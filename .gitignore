@@ -1,0 +1,32 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+
+# Local environments and tooling
+.venv/
+venv/
+.envdir/
+.vscode/
+.idea/
+
+# Local work, caches, and OS metadata
+/work/
+.cache/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Keep all existing team records and source materials local by default
+/docs/**
+!/docs/README.md
+!/docs/public/
+!/docs/public/**
