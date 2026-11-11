@@ -25,8 +25,13 @@ venv/
 Thumbs.db
 Desktop.ini
 
-# Keep all existing team records and source materials local by default
-/docs/**
-!/docs/README.md
-!/docs/public/
-!/docs/public/**
+# Personal/private source material and non-project references
+/docs/meetings/originals/*
+!/docs/meetings/originals/README.md
+/docs/discord/original/team-discord-bot-kit.md
+/docs/guidelines/originals/
+/docs/guidelines/참고자료_원본.zip
+/docs/guidelines/final_project_repository/Doc/*.docx
+/docs/guidelines/final_project_repository/Doc/*.pdf
+/docs/guidelines/final_project_repository/Doc/*.html
+/docs/archive/legacy/*.docx
