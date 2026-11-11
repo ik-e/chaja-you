@@ -26,5 +26,8 @@
     {
       "path": "docs/artifacts/state/current.json"
     }
-  ]
+  ],
+  "decided_by": "project_leader",
+  "authority_ref": "docs/human/INTENT.md",
+  "authority_id": "INTENT-OPS-001"
 }
