@@ -143,5 +143,29 @@
       "TASK-001"
     ],
     "assignment_basis": "팀 헌장 역할 기준 제안. 실제 담당과 내부 목표 시각은 팀 조정 후 반영."
+  },
+  "confirmed_provenance": [
+    {
+      "text": "최종 목표는 요청에 따른 동적 워크플로·에이전트 팀 구성과 근거 있는 조사 결과 제공",
+      "authority": "human",
+      "source_ref": "docs/human/INTENT.md",
+      "source_id": "INTENT-PRODUCT-001"
+    },
+    {
+      "text": "사람이 확인하는 화면과 제출물은 AI의 구조화된 원본에서 생성",
+      "authority": "human",
+      "source_ref": "docs/human/INTENT.md",
+      "source_id": "INTENT-OPS-001"
+    },
+    {
+      "text": "집중 앱 지정 비교와 신규 발굴, 중간 판정에 따른 대안 발굴을 첫 평가 사례로 사용",
+      "authority": "team",
+      "source_ref": "docs/artifacts/specs/focus_apps.json",
+      "source_id": "SPEC-FOCUS-001"
+    }
+  ],
+  "human_input": {
+    "intent_ref": "docs/human/INTENT.md",
+    "responses_dir": "docs/human/responses"
   }
 }
