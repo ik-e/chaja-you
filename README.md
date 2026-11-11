@@ -2,7 +2,7 @@
 
 사용자 요청에 따라 조사 워크플로와 에이전트 팀을 동적으로 구성하고, 결과에 근거와 출처를 연결하는 리서치 시스템입니다.
 
-사람이 프로젝트를 확인할 때는 [검토 화면](docs/review/README.md)과 [필수 제출물](docs/submissions/README.md)을 엽니다. AI는 [PROJECT](PROJECT.md), [CURRENT](CURRENT.md), [EVAL](EVAL.md), [TASK](TASK.md)와 해당 작업의 [구조화 산출물](docs/artifacts/README.md)을 사용합니다. 중요한 선택은 [ADR](docs/adr/README.md)에 근거와 재검토 조건을 남깁니다.
+사람은 [사람 작업 공간](docs/human/README.md)에서 AI 결과의 프로젝션을 확인하고 의도·승인·수정·보류를 남깁니다. AI는 [PROJECT](PROJECT.md), [CURRENT](CURRENT.md), [EVAL](EVAL.md), [TASK](TASK.md)와 해당 작업의 [구조화 산출물](docs/artifacts/README.md)을 사용합니다. 중요한 선택은 [ADR](docs/adr/README.md)에 근거·결정 권한·재검토 조건을 남깁니다.
 
 - [전체 문서 안내](docs/README.md) · [AI 작업 지침](AGENTS.md)
 - [팀 헌장](docs/charter/팀_헌장.md) · [공개 저장소 운영 안내](docs/public/공개_저장소_운영_안내.md)
