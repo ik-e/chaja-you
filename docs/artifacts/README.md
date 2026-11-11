@@ -12,4 +12,6 @@ AI가 작성·수정하는 구조화 데이터의 기준 공간이다. 새 산�
 | [runs](runs/README.md) | 상세 실행·근거 데이터 |
 | [evaluations](evaluations/README.md) | 사례별 실제 평가 기록 |
 
+새 AI 정본은 이 디렉터리에서만 만든다. 기존 `docs/research/`와 `docs/members/*/workspace/`는 이관 전 기록·사람 작업 참고 자료로 취급하며, 별도 사람 요청이 없으면 새 AI 정본을 추가하지 않는다. 사람의 권위 입력은 [사람 작업 공간](../human/README.md)에 두고 필요한 원본에서 그 경로를 provenance로 연결한다.
+
 이관한 문서는 원래 담당·상태·출처와 본문을 JSON의 메타데이터와 섹션으로 보존했다. `kind: document`는 조사·제안 자료이고, 현재 목표는 [PROJECT](../../PROJECT.md), 현재 계약은 [EVAL](../../EVAL.md)에서 찾는다. 원본·생성 문서 관계와 갱신 방법은 [문서 관리 규칙](../문서_관리_규칙.md)을 따른다. 작업 담당자가 산출물과 관련 상태를 갱신한다.
