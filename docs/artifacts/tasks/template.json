@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "TASK-TEMPLATE",
+  "kind": "task_template",
+  "status": "템플릿",
+  "owner": null,
+  "due": null,
+  "depends_on": [],
+  "suggested_owner": null,
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-12",
+  "question": "",
+  "goal": "",
+  "inputs": [],
+  "scope": [],
+  "outputs": [],
+  "acceptance": [],
+  "verification": [],
+  "references": [],
+  "result": null
+}

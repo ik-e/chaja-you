@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "TASK-005",
+  "kind": "task",
+  "status": "할 일",
+  "owner": null,
+  "due": "2026-11-12",
+  "updated_at": "2026-11-12",
+  "question": "최종 동적 구성 목표에서 이번 MVP가 구현하고 평가할 행동은 어디까지인가",
+  "goal": "기획서 5·7장과 WBS가 구현할 핵심 동작·완료 조건을 명시한다.",
+  "inputs": [
+    "PROJECT.md",
+    "docs/artifacts/specs/focus_apps.json",
+    "docs/artifacts/planning/기획서_초안.json"
+  ],
+  "scope": [
+    "APP-A·B와 APP-C의 조건부 발굴에서 필요한 작업·역할·선행 관계를 정리",
+    "정의된 역할 선택과 작업 조합을 초기 구현안으로 제시하고 새 역할 생성과의 경계를 명시",
+    "FR-01~04의 입력·출력·완료 조건을 EVAL 사례와 연결",
+    "고정 흐름 대비 비교 조건, 오류·근거 부족 처리, 품질·시간·비용 측정을 계획으로 정리"
+  ],
+  "outputs": [
+    "result에 MVP 요구사항·평가 사례·실패 조건과 포함·후속 범위 제안",
+    "R01 결정 후 반영할 focus_apps.json 변경안과 기획서 5·7장 반영안"
+  ],
+  "acceptance": [
+    "동적 구성의 최종 목표와 집중 앱 검증 범위가 구별됨",
+    "요구사항마다 적어도 하나의 완료 조건과 평가 사례가 연결됨",
+    "확정하지 않은 수치·프레임워크·재사용 기능이 제안 또는 추후 결정으로 표시됨"
+  ],
+  "verification": [
+    "두 고정 분기만으로 끝나는지 APP-C 중간 결과와 요청 변형으로 대조",
+    "실제 측정 없이 성능 개선을 달성했다고 쓰지 않았는지 확인"
+  ],
+  "references": [
+    {
+      "path": "PROJECT.md"
+    },
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/artifacts/planning/기획서_초안.json"
+    }
+  ],
+  "result": null,
+  "title": "동적 구성 MVP·요구사항·평가 계획 정리",
+  "suggested_owner": "R03",
+  "assignment_status": "제안",
+  "schedule_status": "내부 목표일 제안",
+  "milestone": "2026-11-13",
+  "stage": "실행 범위",
+  "depends_on": [],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01",
+    "SUB-02"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다."
+}

@@ -1,17 +1,20 @@
 # chaja-you
 
-사용자의 조사 요청을 구체화하고, 조사 작업을 나누어 전문 에이전트가 수행한 결과를 출처와 함께 종합하는 시스템을 개발합니다.
+사용자 요청에 따라 조사 워크플로와 에이전트 팀을 동적으로 구성하고, 결과에 근거와 출처를 연결하는 리서치 시스템입니다.
 
-이 공개 저장소는 팀의 공동 작업 공간입니다. 프로젝트 코드뿐 아니라 팀 헌장, 회의 요약, 계획, 설계, 협업 규칙과 일일 작업 문서도 관리합니다. 공개 가능한 작업 맥락은 [문서 라우트](docs/README.md)에서 찾습니다.
+사람이 프로젝트를 확인할 때는 [검토 화면](docs/review/README.md)과 [필수 제출물](docs/submissions/README.md)을 엽니다. AI는 [PROJECT](PROJECT.md), [CURRENT](CURRENT.md), [EVAL](EVAL.md), [TASK](TASK.md)와 해당 작업의 [구조화 산출물](docs/artifacts/README.md)을 사용합니다. 중요한 선택은 [ADR](docs/adr/README.md)에 근거와 재검토 조건을 남깁니다.
 
-## 시작하기
+- [전체 문서 안내](docs/README.md) · [AI 작업 지침](AGENTS.md)
+- [팀 헌장](docs/charter/팀_헌장.md) · [공개 저장소 운영 안내](docs/public/공개_저장소_운영_안내.md)
+- [Discord 읽기·검색 도구](docs/discord/Discord_읽기_검색_도구.md)
 
-- 프로젝트·팀 작업의 기본 지침: [AGENTS.md](AGENTS.md)
-- 전체 문서 라우트: [docs/README.md](docs/README.md)
-- 프로젝트 개요: [공개 프로젝트 개요](docs/public/프로젝트_개요.md)
-- 팀 협업과 공개 범위: [공개 저장소 운영 안내](docs/public/공개_저장소_운영_안내.md)
-- Discord 검색기: [설정 및 사용법](docs/discord/Discord_읽기_검색_도구.md)
+## 프로젝션 생성
 
-## 보안·개인정보
+AI 산출물 원본을 바꾸고 다음 명령으로 CURRENT·EVAL·검토 화면·제출물을 생성합니다.
 
-`.env`, 토큰, API 키, 비밀번호, 개인 연락처와 비공개 링크는 커밋하지 않습니다. `.env.example`에는 변수 이름만 둡니다. 내부 대시보드 URL, 즐겨찾기 내역, 비공개 초대 URL과 원문 대화 링크도 공개 문서에 넣지 않습니다. Git 이력에 올라간 비밀값은 파일을 삭제해도 회수할 수 없으므로, 노출 시 즉시 폐기·교체해야 합니다.
+```powershell
+uv run --no-project python tools/project_docs.py
+uv run --no-project python tools/project_docs.py --check
+```
+
+이 저장소는 공개 팀 공동 작업 공간입니다. 비밀값·개인 연락처·비공개 URL은 기록하지 않으며, 외부 원본은 이용 권한과 공개 범위를 확인합니다.

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "id": "TASK-008",
+  "kind": "task",
+  "status": "할 일",
+  "owner": null,
+  "due": "2026-11-13",
+  "updated_at": "2026-11-12",
+  "question": "합의된 범위와 근거를 8개 장 기획서의 제출 가능한 내용으로 완성했는가",
+  "goal": "프로젝트 개요부터 일정·위험까지 연결되는 기획서 원본과 사람용 제출본을 만든다.",
+  "inputs": [
+    "docs/artifacts/planning/기획서_초안.json",
+    "docs/artifacts/specs/focus_apps.json",
+    "docs/artifacts/state/current.json",
+    "docs/문서_관리_규칙.md"
+  ],
+  "scope": [
+    "기존 8개 목차에 TASK-003~007 결과와 TASK-002의 공식 필수 항목을 반영",
+    "두 검증 과제의 조사·역할·실행 순서·앱 근거·기대 결과를 유지하고 확인일·미확인을 표시",
+    "기획서 원본 JSON을 갱신하고 제출용 Markdown 프로젝션을 생성",
+    "공식 파일 형식 변환이 필요하면 TASK-002 조건에 맞는 제출 파일을 별도로 생성"
+  ],
+  "outputs": [
+    "docs/artifacts/planning/기획서_초안.json의 제출 준비본",
+    "docs/submissions/기획서_초안.md와 공식 요구 시 해당 제출 형식의 파일",
+    "result에 목차·요구사항·근거 점검 결과와 남은 결정"
+  ],
+  "acceptance": [
+    "8개 장과 공식 필수 항목이 채워져 있음",
+    "사용자 문제→동적 구성→집중 앱 사례→요구사항→평가→일정이 서로 연결됨",
+    "앱 근거와 구현 계획, 실제 측정값·미실행 계획이 구분됨",
+    "생성 문서와 원본이 동기화되고 변환했다면 레이아웃을 확인함"
+  ],
+  "verification": [
+    "기획서의 필수 요구사항 ID를 EVAL과 대조",
+    "링크·시점·공개 범위와 제출 체크리스트를 확인",
+    "uv run --no-project python tools/project_docs.py --check"
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/planning/기획서_초안.json"
+    },
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/artifacts/state/current.json"
+    },
+    {
+      "path": "docs/문서_관리_규칙.md"
+    }
+  ],
+  "result": null,
+  "title": "8개 장 기획서 제출본 완성",
+  "suggested_owner": "R01",
+  "assignment_status": "제안",
+  "schedule_status": "내부 목표일 제안",
+  "milestone": "2026-11-13",
+  "stage": "제출본 작성",
+  "depends_on": [
+    "TASK-002",
+    "TASK-007"
+  ],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다."
+}

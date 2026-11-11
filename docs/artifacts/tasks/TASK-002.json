@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "TASK-002",
+  "kind": "task",
+  "status": "할 일",
+  "owner": null,
+  "due": "2026-11-12",
+  "updated_at": "2026-11-12",
+  "question": "11월 13일 기획서·WBS의 필수 항목, 형식, 제출 시각·경로는 무엇인가",
+  "goal": "제출 직전 형식 누락을 막고 확인된 제출 조건으로 최종 검사를 준비한다.",
+  "inputs": [
+    "docs/charter/팀_헌장.md",
+    "docs/guidelines/README.md",
+    "docs/submissions/README.md"
+  ],
+  "scope": [
+    "공식 가이드·대시보드에서 날짜·시각·필수 항목·파일 형식·명명·제출 방식을 확인",
+    "비공개 경로는 공개 저장소에 복사하지 않고 확인 여부와 담당만 기록",
+    "확인되지 않는 조건은 미확인으로 남기고 담당자에게 확인할 질문으로 정리"
+  ],
+  "outputs": [
+    "result에 확인한 조건 목록과 공개 출처 또는 확인 기록",
+    "기획서·WBS 공통 제출 체크리스트"
+  ],
+  "acceptance": [
+    "기획서·WBS 각각 필수 항목과 파일 형식이 확인되거나 미확인으로 표시됨",
+    "공식 마감 날짜·시각의 출처와 확인 시점, 제출 담당·확인 방법이 기록됨"
+  ],
+  "verification": [
+    "헌장 일정과 공식 안내를 대조하고 차이가 있으면 R01의 결정 요청에 표시",
+    "비공개 URL·원문 사본이 결과와 프로젝션에 포함되지 않았는지 확인"
+  ],
+  "references": [
+    {
+      "path": "docs/charter/팀_헌장.md"
+    },
+    {
+      "path": "docs/guidelines/README.md"
+    },
+    {
+      "path": "docs/submissions/README.md"
+    }
+  ],
+  "result": null,
+  "title": "공식 제출 조건 확인",
+  "suggested_owner": "R01",
+  "assignment_status": "제안",
+  "schedule_status": "내부 목표일 제안",
+  "milestone": "2026-11-13",
+  "stage": "제출 조건",
+  "depends_on": [],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01",
+    "SUB-02"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다."
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "TASK-011",
+  "kind": "task",
+  "status": "할 일",
+  "owner": null,
+  "due": "2026-11-13",
+  "updated_at": "2026-11-12",
+  "question": "확인된 공식 경로에 최종 두 제출물이 접수됐는가",
+  "goal": "준비 완료와 실제 제출 완료를 구분해 첫 마감의 상태를 기록한다.",
+  "inputs": [
+    "docs/artifacts/tasks/TASK-002.json",
+    "docs/artifacts/tasks/TASK-010.json",
+    "docs/artifacts/state/current.json"
+  ],
+  "scope": [
+    "확인된 공식 방식과 마감 시각에 맞춰 제출 담당자가 최종 파일을 제출",
+    "파일명·제출 시각·접수 여부를 확인하고 공개 가능한 확인 요약만 기록",
+    "실패·접수 미확인이면 상태와 후속 조치를 기록"
+  ],
+  "outputs": [
+    "result에 제출한 파일·시각·접수 확인·남은 문제의 공개 가능한 기록",
+    "current.json SUB-01·02의 실제 제출 상태와 프로젝션 갱신"
+  ],
+  "acceptance": [
+    "두 파일 모두 제출 사실과 접수 여부를 구분해 확인함",
+    "실제 확인한 제출 상태와 확인 시점이 남고 비공개 URL·개인정보가 포함되지 않음"
+  ],
+  "verification": [
+    "제출 담당자가 공식 화면·안내의 접수 상태를 확인",
+    "제출물 목록과 실제 확인 기록을 대조"
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/tasks/TASK-002.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-010.json"
+    },
+    {
+      "path": "docs/artifacts/state/current.json"
+    }
+  ],
+  "result": null,
+  "title": "기획서·WBS 제출과 접수 확인",
+  "suggested_owner": "R01",
+  "assignment_status": "제안",
+  "schedule_status": "내부 목표일 제안",
+  "milestone": "2026-11-13",
+  "stage": "제출",
+  "depends_on": [
+    "TASK-010"
+  ],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01",
+    "SUB-02"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다."
+}
