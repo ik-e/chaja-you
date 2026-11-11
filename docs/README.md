@@ -2,6 +2,7 @@
 
 | 확인할 내용 | 경로 |
 |---|---|
+| 사람이 읽고 의도·판단을 남기는 진입점 | [사람 작업 공간](human/README.md) |
 | 프로젝트의 최종 목표 | [PROJECT](../PROJECT.md) |
 | 현재 범위·우선순위·작업 | [CURRENT](../CURRENT.md) |
 | 사람이 확인할 결과·근거·결정 요청 | [검토 화면](review/README.md) |
