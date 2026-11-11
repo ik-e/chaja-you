@@ -18,7 +18,19 @@
     "큰 영향을 주는 불확실성은 결정을 바꿀 최소 근거를 확보한 뒤 선택한다. 중요한 결정에는 근거와 재검토 조건을 남긴다."
   ],
   "references": [
-    {"path": "docs/charter/팀_헌장.md"},
-    {"path": "docs/adr/ADR-001_산출물과_프로젝션.json"}
-  ]
+    {
+      "path": "docs/human/INTENT.md"
+    },
+    {
+      "path": "docs/charter/팀_헌장.md"
+    },
+    {
+      "path": "docs/adr/ADR-001_산출물과_프로젝션.json"
+    }
+  ],
+  "authority": {
+    "type": "human",
+    "ref": "docs/human/INTENT.md",
+    "id": "INTENT-PRODUCT-001"
+  }
 }
