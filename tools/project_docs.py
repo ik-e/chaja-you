@@ -206,6 +206,12 @@ def validate(sources):
                 ["case_id", "input", "plan", "steps", "claims", "evidence"],
                 path,
             )
+        if record["kind"] == "decision" and record["status"] == "확정":
+            require(record, ["decided_by", "authority_ref"], path)
+            if not (ROOT / record["authority_ref"]).is_file():
+                raise ValueError(
+                    f"{path}: missing human authority reference {record['authority_ref']}"
+                )
         if record["kind"] == "evaluation":
             require(record, ["case_id", "run_path", "checks", "verdict"], path)
             if (
@@ -257,6 +263,35 @@ def build():
         ],
         STATE,
     )
+    require(project, ["authority"], PROJECT)
+    require(project["authority"], ["type", "ref", "id"], f"{PROJECT}.authority")
+    if (
+        project["authority"]["type"] != "human"
+        or not (ROOT / project["authority"]["ref"]).is_file()
+    ):
+        raise ValueError(
+            f"{PROJECT}: project authority must reference a human-owned file"
+        )
+    provenance = state.get("confirmed_provenance")
+    if not isinstance(provenance, list) or len(provenance) != len(state["confirmed"]):
+        raise ValueError(f"{STATE}: every confirmed item needs provenance")
+    seen_confirmed = set()
+    for item in provenance:
+        require(
+            item,
+            ["text", "authority", "source_ref", "source_id"],
+            f"{STATE}.confirmed_provenance",
+        )
+        if item["text"] not in state["confirmed"] or item["text"] in seen_confirmed:
+            raise ValueError(
+                f"{STATE}: confirmed provenance must match each confirmed item exactly once"
+            )
+        if (
+            item["authority"] not in ("human", "team")
+            or not (ROOT / item["source_ref"]).is_file()
+        ):
+            raise ValueError(f"{STATE}: invalid confirmed authority or source")
+        seen_confirmed.add(item["text"])
     require(spec, ["requirements", "requests", "cases", "checks"], SPEC)
     request_ids = {request["id"] for request in spec["requests"]}
     requirement_ids = {requirement["id"] for requirement in spec["requirements"]}
