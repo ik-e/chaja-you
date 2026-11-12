@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "CAND-003",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "Research State 독립 객체화",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "재사용 가능한 조사 상태를 TASK result와 분리된 1급 객체로 관리.",
+  "potential_value": [
+    "후속 질문 재사용",
+    "질문별 projection",
+    "증분 조사 연결"
+  ],
+  "risks": [
+    "앱 도메인 구조를 너무 일찍 범용 스키마로 고정할 위험"
+  ],
+  "why_not_now": [
+    "동일 조사 결과의 반복 재사용이 아직 관찰되지 않음"
+  ],
+  "evidence_needed": [
+    "같은 조사 결과를 여러 질문에서 재사용하는 사례",
+    "TASK result만으로 상태 유지가 불편한 사례"
+  ],
+  "revisit_when": [
+    "반복 질문 시나리오가 실제로 발생할 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
