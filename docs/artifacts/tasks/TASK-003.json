@@ -56,5 +56,6 @@
     "SUB-01",
     "SUB-02"
   ],
-  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다."
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
+  "intent_ref": "docs/human/task-intents/TASK-003.md"
 }
