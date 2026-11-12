@@ -22,12 +22,6 @@
   ],
   "decisions_needed": [
     {
-      "id": "OPEN-SUB-01",
-      "question": "제출 시각·파일 형식과 TASK 담당·내부 일정을 어떻게 확정할까",
-      "action": "TASK-002 확인과 팀 조정",
-      "evidence_needed": "공식 제출 안내와 각 담당자의 현재 작업 가능 시간. 최종 제출 날짜는 11월 13일."
-    },
-    {
       "id": "OPEN-02",
       "question": "정량 합격 기준을 얼마로 둘까",
       "action": "제출본에 평가 계획과 기준 실행 후 결정 절차를 명시",
@@ -46,7 +40,7 @@
       "evidence_needed": "실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태"
     }
   ],
-  "review_summary": "TASK-007 범위 수렴, TASK-008 기획서, TASK-009 WBS 작성이 완료됐다. 기획서와 WBS는 구조화 원본에서 사람용 제출본으로 생성한다. 다음은 TASK-010 정합성·형식 점검이며, 실제 제출 완료는 팀 대시보드 링크 등록·제출완료 전환을 확인하기 전에는 표시하지 않는다.",
+  "review_summary": "TASK-007 범위, TASK-008 기획서, TASK-009 WBS가 완료됐고 TASK-002에서 공개 제출 규칙도 정리했다. 정확한 마감 시각과 팀별 WBS 추가 안내는 대시보드 최종 확인 항목이다. 다음은 TASK-010 정합성 점검 후 실제 제출·접수 확인(TASK-011)이다.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -127,11 +121,11 @@
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
-    "status": "제안",
+    "status": "준비 중",
     "due_date": "2026-11-13",
     "due_time": null,
     "timezone": "Asia/Seoul",
-    "deadline_check_task": "TASK-002",
+    "deadline_check_task": "TASK-011",
     "task_ids": [
       "TASK-002",
       "TASK-003",
@@ -148,7 +142,7 @@
       "TASK-001"
     ],
     "assignment_basis": "팀 헌장 역할 기준 제안. 실제 담당과 내부 목표 시각은 팀 조정 후 반영.",
-    "submission_location": "docs/step1/",
+    "submission_location": "팀 대시보드 산출물 제출 표에 기획서·WBS 링크 등록 후 제출완료 전환",
     "required_deliverables": [
       "기획서",
       "WBS"
