@@ -100,7 +100,7 @@ APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 �
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-004.json)
 
-공식 자료 기준 PomoToki는 Android 오프라인·무계정 뽀모도로를 뒷받침하고, Focus To-Do는 제품의 오프라인 사용과 무등록 로컬 모드를 설명하지만 Android 첫 실행 조합은 미시험이다. AppBlock은 무료 일정·차단 대상 한도와 요일·시간 안내로 APP-B 후보이며 Stay Focused의 무료 조건 조합은 미확인이다. 공개 열람과 자동 수집·저장 권한은 별개다. Android 기기 시험, 서비스 전체 통합, 실제 약관 적용 여부는 미검증이므로 팀 검토가 필요하다.
+Android 공식 자료를 APP-A → APP-C → APP-B 순서의 판정에 연결했다. PomoToki의 오프라인·무계정 뽀모도로는 문서상 확인되며 Focus To-Do의 Android 첫 실행 조합은 기기 미시험이다. AppBlock은 무료 일정 안내가 있는 후보, Stay Focused의 무료 조건 조합은 미확인이다. 자동 수집·저장·재사용 허용과 실제 기기 동작은 미확인으로 남기며 iOS는 후속 범위다. 팀 검토가 필요하다.
 
 검증과 근거
 
@@ -109,13 +109,15 @@ APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 �
 - 11월 11일 기획서의 관련 앱 근거 재확인 및 기기 시험 여부 구분 · pass
 - 공개 열람과 자동 수집·저장·재사용 조건 구분 · pass
 - 실제 Android 기기에서 조건 조합·알림·브라우저 차단을 검증 · inconclusive
-- Apple 검색 HTTP 응답 표본에서 앱명·ID·가격 필드를 확인 · pass
+- Apple 검색 HTTP 응답 표본에서 앱명·ID·가격 필드를 확인 (이전 iOS 참고 조사; 이번 Android TASK 완료 조건 아님) · pass
 - 선택한 외부 자료의 해당 서비스 용도별 자동 수집·장기 저장·재사용이 허용되는지 확인 · inconclusive
-- 대한민국 국가 버전 약관, 별도 Play Catalog API, Apple Search API의 공개 조건을 원문에서 추가 확인 · pass
+- 대한민국 국가 버전 약관, 별도 Play Catalog API, Apple Search API의 공개 조건을 원문에서 추가 확인 (이전 iOS 참고 조사; 이번 Android TASK 완료 조건 아님) · pass
 - Android 기기 또는 도구 사용 가능 여부 확인 · inconclusive
+- 사용자 전달 Android 범위·우선순위 및 판정 상태 구분을 결과에 반영 · pass
 - [11월 11일 기준 기획서의 앱 비교표 및 기기 시험 계획](../artifacts/planning/기획서_초안.json)
 - [TASK 입력의 이전 기술 문서 기록: 중고거래 사례, 앱별 기기 시험 결과 아님](../artifacts/research/2026-11-11_기술_문서_데이터_출처_확인_기록_초안.json)
 - [APP-A·B·C의 조건과 실행 분기](../artifacts/specs/focus_apps.json)
+- [사용자가 전달한 TASK-004 Android 우선 조사 범위·판정 구분](../human/responses/HRESP-20261112-01_TASK-004_조사_범위.md)
 - [PomoToki 공식 사용 안내: Getting Started·Pomodoro·FAQ](https://www.pomotoki.com/guide)
 - [PomoToki Android Google Play 설명: 무료 타이머·오프라인](https://play.google.com/store/apps/details?hl=en_US&id=com.tamaszahoran.pomotoki)
 - [Focus To-Do 공식 개인정보 처리방침: Data entered by the user·Register an account](https://focustodo.cn/privacy-policy)
@@ -143,15 +145,12 @@ APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 �
 - PomoToki와 Focus To-Do의 Android 설치 직후 비행기 모드 타이머 실행·종료·알림, 계정 없이 첫 실행 가능 여부는 기기 시험 미실시.
 - AppBlock 무료판의 사이트 2개·평일 저녁 차단 조합과 Stay Focused 무료판의 수량·요일·시간 제한은 각 앱 버전·시연 브라우저·지역의 실제 조건으로 확인 필요.
 - 외부 페이지의 자료를 제품에서 자동 수집·저장·재배포하는 권한, 서비스별 추가 약관과 저장·재사용의 적용 범위, 비용·쿼터 및 변경 시 재검증 주기는 미확인. robots.txt는 명시된 경로에 관한 확인이며 모든 상세 페이지의 일괄 금지나 허가를 뜻하지 않음.
-- Apple Search API는 보관 문서와 단일 한국 검색 응답만 확인했다. 현재 사용 자격·요금·실제 운영 한도·캐시 보존 기간 및 iOS 앱별 세부 기능·다른 검색의 안정성은 미확인.
-- 공유된 iOS 전체 조사 범위와 현재 Android 첫 시연 중심 TASK의 우선순위는 팀장 확인 필요. 공식 자료 내용은 앱 버전과 지역에 따라 변할 수 있음.
 - APP-C 확인 한도의 횟수·시간과 팀 간 I/O 필드명, APP-B의 최종 필수 여부는 미결정. 원문 확인이나 단일 API 호출은 실제 LLM 조사·통합 실행 검증이 아님.
-- Apple 검색 응답은 지역·시점·검색어에 따라 달라질 수 있어 이번 한국 응답 표본을 미래 결과나 전체 앱 목록으로 일반화할 수 없음.
 - 개발 환경에 연결된 Android 기기 및 adb/에뮬레이터를 확인하지 못해 기기 테스트를 수행하지 못했다. 앱 버전·OS·지역 및 시험 결과는 미기록이다.
 - R01: APP-A의 문서 근거만으로 초기 시연을 준비할지, Android 비행기 모드·무계정 기기 시험을 선행 필수로 둘지 결정.
 - R01: 자동 수집이나 재사용 허용이 확인되지 않은 자료를 수동 출처 확인과 부분 결과로 제한할지, 별도 이용 가능 출처·연동을 확보할지 결정.
-- R01: iOS 추가 조사 수준과 APP-B 최종 필수 여부를 TASK-005·일정과 함께 결정.
 - R01·R03·R05: APP-C의 미확인 보류 이후 부분 결과로 종료하는 확인 한도와 실패 표시 기준을 결정.
+- R01: APP-B의 최종 시연 포함 여부를 TASK-005 결과와 전체 일정에 따라 결정.
 
 ### TASK-005 · 진행 중
 
