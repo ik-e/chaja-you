@@ -15,9 +15,10 @@
     "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용"
   ],
   "priorities": [
-    "TASK-007의 제출본 MVP 범위 수렴 결과를 기준으로 TASK-008 기획서와 TASK-009 WBS 작성",
-    "TASK-002에서 제출 파일 형식·파일명·정확한 시각·별도 제출 동작을 최종 확인하고 TASK-008·009 제출 형식에 반영",
-    "11월 13일 TASK-008·009 완성 후 TASK-010 정합성·형식 점검과 TASK-011 제출·접수 확인",
+    "TASK-007의 확정 범위를 기준으로 TASK-008 기획서와 TASK-009 WBS의 구조화 원본을 작성",
+    "TASK-008·009의 내용이 준비되면 OUTPUT-GUIDE 기준으로 docs/step1/ 최종 제출 프로젝션 생성",
+    "TASK-002에서 공식 파일명·정확한 제출 시각·별도 제출 동작만 최종 확인",
+    "11월 13일 TASK-010 정합성·형식 점검 후 TASK-011 제출·접수 확인",
     "실제 APP-A·C 통합, B0/D0 비교, 기기 시험과 기술·성능 검증은 제출 후 또는 구현 일정에 연결"
   ],
   "decisions_needed": [
@@ -46,7 +47,7 @@
       "evidence_needed": "실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태"
     }
   ],
-  "review_summary": "TASK-007에서 제출본 MVP 범위를 수렴했다. APP-A·C를 핵심 Must, APP-B를 낮은 우선순위 검증 사례로 두고 근거 추적·상태 구분·수집 정책 gate를 고정했다. R03·R05의 핵심 의미와 ID handoff 설계 합의를 반영했으며 실제 wire contract·통합 검증은 후속으로 남긴다. 이제 TASK-008 기획서와 TASK-009 WBS 작성으로 진행하고, TASK-002의 제출 형식·시각 확인은 최종 제출 전 별도로 닫는다.",
+  "review_summary": "TASK-007의 제출본 MVP 범위를 확정했다. TASK-008 기획서와 TASK-009 WBS는 구조화 원본으로 즉시 작성하며, OUTPUT-GUIDE는 최종 제출 프로젝션의 형식·필수 구성 기준으로만 적용한다. TASK-002의 남은 확인은 공식 파일명·정확한 제출 시각·별도 제출 동작이며 내용 작성의 blocker가 아니다.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -153,8 +154,9 @@
       "기획서",
       "WBS"
     ],
-    "required_contents": "세부 필수 항목 미확인/없음. 제공 가이드는 품질 참고 기준으로 사용",
-    "authority_ref": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
+    "required_contents": "기획서·WBS 최종 제출본은 최신 OUTPUT-GUIDE의 형식·필수 구성 기준에 맞춰 프로젝션한다. 내부 작업 원본 형식과는 분리한다.",
+    "authority_ref": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md",
+    "authoring_model": "TASK/spec/state/planning 등 구조화 원본에서 작성 → OUTPUT-GUIDE 기준으로 docs/step1/ 제출본 프로젝션"
   },
   "confirmed_provenance": [
     {
