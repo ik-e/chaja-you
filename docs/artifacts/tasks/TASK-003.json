@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-003",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "진행 중",
+  "owner": "R04",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
   "question": "집중 앱 두 요청에서 사용자에게 어떤 결과와 선택 근거를 제공할 것인가",
@@ -41,6 +41,9 @@
     },
     {
       "path": "docs/artifacts/research/03_AI_리서치_멀티에이전트_시스템_선행사례_및_구축방안_조사.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261112-02_TASK-003_R04_검토.md"
     }
   ],
   "result": null,
@@ -57,5 +60,8 @@
     "SUB-02"
   ],
   "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
-  "intent_ref": "docs/human/task-intents/TASK-003.md"
+  "intent_ref": "docs/human/task-intents/TASK-003.md",
+  "human_feedback_refs": [
+    "docs/human/responses/HRESP-20261112-02_TASK-003_R04_검토.md"
+  ]
 }
