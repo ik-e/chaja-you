@@ -3,7 +3,7 @@
   "id": "TASK-007",
   "kind": "task",
   "status": "할 일",
-  "owner": null,
+  "owner": "R01",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
   "question": "이번 제출본에 어떤 목표·필수 범위·평가 계획·위험 대응을 기준으로 고정할 것인가",
@@ -69,5 +69,6 @@
     "SUB-01",
     "SUB-02"
   ],
-  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다."
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
+  "intent_ref": "docs/human/task-intents/TASK-007.md"
 }
