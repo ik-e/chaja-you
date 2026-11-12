@@ -15,6 +15,7 @@ PROJECT = "docs/artifacts/state/project.json"
 SPEC = "docs/artifacts/specs/focus_apps.json"
 PROPOSAL = "docs/artifacts/planning/기획서_초안.json"
 WBS = "docs/artifacts/planning/WBS.json"
+TARGET_DESIGN = "docs/artifacts/design/target_design.json"
 LINK = re.compile(r"\]\(([^\n)]+)\)")
 
 
@@ -196,6 +197,82 @@ def render_wbs(record, source, output):
     )
     lines.extend(["## 일정·범위 규칙", ""])
     lines.extend("- " + rule for rule in record["schedule_rules"])
+    lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def render_target_design(record, source, output):
+    lines = header(record["title"], [source], output)
+    lines.extend(
+        [
+            f"상태 {record['status']} · 담당 {record['owner']} · 갱신 {record['updated_at']}",
+            "",
+            "> 이 문서는 최종 구현 구조의 확정본이 아니라 하위 MVP와 설계를 도출하고 검증 결과를 되돌려 받기 위한 상위 설계 가설입니다.",
+            "",
+            "## 목적",
+            "",
+            record["purpose"],
+            "",
+            "## 설계 계층",
+            "",
+        ]
+    )
+    lines.extend(
+        table(
+            ["계층", "이름", "역할"],
+            [
+                (item["level"], item["name"], item["role"])
+                for item in record["hierarchy"]
+            ],
+        )
+    )
+    lines.extend(["## 필요한 능력 가설", ""])
+    lines.extend(
+        table(
+            ["ID", "능력", "가설", "현재 신뢰도"],
+            [
+                (item["id"], item["name"], item["hypothesis"], item["confidence"])
+                for item in record["capabilities"]
+            ],
+        )
+    )
+    lines.extend(["## 열린 설계 질문", ""])
+    lines.extend(
+        table(
+            ["ID", "질문", "주 검증 역할", "판단 근거"],
+            [
+                (
+                    item["id"],
+                    item["question"],
+                    item["owner_hint"],
+                    item["decide_by_evidence"],
+                )
+                for item in record["open_design_questions"]
+            ],
+        )
+    )
+    lines.extend(["## 현재 MVP가 검증하는 것", ""])
+    lines.extend(
+        table(
+            ["MVP 요소", "검증 대상", "이유"],
+            [
+                (
+                    item["mvp_element"],
+                    ", ".join(item["tests"]),
+                    item["reason"],
+                )
+                for item in record["current_mvp_derivation"]
+            ],
+        )
+    )
+    lines.extend(["## 하위 설계 도출 규칙", ""])
+    lines.extend("- " + item for item in record["derivation_rules"])
+    lines.extend(["", "## 지금 확정하지 않는 것", ""])
+    lines.extend("- " + item for item in record["non_commitments"])
+    lines.extend(["", "## 검증 결과를 되돌리는 루프", ""])
+    lines.extend(
+        f"{index}. {item}" for index, item in enumerate(record["update_loop"], 1)
+    )
     lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
@@ -708,6 +785,9 @@ def build():
     )
     outputs["docs/step1/WBS.md"] = render_wbs(
         sources[WBS], WBS, "docs/step1/WBS.md"
+    )
+    outputs["docs/design/TARGET-DESIGN.md"] = render_target_design(
+        sources[TARGET_DESIGN], TARGET_DESIGN, "docs/design/TARGET-DESIGN.md"
     )
 
     for source, record in sources.items():
