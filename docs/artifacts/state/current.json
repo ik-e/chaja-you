@@ -53,7 +53,7 @@
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "초안",
+      "status": "제출 준비본",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/기획서_초안.json",
       "projection": "docs/step1/기획서.md",
