@@ -4,6 +4,7 @@ AI가 작성·수정하는 구조화 데이터의 기준 공간이다. 새 산�
 
 | 공간 | 내용 |
 |---|---|
+| [design](design/README.md) | Target Design과 하위 설계 계층 |
 | [planning](planning/README.md) | 기획서 원본·기획 제안 |
 | [research](research/README.md) | 조사 결과·이전 기술 제안 |
 | [specs](specs/README.md) | 현재 요구사항과 평가 사례 |
