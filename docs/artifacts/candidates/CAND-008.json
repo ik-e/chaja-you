@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "CAND-008",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "Benchmark·평가 Metric 체계",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "Golden Query와 품질·근거·unknown·불필요 작업·시간·비용 지표를 반복 평가 체계로 구성.",
+  "potential_value": [
+    "회귀 평가",
+    "B0/D0 이후 개선량 측정",
+    "프레임워크 변경 영향 비교"
+  ],
+  "risks": [
+    "평가셋 관리 자체가 큰 일이 될 수 있음",
+    "정량 지표가 목적을 대체할 위험"
+  ],
+  "why_not_now": [
+    "현재 사례가 적고 첫 실제 run 전"
+  ],
+  "evidence_needed": [
+    "APP-A/C/B 실제 평가 기록",
+    "반복 비교 필요"
+  ],
+  "revisit_when": [
+    "첫 B0/D0와 실제 통합 평가 후"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
