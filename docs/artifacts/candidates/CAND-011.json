@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "CAND-011",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "Research Execution Adapter 확장",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "현재 hosted research 실행 수단 외에 다른 검색·추출 provider를 교체 가능한 adapter로 추가.",
+  "potential_value": [
+    "provider 한계 대응",
+    "비용·품질·metadata 비교",
+    "vendor lock-in 완화"
+  ],
+  "risks": [
+    "검색 provider 통합이 프로젝트 핵심으로 변질될 위험"
+  ],
+  "why_not_now": [
+    "현재 하나의 실행 adapter로 제품 가설을 먼저 검증 가능"
+  ],
+  "evidence_needed": [
+    "현재 실행 수단의 품질·metadata·비용·정책 한계가 실제로 관찰됨"
+  ],
+  "revisit_when": [
+    "APP-A/C 실제 실행에서 executor 한계가 드러날 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
