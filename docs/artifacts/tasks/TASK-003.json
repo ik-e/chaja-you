@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-003",
   "kind": "task",
-  "status": "진행 중",
+  "status": "완료",
   "owner": "R04",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
@@ -87,6 +87,9 @@
     },
     {
       "path": "docs/members/R03/daily/2026-11-12.md"
+    },
+    {
+      "path": "docs/members/R04/workspace/2026-11-12_사용자_흐름_및_결과_화면_정보구조_설계.md"
     }
   ],
   "result": {
@@ -120,7 +123,8 @@
           "TASK-003-E01",
           "TASK-003-E02",
           "TASK-003-E04",
-          "TASK-003-E05"
+          "TASK-003-E05",
+          "TASK-003-E12"
         ]
       },
       {
@@ -133,7 +137,8 @@
           "TASK-003-E06",
           "TASK-003-E07",
           "TASK-003-E08",
-          "TASK-003-E11"
+          "TASK-003-E11",
+          "TASK-003-E12"
         ]
       },
       {
@@ -144,7 +149,8 @@
           "TASK-003-E02",
           "TASK-003-E06",
           "TASK-003-E08",
-          "TASK-003-E11"
+          "TASK-003-E11",
+          "TASK-003-E12"
         ]
       }
     ],
@@ -203,6 +209,11 @@
         "id": "TASK-003-E11",
         "label": "R03 일일 작업 및 협의 의견 (Danmi 11:48 의견)",
         "path": "docs/members/R03/daily/2026-11-12.md"
+      },
+      {
+        "id": "TASK-003-E12",
+        "label": "R04 사용자 흐름 및 결과 화면 정보구조(IA) 설계 명세",
+        "path": "docs/members/R04/workspace/2026-11-12_사용자_흐름_및_결과_화면_정보구조_설계.md"
       }
     ],
     "verification": [
