@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-008",
   "kind": "task",
-  "status": "진행 중",
+  "status": "완료",
   "owner": "R01",
   "due": "2026-11-13",
   "updated_at": "2026-11-12",
@@ -70,8 +70,169 @@
       "path": "docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json"
     }
   ],
-  "result": null,
-  "title": "8개 장 기획서 제출본 완성",
+  "result": {
+    "summary": "TASK-003~007의 최신 결과와 R01 의도를 수렴해 AI 작업용 8개 장 기획 원본을 갱신하고, OUTPUT-GUIDE 및 공식 기획서 샘플의 기본 목차인 서비스 정의 / 기능 요구사항 / 비기능 요구사항으로 사람용 제출 프로젝션을 분리했다. APP-A·C를 핵심 Must, APP-B를 후순위로 반영하고 Must/Later/Unknown, R03·R05 ID handoff 설계 합의, 근거 추적·부분 결과·미확인 구분, 데이터 수집 정책 gate를 포함했다. 합성 검사와 실제 앱·실기기·API/화면 통합·B0/D0 성능 검증을 구분했으며 미실행 항목을 완료로 표현하지 않았다. project_docs 생성 및 --check를 통과했다. 남은 파일명·정확한 제출 시각·대시보드 제출완료 전환은 TASK-002/011의 제출 운영 항목이다.",
+    "claims": [
+      {
+        "id": "T008-C01",
+        "text": "AI 작업 원본은 내부 8개 장 구조를 유지하고 사람용 제출본은 공식 기본 목차 3개로 프로젝션한다.",
+        "status": "반영 완료",
+        "evidence_ids": [
+          "T008-E01",
+          "T008-E02",
+          "T008-E03"
+        ]
+      },
+      {
+        "id": "T008-C02",
+        "text": "제출본의 MVP 범위는 APP-A·C Must, APP-B 후순위이며 다중 도메인·자유 역할 생성·RAG 등은 Later, B0/D0 우월성과 정량 상한은 Unknown으로 유지한다.",
+        "status": "R01 결정 반영",
+        "evidence_ids": [
+          "T008-E04",
+          "T008-E05"
+        ]
+      },
+      {
+        "id": "T008-C03",
+        "text": "R03·R05의 핵심 의미와 request/task/attempt ID handoff 설계 합의를 구현 방향에 반영하되 실제 wire contract·통합 성공으로 표현하지 않는다.",
+        "status": "설계 합의 반영",
+        "evidence_ids": [
+          "T008-E06",
+          "T008-E07"
+        ]
+      },
+      {
+        "id": "T008-C04",
+        "text": "실제 앱 문서 근거, 합성 검증, 실기기 미확인, 실제 API·화면 통합 미검증을 서로 구분하고 데이터 수집 정책 gate를 비기능 요구사항으로 반영했다.",
+        "status": "반영 완료",
+        "evidence_ids": [
+          "T008-E08",
+          "T008-E09",
+          "T008-E10"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "T008-E01",
+        "label": "AI 작업용 기획 원본과 submission projection",
+        "path": "docs/artifacts/planning/기획서_초안.json"
+      },
+      {
+        "id": "T008-E02",
+        "label": "사람용 Step 1 기획서 프로젝션",
+        "path": "docs/step1/기획서.md"
+      },
+      {
+        "id": "T008-E03",
+        "label": "2026-11-12 FinalProject 가이드 스냅샷",
+        "path": "docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json"
+      },
+      {
+        "id": "T008-E04",
+        "label": "TASK-007 제출본 MVP 범위 결정",
+        "path": "docs/artifacts/tasks/TASK-007.json"
+      },
+      {
+        "id": "T008-E05",
+        "label": "집중 앱 검증 명세",
+        "path": "docs/artifacts/specs/focus_apps.json"
+      },
+      {
+        "id": "T008-E06",
+        "label": "TASK-005 동적 구성·합의 기록",
+        "path": "docs/artifacts/tasks/TASK-005.json"
+      },
+      {
+        "id": "T008-E07",
+        "label": "TASK-006 구조·ID handoff 설계",
+        "path": "docs/artifacts/tasks/TASK-006.json"
+      },
+      {
+        "id": "T008-E08",
+        "label": "TASK-004 앱 근거·자료 이용 제약",
+        "path": "docs/artifacts/tasks/TASK-004.json"
+      },
+      {
+        "id": "T008-E09",
+        "label": "R01 데이터 수집 정책",
+        "path": "docs/human/responses/HRESP-20261112-05_데이터_수집_정책.md"
+      },
+      {
+        "id": "T008-E10",
+        "label": "프로젝션 생성·검증 도구",
+        "path": "tools/project_docs.py"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "AI 작업 원본 8개 장에 TASK-003~007의 최신 범위·근거·미확인이 반영됐는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T008-E01",
+          "T008-E04",
+          "T008-E06",
+          "T008-E07",
+          "T008-E08"
+        ]
+      },
+      {
+        "criterion": "사람용 제출본이 공식 기본 목차 서비스 정의 / 기능 요구사항 / 비기능 요구사항을 유지하는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T008-E01",
+          "T008-E02",
+          "T008-E03"
+        ]
+      },
+      {
+        "criterion": "APP-A·C Must, APP-B 후순위와 Must/Later/Unknown이 TASK-007·focus spec과 일치하는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T008-E02",
+          "T008-E04",
+          "T008-E05"
+        ]
+      },
+      {
+        "criterion": "실제 앱 문서 근거·합성 검사·실기기 및 실제 통합 미검증을 구분했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T008-E02",
+          "T008-E06",
+          "T008-E07",
+          "T008-E08"
+        ]
+      },
+      {
+        "criterion": "데이터 수집 정책 gate와 미확인 자동 수집 비의존 원칙이 제출본에 반영됐는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T008-E02",
+          "T008-E09"
+        ]
+      },
+      {
+        "criterion": "project_docs 생성 후 --check에서 모든 projection이 최신 상태인지 확인했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T008-E10"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "공식 파일명 규칙, 11월 13일 정확한 제출 시각, 팀 대시보드 링크 등록 및 제출완료 전환은 TASK-002/011에서 최종 확인한다.",
+      "Android 실기기 시험이 없어 Focus To-Do 첫 실행 조합 등 일부 앱 동작은 미확인이다.",
+      "APP-A·C의 실제 API·서버·화면 통합과 실제 리서치 실행은 아직 검증하지 않았다.",
+      "B0/D0 실제 비교, 정량 합격선, 실제 timeout/call/retry 및 APP-C 확인 한도는 기준 실행 전까지 미확정이다."
+    ],
+    "decision_requests": [
+      "TASK-009 WBS는 이 기획서의 Must/Later/Unknown과 역할·검증 경계를 동일하게 사용한다.",
+      "TASK-010에서 기획서·WBS 정합성과 OUTPUT-GUIDE 최종 형식을 확인한다.",
+      "TASK-002/011에서 대시보드 링크 등록·제출완료 상태 전환을 포함한 실제 제출 절차를 닫는다."
+    ]
+  },
+  "title": "기획서 원본·공식 제출 프로젝션 완성",
   "suggested_owner": "R01",
   "assignment_status": "제안",
   "schedule_status": "내부 목표일 제안",
