@@ -15,10 +15,9 @@
     "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용"
   ],
   "priorities": [
-    "TASK-010에서 기획서·WBS의 범위·요구사항·일정·미확인 표현과 공식 제출 형식을 최종 대조",
-    "TASK-002에서 공개 가이드로 확인 가능한 제출 규칙을 닫고, 정확한 마감 시각은 팀 대시보드를 최종 기준으로 유지",
-    "TASK-010 통과 후 TASK-011에 제출 준비 상태를 기록하고 실제 대시보드 링크 등록·제출완료 전환은 접수 사실을 확인한 뒤 반영",
-    "실제 APP-A·C 통합, B0/D0 비교, 기기 시험은 WBS의 구현 일정에 따라 진행"
+    "기획서·WBS 최종 제출 링크를 준비하고 팀 대시보드에서 정확한 마감 시각·WBS 추가 안내·열람 권한을 확인",
+    "TASK-011에서 두 산출물 링크 등록 후 제출완료 전환과 접수 상태를 실제 확인한 경우에만 제출 완료로 기록",
+    "제출 이후 WBS 일정에 따라 APP-A vertical slice와 APP-C 동적 분기 구현을 시작"
   ],
   "decisions_needed": [
     {
@@ -40,14 +39,14 @@
       "evidence_needed": "실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태"
     }
   ],
-  "review_summary": "TASK-007 범위, TASK-008 기획서, TASK-009 WBS가 완료됐고 TASK-002에서 공개 제출 규칙도 정리했다. 정확한 마감 시각과 팀별 WBS 추가 안내는 대시보드 최종 확인 항목이다. 다음은 TASK-010 정합성 점검 후 실제 제출·접수 확인(TASK-011)이다.",
+  "review_summary": "TASK-002 공개 제출 규칙, TASK-007 범위, TASK-008 기획서, TASK-009 WBS, TASK-010 최종 정합성 검사가 완료됐다. 두 Step 1 산출물은 검토 완료·제출 준비 상태이며 실제 대시보드 제출은 아직 하지 않았다. 다음은 TASK-011의 실제 링크 등록·제출완료·접수 확인이다.",
   "deliverables": [
     {
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "제출 준비본",
-      "submission_status": "미확인",
+      "status": "검토 완료·제출 준비",
+      "submission_status": "미제출",
       "source": "docs/artifacts/planning/기획서_초안.json",
       "projection": "docs/step1/기획서.md",
       "completion_tasks": [
@@ -66,8 +65,8 @@
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "제출 준비본",
-      "submission_status": "미확인",
+      "status": "검토 완료·제출 준비",
+      "submission_status": "미제출",
       "source": "docs/artifacts/planning/WBS.json",
       "projection": "docs/step1/WBS.md",
       "completion_tasks": [
