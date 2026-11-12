@@ -570,10 +570,10 @@ def build():
     outputs[output] = "\n".join(lines).rstrip() + "\n"
 
     output = "docs/submissions/README.md"
-    lines = header("필수 제출물", [STATE], output)
+    lines = header("필수 제출물 상태", [STATE], output)
     lines.extend(
         [
-            "제출 담당자가 원본 상태와 파일 경로를 갱신한 뒤 이 목록을 재생성합니다. 마감은 팀 헌장에 기록된 일정이며, 실제 제출 상태는 별도 확인합니다.",
+            "이 문서는 실제 제출 파일 저장소가 아니라 단계별 제출 준비·제출 상태 인덱스입니다. 실제 제출 파일은 docs/stepN/에 둡니다. 마감은 팀 헌장과 확인된 안내를 따르며, 실제 제출 상태는 별도 확인합니다.",
             "",
         ]
     )
@@ -596,8 +596,8 @@ def build():
     )
     lines.append(local_link("docs/charter/팀_헌장.md", "마감과 역할 기준", output))
     outputs[output] = "\n".join(lines).rstrip() + "\n"
-    outputs["docs/submissions/기획서_초안.md"] = render_document(
-        sources[PROPOSAL], PROPOSAL, "docs/submissions/기획서_초안.md"
+    outputs["docs/step1/기획서.md"] = render_document(
+        sources[PROPOSAL], PROPOSAL, "docs/step1/기획서.md"
     )
 
     for source, record in sources.items():
