@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "CAND-013",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "범용 Workflow / Recovery Runtime",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "checkpoint·resume·복잡한 병렬·재시도·상태 복구를 지원하는 범용 실행 runtime.",
+  "potential_value": [
+    "장시간 작업 복구",
+    "복잡한 orchestration 안정성",
+    "운영 관측성"
+  ],
+  "risks": [
+    "워크플로 엔진 개발이 제품 개발을 압도할 위험"
+  ],
+  "why_not_now": [
+    "현재 APP-A/C는 더 단순한 흐름으로 검증 가능"
+  ],
+  "evidence_needed": [
+    "중단 재개·복잡 분기·분산 실행 요구가 실제 병목으로 관찰됨"
+  ],
+  "revisit_when": [
+    "단순 orchestration으로 감당하기 어려운 실행 패턴이 생길 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
