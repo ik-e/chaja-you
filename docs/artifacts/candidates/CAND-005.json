@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "CAND-005",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "Domain Profile",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "도메인별 역할 후보·작업·출처 우선순위·검증 규칙을 명시적 profile로 표현.",
+  "potential_value": [
+    "도메인 특화를 재사용 가능하게 표현",
+    "공통 코어와 특화 경계를 명확히 할 수 있음"
+  ],
+  "risks": [
+    "앱 구조를 범용 profile로 성급히 일반화할 위험"
+  ],
+  "why_not_now": [
+    "첫 도메인 실제 구현에서 반복 구조를 먼저 관찰해야 함"
+  ],
+  "evidence_needed": [
+    "두 번째 도메인에서 공통/차이 구조가 관찰됨"
+  ],
+  "revisit_when": [
+    "앱 E2E 이후 두 번째 도메인 비교 시"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
