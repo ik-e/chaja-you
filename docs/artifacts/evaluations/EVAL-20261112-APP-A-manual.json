@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "EVAL-20261112-APP-A-MANUAL",
+  "kind": "evaluation",
+  "status": "완료",
+  "case_id": "APP-A",
+  "run_path": "docs/artifacts/runs/RUN-20261112-APP-A-manual.json",
+  "evaluated_at": "2026-11-12",
+  "verdict": "inconclusive",
+  "checks": [
+    {
+      "criterion": "사용자의 필수 조건과 선호를 구분했는가",
+      "verdict": "pass",
+      "evidence": [
+        "RUN input.criteria에서 offline_timer=필수, no_account=선호로 구조화"
+      ]
+    },
+    {
+      "criterion": "요청과 중간 결과에 필요한 작업·역할을 선택했는가",
+      "verdict": "pass",
+      "evidence": [
+        "지정 후보 조사·검증·종합만 계획하고 후보 발굴을 생략"
+      ]
+    },
+    {
+      "criterion": "계획과 실제 실행의 선행 관계가 일치하는가",
+      "verdict": "pass",
+      "evidence": [
+        "MAN-A1→A2/A3→A4→A5 순서로 수동 실행 기록"
+      ]
+    },
+    {
+      "criterion": "핵심 주장마다 출처와 직접 지지하는 근거가 있는가",
+      "verdict": "pass",
+      "evidence": [
+        "CL-A1/CL-A2가 EV-A1~A5와 공식 source에 연결"
+      ]
+    },
+    {
+      "criterion": "정보의 확인 시점과 충돌·미확인 조건을 표시했는가",
+      "verdict": "pass",
+      "evidence": [
+        "sources checked_at=2026-11-12, Focus To-Do 결합 첫 실행 경로를 미확인으로 분리"
+      ]
+    },
+    {
+      "criterion": "기기 동작 확인과 문서 확인을 구분했는가",
+      "verdict": "pass",
+      "evidence": [
+        "verification_level과 verdict note에서 실기기 미시험 명시"
+      ]
+    },
+    {
+      "criterion": "고정 흐름과 요청별 구성을 동일 조건에서 비교했는가",
+      "verdict": "inconclusive",
+      "evidence": [
+        "이번 실행은 APP-A 단일 수동 조사이며 B0/D0 비교는 수행하지 않음"
+      ]
+    }
+  ],
+  "summary": "APP-A 공개 자료 수동 실행은 요청 구조화→지정 후보 조사→대상×조건 판정→근거 연결 결과까지 이어졌다. 제품 planner/API/UI의 실제 통합 실행과 B0/D0 비교는 수행하지 않아 전체 제품 요구사항 평가는 inconclusive다.",
+  "references": [
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-001.json"
+    }
+  ]
+}

@@ -8,27 +8,18 @@
   "confirmed": [
     "최종 목표는 요청에 따른 동적 워크플로·에이전트 팀 구성과 근거 있는 조사 결과 제공",
     "사람이 확인하는 화면과 제출물은 AI의 구조화된 원본에서 생성",
-    "집중 앱 지정 비교와 신규 발굴, 중간 판정에 따른 대안 발굴을 첫 평가 사례로 사용"
+    "집중 앱 지정 비교와 신규 발굴, 중간 판정에 따른 대안 발굴을 첫 평가 사례로 사용",
+    "APP-A 지정 후보 비교와 APP-C 중간 판정 분기를 이번 MVP의 핵심 Must로 사용",
+    "APP-B는 후보 없는 요청의 발굴 검증 사례로 유지하되 APP-A·C보다 낮은 우선순위",
+    "R03·R05는 공통 의미와 request/task/attempt ID handoff 설계 순서를 합의했으며 실제 통합은 후속 검증",
+    "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용"
   ],
   "priorities": [
-    "11월 12일 TASK-002~006의 제출 조건·기획 근거·요구사항·구현 작업을 병행해 정리",
-    "11월 12일 TASK-007에서 제출본 범위를 수렴하고 TASK-008·009의 초안 작성 시작",
-    "11월 13일 기획서·WBS 완성 후 TASK-010 점검과 TASK-011 제출·접수 확인",
-    "TASK-001의 실행 근거는 가능하면 보완하고, 기술·성능 비교 실험은 제출 이후 일정에 연결"
+    "기획서·WBS 최종 제출 링크를 준비하고 팀 대시보드에서 정확한 마감 시각·WBS 추가 안내·열람 권한을 확인",
+    "TASK-011에서 두 산출물 링크 등록 후 제출완료 전환과 접수 상태를 실제 확인한 경우에만 제출 완료로 기록",
+    "제출 이후 WBS 일정에 따라 APP-A vertical slice와 APP-C 동적 분기 구현을 시작"
   ],
   "decisions_needed": [
-    {
-      "id": "OPEN-SUB-01",
-      "question": "제출 시각·파일 형식과 TASK 담당·내부 일정을 어떻게 확정할까",
-      "action": "TASK-002 확인과 팀 조정",
-      "evidence_needed": "공식 제출 안내와 각 담당자의 현재 작업 가능 시간. 최종 제출 날짜는 11월 13일."
-    },
-    {
-      "id": "OPEN-01",
-      "question": "역할 선택·작업 순서 구성을 MVP에서 어디까지 구현할까",
-      "action": "TASK-007에서 제출본 수준 결정, 실제 비교 결과로 이후 재검토",
-      "evidence_needed": "APP-A·B와 APP-C 분기에서 필수 조건 누락, 불필요한 작업, 근거 정확도·시간·비용 비교"
-    },
     {
       "id": "OPEN-02",
       "question": "정량 합격 기준을 얼마로 둘까",
@@ -40,16 +31,22 @@
       "question": "프레임워크와 경험 재사용에 지금 투자할까",
       "action": "필요가 드러날 때 결정",
       "evidence_needed": "상태 추적·복구의 구현 부담 또는 검토된 조사 경험을 재사용할 실제 과제"
+    },
+    {
+      "id": "OPEN-04",
+      "question": "APP-C 실제 확인 한도와 부분 결과의 세부 수용 기준을 얼마로 둘까",
+      "action": "첫 APP-A·C 통합에서 시간·호출·실패 패턴을 관찰한 뒤 결정",
+      "evidence_needed": "실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태"
     }
   ],
-  "review_summary": "11월 13일 기획서·WBS 제출을 위한 TASK를 준비했다. 담당·내부 목표일은 제안이며 실제 수행 결과와 제출 상태는 각 TASK에서 확인한다. TASK-002~006은 병행하고, 범위를 정리한 뒤 기획서·WBS를 작성·점검·제출한다.",
+  "review_summary": "TASK-002 공개 제출 규칙, TASK-007 범위, TASK-008 기획서, TASK-009 WBS, TASK-010 최종 정합성 검사가 완료됐다. 두 Step 1 산출물은 검토 완료·제출 준비 상태이며 실제 대시보드 제출은 아직 하지 않았다. 다음은 TASK-011의 실제 링크 등록·제출완료·접수 확인이다.",
   "deliverables": [
     {
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "초안",
-      "submission_status": "미확인",
+      "status": "검토 완료·제출 준비",
+      "submission_status": "미제출",
       "source": "docs/artifacts/planning/기획서_초안.json",
       "projection": "docs/step1/기획서.md",
       "completion_tasks": [
@@ -68,10 +65,10 @@
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "팀 작성본 미기록",
-      "submission_status": "미확인",
+      "status": "검토 완료·제출 준비",
+      "submission_status": "미제출",
       "source": "docs/artifacts/planning/WBS.json",
-      "projection": null,
+      "projection": "docs/step1/WBS.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-006",
@@ -123,11 +120,11 @@
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
-    "status": "제안",
+    "status": "준비 중",
     "due_date": "2026-11-13",
     "due_time": null,
     "timezone": "Asia/Seoul",
-    "deadline_check_task": "TASK-002",
+    "deadline_check_task": "TASK-011",
     "task_ids": [
       "TASK-002",
       "TASK-003",
@@ -144,13 +141,14 @@
       "TASK-001"
     ],
     "assignment_basis": "팀 헌장 역할 기준 제안. 실제 담당과 내부 목표 시각은 팀 조정 후 반영.",
-    "submission_location": "docs/step1/",
+    "submission_location": "팀 대시보드 산출물 제출 표에 기획서·WBS 링크 등록 후 제출완료 전환",
     "required_deliverables": [
       "기획서",
       "WBS"
     ],
-    "required_contents": "세부 필수 항목 미확인/없음. 제공 가이드는 품질 참고 기준으로 사용",
-    "authority_ref": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
+    "required_contents": "기획서·WBS 최종 제출본은 최신 OUTPUT-GUIDE의 형식·필수 구성 기준에 맞춰 프로젝션한다. 내부 작업 원본 형식과는 분리한다.",
+    "authority_ref": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md",
+    "authoring_model": "TASK/spec/state/planning 등 구조화 원본에서 작성 → OUTPUT-GUIDE 기준으로 docs/step1/ 제출본 프로젝션"
   },
   "confirmed_provenance": [
     {
@@ -170,6 +168,30 @@
       "authority": "team",
       "source_ref": "docs/artifacts/specs/focus_apps.json",
       "source_id": "SPEC-FOCUS-001"
+    },
+    {
+      "text": "APP-A 지정 후보 비교와 APP-C 중간 판정 분기를 이번 MVP의 핵심 Must로 사용",
+      "authority": "human",
+      "source_ref": "docs/artifacts/tasks/TASK-007.json",
+      "source_id": "T007-C02"
+    },
+    {
+      "text": "APP-B는 후보 없는 요청의 발굴 검증 사례로 유지하되 APP-A·C보다 낮은 우선순위",
+      "authority": "human",
+      "source_ref": "docs/artifacts/tasks/TASK-007.json",
+      "source_id": "T007-C03"
+    },
+    {
+      "text": "R03·R05는 공통 의미와 request/task/attempt ID handoff 설계 순서를 합의했으며 실제 통합은 후속 검증",
+      "authority": "team",
+      "source_ref": "docs/artifacts/tasks/TASK-006.json",
+      "source_id": "interface_draft.plan_id_handoff"
+    },
+    {
+      "text": "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용",
+      "authority": "human",
+      "source_ref": "docs/artifacts/tasks/TASK-007.json",
+      "source_id": "T007-C06,T007-C12"
     }
   ],
   "human_input": {

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-004",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "검토 중",
+  "owner": "R02",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
   "question": "첫 시연에 필요한 집중 앱 속성을 어떤 출처에서 어떤 제약으로 확인할 수 있는가",
@@ -43,10 +43,584 @@
       "path": "docs/artifacts/research/2026-11-11_기술_문서_데이터_출처_확인_기록_초안.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "공식 자료 기준 PomoToki는 Android 오프라인·무계정 뽀모도로를 뒷받침하고, Focus To-Do는 제품의 오프라인 사용과 무등록 로컬 모드를 설명하지만 Android 첫 실행 조합은 미시험이다. AppBlock은 무료 일정·차단 대상 한도와 요일·시간 안내로 APP-B 후보이며 Stay Focused의 무료 조건 조합은 미확인이다. 공개 열람과 자동 수집·저장 권한은 별개다. Android 기기 시험, 서비스 전체 통합, 실제 약관 적용 여부는 미검증이므로 팀 검토가 필요하다.",
+    "claims": [
+      {
+        "id": "TASK-004-C01",
+        "text": "PomoToki Android 스토어 설명은 기본 뽀모도로 타이머가 무료이며 선택적 Todoist 연동 외에 오프라인·무계정으로 사용할 수 있다고 안내한다. 공식 가이드도 오프라인과 무계정 및 Pomodoro 모드를 설명한다.",
+        "status": "공식 문서 확인; 기기 시험 미실시",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02"
+        ]
+      },
+      {
+        "id": "TASK-004-C02",
+        "text": "Focus To-Do 공식 개인정보 처리방침은 Android를 포함한 제품의 온라인·오프라인 사용, 무등록 사용과 로컬 모드를 설명하며 Google Play는 Android용 뽀모도로 타이머를 설명한다. Android 첫 실행부터 무계정·오프라인으로 타이머가 동작하는 조합은 직접 시험하지 않았다.",
+        "status": "공식 문서 일부 확인; 기기 조합 미확인",
+        "evidence_ids": [
+          "TASK-004-E03",
+          "TASK-004-E04"
+        ]
+      },
+      {
+        "id": "TASK-004-C03",
+        "text": "AppBlock Android 무료 비교표는 일정 최대 3개, 일정의 차단 항목으로 웹사이트·키워드 최대 5개, 시간 조건 간격 최대 2개를 안내한다. 일정 도움말은 차단 대상과 요일·시간 조건을 설명하므로 APP-B의 문서 기반 후보이나 무료 Android 환경에서 실제 두 사이트의 평일 저녁 차단은 미시험이다.",
+        "status": "공식 문서 확인 및 제한적 해석; 기기 시험 미실시",
+        "evidence_ids": [
+          "TASK-004-E05",
+          "TASK-004-E06"
+        ]
+      },
+      {
+        "id": "TASK-004-C04",
+        "text": "AppBlock은 웹사이트 차단 시 접근성 권한과 지원 브라우저 확인을 안내하고, 미지원 브라우저나 일부 인앱 브라우저에서 차단이 되지 않을 수 있다고 설명한다.",
+        "status": "공식 문서 확인; 브라우저별 실기기 미시험",
+        "evidence_ids": [
+          "TASK-004-E07",
+          "TASK-004-E08"
+        ]
+      },
+      {
+        "id": "TASK-004-C05",
+        "text": "Stay Focused 공식 자료는 무료 다운로드, 웹사이트 차단, 시간 일정 및 Android 접근성·지원 브라우저를 설명한다. 무료판에서 사이트 2개의 평일 저녁 예약 차단이 함께 가능한지는 확인한 공식 원문으로 판정하지 못했다.",
+        "status": "일부 공식 문서 확인; 무료 조합 미확인",
+        "evidence_ids": [
+          "TASK-004-E09",
+          "TASK-004-E10"
+        ]
+      },
+      {
+        "id": "TASK-004-C06",
+        "text": "Google Play Developer Publishing API는 자체 앱 배포·관리 용도이며 API 약관은 Publishing API를 자신의 제품 배포 관련 활동으로 제한한다. 제3자 공개 앱 전체를 검색하는 용도로 사용 가능하다는 근거는 확인하지 못했다.",
+        "status": "공식 문서 및 약관 확인; 다른 제공 수단 미전수조사",
+        "evidence_ids": [
+          "TASK-004-E11",
+          "TASK-004-E12"
+        ]
+      },
+      {
+        "id": "TASK-004-C07",
+        "text": "Google Play robots.txt는 User-agent *의 /store/search 및 /store/apps/datasafety 경로를 Disallow로 표시한다. Google 서비스 약관은 기계 판독 지침을 위반하는 자동 접근을 금지한다. 개별 상세 페이지의 저장·재사용 허용 여부는 별도 확인이 필요하다.",
+        "status": "공식 자료 확인; 적용 지역 및 개별 이용조건 미확인",
+        "evidence_ids": [
+          "TASK-004-E13",
+          "TASK-004-E14"
+        ]
+      },
+      {
+        "id": "TASK-004-C08",
+        "text": "Apple의 보관된 공식 Search API 문서는 앱 검색 예시를 제공한다. 한국 스토어 검색의 응답 표본을 조회해 HTTP 200, 2건 응답과 Focus To-Do의 trackId 966057213 및 price 0 KRW를 관찰했다. 이는 설치 가격 필드의 응답이며 무료 기능·오프라인 동작·데이터 재사용 허가를 증명하지 않는다.",
+        "status": "공식 보관 문서와 단일 API 호출 확인; 지속성·약관 미확인",
+        "evidence_ids": [
+          "TASK-004-E15",
+          "TASK-004-E16",
+          "TASK-004-E17"
+        ]
+      },
+      {
+        "id": "TASK-004-C09",
+        "text": "11월 11일 기획서의 PomoToki 오프라인·무계정, Focus To-Do 오프라인, AppBlock 무료 한도 및 Stay Focused 무료 범위 미확인을 관련 공식 원문과 다시 대조했다. Focus To-Do 공식 방침의 무등록 로컬 모드는 새로 확인했으나 Android 첫 실행 타이머 조합은 여전히 미확인이다. 이전 입력의 중고거래 조사 내용은 이번 앱 조사로 재검증하지 않았다.",
+        "status": "문서 비교 확인; 기기 시험 미실시",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02",
+          "TASK-004-E03",
+          "TASK-004-E04",
+          "TASK-004-E05",
+          "TASK-004-E09",
+          "TASK-004-E18",
+          "TASK-004-E19"
+        ]
+      },
+      {
+        "id": "TASK-004-C10",
+        "text": "APP-A는 PomoToki에 대해 공식 문서상 오프라인 뽀모도로 사용을 뒷받침하므로 APP-C의 두 앱 모두 미충족 조건을 뒷받침하지 않는다. 다만 실제 기기 실행과 서비스 전체 분기 동작은 검증하지 않았다.",
+        "status": "근거 기반 시연 해석; 제품 실행 미검증",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02",
+          "TASK-004-E20"
+        ]
+      },
+      {
+        "id": "TASK-004-C11",
+        "text": "Apple의 보관된 Search API 안내는 앱 아이콘 등 프로모션 자산의 사용 목적과 스토어 배지 관련 조건을 설명한다. 현재 적용 조건과 텍스트 메타데이터의 저장·재사용 허가는 별도 확인이 필요하다.",
+        "status": "보관된 공식 문서 확인; 현재 조건 미확인",
+        "evidence_ids": [
+          "TASK-004-E15"
+        ]
+      },
+      {
+        "id": "TASK-004-C12",
+        "text": "Google 대한민국 국가 버전 약관도 웹페이지의 robots.txt 등 기계 판독 지침을 위반하는 자동 접근을 금지한다. 개별 페이지 내용의 저장·재사용 권한과 적용되는 추가 약관은 별도 확인이 필요하다.",
+        "status": "대한민국 국가 버전 공식 약관 확인; 개별 사용 조건 미확인",
+        "evidence_ids": [
+          "TASK-004-E13",
+          "TASK-004-E21"
+        ]
+      },
+      {
+        "id": "TASK-004-C13",
+        "text": "Play Catalog API는 Google Play에 등록된 제3자 앱스토어 대상의 읽기 전용 변경분 API다. 대상은 해당 스토어에 포함 동의하고 미국 Play에 게시된 앱이며 최근 36시간 변경분과 두 메서드 합산 2 QPS 제한이 문서화돼 있다. 프로젝트의 등록·접근 자격과 한국 앱 커버리지는 미확인이다.",
+        "status": "공식 가이드 확인; 사용 자격·실제 호출 미확인",
+        "evidence_ids": [
+          "TASK-004-E22"
+        ]
+      },
+      {
+        "id": "TASK-004-C14",
+        "text": "Apple Performance Partners Search API 안내는 software 검색 유형, 검색 결과 limit 1~200(기본 50), 분당 약 20회(변경 가능)와 대형 사이트의 검색·조회 캐싱 권고를 설명한다. 앱 메타데이터의 장기 저장이나 재배포 허가와 실제 운영 한도는 별도 확인이 필요하다.",
+        "status": "공식 문서 확인; 운영 조건·재사용 미확인",
+        "evidence_ids": [
+          "TASK-004-E23"
+        ]
+      },
+      {
+        "id": "TASK-004-C15",
+        "text": "Stay Focused 공식 개인정보 처리방침은 무료 제공과 일부 유료 기능을 설명하지만 무료판의 사이트 두 개·평일 반복 예약 조건은 확인되지 않았다.",
+        "status": "공식 방침 확인; 조건 조합 미확인",
+        "evidence_ids": [
+          "TASK-004-E09",
+          "TASK-004-E24"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "TASK-004-E01",
+        "label": "PomoToki 공식 사용 안내: Getting Started·Pomodoro·FAQ",
+        "url": "https://www.pomotoki.com/guide",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E02",
+        "label": "PomoToki Android Google Play 설명: 무료 타이머·오프라인",
+        "url": "https://play.google.com/store/apps/details?hl=en_US&id=com.tamaszahoran.pomotoki",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E03",
+        "label": "Focus To-Do 공식 개인정보 처리방침: Data entered by the user·Register an account",
+        "url": "https://focustodo.cn/privacy-policy",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E04",
+        "label": "Focus To-Do Android Google Play 설명",
+        "url": "https://play.google.com/store/apps/details?hl=en_US&id=com.superelement.pomodoro",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E05",
+        "label": "AppBlock 공식 Android 무료·유료 기능 비교",
+        "url": "https://appblock.app/premium/",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E06",
+        "label": "AppBlock 공식 일정 안내: 차단 대상 및 요일·시간 조건",
+        "url": "https://appblock.app/how-schedules-work-in-appblock-2/",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E07",
+        "label": "AppBlock 공식 Android 웹사이트 차단 한계",
+        "url": "https://appblock.app/what-are-the-limitations-of-website-blocking-on-android/",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E08",
+        "label": "AppBlock 공식 차단 실패 점검: 접근성 권한",
+        "url": "https://appblock.app/why-can-i-still-access-apps-or-websites-that-should-be-blocked/",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E09",
+        "label": "Stay Focused 공식 제품·Android FAQ",
+        "url": "https://www.stayfocused.me/",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E10",
+        "label": "Stay Focused Android Google Play 설명·접근성 API",
+        "url": "https://play.google.com/store/apps/details?hl=en-US&id=com.stayfocused",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E11",
+        "label": "Google Play Developer API의 앱 배포·관리 범위",
+        "url": "https://developers.google.com/android-publisher",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E12",
+        "label": "Google Play Publishing API 이용조건",
+        "url": "https://developers.google.com/android-publisher/terms",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E13",
+        "label": "Google Play robots.txt: /store/search 등 제한",
+        "url": "https://play.google.com/robots.txt",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E14",
+        "label": "Google 미국 지역판 서비스 약관: 기계 판독 지침 및 타인 콘텐츠",
+        "url": "https://policies.google.com/terms/embedded?hl=en-US",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E15",
+        "label": "Apple Search API 보관 문서: 검색 및 프로모션 자산 조건",
+        "url": "https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E16",
+        "label": "Apple Search API 보관 문서: software 검색 예시",
+        "url": "https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/SearchExamples.html",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E17",
+        "label": "Apple Search API 실제 단건 조회: 한국 앱 검색",
+        "url": "https://itunes.apple.com/search?term=focus%20to-do&country=kr&entity=software&limit=2",
+        "checked_at": "2026-11-12",
+        "method": "2026-11-12 응답 표본 확인: HTTP 200, resultCount 2; 요청·지역과 확인 시점에 한정"
+      },
+      {
+        "id": "TASK-004-E18",
+        "label": "11월 11일 기준 기획서의 앱 비교표 및 기기 시험 계획",
+        "path": "docs/artifacts/planning/기획서_초안.json",
+        "checked_at": "2026-11-12"
+      },
+      {
+        "id": "TASK-004-E19",
+        "label": "TASK 입력의 이전 기술 문서 기록: 중고거래 사례, 앱별 기기 시험 결과 아님",
+        "path": "docs/artifacts/research/2026-11-11_기술_문서_데이터_출처_확인_기록_초안.json",
+        "checked_at": "2026-11-12"
+      },
+      {
+        "id": "TASK-004-E20",
+        "label": "APP-A·B·C의 조건과 실행 분기",
+        "path": "docs/artifacts/specs/focus_apps.json",
+        "checked_at": "2026-11-12"
+      },
+      {
+        "id": "TASK-004-E21",
+        "label": "Google 서비스 약관 대한민국 국가 버전: 자동화 및 타인 콘텐츠",
+        "url": "https://policies.google.com/terms?hl=ko&gl=KR",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E22",
+        "label": "Google Play Catalog API 가이드: 등록된 제3자 앱스토어의 미국 참여 앱 및 갱신 범위",
+        "url": "https://developers.google.com/android-publisher/play-catalog",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E23",
+        "label": "Apple Services Performance Partners Search API: 검색 파라미터·호출 한도",
+        "url": "https://performance-partners.apple.com/search-api",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      },
+      {
+        "id": "TASK-004-E24",
+        "label": "Stay Focused 공식 개인정보 처리방침: 무료 제공 및 일부 유료 기능",
+        "url": "https://www.stayfocused.me/privacy.html",
+        "checked_at": "2026-11-12",
+        "method": "공식 원문 열람"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "첫 시연 핵심 앱·속성에 공식 근거 또는 미확인과 다음 확인을 기록",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02",
+          "TASK-004-E03",
+          "TASK-004-E04",
+          "TASK-004-E05",
+          "TASK-004-E06",
+          "TASK-004-E07",
+          "TASK-004-E08",
+          "TASK-004-E09",
+          "TASK-004-E10",
+          "TASK-004-E20"
+        ]
+      },
+      {
+        "criterion": "각 공식 문서 주장과 해당 원문의 관련 절을 대조하고 문서상 사실과 추론을 구분",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02",
+          "TASK-004-E03",
+          "TASK-004-E04",
+          "TASK-004-E05",
+          "TASK-004-E06",
+          "TASK-004-E07",
+          "TASK-004-E08",
+          "TASK-004-E09",
+          "TASK-004-E10",
+          "TASK-004-E11",
+          "TASK-004-E12",
+          "TASK-004-E13",
+          "TASK-004-E14",
+          "TASK-004-E15",
+          "TASK-004-E16"
+        ]
+      },
+      {
+        "criterion": "11월 11일 기획서의 관련 앱 근거 재확인 및 기기 시험 여부 구분",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02",
+          "TASK-004-E03",
+          "TASK-004-E05",
+          "TASK-004-E09",
+          "TASK-004-E18",
+          "TASK-004-E19"
+        ]
+      },
+      {
+        "criterion": "공개 열람과 자동 수집·저장·재사용 조건 구분",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-004-E11",
+          "TASK-004-E12",
+          "TASK-004-E13",
+          "TASK-004-E14",
+          "TASK-004-E15"
+        ]
+      },
+      {
+        "criterion": "실제 Android 기기에서 조건 조합·알림·브라우저 차단을 검증",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-004-E20"
+        ]
+      },
+      {
+        "criterion": "Apple 검색 HTTP 응답 표본에서 앱명·ID·가격 필드를 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-004-E17"
+        ]
+      },
+      {
+        "criterion": "선택한 외부 자료의 해당 서비스 용도별 자동 수집·장기 저장·재사용이 허용되는지 확인",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-004-E12",
+          "TASK-004-E13",
+          "TASK-004-E14",
+          "TASK-004-E15"
+        ]
+      },
+      {
+        "criterion": "대한민국 국가 버전 약관, 별도 Play Catalog API, Apple Search API의 공개 조건을 원문에서 추가 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-004-E21",
+          "TASK-004-E22",
+          "TASK-004-E23",
+          "TASK-004-E24"
+        ]
+      },
+      {
+        "criterion": "Android 기기 또는 도구 사용 가능 여부 확인",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-004-E20"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "PomoToki와 Focus To-Do의 Android 설치 직후 비행기 모드 타이머 실행·종료·알림, 계정 없이 첫 실행 가능 여부는 기기 시험 미실시.",
+      "AppBlock 무료판의 사이트 2개·평일 저녁 차단 조합과 Stay Focused 무료판의 수량·요일·시간 제한은 각 앱 버전·시연 브라우저·지역의 실제 조건으로 확인 필요.",
+      "외부 페이지의 자료를 제품에서 자동 수집·저장·재배포하는 권한, 서비스별 추가 약관과 저장·재사용의 적용 범위, 비용·쿼터 및 변경 시 재검증 주기는 미확인. robots.txt는 명시된 경로에 관한 확인이며 모든 상세 페이지의 일괄 금지나 허가를 뜻하지 않음.",
+      "Apple Search API는 보관 문서와 단일 한국 검색 응답만 확인했다. 현재 사용 자격·요금·실제 운영 한도·캐시 보존 기간 및 iOS 앱별 세부 기능·다른 검색의 안정성은 미확인.",
+      "공유된 iOS 전체 조사 범위와 현재 Android 첫 시연 중심 TASK의 우선순위는 팀장 확인 필요. 공식 자료 내용은 앱 버전과 지역에 따라 변할 수 있음.",
+      "APP-C 확인 한도의 횟수·시간과 팀 간 I/O 필드명, APP-B의 최종 필수 여부는 미결정. 원문 확인이나 단일 API 호출은 실제 LLM 조사·통합 실행 검증이 아님.",
+      "Apple 검색 응답은 지역·시점·검색어에 따라 달라질 수 있어 이번 한국 응답 표본을 미래 결과나 전체 앱 목록으로 일반화할 수 없음.",
+      "개발 환경에 연결된 Android 기기 및 adb/에뮬레이터를 확인하지 못해 기기 테스트를 수행하지 못했다. 앱 버전·OS·지역 및 시험 결과는 미기록이다."
+    ],
+    "decision_requests": [
+      "R01: APP-A의 문서 근거만으로 초기 시연을 준비할지, Android 비행기 모드·무계정 기기 시험을 선행 필수로 둘지 결정.",
+      "R01: 자동 수집이나 재사용 허용이 확인되지 않은 자료를 수동 출처 확인과 부분 결과로 제한할지, 별도 이용 가능 출처·연동을 확보할지 결정.",
+      "R01: iOS 추가 조사 수준과 APP-B 최종 필수 여부를 TASK-005·일정과 함께 결정.",
+      "R01·R03·R05: APP-C의 미확인 보류 이후 부분 결과로 종료하는 확인 한도와 실패 표시 기준을 결정."
+    ],
+    "attribute_checks": [
+      {
+        "app": "PomoToki",
+        "case": "APP-A/C",
+        "condition": "Android 오프라인 뽀모도로 타이머",
+        "verdict": "문서상 충족",
+        "finding": "개발사 가이드와 Android 목록에서 오프라인과 Pomodoro를 안내; 무료 기능으로 명시.",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "Android 설치 후 비행기 모드에서 타이머 시작·종료·알림 확인"
+      },
+      {
+        "app": "PomoToki",
+        "case": "APP-A",
+        "condition": "계정 없는 사용",
+        "verdict": "문서상 충족",
+        "finding": "독립 사용은 계정 불필요, Todoist 연결은 선택 기능.",
+        "evidence_ids": [
+          "TASK-004-E01",
+          "TASK-004-E02"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "초기 설정과 앱 버전별 실제 동작 확인"
+      },
+      {
+        "app": "Focus To-Do",
+        "case": "APP-A/C",
+        "condition": "Android 오프라인 뽀모도로 타이머",
+        "verdict": "미확인",
+        "finding": "개발사는 제품의 오프라인 사용 및 뽀모도로 기능을 설명하지만 Android 첫 실행·오프라인 타이머 조합은 기기 미시험.",
+        "evidence_ids": [
+          "TASK-004-E03",
+          "TASK-004-E04"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "Android 기기에서 설치 후 네트워크 차단해 타이머 실행·알림 확인"
+      },
+      {
+        "app": "Focus To-Do",
+        "case": "APP-A",
+        "condition": "계정 없는 사용",
+        "verdict": "문서상 충족",
+        "finding": "개발사 방침에 무등록 로컬 모드가 명시됨. 최초 실행에서 타이머까지 가능한지는 별도 확인.",
+        "evidence_ids": [
+          "TASK-004-E03",
+          "TASK-004-E04"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "Android 최초 실행의 계정 없이 타이머 동작 확인"
+      },
+      {
+        "app": "AppBlock",
+        "case": "APP-B",
+        "condition": "무료판 웹사이트 2개 평일 저녁 예약",
+        "verdict": "문서상 후보; 실동작 미확인",
+        "finding": "Android 무료 일정의 차단 항목으로 웹사이트·키워드 최대 5개와 시간 간격 2개, 일정의 요일·시간 조건이 설명됨. 실제 무료 앱의 조합은 미시험.",
+        "evidence_ids": [
+          "TASK-004-E05",
+          "TASK-004-E06"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "무료 Android 앱에서 사이트 2개·평일 저녁 일정을 설정하고 브라우저별 시험"
+      },
+      {
+        "app": "AppBlock",
+        "case": "APP-B",
+        "condition": "지원 브라우저·접근성 권한",
+        "verdict": "문서상 일부 확인",
+        "finding": "웹 차단에 접근성 권한 필요; 일부 브라우저·인앱 브라우저에서는 제한이 있을 수 있음.",
+        "evidence_ids": [
+          "TASK-004-E07",
+          "TASK-004-E08"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "시연 브라우저와 앱·OS 버전을 지정해 권한과 차단 테스트"
+      },
+      {
+        "app": "Stay Focused",
+        "case": "APP-B",
+        "condition": "무료판 웹사이트 2개 평일 저녁 예약",
+        "verdict": "미확인",
+        "finding": "무료 다운로드, 사이트 차단, 시간 일정은 안내하지만 무료판의 수량·요일 조합은 확인하지 못함.",
+        "evidence_ids": [
+          "TASK-004-E09",
+          "TASK-004-E10",
+          "TASK-004-E24"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "공식 무료 한도 확인 또는 Android 무료판에서 조건 조합 시험"
+      },
+      {
+        "app": "Stay Focused",
+        "case": "APP-B",
+        "condition": "지원 브라우저·접근성 권한",
+        "verdict": "문서상 일부 확인",
+        "finding": "공식 FAQ는 여러 지원 브라우저와 접근성 권한·배터리 제한을 설명.",
+        "evidence_ids": [
+          "TASK-004-E09",
+          "TASK-004-E10"
+        ],
+        "checked_at": "2026-11-12",
+        "device_test": "미실시",
+        "follow_up": "시연 브라우저와 앱·OS 버전에서 차단 및 권한 시험"
+      }
+    ],
+    "mvp_handoff": {
+      "R03": "APP-A 조건별 문서 근거와 미확인을 source/evidence 및 후보·조건 판정에 연결. PomoToki는 공식 문서상 충족하므로 현재 문서 판정상 APP-C 두 후보 모두 미충족 조건은 성립하지 않음. 실기기 확인과 동적 흐름 실행은 별도.",
+      "R04": "확인된 출처 설명, 조건 미확인, 자료 접근 실패, 추가 기기 확인을 분리하여 부분 결과로 보여줄 수 있도록 검토.",
+      "R05": "공개 열람과 자동 수집·보관 권한을 구분하고 원문 확인·검색만 확인·접근 실패와 조회 시각을 연결. ID·필드명은 팀 협의 전.",
+      "R01": "기획서 4·6·8장과 TASK-007에 자료 범위·시연 전 기기 시험·이용 조건·불확실성을 반영할지 결정."
+    },
+    "observation_limits": "공식 원문 및 한국 Apple API 단건 조회만 확인. 모든 앱의 Android 기기 시험과 실제 앱 조사 시스템 실행은 미실시. 11월 11일 중고거래 근거는 현 TASK에 관련성이 낮아 재확인하지 않음.",
+    "device_test_plan": {
+      "status": "미실행 — Android 기기와 설치 환경 필요",
+      "common_record": [
+        "시험 날짜·지역·기기 모델·Android 버전·앱 버전·무료/유료 상태",
+        "비행기 모드와 Wi-Fi·모바일 데이터 상태, 최초 실행 여부 및 시험 결과·근거",
+        "실패와 미확인을 구분하고 개인 정보·계정 값은 기록하지 않음"
+      ],
+      "APP-A": [
+        "온라인 설치 후 최초 실행 전 기기 연결을 끊고 계정 없이 진행 가능한지 확인",
+        "PomoToki·Focus To-Do 각각 뽀모도로 타이머 시작·종료 및 알림을 확인",
+        "네트워크 없이 시작이 불가능하면 화면 메시지·시점과 사유를 기록하고 단순 앱 오류를 조건 미충족으로 단정하지 않음"
+      ],
+      "APP-B": [
+        "AppBlock·Stay Focused 무료판 각각에서 테스트용 사이트 2개와 평일 저녁 일정을 설정",
+        "접근성 권한, 기기 현지 시간, 브라우저·버전을 기록하고 일정 안팎에서 차단 및 해제 확인",
+        "무료 제한·브라우저 미지원·접근성/배터리 설정 문제를 각각 기록"
+      ],
+      "safety": "개인 기기의 접근성·차단 설정은 사용자가 확인한 시험용 환경에서 적용하고 시험 후 원래 상태로 복구한다."
+    }
+  },
   "title": "앱 데이터·이용 조건·운영 제약 정리",
   "suggested_owner": "R02",
-  "assignment_status": "제안",
+  "assignment_status": "배정",
   "schedule_status": "내부 목표일 제안",
   "milestone": "2026-11-13",
   "stage": "기획 근거",

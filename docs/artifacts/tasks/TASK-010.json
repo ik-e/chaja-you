@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-010",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "완료",
+  "owner": "R01",
   "due": "2026-11-13",
   "updated_at": "2026-11-12",
   "question": "기획서와 WBS가 같은 범위·마감·완료 기준을 담고 공식 제출 조건을 충족하는가",
@@ -60,7 +60,157 @@
       "path": "docs/artifacts/tasks/TASK-009.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "기획서와 WBS 최종 정합성 점검을 완료했다. 사람용 기획서는 공식 기본 목차 `1. 서비스 정의 / 2. 기능 요구사항 / 3. 비기능 요구사항`을 유지하고 FR-01~04, APP-A·C Must, APP-B 후순위, Must/Later/Unknown, 실제 미검증 상태와 데이터 수집 정책 gate를 포함한다. WBS는 같은 범위를 34개 작업으로 분해하고 FR-01~04를 모두 구현·통합·평가 작업에 연결했다. APP-B는 조건부 W26으로 핵심 경로 선행에서 제외했다. 마일스톤 11/13, 12/08, 12/31, 01/04가 기획서·WBS와 일치한다. project_docs --check 및 별도 정적 대조에서 공식 목차, 요구사항 커버리지, 범위, 마일스톤, 미검증 표현이 모두 통과했다. 실제 팀 대시보드 제출·접수는 수행하지 않았으므로 제출 완료로 표시하지 않는다.",
+    "claims": [
+      {
+        "id": "T010-C01",
+        "text": "기획서와 WBS는 APP-A·C를 핵심 Must, APP-B를 조건부 후순위로 동일하게 표현한다.",
+        "status": "검증 완료",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E03"
+        ]
+      },
+      {
+        "id": "T010-C02",
+        "text": "FR-01~04는 기획서 수용 기준과 WBS 구현·검증 작업에 모두 연결된다.",
+        "status": "검증 완료",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E04"
+        ]
+      },
+      {
+        "id": "T010-C03",
+        "text": "공식 Step 1 기획서 기본 목차와 WBS 필드, 프로젝트 마일스톤이 제출 프로젝션에 반영됐다.",
+        "status": "검증 완료",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E05",
+          "T010-E06"
+        ]
+      },
+      {
+        "id": "T010-C04",
+        "text": "실기기·실제 통합·B0/D0 등 미실행 항목은 완료로 표현하지 않으며 실제 제출 상태도 별도로 남긴다.",
+        "status": "검증 완료",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E07"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "T010-E01",
+        "label": "최종 기획서 사람용 프로젝션",
+        "path": "docs/step1/기획서.md"
+      },
+      {
+        "id": "T010-E02",
+        "label": "최종 WBS 사람용 프로젝션",
+        "path": "docs/step1/WBS.md"
+      },
+      {
+        "id": "T010-E03",
+        "label": "R01 범위 결정",
+        "path": "docs/artifacts/tasks/TASK-007.json"
+      },
+      {
+        "id": "T010-E04",
+        "label": "집중 앱 요구사항 명세",
+        "path": "docs/artifacts/specs/focus_apps.json"
+      },
+      {
+        "id": "T010-E05",
+        "label": "공개 제출 규칙 정리",
+        "path": "docs/artifacts/tasks/TASK-002.json"
+      },
+      {
+        "id": "T010-E06",
+        "label": "WBS 구조화 원본",
+        "path": "docs/artifacts/planning/WBS.json"
+      },
+      {
+        "id": "T010-E07",
+        "label": "기획서·WBS 생성 검증 도구",
+        "path": "tools/project_docs.py"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "기획서가 공식 기본 목차를 유지하고 서비스 정의·FR·NFR를 포함하는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E05"
+        ]
+      },
+      {
+        "criterion": "기획서 FR-01~04와 WBS 작업 커버리지가 일치하는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E04",
+          "T010-E06"
+        ]
+      },
+      {
+        "criterion": "APP-A·C Must와 APP-B 조건부 후순위가 두 문서에서 동일한가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E03"
+        ]
+      },
+      {
+        "criterion": "11/13·12/08·12/31·01/04 마일스톤과 프로젝트 종료일이 정합적인가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E06"
+        ]
+      },
+      {
+        "criterion": "미검증 앱 동작·통합·B0/D0·정량 상한을 완료로 과장하지 않는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T010-E01",
+          "T010-E02",
+          "T010-E03"
+        ]
+      },
+      {
+        "criterion": "생성 도구 검증과 추가 정적 대조를 통과했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T010-E07"
+        ]
+      },
+      {
+        "criterion": "실제 대시보드 링크 등록과 제출완료 상태를 확인했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "T010-E05"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "2026-11-13 정확한 마감 시각과 팀 대시보드의 WBS 추가 안내는 실제 대시보드에서 최종 확인해야 한다.",
+      "실제 제출 링크의 열람 권한과 대시보드 접수 상태는 TASK-011 수행 전까지 미확인이다."
+    ],
+    "decision_requests": [
+      "TASK-011에서 팀 대시보드의 정확한 마감 시각·별도 WBS 안내를 확인하고 기획서·WBS 링크 등록 후 제출완료 상태와 접수 여부를 기록한다."
+    ]
+  },
   "title": "기획서·WBS 최종 정합성·형식 확인",
   "suggested_owner": "R01",
   "assignment_status": "제안",

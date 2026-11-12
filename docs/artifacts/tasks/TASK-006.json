@@ -52,10 +52,16 @@
     },
     {
       "path": "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+    },
+    {
+      "path": "docs/members/R03/workspace/2026-11-12_APP_모의_검증_요약.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-003.json"
     }
   ],
   "result": {
-    "summary": "R05 구조·통합 초안. 공통 리서치 구조와 앱 특화 역할·조건·출처·검증 기준을 구분한다. APP-A는 첫 vertical slice, APP-C의 추가·생략·보류는 핵심 검증 사례다. APP-B의 최종 필수 여부는 TASK-005·일정 확인 후 결정한다. 합성 자료로 APP-A 연결, APP-C 세 분기, 접근 실패와 조건 미확인을 검사했다. R01 방향에 따라 확인된 내용의 부분 결과 제공과 미확인·실패 분리를 MVP에 포함하고 자동 재시도·복잡한 복구는 후순위로 둔다. 세부 담당·필드명·기간, 실제 앱·에이전트 실행과 팀 간 I/O 합의는 아직 미확정이다.",
+    "summary": "R05 구조·통합 초안. 공통 리서치 구조와 앱 특화 역할·조건·출처·검증 기준을 구분한다. APP-A는 첫 vertical slice, APP-C의 추가·생략·보류는 핵심 검증 사례다. APP-B의 최종 필수 여부는 TASK-005·일정 확인 후 결정한다. 합성 자료로 APP-A 연결, APP-C 세 분기, 접근 실패와 조건 미확인을 검사했다. R03 모의 원형과 R04의 2차 개정안을 대조해 작업 실행 조건·판정 ID·출처와 근거 참조·부분 결과 상태의 R05 예시를 보강했다. R03·R05는 계획 제안→R05 작업 ID 발급→R03 정식 ID 연결→실행 순서와 같은 작업의 재시도 ID 보존을 설계 흐름으로 확인했다. 이는 코드 적용이나 실제 통합 검증이 아니다. R01 방향에 따라 확인된 내용의 부분 결과 제공과 미확인·실패 분리를 MVP에 포함하고 자동 재시도·복잡한 복구는 후순위로 둔다. 세부 필드명·기간, 실제 앱·에이전트 실행과 나머지 팀 간 I/O 계약은 아직 미확정이다.",
     "claims": [
       {
         "id": "TASK-006-C01",
@@ -114,6 +120,12 @@
         "text": "R01 의도에 따라 앱 리서치를 첫 도메인으로 구현하며, APP-A 첫 통합과 APP-C 조건부 분기를 핵심 검증으로 두고 APP-B의 최종 필수 여부는 보류한다.",
         "status": "R01 방향 반영 — 세부 계약은 미확정",
         "evidence_ids": ["TASK-006-E06"]
+      },
+      {
+        "id": "TASK-006-C08",
+        "text": "R03 모의 원형에는 작업 ID·선행 관계·분기 이유가 있으나 작업별 run_if, 대상·조건별 verdict ID, 실제 source/evidence ID와 부분 결과 형식은 아직 없다. R04의 2차 개정안은 이 ID 연결과 세 상태 분리를 화면 요구로 제안한다.",
+        "status": "문서·원형 대조 — 팀 간 계약 미확정",
+        "evidence_ids": ["TASK-006-E07", "TASK-006-E08"]
       }
     ],
     "evidence": [
@@ -146,6 +158,16 @@
         "id": "TASK-006-E06",
         "label": "R01의 도메인별 특화와 TASK-006 구현 의도",
         "path": "docs/human/task-intents/TASK-006.md"
+      },
+      {
+        "id": "TASK-006-E07",
+        "label": "R03 APP-A·B·C 규칙 기반 모의 원형과 검증 한계",
+        "path": "docs/members/R03/workspace/2026-11-12_APP_모의_검증_요약.md"
+      },
+      {
+        "id": "TASK-006-E08",
+        "label": "R04 사용자 문제와 결과 화면 연결 2차 개정",
+        "path": "docs/artifacts/tasks/TASK-003.json"
       }
     ],
     "verification": [
@@ -191,15 +213,21 @@
         "evidence_ids": [
           "TASK-006-E04"
         ]
+      },
+      {
+        "criterion": "R03·R05가 확인한 임시 참조→정식 task_id→attempt_id 흐름을 실제 출력과 저장·실행에서 검증했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": ["TASK-006-E05"]
       }
     ],
     "uncertainties": [
-      "R03·R04·R02와 최소 입출력 필드 및 역할 경계를 아직 합의하지 않았다.",
+      "R03·R05는 작업·시도 ID의 발급 및 참조 연결 순서를 설계상 확인했다. 임시 참조 필드명과 실제 전송 형식, R04·R02 경계 및 나머지 최소 입출력은 미합의다.",
       "앱 자료의 접근·보관 가능 범위와 실패 시 대체 출처는 TASK-004 결과를 확인해야 한다.",
       "재시도 상한, 부분 결과의 완료 기준, 프레임워크 필요성은 아직 검증하지 않았다.",
       "WBS 후보의 기간과 병렬 수행 가능성은 팀원의 작업 가능 시간과 첫 구현 결과로 조정해야 한다.",
       "합성 예시는 실제 앱의 기능, 공개 자료 접근, 에이전트 실행 또는 서비스 통합 성공의 근거가 아니다.",
-      "interface_draft의 필드명·자료 형태·상태 전이는 팀 간 합의 전 예시이며 구현 계약이 아니다.",
+      "interface_draft의 ID 발급·연결 순서는 R03·R05 설계 합의이며, 구체 필드명·자료 형태·상태 전이는 구현 계약 전 예시다.",
+      "R03 규칙 기반 모의 원형은 작업별 run_if, 대상·조건별 판정 객체, 실제 source/evidence ID와 부분 결과 객체를 아직 출력하지 않는다. R05의 보강 예시는 팀과 대조할 초안이다.",
       "APP-B의 최종 필수 여부는 TASK-005 결과와 전체 일정 확인 후 R01이 결정한다."
     ],
     "decision_requests": [
@@ -301,6 +329,7 @@
           "depends_on",
           "run_if",
           "status",
+          "status_reason",
           "failure_reason"
         ]
       },
@@ -336,6 +365,8 @@
       {
         "name": "verdict",
         "fields": [
+          "verdict_id",
+          "task_id",
           "candidate_id",
           "condition_id",
           "status",
@@ -347,12 +378,14 @@
         "name": "report",
         "fields": [
           "request_id",
-          "claims",
-          "verdicts",
+          "status",
+          "claim_ids",
+          "verdict_ids",
           "source_ids",
-          "uncertainties",
+          "unverified",
           "failures"
-        ]
+        ],
+        "note": "저장 결과는 ID 참조와 status(완료·부분 결과·생성 실패)를 갖는다. R04 화면용 report_status는 같은 상태의 표시 이름이며 화면 응답에는 참조된 객체를 펼칠 수 있다. 필드명은 협의 전이다."
       }
     ],
     "domain_boundary": {
@@ -373,14 +406,36 @@
       "implementation_boundary": "앱 리서치의 특화 규칙을 공통 request/task/source/evidence/verdict의 의미와 ID 연결 바깥에 둔다. 범용 플러그인이나 두 번째 도메인용 프레임워크 구현은 이번 범위가 아니다."
     },
     "interface_draft": {
-      "status": "R01 공통 의미 우선 방향을 반영한 R05 예시 — 팀 간 필드명·전송 방식 미합의",
+      "status": "R03·R05 ID 발급·연결 순서 확인, 나머지는 R05 예시 — 필드명·전송 방식·실제 연동 미합의",
       "common_rules": [
         "모든 작업·출처·판정·보고서는 동일한 request_id로 묶는다. ID로 연결된 대상이 없으면 결과를 확정하지 않는다.",
         "조건마다 필수·선호 구분을 전달한다. 앱 리서치의 조건 ID·플랫폼 값은 도메인 특화 부분에 둔다. 판정은 대상과 조건의 쌍마다 남긴다.",
         "근거는 원문을 확인한 출처의 source_id를 참조하고, 보고서의 핵심 주장은 evidence_id를 참조한다. 검색 결과만 보거나 접근에 실패한 출처에서 확인 근거를 만들지 않는다.",
         "실행 작업의 실패와 조건 판정의 미확인은 다른 필드에 저장한다. 부분 결과는 이미 확인한 주장과 미확인·실패 이유를 함께 돌려준다.",
+        "run_if는 선행 작업의 완료 여부가 아니라 그 결과에서 평가할 실행 조건이다. 조건 판정 전의 보류와 확인 한도 뒤의 최종 미실행을 구분하고 둘 다 이유를 기록한다.",
+        "미확인 판정에는 근거 ID가 없을 수 있으므로 verdict_id와 판정을 만든 task_id로 요청·작업 경로를 유지한다. 결과는 claim_id·verdict_id를 참조한다.",
+        "같은 논리 작업을 재시도하면 task_id를 유지한다. 첫 실패를 덮어쓰지 않고 시도별 식별자·상태·이유를 남긴다. 조사 목표가 달라진 새 작업에는 새 task_id를 부여한다.",
         "출처의 조회 시각과 접근 상태는 실제 조회 때 기록한다. 예시의 mock 값은 실제 자료 확인을 뜻하지 않는다."
       ],
+      "retry_identity": {
+        "status": "R03·R05 작업 ID 보존 및 R05 시도 ID 발급 흐름 확인 — 코드 적용 전",
+        "rule": "재시도는 기존 task_id에 속한 새로운 실행 시도로 기록한다. 이전 시도와 오류를 보존하고 작업의 최종 상태는 모든 시도의 이력을 참조한다.",
+        "example": {"task_id": "MOCK-T1", "attempts": [{"attempt_id": "MOCK-T1-A1", "status": "실패", "reason": "합성 접근 실패"}, {"attempt_id": "MOCK-T1-A2", "status": "완료", "reason": null}]},
+        "open": "자동 재시도 허용 여부·횟수 상한과 실제 전송 필드명은 미확정이다."
+      },
+      "plan_id_handoff": {
+        "status": "2026-11-12 R03·R05 공동 확인한 설계 순서 — 코드 적용·실제 연동 검증 전",
+        "source": "R03의 2026-11-12 회신과 R03 조건·작업·분기 초안 4·7·9절. 회신에서 지칭한 11절은 현재 main에 없어 후속 대조 필요",
+        "sequence": [
+          "R05가 요청을 수신해 request_id를 발급하고 R03에 전달한다.",
+          "R03이 임시 작업 참조값을 붙인 계획 제안에 목표·역할·실행 조건·선행 관계를 담아 R05에 보낸다. 임시 참조 필드명은 예시이며 확정하지 않는다.",
+          "R05가 임시 작업 참조값별 정식 task_id를 발급하고 대응표를 R03에 반환한다.",
+          "R03이 depends_on과 판정·결정의 작업 참조를 정식 task_id로 연결한 계획을 반환한 뒤 실행한다.",
+          "후속 작업을 추가할 때 기존 task_id는 유지하고 새 작업에만 새 task_id를 발급한다. 같은 목표의 재시도에는 기존 task_id와 새 attempt_id를 사용한다."
+        ],
+        "execution_identity": "R05가 실행 시도마다 attempt_id를 발급해 request_id·task_id와 함께 R03에 전달한다. R03은 결과·실패 기록에 세 ID를 그대로 반환하고 해당 시도의 도구 호출·출처·근거·판정을 같은 attempt로 추적한다.",
+        "validation_draft": "R05는 임시 참조의 중복·누락, 대응표의 일대일 연결, 미해결 depends_on·판정·결정 작업 참조와 선행 관계 순환을 실행 전 확인하고 오류를 기록한다. 구체 전송 형태와 검증 구현은 미완료다."
+      },
       "handoffs": [
         {
           "from": "R04 입력 화면",
@@ -390,25 +445,39 @@
           "invalid_or_missing": "필수 조건을 분리할 수 없으면 확인 질문 또는 미확인 항목으로 반환하며 임의로 충족 판정하지 않는다."
         },
         {
-          "from": "R03 계획·조건부 작업",
-          "to": "R05 계획 저장·실행 상태",
-          "minimum": ["request_id", "task_id", "goal", "role", "depends_on", "run_if", "status"],
-          "example": {"request_id": "MOCK-A", "task_id": "MOCK-T1", "goal": "candidate-A 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "대기"},
-          "invalid_or_missing": "중복 task_id, 존재하지 않는 선행 작업, 선행 관계 순환, 해석할 수 없는 실행 조건은 실행 전 거부하고 이유를 남긴다."
+          "from": "R03 임시 참조를 포함한 계획 제안",
+          "to": "R05 task_id 발급 → 임시 참조 대응표 반환 → R03 정식 ID 연결 → R05 계획 저장·실행 상태",
+          "minimum": ["request_id", "temporary_task_ref", "goal", "role", "depends_on", "run_if"],
+          "example": {"proposal": {"request_id": "MOCK-A", "temporary_task_ref": "draft-A1", "goal": "candidate-A 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상"}, "mapping": {"draft-A1": "MOCK-T1"}, "resolved_task": {"request_id": "MOCK-A", "task_id": "MOCK-T1", "goal": "candidate-A 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "대기", "status_reason": null}},
+          "invalid_or_missing": "임시 참조 중복·누락, 대응표 불일치, 미해결 작업 참조, 선행 관계 순환, 해석할 수 없는 실행 조건은 실행 전 거부하고 이유를 남긴다. temporary_task_ref와 mapping의 필드명·형식은 예시다."
+        },
+        {
+          "from": "R05 작업 실행·시도 식별",
+          "to": "R03 실행 및 결과·실패 이력",
+          "minimum": ["request_id", "task_id", "attempt_id"],
+          "example": {"request_id": "MOCK-A", "task_id": "MOCK-T1", "attempt_id": "MOCK-T1-A1", "status": "실패", "reason": "합성 접근 실패"},
+          "invalid_or_missing": "R03은 받은 세 ID를 변경하지 않고 반환한다. 같은 작업의 새 시도에는 새 attempt_id를 쓰고 이전 실패를 덮어쓰지 않는다. 자동 재시도 여부·상한은 미결정이다."
         },
         {
           "from": "R03 자료 조사·판정 및 R02 접근 제약",
-          "to": "R05 출처·근거·판정 저장",
-          "minimum": ["task_id", "source_id", "url", "retrieved_at", "access_status", "candidate_id", "condition_id", "verdict_status", "evidence_ids"],
+          "to": "R05 출처·근거 저장",
+          "minimum": ["task_id", "attempt_id", "source_id", "url", "retrieved_at", "access_status"],
           "only_when_original_confirmed": ["evidence_id", "finding", "locator"],
-          "example": {"task_id": "MOCK-T1", "source_id": "MOCK-S1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각", "access_status": "원문 확인", "evidence_id": "MOCK-E1", "finding": "합성 근거", "locator": "합성 문단 1", "candidate_id": "candidate-A", "condition_id": "offline_timer", "verdict_status": "충족", "evidence_ids": ["MOCK-E1"]},
-          "invalid_or_missing": "접근 실패·검색 결과만 확인한 출처에는 evidence_id를 붙이지 않는다. 근거 없는 충족·미충족은 미확인으로 남긴다."
+          "example": {"task_id": "MOCK-T1", "attempt_id": "MOCK-T1-A1", "source_id": "MOCK-S1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각", "access_status": "원문 확인", "evidence_id": "MOCK-E1", "finding": "합성 근거", "locator": "합성 문단 1"},
+          "invalid_or_missing": "접근 실패·검색 결과만 확인한 출처에는 확인된 evidence_id를 붙이지 않는다."
+        },
+        {
+          "from": "R03 대상·조건별 판정",
+          "to": "R05 판정 저장",
+          "minimum": ["verdict_id", "task_id", "attempt_id", "candidate_id", "condition_id", "status", "evidence_ids"],
+          "example": {"verdict_id": "MOCK-V1", "task_id": "MOCK-T1", "attempt_id": "MOCK-T1-A1", "candidate_id": "candidate-A", "condition_id": "offline_timer", "status": "충족", "evidence_ids": ["MOCK-E1"]},
+          "invalid_or_missing": "근거 없는 충족·미충족은 미확인으로 남긴다. 미확인 판정은 evidence_ids가 비어 있어도 task_id로 조사 작업에 연결한다."
         },
         {
           "from": "R05 작업 상태·결과 조회",
           "to": "R04 진행·결과 화면",
           "minimum": ["request_id", "task_statuses", "report_status", "claims", "verdicts", "evidence", "sources", "uncertainties", "failures"],
-          "example": {"request_id": "MOCK-A", "task_statuses": [{"task_id": "MOCK-T1", "status": "완료"}, {"task_id": "MOCK-T2", "status": "완료"}], "report_status": "부분 결과", "claims": [{"claim_id": "MOCK-C1", "evidence_ids": ["MOCK-E1"]}], "verdicts": [{"candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}], "evidence": [{"evidence_id": "MOCK-E1", "source_id": "MOCK-S1", "finding": "합성 근거"}], "sources": [{"source_id": "MOCK-S1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각"}], "uncertainties": ["candidate-B:offline_timer"], "failures": []},
+          "example": {"request_id": "MOCK-A", "task_statuses": [{"task_id": "MOCK-T1", "status": "완료"}, {"task_id": "MOCK-T2", "status": "완료"}], "report_status": "부분 결과", "claims": [{"claim_id": "MOCK-C1", "evidence_ids": ["MOCK-E1"]}], "verdicts": [{"verdict_id": "MOCK-V2", "task_id": "MOCK-T2", "candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}], "evidence": [{"evidence_id": "MOCK-E1", "source_id": "MOCK-S1", "finding": "합성 근거"}], "sources": [{"source_id": "MOCK-S1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각"}], "uncertainties": ["candidate-B:offline_timer"], "failures": []},
           "invalid_or_missing": "미확인 조건과 실패 이유를 결과에서 숨기지 않는다. 연결되지 않은 claim·evidence·source는 확인된 주장으로 표시하지 않는다."
         }
       ]
@@ -546,10 +615,10 @@
     ],
     "state_transition_draft": {
       "status": "R05 제안 — 실제 실행·복구 정책 미확정",
-      "task": ["대기 → 진행 중 → 완료 또는 실패", "APP-C 조건을 아직 확인하지 못하면 대기와 보류 이유를 기록하고, 조사 종료 뒤에도 조건이 불명확하면 최종 미실행 이유를 남김", "실행 조건이 불필요로 판정되면 대기 → 생략, 이유 필수", "선행 작업 실패로 실행 불가능하면 임의로 완료하지 않고 실패 또는 생략 사유를 남김"],
+      "task": ["대기 → 진행 중 → 완료 또는 실패", "APP-C 조건 판정 전에는 보류와 이유를 기록하고 한도 안에서 재평가한다. 확인 한도 뒤에도 조건이 불명확하면 최종 미실행과 이유를 남기고 종료한다. 보류는 최종 상태가 아니다.", "실행 조건이 불필요로 판정되면 대기 → 생략, 이유 필수", "선행 작업 실패로 실행 불가능하면 임의로 완료하지 않고 실패 또는 생략 사유를 남김"],
       "condition": ["초기값 미확인", "원문을 확인한 직접 근거가 생기면 충족 또는 미충족", "근거가 없거나 충돌하면 미확인 유지"],
       "report": ["근거가 연결된 결과와 필수 조건 판정이 모두 있으면 완료 후보", "일부 판정이 미확인이거나 일부 작업이 실패해도 확인된 내용을 보존하면 부분 결과 후보", "보고서를 생성할 수 없으면 생성 실패와 이유 기록"],
-      "retry": "재시도 여부·상한·중복 방지 방식은 아직 선택하지 않는다. 시도한다면 원래 task_id와 시도별 상태·이유를 연결해 기록한다."
+      "retry": "같은 논리 작업의 재시도에는 원래 task_id를 유지하고 시도별 ID·상태·이유를 이력으로 남긴다. 자동 재시도 여부·상한과 시도 ID의 팀 간 발급·전달 방식은 아직 정하지 않는다."
     },
     "scope_proposal_for_r01": {
       "status": "R01 범위 방향 반영 — 세부 계약·APP-B 필수 여부는 TASK-007에서 결정",
@@ -580,7 +649,7 @@
       ]
     },
     "handoff_review_questions": [
-      {"role": "R03", "confirm": ["요청 해석 결과에서 필수 조건과 선호를 분리해 반환할 수 있는가", "계획 작업마다 task_id·depends_on·run_if와 조건부 생략 이유를 제공할 수 있는가", "판정마다 candidate_id·condition_id·status·evidence_ids를 제공할 수 있는가"]},
+      {"role": "R03", "confirm": ["요청 해석 결과에서 필수 조건과 선호를 분리해 반환할 수 있는가", "계획 작업마다 task_id·depends_on·run_if와 조건부 생략 이유를 제공할 수 있는가", "판정마다 candidate_id·condition_id·status·evidence_ids를 제공할 수 있는가", "같은 작업 재시도에서 task_id를 유지하고 시도별 실행 ID·상태·이유를 구분해 전달할 수 있는가"]},
       {"role": "R04", "confirm": ["입력 화면에서 지정 후보·필수 조건·선호·발굴 조건을 구분해 보낼 수 있는가", "진행 화면에 작업별 대기·진행 중·완료·실패·생략과 이유를 보여줄 수 있는가", "결과 화면에 조건 미확인·부분 결과·출처·조회 시각을 구분해 보여줄 수 있는가"]},
       {"role": "R02", "confirm": ["첫 시연에 사용할 공개 자료의 접근·보관 범위는 무엇인가", "검색 결과만 보이는 경우와 원문 확인 가능한 경우를 구분할 수 있는가", "접근 실패나 지연이 생겼을 때 어떤 상태·오류 정보를 남길 수 있는가"]},
       {"role": "R01", "confirm": ["TASK-005와 일정 확인 후 APP-B를 필수 시연 사례로 둘 것인가", "부분 결과의 세부 완료 기준과 보완 조사 한도는 무엇인가", "공통 의미 중 무엇을 안정된 계약으로 둘지와 통합 승인 담당을 언제 정할 것인가"]}
@@ -782,8 +851,8 @@
           "discovery_condition": "지정 후보만 비교"
         },
         "tasks": [
-          {"task_id": "MOCK-T1", "request_id": "MOCK-A", "goal": "candidate-A 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "failure_reason": null},
-          {"task_id": "MOCK-T2", "request_id": "MOCK-A", "goal": "candidate-B 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "failure_reason": null}
+          {"task_id": "MOCK-T1", "request_id": "MOCK-A", "goal": "candidate-A 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "status_reason": null, "failure_reason": null},
+          {"task_id": "MOCK-T2", "request_id": "MOCK-A", "goal": "candidate-B 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "status_reason": null, "failure_reason": null}
         ],
         "sources": [
           {"source_id": "MOCK-S1", "task_id": "MOCK-T1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각", "access_status": "원문 확인", "error_reason": null}
@@ -792,25 +861,26 @@
           {"evidence_id": "MOCK-E1", "source_id": "MOCK-S1", "finding": "합성 근거: candidate-A의 offline_timer 조건 충족", "locator": "합성 문단 1"}
         ],
         "verdicts": [
-          {"candidate_id": "candidate-A", "condition_id": "offline_timer", "status": "충족", "evidence_ids": ["MOCK-E1"]},
-          {"candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}
+          {"verdict_id": "MOCK-V1", "task_id": "MOCK-T1", "candidate_id": "candidate-A", "condition_id": "offline_timer", "status": "충족", "evidence_ids": ["MOCK-E1"]},
+          {"verdict_id": "MOCK-V2", "task_id": "MOCK-T2", "candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}
         ],
         "claims": [
           {"claim_id": "MOCK-C1", "text": "합성 자료에서 candidate-A의 offline_timer 조건을 확인", "status": "근거 연결", "evidence_ids": ["MOCK-E1"]}
         ],
-        "report": {"request_id": "MOCK-A", "status": "부분 결과", "claim_ids": ["MOCK-C1"], "unverified": ["candidate-B:offline_timer"], "failures": []}
+        "report": {"request_id": "MOCK-A", "status": "부분 결과", "claim_ids": ["MOCK-C1"], "verdict_ids": ["MOCK-V1", "MOCK-V2"], "source_ids": ["MOCK-S1"], "unverified": ["candidate-B:offline_timer"], "failures": []}
       },
       "app_c_branches": [
         {"case_id": "APP-C1-mock", "candidate_verdicts": ["미충족", "미충족"], "expected_discovery": "추가", "reason": "두 후보의 필수 조건 미충족을 모두 확인"},
         {"case_id": "APP-C2-mock", "candidate_verdicts": ["충족", "미충족"], "expected_discovery": "생략", "reason": "한 후보가 필수 조건 충족"},
-        {"case_id": "APP-C3-mock", "candidate_verdicts": ["미충족", "미확인"], "expected_discovery": "보류", "reason": "두 후보 모두 미충족이라는 조건을 확인하지 못함"}
+        {"case_id": "APP-C3-mock", "candidate_verdicts": ["미충족", "미확인"], "expected_discovery": "보류", "terminal_discovery": "최종 미실행", "terminal_report": "부분 결과 후보", "reason": "확인 중에는 보류하고, 한도 뒤에도 두 후보 모두 미충족이라는 조건을 확인하지 못하면 미실행 이유와 미확인 조건을 남김"}
       ],
       "source_failure": {
-        "task": {"task_id": "MOCK-TF", "status": "실패", "failure_reason": "합성 자료 접근 실패"},
+        "task": {"task_id": "MOCK-TF", "status": "실패", "status_reason": "합성 자료 접근 실패", "failure_reason": "합성 자료 접근 실패"},
         "source": {"source_id": "MOCK-SF", "task_id": "MOCK-TF", "url": "mock://failed-source", "retrieved_at": "합성 조회 시각", "access_status": "접근 실패", "error_reason": "합성 접근 실패"},
         "evidence": [],
-        "verdict": {"candidate_id": "candidate-F", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []},
-        "report": {"status": "부분 결과", "unverified": ["candidate-F:offline_timer"], "failures": ["MOCK-TF"]}
+        "verdict": {"verdict_id": "MOCK-VF", "task_id": "MOCK-TF", "candidate_id": "candidate-F", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []},
+        "report": {"request_id": "MOCK-F", "status": "생성 실패", "claim_ids": [], "verdict_ids": ["MOCK-VF"], "source_ids": ["MOCK-SF"], "unverified": ["candidate-F:offline_timer"], "failures": ["MOCK-TF"]},
+        "note": "이 단일 실패 예시에는 확인된 주장이 없으므로 부분 결과로 표시하지 않는다. 같은 요청의 다른 작업에서 유효한 근거·주장이 남으면 부분 결과 후보가 된다."
       }
     },
     "risk_register": [
