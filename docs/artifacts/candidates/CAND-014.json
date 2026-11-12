@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "CAND-014",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "AI-native PR / Verification Workflow",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "TASK→구현→evidence→독립 검증→위험도 gate→merge로 이어지는 AI 중심 개발·PR 방식.",
+  "potential_value": [
+    "R01 검토 병목 감소",
+    "AI 구현의 근거 중심 리뷰",
+    "독립 verifier를 통한 자기검증 편향 완화"
+  ],
+  "risks": [
+    "프로세스가 과도해질 수 있음",
+    "작은 변경까지 문서화 비용 증가"
+  ],
+  "why_not_now": [
+    "현재 팀의 실제 PR 패턴과 실패 사례가 충분히 쌓이지 않음"
+  ],
+  "evidence_needed": [
+    "AI 생성 PR 증가",
+    "통합 오류·검토 누락·R01 병목 반복"
+  ],
+  "revisit_when": [
+    "실제 개발 운영에서 검증 병목이 관찰될 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
