@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "CAND-010",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "Reviewed Research Experience + Retrieval",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "성공·실패한 조사 경로와 사람 검토 결과를 경험으로 저장하고 필요 시 검색·재사용.",
+  "potential_value": [
+    "검토된 경험 재사용",
+    "실패 반복 감소",
+    "조사 전략 개선"
+  ],
+  "risks": [
+    "잘못된 과거 경험 고착",
+    "저장·검색 구조 조기 복잡화"
+  ],
+  "why_not_now": [
+    "경험 재사용 가치가 아직 실증되지 않음"
+  ],
+  "evidence_needed": [
+    "동일 유형 조사의 반복",
+    "과거 검토가 다음 조사에 실제 도움이 된 사례"
+  ],
+  "revisit_when": [
+    "반복 조사에서 재사용 가치가 확인될 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
