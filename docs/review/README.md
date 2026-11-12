@@ -7,4 +7,392 @@
 
 ## 현재 확인할 내용
 
-TASK-002 공개 제출 규칙, TASK-007 범위, TASK-008 기획서, TASK-009 WBS, TASK-010 최종 정합성 검사가 완료됐다. 두 Step 1���q�^
+TASK-002 공개 제출 규칙, TASK-007 범위, TASK-008 기획서, TASK-009 WBS, TASK-010 최종 정합성 검사가 완료됐다. 두 Step 1 산출물은 검토 완료·제출 준비 상태이며 실제 대시보드 제출은 아직 하지 않았다. 다음은 TASK-011의 실제 링크 등록·제출완료·접수 확인이다.
+
+## 결정 요청
+
+- **정량 합격 기준을 얼마로 둘까** — 첫 실행의 조건별 응답 완결성과 근거 판정 결과
+- **프레임워크와 경험 재사용에 지금 투자할까** — 상태 추적·복구의 구현 부담 또는 검토된 조사 경험을 재사용할 실제 과제
+- **APP-C 실제 확인 한도와 부분 결과의 세부 수용 기준을 얼마로 둘까** — 실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태
+
+## 제출 준비 작업
+
+| 작업 | 할 일 | 담당 | 내부 목표일 | 선행 작업 | 구분 | 상태 |
+| --- | --- | --- | --- | --- | --- | --- |
+| [TASK-001](../artifacts/tasks/TASK-001.json) | 대표 요청 1건의 조사 흐름 점검 | R03 (제안) | 2026-11-12 | 없음 | 보완 | 할 일 |
+| [TASK-002](../artifacts/tasks/TASK-002.json) | 공식 제출 조건 확인 | R01 | 2026-11-12 | 없음 | 제출 준비 | 완료 |
+| [TASK-003](../artifacts/tasks/TASK-003.json) | 사용자 문제·기존 대안·결과 화면 정리 | R04 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
+| [TASK-004](../artifacts/tasks/TASK-004.json) | 앱 데이터·이용 조건·운영 제약 정리 | R02 | 2026-11-12 | 없음 | 제출 준비 | 검토 중 |
+| [TASK-005](../artifacts/tasks/TASK-005.json) | 동적 구성 MVP·요구사항·평가 계획 정리 | R03 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
+| [TASK-006](../artifacts/tasks/TASK-006.json) | 최소 구현 구조·영역별 작업·의존성 도출 | R05 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
+| [TASK-007](../artifacts/tasks/TASK-007.json) | 제출본 MVP·미결정 사항 수렴 | R01 | 2026-11-12 | TASK-003, TASK-004, TASK-005, TASK-006 | 제출 준비 | 완료 |
+| [TASK-008](../artifacts/tasks/TASK-008.json) | 기획서 원본·공식 제출 프로젝션 완성 | R01 | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 완료 |
+| [TASK-009](../artifacts/tasks/TASK-009.json) | 프로젝트 WBS 제출본 작성 | R01 | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 완료 |
+| [TASK-010](../artifacts/tasks/TASK-010.json) | 기획서·WBS 최종 정합성·형식 확인 | R01 | 2026-11-13 | TASK-008, TASK-009 | 제출 준비 | 완료 |
+| [TASK-011](../artifacts/tasks/TASK-011.json) | 기획서·WBS 제출과 접수 확인 | R01 (제안) | 2026-11-13 | TASK-010 | 제출 준비 | 할 일 |
+
+담당·목표일은 제안입니다. 선행 결과를 기다리는 동안 기존 자료로 초안을 작성하고 완료 전에 결과를 반영합니다.
+
+## 작업 결과
+
+### TASK-001 · 할 일
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-001.json)
+
+결과 미기록.
+
+### TASK-002 · 완료
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-002.json)
+
+TASK-002를 제출 프로젝션·접수 운영 기준으로 완료했다. 공식 공개 가이드상 STEP 1 마감일은 2026-11-13이고 제출물은 기획서(요구사항 명세 포함)와 WBS다. 작성 도구는 자유지만 강사·매니저가 열어 확인할 수 있는 문서 형태여야 하며, 문서 준비 후 팀 대시보드의 산출물 제출 표에 링크를 등록하고 상태를 `제출완료`로 바꿔야 실제 제출 절차가 끝난다. 공개 가이드는 확정 마감일·시각은 대시보드를 확인하라고 명시하므로 정확한 시각은 공개 자료만으로 확정하지 않는다. 별도 공식 파일명 규칙도 확인되지 않아 강제하지 않는다. 내부 작업 원본은 TASK/spec/state/planning을 유지하고 최종 제출 프로젝션에만 공식 목차·형식 기준을 적용한다.
+
+검증과 근거
+
+- 작업 원본과 최종 제출 프로젝션을 구분했는가 · pass
+- STEP 1 제출물 종류·공개 마감일·제출 절차를 확인했는가 · pass
+- 기획서 최종 기본 목차와 사람이 읽을 수 있는 제출 형태 기준을 확인했는가 · pass
+- 정확한 마감 시각과 팀별 대시보드의 최종 상태를 공개 자료만으로 확정했는가 · inconclusive
+- 공식 파일명 강제 규칙을 확인했는가 · inconclusive
+- [R01 Step 1 제출물 운영 결정](../human/responses/HRESP-20261112-01_step1_제출물_운영.md)
+- [2026-11-12 FinalProject 가이드 불변 스냅샷 manifest](../guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json)
+- [사람용 기획서 공식 목차 프로젝션](../step1/기획서.md)
+- [공식 OUTPUT-GUIDE](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/OUTPUT-GUIDE.md)
+- [공식 DAILY-MEETING 제출 절차](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/DAILY-MEETING.md)
+- [공식 최종 프로젝트 가이드](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html)
+
+남은 불확실성과 결정 요청
+
+- 2026-11-13의 정확한 마감 시각은 팀 대시보드에서 최종 확인해야 한다.
+- 별도 공식 파일명 강제 규칙은 공개 가이드에서 확인되지 않았다.
+- WBS에 팀 대시보드상 별도 제출 방식이 추가로 표시되어 있다면 해당 팀별 안내가 공개 공통 가이드보다 우선한다.
+- TASK-011 실제 제출 직전에 팀 대시보드의 정확한 마감 시각·WBS 별도 안내·제출 상태를 확인한다.
+- 최종 제출 링크는 강사·매니저가 권한 없이 또는 부여된 권한으로 열 수 있는지 확인한 뒤 등록한다.
+
+### TASK-003 · 진행 중
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-003.json)
+
+APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 대안의 장점과 관찰된 한계, 판단을 위한 4대 정보(충족/미충족/미확인, 근거, 출처, 잔여확인사항), 3대 상태(작업 실패/조건 미확인/부분 결과) 분리 원칙, 대안 발굴 시작·생략·보류(C1~C3) 사유 가시화 및 R03·R05 I/O 데이터 계약 연계를 정리했다.
+
+검증과 근거
+
+- 두 요청에서 시작 조건·기대 결과·사용자 선택 기준이 연결되었는가 · pass
+- 비교 실행 조건과 출처를 남기고 미실행 항목을 검증 계획으로 표시했는가 · pass
+- 실제 사용자 조사 유무를 명시하고 가설을 검증 결과로 포장하지 않았는가 · pass
+- [집중 앱 평가 요구사항과 APP-A·B·C 사례 명세](../artifacts/specs/focus_apps.json)
+- [R04 사용자 문제 및 기존 대안 한계 분석 개정본](../members/R04/workspace/2026-11-12_사용자_문제_및_기존_대안_한계_분석.md)
+- [찾아you 기획서 초안](../artifacts/planning/기획서_초안.json)
+- [R05 구성요소 및 데이터 계약 초안](../artifacts/tasks/TASK-006.json)
+- [HRESP-20261112-02 R01 TASK-003 산출물 검토 및 승인 방향](../human/responses/HRESP-20261112-02_TASK-003_R04_검토.md)
+- [2026-11-12 오전 회의록 (동적/고정 분리 및 I/O 정합성 논의)](../meetings/2026-11-12_오전_회의록.md)
+- [2026-11-11 강사 피드백 회의록 (무료 다운로드 다크패턴)](../meetings/2026-11-11_강사_피드백.md)
+- [2026-11-11 앱 탐색·기획 방향 회의록 (지정 비교 vs 신규 발굴 2개 모드)](../meetings/2026-11-11_앱탐색_기획방향_회의록.md)
+- [R03 일일 작업 및 협의 의견 (Danmi 11:48 의견)](../members/R03/daily/2026-11-12.md)
+- [PomoToki 공식 오프라인 및 로컬 데이터 안내](https://www.pomotoki.com/)
+- [AppBlock Android Premium 및 무료 한도 안내](https://appblock.app/premium/)
+
+남은 불확실성과 결정 요청
+
+- 실제 수험생/학습자 대상 정량 설문이나 인터뷰를 통한 수요 검증은 아직 수행하지 않은 가설 단계이다.
+- Focus To-Do의 첫 실행 시 무계정 타이머 진입 가능 여부와 Stay Focused의 무료 예약 범위는 실기기 시험 전까지 미확인 상태이다.
+- APP-C3의 대안 발굴 시간/호출수 한도(Timeout)의 구체적인 임계값은 R03-R05-R04 간 수치 합의가 필요하다.
+- APP-B(신규 앱 발굴)의 최종 MVP 필수 포함 여부에 대해 R01 팀장의 확정이 필요하다.
+- R01 팀장은 첫 MVP에서 미확인 부분 결과(APP-C3 보류)의 허용 기준과 종료 정책을 확정해야 한다.
+- 기획서 2~4장에 본 사용자 문제 및 화면 정보 구조를 기본 근거로 채택할지 결정해야 한다.
+
+### TASK-004 · 검토 중
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-004.json)
+
+공식 자료 기준 PomoToki는 Android 오프라인·무계정 뽀모도로를 뒷받침하고, Focus To-Do는 제품의 오프라인 사용과 무등록 로컬 모드를 설명하지만 Android 첫 실행 조합은 미시험이다. AppBlock은 무료 일정·차단 대상 한도와 요일·시간 안내로 APP-B 후보이며 Stay Focused의 무료 조건 조합은 미확인이다. 공개 열람과 자동 수집·저장 권한은 별개다. Android 기기 시험, 서비스 전체 통합, 실제 약관 적용 여부는 미검증이므로 팀 검토가 필요하다.
+
+검증과 근거
+
+- 첫 시연 핵심 앱·속성에 공식 근거 또는 미확인과 다음 확인을 기록 · pass
+- 각 공식 문서 주장과 해당 원문의 관련 절을 대조하고 문서상 사실과 추론을 구분 · pass
+- 11월 11일 기획서의 관련 앱 근거 재확인 및 기기 시험 여부 구분 · pass
+- 공개 열람과 자동 수집·저장·재사용 조건 구분 · pass
+- 실제 Android 기기에서 조건 조합·알림·브라우저 차단을 검증 · inconclusive
+- Apple 검색 HTTP 응답 표본에서 앱명·ID·가격 필드를 확인 · pass
+- 선택한 외부 자료의 해당 서비스 용도별 자동 수집·장기 저장·재사용이 허용되는지 확인 · inconclusive
+- 대한민국 국가 버전 약관, 별도 Play Catalog API, Apple Search API의 공개 조건을 원문에서 추가 확인 · pass
+- Android 기기 또는 도구 사용 가능 여부 확인 · inconclusive
+- [11월 11일 기준 기획서의 앱 비교표 및 기기 시험 계획](../artifacts/planning/기획서_초안.json)
+- [TASK 입력의 이전 기술 문서 기록: 중고거래 사례, 앱별 기기 시험 결과 아님](../artifacts/research/2026-11-11_기술_문서_데이터_출처_확인_기록_초안.json)
+- [APP-A·B·C의 조건과 실행 분기](../artifacts/specs/focus_apps.json)
+- [PomoToki 공식 사용 안내: Getting Started·Pomodoro·FAQ](https://www.pomotoki.com/guide)
+- [PomoToki Android Google Play 설명: 무료 타이머·오프라인](https://play.google.com/store/apps/details?hl=en_US&id=com.tamaszahoran.pomotoki)
+- [Focus To-Do 공식 개인정보 처리방침: Data entered by the user·Register an account](https://focustodo.cn/privacy-policy)
+- [Focus To-Do Android Google Play 설명](https://play.google.com/store/apps/details?hl=en_US&id=com.superelement.pomodoro)
+- [AppBlock 공식 Android 무료·유료 기능 비교](https://appblock.app/premium/)
+- [AppBlock 공식 일정 안내: 차단 대상 및 요일·시간 조건](https://appblock.app/how-schedules-work-in-appblock-2/)
+- [AppBlock 공식 Android 웹사이트 차단 한계](https://appblock.app/what-are-the-limitations-of-website-blocking-on-android/)
+- [AppBlock 공식 차단 실패 점검: 접근성 권한](https://appblock.app/why-can-i-still-access-apps-or-websites-that-should-be-blocked/)
+- [Stay Focused 공식 제품·Android FAQ](https://www.stayfocused.me/)
+- [Stay Focused Android Google Play 설명·접근성 API](https://play.google.com/store/apps/details?hl=en-US&id=com.stayfocused)
+- [Google Play Developer API의 앱 배포·관리 범위](https://developers.google.com/android-publisher)
+- [Google Play Publishing API 이용조건](https://developers.google.com/android-publisher/terms)
+- [Google Play robots.txt: /store/search 등 제한](https://play.google.com/robots.txt)
+- [Google 미국 지역판 서비스 약관: 기계 판독 지침 및 타인 콘텐츠](https://policies.google.com/terms/embedded?hl=en-US)
+- [Apple Search API 보관 문서: 검색 및 프로모션 자산 조건](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html)
+- [Apple Search API 보관 문서: software 검색 예시](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/SearchExamples.html)
+- [Apple Search API 실제 단건 조회: 한국 앱 검색](https://itunes.apple.com/search?term=focus%20to-do&country=kr&entity=software&limit=2)
+- [Google 서비스 약관 대한민국 국가 버전: 자동화 및 타인 콘텐츠](https://policies.google.com/terms?hl=ko&gl=KR)
+- [Google Play Catalog API 가이드: 등록된 제3자 앱스토어의 미국 참여 앱 및 갱신 범위](https://developers.google.com/android-publisher/play-catalog)
+- [Apple Services Performance Partners Search API: 검색 파라미터·호출 한도](https://performance-partners.apple.com/search-api)
+- [Stay Focused 공식 개인정보 처리방침: 무료 제공 및 일부 유료 기능](https://www.stayfocused.me/privacy.html)
+
+남은 불확실성과 결정 요청
+
+- PomoToki와 Focus To-Do의 Android 설치 직후 비행기 모드 타이머 실행·종료·알림, 계정 없이 첫 실행 가능 여부는 기기 시험 미실시.
+- AppBlock 무료판의 사이트 2개·평일 저녁 차단 조합과 Stay Focused 무료판의 수량·요일·시간 제한은 각 앱 버전·시연 브라우저·지역의 실제 조건으로 확인 필요.
+- 외부 페이지의 자료를 제품에서 자동 수집·저장·재배포하는 권한, 서비스별 추가 약관과 저장·재사용의 적용 범위, 비용·쿼터 및 변경 시 재검증 주기는 미확인. robots.txt는 명시된 경로에 관한 확인이며 모든 상세 페이지의 일괄 금지나 허가를 뜻하지 않음.
+- Apple Search API는 보관 문서와 단일 한국 검색 응답만 확인했다. 현재 사용 자격·요금·실제 운영 한도·캐시 보존 기간 및 iOS 앱별 세부 기능·다른 검색의 안정성은 미확인.
+- 공유된 iOS 전체 조사 범위와 현재 Android 첫 시연 중심 TASK의 우선순위는 팀장 확인 필요. 공식 자료 내용은 앱 버전과 지역에 따라 변할 수 있음.
+- APP-C 확인 한도의 횟수·시간과 팀 간 I/O 필드명, APP-B의 최종 필수 여부는 미결정. 원문 확인이나 단일 API 호출은 실제 LLM 조사·통합 실행 검증이 아님.
+- Apple 검색 응답은 지역·시점·검색어에 따라 달라질 수 있어 이번 한국 응답 표본을 미래 결과나 전체 앱 목록으로 일반화할 수 없음.
+- 개발 환경에 연결된 Android 기기 및 adb/에뮬레이터를 확인하지 못해 기기 테스트를 수행하지 못했다. 앱 버전·OS·지역 및 시험 결과는 미기록이다.
+- R01: APP-A의 문서 근거만으로 초기 시연을 준비할지, Android 비행기 모드·무계정 기기 시험을 선행 필수로 둘지 결정.
+- R01: 자동 수집이나 재사용 허용이 확인되지 않은 자료를 수동 출처 확인과 부분 결과로 제한할지, 별도 이용 가능 출처·연동을 확보할지 결정.
+- R01: iOS 추가 조사 수준과 APP-B 최종 필수 여부를 TASK-005·일정과 함께 결정.
+- R01·R03·R05: APP-C의 미확인 보류 이후 부분 결과로 종료하는 확인 한도와 실패 표시 기준을 결정.
+
+### TASK-005 · 진행 중
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-005.json)
+
+앱 리서치의 동적·고정 범위와 평가 계획을 정리했고, APP-A·APP-C를 핵심으로 하는 R01 방향을 따른다. 기존 규칙 원형 18건·오류 주입 4건과 별도로, APP-A·APP-C3 연결 원형 2건의 24개 검사·오류 주입 4건 탐지 기록을 확인했다. 사용자가 전달한 R05 답변에 따라 ID 연결·필수/선호·미확인 추적·APP-C3 종료·실패 기록 처리의 핵심 의미 공동 확인을 기록했다. 같은 작업의 재시도는 task_id를 유지하고 실행 시도별 ID·상태·실패 이유를 별도로 보존하기로 추가 합의했다. 시도 ID 발급·전달을 포함한 ID 계약·조건 ID 의미·D1 상태/결정 연결은 조정 중이다. 실제 앱 근거 연결·API/화면 연동·B0/D0 비교는 검증 전이므로 진행 중을 유지한다.
+
+검증과 근거
+
+- 문서 검토: 최종 목표와 앱 검증 범위, 공통 관리 구조와 앱 특화, 동적·고정 범위를 구분해 기록했다. 기능 구현 통과 판정이 아니다. · pass
+- 문서 검토: FR-01~04마다 완료 조건과 APP 사례, 실패 조건을 연결하고 미확정 수치·기술·후속 범위를 제안으로 표시했다. · pass
+- 기존 모의 결과 열람: APP-A/B/C·요청 변형·C 판정 조합 18건 통과, 오류 주입 4건 탐지 기록과 검사 범위를 확인했다. 이번 작업에서 재실행하지 않았다. · pass
+- 기존 원형의 IO-01~08 차이 기록을 보존하고, 새 합성 출력과 R05 답변에서 동의된 핵심 의미·남은 세부 계약을 구분해 기록했다. 공동 의미 확인과 실제 통합 통과를 구분한다. · pass
+- FR-01 실제 자연어 요청에서 필수/선호·후속 조건을 추출하는 능력: 수동 구조화 입력의 보존만 확인해 제품 요구사항 전체는 미검증이다. · inconclusive
+- FR-02·FR-03: 새 합성 출력의 request/task·run_if·판정 참조·C3 종료 표현은 확인했다. 실제 LLM 계획·서버 실행·병렬·API/화면 통합은 검증 전이므로 제품 요구사항 전체는 미검증이다. · inconclusive
+- FR-04: 새 합성 출력에 대상×조건별 판정과 evidence/source ID 연결은 있다. 실제 앱 근거·실제 조회 시각·판정 정확도를 검증하지 않아 제품 요구사항 전체는 미검증이다. · inconclusive
+- B0/D0 동일 조건의 품질·시간·호출·토큰·비용 비교: 계획만 작성했고 실행하지 않아 유효성·개선 여부는 미확인이다. · inconclusive
+- 별도 합성 결과 열람: 사례 2건의 검사 24개 통과·오류 주입 4건 탐지와 코드 해시 일치를 확인. 기존 18건과 구분하며 이번에 재실행하지 않았다. · pass
+- 협의 기록: 사용자 전달 R05 답변의 동의 범위·조건·미합의를 H01~H05와 연결해 보존. 실제 메시지 원문 직접 조회·시스템 연동 통과를 뜻하지 않는다. · pass
+- [R01 공식 검토: 방향 승인, 증거 범위와 최소 정합·완료 후보 조건](../human/responses/HRESP-20261112-03_TASK-005_R03_검토.md)
+- [공식 제품 의도: 도메인 특화와 공통 구조 재사용](../human/INTENT.md)
+- [TASK-005 공식 작업 의도](../human/task-intents/TASK-005.md)
+- [동적·고정 범위와 FR·사례를 정리한 R03 통합 검토](../members/R03/workspace/2026-11-12_TASK-005_동적_구성_MVP_검토_통합.md)
+- [동일 조건의 B0/D0 비교 평가 계획: 미실행](../members/R03/workspace/2026-11-12_고정_워크플로_baseline_비교_평가_계획.md)
+- [기존 수동 구조화·규칙 기반 모의 검사 결과](../members/R03/workspace/2026-11-12_APP_모의_검증_결과.json)
+- [모의 코드: 작업 생성·의존·후속 분기와 출력 누락 확인](../members/R03/workspace/2026-11-12_APP_모의_검증.cjs)
+- [TASK-006 대비 IO-01~08 차이·영향·제안 및 main 재확인](../members/R03/workspace/2026-11-12_R05_최소_계약_대조_차이_기록.md)
+- [R05 새 반영 최소 계약: 판정/작업 ID·상태 사유·보고서 참조·APP-C 종료](../artifacts/tasks/TASK-006.json)
+- [FR-01~04 및 APP-A/B/C 평가 명세](../artifacts/specs/focus_apps.json)
+- [모의 검사 해석과 공통/앱 특화 경계·한계](../members/R03/workspace/2026-11-12_APP_모의_검증_요약.md)
+- [APP-A·APP-C3 별도 합성 연결 원형](../members/R03/workspace/2026-11-12_APP_A_C3_연결_원형.cjs)
+- [새 합성 출력 2건·검사 24개·오류 주입 4건의 기존 실행 결과](../members/R03/workspace/2026-11-12_APP_A_C3_연결_결과.json)
+- [사용자가 전달한 R05 답변의 핵심 의미 공동 확인과 미합의 기록](../members/R03/workspace/2026-11-12_R05_핵심_의미_공동_확인.json)
+- [R01 APP-A·C 핵심 MVP 범위 결정](../human/responses/HRESP-20261112-02_TASK-007_MVP_범위.md)
+- [R01 기존 리서치 실행 재사용·조사 상태와 프로젝션 분리 방향](../human/responses/HRESP-20261112-04_리서치_실행과_프로젝션_방향.md)
+- [R05 새 반영 최소 계약: 판정/작업 ID·상태 사유·보고서 참조·APP-C 종료](https://github.com/ik-e/chaja-you/blob/6eb42c8c30f4b53cd36640657b5e9829e733b46d/docs/artifacts/tasks/TASK-006.json)
+
+남은 불확실성과 결정 요청
+
+- 핵심 의미는 사용자 전달 R05 답변으로 공동 확인했다. 최종 계약 필드·자료형 전체, R04 화면 전달 확인과 실제 API/서버 통합은 검증 전이다.
+- ID 발급 주체·고유 범위, offline_pomodoro/offline_timer 등 조건 ID 의미, D1 상태와 결정 ID 연결은 추가 조정 대상이다. R03이 제안한 ID 발급 분담을 합의로 처리하지 않는다.
+- 재시도 task_id 유지와 시도별 이력 보존은 합의했다. 시도 ID 발급 주체·고유 범위·전달 필드와 자동 재시도 여부·상한은 미확정이며 실제 구현·실행은 이번에 수행하지 않았다.
+- 실패 기록을 받는 판정 작업은 명시적 실행 조건을 갖춰야 한다. 새 합성 원형은 이를 표현하지만 실제 실행기 적용은 미검증이다.
+- 실제 확인 한도와 부분 결과 최종 수용 기준은 R04 전달 형태·실행 제약 확인 후 R01 판단에 연결한다. mock://, retrieved_at=null, 모의 tick 2의 합성 용도 이해는 제품 정책 확정을 뜻하지 않는다.
+- 모든 후보에 확인된 주장이 없는 요청의 종료 정책은 두 새 합성 사례 밖이다. R05 단일 실패 예시와의 정책 경계가 필요할 때 확인하며 새 필수 범위를 추가하지 않는다.
+- R02 TASK-004에는 문서 근거가 있지만 R03의 실제 APP-A 출력에 연결하는 작업은 이번 범위 밖이다. 기기 시험과 자동 수집·저장·재사용 권한은 별도 확인해야 한다.
+- 실제 LLM/검색·기기·B0/D0 비교, 속도·비용상 우월성, 정량 합격선은 미검증이다. 기존 합성 실행을 정식 제품 run/evaluation 통과로 승격하지 않는다.
+- R05의 동의는 사용자가 이 대화에 전달한 메시지를 근거로 기록했다. Discord 원문 직접 조회나 수신 시각의 독립 확인은 하지 않았다.
+- 조사 상태의 장기 저장·질문별 프로젝션·증분 재조사 전체는 현재 필수 구현으로 확정하지 않는다. 기획서·WBS와 TASK-006은 이번 작업에서 수정하지 않았다.
+- R03·R05: 다른 TASK가 의존하는 ID 발급 범위·시도 ID 발급/전달 필드, 조건 ID 의미, D1 상태·결정 ID 연결만 맞춘다. 재시도 task_id 유지·이력 보존 원칙은 다시 승인 요청하지 않는다. 내부 표현·되돌릴 기본값을 모두 합의 대기로 묶지 않는다.
+- R01·R04·R05: 부분 결과 최종 수용 기준과 실제 확인 한도 정책을 전달 형태·실행 제약에 근거해 수렴한다. 실제 실행 전에 필요한 종료 정책을 마련하되 모의 숫자를 채택하지 않는다.
+- R01 TASK-007의 APP-A 첫 통합·APP-C 핵심 분기·APP-B 낮은 우선순위를 따른다. APP-B 전체 시연 여부는 APP-A·C 통합 상태와 일정으로 판단하며 이미 결정된 핵심 범위를 다시 승인 요청하지 않는다.
+- 실제 기준 실행 후 B0/D0 품질·자원 결과로 정량 합격선과 동적 범위 유지·축소·확대를 판단한다. 현재 우월성·제품 성능 수치를 확정하지 않는다.
+
+### TASK-006 · 진행 중
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-006.json)
+
+R05 구조·통합 초안. 공통 리서치 구조와 앱 특화 역할·조건·출처·검증 기준을 구분한다. APP-A는 첫 vertical slice, APP-C의 추가·생략·보류는 핵심 검증 사례다. APP-B의 최종 필수 여부는 TASK-005·일정 확인 후 결정한다. 합성 자료로 APP-A 연결, APP-C 세 분기, 접근 실패와 조건 미확인을 검사했다. R03 모의 원형과 R04의 2차 개정안을 대조해 작업 실행 조건·판정 ID·출처와 근거 참조·부분 결과 상태의 R05 예시를 보강했다. R03·R05는 계획 제안→R05 작업 ID 발급→R03 정식 ID 연결→실행 순서와 같은 작업의 재시도 ID 보존을 설계 흐름으로 확인했다. 이는 코드 적용이나 실제 통합 검증이 아니다. R01 방향에 따라 확인된 내용의 부분 결과 제공과 미확인·실패 분리를 MVP에 포함하고 자동 재시도·복잡한 복구는 후순위로 둔다. 세부 필드명·기간, 실제 앱·에이전트 실행과 나머지 팀 간 I/O 계약은 아직 미확정이다.
+
+검증과 근거
+
+- FR-01~04 각각에 책임 구성요소와 데이터 연결을 지정했는가 · pass
+- APP-A·B·C의 요청과 중간 조건별로 선행 작업과 결과 경로를 설계상 따라갈 수 있는가 · pass
+- WBS 후보 14개의 ID·선행 관계·담당 역할과 FR-01~04 대응을 정적 검사했는가 · pass
+- 합성 APP-A 입력에서 작업·출처·근거·판정·보고서 참조가 이어지고 후보 발굴을 생략하는가 · pass
+- 합성 APP-C1·C2·C3 판정에서 대안 발굴을 각각 추가·생략·보류하는가 · pass
+- 합성 자료 접근 실패에서 근거를 생성하지 않고 실행 실패와 조건 미확인을 구분하는가 · pass
+- R01 의도의 공통 리서치 의미와 앱 특화 조건·역할·출처·검증을 구조상 분리하고 APP-A·C 핵심 검증 및 APP-B 미결정을 반영했는가 · pass
+- 요청 하나가 실제 실행을 통해 근거 있는 결과까지 도달하는가 · inconclusive
+- 담당 제안과 입출력 계약을 관련 팀원과 확인했는가 · inconclusive
+- R03·R05가 확인한 임시 참조→정식 task_id→attempt_id 흐름을 실제 출력과 저장·실행에서 검증했는가 · inconclusive
+- [집중 앱 평가 요구사항과 APP-A·B·C 사례](../artifacts/specs/focus_apps.json)
+- [R05 백엔드 데이터 흐름 초안](../artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json)
+- [R05 출처 저장 방식 초안](../artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json)
+- [팀 역할과 책임](../charter/팀_헌장.md)
+- [오늘의 작업 범위와 완료 기준](../artifacts/tasks/TASK-006.json)
+- [R01의 도메인별 특화와 TASK-006 구현 의도](../human/task-intents/TASK-006.md)
+- [R03 APP-A·B·C 규칙 기반 모의 원형과 검증 한계](../members/R03/workspace/2026-11-12_APP_모의_검증_요약.md)
+- [R04 사용자 문제와 결과 화면 연결 2차 개정](../artifacts/tasks/TASK-003.json)
+
+남은 불확실성과 결정 요청
+
+- R03·R05는 작업·시도 ID의 발급 및 참조 연결 순서를 설계상 확인했다. 임시 참조 필드명과 실제 전송 형식, R04·R02 경계 및 나머지 최소 입출력은 미합의다.
+- 앱 자료의 접근·보관 가능 범위와 실패 시 대체 출처는 TASK-004 결과를 확인해야 한다.
+- 재시도 상한, 부분 결과의 완료 기준, 프레임워크 필요성은 아직 검증하지 않았다.
+- WBS 후보의 기간과 병렬 수행 가능성은 팀원의 작업 가능 시간과 첫 구현 결과로 조정해야 한다.
+- 합성 예시는 실제 앱의 기능, 공개 자료 접근, 에이전트 실행 또는 서비스 통합 성공의 근거가 아니다.
+- interface_draft의 ID 발급·연결 순서는 R03·R05 설계 합의이며, 구체 필드명·자료 형태·상태 전이는 구현 계약 전 예시다.
+- R03 규칙 기반 모의 원형은 작업별 run_if, 대상·조건별 판정 객체, 실제 source/evidence ID와 부분 결과 객체를 아직 출력하지 않는다. R05의 보강 예시는 팀과 대조할 초안이다.
+- APP-B의 최종 필수 여부는 TASK-005 결과와 전체 일정 확인 후 R01이 결정한다.
+- R01이 TASK-007에서 APP-B의 최종 필수 여부와 세부 역할·기간을 TASK-005 및 일정에 맞춰 수렴해야 한다.
+- R01이 WBS 후보의 담당·기간·선행 조건을 TASK-003~005 결과와 함께 확정해야 한다.
+- R01 방향에 맞춰 부분 결과·미확인·접근 실패 표시를 MVP에 포함하되, 세부 표시 기준과 추가 조사 상한은 담당자와 정해야 한다.
+- R03·R04·R05가 공통 의미·ID 연결을 먼저 맞추고 R02 자료 접근 제약을 반영해야 한다. 최종 API·DB 필드명과 안정된 계약은 TASK-007에서 수렴한다.
+
+### TASK-007 · 완료
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-007.json)
+
+R01 제출본 MVP 범위 수렴 완료. 앱 리서치를 첫 도메인으로 두고 버텀업으로 구현·검증한다. APP-A 지정 후보 비교를 첫 end-to-end vertical slice, APP-C의 추가·생략·보류를 핵심 동적 분기로 Must로 둔다. APP-B는 후보가 없는 요청의 발굴 구성 검증 사례로 유지하되 APP-A·C보다 구현 우선순위를 낮춘다. request/task/source/evidence/claim·verdict/report와 실행 상태는 공통 의미로, 앱 속성·출처 우선순위·검증 기준은 앱 특화로 둔다. R03·R05는 request→task→대상×조건 verdict→evidence→source→report 추적, 미확인≠미충족, APP-C3 보류→한도 후 최종 미실행→부분 결과, 같은 논리 작업 재시도 시 task_id 유지·attempt 이력 보존, request/task/attempt ID handoff의 설계 순서를 공동 확인했다. 구체 wire field·실제 API/화면 통합은 후속 구현 검증으로 남긴다. 근거 추적, 미확인·미충족·작업 실패 구분, 부분 결과, 문서/기기 검증 구분과 데이터 수집 정책 gate는 Must다. 다중 도메인 프레임워크·자유 역할 생성·복잡한 자동 복구·장기 기억/RAG/온톨로지는 Later다. B0/D0 우월성, 정량 합격선, 실제 timeout/call/retry 상한은 기준 실행 전까지 Unknown으로 유지한다. 일반 검색·브라우징 자체를 재구현하기보다 기존 리서치 실행 능력을 재사용하고 찾아you는 도메인 특화 구성·근거 판정·상태 연결에 집중한다.
+
+검증과 근거
+
+- PROJECT의 장기 목표를 앱 전용 제품으로 축소하지 않고 앱을 첫 검증 도메인으로 한정했는가 · pass
+- TASK-003~006의 사용자 가치·자료 제약·동적 구성·구현 구조를 대조해 Must/Later/Unknown을 구분했는가 · pass
+- APP-A·B·C가 각각 지정 비교·요청 기반 발굴·중간 결과 분기를 검증한다는 역할을 유지했는가 · pass
+- 실제 B0/D0 비교나 기기 시험을 하지 않은 상태에서 성능·정확성·범용성을 완료로 주장하지 않았는가 · pass
+- R03·R05의 최소 I/O 의미 계약을 공동 확인했는가 · pass
+- APP-A 실제 end-to-end 실행과 APP-C 조건부 분기를 실제 시스템에서 검증했는가 · inconclusive
+- 사용한 수집 경로가 승인 데이터셋·공식 API·명시적 허용 범위 또는 질문 해결을 위한 최소 개별 문서 조회이며, 비공식 자동 크롤링·대량 순회에 의존하지 않는가 · inconclusive
+- [TASK-003 사용자 문제·결과 정보 구조](../artifacts/tasks/TASK-003.json)
+- [TASK-004 앱 자료·이용 제약 조사](../artifacts/tasks/TASK-004.json)
+- [TASK-005 동적 구성 범위·평가 계획](../artifacts/tasks/TASK-005.json)
+- [TASK-006 최소 구현 구조·통합 초안](../artifacts/tasks/TASK-006.json)
+- [R01 TASK-007 MVP 범위 결정](../human/responses/HRESP-20261112-02_TASK-007_MVP_범위.md)
+- [R01 리서치 실행 재사용과 조사 상태·프로젝션 방향](../human/responses/HRESP-20261112-04_리서치_실행과_프로젝션_방향.md)
+- [R01 데이터 수집 정책](../human/responses/HRESP-20261112-05_데이터_수집_정책.md)
+
+남은 불확실성과 결정 요청
+
+- R03·R05의 핵심 의미와 ID handoff 설계 순서는 공동 확인했다. 구체 전송 필드명·자료형, condition ID 세부 매핑, D1 상태·decision 표현과 실제 API/서버/화면 통합은 구현 검증 전이다.
+- Android 실제 기기 시험이 없어 일부 앱 조건은 문서 근거와 미확인 상태로 남아 있다. 기획서 제출 전 필수는 아니지만 실제 시연에서 앱 동작을 확정적으로 주장하기 전에는 확인한다.
+- 출처별 자동 수집·장기 저장·재사용 권한과 실제 운영 한도는 모두 확정되지 않았다. MVP는 확인되지 않은 권한을 전제로 하지 않고 수동 또는 허용된 공개 확인과 부분 결과를 사용한다.
+- B0/D0 실제 비교 전이므로 동적 구성의 품질·시간·호출·비용상 우월성은 미확인이다.
+- 정량 합격선과 실제 timeout/call/retry 상한은 기준 실행 전에는 확정하지 않는다.
+- 두 번째 도메인 적용은 아직 수행하지 않았으므로 다중 도메인 일반화는 검증되지 않았다.
+- 구조화된 조사 결과 상태의 장기 저장 범위, 갱신·최신성 정책, 질문별 프로젝션과 증분 재조사의 최소 구현 범위는 실제 반복 사용 필요가 관찰된 뒤 정한다.
+- APP-A vertical slice와 APP-C 조건부 분기의 첫 실제 통합 결과를 확보한 뒤 현재 공통/앱 특화 경계와 R03·R05 설계 계약을 실제 실행 기준으로 재검토한다.
+- B0/D0 기준 실행 후 정량 합격선과 동적 구성 범위 유지·축소·확대를 결정한다.
+- 핵심 APP-A·C 통합 일정에 여유가 확인되면 APP-B의 full end-to-end 시연과 두 번째 도메인 검증을 추가할지 결정한다.
+- APP-C의 실제 확인 한도와 부분 결과 세부 수용 기준은 첫 통합에서 시간·호출·실패 패턴을 관찰한 뒤 확정한다.
+- APP-A·B·C 실제 통합 전에 각 출처의 수집 방식과 허용 범위를 표시하고, 정책 gate를 통과하지 못한 경로는 대체 출처 또는 미확인 상태로 처리한다.
+
+### TASK-008 · 완료
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-008.json)
+
+TASK-003~007의 최신 결과와 R01 의도를 수렴해 AI 작업용 8개 장 기획 원본을 갱신하고, OUTPUT-GUIDE 및 공식 기획서 샘플의 기본 목차인 서비스 정의 / 기능 요구사항 / 비기능 요구사항으로 사람용 제출 프로젝션을 분리했다. APP-A·C를 핵심 Must, APP-B를 후순위로 반영하고 Must/Later/Unknown, R03·R05 ID handoff 설계 합의, 근거 추적·부분 결과·미확인 구분, 데이터 수집 정책 gate를 포함했다. 합성 검사와 실제 앱·실기기·API/화면 통합·B0/D0 성능 검증을 구분했으며 미실행 항목을 완료로 표현하지 않았다. project_docs 생성 및 --check를 통과했다. 남은 파일명·정확한 제출 시각·대시보드 제출완료 전환은 TASK-002/011의 제출 운영 항목이다.
+
+검증과 근거
+
+- AI 작업 원본 8개 장에 TASK-003~007의 최신 범위·근거·미확인이 반영됐는가 · pass
+- 사람용 제출본이 공식 기본 목차 서비스 정의 / 기능 요구사항 / 비기능 요구사항을 유지하는가 · pass
+- APP-A·C Must, APP-B 후순위와 Must/Later/Unknown이 TASK-007·focus spec과 일치하는가 · pass
+- 실제 앱 문서 근거·합성 검사·실기기 및 실제 통합 미검증을 구분했는가 · pass
+- 데이터 수집 정책 gate와 미확인 자동 수집 비의존 원칙이 제출본에 반영됐는가 · pass
+- project_docs 생성 후 --check에서 모든 projection이 최신 상태인지 확인했는가 · pass
+- [AI 작업용 기획 원본과 submission projection](../artifacts/planning/기획서_초안.json)
+- [사람용 Step 1 기획서 프로젝션](../step1/기획서.md)
+- [2026-11-12 FinalProject 가이드 스냅샷](../guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json)
+- [TASK-007 제출본 MVP 범위 결정](../artifacts/tasks/TASK-007.json)
+- [집중 앱 검증 명세](../artifacts/specs/focus_apps.json)
+- [TASK-005 동적 구성·합의 기록](../artifacts/tasks/TASK-005.json)
+- [TASK-006 구조·ID handoff 설계](../artifacts/tasks/TASK-006.json)
+- [TASK-004 앱 근거·자료 이용 제약](../artifacts/tasks/TASK-004.json)
+- [R01 데이터 수집 정책](../human/responses/HRESP-20261112-05_데이터_수집_정책.md)
+- [프로젝션 생성·검증 도구](../../tools/project_docs.py)
+
+남은 불확실성과 결정 요청
+
+- 공식 파일명 규칙, 11월 13일 정확한 제출 시각, 팀 대시보드 링크 등록 및 제출완료 전환은 TASK-002/011에서 최종 확인한다.
+- Android 실기기 시험이 없어 Focus To-Do 첫 실행 조합 등 일부 앱 동작은 미확인이다.
+- APP-A·C의 실제 API·서버·화면 통합과 실제 리서치 실행은 아직 검증하지 않았다.
+- B0/D0 실제 비교, 정량 합격선, 실제 timeout/call/retry 및 APP-C 확인 한도는 기준 실행 전까지 미확정이다.
+- TASK-009 WBS는 이 기획서의 Must/Later/Unknown과 역할·검증 경계를 동일하게 사용한다.
+- TASK-010에서 기획서·WBS 정합성과 OUTPUT-GUIDE 최종 형식을 확인한다.
+- TASK-002/011에서 대시보드 링크 등록·제출완료 상태 전환을 포함한 실제 제출 절차를 닫는다.
+
+### TASK-009 · 완료
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-009.json)
+
+TASK-006의 구현 후보와 TASK-007의 확정 범위를 바탕으로 2026-11-10~2027-01-04 전체 프로젝트 WBS를 작성했다. 공식 WBS 가이드의 100% 규칙, 1~3일 작업 크기, 담당자 1명, 기간·선행·산출물·완료 기준을 적용했다. 7개 work package와 34개 작업으로 기획·공통 코어·APP-A vertical·APP-C 동적 분기·B0/D0 평가·안정화·배포/최종 검증을 연결했으며 APP-B는 핵심 일정 안정과 여유가 있을 때만 실행하는 조건부 작업으로 분리했다. 정적 검증에서 작업 ID 중복 없음, 의존 DAG 정상, 모든 실행 작업 1~3일, 담당 R01~R05 중 1명, 종료일 프로젝트 기간 내, FR-01~04 모두 복수 작업에 연결됨을 확인했다. 사람용 WBS는 구조화 원본에서 docs/step1/WBS.md로 자동 생성한다.
+
+검증과 근거
+
+- 필수 요구사항마다 구현 작업과 검증 작업이 연결됐는가 · pass
+- 모든 작업에 담당·1~3일 기간·선행·산출물·완료 기준이 있는가 · pass
+- 누락 의존 ID·순환 의존·프로젝트 종료일 초과가 없는가 · pass
+- APP-B·Later 기능이 APP-A·C 핵심 일정의 선행을 막지 않는가 · pass
+- WBS 사람용 프로젝션이 구조화 원본에서 생성되고 project_docs --check를 통과했는가 · pass
+- [정식 WBS 구조화 원본](../artifacts/planning/WBS.json)
+- [R01 MVP 범위 결정](../artifacts/tasks/TASK-007.json)
+- [공식 WBS 가이드·샘플 스냅샷 위치](../guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json)
+- [WBS 생성·검증 도구](../../tools/project_docs.py)
+- [최소 구현 구조·기존 WBS 후보](../artifacts/tasks/TASK-006.json)
+
+남은 불확실성과 결정 요청
+
+- 실제 팀원별 일일 가용 시간은 WBS 작성 시점에 별도 측정하지 않아 날짜는 현재 역할·공식 마일스톤을 기준으로 한 운영 기본값이다. 일정 차질이 관찰되면 핵심 의존 경로를 우선 재배치한다.
+- 정량 합격선, APP-C 확인 한도, retry/timeout 상한은 W21~W22 기준 실행 이후 확정한다.
+- APP-B W26은 조건부이며 W22에서 APP-A·C 통합 안정과 일정 여유가 확인되지 않으면 실행하지 않는다.
+- TASK-010에서 기획서의 Must/Later/Unknown과 WBS 작업·마일스톤이 동일한지 최종 대조한다.
+- 실제 실행 중 한 담당자의 병목이나 일정 지연이 관찰되면 task_id/의도는 유지한 채 WBS 일정·병렬 순서만 조정한다.
+
+### TASK-010 · 완료
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-010.json)
+
+기획서와 WBS 최종 정합성 점검을 완료했다. 사람용 기획서는 공식 기본 목차 `1. 서비스 정의 / 2. 기능 요구사항 / 3. 비기능 요구사항`을 유지하고 FR-01~04, APP-A·C Must, APP-B 후순위, Must/Later/Unknown, 실제 미검증 상태와 데이터 수집 정책 gate를 포함한다. WBS는 같은 범위를 34개 작업으로 분해하고 FR-01~04를 모두 구현·통합·평가 작업에 연결했다. APP-B는 조건부 W26으로 핵심 경로 선행에서 제외했다. 마일스톤 11/13, 12/08, 12/31, 01/04가 기획서·WBS와 일치한다. project_docs --check 및 별도 정적 대조에서 공식 목차, 요구사항 커버리지, 범위, 마일스톤, 미검증 표현이 모두 통과했다. 실제 팀 대시보드 제출·접수는 수행하지 않았으므로 제출 완료로 표시하지 않는다.
+
+검증과 근거
+
+- 기획서가 공식 기본 목차를 유지하고 서비스 정의·FR·NFR를 포함하는가 · pass
+- 기획서 FR-01~04와 WBS 작업 커버리지가 일치하는가 · pass
+- APP-A·C Must와 APP-B 조건부 후순위가 두 문서에서 동일한가 · pass
+- 11/13·12/08·12/31·01/04 마일스톤과 프로젝트 종료일이 정합적인가 · pass
+- 미검증 앱 동작·통합·B0/D0·정량 상한을 완료로 과장하지 않는가 · pass
+- 생성 도구 검증과 추가 정적 대조를 통과했는가 · pass
+- 실제 대시보드 링크 등록과 제출완료 상태를 확인했는가 · inconclusive
+- [최종 기획서 사람용 프로젝션](../step1/기획서.md)
+- [최종 WBS 사람용 프로젝션](../step1/WBS.md)
+- [R01 범위 결정](../artifacts/tasks/TASK-007.json)
+- [집중 앱 요구사항 명세](../artifacts/specs/focus_apps.json)
+- [공개 제출 규칙 정리](../artifacts/tasks/TASK-002.json)
+- [WBS 구조화 원본](../artifacts/planning/WBS.json)
+- [기획서·WBS 생성 검증 도구](../../tools/project_docs.py)
+
+남은 불확실성과 결정 요청
+
+- 2026-11-13 정확한 마감 시각과 팀 대시보드의 WBS 추가 안내는 실제 대시보드에서 최종 확인해야 한다.
+- 실제 제출 링크의 열람 권한과 대시보드 접수 상태는 TASK-011 수행 전까지 미확인이다.
+- TASK-011에서 팀 대시보드의 정확한 마감 시각·별도 WBS 안내를 확인하고 기획서·WBS 링크 등록 후 제출완료 상태와 접수 여부를 기록한다.
+
+### TASK-011 · 할 일
+
+[작업과 상세 산출물](../artifacts/tasks/TASK-011.json)
+
+결과 미기록.
+
+## 평가 결과
+
+| 사례 | 판정 | 상세 근거 |
+| --- | --- | --- |
+
+실행 평가 결과 미기록.
+
+[필수 제출물 상태](../submissions/README.md)
