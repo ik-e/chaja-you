@@ -40,10 +40,13 @@
     },
     {
       "path": "docs/submissions/README.md"
+    },
+    {
+      "path": "docs/guidelines/final_project_repository/README.md"
     }
   ],
   "result": {
-    "summary": "Step 1 필수 제출물은 기획서와 WBS 두 개이며 실제 제출 파일은 docs/step1/에 둔다. 기획서·WBS의 강제 세부 목차는 확인되지 않았고 제공 가이드는 품질 참고 기준으로 사용한다. 정확한 파일 형식·파일명 규칙·제출 시각·별도 접수 동작은 아직 미확인이다.",
+    "summary": "Step 1 필수 제출물은 기획서와 WBS 두 개이며 실제 제출 파일은 docs/step1/에 둔다. 제출물 관련 공개 기준은 Gitea FinalProject 최신 원문과 OUTPUT-GUIDE.md를 우선 확인하도록 기준 경로를 고정했다. 2026-11-12 10:32:53 +09 기준 OUTPUT-GUIDE.md 갱신 표시를 확인했지만, 정확한 파일 형식·파일명 규칙·제출 시각·별도 접수 동작의 개별 규칙은 원문 내용 재확인 전까지 미확인으로 유지한다.",
     "claims": [
       {
         "id": "CLAIM-SUB-001",
@@ -75,6 +78,13 @@
         "id": "EVIDENCE-SUB-001",
         "label": "R01 Step 1 제출물 운영 결정",
         "path": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
+      },
+      {
+        "id": "EVIDENCE-SUB-002",
+        "label": "최종 프로젝트 공개 가이드 원문 위치 및 OUTPUT-GUIDE 최신 변경 확인",
+        "url": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject",
+        "checked_at": "2026-11-12",
+        "note": "FinalProject 폴더에서 OUTPUT-GUIDE.md 존재 및 최신 표시 커밋 a512febe31 (2026-11-12 10:32:53 +09:00) 확인. 개별 제출 규칙 내용은 별도 재확인 필요."
       }
     ],
     "verification": [
@@ -90,6 +100,13 @@
         "verdict": "inconclusive",
         "evidence_ids": [
           "EVIDENCE-SUB-001"
+        ]
+      },
+      {
+        "criterion": "제출 규칙의 공개 원문 기준 경로와 최신 변경 여부를 확인했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "EVIDENCE-SUB-002"
         ]
       }
     ],
