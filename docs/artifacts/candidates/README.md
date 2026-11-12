@@ -32,4 +32,22 @@ Design / Spec / ADR / Task / State
 
 팀원이 아직 정리되지 않은 아이디어를 제안할 때는 [팀 아이디어 Inbox](../../ideas/README.md)에 먼저 남길 수 있다. Candidate는 Inbox의 모든 아이디어를 자동 승격하는 공간이 아니라, 다시 검토할 가치가 있다고 판단된 아이디어를 중복·위험·재검토 조건과 함께 정리하는 공간이다.
 
+## 현재 후보
+
+- [CAND-001 · 의사결정 지원형 리서치](CAND-001.json)
+- [CAND-002 · 정보가치 기반 조사 제어](CAND-002.json)
+- [CAND-003 · Research State 독립 객체화](CAND-003.json)
+- [CAND-004 · 질문별 증분 조사·Projection](CAND-004.json)
+- [CAND-005 · Domain Profile](CAND-005.json)
+- [CAND-006 · 두 번째 도메인 Transfer Test](CAND-006.json)
+- [CAND-007 · 사용자 문제 검증 트랙](CAND-007.json)
+- [CAND-008 · Benchmark·평가 Metric 체계](CAND-008.json)
+- [CAND-009 · Source Registry / 인터넷 지도](CAND-009.json)
+- [CAND-010 · Reviewed Research Experience + Retrieval](CAND-010.json)
+- [CAND-011 · Research Execution Adapter 확장](CAND-011.json)
+- [CAND-012 · 자유 역할·에이전트 생성](CAND-012.json)
+- [CAND-013 · 범용 Workflow / Recovery Runtime](CAND-013.json)
+- [CAND-014 · AI-native PR / Verification Workflow](CAND-014.json)
+- [CAND-015 · 프로젝트 메타구조 개선군](CAND-015.json)
+
 [AI 산출물 목차](../README.md)
