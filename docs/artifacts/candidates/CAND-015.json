@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "CAND-015",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "프로젝트 메타구조 개선군",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "Intent/Hypothesis/Decision/Observation 타입 강화, State 경량화, traceability graph, validation automation을 필요에 따라 발전시키는 후보군.",
+  "potential_value": [
+    "프로젝트 지식의 의미 구분",
+    "현재 기준 추적성",
+    "반복 누락 자동화"
+  ],
+  "risks": [
+    "관리 시스템이 실제 개발보다 커질 위험",
+    "문서·링크 유지비 증가"
+  ],
+  "why_not_now": [
+    "현재 구조로 먼저 운영하며 실제 불편을 관찰해야 함"
+  ],
+  "evidence_needed": [
+    "의미 혼동·state 중복·traceability 탐색 비용·검증 누락이 반복됨"
+  ],
+  "revisit_when": [
+    "운영상 실제 반복 실패가 확인될 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
