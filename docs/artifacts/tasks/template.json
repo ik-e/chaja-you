@@ -18,5 +18,12 @@
   "acceptance": [],
   "verification": [],
   "references": [],
-  "result": null
+  "result": null,
+  "traceability": {
+    "intent_refs": [],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": null
 }
