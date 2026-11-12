@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-003",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "진행 중",
+  "owner": "R04",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
   "question": "집중 앱 두 요청에서 사용자에게 어떤 결과와 선택 근거를 제공할 것인가",
@@ -11,7 +11,8 @@
   "inputs": [
     "docs/artifacts/planning/기획서_초안.json",
     "docs/artifacts/specs/focus_apps.json",
-    "docs/artifacts/research/03_AI_리서치_멀티에이전트_시스템_선행사례_및_구축방안_조사.json"
+    "docs/artifacts/research/03_AI_리서치_멀티에이전트_시스템_선행사례_및_구축방안_조사.json",
+    "docs/artifacts/tasks/TASK-006.json"
   ],
   "scope": [
     "APP-A·B의 사용자 상황과 필수 조건·선호를 정리",
@@ -29,8 +30,30 @@
     "실제 사용자 조사 유무가 명확하며 가설을 수요 검증 결과로 표현하지 않음"
   ],
   "verification": [
-    "요청의 모든 필수 조건이 결과 필드에 나타나는지 확인",
-    "기존 도구의 기능 주장을 공식 출처 또는 실제 관찰과 대조"
+    {
+      "criterion": "두 요청에서 시작 조건·기대 결과·사용자 선택 기준이 연결됨",
+      "verdict": "pass",
+      "evidence_ids": [
+        "TASK-003-E01",
+        "TASK-003-E02"
+      ]
+    },
+    {
+      "criterion": "비교 실행을 했다면 조건과 출처를 남기고 미실행 항목은 검증 계획으로 표시",
+      "verdict": "pass",
+      "evidence_ids": [
+        "TASK-003-E02",
+        "TASK-003-E04",
+        "TASK-003-E05"
+      ]
+    },
+    {
+      "criterion": "실제 사용자 조사 유무가 명확하며 가설을 수요 검증 결과로 표현하지 않음",
+      "verdict": "pass",
+      "evidence_ids": [
+        "TASK-003-E02"
+      ]
+    }
   ],
   "references": [
     {
@@ -41,13 +64,129 @@
     },
     {
       "path": "docs/artifacts/research/03_AI_리서치_멀티에이전트_시스템_선행사례_및_구축방안_조사.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-006.json"
+    },
+    {
+      "path": "docs/members/R04/workspace/2026-11-12_사용자_문제_및_기존_대안_한계_분석.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 대안의 장점과 관찰된 한계, 판단을 위한 4대 정보(충족/미충족/미확인, 근거, 출처, 잔여확인사항), 대안 발굴 시작·생략·보류 이유 가시화 및 TASK-006 백엔드 데이터 계약 연계를 정리했다.",
+    "claims": [
+      {
+        "id": "TASK-003-C01",
+        "text": "사용자는 단순 앱 목록보다 설치 전 복합 제약 조건(오프라인 동작, 무계정 사용, 무료 예약 차단)의 충족 여부를 확인하고 선택하길 원한다 (사용자 수요 가설).",
+        "status": "가설",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02"
+        ]
+      },
+      {
+        "id": "TASK-003-C02",
+        "text": "기존 앱스토어·포털 검색·범용 AI는 일반 탐색과 요약에는 유용하나, 복합 조건 필터링 부재, 최신 유료화 미반영, 근거 없는 환각 단정의 한계가 관찰된다 (비교 분석 가설).",
+        "status": "관찰 및 비교",
+        "evidence_ids": [
+          "TASK-003-E02",
+          "TASK-003-E03"
+        ]
+      },
+      {
+        "id": "TASK-003-C03",
+        "text": "조건별 3단계 판정(충족/미충족/미확인)과 공식 원문 스니펫, 출처 URL, 미확인 주의사항으로 구성된 결과 정보 구조가 사용자의 설치 실패 비용을 줄인다 (FR-01, FR-04 근거).",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02",
+          "TASK-003-E04",
+          "TASK-003-E05"
+        ]
+      },
+      {
+        "id": "TASK-003-C04",
+        "text": "대안 발굴의 시작·생략·보류 이유를 사용자에게 투명하게 보여주는 상태 흐름이 필요하며, 한도 도달 시 미확인 부분 결과로 안전하게 종료한다 (FR-03 근거, TASK-006 데이터 연계).",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02",
+          "TASK-003-E06"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "TASK-003-E01",
+        "label": "집중 앱 평가 요구사항과 APP-A·B·C 사례 명세",
+        "path": "docs/artifacts/specs/focus_apps.json"
+      },
+      {
+        "id": "TASK-003-E02",
+        "label": "R04 사용자 문제 및 기존 대안 한계 분석 개정본",
+        "path": "docs/members/R04/workspace/2026-11-12_사용자_문제_및_기존_대안_한계_분석.md"
+      },
+      {
+        "id": "TASK-003-E03",
+        "label": "찾아you 기획서 초안",
+        "path": "docs/artifacts/planning/기획서_초안.json"
+      },
+      {
+        "id": "TASK-003-E04",
+        "label": "PomoToki 공식 오프라인 및 로컬 데이터 안내",
+        "url": "https://www.pomotoki.com/"
+      },
+      {
+        "id": "TASK-003-E05",
+        "label": "AppBlock Android Premium 및 무료 한도 안내",
+        "url": "https://appblock.app/premium/"
+      },
+      {
+        "id": "TASK-003-E06",
+        "label": "R05 구성요소 및 데이터 계약 초안",
+        "path": "docs/artifacts/tasks/TASK-006.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "두 요청에서 시작 조건·기대 결과·사용자 선택 기준이 연결되었는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02"
+        ]
+      },
+      {
+        "criterion": "비교 실행 조건과 출처를 남기고 미실행 항목을 검증 계획으로 표시했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-003-E02",
+          "TASK-003-E04",
+          "TASK-003-E05"
+        ]
+      },
+      {
+        "criterion": "실제 사용자 조사 유무를 명시하고 가설을 검증 결과로 포장하지 않았는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-003-E02"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "실제 수험생/학습자 대상 정량 설문이나 인터뷰를 통한 수요 검증은 아직 수행하지 않은 가설 단계이다.",
+      "Focus To-Do의 첫 실행 시 무계정 타이머 진입 가능 여부와 Stay Focused의 무료 예약 범위는 실기기 시험 전까지 미확인 상태이다.",
+      "APP-C3의 대안 발굴 시간/호출수 한도(Timeout)의 구체적인 임계값은 TASK-004(인프라)와 추가 조율이 필요하다."
+    ],
+    "decision_requests": [
+      "R01 팀장은 첫 MVP에서 미확인 부분 결과(APP-C3 보류)의 허용 기준과 종료 정책을 확정해야 한다.",
+      "기획서 2~4장에 본 사용자 문제 및 화면 정보 구조를 기본 근거로 채택할지 결정해야 한다."
+    ]
+  },
   "title": "사용자 문제·기존 대안·결과 화면 정리",
   "suggested_owner": "R04",
-  "assignment_status": "제안",
-  "schedule_status": "내부 목표일 제안",
+  "assignment_status": "확인",
+  "schedule_status": "내부 목표일 진행",
   "milestone": "2026-11-13",
   "stage": "기획 근거",
   "depends_on": [],
