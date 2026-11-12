@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "CAND-002",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "정보가치 기반 조사 제어",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "다음에 무엇을 조사할지와 언제 멈출지를 정보가치·비용·결정 영향으로 판단하는 조사 제어.",
+  "potential_value": [
+    "불필요한 검색·검증을 줄일 수 있음",
+    "시간·비용을 목적에 맞게 배분할 수 있음"
+  ],
+  "risks": [
+    "평가 함수가 복잡해질 수 있음",
+    "근거 없이 조기 중단할 위험"
+  ],
+  "why_not_now": [
+    "현재는 단순 조건 분기와 고정 예산만으로 먼저 검증 가능"
+  ],
+  "evidence_needed": [
+    "불필요 검색이나 비용 초과가 반복되는 실제 run",
+    "추가 조사가 결론을 바꾼 사례"
+  ],
+  "revisit_when": [
+    "실제 통합 run에서 비용·시간 문제가 반복될 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
