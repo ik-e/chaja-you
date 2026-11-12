@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "CAND-009",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "Source Registry / 인터넷 지도",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "출처가 무엇을 제공하는지, 범위·신뢰·접근 방식·수집/재사용 제약·활용 경험을 구조화.",
+  "potential_value": [
+    "출처 탐색 비용 감소",
+    "도메인별 source priority 지원",
+    "권한 제약 재사용"
+  ],
+  "risks": [
+    "메타데이터 유지비",
+    "범용 레지스트리 구축이 목적화될 위험"
+  ],
+  "why_not_now": [
+    "현재는 개별 출처 검증으로 충분"
+  ],
+  "evidence_needed": [
+    "동일 출처 판단이 반복됨",
+    "source 선택 실패가 반복됨"
+  ],
+  "revisit_when": [
+    "반복 조사에서 source 선택 비용이 드러날 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
