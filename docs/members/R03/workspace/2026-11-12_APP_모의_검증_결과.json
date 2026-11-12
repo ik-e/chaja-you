@@ -1,0 +1,4426 @@
+{
+  "id": "R03-APP-MOCK-2026-11-12",
+  "generated_at": "2026-11-12T02:36:33.132Z",
+  "scope": "structured-input, deterministic contract prototype only",
+  "spec_path": "docs/artifacts/specs/focus_apps.json",
+  "spec_sha256": "fa671c704cd27aba896ee2b607860415775354b7fbfe4a2284872b8c47ea4e6e",
+  "domain": {
+    "id": "R03-APP-MOCK-v1",
+    "roles": [
+      "discovery",
+      "research",
+      "verification",
+      "comparison",
+      "synthesis"
+    ],
+    "sourceProfiles": {
+      "timer": [
+        "mock-developer-help"
+      ],
+      "blocker": [
+        "mock-pricing",
+        "mock-browser-help"
+      ]
+    }
+  },
+  "summary": {
+    "cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "negative_controls": 4,
+    "detected": 4
+  },
+  "limitations": [
+    "Natural-language understanding untested: structured requests manually supplied.",
+    "Rule-based prototype is not an LLM dynamic planner or the production application.",
+    "No real app facts, citations, web calls, parallel execution, device tests or performance comparison.",
+    "B0/D0 baseline comparison not executed; no superiority or TASK completion claim."
+  ],
+  "runs": [
+    {
+      "id": "APP-A",
+      "request": "안드로이드에서 인터넷 없이 공부하려고 해. PomoToki와 Focus To-Do 중 오프라인에서 뽀모도로 타이머를 쓸 수 있는 앱을 비교해줘. 가능하면 계정 없이 쓰고 싶어.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [
+          "accountless"
+        ],
+        "followup": "never"
+      },
+      "mock_outcomes": [
+        "충족",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [
+            "accountless"
+          ],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [
+            "accountless"
+          ],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "action": "skip_discovery",
+          "reason": "specified comparison; no discovery requested"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "APP-B",
+      "request": "공부 중에 안드로이드 폰으로 웹사이트를 자꾸 열게 돼. 내가 지정한 사이트 2개를 평일 저녁에 무료로 차단할 수 있는 앱을 찾아줘.",
+      "structured_input": {
+        "profile": "blocker",
+        "platform": "Android",
+        "candidates": [],
+        "required": [
+          "two_sites",
+          "weekday_schedule",
+          "evening_schedule",
+          "free_scheduled_blocking"
+        ],
+        "preferred": [],
+        "followup": "never",
+        "contextChecks": [
+          "browser",
+          "permissions"
+        ]
+      },
+      "mock_outcomes": [],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "discover",
+          "role": "discovery",
+          "target": "mock-candidate",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "reason": "request requires discovery"
+        },
+        {
+          "id": "T2",
+          "type": "research",
+          "role": "research",
+          "target": "MockCandidate",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-pricing",
+            "mock-browser-help"
+          ]
+        },
+        {
+          "id": "T3",
+          "type": "verify",
+          "role": "verification",
+          "target": "MockCandidate",
+          "depends_on": [
+            "T2"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "two_sites",
+            "weekday_schedule",
+            "evening_schedule",
+            "free_scheduled_blocking"
+          ],
+          "preferences": [],
+          "context_checks": [
+            "browser",
+            "permissions"
+          ],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T4",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T5",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        }
+      ],
+      "decisions": [],
+      "parallel_eligible_groups": [
+        [
+          "T2"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "APP-C1",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미충족",
+        "미충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T5",
+          "type": "discover",
+          "role": "discovery",
+          "target": "mock-candidate",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "reason": "request requires discovery"
+        },
+        {
+          "id": "T6",
+          "type": "research",
+          "role": "research",
+          "target": "MockAlternative",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T7",
+          "type": "verify",
+          "role": "verification",
+          "target": "MockAlternative",
+          "depends_on": [
+            "T6"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T8",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4",
+            "T7"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T9",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T8"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "task_added",
+          "task_id": "T7",
+          "plan_version": 7
+        },
+        {
+          "seq": 13,
+          "event": "mock_complete",
+          "task_id": "T6"
+        },
+        {
+          "seq": 14,
+          "event": "mock_complete",
+          "task_id": "T7"
+        },
+        {
+          "seq": 15,
+          "event": "task_added",
+          "task_id": "T8",
+          "plan_version": 8
+        },
+        {
+          "seq": 16,
+          "event": "mock_complete",
+          "task_id": "T8"
+        },
+        {
+          "seq": 17,
+          "event": "task_added",
+          "task_id": "T9",
+          "plan_version": 9
+        },
+        {
+          "seq": 18,
+          "event": "mock_complete",
+          "task_id": "T9"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미충족",
+            "미충족"
+          ],
+          "action": "add_discovery",
+          "reason": "request condition satisfied"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "APP-C2",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "충족",
+        "미충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "충족",
+            "미충족"
+          ],
+          "action": "skip_discovery",
+          "reason": "qualifying candidate exists"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "APP-C3",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미충족",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미충족",
+            "미확인"
+          ],
+          "action": "skip_discovery",
+          "reason": "condition not established (unknown)"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "V1",
+      "request": "Android에서 오프라인 뽀모도로 타이머를 쓸 앱을 찾아줘. 가능하면 계정 없이 쓰고 싶어.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [
+          "accountless"
+        ],
+        "followup": "never"
+      },
+      "mock_outcomes": [],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "discover",
+          "role": "discovery",
+          "target": "mock-candidate",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "reason": "request requires discovery"
+        },
+        {
+          "id": "T2",
+          "type": "research",
+          "role": "research",
+          "target": "MockCandidate",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T3",
+          "type": "verify",
+          "role": "verification",
+          "target": "MockCandidate",
+          "depends_on": [
+            "T2"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [
+            "accountless"
+          ],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T4",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T5",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        }
+      ],
+      "decisions": [],
+      "parallel_eligible_groups": [
+        [
+          "T2"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "V2",
+      "request": "Android에서 후보 X와 후보 Y의 무료 평일 저녁 사이트 2개 차단 기능을 비교해줘. 다른 앱은 찾지 마.",
+      "structured_input": {
+        "profile": "blocker",
+        "platform": "Android",
+        "candidates": [
+          "후보 X",
+          "후보 Y"
+        ],
+        "required": [
+          "two_sites",
+          "weekday_schedule",
+          "evening_schedule",
+          "free_scheduled_blocking"
+        ],
+        "preferred": [],
+        "followup": "never",
+        "contextChecks": [
+          "browser",
+          "permissions"
+        ]
+      },
+      "mock_outcomes": [
+        "미확인",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "후보 X",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-pricing",
+            "mock-browser-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "후보 X",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "two_sites",
+            "weekday_schedule",
+            "evening_schedule",
+            "free_scheduled_blocking"
+          ],
+          "preferences": [],
+          "context_checks": [
+            "browser",
+            "permissions"
+          ],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "후보 Y",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-pricing",
+            "mock-browser-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "후보 Y",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "two_sites",
+            "weekday_schedule",
+            "evening_schedule",
+            "free_scheduled_blocking"
+          ],
+          "preferences": [],
+          "context_checks": [
+            "browser",
+            "permissions"
+          ],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "action": "skip_discovery",
+          "reason": "specified comparison; no discovery requested"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "V3",
+      "request": "PomoToki와 Focus To-Do의 Android 오프라인 타이머를 비교해줘. 둘 다 충족하지 않거나 충족 여부를 확인할 수 없으면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "no_pass"
+      },
+      "mock_outcomes": [
+        "미충족",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "discover",
+          "role": "discovery",
+          "target": "mock-candidate",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "reason": "request requires discovery"
+        },
+        {
+          "id": "T6",
+          "type": "research",
+          "role": "research",
+          "target": "MockAlternative",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T7",
+          "type": "verify",
+          "role": "verification",
+          "target": "MockAlternative",
+          "depends_on": [
+            "T6"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T8",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4",
+            "T7"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T9",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T8"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "task_added",
+          "task_id": "T7",
+          "plan_version": 7
+        },
+        {
+          "seq": 13,
+          "event": "mock_complete",
+          "task_id": "T6"
+        },
+        {
+          "seq": 14,
+          "event": "mock_complete",
+          "task_id": "T7"
+        },
+        {
+          "seq": 15,
+          "event": "task_added",
+          "task_id": "T8",
+          "plan_version": 8
+        },
+        {
+          "seq": 16,
+          "event": "mock_complete",
+          "task_id": "T8"
+        },
+        {
+          "seq": 17,
+          "event": "task_added",
+          "task_id": "T9",
+          "plan_version": 9
+        },
+        {
+          "seq": 18,
+          "event": "mock_complete",
+          "task_id": "T9"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "no_pass",
+          "verdicts": [
+            "미충족",
+            "미확인"
+          ],
+          "action": "add_discovery",
+          "reason": "request condition satisfied"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "V4",
+      "request": "PomoToki와 Focus To-Do 중 Android 오프라인 뽀모도로 타이머를 반드시 계정 없이 쓸 수 있는 앱을 비교해줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro",
+          "accountless"
+        ],
+        "preferred": [],
+        "followup": "never"
+      },
+      "mock_outcomes": [
+        "미확인",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro",
+            "accountless"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro",
+            "accountless"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "action": "skip_discovery",
+          "reason": "specified comparison; no discovery requested"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-충족-충족",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "충족",
+        "충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "충족",
+            "충족"
+          ],
+          "action": "skip_discovery",
+          "reason": "qualifying candidate exists"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-충족-미충족",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "충족",
+        "미충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "충족",
+            "미충족"
+          ],
+          "action": "skip_discovery",
+          "reason": "qualifying candidate exists"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-충족-미확인",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "충족",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "충족",
+            "미확인"
+          ],
+          "action": "skip_discovery",
+          "reason": "qualifying candidate exists"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-미충족-충족",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미충족",
+        "충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미충족",
+            "충족"
+          ],
+          "action": "skip_discovery",
+          "reason": "qualifying candidate exists"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-미충족-미충족",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미충족",
+        "미충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T5",
+          "type": "discover",
+          "role": "discovery",
+          "target": "mock-candidate",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "reason": "request requires discovery"
+        },
+        {
+          "id": "T6",
+          "type": "research",
+          "role": "research",
+          "target": "MockAlternative",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T7",
+          "type": "verify",
+          "role": "verification",
+          "target": "MockAlternative",
+          "depends_on": [
+            "T6"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T8",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4",
+            "T7"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T9",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T8"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "task_added",
+          "task_id": "T7",
+          "plan_version": 7
+        },
+        {
+          "seq": 13,
+          "event": "mock_complete",
+          "task_id": "T6"
+        },
+        {
+          "seq": 14,
+          "event": "mock_complete",
+          "task_id": "T7"
+        },
+        {
+          "seq": 15,
+          "event": "task_added",
+          "task_id": "T8",
+          "plan_version": 8
+        },
+        {
+          "seq": 16,
+          "event": "mock_complete",
+          "task_id": "T8"
+        },
+        {
+          "seq": 17,
+          "event": "task_added",
+          "task_id": "T9",
+          "plan_version": 9
+        },
+        {
+          "seq": 18,
+          "event": "mock_complete",
+          "task_id": "T9"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미충족",
+            "미충족"
+          ],
+          "action": "add_discovery",
+          "reason": "request condition satisfied"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-미충족-미확인",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미충족",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미충족",
+            "미확인"
+          ],
+          "action": "skip_discovery",
+          "reason": "condition not established (unknown)"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-미확인-충족",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미확인",
+        "충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "충족"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미확인",
+            "충족"
+          ],
+          "action": "skip_discovery",
+          "reason": "qualifying candidate exists"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-미확인-미충족",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미확인",
+        "미충족"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미충족"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미확인",
+            "미충족"
+          ],
+          "action": "skip_discovery",
+          "reason": "condition not established (unknown)"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    },
+    {
+      "id": "C-MATRIX-미확인-미확인",
+      "request": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+      "structured_input": {
+        "profile": "timer",
+        "platform": "Android",
+        "candidates": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "required": [
+          "offline_pomodoro"
+        ],
+        "preferred": [],
+        "followup": "all_fail"
+      },
+      "mock_outcomes": [
+        "미확인",
+        "미확인"
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "type": "research",
+          "role": "research",
+          "target": "PomoToki",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T2",
+          "type": "verify",
+          "role": "verification",
+          "target": "PomoToki",
+          "depends_on": [
+            "T1"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T3",
+          "type": "research",
+          "role": "research",
+          "target": "Focus To-Do",
+          "depends_on": [],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "source_profiles": [
+            "mock-developer-help"
+          ]
+        },
+        {
+          "id": "T4",
+          "type": "verify",
+          "role": "verification",
+          "target": "Focus To-Do",
+          "depends_on": [
+            "T3"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete",
+          "conditions": [
+            "offline_pomodoro"
+          ],
+          "preferences": [],
+          "context_checks": [],
+          "mock_verdict": "미확인"
+        },
+        {
+          "id": "T5",
+          "type": "comparison",
+          "role": "comparison",
+          "target": "all requested candidates",
+          "depends_on": [
+            "T2",
+            "T4"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        },
+        {
+          "id": "T6",
+          "type": "synthesis",
+          "role": "synthesis",
+          "target": "mock report",
+          "depends_on": [
+            "T5"
+          ],
+          "domain_id": "R03-APP-MOCK-v1",
+          "status": "complete"
+        }
+      ],
+      "events": [
+        {
+          "seq": 1,
+          "event": "task_added",
+          "task_id": "T1",
+          "plan_version": 1
+        },
+        {
+          "seq": 2,
+          "event": "task_added",
+          "task_id": "T2",
+          "plan_version": 2
+        },
+        {
+          "seq": 3,
+          "event": "task_added",
+          "task_id": "T3",
+          "plan_version": 3
+        },
+        {
+          "seq": 4,
+          "event": "task_added",
+          "task_id": "T4",
+          "plan_version": 4
+        },
+        {
+          "seq": 5,
+          "event": "mock_complete",
+          "task_id": "T1"
+        },
+        {
+          "seq": 6,
+          "event": "mock_complete",
+          "task_id": "T3"
+        },
+        {
+          "seq": 7,
+          "event": "mock_complete",
+          "task_id": "T2"
+        },
+        {
+          "seq": 8,
+          "event": "mock_complete",
+          "task_id": "T4"
+        },
+        {
+          "seq": 9,
+          "event": "task_added",
+          "task_id": "T5",
+          "plan_version": 5
+        },
+        {
+          "seq": 10,
+          "event": "mock_complete",
+          "task_id": "T5"
+        },
+        {
+          "seq": 11,
+          "event": "task_added",
+          "task_id": "T6",
+          "plan_version": 6
+        },
+        {
+          "seq": 12,
+          "event": "mock_complete",
+          "task_id": "T6"
+        }
+      ],
+      "decisions": [
+        {
+          "condition": "all_fail",
+          "verdicts": [
+            "미확인",
+            "미확인"
+          ],
+          "action": "skip_discovery",
+          "reason": "condition not established (unknown)"
+        }
+      ],
+      "parallel_eligible_groups": [
+        [
+          "T1",
+          "T3"
+        ]
+      ],
+      "execution_mode": "serial simulation; groups show eligibility only",
+      "app_fact_claims": [],
+      "source_evidence": "synthetic source profile labels only; not actual evidence"
+    }
+  ],
+  "evaluations": [
+    {
+      "case_id": "APP-A",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "APP-B",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "browser and permissions retained",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "APP-C1",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "APP-C2",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "APP-C3",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "V1",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "V2",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "browser and permissions retained",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "V3",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "V4",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-충족-충족",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-충족-미충족",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-충족-미확인",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-미충족-충족",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-미충족-미충족",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-미충족-미확인",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-미확인-충족",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-미확인-미충족",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "C-MATRIX-미확인-미확인",
+      "checks": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "dependency IDs and completion order",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "conditional decision recorded",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all initial candidates covered",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "domain source/validation profiles selected",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "task roles belong to app candidate set",
+          "verdict": "pass"
+        }
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "remove required condition",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "required and preferred preserved",
+          "verdict": "fail"
+        }
+      ]
+    },
+    {
+      "id": "missing candidate comparison dependency",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "all candidate verdicts feed comparison",
+          "verdict": "fail"
+        }
+      ]
+    },
+    {
+      "id": "unknown treated as all-fail",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "expected discovery count",
+          "verdict": "fail"
+        },
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "fail"
+        }
+      ]
+    },
+    {
+      "id": "early conditional task insertion",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "conditional discovery added after all initial verdicts",
+          "verdict": "fail"
+        }
+      ]
+    }
+  ]
+}
