@@ -159,7 +159,7 @@
       "estimate_workdays": 3,
       "depends_on": [],
       "priority": "Must",
-      "status": "진행 중",
+      "status": "완료",
       "requirements": [
         "FR-01",
         "FR-03",
@@ -204,7 +204,7 @@
         "W01"
       ],
       "priority": "Must",
-      "status": "진행 중",
+      "status": "완료",
       "requirements": [
         "FR-01",
         "FR-02",
@@ -256,7 +256,8 @@
       "requirements": [
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-01"
       ],
       "output": "request/task/source/evidence/verdict/report 저장·조회 API",
       "done_when": "ID 연결, 상태·실패 이유, source/evidence 조회를 작은 합성 요청으로 확인함"
@@ -298,7 +299,8 @@
       "priority": "Must",
       "status": "예정",
       "requirements": [
-        "FR-04"
+        "FR-04",
+        "NFR-03"
       ],
       "output": "출처 정책 gate·대체 경로·Android 시험 절차",
       "done_when": "실제 사용 경로마다 허용/수동/미확인과 기기 시험 조건이 기록됨"
@@ -322,7 +324,8 @@
       "status": "예정",
       "requirements": [
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-03"
       ],
       "output": "기존 리서치 실행 능력을 호출하는 교체 가능한 adapter",
       "done_when": "비공식 대량 크롤링 없이 지정한 공식/허용 출처를 조회하고 실패를 상태로 반환함"
@@ -345,7 +348,8 @@
       "status": "예정",
       "requirements": [
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-01"
       ],
       "output": "대상×조건 verdict→evidence→source 저장·조회",
       "done_when": "충족/미충족은 직접 근거를 참조하고 미확인은 근거 없이도 조사 task에 연결됨"
@@ -420,7 +424,8 @@
         "FR-01",
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-04"
       ],
       "output": "APP-A 통합 실행·실패 사례 기록",
       "done_when": "자연어 요청부터 근거 결과까지 정상·자료 실패·근거 부족 경로를 확인하고 문제를 기록함"
@@ -440,7 +445,8 @@
       "priority": "Must",
       "status": "예정",
       "requirements": [
-        "FR-04"
+        "FR-04",
+        "NFR-04"
       ],
       "output": "앱 버전·OS·네트워크·계정 상태가 포함된 기기 시험 기록",
       "done_when": "시연에서 확정적으로 말할 앱 동작과 문서만 확인된 항목을 구분함"
@@ -483,7 +489,9 @@
       "status": "예정",
       "requirements": [
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-01",
+        "NFR-02"
       ],
       "output": "후속 task 추가·보류·최종 미실행과 attempt history",
       "done_when": "같은 task 재시도는 ID를 유지하고 각 시도·실패·run_if 평가 이유를 보존함"
@@ -498,8 +506,7 @@
       "end": "2026-12-02",
       "estimate_workdays": 2,
       "depends_on": [
-        "W14",
-        "W18"
+        "W14"
       ],
       "priority": "Must",
       "status": "예정",
@@ -508,7 +515,7 @@
         "FR-04"
       ],
       "output": "발굴 실행·생략·보류·부분 결과 표시",
-      "done_when": "사용자가 후속 작업이 왜 실행/미실행됐는지와 미확인·실패를 볼 수 있음"
+      "done_when": "합의된 상태 의미를 기준으로 발굴 실행·생략·보류·부분 결과 화면을 구현하고, W18 실제 연동은 W20 통합에서 검증함"
     },
     {
       "id": "W20",
@@ -533,7 +540,9 @@
       "requirements": [
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-02",
+        "NFR-04"
       ],
       "output": "C1/C2/C3 통합 시험 기록",
       "done_when": "추가·생략·보류와 한도 후 부분 결과 경로를 실제 시스템에서 확인하고 한도 수치 후보를 기록함"
@@ -559,7 +568,8 @@
         "FR-01",
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-04"
       ],
       "output": "동일 조건 고정/동적 실행 결과와 자원 사용 기록",
       "done_when": "누락·불필요 작업·분기·근거·시간·호출·토큰·비용을 같은 조건에서 비교함"
@@ -585,7 +595,8 @@
         "FR-01",
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-05"
       ],
       "output": "중간 평가표·정량 기준 후보·범위 재검토 기록",
       "done_when": "실측을 근거로 동적 범위 유지/축소·APP-C 한도·다음 우선순위를 결정하거나 미확인으로 남김"
@@ -630,7 +641,8 @@
       "status": "예정",
       "requirements": [
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-02"
       ],
       "output": "실패/timeout/attempt 관측과 제한된 복구",
       "done_when": "무한 반복 없이 실패 이력과 종료 이유가 남고 기준 실행에서 필요한 관측값을 수집함"
@@ -705,7 +717,8 @@
       "status": "예정",
       "requirements": [
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-03"
       ],
       "output": "배포 환경·외부 호출·비용·오류 확인·출처 정책 재검증",
       "done_when": "핵심 시연 경로의 실행 위치와 운영 제약, 대체 경로를 문서화함"
@@ -735,7 +748,8 @@
         "FR-01",
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-04"
       ],
       "output": "APP-A/C 회귀·정책·실패·부분 결과 통합 시험 기록",
       "done_when": "핵심 경로가 재현되고 P0/P1 결함과 출시 차단 이슈를 구분함"
@@ -804,7 +818,8 @@
       "priority": "Must",
       "status": "예정",
       "requirements": [
-        "FR-04"
+        "FR-04",
+        "NFR-03"
       ],
       "output": "최종 시연 기준 출처/앱 버전/기기/이용 조건 확인 기록",
       "done_when": "변경된 조건을 반영하고 확인되지 않은 자동 수집·앱 동작을 확정적으로 주장하지 않음"
@@ -834,7 +849,8 @@
         "FR-01",
         "FR-02",
         "FR-03",
-        "FR-04"
+        "FR-04",
+        "NFR-05"
       ],
       "output": "B0/D0 최종 평가·사용자 관찰·한계·후속 범위 결정",
       "done_when": "실측 근거로 성공/한계와 APP-B·다중 도메인·기억 기능의 후속 우선순위를 설명함"
@@ -876,14 +892,13 @@
       "end": "2027-01-04",
       "estimate_workdays": 3,
       "depends_on": [
-        "W32",
-        "W33"
+        "W32"
       ],
       "priority": "Must",
       "status": "예정",
       "requirements": [],
       "output": "최종 발표·시연·제출 패키지",
-      "done_when": "목적→구현→검증→한계가 같은 근거로 연결되고 실제 제출·접수 상태를 별도로 확인함"
+      "done_when": "W32의 최종 평가를 반영해 발표·제출물을 작성하고 W33 완료 후 확정된 배포·데모 경로를 최종본에 반영해 실제 제출·접수 상태를 확인함"
     }
   ],
   "schedule_rules": [
