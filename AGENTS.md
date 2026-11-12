@@ -8,6 +8,7 @@
 - 대상 TASK에 `intent_ref`가 있으면 해당 [R01 TASK 의도](docs/human/task-intents/README.md)를 반드시 읽고, 이후 [EVAL](EVAL.md)과 [AI 산출물](docs/artifacts/README.md)의 관련 명세·원본을 확인합니다. 작업 시작 시 현재 작업 목적을 상위 의도와 TASK 의도에 맞춰 한 문장으로 재진술하고, 상위 의도와 충돌하는 해석이나 요구가 있으면 조용히 덮어쓰지 말고 불확실성·결정 요청으로 올립니다.
 - 사람의 장기 의도는 [INTENT](docs/human/INTENT.md), 특정 판단·피드백은 [사람 응답](docs/human/responses/README.md)에서 확인합니다. 사람 입력은 AI가 임의로 수정하지 않습니다. TASK intent는 목적·우선순위·범위 경계에 대한 사람 권위 입력이며 조사 결과나 외부 사실을 대신하지 않습니다. 근거가 intent의 가정과 충돌하면 숨기지 말고 결과의 불확실성·결정 요청에 기록합니다. intent와 다른 결론도 근거가 있으면 제안할 수 있으며, task intent 자체를 프로젝트 확정 결정으로 승격하지 않습니다.
 - AI의 새 작업·조사·계획·실행·평가 결과 정본은 `docs/artifacts/`의 JSON 원본에 ID·상태·입력·출력·근거·검증을 구조화합니다. 기존 `docs/research/`와 `docs/members/*/workspace/`는 이관 전 기록·참고 자료이며, 사람이 별도로 요청하지 않는 한 새 AI 정본을 만들지 않습니다. 도구 출력은 필요한 원래 형식으로 연결합니다.
+- 미확정 아이디어·가설·대안은 `docs/artifacts/candidates/`에 둘 수 있습니다. Candidate는 현재 기준이 아니며 일반 작업 시작 시 기본 컨텍스트로 전부 읽지 않습니다. TASK가 후보를 명시적으로 참조하거나 아이데이션·대안 비교·재검토가 목적일 때만 필요한 후보를 읽고, 근거와 사람 결정 없이 Design·Spec·ADR·Task·State로 자동 승격하지 않습니다.
 - 사람이 보는 [검토 화면](docs/review/README.md)과 [필수 제출물](docs/submissions/README.md)은 원본에서 생성합니다. 원본 수정 후 `uv run --no-project python tools/project_docs.py`를 실행하고 `--check`로 최신 여부를 확인합니다.
 - 중요한 결정은 [ADR](docs/adr/README.md)에 근거·결정권자·사람 권위 입력 경로와 재검토 조건을 남깁니다. AI의 제안과 권한 있는 담당자의 결정을 구분합니다.
 - `docs/human/responses/`에 새 응답이 있으면 대상 ID를 확인해 관련 ADR·state·spec·task에 반영하고 응답 경로를 근거로 남깁니다. 응답 원문은 적용 후에도 삭제하거나 의미를 바꾸지 않습니다.
