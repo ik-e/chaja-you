@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "2026-11-12_a512febe31",
+  "source_repo": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu",
+  "source_path": "Lecture/FinalProject",
+  "source_branch": "main",
+  "source_commit": "a512febe318739fc6e926abd0328d12585336378",
+  "source_commit_time": "2026-11-12T10:32:53+09:00",
+  "source_commit_message": "산출물 작성 Q&A 안내 수강생 배포",
+  "checked_at": "2026-11-12",
+  "directory_archive_sha256": "7dcd5075f73b982be105ef7f291f67fddcd6131625e1fd6cf6f76c618f494073",
+  "snapshot_mode": "immutable-source-reference",
+  "note": "원문 저장소에 명시적 라이선스 파일을 확인하지 못해 원문 바이트를 복제하지 않고, 불변 커밋과 파일별 SHA-256/크기를 보존한다.",
+  "files": [
+    {
+      "path": "Lecture/FinalProject/DAILY-MEETING.md",
+      "size_bytes": 6488,
+      "sha256": "ee5ac1625925eb794b7e77bc49e4902b969d556a687aa76c27ab514ef42caecb"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.html",
+      "size_bytes": 62457,
+      "sha256": "6644ff67f980c8a2ae3d61dba4f7715d267167e776cd4aa5fb77906102044524"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.pdf",
+      "size_bytes": 747373,
+      "sha256": "b5f3e3bfdf03f8d8b14fdb1f3a6bab14cfcb68965eaa4336b0e46b0bebe9c247"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html",
+      "size_bytes": 64562,
+      "sha256": "4fd9f0305c5b8e7a82c356bea103a8feb0f3e510cdbbebba40c617449c898593"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.pdf",
+      "size_bytes": 761856,
+      "sha256": "52fb1dd7df3d93873fa4ed3eb3fcefe99ad28ba38385598d4044c55caeda993a"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/WBS_잘_쓰는_법.html",
+      "size_bytes": 56318,
+      "sha256": "d60dec0997f29418ee4efdc7a0a9c9c1f02481b2750d2edb8c1f0bd0f97c8752"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/WBS_잘_쓰는_법.pdf",
+      "size_bytes": 709478,
+      "sha256": "0e840e97055b7b66f8705322be4f484e3a9dac77a9262709bbf67e6af2e78aab"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/기획서_잘_쓰는_법.html",
+      "size_bytes": 58088,
+      "sha256": "de81617d4466d7bc3e866d7527a6d86447b1283f3fd4c89e12acd7fcac1aa52b"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/기획서_잘_쓰는_법.pdf",
+      "size_bytes": 731144,
+      "sha256": "30891fe3fe21992b08975825849442b160d90b7922715806e951b7aa0a6a3b93"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_WBS_샘플.docx",
+      "size_bytes": 32843,
+      "sha256": "66c7687e99a9f54e819bbf01bb2fad7ef9510ce573cae6a710022325c5cc7cd7"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_기획서_샘플.docx",
+      "size_bytes": 32603,
+      "sha256": "b29dac077bdd263b62ed3ae920a700784c85a8564bfd106e812627cb7d39bbab"
+    },
+    {
+      "path": "Lecture/FinalProject/MANAGER-GUIDE.md",
+      "size_bytes": 9362,
+      "sha256": "152d53a8e1ba18e34fd45e43c63e24b9736bdce77a3dcc19dcdb2c7ca1120f8d"
+    },
+    {
+      "path": "Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "size_bytes": 1709,
+      "sha256": "0f16b33f0e952900c9c2c41844d6f60e9ab7dc8946b56a7db6b29609b1ff96ee"
+    }
+  ]
+}
