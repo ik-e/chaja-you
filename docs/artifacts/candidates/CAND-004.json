@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "CAND-004",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "질문별 증분 조사·Projection",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "기존 조사 상태가 새 질문에 충분한지 먼저 판단하고 부족한 범위만 추가 조사한 뒤 필요한 정보만 프로젝션.",
+  "potential_value": [
+    "재조사 비용 절감",
+    "사용자 질문에 맞는 최소 출력",
+    "조사 상태 재사용"
+  ],
+  "risks": [
+    "충분성 판단 오류",
+    "상태 최신성 관리 복잡성"
+  ],
+  "why_not_now": [
+    "PRODUCT 방향은 있으나 실제 반복 질문 수요가 아직 없음"
+  ],
+  "evidence_needed": [
+    "후속 질문에서 기존 결과가 재사용되는 실제 사례"
+  ],
+  "revisit_when": [
+    "CAND-003 필요가 확인되거나 반복 질문이 생길 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
