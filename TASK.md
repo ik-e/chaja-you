@@ -14,6 +14,8 @@ AI는 [PROJECT](PROJECT.md)와 [CURRENT](CURRENT.md)에서 목표와 우선순�
 | submission_ids · required_for_submission | 연결할 제출물 ID와 제출 준비에 필요한 작업인지 여부 |
 | result | summary, claims, evidence, verification, uncertainties, decision_requests |
 
+canonical TASK 원본은 한 시점에 한 명의 책임자만 직접 수정한다. 기본 책임자는 `owner`이며, 다른 팀원은 근거·차이·수정 제안을 자신의 작업 기록에 남기고 owner가 정본에 반영한다. 다른 TASK가 전제로 사용할 의미·인터페이스·상태·완료 조건만 담당자 간 합의 대상으로 두고, 제품 범위·필수 요구사항·완료 기준을 바꾸는 충돌은 R01 결정으로 올린다. 세부 기준은 [문서와 산출물 관리 규칙](docs/문서_관리_규칙.md#협의정본-수정커밋-규칙)을 따른다.
+
 상태는 `할 일`, `진행 중`, `검토 중`, `완료`, `막힘`을 사용한다. `result`는 실행 전 `null`이고, 완료 시 실제 검증과 근거를 포함한다. 제안과 관찰 결과를 구분하고, 출처나 실행 기록으로 뒷받침하지 못한 항목은 불확실성으로 남긴다.
 
 결과 형식은 [기계용 결과 템플릿](docs/artifacts/tasks/result_template.json)을 따른다. 각 주장은 `id`, `text`, `status`, `evidence_ids`를 갖는다. 근거는 고유 `id`와 저장소 기준 `path` 또는 공개 `url`을 갖고, 검증은 `criterion`, `verdict`, `evidence_ids`를 갖는다. 실행 전 예시값은 실제 결과로 사용하지 않는다.
