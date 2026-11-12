@@ -23,8 +23,8 @@
 | [TASK-001](../artifacts/tasks/TASK-001.json) | 대표 요청 1건의 조사 흐름 점검 | R03 (제안) | 2026-11-12 | 없음 | 보완 | 할 일 |
 | [TASK-002](../artifacts/tasks/TASK-002.json) | 공식 제출 조건 확인 | R01 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
 | [TASK-003](../artifacts/tasks/TASK-003.json) | 사용자 문제·기존 대안·결과 화면 정리 | R04 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
-| [TASK-004](../artifacts/tasks/TASK-004.json) | 앱 데이터·이용 조건·운영 제약 정리 | R02 (제안) | 2026-11-12 | 없음 | 제출 준비 | 할 일 |
-| [TASK-005](../artifacts/tasks/TASK-005.json) | 동적 구성 MVP·요구사항·평가 계획 정리 | R03 (제안) | 2026-11-12 | 없음 | 제출 준비 | 할 일 |
+| [TASK-004](../artifacts/tasks/TASK-004.json) | 앱 데이터·이용 조건·운영 제약 정리 | R02 | 2026-11-12 | 없음 | 제출 준비 | 검토 중 |
+| [TASK-005](../artifacts/tasks/TASK-005.json) | 동적 구성 MVP·요구사항·평가 계획 정리 | R03 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
 | [TASK-006](../artifacts/tasks/TASK-006.json) | 최소 구현 구조·영역별 작업·의존성 도출 | R05 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
 | [TASK-007](../artifacts/tasks/TASK-007.json) | 제출본 MVP·미결정 사항 수렴 | R01 | 2026-11-12 | TASK-003, TASK-004, TASK-005, TASK-006 | 제출 준비 | 할 일 |
 | [TASK-008](../artifacts/tasks/TASK-008.json) | 8개 장 기획서 제출본 완성 | R01 (제안) | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 할 일 |
@@ -88,13 +88,57 @@ APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 �
 - R01 팀장은 첫 MVP에서 미확인 부분 결과(APP-C3 보류)의 허용 기준과 종료 정책을 확정해야 한다.
 - 기획서 2~4장에 본 사용자 문제 및 화면 정보 구조를 기본 근거로 채택할지 결정해야 한다.
 
-### TASK-004 · 할 일
+### TASK-004 · 검토 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-004.json)
 
-결과 미기록.
+공식 자료 기준 PomoToki는 Android 오프라인·무계정 뽀모도로를 뒷받침하고, Focus To-Do는 제품의 오프라인 사용과 무등록 로컬 모드를 설명하지만 Android 첫 실행 조합은 미시험이다. AppBlock은 무료 일정·차단 대상 한도와 요일·시간 안내로 APP-B 후보이며 Stay Focused의 무료 조건 조합은 미확인이다. 공개 열람과 자동 수집·저장 권한은 별개다. Android 기기 시험, 서비스 전체 통합, 실제 약관 적용 여부는 미검증이므로 팀 검토가 필요하다.
 
-### TASK-005 · 할 일
+검증과 근거
+
+- 첫 시연 핵심 앱·속성에 공식 근거 또는 미확인과 다음 확인을 기록 · pass
+- 각 공식 문서 주장과 해당 원문의 관련 절을 대조하고 문서상 사실과 추론을 구분 · pass
+- 11월 11일 기획서의 관련 앱 근거 재확인 및 기기 시험 여부 구분 · pass
+- 공개 열람과 자동 수집·저장·재사용 조건 구분 · pass
+- 실제 Android 기기에서 조건 조합·알림·브라우저 차단을 검증 · inconclusive
+- Apple 검색 HTTP 응답 표본에서 앱명·ID·가격 필드를 확인 · pass
+- 선택한 외부 자료의 해당 서비스 용도별 자동 수집·장기 저장·재사용이 허용되는지 확인 · inconclusive
+- [11월 11일 기준 기획서의 앱 비교표 및 기기 시험 계획](../artifacts/planning/기획서_초안.json)
+- [TASK 입력의 이전 기술 문서 기록: 중고거래 사례, 앱별 기기 시험 결과 아님](../artifacts/research/2026-11-11_기술_문서_데이터_출처_확인_기록_초안.json)
+- [APP-A·B·C의 조건과 실행 분기](../artifacts/specs/focus_apps.json)
+- [PomoToki 공식 사용 안내: Getting Started·Pomodoro·FAQ](https://www.pomotoki.com/guide)
+- [PomoToki Android Google Play 설명: 무료 타이머·오프라인](https://play.google.com/store/apps/details?hl=en_US&id=com.tamaszahoran.pomotoki)
+- [Focus To-Do 공식 개인정보 처리방침: Data entered by the user·Register an account](https://focustodo.cn/privacy-policy)
+- [Focus To-Do Android Google Play 설명](https://play.google.com/store/apps/details?hl=en_US&id=com.superelement.pomodoro)
+- [AppBlock 공식 Android 무료·유료 기능 비교](https://appblock.app/premium/)
+- [AppBlock 공식 일정 안내: 차단 대상 및 요일·시간 조건](https://appblock.app/how-schedules-work-in-appblock-2/)
+- [AppBlock 공식 Android 웹사이트 차단 한계](https://appblock.app/what-are-the-limitations-of-website-blocking-on-android/)
+- [AppBlock 공식 차단 실패 점검: 접근성 권한](https://appblock.app/why-can-i-still-access-apps-or-websites-that-should-be-blocked/)
+- [Stay Focused 공식 제품·Android FAQ](https://www.stayfocused.me/)
+- [Stay Focused Android Google Play 설명·접근성 API](https://play.google.com/store/apps/details?hl=en-US&id=com.stayfocused)
+- [Google Play Developer API의 앱 배포·관리 범위](https://developers.google.com/android-publisher)
+- [Google Play Publishing API 이용조건](https://developers.google.com/android-publisher/terms)
+- [Google Play robots.txt: /store/search 등 제한](https://play.google.com/robots.txt)
+- [Google 미국 지역판 서비스 약관: 기계 판독 지침 및 타인 콘텐츠](https://policies.google.com/terms/embedded?hl=en-US)
+- [Apple Search API 보관 문서: 검색 및 프로모션 자산 조건](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html)
+- [Apple Search API 보관 문서: software 검색 예시](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/SearchExamples.html)
+- [Apple Search API 실제 단건 조회: 한국 앱 검색](https://itunes.apple.com/search?term=focus%20to-do&country=kr&entity=software&limit=2)
+
+남은 불확실성과 결정 요청
+
+- PomoToki와 Focus To-Do의 Android 설치 직후 비행기 모드 타이머 실행·종료·알림, 계정 없이 첫 실행 가능 여부는 기기 시험 미실시.
+- AppBlock 무료판의 사이트 2개·평일 저녁 차단 조합과 Stay Focused 무료판의 수량·요일·시간 제한은 각 앱 버전·시연 브라우저·지역의 실제 조건으로 확인 필요.
+- 외부 페이지의 자료를 제품에서 자동 수집·저장·재배포하는 권한, 한국 적용 약관, 비용·쿼터 및 변경 시 재검증 주기는 미확인. robots.txt는 명시된 경로에 관한 확인이며 모든 상세 페이지의 일괄 금지나 허가를 뜻하지 않음.
+- Apple Search API는 보관 문서와 단일 한국 검색 응답만 확인했다. 현재 사용 조건·요금·한도·캐시·iOS 앱별 세부 기능·다른 검색의 안정성은 미확인.
+- 공유된 iOS 전체 조사 범위와 현재 Android 첫 시연 중심 TASK의 우선순위는 팀장 확인 필요. 공식 자료 내용은 앱 버전과 지역에 따라 변할 수 있음.
+- APP-C 확인 한도의 횟수·시간과 팀 간 I/O 필드명, APP-B의 최종 필수 여부는 미결정. 원문 확인이나 단일 API 호출은 실제 LLM 조사·통합 실행 검증이 아님.
+- Apple 검색 응답은 지역·시점·검색어에 따라 달라질 수 있어 이번 한국 응답 표본을 미래 결과나 전체 앱 목록으로 일반화할 수 없음.
+- R01: APP-A의 문서 근거만으로 초기 시연을 준비할지, Android 비행기 모드·무계정 기기 시험을 선행 필수로 둘지 결정.
+- R01: 자동 수집이나 재사용 허용이 확인되지 않은 자료를 수동 출처 확인과 부분 결과로 제한할지, 별도 이용 가능 출처·연동을 확보할지 결정.
+- R01: iOS 추가 조사 수준과 APP-B 최종 필수 여부를 TASK-005·일정과 함께 결정.
+- R01·R03·R05: APP-C의 미확인 보류 이후 부분 결과로 종료하는 확인 한도와 실패 표시 기준을 결정.
+
+### TASK-005 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-005.json)
 
