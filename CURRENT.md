@@ -36,7 +36,7 @@
 | [TASK-003](docs/artifacts/tasks/TASK-003.json) | 사용자 문제·기존 대안·결과 화면 정리 | R04 (제안) | 2026-11-12 | 없음 | 제출 준비 | 할 일 |
 | [TASK-004](docs/artifacts/tasks/TASK-004.json) | 앱 데이터·이용 조건·운영 제약 정리 | R02 (제안) | 2026-11-12 | 없음 | 제출 준비 | 할 일 |
 | [TASK-005](docs/artifacts/tasks/TASK-005.json) | 동적 구성 MVP·요구사항·평가 계획 정리 | R03 (제안) | 2026-11-12 | 없음 | 제출 준비 | 할 일 |
-| [TASK-006](docs/artifacts/tasks/TASK-006.json) | 최소 구현 구조·영역별 작업·의존성 도출 | R05 (제안) | 2026-11-12 | 없음 | 제출 준비 | 할 일 |
+| [TASK-006](docs/artifacts/tasks/TASK-006.json) | 최소 구현 구조·영역별 작업·의존성 도출 | R05 (제안) | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
 | [TASK-007](docs/artifacts/tasks/TASK-007.json) | 제출본 MVP·미결정 사항 수렴 | R01 (제안) | 2026-11-12 | TASK-003, TASK-004, TASK-005, TASK-006 | 제출 준비 | 할 일 |
 | [TASK-008](docs/artifacts/tasks/TASK-008.json) | 8개 장 기획서 제출본 완성 | R01 (제안) | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 할 일 |
 | [TASK-009](docs/artifacts/tasks/TASK-009.json) | 프로젝트 WBS 제출본 작성 | R01 (제안) | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 할 일 |
