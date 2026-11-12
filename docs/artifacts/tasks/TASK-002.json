@@ -43,6 +43,9 @@
     },
     {
       "path": "docs/guidelines/final_project_repository/README.md"
+    },
+    {
+      "path": "docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json"
     }
   ],
   "result": {
@@ -85,6 +88,11 @@
         "url": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject",
         "checked_at": "2026-11-12",
         "note": "FinalProject 폴더에서 OUTPUT-GUIDE.md 존재 및 최신 표시 커밋 a512febe31 (2026-11-12 10:32:53 +09:00) 확인. 개별 제출 규칙 내용은 별도 재확인 필요."
+      },
+      {
+        "id": "EVIDENCE-SUB-003",
+        "label": "2026-11-12 FinalProject 가이드 불변 커밋 스냅샷",
+        "path": "docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json"
       }
     ],
     "verification": [
