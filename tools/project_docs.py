@@ -106,8 +106,19 @@ def rebase(text, source, output):
 
 def render_document(record, source, output):
     lines = header(record["title"], [source], output)
-    lines.append(rebase(record["preamble_markdown"], source, output))
-    for section in record["sections"]:
+    if output == "docs/step1/기획서.md" and record.get("submission_sections"):
+        lines.append(
+            rebase(
+                record.get("submission_preamble_markdown", record["preamble_markdown"]),
+                source,
+                output,
+            )
+        )
+        sections = record["submission_sections"]
+    else:
+        lines.append(rebase(record["preamble_markdown"], source, output))
+        sections = record["sections"]
+    for section in sections:
         lines.extend(
             [
                 "#" * section["level"] + " " + section["heading"],
