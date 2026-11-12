@@ -348,6 +348,29 @@ def validate(sources):
             )
             if record["status"] not in ("할 일", "진행 중", "검토 중", "완료", "막힘"):
                 raise ValueError(f"{path}: invalid task status")
+            traceability = record.get("traceability")
+            if traceability is not None:
+                if not isinstance(traceability, dict):
+                    raise TypeError(f"{path}: traceability must be an object")
+                for key in (
+                    "intent_refs",
+                    "design_refs",
+                    "requirement_refs",
+                    "evaluation_refs",
+                ):
+                    if key in traceability and not isinstance(traceability[key], list):
+                        raise TypeError(f"{path}: traceability.{key} must be an array")
+            validation_plan = record.get("validation_plan")
+            if validation_plan is not None:
+                if not isinstance(validation_plan, dict):
+                    raise TypeError(f"{path}: validation_plan must be an object or null")
+                require(
+                    validation_plan,
+                    ["question", "observables", "success_condition", "unknown_condition"],
+                    f"{path}.validation_plan",
+                )
+                if not isinstance(validation_plan["observables"], list):
+                    raise TypeError(f"{path}: validation_plan.observables must be an array")
             if record["status"] == "완료":
                 result = record["result"]
                 if (
@@ -503,6 +526,16 @@ def build():
     ]
     task_ids = {task["id"] for _, task in tasks}
     dependencies = {task["id"]: task.get("depends_on", []) for _, task in tasks}
+    for path, record in sources.items():
+        if record["kind"] == "evaluation":
+            task_ref = record.get("task_ref")
+            if task_ref and task_ref not in task_ids:
+                raise ValueError(f"{path}: unknown task_ref {task_ref}")
+    for path, task in tasks:
+        traceability = task.get("traceability") or {}
+        requirement_refs = traceability.get("requirement_refs", [])
+        if not set(requirement_refs) <= requirement_ids:
+            raise ValueError(f"{path}: traceability references unknown requirement")
     for task_id, predecessors in dependencies.items():
         if not isinstance(predecessors, list) or not set(predecessors) <= task_ids:
             raise ValueError(f"{task_id}: unknown or invalid task dependencies")
