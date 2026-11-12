@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "CAND-TEMPLATE",
+  "kind": "candidate_template",
+  "status": "템플릿",
+  "title": "",
+  "summary": "",
+  "potential_value": [],
+  "risks": [],
+  "why_not_now": [],
+  "evidence_needed": [],
+  "revisit_when": [],
+  "related_refs": [],
+  "promotion_note": "후보는 근거 확보와 사람 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
