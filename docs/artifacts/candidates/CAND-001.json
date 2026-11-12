@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "CAND-001",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "의사결정 지원형 리서치",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "단순한 정보 응답을 넘어 사용자의 목적·제약에서 실제 판단에 필요한 정보를 식별하고 구축하는 리서치 방향.",
+  "potential_value": [
+    "설계·기획 판단 지원이라는 사용자 가치를 더 직접 검증할 수 있음",
+    "정보 수집량보다 결정에 필요한 정보의 충분성을 최적화할 수 있음"
+  ],
+  "risks": [
+    "제품 범위가 넓어질 수 있음",
+    "사용자 문제 검증 없이 기술 구조만 복잡해질 수 있음"
+  ],
+  "why_not_now": [
+    "현재 APP-A/C 기술 PoC와 사용자 가치 검증이 아직 분리돼 있음"
+  ],
+  "evidence_needed": [
+    "실제 사용자 의사결정 과제에서 단순 답변보다 판단 지원이 유의미하다는 관찰"
+  ],
+  "revisit_when": [
+    "기술 MVP를 실제 사용자 과제로 시험할 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
