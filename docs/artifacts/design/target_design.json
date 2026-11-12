@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "id": "TARGET-DESIGN-001",
+  "kind": "design",
+  "status": "가설",
+  "owner": "R01",
+  "title": "찾아you Target Design Hypothesis",
+  "updated_at": "2026-11-12",
+  "authority": {
+    "type": "human",
+    "ref": "docs/human/INTENT.md",
+    "id": "INTENT-DESIGN-001"
+  },
+  "purpose": "사용자 요청과 리서치 도메인에 맞춰 조사 구성을 만들고, 중간 결과에 따라 재계획하며, 근거가 연결된 조사 상태를 사용자 목적에 맞게 프로젝션하는 장기 시스템의 필요한 능력과 열린 설계 질문을 보존한다.",
+  "interpretation": "이 문서는 최종 구현 구조의 확정본이 아니라 하위 MVP와 설계를 도출하고 검증 결과를 되돌려 받기 위한 상위 설계 가설이다.",
+  "hierarchy": [
+    {
+      "level": 0,
+      "name": "Human Intent",
+      "canonical": "docs/human/INTENT.md",
+      "role": "장기 목적·가치·제약·권한을 고정"
+    },
+    {
+      "level": 1,
+      "name": "Target Design Hypothesis",
+      "canonical": "docs/artifacts/design/target_design.json",
+      "role": "필요 능력·경계·가설·열린 질문을 표현"
+    },
+    {
+      "level": 2,
+      "name": "Domain / MVP Design",
+      "canonical_pattern": "docs/artifacts/design/domains/*.json 또는 기존 specs/planning",
+      "role": "특정 도메인에서 어떤 상위 가설을 검증할지 구체화"
+    },
+    {
+      "level": 3,
+      "name": "Component / Interface Design",
+      "canonical_pattern": "docs/artifacts/design/components/*.json 또는 관련 TASK/spec",
+      "role": "현재 구현에 필요한 상태·계약·인터페이스를 구체화"
+    },
+    {
+      "level": 4,
+      "name": "Implementation",
+      "canonical_pattern": "code / runtime artifacts",
+      "role": "하위 설계를 실제 동작으로 시험"
+    },
+    {
+      "level": 5,
+      "name": "Evidence / Evaluation",
+      "canonical_pattern": "docs/artifacts/runs/*, docs/artifacts/evaluations/*, TASK result",
+      "role": "상위 가설을 지지·반박·보류하는 근거를 기록"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "TD-CAP-01",
+      "name": "Request and domain interpretation",
+      "hypothesis": "사용자 목적·제약과 리서치 도메인을 구조화해 이후 조사 구성의 입력으로 사용할 수 있어야 한다.",
+      "confidence": "중간"
+    },
+    {
+      "id": "TD-CAP-02",
+      "name": "Task and role composition",
+      "hypothesis": "요청·도메인·중간 판정에 따라 필요한 조사 역할·작업·의존성·실행 조건이 달라질 수 있어야 한다.",
+      "confidence": "중간"
+    },
+    {
+      "id": "TD-CAP-03",
+      "name": "Research execution abstraction",
+      "hypothesis": "검색·브라우징 같은 범용 실행 수단은 교체 가능하게 재사용하고 제품은 무엇을 왜 조사하는지의 구성과 상태를 책임져야 한다.",
+      "confidence": "높음"
+    },
+    {
+      "id": "TD-CAP-04",
+      "name": "Evidence-linked judgment state",
+      "hypothesis": "대상·조건·주장/판정·근거/출처·확인 시점·미확인/충돌/실패를 구조화해 재사용 가능한 조사 상태로 보존해야 한다.",
+      "confidence": "높음"
+    },
+    {
+      "id": "TD-CAP-05",
+      "name": "Conditional replanning",
+      "hypothesis": "중간 판정에 따라 후속 조사를 추가·생략·보류하고 종료 이유를 보존할 수 있어야 한다.",
+      "confidence": "중간"
+    },
+    {
+      "id": "TD-CAP-06",
+      "name": "User-purpose projection",
+      "hypothesis": "내부 조사 상태 전체가 아니라 현재 질문과 목적에 필요한 최소 정보를 우선 프로젝션할 수 있어야 한다.",
+      "confidence": "중간"
+    },
+    {
+      "id": "TD-CAP-07",
+      "name": "Reviewed experience reuse",
+      "hypothesis": "검토된 출처 메타정보와 조사 경험을 다음 조사에서 재사용할 수 있어야 하지만 저장·검색 방식은 실제 필요를 보고 결정해야 한다.",
+      "confidence": "낮음"
+    }
+  ],
+  "open_design_questions": [
+    {
+      "id": "TD-Q01",
+      "question": "동적 구성은 predefined role/task 선택이면 충분한가, 자유 생성이 필요한가?",
+      "owner_hint": "R03",
+      "decide_by_evidence": "APP-A/C 실제 통합과 B0/D0 비교"
+    },
+    {
+      "id": "TD-Q02",
+      "question": "도메인 간에 유지되는 최소 공통 코어는 어디까지인가?",
+      "owner_hint": "R05",
+      "decide_by_evidence": "앱 도메인 실제 통합 후 필요하면 두 번째 도메인 비교"
+    },
+    {
+      "id": "TD-Q03",
+      "question": "정보원 선택·자동 수집·저장·재사용 제약을 어떤 계층에서 표현해야 하는가?",
+      "owner_hint": "R02",
+      "decide_by_evidence": "실제 출처 접근/이용 제약과 대체 경로 사례"
+    },
+    {
+      "id": "TD-Q04",
+      "question": "내부 조사 상태에서 사용자 질문마다 어떤 정보를 최소 프로젝션해야 하는가?",
+      "owner_hint": "R04",
+      "decide_by_evidence": "APP-A/C 결과 화면과 사용자 과제"
+    },
+    {
+      "id": "TD-Q05",
+      "question": "검토된 조사 경험 재사용에 규칙/DB/FTS/RAG 중 무엇이 실제로 필요한가?",
+      "owner_hint": "R01",
+      "decide_by_evidence": "반복 조사에서 재사용 가치와 검색 실패 관찰"
+    },
+    {
+      "id": "TD-Q06",
+      "question": "재시도·timeout·확인 한도는 어떤 정책과 수치가 적절한가?",
+      "owner_hint": "R03/R05",
+      "decide_by_evidence": "실제 통합의 시간·호출·실패 패턴"
+    }
+  ],
+  "current_mvp_derivation": [
+    {
+      "mvp_element": "APP-A 지정 후보 비교",
+      "tests": [
+        "TD-CAP-01",
+        "TD-CAP-02",
+        "TD-CAP-04",
+        "TD-CAP-06"
+      ],
+      "reason": "후보 발굴이 불필요한 요청에서 필요한 작업만 선택하고 근거 있는 조건 판정을 만들 수 있는지 최소 경로로 검증"
+    },
+    {
+      "mvp_element": "APP-C 조건부 대안 발굴",
+      "tests": [
+        "TD-CAP-02",
+        "TD-CAP-05",
+        "TD-CAP-04"
+      ],
+      "reason": "중간 판정에 따라 후속 작업의 추가·생략·보류가 실제로 필요한지 검증"
+    },
+    {
+      "mvp_element": "B0/D0 비교",
+      "tests": [
+        "TD-CAP-02",
+        "TD-CAP-05"
+      ],
+      "reason": "동적 구성이 고정 흐름보다 어떤 조건에서 가치가 있는지 실측"
+    },
+    {
+      "mvp_element": "APP-B 조건부 후순위",
+      "tests": [
+        "TD-CAP-01",
+        "TD-CAP-02",
+        "TD-CAP-03"
+      ],
+      "reason": "후보가 없는 요청의 discovery가 핵심 경로 안정 후 추가 가치를 주는지 검증"
+    }
+  ],
+  "derivation_rules": [
+    "하위 설계는 parent_ref 또는 tests_hypotheses로 상위 설계와 연결한다.",
+    "하위 설계는 scope_boundaries와 revisit_when을 가능한 범위에서 명시한다.",
+    "Target Design의 capability가 존재한다는 이유만으로 구현 기술이나 공통 스키마를 선결정하지 않는다.",
+    "실제 구현·평가에서 재사용 가치가 확인된 구조만 공통 코어 후보로 승격한다.",
+    "상위 설계 가설의 변경이 제품 목적·범위·핵심 완료 기준에 영향을 주면 R01 권한 결정과 ADR/Intent 반영을 거친다."
+  ],
+  "non_commitments": [
+    "다중 도메인 범용 프레임워크를 지금 확정하지 않는다.",
+    "자유 역할 생성이 필요하다고 가정하지 않는다.",
+    "RAG·벡터 DB·온톨로지·특정 에이전트 프레임워크를 장기 구조에 고정하지 않는다.",
+    "앱 도메인에서 나온 세부 조건과 상태를 범용 코어로 자동 일반화하지 않는다."
+  ],
+  "update_loop": [
+    "Target Design Hypothesis에서 열린 설계 질문을 선택",
+    "질문을 판별할 최소 Domain/MVP Design과 검증 기준을 도출",
+    "Component/Interface Design과 구현을 수행",
+    "Evidence/Evaluation을 수집",
+    "가설을 지지·반박·보류로 업데이트하고 필요 시 Target Design/ADR을 수정"
+  ],
+  "references": [
+    {
+      "path": "docs/human/INTENT.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-007.json"
+    },
+    {
+      "path": "docs/artifacts/planning/기획서_초안.json"
+    },
+    {
+      "path": "docs/artifacts/planning/WBS.json"
+    },
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-003.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-004.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-005.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-006.json"
+    }
+  ]
+}
