@@ -17,9 +17,9 @@
 
 ## 우선 작업
 
-1. 기획서·WBS 최종 제출 링크를 준비하고 팀 대시보드에서 정확한 마감 시각·WBS 추가 안내·열람 권한을 확인
-2. TASK-011에서 두 산출물 링크 등록 후 제출완료 전환과 접수 상태를 실제 확인한 경우에만 제출 완료로 기록
-3. 제출 이후 WBS 일정에 따라 APP-A vertical slice와 APP-C 동적 분기 구현을 시작
+1. 팀 대시보드에서 STEP 1 정확한 마감 시각·WBS 별도 안내·문서 열람 권한을 확인
+2. 기획서·WBS 링크를 산출물 제출 표에 등록하고 제출완료로 전환한 뒤 접수 상태를 실제 확인
+3. 제출 확인 후 WBS 일정에 따라 APP-A vertical slice와 APP-C 동적 분기 구현을 시작
 
 ## 결정할 항목
 
@@ -43,7 +43,7 @@
 | [TASK-008](docs/artifacts/tasks/TASK-008.json) | 기획서 원본·공식 제출 프로젝션 완성 | R01 | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 완료 |
 | [TASK-009](docs/artifacts/tasks/TASK-009.json) | 프로젝트 WBS 제출본 작성 | R01 | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 완료 |
 | [TASK-010](docs/artifacts/tasks/TASK-010.json) | 기획서·WBS 최종 정합성·형식 확인 | R01 | 2026-11-13 | TASK-008, TASK-009 | 제출 준비 | 완료 |
-| [TASK-011](docs/artifacts/tasks/TASK-011.json) | 기획서·WBS 제출과 접수 확인 | R01 (제안) | 2026-11-13 | TASK-010 | 제출 준비 | 할 일 |
+| [TASK-011](docs/artifacts/tasks/TASK-011.json) | 기획서·WBS 제출과 접수 확인 | R01 | 2026-11-13 | TASK-010 | 제출 준비 | 막힘 |
 
 담당 제안과 내부 목표일은 팀 조정용입니다. 공식 제출 시각은 TASK-002에서 확인합니다.
 
