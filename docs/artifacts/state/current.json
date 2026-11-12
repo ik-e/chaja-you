@@ -176,6 +176,30 @@
       "authority": "team",
       "source_ref": "docs/artifacts/specs/focus_apps.json",
       "source_id": "SPEC-FOCUS-001"
+    },
+    {
+      "text": "APP-A 지정 후보 비교와 APP-C 중간 판정 분기를 이번 MVP의 핵심 Must로 사용",
+      "authority": "human",
+      "source_ref": "docs/artifacts/tasks/TASK-007.json",
+      "source_id": "T007-C02"
+    },
+    {
+      "text": "APP-B는 후보 없는 요청의 발굴 검증 사례로 유지하되 APP-A·C보다 낮은 우선순위",
+      "authority": "human",
+      "source_ref": "docs/artifacts/tasks/TASK-007.json",
+      "source_id": "T007-C03"
+    },
+    {
+      "text": "R03·R05는 공통 의미와 request/task/attempt ID handoff 설계 순서를 합의했으며 실제 통합은 후속 검증",
+      "authority": "team",
+      "source_ref": "docs/artifacts/tasks/TASK-006.json",
+      "source_id": "interface_draft.plan_id_handoff"
+    },
+    {
+      "text": "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용",
+      "authority": "human",
+      "source_ref": "docs/artifacts/tasks/TASK-007.json",
+      "source_id": "T007-C06,T007-C12"
     }
   ],
   "human_input": {
