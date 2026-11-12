@@ -73,10 +73,10 @@
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "팀 작성본 미기록",
+      "status": "작성 중",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/WBS.json",
-      "projection": null,
+      "projection": "docs/step1/WBS.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-006",
