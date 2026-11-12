@@ -143,6 +143,7 @@ Android 공식 자료를 APP-A → APP-C → APP-B 순서의 판정에 연결했
 - [TASK 입력의 이전 기술 문서 기록: 중고거래 사례, 앱별 기기 시험 결과 아님](../artifacts/research/2026-11-11_기술_문서_데이터_출처_확인_기록_초안.json)
 - [APP-A·B·C의 조건과 실행 분기](../artifacts/specs/focus_apps.json)
 - [사용자가 전달한 TASK-004 Android 우선 조사 범위·판정 구분](../human/responses/HRESP-20261112-01_TASK-004_조사_범위.md)
+- [사용자 전달 팀장 피드백: 기기 시험·자료 이용 방향](../human/responses/HRESP-20261112-02_TASK-004_시연_자료_방향.md)
 - [PomoToki 공식 사용 안내: Getting Started·Pomodoro·FAQ](https://www.pomotoki.com/guide)
 - [PomoToki Android Google Play 설명: 무료 타이머·오프라인](https://play.google.com/store/apps/details?hl=en_US&id=com.tamaszahoran.pomotoki)
 - [Focus To-Do 공식 개인정보 처리방침: Data entered by the user·Register an account](https://focustodo.cn/privacy-policy)
@@ -172,8 +173,6 @@ Android 공식 자료를 APP-A → APP-C → APP-B 순서의 판정에 연결했
 - 외부 페이지의 자료를 제품에서 자동 수집·저장·재배포하는 권한, 서비스별 추가 약관과 저장·재사용의 적용 범위, 비용·쿼터 및 변경 시 재검증 주기는 미확인. robots.txt는 명시된 경로에 관한 확인이며 모든 상세 페이지의 일괄 금지나 허가를 뜻하지 않음.
 - APP-C 확인 한도의 횟수·시간과 팀 간 I/O 필드명, APP-B의 최종 필수 여부는 미결정. 원문 확인이나 단일 API 호출은 실제 LLM 조사·통합 실행 검증이 아님.
 - 개발 환경에 연결된 Android 기기 및 adb/에뮬레이터를 확인하지 못해 기기 테스트를 수행하지 못했다. 앱 버전·OS·지역 및 시험 결과는 미기록이다.
-- R01: APP-A의 문서 근거만으로 초기 시연을 준비할지, Android 비행기 모드·무계정 기기 시험을 선행 필수로 둘지 결정.
-- R01: 자동 수집이나 재사용 허용이 확인되지 않은 자료를 수동 출처 확인과 부분 결과로 제한할지, 별도 이용 가능 출처·연동을 확보할지 결정.
 - R01·R03·R05: APP-C의 미확인 보류 이후 부분 결과로 종료하는 확인 한도와 실패 표시 기준을 결정.
 - R01: APP-B의 최종 시연 포함 여부를 TASK-005 결과와 전체 일정에 따라 결정.
 
