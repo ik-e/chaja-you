@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "CAND-012",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "자유 역할·에이전트 생성",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "predefined 역할·작업 선택을 넘어 요청별 새 역할이나 child agent를 동적으로 생성.",
+  "potential_value": [
+    "예상 밖 요청에 대한 표현력",
+    "복잡한 조사에서 전문 역할 자동 구성"
+  ],
+  "risks": [
+    "제어·평가 어려움",
+    "불필요한 agent 생성",
+    "비용 증가"
+  ],
+  "why_not_now": [
+    "현재 predefined pool로 최소 동적 구성부터 검증 중"
+  ],
+  "evidence_needed": [
+    "현재 역할 풀로 표현 불가능한 실제 요청이 반복됨"
+  ],
+  "revisit_when": [
+    "predefined 구성의 한계가 실측될 때"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
