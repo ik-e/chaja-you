@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-002",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "진행 중",
+  "owner": "R01",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
   "question": "11월 13일 기획서·WBS의 필수 항목, 형식, 제출 시각·경로는 무엇인가",
@@ -11,7 +11,8 @@
   "inputs": [
     "docs/charter/팀_헌장.md",
     "docs/guidelines/README.md",
-    "docs/submissions/README.md"
+    "docs/submissions/README.md",
+    "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
   ],
   "scope": [
     "공식 가이드·대시보드에서 날짜·시각·필수 항목·파일 형식·명명·제출 방식을 확인",
@@ -41,7 +42,65 @@
       "path": "docs/submissions/README.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "Step 1 필수 제출물은 기획서와 WBS 두 개이며 실제 제출 파일은 docs/step1/에 둔다. 기획서·WBS의 강제 세부 목차는 확인되지 않았고 제공 가이드는 품질 참고 기준으로 사용한다. 정확한 파일 형식·파일명 규칙·제출 시각·별도 접수 동작은 아직 미확인이다.",
+    "claims": [
+      {
+        "id": "CLAIM-SUB-001",
+        "text": "Step 1에는 기획서와 WBS 두 개의 필수 제출물이 필요하다.",
+        "status": "확인",
+        "evidence_ids": [
+          "EVIDENCE-SUB-001"
+        ]
+      },
+      {
+        "id": "CLAIM-SUB-002",
+        "text": "실제 Step 1 제출물은 docs/step1/에 저장한다.",
+        "status": "확인",
+        "evidence_ids": [
+          "EVIDENCE-SUB-001"
+        ]
+      },
+      {
+        "id": "CLAIM-SUB-003",
+        "text": "기획서와 WBS의 강제 세부 목차는 확인되지 않았으며 제공 가이드는 품질 참고 기준이다.",
+        "status": "확인",
+        "evidence_ids": [
+          "EVIDENCE-SUB-001"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVIDENCE-SUB-001",
+        "label": "R01 Step 1 제출물 운영 결정",
+        "path": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "Step 1 제출물 종류와 저장 위치가 확인되었는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "EVIDENCE-SUB-001"
+        ]
+      },
+      {
+        "criterion": "정확한 파일 형식·파일명·제출 시각·별도 제출 동작이 확인되었는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "EVIDENCE-SUB-001"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "정확한 파일 형식",
+      "공식 파일명 규칙",
+      "11월 13일 정확한 제출 시각",
+      "Git 저장 외 별도 제출·접수 동작 필요 여부"
+    ],
+    "decision_requests": []
+  },
   "title": "공식 제출 조건 확인",
   "suggested_owner": "R01",
   "assignment_status": "제안",
