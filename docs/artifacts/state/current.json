@@ -71,7 +71,7 @@
       "status": "팀 작성본 미기록",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/WBS.json",
-      "projection": "docs/step1/WBS.md",
+      "projection": null,
       "completion_tasks": [
         "TASK-002",
         "TASK-006",
@@ -79,7 +79,8 @@
         "TASK-009",
         "TASK-010",
         "TASK-011"
-      ]
+      ],
+      "target": "docs/step1/WBS.md"
     },
     {
       "id": "SUB-03",
