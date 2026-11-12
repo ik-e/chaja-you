@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "EVAL-TEMPLATE",
+  "kind": "evaluation_template",
+  "status": "템플릿",
+  "task_ref": "",
+  "case_id": "",
+  "run_path": "",
+  "traceability": {
+    "intent_refs": [],
+    "design_refs": [],
+    "requirement_refs": []
+  },
+  "checks": [],
+  "verdict": "inconclusive"
+}
