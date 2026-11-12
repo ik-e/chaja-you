@@ -172,6 +172,7 @@ def render_wbs(record, source, output):
                 "선행",
                 "우선순위",
                 "상태",
+                "요구사항",
                 "산출물",
                 "완료 기준",
             ],
@@ -185,6 +186,7 @@ def render_wbs(record, source, output):
                     ", ".join(item["depends_on"]) or "-",
                     item["priority"],
                     item["status"],
+                    ", ".join(item.get("requirements", [])) or "-",
                     item["output"],
                     item["done_when"],
                 )
@@ -318,6 +320,30 @@ def validate(sources):
             # Historical research may reference local-only original material.
             if target and not (ROOT / target).exists() and not record.get("provenance"):
                 raise ValueError(f"{path}: missing reference {target}")
+
+    if WBS in sources:
+        wbs = sources[WBS]
+        require(wbs, ["items"], WBS)
+        wbs_items = {item["id"]: item for item in wbs["items"]}
+        if len(wbs_items) != len(wbs["items"]):
+            raise ValueError(f"{WBS}: duplicate work item ID")
+        for item in wbs["items"]:
+            require(
+                item,
+                ["id", "start", "end", "depends_on", "requirements"],
+                f"{WBS}.{item.get('id', '?')}",
+            )
+            for predecessor_id in item["depends_on"]:
+                if predecessor_id not in wbs_items:
+                    raise ValueError(
+                        f"{WBS}: {item['id']} references unknown dependency {predecessor_id}"
+                    )
+                predecessor = wbs_items[predecessor_id]
+                if item["start"] < predecessor["end"]:
+                    raise ValueError(
+                        f"{WBS}: {item['id']} starts {item['start']} before "
+                        f"{predecessor_id} ends {predecessor['end']}"
+                    )
 
 
 def build():

@@ -694,6 +694,38 @@
         "Apple Search API는 보관 문서와 단일 한국 검색 응답만 확인했다. 현재 사용 자격·요금·실제 운영 한도·캐시 보존 기간 및 iOS 앱별 세부 기능·다른 검색의 안정성은 미확인.",
         "Apple 검색 응답은 지역·시점·검색어에 따라 달라질 수 있어 이번 한국 응답 표본을 미래 결과나 전체 앱 목록으로 일반화할 수 없음."
       ]
+    },
+    "integration_handoff": {
+      "status": "R02 제안 — 팀 간 합의 및 실제 연동 전",
+      "examples": [
+        {
+          "case": "APP-A",
+          "candidate": "PomoToki",
+          "condition": "offline_pomodoro",
+          "verdict": "문서상 충족",
+          "evidence_ids": [
+            "TASK-004-E01",
+            "TASK-004-E02"
+          ],
+          "device_test": "미실시",
+          "note": "조건 ID는 뽀모도로 기능을 지칭하는 제안이며 R03·R05의 최종 계약 아님"
+        },
+        {
+          "case": "APP-A",
+          "candidate": "Focus To-Do",
+          "condition": "offline_pomodoro",
+          "verdict": "미확인",
+          "evidence_ids": [
+            "TASK-004-E03",
+            "TASK-004-E04"
+          ],
+          "device_test": "미실시",
+          "note": "제품의 오프라인·무등록 안내는 확인했으나 Android 첫 실행 조합은 미검증"
+        }
+      ],
+      "source_handling": "원문 확인·검색 결과만 확인·접근 실패와 조회 시점을 구분하고 실패한 출처에서 근거를 생성하지 않는다. 확인된 주장과 미확인 판정은 각각 출처 및 조사 작업과 연결한다.",
+      "report": "확인 내용·미확인·작업 실패·APP-C 발굴 미실행 사유를 구분하여 전달. 확인된 내용이 없는 경우의 종료 정책은 미결정.",
+      "boundary": "R03·R05 ID 발급 순서 및 화면 전달 형식은 해당 담당자 확인 전이며 실제 API·에이전트·화면 연결은 미검증."
     }
   },
   "title": "앱 데이터·이용 조건·운영 제약 정리",
