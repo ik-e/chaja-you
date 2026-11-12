@@ -51,7 +51,7 @@
       "status": "초안",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/기획서_초안.json",
-      "projection": "docs/submissions/기획서_초안.md",
+      "projection": "docs/step1/기획서.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-003",
@@ -70,8 +70,8 @@
       "title": "WBS",
       "status": "팀 작성본 미기록",
       "submission_status": "미확인",
-      "source": null,
-      "projection": null,
+      "source": "docs/artifacts/planning/WBS.json",
+      "projection": "docs/step1/WBS.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-006",
@@ -142,7 +142,14 @@
     "support_task_ids": [
       "TASK-001"
     ],
-    "assignment_basis": "팀 헌장 역할 기준 제안. 실제 담당과 내부 목표 시각은 팀 조정 후 반영."
+    "assignment_basis": "팀 헌장 역할 기준 제안. 실제 담당과 내부 목표 시각은 팀 조정 후 반영.",
+    "submission_location": "docs/step1/",
+    "required_deliverables": [
+      "기획서",
+      "WBS"
+    ],
+    "required_contents": "세부 필수 항목 미확인/없음. 제공 가이드는 품질 참고 기준으로 사용",
+    "authority_ref": "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
   },
   "confirmed_provenance": [
     {
