@@ -10,7 +10,7 @@
 
 ## 프로젝션 생성
 
-AI 산출물 원본을 바꾸고 다음 명령으로 CURRENT·EVAL·검토 화면·제출물을 생성합니다.
+AI 산출물 원본을 바꾸고 다음 명령으로 CURRENT·EVAL·검토 화면·제출물 인덱스와 Step별 제출 프로젝션을 생성합니다.
 
 ```powershell
 uv run --no-project python tools/project_docs.py
