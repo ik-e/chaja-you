@@ -14,6 +14,7 @@ STATE = "docs/artifacts/state/current.json"
 PROJECT = "docs/artifacts/state/project.json"
 SPEC = "docs/artifacts/specs/focus_apps.json"
 PROPOSAL = "docs/artifacts/planning/기획서_초안.json"
+WBS = "docs/artifacts/planning/WBS.json"
 LINK = re.compile(r"\]\(([^\n)]+)\)")
 
 
@@ -106,14 +107,94 @@ def rebase(text, source, output):
 
 def render_document(record, source, output):
     lines = header(record["title"], [source], output)
-    lines.append(rebase(record["preamble_markdown"], source, output))
-    for section in record["sections"]:
+    if output == "docs/step1/기획서.md" and record.get("submission_sections"):
+        lines.append(
+            rebase(
+                record.get("submission_preamble_markdown", record["preamble_markdown"]),
+                source,
+                output,
+            )
+        )
+        sections = record["submission_sections"]
+    else:
+        lines.append(rebase(record["preamble_markdown"], source, output))
+        sections = record["sections"]
+    for section in sections:
         lines.extend(
             [
                 "#" * section["level"] + " " + section["heading"],
                 rebase(section["content_markdown"], source, output),
             ]
         )
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def render_wbs(record, source, output):
+    lines = header(record["title"], [source], output)
+    period = record["period"]
+    lines.extend(
+        [
+            f"기간 {period['start']} ~ {period['end']} · 상태 {record['status']} · 담당 {record['owner']}",
+            "",
+            "## 작성 기준",
+            "",
+            record["basis"]["guide_rule"],
+            "",
+            "## 마일스톤",
+            "",
+        ]
+    )
+    lines.extend(
+        table(
+            ["ID", "마감", "마일스톤", "완료 기준"],
+            [
+                (m["id"], m["date"], m["title"], m["done_when"])
+                for m in record["milestones"]
+            ],
+        )
+    )
+    lines.extend(["## Work Package", ""])
+    lines.extend(
+        table(
+            ["ID", "결과물", "목표"],
+            [(p["id"], p["title"], p["goal"]) for p in record["work_packages"]],
+        )
+    )
+    lines.extend(["## 상세 WBS", ""])
+    lines.extend(
+        table(
+            [
+                "ID",
+                "패키지",
+                "작업명",
+                "담당",
+                "기간",
+                "선행",
+                "우선순위",
+                "상태",
+                "산출물",
+                "완료 기준",
+            ],
+            [
+                (
+                    item["id"],
+                    item["package_id"],
+                    item["title"],
+                    item["owner"],
+                    f"{item['start']}~{item['end']} ({item['estimate_workdays']}일)",
+                    ", ".join(item["depends_on"]) or "-",
+                    item["priority"],
+                    item["status"],
+                    item["output"],
+                    item["done_when"],
+                )
+                for item in record["items"]
+            ],
+        )
+    )
+    lines.extend(["## 일정·범위 규칙", ""])
+    lines.extend("- " + rule for rule in record["schedule_rules"])
+    lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -598,6 +679,9 @@ def build():
     outputs[output] = "\n".join(lines).rstrip() + "\n"
     outputs["docs/step1/기획서.md"] = render_document(
         sources[PROPOSAL], PROPOSAL, "docs/step1/기획서.md"
+    )
+    outputs["docs/step1/WBS.md"] = render_wbs(
+        sources[WBS], WBS, "docs/step1/WBS.md"
     )
 
     for source, record in sources.items():

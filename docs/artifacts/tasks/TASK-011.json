@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-011",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "막힘",
+  "owner": "R01",
   "due": "2026-11-13",
   "updated_at": "2026-11-12",
   "question": "확인된 공식 경로에 최종 두 제출물이 접수됐는가",
@@ -41,7 +41,115 @@
       "path": "docs/artifacts/state/current.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "기획서와 WBS는 정본 생성·정합성 검사를 마쳐 제출 준비가 완료됐지만 실제 제출·접수는 아직 수행·확인하지 않았다. 공식 공통 안내상 팀 대시보드 산출물 제출 표에 두 문서의 열람 가능한 링크를 등록하고 상태를 `제출완료`로 전환해야 하며, 정확한 마감 시각과 WBS 별도 안내는 팀 대시보드가 최종 기준이다. 현재 채팅 실행 환경에서는 인증된 팀 대시보드의 제출 화면을 조작하거나 접수 상태를 확인하지 않았으므로 TASK-011은 `막힘`으로 유지한다. 실제 제출 화면에서 확인한 뒤에만 SUB-01·02를 제출 완료로 변경한다.",
+    "claims": [
+      {
+        "id": "T011-C01",
+        "text": "기획서와 WBS는 정본·사람용 프로젝션 및 TASK-010 정합성 검사를 완료해 제출 준비 상태다.",
+        "status": "확인",
+        "evidence_ids": [
+          "T011-E01",
+          "T011-E02",
+          "T011-E03"
+        ]
+      },
+      {
+        "id": "T011-C02",
+        "text": "실제 팀 대시보드 링크 등록·제출완료 전환·접수 확인은 아직 확인되지 않았다.",
+        "status": "미확인",
+        "evidence_ids": [
+          "T011-E04"
+        ]
+      },
+      {
+        "id": "T011-C03",
+        "text": "정확한 마감 시각과 팀별 WBS 추가 안내는 실제 팀 대시보드를 최종 기준으로 확인해야 한다.",
+        "status": "공식 공개 안내 기준",
+        "evidence_ids": [
+          "T011-E04"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "T011-E01",
+        "label": "검토 완료 기획서",
+        "path": "docs/step1/기획서.md"
+      },
+      {
+        "id": "T011-E02",
+        "label": "검토 완료 WBS",
+        "path": "docs/step1/WBS.md"
+      },
+      {
+        "id": "T011-E03",
+        "label": "기획서·WBS 최종 정합성 검사",
+        "path": "docs/artifacts/tasks/TASK-010.json"
+      },
+      {
+        "id": "T011-E04",
+        "label": "공개 제출 규칙과 대시보드 확인 항목",
+        "path": "docs/artifacts/tasks/TASK-002.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "두 제출물의 최종 내용·정합성 검사가 완료됐는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T011-E01",
+          "T011-E02",
+          "T011-E03"
+        ]
+      },
+      {
+        "criterion": "팀 대시보드에서 정확한 마감 시각과 WBS 별도 안내를 확인했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "T011-E04"
+        ]
+      },
+      {
+        "criterion": "기획서·WBS 링크를 대시보드에 등록하고 제출완료로 전환했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "T011-E04"
+        ]
+      },
+      {
+        "criterion": "등록 링크의 강사·매니저 열람 가능성과 접수 상태를 실제 화면에서 확인했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "T011-E04"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "2026-11-13의 정확한 마감 시각은 팀 대시보드 확인 전까지 미확인이다.",
+      "팀 대시보드에 WBS 별도 제출 방식이 표시되는지는 실제 팀 화면 확인 전까지 미확인이다.",
+      "두 문서 링크의 제출 화면상 열람 권한·접수 상태는 실제 등록 후 확인해야 한다."
+    ],
+    "decision_requests": [
+      "팀 대시보드에서 ① 정확한 마감 시각 ② WBS 별도 제출 안내 ③ 기획서·WBS 링크 열람 가능 여부를 확인한다.",
+      "기획서와 WBS 링크를 산출물 제출 표에 등록하고 상태를 `제출완료`로 변경한다.",
+      "실제 화면에서 제출 상태를 확인한 뒤 TASK-011과 SUB-01·02만 완료로 갱신한다."
+    ],
+    "submission_checklist": [
+      "팀 대시보드에서 STEP 1 정확한 마감 시각 확인",
+      "WBS 별도 제출 방식 또는 파일 형식 안내 확인",
+      "docs/step1/기획서.md와 docs/step1/WBS.md의 공유 링크가 강사·매니저에게 열리는지 확인",
+      "산출물 제출 표에 기획서 링크 등록",
+      "산출물 제출 표에 WBS 링크 등록",
+      "두 산출물 상태를 제출완료로 변경",
+      "제출완료 상태와 접수 여부를 확인하고 확인 시각 기록"
+    ],
+    "blocker": {
+      "type": "external_authenticated_dashboard_action",
+      "unblock_when": "팀 대시보드의 제출 화면에서 실제 링크 등록·상태 전환·접수 확인을 수행할 수 있을 때",
+      "safe_fallback": "제출 사실을 추정하거나 미리 완료로 기록하지 않는다."
+    }
+  },
   "title": "기획서·WBS 제출과 접수 확인",
   "suggested_owner": "R01",
   "assignment_status": "제안",

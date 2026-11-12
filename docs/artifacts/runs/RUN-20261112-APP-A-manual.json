@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "id": "RUN-20261112-APP-A-MANUAL",
+  "kind": "run",
+  "status": "완료",
+  "case_id": "APP-A",
+  "mode": "manual_public_web_research",
+  "executed_at": "2026-11-12",
+  "execution_boundary": "ChatGPT가 공식 공개 문서를 개별 조회해 수행한 수동 조사 실행. 찾아you 제품의 planner/API/server/UI 실제 통합 실행이 아님.",
+  "input": {
+    "text": "안드로이드에서 인터넷 없이 공부하려고 해. PomoToki와 Focus To-Do 중 오프라인에서 뽀모도로 타이머를 쓸 수 있는 앱을 비교해줘. 가능하면 계정 없이 쓰고 싶어.",
+    "platform": "Android",
+    "targets": [
+      "PomoToki",
+      "Focus To-Do"
+    ],
+    "criteria": [
+      {
+        "id": "offline_timer",
+        "priority": "필수"
+      },
+      {
+        "id": "no_account",
+        "priority": "선호"
+      }
+    ],
+    "discovery_rule": "지정 후보만 비교"
+  },
+  "plan": [
+    {
+      "task_id": "MAN-A1",
+      "role": "planner",
+      "goal": "요청에서 플랫폼·후보·필수/선호를 구조화",
+      "depends_on": [],
+      "run_if": "항상"
+    },
+    {
+      "task_id": "MAN-A2",
+      "role": "researcher",
+      "goal": "PomoToki 공식 자료에서 offline_timer/no_account 확인",
+      "depends_on": [
+        "MAN-A1"
+      ],
+      "run_if": "항상"
+    },
+    {
+      "task_id": "MAN-A3",
+      "role": "researcher",
+      "goal": "Focus To-Do 공식 자료에서 offline_timer/no_account 확인",
+      "depends_on": [
+        "MAN-A1"
+      ],
+      "run_if": "항상"
+    },
+    {
+      "task_id": "MAN-A4",
+      "role": "verifier",
+      "goal": "대상×조건 판정과 문서/기기 검증 경계 확인",
+      "depends_on": [
+        "MAN-A2",
+        "MAN-A3"
+      ],
+      "run_if": "두 후보 자료 조사 완료 또는 접근 실패"
+    },
+    {
+      "task_id": "MAN-A5",
+      "role": "synthesizer",
+      "goal": "근거와 미확인을 포함해 비교 결과 작성",
+      "depends_on": [
+        "MAN-A4"
+      ],
+      "run_if": "판정 생성 완료"
+    }
+  ],
+  "steps": [
+    {
+      "task_id": "MAN-A1",
+      "status": "완료",
+      "actual": "Android / 두 지정 후보 / offline_timer 필수 / no_account 선호로 구조화. 후보 발굴 작업 없음."
+    },
+    {
+      "task_id": "MAN-A2",
+      "status": "완료",
+      "actual": "PomoToki 공식 User Guide와 공식 홈페이지를 개별 조회."
+    },
+    {
+      "task_id": "MAN-A3",
+      "status": "완료",
+      "actual": "Focus To-Do 공식 Privacy Policy와 Google Play 공식 앱 페이지를 개별 조회."
+    },
+    {
+      "task_id": "MAN-A4",
+      "status": "완료",
+      "actual": "문서 근거와 실제 기기 조합 검증을 분리해 조건별 판정."
+    },
+    {
+      "task_id": "MAN-A5",
+      "status": "완료",
+      "actual": "문서 기준 두 앱 모두 offline_timer 근거가 있고 no_account 근거도 있으나, Focus To-Do의 Android 첫 실행 무계정+오프라인 타이머 조합은 기기 시험 전 미확인으로 표시."
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-A1",
+      "url": "https://www.pomotoki.com/guide",
+      "publisher": "PomoToki",
+      "source_type": "official_developer_guide",
+      "checked_at": "2026-11-12",
+      "access_status": "원문 확인"
+    },
+    {
+      "source_id": "SRC-A2",
+      "url": "https://www.pomotoki.com/",
+      "publisher": "PomoToki",
+      "source_type": "official_developer_site",
+      "checked_at": "2026-11-12",
+      "access_status": "원문 확인"
+    },
+    {
+      "source_id": "SRC-A3",
+      "url": "https://focustodo.cn/privacy-policy",
+      "publisher": "Focus To-Do / SuperElement",
+      "source_type": "official_privacy_policy",
+      "checked_at": "2026-11-12",
+      "access_status": "원문 확인"
+    },
+    {
+      "source_id": "SRC-A4",
+      "url": "https://play.google.com/store/apps/details?id=com.superelement.pomodoro",
+      "publisher": "Google Play / SuperElement",
+      "source_type": "official_store_listing",
+      "checked_at": "2026-11-12",
+      "access_status": "원문 확인"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EV-A1",
+      "source_id": "SRC-A1",
+      "finding": "PomoToki는 완전 오프라인 동작과 계정 불필요를 설명하고 Pomodoro 모드를 안내한다.",
+      "supports": [
+        "PomoToki:offline_timer",
+        "PomoToki:no_account"
+      ]
+    },
+    {
+      "evidence_id": "EV-A2",
+      "source_id": "SRC-A2",
+      "finding": "PomoToki 공식 홈페이지는 Android 집중 타이머이며 fully offline, no account required라고 설명한다.",
+      "supports": [
+        "PomoToki:offline_timer",
+        "PomoToki:no_account"
+      ]
+    },
+    {
+      "evidence_id": "EV-A3",
+      "source_id": "SRC-A3",
+      "finding": "Focus To-Do 공식 개인정보처리방침은 핵심 기능이 task management와 Pomodoro Technique이며 제품을 online/offline 모두 사용할 수 있다고 설명한다.",
+      "supports": [
+        "Focus To-Do:offline_timer"
+      ]
+    },
+    {
+      "evidence_id": "EV-A4",
+      "source_id": "SRC-A3",
+      "finding": "Focus To-Do 공식 개인정보처리방침은 계정 등록 없이 local mode를 제공한다고 설명한다.",
+      "supports": [
+        "Focus To-Do:no_account"
+      ]
+    },
+    {
+      "evidence_id": "EV-A5",
+      "source_id": "SRC-A4",
+      "finding": "Google Play 공식 목록은 SuperElement의 Android Focus To-Do 앱이 Pomodoro Timer 기능을 제공함을 확인한다.",
+      "supports": [
+        "Focus To-Do:offline_timer",
+        "Focus To-Do:platform_android"
+      ]
+    }
+  ],
+  "verdicts": [
+    {
+      "verdict_id": "VER-A1",
+      "candidate_id": "PomoToki",
+      "condition_id": "offline_timer",
+      "status": "충족",
+      "verification_level": "공식 문서",
+      "evidence_ids": [
+        "EV-A1",
+        "EV-A2"
+      ]
+    },
+    {
+      "verdict_id": "VER-A2",
+      "candidate_id": "PomoToki",
+      "condition_id": "no_account",
+      "status": "충족",
+      "verification_level": "공식 문서",
+      "evidence_ids": [
+        "EV-A1",
+        "EV-A2"
+      ]
+    },
+    {
+      "verdict_id": "VER-A3",
+      "candidate_id": "Focus To-Do",
+      "condition_id": "offline_timer",
+      "status": "충족",
+      "verification_level": "공식 문서 조합",
+      "evidence_ids": [
+        "EV-A3",
+        "EV-A5"
+      ],
+      "note": "Android 실기기에서 설치 직후 비행기 모드 타이머 시작/종료/알림은 미시험"
+    },
+    {
+      "verdict_id": "VER-A4",
+      "candidate_id": "Focus To-Do",
+      "condition_id": "no_account",
+      "status": "충족",
+      "verification_level": "공식 문서",
+      "evidence_ids": [
+        "EV-A4"
+      ],
+      "note": "Android 첫 실행에서 local mode 진입 후 타이머 사용 조합은 미시험"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CL-A1",
+      "text": "문서 기준 PomoToki는 Android에서 오프라인 Pomodoro와 무계정 사용을 직접 뒷받침한다.",
+      "evidence_ids": [
+        "EV-A1",
+        "EV-A2"
+      ]
+    },
+    {
+      "claim_id": "CL-A2",
+      "text": "문서 기준 Focus To-Do는 Android Pomodoro 기능, 오프라인 사용, 무등록 local mode를 각각 뒷받침한다.",
+      "evidence_ids": [
+        "EV-A3",
+        "EV-A4",
+        "EV-A5"
+      ]
+    },
+    {
+      "claim_id": "CL-A3",
+      "text": "Focus To-Do의 Android 첫 실행에서 무계정·오프라인·Pomodoro가 하나의 실제 사용 경로로 동작하는지는 기기 시험 전까지 미확인이다.",
+      "evidence_ids": []
+    }
+  ],
+  "result": {
+    "status": "부분 결과",
+    "recommendation": "문서 근거의 직접성은 PomoToki가 더 강하다. Focus To-Do도 각 조건의 문서 근거는 있으나 결합된 첫 실행 경로는 기기 시험을 남긴다.",
+    "uncertainties": [
+      "Focus To-Do Android 설치 직후 무계정 local mode 진입 후 비행기 모드 Pomodoro 시작·종료·알림",
+      "문서 설명과 현재 앱 버전의 실제 동작 차이"
+    ],
+    "failures": [],
+    "skipped": [
+      "후보 발굴 — 지정 후보 비교 요청이므로 불필요"
+    ]
+  },
+  "policy": {
+    "collection_mode": "질문 해결에 필요한 공식 공개 문서의 개별 조회",
+    "bulk_crawling": false,
+    "automated_storage_reuse_claimed": false
+  },
+  "references": [
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-004.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-005.json"
+    }
+  ]
+}

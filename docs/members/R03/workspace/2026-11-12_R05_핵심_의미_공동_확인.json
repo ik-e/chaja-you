@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "id": "R03-R05-ACK-20261112-01",
+  "kind": "collaboration_record",
+  "status": "핵심 의미 공동 확인 완료 / 세부 계약 조정 중 / 실제 연동 검증 전",
+  "owner": "R03",
+  "recorded_at": "2026-11-12",
+  "task_ids": [
+    "TASK-005",
+    "TASK-006"
+  ],
+  "source_provenance": {
+    "type": "user_relayed_R05_message",
+    "sender_as_reported": "R05",
+    "provided_by": "사용자",
+    "received_at": null,
+    "locator": "이 대화에서 사용자가 전달한, APP-A·APP-C3와 H01~H05를 TASK-006과 대조했다는 R05 답변",
+    "verification_limit": "사용자 전달문을 근거로 기록. Discord 원문 직접 조회·별도 수신 시각 확인은 하지 않았으며 비공개 링크는 보존하지 않음."
+  },
+  "inputs": [
+    "docs/members/R03/workspace/2026-11-12_APP_A_C3_연결_검토.md",
+    "docs/members/R03/workspace/2026-11-12_APP_A_C3_연결_결과.json",
+    "docs/artifacts/tasks/TASK-006.json"
+  ],
+  "acknowledged": [
+    {
+      "id": "ACK-01",
+      "review_ids": [
+        "H01"
+      ],
+      "meaning": "요청→작업→대상×조건별 판정→근거·출처→보고서의 ID 연결 의미에 동의",
+      "limit": "ID 발급 주체·고유 범위까지 확정한 것은 아님"
+    },
+    {
+      "id": "ACK-02",
+      "review_ids": [
+        "H02"
+      ],
+      "meaning": "필수·선호 구분과 미확인 판정의 생성 작업 ID·사유 추적에 동의",
+      "limit": "조건 ID의 의미·매핑은 별도 조정"
+    },
+    {
+      "id": "ACK-03",
+      "review_ids": [
+        "H03"
+      ],
+      "meaning": "APP-C3 확인 중 보류→한도 후 최종 미실행→부분 결과의 종료 흐름에 동의",
+      "limit": "D1 상태와 결정 ID 연결 방식·실제 한도는 미확정"
+    },
+    {
+      "id": "ACK-04",
+      "review_ids": [
+        "H04"
+      ],
+      "meaning": "자료 조사 작업 실패 기록을 별도 판정 작업이 받아 조건을 미확인으로 남기고 다른 확인 내용은 보존",
+      "condition": "선행 실패를 성공으로 해석하지 않도록 실행 조건을 명시해야 함",
+      "existing_example": "연결 원형은 V2의 depends_on과 run_if.all_tasks_terminal로 R2 실패 기록을 입력받고 R2는 실패 상태로 유지",
+      "limit": "실제 서버 실행기·화면에서 검증한 것은 아님"
+    },
+    {
+      "id": "ACK-05",
+      "review_ids": [
+        "H05"
+      ],
+      "meaning": "mock://, retrieved_at=null, 모의 한도 2는 합성 검토용이며 실조회 기록·제품 한도로 취급하지 않음",
+      "limit": "이 합성 표기 이해가 운영용 자료형·저장 정책 전체 합의는 아님"
+    },
+    {
+      "id": "ACK-06",
+      "review_ids": [],
+      "topic": "재시도 식별 원칙",
+      "source_ref": "R05-RETRY-REPLY",
+      "meaning": "같은 논리 작업을 재시도하면 기존 task_id를 유지하고 실행 시도별 ID·상태·실패 이유를 별도로 기록하여 이전 실패를 덮어쓰지 않음",
+      "limit": "시도 ID 발급 주체·고유 범위·전달 필드, 자동 재시도 여부·상한, 실제 구현·실행 검증까지 확정한 것은 아님"
+    }
+  ],
+  "remaining_shared_contract": [
+    {
+      "id": "OPEN-ID",
+      "question": "요청·작업·판정·결정 ID의 발급 주체·고유 범위와 재시도 시도 ID의 발급·전달 계약",
+      "status": "미합의",
+      "note": "재시도 task_id 유지·시도 이력 보존은 합의. 시도 ID 발급 주체·고유 범위·전달 필드와 요청/하위 ID 발급 분담은 미합의."
+    },
+    {
+      "id": "OPEN-CONDITION",
+      "question": "offline_pomodoro·offline_timer 등 조건 ID의 정확한 적용 범위와 매핑",
+      "status": "미합의"
+    },
+    {
+      "id": "OPEN-D1",
+      "question": "D1 작업 상태와 보류·최종 미실행 결정 ID의 연결 방식",
+      "status": "미합의"
+    }
+  ],
+  "r01_policy_items": [
+    {
+      "id": "R01-P01",
+      "question": "부분 결과의 최종 수용 기준",
+      "next": "R04와 전달 형태를 확인한 뒤 필요한 결정 요청"
+    },
+    {
+      "id": "R01-P02",
+      "question": "실제 확인 한도 정책",
+      "next": "R04와 전달 형태·실행 제약을 확인한 뒤 필요한 결정 요청; 모의 숫자를 채택하지 않음"
+    }
+  ],
+  "autonomous_details": "내부 구현·표현·쉽게 되돌릴 기본값은 담당자가 결정. 다른 TASK가 의존하는 의미·연결만 추가 협의하며 모든 미확정을 중단 조건으로 삼지 않음.",
+  "not_confirmed": [
+    "실제 앱 조사·기기 시험",
+    "API·화면·서버 통합",
+    "최종 계약 필드·자료형 전체",
+    "B0/D0 성능 비교",
+    "TASK-005 전체 완료"
+  ],
+  "canonical_ownership": "TASK-005 owner R03가 해당 result에 반영. TASK-006은 R05가 직접 조정하며 이번 작업에서 수정하지 않음.",
+  "additional_sources": [
+    {
+      "id": "R05-RETRY-REPLY",
+      "type": "user_relayed_R05_message",
+      "sender_as_reported": "R05",
+      "received_at": null,
+      "summary": "재시도 시 기존 task_id 유지, 실행 시도별 ID·상태·실패 이유 별도 보존, 시도 ID 발급 주체·전달 필드는 함께 조정",
+      "user_confirmation": "사용자가 이 메시지를 전달하며 이 원칙으로 정하기로 했다고 명시함"
+    }
+  ],
+  "retry_identity": {
+    "status": "식별·이력 보존 원칙 합의 / 시도 ID 전달 계약 미합의",
+    "task_id_policy": "같은 논리 작업의 재시도는 기존 task_id 유지",
+    "attempt_history_policy": "시도별 ID·상태·실패 이유를 별도 보존하고 이전 실패를 덮어쓰지 않음",
+    "attempt_id_issuer": null,
+    "attempt_id_field": null,
+    "implementation_status": "새 재시도 구현·실행 없음",
+    "source_ref": "R05-RETRY-REPLY"
+  }
+}

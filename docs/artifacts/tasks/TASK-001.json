@@ -2,8 +2,8 @@
   "schema_version": 1,
   "id": "TASK-001",
   "kind": "task",
-  "status": "할 일",
-  "owner": null,
+  "status": "완료",
+  "owner": "R01",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
   "question": "집중 앱 요청 한 건을 계획부터 근거가 연결된 결과까지 처리할 수 있는가",
@@ -38,7 +38,109 @@
       "path": "docs/artifacts/specs/focus_apps.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "APP-A 대표 요청을 공식 공개 자료의 개별 조회로 실제 수동 실행했다. 요청을 Android·지정 후보 2개·offline_timer 필수·no_account 선호로 구조화하고, 후보 발굴 없이 PomoToki와 Focus To-Do를 조사해 대상×조건 판정과 source/evidence 연결 결과를 만들었다. PomoToki는 공식 문서상 오프라인·무계정 Pomodoro를 직접 뒷받침했고, Focus To-Do는 공식 문서 조합으로 Android Pomodoro·오프라인 사용·무등록 local mode를 각각 뒷받침했다. 다만 Focus To-Do의 Android 첫 실행에서 무계정+오프라인+Pomodoro 결합 경로는 실기기 미시험으로 남겼다. 이 실행은 외부 도구를 사용한 수동 조사 점검이며 찾아you의 planner/API/UI 실제 통합 성공이나 B0/D0 우월성을 의미하지 않는다.",
+    "claims": [
+      {
+        "id": "T001-C01",
+        "text": "APP-A 수동 실행에서 요청 구조화→지정 후보 조사→조건 판정→근거 연결 결과까지 이어졌다.",
+        "status": "확인",
+        "evidence_ids": [
+          "T001-E01",
+          "T001-E02"
+        ]
+      },
+      {
+        "id": "T001-C02",
+        "text": "핵심 조건의 문서 근거와 실기기 미확인 경계를 분리할 수 있었다.",
+        "status": "확인",
+        "evidence_ids": [
+          "T001-E01",
+          "T001-E03",
+          "T001-E04",
+          "T001-E05"
+        ]
+      },
+      {
+        "id": "T001-C03",
+        "text": "이번 실행만으로 찾아you 제품의 실제 동적 오케스트레이션·API/화면 통합 또는 고정 흐름 대비 성능 우월성을 검증하지 못했다.",
+        "status": "미검증",
+        "evidence_ids": [
+          "T001-E02"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "T001-E01",
+        "label": "APP-A 실제 수동 조사 run",
+        "path": "docs/artifacts/runs/RUN-20261112-APP-A-manual.json"
+      },
+      {
+        "id": "T001-E02",
+        "label": "APP-A run 평가",
+        "path": "docs/artifacts/evaluations/EVAL-20261112-APP-A-manual.json"
+      },
+      {
+        "id": "T001-E03",
+        "label": "PomoToki 공식 User Guide",
+        "url": "https://www.pomotoki.com/guide"
+      },
+      {
+        "id": "T001-E04",
+        "label": "Focus To-Do 공식 Privacy Policy",
+        "url": "https://focustodo.cn/privacy-policy"
+      },
+      {
+        "id": "T001-E05",
+        "label": "Focus To-Do 공식 Google Play listing",
+        "url": "https://play.google.com/store/apps/details?id=com.superelement.pomodoro"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "계획과 실제 실행을 근거로 작업·역할 차이를 설명할 수 있는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T001-E01",
+          "T001-E02"
+        ]
+      },
+      {
+        "criterion": "핵심 조건마다 근거와 충족·미충족·미확인 상태가 있는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T001-E01",
+          "T001-E03",
+          "T001-E04",
+          "T001-E05"
+        ]
+      },
+      {
+        "criterion": "EVAL 기준과 결과가 연결되는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T001-E02"
+        ]
+      },
+      {
+        "criterion": "실제 제품 오케스트레이터·API·화면을 통해 실행했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "T001-E01",
+          "T001-E02"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "Focus To-Do의 Android 설치 직후 무계정 local mode + 비행기 모드 Pomodoro 실제 동작은 기기 시험 전까지 미확인이다.",
+      "이번 수동 실행은 제품의 실제 동적 planner와 상태 저장·화면 통합을 거치지 않았다.",
+      "고정 B0와 동적 D0의 품질·시간·호출·비용 비교는 W21 단계에서 별도 수행한다."
+    ],
+    "decision_requests": [
+      "W13~W16 APP-A 실제 구현 단계에서 이 run의 request/condition/source/evidence/verdict 구조를 통합 입력·검증 기준으로 재사용한다."
+    ]
+  },
   "title": "대표 요청 1건의 조사 흐름 점검",
   "suggested_owner": "R03",
   "assignment_status": "제안",

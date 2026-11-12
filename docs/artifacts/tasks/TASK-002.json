@@ -2,12 +2,12 @@
   "schema_version": 1,
   "id": "TASK-002",
   "kind": "task",
-  "status": "진행 중",
+  "status": "완료",
   "owner": "R01",
   "due": "2026-11-12",
   "updated_at": "2026-11-12",
-  "question": "11월 13일 기획서·WBS의 필수 항목, 형식, 제출 시각·경로는 무엇인가",
-  "goal": "제출 직전 형식 누락을 막고 확인된 제출 조건으로 최종 검사를 준비한다.",
+  "question": "OUTPUT-GUIDE에 맞춘 최종 제출 프로젝션과 실제 제출·접수 조건에서 무엇을 확인해야 하는가",
+  "goal": "작업 원본과 제출 프로젝션을 분리하고, 최종 제출 직전에 형식·접수 누락을 막는다.",
   "inputs": [
     "docs/charter/팀_헌장.md",
     "docs/guidelines/README.md",
@@ -15,17 +15,20 @@
     "docs/human/responses/HRESP-20261112-01_step1_제출물_운영.md"
   ],
   "scope": [
-    "공식 가이드·대시보드에서 날짜·시각·필수 항목·파일 형식·명명·제출 방식을 확인",
-    "비공개 경로는 공개 저장소에 복사하지 않고 확인 여부와 담당만 기록",
-    "확인되지 않는 조건은 미확인으로 남기고 담당자에게 확인할 질문으로 정리"
+    "작업 중에는 구조화 원본(TASK/spec/state/planning)과 팀 작업 문서를 사용하고 OUTPUT-GUIDE 형식을 내부 작업 형식으로 강제하지 않음",
+    "기획서·WBS 최종 제출물은 OUTPUT-GUIDE의 형식·필수 구성 기준에 맞춰 docs/step1/에 프로젝션",
+    "공식 가이드·대시보드에서 파일명 규칙, 정확한 제출 시각, 별도 제출·접수 동작을 확인",
+    "비공개 경로는 공개 저장소에 복사하지 않고 확인 여부와 담당만 기록"
   ],
   "outputs": [
-    "result에 확인한 조건 목록과 공개 출처 또는 확인 기록",
-    "기획서·WBS 공통 제출 체크리스트"
+    "OUTPUT-GUIDE를 제출 프로젝션 기준으로 사용하는 원칙",
+    "기획서·WBS 최종 제출 체크리스트",
+    "남은 제출 동작·마감 확인 항목"
   ],
   "acceptance": [
-    "기획서·WBS 각각 필수 항목과 파일 형식이 확인되거나 미확인으로 표시됨",
-    "공식 마감 날짜·시각의 출처와 확인 시점, 제출 담당·확인 방법이 기록됨"
+    "작업 원본과 최종 제출 프로젝션의 역할이 구분됨",
+    "기획서·WBS의 최종 형식·필수 구성은 OUTPUT-GUIDE 기준으로 적용됨",
+    "파일명·정확한 제출 시각·별도 제출 동작은 확인되거나 명시적으로 미확인으로 남음"
   ],
   "verification": [
     "헌장 일정과 공식 안내를 대조하고 차이가 있으면 R01의 결정 요청에 표시",
@@ -49,30 +52,49 @@
     }
   ],
   "result": {
-    "summary": "Step 1 필수 제출물은 기획서와 WBS 두 개이며 실제 제출 파일은 docs/step1/에 둔다. 제출물 관련 공개 기준은 Gitea FinalProject 최신 원문과 OUTPUT-GUIDE.md를 우선 확인하도록 기준 경로를 고정했다. 2026-11-12 10:32:53 +09 기준 OUTPUT-GUIDE.md 갱신 표시를 확인했지만, 정확한 파일 형식·파일명 규칙·제출 시각·별도 접수 동작의 개별 규칙은 원문 내용 재확인 전까지 미확인으로 유지한다.",
+    "summary": "TASK-002를 제출 프로젝션·접수 운영 기준으로 완료했다. 공식 공개 가이드상 STEP 1 마감일은 2026-11-13이고 제출물은 기획서(요구사항 명세 포함)와 WBS다. 작성 도구는 자유지만 강사·매니저가 열어 확인할 수 있는 문서 형태여야 하며, 문서 준비 후 팀 대시보드의 산출물 제출 표에 링크를 등록하고 상태를 `제출완료`로 바꿔야 실제 제출 절차가 끝난다. 공개 가이드는 확정 마감일·시각은 대시보드를 확인하라고 명시하므로 정확한 시각은 공개 자료만으로 확정하지 않는다. 별도 공식 파일명 규칙도 확인되지 않아 강제하지 않는다. 내부 작업 원본은 TASK/spec/state/planning을 유지하고 최종 제출 프로젝션에만 공식 목차·형식 기준을 적용한다.",
     "claims": [
       {
         "id": "CLAIM-SUB-001",
-        "text": "Step 1에는 기획서와 WBS 두 개의 필수 제출물이 필요하다.",
+        "text": "STEP 1 공개 안내의 마감일은 2026-11-13이며 제출물은 기획서(요구사항 명세 포함)와 WBS다.",
         "status": "확인",
         "evidence_ids": [
-          "EVIDENCE-SUB-001"
+          "EVIDENCE-SUB-002",
+          "EVIDENCE-SUB-004"
         ]
       },
       {
         "id": "CLAIM-SUB-002",
-        "text": "실제 Step 1 제출물은 docs/step1/에 저장한다.",
+        "text": "작성 도구는 자유지만 강사·매니저가 열 수 있는 문서 형태로 제출해야 한다.",
         "status": "확인",
         "evidence_ids": [
-          "EVIDENCE-SUB-001"
+          "EVIDENCE-SUB-004"
         ]
       },
       {
         "id": "CLAIM-SUB-003",
-        "text": "기획서와 WBS의 강제 세부 목차는 확인되지 않았으며 제공 가이드는 품질 참고 기준이다.",
+        "text": "파일 업로드나 링크 생성만으로 제출이 끝나지 않고 팀 대시보드 산출물 제출 표에 링크를 등록하고 상태를 제출완료로 바꿔야 한다.",
         "status": "확인",
         "evidence_ids": [
-          "EVIDENCE-SUB-001"
+          "EVIDENCE-SUB-004",
+          "EVIDENCE-SUB-005"
+        ]
+      },
+      {
+        "id": "CLAIM-SUB-004",
+        "text": "정확한 확정 마감일·시각은 팀 대시보드가 기준이며 공개 가이드만으로 정확한 시각을 확정하지 않는다.",
+        "status": "확인",
+        "evidence_ids": [
+          "EVIDENCE-SUB-006"
+        ]
+      },
+      {
+        "id": "CLAIM-SUB-005",
+        "text": "OUTPUT-GUIDE는 최종 제출물의 형식·필수 구성 기준이며 내부 작업 문서 형식을 강제하지 않는다.",
+        "status": "R01 결정",
+        "evidence_ids": [
+          "EVIDENCE-SUB-003",
+          "EVIDENCE-SUB-004"
         ]
       }
     ],
@@ -84,47 +106,80 @@
       },
       {
         "id": "EVIDENCE-SUB-002",
-        "label": "최종 프로젝트 공개 가이드 원문 위치 및 OUTPUT-GUIDE 최신 변경 확인",
-        "url": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject",
-        "checked_at": "2026-11-12",
-        "note": "FinalProject 폴더에서 OUTPUT-GUIDE.md 존재 및 최신 표시 커밋 a512febe31 (2026-11-12 10:32:53 +09:00) 확인. 개별 제출 규칙 내용은 별도 재확인 필요."
+        "label": "2026-11-12 FinalProject 가이드 불변 스냅샷 manifest",
+        "path": "docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json"
       },
       {
         "id": "EVIDENCE-SUB-003",
-        "label": "2026-11-12 FinalProject 가이드 불변 커밋 스냅샷",
-        "path": "docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json"
+        "label": "사람용 기획서 공식 목차 프로젝션",
+        "path": "docs/step1/기획서.md"
+      },
+      {
+        "id": "EVIDENCE-SUB-004",
+        "label": "공식 OUTPUT-GUIDE",
+        "url": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/OUTPUT-GUIDE.md"
+      },
+      {
+        "id": "EVIDENCE-SUB-005",
+        "label": "공식 DAILY-MEETING 제출 절차",
+        "url": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/DAILY-MEETING.md"
+      },
+      {
+        "id": "EVIDENCE-SUB-006",
+        "label": "공식 최종 프로젝트 가이드",
+        "url": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html"
       }
     ],
     "verification": [
       {
-        "criterion": "Step 1 제출물 종류와 저장 위치가 확인되었는가",
+        "criterion": "작업 원본과 최종 제출 프로젝션을 구분했는가",
         "verdict": "pass",
         "evidence_ids": [
-          "EVIDENCE-SUB-001"
+          "EVIDENCE-SUB-001",
+          "EVIDENCE-SUB-003"
         ]
       },
       {
-        "criterion": "정확한 파일 형식·파일명·제출 시각·별도 제출 동작이 확인되었는가",
+        "criterion": "STEP 1 제출물 종류·공개 마감일·제출 절차를 확인했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "EVIDENCE-SUB-004",
+          "EVIDENCE-SUB-005",
+          "EVIDENCE-SUB-006"
+        ]
+      },
+      {
+        "criterion": "기획서 최종 기본 목차와 사람이 읽을 수 있는 제출 형태 기준을 확인했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "EVIDENCE-SUB-003",
+          "EVIDENCE-SUB-004"
+        ]
+      },
+      {
+        "criterion": "정확한 마감 시각과 팀별 대시보드의 최종 상태를 공개 자료만으로 확정했는가",
         "verdict": "inconclusive",
         "evidence_ids": [
-          "EVIDENCE-SUB-001"
+          "EVIDENCE-SUB-006"
         ]
       },
       {
-        "criterion": "제출 규칙의 공개 원문 기준 경로와 최신 변경 여부를 확인했는가",
-        "verdict": "pass",
+        "criterion": "공식 파일명 강제 규칙을 확인했는가",
+        "verdict": "inconclusive",
         "evidence_ids": [
-          "EVIDENCE-SUB-002"
+          "EVIDENCE-SUB-004"
         ]
       }
     ],
     "uncertainties": [
-      "정확한 파일 형식",
-      "공식 파일명 규칙",
-      "11월 13일 정확한 제출 시각",
-      "Git 저장 외 별도 제출·접수 동작 필요 여부"
+      "2026-11-13의 정확한 마감 시각은 팀 대시보드에서 최종 확인해야 한다.",
+      "별도 공식 파일명 강제 규칙은 공개 가이드에서 확인되지 않았다.",
+      "WBS에 팀 대시보드상 별도 제출 방식이 추가로 표시되어 있다면 해당 팀별 안내가 공개 공통 가이드보다 우선한다."
     ],
-    "decision_requests": []
+    "decision_requests": [
+      "TASK-011 실제 제출 직전에 팀 대시보드의 정확한 마감 시각·WBS 별도 안내·제출 상태를 확인한다.",
+      "최종 제출 링크는 강사·매니저가 권한 없이 또는 부여된 권한으로 열 수 있는지 확인한 뒤 등록한다."
+    ]
   },
   "title": "공식 제출 조건 확인",
   "suggested_owner": "R01",
@@ -138,6 +193,6 @@
     "SUB-01",
     "SUB-02"
   ],
-  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
+  "start_policy": "TASK-008·009 내용 작성은 즉시 진행한다. TASK-002의 남은 제출 동작·시각 확인은 최종 프로젝션·제출 전에 반영한다.",
   "intent_ref": "docs/human/task-intents/TASK-002.md"
 }
