@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "CAND-006",
+  "kind": "candidate",
+  "status": "후보",
+  "title": "두 번째 도메인 Transfer Test",
+  "proposed_by": [
+    "R01",
+    "AI"
+  ],
+  "curated_by": "AI",
+  "created_at": "2026-11-13",
+  "origin_note": "프로젝트 내 여러 대화 세션에서 나온 아이디어를 중복·세부 옵션 단위로 흩어두지 않고 R01 요청에 따라 상위 후보로 통합 정리했다.",
+  "source_idea_refs": [],
+  "summary": "앱에서 추출한 공통 구조를 다른 리서치 도메인에 적용해 전이 가능성을 검증.",
+  "potential_value": [
+    "공통 코어의 실제 일반화 여부 확인",
+    "앱 특화 구조의 과잉 일반화 방지"
+  ],
+  "risks": [
+    "일정 분산",
+    "첫 도메인 완성도 저하"
+  ],
+  "why_not_now": [
+    "APP-A/C 핵심 구현이 우선"
+  ],
+  "evidence_needed": [
+    "앱 E2E 안정화",
+    "일정 여유"
+  ],
+  "revisit_when": [
+    "APP-A/C 통합이 안정된 뒤"
+  ],
+  "related_refs": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/design/target_design.json",
+    "docs/artifacts/tasks/TASK-007.json"
+  ],
+  "promotion_note": "이 후보는 현재 기준이 아니다. 필요한 근거 확보와 권한 있는 사람의 결정 후에만 Design·Spec·ADR·Task·State 등 현재 정본으로 승격한다."
+}
