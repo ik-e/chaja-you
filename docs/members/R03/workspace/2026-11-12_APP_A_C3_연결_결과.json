@@ -1,0 +1,2772 @@
+{
+  "schema_version": 1,
+  "id": "R03-APP-A-C3-IO-MOCK-20261112",
+  "kind": "mock_contract_review",
+  "status": "R03 합성 출력 검사",
+  "generated_at": "2026-11-12T03:35:05.467Z",
+  "provenance": {
+    "workspace_revision": "7ec5ab41cfc49b0e35f9a5961da9a66d5c638db3",
+    "contract_basis_revision": "6eb42c8c30f4b53cd36640657b5e9829e733b46d",
+    "task_id": "TASK-005",
+    "contract_path": "docs/artifacts/tasks/TASK-006.json",
+    "contract_sha256": "5fb1a94808a91fb91710b9787b7116d365c812b9d8ac206793eb2c3a6a0e004b",
+    "spec_path": "docs/artifacts/specs/focus_apps.json",
+    "spec_sha256": "fa671c704cd27aba896ee2b607860415775354b7fbfe4a2284872b8c47ea4e6e",
+    "script_sha256": "891c11d86cf1966ef4cb22657ead743a44dc9adfb7d37665b85cf98bd1ef8746"
+  },
+  "scope": "APP-A ID chain and APP-C3 deferred-to-terminal handoff only; local R03 proposal",
+  "limitations": [
+    "All findings, source outcomes and condition verdicts are synthetic; not real app facts.",
+    "retrieved_at is null: simulation ticks are not actual retrieval times or elapsed time.",
+    "No model, search, device, real parallelism, API/UI integration or B0/D0 comparison.",
+    "Field names, deferred-node representation and fixture-only limit are not a team contract.",
+    "No-known-claims report policy and C1/C2 end-to-end execution are outside this small prototype.",
+    "Old 18-case/4-negative-control result is preserved and is not combined with these counts."
+  ],
+  "summary": {
+    "cases": 2,
+    "passed": 2,
+    "checks": 24,
+    "failed_checks": 0,
+    "negative_controls": 4,
+    "detected": 4
+  },
+  "runs": [
+    {
+      "schema_version": 1,
+      "id": "MOCK-REQ-R03-APP-A-001-RUN1",
+      "kind": "run",
+      "status": "모의 실행 완료",
+      "case_id": "APP-A",
+      "simulation": true,
+      "execution_mode": "serial deterministic simulation",
+      "input": {
+        "request_id": "MOCK-REQ-R03-APP-A-001",
+        "domain": "app_research",
+        "user_text": "안드로이드에서 인터넷 없이 공부하려고 해. PomoToki와 Focus To-Do 중 오프라인에서 뽀모도로 타이머를 쓸 수 있는 앱을 비교해줘. 가능하면 계정 없이 쓰고 싶어.",
+        "targets": [
+          {
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "label": "PomoToki"
+          },
+          {
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "label": "Focus To-Do"
+          }
+        ],
+        "criteria": [
+          {
+            "condition_id": "offline_pomodoro",
+            "priority": "필수",
+            "label": "Android 오프라인 뽀모도로 타이머"
+          },
+          {
+            "condition_id": "accountless",
+            "priority": "선호",
+            "label": "계정 없는 사용"
+          }
+        ],
+        "domain_context": {
+          "platform": "Android"
+        },
+        "discovery_rule": "지정 후보만 비교",
+        "structuring_method": "manually supplied; natural-language understanding not tested"
+      },
+      "domain_definition": {
+        "id": "R03-APP-IO-REVIEW-v1",
+        "roles": [
+          "research",
+          "verification",
+          "discovery",
+          "comparison",
+          "synthesis"
+        ],
+        "condition_ids_status": "R03 example names; no R05 field-name agreement"
+      },
+      "confirmation_limit": null,
+      "plan": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+          "goal": "PomoToki 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+          "goal": "Focus To-Do 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "goal": "PomoToki 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-R1"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-A-001-R1"
+            ]
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+          "condition_ids": [
+            "offline_pomodoro",
+            "accountless"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "goal": "Focus To-Do 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-R2"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-A-001-R2"
+            ]
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+          "condition_ids": [
+            "offline_pomodoro",
+            "accountless"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE",
+          "goal": "지정 후보의 조건별 결과 비교",
+          "role": "comparison",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-V1",
+            "MOCK-REQ-R03-APP-A-001-V2"
+          ],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+          "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+          "role": "synthesis",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-COMPARE"
+          ],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null
+        }
+      ],
+      "tasks": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+          "goal": "PomoToki 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+          "goal": "Focus To-Do 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "goal": "PomoToki 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-R1"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-A-001-R1"
+            ]
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+          "condition_ids": [
+            "offline_pomodoro",
+            "accountless"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "goal": "Focus To-Do 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-R2"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-A-001-R2"
+            ]
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+          "condition_ids": [
+            "offline_pomodoro",
+            "accountless"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE",
+          "goal": "지정 후보의 조건별 결과 비교",
+          "role": "comparison",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-V1",
+            "MOCK-REQ-R03-APP-A-001-V2"
+          ],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+          "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+          "role": "synthesis",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-A-001-COMPARE"
+          ],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null
+        }
+      ],
+      "steps": [
+        {
+          "seq": 1,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R1"
+        },
+        {
+          "seq": 2,
+          "simulation_tick": 1,
+          "event": "synthetic_source_outcome",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+          "source_id": "MOCK-REQ-R03-APP-A-001-S1"
+        },
+        {
+          "seq": 3,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 4,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1"
+        },
+        {
+          "seq": 5,
+          "simulation_tick": 1,
+          "event": "verdict_recorded",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-1"
+        },
+        {
+          "seq": 6,
+          "simulation_tick": 1,
+          "event": "verdict_recorded",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2"
+        },
+        {
+          "seq": 7,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 8,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R2"
+        },
+        {
+          "seq": 9,
+          "simulation_tick": 1,
+          "event": "synthetic_source_outcome",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+          "source_id": "MOCK-REQ-R03-APP-A-001-S2"
+        },
+        {
+          "seq": 10,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 11,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2"
+        },
+        {
+          "seq": 12,
+          "simulation_tick": 1,
+          "event": "verdict_recorded",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1"
+        },
+        {
+          "seq": 13,
+          "simulation_tick": 1,
+          "event": "verdict_recorded",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-2"
+        },
+        {
+          "seq": 14,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 15,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE"
+        },
+        {
+          "seq": 16,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 17,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-A-001-REPORT"
+        },
+        {
+          "seq": 18,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 19,
+          "simulation_tick": 1,
+          "event": "report_created",
+          "report_id": "MOCK-REQ-R03-APP-A-001-REPORT1"
+        }
+      ],
+      "sources": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "source_id": "MOCK-REQ-R03-APP-A-001-S1",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+          "url": "mock://r03-io/APP-A/source-1",
+          "retrieved_at": null,
+          "simulation_tick": 1,
+          "access_status": "원문 확인",
+          "error_reason": null,
+          "data_kind": "synthetic fixture; no URL fetched"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "source_id": "MOCK-REQ-R03-APP-A-001-S2",
+          "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+          "url": "mock://r03-io/APP-A/source-2",
+          "retrieved_at": null,
+          "simulation_tick": 1,
+          "access_status": "원문 확인",
+          "error_reason": null,
+          "data_kind": "synthetic fixture; no URL fetched"
+        }
+      ],
+      "evidence": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "evidence_id": "MOCK-REQ-R03-APP-A-001-E1-1",
+          "source_id": "MOCK-REQ-R03-APP-A-001-S1",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+          "condition_id": "offline_pomodoro",
+          "finding": "합성 자료: 대상 1의 Android 오프라인 뽀모도로 타이머 조건 충족",
+          "locator": "fixture.outcomes[0][0]",
+          "simulation": true
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "evidence_id": "MOCK-REQ-R03-APP-A-001-E2-2",
+          "source_id": "MOCK-REQ-R03-APP-A-001-S2",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+          "condition_id": "accountless",
+          "finding": "합성 자료: 대상 2의 계정 없는 사용 조건 충족",
+          "locator": "fixture.outcomes[1][1]",
+          "simulation": true
+        }
+      ],
+      "verdicts": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-1",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+          "condition_id": "offline_pomodoro",
+          "status": "충족",
+          "evidence_ids": [
+            "MOCK-REQ-R03-APP-A-001-E1-1"
+          ],
+          "reason": "합성 자료의 조건별 직접 근거",
+          "simulation": true
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+          "condition_id": "accountless",
+          "status": "미확인",
+          "evidence_ids": [],
+          "reason": "합성 자료에 해당 조건 근거 없음",
+          "simulation": true
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+          "condition_id": "offline_pomodoro",
+          "status": "미확인",
+          "evidence_ids": [],
+          "reason": "합성 자료에 해당 조건 근거 없음",
+          "simulation": true
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-2",
+          "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+          "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+          "condition_id": "accountless",
+          "status": "충족",
+          "evidence_ids": [
+            "MOCK-REQ-R03-APP-A-001-E2-2"
+          ],
+          "reason": "합성 자료의 조건별 직접 근거",
+          "simulation": true
+        }
+      ],
+      "claims": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "claim_id": "MOCK-REQ-R03-APP-A-001-CLAIM1",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-1",
+          "text": "합성 판정 MOCK-REQ-R03-APP-A-001-J1-1: 충족 (실제 앱 기능 주장 아님)",
+          "status": "합성 근거 연결",
+          "evidence_ids": [
+            "MOCK-REQ-R03-APP-A-001-E1-1"
+          ],
+          "simulation": true
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-A-001",
+          "claim_id": "MOCK-REQ-R03-APP-A-001-CLAIM2",
+          "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-2",
+          "text": "합성 판정 MOCK-REQ-R03-APP-A-001-J2-2: 충족 (실제 앱 기능 주장 아님)",
+          "status": "합성 근거 연결",
+          "evidence_ids": [
+            "MOCK-REQ-R03-APP-A-001-E2-2"
+          ],
+          "simulation": true
+        }
+      ],
+      "decisions": [],
+      "snapshots": [
+        {
+          "phase": "planned",
+          "simulation_tick": 0,
+          "tasks": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+              "goal": "PomoToki 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C1"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+              "goal": "Focus To-Do 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C2"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+              "goal": "PomoToki 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-R1"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-A-001-R1"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+              "condition_ids": [
+                "offline_pomodoro",
+                "accountless"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+              "goal": "Focus To-Do 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-R2"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-A-001-R2"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+              "condition_ids": [
+                "offline_pomodoro",
+                "accountless"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE",
+              "goal": "지정 후보의 조건별 결과 비교",
+              "role": "comparison",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-V1",
+                "MOCK-REQ-R03-APP-A-001-V2"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+              "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+              "role": "synthesis",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-COMPARE"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            }
+          ],
+          "verdicts": [],
+          "decisions": [],
+          "report": null
+        },
+        {
+          "phase": "reported",
+          "simulation_tick": 1,
+          "tasks": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+              "goal": "PomoToki 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C1"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+              "goal": "Focus To-Do 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C2"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+              "goal": "PomoToki 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-R1"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-A-001-R1"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+              "condition_ids": [
+                "offline_pomodoro",
+                "accountless"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+              "goal": "Focus To-Do 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-R2"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-A-001-R2"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+              "condition_ids": [
+                "offline_pomodoro",
+                "accountless"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE",
+              "goal": "지정 후보의 조건별 결과 비교",
+              "role": "comparison",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-V1",
+                "MOCK-REQ-R03-APP-A-001-V2"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+              "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+              "role": "synthesis",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-A-001-COMPARE"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null
+            }
+          ],
+          "verdicts": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-1",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+              "condition_id": "offline_pomodoro",
+              "status": "충족",
+              "evidence_ids": [
+                "MOCK-REQ-R03-APP-A-001-E1-1"
+              ],
+              "reason": "합성 자료의 조건별 직접 근거",
+              "simulation": true
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+              "condition_id": "accountless",
+              "status": "미확인",
+              "evidence_ids": [],
+              "reason": "합성 자료에 해당 조건 근거 없음",
+              "simulation": true
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+              "condition_id": "offline_pomodoro",
+              "status": "미확인",
+              "evidence_ids": [],
+              "reason": "합성 자료에 해당 조건 근거 없음",
+              "simulation": true
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-A-001",
+              "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-2",
+              "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+              "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+              "condition_id": "accountless",
+              "status": "충족",
+              "evidence_ids": [
+                "MOCK-REQ-R03-APP-A-001-E2-2"
+              ],
+              "reason": "합성 자료의 조건별 직접 근거",
+              "simulation": true
+            }
+          ],
+          "decisions": [],
+          "report": {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "report_id": "MOCK-REQ-R03-APP-A-001-REPORT1",
+            "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+            "status": "부분 결과",
+            "claim_ids": [
+              "MOCK-REQ-R03-APP-A-001-CLAIM1",
+              "MOCK-REQ-R03-APP-A-001-CLAIM2"
+            ],
+            "verdict_ids": [
+              "MOCK-REQ-R03-APP-A-001-J1-1",
+              "MOCK-REQ-R03-APP-A-001-J1-2",
+              "MOCK-REQ-R03-APP-A-001-J2-1",
+              "MOCK-REQ-R03-APP-A-001-J2-2"
+            ],
+            "source_ids": [
+              "MOCK-REQ-R03-APP-A-001-S1",
+              "MOCK-REQ-R03-APP-A-001-S2"
+            ],
+            "unverified": [
+              {
+                "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2",
+                "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+                "condition_id": "accountless",
+                "reason": "합성 자료에 해당 조건 근거 없음"
+              },
+              {
+                "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1",
+                "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+                "condition_id": "offline_pomodoro",
+                "reason": "합성 자료에 해당 조건 근거 없음"
+              }
+            ],
+            "failures": [],
+            "decision_ids": [],
+            "termination_reason": "specified_comparison_finished",
+            "simulation": true
+          }
+        }
+      ],
+      "report": {
+        "request_id": "MOCK-REQ-R03-APP-A-001",
+        "report_id": "MOCK-REQ-R03-APP-A-001-REPORT1",
+        "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+        "status": "부분 결과",
+        "claim_ids": [
+          "MOCK-REQ-R03-APP-A-001-CLAIM1",
+          "MOCK-REQ-R03-APP-A-001-CLAIM2"
+        ],
+        "verdict_ids": [
+          "MOCK-REQ-R03-APP-A-001-J1-1",
+          "MOCK-REQ-R03-APP-A-001-J1-2",
+          "MOCK-REQ-R03-APP-A-001-J2-1",
+          "MOCK-REQ-R03-APP-A-001-J2-2"
+        ],
+        "source_ids": [
+          "MOCK-REQ-R03-APP-A-001-S1",
+          "MOCK-REQ-R03-APP-A-001-S2"
+        ],
+        "unverified": [
+          {
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "condition_id": "accountless",
+            "reason": "합성 자료에 해당 조건 근거 없음"
+          },
+          {
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "condition_id": "offline_pomodoro",
+            "reason": "합성 자료에 해당 조건 근거 없음"
+          }
+        ],
+        "failures": [],
+        "decision_ids": [],
+        "termination_reason": "specified_comparison_finished",
+        "simulation": true
+      },
+      "screen_payload": {
+        "request_id": "MOCK-REQ-R03-APP-A-001",
+        "simulation": true,
+        "report_status": "부분 결과",
+        "task_statuses": [
+          {
+            "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-A-001-COMPARE",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-A-001-REPORT",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          }
+        ],
+        "claims": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "claim_id": "MOCK-REQ-R03-APP-A-001-CLAIM1",
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-1",
+            "text": "합성 판정 MOCK-REQ-R03-APP-A-001-J1-1: 충족 (실제 앱 기능 주장 아님)",
+            "status": "합성 근거 연결",
+            "evidence_ids": [
+              "MOCK-REQ-R03-APP-A-001-E1-1"
+            ],
+            "simulation": true
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "claim_id": "MOCK-REQ-R03-APP-A-001-CLAIM2",
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-2",
+            "text": "합성 판정 MOCK-REQ-R03-APP-A-001-J2-2: 충족 (실제 앱 기능 주장 아님)",
+            "status": "합성 근거 연결",
+            "evidence_ids": [
+              "MOCK-REQ-R03-APP-A-001-E2-2"
+            ],
+            "simulation": true
+          }
+        ],
+        "verdicts": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-1",
+            "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "condition_id": "offline_pomodoro",
+            "status": "충족",
+            "evidence_ids": [
+              "MOCK-REQ-R03-APP-A-001-E1-1"
+            ],
+            "reason": "합성 자료의 조건별 직접 근거",
+            "simulation": true
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2",
+            "task_id": "MOCK-REQ-R03-APP-A-001-V1",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "condition_id": "accountless",
+            "status": "미확인",
+            "evidence_ids": [],
+            "reason": "합성 자료에 해당 조건 근거 없음",
+            "simulation": true
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1",
+            "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "condition_id": "offline_pomodoro",
+            "status": "미확인",
+            "evidence_ids": [],
+            "reason": "합성 자료에 해당 조건 근거 없음",
+            "simulation": true
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-2",
+            "task_id": "MOCK-REQ-R03-APP-A-001-V2",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "condition_id": "accountless",
+            "status": "충족",
+            "evidence_ids": [
+              "MOCK-REQ-R03-APP-A-001-E2-2"
+            ],
+            "reason": "합성 자료의 조건별 직접 근거",
+            "simulation": true
+          }
+        ],
+        "evidence": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "evidence_id": "MOCK-REQ-R03-APP-A-001-E1-1",
+            "source_id": "MOCK-REQ-R03-APP-A-001-S1",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "condition_id": "offline_pomodoro",
+            "finding": "합성 자료: 대상 1의 Android 오프라인 뽀모도로 타이머 조건 충족",
+            "locator": "fixture.outcomes[0][0]",
+            "simulation": true
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "evidence_id": "MOCK-REQ-R03-APP-A-001-E2-2",
+            "source_id": "MOCK-REQ-R03-APP-A-001-S2",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "condition_id": "accountless",
+            "finding": "합성 자료: 대상 2의 계정 없는 사용 조건 충족",
+            "locator": "fixture.outcomes[1][1]",
+            "simulation": true
+          }
+        ],
+        "sources": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "source_id": "MOCK-REQ-R03-APP-A-001-S1",
+            "task_id": "MOCK-REQ-R03-APP-A-001-R1",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "url": "mock://r03-io/APP-A/source-1",
+            "retrieved_at": null,
+            "simulation_tick": 1,
+            "access_status": "원문 확인",
+            "error_reason": null,
+            "data_kind": "synthetic fixture; no URL fetched"
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-A-001",
+            "source_id": "MOCK-REQ-R03-APP-A-001-S2",
+            "task_id": "MOCK-REQ-R03-APP-A-001-R2",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "url": "mock://r03-io/APP-A/source-2",
+            "retrieved_at": null,
+            "simulation_tick": 1,
+            "access_status": "원문 확인",
+            "error_reason": null,
+            "data_kind": "synthetic fixture; no URL fetched"
+          }
+        ],
+        "uncertainties": [
+          {
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J1-2",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C1",
+            "condition_id": "accountless",
+            "reason": "합성 자료에 해당 조건 근거 없음"
+          },
+          {
+            "verdict_id": "MOCK-REQ-R03-APP-A-001-J2-1",
+            "candidate_id": "MOCK-REQ-R03-APP-A-001-C2",
+            "condition_id": "offline_pomodoro",
+            "reason": "합성 자료에 해당 조건 근거 없음"
+          }
+        ],
+        "failures": [],
+        "discovery_decisions": []
+      }
+    },
+    {
+      "schema_version": 1,
+      "id": "MOCK-REQ-R03-APP-C3-001-RUN1",
+      "kind": "run",
+      "status": "모의 실행 완료",
+      "case_id": "APP-C3",
+      "simulation": true,
+      "execution_mode": "serial deterministic simulation",
+      "input": {
+        "request_id": "MOCK-REQ-R03-APP-C3-001",
+        "domain": "app_research",
+        "user_text": "PomoToki와 Focus To-Do의 안드로이드 오프라인 타이머를 비교해줘. 두 앱 모두 오프라인에서 타이머를 쓸 수 없다고 확인되면 대안도 찾아줘.",
+        "targets": [
+          {
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+            "label": "PomoToki"
+          },
+          {
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+            "label": "Focus To-Do"
+          }
+        ],
+        "criteria": [
+          {
+            "condition_id": "offline_timer",
+            "priority": "필수",
+            "label": "Android 오프라인 타이머"
+          }
+        ],
+        "domain_context": {
+          "platform": "Android"
+        },
+        "discovery_rule": "두 후보 필수 조건 모두 미충족 확인 후 발굴",
+        "structuring_method": "manually supplied; natural-language understanding not tested"
+      },
+      "domain_definition": {
+        "id": "R03-APP-IO-REVIEW-v1",
+        "roles": [
+          "research",
+          "verification",
+          "discovery",
+          "comparison",
+          "synthesis"
+        ],
+        "condition_ids_status": "R03 example names; no R05 field-name agreement"
+      },
+      "confirmation_limit": {
+        "kind": "simulation_tick",
+        "value": 2,
+        "scope": "fixture-only; not product policy"
+      },
+      "plan": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+          "goal": "PomoToki 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+          "goal": "Focus To-Do 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+          "goal": "PomoToki 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-R1"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-C3-001-R1"
+            ]
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+          "condition_ids": [
+            "offline_timer"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+          "goal": "Focus To-Do 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-R2"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-C3-001-R2"
+            ]
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+          "condition_ids": [
+            "offline_timer"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+          "goal": "조건 충족 시 대안 앱 발굴",
+          "role": "discovery",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-V1",
+            "MOCK-REQ-R03-APP-C3-001-V2"
+          ],
+          "run_if": {
+            "op": "all_verdicts_are",
+            "verdict_ids": [
+              "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "MOCK-REQ-R03-APP-C3-001-J2-1"
+            ],
+            "status": "미충족"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+          "goal": "지정 후보의 조건별 결과 비교",
+          "role": "comparison",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-V1",
+            "MOCK-REQ-R03-APP-C3-001-V2"
+          ],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+          "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+          "role": "synthesis",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-COMPARE"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-C3-001-D1"
+            ]
+          },
+          "status": "대기",
+          "status_reason": null,
+          "failure_reason": null
+        }
+      ],
+      "tasks": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+          "goal": "PomoToki 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+          "goal": "Focus To-Do 자료 확인",
+          "role": "research",
+          "depends_on": [],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "실패",
+          "status_reason": "합성 자료 접근 실패",
+          "failure_reason": "합성 자료 접근 실패",
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+          "goal": "PomoToki 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-R1"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-C3-001-R1"
+            ]
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+          "condition_ids": [
+            "offline_timer"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+          "goal": "Focus To-Do 조건별 판정",
+          "role": "verification",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-R2"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-C3-001-R2"
+            ]
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null,
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+          "condition_ids": [
+            "offline_timer"
+          ]
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+          "goal": "조건 충족 시 대안 앱 발굴",
+          "role": "discovery",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-V1",
+            "MOCK-REQ-R03-APP-C3-001-V2"
+          ],
+          "run_if": {
+            "op": "all_verdicts_are",
+            "verdict_ids": [
+              "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "MOCK-REQ-R03-APP-C3-001-J2-1"
+            ],
+            "status": "미충족"
+          },
+          "status": "생략",
+          "status_reason": "limit_reached_condition_unknown",
+          "failure_reason": null
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+          "goal": "지정 후보의 조건별 결과 비교",
+          "role": "comparison",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-V1",
+            "MOCK-REQ-R03-APP-C3-001-V2"
+          ],
+          "run_if": {
+            "op": "always"
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+          "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+          "role": "synthesis",
+          "depends_on": [
+            "MOCK-REQ-R03-APP-C3-001-COMPARE"
+          ],
+          "run_if": {
+            "op": "all_tasks_terminal",
+            "task_ids": [
+              "MOCK-REQ-R03-APP-C3-001-D1"
+            ]
+          },
+          "status": "완료",
+          "status_reason": null,
+          "failure_reason": null
+        }
+      ],
+      "steps": [
+        {
+          "seq": 1,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R1"
+        },
+        {
+          "seq": 2,
+          "simulation_tick": 1,
+          "event": "synthetic_source_outcome",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+          "source_id": "MOCK-REQ-R03-APP-C3-001-S1"
+        },
+        {
+          "seq": 3,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 4,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V1"
+        },
+        {
+          "seq": 5,
+          "simulation_tick": 1,
+          "event": "verdict_recorded",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+          "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1"
+        },
+        {
+          "seq": 6,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 7,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R2"
+        },
+        {
+          "seq": 8,
+          "simulation_tick": 1,
+          "event": "synthetic_source_outcome",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+          "source_id": "MOCK-REQ-R03-APP-C3-001-S2"
+        },
+        {
+          "seq": 9,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+          "status": "실패",
+          "reason": "합성 자료 접근 실패"
+        },
+        {
+          "seq": 10,
+          "simulation_tick": 1,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V2"
+        },
+        {
+          "seq": 11,
+          "simulation_tick": 1,
+          "event": "verdict_recorded",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+          "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1"
+        },
+        {
+          "seq": 12,
+          "simulation_tick": 1,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 13,
+          "simulation_tick": 1,
+          "event": "discovery_deferred",
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC1",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+          "verdict_ids": [
+            "MOCK-REQ-R03-APP-C3-001-J1-1",
+            "MOCK-REQ-R03-APP-C3-001-J2-1"
+          ],
+          "action": "보류",
+          "condition_result": "미확인",
+          "reason": "condition_unknown"
+        },
+        {
+          "seq": 14,
+          "simulation_tick": 2,
+          "event": "confirmation_limit_reached",
+          "limit": {
+            "kind": "simulation_tick",
+            "value": 2,
+            "scope": "fixture-only; not product policy"
+          }
+        },
+        {
+          "seq": 15,
+          "simulation_tick": 2,
+          "event": "discovery_not_executed",
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC2",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+          "verdict_ids": [
+            "MOCK-REQ-R03-APP-C3-001-J1-1",
+            "MOCK-REQ-R03-APP-C3-001-J2-1"
+          ],
+          "action": "최종 미실행",
+          "condition_result": "미확인",
+          "reason": "limit_reached_condition_unknown",
+          "limit": {
+            "kind": "simulation_tick",
+            "value": 2,
+            "scope": "fixture-only; not product policy"
+          }
+        },
+        {
+          "seq": 16,
+          "simulation_tick": 2,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE"
+        },
+        {
+          "seq": 17,
+          "simulation_tick": 2,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 18,
+          "simulation_tick": 2,
+          "event": "task_started",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT"
+        },
+        {
+          "seq": 19,
+          "simulation_tick": 2,
+          "event": "task_finished",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+          "status": "완료",
+          "reason": null
+        },
+        {
+          "seq": 20,
+          "simulation_tick": 2,
+          "event": "report_created",
+          "report_id": "MOCK-REQ-R03-APP-C3-001-REPORT1"
+        }
+      ],
+      "sources": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "source_id": "MOCK-REQ-R03-APP-C3-001-S1",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+          "url": "mock://r03-io/APP-C3/source-1",
+          "retrieved_at": null,
+          "simulation_tick": 1,
+          "access_status": "원문 확인",
+          "error_reason": null,
+          "data_kind": "synthetic fixture; no URL fetched"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "source_id": "MOCK-REQ-R03-APP-C3-001-S2",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+          "url": "mock://r03-io/APP-C3/source-2",
+          "retrieved_at": null,
+          "simulation_tick": 1,
+          "access_status": "접근 실패",
+          "error_reason": "합성 자료 접근 실패",
+          "data_kind": "synthetic fixture; no URL fetched"
+        }
+      ],
+      "evidence": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "evidence_id": "MOCK-REQ-R03-APP-C3-001-E1-1",
+          "source_id": "MOCK-REQ-R03-APP-C3-001-S1",
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+          "condition_id": "offline_timer",
+          "finding": "합성 자료: 대상 1의 Android 오프라인 타이머 조건 미충족",
+          "locator": "fixture.outcomes[0][0]",
+          "simulation": true
+        }
+      ],
+      "verdicts": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+          "condition_id": "offline_timer",
+          "status": "미충족",
+          "evidence_ids": [
+            "MOCK-REQ-R03-APP-C3-001-E1-1"
+          ],
+          "reason": "합성 자료의 조건별 직접 근거",
+          "simulation": true
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+          "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+          "condition_id": "offline_timer",
+          "status": "미확인",
+          "evidence_ids": [],
+          "reason": "자료 접근 실패로 판단 근거 없음",
+          "simulation": true
+        }
+      ],
+      "claims": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "claim_id": "MOCK-REQ-R03-APP-C3-001-CLAIM1",
+          "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+          "text": "합성 판정 MOCK-REQ-R03-APP-C3-001-J1-1: 미충족 (실제 앱 기능 주장 아님)",
+          "status": "합성 근거 연결",
+          "evidence_ids": [
+            "MOCK-REQ-R03-APP-C3-001-E1-1"
+          ],
+          "simulation": true
+        }
+      ],
+      "decisions": [
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC1",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+          "verdict_ids": [
+            "MOCK-REQ-R03-APP-C3-001-J1-1",
+            "MOCK-REQ-R03-APP-C3-001-J2-1"
+          ],
+          "action": "보류",
+          "condition_result": "미확인",
+          "reason": "condition_unknown"
+        },
+        {
+          "request_id": "MOCK-REQ-R03-APP-C3-001",
+          "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC2",
+          "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+          "verdict_ids": [
+            "MOCK-REQ-R03-APP-C3-001-J1-1",
+            "MOCK-REQ-R03-APP-C3-001-J2-1"
+          ],
+          "action": "최종 미실행",
+          "condition_result": "미확인",
+          "reason": "limit_reached_condition_unknown",
+          "limit": {
+            "kind": "simulation_tick",
+            "value": 2,
+            "scope": "fixture-only; not product policy"
+          }
+        }
+      ],
+      "snapshots": [
+        {
+          "phase": "planned",
+          "simulation_tick": 0,
+          "tasks": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+              "goal": "PomoToki 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+              "goal": "Focus To-Do 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "goal": "PomoToki 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R1"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R1"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "goal": "Focus To-Do 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R2"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R2"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "goal": "조건 충족 시 대안 앱 발굴",
+              "role": "discovery",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "all_verdicts_are",
+                "verdict_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-J1-1",
+                  "MOCK-REQ-R03-APP-C3-001-J2-1"
+                ],
+                "status": "미충족"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+              "goal": "지정 후보의 조건별 결과 비교",
+              "role": "comparison",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+              "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+              "role": "synthesis",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-COMPARE"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-D1"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            }
+          ],
+          "verdicts": [],
+          "decisions": [],
+          "report": null
+        },
+        {
+          "phase": "awaiting_confirmation",
+          "simulation_tick": 1,
+          "tasks": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+              "goal": "PomoToki 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+              "goal": "Focus To-Do 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "실패",
+              "status_reason": "합성 자료 접근 실패",
+              "failure_reason": "합성 자료 접근 실패",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "goal": "PomoToki 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R1"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R1"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "goal": "Focus To-Do 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R2"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R2"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "goal": "조건 충족 시 대안 앱 발굴",
+              "role": "discovery",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "all_verdicts_are",
+                "verdict_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-J1-1",
+                  "MOCK-REQ-R03-APP-C3-001-J2-1"
+                ],
+                "status": "미충족"
+              },
+              "status": "보류",
+              "status_reason": "condition_unknown",
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+              "goal": "지정 후보의 조건별 결과 비교",
+              "role": "comparison",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+              "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+              "role": "synthesis",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-COMPARE"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-D1"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            }
+          ],
+          "verdicts": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_id": "offline_timer",
+              "status": "미충족",
+              "evidence_ids": [
+                "MOCK-REQ-R03-APP-C3-001-E1-1"
+              ],
+              "reason": "합성 자료의 조건별 직접 근거",
+              "simulation": true
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_id": "offline_timer",
+              "status": "미확인",
+              "evidence_ids": [],
+              "reason": "자료 접근 실패로 판단 근거 없음",
+              "simulation": true
+            }
+          ],
+          "decisions": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "verdict_ids": [
+                "MOCK-REQ-R03-APP-C3-001-J1-1",
+                "MOCK-REQ-R03-APP-C3-001-J2-1"
+              ],
+              "action": "보류",
+              "condition_result": "미확인",
+              "reason": "condition_unknown"
+            }
+          ],
+          "report": null
+        },
+        {
+          "phase": "limit_closed",
+          "simulation_tick": 2,
+          "tasks": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+              "goal": "PomoToki 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+              "goal": "Focus To-Do 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "실패",
+              "status_reason": "합성 자료 접근 실패",
+              "failure_reason": "합성 자료 접근 실패",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "goal": "PomoToki 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R1"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R1"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "goal": "Focus To-Do 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R2"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R2"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "goal": "조건 충족 시 대안 앱 발굴",
+              "role": "discovery",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "all_verdicts_are",
+                "verdict_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-J1-1",
+                  "MOCK-REQ-R03-APP-C3-001-J2-1"
+                ],
+                "status": "미충족"
+              },
+              "status": "생략",
+              "status_reason": "limit_reached_condition_unknown",
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+              "goal": "지정 후보의 조건별 결과 비교",
+              "role": "comparison",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+              "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+              "role": "synthesis",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-COMPARE"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-D1"
+                ]
+              },
+              "status": "대기",
+              "status_reason": null,
+              "failure_reason": null
+            }
+          ],
+          "verdicts": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_id": "offline_timer",
+              "status": "미충족",
+              "evidence_ids": [
+                "MOCK-REQ-R03-APP-C3-001-E1-1"
+              ],
+              "reason": "합성 자료의 조건별 직접 근거",
+              "simulation": true
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_id": "offline_timer",
+              "status": "미확인",
+              "evidence_ids": [],
+              "reason": "자료 접근 실패로 판단 근거 없음",
+              "simulation": true
+            }
+          ],
+          "decisions": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "verdict_ids": [
+                "MOCK-REQ-R03-APP-C3-001-J1-1",
+                "MOCK-REQ-R03-APP-C3-001-J2-1"
+              ],
+              "action": "보류",
+              "condition_result": "미확인",
+              "reason": "condition_unknown"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC2",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "verdict_ids": [
+                "MOCK-REQ-R03-APP-C3-001-J1-1",
+                "MOCK-REQ-R03-APP-C3-001-J2-1"
+              ],
+              "action": "최종 미실행",
+              "condition_result": "미확인",
+              "reason": "limit_reached_condition_unknown",
+              "limit": {
+                "kind": "simulation_tick",
+                "value": 2,
+                "scope": "fixture-only; not product policy"
+              }
+            }
+          ],
+          "report": null
+        },
+        {
+          "phase": "reported",
+          "simulation_tick": 2,
+          "tasks": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+              "goal": "PomoToki 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+              "goal": "Focus To-Do 자료 확인",
+              "role": "research",
+              "depends_on": [],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "실패",
+              "status_reason": "합성 자료 접근 실패",
+              "failure_reason": "합성 자료 접근 실패",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "goal": "PomoToki 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R1"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R1"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "goal": "Focus To-Do 조건별 판정",
+              "role": "verification",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-R2"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-R2"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null,
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_ids": [
+                "offline_timer"
+              ]
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "goal": "조건 충족 시 대안 앱 발굴",
+              "role": "discovery",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "all_verdicts_are",
+                "verdict_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-J1-1",
+                  "MOCK-REQ-R03-APP-C3-001-J2-1"
+                ],
+                "status": "미충족"
+              },
+              "status": "생략",
+              "status_reason": "limit_reached_condition_unknown",
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+              "goal": "지정 후보의 조건별 결과 비교",
+              "role": "comparison",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-V1",
+                "MOCK-REQ-R03-APP-C3-001-V2"
+              ],
+              "run_if": {
+                "op": "always"
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+              "goal": "확인 내용과 미확인·실패를 보존한 보고서",
+              "role": "synthesis",
+              "depends_on": [
+                "MOCK-REQ-R03-APP-C3-001-COMPARE"
+              ],
+              "run_if": {
+                "op": "all_tasks_terminal",
+                "task_ids": [
+                  "MOCK-REQ-R03-APP-C3-001-D1"
+                ]
+              },
+              "status": "완료",
+              "status_reason": null,
+              "failure_reason": null
+            }
+          ],
+          "verdicts": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+              "condition_id": "offline_timer",
+              "status": "미충족",
+              "evidence_ids": [
+                "MOCK-REQ-R03-APP-C3-001-E1-1"
+              ],
+              "reason": "합성 자료의 조건별 직접 근거",
+              "simulation": true
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+              "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+              "condition_id": "offline_timer",
+              "status": "미확인",
+              "evidence_ids": [],
+              "reason": "자료 접근 실패로 판단 근거 없음",
+              "simulation": true
+            }
+          ],
+          "decisions": [
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC1",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "verdict_ids": [
+                "MOCK-REQ-R03-APP-C3-001-J1-1",
+                "MOCK-REQ-R03-APP-C3-001-J2-1"
+              ],
+              "action": "보류",
+              "condition_result": "미확인",
+              "reason": "condition_unknown"
+            },
+            {
+              "request_id": "MOCK-REQ-R03-APP-C3-001",
+              "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC2",
+              "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+              "verdict_ids": [
+                "MOCK-REQ-R03-APP-C3-001-J1-1",
+                "MOCK-REQ-R03-APP-C3-001-J2-1"
+              ],
+              "action": "최종 미실행",
+              "condition_result": "미확인",
+              "reason": "limit_reached_condition_unknown",
+              "limit": {
+                "kind": "simulation_tick",
+                "value": 2,
+                "scope": "fixture-only; not product policy"
+              }
+            }
+          ],
+          "report": {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "report_id": "MOCK-REQ-R03-APP-C3-001-REPORT1",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+            "status": "부분 결과",
+            "claim_ids": [
+              "MOCK-REQ-R03-APP-C3-001-CLAIM1"
+            ],
+            "verdict_ids": [
+              "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "MOCK-REQ-R03-APP-C3-001-J2-1"
+            ],
+            "source_ids": [
+              "MOCK-REQ-R03-APP-C3-001-S1",
+              "MOCK-REQ-R03-APP-C3-001-S2"
+            ],
+            "unverified": [
+              {
+                "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+                "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+                "condition_id": "offline_timer",
+                "reason": "자료 접근 실패로 판단 근거 없음"
+              }
+            ],
+            "failures": [
+              {
+                "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+                "reason": "합성 자료 접근 실패"
+              }
+            ],
+            "decision_ids": [
+              "MOCK-REQ-R03-APP-C3-001-DEC1",
+              "MOCK-REQ-R03-APP-C3-001-DEC2"
+            ],
+            "termination_reason": "confirmation_limit_reached",
+            "simulation": true
+          }
+        }
+      ],
+      "report": {
+        "request_id": "MOCK-REQ-R03-APP-C3-001",
+        "report_id": "MOCK-REQ-R03-APP-C3-001-REPORT1",
+        "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+        "status": "부분 결과",
+        "claim_ids": [
+          "MOCK-REQ-R03-APP-C3-001-CLAIM1"
+        ],
+        "verdict_ids": [
+          "MOCK-REQ-R03-APP-C3-001-J1-1",
+          "MOCK-REQ-R03-APP-C3-001-J2-1"
+        ],
+        "source_ids": [
+          "MOCK-REQ-R03-APP-C3-001-S1",
+          "MOCK-REQ-R03-APP-C3-001-S2"
+        ],
+        "unverified": [
+          {
+            "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+            "condition_id": "offline_timer",
+            "reason": "자료 접근 실패로 판단 근거 없음"
+          }
+        ],
+        "failures": [
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+            "reason": "합성 자료 접근 실패"
+          }
+        ],
+        "decision_ids": [
+          "MOCK-REQ-R03-APP-C3-001-DEC1",
+          "MOCK-REQ-R03-APP-C3-001-DEC2"
+        ],
+        "termination_reason": "confirmation_limit_reached",
+        "simulation": true
+      },
+      "screen_payload": {
+        "request_id": "MOCK-REQ-R03-APP-C3-001",
+        "simulation": true,
+        "report_status": "부분 결과",
+        "task_statuses": [
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+            "status": "실패",
+            "status_reason": "합성 자료 접근 실패",
+            "failure_reason": "합성 자료 접근 실패"
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+            "status": "생략",
+            "status_reason": "limit_reached_condition_unknown",
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-COMPARE",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          },
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-REPORT",
+            "status": "완료",
+            "status_reason": null,
+            "failure_reason": null
+          }
+        ],
+        "claims": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "claim_id": "MOCK-REQ-R03-APP-C3-001-CLAIM1",
+            "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+            "text": "합성 판정 MOCK-REQ-R03-APP-C3-001-J1-1: 미충족 (실제 앱 기능 주장 아님)",
+            "status": "합성 근거 연결",
+            "evidence_ids": [
+              "MOCK-REQ-R03-APP-C3-001-E1-1"
+            ],
+            "simulation": true
+          }
+        ],
+        "verdicts": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "verdict_id": "MOCK-REQ-R03-APP-C3-001-J1-1",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-V1",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+            "condition_id": "offline_timer",
+            "status": "미충족",
+            "evidence_ids": [
+              "MOCK-REQ-R03-APP-C3-001-E1-1"
+            ],
+            "reason": "합성 자료의 조건별 직접 근거",
+            "simulation": true
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-V2",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+            "condition_id": "offline_timer",
+            "status": "미확인",
+            "evidence_ids": [],
+            "reason": "자료 접근 실패로 판단 근거 없음",
+            "simulation": true
+          }
+        ],
+        "evidence": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "evidence_id": "MOCK-REQ-R03-APP-C3-001-E1-1",
+            "source_id": "MOCK-REQ-R03-APP-C3-001-S1",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+            "condition_id": "offline_timer",
+            "finding": "합성 자료: 대상 1의 Android 오프라인 타이머 조건 미충족",
+            "locator": "fixture.outcomes[0][0]",
+            "simulation": true
+          }
+        ],
+        "sources": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "source_id": "MOCK-REQ-R03-APP-C3-001-S1",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-R1",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C1",
+            "url": "mock://r03-io/APP-C3/source-1",
+            "retrieved_at": null,
+            "simulation_tick": 1,
+            "access_status": "원문 확인",
+            "error_reason": null,
+            "data_kind": "synthetic fixture; no URL fetched"
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "source_id": "MOCK-REQ-R03-APP-C3-001-S2",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+            "url": "mock://r03-io/APP-C3/source-2",
+            "retrieved_at": null,
+            "simulation_tick": 1,
+            "access_status": "접근 실패",
+            "error_reason": "합성 자료 접근 실패",
+            "data_kind": "synthetic fixture; no URL fetched"
+          }
+        ],
+        "uncertainties": [
+          {
+            "verdict_id": "MOCK-REQ-R03-APP-C3-001-J2-1",
+            "candidate_id": "MOCK-REQ-R03-APP-C3-001-C2",
+            "condition_id": "offline_timer",
+            "reason": "자료 접근 실패로 판단 근거 없음"
+          }
+        ],
+        "failures": [
+          {
+            "task_id": "MOCK-REQ-R03-APP-C3-001-R2",
+            "reason": "합성 자료 접근 실패"
+          }
+        ],
+        "discovery_decisions": [
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC1",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+            "verdict_ids": [
+              "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "MOCK-REQ-R03-APP-C3-001-J2-1"
+            ],
+            "action": "보류",
+            "condition_result": "미확인",
+            "reason": "condition_unknown"
+          },
+          {
+            "request_id": "MOCK-REQ-R03-APP-C3-001",
+            "decision_id": "MOCK-REQ-R03-APP-C3-001-DEC2",
+            "task_id": "MOCK-REQ-R03-APP-C3-001-D1",
+            "verdict_ids": [
+              "MOCK-REQ-R03-APP-C3-001-J1-1",
+              "MOCK-REQ-R03-APP-C3-001-J2-1"
+            ],
+            "action": "최종 미실행",
+            "condition_result": "미확인",
+            "reason": "limit_reached_condition_unknown",
+            "limit": {
+              "kind": "simulation_tick",
+              "value": 2,
+              "scope": "fixture-only; not product policy"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "case_id": "APP-A",
+      "run_id": "MOCK-REQ-R03-APP-A-001-RUN1",
+      "checks": [
+        {
+          "criterion": "FR-02/03: request scope and unique object IDs",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-02: task goals, roles, run_if and reasons are explicit",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-03: dependency outcomes precede starts; failed input allowed only by explicit terminal gate",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-03: result-based task gates have finished inputs",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-01/04: every target x required/preferred condition has one verdict",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: verdict -> task and supporting evidence -> original source",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: claims and report retain resolvable verdict/evidence/source references",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: failed access produces no evidence; unknown stays separate from task status",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: partial report preserves known and unknown conditions",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-03/04: screen payload retains failures, unknowns, report state and reasons",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "APP-A: no discovery task; preference does not become required",
+          "verdict": "pass"
+        }
+      ]
+    },
+    {
+      "case_id": "APP-C3",
+      "run_id": "MOCK-REQ-R03-APP-C3-001-RUN1",
+      "checks": [
+        {
+          "criterion": "FR-02/03: request scope and unique object IDs",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-02: task goals, roles, run_if and reasons are explicit",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-03: dependency outcomes precede starts; failed input allowed only by explicit terminal gate",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-03: result-based task gates have finished inputs",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-01/04: every target x required/preferred condition has one verdict",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: verdict -> task and supporting evidence -> original source",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: claims and report retain resolvable verdict/evidence/source references",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: failed access produces no evidence; unknown stays separate from task status",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-04: partial report preserves known and unknown conditions",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "FR-03/04: screen payload retains failures, unknowns, report state and reasons",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "APP-C3: unresolved run_if references condition verdict IDs",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "APP-C3: defer -> limit event -> final non-execution -> report",
+          "verdict": "pass"
+        },
+        {
+          "criterion": "APP-C3: discovery never starts; terminal reason and fixture limit retained",
+          "verdict": "pass"
+        }
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "dangling evidence reference",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "FR-04: verdict -> task and supporting evidence -> original source",
+          "verdict": "fail"
+        }
+      ]
+    },
+    {
+      "id": "unsupported positive verdict",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "FR-04: verdict -> task and supporting evidence -> original source",
+          "verdict": "fail"
+        }
+      ]
+    },
+    {
+      "id": "premature discovery during unknown",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "APP-C3: discovery never starts; terminal reason and fixture limit retained",
+          "verdict": "fail"
+        }
+      ]
+    },
+    {
+      "id": "lost final non-execution reason",
+      "detected": true,
+      "failures": [
+        {
+          "criterion": "FR-02: task goals, roles, run_if and reasons are explicit",
+          "verdict": "fail"
+        },
+        {
+          "criterion": "APP-C3: discovery never starts; terminal reason and fixture limit retained",
+          "verdict": "fail"
+        }
+      ]
+    }
+  ]
+}
