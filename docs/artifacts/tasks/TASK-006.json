@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "id": "TASK-006",
+  "kind": "task",
+  "status": "진행 중",
+  "owner": "R05",
+  "due": "2026-11-12",
+  "updated_at": "2026-11-12",
+  "question": "사용자 요청부터 근거가 연결된 결과와 미확인·실패 상태까지 처리하려면 어떤 구성요소가 필요하고, 각 구성요소는 어떤 데이터를 주고받으며, 어떤 순서로 구현·통합해야 하는가? 현재 팀 역할을 기준으로 각 작업은 누구에게 배분하는 것이 적절한가?",
+  "goal": "기획서 6·8장의 구현 방향과 WBS에 넣을 실제 작업·의존성 초안을 만든다.",
+  "inputs": [
+    "docs/artifacts/planning/기획서_초안.json",
+    "docs/artifacts/specs/focus_apps.json",
+    "docs/charter/팀_헌장.md",
+    "docs/artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json",
+    "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+  ],
+  "scope": [
+    "기술 선택은 확정하지 않고 필요한 검증 조건만 정리",
+    "요청·계획·역할 배정·작업 상태·출처·근거·결과의 최소 입출력을 정리",
+    "에이전트·백엔드·화면·인프라·통합·QA 작업의 담당 영역·산출물·선행 조건·예상 규모를 도출",
+    "팀별 중복 구현이나 순환 의존을 찾아 조정할 항목을 표시",
+    "언어·프레임워크·검색 공급자는 기존 근거로 초기안 또는 결정 조건을 제시"
+  ],
+  "outputs": [
+    "result에 구성요소별 책임·입출력·실패 처리와 구현 작업 목록",
+    "WBS 입력용 작업 ID 후보·담당 역할·예상 기간·선행 작업·산출물·완료 조건"
+  ],
+  "acceptance": [
+    "FR-01~04 각각을 맡을 구성요소와 통합 지점이 있음",
+    "에이전트·서버·화면·배포·시험 작업이 최소 흐름에 연결됨",
+    "초기 기술 선택에 따른 재작업 위험과 팀이 확인할 추정값이 표시됨"
+  ],
+  "verification": [
+    "의존 작업을 순서대로 따라 요청 하나가 결과까지 이어지는지 검토",
+    "팀 헌장 역할과 충돌하거나 소유자가 없는 작업을 확인"
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/planning/기획서_초안.json"
+    },
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/charter/팀_헌장.md"
+    },
+    {
+      "path": "docs/artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json"
+    },
+    {
+      "path": "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+    }
+  ],
+  "result": {
+    "summary": "오전 진행 초안. FR-01~04를 요청 구조화 → 계획·역할 배정 → 작업 실행·상태 → 자료 조회·출처 기록 → 근거 연결·조건 판정 → 결과 생성에 대응시켰다. 각 단계의 데이터와 담당은 제안이며, 실제 실행·통합 시험과 팀 간 계약 합의는 아직 하지 않았다.",
+    "claims": [
+      {
+        "id": "TASK-006-C01",
+        "text": "현재 평가 기준은 사용자 조건 구분, 작업·역할 계획, 조건부 실행 기록, 근거가 연결된 조건별 판정을 요구한다.",
+        "status": "문서 확인",
+        "evidence_ids": [
+          "TASK-006-E01"
+        ]
+      },
+      {
+        "id": "TASK-006-C02",
+        "text": "요청·계획·작업·출처·근거·조건 판정·보고서를 구분하면 FR-01~04의 입력과 결과를 연결하는 최소 데이터 흐름을 제안할 수 있다.",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E02",
+          "TASK-006-E03"
+        ]
+      },
+      {
+        "id": "TASK-006-C03",
+        "text": "R03은 계획·조사·판정 로직, R05는 API·작업 상태·출처 및 근거 연결, R04는 입력·결과 화면, R02는 자료 접근·운영 제약, R01은 범위 조정·통합·QA를 맡는 안이 현행 역할과 부합한다.",
+        "status": "담당 제안",
+        "evidence_ids": [
+          "TASK-006-E04",
+          "TASK-006-E05"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "TASK-006-E01",
+        "label": "집중 앱 평가 요구사항과 APP-A·B·C 사례",
+        "path": "docs/artifacts/specs/focus_apps.json"
+      },
+      {
+        "id": "TASK-006-E02",
+        "label": "R05 백엔드 데이터 흐름 초안",
+        "path": "docs/artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json"
+      },
+      {
+        "id": "TASK-006-E03",
+        "label": "R05 출처 저장 방식 초안",
+        "path": "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+      },
+      {
+        "id": "TASK-006-E04",
+        "label": "팀 역할과 책임",
+        "path": "docs/charter/팀_헌장.md"
+      },
+      {
+        "id": "TASK-006-E05",
+        "label": "오늘의 작업 범위와 완료 기준",
+        "path": "docs/artifacts/tasks/TASK-006.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "FR-01~04 각각에 책임 구성요소와 데이터 연결을 지정했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E05"
+        ]
+      },
+      {
+        "criterion": "요청 하나가 실제 실행을 통해 근거 있는 결과까지 도달하는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-006-E01"
+        ]
+      },
+      {
+        "criterion": "담당 제안과 입출력 계약을 관련 팀원과 확인했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-006-E04"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "R03·R04·R02와 최소 입출력 필드 및 역할 경계를 아직 합의하지 않았다.",
+      "앱 자료의 접근·보관 가능 범위와 실패 시 대체 출처는 TASK-004 결과를 확인해야 한다.",
+      "재시도 상한, 부분 결과의 완료 기준, 프레임워크 필요성은 아직 검증하지 않았다."
+    ],
+    "decision_requests": [
+      "R01이 TASK-007에서 역할 배정과 MVP의 부분 결과·조건부 추가 조사 범위를 조정해야 한다."
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "name": "요청 구조화",
+        "input": "사용자 원문과 명시 조건",
+        "output": "request_id, 플랫폼, 지정 앱, 필수 조건, 선호, 후보 발굴 조건",
+        "failure": "필수 조건 부족은 확인 질문 또는 미확인으로 기록",
+        "proposed_owner": "R04 화면, R05 API, R03 해석 규칙",
+        "requirements": [
+          "FR-01"
+        ]
+      },
+      {
+        "id": "C2",
+        "name": "계획·역할 배정",
+        "input": "구조화된 요청",
+        "output": "task_id, 목표, 역할, 선행 작업, 실행 조건이 있는 계획",
+        "failure": "계획 생성·검증 실패 이유를 기록하고 실행 보류",
+        "proposed_owner": "R03 계획 로직, R05 계획 저장·검증",
+        "requirements": [
+          "FR-02"
+        ]
+      },
+      {
+        "id": "C3",
+        "name": "작업 실행·상태",
+        "input": "계획, 선행 작업 결과, 실행 조건",
+        "output": "작업별 시작·종료·상태·실패 또는 생략 이유",
+        "failure": "시간 초과·실행 실패와 재시도 이력을 별도 기록",
+        "proposed_owner": "R05 실행 상태, R03 하위 에이전트",
+        "requirements": [
+          "FR-03"
+        ]
+      },
+      {
+        "id": "C4",
+        "name": "자료 조회·출처 기록",
+        "input": "작업별 조사 대상과 검색 조건",
+        "output": "source_id, URL, 조회 시각, 검색만 가능·원문 확인·실패 상태",
+        "failure": "접근 실패를 남기고 해당 출처에서 근거를 만들지 않음",
+        "proposed_owner": "R03 조사 도구, R02 접근 제약, R05 조회 기록",
+        "requirements": [
+          "FR-03",
+          "FR-04"
+        ]
+      },
+      {
+        "id": "C5",
+        "name": "근거 연결·조건 판정",
+        "input": "원문에서 확인한 내용, 출처 기록, 필수 조건",
+        "output": "evidence_id, 조건별 충족·미충족·미확인, 근거 연결",
+        "failure": "근거가 없거나 충돌하면 충족으로 단정하지 않음",
+        "proposed_owner": "R03 추출·판정, R05 근거 연결",
+        "requirements": [
+          "FR-04"
+        ]
+      },
+      {
+        "id": "C6",
+        "name": "결과 생성·표시",
+        "input": "조건 판정, 근거, 작업 상태",
+        "output": "후보별 판단, 출처 링크, 조회 시각, 미확인·실패 내역",
+        "failure": "부분 결과와 부족한 근거를 명시",
+        "proposed_owner": "R03 결과 종합, R05 결과 API, R04 화면, R01 통합·QA",
+        "requirements": [
+          "FR-04"
+        ]
+      }
+    ],
+    "data_contracts": [
+      {
+        "name": "request",
+        "fields": [
+          "request_id",
+          "platform",
+          "specified_candidates",
+          "must_conditions",
+          "preferences",
+          "discovery_condition"
+        ]
+      },
+      {
+        "name": "task",
+        "fields": [
+          "task_id",
+          "request_id",
+          "goal",
+          "role",
+          "depends_on",
+          "run_if",
+          "status",
+          "failure_reason"
+        ]
+      },
+      {
+        "name": "source",
+        "fields": [
+          "source_id",
+          "task_id",
+          "url",
+          "retrieved_at",
+          "access_status",
+          "error_reason"
+        ]
+      },
+      {
+        "name": "evidence",
+        "fields": [
+          "evidence_id",
+          "source_id",
+          "finding",
+          "locator"
+        ]
+      },
+      {
+        "name": "claim",
+        "fields": [
+          "claim_id",
+          "text",
+          "status",
+          "evidence_ids"
+        ]
+      },
+      {
+        "name": "verdict",
+        "fields": [
+          "candidate_id",
+          "condition_id",
+          "status",
+          "evidence_ids"
+        ]
+      },
+      {
+        "name": "report",
+        "fields": [
+          "request_id",
+          "claims",
+          "verdicts",
+          "source_ids",
+          "uncertainties",
+          "failures"
+        ]
+      }
+    ],
+    "requirement_map": [
+      {
+        "id": "FR-01",
+        "components": [
+          "C1"
+        ],
+        "integration": "R04 입력 → R05 요청 API → R03 해석 규칙"
+      },
+      {
+        "id": "FR-02",
+        "components": [
+          "C2"
+        ],
+        "integration": "R03 계획 출력 → R05 계획 저장·검증"
+      },
+      {
+        "id": "FR-03",
+        "components": [
+          "C2",
+          "C3",
+          "C4"
+        ],
+        "integration": "R05 실행 상태 ↔ R03 조사 작업, R02 자료 접근 제약"
+      },
+      {
+        "id": "FR-04",
+        "components": [
+          "C4",
+          "C5",
+          "C6"
+        ],
+        "integration": "R03 판정 → R05 출처·근거·결과 API → R04 결과 화면"
+      }
+    ]
+  },
+  "title": "최소 구현 구조·영역별 작업·의존성 도출",
+  "suggested_owner": "R05",
+  "assignment_status": "제안",
+  "schedule_status": "내부 목표일 제안",
+  "milestone": "2026-11-13",
+  "stage": "실행 범위",
+  "depends_on": [],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01",
+    "SUB-02"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
+  "intent_ref": "docs/human/task-intents/TASK-006.md"
+}

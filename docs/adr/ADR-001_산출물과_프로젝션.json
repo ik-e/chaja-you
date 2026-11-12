@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "ADR-001",
+  "kind": "decision",
+  "status": "확정",
+  "decided_at": "2026-11-12",
+  "title": "산출물과 프로젝션 운영",
+  "owner": "프로젝트 리더",
+  "context": "프로젝트 문서 재편과 AI 친화적인 산출물, 사람용 프로젝션을 요청했다.",
+  "options": [
+    "기획·진척·평가를 사람이 보는 문서마다 관리",
+    "구조화 산출물을 원본으로 관리하고 사람용 문서를 생성"
+  ],
+  "evidence": [
+    "사용자가 PROJECT·CURRENT·EVAL·ADR·TASK 중심 재편을 요청",
+    "사용자가 사람의 확인 공간은 AI 산출물의 프로젝션이라고 명시",
+    "사용자가 AI 산출물은 AI가 작업하기 좋은 형태여야 한다고 명시"
+  ],
+  "decision": "최종 제품 목표는 PROJECT에 두고, AI 산출물은 구조화 데이터로 관리한다. CURRENT·EVAL·사람용 검토 화면·제출물은 원본에서 생성한다.",
+  "reason": "AI가 상태와 근거를 복원하고, 사람이 판단에 필요한 내용에서 원본 근거로 이동할 수 있게 한다.",
+  "revisit": "운영하면서 필수 제출 형식이나 작업 데이터가 현재 구조로 표현되지 않거나, 프로젝션에서 중요한 실패와 불확실성을 누락하면 재검토한다.",
+  "references": [
+    {
+      "path": "PROJECT.md"
+    },
+    {
+      "path": "docs/artifacts/state/current.json"
+    }
+  ],
+  "decided_by": "project_leader",
+  "authority_ref": "docs/human/INTENT.md",
+  "authority_id": "INTENT-OPS-001"
+}
