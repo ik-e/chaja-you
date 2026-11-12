@@ -46,13 +46,16 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-002.json)
 
-Step 1 필수 제출물은 기획서와 WBS 두 개이며 실제 제출 파일은 docs/step1/에 둔다. 기획서·WBS의 강제 세부 목차는 확인되지 않았고 제공 가이드는 품질 참고 기준으로 사용한다. 정확한 파일 형식·파일명 규칙·제출 시각·별도 접수 동작은 아직 미확인이다.
+Step 1 필수 제출물은 기획서와 WBS 두 개이며 실제 제출 파일은 docs/step1/에 둔다. 제출물 관련 공개 기준은 Gitea FinalProject 최신 원문과 OUTPUT-GUIDE.md를 우선 확인하도록 기준 경로를 고정했다. 2026-11-12 10:32:53 +09 기준 OUTPUT-GUIDE.md 갱신 표시를 확인했지만, 정확한 파일 형식·파일명 규칙·제출 시각·별도 접수 동작의 개별 규칙은 원문 내용 재확인 전까지 미확인으로 유지한다.
 
 검증과 근거
 
 - Step 1 제출물 종류와 저장 위치가 확인되었는가 · pass
 - 정확한 파일 형식·파일명·제출 시각·별도 제출 동작이 확인되었는가 · inconclusive
+- 제출 규칙의 공개 원문 기준 경로와 최신 변경 여부를 확인했는가 · pass
 - [R01 Step 1 제출물 운영 결정](../human/responses/HRESP-20261112-01_step1_제출물_운영.md)
+- [2026-11-12 FinalProject 가이드 불변 커밋 스냅샷](../guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json)
+- [최종 프로젝트 공개 가이드 원문 위치 및 OUTPUT-GUIDE 최신 변경 확인](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject)
 
 남은 불확실성과 결정 요청
 
