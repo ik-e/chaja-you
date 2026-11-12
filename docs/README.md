@@ -6,7 +6,7 @@
 | 프로젝트의 최종 목표 | [PROJECT](../PROJECT.md) |
 | 현재 범위·우선순위·작업 | [CURRENT](../CURRENT.md) |
 | 사람이 확인할 결과·근거·결정 요청 | [검토 화면](review/README.md) |
-| 필수 제출물과 준비·제출 상태 | [제출물](submissions/README.md) |
+| 필수 제출물과 준비·제출 상태 | [제출물 인덱스](submissions/README.md) · [Step 1](step1/README.md) |
 | 판정 기준 | [EVAL](../EVAL.md) |
 | AI가 작업할 입력·상세 산출물 | [TASK](../TASK.md) · [AI 산출물](artifacts/README.md) |
 | 중요한 결정과 재검토 조건 | [ADR](adr/README.md) |
