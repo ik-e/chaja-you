@@ -11,9 +11,10 @@
 ## 사람이 쓰는 입력
 
 - [INTENT](INTENT.md): 장기간 유지할 목표·운영 원칙·제약을 사람이 직접 관리합니다.
+- [task-intents](task-intents/README.md): 배정된 TASK를 수행할 때 R01이 중요하게 보는 목적·경계·결정 반환 지점을 기록합니다.
 - [responses](responses/README.md): 특정 OPEN/TASK/ADR에 승인·수정·보류·거절·추가 지시를 남깁니다.
 
-생성된 `review/`, `submissions/`, `PROJECT.md`, `CURRENT.md`, `EVAL.md`는 직접 수정하지 않습니다. 사람이 방향을 바꾸려면 `INTENT.md` 또는 `responses/`에 남기고, AI가 그 입력을 ADR·state·spec·task 원본에 반영한 뒤 프로젝션을 재생성합니다.
+생성된 `review/`, `submissions/`, `PROJECT.md`, `CURRENT.md`, `EVAL.md`는 직접 수정하지 않습니다. 사람이 방향을 바꾸려면 `INTENT.md`, `task-intents/` 또는 `responses/`에 남기고, AI가 그 입력을 ADR·state·spec·task 원본에 반영한 뒤 프로젝션을 재생성합니다.
 
 ```text
 AI canonical artifacts
