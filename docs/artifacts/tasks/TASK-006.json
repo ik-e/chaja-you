@@ -53,7 +53,7 @@
     }
   ],
   "result": {
-    "summary": "R05 독립 작업 초안. FR-01~04를 요청 구조화 → 계획·역할 배정 → 작업 실행·상태 → 자료 조회·출처 기록 → 근거 연결·조건 판정 → 결과 생성에 대응시켰다. APP-A의 지정 비교를 첫 통합 흐름으로 구현하고, APP-B의 신규 발굴과 APP-C의 중간 결과에 따른 대안 발굴을 순서대로 추가하는 작업·의존성 제안이다. 담당·기간·기술 선택은 팀 확정 전이며 실제 실행·통합 시험과 팀 간 입출력 계약 합의는 하지 않았다.",
+    "summary": "R05 독립 작업 초안. FR-01~04를 요청 구조화 → 계획·역할 배정 → 작업 실행·상태 → 자료 조회·출처 기록 → 근거 연결·조건 판정 → 결과 생성에 대응시켰다. APP-A의 지정 비교를 첫 통합 흐름으로 구현하고, APP-B의 신규 발굴과 APP-C의 중간 결과에 따른 대안 발굴을 순서대로 추가하는 작업·의존성 제안이다. 합성 자료로 APP-A의 데이터 연결, APP-C의 세 분기, 접근 실패와 조건 미확인의 구분을 검사했다. 담당·기간·기술 선택은 팀 확정 전이며 실제 앱·에이전트 실행과 팀 간 입출력 계약 합의는 하지 않았다.",
     "claims": [
       {
         "id": "TASK-006-C01",
@@ -99,6 +99,12 @@
           "TASK-006-E02",
           "TASK-006-E03"
         ]
+      },
+      {
+        "id": "TASK-006-C06",
+        "text": "합성 입력에 한해 APP-A의 요청·근거·판정·보고서 참조, APP-C의 세 조건 분기, 자료 접근 실패와 조건 미확인의 분리를 검사했다.",
+        "status": "모의 검증 통과 — 제품 실행 아님",
+        "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]
       }
     ],
     "evidence": [
@@ -154,6 +160,9 @@
           "TASK-006-E05"
         ]
       },
+      {"criterion": "합성 APP-A 입력에서 작업·출처·근거·판정·보고서 참조가 이어지고 후보 발굴을 생략하는가", "verdict": "pass", "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]},
+      {"criterion": "합성 APP-C1·C2·C3 판정에서 대안 발굴을 각각 추가·생략·보류하는가", "verdict": "pass", "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]},
+      {"criterion": "합성 자료 접근 실패에서 근거를 생성하지 않고 실행 실패와 조건 미확인을 구분하는가", "verdict": "pass", "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]},
       {
         "criterion": "요청 하나가 실제 실행을 통해 근거 있는 결과까지 도달하는가",
         "verdict": "inconclusive",
@@ -173,7 +182,8 @@
       "R03·R04·R02와 최소 입출력 필드 및 역할 경계를 아직 합의하지 않았다.",
       "앱 자료의 접근·보관 가능 범위와 실패 시 대체 출처는 TASK-004 결과를 확인해야 한다.",
       "재시도 상한, 부분 결과의 완료 기준, 프레임워크 필요성은 아직 검증하지 않았다.",
-      "WBS 후보의 기간과 병렬 수행 가능성은 팀원의 작업 가능 시간과 첫 구현 결과로 조정해야 한다."
+      "WBS 후보의 기간과 병렬 수행 가능성은 팀원의 작업 가능 시간과 첫 구현 결과로 조정해야 한다.",
+      "합성 예시는 실제 앱의 기능, 공개 자료 접근, 에이전트 실행 또는 서비스 통합 성공의 근거가 아니다."
     ],
     "decision_requests": [
       "R01이 TASK-007에서 역할 배정과 MVP의 부분 결과·조건부 추가 조사 범위를 조정해야 한다.",
@@ -636,6 +646,49 @@
         "done_when": "APP-B·C에서 사용자에게 작업·결과 상태와 그 이유가 보임"
       }
     ],
+    "mock_walkthrough": {
+      "scope": "구조와 분기만 검증하는 합성 예시. 실제 앱 기능·웹 출처·에이전트 실행 결과가 아니다.",
+      "app_a": {
+        "request": {
+          "request_id": "MOCK-A",
+          "platform": "Android",
+          "specified_candidates": ["candidate-A", "candidate-B"],
+          "must_conditions": ["offline_timer"],
+          "preferences": ["no_account"],
+          "discovery_condition": "지정 후보만 비교"
+        },
+        "tasks": [
+          {"task_id": "MOCK-T1", "request_id": "MOCK-A", "goal": "candidate-A 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "failure_reason": null},
+          {"task_id": "MOCK-T2", "request_id": "MOCK-A", "goal": "candidate-B 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "failure_reason": null}
+        ],
+        "sources": [
+          {"source_id": "MOCK-S1", "task_id": "MOCK-T1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각", "access_status": "원문 확인", "error_reason": null}
+        ],
+        "evidence": [
+          {"evidence_id": "MOCK-E1", "source_id": "MOCK-S1", "finding": "합성 근거: candidate-A의 offline_timer 조건 충족", "locator": "합성 문단 1"}
+        ],
+        "verdicts": [
+          {"candidate_id": "candidate-A", "condition_id": "offline_timer", "status": "충족", "evidence_ids": ["MOCK-E1"]},
+          {"candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}
+        ],
+        "claims": [
+          {"claim_id": "MOCK-C1", "text": "합성 자료에서 candidate-A의 offline_timer 조건을 확인", "status": "근거 연결", "evidence_ids": ["MOCK-E1"]}
+        ],
+        "report": {"request_id": "MOCK-A", "status": "부분 결과", "claim_ids": ["MOCK-C1"], "unverified": ["candidate-B:offline_timer"], "failures": []}
+      },
+      "app_c_branches": [
+        {"case_id": "APP-C1-mock", "candidate_verdicts": ["미충족", "미충족"], "expected_discovery": "추가", "reason": "두 후보의 필수 조건 미충족을 모두 확인"},
+        {"case_id": "APP-C2-mock", "candidate_verdicts": ["충족", "미충족"], "expected_discovery": "생략", "reason": "한 후보가 필수 조건 충족"},
+        {"case_id": "APP-C3-mock", "candidate_verdicts": ["미충족", "미확인"], "expected_discovery": "보류", "reason": "두 후보 모두 미충족이라는 조건을 확인하지 못함"}
+      ],
+      "source_failure": {
+        "task": {"task_id": "MOCK-TF", "status": "실패", "failure_reason": "합성 자료 접근 실패"},
+        "source": {"source_id": "MOCK-SF", "task_id": "MOCK-TF", "url": "mock://failed-source", "retrieved_at": "합성 조회 시각", "access_status": "접근 실패", "error_reason": "합성 접근 실패"},
+        "evidence": [],
+        "verdict": {"candidate_id": "candidate-F", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []},
+        "report": {"status": "부분 결과", "unverified": ["candidate-F:offline_timer"], "failures": ["MOCK-TF"]}
+      }
+    },
     "risk_register": [
       {
         "risk": "외부 앱 자료의 접근·보관 조건이 미확인",
