@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "id": "R01-CHILDCARE-WAIT-REVIEW-20261113-R1",
+  "kind": "research",
+  "status": "desk_research_complete_causality_open",
+  "owner": "R01",
+  "checked_at": "2026-11-13",
+  "branch": "task/independent-user-problem-research-20261113",
+  "parent": "2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+  "goal": "아이돌봄 연계 지연의 실재, 공급/조건/절차 가설, 현재 해결 수단을 대조해 잠정 타겟 유지·보류 판단",
+  "done_when": [
+    "정부 조사 양측 지표·기관 현황 확인",
+    "기존 매칭/공급개선 확인",
+    "해결 원인별 근거/불확실성 기록",
+    "다음 최소 검증 설계 및 종료 조건 명시"
+  ],
+  "stop_when": [
+    "추가 문헌으로는 원인별 비중 확인 불가능",
+    "실제 기관 자료/당사자 동의가 필요한 단계",
+    "권한 없는 아동정보나 매칭 실행이 요구됨"
+  ],
+  "escalate_when": [
+    "공식 타겟/APP-A/C 변경",
+    "실제 가구·아이돌봄사/기관 연락이나 비식별 집계 외 자료 접근",
+    "실제 아이돌봄 주선/서비스 신청"
+  ],
+  "source_index": [
+    {
+      "id": "S01",
+      "title": "2025 아이돌봄 실태조사 결과, 성평등가족부, 2026-08-13",
+      "url": "https://www.mogef.go.kr/nw/enw/nw_enw_s001d.do?bbtSn=714130&mid=mda700",
+      "access": "search-extract-official",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S02",
+      "title": "2025 아이돌봄 실태조사 브리핑 및 문답, 정부 정책브리핑, 2026-08-13",
+      "url": "https://www.korea.kr/briefing/policyBriefingView.do?newsId=156774423&pWise=sub&pWiseSub=C4",
+      "access": "search-extract-official",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S03",
+      "title": "서비스 신청안내, 아이돌봄서비스 공식 누리집",
+      "url": "https://www.idolbom.go.kr/front/srvcUtztnGuide/srvcApply",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S04",
+      "title": "신청 전 준비안내, 아이돌봄서비스 공식 누리집",
+      "url": "https://www.idolbom.go.kr/front/srvcUtztnGuide/beforeApply",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S05",
+      "title": "자주하는 질문, 아이돌봄서비스 공식 누리집",
+      "url": "https://www.idolbom.go.kr/front/board/question?ctgryCd=10002&page=2",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S06",
+      "title": "아이돌봄 이용가구·인력 통계, 아이돌봄서비스 공식 누리집",
+      "url": "https://care.idolbom.go.kr/dolbomi/biz/stts",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S07",
+      "title": "2026 아이돌봄 지원 확대, 성평등가족부",
+      "url": "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=710800&mid=news405",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S08",
+      "title": "서울형 틈새 아이돌봄 시범 실적, 서울특별시 (2023 실적)",
+      "url": "https://news.seoul.go.kr/welfare/archives/560199",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S09",
+      "title": "2026 서울형 아이돌봄 서비스, 서울특별시",
+      "url": "https://news.seoul.go.kr/welfare/archives/509614",
+      "access": "search-extract-official",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S10",
+      "title": "등하원 아이돌봄 사업안내, 서울특별시",
+      "url": "https://umppa.seoul.go.kr/hmpg/life/cycl/lifeCyclInfoDetail.do?doc_id=065A6647F3584756A84FEC50EC43F413&sys_name=biz",
+      "access": "read-full-page",
+      "checked_at": "2026-11-13"
+    }
+  ],
+  "claims": [
+    {
+      "id": "F01",
+      "status": "verified",
+      "claim": "이미 이용한 가구의 대기: 1주 미만 28.8%, 1주~1개월 31.7%, 1~3개월 20.4%, 3개월 이상 19.1%; 대기기간 만족 2.9/5",
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "limitation": "미이용 신청자 포함한 전체 신청 성공률 아님"
+    },
+    {
+      "id": "F02",
+      "status": "official-diagnosis",
+      "claim": "수요 확대에 비해 아이돌봄사 확대가 충분하지 못한 측면을 정부가 인정",
+      "source_ids": [
+        "S02"
+      ],
+      "limitation": "원인별 발생 비율은 미제공"
+    },
+    {
+      "id": "F03",
+      "status": "verified",
+      "claim": "아이돌봄사 평균 활동 월 118.8시간, 실수령 월 160.5만원; 급여 개선 요구 39%, 원활한 연계 24.2%",
+      "source_ids": [
+        "S01"
+      ],
+      "limitation": "지연에 미치는 인과 기여율은 미확인"
+    },
+    {
+      "id": "F04",
+      "status": "non-comparable",
+      "claim": "주말 이용 의향 조사와 돌봄사의 가장 선호하는 요일/시간 1순위 조사는 질문 방식이 달라 직접 뺄셈 불가",
+      "source_ids": [
+        "S02"
+      ],
+      "limitation": "정부 브리핑 Q&A에서 직접 경고"
+    },
+    {
+      "id": "F05",
+      "status": "existing-solution",
+      "claim": "정부 단기/긴급돌봄에 AI 또는 기관 연계 존재, AI 30분 내 미배정 시 자동 신청취소",
+      "source_ids": [
+        "S03"
+      ],
+      "limitation": "실제 배정 성공률은 미확인"
+    },
+    {
+      "id": "F06",
+      "status": "workflow-confirmed",
+      "claim": "정기돌봄은 기관이 연계; 회원승인·카드·예치금 등 선행 조건 및 일정변경 시 재연계 조건 존재",
+      "source_ids": [
+        "S03",
+        "S04",
+        "S05"
+      ],
+      "limitation": "신청 이탈 기여는 미측정"
+    },
+    {
+      "id": "F07",
+      "status": "municipal-before-after",
+      "claim": "서울 등하원 전담·수당 도입 관련 2023년 발표 대기가정 118→65, 약 44.9% 감소",
+      "source_ids": [
+        "S08"
+      ],
+      "limitation": "시범 지역 전후 결과, 2026 효과나 순수 인과효과 아님"
+    },
+    {
+      "id": "F08",
+      "status": "verified-aggregate",
+      "claim": "2025 공식 운영자료: 이용가구 159804, 아이돌봄사 31718",
+      "source_ids": [
+        "S06"
+      ],
+      "limitation": "가구수/인력수만으로 특정 시간/지역의 가용 공급 판단 불가"
+    },
+    {
+      "id": "F09",
+      "status": "unverified",
+      "claim": "대기 사례 중 실제 활동 가능·자격 충족 돌봄사가 있었지만 연결되지 않은 비율",
+      "source_ids": [],
+      "limitation": "지역·시간대별 익명 운영 기록 필요"
+    },
+    {
+      "id": "F10",
+      "status": "unverified",
+      "claim": "돌봄 공백이 초래한 결근·대체 돌봄비·업무손실의 직접 규모",
+      "source_ids": [],
+      "limitation": "실제 가구 경험과 서비스 데이터 필요"
+    }
+  ],
+  "causes": [
+    {
+      "id": "H1",
+      "name": "자격/시간 조건을 충족하는 실질 공급 부족",
+      "status": "government-diagnosis-supported",
+      "test": "요청 시간·권역별 가용 인력이 0인 비중"
+    },
+    {
+      "id": "H2",
+      "name": "시간대·이동거리·근로조건 불일치",
+      "status": "plausible-not-quantified",
+      "test": "적격 인력이 있으나 근로조건 때문에 거절된 비율; 서로 다른 문항을 비율로 직접 비교 금지"
+    },
+    {
+      "id": "H3",
+      "name": "신청·결제·회원 승인 절차로 인한 이탈",
+      "status": "workflow-known-effect-unverified",
+      "test": "신청 단계별 이탈/오류·예치금 문제 빈도"
+    },
+    {
+      "id": "H4",
+      "name": "기관 재연계/수기조정 부담",
+      "status": "workflow-known-effect-unverified",
+      "test": "취소/재요청 건수 및 조정 소요시간"
+    }
+  ],
+  "target_decision": {
+    "status": "provisionally_retained_not_officially_adopted",
+    "user": "아이돌봄서비스를 신청했지만 필요한 일정에 제때 연계되지 않은 양육가정",
+    "pain": "양육공백이 생기는 특정 시간에 돌봄을 확보하지 못함",
+    "cause": "공급 부족은 공식 진단, 절차/매칭 책임의 기여 비율 미확인",
+    "solution": "새 매칭 AI/플랫폼은 기존 자동연계와 중복이므로 개발 보류",
+    "potential_narrower_segment": "등하원 시간대 이용이 필요한 맞벌이·한부모 가정; 현재 미충족 규모는 검증 전"
+  },
+  "field_validation": {
+    "status": "not_run",
+    "minimum_sources": [
+      "동의받은 양육가정 최근 실패 사례 3~5개",
+      "아이돌봄사 수락/거절 사례 3~5개",
+      "제공기관 비식별 요청·배정·미배정 이유 집계 또는 최근 10~20건"
+    ],
+    "key_fields": [
+      "요청 주간/대략적 시간대",
+      "권역(개인 주소 제외)",
+      "서비스 유형",
+      "해당 시간대 자격 충족 가용 인력 유무",
+      "거절/미응답 이유",
+      "실제 수락/실행 결과",
+      "기관 재연계시간"
+    ],
+    "test": "공급이 존재하는데도 반복적인 누락·조건 조정 실패가 있는가?",
+    "disconfirm": [
+      "대기 대부분이 실제 가용 인력 0으로 설명",
+      "정부의 기존 AI/기관 연계에 추가 가능한 개선이 입증 안 됨",
+      "아동 안전·기관 권한 충족 불가"
+    ]
+  },
+  "execution": {
+    "web_desk_research": "passed",
+    "official_workflow_review": "passed",
+    "literature_causal_partition": "inconclusive",
+    "family_interviews": "not_run",
+    "caregiver_interviews": "not_run",
+    "provider_log_access": "not_run",
+    "prototype": "not_run"
+  }
+}
