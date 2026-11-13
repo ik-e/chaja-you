@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "id": "RUN-20261114-R01-CONTEXT-TOOLS-HYPOTHESIS-PROBE",
+  "kind": "run",
+  "status": "completed_one_model_context_tool_replay",
+  "case_id": "CASE-R01-CONTEXT-TOOLS-HYPOTHESIS-PROBE",
+  "as_of": "2026-11-14",
+  "owner": "R01",
+  "ref": "task/independent-user-problem-research-20261113",
+  "question": "Does context and tool availability enable this AI instance to execute known related tasks without follow-up user corrections?",
+  "hypotheses": {
+    "H1": "The same underlying model can improve execution with relevant context, prior experience and tools, without weight editing.",
+    "H2": "Relevant context and tools alone are sufficient for reliable low-intervention completion across typical tasks."
+  },
+  "method": {
+    "design": "single model instance plus real GitHub reads and deterministic structural/oracle tests; retrospective failure comparison. No randomized held-out LLM comparison and no live second LLM.",
+    "context_sources": [
+      "AGENTS.md",
+      "docs/human/INTENT.md",
+      "docs/artifacts/research/2026-11-13_R01_출처_원본_근거_인덱스_R1.json",
+      "docs/artifacts/research/2026-11-14_R01_타겟_페인포인트_선정_독립조사_R1.json",
+      "docs/artifacts/tasks/TASK-012.json",
+      "docs/artifacts/tasks/TASK-013.json",
+      "docs/artifacts/tasks/TASK-014.json",
+      "docs/artifacts/tasks/TASK-015.json",
+      "docs/artifacts/specs/focus_apps.json",
+      "docs/artifacts/runs/RUN-20261114-R01-research-friction-case.json",
+      "docs/artifacts/evaluations/EVAL-20261114-R01-research-friction-case.json"
+    ],
+    "query_policy": "existing GitHub records as context; no additional external-source web search needed for R01 replay",
+    "interventions": "deliberately corrupted source reference, deliberately stale status, synthetic APP-C outcome states",
+    "risk": "Reusing task data and evaluator construction in same session biases results; policy checks do not demonstrate model reliability."
+  },
+  "tool_trace": {
+    "connected_github_files_read": 11,
+    "browser_tool": "unavailable outside originating browser context, observed in current turn",
+    "independent_model_calls": "unavailable (no configured model credentials in local runtime; user was not asked for secrets)",
+    "external_research": "Separate literature verification of Reflexion, SWE-agent, Mem2ActBench, MemoryAgentBench and invalid memory reuse",
+    "new_external_web_search_for_source_index_questions": 0,
+    "public_repo_only": true
+  },
+  "cases": [
+    {
+      "id": "C01",
+      "name": "existing source re-use and claim references",
+      "expected": "source IDs consistent and 2 reused URLs",
+      "pass": true,
+      "observed": {
+        "claims": 12,
+        "valid": 12,
+        "reused_source_ids": [
+          "N11",
+          "N12"
+        ]
+      }
+    },
+    {
+      "id": "C02",
+      "name": "unacquired original report remains unverified",
+      "expected": "no full report verified in 4 works",
+      "pass": true,
+      "observed": {
+        "works": [
+          {
+            "work": "WORK-2025-CHILDCARE-SURVEY",
+            "status": "not_found_or_not_accessed",
+            "complete": false
+          },
+          {
+            "work": "WORK-2025-GG-MIGRANT-SURVEY",
+            "status": "pdf_attachment_link_seen_but_download_error",
+            "complete": false
+          },
+          {
+            "work": "WORK-2025-SEOUL-DIGITAL-SURVEY",
+            "status": "not_verified_in_this_run",
+            "complete": false
+          },
+          {
+            "work": "WORK-2026-INTEGRATED-CARE-REGIONAL-SURVEY",
+            "status": "underlying_research_report_not_acquired",
+            "complete": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "C03",
+      "name": "fresh task status overrides stale memory",
+      "expected": "TASK-015 not complete; 0/3 dependency results",
+      "pass": true,
+      "observed": {
+        "stale_memory": "완료",
+        "latest_github": "할 일",
+        "task15_result": null,
+        "unfinished": [
+          "TASK-012",
+          "TASK-013",
+          "TASK-014"
+        ]
+      }
+    },
+    {
+      "id": "C04",
+      "name": "APP-C conditional continuation from official task contract",
+      "expected": "discover / skip / hold / final_not_run",
+      "pass": true,
+      "observed": {
+        "cases": [
+          {
+            "case": "APP_C1",
+            "states": [
+              "fail",
+              "fail"
+            ],
+            "expected": "discover",
+            "actual": "discover",
+            "pass": true
+          },
+          {
+            "case": "APP_C2",
+            "states": [
+              "pass",
+              "unknown"
+            ],
+            "expected": "skip",
+            "actual": "skip",
+            "pass": true
+          },
+          {
+            "case": "APP_C3",
+            "states": [
+              "fail",
+              "unknown"
+            ],
+            "expected": "hold",
+            "actual": "hold",
+            "pass": true
+          }
+        ],
+        "budget": {
+          "case": "APP-C3 budget reached",
+          "states": [
+            "fail",
+            "unknown"
+          ],
+          "expected": "final_not_run",
+          "actual": "final_not_run",
+          "pass": true
+        },
+        "unknown_not_treated_as_fail": true
+      }
+    },
+    {
+      "id": "C05",
+      "name": "injected broken evidence reference caught",
+      "expected": "negative control fails validation",
+      "pass": true,
+      "observed": {
+        "broken_id": "SRC-NONEXISTENT",
+        "caught": true
+      }
+    },
+    {
+      "id": "C06",
+      "name": "remember structural replay was not deployed product verification",
+      "expected": "overall evaluation inconclusive",
+      "pass": true,
+      "observed": {
+        "previous_verdict": "inconclusive",
+        "unverified": [
+          "Time saved and user correction count reduced versus control",
+          "Deployed chaja-you feature is working end to end",
+          "Small-team leaders consistently have this problem"
+        ]
+      }
+    },
+    {
+      "id": "C07",
+      "name": "protect human intent and official MVP scope",
+      "expected": "do not mark target as official without human decision",
+      "pass": true,
+      "observed": {
+        "research_target_status": "provisional_target_selected_for_problem_validation",
+        "official_mvp_change": "not_run"
+      }
+    }
+  ],
+  "observed": {
+    "structural_passes": 7,
+    "structural_tests": 7,
+    "negative_control_cases": 2,
+    "negative_control_passes": 2,
+    "source_claim_refs_checked": 12,
+    "prior_url_reuses": 2,
+    "original_studies_verified_full_text": 0,
+    "unsatisfied_team_tasks": 3,
+    "appC_execution": "synthetic/logic only, not live product",
+    "human_corrections_during_this_turn": "not_observable_until_user_reviews",
+    "time_saved_vs_baseline": "not_measured",
+    "quality_improved_vs_baseline": "not_measured",
+    "cost_saved_vs_baseline": "not_measured"
+  },
+  "qualitative_case": {
+    "observed_prior_failures": [
+      "retrieval of previously checked sources requested by user",
+      "project AGENTS instructions were not read before earlier work",
+      "original report verification was overstated",
+      "prior refusal treated as impossible to re-request, corrected by fresh explicit user instruction"
+    ],
+    "current_mechanisms": [
+      "read context from GitHub before selecting next action",
+      "distinguish original-report landing vs full text",
+      "use current task result rather than stale status",
+      "honor conditional follow-up work state",
+      "do not declare product tested when only structural checks run"
+    ],
+    "note": "Prior failures were observed in conversation; no independent blind baseline measurement."
+  },
+  "references": [
+    {
+      "type": "github",
+      "path": "docs/artifacts/research/2026-11-13_R01_출처_원본_근거_인덱스_R1.json"
+    },
+    {
+      "type": "github",
+      "path": "docs/artifacts/research/2026-11-14_R01_타겟_페인포인트_선정_독립조사_R1.json"
+    },
+    {
+      "type": "github",
+      "path": "docs/artifacts/evaluations/EVAL-20261114-R01-research-friction-case.json"
+    },
+    {
+      "type": "paper",
+      "url": "https://papers.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html"
+    },
+    {
+      "type": "paper",
+      "url": "https://papers.nips.cc/paper/2024/hash/5a7c947568c1b1328ccc5230172e1e7c-Abstract-Conference.html"
+    },
+    {
+      "type": "paper",
+      "url": "https://aclanthology.org/2026.acl-long.370/"
+    },
+    {
+      "type": "paper",
+      "url": "https://mlanthology.org/iclr/2026/hu2026iclr-evaluating/"
+    }
+  ],
+  "conclusion": {
+    "H1": "supported_by_prior_ablations_and_local_feasibility_not_causal_local_proof",
+    "H2": "not_supported_as_general_sufficiency_proposition",
+    "what_was_tested": "context retrieval, status reconciliation, branch conditions, evidence checks, stop boundary",
+    "what_was_not_tested": "user time savings, real LLM A/B, general population, autonomous operation over repeated sessions",
+    "next_experiment": "Run same held-out agent tasks with baseline existing AI vs context-pushed vs tools+pushed vs memory/experience combined, same model and permissions, blind grading; measure interventions and completion accuracy."
+  },
+  "write_policy": "research-only output in public repo branch; no private chat, names, credentials, or changes to human decisions"
+}
