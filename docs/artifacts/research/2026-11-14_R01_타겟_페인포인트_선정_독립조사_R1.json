@@ -519,11 +519,45 @@
     "primary_source_comparison": "passed",
     "candidate_selected": "passed",
     "counter_evidence_assessed": "passed",
-    "github_artifact_verification": "not_run",
+    "github_artifact_verification": "passed",
     "team_R02_R03_R05_results_integrated": "not_run_no_task_results",
     "actual_user_interviews": "not_run",
     "baseline_experiment": "not_run",
     "official_product_scope_change": "not_run"
   },
-  "decision_request": "R01은 이 독립 제안을 팀원 3개 독립안과 비교해 첫 검증 타겟으로 유지·수정·기각할 수 있음. 사람이 승인하기 전 공식 제품 타겟으로 승격하지 않음."
+  "decision_request": "R01은 이 독립 제안을 팀원 3개 독립안과 비교해 첫 검증 타겟으로 유지·수정·기각할 수 있음. 사람이 승인하기 전 공식 제품 타겟으로 승격하지 않음.",
+  "verification": {
+    "checks": [
+      {
+        "criterion": "5개 후보별 사용자·과제·기존 대안·반증·판정 기록",
+        "status": "pass",
+        "evidence": "candidates length=5, selected_target"
+      },
+      {
+        "criterion": "외부 주장 12건의 등록 출처 연결 무누락",
+        "status": "pass",
+        "evidence": "claims 12 with source IDs all resolved to sources"
+      },
+      {
+        "criterion": "기존 출처 인덱스의 재사용 경로 연결",
+        "status": "pass",
+        "evidence": "existing_evidence_index"
+      },
+      {
+        "criterion": "사용자 문제 검증과 공식 제품 채택 분리",
+        "status": "pass",
+        "evidence": "status and scope_and_authority"
+      },
+      {
+        "criterion": "기존 Deep Research 기준 대비 사용자 효용 실제 검증",
+        "status": "inconclusive",
+        "evidence": "baseline_test not_run"
+      },
+      {
+        "criterion": "특정 2~10명 팀 리더 사용자 수요",
+        "status": "inconclusive",
+        "evidence": "minimum_user_validation not_run"
+      }
+    ]
+  }
 }
