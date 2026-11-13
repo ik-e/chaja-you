@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "id": "RUN-20261114-R01-RESEARCH-FRICTION",
+  "kind": "run",
+  "status": "completed_scoped_structural_replay",
+  "case_id": "CASE-R01-RESEARCH-DECISION-FRICTION-20261114",
+  "owner": "R01",
+  "executed_at": "2026-11-14",
+  "branch": "task/independent-user-problem-research-20261113",
+  "repository": "ik-e/chaja-you",
+  "task_contract": {
+    "related_task": "TASK-015",
+    "is_official_task_result": false,
+    "goal": "AI가 사용자 반복 지시 없이 기존 근거로 잠정 타겟 선정과 종료 판단을 내릴 수 있는가",
+    "scope": "기존 GitHub 자료에 대한 1회 구조적 재실행. 배포된 찾아you 제품 E2E 테스트가 아님"
+  },
+  "input": {
+    "question": "기존 조사와 출처 인덱스를 재사용해 새 웹 검색 없이 타겟 하나를 잠정 선택하고 근거·종료 조건을 확인할 수 있는가",
+    "sources": [
+      "docs/artifacts/research/2026-11-14_R01_타겟_페인포인트_선정_독립조사_R1.json",
+      "docs/artifacts/research/2026-11-13_R01_출처_원본_근거_인덱스_R1.json",
+      "docs/artifacts/tasks/TASK-012.json",
+      "docs/artifacts/tasks/TASK-013.json",
+      "docs/artifacts/tasks/TASK-014.json",
+      "docs/artifacts/tasks/TASK-015.json"
+    ],
+    "baseline": "현재 대화에서 관찰된 사용자의 보완 지적. 동일 과제에 대한 정량적 대조군 없음",
+    "privacy": "비공개 대화 원문, 개인 연락처, 계정 정보, 비공개 URL을 공개 기록에 복사하지 않음"
+  },
+  "plan": [
+    {
+      "id": "P1",
+      "task": "AGENTS.md 및 사람의 의도와 TASK 계약을 먼저 확인",
+      "depends_on": []
+    },
+    {
+      "id": "P2",
+      "task": "기존 연구 및 원출처 연결 인덱스를 불러오기",
+      "depends_on": [
+        "P1"
+      ]
+    },
+    {
+      "id": "P3",
+      "task": "출처 참조 무결성 및 일부러 넣은 오류 검출 시험",
+      "depends_on": [
+        "P2"
+      ]
+    },
+    {
+      "id": "P4",
+      "task": "기존 후보 비교에서 잠정 대상과 반론을 확인",
+      "depends_on": [
+        "P3"
+      ]
+    },
+    {
+      "id": "P5",
+      "task": "독립 팀원 TASK 결과를 확인하고 완료 여부 분리",
+      "depends_on": [
+        "P1"
+      ]
+    },
+    {
+      "id": "P6",
+      "task": "잠정 타겟과 페인포인트 결론, 하나의 다음 검증만 제시하고 조사 종료",
+      "depends_on": [
+        "P4",
+        "P5"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "P1",
+      "status": "passed",
+      "observed": "AGENTS.md, INTENT.md, README/문서 경로, PROJECT.md, CURRENT.md, TASK.md, EVAL.md 확인",
+      "evidence_ids": [
+        "E01",
+        "E02"
+      ]
+    },
+    {
+      "id": "P2",
+      "status": "passed",
+      "observed": "기존 조사 13개 출처·12개 주장과 78개 출처 URL 기록을 GitHub에서 조회",
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ]
+    },
+    {
+      "id": "P3",
+      "status": "passed",
+      "observed": "12/12 주장 출처 ID가 모두 존재. 기존 인덱스에 이미 있는 URL 2개 재사용. 가상 누락 출처 ID는 오류로 검출",
+      "metrics": {
+        "checked_claims": 12,
+        "resolved_claims": 12,
+        "reused_prior_source_urls": 2,
+        "new_web_search_queries": 0,
+        "injected_missing_source_detected": true
+      },
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ]
+    },
+    {
+      "id": "P4",
+      "status": "passed",
+      "observed": "기존 비교 후보 5개 중 T1을 우선 검증 대상으로 유지. 시장 수요나 제품 성공 확정 아님",
+      "metrics": {
+        "candidate_count": 5,
+        "selected": "T1"
+      },
+      "evidence_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "P5",
+      "status": "passed",
+      "observed": "TASK-012/013/014의 result가 모두 null; TASK-015를 완료로 기록하지 않음",
+      "metrics": {
+        "upstream_results_registered": 0,
+        "upstream_results_required": 3,
+        "official_task_015_done": false
+      },
+      "evidence_ids": [
+        "E05",
+        "E06",
+        "E07",
+        "E08"
+      ]
+    },
+    {
+      "id": "P6",
+      "status": "passed",
+      "observed": "잠정 결론과 반론을 기록하고 근거 부족한 시장 검증·사용자 시간 절감을 주장하지 않고 종료",
+      "metrics": {
+        "time_saved_vs_baseline": null,
+        "user_interventions_saved_vs_baseline": null
+      },
+      "evidence_ids": [
+        "E03",
+        "E08"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "text": "1순위 잠정 타겟: AI와 다수 출처를 활용해 의사결정을 내려야 하는 소규모 팀 조사 책임자",
+      "status": "research_proposal",
+      "evidence_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "C02",
+      "text": "기존 대화에서 AI에 대한 지침·출처 재사용·원본 추적·조사 종료 판단의 보완 요구가 반복 관찰됨",
+      "status": "single_case_qualitative_observation",
+      "evidence_ids": [
+        "E03"
+      ],
+      "caveat": "독립 표본이나 전체 대화 감사 로그는 없음"
+    },
+    {
+      "id": "C03",
+      "text": "이번 단일 재실행에서 출처 참조 12/12 확인과 가상 누락 참조 검출을 완료함",
+      "status": "executed_structural_check",
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ]
+    },
+    {
+      "id": "C04",
+      "text": "기존 AI 대비 시간 절약, 사용 편의, 제품 성능은 측정하지 않음",
+      "status": "not_measured",
+      "evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "label": "Repository agent guidance",
+      "path": "AGENTS.md"
+    },
+    {
+      "id": "E02",
+      "label": "Human intent",
+      "path": "docs/human/INTENT.md"
+    },
+    {
+      "id": "E03",
+      "label": "Prior candidate comparison and research",
+      "path": "docs/artifacts/research/2026-11-14_R01_타겟_페인포인트_선정_독립조사_R1.json"
+    },
+    {
+      "id": "E04",
+      "label": "Existing research source provenance index",
+      "path": "docs/artifacts/research/2026-11-13_R01_출처_원본_근거_인덱스_R1.json"
+    },
+    {
+      "id": "E05",
+      "label": "R02 result",
+      "path": "docs/artifacts/tasks/TASK-012.json"
+    },
+    {
+      "id": "E06",
+      "label": "R03 result",
+      "path": "docs/artifacts/tasks/TASK-013.json"
+    },
+    {
+      "id": "E07",
+      "label": "R05 result",
+      "path": "docs/artifacts/tasks/TASK-014.json"
+    },
+    {
+      "id": "E08",
+      "label": "R01 integrator contract",
+      "path": "docs/artifacts/tasks/TASK-015.json"
+    }
+  ],
+  "decision": {
+    "selected_target": "이미 AI를 사용하는 소규모 팀의 근거 기반 조사 책임자",
+    "pain": "출처 원본 추적·근거 중복과 충돌·작업 완료 확인에 반복적인 사용자 조정이 필요",
+    "decision_type": "provisional_only",
+    "counterevidence": "기존 Deep Research는 출처 기반 복합 조사 기능을 제공하며 아직 비교 우월성을 검증하지 않음",
+    "stop_reason": "잠정 문제 선정 및 구조 검사는 완료. 같은 문헌의 추가 조사 가치는 낮음",
+    "next_test": "같은 자료와 질문으로 기존 AI 단독 대비 출처상태·완료판정 흐름을 비교해 사람의 정정 횟수, 증거 오류, 결과 품질, 시간을 측정"
+  },
+  "not_run": [
+    "원본 PDF 전체 검증",
+    "제품 E2E 작동",
+    "사용자 편익 대조 실험",
+    "외부 사용자 인터뷰",
+    "Deep Research 경쟁 기준 실험"
+  ],
+  "write_status": "github_write_requested_explicitly_by_user"
+}
