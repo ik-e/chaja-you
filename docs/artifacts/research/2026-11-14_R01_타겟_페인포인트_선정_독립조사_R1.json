@@ -1,0 +1,529 @@
+{
+  "schema_version": 1,
+  "id": "R01-TARGET-PAIN-SELECTION-20261114-R1",
+  "kind": "research",
+  "status": "independent_research_complete_provisional_target_selected",
+  "owner": "R01",
+  "as_of": "2026-11-14",
+  "question": "어떤 실제 다단계 사용자 문제를 첫 타겟·페인포인트로 검증해야 현재 근거로 가장 설득력 있는가?",
+  "goal": "기존 R01 출처 인덱스와 새 공식·학술 원자료를 재사용/확장해 다자간 사용자 과제를 비교하고 하나의 검증 타겟을 선정한다",
+  "existing_evidence_index": "docs/artifacts/research/2026-11-13_R01_출처_원본_근거_인덱스_R1.json",
+  "first_party_context": [
+    "docs/human/INTENT.md",
+    "docs/artifacts/tasks/TASK-015.json",
+    "docs/artifacts/tasks/TASK-007.json",
+    "docs/artifacts/candidates/CAND-007.json",
+    "docs/artifacts/candidates/CAND-009.json"
+  ],
+  "boundary": "사람 권위의 제품 목표·MVP·기획·WBS·TASK-012~015 실제 상태 변경 없음. 대상자 연구와 제품 차별화 실험은 별개.",
+  "method": {
+    "approach": "문제별 실제 외부 근거 → 기존 서비스/정책 반례 → 복수 관계 구조 → 직접 접근·실험 가능성 → 조건부 우선 선정",
+    "evaluation_dimensions": [
+      "실제 과제 실패 경험 근거",
+      "빈도·손실·시급성의 신뢰성",
+      "기존 대안 이후 남는 구체 문제",
+      "AI/정보 도구가 바꿀 수 있는 장애물의 비중",
+      "사용자와 원자료/결과에 대한 합법적 접근 및 짧은 실험 가능성"
+    ],
+    "no_fabricated_score": true,
+    "source_reuse": "이전 R01에 존재하는 복지/이주민 출처는 재조회 대신 기존 index 참조. 새 질문에 필요했던 공식 창업민원, 경쟁 기능, 학술 AI 품질 조사만 신규 조회.",
+    "selection_is_not_market_validation": true
+  },
+  "sources": [
+    {
+      "id": "N01",
+      "title": "The Impact of Generative AI on Critical Thinking",
+      "issuer": "CHI 2025 / ACM / Microsoft Research authors",
+      "url": "https://doi.org/10.1145/3706598.3713778",
+      "date": "2025-04-25",
+      "basis": "peer_reviewed_survey_319_workers_936_tasks",
+      "access": "original article text indexed in web search; PDF full read not claimed",
+      "limits": "self-reported and selected weekly GenAI users; subgroup project leaders not measured"
+    },
+    {
+      "id": "N02",
+      "title": "2025 Work Trend Index: The year the Frontier Firm is born",
+      "issuer": "Microsoft",
+      "url": "https://www.microsoft.com/en-us/worklab/work-trend-index/2025-the-year-the-frontier-firm-is-born",
+      "date": "2025-04-23",
+      "basis": "provider_run_global_survey_and_M365_telemetry",
+      "access": "original HTML read",
+      "limits": "general knowledge-work fragmentation, not source/claim verification causality; survey/product marketing context"
+    },
+    {
+      "id": "N03",
+      "title": "Workslop: The Hidden Cost of AI-Generated Busywork",
+      "issuer": "BetterUp Labs and Stanford Social Media Lab",
+      "url": "https://www.betterup.com/workslop",
+      "date": "2025-09",
+      "basis": "provider_study_1150_US_desk_workers",
+      "access": "study landing and methodology from source search",
+      "limits": "US desk workers and self report; not an independent measure of small research leaders or product demand"
+    },
+    {
+      "id": "N04",
+      "title": "Towards a Science of AI Agent Reliability",
+      "issuer": "Rabanser et al., ICML 2026 PMLR",
+      "url": "https://proceedings.mlr.press/v306/rabanser26a.html",
+      "date": "2026-07",
+      "basis": "peer_reviewed_agent_benchmark",
+      "access": "proceedings abstract and paper bibliographic page read by search",
+      "limits": "agent model reliability, not a user-needs survey"
+    },
+    {
+      "id": "N05",
+      "title": "2026년 창업 민원 2,184건 분석 발표",
+      "issuer": "국민권익위원회",
+      "url": "https://www.acrc.go.kr/board.es?act=view&bid=4A&list_no=118816&mid=a10106000000&nPage=3&tag=",
+      "date": "2026-09-21",
+      "basis": "government_complaint_analysis_one_underlying_work",
+      "access": "full press-release body from official search; attached original PDF not acquired",
+      "limits": "complaint volumes are not all entrepreneurs and increase 36.5% partly affected by specific project announcements"
+    },
+    {
+      "id": "N06",
+      "title": "중기부 중소기업·창업·소상공인 원스톱 지원체계 구축",
+      "issuer": "중소벤처기업부 / 정책브리핑",
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148960962&pWise=main&pWiseMain=A5",
+      "date": "2026-03-17",
+      "basis": "official_policy_plan",
+      "access": "official text via search",
+      "limits": "May trial and December planned AI assistant are announced goals, not all verified deployed"
+    },
+    {
+      "id": "N07",
+      "title": "스타트업 원스톱 지원센터 기능·FAQ",
+      "issuer": "창업진흥원 K-Startup",
+      "url": "https://www.k-startup.go.kr/onestop/main/index.do?cat=OT0600",
+      "date": "checked 2026-11-14",
+      "basis": "live_official_service_documentation",
+      "access": "HTML content read",
+      "limits": "FAQ restricts this one stop service to tech startup, other support services exist"
+    },
+    {
+      "id": "N08",
+      "title": "식당·미용실 영업신고·사업자등록 한 번에",
+      "issuer": "국세청",
+      "url": "https://s.nts.go.kr/geumcheon/na/ntt/selectNttInfo.do?mi=2201&nttSn=1354686",
+      "date": "2026-09-04",
+      "basis": "official_program_change_with_actual_burden_examples",
+      "access": "official search text",
+      "limits": "specific categories; pre-reform double-visit problem now partially resolved"
+    },
+    {
+      "id": "N09",
+      "title": "Deep research (current capabilities)",
+      "issuer": "OpenAI Academy",
+      "url": "https://academy.openai.com/public/clubs/work-users-ynjqu/resources/deep-research",
+      "date": "updated 2026-09-02",
+      "basis": "first_party_competitor_feature_claim",
+      "access": "current product guide via search",
+      "limits": "feature availability and real quality not independently benchmarked"
+    },
+    {
+      "id": "N10",
+      "title": "Introducing Deep Research and Deep Research Max",
+      "issuer": "Google",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/next-Generation-gemini-deep-research/",
+      "date": "2026-04-21",
+      "basis": "first_party_competitor_feature_claim",
+      "access": "official product announcement via search",
+      "limits": "claims not verified via same-task tests"
+    },
+    {
+      "id": "N11",
+      "title": "2025 GG migrant public-service usage survey official briefing",
+      "issuer": "경기도",
+      "url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=67518",
+      "date": "2025-09-04",
+      "basis": "previous_R01_source_index_reuse",
+      "access": "reused old record, no new web retrieval",
+      "limits": "original report PDF not yet accessed"
+    },
+    {
+      "id": "N12",
+      "title": "지역사회 통합돌봄 실태조사 발표",
+      "issuer": "보건복지부 / 대한민국 정책브리핑",
+      "url": "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156784964&pWise=mSub&pWiseSub=C5",
+      "date": "2026-10-13",
+      "basis": "previous_R01_source_index_reuse",
+      "access": "reused existing source index",
+      "limits": "original study report not acquired; aggregate supply deficits do not imply software matching failure"
+    },
+    {
+      "id": "N13",
+      "title": "AI R01 collaboration trace: repeated research and missed AGENTS.md",
+      "issuer": "R01 workspace / current conversation",
+      "url": null,
+      "date": "2026-11-13",
+      "basis": "single_concrete_non-generalizable_case",
+      "path": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+      "limits": "n=1 project and assistant behavior; not independent user demand measurement"
+    }
+  ],
+  "claims": [
+    {
+      "id": "P01",
+      "text": "319명의 주 1회 이상 GenAI 업무 사용자에서 936개 실작업 사례 수집; 114/319 외부 출처 대조, 72/319 응답 개선 어려움, 56/319 오류 확인으로 검색노력 증가 사례",
+      "status": "external_evidence_verified_with_self_report_limit",
+      "source_ids": [
+        "N01"
+      ],
+      "inference": "검증/통합 부담 실재, 소규모 팀장 모집단 비율로 확대 금지"
+    },
+    {
+      "id": "P02",
+      "text": "GenAI 사용에 따라 일부 업무 노력이 정보 수집에서 정보 검증, AI 응답 통합, 작업 관리로 이동",
+      "status": "researcher_interpretation",
+      "source_ids": [
+        "N01"
+      ],
+      "inference": "특정 소프트웨어 개선 효과에 대한 증거 아님"
+    },
+    {
+      "id": "P03",
+      "text": "미국 지식근로자 1150명 조사에서 직전 달 AI 생성 저품질 업무물을 받았다는 응답 40%",
+      "status": "provider_survey_indirect",
+      "source_ids": [
+        "N03"
+      ],
+      "inference": "홍보·자가보고 조사; 리서치 실무자 빈도, 시간손실 인과 증거로 사용 제한"
+    },
+    {
+      "id": "P04",
+      "text": "AI 에이전트의 개별 벤치마크 정확도와 반복 장기 실행의 안정성은 동일한 개념이 아님",
+      "status": "research_supports_mechanism_not_user_demand",
+      "source_ids": [
+        "N04"
+      ],
+      "inference": "실제 특정 시스템 실패 확률을 예측하지 못함"
+    },
+    {
+      "id": "P05",
+      "text": "국민권익위 2025-08~2026-07 창업 민원 2184건 분석에서 지원사업·허가·세금·특허의 정보/창구 분산과 다양한 업종 절차 지적",
+      "status": "government_observed",
+      "source_ids": [
+        "N05"
+      ],
+      "inference": "창업자 전체 불만율이나 인허가 사건 비율로 해석 불가"
+    },
+    {
+      "id": "P06",
+      "text": "정부는 2026년 중소기업·창업·소상공인 67개 지원 채널 통합, 신청서류 간소화와 12월 AI 추천을 계획",
+      "status": "policy_announced_not_rollout_verification",
+      "source_ids": [
+        "N06"
+      ],
+      "inference": "현재 이미 완성돼 전 문제를 해결했다고 주장 금지"
+    },
+    {
+      "id": "P07",
+      "text": "K-Startup 원스톱 상담은 기술창업 예비·기창업자를 위한 제도이며 분야별 자문·전문가를 연결",
+      "status": "official_site_features",
+      "source_ids": [
+        "N07"
+      ],
+      "inference": "소상공인 지원 채널이 전혀 없다는 뜻이 아님"
+    },
+    {
+      "id": "P08",
+      "text": "국세청은 기존 음식점·미용실의 시군구청 영업신고와 세무서 사업자등록 이중방문을 2026-08/09 간소화",
+      "status": "official_policy_implemented",
+      "source_ids": [
+        "N08"
+      ],
+      "inference": "기존 격차의 일부는 실제 행정제도 개편으로 해소 중"
+    },
+    {
+      "id": "P09",
+      "text": "ChatGPT Deep Research와 Gemini Deep Research는 다단계 조사·출처 연결 보고서/모델 기능을 이미 제공",
+      "status": "verified_feature_claim_not_quality_comparison",
+      "source_ids": [
+        "N09",
+        "N10"
+      ],
+      "inference": "신규 '출처 달린 보고서'만으로 경쟁 우위 주장 금지"
+    },
+    {
+      "id": "P10",
+      "text": "기존 R01 조사에서 AI가 지침 선확인·중복 검색 회피·선정 완료 판단에 반복 실패",
+      "status": "single_first_party_case",
+      "source_ids": [
+        "N13"
+      ],
+      "inference": "해당 사용자에게 실제 문제였지만 다수 고객 수요 증거는 아님"
+    },
+    {
+      "id": "P11",
+      "text": "통합돌봄 2026 정부 조사에서 229개 시군구 중 59곳 고수요·저공급; 실제 연결 수혜자당 평균 3.5건 서비스 연결",
+      "status": "government_observed_existing_index",
+      "source_ids": [
+        "N12"
+      ],
+      "inference": "공급 부족은 관계 구조 복잡성과 다르며 소프트웨어로 해소된다고 볼 수 없음"
+    },
+    {
+      "id": "P12",
+      "text": "경기도 2025 이주민 공공서비스 조사에서 행정서류와 의사소통 어려움 보고",
+      "status": "government_observed_existing_index",
+      "source_ids": [
+        "N11"
+      ],
+      "inference": "다기관 조정이 새 제품을 반드시 필요로 한다는 인과 아님"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "T1",
+      "name": "AI를 주 1회 이상 활용하며 근거 기반 선택·보고를 통합하는 소규모 팀 리서치 책임자",
+      "target_specific": "2~10명 팀에서 공개정보 기반의 후보 비교/정책/기술선정을 주도하며, 기존 AI와 공식 문서·팀원 결과를 받아 최종 판단하는 실무 담당자",
+      "job": "근거가 통하는 최종 선택·실행 판단을 낮은 재검증 부담으로 완료",
+      "observed_pain": [
+        "외부 원출처와 AI 주장 수동 대조 (학술 설문 실제 응답)",
+        "AI 수정과 재요청 반복 (학술 설문)",
+        "다단계 조사 후 최종 결정/완료 상태가 남지 않음 (R01 1사례)"
+      ],
+      "evidence_strength": "medium_high_for_general_workflow_medium_low_for_narrow_segment",
+      "existing_alternatives": [
+        "ChatGPT Deep Research",
+        "Gemini Deep Research",
+        "수동 소스 매트릭스+GitHub/Notion",
+        "전문 조사기관"
+      ],
+      "counter_evidence": [
+        "Deep Research는 이미 소스·보고서·진행 및 연결 앱 제공",
+        "소규모 팀 책임자 구매 의향/업무량은 대표 조사로 확인되지 않음"
+      ],
+      "leverage": "high_if_proven: decisions, evidence, state are accessible public or authorized team files",
+      "feasibility": "high_on_small_public_research_benchmarks",
+      "rank": 1,
+      "verdict": "select_for_validation_not_official_product"
+    },
+    {
+      "id": "T2",
+      "name": "여러 부처의 지원사업·인허가·정책자금을 비교하는 예비·초기 창업자",
+      "target_specific": "업종과 사업자 상태에 따라 지원 자격, 인허가, 정책자금을 직접 비교하는 예비 사업자",
+      "job": "적격 제도·절차를 파악하고 거절·누락 없이 필요한 신청을 준비",
+      "observed_pain": [
+        "국민권익위 실제 민원 2184건에서 정보·절차 분산 확인",
+        "특정 승인과 보증 심사기관의 상충 기준 가능"
+      ],
+      "evidence_strength": "high_for_problem_but_product_gap_rapidly_changing",
+      "existing_alternatives": [
+        "K-Startup",
+        "소상공인24",
+        "중기부 2026 통합지원 플랫폼 및 AI 상담 추진",
+        "국세청 연계 간소화"
+      ],
+      "counter_evidence": [
+        "2026 이미 원스톱 통합체계·AI 추천 추진",
+        "인허가/대출 규칙 자체는 새 조사 기능으로 바꿀 수 없음",
+        "민원 증가 일부는 특정 사업 선정 공고에 의해 발생"
+      ],
+      "leverage": "medium: policy info assist possible, formal approval out of scope",
+      "feasibility": "high_for_public_information_only",
+      "rank": 2,
+      "verdict": "hold_as_second_domain_comparison"
+    },
+    {
+      "id": "T3",
+      "name": "여러 의료·요양·생활돌봄 서비스를 동시에 조정하는 가족 보호자",
+      "target_specific": "가족의 퇴원, 재택생활, 요양·돌봄·주거를 함께 조정해야 하는 성인",
+      "job": "필요한 시기에 필요한 서비스가 실제 수행되도록 조합",
+      "observed_pain": [
+        "복합서비스 연계가 실제 운영되고 지역별 공급 격차 확인",
+        "상당 지역에 자원 자체가 부족"
+      ],
+      "evidence_strength": "high_for_demand_supply_gap_but_low_for_workflow_user_burden",
+      "existing_alternatives": [
+        "2026 통합돌봄 법정 전달체계",
+        "지자체 전담인력"
+      ],
+      "counter_evidence": [
+        "제도의 기본 책임이 지방정부에 있고 공급 부족은 제품만으로 해결 불가",
+        "의료/민감정보와 연계권한 제약"
+      ],
+      "leverage": "low_without_provider_participation",
+      "feasibility": "low_for_8_week_product",
+      "rank": 3,
+      "verdict": "defer_social_impact_track"
+    },
+    {
+      "id": "T4",
+      "name": "이주민의 복합 행정민원을 지원하는 상담 실무자",
+      "target_specific": "노동·체류·법률·주거 등 서로 다른 기관으로 이주민 사례를 이관하는 지역 지원기관 실무자",
+      "job": "사례별 자격·서류·기관을 판단하고 적정 전문가에 연결",
+      "observed_pain": [
+        "이주민측 복잡한 행정·의사소통 민원 조사",
+        "복합 지원상담 운영사례"
+      ],
+      "evidence_strength": "medium_for_beneficiary_pain_low_for_counselor_workflow",
+      "existing_alternatives": [
+        "법무부 1345",
+        "경기도 이주민 AI 포털",
+        "서울 MY SEOUL+",
+        "지원기관 인적 네트워크"
+      ],
+      "counter_evidence": [
+        "상담 실무자 본인 반복 업무·누락률 직접 측정 미실행",
+        "법률/체류 권한과 프라이버시 위험"
+      ],
+      "leverage": "unknown_without_coordinator_access",
+      "feasibility": "low_medium",
+      "rank": 4,
+      "verdict": "defer"
+    },
+    {
+      "id": "T5",
+      "name": "특정 생활 디지털 과제에 실패하는 어르신",
+      "target_specific": "스마트폰·키오스크 예약·주문 등 실제 과제에 실패한 사람",
+      "job": "필요한 때 생활 서비스 이용을 혼자 또는 적절한 도움으로 완료",
+      "observed_pain": [
+        "기기 사용 어려움에 대한 서울 조사 보도 및 기존 지원 사업"
+      ],
+      "evidence_strength": "medium_for_accessibility_low_for_unmet_matching",
+      "existing_alternatives": [
+        "서울 디지털동행플라자",
+        "어디나지원단",
+        "현장 직원·가족"
+      ],
+      "counter_evidence": [
+        "미연결 실패 규모 미확인, 직접 서비스 접근성 개선이 우선일 수 있음",
+        "원조사 원문 문항 미열람"
+      ],
+      "leverage": "medium_with_accessibility_design",
+      "feasibility": "medium",
+      "rank": 5,
+      "verdict": "defer"
+    }
+  ],
+  "selected_target": {
+    "status": "provisional_target_selected_for_problem_validation",
+    "segment": "2~10명 팀에서 공개정보 기반의 후보 비교/정책/기술선정을 주도하며, 기존 AI와 공식 문서·팀원 결과를 받아 최종 판단하는 실무 담당자",
+    "operational_inclusion": [
+      "지난 30일 안에 업무상 출처 3개 이상의 정보를 비교했음",
+      "그 결과로 타겟 선정·제품·정책·기술·사내 프로젝트 등 중요한 결정·산출물을 제출해야 했음",
+      "AI를 업무에 주 1회 이상 이미 사용함",
+      "조사 결과를 스스로 승인하거나 팀에 최종 전달하는 역할"
+    ],
+    "exclusion": [
+      "단순 한 번 질문하고 답변만 소비하는 이용자",
+      "출처 검증이나 최종 의사결정이 필요 없는 단순 창작 업무",
+      "아동·의료·법률에 대한 직접 판단 자동화가 필요한 고위험 사례"
+    ],
+    "pain_statement": "여러 AI·사람·공식 출처의 조사 결과를 받아도, 근거의 원본·중복·충돌과 작업의 완료/미확인을 조정해야 해서 최종 의사결정을 내리는 데 재검증과 재작업이 반복된다",
+    "problem_statement": "소규모 프로젝트의 조사 책임자는 여러 출처와 협업 결과를 근거로 결정을 내려야 하지만, 현재 사용 중인 AI·검색·문서 도구만으로 각 주장과 원본·수정 이력·작업 완료 조건을 일관되게 대조하는 데 반복적인 조정·검증 부담을 겪는가?",
+    "relationship_structure": {
+      "actors": [
+        "의사결정 책임자",
+        "팀원 또는 AI 조사자",
+        "공식 원자료 생산자/발행기관",
+        "기존 검색·AI 제품",
+        "결정 승인자"
+      ],
+      "objects": [
+        "원 질문과 승인 기준",
+        "부분 작업·조건",
+        "출처별 원본 보고서·데이터",
+        "주장·인용·상충 여부",
+        "선택안·반증·결정·미확인",
+        "실행 상태"
+      ],
+      "path": [
+        "요청과 완료 조건",
+        "작업 분해와 정보 수집",
+        "원본 출처 추적",
+        "증거-주장 중복/충돌 대조",
+        "대안과 반증 비교",
+        "충족/미충족/미확인/막힘 판정",
+        "결정/재조사 요청"
+      ]
+    },
+    "pain_is_not": [
+      "단순 자료 검색의 어려움",
+      "AI를 잘 사용하도록 교육해야 한다는 문제",
+      "무조건 새로운 다중에이전트가 필요하다는 문제"
+    ],
+    "feature_hypotheses": [
+      {
+        "id": "H1",
+        "feature": "목표·선정 기준·완료/중지 조건을 작업 계약으로 유지하고 실제 실행과 대조",
+        "pain_link": "조사 주제 표류·미완료 판단·지침 누락",
+        "test": "같은 목표와 중간 반증 상황에서 계획 수정·종료 여부/사용자 추가 지시 수 기록"
+      },
+      {
+        "id": "H2",
+        "feature": "원조사(work)→웹출처(source)→주장(claim)→판정 연결과 반복 조사 재사용",
+        "pain_link": "출처 재탐색·2차 인용 독립 근거 오인",
+        "test": "동일 URL·동일 원조사 중복 발견률과 원본 근거 오류·검색 재사용 동작 비교"
+      },
+      {
+        "id": "H3",
+        "feature": "한 번의 결정에 필요한 대안·충족/미확인·반대 근거·다음 최소 확인만 보여주는 결과 상태",
+        "pain_link": "긴 보고서에도 결론과 미확인이 불분명",
+        "test": "사용자의 동일 조건 결정 일치/근거 정확도/확인 횟수 비교"
+      }
+    ],
+    "minimum_user_validation": {
+      "status": "not_run",
+      "sample_proposed": "직접 사용자 경험 5~8건 (초기 탐색 표본; 모집단 대표성 주장 금지)",
+      "questions": [
+        "최근 30일 안에 AI와 출처 3개 이상으로 최종 결정을 내린 사례가 있는가?",
+        "최종적으로 확인해야 했던 원본과 결과는 무엇이고 어떤 단계에서 재검증/재요청했는가?",
+        "기존 Deep Research 등으로도 그 문제가 발생했는가?",
+        "마지막 문서 작성부터 실제 결정/실행 완료까지 누가 무엇을 책임지고 조정했는가?",
+        "같은 출처나 요청을 재검색한 기록이 있는가?"
+      ],
+      "evidence_to_collect": [
+        "실제 과제의 비민감한 요구·결과·출처 경로",
+        "재확인 행동과 추가 지시 횟수",
+        "결론에 대한 승인자 요구와 되돌림 사례"
+      ]
+    },
+    "baseline_test": {
+      "status": "not_run",
+      "comparison": [
+        "B0: 현재 수동 웹 검색+문서 관리",
+        "B1: 현재 ChatGPT/Gemini Deep Research 기능",
+        "B2: 동일 모델의 근거 연결/작업 계약/판정 제약을 더한 최소 시제품"
+      ],
+      "tasks": [
+        "동일 공개 출처를 여러 뉴스가 재인용하는 조사",
+        "중간에 새 조건/상반되는 근거가 들어오는 비교",
+        "충분한 근거가 없으면 종료·보류를 구분해야 하는 조사"
+      ],
+      "must_measure": [
+        "선정 기준 충족/미확인 진실성",
+        "출처→원조사 추적 정확도",
+        "중복 조사·중복 근거 판정",
+        "불필요한 후속 질문/사용자 개입 횟수",
+        "완료 판정·변경 이유 재현 가능성",
+        "총 작업시간·도구 비용"
+      ],
+      "falsification": [
+        "기존 Deep Research와 수동 기록 조합만으로 결과 품질·사용자 부담을 동일하게 충족",
+        "목표 사용자에서 최근 동일한 문제를 겪은 실제 사례가 드물거나 필요성이 약함",
+        "추가 근거/상태 구조가 시간을 더 늘리고 유용성이 없음"
+      ]
+    },
+    "scope_and_authority": "R01 독립 연구 제안일 뿐 TASK-015에 팀 의견을 대신해 확정 반영하지 않음. 기존 APP-A/C와 프로젝트 공식 기준은 유지"
+  },
+  "confidence": {
+    "problem_class": "high: independent user studies verify source checking and response integration workload",
+    "specific_segment": "medium_low: project leaders subset not isolated in original surveys",
+    "unmet_competitive_gap": "unknown: competitors already provide deep research with citations, apps and progress",
+    "solution_worth_building": "unknown: comparison and direct user validation not yet run"
+  },
+  "execution": {
+    "existing_source_index_checked": "passed",
+    "primary_source_comparison": "passed",
+    "candidate_selected": "passed",
+    "counter_evidence_assessed": "passed",
+    "github_artifact_verification": "not_run",
+    "team_R02_R03_R05_results_integrated": "not_run_no_task_results",
+    "actual_user_interviews": "not_run",
+    "baseline_experiment": "not_run",
+    "official_product_scope_change": "not_run"
+  },
+  "decision_request": "R01은 이 독립 제안을 팀원 3개 독립안과 비교해 첫 검증 타겟으로 유지·수정·기각할 수 있음. 사람이 승인하기 전 공식 제품 타겟으로 승격하지 않음."
+}
