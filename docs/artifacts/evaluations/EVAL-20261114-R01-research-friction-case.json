@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "EVAL-20261114-R01-RESEARCH-FRICTION",
+  "kind": "evaluation",
+  "status": "completed_scoped_structural_assessment",
+  "case_id": "CASE-R01-RESEARCH-DECISION-FRICTION-20261114",
+  "task_ref": null,
+  "related_task_refs": [
+    "TASK-015"
+  ],
+  "run_path": "docs/artifacts/runs/RUN-20261114-R01-research-friction-case.json",
+  "evaluated_at": "2026-11-14",
+  "verdict": "inconclusive",
+  "verdict_scope": {
+    "reference_checks": "pass",
+    "honest_task_boundary": "pass",
+    "actual_user_benefit": "inconclusive",
+    "deployed_product": "not_tested"
+  },
+  "checks": [
+    {
+      "criterion": "Relevant repository instructions checked before analysis",
+      "verdict": "pass",
+      "evidence": [
+        "AGENTS.md, INTENT.md, TASK.md fetched"
+      ]
+    },
+    {
+      "criterion": "Stored findings reused and source links validated",
+      "verdict": "pass",
+      "evidence": [
+        "12 of 12 claim records resolved to source IDs",
+        "Two source URLs reused from prior registry"
+      ]
+    },
+    {
+      "criterion": "Injected nonexistent source ID is detected",
+      "verdict": "pass",
+      "evidence": [
+        "Negative test with NONEXISTENT-SOURCE returned unresolved"
+      ]
+    },
+    {
+      "criterion": "Single target prioritized with competing alternatives and counterarguments",
+      "verdict": "pass",
+      "evidence": [
+        "Research T1 ranked first of five and provisional only"
+      ]
+    },
+    {
+      "criterion": "Official team integration is not falsely marked complete",
+      "verdict": "pass",
+      "evidence": [
+        "TASK-012, 013, 014 result=null at read time"
+      ]
+    },
+    {
+      "criterion": "Time saved and user correction count reduced versus control",
+      "verdict": "inconclusive",
+      "evidence": [
+        "No matched quantitative baseline; do not claim measured improvement"
+      ]
+    },
+    {
+      "criterion": "Deployed chaja-you feature is working end to end",
+      "verdict": "inconclusive",
+      "evidence": [
+        "In-session structural check only, no product execution"
+      ]
+    },
+    {
+      "criterion": "Small-team leaders consistently have this problem",
+      "verdict": "inconclusive",
+      "evidence": [
+        "One observed project case plus broader knowledge-worker literature, no segment-specific interviews"
+      ]
+    }
+  ],
+  "summary": "Existing evidence can be reused to reach an honest provisional target and stop with complete source references. Actual reduction of user burden or competitive superiority is not yet demonstrated.",
+  "next_validation": {
+    "question": "Does tracking original studies, claims and completion conditions reduce human corrections versus current tools?",
+    "conditions": [
+      "Use same pre-supplied official documents and questions",
+      "Hold information and success criteria constant",
+      "Keep public information only"
+    ],
+    "metrics": [
+      "Number of user correction messages",
+      "Incorrect or duplicate source-as-study assertions",
+      "Decision accuracy against explicit criteria",
+      "Time to completed answer"
+    ],
+    "falsification": "If improvement in both evidence quality and user work is not observed, do not claim product differentiation"
+  },
+  "write_status": "github_write_requested_explicitly_by_user"
+}
