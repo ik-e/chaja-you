@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "id": "R01-MIGRANT-DIGITAL-LANDSCAPE-20261113-R1",
+  "kind": "research",
+  "status": "desk_research_complete_not_product_validation",
+  "owner": "R01",
+  "as_of": "2026-11-13",
+  "branch": "task/independent-user-problem-research-20261113",
+  "parent": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.md",
+  "scope": "한국 이주민 공공서비스 접근·AI·현장지원 서비스 조사, 고령층 비교 기준, 제품 기회 반증",
+  "intent_refs": [
+    "INTENT-PRODUCT-002",
+    "INTENT-PRODUCT-003",
+    "INTENT-DESIGN-001",
+    "INTENT-DEV-001",
+    "INTENT-OPS-003",
+    "INTENT-OPS-005",
+    "INTENT-OPS-007",
+    "INTENT-GOV-001",
+    "INTENT-DATA-001"
+  ],
+  "method": "1차 출처(정부·공공기관·제공기관) 기능 확인, 2025 사용자 실태조사, 반증 중심 공백 분석; 가입/개인정보 제공/실제 이용자 동작·서비스 내 메시지 전송은 미실시",
+  "goal_contract": {
+    "goal": "첫 사용자 집단 선정 전에 기존 서비스·이용 현황·반대 근거를 충분히 정리하고 도메인 결정 보류/추가 검증 기준을 제안",
+    "done_when": [
+      "정부/공공/비영리/민간/상담인력 주요 서비스 10개 이상 비교",
+      "2025년 이후 실제 사용자 불편 근거 확보",
+      "이미 해결된 기능과 미확인 간극 구분",
+      "최소 3개 사용자/지원자 문제 후보의 반증 기준 도출",
+      "GitHub 개인 브랜치에 근거 JSON/보고서 저장 및 재확인"
+    ],
+    "reopen_research_when": [
+      "기준 서비스 신규 출시에 따라 기능 비교가 바뀜",
+      "현장 사용 평가에서 새로운 이탈 원인이 발견됨",
+      "제공사 발표만으로는 실제 실행을 판정할 수 없는 핵심 기능 발생"
+    ],
+    "stop_when": [
+      "위 비교·반증 기준을 충족하고 남은 핵심 불확실성이 현장·제품 사용실험에 달림",
+      "이용 약관/접근권한 제약으로 직접 이용 불가",
+      "개인/조직 공식 방향 변경에 사람 승인 필요"
+    ],
+    "no_automatic_decisions": [
+      "찾아you 공식 도메인·타겟 변경",
+      "APP-A/C 필수 범위 변경",
+      "지원자의 실제 개인정보 수집",
+      "비자·법률 등 고위험 결정을 AI가 대신 내림"
+    ]
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "publisher": "경기도",
+      "published_at": "2025-09-04",
+      "title": "경기도 이주민 공공서비스 실태조사 최종보고",
+      "url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=67518",
+      "type": "government_research_press",
+      "access": "official_release_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S02",
+      "publisher": "경기도이민사회통합지원센터",
+      "published_at": "2025-12-22",
+      "title": "경기도 이주민의 공공서비스 이용 실태조사 보고서 게시",
+      "url": "https://gmis.or.kr/report/65",
+      "type": "research_institution",
+      "access": "official_record_page_read_full_pdf_not_retrieved",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S03",
+      "publisher": "법무부 출입국·외국인정책본부",
+      "published_at": null,
+      "title": "외국인종합안내센터 1345",
+      "url": "https://www.cppb.go.kr/immigration/1530/subview.do",
+      "type": "government_service",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S04",
+      "publisher": "법무부",
+      "published_at": null,
+      "title": "출입국 전자민원(하이코리아) 법무부 안내",
+      "url": "https://immigration.go.kr/moj/index.do",
+      "type": "government_service",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S05",
+      "publisher": "경기도",
+      "published_at": "2026-07-07",
+      "title": "경기도 생성형 AI 이주민 포털 정식 개통",
+      "url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=s017&number=70825&subject_Code=BO01",
+      "type": "government_service_release",
+      "access": "official_result_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S06",
+      "publisher": "경기도",
+      "published_at": "2026",
+      "title": "경기도 이주민 포털 공식 홈페이지",
+      "url": "https://www.gg.go.kr/gmigrant/hmpg/main.do",
+      "type": "government_live_site",
+      "access": "official_page_read_without_authenticated_chat_test",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S07",
+      "publisher": "경기도",
+      "published_at": "2026",
+      "title": "경기도 이주민 포털 소개",
+      "url": "https://www.gg.go.kr/gmigrant/hmpg/gude/lang/contLangPage.do?cont_lang_no=3",
+      "type": "government_service",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S08",
+      "publisher": "서울특별시",
+      "published_at": "2026-09-02",
+      "title": "MY SEOUL+ 개편 발표",
+      "url": "https://news.seoul.go.kr/welfare/archives/582852",
+      "type": "government_service_release",
+      "access": "search_result_official_page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S09",
+      "publisher": "서울특별시",
+      "published_at": null,
+      "title": "MY SEOUL+ 포털",
+      "url": "https://global.seoul.go.kr/",
+      "type": "government_live_site",
+      "access": "search_result_official_page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S10",
+      "publisher": "다누리콜센터",
+      "published_at": null,
+      "title": "다누리콜센터 안내 (최신 중앙 안내 15개 언어)",
+      "url": "https://www.liveinkorea.kr/web/lay1/S1T40C44/contents.do",
+      "type": "government_supported_service",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S11",
+      "publisher": "한국건강가정진흥원",
+      "published_at": "2026-07-09",
+      "title": "가족상담정보전화센터 AI 챗봇 개설",
+      "url": "https://www.liveinkorea.kr/web/lay1/bbs/S1T18C26/B/3/view.do?area=&area_detail=&article_seq=168177&board_view_type=&condition=&cpage=12&keyword=&mode=view&rows=12",
+      "type": "government_supported_ai",
+      "access": "official_notice_search_result",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S12",
+      "publisher": "교육부·국립국제교육원",
+      "published_at": "2025-03-06",
+      "title": "한국유학종합시스템 AI 상담·다국어 개편",
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148940281",
+      "type": "government_ai_portal",
+      "access": "government_official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S13",
+      "publisher": "고용노동부",
+      "published_at": "2026-04-21",
+      "title": "외국인력상담센터 1577-0071",
+      "url": "https://www.moel.go.kr/local/daegu/news/notice/noticeView.do?bbs_seq=20260401120",
+      "type": "government_labor",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S14",
+      "publisher": "서울외국인주민센터",
+      "published_at": null,
+      "title": "이주민 무료 전문 법률·노무·다국어 상담",
+      "url": "https://global.seoul.go.kr/hmpg/ainf/ctrs/frct/srch/dopr/doprListPage.do?cntr_no=04E34E2046394333BCC451C20A4850D9",
+      "type": "public_support_center",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S15",
+      "publisher": "공익법센터 어필",
+      "published_at": "2025-12-11",
+      "title": "ASKOVISA 출시 안내",
+      "url": "https://www.apil.or.kr/notice/1112427516",
+      "type": "ngo_ai_service",
+      "access": "developer_official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S16",
+      "publisher": "UNHCR Korea",
+      "published_at": null,
+      "title": "ASKOVISA 공식 지원 자원 안내",
+      "url": "https://help.unhcr.org/southkorea/services-in-korea/immigration-information-chatbot/",
+      "type": "ngo_service_directory",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S17",
+      "publisher": "K-VISA AI",
+      "published_at": "2026",
+      "title": "K-VISA AI 서비스 소개·기한/전문가 연결",
+      "url": "https://k-visa.ai/",
+      "type": "private_service_claim",
+      "access": "developer_site_search_result_no_independent_product_test",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S18",
+      "publisher": "K-VISA AI",
+      "published_at": "2026",
+      "title": "K-VISA AI FAQ",
+      "url": "https://k-visa.ai/faq",
+      "type": "private_service_claim",
+      "access": "developer_site_search_result",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S19",
+      "publisher": "K-Together",
+      "published_at": null,
+      "title": "K-Together 서비스 소개",
+      "url": "https://www.k-together.com/app/",
+      "type": "private_service_claim",
+      "access": "developer_site_search_result_no_independent_product_test",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S20",
+      "publisher": "정부24",
+      "published_at": null,
+      "title": "정부24 외국인용 서비스",
+      "url": "https://www.gov.kr/portal/main/nologin",
+      "type": "government_live_site",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S21",
+      "publisher": "서울특별시",
+      "published_at": "2026-03-12",
+      "title": "서울디지털동행플라자",
+      "url": "https://news.seoul.go.kr/gov/archives/570895",
+      "type": "government_senior",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S22",
+      "publisher": "서울특별시",
+      "published_at": "2026-04-08",
+      "title": "어디나지원단",
+      "url": "https://news.seoul.go.kr/gov/archives/527994",
+      "type": "government_senior",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S23",
+      "publisher": "한국지능정보사회진흥원",
+      "published_at": "2026-03-27",
+      "title": "2025 디지털정보격차 실태조사 보고서",
+      "url": "https://nia.or.kr/site/nia_kor/ex/bbs/View.do?bcIdx=29168&cbIdx=81623",
+      "type": "government_research",
+      "access": "official_report_index_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S24",
+      "publisher": "경기도이민사회통합지원센터",
+      "published_at": "2023-04-25",
+      "title": "센터의 외국인노동자 폭행 관련 복합 상담 및 기관연계 실제 사례",
+      "url": "https://gmis.or.kr/bbs/board.php?bo_table=case&page=7&sca=%EA%B3%A0%EC%9A%A9%ED%97%88%EA%B0%80&wr_id=1515",
+      "type": "operator_case_record",
+      "access": "official_case_public_page",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S25",
+      "publisher": "서울특별시",
+      "published_at": "2026-09-01",
+      "title": "MY SEOUL+ 보도자료 서울시 원문",
+      "url": "https://www.seoul.go.kr/news/news_report.do?nttNo=465100",
+      "type": "government_service_release",
+      "access": "official_page_search_result",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S26",
+      "publisher": "경기도",
+      "published_at": "2025-07-22",
+      "title": "이주민 공공서비스 조사 중간보고",
+      "url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=66972",
+      "type": "government_research_press",
+      "access": "official_page_read",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S27",
+      "publisher": "다누리",
+      "published_at": null,
+      "title": "다문화가족지원센터 229개 목록",
+      "url": "https://www.yeosusi.liveinkorea.kr/web/index.do",
+      "type": "government_supported_centers",
+      "access": "portal_page_search_result",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "id": "S28",
+      "publisher": "경기도",
+      "published_at": "2026",
+      "title": "경기도 이주민 포털 이용 안내",
+      "url": "https://www.gg.go.kr/gmigrant/hmpg/gude/inf1/contLangPage.do?cont_lang_no=7",
+      "type": "government_service",
+      "access": "official_page_search_result",
+      "checked_at": "2026-11-13"
+    }
+  ],
+  "services": [
+    {
+      "id": "P01",
+      "name": "법무부 1345",
+      "segment": "전국 체류외국인",
+      "mode": "전화·인간 상담",
+      "strength": "20개 언어, 체류·생활 민원, 공공기관 3자 통역, 마을변호사 이관",
+      "limits": "18시 이후 3개 언어 등 운영시간 제약, 실제 신청 대행 기능 확인 안 됨",
+      "source_ids": [
+        "S03"
+      ],
+      "evidence": "government_operated"
+    },
+    {
+      "id": "P02",
+      "name": "HiKorea",
+      "segment": "체류·출입국 행정 이용자",
+      "mode": "공식 전자민원·방문예약",
+      "strength": "정식 신청/예약 채널",
+      "limits": "본인인증, 계정 및 서류·권한 문제는 외부 AI만으로 해결 불가",
+      "source_ids": [
+        "S04"
+      ],
+      "evidence": "government_operated"
+    },
+    {
+      "id": "P03",
+      "name": "정부24 For Foreigners",
+      "segment": "국내 거주 외국인",
+      "mode": "공식 전자민원",
+      "strength": "한·영·중 언어 항목과 민원 신청/발급 접근",
+      "limits": "전체 개별 민원별 지원 범위 확인 필요",
+      "source_ids": [
+        "S20"
+      ],
+      "evidence": "government_operated"
+    },
+    {
+      "id": "P04",
+      "name": "경기도 이주민 포털",
+      "segment": "경기 이주민",
+      "mode": "생성형 AI 챗봇+직원 SOS+정보·지도+프로그램 신청",
+      "strength": "AI/번역/공식정보/12개언어 직원상담/커뮤니티/알림/지도/간편로그인",
+      "limits": "실제 문의 완결률과 접속성·상담 전환 효용은 미측정",
+      "source_ids": [
+        "S05",
+        "S06",
+        "S07",
+        "S28"
+      ],
+      "evidence": "government_operated"
+    },
+    {
+      "id": "P05",
+      "name": "서울 MY SEOUL+",
+      "segment": "서울 외국인주민",
+      "mode": "시 포털+AI 챗봇+기관예약",
+      "strength": "유형/분야별 개인화, 자동번역, 시설 지도, 교육·시설 예약",
+      "limits": "포털 밖의 법적 민원까지 자동 완료하지 않음; 서비스 이용성 직접 테스트 필요",
+      "source_ids": [
+        "S08",
+        "S09",
+        "S25"
+      ],
+      "evidence": "government_operated"
+    },
+    {
+      "id": "P06",
+      "name": "다누리콜센터·가족센터",
+      "segment": "결혼이민자·다문화가족·이주여성",
+      "mode": "24시간 인간 상담/지원 인프라",
+      "strength": "2026 공식 안내 15개 언어, 3자 통역, 법률상담, 229개 가족센터 검색",
+      "limits": "고위험·긴급 상담은 AI가 대체하면 안 됨; 지역·서비스별 조건 차이",
+      "source_ids": [
+        "S10",
+        "S27"
+      ],
+      "evidence": "government_supported"
+    },
+    {
+      "id": "P07",
+      "name": "가족상담정보전화센터 AI 챗봇",
+      "segment": "다양한 가족/다문화가족",
+      "mode": "AI 정책정보 챗봇",
+      "strength": "2026-07-01 개시, 한/영/중/베 4개 언어, Kakao/URL 접속",
+      "limits": "공식적으로 오류 가능성과 상담원 재확인을 고지",
+      "source_ids": [
+        "S11"
+      ],
+      "evidence": "government_supported_live"
+    },
+    {
+      "id": "P08",
+      "name": "Study in Korea 차세대 포털",
+      "segment": "외국인 유학생",
+      "mode": "정부 AI 상담+온라인 접수",
+      "strength": "2025-03 개통, 24시간 AI상담, 100여 언어 번역, 온라인 입학 관련 서비스",
+      "limits": "고등교육/유학생에 특화, 실제 AI 답변·지원 성과 미측정",
+      "source_ids": [
+        "S12"
+      ],
+      "evidence": "government_operated"
+    },
+    {
+      "id": "P09",
+      "name": "외국인력상담센터 1577-0071",
+      "segment": "외국인 근로자",
+      "mode": "상담+신고 연계",
+      "strength": "17개 언어 다국어 진정·신고 지원",
+      "limits": "노무·인권 보호와 전문상담은 인간 주도·민감정보",
+      "source_ids": [
+        "S13"
+      ],
+      "evidence": "government_supported"
+    },
+    {
+      "id": "P10",
+      "name": "서울외국인주민센터 상담",
+      "segment": "서울 외국인주민",
+      "mode": "대면/전화/이메일·전문가",
+      "strength": "무료 다국어 상담과 법률·노무 전문가 예약",
+      "limits": "시간·지역 제약; 세부 운영시각은 사이트 확인 필요",
+      "source_ids": [
+        "S14"
+      ],
+      "evidence": "municipal_center"
+    },
+    {
+      "id": "P11",
+      "name": "ASKOVISA",
+      "segment": "난민·이주민",
+      "mode": "비영리 AI 공식정보 Q&A",
+      "strength": "9언어·무료·공식 출입국지침 근거 페이지·가입 장벽 최소",
+      "limits": "발표 자체도 전문 법률상담 대체 불가·오류 가능성 인정; 사용자 성과 미측정",
+      "source_ids": [
+        "S15",
+        "S16"
+      ],
+      "evidence": "ngo_launched_official"
+    },
+    {
+      "id": "P12",
+      "name": "K-VISA AI",
+      "segment": "체류정보 개인화가 필요한 외국인",
+      "mode": "민간 AI 개인화·기한알림·전문가 이관",
+      "strength": "체류 체크·기한 알림·개인 정보 기반 답변·행정사 이관·일일 10회 무료 AI상담(제공사 안내)",
+      "limits": "기능 소개·자체 평가·가입자 규모 모두 독립 검증 안 됨",
+      "source_ids": [
+        "S17",
+        "S18"
+      ],
+      "evidence": "developer_claim"
+    },
+    {
+      "id": "P13",
+      "name": "K-Together",
+      "segment": "비자·국제서류 지원이 필요한 외국인",
+      "mode": "민간 AI 상담→서류/신청→전문가",
+      "strength": "서식 작성·온라인 민원·K-ETA·진행상태 확인 등 주장",
+      "limits": "실제 정상 완료율/외부 시스템 연동/결제범위 미확인, 제공사 주장 수준",
+      "source_ids": [
+        "S19"
+      ],
+      "evidence": "developer_claim"
+    },
+    {
+      "id": "P14",
+      "name": "서울디지털동행플라자",
+      "segment": "디지털 사용에 어려움 있는 장노년층",
+      "mode": "현장 1:1 지원+교육",
+      "strength": "스마트폰/예약/금융/일상앱 상담, 어르신 친화 공간",
+      "limits": "AI 자율 에이전트형 서비스가 아님; 현장 참여 전제",
+      "source_ids": [
+        "S21"
+      ],
+      "evidence": "municipal_service"
+    },
+    {
+      "id": "P15",
+      "name": "어디나지원단",
+      "segment": "서울 고령층",
+      "mode": "노노 1:1 디지털 교육",
+      "strength": "어르신 강사·맞춤형 교육 및 헬프데스크",
+      "limits": "실제 앱 대행·완료율을 이 조사에서 확인하지 않음",
+      "source_ids": [
+        "S22"
+      ],
+      "evidence": "municipal_service"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "status": "confirmed",
+      "fact": "2025 경기도 공공서비스 조사 494명: 서류 61.5%, 의사소통 57.2%, 혼자 이용 52.7%, 정보 부족 50.2%",
+      "source_ids": [
+        "S01",
+        "S26"
+      ],
+      "caveat": "특정 지역 494명, 전국 이주민에 직접 일반화 불가"
+    },
+    {
+      "id": "C02",
+      "status": "confirmed",
+      "fact": "2026년 기준 경기도·서울 포털 모두 생성형 AI 안내 및 다국어 통합 정보를 제공",
+      "source_ids": [
+        "S05",
+        "S06",
+        "S08",
+        "S25"
+      ],
+      "caveat": "기능 제공 여부가 실제 이용 성공 보장은 아님"
+    },
+    {
+      "id": "C03",
+      "status": "confirmed",
+      "fact": "1345·다누리·고용센터·지역센터 등 다국어 인적 지원 경로도 이미 존재",
+      "source_ids": [
+        "S03",
+        "S10",
+        "S13",
+        "S14"
+      ],
+      "caveat": "대상·언어·운영시간 제약은 서로 다름"
+    },
+    {
+      "id": "C04",
+      "status": "confirmed",
+      "fact": "ASKOVISA는 무료 다국어 공식 출입국 지침 근거 페이지 제공, 전문 상담 대체 아님",
+      "source_ids": [
+        "S15",
+        "S16"
+      ],
+      "caveat": "정확도·실제 완료율 미검증"
+    },
+    {
+      "id": "C05",
+      "status": "developer_claim_only",
+      "fact": "K-VISA AI가 개인 기한/결정 지원·상담 이관을, K-Together가 서류·진행상태까지 제공한다고 소개",
+      "source_ids": [
+        "S17",
+        "S19"
+      ],
+      "caveat": "기술·가입·성공률 독립 검증 안 됨"
+    },
+    {
+      "id": "C06",
+      "status": "confirmed",
+      "fact": "2026년 가족정책 4언어 AI 챗봇과 2025년 유학생 AI 상담 포털도 존재",
+      "source_ids": [
+        "S11",
+        "S12"
+      ],
+      "caveat": "목적 및 대화 범위는 상이함"
+    },
+    {
+      "id": "C07",
+      "status": "confirmed",
+      "fact": "기존 고령층 지원에 1:1 공공서비스 안내 및 교육시설이 제공됨",
+      "source_ids": [
+        "S21",
+        "S22"
+      ],
+      "caveat": "AI 대응 정도는 개별 프로그램으로 추가 확인"
+    },
+    {
+      "id": "C08",
+      "status": "confirmed",
+      "fact": "경기도 조사에서 본인인증·회원가입·낮은 정보 접근성·행정 서류 장벽이 보고됨",
+      "source_ids": [
+        "S01",
+        "S26"
+      ],
+      "caveat": "2026 신규 서비스 출시 이후 개선된 정도는 미측정"
+    },
+    {
+      "id": "C09",
+      "status": "not_verified",
+      "fact": "기존 AI/포털 이용자가 실제 민원 절차를 끝내지 못하는 비율, 원인, 전환율",
+      "source_ids": [],
+      "caveat": "현장 인터뷰·동일 과제 서비스 사용 시험 필요"
+    },
+    {
+      "id": "C10",
+      "status": "not_verified",
+      "fact": "지원자용 co-pilot이 기존 센터 업무관리보다 효과적이라는 근거",
+      "source_ids": [],
+      "caveat": "지원자 업무 기록/반복 사례와 시간 측정 필요"
+    },
+    {
+      "id": "C11",
+      "status": "evaluation_inference",
+      "fact": "기존 서비스가 강해 범용 이주민 챗봇을 첫 MVP로 선정할 근거가 약함",
+      "source_ids": [
+        "S05",
+        "S08",
+        "S11",
+        "S15",
+        "S17",
+        "S19"
+      ],
+      "caveat": "경쟁 범위가 넓다는 조사자의 해석이며 채택·불채택 확정 아님"
+    },
+    {
+      "id": "C12",
+      "status": "confirmed",
+      "fact": "서울 MY SEOUL+는 교육·시설 예약을 포함하고 경기도 포털에도 프로그램 신청이 있음",
+      "source_ids": [
+        "S06",
+        "S08"
+      ],
+      "caveat": "모든 신청·인증의 자동 해결을 의미하지 않음"
+    }
+  ],
+  "evidence_note": "실서비스 메뉴/공공 보도자료/제공사 제품 설명을 구분. 제공사 성과 지표는 독립 검증 안 함. 실태조사는 2025 조사로 2026 출시 이후 변화는 미확인. 구체 이탈·신청완료율 미수집",
+  "hypothesis_candidates": [
+    {
+      "id": "H01",
+      "user": "초기 정착 이주민",
+      "job": "공공 교육·생활 프로그램 정보를 찾고 자신에게 가능한지 확인한 뒤 신청",
+      "baseline": [
+        "경기도 이주민 포털",
+        "서울 MY SEOUL+",
+        "1345",
+        "일반 LLM"
+      ],
+      "disconfirm": "기존 포털에서 대상자가 대부분 완수하며 추가 조정 필요가 없음",
+      "data_needed": "과제별 실제 완수율·이해도·오류·중도포기 이유"
+    },
+    {
+      "id": "H02",
+      "user": "이주민 현장 지원자·통역 상담원",
+      "job": "다기관 정보·조건·근거를 취합해 사용자가 필요한 다음 행동과 상담 연결을 제공",
+      "baseline": [
+        "기존 센터 업무 도구",
+        "1345/다누리",
+        "일반 LLM+양식"
+      ],
+      "disconfirm": "기존 상담 도구와 체크리스트만으로 업무가 충분히 빠르고 정확함",
+      "data_needed": "비식별 실제 반복 상담 사례·처리시간·교차인계/오류"
+    },
+    {
+      "id": "H03",
+      "user": "복수 기관 절차를 거치는 이주민",
+      "job": "정보 이해 이후 예약·서류·기관 연결 등의 단계별 진행",
+      "baseline": [
+        "HiKorea",
+        "경기도/서울 포털",
+        "K-VISA AI",
+        "K-Together"
+      ],
+      "disconfirm": "기존 연동/전문가 서비스가 해당 과제를 이미 충분히 해결",
+      "data_needed": "권한 범위·외부 시스템 신청 제약·진짜 단계별 완료율"
+    },
+    {
+      "id": "H04",
+      "user": "디지털 초보 고령층",
+      "job": "앱/공공 서비스에 필요한 한 가지 과제를 스스로 완료",
+      "baseline": [
+        "서울디지털동행플라자",
+        "어디나지원단",
+        "기본 스마트폰 도우미"
+      ],
+      "disconfirm": "현장 1:1 안내가 더 안전·경제적이고 도구 없이 충분",
+      "data_needed": "직접 사용자 참여 접근성·사용 중단 이유·학습 효과"
+    }
+  ],
+  "report_conclusion": "이주민이라는 넓은 집단의 첫 타겟 확정은 보류. 기존 AI 정보/다국어/근거/후속일정/예약/인적이관 서비스가 풍부함. 실제 미완료 과제와 지원자 반복 부담의 정량·정성 자료가 없으며 2026 신규 서비스의 사용자 효과 데이터 부재. 특정 task에 대한 비교 시험과 현장 인터뷰 후 선택",
+  "execution": {
+    "public_service_identification": "passed",
+    "official_feature_review": "passed",
+    "first_party_need_survey": "passed",
+    "feature_competitor_matrix": "passed",
+    "actual_user_interviews": "not_run",
+    "competitor_account_and_task_tests": "not_run",
+    "user_value_or_diff_claims": "not_verified"
+  }
+}
