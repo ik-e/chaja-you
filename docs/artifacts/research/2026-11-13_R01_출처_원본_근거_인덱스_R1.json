@@ -1,0 +1,3812 @@
+{
+  "schema_version": 1,
+  "id": "R01-SOURCE-PROVENANCE-INDEX-20261113-R1",
+  "kind": "research",
+  "status": "legacy_research_index_compiled_with_original_trace_gaps",
+  "owner": "R01",
+  "date": "2026-11-13",
+  "authority": "research_evidence_only_not_project_state_or_candidate_promotion",
+  "scope": "5개 R01 기존 조사 JSON에서 반복된 URL·주장·원본 작업물을 연결한 최소 재사용 인덱스. 전체 프로젝트 출처의 완전한 수집 아님.",
+  "method": {
+    "source_identity": "정규화 URL (추적 매개변수 제거·query 정렬). 서로 다른 URL은 내용 동일성을 증명할 때만 병합",
+    "work_identity": "같은 1차 실태조사·보고서의 재인용은 별도 work_id로 연결해 독립 근거 중복 계수 방지",
+    "claim_identity": "기존 조사 문서 경로 + 원 주장 ID를 보존하고 링크만 전역 출처 ID로 연결",
+    "verification": "이전 조사기록의 '확인' 표시는 상속하되 이번 세션에서 직접 연 원문과 검색 결과·접근 오류를 구분"
+  },
+  "source_documents": [
+    {
+      "path": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+      "report_id": "R01-AI-INCLUSION-CASES-20261113-R1",
+      "role": "legacy_research_source_not_new_canonical_output",
+      "source_ids": [
+        "SRC-28fbb7bd",
+        "SRC-0b3fe984",
+        "SRC-d109284b",
+        "SRC-0093cadd",
+        "SRC-7f760c46",
+        "SRC-d29336a4",
+        "SRC-35b004a7",
+        "SRC-a0e7acf8",
+        "SRC-407736be",
+        "SRC-098791fe",
+        "SRC-eaea6dd9",
+        "SRC-88361d1e",
+        "SRC-92db751b",
+        "SRC-b6aa56ad"
+      ],
+      "local_to_global_sources": [
+        {
+          "local_id": "S01",
+          "source_id": "SRC-28fbb7bd"
+        },
+        {
+          "local_id": "S02",
+          "source_id": "SRC-0b3fe984"
+        },
+        {
+          "local_id": "S03",
+          "source_id": "SRC-d109284b"
+        },
+        {
+          "local_id": "S04",
+          "source_id": "SRC-0093cadd"
+        },
+        {
+          "local_id": "S05",
+          "source_id": "SRC-7f760c46"
+        },
+        {
+          "local_id": "S06",
+          "source_id": "SRC-d29336a4"
+        },
+        {
+          "local_id": "S07",
+          "source_id": "SRC-35b004a7"
+        },
+        {
+          "local_id": "S08",
+          "source_id": "SRC-a0e7acf8"
+        },
+        {
+          "local_id": "S09",
+          "source_id": "SRC-407736be"
+        },
+        {
+          "local_id": "S10",
+          "source_id": "SRC-098791fe"
+        },
+        {
+          "local_id": "S11",
+          "source_id": "SRC-eaea6dd9"
+        },
+        {
+          "local_id": "S12",
+          "source_id": "SRC-88361d1e"
+        },
+        {
+          "local_id": "S13",
+          "source_id": "SRC-92db751b"
+        },
+        {
+          "local_id": "S14",
+          "source_id": "SRC-b6aa56ad"
+        }
+      ]
+    },
+    {
+      "path": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+      "report_id": "R01-RESEARCH-EXTERNAL-COMPARISON-20261113-R1",
+      "role": "legacy_research_source_not_new_canonical_output",
+      "source_ids": [
+        "SRC-7e0e7c3a",
+        "SRC-7c2b8bbe",
+        "SRC-3978bbba",
+        "SRC-bf3312b6",
+        "SRC-e538ffc8",
+        "SRC-e70fec71",
+        "SRC-60e8903e",
+        "SRC-4bc6b8e9",
+        "SRC-8a6a2593",
+        "SRC-1dc5b210",
+        "SRC-8b536334"
+      ],
+      "local_to_global_sources": [
+        {
+          "local_id": "S01",
+          "source_id": "SRC-7e0e7c3a"
+        },
+        {
+          "local_id": "S02",
+          "source_id": "SRC-7c2b8bbe"
+        },
+        {
+          "local_id": "S03",
+          "source_id": "SRC-3978bbba"
+        },
+        {
+          "local_id": "S04",
+          "source_id": "SRC-bf3312b6"
+        },
+        {
+          "local_id": "S05",
+          "source_id": "SRC-e538ffc8"
+        },
+        {
+          "local_id": "S06",
+          "source_id": "SRC-e70fec71"
+        },
+        {
+          "local_id": "S07",
+          "source_id": "SRC-60e8903e"
+        },
+        {
+          "local_id": "S08",
+          "source_id": "SRC-4bc6b8e9"
+        },
+        {
+          "local_id": "S09",
+          "source_id": "SRC-8a6a2593"
+        },
+        {
+          "local_id": "S10",
+          "source_id": "SRC-1dc5b210"
+        },
+        {
+          "local_id": "S11",
+          "source_id": "SRC-8b536334"
+        }
+      ]
+    },
+    {
+      "path": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+      "report_id": "R01-MIGRANT-DIGITAL-LANDSCAPE-20261113-R1",
+      "role": "legacy_research_source_not_new_canonical_output",
+      "source_ids": [
+        "SRC-fae90f96",
+        "SRC-f689ad35",
+        "SRC-1f995669",
+        "SRC-c3c45604",
+        "SRC-340b2144",
+        "SRC-2afa1e8e",
+        "SRC-36b9b991",
+        "SRC-0c1aaad8",
+        "SRC-8826b61d",
+        "SRC-a76de862",
+        "SRC-75dd36e7",
+        "SRC-01fde0bb",
+        "SRC-69af6d6b",
+        "SRC-b07b6361",
+        "SRC-0093cadd",
+        "SRC-7f760c46",
+        "SRC-4df9abe2",
+        "SRC-b05d6bd2",
+        "SRC-b829fe71",
+        "SRC-e6fd3368",
+        "SRC-25d62fca",
+        "SRC-3a8fe196",
+        "SRC-ae6f2cc6",
+        "SRC-46fcfa21",
+        "SRC-b6e1f183",
+        "SRC-6dab2beb",
+        "SRC-33937e6f",
+        "SRC-94c9d2e3"
+      ],
+      "local_to_global_sources": [
+        {
+          "local_id": "S01",
+          "source_id": "SRC-fae90f96"
+        },
+        {
+          "local_id": "S02",
+          "source_id": "SRC-f689ad35"
+        },
+        {
+          "local_id": "S03",
+          "source_id": "SRC-1f995669"
+        },
+        {
+          "local_id": "S04",
+          "source_id": "SRC-c3c45604"
+        },
+        {
+          "local_id": "S05",
+          "source_id": "SRC-340b2144"
+        },
+        {
+          "local_id": "S06",
+          "source_id": "SRC-2afa1e8e"
+        },
+        {
+          "local_id": "S07",
+          "source_id": "SRC-36b9b991"
+        },
+        {
+          "local_id": "S08",
+          "source_id": "SRC-0c1aaad8"
+        },
+        {
+          "local_id": "S09",
+          "source_id": "SRC-8826b61d"
+        },
+        {
+          "local_id": "S10",
+          "source_id": "SRC-a76de862"
+        },
+        {
+          "local_id": "S11",
+          "source_id": "SRC-75dd36e7"
+        },
+        {
+          "local_id": "S12",
+          "source_id": "SRC-01fde0bb"
+        },
+        {
+          "local_id": "S13",
+          "source_id": "SRC-69af6d6b"
+        },
+        {
+          "local_id": "S14",
+          "source_id": "SRC-b07b6361"
+        },
+        {
+          "local_id": "S15",
+          "source_id": "SRC-0093cadd"
+        },
+        {
+          "local_id": "S16",
+          "source_id": "SRC-7f760c46"
+        },
+        {
+          "local_id": "S17",
+          "source_id": "SRC-4df9abe2"
+        },
+        {
+          "local_id": "S18",
+          "source_id": "SRC-b05d6bd2"
+        },
+        {
+          "local_id": "S19",
+          "source_id": "SRC-b829fe71"
+        },
+        {
+          "local_id": "S20",
+          "source_id": "SRC-e6fd3368"
+        },
+        {
+          "local_id": "S21",
+          "source_id": "SRC-25d62fca"
+        },
+        {
+          "local_id": "S22",
+          "source_id": "SRC-3a8fe196"
+        },
+        {
+          "local_id": "S23",
+          "source_id": "SRC-ae6f2cc6"
+        },
+        {
+          "local_id": "S24",
+          "source_id": "SRC-46fcfa21"
+        },
+        {
+          "local_id": "S25",
+          "source_id": "SRC-b6e1f183"
+        },
+        {
+          "local_id": "S26",
+          "source_id": "SRC-6dab2beb"
+        },
+        {
+          "local_id": "S27",
+          "source_id": "SRC-33937e6f"
+        },
+        {
+          "local_id": "S28",
+          "source_id": "SRC-94c9d2e3"
+        }
+      ]
+    },
+    {
+      "path": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+      "report_id": "R01-TWO-SIDED-CONNECTION-RESEARCH-20261113-R1",
+      "role": "legacy_research_source_not_new_canonical_output",
+      "source_ids": [
+        "SRC-70914087",
+        "SRC-73e9c3cc",
+        "SRC-e405d7fc",
+        "SRC-9359f37a",
+        "SRC-3a8fe196",
+        "SRC-d42d188c",
+        "SRC-c0c40c5c",
+        "SRC-9da76e2e",
+        "SRC-6047270f",
+        "SRC-13544ae9",
+        "SRC-137937b2",
+        "SRC-e9d9c58d",
+        "SRC-3ac3302c",
+        "SRC-38fb8785",
+        "SRC-bf6eb690",
+        "SRC-c3802de5",
+        "SRC-6f3735a7"
+      ],
+      "local_to_global_sources": [
+        {
+          "local_id": "S01",
+          "source_id": "SRC-70914087"
+        },
+        {
+          "local_id": "S02",
+          "source_id": "SRC-73e9c3cc"
+        },
+        {
+          "local_id": "S03",
+          "source_id": "SRC-e405d7fc"
+        },
+        {
+          "local_id": "S04",
+          "source_id": "SRC-9359f37a"
+        },
+        {
+          "local_id": "S05",
+          "source_id": "SRC-3a8fe196"
+        },
+        {
+          "local_id": "S06",
+          "source_id": "SRC-d42d188c"
+        },
+        {
+          "local_id": "S07",
+          "source_id": "SRC-c0c40c5c"
+        },
+        {
+          "local_id": "S08",
+          "source_id": "SRC-9da76e2e"
+        },
+        {
+          "local_id": "S09",
+          "source_id": "SRC-6047270f"
+        },
+        {
+          "local_id": "S10",
+          "source_id": "SRC-13544ae9"
+        },
+        {
+          "local_id": "S11",
+          "source_id": "SRC-137937b2"
+        },
+        {
+          "local_id": "S12",
+          "source_id": "SRC-e9d9c58d"
+        },
+        {
+          "local_id": "S13",
+          "source_id": "SRC-3ac3302c"
+        },
+        {
+          "local_id": "S14",
+          "source_id": "SRC-38fb8785"
+        },
+        {
+          "local_id": "S15",
+          "source_id": "SRC-bf6eb690"
+        },
+        {
+          "local_id": "S16",
+          "source_id": "SRC-c3802de5"
+        },
+        {
+          "local_id": "S17",
+          "source_id": "SRC-6f3735a7"
+        }
+      ]
+    },
+    {
+      "path": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+      "report_id": "R01-CHILDCARE-WAIT-REVIEW-20261113-R1",
+      "role": "legacy_research_source_not_new_canonical_output",
+      "source_ids": [
+        "SRC-70914087",
+        "SRC-0f3d0682",
+        "SRC-809fd1fb",
+        "SRC-490e44e4",
+        "SRC-ef24618d",
+        "SRC-b6685e68",
+        "SRC-e405d7fc",
+        "SRC-d19d5a92",
+        "SRC-1cfd77ef",
+        "SRC-30ff7723"
+      ],
+      "local_to_global_sources": [
+        {
+          "local_id": "S01",
+          "source_id": "SRC-70914087"
+        },
+        {
+          "local_id": "S02",
+          "source_id": "SRC-0f3d0682"
+        },
+        {
+          "local_id": "S03",
+          "source_id": "SRC-809fd1fb"
+        },
+        {
+          "local_id": "S04",
+          "source_id": "SRC-490e44e4"
+        },
+        {
+          "local_id": "S05",
+          "source_id": "SRC-ef24618d"
+        },
+        {
+          "local_id": "S06",
+          "source_id": "SRC-b6685e68"
+        },
+        {
+          "local_id": "S07",
+          "source_id": "SRC-e405d7fc"
+        },
+        {
+          "local_id": "S08",
+          "source_id": "SRC-d19d5a92"
+        },
+        {
+          "local_id": "S09",
+          "source_id": "SRC-1cfd77ef"
+        },
+        {
+          "local_id": "S10",
+          "source_id": "SRC-30ff7723"
+        }
+      ]
+    }
+  ],
+  "source_records": [
+    {
+      "id": "SRC-0093cadd",
+      "normalized_url": "https://www.apil.or.kr/notice/1112427516",
+      "observed_urls": [
+        "https://www.apil.or.kr/notice/1112427516"
+      ],
+      "titles": [
+        "ASKOVISA 출시 안내"
+      ],
+      "publishers": [
+        "공익법센터 어필"
+      ],
+      "source_types": [
+        "developer_launch",
+        "ngo_ai_service"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S04",
+          "access": "2026-11-13"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S15",
+          "access": "developer_official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S04"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S15"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-01fde0bb",
+      "normalized_url": "https://www.korea.kr/news/policyNewsView.do?newsId=148940281",
+      "observed_urls": [
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148940281"
+      ],
+      "titles": [
+        "한국유학종합시스템 AI 상담·다국어 개편"
+      ],
+      "publishers": [
+        "교육부·국립국제교육원"
+      ],
+      "source_types": [
+        "government_ai_portal"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S12",
+          "access": "government_official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S12"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-08ef4bf3",
+      "normalized_url": "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156784964&pWise=mSub&pWiseSub=C5",
+      "observed_urls": [
+        "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156784964&pWise=mSub&pWiseSub=C5"
+      ],
+      "titles": [
+        "지역사회 통합돌봄 첫 실태조사 결과 발표"
+      ],
+      "publishers": [
+        "보건복지부"
+      ],
+      "source_types": [
+        "government_press_release"
+      ],
+      "access_records": [
+        {
+          "document": "new_targeted_original_tracing_2026-11-13",
+          "local_source_id": null,
+          "access": "2026-11-13 official search result shows PDF/HWPX attachments; direct open cache miss"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [],
+      "work_ids": [
+        "WORK-2026-INTEGRATED-CARE-REGIONAL-SURVEY"
+      ],
+      "discovery_status": "rechecked_2026-11-13"
+    },
+    {
+      "id": "SRC-098791fe",
+      "normalized_url": "https://www.sciencedirect.com/science/article/pii/S0019570726002386",
+      "observed_urls": [
+        "https://www.sciencedirect.com/science/article/pii/S0019570726002386"
+      ],
+      "titles": [
+        "Evaluating community-wide AI-assisted systematic tuberculosis screening in urban slums of Delhi"
+      ],
+      "publishers": [
+        "Indian Journal of Tuberculosis"
+      ],
+      "source_types": [
+        "academic_implementation_study"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S10",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S10"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-0b3fe984",
+      "normalized_url": "https://www.seoul.go.kr/news/news_report.do?nttNo=424339",
+      "observed_urls": [
+        "https://www.seoul.go.kr/news/news_report.do?nttNo=424339"
+      ],
+      "titles": [
+        "서울시 고립위험 4만 4천9백 가구에 스마트돌봄서비스 제공"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_operations"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S02",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S02"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-0c1aaad8",
+      "normalized_url": "https://news.seoul.go.kr/welfare/archives/582852",
+      "observed_urls": [
+        "https://news.seoul.go.kr/welfare/archives/582852"
+      ],
+      "titles": [
+        "MY SEOUL+ 개편 발표"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_service_release"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S08",
+          "access": "search_result_official_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S08"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-0f3d0682",
+      "normalized_url": "https://www.korea.kr/briefing/policyBriefingView.do?newsId=156774423&pWise=sub&pWiseSub=C4",
+      "observed_urls": [
+        "https://www.korea.kr/briefing/policyBriefingView.do?newsId=156774423&pWise=sub&pWiseSub=C4"
+      ],
+      "titles": [
+        "2025 아이돌봄 실태조사 브리핑 및 문답, 정부 정책브리핑, 2026-08-13"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S02",
+          "access": "search-extract-official"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S02"
+        }
+      ],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-13544ae9",
+      "normalized_url": "https://www.v1365.or.kr/participation/volunteer",
+      "observed_urls": [
+        "https://www.v1365.or.kr/participation/volunteer"
+      ],
+      "titles": [
+        "자원봉사 참여 안내와 1365 포털 기능"
+      ],
+      "publishers": [
+        "한국중앙자원봉사센터"
+      ],
+      "source_types": [
+        "공식 플랫폼 기능 설명"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S10",
+          "access": "검색 결과 본문, 별도 직접 open 실패"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S10"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-137937b2",
+      "normalized_url": "https://www.1365.go.kr/vols/callListPopup.do",
+      "observed_urls": [
+        "https://www.1365.go.kr/vols/callListPopup.do"
+      ],
+      "titles": [
+        "상황별 문의전화 안내"
+      ],
+      "publishers": [
+        "1365 자원봉사포털"
+      ],
+      "source_types": [
+        "공식 서비스 운영 안내"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S11",
+          "access": "직접 조회"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S11"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-1cfd77ef",
+      "normalized_url": "https://news.seoul.go.kr/welfare/archives/509614",
+      "observed_urls": [
+        "https://news.seoul.go.kr/welfare/archives/509614"
+      ],
+      "titles": [
+        "2026 서울형 아이돌봄 서비스, 서울특별시"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S09",
+          "access": "search-extract-official"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S09"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-1dc5b210",
+      "normalized_url": "https://metr.org/blog/2026-02-24-uplift-update/",
+      "observed_urls": [
+        "https://metr.org/blog/2026-02-24-uplift-update/"
+      ],
+      "titles": [
+        "We are Changing our Developer Productivity Experiment Design"
+      ],
+      "publishers": [
+        "METR"
+      ],
+      "source_types": [
+        "primary_research_update"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S10",
+          "access": "direct_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S10"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-1f995669",
+      "normalized_url": "https://www.cppb.go.kr/immigration/1530/subview.do",
+      "observed_urls": [
+        "https://www.cppb.go.kr/immigration/1530/subview.do"
+      ],
+      "titles": [
+        "외국인종합안내센터 1345"
+      ],
+      "publishers": [
+        "법무부 출입국·외국인정책본부"
+      ],
+      "source_types": [
+        "government_service"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S03",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S03"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-25d62fca",
+      "normalized_url": "https://news.seoul.go.kr/gov/archives/570895",
+      "observed_urls": [
+        "https://news.seoul.go.kr/gov/archives/570895"
+      ],
+      "titles": [
+        "서울디지털동행플라자"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_senior"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S21",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S21"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-28fbb7bd",
+      "normalized_url": "https://news.seoul.go.kr/welfare/archives/559727",
+      "observed_urls": [
+        "https://news.seoul.go.kr/welfare/archives/559727"
+      ],
+      "titles": [
+        "AI·IoT로 전기·휴대폰사용량 모니터링... 고립 위험가구 찾아낸다"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_case"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S01",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S01"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-2afa1e8e",
+      "normalized_url": "https://www.gg.go.kr/gmigrant/hmpg/main.do",
+      "observed_urls": [
+        "https://www.gg.go.kr/gmigrant/hmpg/main.do"
+      ],
+      "titles": [
+        "경기도 이주민 포털 공식 홈페이지"
+      ],
+      "publishers": [
+        "경기도"
+      ],
+      "source_types": [
+        "government_live_site"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S06",
+          "access": "official_page_read_without_authenticated_chat_test"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S06"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-30ff7723",
+      "normalized_url": "https://umppa.seoul.go.kr/hmpg/life/cycl/lifeCyclInfoDetail.do?doc_id=065A6647F3584756A84FEC50EC43F413&sys_name=biz",
+      "observed_urls": [
+        "https://umppa.seoul.go.kr/hmpg/life/cycl/lifeCyclInfoDetail.do?doc_id=065A6647F3584756A84FEC50EC43F413&sys_name=biz"
+      ],
+      "titles": [
+        "등하원 아이돌봄 사업안내, 서울특별시"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S10",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S10"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-33937e6f",
+      "normalized_url": "https://www.yeosusi.liveinkorea.kr/web/index.do",
+      "observed_urls": [
+        "https://www.yeosusi.liveinkorea.kr/web/index.do"
+      ],
+      "titles": [
+        "다문화가족지원센터 229개 목록"
+      ],
+      "publishers": [
+        "다누리"
+      ],
+      "source_types": [
+        "government_supported_centers"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S27",
+          "access": "portal_page_search_result"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S27"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-340b2144",
+      "normalized_url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=s017&number=70825&subject_Code=BO01",
+      "observed_urls": [
+        "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=s017&number=70825&subject_Code=BO01"
+      ],
+      "titles": [
+        "경기도 생성형 AI 이주민 포털 정식 개통"
+      ],
+      "publishers": [
+        "경기도"
+      ],
+      "source_types": [
+        "government_service_release"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S05",
+          "access": "official_result_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S05"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-35b004a7",
+      "normalized_url": "https://support.bemyeyes.com/hc/en-us/articles/18133134809105-Using-Be-My-AI",
+      "observed_urls": [
+        "https://support.bemyeyes.com/hc/en-us/articles/18133134809105-Using-Be-My-AI"
+      ],
+      "titles": [
+        "Using Be My AI – Help Center"
+      ],
+      "publishers": [
+        "Be My Eyes"
+      ],
+      "source_types": [
+        "support_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S07",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S07"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-36b9b991",
+      "normalized_url": "https://www.gg.go.kr/gmigrant/hmpg/gude/lang/contLangPage.do?cont_lang_no=3",
+      "observed_urls": [
+        "https://www.gg.go.kr/gmigrant/hmpg/gude/lang/contLangPage.do?cont_lang_no=3"
+      ],
+      "titles": [
+        "경기도 이주민 포털 소개"
+      ],
+      "publishers": [
+        "경기도"
+      ],
+      "source_types": [
+        "government_service"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S07",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S07"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-38fb8785",
+      "normalized_url": "https://soomgo.com/pro",
+      "observed_urls": [
+        "https://soomgo.com/pro"
+      ],
+      "titles": [
+        "서비스 전문가와 고객 연결·견적·인증 안내"
+      ],
+      "publishers": [
+        "숨고"
+      ],
+      "source_types": [
+        "기업 자체 기능 설명"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S14",
+          "access": "원문 직접 조회; 검색 캐시의 가입자 규모가 시점별 불일치하므로 사용 안 함"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S14"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-3978bbba",
+      "normalized_url": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+      "observed_urls": [
+        "https://developers.openai.com/api/docs/guides/agents/orchestration"
+      ],
+      "titles": [
+        "Orchestration and handoffs"
+      ],
+      "publishers": [
+        "OpenAI"
+      ],
+      "source_types": [
+        "official_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S03",
+          "access": "direct_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S03"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-3a8fe196",
+      "normalized_url": "https://news.seoul.go.kr/gov/archives/527994",
+      "observed_urls": [
+        "https://news.seoul.go.kr/gov/archives/527994"
+      ],
+      "titles": [
+        "어디나지원단"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_senior",
+        "지자체 강사단 운영"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S22",
+          "access": "official_page_read"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S05",
+          "access": "공식 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S22"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S05"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-3ac3302c",
+      "normalized_url": "https://about.daangn.com/company/pr/archive/%EB%8B%B9%EA%B7%BC-2025-%EC%97%B0%EB%A7%90%EA%B2%B0%EC%82%B0-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B3%B5%EA%B0%9C/",
+      "observed_urls": [
+        "https://about.daangn.com/company/pr/archive/%EB%8B%B9%EA%B7%BC-2025-%EC%97%B0%EB%A7%90%EA%B2%B0%EC%82%B0-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B3%B5%EA%B0%9C/"
+      ],
+      "titles": [
+        "2025 연말결산: 모임·알바·이웃 거래"
+      ],
+      "publishers": [
+        "당근"
+      ],
+      "source_types": [
+        "기업 자체 운영 통계"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S13",
+          "access": "원문 직접 조회"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S13"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-407736be",
+      "normalized_url": "https://blog.google/company-news/outreach-and-initiatives/accessibility/ai-accessibility-update-gaad-2024/",
+      "observed_urls": [
+        "https://blog.google/company-news/outreach-and-initiatives/accessibility/ai-accessibility-update-gaad-2024/"
+      ],
+      "titles": [
+        "GAAD 2024: New AI accessibility updates"
+      ],
+      "publishers": [
+        "Google"
+      ],
+      "source_types": [
+        "developer_product"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S09",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S09"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-44d78907",
+      "normalized_url": "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=710579&mid=news405",
+      "observed_urls": [
+        "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=710579&mid=news405"
+      ],
+      "titles": [
+        "2025 아이돌봄서비스 실태조사 국가승인통계 실시 안내"
+      ],
+      "publishers": [
+        "성평등가족부"
+      ],
+      "source_types": [
+        "survey_design_announcement"
+      ],
+      "access_records": [
+        {
+          "document": "new_targeted_original_tracing_2026-11-13",
+          "local_source_id": null,
+          "access": "2026-11-13 official full-page direct open"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ],
+      "discovery_status": "rechecked_2026-11-13"
+    },
+    {
+      "id": "SRC-46fcfa21",
+      "normalized_url": "https://gmis.or.kr/bbs/board.php?bo_table=case&page=7&sca=%EA%B3%A0%EC%9A%A9%ED%97%88%EA%B0%80&wr_id=1515",
+      "observed_urls": [
+        "https://gmis.or.kr/bbs/board.php?bo_table=case&page=7&sca=%EA%B3%A0%EC%9A%A9%ED%97%88%EA%B0%80&wr_id=1515"
+      ],
+      "titles": [
+        "센터의 외국인노동자 폭행 관련 복합 상담 및 기관연계 실제 사례"
+      ],
+      "publishers": [
+        "경기도이민사회통합지원센터"
+      ],
+      "source_types": [
+        "operator_case_record"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S24",
+          "access": "official_case_public_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S24"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-490e44e4",
+      "normalized_url": "https://www.idolbom.go.kr/front/srvcUtztnGuide/beforeApply",
+      "observed_urls": [
+        "https://www.idolbom.go.kr/front/srvcUtztnGuide/beforeApply"
+      ],
+      "titles": [
+        "신청 전 준비안내, 아이돌봄서비스 공식 누리집"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S04",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S04"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-4bc6b8e9",
+      "normalized_url": "https://proceedings.mlr.press/v306/li26ej.html",
+      "observed_urls": [
+        "https://proceedings.mlr.press/v306/li26ej.html"
+      ],
+      "titles": [
+        "Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+      ],
+      "publishers": [
+        "ICML 2026 / PMLR"
+      ],
+      "source_types": [
+        "peer_reviewed_paper"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S08",
+          "access": "bibliographic_abstract_search; direct page unavailable"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S08"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-4df9abe2",
+      "normalized_url": "https://k-visa.ai/",
+      "observed_urls": [
+        "https://k-visa.ai/"
+      ],
+      "titles": [
+        "K-VISA AI 서비스 소개·기한/전문가 연결"
+      ],
+      "publishers": [
+        "K-VISA AI"
+      ],
+      "source_types": [
+        "private_service_claim"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S17",
+          "access": "developer_site_search_result_no_independent_product_test"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S17"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-6047270f",
+      "normalized_url": "https://jaripon.ncrc.or.kr/home/kor/support/projectMng/edit.do?idx=1648&menuPos=1",
+      "observed_urls": [
+        "https://jaripon.ncrc.or.kr/home/kor/support/projectMng/edit.do?idx=1648&menuPos=1"
+      ],
+      "titles": [
+        "우리사이 3기 사회인 멘토 모집"
+      ],
+      "publishers": [
+        "자립정보ON/굿네이버스"
+      ],
+      "source_types": [
+        "운영기관 멘토 모집 공고"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S09",
+          "access": "공식 사업 공고 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S09"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-60e8903e",
+      "normalized_url": "https://aclanthology.org/2026.findings-acl.1337/",
+      "observed_urls": [
+        "https://aclanthology.org/2026.findings-acl.1337/"
+      ],
+      "titles": [
+        "From Recall to Forgetting: Benchmarking Long-Term Memory for Personalized Agents"
+      ],
+      "publishers": [
+        "ACL Findings 2026"
+      ],
+      "source_types": [
+        "peer_reviewed_paper"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S07",
+          "access": "bibliographic_abstract_search; direct page unavailable"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S07"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-69af6d6b",
+      "normalized_url": "https://www.moel.go.kr/local/daegu/news/notice/noticeView.do?bbs_seq=20260401120",
+      "observed_urls": [
+        "https://www.moel.go.kr/local/daegu/news/notice/noticeView.do?bbs_seq=20260401120"
+      ],
+      "titles": [
+        "외국인력상담센터 1577-0071"
+      ],
+      "publishers": [
+        "고용노동부"
+      ],
+      "source_types": [
+        "government_labor"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S13",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S13"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-6dab2beb",
+      "normalized_url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=66972",
+      "observed_urls": [
+        "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=66972"
+      ],
+      "titles": [
+        "이주민 공공서비스 조사 중간보고"
+      ],
+      "publishers": [
+        "경기도"
+      ],
+      "source_types": [
+        "government_research_press"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S26",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S26"
+        }
+      ],
+      "work_ids": [
+        "WORK-2025-GG-MIGRANT-SURVEY"
+      ],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-6f3735a7",
+      "normalized_url": "https://www.v1365.or.kr/board/policy-news/read/3125",
+      "observed_urls": [
+        "https://www.v1365.or.kr/board/policy-news/read/3125"
+      ],
+      "titles": [
+        "2023 자원봉사활동 실태조사 연구 자료 공개"
+      ],
+      "publishers": [
+        "행정안전부/한국중앙자원봉사센터"
+      ],
+      "source_types": [
+        "정부 주관 원 조사 안내"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S17",
+          "access": "보고서 목록·조사 목적 확인; 원 PDF 미열람"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S17"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-70914087",
+      "normalized_url": "https://www.mogef.go.kr/nw/enw/nw_enw_s001d.do?bbtSn=714130&mid=mda700",
+      "observed_urls": [
+        "https://www.mogef.go.kr/nw/enw/nw_enw_s001d.do?bbtSn=714130&mid=mda700"
+      ],
+      "titles": [
+        "2025년 아이돌봄서비스 실태조사 결과 발표",
+        "2025 아이돌봄 실태조사 결과, 성평등가족부, 2026-08-13"
+      ],
+      "publishers": [
+        "성평등가족부"
+      ],
+      "source_types": [
+        "정부 1차 실태조사 결과"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S01",
+          "access": "공식 검색 결과 본문·정책브리핑 교차 확인"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S01",
+          "access": "search-extract-official"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S01"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S01"
+        }
+      ],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-73e9c3cc",
+      "normalized_url": "https://www.mogef.go.kr/nw/enw/nw_enw_s001d.do?bbtSn=712401&mid=mda700",
+      "observed_urls": [
+        "https://www.mogef.go.kr/nw/enw/nw_enw_s001d.do?bbtSn=712401&mid=mda700"
+      ],
+      "titles": [
+        "2025년 주요업무 추진계획"
+      ],
+      "publishers": [
+        "성평등가족부"
+      ],
+      "source_types": [
+        "정부 정책 진단"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S02",
+          "access": "공식 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S02"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-75dd36e7",
+      "normalized_url": "https://www.liveinkorea.kr/web/lay1/bbs/S1T18C26/B/3/view.do?area=&area_detail=&article_seq=168177&board_view_type=&condition=&cpage=12&keyword=&mode=view&rows=12",
+      "observed_urls": [
+        "https://www.liveinkorea.kr/web/lay1/bbs/S1T18C26/B/3/view.do?area=&area_detail=&article_seq=168177&board_view_type=&condition=&cpage=12&keyword=&mode=view&rows=12"
+      ],
+      "titles": [
+        "가족상담정보전화센터 AI 챗봇 개설"
+      ],
+      "publishers": [
+        "한국건강가정진흥원"
+      ],
+      "source_types": [
+        "government_supported_ai"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S11",
+          "access": "official_notice_search_result"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S11"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-7a77456e",
+      "normalized_url": "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=711261&mid=news405",
+      "observed_urls": [
+        "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=711261&mid=news405"
+      ],
+      "titles": [
+        "2025년 아이돌봄서비스 실태조사 결과 발표"
+      ],
+      "publishers": [
+        "성평등가족부"
+      ],
+      "source_types": [
+        "publisher_original_press_release_not_full_study"
+      ],
+      "access_records": [
+        {
+          "document": "new_targeted_original_tracing_2026-11-13",
+          "local_source_id": null,
+          "access": "2026-11-13 official search result, direct open cache miss"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ],
+      "discovery_status": "rechecked_2026-11-13"
+    },
+    {
+      "id": "SRC-7c2b8bbe",
+      "normalized_url": "https://www.anthropic.com/research/multi-agent-research-system",
+      "observed_urls": [
+        "https://www.anthropic.com/research/multi-agent-research-system"
+      ],
+      "titles": [
+        "How we built our multi-agent research system"
+      ],
+      "publishers": [
+        "Anthropic"
+      ],
+      "source_types": [
+        "official_engineering"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S02",
+          "access": "search_result_content; detailed page open unavailable"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S02"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-7e0e7c3a",
+      "normalized_url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "observed_urls": [
+        "https://www.anthropic.com/engineering/building-effective-agents"
+      ],
+      "titles": [
+        "Building effective agents"
+      ],
+      "publishers": [
+        "Anthropic"
+      ],
+      "source_types": [
+        "official_engineering"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S01",
+          "access": "direct_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S01"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-7f760c46",
+      "normalized_url": "https://help.unhcr.org/southkorea/services-in-korea/immigration-information-chatbot/",
+      "observed_urls": [
+        "https://help.unhcr.org/southkorea/services-in-korea/immigration-information-chatbot/"
+      ],
+      "titles": [
+        "Immigration Information Chatbot — ASKOVISA",
+        "ASKOVISA 공식 지원 자원 안내"
+      ],
+      "publishers": [
+        "UNHCR Republic of Korea",
+        "UNHCR Korea"
+      ],
+      "source_types": [
+        "ngo_service_directory"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S05",
+          "access": "2026-11-13"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S16",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S05"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S16"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-809fd1fb",
+      "normalized_url": "https://www.idolbom.go.kr/front/srvcUtztnGuide/srvcApply",
+      "observed_urls": [
+        "https://www.idolbom.go.kr/front/srvcUtztnGuide/srvcApply"
+      ],
+      "titles": [
+        "서비스 신청안내, 아이돌봄서비스 공식 누리집"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S03",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S03"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-8826b61d",
+      "normalized_url": "https://global.seoul.go.kr/",
+      "observed_urls": [
+        "https://global.seoul.go.kr/"
+      ],
+      "titles": [
+        "MY SEOUL+ 포털"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_live_site"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S09",
+          "access": "search_result_official_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S09"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-88361d1e",
+      "normalized_url": "https://www.rescue.org/eu/country/italy",
+      "observed_urls": [
+        "https://www.rescue.org/eu/country/italy"
+      ],
+      "titles": [
+        "Italy country program – Signpost AI pilot"
+      ],
+      "publishers": [
+        "International Rescue Committee Italy"
+      ],
+      "source_types": [
+        "operator_pilot"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S12",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S12"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-8a6a2593",
+      "normalized_url": "https://playwright.dev/docs/api/class-browsertype",
+      "observed_urls": [
+        "https://playwright.dev/docs/api/class-browsertype"
+      ],
+      "titles": [
+        "BrowserType — connectOverCDP"
+      ],
+      "publishers": [
+        "Playwright"
+      ],
+      "source_types": [
+        "official_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S09",
+          "access": "search_result_content"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S09"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-8b536334",
+      "normalized_url": "https://docs.langchain.com/oss/javascript/deepagents/overview",
+      "observed_urls": [
+        "https://docs.langchain.com/oss/javascript/deepagents/overview"
+      ],
+      "titles": [
+        "Deep Agents overview"
+      ],
+      "publishers": [
+        "LangChain"
+      ],
+      "source_types": [
+        "official_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S11",
+          "access": "search_result_content"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S11"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-92db751b",
+      "normalized_url": "https://startup.google.com/intl/digital-events/alumni/stories/sovoro/",
+      "observed_urls": [
+        "https://startup.google.com/intl/digital-events/alumni/stories/sovoro/"
+      ],
+      "titles": [
+        "Sovoro – Korean AI speech-to-text accessibility startup"
+      ],
+      "publishers": [
+        "Google for Startups"
+      ],
+      "source_types": [
+        "partner_case"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S13",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S13"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-9359f37a",
+      "normalized_url": "https://news.seoul.go.kr/gov/archives/570972",
+      "observed_urls": [
+        "https://news.seoul.go.kr/gov/archives/570972"
+      ],
+      "titles": [
+        "시민 AI 동행·어디나지원단"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "지자체 서비스 운영 자료"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S04",
+          "access": "공식 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S04"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-94c9d2e3",
+      "normalized_url": "https://www.gg.go.kr/gmigrant/hmpg/gude/inf1/contLangPage.do?cont_lang_no=7",
+      "observed_urls": [
+        "https://www.gg.go.kr/gmigrant/hmpg/gude/inf1/contLangPage.do?cont_lang_no=7"
+      ],
+      "titles": [
+        "경기도 이주민 포털 이용 안내"
+      ],
+      "publishers": [
+        "경기도"
+      ],
+      "source_types": [
+        "government_service"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S28",
+          "access": "official_page_search_result"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S28"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-9da76e2e",
+      "normalized_url": "https://jaripon.ncrc.or.kr/home/kor/support/projectMng/edit.do?idx=2145&menuPos=1",
+      "observed_urls": [
+        "https://jaripon.ncrc.or.kr/home/kor/support/projectMng/edit.do?idx=2145&menuPos=1"
+      ],
+      "titles": [
+        "자립준비청년 취업·진로 멘토링 멘티 모집"
+      ],
+      "publishers": [
+        "자립정보ON/고대95 동기회"
+      ],
+      "source_types": [
+        "운영기관 모집 공고"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S08",
+          "access": "공식 사업 공고 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S08"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-a0e7acf8",
+      "normalized_url": "https://blog.google/company-news/inside-google/around-the-globe/google-europe/united-kingdom/the-accessibility-discovery-centre-is-open-for-collaboration/",
+      "observed_urls": [
+        "https://blog.google/company-news/inside-google/around-the-globe/google-europe/united-kingdom/the-accessibility-discovery-centre-is-open-for-collaboration/"
+      ],
+      "titles": [
+        "The Accessibility Discovery Centre is open for collaboration"
+      ],
+      "publishers": [
+        "Google"
+      ],
+      "source_types": [
+        "developer_story"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S08",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S08"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-a76de862",
+      "normalized_url": "https://www.liveinkorea.kr/web/lay1/S1T40C44/contents.do",
+      "observed_urls": [
+        "https://www.liveinkorea.kr/web/lay1/S1T40C44/contents.do"
+      ],
+      "titles": [
+        "다누리콜센터 안내 (최신 중앙 안내 15개 언어)"
+      ],
+      "publishers": [
+        "다누리콜센터"
+      ],
+      "source_types": [
+        "government_supported_service"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S10",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S10"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-ae6f2cc6",
+      "normalized_url": "https://nia.or.kr/site/nia_kor/ex/bbs/View.do?bcIdx=29168&cbIdx=81623",
+      "observed_urls": [
+        "https://nia.or.kr/site/nia_kor/ex/bbs/View.do?bcIdx=29168&cbIdx=81623"
+      ],
+      "titles": [
+        "2025 디지털정보격차 실태조사 보고서"
+      ],
+      "publishers": [
+        "한국지능정보사회진흥원"
+      ],
+      "source_types": [
+        "government_research"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S23",
+          "access": "official_report_index_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S23"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-b05d6bd2",
+      "normalized_url": "https://k-visa.ai/faq",
+      "observed_urls": [
+        "https://k-visa.ai/faq"
+      ],
+      "titles": [
+        "K-VISA AI FAQ"
+      ],
+      "publishers": [
+        "K-VISA AI"
+      ],
+      "source_types": [
+        "private_service_claim"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S18",
+          "access": "developer_site_search_result"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S18"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-b07b6361",
+      "normalized_url": "https://global.seoul.go.kr/hmpg/ainf/ctrs/frct/srch/dopr/doprListPage.do?cntr_no=04E34E2046394333BCC451C20A4850D9",
+      "observed_urls": [
+        "https://global.seoul.go.kr/hmpg/ainf/ctrs/frct/srch/dopr/doprListPage.do?cntr_no=04E34E2046394333BCC451C20A4850D9"
+      ],
+      "titles": [
+        "이주민 무료 전문 법률·노무·다국어 상담"
+      ],
+      "publishers": [
+        "서울외국인주민센터"
+      ],
+      "source_types": [
+        "public_support_center"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S14",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S14"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-b6685e68",
+      "normalized_url": "https://care.idolbom.go.kr/dolbomi/biz/stts",
+      "observed_urls": [
+        "https://care.idolbom.go.kr/dolbomi/biz/stts"
+      ],
+      "titles": [
+        "아이돌봄 이용가구·인력 통계, 아이돌봄서비스 공식 누리집"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S06",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S06"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-b6aa56ad",
+      "normalized_url": "https://www.who.int/news/item/11-06-2025-who-approves-six-software-products-for-computer-aided-detection-of-tb-on-chest-x-ray",
+      "observed_urls": [
+        "https://www.who.int/news/item/11-06-2025-who-approves-six-software-products-for-computer-aided-detection-of-tb-on-chest-x-ray"
+      ],
+      "titles": [
+        "WHO approves six products for computer-aided TB detection"
+      ],
+      "publishers": [
+        "World Health Organization"
+      ],
+      "source_types": [
+        "health_policy"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S14",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S14"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-b6e1f183",
+      "normalized_url": "https://www.seoul.go.kr/news/news_report.do?nttNo=465100",
+      "observed_urls": [
+        "https://www.seoul.go.kr/news/news_report.do?nttNo=465100"
+      ],
+      "titles": [
+        "MY SEOUL+ 보도자료 서울시 원문"
+      ],
+      "publishers": [
+        "서울특별시"
+      ],
+      "source_types": [
+        "government_service_release"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S25",
+          "access": "official_page_search_result"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S25"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-b829fe71",
+      "normalized_url": "https://www.k-together.com/app/",
+      "observed_urls": [
+        "https://www.k-together.com/app/"
+      ],
+      "titles": [
+        "K-Together 서비스 소개"
+      ],
+      "publishers": [
+        "K-Together"
+      ],
+      "source_types": [
+        "private_service_claim"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S19",
+          "access": "developer_site_search_result_no_independent_product_test"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S19"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-bf3312b6",
+      "normalized_url": "https://openai.github.io/openai-agents-python/running_agents/",
+      "observed_urls": [
+        "https://openai.github.io/openai-agents-python/running_agents/"
+      ],
+      "titles": [
+        "Running agents"
+      ],
+      "publishers": [
+        "OpenAI Agents SDK"
+      ],
+      "source_types": [
+        "official_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S04",
+          "access": "direct_page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S04"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-bf6eb690",
+      "normalized_url": "https://www.mohw.go.kr/menu.es?mid=a10709020900",
+      "observed_urls": [
+        "https://www.mohw.go.kr/menu.es?mid=a10709020900"
+      ],
+      "titles": [
+        "일상돌봄 서비스 사업"
+      ],
+      "publishers": [
+        "보건복지부"
+      ],
+      "source_types": [
+        "중앙정부 현행 지원"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S15",
+          "access": "공식 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S15"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-c0c40c5c",
+      "normalized_url": "https://jaripon.ncrc.or.kr/home/kor/support/projectMng/edit.do?idx=2190&menuPos=1",
+      "observed_urls": [
+        "https://jaripon.ncrc.or.kr/home/kor/support/projectMng/edit.do?idx=2190&menuPos=1"
+      ],
+      "titles": [
+        "우리사이 4기 자립준비청년 멘토 모집"
+      ],
+      "publishers": [
+        "자립정보ON/굿네이버스"
+      ],
+      "source_types": [
+        "운영기관 구인 공고"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S07",
+          "access": "공식 사업 공고 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S07"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-c3802de5",
+      "normalized_url": "https://scc.50plus.or.kr/fpp/detail.do?id=33463393",
+      "observed_urls": [
+        "https://scc.50plus.or.kr/fpp/detail.do?id=33463393"
+      ],
+      "titles": [
+        "디지털이음단 중장년 강사 모집·시설 활동"
+      ],
+      "publishers": [
+        "서울50플러스포털"
+      ],
+      "source_types": [
+        "운영기관 활동 설계·강사 수급"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S16",
+          "access": "공식 검색 결과 본문"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S16"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-c3c45604",
+      "normalized_url": "https://immigration.go.kr/moj/index.do",
+      "observed_urls": [
+        "https://immigration.go.kr/moj/index.do"
+      ],
+      "titles": [
+        "출입국 전자민원(하이코리아) 법무부 안내"
+      ],
+      "publishers": [
+        "법무부"
+      ],
+      "source_types": [
+        "government_service"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S04",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S04"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-d109284b",
+      "normalized_url": "https://skhappiness.org/newsroom/sesangfile_insightreport_2/",
+      "observed_urls": [
+        "https://skhappiness.org/newsroom/sesangfile_insightreport_2/"
+      ],
+      "titles": [
+        "청각장애 학생 문자 통역 프로젝트 성과 담은 인사이트 리포트 발간"
+      ],
+      "publishers": [
+        "SK행복나눔재단"
+      ],
+      "source_types": [
+        "operator_evaluation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S03",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S03"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-d19d5a92",
+      "normalized_url": "https://news.seoul.go.kr/welfare/archives/560199",
+      "observed_urls": [
+        "https://news.seoul.go.kr/welfare/archives/560199"
+      ],
+      "titles": [
+        "서울형 틈새 아이돌봄 시범 실적, 서울특별시 (2023 실적)"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S08",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S08"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-d29336a4",
+      "normalized_url": "https://www.bemyeyes.com/business/blog/be-my-eyes-integrates-be-my-ai-into-its-first-contact-center-with-stunning-results/",
+      "observed_urls": [
+        "https://www.bemyeyes.com/business/blog/be-my-eyes-integrates-be-my-ai-into-its-first-contact-center-with-stunning-results/"
+      ],
+      "titles": [
+        "Be My AI in Microsoft's Disability Answer Desk"
+      ],
+      "publishers": [
+        "Be My Eyes"
+      ],
+      "source_types": [
+        "operator_claims"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S06",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S06"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-d42d188c",
+      "normalized_url": "https://www.yna.co.kr/amp/view/AKR20260420128100004",
+      "observed_urls": [
+        "https://www.yna.co.kr/amp/view/AKR20260420128100004"
+      ],
+      "titles": [
+        "2025 서울시민 디지털역량 실태조사 보도"
+      ],
+      "publishers": [
+        "서울AI재단 조사/연합뉴스"
+      ],
+      "source_types": [
+        "공공 조사 언론 전재"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S06",
+          "access": "원 보고서 본문 미열람, 언론이 전한 수치만"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S06"
+        }
+      ],
+      "work_ids": [
+        "WORK-2025-SEOUL-DIGITAL-SURVEY"
+      ],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-e405d7fc",
+      "normalized_url": "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=710800&mid=news405",
+      "observed_urls": [
+        "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=710800&mid=news405"
+      ],
+      "titles": [
+        "2026 아이돌봄서비스 지원 확대",
+        "2026 아이돌봄 지원 확대, 성평등가족부"
+      ],
+      "publishers": [
+        "성평등가족부"
+      ],
+      "source_types": [
+        "정부 현행 제도"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S03",
+          "access": "공식 페이지 조회"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S07",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S03"
+        },
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S07"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-e538ffc8",
+      "normalized_url": "https://docs.langchain.com/oss/javascript/langgraph/thinking-in-langgraph",
+      "observed_urls": [
+        "https://docs.langchain.com/oss/javascript/langgraph/thinking-in-langgraph"
+      ],
+      "titles": [
+        "Thinking in LangGraph"
+      ],
+      "publishers": [
+        "LangChain"
+      ],
+      "source_types": [
+        "official_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S05",
+          "access": "search_result_content"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S05"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-e6fd3368",
+      "normalized_url": "https://www.gov.kr/portal/main/nologin",
+      "observed_urls": [
+        "https://www.gov.kr/portal/main/nologin"
+      ],
+      "titles": [
+        "정부24 외국인용 서비스"
+      ],
+      "publishers": [
+        "정부24"
+      ],
+      "source_types": [
+        "government_live_site"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S20",
+          "access": "official_page_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S20"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-e70fec71",
+      "normalized_url": "https://openai.github.io/openai-agents-js/guides/tracing/",
+      "observed_urls": [
+        "https://openai.github.io/openai-agents-js/guides/tracing/"
+      ],
+      "titles": [
+        "Tracing"
+      ],
+      "publishers": [
+        "OpenAI Agents SDK"
+      ],
+      "source_types": [
+        "official_documentation"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S06",
+          "access": "search_result_content"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+          "local_source_id": "S06"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-e9d9c58d",
+      "normalized_url": "https://volunteer.seoul.go.kr/svcStatus.do",
+      "observed_urls": [
+        "https://volunteer.seoul.go.kr/svcStatus.do"
+      ],
+      "titles": [
+        "서울 자원봉사 현황 (1365 연계)"
+      ],
+      "publishers": [
+        "서울시자원봉사센터"
+      ],
+      "source_types": [
+        "공공 활동 통계"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S12",
+          "access": "공식 검색 결과 본문; 활동인원 정의 확인 전 독립 인원으로 해석 금지"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+          "local_source_id": "S12"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-eaea6dd9",
+      "normalized_url": "https://www.rescue.org/article/how-irc-using-ai-reach-more-people-crisis",
+      "observed_urls": [
+        "https://www.rescue.org/article/how-irc-using-ai-reach-more-people-crisis"
+      ],
+      "titles": [
+        "How the IRC is using AI to reach more people in crisis"
+      ],
+      "publishers": [
+        "International Rescue Committee"
+      ],
+      "source_types": [
+        "operator_claims"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S11",
+          "access": "2026-11-13"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_AI_기술소외계층_실증사례_조사_R1.json",
+          "local_source_id": "S11"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-ef24618d",
+      "normalized_url": "https://www.idolbom.go.kr/front/board/question?ctgryCd=10002&page=2",
+      "observed_urls": [
+        "https://www.idolbom.go.kr/front/board/question?ctgryCd=10002&page=2"
+      ],
+      "titles": [
+        "자주하는 질문, 아이돌봄서비스 공식 누리집"
+      ],
+      "publishers": [],
+      "source_types": [],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S05",
+          "access": "read-full-page"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+          "local_source_id": "S05"
+        }
+      ],
+      "work_ids": [],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    },
+    {
+      "id": "SRC-f689ad35",
+      "normalized_url": "https://gmis.or.kr/report/65",
+      "observed_urls": [
+        "https://gmis.or.kr/report/65"
+      ],
+      "titles": [
+        "경기도 이주민의 공공서비스 이용 실태조사 보고서 게시"
+      ],
+      "publishers": [
+        "경기도이민사회통합지원센터"
+      ],
+      "source_types": [
+        "research_institution",
+        "original_report_landing"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S02",
+          "access": "official_record_page_read_full_pdf_not_retrieved"
+        },
+        {
+          "document": "new_targeted_original_tracing_2026-11-13",
+          "local_source_id": null,
+          "access": "2026-11-13 direct full HTML view; attached PDF click returned invalid access"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S02"
+        }
+      ],
+      "work_ids": [
+        "WORK-2025-GG-MIGRANT-SURVEY"
+      ],
+      "discovery_status": "original_landing_verified_pdf_access_failed"
+    },
+    {
+      "id": "SRC-fae90f96",
+      "normalized_url": "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=67518",
+      "observed_urls": [
+        "https://gnews.gg.go.kr/briefing/brief_gongbo_view.do?BS_CODE=S017&number=67518"
+      ],
+      "titles": [
+        "경기도 이주민 공공서비스 실태조사 최종보고"
+      ],
+      "publishers": [
+        "경기도"
+      ],
+      "source_types": [
+        "government_research_press"
+      ],
+      "access_records": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S01",
+          "access": "official_release_read"
+        }
+      ],
+      "first_recorded_at": "2026-11-13",
+      "observed_in": [
+        {
+          "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+          "local_source_id": "S01"
+        }
+      ],
+      "work_ids": [
+        "WORK-2025-GG-MIGRANT-SURVEY"
+      ],
+      "discovery_status": "recorded_in_prior_reports_not_all_live_rechecked"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-fbe3f83f",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C01"
+      },
+      "text": "상위 에이전트의 동적 작업 분해·위임·결과 통합은 이미 구현·문서화된 패턴이다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-7e0e7c3a",
+        "SRC-7c2b8bbe",
+        "SRC-3978bbba"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-fce3f9d2",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C02"
+      },
+      "text": "실행 상태 저장·중단/재개·사용자 승인 개입은 기존 프레임워크에서 지원한다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-bf3312b6",
+        "SRC-e538ffc8",
+        "SRC-8b536334"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-fde3fb65",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C03"
+      },
+      "text": "에이전트 실행은 완료 결과, 정해진 턴 한도, 승인·오류로 종료/중단될 수 있다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-7e0e7c3a",
+        "SRC-bf3312b6"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-f6e3f060",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C04"
+      },
+      "text": "도구·모델·위임의 실행 근거는 기존 tracing 도구에서 수집할 수 있다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-e70fec71"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-f7e3f1f3",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C05"
+      },
+      "text": "멀티에이전트는 비용이 높을 수 있고 모든 문제에 적합하지 않다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-7e0e7c3a",
+        "SRC-7c2b8bbe"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-f8e3f386",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C06"
+      },
+      "text": "분산 정보 조건에서 멀티에이전트가 정보 통합에 실패할 수 있다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-4bc6b8e9"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-f9e3f519",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C07"
+      },
+      "text": "장기 기억의 과거 정보 무효화·변경 반영은 여전히 연구상 실패 유형이다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-60e8903e"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-02e40344",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C08"
+      },
+      "text": "기존 Chromium 기반 Edge 탭에 CDP로 연결하는 자동화 기술이 존재한다",
+      "status": "verified_capability_not_user_integration",
+      "qualification": "",
+      "source_ids": [
+        "SRC-8a6a2593"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-03e404d7",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C09"
+      },
+      "text": "AI 활용의 생산성 개선 정도는 대상 작업·사용자·시점·실험 설계에 따라 달라진다",
+      "status": "verified_in_sources",
+      "qualification": "",
+      "source_ids": [
+        "SRC-1dc5b210"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-00e63eb5",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C10"
+      },
+      "text": "하위 문제 P=(X,Y,E,C)의 입력·출력 연결은 프로젝트 자체 설계 표기이며 선행연구에서 새로 증명된 표준은 아니다",
+      "status": "project_interpretation",
+      "qualification": "",
+      "source_ids": [],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-ffe63d22",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_선행기술_근거대조_조사기록_R1.json",
+        "claim_id": "C11"
+      },
+      "text": "찾아you의 사용자 부담 감소, 판단 재사용 신뢰성, 멀티탭 상위 에이전트 성능이 입증되었다",
+      "status": "not_verified",
+      "qualification": "",
+      "source_ids": [],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-26c61f80",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C01"
+      },
+      "text": "2025 경기도 공공서비스 조사 494명: 서류 61.5%, 의사소통 57.2%, 혼자 이용 52.7%, 정보 부족 50.2%",
+      "status": "confirmed",
+      "qualification": "특정 지역 494명, 전국 이주민에 직접 일반화 불가",
+      "source_ids": [
+        "SRC-fae90f96",
+        "SRC-6dab2beb"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-GG-MIGRANT-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-29c62439",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C02"
+      },
+      "text": "2026년 기준 경기도·서울 포털 모두 생성형 AI 안내 및 다국어 통합 정보를 제공",
+      "status": "confirmed",
+      "qualification": "기능 제공 여부가 실제 이용 성공 보장은 아님",
+      "source_ids": [
+        "SRC-340b2144",
+        "SRC-2afa1e8e",
+        "SRC-0c1aaad8",
+        "SRC-b6e1f183"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-28c622a6",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C03"
+      },
+      "text": "1345·다누리·고용센터·지역센터 등 다국어 인적 지원 경로도 이미 존재",
+      "status": "confirmed",
+      "qualification": "대상·언어·운영시간 제약은 서로 다름",
+      "source_ids": [
+        "SRC-1f995669",
+        "SRC-a76de862",
+        "SRC-69af6d6b",
+        "SRC-b07b6361"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-2bc6275f",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C04"
+      },
+      "text": "ASKOVISA는 무료 다국어 공식 출입국 지침 근거 페이지 제공, 전문 상담 대체 아님",
+      "status": "confirmed",
+      "qualification": "정확도·실제 완료율 미검증",
+      "source_ids": [
+        "SRC-0093cadd",
+        "SRC-7f760c46"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-2ac625cc",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C05"
+      },
+      "text": "K-VISA AI가 개인 기한/결정 지원·상담 이관을, K-Together가 서류·진행상태까지 제공한다고 소개",
+      "status": "developer_claim_only",
+      "qualification": "기술·가입·성공률 독립 검증 안 됨",
+      "source_ids": [
+        "SRC-4df9abe2",
+        "SRC-b829fe71"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-2dc62a85",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C06"
+      },
+      "text": "2026년 가족정책 4언어 AI 챗봇과 2025년 유학생 AI 상담 포털도 존재",
+      "status": "confirmed",
+      "qualification": "목적 및 대화 범위는 상이함",
+      "source_ids": [
+        "SRC-75dd36e7",
+        "SRC-01fde0bb"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-2cc628f2",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C07"
+      },
+      "text": "기존 고령층 지원에 1:1 공공서비스 안내 및 교육시설이 제공됨",
+      "status": "confirmed",
+      "qualification": "AI 대응 정도는 개별 프로그램으로 추가 확인",
+      "source_ids": [
+        "SRC-25d62fca",
+        "SRC-3a8fe196"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-2fc62dab",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C08"
+      },
+      "text": "경기도 조사에서 본인인증·회원가입·낮은 정보 접근성·행정 서류 장벽이 보고됨",
+      "status": "confirmed",
+      "qualification": "2026 신규 서비스 출시 이후 개선된 정도는 미측정",
+      "source_ids": [
+        "SRC-fae90f96",
+        "SRC-6dab2beb"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-GG-MIGRANT-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-2ec62c18",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C09"
+      },
+      "text": "기존 AI/포털 이용자가 실제 민원 절차를 끝내지 못하는 비율, 원인, 전환율",
+      "status": "not_verified",
+      "qualification": "현장 인터뷰·동일 과제 서비스 사용 시험 필요",
+      "source_ids": [],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-41c40b6a",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C10"
+      },
+      "text": "지원자용 co-pilot이 기존 센터 업무관리보다 효과적이라는 근거",
+      "status": "not_verified",
+      "qualification": "지원자 업무 기록/반복 사례와 시간 측정 필요",
+      "source_ids": [],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-42c40cfd",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C11"
+      },
+      "text": "기존 서비스가 강해 범용 이주민 챗봇을 첫 MVP로 선정할 근거가 약함",
+      "status": "evaluation_inference",
+      "qualification": "경쟁 범위가 넓다는 조사자의 해석이며 채택·불채택 확정 아님",
+      "source_ids": [
+        "SRC-340b2144",
+        "SRC-0c1aaad8",
+        "SRC-75dd36e7",
+        "SRC-0093cadd",
+        "SRC-4df9abe2",
+        "SRC-b829fe71"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-3fc40844",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_이주민_디지털지원_기존서비스_현황_경쟁대조_R1.json",
+        "claim_id": "C12"
+      },
+      "text": "서울 MY SEOUL+는 교육·시설 예약을 포함하고 경기도 포털에도 프로그램 신청이 있음",
+      "status": "confirmed",
+      "qualification": "모든 신청·인증의 자동 해결을 의미하지 않음",
+      "source_ids": [
+        "SRC-2afa1e8e",
+        "SRC-0c1aaad8"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-99fc05d5",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C01"
+      },
+      "text": "아이돌봄 가정 이용 의향과 실제 대기, 돌봄사측 연계 개선 요구는 모두 측정됐다",
+      "status": "externally_observed",
+      "qualification": "이용의향/현재 이용가구/현재 활동 돌봄사 표본이 다름; 같은 개인쌍을 의미하지 않음",
+      "source_ids": [
+        "SRC-70914087"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-96fc011c",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C02"
+      },
+      "text": "돌봄 지연에는 수요 집중·공급 부족·보수 등 정책 문제가 있다",
+      "status": "official_diagnosis",
+      "qualification": "분석에서 어느 원인이 개별 미매칭을 만들었는지 정량 분해 불가",
+      "source_ids": [
+        "SRC-70914087",
+        "SRC-73e9c3cc",
+        "SRC-e405d7fc"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-97fc02af",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C03"
+      },
+      "text": "고령층 디지털 문제와 또래 강사 지원 운영은 각각 확인됐다",
+      "status": "externally_observed",
+      "qualification": "2025 고령층 조사 원보고서 미열람; 강사 부족 증거 없음",
+      "source_ids": [
+        "SRC-9359f37a",
+        "SRC-3a8fe196",
+        "SRC-d42d188c"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-SEOUL-DIGITAL-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-94fbfdf6",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C04"
+      },
+      "text": "멘토와 멘티를 모집하는 프로그램이 운영되지만 둘의 연결 실패율은 알려지지 않았다",
+      "status": "program_evidence_not_gap",
+      "qualification": "모집 공고는 실제 참여·최종 매칭·완료 숫자와 다름",
+      "source_ids": [
+        "SRC-c0c40c5c",
+        "SRC-9da76e2e",
+        "SRC-6047270f"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-95fbff89",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C05"
+      },
+      "text": "1365에서 활동검색·신청·승인·실적을 제공하므로 단순 봉사 매칭의 기회 공백은 미확인",
+      "status": "official_feature",
+      "qualification": "활동 결과·신청 승인 데이터 없음",
+      "source_ids": [
+        "SRC-13544ae9",
+        "SRC-137937b2",
+        "SRC-6f3735a7"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-92fbfad0",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C06"
+      },
+      "text": "당근과 숨고는 지역 사람·전문가의 연결을 이미 대규모로 처리한다",
+      "status": "provider_claim_with_actual_service",
+      "qualification": "당근 숫자는 기업 자체 발표; 숨고 가입자 시점별 불일치로 규모 수치는 인용하지 않음",
+      "source_ids": [
+        "SRC-3ac3302c",
+        "SRC-38fb8785"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-93fbfc63",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C07"
+      },
+      "text": "양쪽이 서로를 알고 연결될 의사가 있어도 시간·지역·신뢰·권한·공급 부족으로 관계가 형성되지 않을 수 있다",
+      "status": "mechanism_hypothesis",
+      "qualification": "일반 연결실패 비율과 모든 사례의 공통 인과는 미실증",
+      "source_ids": [
+        "SRC-70914087",
+        "SRC-73e9c3cc",
+        "SRC-e405d7fc",
+        "SRC-c0c40c5c"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-a0fc10da",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_양방향_연결수요_연결실패_조사_R1.json",
+        "claim_id": "C08"
+      },
+      "text": "만남이 성사됐다는 사실과 실제 과제 완료·관계 지속은 다른 평가 단계다",
+      "status": "research_operating_definition",
+      "qualification": "이는 후속 검증을 위한 분석 틀, 모든 서비스가 실패했다는 관찰 아님",
+      "source_ids": [
+        "SRC-137937b2",
+        "SRC-38fb8785",
+        "SRC-c0c40c5c"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-c7d48e16",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F01"
+      },
+      "text": "이미 이용한 가구의 대기: 1주 미만 28.8%, 1주~1개월 31.7%, 1~3개월 20.4%, 3개월 이상 19.1%; 대기기간 만족 2.9/5",
+      "status": "verified",
+      "qualification": "미이용 신청자 포함한 전체 신청 성공률 아님",
+      "source_ids": [
+        "SRC-70914087",
+        "SRC-0f3d0682"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-c6d48c83",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F02"
+      },
+      "text": "수요 확대에 비해 아이돌봄사 확대가 충분하지 못한 측면을 정부가 인정",
+      "status": "official-diagnosis",
+      "qualification": "원인별 발생 비율은 미제공",
+      "source_ids": [
+        "SRC-0f3d0682"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-c5d48af0",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F03"
+      },
+      "text": "아이돌봄사 평균 활동 월 118.8시간, 실수령 월 160.5만원; 급여 개선 요구 39%, 원활한 연계 24.2%",
+      "status": "verified",
+      "qualification": "지연에 미치는 인과 기여율은 미확인",
+      "source_ids": [
+        "SRC-70914087"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-ccd495f5",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F04"
+      },
+      "text": "주말 이용 의향 조사와 돌봄사의 가장 선호하는 요일/시간 1순위 조사는 질문 방식이 달라 직접 뺄셈 불가",
+      "status": "non-comparable",
+      "qualification": "정부 브리핑 Q&A에서 직접 경고",
+      "source_ids": [
+        "SRC-0f3d0682"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": [
+        "WORK-2025-CHILDCARE-SURVEY"
+      ]
+    },
+    {
+      "id": "CLM-cbd49462",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F05"
+      },
+      "text": "정부 단기/긴급돌봄에 AI 또는 기관 연계 존재, AI 30분 내 미배정 시 자동 신청취소",
+      "status": "existing-solution",
+      "qualification": "실제 배정 성공률은 미확인",
+      "source_ids": [
+        "SRC-809fd1fb"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-cad492cf",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F06"
+      },
+      "text": "정기돌봄은 기관이 연계; 회원승인·카드·예치금 등 선행 조건 및 일정변경 시 재연계 조건 존재",
+      "status": "workflow-confirmed",
+      "qualification": "신청 이탈 기여는 미측정",
+      "source_ids": [
+        "SRC-809fd1fb",
+        "SRC-490e44e4",
+        "SRC-ef24618d"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-c9d4913c",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F07"
+      },
+      "text": "서울 등하원 전담·수당 도입 관련 2023년 발표 대기가정 118→65, 약 44.9% 감소",
+      "status": "municipal-before-after",
+      "qualification": "시범 지역 전후 결과, 2026 효과나 순수 인과효과 아님",
+      "source_ids": [
+        "SRC-d19d5a92"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-d0d49c41",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F08"
+      },
+      "text": "2025 공식 운영자료: 이용가구 159804, 아이돌봄사 31718",
+      "status": "verified-aggregate",
+      "qualification": "가구수/인력수만으로 특정 시간/지역의 가용 공급 판단 불가",
+      "source_ids": [
+        "SRC-b6685e68"
+      ],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-cfd49aae",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F09"
+      },
+      "text": "대기 사례 중 실제 활동 가능·자격 충족 돌봄사가 있었지만 연결되지 않은 비율",
+      "status": "unverified",
+      "qualification": "지역·시간대별 익명 운영 기록 필요",
+      "source_ids": [],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    },
+    {
+      "id": "CLM-c2d247a0",
+      "original_reference": {
+        "document": "docs/members/R01/workspace/2026-11-13_R01_아이돌봄_연계지연_원인_심층검토_R1.json",
+        "claim_id": "F10"
+      },
+      "text": "돌봄 공백이 초래한 결근·대체 돌봄비·업무손실의 직접 규모",
+      "status": "unverified",
+      "qualification": "실제 가구 경험과 서비스 데이터 필요",
+      "source_ids": [],
+      "unresolved_source_ids": [],
+      "work_ids": []
+    }
+  ],
+  "underlying_works": [
+    {
+      "id": "WORK-2025-CHILDCARE-SURVEY",
+      "title": "2025년 아이돌봄서비스 실태조사",
+      "issuer": "성평등가족부",
+      "year": 2025,
+      "original_kind": "국가승인통계 제154024호의 2025년 조사 (보고서 원문 미확보)",
+      "verified_publisher_release": "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=711261&mid=news405",
+      "full_study_report_status": "not_found_or_not_accessed",
+      "chain_status": "정부 발표·브리핑 확인, 완전한 통계표 원문 불명",
+      "observations": [
+        "기존 기록의 bbtsn=714130 URL은 이번 조회에서 확인 실패, 새로운 발표 페이지 bbtsn=711261 발견; 두 URL을 동일 문서로 자동 병합하지 않음",
+        "같은 조사 결과를 전재한 정책브리핑과 공식 발표를 독립 표본으로 중복 계수 금지"
+      ],
+      "source_ids": [
+        "SRC-0f3d0682",
+        "SRC-70914087",
+        "SRC-7a77456e",
+        "SRC-44d78907"
+      ],
+      "claim_ids": [
+        "CLM-99fc05d5",
+        "CLM-96fc011c",
+        "CLM-93fbfc63",
+        "CLM-c7d48e16",
+        "CLM-c6d48c83",
+        "CLM-c5d48af0",
+        "CLM-ccd495f5"
+      ]
+    },
+    {
+      "id": "WORK-2025-GG-MIGRANT-SURVEY",
+      "title": "경기도 이주민의 공공서비스 이용 실태조사",
+      "issuer": "경기도이민사회통합지원센터",
+      "year": 2025,
+      "report_landing": "https://gmis.or.kr/report/65",
+      "original_kind": "조사보고서(2025년 12월) 원문 게재 페이지와 PDF 첨부",
+      "full_study_report_status": "pdf_attachment_link_seen_but_download_error",
+      "chain_status": "보고서 게재 페이지와 PDF 링크 확인, 첨부 다운로드 페이지는 '잘못된 접근' 오류",
+      "observations": [
+        "경기도 정부 최종보고회·중간보고회 보도자료는 하나의 조사에 기반하므로 독립 연구 두 건으로 계산하지 않음"
+      ],
+      "source_ids": [
+        "SRC-6dab2beb",
+        "SRC-f689ad35",
+        "SRC-fae90f96"
+      ],
+      "claim_ids": [
+        "CLM-26c61f80",
+        "CLM-2fc62dab"
+      ]
+    },
+    {
+      "id": "WORK-2025-SEOUL-DIGITAL-SURVEY",
+      "title": "2025 서울시민 디지털 역량 실태조사",
+      "issuer": "서울AI재단",
+      "year": 2025,
+      "original_kind": "서울 시민 디지털 역량 조사",
+      "full_study_report_status": "not_verified_in_this_run",
+      "chain_status": "2026년 보도 기사 인용 기록 있음, 2025 원문 조사 전체 미확보",
+      "observations": [
+        "과거 문서의 63.3%는 원보고서의 문항·분모·표본과 대조하지 않은 보도 인용이므로 원문확인으로 승격 금지"
+      ],
+      "source_ids": [
+        "SRC-d42d188c"
+      ],
+      "claim_ids": [
+        "CLM-97fc02af"
+      ]
+    },
+    {
+      "id": "WORK-2026-INTEGRATED-CARE-REGIONAL-SURVEY",
+      "title": "지역사회 통합돌봄 실태조사 (전국 229 시군구, 서비스 16종)",
+      "issuer": "보건복지부",
+      "year": 2026,
+      "original_kind": "정부 2026-10-13 실태조사 발표 / 연구용역 결과의 정부 요약",
+      "verified_publisher_release": "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156784964&pWise=mSub&pWiseSub=C5",
+      "full_study_report_status": "underlying_research_report_not_acquired",
+      "chain_status": "공식 보도자료·PDF 첨부 존재 확인, 별도 전체 연구 원보고서는 미확보",
+      "observations": [
+        "59개 고수요·저공급 권역은 동일 조사 한 건에 근거. 언론 기사 여러 개를 독립 조사로 세지 않음"
+      ],
+      "source_ids": [
+        "SRC-08ef4bf3"
+      ],
+      "claim_ids": []
+    }
+  ],
+  "original_tracing": [
+    {
+      "id": "TRACE-01",
+      "work_id": "WORK-2025-CHILDCARE-SURVEY",
+      "observed": "정부 공식 2026-08-13 발표 및 브리핑·2025 통계 실시 공고 확인",
+      "not_observed": "완전한 2025 조사보고서·통계표 원문",
+      "next_question": "특정 문항의 분모·설문지 분석에 원자료가 필요한가? 필요할 때만 보고서 검색·공식 통계 조회",
+      "decision": "보도자료 수치는 발표에서 확인한 것으로만 인용하고 표본/인과 확대금지"
+    },
+    {
+      "id": "TRACE-02",
+      "work_id": "WORK-2025-GG-MIGRANT-SURVEY",
+      "observed": "2025-12 연구기관 원보고서 게시페이지와 PDF 첨부 링크 확인",
+      "not_observed": "PDF 본문 읽기 실패: 첨부 클릭이 접근 오류 페이지로 이동",
+      "next_question": "원문에 있는 표본·교차표·면접 근거가 실제 결정에 필요한 경우에만 공식 공개 뷰어 또는 연구기관 허용 다운로드 경로 조회",
+      "decision": "원본 보고서 확보로 표시하지 않음"
+    },
+    {
+      "id": "TRACE-03",
+      "work_id": "WORK-2025-SEOUL-DIGITAL-SURVEY",
+      "observed": "기존 연구 기록의 뉴스 기사 인용과 서울AI재단 발표 이력",
+      "not_observed": "해당 2025 조사 원보고서의 관련 문항·분모 확인",
+      "next_question": "2025 고령층 키오스크 수치를 제품 타겟 선정 근거로 사용할 때 원표 확인",
+      "decision": "기사 수치를 독립 1차 검증으로 표시하지 않음"
+    },
+    {
+      "id": "TRACE-04",
+      "work_id": "WORK-2026-INTEGRATED-CARE-REGIONAL-SURVEY",
+      "observed": "2026-10-13 정부 발표 및 첨부 존재",
+      "not_observed": "정부 연구용역 전체 원보고서·통계 원표",
+      "next_question": "시군구별 단위 수급을 비교할 때 연구보고서 원문/표/기준 검증 필요",
+      "decision": "229시군구의 조사와 59 고수요·저공급은 하나의 공식 정부 조사로 계산"
+    }
+  ],
+  "known_quality_risks": [
+    {
+      "source_url": "https://www.mogef.go.kr/nw/enw/nw_enw_s001d.do?bbtSn=714130&mid=mda700",
+      "status": "recorded_in_legacy_but_not_confirmed_on_2026-11-13",
+      "alternative_url": "https://www.mogef.go.kr/nw/rpd/nw_rpd_s001d.do?bbtSn=711261&mid=news405",
+      "note": "동일 URL/내용으로 입증되지 않아 alias를 자동 합치지 않음. 후자는 2026-08-13 공식 보도자료 검색 결과로 확인."
+    },
+    {
+      "source_url": "https://gmis.or.kr/bbs/download.php?bo_table=report&no=1&wr_id=65",
+      "status": "observed_link_but_failed_download",
+      "note": "원본 PDF 바이트·본문을 확인한 것으로 취급하지 않음"
+    }
+  ],
+  "reuse_gates": [
+    "새 검색 전에 질문의 핵심 claim/연도/대상/지역을 식별하고 source_records/underlying_works/claims를 찾는다.",
+    "기존 주장이 질문에 충분히 답하고 freshness 문제가 없으면 URL을 다시 열지 않는다.",
+    "원본 필요성이 있으면 work_id의 공식 연구보고서/통계표/첨부→기관 발표→언론 순으로 provenance 경로를 확인한다.",
+    "같은 보고서에 대한 다수 기사와 발표는 독립 측정으로 계산하지 않는다.",
+    "원본 접근 실패 또는 문항 불명은 별도로 기록하고 추정하지 않는다.",
+    "미확인 항목이 현재 의사결정을 바꿀 가능성이 크고 접근권한이 명확할 때만 범위 제한 추가 조사를 한다.",
+    "출처 문서 열람 가능성과 자동 수집·보존 권한은 별도다. PDF/웹 원문을 저장소로 대량 복사하지 않는다.",
+    "도구 조회 건수·검색어 로그가 없으므로 이 인덱스는 중복 등록을 보여줄 뿐 실제 도구 중복 검색 횟수를 증명하지 않는다."
+  ],
+  "quality_checks": {
+    "source_occurrences": 80,
+    "unique_normalized_prior_urls": 75,
+    "all_source_records": 78,
+    "reused_source_urls": 5,
+    "duplicate_occurrences": 5,
+    "claims_mapped": 41,
+    "dangling_claim_source_references": 0,
+    "source_id_collision": false,
+    "source_fulltext_revalidated": false,
+    "all_github_paths_exist": true
+  }
+}
