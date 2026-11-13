@@ -47,7 +47,7 @@
 | [TASK-011](docs/artifacts/tasks/TASK-011.json) | 기획서·WBS 제출과 접수 확인 | R01 | 2026-11-13 | TASK-010 | 제출 준비 | 막힘 |
 | [TASK-012](docs/artifacts/tasks/TASK-012.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R02) | R02 | 2026-11-13 | 없음 | 보완 | 할 일 |
 | [TASK-013](docs/artifacts/tasks/TASK-013.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R03) | R03 | 2026-11-13 | 없음 | 보완 | 할 일 |
-| [TASK-014](docs/artifacts/tasks/TASK-014.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R05) | R05 | 2026-11-13 | 없음 | 보완 | 완료 |
+| [TASK-014](docs/artifacts/tasks/TASK-014.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R05) | R05 | 2026-11-13 | 없음 | 보완 | 할 일 |
 | [TASK-015](docs/artifacts/tasks/TASK-015.json) | 3개 독립 기획안 비교·통합 및 제품 문제 정의 R1 | R01 | 2026-11-13 | TASK-012, TASK-013, TASK-014 | 보완 | 할 일 |
 
 담당 제안과 내부 목표일은 팀 조정용입니다. 공식 제출 시각은 TASK-002에서 확인합니다.
