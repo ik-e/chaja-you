@@ -20,7 +20,7 @@
 | BMad Method | setup_passed | v6.12.4 안정 계열 / `--modules bmm --tools codex` / 29 Skills 구성 |
 | OpenSpec | setup_passed | v2.0.0 / `--tools codex` / 6 Skills 구성 / CLI doctor 성공 |
 | GitHub Spec Kit | setup_passed | 현재 공식 코드의 CLI를 `uvx`로 설치·Codex 통합 초기화 / `specify check` 성공 |
-| Bathos | setup_in_progress | Rust toolchain 도입 및 기본 소스 준비. Cargo 빌드·적용 상태는 별도 실제 검증 후 업데이트 |
+| Bathos | setup_passed / auth_blocked | Rust 1.100.0, Bathos v0.4.0 Rust 바이너리 빌드 완료(8.8MB), Claude Code 훅·역할·모듈을 별도 실험 폴더에 설치. `bathos doctor` PASS(경고 4: Agent Teams 환경변수/ Codex 훅·Skills·역할 미배선), Claude 로그인 없음 |
 | AI/멀티에이전트 전체 실험 | not_run | Codex/Claude 인증 연결되지 않아 실제 AI 호출 없음 |
 
 ## 공통 비교 시나리오
@@ -45,6 +45,16 @@
 
 ## 후속 단계
 
-- Bathos 엔진 컴파일·설치·스모크 테스트의 실제 종료 상태 기록.
+- Bathos Rust 엔진 컴파일과 `doctor` 스모크 테스트 완료. Claude용 설정은 준비됐지만 Agent Teams 실제 실행은 인증 후 검증하며 Codex 어댑터는 미연결.
 - 연결 가능한 로그인/모델 접근 경로를 승인받은 후 동일 입력으로 제품별 실행.
 - 결과에서 '기존 서비스가 이미 해결한 부분'과 '사용자 개입이 남는 부분'을 구분해 R01 문제 정의를 갱신.
+
+## 완료 검증 및 실험 범위 한계
+
+- Bash/Linux 환경에서 BMad 안정 v6.12.4 Codex용 설치 정상 종료(29 Skills).
+- OpenSpec v2.0.0 Codex용 설치 정상 종료(6 Skills), `openspec doctor` 정상.
+- GitHub Spec Kit Codex용 `specify init` 및 `specify check` 정상.
+- Bathos v0.4.0 Rust 엔진 `cargo build --release -p bathos-cli` exit 0, `bathos --version` 성공, 분리된 실험 폴더에서 `bathos doctor` = PASS(경고 4).
+- 비교 fixture 5개 폴더의 독립 Git 시작 커밋 ID 동일(`bee5651`)이며 입력 자료는 같음.
+- 이 단계는 CLI 설치/진단 검증일 뿐 **AI 사용 경험·승인/검증 효용·사용자 페인포인트 해결 실험은 not_run**.
+- 샌드박스는 유휴 요금 방지를 위해 세션 중지를 원칙으로 하며, 중지한 뒤에는 파일 스냅샷으로 재개. 스냅샷 기본 만료 기간·보존 설정은 Vercel 정책을 따른다.
