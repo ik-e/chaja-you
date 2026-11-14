@@ -22,3 +22,4 @@ R01의 개인 초안과 작업 메모를 둡니다. 팀에서 확정한 내용�
 ## 현재 타겟 외의 별도 탐색 자료
 
 - [기타 사용자·도메인 문제 조사](other-target-research/README.md) — 기술 소외계층·이주민 지원·양방향 연결·아이돌봄 연계 조사 4개 주제(보고서/근거 JSON 총 8개 파일). 삭제 또는 폐기한 자료가 아니며, 현재 R01 문제 정의와 구분하여 보관한다.
+- 클라우드 비교 실험: [Vercel 독립 Sandbox — BMad·OpenSpec·Spec Kit·Bathos](experiments/cloud-workflow-lab/README.md) — R01 개인 실험 환경, AI 인증/전체 실행 검증은 별도
