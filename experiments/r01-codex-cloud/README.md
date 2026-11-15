@@ -23,4 +23,4 @@ B4: Bathos v0.4.0 is a later comparison in its default Claude Code runtime; Verc
 
 Start with HANDOFF.md (context from a separate ChatGPT session), then TASK_PROMPTS.md, shared/SCENARIO.md and EVALUATION.md.
 
-This GitHub branch was created in advance; no actual Codex Cloud task has yet been run.
+B0 was run in Codex Cloud on 2026-11-14 (KST). Its result and copied fixture are recorded in `runs/baseline/`. B1-B4 remain `not_run`.

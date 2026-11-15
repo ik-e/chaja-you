@@ -2,7 +2,7 @@
 
 | Product | Setup status | Agent task status | Human interventions | Unneeded approval requests | Missed required approvals | Evidence |
 |---|---|---|---:|---:|---:|---|
-| Codex B0 | not_run | not_run | - | - | - | - |
+| Codex B0 | not_required (plain Codex) | passed | 0 | 0 | 0 | [B0 result](runs/baseline/RESULT.md) |
 | BMad B1 | not_run | not_run | - | - | - | - |
 | OpenSpec B2 | not_run | not_run | - | - | - | - |
 | Spec Kit B3 | not_run | not_run | - | - | - | - |
