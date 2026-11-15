@@ -191,52 +191,52 @@
   },
   "confirmed_provenance": [
     {
-      "text": "최종 목표는 요청에 따른 동적 워크플로·에이전트 팀 구성과 근거 있는 조사 결과 제공",
+      "text": "2026-11-16 현재 우선순위는 새 구현 확대보다 R01~R05 각자의 기획안을 멘토가 요구한 문제 정의 수준까지 구체화하는 것이다.",
+      "authority": "team",
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-OP-01"
+    },
+    {
+      "text": "R01~R03은 이미 받은 개별 멘토 피드백을 반영하고, R04~R05는 같은 공통 기준을 적용해 자신의 기획안을 구체화한다.",
+      "authority": "team",
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-R04R05-01"
+    },
+    {
+      "text": "공통 기준은 구체적 타겟 상황, 실제 사용자 고통, 기존 대안이 해결하는 부분과 남는 문제, painkiller 기능, 근거와 미확인의 구분이다.",
+      "authority": "team",
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-CRITERIA-01"
+    },
+    {
+      "text": "팀원별 결론은 독립적으로 유지하고 공통 평가 기준만 공유한다.",
+      "authority": "team",
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-CRITERIA-02"
+    },
+    {
+      "text": "2026-11-17 18:00 KST까지 다섯 안을 비교 가능한 수준으로 만들고 2개 후보로 압축한 뒤 20:00 KST 멘토에게 재검토 받는다.",
+      "authority": "team",
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-SCHEDULE-01"
+    },
+    {
+      "text": "2개 압축은 최종 제품 문제 확정이 아니며, 멘토 피드백과 사람 권위 결정 전에는 기존 APP-A·C, 제출용 기획서·WBS, 제품 범위를 자동 변경하지 않는다.",
+      "authority": "team",
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-SCOPE-01"
+    },
+    {
+      "text": "기존 상위 의도인 AI 활용의 반복 감독 부담 감소는 장기 가설로 유지하되, 각 팀원의 문제 정의를 그 비전에 억지로 맞추지 않는다.",
       "authority": "human",
       "source_ref": "docs/human/INTENT.md",
       "source_id": "INTENT-PRODUCT-001"
     },
     {
-      "text": "사람이 확인하는 화면과 제출물은 AI의 구조화된 원본에서 생성",
-      "authority": "human",
-      "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-OPS-001"
-    },
-    {
-      "text": "집중 앱 지정 비교와 신규 발굴, 중간 판정에 따른 대안 발굴을 첫 평가 사례로 사용",
+      "text": "외부 조사에서는 기존 서비스의 기능 부재를 가정하지 않고 이미 해결되는 부분과 잔여 페인포인트를 확인한다.",
       "authority": "team",
-      "source_ref": "docs/artifacts/specs/focus_apps.json",
-      "source_id": "SPEC-FOCUS-001"
-    },
-    {
-      "text": "APP-A 지정 후보 비교와 APP-C 중간 판정 분기를 이번 MVP의 핵심 Must로 사용",
-      "authority": "human",
-      "source_ref": "docs/artifacts/tasks/TASK-007.json",
-      "source_id": "T007-C02"
-    },
-    {
-      "text": "APP-B는 후보 없는 요청의 발굴 검증 사례로 유지하되 APP-A·C보다 낮은 우선순위",
-      "authority": "human",
-      "source_ref": "docs/artifacts/tasks/TASK-007.json",
-      "source_id": "T007-C03"
-    },
-    {
-      "text": "R03·R05는 공통 의미와 request/task/attempt ID handoff 설계 순서를 합의했으며 실제 통합은 후속 검증",
-      "authority": "team",
-      "source_ref": "docs/artifacts/tasks/TASK-006.json",
-      "source_id": "interface_draft.plan_id_handoff"
-    },
-    {
-      "text": "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용",
-      "authority": "human",
-      "source_ref": "docs/artifacts/tasks/TASK-007.json",
-      "source_id": "T007-C06,T007-C12"
-    },
-    {
-      "text": "장기 목적과 필요한 능력은 Target Design Hypothesis로 먼저 표현하고, MVP·도메인·컴포넌트 설계는 그 가설을 검증하기 위해 하위로 도출하며 구체 구조는 구현·평가 근거로 수정한다",
-      "authority": "human",
-      "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-DESIGN-001"
+      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
+      "source_id": "MENTOR-20261116-RESEARCH-01"
     }
   ],
   "human_input": {
