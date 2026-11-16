@@ -3,7 +3,7 @@
   "id": "CAND-016",
   "kind": "candidate",
   "status": "후보",
-  "title": "시험장 부정행위 위험 탐지 및 감독 지원 시스템 — V1.0 기준선",
+  "title": "시험장 부정행위 위험 탐지 및 감독 지원 시스템 — V1.1 검토안 (V1.0 동결 보존)",
   "proposed_by": [
     "R01",
     "AI"
@@ -12,7 +12,7 @@
   "created_at": "2026-11-16",
   "origin_note": "R01이 타깃→상황별 페인포인트→문제 정의→핵심 피처의 흐름을 고정하고, 기술·하드웨어는 후보별 실험 결과로 결정하도록 요청해 정리한 독립 기획안. 2026-11-16 V1.0 내용 동결 요청을 반영한다.",
   "source_idea_refs": [],
-  "summary": "도입 주체는 대면시험 운영기관, 실사용자는 시험감독관이다. 스마트안경 등 미허가 전자기기가 의심될 때 오인에 따른 부적절한 개입과 실제 위반 미발견의 위험 사이에서 판단하고, 사건 기록·이관·사후 소명 업무가 발생할 수 있는 문제를 다룬다. F1 위험 징후 발견·선별, F2 근거 중심 판단·대응, F3 사건 기록·사후 재구성을 8주 MVP로 비교 검증한다.",
+  "summary": "도입 기관=대면시험 운영기관, 실사용자=감독관. 미허가 전자기기 의심 상황의 오인·미발견과 후속 기록·소명 부담을 줄이는 F1~F3 후보로, V1.1에서 기관 승인 전 운영 흐름·기존 대안 대비 줄이는 업무·RF 탐지 주장 수준·A/B 기준을 구체화했다.",
   "potential_value": [
     "시험 중 불필요한 개입·필요한 확인 누락 감소 가능성",
     "사건 이관 시 관찰 사실·추정 혼동과 재질의 감소 가능성",
@@ -43,9 +43,12 @@
   "related_refs": [
     "docs/artifacts/candidates/CAND-016-v1.0-snapshot.md",
     "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.0.md",
-    "docs/artifacts/candidates/README.md"
+    "docs/artifacts/candidates/README.md",
+    "docs/artifacts/candidates/CAND-016-v1.1-proposal.md",
+    "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.1.md",
+    "docs/artifacts/candidates/CAND-016-v1.1-changelog.md"
   ],
-  "promotion_note": "V1.0 동결은 이 후보의 서술·범위에 대한 기준선 고정이지 팀의 공식 제품 채택이 아니다. 실제 검증과 권한 있는 사람의 결정 전에는 현재 Design·Spec·ADR·Task·State·제출물을 변경하지 않는다.",
+  "promotion_note": "V1.0 동결 원문은 보존. V1.1은 R01의 기획 보완 요청으로 만든 독립 후보이며 팀 제품 채택이나 기관의 현장 도입 승인이 아니다. 근거와 사람 결정 전 현재 Design·Spec·ADR·Task·State를 변경하지 않는다.",
   "baseline": {
     "version": "V1.0",
     "date": "2026-11-16",
@@ -111,6 +114,43 @@
     "synthetic_pipeline": "합성 데이터 처리/재생 실험을 선행 작업으로 기록. 실제 RF 탐지 성능의 증거는 아님",
     "real_rf": "미검증",
     "supervisor_usability": "미검증",
-    "institutional_permission": "미확인"
+    "institutional_permission": "미확인",
+    "comparative_user_test": "설계만 완료, 미실시",
+    "institutional_workflow": "미확인"
+  },
+  "latest_revision": {
+    "version": "V1.1",
+    "date": "2026-11-16",
+    "status": "멘토 검토용 독립 후보",
+    "document": "docs/artifacts/candidates/CAND-016-v1.1-proposal.md",
+    "onepager": "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.1.md",
+    "changelog": "docs/artifacts/candidates/CAND-016-v1.1-changelog.md",
+    "previous_frozen_version": "docs/artifacts/candidates/CAND-016-v1.0-snapshot.md"
+  },
+  "review_improvements": {
+    "operation": "감독관 시험 중 금지 기기 조작 금지, 전담요원·운영본부 허가 경로를 전제로 설계",
+    "residual_work": [
+      "불필요 개입",
+      "중복 보고/재질의",
+      "사후 경위 재작성"
+    ],
+    "detection_levels": [
+      "L0 센서상태",
+      "L1 무선송신",
+      "L2 실내외 추정",
+      "L3 기기군 추정",
+      "L4 검토 사건"
+    ],
+    "comparison": [
+      "A 지침/양식",
+      "B 비AI 체크리스트",
+      "C 동일 정보 사건 카드",
+      "D 검증 센서 추가"
+    ],
+    "safety_gates": [
+      "필요 확인 누락 악화 금지",
+      "총 업무시간 악화 금지",
+      "운영기관 승인 전 현장 실증 금지"
+    ]
   }
 }
