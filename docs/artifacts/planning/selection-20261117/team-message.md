@@ -20,7 +20,7 @@
 - **R05 작성 틀:** [키오스크 메뉴 선택 기획 프레임](drafts/R05-PLANNING-FRAME.md) / [현재 1페이지 초안](drafts/R05-mentor-ready-draft.md)
 - **공통 양식:** [멘토용 1페이지](submission-template.md) / [후보별 조건부 WBS](drafts/WBS-alternatives.md)
 - **평가 원본/채점:** [평가 인수인계](HANDOFF-20261117.md) / [점수 템플릿](score-template.json) / [평가 기준](criteria.json)
-- **공식 가이드 확인:** [OUTPUT-GUIDE 확인 및 적용](../../guidelines/2026-11-16_OUTPUT-GUIDE_적용확인.md) / [교육기관 FinalProject](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject)
+- **공식 가이드 확인:** [OUTPUT-GUIDE 확인 및 적용](../../../guidelines/2026-11-16_OUTPUT-GUIDE_적용확인.md) / [교육기관 FinalProject](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject)
 
 **두 후보 공통 완료 기준:** 타깃(누가·언제) → **실제 행동·손실** → 가장 강한 기존 대안과 해결 범위 → **그 후 남는 Pain** → 문제 정의 1문장 → 핵심 피처 2~3개 → 구체적 사용자 흐름/가상 시연 → 같은 조건의 대조 실험/측정 → 반대 근거·미확인/중단 조건. 1페이지 + 3~5분 설명 + 멘토 질문 2~3개를 먼저 완성하세요. **미확인 수요나 성능은 달성 사실처럼 쓰지 마세요.**
 
