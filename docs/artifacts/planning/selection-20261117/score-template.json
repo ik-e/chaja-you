@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "SEL-20261117-SCORE-TEMPLATE",
+  "kind": "candidate_scoring_template",
+  "status": "미작성 템플릿",
+  "task_ref": "docs/artifacts/tasks/TASK-021.json",
+  "criteria_ref": "docs/artifacts/planning/selection-20261117/criteria.json",
+  "candidate_id": "R0X",
+  "evaluator_id": "R0Y",
+  "proposal_revision_or_sha": null,
+  "evaluated_at": null,
+  "gates": {
+    "G1": null,
+    "G2": null,
+    "G3": null
+  },
+  "gate_evidence": [],
+  "ratings": {
+    "A": null,
+    "B": null,
+    "C": null,
+    "D": null,
+    "E": null,
+    "F": null
+  },
+  "per_dimension_evidence": {
+    "A": [],
+    "B": [],
+    "C": [],
+    "D": [],
+    "E": [],
+    "F": []
+  },
+  "score_total": null,
+  "score_completeness": "미평가",
+  "strongest_evidence": [],
+  "counterevidence": [],
+  "key_unknowns": [],
+  "critical_risk": null,
+  "cheapest_next_validation": null,
+  "recommendation": "보류/검토 전",
+  "notes": "null은 0점이 아님. 평가 결과가 생기면 별도 파일로 저장하고 템플릿은 수정하지 않는다."
+}
