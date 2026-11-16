@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "SEL-20261117-INTAKE",
+  "kind": "candidate_selection_intake",
+  "status": "수합 중/평가 전",
+  "owner": "R01",
+  "created_at": "2026-11-16",
+  "linked_task": "docs/artifacts/tasks/TASK-021.json",
+  "criteria_ref": "docs/artifacts/planning/selection-20261117/criteria.json",
+  "selected_ids": [],
+  "selection_status": "미선정",
+  "notes": [
+    "이 파일은 자료 수합용. 팀원 기획안 원본은 각 TASK/기존 경로에서 보존하고 여기서는 링크와 준비 상태만 관리.",
+    "R01의 TASK-016(기존 AI 도구 기획)과 별도 CAND-016(스마트안경 감독 기획)이 함께 존재하므로 이번 5개에 제출할 R01 안 1개를 확정해야 한다.",
+    "TASK의 진행 상태는 최초 확인 시점의 스냅샷이며 최신 여부는 각 링크에서 확인. 원본 수정 권한은 owner에게 있음."
+  ],
+  "entries": [
+    {
+      "id": "R01",
+      "owner": "R01",
+      "proposal_title": "제출안 1개 확정 필요 (기존 R01 기획 vs 스마트안경 감독)",
+      "source_task": "docs/artifacts/tasks/TASK-016.json",
+      "other_reference": "docs/artifacts/candidates/CAND-016.json",
+      "submission_ref": null,
+      "submission_status": "제출 본문 선택 대기",
+      "verified_task_status": "할 일",
+      "review_ready": false,
+      "blocking_question": "어느 주제를 R01의 1개 제출안으로 평가할지 확정"
+    },
+    {
+      "id": "R02",
+      "owner": "R02",
+      "proposal_title": "결혼 관련 서비스 (문제 정의 보완 중)",
+      "source_task": "docs/artifacts/tasks/TASK-017.json",
+      "submission_ref": null,
+      "submission_status": "최종 1페이지 미등록",
+      "verified_task_status": "할 일",
+      "review_ready": false
+    },
+    {
+      "id": "R03",
+      "owner": "R03",
+      "proposal_title": "새 인터페이스/사용 상황 (문제 정의 보완 중)",
+      "source_task": "docs/artifacts/tasks/TASK-018.json",
+      "submission_ref": null,
+      "submission_status": "최종 1페이지 미등록",
+      "verified_task_status": "할 일",
+      "review_ready": false
+    },
+    {
+      "id": "R04",
+      "owner": "R04",
+      "proposal_title": "공공사업 토지대장·지적도 PDF 발급/정리 자동화 (근거 추가 검증 필요)",
+      "source_task": "docs/artifacts/tasks/TASK-019.json",
+      "existing_draft_ref": "docs/members/R04/workspace/2026-11-16_R04_공공사업_토지대장_PDF_수집자동화_기획안.md",
+      "submission_ref": null,
+      "submission_status": "TASK 결과/초안 존재, 최종 제출본 확인 전",
+      "verified_task_status": "진행 중",
+      "review_ready": false
+    },
+    {
+      "id": "R05",
+      "owner": "R05",
+      "proposal_title": "가전 구매 정보 확인 (페인포인트 보완 중)",
+      "source_task": "docs/artifacts/tasks/TASK-020.json",
+      "submission_ref": null,
+      "submission_status": "최종 1페이지 미등록",
+      "verified_task_status": "할 일",
+      "review_ready": false
+    }
+  ]
+}
