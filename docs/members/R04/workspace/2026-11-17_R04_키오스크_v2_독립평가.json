@@ -6,11 +6,11 @@
   "task_ref": "docs/artifacts/tasks/TASK-021.json",
   "criteria_ref": "docs/artifacts/planning/selection-20261117/criteria.json",
   "candidate_id": "R05",
-  "candidate_title": "키오스크 메뉴 선택 도우미 (v2 개정본)",
+  "candidate_title": "키오스크 메뉴 선택 도우미 (v3 개정본)",
   "evaluator_id": "R04",
   "proposal_revision_or_sha": {
-    "revision": "v2 개정본",
-    "proposal_path": "docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v2.md",
+    "revision": "v3 개정본",
+    "proposal_path": "docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v3.md",
     "evaluated_at": "2026-11-17"
   },
   "evaluated_at": "2026-11-17",
