@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "SEL-20261117-R02-R04-DRAFT",
+  "kind": "candidate_scoring_template",
+  "status": "AI 보조 초안 / R02 직접 검토 및 대상 버전 확인 전",
+  "task_ref": "docs/artifacts/tasks/TASK-021.json",
+  "criteria_ref": "docs/artifacts/planning/selection-20261117/criteria.json",
+  "candidate_id": "R04",
+  "evaluator_id": "R02",
+  "proposal_revision_or_sha": "공공서류 main 초안; 지정 v0.2와 동일 여부 미확인",
+  "evaluated_at": "2026-11-17",
+  "gates": {
+    "G1": "조건부",
+    "G2": "중단 위험",
+    "G3": "보류/근거 부족"
+  },
+  "gate_evidence": [
+    "정부24 자동 접근·문서 유효성 및 비용 근거 미확인; 공식 지정 브랜치 최신본 재평가 필요"
+  ],
+  "ratings": {
+    "A": null,
+    "B": null,
+    "C": 2,
+    "D": null,
+    "E": 1,
+    "F": null
+  },
+  "per_dimension_evidence": {
+    "A": [],
+    "B": [],
+    "C": [
+      {
+        "basis": "docs/artifacts/planning/selection-20261117/inbox/2026-11-16_R02_대화전달_예비평가.md",
+        "note": "이전 대화의 예비 등급. 담당자 원문 최종본 및 항목별 근거 확인 후 수정 필요."
+      }
+    ],
+    "D": [],
+    "E": [
+      {
+        "basis": "docs/artifacts/planning/selection-20261117/inbox/2026-11-16_R02_대화전달_예비평가.md",
+        "note": "이전 대화의 예비 등급. 담당자 원문 최종본 및 항목별 근거 확인 후 수정 필요."
+      }
+    ],
+    "F": []
+  },
+  "score_total": null,
+  "score_completeness": "미완료: null 포함, 총점·순위 산출 금지",
+  "strongest_evidence": [
+    "정부24 자동 접근·문서 유효성 및 비용 근거 미확인; 공식 지정 브랜치 최신본 재평가 필요"
+  ],
+  "counterevidence": [
+    "기존 대안이 해당 문제를 충분히 해결할 가능성과 실사용 검증 부재"
+  ],
+  "key_unknowns": [
+    "최종 제출본·직접 검토 승인",
+    "사용자 pain 크기와 기존 대안 이후 잔여 문제",
+    "실제 도입 의향"
+  ],
+  "critical_risk": "정부24 자동 접근·문서 유효성 및 비용 근거 미확인; 공식 지정 브랜치 최신본 재평가 필요",
+  "cheapest_next_validation": "허용된 발급 경로와 대행 서비스 확인",
+  "recommendation": "보류/최종본 확인 후 재평가",
+  "notes": "이전 가정 점수 제거. AI 초안이며 평가자 직접 확인과 항목별 출처·반대근거·확신도 보강 전 공식 독립평가 아님."
+}
