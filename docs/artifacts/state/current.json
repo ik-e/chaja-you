@@ -60,7 +60,7 @@
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "검토 완료·제출 준비",
+      "status": "강사 피드백 반영·수정본 재검토 대기",
       "submission_status": "미제출",
       "source": "docs/artifacts/planning/기획서_초안.json",
       "projection": "docs/step1/기획서.md",
@@ -74,13 +74,15 @@
         "TASK-008",
         "TASK-010",
         "TASK-011"
-      ]
+      ],
+      "revision_ref": "docs/artifacts/planning/기획서_초안.json",
+      "revision_date": "2026-11-17"
     },
     {
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "검토 완료·제출 준비",
+      "status": "강사 피드백 반영·수정본 재검토 대기",
       "submission_status": "미제출",
       "source": "docs/artifacts/planning/WBS.json",
       "projection": "docs/step1/WBS.md",
@@ -92,7 +94,9 @@
         "TASK-010",
         "TASK-011"
       ],
-      "target": "docs/step1/WBS.md"
+      "target": "docs/step1/WBS.md",
+      "revision_ref": "docs/artifacts/planning/WBS.json",
+      "revision_date": "2026-11-17"
     },
     {
       "id": "SUB-03",
