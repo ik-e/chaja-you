@@ -141,15 +141,23 @@ def render_wbs(record, source, output):
             "",
             record["basis"]["guide_rule"],
             "",
-            "## 마일스톤",
-            "",
         ]
     )
+    if record.get("team"):
+        lines.extend([record["basis"].get("revision_note", ""), "", "## 담당자와 역할", ""])
+        lines.extend(table(
+            ["ID", "이름", "역할", "책임"],
+            [(member["id"], member["name"], member["role"], member["responsibility"])
+             for member in record["team"]],
+        ))
+    lines.extend(["## 마일스톤", ""])
     lines.extend(
         table(
-            ["ID", "마감", "마일스톤", "완료 기준"],
+            ["ID", "마감", "마일스톤", "담당", "연결 작업", "완료 기준", "제출 상태"],
             [
-                (m["id"], m["date"], m["title"], m["done_when"])
+                (m["id"], m["date"], m["title"], m.get("owner", "미정"),
+                 ", ".join(m.get("wbs_refs", [])), m["done_when"],
+                 m.get("submission_status", "미확인"))
                 for m in record["milestones"]
             ],
         )
@@ -184,7 +192,9 @@ def render_wbs(record, source, output):
                     item["title"],
                     item["owner"],
                     f"{item['start']}~{item['end']} ({item['estimate_workdays']}일)",
-                    ", ".join(item["depends_on"]) or "-",
+                    (", ".join(item["depends_on"]) or "-")
+                    + (" / 최종 반영: " + ", ".join(item["completion_dependencies"])
+                       if item.get("completion_dependencies") else ""),
                     item["priority"],
                     item["status"],
                     ", ".join(item.get("requirements", [])) or "-",
@@ -195,9 +205,74 @@ def render_wbs(record, source, output):
             ],
         )
     )
+    subtasks = [(item, sub) for item in record["items"] for sub in item.get("subtasks", [])]
+    if subtasks:
+        lines.extend(["## 1~3일 실행 단위", "", "상위 W ID는 묶음이다. 예상 작업일은 투입량이며 날짜 구간의 모든 날에 작업한다는 뜻이 아니다. 상위·하위 투입량을 중복 합산하지 않는다.", ""])
+        lines.extend(table(
+            ["ID", "상위", "담당", "기간·예상 작업일", "산출물", "완료 기준", "상태"],
+            [(sub["id"], item["id"], sub["owner"],
+              f"{sub['start']}~{sub['end']} ({sub['estimate_workdays']}일)",
+              sub["output"], sub["done_when"], sub["status"])
+             for item, sub in subtasks],
+        ))
+    parallel = [item for item in record["items"] if item.get("parallel_contract") or item.get("input_note")]
+    if parallel:
+        lines.extend(["## 병렬 작업과 인계 경계", ""])
+        lines.extend(table(["작업", "경계"], [(i["id"], i.get("parallel_contract", i.get("input_note"))) for i in parallel]))
+    if record.get("deliverable_schedule"):
+        lines.extend(["## 공식 산출물 작성·검토·제출", "", "공개 가이드의 마감 계획이다. 확정 마감일·시각·별도 제출 방식은 팀 대시보드에서 확인한다. 코드 개발·문서 준비·제출·접수는 별개다.", ""])
+        lines.extend(table(
+            ["ID", "산출물", "작성 책임", "작성·시험", "검토·보완", "제출 목표", "연결 작업", "제출 / 접수"],
+            [(d["id"], d["title"], d["owner"], d["write"], d["review"], d["due"],
+              ", ".join(d["wbs_refs"]), d["submission_status"] + " / " + d["receipt_status"])
+             for d in record["deliverable_schedule"]],
+        ))
+    if record.get("weeks"):
+        lines.extend(["## 주차별 간트: 계획과 실적", "", "■ 계획 · ● 증빙이 연결된 실제 수행 기간 · ? 실적 기간 미확인 · — 해당 기록 없음. 미래 실적은 미도래로 표시한다. 기존 완료 상태만으로 실제 작업 날짜를 추정하지 않는다.", ""])
+        weeks = record["weeks"]
+        gantt_rows = []
+        for item in record["items"]:
+            actual = item.get("actual", {})
+            planned = ["■" if item["start"] <= week["end"] and item["end"] >= week["start"] else "—" for week in weeks]
+            observed = []
+            for week in weeks:
+                if week["start"] > actual.get("as_of", record["updated_at"]):
+                    observed.append("미도래")
+                elif actual.get("start") and actual.get("evidence_refs"):
+                    end = actual.get("end") or actual.get("as_of", record["updated_at"])
+                    observed.append("●" if actual["start"] <= week["end"] and end >= week["start"] else "—")
+                else:
+                    observed.append("?")
+            gantt_rows.extend([(item["id"], "계획", *planned), (item["id"], "실적", *observed)])
+        lines.extend(table(["작업", "구분", *[week["label"] for week in weeks]], gantt_rows))
+        lines.extend(["## 진척·지연 기록", "", "수치·실적은 증빙 확인 후 입력한다. 기준 계획과 현재 예상일을 함께 보존한다. 기존 완료는 당시 범위의 상태이며 이번 추가 제출 확인을 소급 완료하지 않는다.", ""])
+        lines.extend(table(
+            ["작업", "기존 상태", "최초 종료", "현재 예상 종료", "실제 시작 / 종료", "진척률", "근거", "지연 원인 / 영향 / 조치"],
+            [(i["id"], i["status"], i.get("baseline", {}).get("end", "미기록"), i["end"],
+              (i["actual"].get("start") or "미확인") + " / " + (i["actual"].get("end") or "미확인"),
+              "미확인" if i["actual"].get("progress_percent") is None else str(i["actual"]["progress_percent"]) + "%",
+              ", ".join(i["actual"].get("evidence_refs", [])) or "미확인",
+              " / ".join(i.get("delay", {}).get(k) or "미확인" for k in ("reason", "impact", "action")))
+             for i in record["items"]],
+        ))
+    if record.get("tracking_rules"):
+        lines.extend(["## 주간 갱신·진척률·지연 규칙", ""])
+        lines.extend("- " + rule for rule in record["tracking_rules"])
+        lines.append("")
+    if record.get("final_acceptance"):
+        lines.extend(["## 최종 제출 기준", ""])
+        lines.extend(table(["대상", "완료 기준"], [(f["deliverable"], f["criterion"]) for f in record["final_acceptance"]]))
     lines.extend(["## 일정·범위 규칙", ""])
     lines.extend("- " + rule for rule in record["schedule_rules"])
     lines.append("")
+    if record.get("references"):
+        lines.extend(["## 근거와 관련 문서", ""])
+        for ref in record["references"]:
+            if ref.get("path"):
+                lines.append("- " + local_link(ref["path"], ref["path"], output))
+            elif ref.get("url"):
+                lines.append(f"- [공식 가이드]({ref['url']})")
+        lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -427,12 +502,20 @@ def validate(sources):
         wbs_items = {item["id"]: item for item in wbs["items"]}
         if len(wbs_items) != len(wbs["items"]):
             raise ValueError(f"{WBS}: duplicate work item ID")
+        owners = {member["id"] for member in wbs.get("team", [])}
+        subtask_ids = set()
+        graph = {}
         for item in wbs["items"]:
             require(
                 item,
                 ["id", "start", "end", "depends_on", "requirements"],
                 f"{WBS}.{item.get('id', '?')}",
             )
+            if not wbs["period"]["start"] <= item["start"] <= item["end"] <= wbs["period"]["end"]:
+                raise ValueError(f"{WBS}: {item['id']} invalid work dates")
+            if owners and item["owner"] not in owners:
+                raise ValueError(f"{WBS}: {item['id']} unknown owner")
+            graph[item["id"]] = item["depends_on"] + item.get("completion_dependencies", [])
             for predecessor_id in item["depends_on"]:
                 if predecessor_id not in wbs_items:
                     raise ValueError(
@@ -444,6 +527,36 @@ def validate(sources):
                         f"{WBS}: {item['id']} starts {item['start']} before "
                         f"{predecessor_id} ends {predecessor['end']}"
                     )
+            for dependency in item.get("completion_dependencies", []):
+                if dependency not in wbs_items or wbs_items[dependency]["end"] > item["end"]:
+                    raise ValueError(f"{WBS}: {item['id']} invalid completion dependency {dependency}")
+            children = item.get("subtasks", [])
+            if not children and not 1 <= item["estimate_workdays"] <= 3:
+                raise ValueError(f"{WBS}: {item['id']} needs 1-3 day subtasks")
+            if children and sum(child["estimate_workdays"] for child in children) != item["estimate_workdays"]:
+                raise ValueError(f"{WBS}: {item['id']} subtask effort mismatch")
+            for child in children:
+                require(child, ["id", "owner", "start", "end", "estimate_workdays", "output", "done_when"], item["id"])
+                if child["id"] in subtask_ids or child["id"] in wbs_items:
+                    raise ValueError(f"{WBS}: duplicate subtask {child['id']}")
+                subtask_ids.add(child["id"])
+                if not item["start"] <= child["start"] <= child["end"] <= item["end"]:
+                    raise ValueError(f"{WBS}: {child['id']} outside parent dates")
+                if not 1 <= child["estimate_workdays"] <= 3 or (owners and child["owner"] not in owners):
+                    raise ValueError(f"{WBS}: {child['id']} invalid effort or owner")
+            actual = item.get("actual", {})
+            progress = actual.get("progress_percent")
+            if progress is not None and (not isinstance(progress, (float, int)) or not 0 <= progress <= 100):
+                raise ValueError(f"{WBS}: {item['id']} invalid progress")
+            if (progress is not None or actual.get("start") or actual.get("end")) and not actual.get("evidence_refs"):
+                raise ValueError(f"{WBS}: {item['id']} actual progress needs evidence")
+        tuple(TopologicalSorter(graph).static_order())
+        milestone_ids = {m["id"] for m in wbs["milestones"]}
+        if len(milestone_ids) != len(wbs["milestones"]):
+            raise ValueError(f"{WBS}: duplicate milestone ID")
+        for deliverable in wbs.get("deliverable_schedule", []):
+            if deliverable["id"] not in milestone_ids or not set(deliverable["wbs_refs"]) <= wbs_items.keys():
+                raise ValueError(f"{WBS}: invalid deliverable mapping {deliverable['id']}")
 
 
 def build():
