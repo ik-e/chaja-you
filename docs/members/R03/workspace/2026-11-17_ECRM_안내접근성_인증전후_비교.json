@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "id": "R03-ECRM-ACCESS-COMPARE-20261117",
+  "kind": "research_note",
+  "owner": "R03",
+  "status": "부분 관찰 정리 · 비교 테스트 미구현",
+  "date": "2026-11-17",
+  "scope": "기존 사용자 화면 공유·사용자 보고·페이지 데이터의 근거 수준 대조. 새 UI 조작·인증·신고 제출 없음",
+  "evidence": [
+    {
+      "id": "E-SCREEN-1",
+      "type": "사용자 공유 화면",
+      "description": "신고접수 진행절차 팝업. 온라인 임시접수→경찰서 정식접수→조사. 인증 전 촬영으로 확인된 자료가 아님"
+    },
+    {
+      "id": "E-SCREEN-2",
+      "type": "사용자 공유 화면",
+      "description": "사전 인증 후 긴급사안 질문과 신고시스템 접수/112 선택 버튼"
+    },
+    {
+      "id": "E-SCREEN-3",
+      "type": "사용자 공유 화면",
+      "description": "사전 인증 후 02 증거자료 첨부 신분증 팝업. 필수업로드·허용 목록 표시"
+    },
+    {
+      "id": "E-PAGE",
+      "type": "페이지 데이터",
+      "url": "https://ecrm.police.go.kr/minwon/main",
+      "description": "증빙·육하원칙·작성예시 문구. 실제 표시·인증 전 접근성 미확인"
+    },
+    {
+      "id": "E-USER",
+      "type": "사후 자기보고",
+      "description": "11/16 남은시간 만료→로그아웃→재인증→처음부터재입력. 임시저장 없었다고 설명, 연장안내는 보지 못한 것으로 기억"
+    }
+  ],
+  "comparison": [
+    {
+      "id": "ACCESS-01",
+      "question": "처음 이용자가 준비 안내를 찾을 수 있는가",
+      "status": "부분 확인",
+      "observed": "메인 신고하기 버튼과 절차 팝업을 사용자가 공유. 이후 사용자는 이미 인증했다고 설명했고 긴급사안 질문·신분증 첨부 팝업을 공유함.",
+      "unknown": "비로그인 상태에서 준비·작성 안내까지 도달하는 경로, 클릭 수·시간, 최초 이용자의 성공 여부",
+      "interpretation": "현재 사용자는 경험 있는 단일 이용자이며 처음 이용자 실험이 아님. 최초 팝업 시점의 인증 상태도 사후 설명상 인증 가능성이 있어 비로그인 증거로 삼지 않음"
+    },
+    {
+      "id": "ACCESS-02",
+      "question": "인증 전 실제 화면에서 무엇을 준비할 수 있는가",
+      "status": "미확인",
+      "observed": "페이지 데이터에는 증빙·피해 경위 요소·예시 문구가 있음. 실제 표시 경로는 확인되지 않음.",
+      "unknown": "로그인 없이 보이는 자료 목록·작성 예시·파일 조건의 범위",
+      "interpretation": "데이터 존재만으로 인증 전 준비 가능 항목을 확정하지 않음"
+    },
+    {
+      "id": "ACCESS-03",
+      "question": "인증 후 무엇을 확인했으며 추가 항목은 무엇인가",
+      "status": "인증 후 관찰 일부 확인 · 전후 차이 미확인",
+      "observed": "02 증거자료 첨부에서 신분증 필수 업로드 및 허용 목록·기타 신분증 불가 안내를 화면으로 확인함.",
+      "unknown": "동일 안내의 비로그인 접근 여부, 나머지 증빙·파일조건·인적사항·내용입력의 상세 항목",
+      "interpretation": "인증 후 관찰했으나 인증 후에만 나오는 추가 항목이라고 결론 내리지 않음"
+    }
+  ],
+  "separate_validation_tracks": {
+    "accessibility": "실제 탐색 경로·인증 여부·전후 항목 차이",
+    "preparation_quality": "같은 가상 과제에서 누락·왜곡·입력/검토 수고. 테스트·시제품 미구현",
+    "reauthentication_effect": "실제 세션·재진입·재입력 동작과 효과. 자기보고 외 AI 재현·효과 측정 없음"
+  },
+  "not_measured": {
+    "click_count": null,
+    "navigation_time": null,
+    "first_time_user_success_rate": null,
+    "preparation_accuracy_comparison": null,
+    "reauthentication_reduction": null
+  },
+  "conclusion": "로그인 전 안내 접근 경로는 미확인. 인증 후 신분증 안내 일부는 관찰했지만 전후 차이·추가 항목 전체는 미확인. 체크리스트는 부분 근거 목록이며 완전한 준비목록이나 효과검증결과가 아님."
+}
