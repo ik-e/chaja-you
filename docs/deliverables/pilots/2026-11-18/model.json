@@ -122,6 +122,90 @@
           "body": "| 제출물 | 대시보드 마감 | 11/18 당시 표시 | 우선 확인 |\n| --- | --- | --- | --- |\n| Step1 기획서 및 WBS | 11/13 | 둘 다 '작성중'; 링크 등록, 접수 미확인 | 원본 수정본 목차·실제 제출 |\n| Step2 API / DB | 11/20 | 둘 다 '미착수' | 같은 사용자 흐름에서 계약·관계 일치 |\n| Step3 상태 전이 / 성찰 결과 | 11/27 / 12/4 | 후속 단계 | 선정된 제품의 상태/실제 시험 |\n| 중간 발표 | 12/8 | 후속 단계 | 실제 진행·검증·위험 정리 |\n| Step4 협업 / 가드레일 / 복구 | 12/11 / 12/18 | 후속 단계 | 역할·실패 장면과 시험 |\n| Step5 웹 앱 / 통합 / 배포 | 12/24 / 12/31 | 후속 단계 | 실제 배포·시연/통합 로그 |\n| 최종 발표 / 코드 / 영상 | 2027/1/4 | 후속 단계 | 제출 버전·재생·권한 |\n\n### 위험·대응\n\n| 위험 | 근거/상태 | 대응 |\n| --- | --- | --- |\n| 제품 선정(11/21)이 Step2(11/20) 이후 | 현재 Phase·마감 충돌 | 이전 찾아you 잠정 기준으로 제출 준비, 협의가 필요한 실제 일정은 강사/매니저 확인 |\n| 이전 개발 WBS 오인 재개 | 과거 W07~W09 계획 남음 | 별도 이력으로 구분하고 신규 작업 지시로 사용하지 않음 |\n| 진행률·접수 오인 | 이전 완료와 현재 제출 미확인 혼재 | 실제 증빙 전 '완료/접수' 미기록 |\n| 공식 수정본/캡처 방식 미확보 | 강사 피드백 경로만 확인 | 형식 게이트 G0는 '미확인' 유지 |"
         }
       ]
+    },
+    {
+      "id": "DLV-03",
+      "file": "STEP2-API-설계.md",
+      "title": "찾아you API 설계 — 잠정 계약 검증본",
+      "status": "설계 가설 · 미구현 · 미승인 · 미제출",
+      "basis": "이전 APP-A 요청→조사 작업→근거·판정→결과 조회 하나를 문서상 연결",
+      "outline_basis": "교육 예시의 인증 방식/API 상세/Pydantic 검증/Tool 호출/API 목록을 현재 흐름에 맞게 재구성; 최신 공식 수정본 대조 대기",
+      "source_pins": [
+        {
+          "path": "docs/artifacts/planning/기획서_초안.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-006.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/specs/focus_apps.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/planning/WBS.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "1. 목적·경계·인증 방식",
+          "body": "### 계약의 상태\n\n이 API는 **검증용 가상 계약**입니다. HTTP API·FastAPI·구체 엔드포인트·키 발급·테이블은 현재 구현하거나 최종 채택하지 않았습니다. Python/FastAPI는 기존 기술 후보일 뿐이며 사용자에게 이미 동작한다고 표시하지 않습니다.\n\n- **대표 사용자 흐름:** 지정 Android 앱 2개를 오프라인 타이머(필수) 및 무계정(선호) 기준으로 비교 요청 → 요청 검증 → 비동기 조사 작업 준비 → 상태 및 판정 결과 조회.\n- **계정·인증:** 로컬 단일 사용자 데모를 가정하더라도 실제 외부 공개 배포 시에는 인증·소유권 확인이 필요합니다. 예시 \\`Authorization: Bearer <REDACTED>\\`는 실제 토큰이 아닙니다.\n- **권한:** 생성 요청은 해당 사용자에게 귀속, 조회는 요청 소유자만 허용. 인증 불가 401, 소유하지 않은 요청은 403/404 선택 검토.\n- **비밀키:** 외부 조회/LLM 키는 클라이언트에 전달하지 않는 설계 가정. 실제 구현 전 검증 필요.\n- **상태 어휘:** \\`queued\\`, \\`running\\`, \\`completed\\`, \\`partial\\`, \\`failed\\`, \\`cancelled\\` (제안). \\`partial\\`은 실패와 별도이며 \\`unknown\\` 조건을 참조할 수 있습니다."
+        },
+        {
+          "heading": "2. API 목록과 사용자 흐름",
+          "body": "| API ID | Method | Path(제안) | 입력 | 반환 / 상태 | 연결 요구 |\n| --- | --- | --- | --- | --- | --- |\n| API-01 | POST | /api/v1/research-requests | targets, criteria, discovery_rule | 202, request_id, status | FR-01/02 |\n| API-02 | GET | /api/v1/research-requests/{request_id} | request_id | 200, request & task summary | FR-03 |\n| API-03 | GET | /api/v1/research-requests/{request_id}/results | request_id | 200, claims/verdicts/sources/unknowns | FR-04 |\n| API-04 | GET | /api/v1/research-requests/{request_id}/tasks | request_id | 200, task_id/attempts/status | FR-02/03 |\n\n**인계 흐름:** API-01 검증→request_id 발급→작업 후보 제안(R03 논리)→task_id 확정 및 관계 저장(R05 영역)→실행별 attempt_id 기록→source/evidence/verdict 연결→API-03 조회. 이는 TASK-006의 **설계 순서를 예시 계약으로 투영**한 것이며 실제 호출·저장·팀 승인 확인은 없었습니다.\n\n### 예시 요청(JSON, 실제 전송 아님)\n\n\\`\\`\\`json\n{\n  \"domain\": \"focus_apps\",\n  \"targets\": [\"PomoToki\", \"Focus To-Do\"],\n  \"criteria\": [\n    {\"id\":\"C-OFFLINE\",\"name\":\"offline_timer\",\"importance\":\"must\"},\n    {\"id\":\"C-ACCOUNT\",\"name\":\"no_account\",\"importance\":\"prefer\"}\n  ],\n  \"discovery_rule\": \"specified_candidates_only\"\n}\n\\`\\`\\`\n\n### 예시 202 응답\n\n\\`\\`\\`json\n{\n  \"request_id\": \"req_example_001\",\n  \"status\": \"queued\",\n  \"result_url\": \"/api/v1/research-requests/req_example_001/results\"\n}\n\\`\\`\\`\n\nAPI-03 조회 시, 조건을 충족한다고 단정하는 대신 각 판정이 \\`fulfilled\\`/\\`not_fulfilled\\`/\\`unknown\\` 중 무엇인지와 source_id/evidence_id를 보여줍니다. 실제 앱 기능은 응답에 임의로 확정값으로 삽입하지 않습니다."
+        },
+        {
+          "heading": "3. 상세 계약·오류·검증",
+          "body": "### 필드·검증 명세\n\n| 계약/필드 | 유형·제약(제안) | 오류 |\n| --- | --- | --- |\n| domain | 허용된 도메인 코드 | 422 unsupported_domain |\n| targets | APP-A는 2개 비공백 문자열 | 422 invalid_targets |\n| criteria[].id | 요청 내 중복 불가 | 422 duplicate_criterion |\n| criteria[].importance | must/prefer | 422 invalid_importance |\n| discovery_rule | specified_candidates_only / conditional_discovery | 422 invalid_rule |\n| request_id | API가 발급하는 문자열 ID | 404 unknown_request |\n| task.status | 대기/실행/완료/부분/실패/취소 | 409 invalid_transition |\n| verdict.status | fulfilled/not_fulfilled/unknown | 근거 없을 때 fulfilled 금지 |\n\n### 오류 응답 예시\n\n\\`\\`\\`json\n{\n  \"error\": {\n    \"code\": \"invalid_targets\",\n    \"message\": \"The specified-candidate scenario needs two candidates.\",\n    \"request_id\": null,\n    \"retryable\": false\n  }\n}\n\\`\\`\\`\n\n| 상태 | 의미 | 공개 여부 |\n| --- | --- | --- |\n| 400 | 파싱/형식 오류 | 안전한 메시지만 노출 |\n| 401 | 인증 누락 | 비밀 정보 노출 금지 |\n| 403/404 | 소유권·조회 정책 | 선택 사항 미결정 |\n| 409 | 상태 전이/중복 문제 | 클라이언트 재시도 조건 확인 |\n| 422 | 도메인 입력 의미 검증 실패 | 필드별 사유 |\n| 429 | 요청/호출 예산 초과 | 자동 무한 재시도 금지 |\n| 500/503 | 내부·외부 도구 실패 | 부분 결과 가능성 검토 |\n\n**예시 구현 언어에 따른 Pydantic 검사**는 선택 사항입니다. API 입력·출력 JSON Schema 또는 다른 언어의 DTO 검증도 가능하므로 특정 라이브러리를 채택하지 않았습니다."
+        },
+        {
+          "heading": "4. Tool 호출·실패 정책과 미결정",
+          "body": "| 단계 | 담당 역할 가설 | 입력 | 출력 | 실패·중단 |\n| --- | --- | --- | --- | --- |\n| 계획 | R03 영역 | request_id, criteria, targets | task 제안 및 depends_on | 필수 조건 누락 시 보류 |\n| 저장·상태 | R05 영역 | 계획 제안 | task_id, queued→running 등 상태 | 계약 오류 시 실행 불가 |\n| 자료 조회 | R02 제약 + R03 도구 | 허용된 source/검색 요청 | source_id, retrieved_at, access_status | 접근 실패를 evidence로 만들지 않음 |\n| 근거 판정 | R03 기준 | source + criterion | verdict + evidence refs | 근거 불충분이면 unknown |\n| 반환 | R05 API + R04 화면 | request/result refs | 결과와 실패·미확인 목록 | partial과 failed 구분 |\n\n- 실제 외부 웹 자동 수집은 금지된 비허용 경로를 사용하지 않습니다.\n- timeout/calls/retry budget의 숫자는 **미확정**입니다. 유한 상한의 존재와 실패 종료만 명세했습니다.\n- 현재 APP-C의 조건부 발굴은 실제 오프라인 앱 조회 완료를 의미하지 않습니다. 추후 실제 주제 선정에서 API 자체가 폐기될 수 있습니다.\n- 남은 검토: 인증/호스팅, API 형태, 필드/상태 이름, DB 관계, R02/R03/R04/R05 경계, 공식 가이드에서 요구하는 Tool 설명 범위.\n\n**원본:** TASK-006의 data_contracts/components 및 기획서 JSON. 다음 DB 설계 문서와 관계를 검증하되 실제 구현 계약으로 채택하지 않습니다."
+        }
+      ]
+    },
+    {
+      "id": "DLV-04",
+      "file": "STEP2-DB-스키마.md",
+      "title": "찾아you DB 스키마 및 ERD — 잠정 관계 검증본",
+      "status": "개념 설계 가설 · 미구현 · 미승인 · 미제출",
+      "basis": "Step2 API 예시의 request/task/attempt/source/evidence/verdict 저장 관계를 정합적으로 시연",
+      "outline_basis": "교육 예시의 ERD·엔터티 정의·권한 정책·데이터 수명·최적화를 현재 범위로 제한; 특정 pgvector/RLS/Redis 채택 아님",
+      "source_pins": [
+        {
+          "path": "docs/artifacts/tasks/TASK-006.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/planning/기획서_초안.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/specs/focus_apps.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "1. 설계 목표·범위와 ERD",
+          "body": "이 스키마는 **기술 확정 이전의 개념 데이터 모델**입니다. DBMS·pgvector·Redis·RLS·마이그레이션 도구는 **미선정**이며 실제 데이터베이스를 생성한 기록이 아닙니다.\n\n### 대표 사용자 흐름\n\n사용자 요청 \\`research_request\\` → 작업 \\`research_task\\` → 시도 \\`task_attempt\\` → 조회한 출처 \\`source\\` → 근거 \\`evidence\\` → 조건별 판정 \\`verdict\\` → 근거 연결 \\`verdict_evidence\\` → 요청별 결과 조회.\n\n### ERD (개념 모델)\n\n\\`\\`\\`mermaid\nerDiagram\n    RESEARCH_REQUEST ||--o{ RESEARCH_TASK : contains\n    RESEARCH_REQUEST ||--o{ VERDICT : evaluates\n    RESEARCH_TASK ||--o{ TASK_ATTEMPT : has\n    RESEARCH_TASK ||--o{ SOURCE : retrieves\n    SOURCE ||--o{ EVIDENCE : supports\n    VERDICT ||--o{ VERDICT_EVIDENCE : uses\n    EVIDENCE ||--o{ VERDICT_EVIDENCE : cited_by\n    RESEARCH_REQUEST {\n      string request_id PK\n      string domain\n      string status\n      json targets\n      json criteria\n      string discovery_rule\n      datetime created_at\n    }\n    RESEARCH_TASK {\n      string task_id PK\n      string request_id FK\n      string role\n      string status\n      json depends_on\n    }\n    TASK_ATTEMPT {\n      string attempt_id PK\n      string task_id FK\n      int attempt_no\n      string status\n      string error_code\n    }\n    SOURCE {\n      string source_id PK\n      string task_id FK\n      string uri\n      string access_status\n      datetime retrieved_at\n    }\n    EVIDENCE {\n      string evidence_id PK\n      string source_id FK\n      string finding\n      string locator\n    }\n    VERDICT {\n      string verdict_id PK\n      string request_id FK\n      string candidate_id\n      string condition_id\n      string status\n    }\n    VERDICT_EVIDENCE {\n      string verdict_id FK\n      string evidence_id FK\n    }\n\\`\\`\\`\n\n이는 도메인별 검색 결과·후속 발굴을 포함한 최종 물리 ERD가 아닙니다. 실제 제품에서는 충분히 간소화하거나 다른 관계를 채택할 수 있습니다."
+        },
+        {
+          "heading": "2. 엔터티·관계 및 키 정의",
+          "body": "| 테이블(제안) | PK | 핵심 컬럼 | 관계·제약 |\n| --- | --- | --- | --- |\n| research_request | request_id | domain, status, targets(JSON), criteria(JSON), discovery_rule, created_at | 요청의 상태·입력 계약. owner_id는 인증 선택 후 별도 검토 |\n| research_task | task_id | request_id FK, goal, role, status, depends_on(JSON) | request 1:N task, 동일 request 범위 참조 |\n| task_attempt | attempt_id | task_id FK, attempt_no, started_at, finished_at, status, error_code | task 1:N attempt, (task_id,attempt_no) 유일 |\n| source | source_id | task_id FK, uri, retrieved_at, access_status | task 1:N source, 접근 실패를 실제 근거로 사용 금지 |\n| evidence | evidence_id | source_id FK, locator, finding, checked_at | source 1:N evidence, source 참조 필수 |\n| verdict | verdict_id | request_id FK, candidate_id, condition_id, status, checked_at | (request_id,candidate_id,condition_id) 단일 최종 판정 **가정**; 변경 이력 정책 미결정 |\n| verdict_evidence | (verdict_id,evidence_id) | 두 FK | verdict:N evidence의 다대다 링크 |\n\n### 주요 정합성 제약\n\n- \\`verdict.status\\`는 \\`fulfilled | not_fulfilled | unknown\\` 중 하나. \\`evidence\\`를 참조하지 않는 fulfilled 판정이 없도록 **애플리케이션 검증 규칙(제안)**을 둡니다.\n- source의 access_status가 \\`unavailable\\` 또는 \\`failed\\`이면 그 조회 자체가 기능 충족 근거가 되지 않습니다.\n- 신규 task 재시도는 task_id 재사용, attempt_id 신규 발급. 실패한 attempt도 감사·재현을 위해 유지합니다.\n- \\`depends_on\\`을 JSON 배열로 두는 예시를 사용했지만 그래프 조회 요구가 커지면 별도 \\`task_dependency\\` 테이블로 분리합니다.\n- 엔터티 필드와 접근/보관 정책은 도메인·자료권한에 따라 재검토합니다."
+        },
+        {
+          "heading": "3. API↔DB 데이터 계약과 대표 샘플",
+          "body": "| Step2 API 항목 | DB 엔터티·컬럼 | 문서상 정합성 |\n| --- | --- | --- |\n| API-01 요청의 domain/targets/criteria/discovery_rule | research_request의 동명 컬럼 | 202 시 request_id 발급 |\n| API-02 요청의 status | research_request.status / research_task.status | running/partial/failed 구분 |\n| API-03 source/evidence/verdict 반환 | source→evidence→verdict_evidence→verdict | 조건별 출처 연결 |\n| API-04 task/attempt 반환 | research_task→task_attempt | task_id 유지·attempt_id 변경 |\n\n### 예시 데이터 (가상, 실측 아님)\n\n\\`\\`\\`json\n{\n  \"research_request\": {\n    \"request_id\": \"req_example_001\",\n    \"domain\": \"focus_apps\",\n    \"targets\": [\"PomoToki\", \"Focus To-Do\"],\n    \"criteria\": [\n      {\"id\":\"C-OFFLINE\",\"name\":\"offline_timer\",\"importance\":\"must\"},\n      {\"id\":\"C-ACCOUNT\",\"name\":\"no_account\",\"importance\":\"prefer\"}\n    ],\n    \"discovery_rule\": \"specified_candidates_only\",\n    \"status\": \"queued\"\n  },\n  \"research_task\": {\n    \"task_id\": \"task_example_001\",\n    \"request_id\": \"req_example_001\",\n    \"role\": \"researcher\",\n    \"status\": \"queued\",\n    \"depends_on\": []\n  }\n}\n\\`\\`\\`\n\n확정 제품의 실제 사용 데이터가 아니라, API와 DB가 같은 필드를 공유하는지를 확인하기 위한 **문서용 테스트 픽스처**입니다."
+        },
+        {
+          "heading": "4. 데이터 수명·권한·보안·미결정",
+          "body": "### 접근 및 보존\n\n- 사용자별 요청 소유권을 검증해야 하며 현재 단일-user/local 또는 다중-user 인증 경계가 결정되지 않았습니다. 따라서 **RLS 적용을 이미 구현했다거나 DB 권한 정책을 검증했다는 주장은 하지 않습니다.**\n- 출처 데이터의 수집/복제/보관 여부는 이용조건·저작권·사이트 정책에 따르며 자동 크롤링을 승인하지 않습니다. 가능한 경우 원문 URL/확인 시점/locator/허가 범위만 보관합니다.\n- API 키·외부 서비스 자격증명은 DB 내용/응답/일반 로그에 남기지 않는 것을 목표로 하며 실제 secret manager 선택은 미정입니다.\n- 로그인·세션·JWT·Redis, pgvector, 인덱스/샤딩 등은 **교육 예시의 기능 설명 대상일 수 있지만 우리 제품 채택 확정 사항이 아닙니다.**\n\n### 성능·조회\n\n(1) \\`research_task(request_id)\\`, (2) \\`source(task_id)\\`, (3) \\`verdict(request_id,candidate_id,condition_id)\\`, (4) \\`evidence(source_id)\\` 인덱스를 물리 구현 시 후보로 검토합니다. 현재 쿼리 실행계획, 실제 인덱스 성능 수치는 없습니다.\n\n### 남은 설계 질문\n\n1. \\`verdict\\`의 최종 판단과 수정 이력(version) 유지 방식.\n2. 외부 자료 삭제 요청, TTL, 보존 책임과 요청 데이터의 접근 주체.\n3. task_dependency 정규화 필요성과 실패 attempt의 리텐션.\n4. 구조화 JSON/SQL 스키마의 실제 자료형·관계 제약·마이그레이션.\n5. 11/21 주제 선택에 따라 전체 엔터티 구조의 유지·폐기 판단.\n\n**근거:** TASK-006의 \\`data_contracts\\`·담당 구성요소 및 기존 APP-A 기획. 이 문서는 실제 DB 생성·데이터 수집·승인을 뜻하지 않습니다."
+        }
+      ]
     }
   ]
 }
