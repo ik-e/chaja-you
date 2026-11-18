@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TARGET-DESIGN-001",
   "kind": "design",
-  "status": "가설",
+  "status": "장기 설계 가설 보존 — 이전 찾아you 기반 MVP 실행 보류",
   "owner": "R01",
   "title": "찾아you Target Design Hypothesis",
   "updated_at": "2026-11-12",
@@ -218,6 +218,10 @@
     },
     {
       "path": "docs/artifacts/tasks/TASK-006.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
     }
-  ]
+  ],
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
 }

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "WR-EXAMPLE-001",
+  "kind": "work_record_template",
+  "status": "template_only",
+  "title": "예시: 실제 정보 기록",
+  "owner": "ROLE_ID",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "updated_at": "YYYY-MM-DD",
+  "domain": "requirements",
+  "summary": "이 영역의 한 문장 목적",
+  "source_refs": [
+    {
+      "path": "docs/artifacts/tasks/TASK-026.json",
+      "commit": "<real_commit_sha_or_null>",
+      "relationship": "derived_from"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLAIM-EXAMPLE-001",
+      "text": "예시 주장(확정 사실 아님)",
+      "evidence_level": "hypothesis",
+      "evidence_refs": [],
+      "checked_at": null,
+      "scope": "어떤 사용자/조건에서만 유효한지",
+      "limitation": "검증 전",
+      "opposing_evidence_refs": []
+    }
+  ],
+  "requirements_refs": [],
+  "decision_refs": [],
+  "run_refs": [],
+  "artifact_refs": [],
+  "assumptions": [
+    "예시 가정"
+  ],
+  "uncertainties": [
+    "검증해야 할 질문"
+  ],
+  "review": {
+    "machine_check": "not_run",
+    "human_review": "not_reviewed",
+    "notes": []
+  },
+  "note": "양식 예시이지 실제 TASK 변경이나 데이터베이스 신규 구축 지시가 아니다."
+}

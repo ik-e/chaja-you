@@ -1,0 +1,81 @@
+{
+  "case_id": "R03-CASE-001",
+  "cli_version": "0.167.2",
+  "backend_model": "not exposed in captured JSON events; CLI default, no explicit model selected",
+  "rounds": 2,
+  "independent_product_baseline": false,
+  "baseline_scope": "기존 대화와 저장소를 전달하지 않은 두 독립 CLI 실행에 이전 사례/응답과 정정만 전달. Codex 도구 harness로서 일반 ChatGPT UI와 동일한 환경 아님",
+  "automated_checks": [
+    {
+      "criterion": "1턴 summary 원문 ID 유효성",
+      "verdict": "pass"
+    },
+    {
+      "criterion": "2턴 summary 원문 ID 유효성",
+      "verdict": "pass"
+    },
+    {
+      "criterion": "2턴 기존 금액 질문 Q1 제거",
+      "verdict": "pass"
+    },
+    {
+      "criterion": "2턴 기존 미해결 금액 항목 U1 제거",
+      "verdict": "pass"
+    },
+    {
+      "criterion": "외부 도구 실행 항목 없음",
+      "verdict": "pass"
+    }
+  ],
+  "manual_review": [
+    {
+      "criterion": "1턴 10만/12만원 충돌 보존",
+      "observation": "SUM1·SUM3에서 S1/S4 값 차이를 표시하고 Q1에서 연결·정정을 확인",
+      "assessment": "이 사례에서 확인"
+    },
+    {
+      "criterion": "판매자 발송 주장·의도 추측 구분",
+      "observation": "양 턴 SUM4는 판매자 주장으로, SUM7은 사용자 추측으로 기록",
+      "assessment": "이 사례에서 확인"
+    },
+    {
+      "criterion": "정정 반영과 원문 이력 유지",
+      "observation": "2턴 SUM1·SUM3에 120000원 반영, materials에 S1과 정정 S6를 별도 보존, CH2/CH3에서 이전 충돌·해소 표시",
+      "assessment": "이 사례에서 확인"
+    },
+    {
+      "criterion": "미확인 보존",
+      "observation": "양 턴 배송 약속일·실제 발송·메시지 시점은 미확인 유지",
+      "assessment": "이 사례에서 확인"
+    },
+    {
+      "criterion": "효율·부분 갱신 구현",
+      "observation": "도구 호출은 없지만 응답은 전체 JSON을 다시 생성. 내부 처리량·영향 범위만 갱신하는 구현·서비스 대비 사용자 수고는 측정 못함",
+      "assessment": "미확인"
+    }
+  ],
+  "reviewer": "작성 에이전트의 원문 대조; 독립·맹검 평가 아님",
+  "metrics": {
+    "elapsed_seconds": 108.247,
+    "input_tokens": 37868,
+    "output_tokens": 4896,
+    "cost": "미측정; 금액 환산하지 않음"
+  },
+  "hashes": {
+    "case.json": "0dc88161037a4d0c7f56e13b7e9879d7c4879a2b432221fca0bfd0d197603f50",
+    "expected.json": "13a594355ed6a41eccd23948752aa9d0766e6556ff425f3e6cbfb9feff226371",
+    "prompt-1.txt": "2689cf2a6cb66826d94f595e41323df0dd8751d06c4db805a5daf160cc6cfece",
+    "prompt-2.txt": "3482e0ed4ae9fb5ade1933dcd8f0f849453fba0e5624283624844df74322a1d7",
+    "response-1.txt": "f5947e5eca3d4d05a4a95e37d7dce760b750fea63313447e4860bf3fcbe2b05e",
+    "response-2.txt": "3ec4742bb1f402a349a86a722096c33653d7b19b282fa873b868f868f171923b"
+  },
+  "conclusion": "충분한 지시의 LLM이 이 사례의 원문 연결·미확인·정정 이력 요구를 대체로 수행했다. 서비스의 추가 가치를 확인한 결과가 아니며 진행 타당성에 대한 반대 근거다.",
+  "limits": [
+    "사례1건·각턴1회",
+    "정확한백엔드모델미노출",
+    "사용자준비시간·인지부담미측정",
+    "서비스C미구현",
+    "폴봇응답미확보",
+    "일반LLM전체성능·실제수요로일반화금지"
+  ]
+}

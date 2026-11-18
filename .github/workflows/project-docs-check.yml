@@ -20,3 +20,5 @@ jobs:
         run: python -m py_compile tools/project_docs.py
       - name: Validate canonical artifacts and projections
         run: python tools/project_docs.py --check
+      - name: Validate deliverable framework mapping (design only)
+        run: python tools/check_deliverables.py

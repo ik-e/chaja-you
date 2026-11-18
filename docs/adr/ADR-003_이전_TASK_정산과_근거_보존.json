@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "ADR-003",
+  "kind": "decision",
+  "status": "확정",
+  "decided_at": "2026-11-18",
+  "title": "이전 TASK 종료 정산과 당시 원본 근거 보존",
+  "owner": "R01",
+  "decided_by": "project_leader",
+  "authority_ref": "docs/human/responses/HRESP-20261118-03_legacy-closeout-evidence.md",
+  "authority_id": "HRESP-20261118-03",
+  "context": "Phase Intent 전환으로 TASK-001~021이 실제 실행 대상에서 제외되었으나 기존 원본 상태에는 완료·진행·막힘·결과없음이 혼재한다. 종료 이유를 mutable main 링크만 참조하면 원문 수정 후 당시 판단을 추적하기 어렵다. R05 개인 브랜치에는 main에 없는 결과와 당시 평가 취합 기록이 있다.",
+  "options": [
+    "이전 TASK를 모두 완료 처리하고 원본 경로만 남기기",
+    "이전 TASK를 삭제하거나 옛 작업 계획에서 제외하며 기록은 별도 보존하지 않기",
+    "원본 상태는 그대로 두고 별도 종료 원장에 분류/인계/미확인을 기록하며, 기준 커밋·blob SHA·불변 사본과 사람 결정 출처를 함께 보존하기"
+  ],
+  "evidence": [
+    "R01 권위 응답: docs/human/responses/HRESP-20261118-03_legacy-closeout-evidence.md",
+    "고정 기준 원본: docs/archive/2026-11-18-task-closeout/manifest.json (main 5f6a669718d6cc710b7f40d047cacab587991f84, R05 a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0)",
+    "각 TASK 종료 분류와 예외: docs/artifacts/state/legacy_task_closeout_20261118.json",
+    "TASK-011은 공식 제출·접수 미확인, TASK-014는 main과 Imdahyeok 상태 불일치, TASK-021은 잠정 평가와 최종 결정을 구분해야 함"
+  ],
+  "decision": "이전 TASK 21개를 현재 실행 목록에서 제외하고, 기존 canonical TASK 상태·결과는 바꾸지 않는다. docs/artifacts/state/legacy_task_closeout_20261118.json에 완료 보존/부분 결과 인계/이전 범위 대체/제출 의무 인계를 따로 기록한다. docs/archive/2026-11-18-task-closeout/snapshots의 각 원본 Git blob을 불변 사본으로 유지하고 manifest에 commit SHA·blob SHA·원본 경로·스냅샷 경로를 고정한다. TASK-011 제출/접수 의무는 TASK-027에, 이전 후보 평가 및 멘토 후속은 TASK-026에 인계한다. CURRENT와 검토 화면은 현재 활성 TASK만 실행 목록으로 보이고, 정산 기록으로 이전 이력을 탐색하게 한다.",
+  "reason": "과거의 실제 실행·미확인·결정과 현재의 실행 작업을 혼동하지 않으면서, 변경된 문서가 과거 사유를 바꿔 보이게 만드는 위험을 줄인다. R01의 확인 부담을 줄이고 실제 추적 가능성을 유지한다.",
+  "revisit": "정산 당시 근거와 다른 원본/현장 증빙이 나오거나 실제 제출 접수가 확인되면 과거 스냅샷을 수정하지 않고 새 날짜의 결정·증거 갱신으로 분류와 인계 기록을 변경한다. Git 저장소 관리 권한/보존 정책 변경으로 Git 객체 유실 위험이 생기면 별도 외부 아카이브가 필요한지 R01이 판단한다.",
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261118-03_legacy-closeout-evidence.md"
+    },
+    {
+      "path": "docs/artifacts/state/legacy_task_closeout_20261118.json"
+    },
+    {
+      "path": "docs/archive/2026-11-18-task-closeout/manifest.json"
+    },
+    {
+      "path": "docs/artifacts/state/transition-20261118.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
+    }
+  ]
+}

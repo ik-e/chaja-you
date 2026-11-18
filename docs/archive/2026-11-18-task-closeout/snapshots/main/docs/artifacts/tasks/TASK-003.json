@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "id": "TASK-003",
+  "kind": "task",
+  "status": "완료",
+  "owner": "R04",
+  "due": "2026-11-12",
+  "updated_at": "2026-11-12",
+  "question": "집중 앱 두 요청에서 사용자에게 어떤 결과와 선택 근거를 제공할 것인가",
+  "goal": "기획서 2~4장의 사용자 문제, 차별화 가설, 사용 흐름을 구체적인 예시로 연결한다.",
+  "inputs": [
+    "docs/artifacts/planning/기획서_초안.json",
+    "docs/artifacts/specs/focus_apps.json",
+    "docs/artifacts/research/03_AI_리서치_멀티에이전트_시스템_선행사례_및_구축방안_조사.json",
+    "docs/artifacts/tasks/TASK-006.json",
+    "docs/human/responses/HRESP-20261112-02_TASK-003_R04_검토.md"
+  ],
+  "scope": [
+    "APP-A·B의 사용자 상황과 필수 조건·선호를 정리",
+    "기존 앱스토어 검색·AI 조사로 해결할 때 확인해야 하는 항목을 같은 조건으로 비교",
+    "요청·진행·비교 결과 화면의 필수 정보와 예시를 구조화",
+    "관찰한 사실과 사용자 수요·차별화 가설을 구분하고 조사 범위를 두 요청으로 제한"
+  ],
+  "outputs": [
+    "result에 사용자 상황·불편·기존 대안·차별화 가설의 주장과 근거",
+    "기획서 2~4장에 넣을 사용 흐름과 결과 필드 목록"
+  ],
+  "acceptance": [
+    "두 요청에서 시작 조건·기대 결과·사용자 선택 기준이 연결됨",
+    "비교 실행을 했다면 조건과 출처를 남기고 미실행 항목은 검증 계획으로 표시",
+    "실제 사용자 조사 유무가 명확하며 가설을 수요 검증 결과로 표현하지 않음"
+  ],
+  "verification": [
+    {
+      "criterion": "두 요청에서 시작 조건·기대 결과·사용자 선택 기준이 연결되었는가",
+      "verdict": "pass",
+      "evidence_ids": [
+        "TASK-003-E01",
+        "TASK-003-E02"
+      ]
+    },
+    {
+      "criterion": "비교 실행 조건과 출처를 남기고 미실행 항목을 검증 계획으로 표시했는가",
+      "verdict": "pass",
+      "evidence_ids": [
+        "TASK-003-E02",
+        "TASK-003-E04",
+        "TASK-003-E05"
+      ]
+    },
+    {
+      "criterion": "실제 사용자 조사 유무를 명시하고 가설을 검증 결과로 포장하지 않았는가",
+      "verdict": "pass",
+      "evidence_ids": [
+        "TASK-003-E02",
+        "TASK-003-E07"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/planning/기획서_초안.json"
+    },
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/artifacts/research/03_AI_리서치_멀티에이전트_시스템_선행사례_및_구축방안_조사.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-006.json"
+    },
+    {
+      "path": "docs/members/R04/workspace/2026-11-12_사용자_문제_및_기존_대안_한계_분석.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261112-02_TASK-003_R04_검토.md"
+    },
+    {
+      "path": "docs/meetings/2026-11-12_오전_회의록.md"
+    },
+    {
+      "path": "docs/meetings/2026-11-11_앱탐색_기획방향_회의록.md"
+    },
+    {
+      "path": "docs/meetings/2026-11-11_강사_피드백.md"
+    },
+    {
+      "path": "docs/members/R03/daily/2026-11-12.md"
+    },
+    {
+      "path": "docs/members/R04/workspace/2026-11-12_사용자_흐름_및_결과_화면_정보구조_설계.md"
+    }
+  ],
+  "result": {
+    "summary": "APP-A·B·C 시나리오를 바탕으로 사용자 문제 가설, 기존 3대 대안의 장점과 관찰된 한계, 판단을 위한 4대 정보(충족/미충족/미확인, 근거, 출처, 잔여확인사항), 3대 상태(작업 실패/조건 미확인/부분 결과) 분리 원칙, 대안 발굴 시작·생략·보류(C1~C3) 사유 가시화 및 R03·R05 I/O 데이터 계약 연계를 정리했다.",
+    "claims": [
+      {
+        "id": "TASK-003-C01",
+        "text": "사용자는 단순 앱 목록보다 설치 전 복합 제약 조건(오프라인 동작, 무계정 사용, 무료 예약 차단)의 충족 여부를 확인하고 선택하길 원한다 (사용자 수요 가설).",
+        "status": "가설",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02"
+        ]
+      },
+      {
+        "id": "TASK-003-C02",
+        "text": "기존 앱스토어·포털 검색·범용 AI는 일반 탐색과 요약에는 유용하나, 복합 조건 필터링 부재, 최신 유료화 미반영, 근거 없는 환각 단정의 한계가 관찰된다 (비교 분석 가설).",
+        "status": "관찰 및 비교",
+        "evidence_ids": [
+          "TASK-003-E02",
+          "TASK-003-E03",
+          "TASK-003-E09",
+          "TASK-003-E10"
+        ]
+      },
+      {
+        "id": "TASK-003-C03",
+        "text": "조건별 3단계 판정(충족/미충족/미확인)과 공식 원문 스니펫, 출처 URL, 미확인 주의사항으로 구성된 결과 정보 구조가 사용자의 설치 실패 비용을 줄인다 (FR-01, FR-04 근거).",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02",
+          "TASK-003-E04",
+          "TASK-003-E05",
+          "TASK-003-E12"
+        ]
+      },
+      {
+        "id": "TASK-003-C04",
+        "text": "작업 실패, 조건 미확인, 부분 결과(한도 도달로 종료)의 3대 상태를 엄격히 분리하고, 대안 발굴의 시작·생략·보류(APP-C1~C3) 이유를 사용자에게 투명하게 보여주는 상태 흐름을 확립한다 (FR-03 근거).",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02",
+          "TASK-003-E06",
+          "TASK-003-E07",
+          "TASK-003-E08",
+          "TASK-003-E11",
+          "TASK-003-E12"
+        ]
+      },
+      {
+        "id": "TASK-003-C05",
+        "text": "request_id → task_id (run_if) → source_id/evidence_id → candidate_id·condition_id별 verdict_id → result_view로 연결되는 R03-R05-R04 간 파이프라인 계약을 화면 인터페이스와 일대일로 연결한다.",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-003-E02",
+          "TASK-003-E06",
+          "TASK-003-E08",
+          "TASK-003-E11",
+          "TASK-003-E12"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "TASK-003-E01",
+        "label": "집중 앱 평가 요구사항과 APP-A·B·C 사례 명세",
+        "path": "docs/artifacts/specs/focus_apps.json"
+      },
+      {
+        "id": "TASK-003-E02",
+        "label": "R04 사용자 문제 및 기존 대안 한계 분석 개정본",
+        "path": "docs/members/R04/workspace/2026-11-12_사용자_문제_및_기존_대안_한계_분석.md"
+      },
+      {
+        "id": "TASK-003-E03",
+        "label": "찾아you 기획서 초안",
+        "path": "docs/artifacts/planning/기획서_초안.json"
+      },
+      {
+        "id": "TASK-003-E04",
+        "label": "PomoToki 공식 오프라인 및 로컬 데이터 안내",
+        "url": "https://www.pomotoki.com/"
+      },
+      {
+        "id": "TASK-003-E05",
+        "label": "AppBlock Android Premium 및 무료 한도 안내",
+        "url": "https://appblock.app/premium/"
+      },
+      {
+        "id": "TASK-003-E06",
+        "label": "R05 구성요소 및 데이터 계약 초안",
+        "path": "docs/artifacts/tasks/TASK-006.json"
+      },
+      {
+        "id": "TASK-003-E07",
+        "label": "HRESP-20261112-02 R01 TASK-003 산출물 검토 및 승인 방향",
+        "path": "docs/human/responses/HRESP-20261112-02_TASK-003_R04_검토.md"
+      },
+      {
+        "id": "TASK-003-E08",
+        "label": "2026-11-12 오전 회의록 (동적/고정 분리 및 I/O 정합성 논의)",
+        "path": "docs/meetings/2026-11-12_오전_회의록.md"
+      },
+      {
+        "id": "TASK-003-E09",
+        "label": "2026-11-11 강사 피드백 회의록 (무료 다운로드 다크패턴)",
+        "path": "docs/meetings/2026-11-11_강사_피드백.md"
+      },
+      {
+        "id": "TASK-003-E10",
+        "label": "2026-11-11 앱 탐색·기획 방향 회의록 (지정 비교 vs 신규 발굴 2개 모드)",
+        "path": "docs/meetings/2026-11-11_앱탐색_기획방향_회의록.md"
+      },
+      {
+        "id": "TASK-003-E11",
+        "label": "R03 일일 작업 및 협의 의견 (Danmi 11:48 의견)",
+        "path": "docs/members/R03/daily/2026-11-12.md"
+      },
+      {
+        "id": "TASK-003-E12",
+        "label": "R04 사용자 흐름 및 결과 화면 정보구조(IA) 설계 명세",
+        "path": "docs/members/R04/workspace/2026-11-12_사용자_흐름_및_결과_화면_정보구조_설계.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "두 요청에서 시작 조건·기대 결과·사용자 선택 기준이 연결되었는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-003-E01",
+          "TASK-003-E02"
+        ]
+      },
+      {
+        "criterion": "비교 실행 조건과 출처를 남기고 미실행 항목을 검증 계획으로 표시했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-003-E02",
+          "TASK-003-E04",
+          "TASK-003-E05"
+        ]
+      },
+      {
+        "criterion": "실제 사용자 조사 유무를 명시하고 가설을 검증 결과로 포장하지 않았는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-003-E02",
+          "TASK-003-E07"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "실제 수험생/학습자 대상 정량 설문이나 인터뷰를 통한 수요 검증은 아직 수행하지 않은 가설 단계이다.",
+      "Focus To-Do의 첫 실행 시 무계정 타이머 진입 가능 여부와 Stay Focused의 무료 예약 범위는 실기기 시험 전까지 미확인 상태이다.",
+      "APP-C3의 대안 발굴 시간/호출수 한도(Timeout)의 구체적인 임계값은 R03-R05-R04 간 수치 합의가 필요하다."
+    ],
+    "decision_requests": [
+      "APP-B(신규 앱 발굴)의 최종 MVP 필수 포함 여부에 대해 R01 팀장의 확정이 필요하다.",
+      "R01 팀장은 첫 MVP에서 미확인 부분 결과(APP-C3 보류)의 허용 기준과 종료 정책을 확정해야 한다.",
+      "기획서 2~4장에 본 사용자 문제 및 화면 정보 구조를 기본 근거로 채택할지 결정해야 한다."
+    ]
+  },
+  "title": "사용자 문제·기존 대안·결과 화면 정리",
+  "suggested_owner": "R04",
+  "assignment_status": "확인",
+  "schedule_status": "내부 목표일 진행",
+  "milestone": "2026-11-13",
+  "stage": "기획 근거",
+  "depends_on": [],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01",
+    "SUB-02"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
+  "intent_ref": "docs/human/task-intents/TASK-003.md"
+}

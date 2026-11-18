@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "DLV-XX",
+  "kind": "submission_tracking_template",
+  "status": "template_only",
+  "title": "산출물 명",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "official_outline_ref": null,
+  "official_outline_verified": false,
+  "official_due": null,
+  "owner": null,
+  "reviewer": null,
+  "content_status": "not_started",
+  "submission_status": "not_ready",
+  "source_commit": null,
+  "work_record_refs": [],
+  "output": {
+    "path": null,
+    "format": null,
+    "version": null,
+    "render_checked": false,
+    "access_checked": false
+  },
+  "review": {
+    "criteria_checks": [],
+    "missing_items": [],
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "submission": {
+    "dashboard_link_registered": false,
+    "submitted_at": null,
+    "receipt_verified_at": null,
+    "receipt_evidence_ref": null
+  },
+  "feedback_refs": [],
+  "limitations": [
+    "현재 예시 정보. 제출 상태의 실제 정본은 current.json 및 비공개 대시보드이다."
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "id": "ARCHIVE-MANIFEST-20261118-TASK-CLOSEOUT",
+  "kind": "immutable_source_snapshot_manifest",
+  "status": "고정",
+  "created_at": "2026-11-18",
+  "owner": "R01",
+  "repository": "ik-e/chaja-you",
+  "source_commits": {
+    "main": "5f6a669718d6cc710b7f40d047cacab587991f84",
+    "Imdahyeok": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0"
+  },
+  "scope": "과거 TASK-001~021 원문과 당시 운영·결정·회의·기획·WBS 증빙, R05 비병합 브랜치의 평가 취합·v5·TASK-014 차이를 변경 전 Git blob 그대로 보존",
+  "method": "Git tree의 원본 blob sha를 별도 archive 경로에 재연결: 원본 파일은 수정·재직렬화 없이 정확히 같은 Git blob bytes로 보존. source_commit+blob_sha+archive path를 함께 기록.",
+  "limitations": [
+    "Git main의 동일 시점 저장소 전체는 source_commits.main으로 조회 가능하며 이 archive는 결정 관련 중요 파일만 별도로 복제한다.",
+    "멘토 원음성·비공개 Discord 원본, 사이트의 변경 가능한 외부 원문은 보관되지 않음. 공개 요약은 불완전할 수 있다.",
+    "저작권·개인정보·접근 허가가 확인되지 않은 외부 원본 파일을 무단 재배포하지 않는다.",
+    "Git/blob 사본은 파일의 해당 시점 버전을 보증할 뿐 기록 내용의 사실성·평가 품질·수신 여부를 보증하지 않는다."
+  ],
+  "entries": [
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-001.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "48e296174e032c5b50ab2ad75b81c5dd59ff8816",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-001.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-001.json",
+      "file_size_bytes": 6352
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-002.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "22befd675963423bf03b2987e5408ee5d64a8f0d",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-002.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-002.json",
+      "file_size_bytes": 8513
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-003.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "c1b064ad017a3a0b6c59b6b1025efee83cc3714f",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-003.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-003.json",
+      "file_size_bytes": 10950
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-004.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "1de6066a73c8f72d931d082d030efb5c590004bd",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-004.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-004.json",
+      "file_size_bytes": 44272
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-005.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "a1667c8e32ec85afe429fb862691044aa9f8a864",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-005.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-005.json",
+      "file_size_bytes": 31642
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-006.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "3cbfba41339a7d4b4a39cc655ba861e8df30fefd",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-006.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-006.json",
+      "file_size_bytes": 52383
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-007.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "be91c88cad9f22eef46e030d893d532c75181310",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-007.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-007.json",
+      "file_size_bytes": 16613
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-008.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "e4f276986294e1405ea1f105e07ddcfb8814bf65",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-008.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-008.json",
+      "file_size_bytes": 10117
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-009.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "39154b50b1179eaf82b7709c6fa4c83d541d6412",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-009.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-009.json",
+      "file_size_bytes": 8070
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-010.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "6ed1caaee313d302d3925f15c89518d693acc07d",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-010.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-010.json",
+      "file_size_bytes": 9543
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-011.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "ea47098f4fb4e4e4365633a20fc5eab90d157600",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-011.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-011.json",
+      "file_size_bytes": 6821
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-012.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "25e9b72c14d6aa8d88effb4e7e3ee3c91197c0d8",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-012.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-012.json",
+      "file_size_bytes": 5021
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-013.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "21026ed4de94c02f94ef97ba316af882ca080d8b",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-013.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-013.json",
+      "file_size_bytes": 5021
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-014.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "c6776969bfe928ff54fc2717c969b2a13b9a3813",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-014.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-014.json",
+      "file_size_bytes": 5021
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-015.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "46ba2b1209f8460b6ab7e8ba5d9170d963f62e1b",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-015.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-015.json",
+      "file_size_bytes": 5319
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-016.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "899b2a6523f7985a9a5d809eeaef27edb405a065",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-016.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-016.json",
+      "file_size_bytes": 6346
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-017.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "f9f74ee040728954e9b6808b57624321b9ed838c",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-017.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-017.json",
+      "file_size_bytes": 6736
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-018.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "673ef1eef557477ca8bdf9dc0a6d93ca7859bc0e",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-018.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-018.json",
+      "file_size_bytes": 26106
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-019.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "d54579b7b00f1e2b7dc1170aa54ce9fb939e4364",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-019.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-019.json",
+      "file_size_bytes": 16563
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-020.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "69dc807e8c15a245b2e0f200276a650aa2bdc6b7",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-020.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-020.json",
+      "file_size_bytes": 6324
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/tasks/TASK-021.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "9c47f96102c5102cfaac2ea399c36e2a9c6b04b1",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/tasks/TASK-021.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/tasks/TASK-021.json",
+      "file_size_bytes": 5055
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/state/current.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "1dac87f4c284bbbac5ec097eebd3775c4b1c3452",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/state/current.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/state/current.json",
+      "file_size_bytes": 13018
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/state/transition-20261118.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "62368e303452ac6b1c1338cc37c17e3160916b1a",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/state/transition-20261118.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/state/transition-20261118.json",
+      "file_size_bytes": 2923
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/human/INTENT.md",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "ae9ccdfd17ffdd013682580cc38cb4324b873302",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/human/INTENT.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/human/INTENT.md",
+      "file_size_bytes": 17388
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "174fd896ddf147a9f0a68347d90f34be38923269",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+      "file_size_bytes": 2421
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/human/responses/HRESP-20261118-02_phase-sync.md",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "43078cdfe11d976d63ef85ec00ea0ccdfc2fb8a8",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/human/responses/HRESP-20261118-02_phase-sync.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/human/responses/HRESP-20261118-02_phase-sync.md",
+      "file_size_bytes": 2171
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "3878d489267241454b059b495c4c5b55858c110e",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/human/phase-intents/PHASE-20261118-01.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/human/phase-intents/PHASE-20261118-01.md",
+      "file_size_bytes": 4620
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/meetings/MEET-20261117-01.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "927f14f151ea618e96f878d15d809e13f310d2ec",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/meetings/MEET-20261117-01.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/meetings/MEET-20261117-01.json",
+      "file_size_bytes": 2359
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/meetings/MEET-20261118-01.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "b2da63575eca809ebc8d0c1941e14fd5621caa44",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/meetings/MEET-20261118-01.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/meetings/MEET-20261118-01.json",
+      "file_size_bytes": 2879
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/planning/selection-20261117/criteria.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "a7aa685e0d787160381f1328ad69b7928b4485f8",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/planning/selection-20261117/criteria.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/planning/selection-20261117/criteria.json",
+      "file_size_bytes": 6913
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/planning/selection-20261117/submissions.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "915452ebb694f4c2b9ac585a0b652408510cf1f9",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/planning/selection-20261117/submissions.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/planning/selection-20261117/submissions.json",
+      "file_size_bytes": 5374
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/planning/selection-20261117/MENTORING-NOTES-20261117.md",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "56140973e3f9e09823ec7c53f597434aaef487b8",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/planning/selection-20261117/MENTORING-NOTES-20261117.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/planning/selection-20261117/MENTORING-NOTES-20261117.md",
+      "file_size_bytes": 2390
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/planning/기획서_초안.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "1bea57bf3f563c9acfa626c993e49f3f55d2589f",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/planning/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B4%88%EC%95%88.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/planning/기획서_초안.json",
+      "file_size_bytes": 51994
+    },
+    {
+      "origin": "main",
+      "source_path": "docs/artifacts/planning/WBS.json",
+      "source_commit": "5f6a669718d6cc710b7f40d047cacab587991f84",
+      "blob_sha": "e9f8f48671d34b31cde6b43044ecfcdf272c53d3",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/5f6a669718d6cc710b7f40d047cacab587991f84/docs/artifacts/planning/WBS.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/main/docs/artifacts/planning/WBS.json",
+      "file_size_bytes": 88390
+    },
+    {
+      "origin": "Imdahyeok",
+      "source_path": "docs/artifacts/tasks/TASK-014.json",
+      "source_commit": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0",
+      "blob_sha": "a3af9aa974e315cb9e953fc6b3ebc79f3e72d11b",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0/docs/artifacts/tasks/TASK-014.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/Imdahyeok/docs/artifacts/tasks/TASK-014.json",
+      "file_size_bytes": 42886
+    },
+    {
+      "origin": "Imdahyeok",
+      "source_path": "docs/artifacts/planning/selection-20261117/2026-11-17_5안_평가_취합.md",
+      "source_commit": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0",
+      "blob_sha": "793d293bab46a3cbc12d513ca65cbedeb7bc355f",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0/docs/artifacts/planning/selection-20261117/2026-11-17_5%EC%95%88_%ED%8F%89%EA%B0%80_%EC%B7%A8%ED%95%A9.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/Imdahyeok/docs/artifacts/planning/selection-20261117/2026-11-17_5안_평가_취합.md",
+      "file_size_bytes": 8786
+    },
+    {
+      "origin": "Imdahyeok",
+      "source_path": "docs/artifacts/planning/2026-11-17_R03_R05_멘토_재검토_취합.md",
+      "source_commit": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0",
+      "blob_sha": "8fe2bb579e72443ff2e83ba434b192e05b63bbd9",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0/docs/artifacts/planning/2026-11-17_R03_R05_%EB%A9%98%ED%86%A0_%EC%9E%AC%EA%B2%80%ED%86%A0_%EC%B7%A8%ED%95%A9.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/Imdahyeok/docs/artifacts/planning/2026-11-17_R03_R05_멘토_재검토_취합.md",
+      "file_size_bytes": 8103
+    },
+    {
+      "origin": "Imdahyeok",
+      "source_path": "docs/artifacts/planning/2026-11-17_R03_R05_멘토_재검토_취합.json",
+      "source_commit": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0",
+      "blob_sha": "9a766ea9b57729fa1677775600c263a573905d4d",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0/docs/artifacts/planning/2026-11-17_R03_R05_%EB%A9%98%ED%86%A0_%EC%9E%AC%EA%B2%80%ED%86%A0_%EC%B7%A8%ED%95%A9.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/Imdahyeok/docs/artifacts/planning/2026-11-17_R03_R05_멘토_재검토_취합.json",
+      "file_size_bytes": 3177
+    },
+    {
+      "origin": "Imdahyeok",
+      "source_path": "docs/artifacts/planning/selection-20261117/submissions.json",
+      "source_commit": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0",
+      "blob_sha": "9275154b23ff92ccd48da0766fbe910769a17f0f",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0/docs/artifacts/planning/selection-20261117/submissions.json",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/Imdahyeok/docs/artifacts/planning/selection-20261117/submissions.json",
+      "file_size_bytes": 6506
+    },
+    {
+      "origin": "Imdahyeok",
+      "source_path": "docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v5.md",
+      "source_commit": "a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0",
+      "blob_sha": "1a408d40b2142de03287849750ef7d1b645d17f2",
+      "source_blob_url": "https://github.com/ik-e/chaja-you/blob/a9db2e4dfa53f4525e5ac82ec71e88a02f321ca0/docs/ideas/R05_%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC_%EB%A9%94%EB%89%B4_%EC%84%A0%ED%83%9D_%EB%8F%84%EC%9A%B0%EB%AF%B8_%EB%A9%98%ED%86%A0%EC%9E%AC%EA%B2%80%ED%86%A0_v5.md",
+      "snapshot_path": "docs/archive/2026-11-18-task-closeout/snapshots/Imdahyeok/docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v5.md",
+      "file_size_bytes": 31459
+    }
+  ]
+}

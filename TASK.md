@@ -1,6 +1,6 @@
 # AI 작업 계약
 
-AI는 [PROJECT](PROJECT.md)와 [CURRENT](CURRENT.md)에서 목표와 우선순위를 확인하고, [EVAL](EVAL.md)의 적용 기준을 작업에 연결한다. 담당자는 [JSON 템플릿](docs/artifacts/tasks/template.json)을 복사해 [작업 공간](docs/artifacts/tasks/README.md)에 저장한다. `kind`를 `task`로 바꾸고 고유 ID, 담당·기한과 아래 항목을 채운다. 담당·기한이 정해지지 않았으면 `null`로 둔다.
+AI는 [장기 의도](docs/human/INTENT.md)와 [현재 단계 의도](docs/human/phase-intents/README.md)를 확인하고 [CURRENT](CURRENT.md)의 적용 범위·보류 상태를 읽는다. [PROJECT](PROJECT.md)와 [EVAL](EVAL.md)는 단계에 따라 과거 기획·제출용 잠정안일 수 있으므로 실제 구현 지시로 자동 적용하지 않는다. 해당 TASK의 검증 기준만 선택적으로 연결한다. 담당자는 [JSON 템플릿](docs/artifacts/tasks/template.json)을 복사해 [작업 공간](docs/artifacts/tasks/README.md)에 저장한다. `kind`를 `task`로 바꾸고 고유 ID, 담당·기한과 아래 항목을 채운다. 담당·기한이 정해지지 않았으면 `null`로 둔다.
 
 | 필드 | 작업에 담을 내용 |
 |---|---|
@@ -9,6 +9,7 @@ AI는 [PROJECT](PROJECT.md)와 [CURRENT](CURRENT.md)에서 목표와 우선순�
 | scope | 이번 작업의 범위와 제약 |
 | outputs | 구조화 산출물 형식과 저장 경로 |
 | acceptance · verification | 완료 조건과 실제 확인 방법 |
+| phase_intent_ref | CURRENT의 active_phase_intent_ref와 연결하는 현 단계 실행 목적·보류 경계. 모든 활성 TASK에서 일치 여부 확인 |
 | traceability | 관련 `intent_refs`·`design_refs`·`requirement_refs`·`evaluation_refs`. 존재하는 ID만 연결하고 불필요한 문서 생성을 위한 참조는 만들지 않음 |
 | validation_plan | 구현과 함께 설계할 검증 질문·baseline·관측값·성공/미확인 조건. 단순 작업에는 `null` 가능 |
 | depends_on | 완료 전에 반영할 선행 TASK ID. 초안 작성은 기존 자료로 병행 가능 |

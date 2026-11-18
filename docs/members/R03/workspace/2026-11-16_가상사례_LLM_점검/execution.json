@@ -1,0 +1,49 @@
+{
+  "case_id": "R03-CASE-001",
+  "runner": "Codex CLI noninteractive, default model, ignore-user-config, ephemeral, read-only empty temp cwd",
+  "started_at": "2026-11-16T08:50:42.044521+00:00",
+  "rounds": [
+    {
+      "round": 1,
+      "exit_code": 0,
+      "status": "response_received",
+      "elapsed_seconds": 50.065,
+      "response_file": "response-1.txt",
+      "prompt_file": "prompt-1.txt",
+      "usage": {
+        "input_tokens": 18955,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2224,
+        "reasoning_output_tokens": 0
+      },
+      "tool_item_types": [],
+      "errors": [],
+      "stderr_tail": ""
+    },
+    {
+      "round": 2,
+      "exit_code": 0,
+      "status": "response_received",
+      "elapsed_seconds": 58.182,
+      "response_file": "response-2.txt",
+      "prompt_file": "prompt-2.txt",
+      "usage": {
+        "input_tokens": 18913,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2672,
+        "reasoning_output_tokens": 61
+      },
+      "tool_item_types": [],
+      "errors": [],
+      "stderr_tail": ""
+    }
+  ],
+  "limitations": [
+    "coding-agent harness, not standalone ChatGPT UI",
+    "single case, one run per turn, no service-C output",
+    "exact backend model may not be exposed; record available metadata only"
+  ],
+  "finished_at": "2026-11-16T08:52:30.298590+00:00"
+}
