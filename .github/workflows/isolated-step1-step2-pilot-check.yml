@@ -1,0 +1,44 @@
+name: isolated-step1-step2-pilot-check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/deliverables/pilots/2026-11-18/**'
+      - 'tools/pilot_step1_step2.py'
+      - '.github/workflows/isolated-step1-step2-pilot-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/deliverables/pilots/2026-11-18/**'
+      - 'tools/pilot_step1_step2.py'
+
+permissions:
+  contents: read
+
+jobs:
+  check-pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate isolated pilot generator and source relations
+        run: |
+          python -m py_compile tools/pilot_step1_step2.py
+          python tools/pilot_step1_step2.py --check
+      - name: Ensure past/current canonical artifacts remain unchanged in this PR
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}"
+            git diff --name-only "origin/${{ github.base_ref }}...HEAD" > /tmp/changed-pilot-paths.txt
+            python - <<'PY'
+          from pathlib import Path
+          paths = Path('/tmp/changed-pilot-paths.txt').read_text().splitlines()
+          allow = ('docs/deliverables/pilots/2026-11-18/', 'tools/pilot_step1_step2.py', '.github/workflows/isolated-step1-step2-pilot-check.yml')
+          bad = [p for p in paths if not (p.startswith(allow[0]) or p in allow[1:])]
+          if bad:
+              raise SystemExit('Out-of-scope path touched: ' + ', '.join(bad))
+          print('Non-interference path check PASS')
+          PY
+          fi
