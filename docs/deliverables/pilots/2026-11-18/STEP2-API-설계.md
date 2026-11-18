@@ -125,9 +125,9 @@ API-03 조회 시, 조건을 충족한다고 단정하는 대신 각 판정이 \
 - 현재 APP-C의 조건부 발굴은 실제 오프라인 앱 조회 완료를 의미하지 않습니다. 추후 실제 주제 선정에서 API 자체가 폐기될 수 있습니다.
 - 남은 검토: 인증/호스팅, API 형태, 필드/상태 이름, DB 관계, R02/R03/R04/R05 경계, 공식 가이드에서 요구하는 Tool 설명 범위.
 
-**식별자 연결:** 각 조건 판정에는 `verdict_id`를 부여하고 `evidence_id`로 연결합니다. 이 관계는 DB의 verdict→verdict_evidence→evidence를 사용하되, 필드명/직렬화 방식은 아직 미승인입니다.
-
 **원본:** TASK-006의 data_contracts/components 및 기획서 JSON. 다음 DB 설계 문서와 관계를 검증하되 실제 구현 계약으로 채택하지 않습니다.
+
+**식별자 연결:** 각 조건 판정에는 `verdict_id`를 부여하고 `evidence_id`로 연결합니다. 이 관계는 DB의 verdict→verdict_evidence→evidence를 사용하되, 필드명/직렬화 방식은 아직 미승인입니다.
 
 ---
 
