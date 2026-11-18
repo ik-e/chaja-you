@@ -656,7 +656,7 @@ def build():
         if not path.is_file():
             raise ValueError(f"missing immutable source snapshot {path}")
         content = path.read_bytes()
-        blob_sha = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\\x00" + content).hexdigest()
+        blob_sha = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\x00" + content).hexdigest()
         if blob_sha != entry["blob_sha"]:
             raise ValueError(f"immutable source blob digest mismatch: {path}")
     for entry in closeout["entries"]:
