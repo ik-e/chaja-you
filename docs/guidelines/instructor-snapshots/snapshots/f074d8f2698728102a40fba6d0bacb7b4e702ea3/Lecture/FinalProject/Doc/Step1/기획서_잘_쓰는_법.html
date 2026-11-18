@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기획서 잘 쓰는 법</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: #1B1E24; height: 100%; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  .frame { width: min(100vw, calc(100vh * 16 / 9)); aspect-ratio: 16 / 9; position: relative; overflow: hidden;
+           display: none; }
+  .frame.active { display: block; }
+  .nav { position: fixed; right: 16px; bottom: 12px; display: flex; gap: 8px; align-items: center;
+         font: 14px 'JetBrains Mono', 'Noto Sans CJK KR', monospace; color: #C9D3E3; opacity: .25; transition: opacity .2s; }
+  .nav:hover, body.moved .nav { opacity: .9; }
+  .nav button { background: #2B2F36; color: #F7F6F2; border: 1px solid #4A5D80; border-radius: 6px;
+                 width: 36px; height: 32px; font-size: 16px; cursor: pointer; }
+  .nav button:hover { background: #E8833A; color: #14213D; }
+  .progress { position: fixed; left: 0; bottom: 0; height: 4px; background: #E8833A; transition: width .2s; }
+  .slide { width: 1920px; height: 1080px; transform-origin: 0 0; position: absolute; left: 0; top: 0; }
+  .slide > section { width: 1920px; height: 1080px; position: relative; overflow: hidden;
+                      font-family: 'Noto Sans KR', 'Noto Sans CJK KR', Arial, sans-serif; }
+  section [style*="JetBrains"] { }
+  h1, h2, h3, p, li, td, th { font-family: inherit; }
+  ul, ol { padding-left: 1.3em; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { padding: 0.35em 0.6em; text-align: left; border-bottom: 1px solid #E2E0D8; vertical-align: top; }
+  @media print {
+    html, body { background: none; padding: 0; gap: 0; display: block; height: auto; overflow: visible; }
+    .nav, .progress { display: none; }
+    .frame { display: block !important; width: 1920px; height: 1080px; break-after: page; }
+    .slide { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="frame"><div class="slide"><section id="cover" style="background:#14213D;color:#F7F6F2;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:1080px;background:#E8833A"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#F2A66B;letter-spacing:4px">AIO 1기 · FINAL PROJECT · GUIDE</p>
+<h1 style="font-size:112px;font-weight:900;line-height:1.1">기획서<br>잘 쓰는 법</h1>
+<p style="font-size:36px;color:#C9D3E3;line-height:1.4">읽는 사람의 질문에 미리 답하는 문서 만들기</p>
+<div style="display:flex;gap:24px">
+<p style="font-size:28px;color:#14213D;background:#E8833A;padding:12px 24px;border-radius:8px">문제 → 사용자 → 범위 → 설계 → 검증</p>
+</div>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="what" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">WHAT IS IT</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">기획서는 결정을 돕는 문서입니다</h2>
+</div>
+<p style="font-size:44px;font-weight:700;line-height:1.35;color:#14213D">읽는 사람이 <span style="color:#B5541A">“이걸 왜, 무엇을, 어떻게, 언제까지 만들고, 성공은 어떻게 판단하나?”</span>를 한 번에 판단할 수 있어야 합니다.</p>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:28px">
+<h3 style="font-size:32px;font-weight:700">설득 문서</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.5">이 프로젝트가 할 만한 가치가 있다는 근거</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:28px">
+<h3 style="font-size:32px;font-weight:700">팀의 설계도</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.5">무엇을 만들고 무엇을 안 만들지에 대한 합의</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:28px">
+<h3 style="font-size:32px;font-weight:700">판단의 기준</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.5">나중에 범위·우선순위를 바꿀 때 돌아올 곳</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">02 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="readers" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">WHO READS IT</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">읽는 사람은 세 명입니다</h2>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#14213D;border-radius:16px;padding:36px">
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#F2A66B;width:44px;height:44px" aria-label="Verified"><path d="M12 2l2.4 2.1 3.2-.3.9 3.1 2.8 1.6-1.2 3 1.2 3-2.8 1.6-.9 3.1-3.2-.3L12 22l-2.4-2.1-3.2.3-.9-3.1-2.8-1.6 1.2-3-1.2-3 2.8-1.6.9-3.1 3.2.3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><h3 style="font-size:34px;font-weight:700;color:#F7F6F2">평가자</h3></div>
+<p style="font-size:24px;color:#9AA8BF">강사 · 멘토 · 심사위원</p>
+<ul style="font-size:26px;color:#C9D3E3;line-height:1.6">
+<li>문제가 진짜인가?</li>
+<li>해법이 논리적인가?</li>
+<li>기간 안에 가능한가?</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:16px;padding:36px">
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:44px;height:44px" aria-label="Users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><h3 style="font-size:34px;font-weight:700">팀원</h3></div>
+<p style="font-size:24px;color:#6B7280">함께 만드는 사람</p>
+<ul style="font-size:26px;color:#14213D;line-height:1.6">
+<li>내가 만들 것은 무엇인가?</li>
+<li>어디까지가 완료인가?</li>
+<li>언제까지 해야 하나?</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:16px;padding:36px">
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:44px;height:44px" aria-label="Clock"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3 style="font-size:34px;font-weight:700">미래의 우리</h3></div>
+<p style="font-size:24px;color:#6B7280">5주 뒤, 면접장에서</p>
+<ul style="font-size:26px;color:#14213D;line-height:1.6">
+<li>그때 왜 이렇게 정했지?</li>
+<li>무엇을 일부러 뺐지?</li>
+<li>이 프로젝트를 어떻게 설명하지?</li>
+</ul>
+</div>
+</div>
+<p style="font-size:28px;color:#4A5568;line-height:1.4">세 사람의 질문 중 하나라도 답이 없으면, 그 부분이 기획서의 빈칸입니다.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">03 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="traits" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">GOOD PROPOSALS</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">좋은 기획서의 다섯 가지 특징</h2>
+</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;gap:40px;align-items:center;border-top:2px solid #14213D;padding:22px 0px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#B5541A;width:88px">01</p><p style="width:360px;font-size:34px;font-weight:700">문제에서 출발한다</p><p style="flex:1;font-size:28px;color:#4A5568">기술이 아니라 누군가의 불편에서 시작</p></div>
+<div style="display:flex;gap:40px;align-items:center;border-top:1px solid #C9CCD1;padding:22px 0px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#B5541A;width:88px">02</p><p style="width:360px;font-size:34px;font-weight:700">구체적이다</p><p style="flex:1;font-size:28px;color:#4A5568">누가 · 언제 · 무엇을이 이름과 숫자로 보인다</p></div>
+<div style="display:flex;gap:40px;align-items:center;border-top:1px solid #C9CCD1;padding:22px 0px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#B5541A;width:88px">03</p><p style="width:360px;font-size:34px;font-weight:700">한 줄로 이어진다</p><p style="flex:1;font-size:28px;color:#4A5568">문제 → 해법 → 기능 → 일정이 서로 근거가 된다</p></div>
+<div style="display:flex;gap:40px;align-items:center;border-top:1px solid #C9CCD1;padding:22px 0px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#B5541A;width:88px">04</p><p style="width:360px;font-size:34px;font-weight:700">확인할 수 있다</p><p style="flex:1;font-size:28px;color:#4A5568">완료와 성공을 무엇으로 판단할지 적혀 있다</p></div>
+<div style="display:flex;gap:40px;align-items:center;border-top:1px solid #C9CCD1;border-bottom:1px solid #C9CCD1;padding:22px 0px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;font-weight:600;color:#B5541A;width:88px">05</p><p style="width:360px;font-size:34px;font-weight:700">현실적이다</p><p style="flex:1;font-size:28px;color:#4A5568">인원 · 기간 · 데이터로 가능한 범위만 약속한다</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">04 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="mistakes" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">COMMON MISTAKES</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">흔한 실수와 고쳐 쓴 문장</h2>
+</div>
+<table style="font-size:25px;color:#14213D;background:#FFFFFF">
+<tr style="background:#14213D"><th style="width:18%;color:#F7F6F2">실수</th><th style="width:36%;color:#F7F6F2">이렇게 쓰면 약하다</th><th style="width:46%;color:#F7F6F2">이렇게 고친다</th></tr>
+<tr><td>기술부터 시작</td><td>LangGraph로 멀티 에이전트를 구현한다</td><td>장애 대응에 [N시간]이 걸리는 운영자의 수작업을 줄인다</td></tr>
+<tr style="background:#F5F7FA"><td>모호한 목표</td><td>AI로 업무를 효율화한다</td><td>일정 충돌 확인 시간을 [N분]에서 [M분]으로 줄인다</td></tr>
+<tr><td>기능 나열</td><td>검색, 요약, 분석, 보고서, 알림…</td><td>사용자 한 명이 끝까지 가는 시나리오 1개로 기능을 묶는다</td></tr>
+<tr style="background:#F5F7FA"><td>전부 다 하기</td><td>Must 기능 15개</td><td>Must 3~5개 · 나머지는 Should·Could로</td></tr>
+<tr><td>근거 없는 주장</td><td>많은 사람이 불편을 겪고 있다</td><td>출처가 있는 자료나 인터뷰 [N명] 결과를 붙인다</td></tr>
+</table>
+<p style="font-size:24px;color:#6B7280">대괄호 [ ]는 팀이 조사해서 채울 자리입니다 — 숫자를 지어내지 마세요</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">05 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="structure" style="background:#14213D;color:#F7F6F2;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#F2A66B;letter-spacing:2px">STRUCTURE</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">기획서의 뼈대는 다섯 개의 질문</h2>
+</div>
+<div style="display:flex;gap:16px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#E8833A;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;font-weight:600;color:#14213D">WHY</p>
+<h3 style="font-size:32px;font-weight:700;color:#14213D">왜</h3>
+<p style="font-size:24px;color:#14213D;line-height:1.5">배경 · 문제 · 타깃 사용자</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1F2E4F;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;font-weight:600;color:#F2A66B">WHAT</p>
+<h3 style="font-size:32px;font-weight:700">무엇을</h3>
+<p style="font-size:24px;color:#C9D3E3;line-height:1.5">솔루션 · 시나리오 · 기능 · 요구사항</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1F2E4F;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;font-weight:600;color:#F2A66B">HOW</p>
+<h3 style="font-size:32px;font-weight:700">어떻게</h3>
+<p style="font-size:24px;color:#C9D3E3;line-height:1.5">아키텍처 · 기술 스택 · 데이터</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1F2E4F;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;font-weight:600;color:#F2A66B">WHEN · WHO</p>
+<h3 style="font-size:32px;font-weight:700">언제 · 누가</h3>
+<p style="font-size:24px;color:#C9D3E3;line-height:1.5">일정 · 마일스톤 · 역할</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1F2E4F;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;font-weight:600;color:#F2A66B">HOW WELL</p>
+<h3 style="font-size:32px;font-weight:700">얼마나</h3>
+<p style="font-size:24px;color:#C9D3E3;line-height:1.5">성공 지표 · 리스크와 대응</p>
+</div>
+</div>
+<p style="font-size:30px;color:#C9D3E3;line-height:1.5">‘왜’에 가장 많은 시간을 쓰세요. ‘왜’가 약하면 나머지가 아무리 화려해도 설득력이 없습니다.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#9AA8BF">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#9AA8BF;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">06 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="problem" style="background:#EEF1F5;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2F5D8C;letter-spacing:2px">WHY · PROBLEM</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">문제를 한 문장으로 진술하기</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#14213D;border-radius:16px;padding:36px 40px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#F2A66B">문제 진술 공식</p>
+<p style="font-size:36px;font-weight:700;color:#F7F6F2;line-height:1.45">[누가] [어떤 상황에서] [무엇 때문에] [어떤 손해]를 겪는다</p>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border-radius:12px;padding:28px">
+<h3 style="font-size:30px;font-weight:700">예시</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.55">소규모 개발팀의 운영 담당자는 야간 장애가 나면 로그를 일일이 뒤져 원인을 찾느라 복구까지 [N시간]이 걸리고, 그동안 서비스가 멈춘다.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border-radius:12px;padding:28px">
+<h3 style="font-size:30px;font-weight:700">‘왜?’를 다섯 번</h3>
+<p style="font-size:26px;color:#4A5568;line-height:1.55">눈에 보이는 불편에서 “왜 그런가?”를 반복해 근본 원인까지 내려가면, 해결해야 할 진짜 문제가 보입니다.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6472">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5B6472;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">07 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="persona" style="background:#EEF1F5;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2F5D8C;letter-spacing:2px">WHY · USER</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">사용자를 한 사람으로 그리기 — 페르소나</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1.1;display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border-top:8px solid #2F5D8C;border-radius:12px;padding:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2F5D8C">PERSONA CARD · 예시</p>
+<h3 style="font-size:34px;font-weight:700">김운영 (32) · 스타트업 인프라 담당</h3>
+<p style="font-size:26px;color:#14213D;line-height:1.5"><b>목표</b> — 장애를 빨리 끝내고 재발을 막고 싶다</p>
+<p style="font-size:26px;color:#14213D;line-height:1.5"><b>불편</b> — 혼자서 여러 서버를 보고, 원인 찾기가 오래 걸린다</p>
+<p style="font-size:26px;color:#14213D;line-height:1.5"><b>지금 쓰는 도구</b> — 모니터링 알림, 로그 검색, 메신저</p>
+<p style="font-size:26px;color:#14213D;line-height:1.5"><b>성공의 모습</b> — 알림을 받으면 원인과 조치가 이미 정리되어 있다</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:700">왜 한 사람으로?</h3>
+<ul style="font-size:28px;color:#14213D;line-height:1.6">
+<li>“모든 사용자”를 위한 서비스는 아무도 만족시키지 못한다</li>
+<li>기능을 넣을지 말지 “김운영에게 필요한가?”로 판단</li>
+<li>팀 전원이 같은 사람을 떠올리며 만든다</li>
+</ul>
+<p style="font-size:24px;color:#6B7280">대표 페르소나 1명 + 보조 1명이면 충분합니다</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6472">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5B6472;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">08 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="scenario" style="background:#EEF1F5;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2F5D8C;letter-spacing:2px">WHAT · SCENARIO</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">Before / After 시나리오로 보여주기</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:28px;font-weight:700;color:#5B6472">BEFORE · 지금</p>
+<div style="display:flex;gap:12px;align-items:center">
+<p style="flex:1;font-size:24px;background:#FFFFFF;border:1px solid #C9CCD1;padding:18px 20px;border-radius:8px">새벽 장애 알림</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:40px;height:20px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#9AA8BF"/></svg>
+<p style="flex:1;font-size:24px;background:#FFFFFF;border:1px solid #C9CCD1;padding:18px 20px;border-radius:8px">로그 직접 검색</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:40px;height:20px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#9AA8BF"/></svg>
+<p style="flex:1;font-size:24px;background:#FFFFFF;border:1px solid #C9CCD1;padding:18px 20px;border-radius:8px">원인 추측 · 재시도</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:40px;height:20px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#9AA8BF"/></svg>
+<p style="flex:1;font-size:24px;background:#FFFFFF;border:1px solid #C9CCD1;padding:18px 20px;border-radius:8px">[N시간] 뒤 복구</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:28px;font-weight:700;color:#2F5D8C">AFTER · 우리 서비스</p>
+<div style="display:flex;gap:12px;align-items:center">
+<p style="flex:1;font-size:24px;color:#F7F6F2;background:#2F5D8C;padding:18px 20px;border-radius:8px">이상 감지</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:40px;height:20px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:24px;color:#F7F6F2;background:#2F5D8C;padding:18px 20px;border-radius:8px">진단 에이전트 분석</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:40px;height:20px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:24px;color:#F7F6F2;background:#2F5D8C;padding:18px 20px;border-radius:8px">자동 복구 실행</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:40px;height:20px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:24px;color:#F7F6F2;background:#2F5D8C;padding:18px 20px;border-radius:8px">결과 보고만 확인</p>
+</div>
+</div>
+<p style="font-size:28px;color:#4A5568;line-height:1.4">시나리오 한 줄이 곧 <b>시연 대본</b>이 됩니다. 발표 데모에서 이 흐름을 그대로 보여주세요.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6472">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5B6472;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">09 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="solution" style="background:#EEF1F5;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2F5D8C;letter-spacing:2px">WHAT · DIFFERENTIATION</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">기존 방식과 비교해 차별점 보여주기</h2>
+</div>
+<table style="font-size:26px;color:#14213D;background:#FFFFFF">
+<tr style="background:#14213D"><th style="width:22%;color:#F7F6F2">비교 기준</th><th style="width:26%;color:#F7F6F2">수작업</th><th style="width:26%;color:#F7F6F2">기존 도구 [이름]</th><th style="width:26%;color:#F7F6F2">우리 서비스</th></tr>
+<tr><td>원인 파악</td><td>사람이 로그 검색</td><td>알림만 제공</td><td>에이전트가 진단</td></tr>
+<tr style="background:#F5F7FA"><td>조치</td><td>수동 실행</td><td>수동 실행</td><td>자동 복구 + 승인</td></tr>
+<tr><td>오류 시 대응</td><td>사람이 재시도</td><td>없음</td><td>자기 성찰 후 재시도</td></tr>
+<tr style="background:#F5F7FA"><td>과정 확인</td><td>기록 없음</td><td>일부 로그</td><td>사고 과정 대시보드</td></tr>
+</table>
+<p style="font-size:28px;color:#4A5568;line-height:1.4">비교 기준은 <b>사용자가 신경 쓰는 것</b>으로 고르세요. 기술 이름이 아니라 결과의 차이를 적습니다.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6472">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5B6472;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">10 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="priority" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">WHAT · SCOPE</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">기능에 우선순위 매기기 — MoSCoW</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#14213D;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:600;color:#F2A66B">MUST</p>
+<h3 style="font-size:28px;font-weight:700;color:#F7F6F2">없으면 실패</h3>
+<p style="font-size:24px;color:#C9D3E3;line-height:1.5">핵심 시나리오가 끝까지 돌아가는 데 꼭 필요한 것 · 3~5개</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:600;color:#B5541A">SHOULD</p>
+<h3 style="font-size:28px;font-weight:700">있으면 좋음</h3>
+<p style="font-size:24px;color:#4A5568;line-height:1.5">가치는 크지만 없어도 시연은 가능한 것</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:600;color:#2F5D8C">COULD</p>
+<h3 style="font-size:28px;font-weight:700">여유 있으면</h3>
+<p style="font-size:24px;color:#4A5568;line-height:1.5">일정이 남으면 추가할 것</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px dashed #9AA8BF;border-radius:12px;padding:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:600;color:#5B6472">WON’T</p>
+<h3 style="font-size:28px;font-weight:700">이번엔 안 함</h3>
+<p style="font-size:24px;color:#4A5568;line-height:1.5">일부러 뺀 것 — 적어 두면 범위 논쟁이 줄어듭니다</p>
+</div>
+</div>
+<div style="display:flex;gap:20px">
+<p style="flex:1;font-size:26px;color:#F7F6F2;background:#2F5D8C;padding:16px 24px;border-radius:8px">시나리오에 안 나오는 기능 → Could 이하</p>
+<p style="flex:1;font-size:26px;color:#7A3A10;background:#FBE3CF;padding:16px 24px;border-radius:8px">Must가 5개를 넘으면 범위가 과하다는 신호</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">11 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="requirements" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">WHAT · REQUIREMENTS</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">요구사항은 확인할 수 있게 씁니다</h2>
+</div>
+<table style="font-size:26px;color:#14213D;background:#FFFFFF">
+<tr style="background:#14213D"><th style="width:42%;color:#F7F6F2">확인할 수 없는 문장</th><th style="width:58%;color:#F7F6F2">확인할 수 있는 문장</th></tr>
+<tr><td>빠르게 응답한다</td><td>첫 응답 토큰이 [N초] 안에 화면에 표시된다</td></tr>
+<tr style="background:#F5F7FA"><td>안전하게 처리한다</td><td>로그인하지 않은 요청은 401로 거부한다</td></tr>
+<tr><td>오류에 강하다</td><td>외부 API 실패 시 [N회] 재시도 후 대체 응답을 준다</td></tr>
+<tr style="background:#F5F7FA"><td>사용하기 쉽다</td><td>처음 쓰는 사용자가 안내 없이 [핵심 작업]을 끝낸다</td></tr>
+</table>
+<div style="display:flex;gap:20px">
+<p style="flex:1;font-size:24px;color:#14213D;background:#FFFFFF;border:1px solid #E2E0D8;padding:16px 20px;border-radius:8px"><b>주어</b> — 시스템이 / 사용자가</p>
+<p style="flex:1;font-size:24px;color:#14213D;background:#FFFFFF;border:1px solid #E2E0D8;padding:16px 20px;border-radius:8px"><b>조건</b> — 언제 · 어떤 입력에서</p>
+<p style="flex:1;font-size:24px;color:#14213D;background:#FFFFFF;border:1px solid #E2E0D8;padding:16px 20px;border-radius:8px"><b>기준</b> — 숫자 · 상태 · 결과</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">12 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="diagram" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">HOW · ARCHITECTURE</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">구성도는 한 장으로, 흐름이 보이게</h2>
+</div>
+<div style="display:flex;gap:14px;align-items:center">
+<p style="flex:1;font-size:26px;text-align:center;background:#FFFFFF;border:2px solid #14213D;padding:22px 12px;border-radius:10px">사용자</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;text-align:center;background:#FFFFFF;border:2px solid #14213D;padding:22px 12px;border-radius:10px">화면 (UI)</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;text-align:center;background:#FFFFFF;border:2px solid #14213D;padding:22px 12px;border-radius:10px">API 서버</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;text-align:center;color:#F7F6F2;background:#2F5D8C;padding:24px 12px;border-radius:10px">에이전트</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;text-align:center;background:#FFFFFF;border:2px dashed #5B6472;padding:22px 12px;border-radius:10px">DB · 외부 API</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 48px">
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:36px;height:36px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:28px">왼쪽에서 오른쪽으로, 요청이 흐르는 방향대로</p></div>
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:36px;height:36px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:28px">화살표 옆에 오가는 데이터 이름 적기</p></div>
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:36px;height:36px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:28px">외부 서비스는 점선 등으로 구분</p></div>
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:36px;height:36px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:28px">박스마다 쓰는 기술 이름 한 줄</p></div>
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:36px;height:36px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:28px">색과 선 모양의 범례 달기</p></div>
+<div style="display:flex;gap:16px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#B5541A;width:36px;height:36px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:28px">박스는 10개 안팎까지</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">13 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="metrics" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">HOW WELL · METRICS</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">성공을 무엇으로 판단할지 미리 정하기</h2>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border-top:6px solid #E8833A;border-radius:12px;padding:32px">
+<h3 style="font-size:32px;font-weight:700">사용자 가치 지표</h3>
+<ul style="font-size:26px;color:#4A5568;line-height:1.6">
+<li>작업 처리 시간 (Before → After)</li>
+<li>사람이 개입한 횟수</li>
+<li>사용자 만족도 · 재사용 의향</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border-top:6px solid #2F5D8C;border-radius:12px;padding:32px">
+<h3 style="font-size:32px;font-weight:700">시스템 품질 지표</h3>
+<ul style="font-size:26px;color:#4A5568;line-height:1.6">
+<li>응답 지연 시간</li>
+<li>자동 복구 성공률 · 평균 복구 시간</li>
+<li>보안 테스트 차단 결과</li>
+</ul>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#14213D;border-radius:12px;padding:28px 32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#F2A66B">좋은 지표의 조건</p>
+<p style="font-size:30px;color:#F7F6F2;line-height:1.5">측정 방법이 정해져 있고 · 기준값과 목표값이 있고 · 시연이나 로그로 보여줄 수 있다</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">14 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="schedule" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">WHEN · WHO</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">일정은 마감에서 거꾸로 세웁니다</h2>
+</div>
+<div style="display:flex;gap:12px;align-items:center">
+<p style="flex:1;font-size:26px;color:#F7F6F2;background:#14213D;padding:20px;border-radius:10px;text-align:center">최종 발표</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;background:#FFFFFF;border:1px solid #C9CCD1;padding:20px;border-radius:10px;text-align:center">리허설 · 버퍼</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;background:#FFFFFF;border:1px solid #C9CCD1;padding:20px;border-radius:10px;text-align:center">통합 테스트</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;background:#FFFFFF;border:1px solid #C9CCD1;padding:20px;border-radius:10px;text-align:center">기능 구현</p>
+<svg viewBox="0 0 10 5" preserveAspectRatio="none" style="flex:none;width:48px;height:24px" aria-hidden="true"><polygon points="0,1.5 6,1.5 6,0 10,2.5 6,5 6,3.5 0,3.5" fill="#E8833A"/></svg>
+<p style="flex:1;font-size:26px;color:#14213D;background:#E8833A;padding:20px;border-radius:10px;text-align:center">오늘</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:24px 28px"><h3 style="font-size:30px;font-weight:700">마일스톤마다 결과물</h3><p style="font-size:26px;color:#4A5568;line-height:1.5">“무엇이 돌아가는가”로 정의</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:24px 28px"><h3 style="font-size:30px;font-weight:700">작업은 1~3일 단위</h3><p style="font-size:26px;color:#4A5568;line-height:1.5">더 크면 쪼개야 진행이 보입니다</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:24px 28px"><h3 style="font-size:30px;font-weight:700">담당자는 한 명</h3><p style="font-size:26px;color:#4A5568;line-height:1.5">“다 같이”는 아무도 안 한다는 뜻</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #E2E0D8;border-radius:12px;padding:24px 28px"><h3 style="font-size:30px;font-weight:700">버퍼를 남긴다</h3><p style="font-size:26px;color:#4A5568;line-height:1.5">예상 못 한 문제는 반드시 생깁니다</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">15 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="risks" style="background:#F7F6F2;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B5541A;letter-spacing:2px">HOW WELL · RISKS</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">리스크는 미리 적어 두면 관리가 됩니다</h2>
+</div>
+<table style="font-size:26px;color:#14213D;background:#FFFFFF">
+<tr style="background:#14213D"><th style="width:28%;color:#F7F6F2">리스크</th><th style="width:16%;color:#F7F6F2">가능성</th><th style="width:16%;color:#F7F6F2">영향</th><th style="width:40%;color:#F7F6F2">대응 계획</th></tr>
+<tr><td>외부 API 비용·호출 제한</td><td>중간</td><td>높음</td><td>캐시 · 모의 응답 · 사용량 모니터링</td></tr>
+<tr style="background:#F5F7FA"><td>필요한 데이터를 못 구함</td><td>중간</td><td>높음</td><td>공개 데이터 · 합성 데이터로 대체</td></tr>
+<tr><td>새 기술 학습이 오래 걸림</td><td>높음</td><td>중간</td><td>첫 주에 작은 기술 검증(PoC) 먼저</td></tr>
+<tr style="background:#F5F7FA"><td>팀원 일정 공백</td><td>낮음</td><td>중간</td><td>보조 담당자 지정 · 매일 기록 공유</td></tr>
+<tr><td>시연 중 오류</td><td>중간</td><td>높음</td><td>시연 영상 백업 · 고정된 시연 데이터</td></tr>
+</table>
+<p style="font-size:24px;color:#6B7280">가능성·영향은 예시 판단입니다 — 팀 상황에 맞게 다시 평가하세요</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#6B7280">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#6B7280;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">16 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="writing" style="background:#EEF1F5;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2F5D8C;letter-spacing:2px">WRITING TIPS</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">읽히는 문서를 만드는 여섯 가지 습관</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:12px;padding:28px"><h3 style="font-size:30px;font-weight:700">두괄식</h3><p style="font-size:24px;color:#4A5568;line-height:1.5">결론을 먼저, 근거는 그다음</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:12px;padding:28px"><h3 style="font-size:30px;font-weight:700">한 장 한 메시지</h3><p style="font-size:24px;color:#4A5568;line-height:1.5">제목만 읽어도 흐름이 이어지게</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:12px;padding:28px"><h3 style="font-size:30px;font-weight:700">숫자와 그림</h3><p style="font-size:24px;color:#4A5568;line-height:1.5">설명 세 줄보다 표 하나, 그림 하나</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:12px;padding:28px"><h3 style="font-size:30px;font-weight:700">용어 통일</h3><p style="font-size:24px;color:#4A5568;line-height:1.5">같은 것은 끝까지 같은 이름으로</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:12px;padding:28px"><h3 style="font-size:30px;font-weight:700">출처 표시</h3><p style="font-size:24px;color:#4A5568;line-height:1.5">인용한 자료와 수치에는 출처를</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:12px;padding:28px"><h3 style="font-size:30px;font-weight:700">가정은 가정이라고</h3><p style="font-size:24px;color:#4A5568;line-height:1.5">확인 못 한 내용은 ‘가정’으로 명시</p></div>
+</div>
+<p style="font-size:28px;color:#4A5568;line-height:1.4">AI 도구로 초안을 만들었다면, 사실과 수치는 반드시 직접 확인하고 우리 팀의 말로 다시 쓰세요.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#5B6472">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5B6472;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">17 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="checklist" style="background:#E8833A;color:#14213D;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#14213D;letter-spacing:2px">SELF CHECK</p>
+<h2 style="font-size:64px;font-weight:900;line-height:1.15">제출 전 셀프 체크리스트</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px">
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">문제를 한 문장으로 말할 수 있다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">Must 기능이 5개 이하다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">타깃 사용자가 구체적인 한 사람이다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">요구사항마다 확인 기준이 있다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">수치와 주장에 근거나 출처가 있다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">구성도 한 장으로 흐름이 보인다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">Before / After 시나리오가 있다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">성공 지표와 측정 방법이 있다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">기존 방식과의 차이가 표로 보인다</p></div>
+<div style="display:flex;gap:16px;align-items:center;background:#F7F6F2;border-radius:10px;padding:16px 22px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#14213D;width:32px;height:32px" aria-label="Check"><path d="M20 6L9 17l-5-5"/></svg><p style="font-size:25px">일정·담당자·리스크 대응이 있다</p></div>
+</div>
+<p style="font-size:26px;font-weight:500;line-height:1.4">마지막 확인: 팀 밖의 사람에게 5분 설명했을 때, 질문 없이 이해했는가?</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#14213D">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#14213D;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">18 / 19</p>
+
+</section>
+</div></div><div class="frame"><div class="slide"><section id="closing" style="background:#14213D;color:#F7F6F2;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<h2 style="font-size:88px;font-weight:900;line-height:1.15">좋은 기획서는<br>읽는 사람의 질문에<br>미리 답합니다</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<p style="font-size:28px;color:#14213D;background:#E8833A;padding:12px 24px;border-radius:8px;font-weight:700">왜</p>
+<p style="font-size:28px;color:#F7F6F2;border:2px solid #4A5D80;padding:12px 24px;border-radius:8px">무엇을</p>
+<p style="font-size:28px;color:#F7F6F2;border:2px solid #4A5D80;padding:12px 24px;border-radius:8px">어떻게</p>
+<p style="font-size:28px;color:#F7F6F2;border:2px solid #4A5D80;padding:12px 24px;border-radius:8px">언제 · 누가</p>
+<p style="font-size:28px;color:#F7F6F2;border:2px solid #4A5D80;padding:12px 24px;border-radius:8px">얼마나</p>
+</div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:600;color:#F2A66B">Q &amp; A</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-size:24px;color:#9AA8BF">AIO 1기 최종 프로젝트 · 기획서 잘 쓰는 법</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#9AA8BF;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace">19 / 19</p>
+
+</section>
+</div></div>
+<div class="progress"></div>
+<div class="nav" aria-label="슬라이드 이동">
+  <button id="prev" title="이전 (←)" aria-label="이전 슬라이드">‹</button>
+  <span id="count"></span>
+  <button id="next" title="다음 (→)" aria-label="다음 슬라이드">›</button>
+  <button id="fs" title="전체 화면 (F)" aria-label="전체 화면">⛶</button>
+</div>
+<script>
+  const frames = [...document.querySelectorAll('.frame')];
+  const n = frames.length;
+  let cur = 0;
+  function fit() {
+    const f = frames[cur];
+    f.querySelector('.slide').style.transform = 'scale(' + (f.clientWidth / 1920) + ')';
+  }
+  function go(i) {
+    cur = Math.max(0, Math.min(n - 1, i));
+    frames.forEach((f, k) => f.classList.toggle('active', k === cur));
+    document.getElementById('count').textContent = (cur + 1) + ' / ' + n;
+    document.querySelector('.progress').style.width = ((cur + 1) / n * 100) + '%';
+    history.replaceState(null, '', '#' + (cur + 1));
+    fit();
+  }
+  addEventListener('keydown', e => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    const k = e.key;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); go(cur + (e.shiftKey && k === ' ' ? -1 : 1)); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); go(cur - 1); }
+    else if (k === 'Home') { e.preventDefault(); go(0); }
+    else if (k === 'End') { e.preventDefault(); go(n - 1); }
+    else if (k === 'f' || k === 'F') toggleFs();
+  });
+  function toggleFs() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+  }
+  document.getElementById('prev').onclick = () => go(cur - 1);
+  document.getElementById('next').onclick = () => go(cur + 1);
+  document.getElementById('fs').onclick = toggleFs;
+  let tx = null;
+  addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1));
+  });
+  let hideT;
+  addEventListener('mousemove', () => {
+    document.body.classList.add('moved'); clearTimeout(hideT);
+    hideT = setTimeout(() => document.body.classList.remove('moved'), 1500);
+  });
+  addEventListener('resize', fit);
+  addEventListener('hashchange', () => go((parseInt(location.hash.slice(1)) || 1) - 1));
+  go((parseInt(location.hash.slice(1)) || 1) - 1);
+  addEventListener('beforeprint', () => document.querySelectorAll('.slide').forEach(s => s.style.transform = 'none'));
+  addEventListener('afterprint', () => { frames.forEach(f => f.querySelector('.slide').style.transform = ''); fit(); });
+</script>
+</body>
+</html>
