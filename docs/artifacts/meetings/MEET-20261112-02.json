@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "MEET-20261112-02",
+  "kind": "document",
+  "status": "공개 참고 기록",
+  "title": "2026-11-12 온라인 멘토링 · 사용자 문제와 품질 검증",
+  "category": "멘토링",
+  "input": {
+    "archive_id": "MEET-20261112-02",
+    "description": "11월 12일 Discord 업로드. PDF 첨부 6쪽."
+  },
+  "verification": {
+    "source_review": "Discord 보관 원본 대조",
+    "speaker_attribution": "미확인",
+    "decision_authority": "미확인"
+  },
+  "preamble_markdown": "멘토링 · MEET-20261112-02 · 공개 참고 기록\n\n출처 범위 — 11월 12일 Discord 업로드. PDF 첨부 6쪽.\n\n> 화자 구분과 발언 맥락이 불완전한 자료를 요약했습니다. 이 기록의 화자, 발언 의도와 합의 여부는 미확인입니다. 현재 적용할 기준은 [사람의 의도](../../human/INTENT.md), [현재 상태](../../../CURRENT.md), 관련 TASK·명세·ADR에서 확인합니다.\n",
+  "sections": [
+    {
+      "level": 2,
+      "heading": "주요 내용",
+      "content_markdown": "\n- 불편을 실제로 겪는 사용자, 구체적인 불편, 이를 해결할 핵심 기능 순서로 정의하라는 조언이 있었다. AI에 구현을 맡기더라도 사람은 문제 정의, 검증, 팀 품질 관리에 관여해야 한다는 논의가 이어졌다.\n- 팀은 조건을 질문해 덜 알려진 Android 앱도 찾는 구상을 설명했다. 그 경험이 실제 사용자 문제를 풀어 주는지 다시 살피고, 제출용 초안과 실제 제품 구체화를 병행하자는 피드백이 기록됐다.\n- Git 브랜치 기반 문서 관리, 구체적인 막힘을 설명하는 피드백 요청, 팀 단위 작업과 후속 멘토링 조율도 다뤘다.\n"
+    },
+    {
+      "level": 2,
+      "heading": "기억과 대조할 부분",
+      "content_markdown": "\n- 원본은 일부 발언자를 강사와 멘토로 다르게 표기합니다. 발언자별 귀속과 브랜치 운영 제안의 실제 채택 여부를 확인해 주세요.\n\n[다음 회의로](../../meetings/reviews/MEET-20261113-01.md)\n"
+    }
+  ]
+}
