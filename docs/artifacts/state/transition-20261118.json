@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "STATE-TRANSITION-20261118",
+  "kind": "state",
+  "status": "운영 인계/과거 TASK 추적",
+  "as_of": "2026-11-18",
+  "owner": "R01",
+  "title": "11/18 이전 TASK 이력 정리 및 투 트랙 활성 업무",
+  "authority_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+  "previous_period": {
+    "task_range": "TASK-001~TASK-021",
+    "through": "2026-11-17",
+    "disposition": "이력 보존, 완료 상태 일괄 변경 금지; 11/18 이후 일일 수행의 기본 배정에서는 제외",
+    "groups": [
+      {
+        "range": "TASK-001~TASK-011",
+        "meaning": "기존 찾아you 제출·MVP 준비",
+        "open_items": [
+          "TASK-011 공식 제출/접수 확인은 미완료; TASK-027이 인계"
+        ]
+      },
+      {
+        "range": "TASK-012~TASK-015",
+        "meaning": "11/13 독립 조사 및 이전 3안 비교 경로",
+        "open_items": [
+          "일부 개인 브랜치 결과는 main 미반영; 신규 후보 탐색으로 전환"
+        ]
+      },
+      {
+        "range": "TASK-016~TASK-021",
+        "meaning": "11/17 5안 기획·평가 및 멘토 준비",
+        "open_items": [
+          "TASK-021 정식 R01 결정·selected_ids는 미기록; R05 취합본은 개인 브랜치 참고",
+          "11/17 멘토 회의 결과의 정식 후속 조치 기록 보강 필요"
+        ]
+      }
+    ]
+  },
+  "active_period": {
+    "from": "2026-11-18",
+    "decision_target": "2026-11-21 오프라인",
+    "task_ids": [
+      "TASK-022",
+      "TASK-023",
+      "TASK-024",
+      "TASK-025",
+      "TASK-026",
+      "TASK-027"
+    ],
+    "tracks": [
+      {
+        "id": "A",
+        "name": "실제 기획 탐색/검증",
+        "task_ids": [
+          "TASK-022",
+          "TASK-023",
+          "TASK-024",
+          "TASK-025",
+          "TASK-026"
+        ]
+      },
+      {
+        "id": "B",
+        "name": "잠정 제출 대응",
+        "task_ids": [
+          "TASK-027"
+        ]
+      }
+    ]
+  },
+  "open_legacy_obligations": [
+    "11/13 제출본 실제 접수 확인 (TASK-011)",
+    "11/17 멘토링의 구체적 합의/결정과 후속 검증 정리",
+    "R05의 11/17 5안 취합본·키오스크 v5 등 개인 브랜치 결과 통합 여부"
+  ],
+  "rules": [
+    "과거 작업이 무효 또는 완료되었다는 뜻이 아니다.",
+    "정본 링크와 당시 상태·근거를 보존한다.",
+    "기한이 지난 제품 구현 계획은 토요일 실제 주제 선택 전 자동 실행하지 않는다.",
+    "공식 제출은 준비/공유/등록/접수 구분한다."
+  ]
+}

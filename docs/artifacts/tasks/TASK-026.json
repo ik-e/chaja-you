@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "TASK-026",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R01",
+  "due": "2026-11-18",
+  "depends_on": [],
+  "suggested_owner": "R01",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-18",
+  "title": "R01 기획안 검토·과거 TASK 인계·토요일 오프라인 의사결정 준비",
+  "question": "각 후보의 실제 사용자 가치와 잔여 Pain을 같은 기준으로 검토하고 토요일 오프라인에서 무엇을 결정해야 하는가?",
+  "goal": "각 팀원에게 탐색·구체화의 자율성을 주면서 R01은 비교 기준·운영 정합성·결정 질문만 관리한다. 기존 TASK 이력을 남기고 이번 주의 활성 작업을 분리한다.",
+  "inputs": [
+    "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+    "docs/meetings/reviews/MEET-20261117-01.md",
+    "docs/meetings/reviews/MEET-20261118-01.md",
+    "docs/artifacts/planning/selection-20261117/README.md",
+    "docs/artifacts/state/transition-20261118.json"
+  ],
+  "scope": [
+    "TASK-001~021 원본을 삭제·일괄 완료 처리하지 않는다. 이전 상태와 열린 제출·검증 의무를 인계표에 남긴다.",
+    "R01의 과거 시험감독안도 다른 후보와 같은 근거 기준을 적용한다. 특정 후보를 자동 채택하지 않는다.",
+    "R02~R05는 자체 후보 연구 담당, R01은 검토·의견 충돌·일정·토요일 회의 판단 준비 담당. 모든 작은 수정에 R01 결재를 강제하지 않는다.",
+    "어제 멘토링의 확인된 발언·팀 해석·오늘 R01 결정 분리. 직접 검증되지 않은 사용자 고통은 확정하지 않는다.",
+    "주제 결정은 11/21 오프라인 목표이며 그 전에 기술 스택·API/DB·제품 기능을 최종 확정하지 않는다."
+  ],
+  "outputs": [
+    "2026-11-18 최신 후보 목록 및 근거 수준·반대 증거·미확인 요약",
+    "TASK-001~021 과거 이력/미결 의무를 새 TASK와 구별한 운영 인계 기록",
+    "11/21 오프라인 회의 판단 안건: 선택 기준, 후보별 치명적 질문, 선택/보류 기준",
+    "팀원에게 보낼 간결한 목적·산출물·자율 범위·링크 공지(실제 발송은 별도 확인)"
+  ],
+  "acceptance": [
+    "기존 산출물의 완료를 허위 선언하거나 삭제하지 않는다.",
+    "새 후보를 공통 기준으로 비교하되 수치 없는 부분을 임의 점수화하지 않는다.",
+    "토요일 전 후보는 잠정으로 표시하고 최종 권한을 R01과 팀 오프라인 결정 과정에 남긴다."
+  ],
+  "verification": [
+    "GitHub 원본·개인 브랜치의 최신 기록을 함께 대조한다.",
+    "회의에서 결정된 것과 제안·추정을 구분한다.",
+    "새 TASK와 과거 미결 출처를 추적할 수 있다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261118-01_two-track-planning.md"
+    },
+    {
+      "path": "docs/meetings/reviews/MEET-20261117-01.md"
+    },
+    {
+      "path": "docs/meetings/reviews/MEET-20261118-01.md"
+    },
+    {
+      "path": "docs/artifacts/state/transition-20261118.json"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": null,
+  "stage": "2026-11-18 팀장 운영·검토",
+  "assignment_status": "R01 지시"
+}
