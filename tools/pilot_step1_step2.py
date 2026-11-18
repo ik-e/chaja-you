@@ -61,7 +61,7 @@ def verify_model(model):
     for id in ["TASK-022","TASK-023","TASK-024","TASK-025","TASK-026","TASK-027"]:
         assert id in wbs,id
     assert "11/21" in wbs and "11/20" in wbs
-    assert "미검증" in proposal and "미구현" in api and "미구현" in db
+    assert "미검증" in proposal and "미구현" in docs["DLV-03"]["status"] and "미구현" in docs["DLV-04"]["status"]
     # Show usage boundary and no false approval.
     for d in model["documents"]:
         assert "미제출" in d["status"]
