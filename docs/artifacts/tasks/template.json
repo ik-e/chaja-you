@@ -25,5 +25,6 @@
     "requirement_refs": [],
     "evaluation_refs": []
   },
-  "validation_plan": null
+  "validation_plan": null,
+  "phase_intent_ref": null
 }

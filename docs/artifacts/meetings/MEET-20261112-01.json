@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "MEET-20261112-01",
+  "kind": "document",
+  "status": "공개 참고 기록",
+  "title": "2026-11-12 오전 회의 · AI와 사람의 역할",
+  "category": "일반 회의",
+  "input": {
+    "archive_id": "MEET-20261112-01",
+    "description": "11월 12일 Discord 게시글 본문."
+  },
+  "verification": {
+    "source_review": "Discord 보관 원본 대조",
+    "speaker_attribution": "미확인",
+    "decision_authority": "미확인"
+  },
+  "preamble_markdown": "일반 회의 · MEET-20261112-01 · 공개 참고 기록\n\n출처 범위 — 11월 12일 Discord 게시글 본문.\n\n> 화자 구분과 발언 맥락이 불완전한 자료를 요약했습니다. 이 기록의 화자, 발언 의도와 합의 여부는 미확인입니다. 현재 적용할 기준은 [사람의 의도](../../human/INTENT.md), [현재 상태](../../../CURRENT.md), 관련 TASK·명세·ADR에서 확인합니다.\n",
+  "sections": [
+    {
+      "level": 2,
+      "heading": "주요 내용",
+      "content_markdown": "\n- AI는 조사·문서 작성·정리를 맡고, 사람은 핵심 검토와 판단·결정을 맡는 작업 방식이 공유됐다. 사람에게는 결론과 필요한 근거를 짧게 전달하자는 취지였다.\n- 작업에 들어가기 전에 GitHub의 프로젝트 목표·현재 상태·담당 TASK를 보고, 그날 답할 질문을 한 문장으로 공유하자는 안내가 있었다.\n- 담당 과제로 기획서와 WBS를 준비하고, 결과·근거와 함께 미완료·확인 필요 항목을 공유하자는 안내가 있었다.\n"
+    },
+    {
+      "level": 2,
+      "heading": "기억과 대조할 부분",
+      "content_markdown": "\n- [기존 11월 12일 오전 회의록](../../meetings/2026-11-12_오전_회의록.md)은 MVP 동적 구성과 APP-A·B·C 계약을 주로 다룹니다. 같은 회의의 다른 부분인지, 별도 논의인지 확인해 주세요.\n\n[다음 회의로](../../meetings/reviews/MEET-20261112-02.md)\n"
+    }
+  ]
+}

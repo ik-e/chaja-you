@@ -2,9 +2,9 @@
   "schema_version": 1,
   "id": "PROJECT-001",
   "kind": "project",
-  "status": "확정 — 사용자 지정 목표와 운영 원칙",
+  "status": "이전 찾아you 기준안 — 제품 주제 미선정 / 현재 구현 보류 / 제출용 잠정 보존",
   "owner": "프로젝트 리더",
-  "updated_at": "2026-11-12",
+  "updated_at": "2026-11-18",
   "goal": "사용자의 요청과 리서치 도메인에 맞게 조사 워크플로와 에이전트 역할·작업을 구성하고, 도메인에 적합한 출처와 검증 기준을 사용해 공개 자료를 조사하여 근거와 출처가 연결된 결과를 제공한다.",
   "success": [
     "사용자 조건과 리서치 도메인에 맞춰 필요한 조사 작업과 역할을 구성하고 실제 결과까지 실행한다.",
@@ -32,11 +32,19 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261112-05_데이터_수집_정책.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261118-02_phase-sync.md"
     }
   ],
   "authority": {
     "type": "human",
     "ref": "docs/human/INTENT.md",
     "id": "INTENT-PRODUCT-001"
-  }
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "product_scope_lifecycle": "2026-11-18~21 실제 제품 방향 미확정. 기존 목표·성공 조건은 과거 찾아you 작업과 교육 제출용으로만 보존. 새로운 제품 선정 전 구현 작업의 기준 아님."
 }
