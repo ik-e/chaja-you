@@ -25,7 +25,6 @@
   "accepted_work_domains": [
     "problem",
     "requirements",
-    "quality",
     "task",
     "interface",
     "data",
@@ -114,8 +113,8 @@
     {
       "id": "SRC-OPENAPI",
       "class": "technical_spec",
-      "title": "OpenAPI Specification v3.2.1 (2026-09-10)",
-      "url": "https://spec.openapis.org/oas/v3.2.1.html",
+      "title": "OpenAPI Specification v3.1.1 (2024-10-24; 고정 참조 버전)",
+      "url": "https://spec.openapis.org/oas/v3.1.1.html",
       "supports": "HTTP API 계약을 기계/사람이 읽는 정의로 표현",
       "does_not_prove": "선정 전 API·REST·도구 전부 확정해야 함"
     },
@@ -693,5 +692,7 @@
       "submission_truth_source": "docs/artifacts/state/current.json or private dashboard (not this registry)",
       "template_design_status": "proposed_not_a_submitted_artifact"
     }
-  ]
+  ],
+  "quality_claims": "공식 가이드·교육 예시·표준은 서로 다른 증거 권위다. 본 체계는 ISO 준수 인증/공식 목차 확인/실제 구현 완료를 주장하지 않는다.",
+  "pending_official_outline": "1~12 항목의 공유 교육 예시 목차는 참고 관찰됨. 공식 산출물별 최종 양식/필수 목차는 확보 시 별도 mapping 검증 필요. 13~16 항목은 예시 목차 관찰하지 않음."
 }
