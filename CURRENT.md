@@ -39,37 +39,22 @@
 | 11/20 API·DB 설계와 과거 기획서·WBS의 실제 제출·접수 상태를 어떻게 처리할까 | TASK-027에서 공식 목차·제출 방식과 기존 TASK-011의 접수를 확인하고, 잠정 설계임을 명시한 문서를 제출한다. | 최신 교육기관 안내/대시보드, 열람 가능 링크, 등록·상태 변경 및 접수 증빙 |
 | 토요일 이후 기존 찾아you APP-A/C·R03/R05 우선안을 유지할지 교체할지 | 기획 결정 뒤 관련 PROJECT/Spec/WBS/TASK를 사람 결정에 근거해 변경한다. 이전 상태는 보존한다. | 최종 후보 결정과 재검토 조건, 기술·데이터·법적 제약 |
 
-## 작업 상태
+## 현재 활성 TASK
 
 | 작업 | 할 일 | 담당 | 내부 목표일 | 선행 작업 | 구분 | 상태 |
 | --- | --- | --- | --- | --- | --- | --- |
-| [TASK-001](docs/artifacts/tasks/TASK-001.json) | 대표 요청 1건의 조사 흐름 점검 | R01 | 2026-11-12 | 없음 | 보완 | 완료 |
-| [TASK-002](docs/artifacts/tasks/TASK-002.json) | 공식 제출 조건 확인 | R01 | 2026-11-12 | 없음 | 제출 준비 | 완료 |
-| [TASK-003](docs/artifacts/tasks/TASK-003.json) | 사용자 문제·기존 대안·결과 화면 정리 | R04 | 2026-11-12 | 없음 | 제출 준비 | 완료 |
-| [TASK-004](docs/artifacts/tasks/TASK-004.json) | 앱 데이터·이용 조건·운영 제약 정리 | R02 | 2026-11-12 | 없음 | 제출 준비 | 검토 중 |
-| [TASK-005](docs/artifacts/tasks/TASK-005.json) | 동적 구성 MVP·요구사항·평가 계획 정리 | R03 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
-| [TASK-006](docs/artifacts/tasks/TASK-006.json) | 최소 구현 구조·영역별 작업·의존성 도출 | R05 | 2026-11-12 | 없음 | 제출 준비 | 진행 중 |
-| [TASK-007](docs/artifacts/tasks/TASK-007.json) | 제출본 MVP·미결정 사항 수렴 | R01 | 2026-11-12 | TASK-003, TASK-004, TASK-005, TASK-006 | 제출 준비 | 완료 |
-| [TASK-008](docs/artifacts/tasks/TASK-008.json) | 기획서 원본·공식 제출 프로젝션 완성 | R01 | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 완료 |
-| [TASK-009](docs/artifacts/tasks/TASK-009.json) | 프로젝트 WBS 제출본 작성 | R01 | 2026-11-13 | TASK-002, TASK-007 | 제출 준비 | 완료 |
-| [TASK-010](docs/artifacts/tasks/TASK-010.json) | 기획서·WBS 최종 정합성·형식 확인 | R01 | 2026-11-13 | TASK-008, TASK-009 | 제출 준비 | 완료 |
-| [TASK-011](docs/artifacts/tasks/TASK-011.json) | 기획서·WBS 제출과 접수 확인 | R01 | 2026-11-13 | TASK-010 | 제출 준비 | 막힘 |
-| [TASK-012](docs/artifacts/tasks/TASK-012.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R02) | R02 | 2026-11-13 | 없음 | 보완 | 할 일 |
-| [TASK-013](docs/artifacts/tasks/TASK-013.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R03) | R03 | 2026-11-13 | 없음 | 보완 | 할 일 |
-| [TASK-014](docs/artifacts/tasks/TASK-014.json) | 타겟 유저·페인 포인트·문제 정의·핵심 피처 독립 조사 (R05) | R05 | 2026-11-13 | 없음 | 보완 | 할 일 |
-| [TASK-015](docs/artifacts/tasks/TASK-015.json) | 3개 독립 기획안 비교·통합 및 제품 문제 정의 R1 | R01 | 2026-11-13 | TASK-012, TASK-013, TASK-014 | 보완 | 할 일 |
-| [TASK-016](docs/artifacts/tasks/TASK-016.json) | R01 기획안 문제 정의 구체화 · 경쟁서비스 잔여 페인포인트 재검증 | R01 | 2026-11-17 | 없음 | 보완 | 할 일 |
-| [TASK-017](docs/artifacts/tasks/TASK-017.json) | R02 기획안 문제 정의 구체화 · 연애 예능 참여 경험 | R02 | 2026-11-17 | 없음 | 보완 | 할 일 |
-| [TASK-018](docs/artifacts/tasks/TASK-018.json) | R03 기획안 문제 정의 구체화 · 실제 인터페이스 사용 상황과 기존 서비스 제약 검토 | R03 | 2026-11-17 | 없음 | 보완 | 진행 중 |
-| [TASK-019](docs/artifacts/tasks/TASK-019.json) | R04 기획안 문제 정의 구체화 · 공통 멘토 기준 적용 | R04 | 2026-11-17 | 없음 | 보완 | 진행 중 |
-| [TASK-020](docs/artifacts/tasks/TASK-020.json) | R05 기획안 문제 정의 구체화 · 정보 현상과 실제 구매자 고통 분리 | R05 | 2026-11-17 | 없음 | 보완 | 할 일 |
-| [TASK-021](docs/artifacts/tasks/TASK-021.json) | R01~R05 문제 정의 5개 비교 · 멘토 재검토 후보 2개 압축 | R01 | 2026-11-17 | TASK-016, TASK-017, TASK-018, TASK-019, TASK-020 | 보완 | 할 일 |
 | [TASK-022](docs/artifacts/tasks/TASK-022.json) | 11/18 독립 기획 구체화 또는 신규 문제 탐색 · R02 | R02 | 2026-11-18 | 없음 | 보완 | 할 일 |
 | [TASK-023](docs/artifacts/tasks/TASK-023.json) | 11/18 독립 기획 구체화 또는 신규 문제 탐색 · R03 | R03 | 2026-11-18 | 없음 | 보완 | 할 일 |
 | [TASK-024](docs/artifacts/tasks/TASK-024.json) | 11/18 독립 기획 구체화 또는 신규 문제 탐색 · R04 | R04 | 2026-11-18 | 없음 | 보완 | 할 일 |
 | [TASK-025](docs/artifacts/tasks/TASK-025.json) | 11/18 독립 기획 구체화 또는 신규 문제 탐색 · R05 | R05 | 2026-11-18 | 없음 | 보완 | 할 일 |
 | [TASK-026](docs/artifacts/tasks/TASK-026.json) | R01 기획안 검토·과거 TASK 인계·토요일 오프라인 의사결정 준비 | R01 | 2026-11-18 | 없음 | 보완 | 할 일 |
 | [TASK-027](docs/artifacts/tasks/TASK-027.json) | 투 트랙 제출 대응 · 기존 기획 기반 잠정 API 설계/DB 스키마 문서 | R01 | 2026-11-20 | 없음 | 제출 준비 | 할 일 |
+
+## 이전 TASK · 정산 이력
+
+과거 21개 TASK의 당시 상태와 결과는 원본에서 보존하며 새 실행 업무에서 제외합니다.
+
+[TASK별 사유·후속 작업 원장](docs/artifacts/state/legacy_task_closeout_20261118.json) · [당시 원문 Git blob 보존](docs/archive/2026-11-18-task-closeout/manifest.json)
 
 담당 제안과 내부 목표일은 팀 조정용입니다. 공식 제출 시각은 TASK-002에서 확인합니다.
 

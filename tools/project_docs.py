@@ -1,6 +1,7 @@
 """Validate AI artifacts and build the human-readable project projections."""
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -638,6 +639,31 @@ def build():
         (path, record) for path, record in sources.items() if record["kind"] == "task"
     ]
     task_ids = {task["id"] for _, task in tasks}
+    active_task_ids = set(state.get("active_task_ids", []))
+    active_tasks = [(path, task) for path, task in tasks if task["id"] in active_task_ids]
+    historical_tasks = [(path, task) for path, task in tasks if task["id"] not in active_task_ids]
+    closeout_path = state.get("legacy_task_closeout_ref")
+    manifest_path = state.get("legacy_evidence_manifest_ref")
+    if not closeout_path or not manifest_path or not (ROOT / closeout_path).is_file() or not (ROOT / manifest_path).is_file():
+        raise ValueError("legacy closeout source or immutable manifest missing")
+    closeout = read_json(closeout_path)
+    manifest = read_json(manifest_path)
+    if set(entry["id"] for entry in closeout["entries"]) != set(f"TASK-{n:03}" for n in range(1, 22)):
+        raise ValueError("legacy closeout needs all 21 original tasks exactly once")
+    source_by_snapshot = {entry["snapshot_path"]: entry for entry in manifest["entries"]}
+    for entry in manifest["entries"]:
+        path = ROOT / entry["snapshot_path"]
+        if not path.is_file():
+            raise ValueError(f"missing immutable source snapshot {path}")
+        content = path.read_bytes()
+        blob_sha = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\\x00" + content).hexdigest()
+        if blob_sha != entry["blob_sha"]:
+            raise ValueError(f"immutable source blob digest mismatch: {path}")
+    for entry in closeout["entries"]:
+        original = entry["source_snapshot"]
+        snapshot = source_by_snapshot.get(original["path"])
+        if not snapshot or snapshot["blob_sha"] != original["git_blob_sha"]:
+            raise ValueError(f"{entry['id']}: closeout snapshot SHA does not match manifest")
     phase_ref = state.get("active_phase_intent_ref")
     if (not phase_ref or not phase_ref.startswith("docs/human/phase-intents/")
             or not (ROOT / phase_ref).is_file()
@@ -686,14 +712,18 @@ def build():
             "",
             "담당자는 실제 결과와 근거를 각 TASK의 result에 기록합니다. 담당 제안과 내부 목표일은 팀 조정용입니다.",
             "",
+            "## 현재 활성 TASK",
+            "",
         ]
     )
     lines.extend(
         table(
             ["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"],
-            task_rows(tasks, output),
+            task_rows(active_tasks, output),
         )
     )
+    lines.extend(["## 이전 TASK · 종료 정산/증거 보존", "", local_link(closeout_path, "정산 원본", output) + " · " + local_link(manifest_path, "원문 고정 매니페스트", output), "", "이전 TASK의 상태는 당시 원본 상태이며 현재 실행 지시가 아닙니다. 신규 수행 대신 후속 TASK와 보류 의무를 정산 원장에서 확인합니다.", ""])
+    lines.extend(table(["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"], task_rows(historical_tasks, output)))
     lines.extend(
         [
             "보완 작업은 제출 준비의 필수 선행으로 두지 않습니다. 확보된 관찰은 근거로 사용하고 미완료 항목은 후속 검증 계획으로 반영합니다.",
@@ -778,13 +808,14 @@ def build():
             ],
         )
     )
-    lines.extend(["## 작업 상태", ""])
+    lines.extend(["## 현재 활성 TASK", ""])
     lines.extend(
         table(
             ["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"],
-            task_rows(tasks, output),
+            task_rows(active_tasks, output),
         )
     )
+    lines.extend(["## 이전 TASK · 정산 이력", "", f"과거 {len(historical_tasks)}개 TASK의 당시 상태와 결과는 원본에서 보존하며 새 실행 업무에서 제외합니다.", "", local_link(closeout_path, "TASK별 사유·후속 작업 원장", output) + " · " + local_link(manifest_path, "당시 원문 Git blob 보존", output), ""])
     lines.extend(
         [
             "담당 제안과 내부 목표일은 팀 조정용입니다. 공식 제출 시각은 TASK-002에서 확인합니다.",
@@ -869,11 +900,11 @@ def build():
     )
     for item in state["decisions_needed"]:
         lines.extend([f"- **{item['question']}** — {item['evidence_needed']}"])
-    lines.extend(["", "## 제출 준비 작업", ""])
+    lines.extend(["", "## 현재 활성 작업", ""])
     lines.extend(
         table(
             ["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"],
-            task_rows(tasks, output),
+            task_rows(active_tasks, output),
         )
     )
     lines.extend(
@@ -884,7 +915,7 @@ def build():
             "",
         ]
     )
-    for path, task in tasks:
+    for path, task in active_tasks:
         result = task["result"]
         lines.extend(
             [
@@ -918,7 +949,7 @@ def build():
                 for item in result["uncertainties"] + result["decision_requests"]
             )
             lines.append("")
-    lines.extend(["## 평가 결과", ""])
+    lines.extend(["## 이전 작업 정산/근거", "", local_link(closeout_path, "이전 21개 TASK 종료 사유·후속 작업", output), " · " + local_link(manifest_path, "불변 원본 매니페스트", output), "", "TASK-001~021은 2026-11-18 이후 신규 실행에서 제외되었지만, 당시 상태와 산출물은 수정되지 않았습니다.", "", "## 평가 결과", ""])
     lines.extend(
         table(
             ["사례", "판정", "상세 근거"],
