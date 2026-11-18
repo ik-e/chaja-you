@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "MENTOR-BRIEF-20261117-R03-R05",
+  "kind": "mentor_review_brief",
+  "status": "멘토 재검토용 잠정 2안 취합; 최종 제품 선정 아님",
+  "owner": "R05",
+  "date": "2026-11-17",
+  "purpose": "R01이 지정한 R03·R05 잠정 우선 후보의 최신 작성자 문서를 동일한 검토 질문으로 연결한다.",
+  "presentation_path": "docs/artifacts/planning/2026-11-17_R03_R05_멘토_재검토_취합.md",
+  "sources": [
+    {
+      "candidate_id": "R03",
+      "branch": "choiduna",
+      "commit": "2734f7d",
+      "proposal_path": "docs/members/R03/workspace/2026-11-16_중고거래_상담신고_준비_멘토링_1페이지_요약.md",
+      "presentation_path": "docs/members/R03/workspace/2026-11-17_중고거래_멘토_설명문_및_질문.md",
+      "scope_path": "docs/members/R03/workspace/2026-11-17_ECRM_접수전_준비지원_작업범위.md",
+      "proposal_status": "기획 구체화; 비교 실험·시제품 미구현"
+    },
+    {
+      "candidate_id": "R05",
+      "branch": "Imdahyeok",
+      "commit": "ec424a4",
+      "proposal_path": "docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v5.md",
+      "proposal_status": "작성자 v5; 참가자 비교 실험·시제품 미실행"
+    }
+  ],
+  "comparison": [
+    {
+      "candidate_id": "R03",
+      "target": "중고거래 대금 송금 뒤 물품을 받지 못해 처음 ECRM 접수를 준비하는 사람",
+      "core_pain_hypothesis": "준비 자료와 경위 정리 중 인증 만료·재입력 및 자료 대조 수고",
+      "strongest_alternatives": ["ECRM 공식 안내", "체크리스트와 메모", "충분히 지시한 범용 LLM"],
+      "minimum_falsification": "같은 가상 자료·정정 과제로 기존 대안과 제안 방식을 전체 수고·사실 보존 기준에서 비교",
+      "unknowns": ["실제 재인증·복원 동작", "다른 이용자 빈도", "동등 조건 비교와 시제품 효과"]
+    },
+    {
+      "candidate_id": "R05",
+      "target": "테이블오더에서 먹고 싶은 느낌은 있으나 메뉴를 정하지 못한 손님",
+      "core_pain_hypothesis": "느낌을 정형 필터에 옮기기 어려워 선택이 늦고 일행을 기다리게 함",
+      "strongest_alternatives": ["상세 메뉴판", "비AI 필터", "추천 태그", "직원 질문"],
+      "minimum_falsification": "같은 메뉴 정보로 메뉴판·필터·도우미를 비교하고 필터·태그 밖 요청에서 AI 입력과 음성의 효과를 분리",
+      "unknowns": ["다른 손님의 문제 빈도", "응답 지연·음성 인식", "점주 데이터와 업체 협조", "참가자 비교 효과"]
+    }
+  ],
+  "limitations": [
+    "R01의 5개 안 평가 취합본을 대체하지 않는다.",
+    "R03의 자기보고와 R05의 개인 경험을 전체 사용자 효과로 일반화하지 않는다.",
+    "멘토 피드백은 아직 이 원본에 포함하지 않으며 실제 발언·팀 해석을 별도 기록한다."
+  ],
+  "decision_request": "멘토에게 두 후보의 가장 작은 반증 실험·중단 기준을 확인받고, 최종 제품 선정은 R01의 후속 결정으로 남긴다."
+}

@@ -3,65 +3,52 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-16",
-  "scope": "멘토 피드백을 반영해 R01~R05 각자의 문제 정의를 구체화하고, 2026-11-17 18:00 KST까지 5개 중 2개를 멘토 재검토 후보로 압축",
+  "as_of": "2026-11-18",
+  "scope": "11/18~21: 실제 제품 미선정·기획안 탐색(트랙 A) + 기존 찾아you 잠정 문서 제출 대응(트랙 B); 기존 기획·WBS 구현 보류",
   "confirmed": [
-    "2026-11-16 현재 우선순위는 새 구현 확대보다 R01~R05 각자의 기획안을 멘토가 요구한 문제 정의 수준까지 구체화하는 것이다.",
-    "R01~R03은 이미 받은 개별 멘토 피드백을 반영하고, R04~R05는 같은 공통 기준을 적용해 자신의 기획안을 구체화한다.",
-    "공통 기준은 구체적 타겟 상황, 실제 사용자 고통, 기존 대안이 해결하는 부분과 남는 문제, painkiller 기능, 근거와 미확인의 구분이다.",
-    "팀원별 결론은 독립적으로 유지하고 공통 평가 기준만 공유한다.",
-    "2026-11-17 18:00 KST까지 다섯 안을 비교 가능한 수준으로 만들고 2개 후보로 압축한 뒤 20:00 KST 멘토에게 재검토 받는다.",
-    "2개 압축은 최종 제품 문제 확정이 아니며, 멘토 피드백과 사람 권위 결정 전에는 기존 APP-A·C, 제출용 기획서·WBS, 제품 범위를 자동 변경하지 않는다.",
-    "기존 상위 의도인 AI 활용의 반복 감독 부담 감소는 장기 가설로 유지하되, 각 팀원의 문제 정의를 그 비전에 억지로 맞추지 않는다.",
-    "외부 조사에서는 기존 서비스의 기능 부재를 가정하지 않고 이미 해결되는 부분과 잔여 페인포인트를 확인한다."
+    "2026-11-18 이후 R02~R05는 각자 기존 기획안을 심화하거나 새 사용자 문제를 탐색하는 경로 중 하나를 자율 선택한다.",
+    "R01은 팀원 기획안 검토·운영 정합성·제출 기한에 대응하는 임시 문서 관리를 맡는다.",
+    "2026-11-21(토) 오프라인 모임에서 실제 제품 기획을 결정하는 것을 목표로 하며, 그 전에 후보를 최종 제품으로 승격하지 않는다.",
+    "지난 TASK-001~021의 당시 기록과 미완료·미확인 사항은 보존하고 11/18의 실행 업무에서 분리한다.",
+    "멘토링에서 강조된 사용자 상황·실제 불편·강한 기존 대안 후 잔여 문제를 기획안 검토의 중심으로 둔다.",
+    "공개 자료를 읽을 수 있다는 사실과 자동 수집·저장·재사용 권한을 구별한다.",
+    "기존 찾아you 기획서·APP-A/C 명세·WBS·기술설계는 실제 제품 구현 기준에서 보류하고, 공식 제출 대응용 잠정 기준본으로만 유지한다."
   ],
   "priorities": [
-    "TASK-016~020에서 R01~R05 각자의 기존 기획안을 멘토 피드백 기준까지 구체화한다.",
-    "2026-11-17 18:00 KST까지 TASK-021에서 다섯 문제 정의를 같은 기준으로 비교해 멘토 재검토 후보 2개로 압축한다.",
-    "2026-11-17 20:00 KST 멘토링에서 두 후보의 사용자 pain·기존 대안 이후 잔여 문제·검증 가능성·구현 위험을 다시 검토받는다.",
-    "멘토 피드백 이후 사람 권위 결정으로 최종 문제 정의와 실제 작업용 MVP·TASK·일정을 재구성한다.",
-    "기획서·WBS 실제 제출 상태(TASK-011)는 현재 GitHub 기록상 미확인이므로 별도 운영 항목으로 닫는다."
+    "TASK-022~025에서 R02~R05 각자 기존안 고도화 또는 새 주제 탐색을 택해 11/18 1차 근거·반대 근거가 있는 1개 후보를 남긴다.",
+    "TASK-026에서 R01은 기존 TASK 이력을 구분하고 후보·멘토 의견·운영 상태를 검토해 11/21 오프라인 선택 기준과 의제를 만든다.",
+    "TASK-027에서 R01은 현재 WBS상 11/20 API 설계·DB 스키마 문서에 잠정 기준안으로 대응하고, 공식 제출 조건·접수를 별도 확인한다.",
+    "11/21(토) 오프라인에서 후보별 실제 Pain·강한 기존 대안·8주 검증 가능성과 중단 위험을 비교해 실제 제품 방향을 결정한다.",
+    "토요일 선정 후 실제 제품 기획서·구현 TASK·WBS를 재작성한다. 그전에는 기존 APP-A/C나 11/17 잠정 R03/R05 후보를 최종 범위로 자동 승인하지 않는다."
   ],
   "decisions_needed": [
     {
-      "id": "OPEN-05",
-      "question": "R01~R05의 다섯 문제 정의 중 어떤 2개를 멘토 재검토 후보로 남길까",
-      "action": "TASK-016~020 완료 후 동일 기준으로 비교해 TASK-021에서 2개 후보와 보류 3개 이유를 기록",
-      "evidence_needed": "타겟 구체성, 실제 pain, 기존 대안 이후 잔여 문제, painkiller 직접성, 근거·반대 근거, 사용자 검증·데이터·8주 구현 가능성"
+      "id": "OPEN-20261118-01",
+      "question": "11/21 오프라인에서 어떤 사용자 문제와 제품 방향을 최종 선택할까",
+      "action": "각자 후보 1개, 실제 Pain·잔여 문제·가장 저렴한 반증·허용된 MVP 경로를 비교해 R01/팀 결정으로 남긴다.",
+      "evidence_needed": "대안 실사용 또는 공개 근거, 직접 사용자 맥락, 손실 강도, 기존 대안 이후 잔여 문제, 8주 시연·수집권한"
     },
     {
-      "id": "OPEN-06",
-      "question": "11/17 20:00 멘토 재검토 이후 어떤 문제를 최종 프로젝트 문제로 선택할까",
-      "action": "멘토 피드백과 사람 권위 결정 후 제품 범위·MVP·실제 작업 계획 변경 여부를 별도 반영",
-      "evidence_needed": "두 후보의 멘토 피드백, 실제 사용자 검증 필요사항, 기존 대안 대비 잔여 pain, 구현·데이터 제약"
+      "id": "OPEN-20261118-02",
+      "question": "11/20 API·DB 설계와 과거 기획서·WBS의 실제 제출·접수 상태를 어떻게 처리할까",
+      "action": "TASK-027에서 공식 목차·제출 방식과 기존 TASK-011의 접수를 확인하고, 잠정 설계임을 명시한 문서를 제출한다.",
+      "evidence_needed": "최신 교육기관 안내/대시보드, 열람 가능 링크, 등록·상태 변경 및 접수 증빙"
     },
     {
-      "id": "OPEN-02",
-      "question": "정량 합격 기준을 얼마로 둘까",
-      "action": "제출본에 평가 계획과 기준 실행 후 결정 절차를 명시",
-      "evidence_needed": "첫 실행의 조건별 응답 완결성과 근거 판정 결과"
-    },
-    {
-      "id": "OPEN-03",
-      "question": "프레임워크와 경험 재사용에 지금 투자할까",
-      "action": "필요가 드러날 때 결정",
-      "evidence_needed": "상태 추적·복구의 구현 부담 또는 검토된 조사 경험을 재사용할 실제 과제"
-    },
-    {
-      "id": "OPEN-04",
-      "question": "APP-C 실제 확인 한도와 부분 결과의 세부 수용 기준을 얼마로 둘까",
-      "action": "첫 APP-A·C 통합에서 시간·호출·실패 패턴을 관찰한 뒤 결정",
-      "evidence_needed": "실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태"
+      "id": "OPEN-20261118-03",
+      "question": "토요일 이후 기존 찾아you APP-A/C·R03/R05 우선안을 유지할지 교체할지",
+      "action": "기획 결정 뒤 관련 PROJECT/Spec/WBS/TASK를 사람 결정에 근거해 변경한다. 이전 상태는 보존한다.",
+      "evidence_needed": "최종 후보 결정과 재검토 조건, 기술·데이터·법적 제약"
     }
   ],
-  "review_summary": "2026-11-16 기준 문제 정의 재검토 단계다. R01·R02·R03은 멘토의 개별 피드백을 받았고, R04·R05는 같은 문제 정의 기준을 적용해 기획안을 구체화한다. TASK-016~020에서 다섯 안의 품질을 맞춘 뒤 TASK-021에서 2026-11-17 18:00 KST까지 2개 후보로 압축하고 20:00 멘토 재검토를 받는다. 이 과정은 최종 제품 범위 변경이 아니며 기존 APP-A·C와 제출용 기획서·WBS는 사람 결정 전까지 자동 변경하지 않는다. 기존 TASK-015의 3개 안 즉시 통합 경로는 현재 운영 경로가 아니며 TASK-021이 후속 수렴 작업을 담당한다.",
+  "review_summary": "현재 적용 Phase: PHASE-20261118-01. 11/18~21 실제 제품은 미선정이며 R02~R05는 기존안 고도화 또는 신규 문제를 탐색한다. R01은 후보 검토·운영 조정과 교육 제출 대응을 맡는다. **이전 찾아you 기획·APP-A/C·WBS와 과거 구현 일정은 실제 개발 기준으로 보류하며, 제출용 잠정안으로만 보존한다.** 11/21 토요일 오프라인에서 제품 선정/보류를 근거와 함께 결정한 뒤 PROJECT·Spec·실행 WBS를 교체한다. 11/20 API·DB 설계의 공식 제출 방식 및 기존 Step1 접수 상태는 미확인이다. 11/17 멘토링 요약은 검토용 참고이며 사람의 최종 제품 승인 기록은 아니다.",
   "deliverables": [
     {
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "검토 완료·제출 준비",
-      "submission_status": "미제출",
+      "status": "기존 찾아you 잠정 제출본 · 실제 제품 구현 보류",
+      "submission_status": "미확인",
       "source": "docs/artifacts/planning/기획서_초안.json",
       "projection": "docs/step1/기획서.md",
       "completion_tasks": [
@@ -74,14 +61,16 @@
         "TASK-008",
         "TASK-010",
         "TASK-011"
-      ]
+      ],
+      "revision_ref": "docs/artifacts/planning/기획서_초안.json",
+      "revision_date": "2026-11-17"
     },
     {
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "검토 완료·제출 준비",
-      "submission_status": "미제출",
+      "status": "기존 찾아you 잠정 제출본 · 실제 제품 구현 보류",
+      "submission_status": "미확인",
       "source": "docs/artifacts/planning/WBS.json",
       "projection": "docs/step1/WBS.md",
       "completion_tasks": [
@@ -92,7 +81,9 @@
         "TASK-010",
         "TASK-011"
       ],
-      "target": "docs/step1/WBS.md"
+      "target": "docs/step1/WBS.md",
+      "revision_ref": "docs/artifacts/planning/WBS.json",
+      "revision_date": "2026-11-17"
     },
     {
       "id": "SUB-03",
@@ -120,6 +111,19 @@
       "submission_status": "미확인",
       "source": null,
       "projection": null
+    },
+    {
+      "id": "SUB-API-20261120",
+      "due": "2026-11-20",
+      "title": "API 설계 문서·DB 스키마 설계서 (잠정)",
+      "status": "기존 찾아you 기준 잠정 설계(11/21 제품 미선정)",
+      "submission_status": "미확인",
+      "source": null,
+      "projection": null,
+      "completion_tasks": [
+        "TASK-027"
+      ],
+      "note": "공식 원문·대시보드 마감/제출 절차 확인 필요. 실제 기획은 11/21 결정 목표."
     }
   ],
   "references": [
@@ -155,11 +159,47 @@
     },
     {
       "path": "docs/artifacts/design/target_design.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261118-01_two-track-planning.md"
+    },
+    {
+      "path": "docs/artifacts/state/transition-20261118.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-022.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-023.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-024.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-025.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-026.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-027.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261118-02_phase-sync.md"
+    },
+    {
+      "path": "docs/artifacts/state/legacy_task_closeout_20261118.json"
+    },
+    {
+      "path": "docs/archive/2026-11-18-task-closeout/manifest.json"
     }
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
-    "status": "제출 대기",
+    "status": "기존 Step1 접수 미확인; 11/20 잠정 API/DB 문서 대응 병행",
     "due_date": "2026-11-13",
     "due_time": null,
     "timezone": "Asia/Seoul",
@@ -191,56 +231,75 @@
   },
   "confirmed_provenance": [
     {
-      "text": "2026-11-16 현재 우선순위는 새 구현 확대보다 R01~R05 각자의 기획안을 멘토가 요구한 문제 정의 수준까지 구체화하는 것이다.",
-      "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-OP-01"
+      "text": "2026-11-18 이후 R02~R05는 각자 기존 기획안을 심화하거나 새 사용자 문제를 탐색하는 경로 중 하나를 자율 선택한다.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+      "source_id": "HRESP-20261118-01"
     },
     {
-      "text": "R01~R03은 이미 받은 개별 멘토 피드백을 반영하고, R04~R05는 같은 공통 기준을 적용해 자신의 기획안을 구체화한다.",
-      "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-R04R05-01"
+      "text": "R01은 팀원 기획안 검토·운영 정합성·제출 기한에 대응하는 임시 문서 관리를 맡는다.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+      "source_id": "HRESP-20261118-01"
     },
     {
-      "text": "공통 기준은 구체적 타겟 상황, 실제 사용자 고통, 기존 대안이 해결하는 부분과 남는 문제, painkiller 기능, 근거와 미확인의 구분이다.",
-      "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-CRITERIA-01"
+      "text": "2026-11-21(토) 오프라인 모임에서 실제 제품 기획을 결정하는 것을 목표로 하며, 그 전에 후보를 최종 제품으로 승격하지 않는다.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+      "source_id": "HRESP-20261118-01"
     },
     {
-      "text": "팀원별 결론은 독립적으로 유지하고 공통 평가 기준만 공유한다.",
+      "text": "지난 TASK-001~021의 당시 기록과 미완료·미확인 사항은 보존하고 11/18의 실행 업무에서 분리한다.",
       "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-CRITERIA-02"
+      "source_ref": "docs/문서_관리_규칙.md",
+      "source_id": "DOC-MGMT-HISTORY"
     },
     {
-      "text": "2026-11-17 18:00 KST까지 다섯 안을 비교 가능한 수준으로 만들고 2개 후보로 압축한 뒤 20:00 KST 멘토에게 재검토 받는다.",
+      "text": "멘토링에서 강조된 사용자 상황·실제 불편·강한 기존 대안 후 잔여 문제를 기획안 검토의 중심으로 둔다.",
       "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-SCHEDULE-01"
+      "source_ref": "docs/meetings/reviews/MEET-20261117-01.md",
+      "source_id": "MEET-20261117-01"
     },
     {
-      "text": "2개 압축은 최종 제품 문제 확정이 아니며, 멘토 피드백과 사람 권위 결정 전에는 기존 APP-A·C, 제출용 기획서·WBS, 제품 범위를 자동 변경하지 않는다.",
-      "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-SCOPE-01"
-    },
-    {
-      "text": "기존 상위 의도인 AI 활용의 반복 감독 부담 감소는 장기 가설로 유지하되, 각 팀원의 문제 정의를 그 비전에 억지로 맞추지 않는다.",
+      "text": "공개 자료를 읽을 수 있다는 사실과 자동 수집·저장·재사용 권한을 구별한다.",
       "authority": "human",
       "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-PRODUCT-001"
+      "source_id": "INTENT-DATA-001"
     },
     {
-      "text": "외부 조사에서는 기존 서비스의 기능 부재를 가정하지 않고 이미 해결되는 부분과 잔여 페인포인트를 확인한다.",
-      "authority": "team",
-      "source_ref": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md",
-      "source_id": "MENTOR-20261116-RESEARCH-01"
+      "text": "기존 찾아you 기획서·APP-A/C 명세·WBS·기술설계는 실제 제품 구현 기준에서 보류하고, 공식 제출 대응용 잠정 기준본으로만 유지한다.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261118-02_phase-sync.md",
+      "source_id": "HRESP-20261118-02"
     }
   ],
   "human_input": {
     "intent_ref": "docs/human/INTENT.md",
     "responses_dir": "docs/human/responses"
-  }
+  },
+  "operating_transition_ref": "docs/artifacts/state/transition-20261118.json",
+  "active_task_ids": [
+    "TASK-022",
+    "TASK-023",
+    "TASK-024",
+    "TASK-025",
+    "TASK-026",
+    "TASK-027"
+  ],
+  "inactive_historical_task_range": "TASK-001~TASK-021 (상태 원본 유지; 신규 일정 실행은 아님)",
+  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "active_phase_intent_id": "PHASE-20261118-01",
+  "current_product_status": "실제 개발 제품·주제 미선정 (R02~R05 기존안 구체화 또는 신규 탐색 중; 11/21 오프라인 결정 목표)",
+  "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
+  "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
+  "current_baseline_lifecycle": {
+    "product_selection": "미선정",
+    "previous_plan_and_wbs": "실제 구현 보류",
+    "previous_plan_and_wbs_submission_use": "잠정 제출 전용",
+    "future_after_offline": "R01/팀 결정 후 제품 기획·개발 WBS 재수립",
+    "phase_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
+  },
+  "legacy_task_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+  "legacy_evidence_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json",
+  "legacy_task_status_policy": "TASK-001~021 원본 상태/결과 유지. 운영상 신규 실행은 종료/비활성화했으며 분류·근거·대체 TASK는 closeout 원본과 고정 blob 사본 참조."
 }

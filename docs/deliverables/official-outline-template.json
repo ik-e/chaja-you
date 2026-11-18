@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "OUTLINE-DLV-XX",
+  "kind": "official_outline_mapping_template",
+  "status": "template_only",
+  "deliverable_id": "DLV-XX",
+  "source": {
+    "type": "official_course_template_or_educational_example",
+    "title": null,
+    "url": null,
+    "checked_at": null,
+    "version_or_sha": null,
+    "verified_as_mandatory": false
+  },
+  "sections": [
+    {
+      "section_id": "S-01",
+      "official_heading": "공식 목차의 원문 표기",
+      "requirement": "required_or_example",
+      "work_domain_refs": [
+        "requirements"
+      ],
+      "source_record_refs": [],
+      "coverage": "missing",
+      "exception_or_unknown": "공식 필수 여부 미확인"
+    }
+  ],
+  "notes": [
+    "교육용 예시 목차의 하위항목은 강사 명시가 없는 한 의무가 아니다.",
+    "가이드 최신본의 원본 확인·허용된 공유 링크·별도 제출 절차 확인이 필요하다."
+  ]
+}
