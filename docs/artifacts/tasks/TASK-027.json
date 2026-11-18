@@ -16,6 +16,7 @@
   "question": "11/21 실제 기획 확정 전인 11/20 제출 일정에, 결정되지 않은 제품 사양을 확정 사실로 꾸미지 않고 어떤 최소 형식의 설계 문서를 준비할 수 있는가?",
   "goal": "WBS의 11/20 API 설계·DB 스키마 마일스톤을 대응하고 기존 Step1 제출·접수 미확인을 확인한다. 토요일 실제 주제가 선택되면 문서를 재작성할 수 있음을 명시한다.",
   "inputs": [
+    "docs/human/phase-intents/PHASE-20261118-01.md",
     "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
     "docs/artifacts/planning/WBS.json",
     "docs/artifacts/planning/기획서_초안.json",
@@ -58,16 +59,22 @@
     },
     {
       "path": "docs/artifacts/tasks/TASK-011.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
     }
   ],
   "result": null,
   "traceability": {
-    "intent_refs": [],
+    "intent_refs": [
+      "PHASE-20261118-01"
+    ],
     "design_refs": [],
     "requirement_refs": [],
     "evaluation_refs": []
   },
   "validation_plan": null,
   "stage": "트랙 B 잠정 제출 일정 대응",
-  "assignment_status": "R01 운영 담당; R05는 기존 WBS상 기술 검토 협조자"
+  "assignment_status": "R01 운영 담당; R05는 기존 WBS상 기술 검토 협조자",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
 }

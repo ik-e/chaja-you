@@ -14,6 +14,7 @@
   "question": "각 후보의 실제 사용자 가치와 잔여 Pain을 같은 기준으로 검토하고 토요일 오프라인에서 무엇을 결정해야 하는가?",
   "goal": "각 팀원에게 탐색·구체화의 자율성을 주면서 R01은 비교 기준·운영 정합성·결정 질문만 관리한다. 기존 TASK 이력을 남기고 이번 주의 활성 작업을 분리한다.",
   "inputs": [
+    "docs/human/phase-intents/PHASE-20261118-01.md",
     "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
     "docs/meetings/reviews/MEET-20261117-01.md",
     "docs/meetings/reviews/MEET-20261118-01.md",
@@ -55,16 +56,22 @@
     },
     {
       "path": "docs/artifacts/state/transition-20261118.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
     }
   ],
   "result": null,
   "traceability": {
-    "intent_refs": [],
+    "intent_refs": [
+      "PHASE-20261118-01"
+    ],
     "design_refs": [],
     "requirement_refs": [],
     "evaluation_refs": []
   },
   "validation_plan": null,
   "stage": "2026-11-18 팀장 운영·검토",
-  "assignment_status": "R01 지시"
+  "assignment_status": "R01 지시",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
 }

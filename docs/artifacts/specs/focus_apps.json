@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "SPEC-FOCUS-001",
   "kind": "spec",
-  "status": "초안",
+  "status": "이전 찾아you APP-A/C 평가 초안 — 실제 구현 보류·제출용 잠정 참조",
   "title": "집중 앱 동적 워크플로 검증",
   "owner": "R01",
   "updated_at": "2026-11-12",
@@ -140,6 +140,9 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261112-02_TASK-007_MVP_범위.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
     }
   ],
   "mvp_scope": {
@@ -169,5 +172,7 @@
       "실제 timeout/call/retry 상한",
       "다중 도메인 일반화"
     ]
-  }
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "usage_scope": "토요일 실제 주제 선정 전 APP-A/C는 현재 검증 작업/기능 요구사항이 아님. 과거 기준 및 공식 제출 문서 참조 전용."
 }

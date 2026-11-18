@@ -638,6 +638,16 @@ def build():
         (path, record) for path, record in sources.items() if record["kind"] == "task"
     ]
     task_ids = {task["id"] for _, task in tasks}
+    phase_ref = state.get("active_phase_intent_ref")
+    if (not phase_ref or not phase_ref.startswith("docs/human/phase-intents/")
+            or not (ROOT / phase_ref).is_file()
+            or project.get("phase_intent_ref") != phase_ref):
+        raise ValueError("current phase intent reference missing or inconsistent")
+    if not set(state.get("active_task_ids", [])) <= task_ids:
+        raise ValueError("current state references nonexistent active task")
+    for _, task in tasks:
+        if task["id"] in state.get("active_task_ids", []) and task.get("phase_intent_ref") != phase_ref:
+            raise ValueError(f"{task['id']}: active task phase intent does not match current")
     dependencies = {task["id"]: task.get("depends_on", []) for _, task in tasks}
     for path, record in sources.items():
         if record["kind"] == "evaluation":
@@ -701,6 +711,13 @@ def build():
         [
             f"상태 {project['status']} · 담당 {project['owner']}",
             "",
+            "## 현재 운영 적용 범위",
+            "",
+            "**주의: 이 문서는 이전 찾아you 제품 기준안입니다. 현재 실제 제품은 미선정이며 이 목표·MVP의 구현을 보류합니다. 제출용 잠정 기준 및 과거 이력으로만 사용합니다.**",
+            "",
+            local_link(project["phase_intent_ref"], "현재 단계 의도", output)
+            + " · " + local_link("CURRENT.md", "실제 운영 상태", output),
+            "",
             "## 목적",
             "",
             project["goal"],
@@ -731,7 +748,20 @@ def build():
     output = "CURRENT.md"
     lines = header("현재 상태", [STATE, *task_sources, *evaluation_sources], output)
     lines.extend(
-        [f"기준일 {state['as_of']} · {state['scope']}", "", "## 확정한 방향", ""]
+        [
+            f"기준일 {state['as_of']} · {state['scope']}",
+            "",
+            "## 현재 적용 의도",
+            "",
+            local_link(state["active_phase_intent_ref"], state["active_phase_intent_id"], output),
+            "",
+            f"- 실제 제품: {state['current_product_status']}",
+            f"- 이전 기획·WBS: {state['legacy_execution_status']}",
+            f"- 제출 문서: {state['legacy_submission_use']}",
+            "",
+            "## 확정한 방향",
+            "",
+        ]
     )
     lines.extend("- " + item for item in state["confirmed"])
     lines.extend(["", "## 우선 작업", ""])
@@ -824,6 +854,10 @@ def build():
     lines.extend(
         [
             f"기준일 {state['as_of']}. 작업 담당자는 원본의 결과와 근거를 갱신하고 이 화면을 재생성합니다.",
+            "",
+            "## 현재 적용 의도",
+            "",
+            local_link(state["active_phase_intent_ref"], state["active_phase_intent_id"], output),
             "",
             "## 현재 확인할 내용",
             "",
