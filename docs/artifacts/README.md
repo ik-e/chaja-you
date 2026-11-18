@@ -8,6 +8,7 @@ AI가 작성·수정하는 구조화 데이터의 기준 공간이다. 새 산�
 | [candidates](candidates/README.md) | 아직 채택되지 않은 아이디어·가설·대안·미래 기능 후보 |
 | [planning](planning/README.md) | 기획서 원본·기획 제안 |
 | [research](research/README.md) | 조사 결과·이전 기술 제안 |
+| [meetings](meetings/) | Discord 회의별 공개 검토용 요약과 확인할 항목 |
 | [specs](specs/README.md) | 현재 요구사항과 평가 사례 |
 | [state](state/README.md) | 현재 우선순위·결정 요청·제출 상태 |
 | [tasks](tasks/README.md) | 작업 입력과 실행 결과 |

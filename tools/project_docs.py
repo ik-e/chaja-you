@@ -937,6 +937,9 @@ def build():
     )
 
     for source, record in sources.items():
+        if source.startswith("docs/artifacts/meetings/") and record["kind"] == "document":
+            output = f"docs/meetings/reviews/{Path(source).stem}.md"
+            outputs[output] = render_document(record, source, output)
         if record["kind"] == "decision":
             output = source.replace(".json", ".md")
             lines = header(record["title"], [source], output)
