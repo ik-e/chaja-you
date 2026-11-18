@@ -1,0 +1,859 @@
+{
+  "schema_version": 1,
+  "id": "PILOT-CONTRACT-20261118-V3",
+  "status": "proposed_only_not_implemented",
+  "source": "TASK-006 R05 mock contracts, adapted for a provisional multi-user API",
+  "decision_state": "not_approved",
+  "data_model_version": "v3-proposal",
+  "id_policy": {
+    "type": "TEXT",
+    "format": "server generated opaque identifier; examples req_example_001/task_example_001, not mandated production syntax",
+    "unique_per_entity": true
+  },
+  "identity": {
+    "mode": "provisional Bearer JWT for an authenticated multi-user scenario",
+    "subject_claim": "sub",
+    "owner_field": "research_request.owner_id",
+    "authorization_rule": "token.sub == research_request.owner_id for reading this request and any child record; do not trust client-supplied owner_id",
+    "no_user_auth_alternative": "If anonymous/local chosen, replace ownership model with documented local access boundary; do not pretend JWT is deployed"
+  },
+  "request": {
+    "name": "research_request",
+    "fields": [
+      "request_id",
+      "owner_id",
+      "domain",
+      "targets",
+      "criteria",
+      "discovery_rule",
+      "status",
+      "idempotency_key",
+      "created_at"
+    ]
+  },
+  "status_policy": {
+    "request": [
+      "queued",
+      "running",
+      "completed",
+      "partial",
+      "failed",
+      "cancelled"
+    ],
+    "task": [
+      "queued",
+      "running",
+      "completed",
+      "skipped",
+      "failed",
+      "cancelled"
+    ],
+    "attempt": [
+      "running",
+      "completed",
+      "failed",
+      "timed_out"
+    ],
+    "verdict": [
+      "fulfilled",
+      "not_fulfilled",
+      "unknown"
+    ],
+    "access": [
+      "retrieved",
+      "denied",
+      "unavailable",
+      "failed"
+    ],
+    "unknown_definition": "insufficient evidence; never treat missing or failed access as not_fulfilled"
+  },
+  "errors": {
+    "shape": {
+      "error": {
+        "code": "EXAMPLE",
+        "message": "safe end-user message",
+        "request_id": null,
+        "retryable": false
+      }
+    },
+    "by_http": {
+      "400": "malformed JSON or unsupported syntax",
+      "401": "missing or invalid authentication",
+      "404": "request not found or not authorized (mask owner existence)",
+      "409": "invalid transition or idempotency key reused with different payload",
+      "422": "invalid input semantics",
+      "429": "request budget/rate exceeded",
+      "503": "external source/tool failure; prefer partial with explanation when possible"
+    }
+  },
+  "resources": [
+    {
+      "id": "API-01",
+      "method": "POST",
+      "path": "/api/v1/research-requests",
+      "auth": "Bearer JWT (provisional)",
+      "purpose": "create an APP-A request and enqueue allowed work",
+      "request_body_schema": "ResearchRequestCreate",
+      "request_example": {
+        "domain": "focus_apps",
+        "targets": [
+          "PomoToki",
+          "Focus To-Do"
+        ],
+        "criteria": [
+          {
+            "id": "C-OFFLINE",
+            "name": "offline_timer",
+            "importance": "must"
+          },
+          {
+            "id": "C-ACCOUNT",
+            "name": "no_account",
+            "importance": "prefer"
+          }
+        ],
+        "discovery_rule": "specified_candidates_only"
+      },
+      "response_http": 202,
+      "response_example": {
+        "request_id": "req_example_001",
+        "status": "queued",
+        "result_url": "/api/v1/research-requests/req_example_001/results"
+      },
+      "errors": [
+        "401",
+        "409",
+        "422",
+        "429",
+        "503"
+      ],
+      "owner_rule": "owner_id from verified JWT sub; never accepted from request JSON",
+      "idempotency": "Idempotency-Key optional for test but required before production retries; unique (owner_id,idempotency_key), same key same input returns same request_id; same key/different input 409",
+      "requirement_refs": [
+        "FR-01",
+        "FR-02"
+      ]
+    },
+    {
+      "id": "API-02",
+      "method": "GET",
+      "path": "/api/v1/research-requests/{request_id}",
+      "auth": "Bearer JWT (provisional)",
+      "purpose": "read request state and task count",
+      "path_parameters": {
+        "request_id": "opaque text, required"
+      },
+      "response_http": 200,
+      "response_example": {
+        "request_id": "req_example_001",
+        "status": "running",
+        "task_count": 2,
+        "completed_count": 1
+      },
+      "errors": [
+        "401",
+        "404",
+        "503"
+      ],
+      "owner_rule": "server resolves owner_id and checks JWT sub before returning state",
+      "idempotency": "read-only",
+      "requirement_refs": [
+        "FR-03"
+      ]
+    },
+    {
+      "id": "API-03",
+      "method": "GET",
+      "path": "/api/v1/research-requests/{request_id}/results",
+      "auth": "Bearer JWT (provisional)",
+      "purpose": "read evidence-linked comparison results including unknown and partial",
+      "path_parameters": {
+        "request_id": "opaque text, required"
+      },
+      "response_http": 200,
+      "response_example": {
+        "request_id": "req_example_001",
+        "status": "partial",
+        "verdicts": [
+          {
+            "verdict_id": "verdict_example_001",
+            "task_id": "task_example_001",
+            "candidate_id": "PomoToki",
+            "condition_id": "C-OFFLINE",
+            "status": "unknown",
+            "evidence_ids": [],
+            "unknown_reason": "source_access_failed"
+          }
+        ],
+        "sources": [],
+        "failures": [
+          {
+            "task_id": "task_example_001",
+            "error_code": "SOURCE_UNAVAILABLE"
+          }
+        ]
+      },
+      "errors": [
+        "401",
+        "404",
+        "503"
+      ],
+      "owner_rule": "same request ownership applied to every nested verdict/source/evidence",
+      "idempotency": "read-only",
+      "requirement_refs": [
+        "FR-04"
+      ]
+    },
+    {
+      "id": "API-04",
+      "method": "GET",
+      "path": "/api/v1/research-requests/{request_id}/tasks",
+      "auth": "Bearer JWT (provisional)",
+      "purpose": "read task/attempt execution history",
+      "path_parameters": {
+        "request_id": "opaque text, required"
+      },
+      "response_http": 200,
+      "response_example": {
+        "request_id": "req_example_001",
+        "tasks": [
+          {
+            "task_id": "task_example_001",
+            "request_id": "req_example_001",
+            "status": "failed",
+            "attempts": [
+              {
+                "attempt_id": "attempt_example_001",
+                "status": "failed",
+                "error_code": "SOURCE_UNAVAILABLE"
+              }
+            ]
+          }
+        ]
+      },
+      "errors": [
+        "401",
+        "404",
+        "503"
+      ],
+      "owner_rule": "task/request linkage must be checked before nested attempt output",
+      "idempotency": "read-only",
+      "requirement_refs": [
+        "FR-02",
+        "FR-03"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "read_allowed_source",
+      "purpose": "retrieve a source using an approved provider/official API under explicit permission",
+      "agent_role": "researcher proposal",
+      "input": {
+        "request_id": "req_example_001",
+        "task_id": "task_example_001",
+        "source_locator": "approved provider reference"
+      },
+      "output_success": {
+        "ok": true,
+        "source_id": "source_example_001",
+        "access_status": "retrieved",
+        "retrieved_at": "ISO-8601"
+      },
+      "output_failure": {
+        "ok": false,
+        "code": "SOURCE_UNAVAILABLE",
+        "retryable": true
+      },
+      "authorization": "server checks owning request, tool allowlist, budget and source terms before execution; no arbitrary scraping",
+      "retry": "maximum one retry on eligible transient access errors, with bounded backoff; not a currently deployed tool"
+    },
+    {
+      "name": "link_verdict_evidence",
+      "purpose": "write only evidence-backed condition verdict or mark unknown",
+      "agent_role": "verifier proposal",
+      "input": {
+        "request_id": "req_example_001",
+        "task_id": "task_example_001",
+        "candidate_id": "PomoToki",
+        "condition_id": "C-OFFLINE",
+        "evidence_ids": []
+      },
+      "output_success": {
+        "ok": true,
+        "verdict_id": "verdict_example_001",
+        "status": "unknown"
+      },
+      "output_failure": {
+        "ok": false,
+        "code": "EVIDENCE_SCOPE_MISMATCH",
+        "retryable": false
+      },
+      "authorization": "server verifies task/request ownership and that all evidence belongs to same request; model cannot authorize its own writes",
+      "retry": "do not replay non-idempotent write without stable unique command id"
+    }
+  ],
+  "budget": {
+    "status": "provisional_design_values_not_measured",
+    "request_timeout_seconds": 90,
+    "tool_timeout_seconds": 20,
+    "max_tool_calls": 6,
+    "max_retries_per_transient_tool": 1,
+    "backoff_seconds": [
+      1
+    ],
+    "production_acceptance": "verify with actual service/tool limits after project selection; no measured performance claim"
+  },
+  "tables": [
+    {
+      "name": "research_request",
+      "pk": [
+        "request_id"
+      ],
+      "columns": [
+        [
+          "request_id",
+          "TEXT",
+          "PK NOT NULL",
+          "server assigned request ID"
+        ],
+        [
+          "owner_id",
+          "TEXT",
+          "NOT NULL",
+          "verified subject identity, no client override"
+        ],
+        [
+          "domain",
+          "TEXT",
+          "NOT NULL",
+          "research domain"
+        ],
+        [
+          "targets",
+          "JSON",
+          "NOT NULL",
+          "candidate list"
+        ],
+        [
+          "criteria",
+          "JSON",
+          "NOT NULL",
+          "condition list with importance"
+        ],
+        [
+          "discovery_rule",
+          "TEXT",
+          "NOT NULL",
+          "specified_candidates_only or conditional_discovery"
+        ],
+        [
+          "status",
+          "TEXT",
+          "NOT NULL CHECK status IN request_status",
+          "request lifecycle"
+        ],
+        [
+          "idempotency_key",
+          "TEXT",
+          "NULL",
+          "per-user deduplication key"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [
+        [
+          "owner_id",
+          "idempotency_key"
+        ]
+      ],
+      "fks": []
+    },
+    {
+      "name": "research_task",
+      "pk": [
+        "task_id"
+      ],
+      "columns": [
+        [
+          "task_id",
+          "TEXT",
+          "PK NOT NULL",
+          "assigned task ID"
+        ],
+        [
+          "request_id",
+          "TEXT",
+          "NOT NULL FK research_request.request_id",
+          "parent request"
+        ],
+        [
+          "goal",
+          "TEXT",
+          "NOT NULL",
+          "task goal"
+        ],
+        [
+          "role",
+          "TEXT",
+          "NOT NULL",
+          "assigned agent role (proposal)"
+        ],
+        [
+          "depends_on",
+          "JSON",
+          "NOT NULL DEFAULT []",
+          "predecessor task IDs in same request"
+        ],
+        [
+          "run_if",
+          "TEXT",
+          "NULL",
+          "execution guard (proposal)"
+        ],
+        [
+          "status",
+          "TEXT",
+          "NOT NULL CHECK status IN task_status",
+          "task lifecycle"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [
+        [
+          "request_id",
+          "task_id"
+        ]
+      ],
+      "fks": [
+        [
+          "request_id",
+          "research_request.request_id"
+        ]
+      ]
+    },
+    {
+      "name": "task_attempt",
+      "pk": [
+        "attempt_id"
+      ],
+      "columns": [
+        [
+          "attempt_id",
+          "TEXT",
+          "PK NOT NULL",
+          "unique per try"
+        ],
+        [
+          "task_id",
+          "TEXT",
+          "NOT NULL FK research_task.task_id",
+          "parent task"
+        ],
+        [
+          "attempt_no",
+          "INTEGER",
+          "NOT NULL CHECK >0",
+          "retry order"
+        ],
+        [
+          "status",
+          "TEXT",
+          "NOT NULL CHECK status IN attempt_status",
+          "attempt state"
+        ],
+        [
+          "error_code",
+          "TEXT",
+          "NULL",
+          "safe failure code"
+        ],
+        [
+          "started_at",
+          "TIMESTAMPTZ",
+          "NULL",
+          "actual start"
+        ],
+        [
+          "finished_at",
+          "TIMESTAMPTZ",
+          "NULL",
+          "actual finish"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [
+        [
+          "task_id",
+          "attempt_no"
+        ]
+      ],
+      "fks": [
+        [
+          "task_id",
+          "research_task.task_id"
+        ]
+      ]
+    },
+    {
+      "name": "source",
+      "pk": [
+        "source_id"
+      ],
+      "columns": [
+        [
+          "source_id",
+          "TEXT",
+          "PK NOT NULL",
+          "source id"
+        ],
+        [
+          "task_id",
+          "TEXT",
+          "NOT NULL FK research_task.task_id",
+          "which task retrieved"
+        ],
+        [
+          "uri",
+          "TEXT",
+          "NULL",
+          "approved source URI"
+        ],
+        [
+          "access_status",
+          "TEXT",
+          "NOT NULL CHECK status IN access_status",
+          "retrieval status"
+        ],
+        [
+          "retrieved_at",
+          "TIMESTAMPTZ",
+          "NULL",
+          "retrieval time"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [],
+      "fks": [
+        [
+          "task_id",
+          "research_task.task_id"
+        ]
+      ]
+    },
+    {
+      "name": "evidence",
+      "pk": [
+        "evidence_id"
+      ],
+      "columns": [
+        [
+          "evidence_id",
+          "TEXT",
+          "PK NOT NULL",
+          "evidence id"
+        ],
+        [
+          "source_id",
+          "TEXT",
+          "NOT NULL FK source.source_id",
+          "parent source"
+        ],
+        [
+          "locator",
+          "TEXT",
+          "NULL",
+          "passage/screen/record reference"
+        ],
+        [
+          "finding",
+          "TEXT",
+          "NOT NULL",
+          "bounded excerpt or observation"
+        ],
+        [
+          "checked_at",
+          "TIMESTAMPTZ",
+          "NULL",
+          "verification time"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [],
+      "fks": [
+        [
+          "source_id",
+          "source.source_id"
+        ]
+      ]
+    },
+    {
+      "name": "verdict",
+      "pk": [
+        "verdict_id"
+      ],
+      "columns": [
+        [
+          "verdict_id",
+          "TEXT",
+          "PK NOT NULL",
+          "verdict ID"
+        ],
+        [
+          "request_id",
+          "TEXT",
+          "NOT NULL FK research_request.request_id",
+          "parent request"
+        ],
+        [
+          "task_id",
+          "TEXT",
+          "NOT NULL FK research_task.task_id",
+          "task responsible for decision"
+        ],
+        [
+          "candidate_id",
+          "TEXT",
+          "NOT NULL",
+          "candidate within request"
+        ],
+        [
+          "condition_id",
+          "TEXT",
+          "NOT NULL",
+          "criterion within request"
+        ],
+        [
+          "status",
+          "TEXT",
+          "NOT NULL CHECK status IN verdict_status",
+          "fulfilled/not_fulfilled/unknown"
+        ],
+        [
+          "unknown_reason",
+          "TEXT",
+          "NULL",
+          "missing evidence or access failed"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [
+        [
+          "request_id",
+          "candidate_id",
+          "condition_id"
+        ]
+      ],
+      "fks": [
+        [
+          "request_id",
+          "research_request.request_id"
+        ],
+        [
+          "task_id",
+          "research_task.task_id"
+        ]
+      ]
+    },
+    {
+      "name": "verdict_evidence",
+      "pk": [
+        "verdict_id",
+        "evidence_id"
+      ],
+      "columns": [
+        [
+          "verdict_id",
+          "TEXT",
+          "PK FK verdict.verdict_id",
+          "verdict ref"
+        ],
+        [
+          "evidence_id",
+          "TEXT",
+          "PK FK evidence.evidence_id",
+          "evidence ref"
+        ],
+        [
+          "created_at",
+          "TIMESTAMPTZ",
+          "NOT NULL DEFAULT now()",
+          "creation timestamp"
+        ]
+      ],
+      "uniques": [],
+      "fks": [
+        [
+          "verdict_id",
+          "verdict.verdict_id"
+        ],
+        [
+          "evidence_id",
+          "evidence.evidence_id"
+        ]
+      ]
+    }
+  ],
+  "invariants": [
+    {
+      "id": "I-OWNER",
+      "rule": "request.owner_id equals validated JWT.sub for API-02/03/04; nested records cannot be read without same parent scope",
+      "enforcement": "authorization middleware + parent-scoped queries; optional RLS if PostgreSQL adopted"
+    },
+    {
+      "id": "I-TASK",
+      "rule": "verdict.request_id equals research_task.request_id for verdict.task_id",
+      "enforcement": "composite FK (request_id,task_id) referencing unique research_task(request_id,task_id), or equivalent transactional validation"
+    },
+    {
+      "id": "I-EVIDENCE",
+      "rule": "for verdict_evidence row the evidence.source.task.request_id equals verdict.request_id",
+      "enforcement": "transaction/trigger or equivalent validated write path; plain two FKs insufficient"
+    },
+    {
+      "id": "I-VERDICT",
+      "rule": "fulfilled or not_fulfilled verdict requires verified evidence, else unknown; source access failure never proves not_fulfilled",
+      "enforcement": "server validation and test fixtures; SQL FK alone insufficient"
+    },
+    {
+      "id": "I-IDEMPOTENCY",
+      "rule": "POST retry with same owner,key,payload returns existing request; same key with different payload yields 409",
+      "enforcement": "atomic unique key + stored payload fingerprint, to be defined before implementation"
+    }
+  ],
+  "rls_roles": [
+    {
+      "role": "anonymous",
+      "select": "deny",
+      "insert": "deny",
+      "update": "deny",
+      "delete": "deny"
+    },
+    {
+      "role": "authenticated_owner",
+      "select": "own request and child rows",
+      "insert": "POST via authorized API",
+      "update": "server-controlled only",
+      "delete": "server-controlled policy TBD"
+    },
+    {
+      "role": "service_worker",
+      "select": "scoped assigned request",
+      "insert": "allowed retrieval/evidence transaction",
+      "update": "task status with server guard",
+      "delete": "no default"
+    }
+  ],
+  "optional_technologies": [
+    {
+      "tech": "pgvector",
+      "decision": "conditional_not_selected",
+      "reason": "the APP-A fixed-candidate source-linking flow does not yet require embedding search",
+      "if_used": "document/quote chunk tables, embedding model, dimension/vector operator and index/search evaluation required",
+      "review": "confirm educational applicability with instructor/manager after selected domain"
+    },
+    {
+      "tech": "Redis",
+      "decision": "conditional_not_selected",
+      "reason": "current prototype does not establish a distributed session/cache need",
+      "if_used": "session:{id} key, TTL, revocation, cache invalidation and auth separation",
+      "review": "confirm on selected backend/auth approach"
+    },
+    {
+      "tech": "JWT/RLS",
+      "decision": "provisional_multiuser_proposal",
+      "reason": "API promises resource ownership, so a design must show subject and row relationship",
+      "if_used": "verified JWT sub, request owner_id; optionally RLS for PostgreSQL",
+      "review": "if single-user/anonymous prototype chosen replace both with a concrete alternative access boundary"
+    }
+  ],
+  "indexes": [
+    {
+      "table": "research_task",
+      "cols": [
+        "request_id"
+      ],
+      "query": "API-04 tasks by request"
+    },
+    {
+      "table": "source",
+      "cols": [
+        "task_id"
+      ],
+      "query": "source by task"
+    },
+    {
+      "table": "verdict",
+      "cols": [
+        "request_id",
+        "candidate_id",
+        "condition_id"
+      ],
+      "query": "API-03 filter result"
+    },
+    {
+      "table": "evidence",
+      "cols": [
+        "source_id"
+      ],
+      "query": "evidence by source"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T-INPUT",
+      "expect": "invalid empty targets → 422",
+      "kind": "planned_not_run"
+    },
+    {
+      "id": "T-OWNER",
+      "expect": "different JWT sub cannot read request or nested result → 404",
+      "kind": "planned_not_run"
+    },
+    {
+      "id": "T-TRACE",
+      "expect": "foreign task/evidence request scope is rejected, never linked to another user's verdict",
+      "kind": "planned_not_run"
+    },
+    {
+      "id": "T-UNKNOWN",
+      "expect": "failed source cannot be marked fulfilled/not_fulfilled without verified evidence",
+      "kind": "planned_not_run"
+    },
+    {
+      "id": "T-IDEMPOTENCY",
+      "expect": "same key same input → same ID; changed input → 409",
+      "kind": "planned_not_run"
+    }
+  ]
+}
