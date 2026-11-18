@@ -950,7 +950,7 @@ def build():
                 for item in result["uncertainties"] + result["decision_requests"]
             )
             lines.append("")
-    lines.extend(["## 이전 작업 정산/근거", "", local_link(closeout_path, "이전 21개 TASK 종료 사유·후속 작업", output), " · " + local_link(manifest_path, "불변 원본 매니페스트", output), "", "TASK-001~021은 2026-11-18 이후 신규 실행에서 제외되었지만, 당시 상태와 산출물은 수정되지 않았습니다.", "", "## 평가 결과", ""])
+    lines.extend(["## 이전 작업 정산/근거", "", local_link(closeout_path, "이전 21개 TASK 종료 사유·후속 작업", output) + " · " + local_link(manifest_path, "불변 원본 매니페스트", output), "", "TASK-001~021은 2026-11-18 이후 신규 실행에서 제외되었지만, 당시 상태와 산출물은 수정되지 않았습니다.", "", "## 평가 결과", ""])
     lines.extend(
         table(
             ["사례", "판정", "상세 근거"],
