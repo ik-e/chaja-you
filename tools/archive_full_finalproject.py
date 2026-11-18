@@ -52,7 +52,7 @@ def archive():
         commit=sh("git","rev-parse","HEAD",cwd=repo)
         src=repo/SUBDIR
         if not src.is_dir(): raise RuntimeError("FinalProject not found at pinned commit")
-        paths=sh("git","ls-files","--cached","--",SUBDIR.as_posix(),cwd=repo).splitlines()
+        paths=sh("git","-c","core.quotePath=false","ls-files","--cached","--",SUBDIR.as_posix(),cwd=repo).splitlines()
         if not paths or len(paths)>MAX_FILES:
             raise RuntimeError("unexpected source file count: "+str(len(paths)))
         sizes=sum((repo/p).stat().st_size for p in paths)
