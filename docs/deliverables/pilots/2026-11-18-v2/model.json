@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "id": "PILOT-SUBMISSIONS-20261118-V2",
+  "kind": "isolated_projection_pilot",
+  "status": "draft_not_submitted",
+  "created_at": "2026-11-18",
+  "owner": "R01",
+  "source_baseline_commit": "53b73584069042225298c97c6c5688f8b429f56b",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "non_interference": [
+    "기존 2026-11-18 파일럿 v1 및 Step1 정본, TASK, Phase Intent, WBS JSON, 대시보드 상태 미수정",
+    "개별 산출물 의견이 존재하는 Step1 L26/L27은 현재/후속으로 구분; Step2 L28/L29는 개별 피드백 공란으로 기록",
+    "외부 원문은 현재 셀과 확인 시각만 기록하고 비공개 대시보드 전문을 공개 GitHub에 복제하지 않음",
+    "11/21 전 실제 제품·기능·기술 확정 또는 신규 TASK 배정이 아님",
+    "v2 폴더와 전용 검증 스크립트만 추가, 공식 제출·접수는 별도"
+  ],
+  "instructor_sources": [
+    {
+      "system": "1팀 강사 대시보드",
+      "cells": [
+        "L26",
+        "L27"
+      ],
+      "scope": "산출물별 1차 피드백: 현재 우선 참조",
+      "checked_at": "2026-11-18",
+      "private_url_not_saved": true
+    },
+    {
+      "system": "1팀 강사 대시보드",
+      "cells": [
+        "L28",
+        "L29"
+      ],
+      "scope": "Step2 산출물 직접 피드백: 11/18 현재 의견 공란",
+      "checked_at": "2026-11-18",
+      "private_url_not_saved": true
+    },
+    {
+      "system": "1팀 강사 대시보드",
+      "cells": [
+        "L53",
+        "L55"
+      ],
+      "scope": "11/13·11/17 일일 과거 피드백: 현재 유효성 검토 후 참고",
+      "checked_at": "2026-11-18",
+      "private_url_not_saved": true
+    },
+    {
+      "system": "FinalProject OUTPUT-GUIDE.md",
+      "scope": "실제 제공 목차 우선, 열람/등록/접수 구분",
+      "source_ref": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "private_url_not_saved": false
+    },
+    {
+      "system": "교육용 주요산출물 예시",
+      "checked_at": "2026-11-18",
+      "role": "Step1·2 참고 목차; 개별 공식 수정본 DOCX 미대조",
+      "mandatory_outline_verified": false
+    }
+  ],
+  "documents": [
+    {
+      "id": "DLV-01",
+      "file": "STEP1-기획서.md",
+      "title": "Step 1 기획서·요구사항 — 산출물별 피드백 우선 V2 (찾아you 잠정안)",
+      "status": "개정 검증용 초안 · 미제출 · 실제 제품 미선정",
+      "basis": "(v2) 산출물별 강사 피드백의 유효 조건을 우선 적용; 기존 찾아you는 제출용 잠정 예시이며 현재 제품 미선정",
+      "outline_basis": "강사 산출물 L26: 주제 선정 전/후 분리; OUTPUT-GUIDE의 제공 목차 준수; 교육용 예시 3개 장. 공식 수정본 DOCX 원본 대조 미완료",
+      "source_pins": [
+        {
+          "path": "docs/artifacts/planning/기획서_초안.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/specs/focus_apps.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-003.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-006.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/state/current.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "1. 서비스 정의",
+          "body": "### 1.1 문서 적용 범위와 현재 상태\n\n| 판단 대상 | 2026-11-18 기준 | 현재 처리 |\n| --- | --- | --- |\n| 실제 추진할 제품 | 아직 선택하지 않음. R02~R05 독립 탐색 중 | 11/21 오프라인 선택/보류가 목표 |\n| 기존 찾아you APP-A/C | 과거 제출용 설계와 합성 검증 자료가 있음 | **이번 문서 내용의 잠정 예시**이지 현재 구현 지시 아님 |\n| 기획서의 사용자·기능 | 앱 비교 사례를 통한 이전 요구 가설 | 실제 주제 선정 이후 교체 가능 |\n| 강사 산출물 피드백 | 기획서 L26의 '선정 전 준비' 1~3번과 '선정 후 보완' 4~6번 | 해당 조건별로 지금/후속 분리 |\n| 제출 상태 | 대시보드 기획서 '작성중', 링크 등록됨 | 제출완료·접수는 확인되지 않음 |\n\n**오해 방지:** 강사님이 선정 전/후 작업을 구분했다는 것은 확인되지만, 11/21 선정 일정이나 특정 잠정 제품을 공식 승인했다는 뜻은 아닙니다.\n\n### 1.2 후보와 결정의 경계 (L26-1 현재 반영)\n\n| 후보·자료 | 확인된 출처/맥락 | R01 팀 최종 결정 |\n| --- | --- | --- |\n| 이전 찾아you 앱 리서치 | 기존 기획서·WBS·APP-A/C 명세 | **현재 제품으로 미선정**, 제출용 참고 |\n| R03 중고거래 ECRM 준비 지원 | 11/17 멘토 검토 자료 | 후보 검토 이력, 채택 결정 아님 |\n| R05 키오스크 메뉴 선택 지원 | 11/17 후보·멘토 검토 자료 | 후보 검토 이력, 채택 결정 아님 |\n| R02·R04 기획안 | TASK-022/024 각자 독립 탐색/심화 가능 | 현재 결과 보고·선정 미확인 |\n| R01 시험감독 지원 아이디어 | 별도 후보 | 실제 팀 제품 채택 아님 |\n\nR03/R05의 과거 멘토 요약은 검토 근거이며, 발언 원문이나 팀 최종 합의로 자동 승격하지 않습니다. 후보별 채택·보류 사유와 다음 결정 시점은 11/21 회의에서 별도 기록합니다.\n\n### 1.3 이전 찾아you 예시의 사용자 문제 (L26-2 현재 반영)\n\n- **사용자 가설:** Android 앱 후보를 조건별로 빠르게 비교해야 하는 개인 사용자.\n- **대표 상황:** PomoToki와 Focus To-Do에 대해 오프라인 타이머(필수)·무계정 사용(선호)을 확인한다.\n- **현재 대안:** 일반 검색, 앱 공식 안내, 범용 LLM으로 정리, 직접 기기 시험. 이미 상당 부분 문제를 해결할 수 있다.\n- **대안 이후 잔여 문제 가설:** 출처·앱 버전·기기 환경에 따라 확인 수준이 다를 때 조건별 충족/미충족/미확인을 근거와 시점까지 재구성하기 어렵다.\n- **검증 결핍:** 실제 사용자 인터뷰, 대안 대비 동일 조건 비교, 비용/시간/판정 정확도 실측 없음. 위 내용은 해결되지 않은 사용자 Pain의 **입증이 아니라 조사 가설**이다.\n\n### 1.4 제안 범위와 검증 방법 (L26-2·3 현재 반영)\n\n| 이전 안의 사례 | 사용자 요청·중간 조건 | 확인 수준 | 11/21 이후 처리 |\n| --- | --- | --- | --- |\n| APP-A | 지정 앱 두 개의 필수·선호 조건별 비교; 불필요한 발굴 생략 | 문서·합성 구조 검토 | 새 주제에서 재사용 여부 결정 |\n| APP-C | 중간 판정에 따른 후보 조사 추가/생략/보류 | 합성 분기 테스트. 현실의 두 후보 모두 미충족 시나리오는 미확인 | 도메인 전용 조건 자동 승계 금지 |\n| APP-B | 지정 후보가 없을 때 추가 조사 | 후순위·미선정 | 자동 채택 금지 |\n\n**재사용 후보:** request→task→attempt→source→evidence→verdict→report 관계, 실패·미확인·부분 결과 구분, 권한·키·호출 예산. **도메인 고유:** 앱 이름·조건·출처·테스트 문항·후속 분기. 구조 재사용도 실제 다른 주제에서 검증하기 전까지는 가설입니다.\n\n### 1.5 기대 효과와 판단 기준\n\n가장 강한 기존 대안(일반 검색/범용 AI/수작업 중 대표 과제에 적합한 한 가지)과 제안 흐름을 **동일 요청·자료·제약**으로 비교하는 작은 실험을 준비합니다. 조건별 판단 정확성, 근거 연결, 미확인 표시, 작업 수, 완료 시간과 사용 부담을 측정할 예정입니다. 아직 사용자가 실제로 시간을 절약했다거나 더 높은 성능을 얻었다는 결과는 **없습니다**.\n\n### 1.6 주제 선정 이후 필요한 보완 (지금 완료 처리 금지)\n\n선정한 제품의 정상·실패 사용자 흐름, 에이전트 역할·인계, 복구/검증, 기술 공급자 및 UI/배포 결정, 새로운 실측 기준은 그때 재검토합니다. 이는 산출물 L26의 '선정 후' 항목이며 현재 기능 확정을 요구하는 근거로 사용하지 않습니다."
+        },
+        {
+          "heading": "2. 기능 요구사항",
+          "body": "이 표는 **기존 찾아you 제출용 명세의 사례**입니다. 현재 선정된 제품의 최종 요구사항이 아니며, 새로운 주제에 그대로 복제하지 않습니다.\n\n| ID | 예시 기능 요구 | 현재 수준 | 후속 검사 가능한 수용 조건 | 제안된 문서 연결 |\n| --- | --- | --- | --- | --- |\n| FR-01 | 사용자 요청에서 대상·필수/선호 조건 구조화 | 요구 가설 | 조건·대상·빈 입력 구분, 부족하면 질문/미확인 | Step2 API-01 |\n| FR-02 | 요청 상황별 작업 선택·생략 | 합성 시나리오 | 지정 후보가 있으면 후보 발굴을 생략하고 선행 관계 기록 | API-01/04 |\n| FR-03 | 작업·시도·조건부 종료/분기 관리 | 설계/합성 | 상태와 추가·생략·보류 이유, 실제 실패 별도 표현 | API-02/04 |\n| FR-04 | 판정·출처·근거를 연결한 결과 | 설계/합성 | 판정마다 근거/출처/확인 시점·unknown을 식별 | API-03 |\n\n실제 앱에서 이 흐름이 실행됐거나 사용자 만족을 검증한 것으로 쓰지 않습니다. 요구를 지지하는 근거가 약하면 채택을 보류하고, 11/21 선정 이후 문제 정의부터 다시 연결합니다.\n\n**의사결정 전 가드:** 특정 프레임워크, 에이전트 수, 검색 공급자, DB 엔진, UI 기술은 이 FR 때문에 확정되지 않습니다."
+        },
+        {
+          "heading": "3. 비기능 요구사항",
+          "body": "| ID | 품질 목표(기존 안의 가설) | 지금 확인된 근거 | 결과/미확정 |\n| --- | --- | --- | --- |\n| NFR-01 | 요청·작업·근거·판정 추적 | TASK-006 설계/합성 | 실제 E2E 미검증 |\n| NFR-02 | 실패·미확인·부분 결과의 의미 분리 | 합성 예시 | 실서비스 반영 미검증 |\n| NFR-03 | 허용된 자료만 조회·저장 | 교육기관 수집 정책 | 사용 권한 확인·외부 크롤링 제한 |\n| NFR-04 | 사용자 정보·키·도구 권한 보호 | 정책/설계 가정 | 실제 인증·보안 시험 없음 |\n| NFR-05 | 시간·호출·재시도·비용 상한 | 필요성 제안 | 구체 수치 미정 |\n| NFR-06 | 같은 조건의 평가·로그·재현성 | 평가 계획·합성 | 비교 실측 미완료 |\n\n### 11/18 기준 검토와 강사 피드백 처리\n\n- **지금 반영(L26-1~3, L26-6의 현재성 있는 부분):** 기존안/신규 후보/팀 합의 구분, 사용자 문제 가설과 기존 대안, 재사용 범위, 문서·합성·실측·제출 상태 분리.\n- **선정 후 반영(L26-4~5):** 실제 제품의 정상/실패 시나리오·에이전트 간 인계·복구 검증, 최종 도구/기술/화면 확정과 관련 강사 협의.\n- **증빙 상태:** 11/13 일일 의견 L53은 양식 확인·과거 구현 맥락으로만 참고하며 현재 제품 개발 지시가 아닙니다.\n- **형식 게이트:** 강사 안내의 제공 목차와 대조해야 합니다. 수정본 DOCX의 실제 파일·최종 하위목차는 직접 확보하지 못했습니다.\n\n**다음 검토 시점:** 11/21 실제 선택/보류 결정 이후. 과거 기획서·WBS를 수정하는 대신 별도 새로운 정본 생성 여부를 사람 판단으로 결정합니다."
+        }
+      ],
+      "feedback_version_ref": "FEEDBACK-DECISIONS.json",
+      "official_outline_checked": false
+    },
+    {
+      "id": "DLV-02",
+      "file": "STEP1-WBS.md",
+      "title": "Step 1 WBS — 산출물별 피드백 우선 V2 (과거 계획과 투 트랙 구분)",
+      "status": "개정 검증용 초안 · 실행 일정 확정 아님 · 미제출",
+      "basis": "(v2) 산출물별 강사 피드백의 유효 조건을 우선 적용; 기존 찾아you는 제출용 잠정 예시이며 현재 제품 미선정",
+      "outline_basis": "강사 산출물 L27: 선정 전 1~2번 우선, 선정 후 3~6번 조건부; 교육 예시의 간트·일정 규칙·작업 계획·마일스톤; DOCX 원본 미대조",
+      "source_pins": [
+        {
+          "path": "docs/artifacts/planning/WBS.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/state/current.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-026.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-027.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "1. 간트 차트 (주차별 계획·실적)",
+          "body": "### 1.1 기존 WBS는 과거 기준으로 보존 (L27-2)\n\n| 기존 WBS | 과거 예정 또는 표시 | 현재 상태 해석 | 변경 전 원본 |\n| --- | --- | --- | --- |\n| W01/W04/W06 | 11/10~13, 당시 완료 | 해당 당시 범위의 완료만 인정. 새 제품 결정·실제 제출 접수 아님 | 기존 WBS JSON/Step1 이력 |\n| W07/W09 | 11/16~18 예정 | 이전 APP 구현 일정은 **보류**, 자동 재착수 금지 | 기존 WBS JSON |\n| W08 | 11/16~20 기존 API·DB/서버 뼈대 예정 | 서버 구현은 보류, 11/20 문서 제출 의무만 현 TASK-027로 관리 | 기존 WBS JSON |\n| W13/W17/W20/W24 | 11/25~12/16 구 구현·시험 계획 | 실제 주제 선택 후 일정/공수/내용 재산정 | 기존 WBS JSON |\n\n**원본 기록 보존:** 당일 과거 WBS를 직접 수정하거나 과거 완료 상태를 새로운 프로젝트의 완료로 옮기지 않습니다. 근거 없는 실제 시작/종료일·진척률은 **미확인**입니다.\n\n### 1.2 실제 주제 미선정 상태의 가까운 일정 (L27-1, 계획과 실적 구분)\n\n```mermaid\ngantt\n    title 11/18~11/21 전환·제출 준비 (계획, 실적 미확인)\n    dateFormat YYYY-MM-DD\n    axisFormat %m/%d\n    section 트랙 A\n    R02~R05 1차 후보 탐색 정리 :a1, 2026-11-18, 1d\n    11월 21일 선택/보류 회의 목표 :milestone, a2, 2026-11-21, 0d\n    section 트랙 B\n    Step1 산출물/접수 상태 점검 :b1, 2026-11-18, 2d\n    Step2 잠정 API/DB 문서 준비 :b2, 2026-11-18, 3d\n```\n\n| 날짜 | 기존 배정된 업무 | 예상 출력 | 결과/관측 상태 |\n| --- | --- | --- | --- |\n| 11/18 | TASK-022~025 후보 탐색·근거 기록 | 팀원별 1개 후보의 Pain·대안·반증 | GitHub 원본 TASK는 모두 '할 일', result 미기록 |\n| 11/18~20 | TASK-026/027 R01 운영·제출 관리 | 피드백 반영표, 잠정 Step1·2 문서 및 링크 확인 | 파일럿 문서와 실제 제출을 구분 |\n| 11/20 | API·DB 산출물 마감(대시보드) | 잠정 API/DB·열람/제출 확인 | 제출·접수 미확인 |\n| 11/21 | 팀 오프라인 후보 채택/보류 목표 | 실제 문제·제품 방향 결정 및 근거 | 아직 미래 계획 |\n| 11/23 이후 | 선정 결과를 받아 재기획·재WBS | 신규 구현 TASK와 추정 일정 | 선행 결정을 기다림, 지금 할당하지 않음 |\n\n**이 간트는 현 시점의 운영·제출 초안**입니다. 기존 개발 WBS의 실행 시작을 승인하지 않으며, 완료 여부는 해당 TASK/대시보드에서만 판정합니다."
+        },
+        {
+          "heading": "2. 일정 관리 규칙",
+          "body": "1. **두 계획 층을 분리:** (가) 기존 찾아you W01~W34 이력, (나) 현재 PHASE-20261118-01의 신규 후보 탐색·잠정 제출. 구 W07~W09를 자동 재개하지 않습니다.\n2. **선정 전 우선(L27-1~2):** 11/21 사람 결정 시점, 담당, 후보 비교 근거, 구 계획의 완료 범위·대기 사유를 재시작 준비표에서 관리합니다.\n3. **실적 허위 생성 금지:** 계획일, 예상일, 실제 수행일, 확인한 파일·PR/로그, 증빙 없는 미확인을 각각 분리합니다. 이번 문서는 11/18~20 미래 일정을 실제 수행으로 채우지 않습니다.\n4. **제출 단계 구분:** 작성 → 검토 → 읽기 권한 → 대시보드 링크 등록 → 상태 '제출완료' → 실제 접수 확인. 11/13 Step1은 현재 '작성중', 11/20 Step2는 '미착수'로 보입니다.\n5. **11/21 이후에만 적용(L27-3~6):** 선택된 문제의 구현 WBS·담당·시간·검토·리허설·실험·회복 절차를 다시 산정합니다. 단, 11/20 마감에 필요한 **문서 작성·내부 검토·제출**만 현재 트랙 B에서 수행합니다.\n6. **협의 대상:** 실제 일정 충돌·제출 방식은 강사/매니저와 확인합니다. 강사가 현 2트랙 일정 변경을 승인했다고 단정하지 않습니다.\n7. **타인 작업 보호:** 팀원 TASK 소유권·업무 계약·기획 방향은 본 파일럿을 근거로 수정하지 않습니다. R01이 문서와 제출을 관리하고 기술 검토는 적임자에게 요청합니다."
+        },
+        {
+          "heading": "3. 작업 계획표",
+          "body": "| 작업 | 원본 책임 | 완료 조건 / 검토 증거 | 당일 원본 상태 | 제출·재계획과의 관계 |\n| --- | --- | --- | --- | --- |\n| TASK-022 | R02 | 한 후보의 사용자·Pain·기존 대안·반증 | 할 일 / 결과 미기록 / 11/18 | 실제 제품 탐색 |\n| TASK-023 | R03 | 한 후보의 사용자·Pain·기존 대안·반증 | 할 일 / 결과 미기록 / 11/18 | 실제 제품 탐색 |\n| TASK-024 | R04 | 한 후보의 사용자·Pain·기존 대안·반증 | 할 일 / 결과 미기록 / 11/18 | 실제 제품 탐색 |\n| TASK-025 | R05 | 한 후보의 사용자·Pain·기존 대안·반증 | 할 일 / 결과 미기록 / 11/18 | 실제 제품 탐색 |\n| TASK-026 | R01 | 운영·과거 TASK 정산/멘토 요약·선정 안건 관리 | 할 일 / 결과 미기록 / 11/18. 일부 작업은 별도 PR 증거 존재 | 운영 관리 |\n| TASK-027 | R01 | 기존 찾아you 기준 잠정 API/DB 초안, 제출·접수 상태 분리 | 할 일 / 결과 미기록 / 11/20 | 제출 관리 |\n| 제품 선택 이후 WBS(아직 TASK 아님) | 사람 결정 후 조정 | 사용자 문제·범위·기술/인력·가용 시간을 반영한 새 계획 | 미착수, 미배정 | 선정 전 구현 약속 금지 |\n\n**작업 산출물과 책임의 구분:** 기술 문서의 작성/검토 전문성은 R05 등 적임자에게 협조받을 수 있지만 R01이 모든 구현 기술을 확정할 필요는 없습니다. 본 표는 기존 할당을 설명할 뿐 새 배정은 아닙니다.\n\n### 11/20 제출을 위한 최소 점검 단위(기존 TASK-027의 하위 체크, 새로운 TASK 발행 아님)\n\n- 입력·출력·상태·오류와 요청 ID가 동일 흐름을 표현하는지\n- API와 DB 엔터티/키 관계가 일치하는지\n- 문서에 미확정 기술과 미구현·미검증 범위를 표시했는지\n- 공식 제공 양식·문서 열람 권한·대시보드 제출·접수 동작을 별개로 확인했는지"
+        },
+        {
+          "heading": "4. 마일스톤",
+          "body": "| 산출물/의사결정 | 대시보드 마감 또는 팀 목표 | 11/18 확인 상태 | 지금 필요한 조치 |\n| --- | --- | --- | --- |\n| Step1 기획서·WBS | 공식 표시 11/13 | 두 행 '작성중', 링크 등록, 접수 미확인 | 산출물 L26/L27 사전 피드백 반영 및 제출 확인 |\n| Step2 API 설계·DB 스키마 | 공식 표시 11/20 | 두 행 '미착수', 개별 강사 의견 공란 | 잠정 계약과 개념 ERD를 **최소 형식으로** 준비·검토, 기술 확정 금지 |\n| 제품 방향 선택/보류 | 팀 목표 11/21 | 최종 결정 없음 | 후보별 근거·보류 사유·현 WBS 교체 필요성 결정 |\n| Step3 상태 전이 / 자기 성찰 | 공식 표시 11/27 · 12/04 | 미래 산출물 | 선정된 주제에서 재평가 |\n| 중간 발표 | 공식 표시 12/08 | 미래 산출물 | 실제 진척·검증 근거만 사용 |\n| Step4 협업/가드레일/복구 | 공식 표시 12/11 · 12/18 | 미래 산출물 | 선정 후 설계·구현·실측 연결 |\n| Step5 웹 앱/통합·배포 | 공식 표시 12/24 · 12/31 | 미래 산출물 | 실제 제품·릴리스 기준 |\n| 최종 발표·코드·영상 | 공식 표시 2027/01/04 | 미래 산출물 | 결과·접근·재현 확인 |\n\n### 위험과 조건부 작업의 우선순위\n\n| 위험 | 지금 대응 | 선정 후 대응 |\n| --- | --- | --- |\n| 11/20 제출이 11/21 결정보다 앞섬 | 이전 찾아you 기준 잠정 설계로 제출 대응, 공식 마감/협의 결과 확인 | 선정 제품에 맞게 문서 개정 필요 여부 판단 |\n| 지난 APP 일정이 현재 일처럼 보임 | 구 WBS와 현재 실행 목록을 분리, 구 계획의 의미 보존 | 새 WBS 수립 |\n| 실제 진척률/근거 없음 | 미확인 유지, 담당·확인 시점 명시 | 실제 run/검토 결과만 기록 |\n| 11/13 링크만 존재하고 제출·접수 미확인 | 최신 문서·권한·대시보드 상태 확인 | 변경된 제출본은 새 버전 기록 |\n| 예시/수정본 양식 차이 | 공식 제공 양식 확보 전 G0 미통과 | 새 주제에서 목차와 내용 재대조 |\n\n**수행 기준:** 강사 산출물 L27의 선정 전 1·2번은 지금, 3~6번의 구체적인 새 구현/시험/WBS 수립은 선정 후입니다. 단 11/20 API/DB **문서 준비 의무**는 현재 시점에도 유효합니다."
+        }
+      ],
+      "feedback_version_ref": "FEEDBACK-DECISIONS.json",
+      "official_outline_checked": false
+    },
+    {
+      "id": "DLV-03",
+      "file": "STEP2-API-설계.md",
+      "title": "Step 2 API 설계 — 직접 강사 의견 없는 잠정 교차검증 V2",
+      "status": "설계 가설 · 미구현 · 미승인 · 미제출",
+      "basis": "(v2) 산출물별 강사 피드백의 유효 조건을 우선 적용; 기존 찾아you는 제출용 잠정 예시이며 현재 제품 미선정",
+      "outline_basis": "대시보드 Step2 해당 산출물 행은 11/18 기준 개별 강사 의견 공란. 공식 OUTPUT-GUIDE/교육용 예시 참조(의무 목차 미확인), 기존 APP-A 흐름만 잠정 사용",
+      "source_pins": [
+        {
+          "path": "docs/artifacts/planning/기획서_초안.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-006.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/specs/focus_apps.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/planning/WBS.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "1. 목적·경계·인증 방식",
+          "body": "### 이번 개정의 피드백 기준\n\n현재 1팀 대시보드의 Step2 API 설계 산출물 행(L28)에는 개별 강사 의견이 기록되어 있지 않습니다. 따라서 11/13·11/17 과거 일일 피드백을 최신 설계 지시로 취급하지 않고, **11/20 제출 의무·공식 양식·API↔DB 일관성**을 우선합니다. 기존 기술/기능/서버·공급자 선택은 확정하지 않습니다.\n\n### 계약의 상태\n\n이 API는 **검증용 가상 계약**입니다. HTTP API·FastAPI·구체 엔드포인트·키 발급·테이블은 현재 구현하거나 최종 채택하지 않았습니다. Python/FastAPI는 기존 기술 후보일 뿐이며 사용자에게 이미 동작한다고 표시하지 않습니다.\n\n- **대표 사용자 흐름:** 지정 Android 앱 2개를 오프라인 타이머(필수) 및 무계정(선호) 기준으로 비교 요청 → 요청 검증 → 비동기 조사 작업 준비 → 상태 및 판정 결과 조회.\n- **계정·인증:** 로컬 단일 사용자 데모를 가정하더라도 실제 외부 공개 배포 시에는 인증·소유권 확인이 필요합니다. 예시 \\`Authorization: Bearer <REDACTED>\\`는 실제 토큰이 아닙니다.\n- **권한:** 생성 요청은 해당 사용자에게 귀속, 조회는 요청 소유자만 허용. 인증 불가 401, 소유하지 않은 요청은 403/404 선택 검토.\n- **비밀키:** 외부 조회/LLM 키는 클라이언트에 전달하지 않는 설계 가정. 실제 구현 전 검증 필요.\n- **상태 어휘:** \\`queued\\`, \\`running\\`, \\`completed\\`, \\`partial\\`, \\`failed\\`, \\`cancelled\\` (제안). \\`partial\\`은 실패와 별도이며 \\`unknown\\` 조건을 참조할 수 있습니다."
+        },
+        {
+          "heading": "2. API 목록과 사용자 흐름",
+          "body": "| API ID | Method | Path(제안) | 입력 | 반환 / 상태 | 연결 요구 |\n| --- | --- | --- | --- | --- | --- |\n| API-01 | POST | /api/v1/research-requests | targets, criteria, discovery_rule | 202, request_id, status | FR-01/02 |\n| API-02 | GET | /api/v1/research-requests/{request_id} | request_id | 200, request & task summary | FR-03 |\n| API-03 | GET | /api/v1/research-requests/{request_id}/results | request_id | 200, claims/verdicts/sources/unknowns | FR-04 |\n| API-04 | GET | /api/v1/research-requests/{request_id}/tasks | request_id | 200, task_id/attempts/status | FR-02/03 |\n\n**인계 흐름:** API-01 검증→request_id 발급→작업 후보 제안(R03 논리)→task_id 확정 및 관계 저장(R05 영역)→실행별 attempt_id 기록→source/evidence/verdict 연결→API-03 조회. 이는 TASK-006의 **설계 순서를 예시 계약으로 투영**한 것이며 실제 호출·저장·팀 승인 확인은 없었습니다.\n\n### 예시 요청(JSON, 실제 전송 아님)\n\n\\`\\`\\`json\n{\n  \"domain\": \"focus_apps\",\n  \"targets\": [\"PomoToki\", \"Focus To-Do\"],\n  \"criteria\": [\n    {\"id\":\"C-OFFLINE\",\"name\":\"offline_timer\",\"importance\":\"must\"},\n    {\"id\":\"C-ACCOUNT\",\"name\":\"no_account\",\"importance\":\"prefer\"}\n  ],\n  \"discovery_rule\": \"specified_candidates_only\"\n}\n\\`\\`\\`\n\n### 예시 202 응답\n\n\\`\\`\\`json\n{\n  \"request_id\": \"req_example_001\",\n  \"status\": \"queued\",\n  \"result_url\": \"/api/v1/research-requests/req_example_001/results\"\n}\n\\`\\`\\`\n\nAPI-03 조회 시, 조건을 충족한다고 단정하는 대신 각 판정이 \\`fulfilled\\`/\\`not_fulfilled\\`/\\`unknown\\` 중 무엇인지와 source_id/evidence_id를 보여줍니다. 실제 앱 기능은 응답에 임의로 확정값으로 삽입하지 않습니다."
+        },
+        {
+          "heading": "3. 상세 계약·오류·검증",
+          "body": "### 필드·검증 명세\n\n| 계약/필드 | 유형·제약(제안) | 오류 |\n| --- | --- | --- |\n| domain | 허용된 도메인 코드 | 422 unsupported_domain |\n| targets | APP-A는 2개 비공백 문자열 | 422 invalid_targets |\n| criteria[].id | 요청 내 중복 불가 | 422 duplicate_criterion |\n| criteria[].importance | must/prefer | 422 invalid_importance |\n| discovery_rule | specified_candidates_only / conditional_discovery | 422 invalid_rule |\n| request_id | API가 발급하는 문자열 ID | 404 unknown_request |\n| task.status | 대기/실행/완료/부분/실패/취소 | 409 invalid_transition |\n| verdict.status | fulfilled/not_fulfilled/unknown | 근거 없을 때 fulfilled 금지 |\n\n### 오류 응답 예시\n\n\\`\\`\\`json\n{\n  \"error\": {\n    \"code\": \"invalid_targets\",\n    \"message\": \"The specified-candidate scenario needs two candidates.\",\n    \"request_id\": null,\n    \"retryable\": false\n  }\n}\n\\`\\`\\`\n\n| 상태 | 의미 | 공개 여부 |\n| --- | --- | --- |\n| 400 | 파싱/형식 오류 | 안전한 메시지만 노출 |\n| 401 | 인증 누락 | 비밀 정보 노출 금지 |\n| 403/404 | 소유권·조회 정책 | 선택 사항 미결정 |\n| 409 | 상태 전이/중복 문제 | 클라이언트 재시도 조건 확인 |\n| 422 | 도메인 입력 의미 검증 실패 | 필드별 사유 |\n| 429 | 요청/호출 예산 초과 | 자동 무한 재시도 금지 |\n| 500/503 | 내부·외부 도구 실패 | 부분 결과 가능성 검토 |\n\n**예시 구현 언어에 따른 Pydantic 검사**는 선택 사항입니다. API 입력·출력 JSON Schema 또는 다른 언어의 DTO 검증도 가능하므로 특정 라이브러리를 채택하지 않았습니다."
+        },
+        {
+          "heading": "4. Tool 호출·실패 정책과 미결정",
+          "body": "| 단계 | 담당 역할 가설 | 입력 | 출력 | 실패·중단 |\n| --- | --- | --- | --- | --- |\n| 계획 | R03 영역 | request_id, criteria, targets | task 제안 및 depends_on | 필수 조건 누락 시 보류 |\n| 저장·상태 | R05 영역 | 계획 제안 | task_id, queued→running 등 상태 | 계약 오류 시 실행 불가 |\n| 자료 조회 | R02 제약 + R03 도구 | 허용된 source/검색 요청 | source_id, retrieved_at, access_status | 접근 실패를 evidence로 만들지 않음 |\n| 근거 판정 | R03 기준 | source + criterion | verdict + evidence refs | 근거 불충분이면 unknown |\n| 반환 | R05 API + R04 화면 | request/result refs | 결과와 실패·미확인 목록 | partial과 failed 구분 |\n\n- 실제 외부 웹 자동 수집은 금지된 비허용 경로를 사용하지 않습니다.\n- timeout/calls/retry budget의 숫자는 **미확정**입니다. 유한 상한의 존재와 실패 종료만 명세했습니다.\n- 현재 APP-C의 조건부 발굴은 실제 오프라인 앱 조회 완료를 의미하지 않습니다. 추후 실제 주제 선정에서 API 자체가 폐기될 수 있습니다.\n- 남은 검토: 인증/호스팅, API 형태, 필드/상태 이름, DB 관계, R02/R03/R04/R05 경계, 공식 가이드에서 요구하는 Tool 설명 범위.\n\n**원본:** TASK-006의 data_contracts/components 및 기획서 JSON. 다음 DB 설계 문서와 관계를 검증하되 실제 구현 계약으로 채택하지 않습니다.\n\n**식별자 연결:** 각 조건 판정에는 `verdict_id`를 부여하고 `evidence_id`로 연결합니다. 이 관계는 DB의 verdict→verdict_evidence→evidence를 사용하되, 필드명/직렬화 방식은 아직 미승인입니다.\n\n### 개정 v2의 결정 경계\n\n직접 산출물별 새 의견이 없는 상태이므로 이 문서는 기존 기획의 제출용 예시만 유지합니다. 강사 피드백 L26/L27에서 '제품 선정 후'로 분리된 기술 확정과 구현/시험 요구는 미완료·조건부 후속으로 남깁니다. 공식 수정본 원문 목차와 실 제출 접수는 별도 확인이 필요합니다."
+        }
+      ],
+      "feedback_version_ref": "FEEDBACK-DECISIONS.json",
+      "official_outline_checked": false
+    },
+    {
+      "id": "DLV-04",
+      "file": "STEP2-DB-스키마.md",
+      "title": "Step 2 DB 스키마 — 직접 강사 의견 없는 잠정 교차검증 V2",
+      "status": "개념 설계 가설 · 미구현 · 미승인 · 미제출",
+      "basis": "(v2) 산출물별 강사 피드백의 유효 조건을 우선 적용; 기존 찾아you는 제출용 잠정 예시이며 현재 제품 미선정",
+      "outline_basis": "대시보드 Step2 해당 산출물 행은 11/18 기준 개별 강사 의견 공란. 공식 OUTPUT-GUIDE/교육용 예시 참조(의무 목차 미확인), 기존 APP-A 흐름만 잠정 사용",
+      "source_pins": [
+        {
+          "path": "docs/artifacts/tasks/TASK-006.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/planning/기획서_초안.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        },
+        {
+          "path": "docs/artifacts/specs/focus_apps.json",
+          "commit": "53b73584069042225298c97c6c5688f8b429f56b"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "1. 설계 목표·범위와 ERD",
+          "body": "### 이번 개정의 피드백 기준\n\n현재 1팀 대시보드의 Step2 DB 스키마 산출물 행(L29)에는 개별 강사 의견이 기록되어 있지 않습니다. 따라서 임의의 과거 일일 피드백에 따라 특정 DBMS, RLS 또는 저장소를 채택하지 않고, **11/20 제출을 위한 개념 ERD·테이블 정의·API 키 관계**만 잠정적으로 대조합니다.\n\n이 스키마는 **기술 확정 이전의 개념 데이터 모델**입니다. DBMS·pgvector·Redis·RLS·마이그레이션 도구는 **미선정**이며 실제 데이터베이스를 생성한 기록이 아닙니다.\n\n### 대표 사용자 흐름\n\n사용자 요청 \\`research_request\\` → 작업 \\`research_task\\` → 시도 \\`task_attempt\\` → 조회한 출처 \\`source\\` → 근거 \\`evidence\\` → 조건별 판정 \\`verdict\\` → 근거 연결 \\`verdict_evidence\\` → 요청별 결과 조회.\n\n### ERD (개념 모델)\n\n\\`\\`\\`mermaid\nerDiagram\n    RESEARCH_REQUEST ||--o{ RESEARCH_TASK : contains\n    RESEARCH_REQUEST ||--o{ VERDICT : evaluates\n    RESEARCH_TASK ||--o{ TASK_ATTEMPT : has\n    RESEARCH_TASK ||--o{ SOURCE : retrieves\n    SOURCE ||--o{ EVIDENCE : supports\n    VERDICT ||--o{ VERDICT_EVIDENCE : uses\n    EVIDENCE ||--o{ VERDICT_EVIDENCE : cited_by\n    RESEARCH_REQUEST {\n      string request_id PK\n      string domain\n      string status\n      json targets\n      json criteria\n      string discovery_rule\n      datetime created_at\n    }\n    RESEARCH_TASK {\n      string task_id PK\n      string request_id FK\n      string role\n      string status\n      json depends_on\n    }\n    TASK_ATTEMPT {\n      string attempt_id PK\n      string task_id FK\n      int attempt_no\n      string status\n      string error_code\n    }\n    SOURCE {\n      string source_id PK\n      string task_id FK\n      string uri\n      string access_status\n      datetime retrieved_at\n    }\n    EVIDENCE {\n      string evidence_id PK\n      string source_id FK\n      string finding\n      string locator\n    }\n    VERDICT {\n      string verdict_id PK\n      string request_id FK\n      string candidate_id\n      string condition_id\n      string status\n    }\n    VERDICT_EVIDENCE {\n      string verdict_id FK\n      string evidence_id FK\n    }\n\\`\\`\\`\n\n이는 도메인별 검색 결과·후속 발굴을 포함한 최종 물리 ERD가 아닙니다. 실제 제품에서는 충분히 간소화하거나 다른 관계를 채택할 수 있습니다."
+        },
+        {
+          "heading": "2. 엔터티·관계 및 키 정의",
+          "body": "| 테이블(제안) | PK | 핵심 컬럼 | 관계·제약 |\n| --- | --- | --- | --- |\n| research_request | request_id | domain, status, targets(JSON), criteria(JSON), discovery_rule, created_at | 요청의 상태·입력 계약. owner_id는 인증 선택 후 별도 검토 |\n| research_task | task_id | request_id FK, goal, role, status, depends_on(JSON) | request 1:N task, 동일 request 범위 참조 |\n| task_attempt | attempt_id | task_id FK, attempt_no, started_at, finished_at, status, error_code | task 1:N attempt, (task_id,attempt_no) 유일 |\n| source | source_id | task_id FK, uri, retrieved_at, access_status | task 1:N source, 접근 실패를 실제 근거로 사용 금지 |\n| evidence | evidence_id | source_id FK, locator, finding, checked_at | source 1:N evidence, source 참조 필수 |\n| verdict | verdict_id | request_id FK, candidate_id, condition_id, status, checked_at | (request_id,candidate_id,condition_id) 단일 최종 판정 **가정**; 변경 이력 정책 미결정 |\n| verdict_evidence | (verdict_id,evidence_id) | 두 FK | verdict:N evidence의 다대다 링크 |\n\n### 주요 정합성 제약\n\n- \\`verdict.status\\`는 \\`fulfilled | not_fulfilled | unknown\\` 중 하나. \\`evidence\\`를 참조하지 않는 fulfilled 판정이 없도록 **애플리케이션 검증 규칙(제안)**을 둡니다.\n- source의 access_status가 \\`unavailable\\` 또는 \\`failed\\`이면 그 조회 자체가 기능 충족 근거가 되지 않습니다.\n- 신규 task 재시도는 task_id 재사용, attempt_id 신규 발급. 실패한 attempt도 감사·재현을 위해 유지합니다.\n- \\`depends_on\\`을 JSON 배열로 두는 예시를 사용했지만 그래프 조회 요구가 커지면 별도 \\`task_dependency\\` 테이블로 분리합니다.\n- 엔터티 필드와 접근/보관 정책은 도메인·자료권한에 따라 재검토합니다."
+        },
+        {
+          "heading": "3. API↔DB 데이터 계약과 대표 샘플",
+          "body": "| Step2 API 항목 | DB 엔터티·컬럼 | 문서상 정합성 |\n| --- | --- | --- |\n| API-01 요청의 domain/targets/criteria/discovery_rule | research_request의 동명 컬럼 | 202 시 request_id 발급 |\n| API-02 요청의 status | research_request.status / research_task.status | running/partial/failed 구분 |\n| API-03 source/evidence/verdict 반환 | source→evidence→verdict_evidence→verdict | 조건별 출처 연결 |\n| API-04 task/attempt 반환 | research_task→task_attempt | task_id 유지·attempt_id 변경 |\n\n### 예시 데이터 (가상, 실측 아님)\n\n\\`\\`\\`json\n{\n  \"research_request\": {\n    \"request_id\": \"req_example_001\",\n    \"domain\": \"focus_apps\",\n    \"targets\": [\"PomoToki\", \"Focus To-Do\"],\n    \"criteria\": [\n      {\"id\":\"C-OFFLINE\",\"name\":\"offline_timer\",\"importance\":\"must\"},\n      {\"id\":\"C-ACCOUNT\",\"name\":\"no_account\",\"importance\":\"prefer\"}\n    ],\n    \"discovery_rule\": \"specified_candidates_only\",\n    \"status\": \"queued\"\n  },\n  \"research_task\": {\n    \"task_id\": \"task_example_001\",\n    \"request_id\": \"req_example_001\",\n    \"role\": \"researcher\",\n    \"status\": \"queued\",\n    \"depends_on\": []\n  }\n}\n\\`\\`\\`\n\n확정 제품의 실제 사용 데이터가 아니라, API와 DB가 같은 필드를 공유하는지를 확인하기 위한 **문서용 테스트 픽스처**입니다."
+        },
+        {
+          "heading": "4. 데이터 수명·권한·보안·미결정",
+          "body": "### 접근 및 보존\n\n- 사용자별 요청 소유권을 검증해야 하며 현재 단일-user/local 또는 다중-user 인증 경계가 결정되지 않았습니다. 따라서 **RLS 적용을 이미 구현했다거나 DB 권한 정책을 검증했다는 주장은 하지 않습니다.**\n- 출처 데이터의 수집/복제/보관 여부는 이용조건·저작권·사이트 정책에 따르며 자동 크롤링을 승인하지 않습니다. 가능한 경우 원문 URL/확인 시점/locator/허가 범위만 보관합니다.\n- API 키·외부 서비스 자격증명은 DB 내용/응답/일반 로그에 남기지 않는 것을 목표로 하며 실제 secret manager 선택은 미정입니다.\n- 로그인·세션·JWT·Redis, pgvector, 인덱스/샤딩 등은 **교육 예시의 기능 설명 대상일 수 있지만 우리 제품 채택 확정 사항이 아닙니다.**\n\n### 성능·조회\n\n(1) \\`research_task(request_id)\\`, (2) \\`source(task_id)\\`, (3) \\`verdict(request_id,candidate_id,condition_id)\\`, (4) \\`evidence(source_id)\\` 인덱스를 물리 구현 시 후보로 검토합니다. 현재 쿼리 실행계획, 실제 인덱스 성능 수치는 없습니다.\n\n### 남은 설계 질문\n\n1. \\`verdict\\`의 최종 판단과 수정 이력(version) 유지 방식.\n2. 외부 자료 삭제 요청, TTL, 보존 책임과 요청 데이터의 접근 주체.\n3. task_dependency 정규화 필요성과 실패 attempt의 리텐션.\n4. 구조화 JSON/SQL 스키마의 실제 자료형·관계 제약·마이그레이션.\n5. 11/21 주제 선택에 따라 전체 엔터티 구조의 유지·폐기 판단.\n\n**근거:** TASK-006의 \\`data_contracts\\`·담당 구성요소 및 기존 APP-A 기획. 이 문서는 실제 DB 생성·데이터 수집·승인을 뜻하지 않습니다.\n\n### 개정 v2의 결정 경계\n\n직접 산출물별 새 의견이 없는 상태이므로 이 문서는 기존 기획의 제출용 예시만 유지합니다. 강사 피드백 L26/L27에서 '제품 선정 후'로 분리된 기술 확정과 구현/시험 요구는 미완료·조건부 후속으로 남깁니다. 공식 수정본 원문 목차와 실 제출 접수는 별도 확인이 필요합니다."
+        }
+      ],
+      "feedback_version_ref": "FEEDBACK-DECISIONS.json",
+      "official_outline_checked": false
+    }
+  ],
+  "revision": "feedback_scope_v2",
+  "supersedes_for_review": "docs/deliverables/pilots/2026-11-18/model.json",
+  "updated_at": "2026-11-18",
+  "feedback_priority": {
+    "assessed_as_of": "2026-11-18",
+    "priority_order": [
+      "산출물별 최신 강사 의견(기획서 L26, WBS L27) 및 최신 공식 제공 목차/제출 규칙",
+      "현재 적용 Phase Intent/실제 TASK·대시보드 상태",
+      "최근 일일 피드백: 현재 사실과 맞는 일반 지침만 참고",
+      "과거 일일 피드백: 변경 전 당시 판단과 양식 확인 단서로만 보존"
+    ],
+    "scope_rules": [
+      "주제 선정 전·후로 갈라진 하나의 강사 의견도 해당 조건별로 별도 처리한다.",
+      "11/13 일일 의견 L53 또는 11/17 일일 의견 L55를 현재 기획/기술 확정 지시로 승격하지 않는다.",
+      "산출물 28·29행은 11/18 현재 직접 강사 의견이 비어 있다. 오래된 일일 의견으로 대체하지 않는다.",
+      "11/21 제품 선정 목표는 R01의 현재 계획이며 강사가 일정 연기를 승인한 증거는 아니다."
+    ],
+    "source_cells": [
+      "1팀 L26",
+      "1팀 L27",
+      "1팀 L28:L29(의견 공란)",
+      "1팀 L53(과거 일일 의견)",
+      "1팀 L55(과거 일일 의견)"
+    ],
+    "decision_log_ref": "FEEDBACK-DECISIONS.json"
+  }
+}
