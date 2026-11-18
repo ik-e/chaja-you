@@ -31,7 +31,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             git fetch origin "${{ github.base_ref }}"
-            git diff --name-only "origin/${{ github.base_ref }}" HEAD > /tmp/changed-pilot-paths.txt
+            git -c core.quotePath=false diff --name-only "origin/${{ github.base_ref }}" HEAD > /tmp/changed-pilot-paths.txt
             python - <<'PY'
           from pathlib import Path
           paths = Path('/tmp/changed-pilot-paths.txt').read_text().splitlines()
