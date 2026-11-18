@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "full_course_originals_git_snapshot",
+  "source_repo": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu.git",
+  "source_branch": "main",
+  "source_commit": "f074d8f2698728102a40fba6d0bacb7b4e702ea3",
+  "source_subdir": "Lecture/FinalProject",
+  "archive_utc": "2026-11-18T07:48:42.775044+00:00",
+  "origin_permission": "R01 reports instructor verbal permission for GitHub preservation (2026-11-18)",
+  "preservation": "unaltered original bytes; any new original commit is a new immutable snapshot",
+  "file_count": 22,
+  "total_bytes": 6251568,
+  "files": [
+    {
+      "path": "Lecture/FinalProject/DAILY-MEETING.md",
+      "bytes": 6488,
+      "sha256": "ee5ac1625925eb794b7e77bc49e4902b969d556a687aa76c27ab514ef42caecb"
+    },
+    {
+      "path": "Lecture/FinalProject/Data/BFCL-PREPARE.md",
+      "bytes": 50154,
+      "sha256": "1614b4f8fa23a7e46fd8c746e749960621ae242b79db47a0ee23fd3e3e748a05"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.html",
+      "bytes": 62457,
+      "sha256": "6644ff67f980c8a2ae3d61dba4f7715d267167e776cd4aa5fb77906102044524"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.pdf",
+      "bytes": 747373,
+      "sha256": "b5f3e3bfdf03f8d8b14fdb1f3a6bab14cfcb68965eaa4336b0e46b0bebe9c247"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html",
+      "bytes": 64562,
+      "sha256": "4fd9f0305c5b8e7a82c356bea103a8feb0f3e510cdbbebba40c617449c898593"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.pdf",
+      "bytes": 761856,
+      "sha256": "52fb1dd7df3d93873fa4ed3eb3fcefe99ad28ba38385598d4044c55caeda993a"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/WBS_잘_쓰는_법.html",
+      "bytes": 56318,
+      "sha256": "d60dec0997f29418ee4efdc7a0a9c9c1f02481b2750d2edb8c1f0bd0f97c8752"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/WBS_잘_쓰는_법.pdf",
+      "bytes": 709478,
+      "sha256": "0e840e97055b7b66f8705322be4f484e3a9dac77a9262709bbf67e6af2e78aab"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/기획서_잘_쓰는_법.html",
+      "bytes": 58088,
+      "sha256": "de81617d4466d7bc3e866d7527a6d86447b1283f3fd4c89e12acd7fcac1aa52b"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/기획서_잘_쓰는_법.pdf",
+      "bytes": 731144,
+      "sha256": "30891fe3fe21992b08975825849442b160d90b7922715806e951b7aa0a6a3b93"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/API설계문서_작성법.html",
+      "bytes": 175555,
+      "sha256": "9f1a1e3ab398388b209a69ca2c92312d990cbe616ad119b5226e435fa6be6dae"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/API설계문서_작성법.pdf",
+      "bytes": 574020,
+      "sha256": "2f0195b648c17a7df6de903f2f085d3962fd892649afc412ded4436c06f7695c"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/DB스키마설계서_작성법.html",
+      "bytes": 119104,
+      "sha256": "548ae9d312f33ba66e7df8b7355d54fe1e93a06da0ff2a9cf3320f04a59149fe"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/DB스키마설계서_작성법.pdf",
+      "bytes": 497247,
+      "sha256": "186f716da82bceb89391dcae9e2978be7b67c0252258658a8dc5bd8063c77b76"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/agent-skills-final-project.html",
+      "bytes": 59663,
+      "sha256": "20aa4b7bf14557a0efb04612a27dc6389922376e47146346a019550daa82fb46"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/agent-skills-final-project.pdf",
+      "bytes": 854000,
+      "sha256": "2e75f088b71d52eba9bcb4538ab2807f92106276103976934132f6d230b7714d"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/멀티에이전트_AutoHealing_적용가이드.html",
+      "bytes": 127324,
+      "sha256": "7d02d5be864e30676c5f9c6094b1c353268a0bbc1a90b6a4ba550594c65361df"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/멀티에이전트_AutoHealing_적용가이드.pdf",
+      "bytes": 520220,
+      "sha256": "5d16d0412af647099999347891fd65f21aae76ff210a4886f1ff3850dc3afdc4"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_WBS_샘플.docx",
+      "bytes": 32843,
+      "sha256": "66c7687e99a9f54e819bbf01bb2fad7ef9510ce573cae6a710022325c5cc7cd7"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_기획서_샘플.docx",
+      "bytes": 32603,
+      "sha256": "b29dac077bdd263b62ed3ae920a700784c85a8564bfd106e812627cb7d39bbab"
+    },
+    {
+      "path": "Lecture/FinalProject/MANAGER-GUIDE.md",
+      "bytes": 9362,
+      "sha256": "152d53a8e1ba18e34fd45e43c63e24b9736bdce77a3dcc19dcdb2c7ca1120f8d"
+    },
+    {
+      "path": "Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "bytes": 1709,
+      "sha256": "0f16b33f0e952900c9c2c41844d6f60e9ab7dc8946b56a7db6b29609b1ff96ee"
+    }
+  ]
+}
