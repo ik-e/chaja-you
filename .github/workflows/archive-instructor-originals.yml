@@ -1,0 +1,42 @@
+name: Archive instructor originals from pinned Gitea commit
+
+on:
+  push:
+    branches:
+      - docs/archive-instructor-originals-20261118
+    paths:
+      - '.github/workflows/archive-instructor-originals.yml'
+      - 'tools/archive_instructor_originals.py'
+      - 'docs/guidelines/originals/2026-11-12_a512febe31/manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive-originals:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: course-instructor-originals-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch only instructor-authorized pinned original files and verify SHA256
+        run: python tools/archive_instructor_originals.py --download
+      - name: Commit verified binary originals to this branch (never main directly)
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/
+          if git diff --cached --quiet; then
+            echo 'Originals already exist and hashes are correct'
+          else
+            git commit -m 'docs(guidelines): preserve 13 verified original instructor documents'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

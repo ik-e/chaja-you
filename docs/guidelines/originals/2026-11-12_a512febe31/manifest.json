@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "id": "INSTRUCTOR-ORIGINAL-SNAPSHOT-20261112",
+  "snapshot_source_commit": "a512febe318739fc6e926abd0328d12585336378",
+  "source_repo": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu",
+  "source_directory": "Lecture/FinalProject",
+  "captured_at": null,
+  "source_as_of": "2026-11-12 10:32:53 +09:00",
+  "saved_repo": "ik-e/chaja-you",
+  "saved_snapshot_dir": "docs/guidelines/originals/2026-11-12_a512febe31",
+  "permission": {
+    "statement": "R01 reported on 2026-11-18 that the instructor verbally authorized preserving original instructor-provided files in GitHub.",
+    "authority": "user-reported instructor permission, not independently verified",
+    "scope_note": "Archive originals for this team's course project; do not infer an unrestricted external redistribution license."
+  },
+  "status": "pending_binary_archive",
+  "files": [
+    {
+      "id": "SRC-01",
+      "name": "DAILY-MEETING.md",
+      "original_path": "Lecture/FinalProject/DAILY-MEETING.md",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/DAILY-MEETING.md",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/DAILY-MEETING.md",
+      "expected_bytes": 6488,
+      "expected_sha256": "ee5ac1625925eb794b7e77bc49e4902b969d556a687aa76c27ab514ef42caecb",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/DAILY-MEETING.md"
+    },
+    {
+      "id": "SRC-02",
+      "name": "AIO_1기_1주차_킥오프.html",
+      "original_path": "Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.html",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_1%EC%A3%BC%EC%B0%A8_%ED%82%A5%EC%98%A4%ED%94%84.html",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_1%EC%A3%BC%EC%B0%A8_%ED%82%A5%EC%98%A4%ED%94%84.html",
+      "expected_bytes": 62457,
+      "expected_sha256": "6644ff67f980c8a2ae3d61dba4f7715d267167e776cd4aa5fb77906102044524",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.html"
+    },
+    {
+      "id": "SRC-03",
+      "name": "AIO_1기_1주차_킥오프.pdf",
+      "original_path": "Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.pdf",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_1%EC%A3%BC%EC%B0%A8_%ED%82%A5%EC%98%A4%ED%94%84.pdf",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_1%EC%A3%BC%EC%B0%A8_%ED%82%A5%EC%98%A4%ED%94%84.pdf",
+      "expected_bytes": 747373,
+      "expected_sha256": "b5f3e3bfdf03f8d8b14fdb1f3a6bab14cfcb68965eaa4336b0e46b0bebe9c247",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/AIO_1기_1주차_킥오프.pdf"
+    },
+    {
+      "id": "SRC-04",
+      "name": "AIO_1기_최종프로젝트_가이드.html",
+      "original_path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B0%80%EC%9D%B4%EB%93%9C.html",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B0%80%EC%9D%B4%EB%93%9C.html",
+      "expected_bytes": 64562,
+      "expected_sha256": "4fd9f0305c5b8e7a82c356bea103a8feb0f3e510cdbbebba40c617449c898593",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html"
+    },
+    {
+      "id": "SRC-05",
+      "name": "AIO_1기_최종프로젝트_가이드.pdf",
+      "original_path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.pdf",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B0%80%EC%9D%B4%EB%93%9C.pdf",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/AIO_1%EA%B8%B0_%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B0%80%EC%9D%B4%EB%93%9C.pdf",
+      "expected_bytes": 761856,
+      "expected_sha256": "52fb1dd7df3d93873fa4ed3eb3fcefe99ad28ba38385598d4044c55caeda993a",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.pdf"
+    },
+    {
+      "id": "SRC-06",
+      "name": "WBS_잘_쓰는_법.html",
+      "original_path": "Lecture/FinalProject/Doc/WBS_잘_쓰는_법.html",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/WBS_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.html",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/WBS_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.html",
+      "expected_bytes": 56318,
+      "expected_sha256": "d60dec0997f29418ee4efdc7a0a9c9c1f02481b2750d2edb8c1f0bd0f97c8752",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/WBS_잘_쓰는_법.html"
+    },
+    {
+      "id": "SRC-07",
+      "name": "WBS_잘_쓰는_법.pdf",
+      "original_path": "Lecture/FinalProject/Doc/WBS_잘_쓰는_법.pdf",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/WBS_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.pdf",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/WBS_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.pdf",
+      "expected_bytes": 709478,
+      "expected_sha256": "0e840e97055b7b66f8705322be4f484e3a9dac77a9262709bbf67e6af2e78aab",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/WBS_잘_쓰는_법.pdf"
+    },
+    {
+      "id": "SRC-08",
+      "name": "기획서_잘_쓰는_법.html",
+      "original_path": "Lecture/FinalProject/Doc/기획서_잘_쓰는_법.html",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.html",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.html",
+      "expected_bytes": 58088,
+      "expected_sha256": "de81617d4466d7bc3e866d7527a6d86447b1283f3fd4c89e12acd7fcac1aa52b",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/기획서_잘_쓰는_법.html"
+    },
+    {
+      "id": "SRC-09",
+      "name": "기획서_잘_쓰는_법.pdf",
+      "original_path": "Lecture/FinalProject/Doc/기획서_잘_쓰는_법.pdf",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.pdf",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.pdf",
+      "expected_bytes": 731144,
+      "expected_sha256": "30891fe3fe21992b08975825849442b160d90b7922715806e951b7aa0a6a3b93",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/기획서_잘_쓰는_법.pdf"
+    },
+    {
+      "id": "SRC-10",
+      "name": "최종프로젝트_주요산출물_WBS_샘플.docx",
+      "original_path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_WBS_샘플.docx",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%A3%BC%EC%9A%94%EC%82%B0%EC%B6%9C%EB%AC%BC_WBS_%EC%83%98%ED%94%8C.docx",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%A3%BC%EC%9A%94%EC%82%B0%EC%B6%9C%EB%AC%BC_WBS_%EC%83%98%ED%94%8C.docx",
+      "expected_bytes": 32843,
+      "expected_sha256": "66c7687e99a9f54e819bbf01bb2fad7ef9510ce573cae6a710022325c5cc7cd7",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/최종프로젝트_주요산출물_WBS_샘플.docx"
+    },
+    {
+      "id": "SRC-11",
+      "name": "최종프로젝트_주요산출물_기획서_샘플.docx",
+      "original_path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_기획서_샘플.docx",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%A3%BC%EC%9A%94%EC%82%B0%EC%B6%9C%EB%AC%BC_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%83%98%ED%94%8C.docx",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/Doc/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%A3%BC%EC%9A%94%EC%82%B0%EC%B6%9C%EB%AC%BC_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%83%98%ED%94%8C.docx",
+      "expected_bytes": 32603,
+      "expected_sha256": "b29dac077bdd263b62ed3ae920a700784c85a8564bfd106e812627cb7d39bbab",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/Doc/최종프로젝트_주요산출물_기획서_샘플.docx"
+    },
+    {
+      "id": "SRC-12",
+      "name": "MANAGER-GUIDE.md",
+      "original_path": "Lecture/FinalProject/MANAGER-GUIDE.md",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/MANAGER-GUIDE.md",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/MANAGER-GUIDE.md",
+      "expected_bytes": 9362,
+      "expected_sha256": "152d53a8e1ba18e34fd45e43c63e24b9736bdce77a3dcc19dcdb2c7ca1120f8d",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/MANAGER-GUIDE.md"
+    },
+    {
+      "id": "SRC-13",
+      "name": "OUTPUT-GUIDE.md",
+      "original_path": "Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "source_view": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "source_raw": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu/raw/commit/a512febe318739fc6e926abd0328d12585336378/Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "expected_bytes": 1709,
+      "expected_sha256": "0f16b33f0e952900c9c2c41844d6f60e9ab7dc8946b56a7db6b29609b1ff96ee",
+      "archived_path": "docs/guidelines/originals/2026-11-12_a512febe31/Lecture/FinalProject/OUTPUT-GUIDE.md"
+    }
+  ]
+}
