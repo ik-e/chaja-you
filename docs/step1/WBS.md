@@ -307,3 +307,5 @@ W01~W34는 결과물 묶음 ID로 유지한다. 실행 단위는 담당 1명·1~
 - [docs/guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json](../guidelines/final_project_repository/snapshots/2026-11-12_a512febe31/manifest.json)
 - [공식 가이드](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/OUTPUT-GUIDE.md)
 - [공식 가이드](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html)
+- [docs/human/phase-intents/PHASE-20261118-01.md](../human/phase-intents/PHASE-20261118-01.md)
+- [docs/human/responses/HRESP-20261118-02_phase-sync.md](../human/responses/HRESP-20261118-02_phase-sync.md)
