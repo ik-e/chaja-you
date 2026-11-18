@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import difflib
 import os
 import re
 import sys
@@ -1057,6 +1058,11 @@ def main():
             temporary.replace(target)
     if args.check and stale:
         print("Stale projections:\n" + "\n".join(stale), file=sys.stderr)
+        for path in stale[:3]:
+            target = ROOT / path
+            existing = target.read_text(encoding="utf-8").splitlines(keepends=True) if target.exists() else []
+            expected = outputs[path].splitlines(keepends=True)
+            print("".join(list(difflib.unified_diff(existing, expected, fromfile=f"current/{path}", tofile=f"expected/{path}"))[:100]), file=sys.stderr)
         return 1
     print(
         f"{len(outputs)} projections verified; {len(stale)} updated."
