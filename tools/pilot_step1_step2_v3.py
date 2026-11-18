@@ -88,7 +88,7 @@ def check_contract(c, m):
         assert all(x.startswith("FR-") for x in r["requirement_refs"])
     assert c["identity"]["owner_field"]=="research_request.owner_id"
     assert c["identity"]["subject_claim"]=="sub"
-    assert "request_id" in c["identity"]["authorization_rule"]
+    assert "owner_id" in c["identity"]["authorization_rule"]
     assert set(c["status_policy"]["verdict"])=={"fulfilled","not_fulfilled","unknown"}
     for d in m["documents"]:
         assert "미제출" in d["status"],d["id"]
