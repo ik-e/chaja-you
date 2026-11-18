@@ -4,7 +4,8 @@
 
 이 저장소는 공개된 팀 공동 작업 공간입니다. 작업 시작 시 [README](README.md), [문서 라우트](docs/README.md), [문서 관리 규칙](docs/문서_관리_규칙.md), [공개 저장소 운영 안내](docs/public/공개_저장소_운영_안내.md)를 읽습니다.
 
-- 작업을 시작할 때는 **사람의 장기 의도 → 프로젝트 현재 기준 → 대상 TASK → TASK별 의도 → 관련 명세·평가 기준** 순서로 확인합니다. 구체적으로 [INTENT](docs/human/INTENT.md)를 먼저 읽고, [PROJECT](PROJECT.md)와 [CURRENT](CURRENT.md), [팀 헌장](docs/charter/팀_헌장.md)을 확인한 뒤 [TASK](TASK.md)의 작업 계약을 읽습니다.
+- 작업을 시작할 때는 **사람의 장기 의도 → 현재 단계 Phase Intent → CURRENT/제품 상태 → 대상 TASK → TASK별 의도 → 적용되는 명세·평가 기준** 순서로 확인합니다. 구체적으로 [INTENT](docs/human/INTENT.md)와 [현재 단계 의도](docs/human/phase-intents/README.md)를 먼저 읽고, [CURRENT](CURRENT.md)의 활성 단계 포인터 및 보류 범위를 확인합니다. [PROJECT](PROJECT.md)·[EVAL](EVAL.md)는 현재 단계에서 이전 제품의 잠정 제출안으로 보류될 수 있으므로 구현 지시로 자동 사용하지 않습니다. [팀 헌장](docs/charter/팀_헌장.md)과 [TASK](TASK.md) 작업 계약을 확인합니다.
+- 활성 TASK의 `phase_intent_ref`가 CURRENT의 `active_phase_intent_ref`와 일치하는지 확인합니다. 다르면 실행 전에 상태 충돌로 보고합니다. 2026-11-18 단계에서는 이전 찾아you 기획·APP-A/C·WBS의 실제 구현을 보류하고 제출 대응만 허용합니다.
 - 대상 TASK에 `intent_ref`가 있으면 해당 [R01 TASK 의도](docs/human/task-intents/README.md)를 반드시 읽고, 이후 [EVAL](EVAL.md)과 [AI 산출물](docs/artifacts/README.md)의 관련 명세·원본을 확인합니다. 작업 시작 시 현재 작업 목적을 상위 의도와 TASK 의도에 맞춰 한 문장으로 재진술하고, 상위 의도와 충돌하는 해석이나 요구가 있으면 조용히 덮어쓰지 말고 불확실성·결정 요청으로 올립니다.
 - 사람의 장기 의도는 [INTENT](docs/human/INTENT.md), 특정 판단·피드백은 [사람 응답](docs/human/responses/README.md)에서 확인합니다. 사람 입력은 AI가 임의로 수정하지 않습니다. TASK intent는 목적·우선순위·범위 경계에 대한 사람 권위 입력이며 조사 결과나 외부 사실을 대신하지 않습니다. 근거가 intent의 가정과 충돌하면 숨기지 말고 결과의 불확실성·결정 요청에 기록합니다. intent와 다른 결론도 근거가 있으면 제안할 수 있으며, task intent 자체를 프로젝트 확정 결정으로 승격하지 않습니다.
 - AI의 새 작업·조사·계획·실행·평가 결과 정본은 `docs/artifacts/`의 JSON 원본에 ID·상태·입력·출력·근거·검증을 구조화합니다. 기존 `docs/research/`와 `docs/members/*/workspace/`는 이관 전 기록·참고 자료이며, 사람이 별도로 요청하지 않는 한 새 AI 정본을 만들지 않습니다. 도구 출력은 필요한 원래 형식으로 연결합니다.

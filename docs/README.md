@@ -3,11 +3,12 @@
 | 확인할 내용 | 경로 |
 |---|---|
 | 사람이 읽고 의도·판단을 남기는 진입점 | [사람 작업 공간](human/README.md) |
-| 프로젝트의 최종 목표 | [PROJECT](../PROJECT.md) |
+| 현재 적용 중인 실행 의도·보류 범위 | [현재 단계 의도](human/phase-intents/PHASE-20261118-01.md) |
+| 이전 찾아you 제품 목표(실제 구현 보류) | [PROJECT](../PROJECT.md) |
 | 현재 범위·우선순위·작업 | [CURRENT](../CURRENT.md) |
 | 사람이 확인할 결과·근거·결정 요청 | [검토 화면](review/README.md) |
 | 필수 제출물과 준비·제출 상태 | [제출물 인덱스](submissions/README.md) · [Step 1](step1/README.md) |
-| 판정 기준 | [EVAL](../EVAL.md) |
+| 이전 찾아you 평가 기준(제출용 잠정) | [EVAL](../EVAL.md) |
 | AI가 작업할 입력·상세 산출물 | [TASK](../TASK.md) · [AI 산출물](artifacts/README.md) |
 | 중요한 결정과 재검토 조건 | [ADR](adr/README.md) |
 
