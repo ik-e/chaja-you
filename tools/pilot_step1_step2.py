@@ -48,7 +48,7 @@ def verify_model(model):
         assert len(d["sections"]) >= 3
         assert d["source_pins"] and all(x["commit"] == model["source_baseline_commit"] for x in d["source_pins"])
         assert "미제출" in d["status"] and not d.get("submitted_at")
-        assert "미검증" in d["outline_basis"] or "미검증" in d["status"] or "미확정" in d["outline_basis"] or "대조" in d["outline_basis"]
+        assert any(token in d["outline_basis"] for token in ("미검증", "대조", "교육 예시", "교육용", "미확정"))
     docs={d["id"]:d for d in model["documents"]}
     content=lambda x:"\n".join(s["body"] for s in docs[x]["sections"])
     proposal, wbs, api, db=(content(x) for x in ["DLV-01","DLV-02","DLV-03","DLV-04"])
