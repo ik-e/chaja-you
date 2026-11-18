@@ -189,6 +189,12 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261118-02_phase-sync.md"
+    },
+    {
+      "path": "docs/artifacts/state/legacy_task_closeout_20261118.json"
+    },
+    {
+      "path": "docs/archive/2026-11-18-task-closeout/manifest.json"
     }
   ],
   "submission_plan": {
@@ -292,5 +298,8 @@
     "previous_plan_and_wbs_submission_use": "잠정 제출 전용",
     "future_after_offline": "R01/팀 결정 후 제품 기획·개발 WBS 재수립",
     "phase_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
-  }
+  },
+  "legacy_task_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+  "legacy_evidence_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json",
+  "legacy_task_status_policy": "TASK-001~021 원본 상태/결과 유지. 운영상 신규 실행은 종료/비활성화했으며 분류·근거·대체 TASK는 closeout 원본과 고정 blob 사본 참조."
 }

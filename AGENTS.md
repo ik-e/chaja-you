@@ -14,6 +14,7 @@
 - 사람이 보는 [검토 화면](docs/review/README.md)과 [필수 제출물](docs/submissions/README.md)은 원본에서 생성합니다. 원본 수정 후 `uv run --no-project python tools/project_docs.py`를 실행하고 `--check`로 최신 여부를 확인합니다.
 - 중요한 결정은 [ADR](docs/adr/README.md)에 근거·결정권자·사람 권위 입력 경로와 재검토 조건을 남깁니다. AI의 제안과 권한 있는 담당자의 결정을 구분합니다.
 - `docs/human/responses/`에 새 응답이 있으면 대상 ID를 확인해 관련 ADR·state·spec·task에 반영하고 응답 경로를 근거로 남깁니다. 응답 원문은 적용 후에도 삭제하거나 의미를 바꾸지 않습니다.
+- 이전 TASK 정산 전에는 `CURRENT.active_task_ids`와 `legacy_task_closeout_ref`를 확인한다. 과거 TASK의 `할 일/진행 중/막힘`을 신규 실행 지시로 취급하지 않는다. 과거 판단의 근거는 [정산 원장](docs/artifacts/state/legacy_task_closeout_20261118.json)과 [불변 manifest](docs/archive/2026-11-18-task-closeout/manifest.json)의 source commit/blob SHA로 조회하며, 새 증거가 나오면 당시 스냅샷을 수정하지 않는다.
 - 팀원 일일 상태는 `docs/members/Rxx/daily/`의 가장 최근 날짜 문서를 확인합니다. 관련된 팀원의 기록만 읽습니다.
 - 회의·조사·설계 기록은 `docs/meetings/`, `docs/research/`, `docs/design/`의 라우트에서 찾습니다.
 - 작업에 적용되는 요구사항과 완료 조건을 확인합니다. 요구사항 ID가 있는 작업은 결과에 해당 ID와 실제 검증 내용을 연결합니다.

@@ -1,0 +1,939 @@
+{
+  "schema_version": 1,
+  "id": "TASK-006",
+  "kind": "task",
+  "status": "진행 중",
+  "owner": "R05",
+  "due": "2026-11-12",
+  "updated_at": "2026-11-12",
+  "question": "사용자 요청부터 근거가 연결된 결과와 미확인·실패 상태까지 처리하려면 어떤 구성요소가 필요하고, 각 구성요소는 어떤 데이터를 주고받으며, 어떤 순서로 구현·통합해야 하는가? 현재 팀 역할을 기준으로 각 작업은 누구에게 배분하는 것이 적절한가?",
+  "goal": "기획서 6·8장의 구현 방향과 WBS에 넣을 실제 작업·의존성 초안을 만든다.",
+  "inputs": [
+    "docs/artifacts/planning/기획서_초안.json",
+    "docs/artifacts/specs/focus_apps.json",
+    "docs/charter/팀_헌장.md",
+    "docs/artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json",
+    "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+  ],
+  "scope": [
+    "기술 선택은 확정하지 않고 필요한 검증 조건만 정리",
+    "요청·계획·역할 배정·작업 상태·출처·근거·결과의 최소 입출력을 정리",
+    "공통 리서치 의미·연결 관계와 앱 도메인 특화 역할·조건·출처·검증 기준의 경계를 표시",
+    "APP-A 첫 통합과 APP-C 중간 판정의 추가·생략·보류를 핵심 검증으로 두고 APP-B 최종 필수 여부는 미정으로 둠",
+    "에이전트·백엔드·화면·인프라·통합·QA 작업의 담당 영역·산출물·선행 조건·예상 규모를 도출",
+    "팀별 중복 구현이나 순환 의존을 찾아 조정할 항목을 표시",
+    "언어·프레임워크·검색 공급자는 기존 근거로 초기안 또는 결정 조건을 제시"
+  ],
+  "outputs": [
+    "result에 구성요소별 책임·입출력·실패 처리와 구현 작업 목록",
+    "WBS 입력용 작업 ID 후보·담당 역할·예상 기간·선행 작업·산출물·완료 조건"
+  ],
+  "acceptance": [
+    "FR-01~04 각각을 맡을 구성요소와 통합 지점이 있음",
+    "에이전트·서버·화면·배포·시험 작업이 최소 흐름에 연결됨",
+    "초기 기술 선택에 따른 재작업 위험과 팀이 확인할 추정값이 표시됨"
+  ],
+  "verification": [
+    "의존 작업을 순서대로 따라 요청 하나가 결과까지 이어지는지 검토",
+    "팀 헌장 역할과 충돌하거나 소유자가 없는 작업을 확인"
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/planning/기획서_초안.json"
+    },
+    {
+      "path": "docs/artifacts/specs/focus_apps.json"
+    },
+    {
+      "path": "docs/charter/팀_헌장.md"
+    },
+    {
+      "path": "docs/artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json"
+    },
+    {
+      "path": "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+    },
+    {
+      "path": "docs/members/R03/workspace/2026-11-12_APP_모의_검증_요약.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-003.json"
+    }
+  ],
+  "result": {
+    "summary": "R05 구조·통합 초안. 공통 리서치 구조와 앱 특화 역할·조건·출처·검증 기준을 구분한다. APP-A는 첫 vertical slice, APP-C의 추가·생략·보류는 핵심 검증 사례다. APP-B의 최종 필수 여부는 TASK-005·일정 확인 후 결정한다. 합성 자료로 APP-A 연결, APP-C 세 분기, 접근 실패와 조건 미확인을 검사했다. R03 모의 원형과 R04의 2차 개정안을 대조해 작업 실행 조건·판정 ID·출처와 근거 참조·부분 결과 상태의 R05 예시를 보강했다. R03·R05는 계획 제안→R05 작업 ID 발급→R03 정식 ID 연결→실행 순서와 같은 작업의 재시도 ID 보존을 설계 흐름으로 확인했다. 이는 코드 적용이나 실제 통합 검증이 아니다. R01 방향에 따라 확인된 내용의 부분 결과 제공과 미확인·실패 분리를 MVP에 포함하고 자동 재시도·복잡한 복구는 후순위로 둔다. 세부 필드명·기간, 실제 앱·에이전트 실행과 나머지 팀 간 I/O 계약은 아직 미확정이다.",
+    "claims": [
+      {
+        "id": "TASK-006-C01",
+        "text": "현재 평가 기준은 사용자 조건 구분, 작업·역할 계획, 조건부 실행 기록, 근거가 연결된 조건별 판정을 요구한다.",
+        "status": "문서 확인",
+        "evidence_ids": [
+          "TASK-006-E01"
+        ]
+      },
+      {
+        "id": "TASK-006-C02",
+        "text": "요청·계획·작업·출처·근거·조건 판정·보고서를 구분하면 FR-01~04의 입력과 결과를 연결하는 최소 데이터 흐름을 제안할 수 있다.",
+        "status": "설계 제안",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E02",
+          "TASK-006-E03"
+        ]
+      },
+      {
+        "id": "TASK-006-C03",
+        "text": "R03은 계획·조사·판정 로직, R05는 API·작업 상태·출처 및 근거 연결, R04는 입력·결과 화면, R02는 자료 접근·운영 제약, R01은 범위 조정·통합·QA를 맡는 안이 현행 역할과 부합한다.",
+        "status": "담당 제안",
+        "evidence_ids": [
+          "TASK-006-E04",
+          "TASK-006-E05"
+        ]
+      },
+      {
+        "id": "TASK-006-C04",
+        "text": "APP-A 지정 후보 조사를 첫 통합으로, APP-C의 근거 있는 중간 판정별 추가·생략·보류를 핵심 후속 검증으로 둔다. APP-B 신규 후보 발굴의 최종 필수 여부는 미정이다.",
+        "status": "평가 사례를 바탕으로 한 구현 제안",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E06"
+        ]
+      },
+      {
+        "id": "TASK-006-C05",
+        "text": "작업 실행 실패와 조건 판정 미확인을 별도 상태로 다루고, 근거가 없는 조건을 충족으로 표시하지 않는 경계가 필요하다.",
+        "status": "요구사항에서 도출한 설계 제안",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E02",
+          "TASK-006-E03"
+        ]
+      },
+      {
+        "id": "TASK-006-C06",
+        "text": "합성 입력에 한해 APP-A의 요청·근거·판정·보고서 참조, APP-C의 세 조건 분기, 자료 접근 실패와 조건 미확인의 분리를 검사했다.",
+        "status": "모의 검증 통과 — 제품 실행 아님",
+        "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]
+      },
+      {
+        "id": "TASK-006-C07",
+        "text": "R01 의도에 따라 앱 리서치를 첫 도메인으로 구현하며, APP-A 첫 통합과 APP-C 조건부 분기를 핵심 검증으로 두고 APP-B의 최종 필수 여부는 보류한다.",
+        "status": "R01 방향 반영 — 세부 계약은 미확정",
+        "evidence_ids": ["TASK-006-E06"]
+      },
+      {
+        "id": "TASK-006-C08",
+        "text": "R03 모의 원형에는 작업 ID·선행 관계·분기 이유가 있으나 작업별 run_if, 대상·조건별 verdict ID, 실제 source/evidence ID와 부분 결과 형식은 아직 없다. R04의 2차 개정안은 이 ID 연결과 세 상태 분리를 화면 요구로 제안한다.",
+        "status": "문서·원형 대조 — 팀 간 계약 미확정",
+        "evidence_ids": ["TASK-006-E07", "TASK-006-E08"]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "TASK-006-E01",
+        "label": "집중 앱 평가 요구사항과 APP-A·B·C 사례",
+        "path": "docs/artifacts/specs/focus_apps.json"
+      },
+      {
+        "id": "TASK-006-E02",
+        "label": "R05 백엔드 데이터 흐름 초안",
+        "path": "docs/artifacts/research/2026-11-11_리서치_백엔드_데이터_흐름_초안.json"
+      },
+      {
+        "id": "TASK-006-E03",
+        "label": "R05 출처 저장 방식 초안",
+        "path": "docs/artifacts/research/2026-11-11_리서치_출처_저장_방식_초안.json"
+      },
+      {
+        "id": "TASK-006-E04",
+        "label": "팀 역할과 책임",
+        "path": "docs/charter/팀_헌장.md"
+      },
+      {
+        "id": "TASK-006-E05",
+        "label": "오늘의 작업 범위와 완료 기준",
+        "path": "docs/artifacts/tasks/TASK-006.json"
+      },
+      {
+        "id": "TASK-006-E06",
+        "label": "R01의 도메인별 특화와 TASK-006 구현 의도",
+        "path": "docs/human/task-intents/TASK-006.md"
+      },
+      {
+        "id": "TASK-006-E07",
+        "label": "R03 APP-A·B·C 규칙 기반 모의 원형과 검증 한계",
+        "path": "docs/members/R03/workspace/2026-11-12_APP_모의_검증_요약.md"
+      },
+      {
+        "id": "TASK-006-E08",
+        "label": "R04 사용자 문제와 결과 화면 연결 2차 개정",
+        "path": "docs/artifacts/tasks/TASK-003.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "FR-01~04 각각에 책임 구성요소와 데이터 연결을 지정했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E05"
+        ]
+      },
+      {
+        "criterion": "APP-A·B·C의 요청과 중간 조건별로 선행 작업과 결과 경로를 설계상 따라갈 수 있는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E05"
+        ]
+      },
+      {
+        "criterion": "WBS 후보 14개의 ID·선행 관계·담당 역할과 FR-01~04 대응을 정적 검사했는가",
+        "verdict": "pass",
+        "evidence_ids": [
+          "TASK-006-E01",
+          "TASK-006-E04",
+          "TASK-006-E05"
+        ]
+      },
+      {"criterion": "합성 APP-A 입력에서 작업·출처·근거·판정·보고서 참조가 이어지고 후보 발굴을 생략하는가", "verdict": "pass", "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]},
+      {"criterion": "합성 APP-C1·C2·C3 판정에서 대안 발굴을 각각 추가·생략·보류하는가", "verdict": "pass", "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]},
+      {"criterion": "합성 자료 접근 실패에서 근거를 생성하지 않고 실행 실패와 조건 미확인을 구분하는가", "verdict": "pass", "evidence_ids": ["TASK-006-E01", "TASK-006-E05"]},
+      {"criterion": "R01 의도의 공통 리서치 의미와 앱 특화 조건·역할·출처·검증을 구조상 분리하고 APP-A·C 핵심 검증 및 APP-B 미결정을 반영했는가", "verdict": "pass", "evidence_ids": ["TASK-006-E05", "TASK-006-E06"]},
+      {
+        "criterion": "요청 하나가 실제 실행을 통해 근거 있는 결과까지 도달하는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-006-E01"
+        ]
+      },
+      {
+        "criterion": "담당 제안과 입출력 계약을 관련 팀원과 확인했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "TASK-006-E04"
+        ]
+      },
+      {
+        "criterion": "R03·R05가 확인한 임시 참조→정식 task_id→attempt_id 흐름을 실제 출력과 저장·실행에서 검증했는가",
+        "verdict": "inconclusive",
+        "evidence_ids": ["TASK-006-E05"]
+      }
+    ],
+    "uncertainties": [
+      "R03·R05는 작업·시도 ID의 발급 및 참조 연결 순서를 설계상 확인했다. 임시 참조 필드명과 실제 전송 형식, R04·R02 경계 및 나머지 최소 입출력은 미합의다.",
+      "앱 자료의 접근·보관 가능 범위와 실패 시 대체 출처는 TASK-004 결과를 확인해야 한다.",
+      "재시도 상한, 부분 결과의 완료 기준, 프레임워크 필요성은 아직 검증하지 않았다.",
+      "WBS 후보의 기간과 병렬 수행 가능성은 팀원의 작업 가능 시간과 첫 구현 결과로 조정해야 한다.",
+      "합성 예시는 실제 앱의 기능, 공개 자료 접근, 에이전트 실행 또는 서비스 통합 성공의 근거가 아니다.",
+      "interface_draft의 ID 발급·연결 순서는 R03·R05 설계 합의이며, 구체 필드명·자료 형태·상태 전이는 구현 계약 전 예시다.",
+      "R03 규칙 기반 모의 원형은 작업별 run_if, 대상·조건별 판정 객체, 실제 source/evidence ID와 부분 결과 객체를 아직 출력하지 않는다. R05의 보강 예시는 팀과 대조할 초안이다.",
+      "APP-B의 최종 필수 여부는 TASK-005 결과와 전체 일정 확인 후 R01이 결정한다."
+    ],
+    "decision_requests": [
+      "R01이 TASK-007에서 APP-B의 최종 필수 여부와 세부 역할·기간을 TASK-005 및 일정에 맞춰 수렴해야 한다.",
+      "R01이 WBS 후보의 담당·기간·선행 조건을 TASK-003~005 결과와 함께 확정해야 한다.",
+      "R01 방향에 맞춰 부분 결과·미확인·접근 실패 표시를 MVP에 포함하되, 세부 표시 기준과 추가 조사 상한은 담당자와 정해야 한다.",
+      "R03·R04·R05가 공통 의미·ID 연결을 먼저 맞추고 R02 자료 접근 제약을 반영해야 한다. 최종 API·DB 필드명과 안정된 계약은 TASK-007에서 수렴한다."
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "name": "요청 구조화",
+        "input": "사용자 원문과 명시 조건",
+        "output": "request_id, 플랫폼, 지정 앱, 필수 조건, 선호, 후보 발굴 조건",
+        "failure": "필수 조건 부족은 확인 질문 또는 미확인으로 기록",
+        "proposed_owner": "R04 화면, R05 API, R03 해석 규칙",
+        "requirements": [
+          "FR-01"
+        ]
+      },
+      {
+        "id": "C2",
+        "name": "계획·역할 배정",
+        "input": "구조화된 요청",
+        "output": "task_id, 목표, 역할, 선행 작업, 실행 조건이 있는 계획",
+        "failure": "계획 생성·검증 실패 이유를 기록하고 실행 보류",
+        "proposed_owner": "R03 계획 로직, R05 계획 저장·검증",
+        "requirements": [
+          "FR-02"
+        ]
+      },
+      {
+        "id": "C3",
+        "name": "작업 실행·상태",
+        "input": "계획, 선행 작업 결과, 실행 조건",
+        "output": "작업별 시작·종료·상태·실패 또는 생략 이유",
+        "failure": "시간 초과·실행 실패와 재시도 이력을 별도 기록",
+        "proposed_owner": "R05 실행 상태, R03 하위 에이전트",
+        "requirements": [
+          "FR-03"
+        ]
+      },
+      {
+        "id": "C4",
+        "name": "자료 조회·출처 기록",
+        "input": "작업별 조사 대상과 검색 조건",
+        "output": "source_id, URL, 조회 시각, 검색만 가능·원문 확인·실패 상태",
+        "failure": "접근 실패를 남기고 해당 출처에서 근거를 만들지 않음",
+        "proposed_owner": "R03 조사 도구, R02 접근 제약, R05 조회 기록",
+        "requirements": [
+          "FR-03",
+          "FR-04"
+        ]
+      },
+      {
+        "id": "C5",
+        "name": "근거 연결·조건 판정",
+        "input": "원문에서 확인한 내용, 출처 기록, 필수 조건",
+        "output": "evidence_id, 조건별 충족·미충족·미확인, 근거 연결",
+        "failure": "근거가 없거나 충돌하면 충족으로 단정하지 않음",
+        "proposed_owner": "R03 추출·판정, R05 근거 연결",
+        "requirements": [
+          "FR-04"
+        ]
+      },
+      {
+        "id": "C6",
+        "name": "결과 생성·표시",
+        "input": "조건 판정, 근거, 작업 상태",
+        "output": "후보별 판단, 출처 링크, 조회 시각, 미확인·실패 내역",
+        "failure": "부분 결과와 부족한 근거를 명시",
+        "proposed_owner": "R03 결과 종합, R05 결과 API, R04 화면, R01 통합·QA",
+        "requirements": [
+          "FR-04"
+        ]
+      }
+    ],
+    "data_contracts": [
+      {
+        "name": "request",
+        "fields": [
+          "request_id",
+          "domain",
+          "user_text",
+          "targets",
+          "criteria",
+          "discovery_rule",
+          "domain_context"
+        ],
+        "note": "공통 의미 초안. Android 플랫폼, 오프라인 타이머 등은 app 도메인의 criteria·domain_context에 둔다. 기존 APP-A 모의 입력은 앱 전용 펼침 예시다."
+      },
+      {
+        "name": "task",
+        "fields": [
+          "task_id",
+          "request_id",
+          "goal",
+          "role",
+          "depends_on",
+          "run_if",
+          "status",
+          "status_reason",
+          "failure_reason"
+        ]
+      },
+      {
+        "name": "source",
+        "fields": [
+          "source_id",
+          "task_id",
+          "url",
+          "retrieved_at",
+          "access_status",
+          "error_reason"
+        ]
+      },
+      {
+        "name": "evidence",
+        "fields": [
+          "evidence_id",
+          "source_id",
+          "finding",
+          "locator"
+        ]
+      },
+      {
+        "name": "claim",
+        "fields": [
+          "claim_id",
+          "text",
+          "status",
+          "evidence_ids"
+        ]
+      },
+      {
+        "name": "verdict",
+        "fields": [
+          "verdict_id",
+          "task_id",
+          "candidate_id",
+          "condition_id",
+          "status",
+          "evidence_ids"
+        ],
+        "note": "candidate_id는 앱 사례의 조사 대상 ID다. 공통 의미는 대상·조건별 판정과 근거 연결이며 최종 필드명은 팀 협의 전이다."
+      },
+      {
+        "name": "report",
+        "fields": [
+          "request_id",
+          "status",
+          "claim_ids",
+          "verdict_ids",
+          "source_ids",
+          "unverified",
+          "failures"
+        ],
+        "note": "저장 결과는 ID 참조와 status(완료·부분 결과·생성 실패)를 갖는다. R04 화면용 report_status는 같은 상태의 표시 이름이며 화면 응답에는 참조된 객체를 펼칠 수 있다. 필드명은 협의 전이다."
+      }
+    ],
+    "domain_boundary": {
+      "authority": "docs/human/task-intents/TASK-006.md",
+      "status": "R01 방향 반영, 구체적 필드·모듈 경계는 R03·R04·R05 협의 전",
+      "common_meanings": [
+        {"name": "request", "meaning": "요청 ID·원문·도메인·조사 대상·조건과 발굴 규칙", "must_not_fix": "Android·앱 이름·오프라인 기능을 공통 필수 필드로 두지 않음"},
+        {"name": "task", "meaning": "역할·선행 관계·실행 조건·실행 상태와 이유", "must_not_fix": "모든 도메인에 앱 비교 작업을 생성하지 않음"},
+        {"name": "source/evidence", "meaning": "조회 기록·접근 상태와 원문 위치·발견 내용의 연결", "must_not_fix": "앱스토어만 공통 출처로 강제하지 않음"},
+        {"name": "verdict/report", "meaning": "대상·조건별 판정과 근거 연결, 미확인·실패·부분 결과", "must_not_fix": "앱 기능별 판정 기준을 공통 규칙으로 고정하지 않음"}
+      ],
+      "app_research_specialization": {
+        "criteria": ["오프라인 타이머 사용", "계정 필요 여부", "무료판의 요일·시간 예약 차단", "사이트 2개 차단", "권한·브라우저·OS 호환성"],
+        "roles_and_tasks": ["앱 후보 발굴", "지정 앱 비교", "앱 기능·무료 범위 확인", "권한·호환성 확인"],
+        "source_priority_to_validate": ["앱스토어 공개 설명", "개발사 공식 안내", "그 밖의 허용된 공개 자료"],
+        "verification_rules": ["무료 설치와 무료 기능을 구분", "문서상 지원과 실제 기기 동작 확인을 구분", "기능·가격·권한의 확인 시점 표시", "APP-C의 두 후보 모두 미충족 확인 후에만 대안 발굴"]
+      },
+      "implementation_boundary": "앱 리서치의 특화 규칙을 공통 request/task/source/evidence/verdict의 의미와 ID 연결 바깥에 둔다. 범용 플러그인이나 두 번째 도메인용 프레임워크 구현은 이번 범위가 아니다."
+    },
+    "interface_draft": {
+      "status": "R03·R05 ID 발급·연결 순서 확인, 나머지는 R05 예시 — 필드명·전송 방식·실제 연동 미합의",
+      "common_rules": [
+        "모든 작업·출처·판정·보고서는 동일한 request_id로 묶는다. ID로 연결된 대상이 없으면 결과를 확정하지 않는다.",
+        "조건마다 필수·선호 구분을 전달한다. 앱 리서치의 조건 ID·플랫폼 값은 도메인 특화 부분에 둔다. 판정은 대상과 조건의 쌍마다 남긴다.",
+        "근거는 원문을 확인한 출처의 source_id를 참조하고, 보고서의 핵심 주장은 evidence_id를 참조한다. 검색 결과만 보거나 접근에 실패한 출처에서 확인 근거를 만들지 않는다.",
+        "실행 작업의 실패와 조건 판정의 미확인은 다른 필드에 저장한다. 부분 결과는 이미 확인한 주장과 미확인·실패 이유를 함께 돌려준다.",
+        "run_if는 선행 작업의 완료 여부가 아니라 그 결과에서 평가할 실행 조건이다. 조건 판정 전의 보류와 확인 한도 뒤의 최종 미실행을 구분하고 둘 다 이유를 기록한다.",
+        "미확인 판정에는 근거 ID가 없을 수 있으므로 verdict_id와 판정을 만든 task_id로 요청·작업 경로를 유지한다. 결과는 claim_id·verdict_id를 참조한다.",
+        "같은 논리 작업을 재시도하면 task_id를 유지한다. 첫 실패를 덮어쓰지 않고 시도별 식별자·상태·이유를 남긴다. 조사 목표가 달라진 새 작업에는 새 task_id를 부여한다.",
+        "출처의 조회 시각과 접근 상태는 실제 조회 때 기록한다. 예시의 mock 값은 실제 자료 확인을 뜻하지 않는다."
+      ],
+      "retry_identity": {
+        "status": "R03·R05 작업 ID 보존 및 R05 시도 ID 발급 흐름 확인 — 코드 적용 전",
+        "rule": "재시도는 기존 task_id에 속한 새로운 실행 시도로 기록한다. 이전 시도와 오류를 보존하고 작업의 최종 상태는 모든 시도의 이력을 참조한다.",
+        "example": {"task_id": "MOCK-T1", "attempts": [{"attempt_id": "MOCK-T1-A1", "status": "실패", "reason": "합성 접근 실패"}, {"attempt_id": "MOCK-T1-A2", "status": "완료", "reason": null}]},
+        "open": "자동 재시도 허용 여부·횟수 상한과 실제 전송 필드명은 미확정이다."
+      },
+      "plan_id_handoff": {
+        "status": "2026-11-12 R03·R05 공동 확인한 설계 순서 — 코드 적용·실제 연동 검증 전",
+        "source": "R03의 2026-11-12 회신과 R03 조건·작업·분기 초안 4·7·9절. 회신에서 지칭한 11절은 현재 main에 없어 후속 대조 필요",
+        "sequence": [
+          "R05가 요청을 수신해 request_id를 발급하고 R03에 전달한다.",
+          "R03이 임시 작업 참조값을 붙인 계획 제안에 목표·역할·실행 조건·선행 관계를 담아 R05에 보낸다. 임시 참조 필드명은 예시이며 확정하지 않는다.",
+          "R05가 임시 작업 참조값별 정식 task_id를 발급하고 대응표를 R03에 반환한다.",
+          "R03이 depends_on과 판정·결정의 작업 참조를 정식 task_id로 연결한 계획을 반환한 뒤 실행한다.",
+          "후속 작업을 추가할 때 기존 task_id는 유지하고 새 작업에만 새 task_id를 발급한다. 같은 목표의 재시도에는 기존 task_id와 새 attempt_id를 사용한다."
+        ],
+        "execution_identity": "R05가 실행 시도마다 attempt_id를 발급해 request_id·task_id와 함께 R03에 전달한다. R03은 결과·실패 기록에 세 ID를 그대로 반환하고 해당 시도의 도구 호출·출처·근거·판정을 같은 attempt로 추적한다.",
+        "validation_draft": "R05는 임시 참조의 중복·누락, 대응표의 일대일 연결, 미해결 depends_on·판정·결정 작업 참조와 선행 관계 순환을 실행 전 확인하고 오류를 기록한다. 구체 전송 형태와 검증 구현은 미완료다."
+      },
+      "handoffs": [
+        {
+          "from": "R04 입력 화면",
+          "to": "R05 요청 수신 → R03 요청 해석",
+          "minimum": ["request_id", "domain", "user_text", "targets", "criteria", "discovery_rule", "domain_context"],
+          "example": {"request_id": "MOCK-A", "domain": "app_research", "user_text": "지정한 두 앱의 오프라인 타이머 비교", "targets": ["candidate-A", "candidate-B"], "criteria": [{"id": "offline_timer", "priority": "필수"}, {"id": "no_account", "priority": "선호"}], "discovery_rule": "지정 후보만 비교", "domain_context": {"platform": "Android"}},
+          "invalid_or_missing": "필수 조건을 분리할 수 없으면 확인 질문 또는 미확인 항목으로 반환하며 임의로 충족 판정하지 않는다."
+        },
+        {
+          "from": "R03 임시 참조를 포함한 계획 제안",
+          "to": "R05 task_id 발급 → 임시 참조 대응표 반환 → R03 정식 ID 연결 → R05 계획 저장·실행 상태",
+          "minimum": ["request_id", "temporary_task_ref", "goal", "role", "depends_on", "run_if"],
+          "example": {"proposal": {"request_id": "MOCK-A", "temporary_task_ref": "draft-A1", "goal": "candidate-A 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상"}, "mapping": {"draft-A1": "MOCK-T1"}, "resolved_task": {"request_id": "MOCK-A", "task_id": "MOCK-T1", "goal": "candidate-A 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "대기", "status_reason": null}},
+          "invalid_or_missing": "임시 참조 중복·누락, 대응표 불일치, 미해결 작업 참조, 선행 관계 순환, 해석할 수 없는 실행 조건은 실행 전 거부하고 이유를 남긴다. temporary_task_ref와 mapping의 필드명·형식은 예시다."
+        },
+        {
+          "from": "R05 작업 실행·시도 식별",
+          "to": "R03 실행 및 결과·실패 이력",
+          "minimum": ["request_id", "task_id", "attempt_id"],
+          "example": {"request_id": "MOCK-A", "task_id": "MOCK-T1", "attempt_id": "MOCK-T1-A1", "status": "실패", "reason": "합성 접근 실패"},
+          "invalid_or_missing": "R03은 받은 세 ID를 변경하지 않고 반환한다. 같은 작업의 새 시도에는 새 attempt_id를 쓰고 이전 실패를 덮어쓰지 않는다. 자동 재시도 여부·상한은 미결정이다."
+        },
+        {
+          "from": "R03 자료 조사·판정 및 R02 접근 제약",
+          "to": "R05 출처·근거 저장",
+          "minimum": ["task_id", "attempt_id", "source_id", "url", "retrieved_at", "access_status"],
+          "only_when_original_confirmed": ["evidence_id", "finding", "locator"],
+          "example": {"task_id": "MOCK-T1", "attempt_id": "MOCK-T1-A1", "source_id": "MOCK-S1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각", "access_status": "원문 확인", "evidence_id": "MOCK-E1", "finding": "합성 근거", "locator": "합성 문단 1"},
+          "invalid_or_missing": "접근 실패·검색 결과만 확인한 출처에는 확인된 evidence_id를 붙이지 않는다."
+        },
+        {
+          "from": "R03 대상·조건별 판정",
+          "to": "R05 판정 저장",
+          "minimum": ["verdict_id", "task_id", "attempt_id", "candidate_id", "condition_id", "status", "evidence_ids"],
+          "example": {"verdict_id": "MOCK-V1", "task_id": "MOCK-T1", "attempt_id": "MOCK-T1-A1", "candidate_id": "candidate-A", "condition_id": "offline_timer", "status": "충족", "evidence_ids": ["MOCK-E1"]},
+          "invalid_or_missing": "근거 없는 충족·미충족은 미확인으로 남긴다. 미확인 판정은 evidence_ids가 비어 있어도 task_id로 조사 작업에 연결한다."
+        },
+        {
+          "from": "R05 작업 상태·결과 조회",
+          "to": "R04 진행·결과 화면",
+          "minimum": ["request_id", "task_statuses", "report_status", "claims", "verdicts", "evidence", "sources", "uncertainties", "failures"],
+          "example": {"request_id": "MOCK-A", "task_statuses": [{"task_id": "MOCK-T1", "status": "완료"}, {"task_id": "MOCK-T2", "status": "완료"}], "report_status": "부분 결과", "claims": [{"claim_id": "MOCK-C1", "evidence_ids": ["MOCK-E1"]}], "verdicts": [{"verdict_id": "MOCK-V2", "task_id": "MOCK-T2", "candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}], "evidence": [{"evidence_id": "MOCK-E1", "source_id": "MOCK-S1", "finding": "합성 근거"}], "sources": [{"source_id": "MOCK-S1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각"}], "uncertainties": ["candidate-B:offline_timer"], "failures": []},
+          "invalid_or_missing": "미확인 조건과 실패 이유를 결과에서 숨기지 않는다. 연결되지 않은 claim·evidence·source는 확인된 주장으로 표시하지 않는다."
+        }
+      ]
+    },
+    "requirement_map": [
+      {
+        "id": "FR-01",
+        "components": [
+          "C1"
+        ],
+        "integration": "R04 입력 → R05 요청 API → R03 해석 규칙"
+      },
+      {
+        "id": "FR-02",
+        "components": [
+          "C2"
+        ],
+        "integration": "R03 계획 출력 → R05 계획 저장·검증"
+      },
+      {
+        "id": "FR-03",
+        "components": [
+          "C2",
+          "C3",
+          "C4"
+        ],
+        "integration": "R05 실행 상태 ↔ R03 조사 작업, R02 자료 접근 제약"
+      },
+      {
+        "id": "FR-04",
+        "components": [
+          "C4",
+          "C5",
+          "C6"
+        ],
+        "integration": "R03 판정 → R05 출처·근거·결과 API → R04 결과 화면"
+      }
+    ],
+    "integration_stages": [
+      {
+        "stage": 1,
+        "case": "APP-A",
+        "goal": "지정된 두 앱의 필수 조건·선호를 구분해 조사하고 근거 있는 비교 결과를 표시",
+        "required_path": [
+          "요청 구조화",
+          "지정 후보 조사 계획",
+          "자료 조회·근거 저장",
+          "조건 판정",
+          "보고서·화면"
+        ],
+        "skip": "후보 발굴 작업은 생성하거나 실행하지 않음",
+        "failure_check": "오프라인 기능 또는 계정 조건의 근거가 없으면 해당 조건을 미확인으로 표시"
+      },
+      {
+        "stage": 2,
+        "case": "APP-C",
+        "goal": "APP-A 이후 핵심 검증. 두 후보의 중간 판정에 따라 대안 발굴 작업을 추가·생략·보류",
+        "required_path": [
+          "지정 후보 조사",
+          "두 후보의 필수 조건 판정",
+          "실행 조건 평가",
+          "필요한 경우 대안 발굴",
+          "보고서·화면"
+        ],
+        "skip": "한 후보라도 충족하면 발굴 생략; 미확인이 남아 두 후보 모두 미충족임을 확인하지 못하면 발굴 보류",
+        "failure_check": "발굴 실행·생략·보류 이유를 계획 및 실제 작업 기록에 남김"
+      },
+      {
+        "stage": 3,
+        "case": "APP-B",
+        "goal": "후속 검토 후보. 최종 필수 여부는 TASK-005·전체 일정 확인 후 R01 결정. 지정 후보 없는 요청에서 후보 발굴과 무료 예약 차단 등 조건 검증",
+        "required_path": [
+          "요청 구조화",
+          "후보 발굴 계획",
+          "후보 조사",
+          "조건 판정",
+          "보고서·화면"
+        ],
+        "skip": "지정 후보 비교 작업은 요청에 없으면 생략",
+        "failure_check": "무료 설치와 무료 기능을 구분하고 브라우저·권한 정보가 부족하면 미확인으로 표시"
+      },
+      {
+        "stage": 4,
+        "case": "실패·부분 결과",
+        "goal": "자료 접근 실패와 조건 미확인을 분리해 사용자에게 설명",
+        "required_path": [
+          "실패 기록",
+          "근거가 있는 부분 결과 보존",
+          "미확인 조건 표시",
+          "종료·재시도 정책 확인"
+        ],
+        "skip": "재시도 상한과 부분 결과 완료 기준은 팀 결정 전 숫자로 고정하지 않음",
+        "failure_check": "접근 실패한 출처에서 근거를 만들지 않고 근거 없는 조건을 충족으로 표시하지 않음"
+      }
+    ],
+    "state_policy": [
+      {
+        "kind": "task",
+        "values": [
+          "대기",
+          "진행 중",
+          "완료",
+          "실패",
+          "생략"
+        ],
+        "rule": "실패는 실행 실패 이유를, 생략은 조건 미충족 또는 불필요 이유를 보존"
+      },
+      {
+        "kind": "source",
+        "values": [
+          "검색 결과만 확인",
+          "원문 확인",
+          "접근 실패"
+        ],
+        "rule": "원문을 읽지 못한 출처에는 확인된 근거를 생성하지 않음"
+      },
+      {
+        "kind": "condition",
+        "values": [
+          "충족",
+          "미충족",
+          "미확인"
+        ],
+        "rule": "충족·미충족은 이를 직접 뒷받침하는 근거 ID가 있을 때만 사용"
+      },
+      {
+        "kind": "report",
+        "values": [
+          "완료",
+          "부분 결과",
+          "생성 실패"
+        ],
+        "rule": "부분 결과의 사용자 제공 기준과 재시도 상한은 R01 결정 필요"
+      }
+    ],
+    "state_transition_draft": {
+      "status": "R05 제안 — 실제 실행·복구 정책 미확정",
+      "task": ["대기 → 진행 중 → 완료 또는 실패", "APP-C 조건 판정 전에는 보류와 이유를 기록하고 한도 안에서 재평가한다. 확인 한도 뒤에도 조건이 불명확하면 최종 미실행과 이유를 남기고 종료한다. 보류는 최종 상태가 아니다.", "실행 조건이 불필요로 판정되면 대기 → 생략, 이유 필수", "선행 작업 실패로 실행 불가능하면 임의로 완료하지 않고 실패 또는 생략 사유를 남김"],
+      "condition": ["초기값 미확인", "원문을 확인한 직접 근거가 생기면 충족 또는 미충족", "근거가 없거나 충돌하면 미확인 유지"],
+      "report": ["근거가 연결된 결과와 필수 조건 판정이 모두 있으면 완료 후보", "일부 판정이 미확인이거나 일부 작업이 실패해도 확인된 내용을 보존하면 부분 결과 후보", "보고서를 생성할 수 없으면 생성 실패와 이유 기록"],
+      "retry": "같은 논리 작업의 재시도에는 원래 task_id를 유지하고 시도별 ID·상태·이유를 이력으로 남긴다. 자동 재시도 여부·상한과 시도 ID의 팀 간 발급·전달 방식은 아직 정하지 않는다."
+    },
+    "scope_proposal_for_r01": {
+      "status": "R01 범위 방향 반영 — 세부 계약·APP-B 필수 여부는 TASK-007에서 결정",
+      "first_integrated_slice": [
+        "APP-A의 구조화된 입력을 받아 두 지정 후보의 조사 작업을 계획하고 작업 상태를 보인다.",
+        "실제 접근이 허용된 자료에서 출처·조회 시각·직접 근거를 저장하고 조건별 충족·미충족·미확인을 표시한다.",
+        "근거가 있는 주장과 미확인·실패를 구분한 결과를 화면에 전달한다. 후보 발굴은 실행하지 않는다."
+      ],
+      "next_if_first_slice_works": [
+        "APP-C를 핵심 검증으로 연결한다. 두 후보의 필수 조건이 모두 미충족으로 확인될 때만 대안 발굴을 추가하고, 미확인이 있으면 보류 이유를 표시한다.",
+        "APP-B의 신규 후보 발굴 사례는 TASK-005와 일정 확인 후 최종 필수 여부를 정한다."
+      ],
+      "defer_candidate": [
+        "중단된 장시간 실행의 자동 복구와 복잡한 병렬 워크플로",
+        "프레임워크·DB·검색 공급자 확정, 범용 도메인 확장",
+        "자동 재시도 정책과 광범위한 앱 후보 탐색, 범용 플러그인·다중 도메인 프레임워크"
+      ],
+      "confirmed_direction": [
+        "APP-A 첫 vertical slice와 APP-C 추가·생략·보류를 핵심 검증으로 유지",
+        "확인된 내용의 부분 결과를 MVP에서 제공하고 미확인과 실패를 분리",
+        "APP-C에서 두 후보 모두 필수 조건 미충족이 근거로 확인될 때만 대안 발굴",
+        "팀 간 I/O는 공통 의미와 연결 관계부터 맞추며 앱 특화 규칙은 공통 구조에 고정하지 않음"
+      ],
+      "still_to_decide": [
+        {"question": "APP-B를 최종 필수 시연 사례로 둘지", "basis": "TASK-005 결과와 전체 일정", "owner": "R01"},
+        {"question": "부분 결과의 세부 완료 기준과 보완 조사 상한", "basis": "첫 통합의 실제 접근·품질 결과", "owner": "R01·R03·R05"},
+        {"question": "공통 의미 중 안정된 계약과 각 경계의 최종 책임자", "basis": "R03·R04·R05 I/O 협의 및 R02 접근 제약", "owner": "R01"}
+      ]
+    },
+    "handoff_review_questions": [
+      {"role": "R03", "confirm": ["요청 해석 결과에서 필수 조건과 선호를 분리해 반환할 수 있는가", "계획 작업마다 task_id·depends_on·run_if와 조건부 생략 이유를 제공할 수 있는가", "판정마다 candidate_id·condition_id·status·evidence_ids를 제공할 수 있는가", "같은 작업 재시도에서 task_id를 유지하고 시도별 실행 ID·상태·이유를 구분해 전달할 수 있는가"]},
+      {"role": "R04", "confirm": ["입력 화면에서 지정 후보·필수 조건·선호·발굴 조건을 구분해 보낼 수 있는가", "진행 화면에 작업별 대기·진행 중·완료·실패·생략과 이유를 보여줄 수 있는가", "결과 화면에 조건 미확인·부분 결과·출처·조회 시각을 구분해 보여줄 수 있는가"]},
+      {"role": "R02", "confirm": ["첫 시연에 사용할 공개 자료의 접근·보관 범위는 무엇인가", "검색 결과만 보이는 경우와 원문 확인 가능한 경우를 구분할 수 있는가", "접근 실패나 지연이 생겼을 때 어떤 상태·오류 정보를 남길 수 있는가"]},
+      {"role": "R01", "confirm": ["TASK-005와 일정 확인 후 APP-B를 필수 시연 사례로 둘 것인가", "부분 결과의 세부 완료 기준과 보완 조사 한도는 무엇인가", "공통 의미 중 무엇을 안정된 계약으로 둘지와 통합 승인 담당을 언제 정할 것인가"]}
+    ],
+    "technology_decision_boundary": {
+      "ordinary_python_candidate": [
+        "구조화된 입력 검증",
+        "작업 상태와 선행 관계 확인",
+        "APP-A·B·C의 제한된 조건 분기",
+        "출처·근거 ID 연결 검사",
+        "상한이 있는 재시도 기록"
+      ],
+      "framework_review_trigger": [
+        "프로세스 재시작 뒤 실행 복구가 필수",
+        "장시간·병렬 작업의 상태 추적이 자체 코드에서 복잡해짐",
+        "조건 분기와 역할 수가 실제 사례에서 증가해 수동 구현 부담이 확인됨"
+      ],
+      "status": "선택 조건 제안. Python만으로 충분하다는 실행 검증이나 특정 프레임워크 채택 결정은 하지 않음"
+    },
+    "wbs_candidates": [
+      {
+        "id": "WBS-C01",
+        "title": "요청·작업·근거·판정의 최소 데이터 계약 초안",
+        "proposed_owner": "R05",
+        "estimate_workdays": "1일 제안",
+        "depends_on": [],
+        "output": "필드 목록과 경계별 입력·출력 예시",
+        "done_when": "FR-01~04 필드와 R03·R04 인터페이스 질문이 빠짐없이 적힘"
+      },
+      {
+        "id": "WBS-C02",
+        "title": "첫 앱 자료의 출처·이용 조건 확인",
+        "proposed_owner": "R02",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [],
+        "output": "조건별 접근 가능·미확인 목록",
+        "done_when": "시연에 쓸 자료와 접근·보관 제약 또는 대체 자료가 표시됨"
+      },
+      {
+        "id": "WBS-C03",
+        "title": "APP-A 요청 해석·지정 후보 조사 계획",
+        "proposed_owner": "R03",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [
+          "WBS-C01"
+        ],
+        "output": "작업·역할·선행 관계가 있는 계획",
+        "done_when": "APP-A에서 두 지정 후보를 조사하고 후보 발굴을 생략함"
+      },
+      {
+        "id": "WBS-C04",
+        "title": "요청·계획·작업 상태 API",
+        "proposed_owner": "R05",
+        "estimate_workdays": "2~3일 제안",
+        "depends_on": [
+          "WBS-C01"
+        ],
+        "output": "요청 ID, 계획, 상태·실패 이유를 다루는 API",
+        "done_when": "작업 시작·완료·실패·생략과 선행 관계가 기록됨"
+      },
+      {
+        "id": "WBS-C05",
+        "title": "출처·근거·판정·결과 연결 저장",
+        "proposed_owner": "R05",
+        "estimate_workdays": "2~3일 제안",
+        "depends_on": [
+          "WBS-C01"
+        ],
+        "output": "조회 기록, 근거·주장·판정 연결과 결과 조회",
+        "done_when": "결과의 핵심 판단에서 근거와 원문 URL·조회 시각을 따라갈 수 있음"
+      },
+      {
+        "id": "WBS-C06",
+        "title": "APP-A 자료 조사와 조건 판정·결과 생성",
+        "proposed_owner": "R03",
+        "estimate_workdays": "2~3일 제안",
+        "depends_on": [
+          "WBS-C02",
+          "WBS-C03",
+          "WBS-C05"
+        ],
+        "output": "조건별 충족·미충족·미확인과 근거 있는 비교 결과",
+        "done_when": "미확인 조건을 충족으로 단정하지 않고 APP-A 결과를 생성함"
+      },
+      {
+        "id": "WBS-C07",
+        "title": "요청·진행·근거 결과 화면",
+        "proposed_owner": "R04",
+        "estimate_workdays": "2~3일 제안",
+        "depends_on": [
+          "WBS-C01"
+        ],
+        "output": "입력, 작업 상태, 후보별 조건과 출처 표시 화면",
+        "done_when": "APP-A의 필수 조건·선호·미확인·출처를 사용자가 확인할 수 있음"
+      },
+      {
+        "id": "WBS-C08",
+        "title": "APP-A 첫 통합·실패 사례 확인",
+        "proposed_owner": "R01",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [
+          "WBS-C04",
+          "WBS-C05",
+          "WBS-C06",
+          "WBS-C07"
+        ],
+        "output": "요청부터 근거 결과까지의 통합 확인 기록",
+        "done_when": "정상·자료 실패·근거 부족 경로를 시연하고 남은 문제를 기록함"
+      },
+      {
+        "id": "WBS-C09",
+        "title": "앱 후보 발굴 작업 — APP-C 조건부 대안에 우선 사용",
+        "proposed_owner": "R03",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [
+          "WBS-C03",
+          "WBS-C06"
+        ],
+        "output": "APP-C 대안 발굴·조사·조건 판정 계획과 결과. APP-B에서도 재사용 가능",
+        "done_when": "APP-C에서 발굴 조건이 확인된 뒤에만 발굴 역할을 선택함",
+        "scope_note": "APP-B의 최종 필수 여부는 미정"
+      },
+      {
+        "id": "WBS-C10",
+        "title": "APP-C 중간 판정 후 작업 추가·생략 규칙",
+        "proposed_owner": "R03",
+        "estimate_workdays": "1일 제안",
+        "depends_on": [
+          "WBS-C06",
+          "WBS-C09"
+        ],
+        "output": "미충족·충족·미확인별 실행 조건",
+        "done_when": "두 후보 모두 미충족일 때만 발굴을 제안하고 나머지는 이유와 함께 생략·보류함"
+      },
+      {
+        "id": "WBS-C11",
+        "title": "APP-C 조건부 작업 상태·실행 연결",
+        "proposed_owner": "R05",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [
+          "WBS-C04",
+          "WBS-C10"
+        ],
+        "output": "중간 결과에 따른 후속 작업 추가·생략 이력",
+        "done_when": "APP-C 세 분기의 실제 작업 순서와 상태·이유가 기록됨"
+      },
+      {
+        "id": "WBS-C12",
+        "title": "APP-A·C 화면·서버·에이전트 핵심 통합 검증",
+        "proposed_owner": "R01",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [
+          "WBS-C08",
+          "WBS-C09",
+          "WBS-C11",
+          "WBS-C13",
+          "WBS-C14"
+        ],
+        "output": "APP-A·C의 FR-01~04와 실패·미확인 통합 시험 기록",
+        "done_when": "APP-A 첫 흐름과 APP-C 추가·생략·보류, 부분 결과를 확인하고 미해결 문제를 남김",
+        "scope_note": "APP-B 최종 통합은 TASK-005·일정 확인 후 범위 결정"
+      },
+      {
+        "id": "WBS-C13",
+        "title": "통합 실행 환경·배포 경로 초안",
+        "proposed_owner": "R02",
+        "estimate_workdays": "1~2일 제안",
+        "depends_on": [
+          "WBS-C04",
+          "WBS-C05"
+        ],
+        "output": "서버·에이전트·화면의 실행 환경과 배포·비용 제약",
+        "done_when": "APP-A 통합 실행 위치와 외부 호출·오류 확인 방법이 문서화됨"
+      },
+      {
+        "id": "WBS-C14",
+        "title": "APP-C 발굴·조건 분기 상태 화면 연결",
+        "proposed_owner": "R04",
+        "estimate_workdays": "1일 제안",
+        "depends_on": [
+          "WBS-C07",
+          "WBS-C09",
+          "WBS-C11"
+        ],
+        "output": "APP-C 발굴 실행·생략·보류와 미확인 상태 표시",
+        "done_when": "APP-C에서 사용자에게 작업·결과 상태와 그 이유가 보임",
+        "scope_note": "APP-B 화면 범위는 추후 결정"
+      }
+    ],
+    "mock_walkthrough": {
+      "scope": "구조와 분기만 검증하는 합성 예시. 실제 앱 기능·웹 출처·에이전트 실행 결과가 아니다.",
+      "app_a": {
+        "request": {
+          "request_id": "MOCK-A",
+          "platform": "Android",
+          "specified_candidates": ["candidate-A", "candidate-B"],
+          "must_conditions": ["offline_timer"],
+          "preferences": ["no_account"],
+          "discovery_condition": "지정 후보만 비교"
+        },
+        "tasks": [
+          {"task_id": "MOCK-T1", "request_id": "MOCK-A", "goal": "candidate-A 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "status_reason": null, "failure_reason": null},
+          {"task_id": "MOCK-T2", "request_id": "MOCK-A", "goal": "candidate-B 조건 조사", "role": "조건 조사", "depends_on": [], "run_if": "항상", "status": "완료", "status_reason": null, "failure_reason": null}
+        ],
+        "sources": [
+          {"source_id": "MOCK-S1", "task_id": "MOCK-T1", "url": "mock://source-1", "retrieved_at": "합성 조회 시각", "access_status": "원문 확인", "error_reason": null}
+        ],
+        "evidence": [
+          {"evidence_id": "MOCK-E1", "source_id": "MOCK-S1", "finding": "합성 근거: candidate-A의 offline_timer 조건 충족", "locator": "합성 문단 1"}
+        ],
+        "verdicts": [
+          {"verdict_id": "MOCK-V1", "task_id": "MOCK-T1", "candidate_id": "candidate-A", "condition_id": "offline_timer", "status": "충족", "evidence_ids": ["MOCK-E1"]},
+          {"verdict_id": "MOCK-V2", "task_id": "MOCK-T2", "candidate_id": "candidate-B", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []}
+        ],
+        "claims": [
+          {"claim_id": "MOCK-C1", "text": "합성 자료에서 candidate-A의 offline_timer 조건을 확인", "status": "근거 연결", "evidence_ids": ["MOCK-E1"]}
+        ],
+        "report": {"request_id": "MOCK-A", "status": "부분 결과", "claim_ids": ["MOCK-C1"], "verdict_ids": ["MOCK-V1", "MOCK-V2"], "source_ids": ["MOCK-S1"], "unverified": ["candidate-B:offline_timer"], "failures": []}
+      },
+      "app_c_branches": [
+        {"case_id": "APP-C1-mock", "candidate_verdicts": ["미충족", "미충족"], "expected_discovery": "추가", "reason": "두 후보의 필수 조건 미충족을 모두 확인"},
+        {"case_id": "APP-C2-mock", "candidate_verdicts": ["충족", "미충족"], "expected_discovery": "생략", "reason": "한 후보가 필수 조건 충족"},
+        {"case_id": "APP-C3-mock", "candidate_verdicts": ["미충족", "미확인"], "expected_discovery": "보류", "terminal_discovery": "최종 미실행", "terminal_report": "부분 결과 후보", "reason": "확인 중에는 보류하고, 한도 뒤에도 두 후보 모두 미충족이라는 조건을 확인하지 못하면 미실행 이유와 미확인 조건을 남김"}
+      ],
+      "source_failure": {
+        "task": {"task_id": "MOCK-TF", "status": "실패", "status_reason": "합성 자료 접근 실패", "failure_reason": "합성 자료 접근 실패"},
+        "source": {"source_id": "MOCK-SF", "task_id": "MOCK-TF", "url": "mock://failed-source", "retrieved_at": "합성 조회 시각", "access_status": "접근 실패", "error_reason": "합성 접근 실패"},
+        "evidence": [],
+        "verdict": {"verdict_id": "MOCK-VF", "task_id": "MOCK-TF", "candidate_id": "candidate-F", "condition_id": "offline_timer", "status": "미확인", "evidence_ids": []},
+        "report": {"request_id": "MOCK-F", "status": "생성 실패", "claim_ids": [], "verdict_ids": ["MOCK-VF"], "source_ids": ["MOCK-SF"], "unverified": ["candidate-F:offline_timer"], "failures": ["MOCK-TF"]},
+        "note": "이 단일 실패 예시에는 확인된 주장이 없으므로 부분 결과로 표시하지 않는다. 같은 요청의 다른 작업에서 유효한 근거·주장이 남으면 부분 결과 후보가 된다."
+      }
+    },
+    "risk_register": [
+      {
+        "risk": "외부 앱 자료의 접근·보관 조건이 미확인",
+        "impact": "수집·시연 방식을 확정할 수 없음",
+        "check": "TASK-004에서 출처별 허용 범위와 대체 자료를 확인",
+        "status": "미확인"
+      },
+      {
+        "risk": "에이전트 출력과 서버 입력 필드가 다름",
+        "impact": "계획·판정·근거 연결이 끊김",
+        "check": "R03·R05가 같은 요청·작업·판정 예시를 교환",
+        "status": "팀 간 확인 전"
+      },
+      {
+        "risk": "미확인을 미충족으로 잘못 해석해 APP-C 발굴 실행",
+        "impact": "불필요한 작업과 잘못된 결론",
+        "check": "APP-C1·C2·C3 모의 판정으로 분기 확인",
+        "status": "설계 단계"
+      },
+      {
+        "risk": "실패 재시도·부분 결과 종료 기준이 없음",
+        "impact": "무한 반복 또는 설명 없는 종료",
+        "check": "R01과 횟수 상한·부분 결과 기준을 정하고 실패 사례 확인",
+        "status": "결정 필요"
+      },
+      {
+        "risk": "출처 URL만 저장하고 근거·주장을 연결하지 못함",
+        "impact": "결과의 판단 이유를 검증할 수 없음",
+        "check": "주장 → 근거 → 조회 기록 → 원문 경로를 설계·통합 시험",
+        "status": "실행 미검증"
+      },
+      {
+        "risk": "실행 복구 필요성 확인 전에 프레임워크를 고정하거나 자체 실행기를 확장",
+        "impact": "상태 모델과 에이전트 연결의 재작업",
+        "check": "APP-A·B·C와 실패 사례의 상태 추적·복구 부담을 작은 구현으로 확인 후 선택",
+        "status": "기술 선택 보류"
+      }
+    ]
+  },
+  "title": "최소 구현 구조·영역별 작업·의존성 도출",
+  "suggested_owner": "R05",
+  "assignment_status": "제안",
+  "schedule_status": "내부 목표일 제안",
+  "milestone": "2026-11-13",
+  "stage": "실행 범위",
+  "depends_on": [],
+  "required_for_submission": true,
+  "submission_ids": [
+    "SUB-01",
+    "SUB-02"
+  ],
+  "start_policy": "기존 초안으로 작업을 시작하고 선행 TASK의 결과를 완료 전에 반영한다.",
+  "intent_ref": "docs/human/task-intents/TASK-006.md"
+}

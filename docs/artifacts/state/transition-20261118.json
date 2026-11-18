@@ -78,9 +78,12 @@
     "정본 링크와 당시 상태·근거를 보존한다.",
     "기한이 지난 제품 구현 계획은 토요일 실제 주제 선택 전 자동 실행하지 않는다.",
     "공식 제출은 준비/공유/등록/접수 구분한다.",
-    "기존 찾아you 기획서·WBS·Spec의 세부 계획은 11/21 제품 선정 전 실행 지시가 아니다."
+    "기존 찾아you 기획서·WBS·Spec의 세부 계획은 11/21 제품 선정 전 실행 지시가 아니다.",
+    "당시 TASK 원문 21개 및 R05 브랜치 출처는 Git blob SHA를 고정한 읽기 전용 archive로 보존한다. 원래 TASK status/result는 수정하지 않는다."
   ],
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
   "current_product_status": "미선정",
-  "legacy_plan_wbs_status": "실제 구현 보류 / 제출용 잠정 기준"
+  "legacy_plan_wbs_status": "실제 구현 보류 / 제출용 잠정 기준",
+  "legacy_task_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+  "legacy_snapshot_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json"
 }
