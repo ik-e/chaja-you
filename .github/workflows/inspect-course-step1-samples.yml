@@ -1,0 +1,19 @@
+name: inspect instructor Step1 sample contents
+on:
+  push:
+    branches: [docs/review-step1-step2-original-guides-20261118]
+    paths:
+      - 'tools/inspect_course_samples.py'
+      - '.github/workflows/inspect-course-step1-samples.yml'
+permissions:
+  contents: read
+jobs:
+  parse-samples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract DOCX structure from two archived instructor samples
+        run: python tools/inspect_course_samples.py
