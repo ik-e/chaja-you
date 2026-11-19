@@ -3,7 +3,7 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-18",
+  "as_of": "2026-11-19",
   "scope": "11/18~21: 실제 제품 미선정·기획안 탐색(트랙 A) + 기존 찾아you 잠정 문서 제출 대응(트랙 B); 기존 기획·WBS 구현 보류",
   "confirmed": [
     "2026-11-18 이후 R02~R05는 각자 기존 기획안을 심화하거나 새 사용자 문제를 탐색하는 경로 중 하나를 자율 선택한다.",
@@ -15,11 +15,11 @@
     "기존 찾아you 기획서·APP-A/C 명세·WBS·기술설계는 실제 제품 구현 기준에서 보류하고, 공식 제출 대응용 잠정 기준본으로만 유지한다."
   ],
   "priorities": [
-    "TASK-022~025에서 R02~R05 각자 기존안 고도화 또는 새 주제 탐색을 택해 11/18 1차 근거·반대 근거가 있는 1개 후보를 남긴다.",
-    "TASK-026에서 R01은 기존 TASK 이력을 구분하고 후보·멘토 의견·운영 상태를 검토해 11/21 오프라인 선택 기준과 의제를 만든다.",
-    "TASK-027에서 R01은 현재 WBS상 11/20 API 설계·DB 스키마 문서에 잠정 기준안으로 대응하고, 공식 제출 조건·접수를 별도 확인한다.",
-    "11/21(토) 오프라인에서 후보별 실제 Pain·강한 기존 대안·8주 검증 가능성과 중단 위험을 비교해 실제 제품 방향을 결정한다.",
-    "토요일 선정 후 실제 제품 기획서·구현 TASK·WBS를 재작성한다. 그전에는 기존 APP-A/C나 11/17 잠정 R03/R05 후보를 최종 범위로 자동 승인하지 않는다."
+    "11/19 R01 리뷰 #18/#19/#20/#22를 후보 판단 근거로 연결하고 R02~R05 소유 TASK·개인 문서는 해당 owner가 관리한다.",
+    "R03은 R01 보고로 11/19 부재다. TASK-023을 임의 완료·재배정하거나 신규 결과를 요구하지 않으며 부재 기간·복귀는 미확인으로 둔다.",
+    "TASK-026: 11/21 후보 선택을 위한 실제 사용자 사건·손실, 강한 대안 후 잔여 Pain, 적법한 최소 반증, 8주 범위/중단 조건을 취합한다.",
+    "TASK-027: Step1 기획서/WBS·Step2 API/DB 잠정 MD 4종을 관리하되 공식 제출·접수, R05 계약 검토, WBS 시트/Projects 캡처와 열람권한은 확인 전으로 둔다.",
+    "11/21 실제 제품 채택·보류 결정을 근거와 함께 남긴 뒤 PROJECT·Spec·WBS·실행 TASK를 재구성하며, 그 전에는 어떤 후보도 자동 확정하지 않는다."
   ],
   "decisions_needed": [
     {
@@ -41,16 +41,16 @@
       "evidence_needed": "최종 후보 결정과 재검토 조건, 기술·데이터·법적 제약"
     }
   ],
-  "review_summary": "현재 적용 Phase: PHASE-20261118-01. 11/18~21 실제 제품은 미선정이며 R02~R05는 기존안 고도화 또는 신규 문제를 탐색한다. R01은 후보 검토·운영 조정과 교육 제출 대응을 맡는다. **이전 찾아you 기획·APP-A/C·WBS와 과거 구현 일정은 실제 개발 기준으로 보류하며, 제출용 잠정안으로만 보존한다.** 11/21 토요일 오프라인에서 제품 선정/보류를 근거와 함께 결정한 뒤 PROJECT·Spec·실행 WBS를 교체한다. 11/20 API·DB 설계의 공식 제출 방식 및 기존 Step1 접수 상태는 미확인이다. 11/17 멘토링 요약은 검토용 참고이며 사람의 최종 제품 승인 기록은 아니다.",
+  "review_summary": "적용 Phase: PHASE-20261118-01. 2026-11-19 현재 최종 제품 미선정·기존 찾아you 구현 보류, 11/21 오프라인 선택 목표를 유지한다.\n\n**R01 검토 기록:** R02 음악 레슨 기획안 [#18](https://github.com/ik-e/chaja-you/issues/18), R04 후보 집중 [#20](https://github.com/ik-e/chaja-you/issues/20), R05 가맹점 입지 [#19](https://github.com/ik-e/chaja-you/issues/19) 및 테이블 음성 도우미 [#22](https://github.com/ik-e/chaja-you/issues/22) 리뷰 완료. 리뷰 기록은 팀원 수신·수정 반영이나 최종 제품 승인을 뜻하지 않는다.\n\n**부재·미확인:** R03은 R01 보고로 **11/19 부재**다. 부재 기간·복귀 시점은 미확인으로 두며 TASK-023/개인 문서를 수정하지 않는다. R04의 11/19 일일 기록은 자동 점검 중심이라 조사 결과 기재 여부만 확인되며 실제 업무 여부를 단정하지 않는다.\n\n**제출:** [Step1 잠정 기획서](../step1/기획서_제출본.md)·[WBS](../step1/WBS_제출본.md)와 [Step2 API/DB](../step2/README.md) Markdown 후보는 준비됐다. 이 파일은 기존 JSON 자동 프로젝션과 구분하며 공식 제출·접수·R05 검토·열람권한은 미확인이다. [TASK-026](../artifacts/tasks/TASK-026.json) · [TASK-027](../artifacts/tasks/TASK-027.json) · [11/19 R01 지시](../human/responses/HRESP-20261119-01_r01-owned-doc-sync.md).",
   "deliverables": [
     {
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "기존 찾아you 잠정 제출본 · 실제 제품 구현 보류",
+      "status": "11/19 강사 피드백 반영 잠정 기획서 MD 제출 후보 작성 · 제품 미선정",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/기획서_초안.json",
-      "projection": "docs/step1/기획서.md",
+      "projection": "docs/step1/기획서_제출본.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-003",
@@ -62,17 +62,18 @@
         "TASK-010",
         "TASK-011"
       ],
-      "revision_ref": "docs/artifacts/planning/기획서_초안.json",
-      "revision_date": "2026-11-17"
+      "revision_ref": "docs/step1/기획서_제출본.md",
+      "revision_date": "2026-11-19",
+      "note": "11/19 준비 ≠ 공식 제출·접수."
     },
     {
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "기존 찾아you 잠정 제출본 · 실제 제품 구현 보류",
+      "status": "11/19 잠정 WBS MD 제출 후보 작성 · 시트/Projects 화면 미확인",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/WBS.json",
-      "projection": "docs/step1/WBS.md",
+      "projection": "docs/step1/WBS_제출본.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-006",
@@ -82,8 +83,9 @@
         "TASK-011"
       ],
       "target": "docs/step1/WBS.md",
-      "revision_ref": "docs/artifacts/planning/WBS.json",
-      "revision_date": "2026-11-17"
+      "revision_ref": "docs/step1/WBS_제출본.md",
+      "revision_date": "2026-11-19",
+      "note": "11/19 준비 ≠ 공식 제출·접수."
     },
     {
       "id": "SUB-03",
@@ -116,14 +118,15 @@
       "id": "SUB-API-20261120",
       "due": "2026-11-20",
       "title": "API 설계 문서·DB 스키마 설계서 (잠정)",
-      "status": "기존 찾아you 기준 잠정 설계(11/21 제품 미선정)",
+      "status": "11/19 잠정 API·DB MD 2종 작성 · R05 기술검토/구현 미확인",
       "submission_status": "미확인",
-      "source": null,
-      "projection": null,
+      "source": "docs/submissions/step1-step2-20261119/README.md",
+      "projection": "docs/step2/README.md",
       "completion_tasks": [
         "TASK-027"
       ],
-      "note": "공식 원문·대시보드 마감/제출 절차 확인 필요. 실제 기획은 11/21 결정 목표."
+      "note": "공식 원문·대시보드 마감/제출 절차 확인 필요. 실제 기획은 11/21 결정 목표. 11/19 준비 ≠ 공식 제출·접수.",
+      "revision_date": "2026-11-19"
     }
   ],
   "references": [
@@ -195,11 +198,14 @@
     },
     {
       "path": "docs/archive/2026-11-18-task-closeout/manifest.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261119-01_r01-owned-doc-sync.md"
     }
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
-    "status": "기존 Step1 접수 미확인; 11/20 잠정 API/DB 문서 대응 병행",
+    "status": "11/19 Step1·Step2 잠정 MD 후보 준비; 실제 제출·접수 미확인",
     "due_date": "2026-11-13",
     "due_time": null,
     "timezone": "Asia/Seoul",
