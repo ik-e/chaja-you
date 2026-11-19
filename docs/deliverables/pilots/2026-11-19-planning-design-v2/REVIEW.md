@@ -69,3 +69,33 @@ GitHub 파일을 다시 읽어 **별도 JavaScript 구조 검사**로 정상 데
 - [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/system-engineering-handbook-appendix/): 필요·요구·검증 연결
 
 본 정보 모델은 위 자료들을 참고한 팀 내부 제안이며 공식 표준 인증이나 검증 승인 결과가 아닙니다.
+
+---
+
+## 7. 추가 재평가: 설계 순서도·구성요소 구조도 교차 검토 (2026-11-19)
+
+**판정: 정보 분류·시각화 구조는 타당, 운영 정본/완성 설계로 채택은 보류.** 아래 항목은 GitHub 브랜치의 [구성요소 시각화](../../COMPONENT-DESIGN-VIEWS.md), [구성요소 JSON](../../component-design-model.json), [V2 본체](../../planning-design-info-model.json)와 [CAND-016 추적 파일](CAND-016-TRACE.json)을 다시 읽어 교차 확인한 결과이다. 본 검토만으로 PR을 병합하거나 제품 설계를 확정하지 않는다.
+
+| 구분 | 관측 사실 | 해석·필요 수정 |
+|---|---|---|
+| 상세 컴포넌트 정본 추적 | 예시 10개 컴포넌트 모두 `source_info_ref=EX-COMP` 한 레코드 참조 | 각 컴포넌트 ID를 정본에 독립 참조하거나, 명시적 집합 레코드의 멤버십·필드 정합성 계약 필요 |
+| 요구·검증 책임 분배 | 10개 컴포넌트 모두 동일한 `EX-FR`, `EX-NFR`, `EX-TEST` 연결 | 단순 ID 연결은 기능 책임 배분을 검증하지 못함. 각 컴포넌트별 어떤 동작/품질 조건을 만족시키는지 연결 |
+| 설계 시점 | 상세 순서도의 '실행 단위 식별' 단계에서 `IT-26` 사용, 본체 모델의 `IT-26.first_defined_at=PD-09D` | 논리적 컨테이너와 물리 배포 토폴로지를 구분. 초안/확정 시점·정보 유형 참조를 일치시키기 |
+| 검증기 범위 | 현재 `tools/validate_planning_design_model.py`는 본체 JSON·추적 예시만 검사 | 신규 구성요소 JSON·도식 ID 및 설명과의 일치 검사 미구현. 이전 '오류주입 9/9' 결과를 구성요소 모델 검증이라고 표기하면 안 됨 |
+| 상태 일관성 | `EX-WF.terminal_states`에 `cancelled` 있으나 state 목록·전이 및 `EX-API.output_schema.status`와 `DT-CASE.case_status`에 없음 | `cancelled` 제거 또는 상태 전이/데이터/API/UI를 모두 포함해 정렬 |
+| 오류 계약 | `IF-CASE-CREATE.errors`의 `invalid_transition`, `storage_failure`가 `EX-API.errors`에 없음 | 공통 오류 명세 하나를 가리키도록 참조 |
+| UI 완료 상태 | `EX-UI.presentation_states`에 완료된 `reviewed` 표현이 명시되지 않음 | 예외·완료 상태의 UI 표현 또는 미적용 사유 기술 |
+| 감사 이력 흐름 | 구조도 `C-APP-CASE → C-AUDIT → C-REPOSITORY`와 실행 시퀀스의 저장 흐름에서 감사 책임 경유 표현이 다름 | 시퀀스에 감사 이벤트와 트랜잭션 경계를 명확히 명시 |
+| 외부 관계 | 시스템 예시의 `EXT-OFFICIAL-RULES`는 구성요소 연결 목록에 없음 | 공식 규정이 오프라인 참조 자료라면 물리 API 연결이 아니라 문서/사람 제공 경계를 명시 |
+
+### 추천 수정 순서
+
+1. **P0 의미적 계약:** `CaseStatus`·`ObservationKind`·`ErrorCode`·`ActorRole` 등 공유 용어를 정의하고 상태 전이/저장/API/UI/테스트에서 같은 의미로 사용하게 한다.
+2. **P0 요소별 추적:** 각 `C-*`에 고유 구성요소 인스턴스 ID 및 실제 `fulfills_requirement`, `verified_by` 관계를 연결하고 동일한 FR/NFR 테스트 ID 일괄 복제를 지양한다.
+3. **P0 순서 정합성:** 논리적 실행 컨테이너(C4)와 배포 토폴로지(arc42)를 구분하고 `PD-08`/`PD-09D`의 초안·확정 단계를 설명한다.
+4. **P1 구조 검사 확장:** JSON의 구성요소 존재·부모·호출·데이터·오류·상태 참조를 검사하고, 다이어그램의 ID를 정본 JSON에서 생성하거나 자동 대조한다.
+5. **P1 대표 사용자 흐름 검증:** 정상 생성, 권한 거절, 상태 충돌, 저장 실패 각각에서 시퀀스·API 오류·UI 표시·테스트 케이스를 끝까지 비교한다.
+
+**수용 조건:** 대표 FR 하나에 대해 `사용자 문제 → 요구사항 → 상위 전략 → 시스템/컴포넌트 책임 → 상태·데이터·API·UI → 검증 → 출력 DLV`의 연결을 확인하고, `CaseStatus`/`ErrorCode`의 값 차이를 검출·설명할 수 있어야 한다. 채택 전 실제 제품의 승인과 실측은 별도다.
+
+**외부 관점 확인:** [C4 공식 FAQ](https://c4model.com/faq)는 구조의 추상화 수준을 설명하지만 개발 순서를 규정하지 않는다. [arc42 Building Block](https://docs.arc42.org/section-5/), [Runtime](https://docs.arc42.org/section-6/), [Deployment](https://docs.arc42.org/section-7/)는 각각 정적 구조·실행 행동·배포 환경을 구분한다. 실제 설계의 순서/계약 체계는 팀 내부 설계 선택이다.
