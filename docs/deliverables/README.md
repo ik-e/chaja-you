@@ -6,13 +6,14 @@
 
 ## 바로 읽을 순서
 
-1. [작업 정보 모델](WORK-MODEL.md): 어떤 정보가 어디에 있고 누가 소유하는가
-2. [품질 게이트](QUALITY-GATES.md): 정보·문서·실측·제출을 언제 완료로 볼 수 있는가
-3. [산출물 프로젝션 계약](PROJECTION-CONTRACT.md): 16개 공식 항목과 작업 정보를 어떻게 연결하는가
-4. [원본·판단 근거](SOURCES-AND-DECISIONS.md): 공식 안내·교육 예시·국제 표준의 권위를 어떻게 구분하는가
-5. [작업 사례](WORKFLOW-EXAMPLES.md): 두 트랙과 AI 초안·사람 검토의 실제 적용
+1. [기획 → 설계 결정·정보 모델](PLANNING-DESIGN-INFO-MODEL.md): 설계 판단의 순서·의존성과 실제 정보 항목·속성·문서 연결(2026-11-19 제안 초안)
+2. [작업 정보 모델](WORK-MODEL.md): 어떤 정보가 어디에 있고 누가 소유하는가
+3. [품질 게이트](QUALITY-GATES.md): 정보·문서·실측·제출을 언제 완료로 볼 수 있는가
+4. [산출물 프로젝션 계약](PROJECTION-CONTRACT.md): 16개 공식 항목과 작업 정보를 어떻게 연결하는가
+5. [원본·판단 근거](SOURCES-AND-DECISIONS.md): 공식 안내·교육 예시·국제 표준의 권위를 어떻게 구분하는가
+6. [작업 사례](WORKFLOW-EXAMPLES.md): 두 트랙과 AI 초안·사람 검토의 실제 적용
 
-**구조화 원본:** [16개 산출물·근거·검증 매핑](registry.json) · [작업 정보 예시/스키마](work-record-template.json) · [제출 상태 기록 형식](submission-entry-template.json) · [공식 목차 대조 양식](official-outline-template.json)
+**구조화 원본:** [기획·설계 정보 유형·선행관계 제안](planning-design-info-model.json) · [16개 산출물·근거·검증 매핑](registry.json) · [작업 정보 예시/스키마](work-record-template.json) · [제출 상태 기록 형식](submission-entry-template.json) · [공식 목차 대조 양식](official-outline-template.json)
 
 ## 기존 저장소와의 관계
 
