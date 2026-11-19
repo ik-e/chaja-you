@@ -1,8 +1,8 @@
 {
-  "schema_version": 2,
-  "id": "PLANNING-DESIGN-INFO-MODEL-V2-20261119",
+  "schema_version": 3,
+  "id": "PLANNING-DESIGN-INFO-MODEL-V3-20261119",
   "kind": "planning_design_information_model",
-  "status": "revised_proposal_not_adopted",
+  "status": "progressive_refinement_v3_proposal_only",
   "updated_at": "2026-11-19",
   "owner": "R01_review_proposed",
   "purpose": "기획부터 상세 설계까지 결정의 선행관계와 실제 정보 항목을 연결한 재사용 가능한 정보 모델(제품/기술 미확정).",
@@ -780,6 +780,12 @@
           "meaning": "규칙이 필요한 요구사항",
           "value_type": "ref[]",
           "required_for_baseline": true
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "업무 상태·관측 유형·권한·오류 등 공통 계약(단일 의미적 정본)의 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
         }
       ],
       "typically_relates_to": [
@@ -846,7 +852,7 @@
       "key": "component_responsibility",
       "name": "구성요소·책임·의존관계",
       "work_domain": "architecture",
-      "first_defined_at": "PD-08",
+      "first_defined_at": "PD-08B",
       "applicability": "general",
       "fields": [
         {
@@ -883,6 +889,24 @@
           "key": "failure_boundary",
           "meaning": "실패 시 책임과 대체 경로",
           "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "parent_runtime_unit_ref",
+          "meaning": "이 컴포넌트를 포함하는 논리 실행/저장 단위 ID",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "requirement_contributions",
+          "meaning": "구성요소가 각 요구사항의 어떤 책임을 수행하는지에 대한 명시적 매핑",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verification_refs",
+          "meaning": "이 구성요소의 책임을 검증할 테스트 ID",
+          "value_type": "ref[]",
           "required_for_baseline": false
         }
       ],
@@ -942,6 +966,12 @@
           "meaning": "성공·부분·보류·실패·종료",
           "value_type": "string[]",
           "required_for_baseline": true
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
         }
       ],
       "typically_relates_to": [
@@ -1000,6 +1030,12 @@
           "key": "source_of_truth",
           "meaning": "정본·파생·캐시 구별",
           "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
           "required_for_baseline": false
         }
       ],
@@ -1060,6 +1096,12 @@
           "meaning": "연결할 상태·데이터 계약",
           "value_type": "ref[]",
           "required_for_baseline": false
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
         }
       ],
       "typically_relates_to": [
@@ -1119,6 +1161,12 @@
           "key": "accessibility",
           "meaning": "필요한 접근성·환경 제약",
           "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
           "required_for_baseline": false
         }
       ],
@@ -1196,7 +1244,7 @@
       "key": "architecture_decision",
       "name": "설계 대안·선택 기록",
       "work_domain": "decision",
-      "first_defined_at": "PD-07A",
+      "first_defined_at": "PD-08A",
       "applicability": "general",
       "fields": [
         {
@@ -1549,7 +1597,7 @@
       "key": "solution_strategy",
       "name": "상위 해결 전략·주요 구조 가설",
       "work_domain": "architecture",
-      "first_defined_at": "PD-07A",
+      "first_defined_at": "PD-08A",
       "applicability": "general",
       "fields": [
         {
@@ -1688,6 +1736,84 @@
       ],
       "baseline_policy": "기능별 구현 상세와 별개로, 실제 실행·배포가 이루어질 때 필요한 최소 배치/접근/롤백을 채움. 로컬 PoC는 로컬 환경 명시로 충분.",
       "evidence_policy": "실제 URL/배포/운영 상태는 실행 증거가 있을 때만 confirmed. 제품 선택 이전은 proposed."
+    },
+    {
+      "id": "IT-27",
+      "key": "runtime_unit",
+      "name": "실행·저장 단위(C4 컨테이너)와 책임 경계",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08B",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "system_context_ref",
+          "meaning": "해당 시스템 경계(IT-12) 참조",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "name",
+          "meaning": "앱·데이터 저장소 등 실행·저장 단위의 이름",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "runtime_kind",
+          "meaning": "browser application/server application/data store/background worker 등 논리 런타임 종류",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "responsibility",
+          "meaning": "해당 실행 단위의 외부에서 관측 가능한 책임",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "communication_boundary",
+          "meaning": "다른 실행 단위와의 호출/메시지·신뢰 경계",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "data_ownership",
+          "meaning": "정본 데이터와 읽기/쓰기 책임·캐시 구분",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "component_refs",
+          "meaning": "내부 논리 컴포넌트 ID 참조",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "external_interface_refs",
+          "meaning": "외부 계약·공식 API 등 참조",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "technology_choice_status",
+          "meaning": "미선정/가설/승인 상태를 구분하고 제품/프레임워크 고정 금지",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "deployment_mapping_ref",
+          "meaning": "구체 배포 환경·노드 매핑 IT-26 참조(아직 미정 가능)",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-12",
+        "IT-25",
+        "IT-13",
+        "IT-26"
+      ],
+      "baseline_policy": "논리 실행/저장 단위의 책임·정본 소유를 먼저 정의. 구체 호스팅/물리 인프라는 IT-26에서 승인한다.",
+      "evidence_policy": "외부 접근·비용·실측이 확인되지 않은 기술 선택은 provisional/unknown으로 구별"
     }
   ],
   "decision_stages": [
@@ -1930,23 +2056,52 @@
       "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
     },
     {
-      "id": "PD-07A",
+      "id": "PD-08",
       "phase": "design",
-      "label": "상위 해결 전략·구조 대안",
-      "decision_question": "품질 목표와 제약을 어떤 핵심 해결 접근으로 달성할 것인가?",
+      "label": "도메인 용어·핵심 규칙·시스템 맥락",
+      "decision_question": "제품의 주요 업무 객체와 불변식, 사용자·외부 시스템·권한 경계가 무엇인가?",
       "blocking_on": [
         "PD-07"
+      ],
+      "output_types": [
+        "IT-11",
+        "IT-12"
+      ],
+      "exit_when": "공통 업무 용어·핵심 데이터 개념·규칙과 시스템 내외부의 책임·정보 흐름을 구분",
+      "parallel_group": null,
+      "draft_requirements": [
+        "요구사항 또는 유스케이스 초안과 실제 사용자·외부 시스템"
+      ],
+      "baseline_requirements": [
+        "상위 시나리오/FR에 필요한 업무 용어·핵심 규칙·시스템 경계·권한/데이터 접근 경계 정합성"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+    },
+    {
+      "id": "PD-08A",
+      "phase": "design",
+      "label": "상위 해결 전략·구조 대안 비교",
+      "decision_question": "도메인 규칙·시스템 경계·주요 품질 목표를 어떤 최상위 책임 배분으로 충족할 것인가?",
+      "blocking_on": [
+        "PD-08"
       ],
       "output_types": [
         "IT-25",
         "IT-19"
       ],
-      "exit_when": "핵심 전략 대안·장단점·선정 가설·재검토 조건을 기록; 세부 기술은 확정하지 않아도 됨",
+      "exit_when": "컴포넌트·기술 이름 대신 시스템 수준의 상위 해결 전략과 책임 경계만 잠정 결정한다",
       "draft_requirements": [
-        "기능·품질 요구 및 치명적 제약을 확인하거나 가정 표시"
+        "사용자 시나리오, 핵심 품질 목표, 도메인 개념·외부 시스템 경계의 초안"
       ],
       "baseline_requirements": [
-        "주요 품질 목표·현실 제약과 연결된 전략의 승인/잠정 선택 기록"
+        "요구·제약·품질 목표에 대응한 상위 해결 전략 대안/비교·선택(또는 보류)·재검토 조건"
       ],
       "parallel_group": null,
       "gate_status": [
@@ -1959,25 +2114,24 @@
       "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
     },
     {
-      "id": "PD-08",
+      "id": "PD-08B",
       "phase": "design",
-      "label": "도메인·시스템 경계",
-      "decision_question": "무엇을 누가 책임지고 어떤 개념과 규칙이 필요한가?",
+      "label": "논리 실행·저장 단위 및 구성요소 책임 분해",
+      "decision_question": "동작/저장 책임을 어떤 실행 단위(앱·데이터 저장소)와 내부 컴포넌트에 배분할 것인가?",
       "blocking_on": [
-        "PD-07A"
+        "PD-08A"
       ],
       "output_types": [
-        "IT-11",
-        "IT-12",
+        "IT-27",
         "IT-13"
       ],
-      "exit_when": "도메인 불변식·시스템 내외부·구성요소 책임·주요 입출력 구분",
+      "exit_when": "실행 단위의 책임·인터페이스·데이터 정본 경계를 먼저 정의하고 중요한 내부 컴포넌트만 구체화",
       "parallel_group": null,
       "draft_requirements": [
-        "선정/보류된 상위 해결 전략과 전제(IT-25)를 읽을 수 있음"
+        "상위 해결 전략과 업무/시스템 경계의 잠정 선택"
       ],
       "baseline_requirements": [
-        "도메인 불변식·시스템 경계·주요 책임이 요구와 충돌하지 않음"
+        "각 실행/저장 단위의 책임·통신 경계·정본 소유와 필요한 내부 컴포넌트의 인터페이스·책임/검증 연결이 명시"
       ],
       "gate_status": [
         "draftable",
@@ -1986,7 +2140,7 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "개별 컴포넌트는 같은 실행 단위 안의 논리적 책임 묶음. 실행 단위 분해를 물리 인프라/VM/Docker 배포 결정과 혼동하지 않는다."
     },
     {
       "id": "PD-09A",
@@ -1994,7 +2148,7 @@
       "label": "행동·상태·선택적 AI",
       "decision_question": "상태·분기·실패·중단이 어떻게 진행되는가?",
       "blocking_on": [
-        "PD-08"
+        "PD-08B"
       ],
       "output_types": [
         "IT-14",
@@ -2025,7 +2179,7 @@
       "label": "데이터·생명주기",
       "decision_question": "무슨 데이터를 누구 책임으로 보존하고 바꾸는가?",
       "blocking_on": [
-        "PD-08"
+        "PD-08B"
       ],
       "output_types": [
         "IT-15"
@@ -2055,7 +2209,7 @@
       "label": "API·Tool·UI 계약",
       "decision_question": "어떤 입력·출력과 화면 반응으로 연결되는가?",
       "blocking_on": [
-        "PD-08"
+        "PD-08B"
       ],
       "output_types": [
         "IT-16",
@@ -2086,7 +2240,7 @@
       "label": "횡단 통제·품질",
       "decision_question": "공통 위험·보안·운영 제약을 어떻게 보장하는가?",
       "blocking_on": [
-        "PD-08"
+        "PD-08B"
       ],
       "output_types": [
         "IT-18",
@@ -2280,7 +2434,7 @@
     "사용자 가치 검증·실측",
     "제품 주제나 기술 확정"
   ],
-  "revision_note": "V2.1: add concrete deployment topology information IT-26 and component design order/views for consistency with architecture submodel.",
+  "revision_note": "기획→설계 큰 결정에서 세부 책임을 순차 구체화하는 정책, 용어·논리 실행 단위와 물리 배포 구분, 공통 도메인 계약 참조를 추가. 제품 미선정/설계 미승인.",
   "version_history": [
     {
       "version": 1,
@@ -2291,6 +2445,11 @@
       "version": 2,
       "date": "2026-11-19",
       "description": "typed information fields, solution strategy stage, stakeholder concerns, explicit type edges, draft/baseline distinction"
+    },
+    {
+      "version": 3,
+      "date": "2026-11-19",
+      "description": "coarse-to-fine decision boundaries and precise runtime unit vs component vs deployment terminology"
     }
   ],
   "stage_policies": {
@@ -2307,7 +2466,12 @@
     "early_wbs": "IT-21 상위 작업 윤곽은 PD-05 이후 가능, PD-11에서 상세 작업 선행·완료를 갱신",
     "early_submission": "IT-22 제출물 준비는 PD-00 이후 공식 마감에 맞춰 언제든 가능; 제출은 제품 채택이나 구현 승인과 별개",
     "candidate_boundary": "PD-05 채택 실패/보류 시 하위 예시는 illustrative_only 상태로 작성할 수 있으나 실제 구현 기준으로 승격 금지",
-    "human_approval": "문제 선택·제품 범위·Must/Done·공통 구조의 고영향 결정만 권한 있는 사람 승인; 사소한 가역 선택은 담당자 위임"
+    "human_approval": "문제 선택·제품 범위·Must/Done·공통 구조의 고영향 결정만 권한 있는 사람 승인; 사소한 가역 선택은 담당자 위임",
+    "refinement": "현재 단계는 다음 결정을 위한 최소 정보만 구체화하며, 미증명/가역 사항은 뒤로 미룬다. 큰 틀→업무 경계→실행 단위→컴포넌트→계약·배포 상세로 좁힌다.",
+    "never_all_at_once": "각 단계마다 decide_now와 defer_now를 분리. 단계 진입은 일부 가정으로 가능하지만 확정은 근거와 권한 필요.",
+    "runtime_vs_deployment": "IT-27 C4 실행/저장 단위의 논리적 경계는 PD-08B에서, IT-26 물리 배포/환경 매핑은 PD-09D에서 결정.",
+    "canonical_enum_policy": "공유 상태·오류·역할 계약을 하나의 의미적 정본에 선언하고 IT-14/15/16/17이 참조. 문서·API·UI 표현은 정본과 대조.",
+    "exceptions": "8주 PoC 또는 치명적 제약 확인용 기술 스파이크는 언제든 가능; 수행한 프로토타입이 설계 최종 승인으로 자동 승격되지는 않음"
   },
   "type_edges": [
     {
@@ -2741,6 +2905,110 @@
       "relation": "verified_by",
       "contract_phase": "draft_and_baseline",
       "propagate_review": true
+    },
+    {
+      "id": "TE-055",
+      "from_type": "IT-11",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-056",
+      "from_type": "IT-12",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-057",
+      "from_type": "IT-12",
+      "to_type": "IT-27",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-058",
+      "from_type": "IT-25",
+      "to_type": "IT-27",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-059",
+      "from_type": "IT-27",
+      "to_type": "IT-13",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-060",
+      "from_type": "IT-27",
+      "to_type": "IT-26",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-061",
+      "from_type": "IT-11",
+      "to_type": "IT-14",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-062",
+      "from_type": "IT-11",
+      "to_type": "IT-15",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-063",
+      "from_type": "IT-11",
+      "to_type": "IT-16",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-064",
+      "from_type": "IT-11",
+      "to_type": "IT-17",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-065",
+      "from_type": "IT-09",
+      "to_type": "IT-13",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-066",
+      "from_type": "IT-10",
+      "to_type": "IT-13",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-067",
+      "from_type": "IT-13",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
     }
   ],
   "record_contract": {
@@ -2829,5 +3097,234 @@
     }
   ],
   "component_submodel_ref": "docs/deliverables/component-design-model.json",
-  "component_views_ref": "docs/deliverables/COMPONENT-DESIGN-VIEWS.md"
+  "component_views_ref": "docs/deliverables/COMPONENT-DESIGN-VIEWS.md",
+  "progressive_design_layers": [
+    {
+      "id": "L0",
+      "name": "목적·제약의 최상위 경계",
+      "stage_ids": [
+        "PD-00"
+      ],
+      "decide_now": [
+        "문제 해결의 목적",
+        "현재 유효한 의도와 승인권자",
+        "필수 법·자원·기한 제약"
+      ],
+      "defer_now": [
+        "제품 기능",
+        "화면·DB·프레임워크"
+      ],
+      "minimum_input": [
+        "INTENT/Phase/공식 제약"
+      ],
+      "completion_for_next": "현재 의도·권한·제약의 정본을 참조할 수 있다",
+      "reopen_trigger": "의도나 기관 제약 변경"
+    },
+    {
+      "id": "L1",
+      "name": "사용자 문제와 잔여 손실",
+      "stage_ids": [
+        "PD-01",
+        "PD-02",
+        "PD-03",
+        "PD-04",
+        "PD-05"
+      ],
+      "decide_now": [
+        "사용자 역할·업무 상황",
+        "As-Is와 관측 가능한 손실",
+        "기존 대안의 해결 범위",
+        "법적·기술적 불가능 조건",
+        "채택·보류할 문제"
+      ],
+      "defer_now": [
+        "제품 기능 전체 목록",
+        "AI·DB·아키텍처",
+        "예쁜 화면 시안"
+      ],
+      "minimum_input": [
+        "사용자/기관 정보와 후보 근거"
+      ],
+      "completion_for_next": "근거·반대 근거·미확인을 구분하고 제품 문제를 선택/보류",
+      "reopen_trigger": "기존 대안 또는 접근·권한 조건 변화"
+    },
+    {
+      "id": "L2",
+      "name": "제품 수준 동작과 성공 조건",
+      "stage_ids": [
+        "PD-06",
+        "PD-07"
+      ],
+      "decide_now": [
+        "대표 사용자 목표/유스케이스",
+        "핵심 기능 요구·품질 목표",
+        "수용·반증 조건",
+        "MVP 포함/제외"
+      ],
+      "defer_now": [
+        "클래스·테이블·API 경로·화면 픽셀",
+        "단일/다중 에이전트 수"
+      ],
+      "minimum_input": [
+        "채택/조건부 문제 가설과 유효한 제약"
+      ],
+      "completion_for_next": "대표 시나리오와 FR/NFR·검증 계획을 일대일 또는 명시적 다대다 연결",
+      "reopen_trigger": "가치 가설 반증·핵심 문제 변경"
+    },
+    {
+      "id": "L3",
+      "name": "업무 개념과 시스템 경계",
+      "stage_ids": [
+        "PD-08"
+      ],
+      "decide_now": [
+        "도메인 객체·용어·핵심 규칙",
+        "외부 사용자·시스템·법/권한 경계",
+        "내부/외부 책임"
+      ],
+      "defer_now": [
+        "DB 테이블·컬럼",
+        "외부 API 구현 코드·배포 방식"
+      ],
+      "minimum_input": [
+        "대표 시나리오·요구사항"
+      ],
+      "completion_for_next": "다른 설계자가 동일 의미로 업무 객체와 경계를 설명",
+      "reopen_trigger": "업무 규칙/외부 권한 바뀜"
+    },
+    {
+      "id": "L4",
+      "name": "상위 해결 전략과 실행·저장 단위",
+      "stage_ids": [
+        "PD-08A",
+        "PD-08B"
+      ],
+      "decide_now": [
+        "모놀리식/외부 서비스 등 접근 대안",
+        "앱·저장소별 책임과 정보 흐름",
+        "어느 단위가 어떤 정본 데이터를 책임지는지",
+        "중요 컴포넌트 책임"
+      ],
+      "defer_now": [
+        "메서드 목록·DB 인덱스",
+        "특정 클라우드·컨테이너 오케스트레이터"
+      ],
+      "minimum_input": [
+        "시스템 경계·도메인 불변식·품질 제약"
+      ],
+      "completion_for_next": "상위 책임이 겹치지 않고 실행 단위/컴포넌트의 입력·출력·의존을 추적할 수 있음",
+      "reopen_trigger": "실측 성능·권한·비용이 상위 전략을 반증"
+    },
+    {
+      "id": "L5",
+      "name": "동작·데이터·인터페이스 상세 설계",
+      "stage_ids": [
+        "PD-09A",
+        "PD-09B",
+        "PD-09C",
+        "PD-09D"
+      ],
+      "decide_now": [
+        "상태/전이/가드·예외",
+        "논리 엔터티·키·무결성",
+        "API 요청/응답/권한/오류",
+        "화면별 사용자 행동·상태",
+        "위험 통제·최소 배포/운영 제약"
+      ],
+      "defer_now": [
+        "미검증 구현 세부 최적화",
+        "기능과 무관한 부가 컴포넌트"
+      ],
+      "minimum_input": [
+        "구성요소 책임·공통 도메인 용어"
+      ],
+      "completion_for_next": "상태·오류·키·권한·UI 표현이 서로 대응되는 초안",
+      "reopen_trigger": "상태/키/권한의 모순 발견"
+    },
+    {
+      "id": "L6",
+      "name": "계약 합류와 고영향 확정",
+      "stage_ids": [
+        "PD-10"
+      ],
+      "decide_now": [
+        "요구→컴포넌트→테스트의 책임",
+        "상태·API·DB·UI/실패 교차 정합성",
+        "보류 가정과 ADR",
+        "선택된 기술·비용의 근거"
+      ],
+      "defer_now": [
+        "기여도 낮은 세부 구현 선택까지 사람 승인"
+      ],
+      "minimum_input": [
+        "네 가지 상세 설계의 동기화된 초안"
+      ],
+      "completion_for_next": "서로 다른 설계가 하나의 도메인 계약을 설명하고 미결사항·재검토 조건 명시",
+      "reopen_trigger": "계약 충돌·새 실제 근거"
+    },
+    {
+      "id": "L7",
+      "name": "실행 단위의 작업 분해와 산출물",
+      "stage_ids": [
+        "PD-11"
+      ],
+      "decide_now": [
+        "작업 담당·의존·완료 기준",
+        "테스트 실행 방법",
+        "정본→제출 문서 필드 투영"
+      ],
+      "defer_now": [
+        "아직 수행하지 않은 결과값 작성"
+      ],
+      "minimum_input": [
+        "승인/조건부 설계 기준선과 공식 양식"
+      ],
+      "completion_for_next": "실행 가능한 TASK/검증 계획과 독립적인 제출 상태",
+      "reopen_trigger": "실행 실패·실측 반증·공식 요구 변경"
+    }
+  ],
+  "terms_policy": {
+    "glossary_ref": "docs/deliverables/DESIGN-GLOSSARY.md",
+    "disallow_ambiguous_terms": [
+      {
+        "ambiguous": "서비스",
+        "replace_with": [
+          "제품 서비스",
+          "애플리케이션 서비스",
+          "외부 API 서비스",
+          "별도 배포 마이크로서비스"
+        ]
+      },
+      {
+        "ambiguous": "컨테이너",
+        "replace_with": [
+          "C4 실행 단위(애플리케이션·데이터 저장소)",
+          "Docker 컨테이너(배포 패키징)"
+        ]
+      },
+      {
+        "ambiguous": "상태",
+        "replace_with": [
+          "업무 상태(CaseStatus)",
+          "UI 표시 상태",
+          "HTTP 응답 상태"
+        ]
+      },
+      {
+        "ambiguous": "설계 확정",
+        "replace_with": [
+          "가설 초안",
+          "잠정 기준선",
+          "승인된 기준선"
+        ]
+      },
+      {
+        "ambiguous": "검증",
+        "replace_with": [
+          "명세 충족 시험(verification)",
+          "사용자 가치 확인(validation)"
+        ]
+      }
+    ]
+  }
 }
