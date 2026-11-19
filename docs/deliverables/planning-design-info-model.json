@@ -1600,6 +1600,12 @@
           "meaning": "실험 또는 상세 설계에서 번복할 조건",
           "value_type": "string",
           "required_for_baseline": true
+        },
+        {
+          "key": "authority_ref",
+          "meaning": "제품 범위·Must/Done·공통 구조에 영향을 주는 전략 채택 시 승인 권한/ADR 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
         }
       ],
       "typically_relates_to": [
@@ -2671,7 +2677,8 @@
     "missing_policy": "draft에서는 실제 아는 필드만 기록; baseline에서는 required_for_baseline 확인. 미확인과 근거 없음은 null/unknown으로 기록, 실제 없는 사실을 채우지 않음.",
     "relationship_direction": "from 상위·영향 출발 → to 파생/설계/검증/출력",
     "typed_edge_policy": "instance_edges는 type_edges에 허용된 from_type/to_type/relation만 사용; 예외는 impacts로 사람 검토 후 명시",
-    "required_at_baseline": "최소 3개 핵심 필드만 관리하는 부담 방지를 위해 모든 필드를 의무화하지 않음. required_for_baseline는 해당 정보 유형을 실제로 확정·사용하는 경우에만 적용."
+    "required_at_baseline": "최소 3개 핵심 필드만 관리하는 부담 방지를 위해 모든 필드를 의무화하지 않음. required_for_baseline는 해당 정보 유형을 실제로 확정·사용하는 경우에만 적용.",
+    "adoption_policy": "type_id IT-06/IT-19/IT-25 record.status=adopted is valid only with fields.authority_ref and a human decision record; baseline mandatory fields must also be present. Proposed/provisional decisions do not imply product adoption."
   },
   "pilot_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json",
   "validator_ref": "tools/validate_planning_design_model.py",
