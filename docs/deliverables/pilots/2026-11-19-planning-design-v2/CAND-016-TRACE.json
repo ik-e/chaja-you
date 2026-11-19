@@ -44,7 +44,9 @@
         "stakeholder_ref": "EX-ACTOR",
         "concern": "무고한 수험생 지목·불필요 개입 방지와 감독관 확인 누락 방지",
         "authority_boundary": "시험별 운영기관 승인 없는 데이터 수집·제재는 금지",
-        "open_question": "실제 기관 규정과 현장 업무량은 아직 직접 확인되지 않음"
+        "open_question": [
+          "실제 기관 규정과 현장 업무량은 아직 직접 확인되지 않음"
+        ]
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
@@ -92,7 +94,7 @@
           "docs/artifacts/candidates/CAND-016-evidence-review-2026-11-16.md"
         ],
         "counter_evidence_refs": [
-          "현행 감독·검사·사건 기록 시스템이 이미 일부 기능 제공"
+          "docs/artifacts/candidates/CAND-016-evidence-review-2026-11-16.md"
         ]
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
@@ -709,7 +711,7 @@
       "EX-CONTEXT",
       "EX-COMP",
       "EX-API",
-      "EX-TEST"
+      "EX-UI"
     ],
     "change_case": {
       "changed_record": "EX-FR",
