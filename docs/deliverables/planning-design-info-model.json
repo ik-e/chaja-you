@@ -1616,6 +1616,78 @@
       ],
       "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
       "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-26",
+      "key": "deployment_topology",
+      "name": "배포 단위·실행 환경·운영 토폴로지",
+      "work_domain": "deployment",
+      "first_defined_at": "PD-09D",
+      "applicability": "when_service_is_deployed",
+      "fields": [
+        {
+          "key": "environment_nodes",
+          "meaning": "실행 환경과 노드·격리 경계",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "software_unit_mapping",
+          "meaning": "UI/API/작업자/저장소 등 소프트웨어 단위가 실행 환경 어디에 놓이는가",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "network_and_trust",
+          "meaning": "네트워크 접근, 방화벽·신뢰 경계와 전송 정책",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "runtime_dependencies",
+          "meaning": "운영 시 필요한 외부 서비스·도구·비밀 관리 경로",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "release_strategy",
+          "meaning": "설치·버전·배포 및 정상 확인 절차",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "observability",
+          "meaning": "로그·메트릭·트레이스·알림·운영책임",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "recovery_and_rollback",
+          "meaning": "백업·복원·롤백·장애 복구 기준",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "capacity_and_cost",
+          "meaning": "운영 부하·성능·자원·비용 가정",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "source_refs",
+          "meaning": "배포 설계의 근거 자료·ADR·수용 기준",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-10",
+        "IT-12",
+        "IT-13",
+        "IT-18"
+      ],
+      "baseline_policy": "기능별 구현 상세와 별개로, 실제 실행·배포가 이루어질 때 필요한 최소 배치/접근/롤백을 채움. 로컬 PoC는 로컬 환경 명시로 충분.",
+      "evidence_policy": "실제 URL/배포/운영 상태는 실행 증거가 있을 때만 confirmed. 제품 선택 이전은 proposed."
     }
   ],
   "decision_stages": [
@@ -2017,9 +2089,10 @@
         "PD-08"
       ],
       "output_types": [
-        "IT-18"
+        "IT-18",
+        "IT-26"
       ],
-      "exit_when": "핵심 위험에 대응하는 통제·남은 위험·검증 연결",
+      "exit_when": "핵심 위험에 대응하는 통제·남은 위험·검증 연결; 실제 배포에 필요한 실행 단위·연결·복구 전제 정의",
       "parallel_group": "detail_design",
       "draft_requirements": [
         "선행 단계의 가설 또는 결과를 읽을 수 있음"
@@ -2207,7 +2280,7 @@
     "사용자 가치 검증·실측",
     "제품 주제나 기술 확정"
   ],
-  "revision_note": "V1의 상위 전략 누락, 병렬 확정 모순, 비유형 참조, 필드 계약 부재를 보완. 상세 예시·검증기는 별도 파일.",
+  "revision_note": "V2.1: add concrete deployment topology information IT-26 and component design order/views for consistency with architecture submodel.",
   "version_history": [
     {
       "version": 1,
@@ -2628,6 +2701,46 @@
       "relation": "constrains",
       "contract_phase": "draft_and_baseline",
       "propagate_review": true
+    },
+    {
+      "id": "TE-050",
+      "from_type": "IT-13",
+      "to_type": "IT-26",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-051",
+      "from_type": "IT-12",
+      "to_type": "IT-26",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-052",
+      "from_type": "IT-10",
+      "to_type": "IT-26",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-053",
+      "from_type": "IT-18",
+      "to_type": "IT-26",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-054",
+      "from_type": "IT-26",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
     }
   ],
   "record_contract": {
@@ -2714,5 +2827,7 @@
       "url": "https://www.nasa.gov/reference/system-engineering-handbook-appendix/",
       "scope": "needs, requirements, verification and validation traceability"
     }
-  ]
+  ],
+  "component_submodel_ref": "docs/deliverables/component-design-model.json",
+  "component_views_ref": "docs/deliverables/COMPONENT-DESIGN-VIEWS.md"
 }
