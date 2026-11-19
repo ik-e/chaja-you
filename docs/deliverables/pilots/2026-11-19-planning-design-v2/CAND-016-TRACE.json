@@ -740,5 +740,55 @@
       ],
       "official_outline_status": "not_verified"
     }
-  }
+  },
+  "projection_edges": [
+    {
+      "id": "PE-01",
+      "from": "EX-PAIN",
+      "to": "DLV-01",
+      "relation": "materialized_in",
+      "section_hint": "사용자 문제·잔여 Pain",
+      "status": "preview_only"
+    },
+    {
+      "id": "PE-02",
+      "from": "EX-FR",
+      "to": "DLV-01",
+      "relation": "materialized_in",
+      "section_hint": "핵심 요구사항·수용 기준",
+      "status": "preview_only"
+    },
+    {
+      "id": "PE-03",
+      "from": "EX-API",
+      "to": "DLV-03",
+      "relation": "materialized_in",
+      "section_hint": "요청/응답·오류 계약",
+      "status": "preview_only"
+    },
+    {
+      "id": "PE-04",
+      "from": "EX-DATA",
+      "to": "DLV-04",
+      "relation": "materialized_in",
+      "section_hint": "논리 엔터티·키·관계",
+      "status": "preview_only"
+    },
+    {
+      "id": "PE-05",
+      "from": "EX-WF",
+      "to": "DLV-05",
+      "relation": "materialized_in",
+      "section_hint": "상태·전이·가드",
+      "status": "preview_only"
+    },
+    {
+      "id": "PE-06",
+      "from": "EX-TEST",
+      "to": "DLV-11",
+      "relation": "materialized_in",
+      "section_hint": "시험 설계만 가능, 실행 결과는 not_run",
+      "status": "preview_only"
+    }
+  ]
 }
