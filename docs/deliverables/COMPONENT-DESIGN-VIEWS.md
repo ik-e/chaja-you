@@ -3,6 +3,37 @@
 > **R01 검토용 제안 · 2026-11-19.** 이 문서는 [기획→설계 결정·정보 모델](PLANNING-DESIGN-INFO-MODEL.md)의 **구체적 구성요소 및 설계 순서 시각화**입니다. 아래 CAND-016 구성은 가상 검토 사례이고 팀 제품·기술·배포/코드가 확정됐다는 뜻이 아닙니다.
 > 구조화 원본: [component-design-model.json](component-design-model.json) · 단계/정보 ID의 정본: [planning-design-info-model.json](planning-design-info-model.json)
 
+## 설계와 시험 설계는 같은 구성요소 경계를 사용합니다
+
+이 문서는 **설계 대상의 실제 컴포넌트·실행/데이터 구조 및 시험 대상 경계**를 보여줍니다. 각 컴포넌트를 정의할 때 책임·입력·출력·의존·소유 데이터와 함께 그 책임의 **검증 질문, 정상/예외 입력, 기대 결과, 통합 경계**를 정의합니다. 실행했다고 주장하지 않습니다.
+
+대표 가상 요구 `EX-FR`: 모의 사건의 관측 정보가 `unknown`이면 확정 위반으로 표시하지 않습니다.
+
+```mermaid
+flowchart TD
+  FR["EX-FR 요구사항<br/>unknown과 확정 사실 구별"]
+  CP["C-EVIDENCE-POLICY<br/>관측 분류 업무 규칙"]
+  ST["C-STATE<br/>허가된 상태 전이"]
+  REP["C-REPOSITORY<br/>정본 저장"]
+  API["C-API-CASE<br/>입출력·오류"]
+  UI["C-UI-RESULT<br/>화면 표시"]
+  TF["EX-T-CLASSIFY<br/>observed/inferred/unknown 입력별 기대 분류"]
+  TS["EX-T-STATUS<br/>잘못된 상태 전이 거절"]
+  TR["EX-T-STORE<br/>저장 오류 시 성공 반환 금지"]
+  TU["EX-T-UI<br/>unknown의 확정 판정 표기 금지"]
+  FR --> CP
+  FR --> ST
+  FR --> REP
+  FR --> API
+  FR --> UI
+  CP -. "검증 설계" .-> TF
+  ST -. "검증 설계" .-> TS
+  REP -. "검증 설계" .-> TR
+  UI -. "검증 설계" .-> TU
+```
+
+이는 **대표 설계·검증 관계를 설명한 예시**입니다. 요구사항·컴포넌트의 전체 추적은 [CAND-016-TRACE.json](pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json)의 관계·테스트 ID에 있고, 실제 테스트 수행 결과는 `not_run`입니다. 공통 상태/오류 의미는 [DOMAIN-CONTRACT.json](pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json)을 참조합니다.
+
 ## 1. 점진적 설계 결정 순서 — 넓은 범위에서 구체 책임으로
 ```mermaid
 flowchart TD
@@ -154,7 +185,6 @@ erDiagram
 
 | 설계 순서 | 작성할 구체 항목 | 처음 완성해야 하는 수준 | 확정 시 확인할 것 |
 |---|---|---|---|
-| 상위 전략 IT-25 | 구조 대안·품질 목표·제약·비용·실패 모드 | 핵심 전략 가설 | 사용자 요구·품질·권한 충족, 반증 조건 |
 | 시스템 맥락·업무 규칙 IT-11/12 | Case/Observation·상태 의미·외부 사용자/시스템·권한 경계 | 개념·맥락 모델 | 용어·불변식·권한 누락 없음 |
 | 상위 해결 전략 IT-25 | 독립 서비스/단일 앱 등 대안·품질 목표·비용·실패 모드 | 구조 전략 가설 | 요구·제약·품질의 비교 근거 |
 | **논리 실행·저장 단위 IT-27** | UI·API·DB 등 논리 실행/저장 단위 | 배치 가설 | 업무 책임·동기/비동기·데이터 정본 경계 |
@@ -171,7 +201,13 @@ erDiagram
 - **조건부:** 큐/워커(장시간 비동기 작업이 실제 필요할 때), AI/에이전트(기존 수작업·규칙 대비 이득을 검증할 때), 감사·관측(위험·운영 수준에 맞춰), 외부 API 어댑터(실제 연동이 필요할 때).
 - **고정하지 않을 것:** 프레임워크·DBMS·개별 서버 수·마이크로서비스 수·에이전트 수. 설명을 위한 논리 박스가 물리 실행 단위를 강제하지 않습니다.
 
-## 8. 외부 근거·검증 범위
+## 8. 검증 및 시험 설계 관점
+
+- 컴포넌트별 책임은 [추적 모델](pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json)의 `CR-*` 설계 레코드에 연결되며, 해당 `verification_refs`는 실행된 결과가 아니라 시험 설계 ID입니다.
+- 상태·DB·API·UI의 세부 테스트는 [점진적 설계 순서표](PROGRESSIVE-DESIGN-ORDER.md)의 L5 항목에 배치합니다.
+- 전체 설계 일치 여부는 L6의 교차 정합성으로 다룹니다. 구조 검사 통과와 기능/가치 입증은 구별합니다.
+
+## 9. 외부 근거·검증 범위
 
 - [C4 Model](https://c4model.com/): 시스템 맥락·컨테이너·컴포넌트의 설명 수준을 참고. 설계의 시간적 순서를 규정하는 표준은 아님.
 - [arc42 Building Block](https://docs.arc42.org/section-5/), [Runtime](https://docs.arc42.org/section-6/), [Deployment](https://docs.arc42.org/section-7/): 구성·행동·실행 환경 관점을 분리하는 참고 근거.
