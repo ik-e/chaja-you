@@ -379,17 +379,23 @@
         ],
         "owned_state": "표시 상태만 소유",
         "requirements": [
-          "EX-FR",
-          "EX-NFR"
+          "EX-FR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-UI"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-UI-ENTRY",
         "phase": "draft_hypothesis",
         "failure_policy": "검증 오류를 사용자에게 표시; 확정 판정 생성 금지",
         "contract_ref": "IT-17",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "사용자가 observed/inferred/unknown 분류로 관측 자료를 입력하도록 함"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-UI-RESULT",
@@ -410,17 +416,23 @@
         "depends_on": [],
         "owned_state": "표시 상태만 소유",
         "requirements": [
-          "EX-FR",
-          "EX-NFR"
+          "EX-FR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-UI"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-UI-RESULT",
         "phase": "draft_hypothesis",
         "failure_policy": "미확인을 '부정행위 확정'으로 표시하지 않음",
         "contract_ref": "IT-17",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "미확인을 위반 확정으로 표시하지 않고 reviewed는 사람의 검토 완료로만 표시"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-API-CASE",
@@ -448,13 +460,25 @@
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-ACCESS",
+          "EX-T-STATUS"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-API-CASE",
         "phase": "draft_hypothesis",
         "failure_policy": "입력 오류·권한 거절·상태 충돌·저장 실패를 구분",
         "contract_ref": "IT-16",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "외부 요청의 권한·입출력·실패 코드를 계약대로 반환"
+          },
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "외부 요청의 권한·입출력·실패 코드를 계약대로 반환"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-AUTHZ",
@@ -474,17 +498,23 @@
         "depends_on": [],
         "owned_state": "접근 정책 참조",
         "requirements": [
-          "EX-FR",
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-ACCESS"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-AUTHZ",
         "phase": "draft_hypothesis",
         "failure_policy": "권한 불충족이면 저장·상태 전이 전 거절",
         "contract_ref": "IT-18",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "역할에 따른 접근/전이 승인, 거절 시 업무 부작용 방지"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-APP-CASE",
@@ -515,13 +545,25 @@
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-CLASSIFY",
+          "EX-T-STORE"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-APP-CASE",
         "phase": "draft_hypothesis",
         "failure_policy": "정합성 오류 시 저장 취소·안전한 실패 응답",
         "contract_ref": "IT-09",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "사건 유스케이스의 분류·상태·정본·이력 변경을 조정"
+          },
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "사건 유스케이스의 분류·상태·정본·이력 변경을 조정"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-EVIDENCE-POLICY",
@@ -541,17 +583,23 @@
         "depends_on": [],
         "owned_state": "순수 정책(상태 비소유)",
         "requirements": [
-          "EX-FR",
-          "EX-NFR"
+          "EX-FR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-CLASSIFY"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-EVIDENCE-POLICY",
         "phase": "draft_hypothesis",
         "failure_policy": "출처 불명이나 미확인 자료를 확정 사실로 승격하지 않음",
         "contract_ref": "IT-11",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "관측/추정/미확인 입력의 의미 보존"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-STATE",
@@ -573,17 +621,23 @@
         ],
         "owned_state": "논리 상태 전이 규칙",
         "requirements": [
-          "EX-FR",
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-STATUS"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-STATE",
         "phase": "draft_hypothesis",
         "failure_policy": "잘못된 전이 409; 자동 제재 없음",
         "contract_ref": "IT-14",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "규정된 CaseStatus 전이·가드를 적용하고 잘못된 전이 거부"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-REPOSITORY",
@@ -606,17 +660,24 @@
         ],
         "owned_state": "정본 DB 접근·트랜잭션",
         "requirements": [
-          "EX-FR",
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-STORE",
+          "EX-T-AUDIT"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-REPOSITORY",
         "phase": "draft_hypothesis",
         "failure_policy": "저장 실패 시 상태만 성공 반환 금지",
         "contract_ref": "IT-15",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "Case·Observation·Action 정본을 실패 시 일관되게 처리"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-AUDIT",
@@ -638,17 +699,23 @@
         ],
         "owned_state": "이력은 DB에 저장",
         "requirements": [
-          "EX-FR",
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-AUDIT"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-AUDIT",
         "phase": "draft_hypothesis",
         "failure_policy": "업무 결정과 이력이 함께 기록돼야 하는 동작은 원자적 처리",
         "contract_ref": "IT-18",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "조치 주체·시각·이력을 저장 성공과 정합적으로 기록"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       {
         "id": "C-OBSERVE",
@@ -668,17 +735,23 @@
         "depends_on": [],
         "owned_state": "운영 로그는 업무 원본과 분리",
         "requirements": [
-          "EX-FR",
           "EX-NFR"
         ],
         "verification_refs": [
-          "EX-TEST"
+          "EX-T-OBSERVE"
         ],
-        "source_info_ref": "EX-COMP",
+        "source_info_ref": "CR-C-OBSERVE",
         "phase": "draft_hypothesis",
         "failure_policy": "비밀·개인정보 유출 로그 금지",
         "contract_ref": "IT-18",
-        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님"
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "민감정보를 제외한 실패/지연 관측 이벤트 기록"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       }
     ],
     "connections": [
