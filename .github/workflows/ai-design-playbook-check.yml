@@ -1,0 +1,39 @@
+name: ai-design-playbook-check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/deliverables/AI-DESIGN-PLAYBOOK.md'
+      - 'docs/deliverables/PROGRESSIVE-DESIGN-ORDER.md'
+      - 'docs/deliverables/planning-design-info-model.json'
+      - 'docs/deliverables/component-design-model.json'
+      - 'docs/deliverables/pilots/2026-11-19-planning-design-v2/**'
+      - 'tools/validate_planning_design_model.py'
+      - 'tools/check_ai_design_playbook.py'
+      - '.github/workflows/ai-design-playbook-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/deliverables/AI-DESIGN-PLAYBOOK.md'
+      - 'docs/deliverables/planning-design-info-model.json'
+      - 'docs/deliverables/component-design-model.json'
+      - 'docs/deliverables/pilots/2026-11-19-planning-design-v2/**'
+      - 'tools/validate_planning_design_model.py'
+      - 'tools/check_ai_design_playbook.py'
+      - '.github/workflows/ai-design-playbook-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-design-and-slice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile local validators
+        run: python -m py_compile tools/validate_planning_design_model.py tools/check_ai_design_playbook.py
+      - name: Validate design model, shared contract and sample AI slice
+        run: python tools/check_ai_design_playbook.py
