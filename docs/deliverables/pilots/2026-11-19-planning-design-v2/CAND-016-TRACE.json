@@ -476,16 +476,16 @@
         ],
         "case_conditions": [
           "Case의 ObservationKind=unknown",
-          "무근거 추정을 사실·위반으로 표시할 유혹이 있는 화면 상태"
+          "근거 없는 확정·개인 귀속을 표시할 위험이 있는 화면 상태"
         ],
-        "expected": "위반 확정 표시 없음; 권한 없는 검토 완료 거절",
+        "expected": "unknown 관측 입력 후 개인·좌석 식별 및 부정행위 확정 표시 없음",
         "method": "모의 사건 E2E 또는 계약 테스트",
-        "verdict_boundary": "pass: unknown 입력 후 모든 결과 필드/화면에 확정 위반·개인 식별 단정 문구 없음; fail: 하나라도 잘못된 단정 존재; unknown: 조회/화면을 관찰할 수 없음",
+        "verdict_boundary": "pass: unknown 입력에서 개인·좌석/위반 단정 표시 0건; fail: 근거 없는 단정 표시 1건 이상; unknown: 입력·조회·화면 결과를 관찰할 수 없음",
         "run_ref": null,
         "verification_kind": "requirements_verification",
         "design_level": "L2",
         "plan_maturity": "detailed_test_case",
-        "verification_question": "미확인 강제 표시 검증 예시 조건에서 예상 결과와 금지 조건이 성립하는가?"
+        "verification_question": "미확인 관측에서 개인·좌석·위반 확정 문구가 나타나지 않는가?"
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
