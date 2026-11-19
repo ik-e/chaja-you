@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency/type/traceability validation for the R01 planning-design V2 proposal.
+"""Dependency/type/traceability validation for the R01 planning-design V3 proposal.
 No network access; never accepts sample evidence as real-world product proof.
 Usage: python tools/validate_planning_design_model.py [model_json] [pilot_json]
 """
@@ -11,6 +11,8 @@ from pathlib import Path
 
 MODEL = "docs/deliverables/planning-design-info-model.json"
 PILOT = "docs/deliverables/pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json"
+COMPONENT = "docs/deliverables/component-design-model.json"
+DOMAIN = "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
 ALLOWED_STATUS = {"draft_hypothesis", "proposed", "provisional", "adopted", "deferred", "rejected", "not_applicable"}
 SCHEMA_TYPES = {"string", "string[]", "object", "ref", "ref[]", "enum"}
 
@@ -182,6 +184,17 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
     check(assertions.get("run_status") == "not_run", "Pilot must not invent test executions", errors)
     check("EX-CHOICE" in record_map and record_map["EX-CHOICE"].get("status") == "deferred",
           "Non-adopted product choice must remain deferred", errors)
+
+    for typ in types:
+        first = stage_map.get(typ.get("first_defined_at"))
+        check(bool(first) and typ["id"] in first.get("output_types", []),
+              f"{typ['id']}: first production stage missing", errors)
+    for layer in model.get("progressive_design_layers", []):
+        for sid in layer.get("stage_ids", []):
+            check(sid in stage_map, f"{layer['id']}: unknown stage {sid}", errors)
+        for prop in ("decide_now","defer_now","minimum_input","completion_for_next"):
+            check(bool(layer.get(prop)), f"{layer['id']}: missing {prop}", errors)
+
     stats = {"stages":len(stages),"information_types":len(types),
              "typed_fields":sum(len(t["fields"]) for t in types),
              "typed_edges":len(model.get("type_edges",[])),
@@ -189,16 +202,91 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
              "change_impact_targets":len(change.get("expected_impact",[]))}
     return errors, stats
 
+
+def validate_component(model, pilot, component, domain):
+    errors = []
+    recs = {r["id"]: r for r in pilot.get("records", [])}
+    ex = component.get("example", {})
+    comps = ex.get("components", [])
+    runtime = {c["id"] for c in ex.get("containers", [])}
+    kind_ids = {c["key"] for c in component.get("categories", [])}
+    comp_ids = {c["id"] for c in comps}
+    known = comp_ids | runtime | {a["id"] for a in ex.get("system",{}).get("actors",[])} | {a["id"] for a in ex.get("system",{}).get("external",[])}
+    check(len(comp_ids)==len(comps), "Duplicate component IDs", errors)
+    for c in comps:
+        cid = c["id"]
+        check(c.get("kind") in kind_ids, f"{cid}: undefined component kind", errors)
+        check(c.get("parent_container") in runtime, f"{cid}: missing runtime unit", errors)
+        check(c.get("phase") == "draft_hypothesis", f"{cid}: proposed component prematurely adopted", errors)
+        src = recs.get(c.get("source_info_ref"))
+        check(src is not None and src.get("type_id") == "IT-13", f"{cid}: no independent IT-13 record", errors)
+        if src:
+            check(src["fields"].get("component") == cid, f"{cid}: mismatched ID", errors)
+            check(src["fields"].get("parent_runtime_unit_ref") == "RU-"+c["parent_container"], f"{cid}: mismatched runtime", errors)
+            check(src["fields"].get("verification_refs") == c.get("verification_refs"), f"{cid}: mismatched tests", errors)
+        for dep in c.get("depends_on", []):
+            check(dep in known, f"{cid}: missing dependency {dep}", errors)
+        check(len(c.get("requirement_contributions", [])) == len(c.get("requirements", [])),
+              f"{cid}: unclear requirement responsibility", errors)
+        for contrib in c.get("requirement_contributions", []):
+            check(contrib.get("requirement_ref") in c.get("requirements", []) and bool(contrib.get("contribution")),
+                  f"{cid}: invalid requirement contribution", errors)
+        for req in c.get("requirements", []):
+            check(req in recs and recs[req].get("type_id") in {"IT-09", "IT-10"},
+                  f"{cid}: unknown requirement {req}", errors)
+        for test in c.get("verification_refs", []):
+            check(test in recs and recs[test].get("type_id") == "IT-20",
+                  f"{cid}: unknown verification {test}", errors)
+    for conn in ex.get("connections", []):
+        check(conn.get("from") in known and conn.get("to") in known,
+              f"{conn.get('id')}: invalid component connection", errors)
+    for unit in runtime:
+        check(recs.get("RU-"+unit,{}).get("type_id") == "IT-27",
+              f"{unit}: missing distinct logical runtime record", errors)
+    enums = domain.get("enums", {})
+    states = enums.get("CaseStatus", [])
+    kinds = enums.get("ObservationKind", [])
+    error_codes = enums.get("ErrorCode", [])
+    wf = recs.get("EX-WF",{}).get("fields",{})
+    api = recs.get("EX-API",{}).get("fields",{})
+    ui = recs.get("EX-UI",{}).get("fields",{})
+    check(wf.get("states") == states, "CaseStatus differs from workflow", errors)
+    check(all(s in states for s in wf.get("terminal_states",[])), "Unknown terminal state", errors)
+    check(api.get("output_schema",{}).get("status")=="|".join(states), "CaseStatus differs from API", errors)
+    check(api.get("output_schema",{}).get("evidence_kind")=="|".join(kinds), "ObservationKind differs from API", errors)
+    check(api.get("errors")==error_codes, "ErrorCode differs from API", errors)
+    for state in states:
+        check(any(state in v for v in ui.get("presentation_states",[])), f"UI missing {state}", errors)
+    shared = component.get("canonical_domain_contract_ref")
+    for rid in ("EX-WF","EX-API","EX-UI","EX-DATA"):
+        check(recs.get(rid,{}).get("fields",{}).get("canonical_contract_ref")==shared,
+              f"{rid}: inconsistent canonical contract ref", errors)
+    case = next((d for d in ex.get("logical_data_entities",[]) if d["name"]=="Case"),None)
+    check(bool(case) and "case_status: "+"|".join(states) in case.get("fields",[]),
+          "Case status differs from canonical contract", errors)
+    for ci in ex.get("example_contracts",[]):
+        for error in ci.get("errors",[]):
+            check(error in error_codes, f"{ci['id']}: invalid API error {error}", errors)
+    return errors, {"components":len(comps),"logical_runtime_units":len(runtime),
+                    "shared_states":len(states),"shared_errors":len(error_codes)}
+
 def main() -> int:
     model_path = Path(sys.argv[1]) if len(sys.argv)>1 else Path(MODEL)
     pilot_path = Path(sys.argv[2]) if len(sys.argv)>2 else Path(PILOT)
+    component_path = Path(sys.argv[3]) if len(sys.argv)>3 else Path(COMPONENT)
+    domain_path = Path(sys.argv[4]) if len(sys.argv)>4 else Path(DOMAIN)
     try:
         model = json.loads(model_path.read_text(encoding="utf-8"))
         pilot = json.loads(pilot_path.read_text(encoding="utf-8"))
+        component = json.loads(component_path.read_text(encoding="utf-8"))
+        domain = json.loads(domain_path.read_text(encoding="utf-8"))
     except (OSError, ValueError) as error:
         print(json.dumps({"status":"error", "reason":str(error)},ensure_ascii=False))
         return 2
     errors, stats = validate(model,pilot)
+    more_errors, component_stats = validate_component(model,pilot,component,domain)
+    errors.extend(more_errors)
+    stats.update(component_stats)
     print(json.dumps({"status":"pass" if not errors else "fail","stats":stats,"errors":errors},ensure_ascii=False,indent=2))
     return 0 if not errors else 1
 
