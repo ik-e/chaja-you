@@ -16,7 +16,8 @@
       "ai_optional"
     ],
     "separation": "IT-13은 구성요소·책임 정본의 원소를 대표하고 IT-14/15/16/17/18/20/26이 동작·데이터·계약·UI·운영·검증을 각각 상세 기술한다.",
-    "product_status": "기존 Phase Intent와 팀 제품 미채택 상태 유지; 시범 컴포넌트는 전부 draft_hypothesis"
+    "product_status": "기존 Phase Intent와 팀 제품 미채택 상태 유지; 시범 컴포넌트는 전부 draft_hypothesis",
+    "logical_container_vs_deployment": "CTN-WEB/CTN-API/CTN-DATA는 C4 실행·저장 단위(IT-27) 예시이며 IT-26 물리적 배포 환경과 별도"
   },
   "component_record_contract": {
     "required": [
@@ -837,8 +838,8 @@
       {
         "id": "IF-CASE-CREATE",
         "entrypoint": "POST /cases",
-        "request": "Observation[kind,source] + optional memo; actor context",
-        "response": "case_id,case_status,observation kind",
+        "request": "Observation[kind:ObservationKind,source] + optional memo; actor context (case_id is server generated)",
+        "response": "case_id (server generated), status:CaseStatus, evidence_kind:ObservationKind",
         "errors": [
           "invalid_input",
           "permission_denied",
@@ -888,7 +889,31 @@
           "runtime": "local test data store"
         }
       ],
-      "note": "실제 cloud, DBMS, framework, containers, queues 미선택"
+      "note": "물리 배포 환경·Docker·클라우드·DBMS는 미선정. 브라우저/서버/저장소는 논리 실행·저장 단위의 가상 배치"
+    },
+    "shared_contracts": {
+      "CaseStatus": [
+        "draft",
+        "unverified",
+        "review_pending",
+        "reviewed"
+      ],
+      "ObservationKind": [
+        "observed",
+        "inferred",
+        "unknown"
+      ],
+      "ErrorCode": [
+        "invalid_input",
+        "permission_denied",
+        "not_found",
+        "invalid_transition",
+        "storage_failure"
+      ],
+      "ActorRole": [
+        "supervisor_sim",
+        "reviewer_sim"
+      ]
     }
   },
   "acceptance_checks": [
@@ -923,5 +948,6 @@
       "name": "ISO/IEC/IEEE 42010:2022",
       "url": "https://www.iso.org/standard/74393.html"
     }
-  ]
+  ],
+  "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
 }
