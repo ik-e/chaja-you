@@ -1,8 +1,8 @@
 {
-  "schema_version": 3,
-  "id": "PLANNING-DESIGN-INFO-MODEL-V3-20261119",
+  "schema_version": 4,
+  "id": "PLANNING-DESIGN-INFORMATION-MODEL-V4-20261119",
   "kind": "planning_design_information_model",
-  "status": "progressive_refinement_v3_proposal_only",
+  "status": "design_only_progressive_refinement_proposal",
   "updated_at": "2026-11-19",
   "owner": "R01_review_proposed",
   "purpose": "기획부터 상세 설계까지 결정의 선행관계와 실제 정보 항목을 연결한 재사용 가능한 정보 모델(제품/기술 미확정).",
@@ -119,13 +119,13 @@
     }
   ],
   "decision_principles": [
-    "선행/치명적 제약 먼저",
-    "파급력이 크고 불확실한 선택은 최소 반증부터",
-    "되돌릴 수 있는 세부 선택은 담당자 병렬 진행",
-    "실측 전 값은 가설/미확인으로 남김",
-    "서로 영향을 주는 상세 설계는 병렬 초안 후 계약 정합성 확인",
-    "상위 WBS는 조기 작성 가능하며 PD-11에서 상세 계획으로 갱신",
-    "문서 상태와 제출/접수 상태는 독립적"
+    "상위 사용자 문제·범위·품질 목표를 먼저 결정한 뒤 종속되는 도메인·경계·구성·상태·데이터·인터페이스를 필요한 수준만 상세화",
+    "각 설계 수준에서 정의한 정보와 해당 정보의 검증/시험 질문을 동시에 설계하고, 다음 단계에서 세부 시험 조건을 발전시킨다",
+    "문제/제품 타당성 검증(Validation)과 명세·설계 적합성 확인(Verification)을 구분하고 구조 검사/시험 계획을 실측 성공으로 대체하지 않는다",
+    "선행 정보가 없으면 초안은 가정으로 표시하고, 나중에 근거를 확보한 후 정합성을 확인한다",
+    "상태·데이터·API·UI·보안의 상세 설계는 병렬 초안 작성 후 공통 업무/오류 계약을 기준으로 합류",
+    "의존성은 설계 결정의 확정 순서이지 문서 작성 순서, 개발 절차, 자동 업무 할당을 강제하지 않는다",
+    "물리 구현·실제 시험·작업 분해·제출은 설계에서 도출되는 후속 활동으로 분리한다"
   ],
   "information_types": [
     {
@@ -1302,7 +1302,7 @@
     {
       "id": "IT-20",
       "key": "verification_case",
-      "name": "요구·설계 검증 계획",
+      "name": "기획·요구·설계 검증 및 시험 계획",
       "work_domain": "test",
       "first_defined_at": "PD-07",
       "applicability": "general",
@@ -1345,8 +1345,55 @@
         },
         {
           "key": "run_ref",
-          "meaning": "실행 후에만 연결할 실측 근거",
+          "meaning": "실제 수행 후의 실행 결과 정본 Run/Eval 참조(미실행은 null); 검증 계획을 결과로 취급하지 않음",
           "value_type": "ref",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verification_kind",
+          "meaning": "해당 계획이 무엇을 확인하는지: 사용자 문제/요구/아키텍처/컴포넌트/계약/통합/사용자 가치",
+          "value_type": "enum",
+          "required_for_baseline": false,
+          "allowed_values": [
+            "problem_validation",
+            "requirements_verification",
+            "architecture_evaluation",
+            "design_review",
+            "component_verification",
+            "contract_test",
+            "integration_test",
+            "user_acceptance",
+            "quality_test"
+          ]
+        },
+        {
+          "key": "design_level",
+          "meaning": "이 시험·검증 계획이 유도된 설계 수준 L0~L6",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "coverage_refs",
+          "meaning": "검증 대상 요구·규칙·컴포넌트·계약 식별자",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "test_data_plan",
+          "meaning": "정상·경계·예외 입력의 출처·생성/권한·기준선 정의",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "environment_plan",
+          "meaning": "실행 때 필요한 환경/버전/권한 조건; 아직 미선정 가능",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "execution_separation",
+          "meaning": "테스트를 설계했다는 사실과 실제 수행 증거는 구분",
+          "value_type": "string",
           "required_for_baseline": false
         }
       ],
@@ -1843,7 +1890,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "planning_review",
+        "question": "상위 목적·범위·법적/자원 제약에 실제 근거가 있는가?",
+        "planned_methods": [
+          "유효한 Intent·Phase·기준 원본의 출처와 충돌 확인"
+        ],
+        "designed_output": "목적·제약·미확인 목록",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-01",
@@ -1873,7 +1930,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "해당 역할·사용 환경이 실재하고 적절하게 정의됐는가?",
+        "planned_methods": [
+          "사용자/기관 자료, 관찰·인터뷰 계획과 반대 사례 정의"
+        ],
+        "designed_output": "검증 가능한 사용자·맥락 가설",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-02",
@@ -1903,7 +1970,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "As-Is의 어느 단계에서 어떤 손실이 발생하는가?",
+        "planned_methods": [
+          "현행 업무 관찰·업무 흐름 검토·관측 및 반증 계획"
+        ],
+        "designed_output": "관찰/추정·손실 기준 구분",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-03",
@@ -1932,7 +2009,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "기존 대안과 비교한 뒤에도 잔여 문제가 있는가?",
+        "planned_methods": [
+          "동일 작업·환경의 기준선 비교 설계, 대안 반례 수집"
+        ],
+        "designed_output": "기존 대안 대비 남은 손실 가설",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-04",
@@ -1961,7 +2048,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "feasibility_review",
+        "question": "데이터·권한·기술·비용 제약 때문에 검증 자체가 불가능한가?",
+        "planned_methods": [
+          "접근 허가·공식 출처 확인, 필요시 최소 PoC의 반증 조건"
+        ],
+        "designed_output": "치명적 제한과 불확실성 목록",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-05",
@@ -1992,7 +2089,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "이 문제를 선택할 만큼 사용자 가치와 가능성이 있는가?",
+        "planned_methods": [
+          "문제 선택 근거·대안·반증 및 보류 조건 비교"
+        ],
+        "designed_output": "사람의 선택 또는 보류 근거",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-06",
@@ -2022,12 +2129,22 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "scenario_validation",
+        "question": "제안된 사용 시나리오가 목표 달성을 의미하는가?",
+        "planned_methods": [
+          "대표·예외 시나리오의 사용자 확인 계획, 관찰 성과 지표"
+        ],
+        "designed_output": "가치 지표·유스케이스 검증 질문",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-07",
       "phase": "planning",
-      "label": "요구사항·검증 계획",
+      "label": "기능·품질 요구사항 및 시험 설계",
       "decision_question": "무엇이 반드시 동작하고 어떤 품질을 충족해야 하는가?",
       "blocking_on": [
         "PD-06"
@@ -2053,7 +2170,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "requirements_verification",
+        "question": "요구사항 각각이 관찰·측정·시험 가능하며 사용자 가치와 연결되는가?",
+        "planned_methods": [
+          "FR/NFR마다 수용 기준·시험 입력·예상 결과·판정 한계 설계"
+        ],
+        "designed_output": "초기 IT-20 검증·시험 계획",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-08",
@@ -2082,7 +2209,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "design_review",
+        "question": "도메인 용어·불변식·신뢰 경계가 모순되거나 누락되지 않았는가?",
+        "planned_methods": [
+          "업무 규칙 반례·경계/권한 도표·도메인 객체 정의 리뷰"
+        ],
+        "designed_output": "도메인/경계 검토 및 예상 반례",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-08A",
@@ -2111,7 +2248,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "architecture_evaluation",
+        "question": "상위 해결 전략이 주요 품질·비용·법적 제약을 만족할 가능성이 높은가?",
+        "planned_methods": [
+          "대안별 품질 시나리오·비교 가정·필요한 최소 기술 검증 정의"
+        ],
+        "designed_output": "전략 비교 근거와 재검토 지점",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-08B",
@@ -2140,7 +2287,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "개별 컴포넌트는 같은 실행 단위 안의 논리적 책임 묶음. 실행 단위 분해를 물리 인프라/VM/Docker 배포 결정과 혼동하지 않는다."
+      "note": "개별 컴포넌트는 같은 실행 단위 안의 논리적 책임 묶음. 실행 단위 분해를 물리 인프라/VM/Docker 배포 결정과 혼동하지 않는다.",
+      "verification_design": {
+        "kind": "design_review",
+        "question": "실행 단위·컴포넌트별 책임과 데이터 소유가 요구를 빠짐없이 충족하는가?",
+        "planned_methods": [
+          "요구→책임 매핑·인터페이스/소유권/충돌 점검·컴포넌트 시험 대상 정의"
+        ],
+        "designed_output": "구성요소별 검증 대상과 통합 경계",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-09A",
@@ -2171,7 +2328,17 @@
         "deferred"
       ],
       "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
-      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정"
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "정상·예외·금지 상태 전이가 정확히 정의됐는가?",
+        "planned_methods": [
+          "상태 전이 표/경계값/권한 가드·실패/재시도 케이스 설계"
+        ],
+        "designed_output": "상태·행동 단위 및 통합 시험 조건",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-09B",
@@ -2201,7 +2368,17 @@
         "deferred"
       ],
       "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
-      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정"
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "키·관계·무결성·보관/삭제 조건을 지킬 수 있는가?",
+        "planned_methods": [
+          "참조 무결성·동시성·권한·데이터 생명주기 입력/예상값 설계"
+        ],
+        "designed_output": "데이터 계약·저장/복구 시험 조건",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-09C",
@@ -2232,7 +2409,17 @@
         "deferred"
       ],
       "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
-      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정"
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "API·Tool·UI가 동일한 입력·출력·오류·업무 의미를 나타내는가?",
+        "planned_methods": [
+          "스키마/권한/오류·빈 상태·부분 결과의 계약·화면 시험 설계"
+        ],
+        "designed_output": "API/UI 계약·사용자 시나리오 시험",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-09D",
@@ -2263,12 +2450,22 @@
         "deferred"
       ],
       "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
-      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정"
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "품질·보안·배포 제약의 실패 조건과 판정 기준이 정의됐는가?",
+        "planned_methods": [
+          "위협 시나리오·성능/복구·배포 롤백·접근 통제 시험 설계"
+        ],
+        "designed_output": "보안·성능·복구 시험 계획",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-10",
       "phase": "design",
-      "label": "계약 정합성·핵심 대안 결정",
+      "label": "설계 정합성·요구 추적·시험 계획 완성",
       "decision_question": "요구·상태·데이터·API·UI·안전 규칙이 충돌하는가?",
       "blocking_on": [
         "PD-09A",
@@ -2296,12 +2493,22 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "design_verification",
+        "question": "요구→컴포넌트→상태/데이터/API/UI→시험 계획이 일관되고 누락이 없는가?",
+        "planned_methods": [
+          "참조 추적·공통 enum·권한/오류·시험 커버리지의 교차 검토"
+        ],
+        "designed_output": "충돌·미확인·보류를 명시한 설계 기준선",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     },
     {
       "id": "PD-11",
       "phase": "planning_and_design",
-      "label": "실행 계획·문서 프로젝션",
+      "label": "설계 전달·산출물 투영(후속 단계)",
       "decision_question": "이 정보를 어떤 작업과 공식 산출물로 연결하는가?",
       "blocking_on": [
         "PD-10"
@@ -2326,7 +2533,17 @@
         "adopted",
         "deferred"
       ],
-      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다."
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "handoff_review",
+        "question": "설계 정보와 후속 시험·산출물의 참조가 누락되지 않았는가?",
+        "planned_methods": [
+          "승인/조건부 설계와 시험 데이터/환경·수행 계획·문서 투영을 대조"
+        ],
+        "designed_output": "실제 시험 전 계획, 실행 결과는 별도 Run/Eval",
+        "test_plan_type_ref": "IT-20",
+        "execution_result": "not_run"
+      }
     }
   ],
   "projection_examples": [
@@ -2434,7 +2651,7 @@
     "사용자 가치 검증·실측",
     "제품 주제나 기술 확정"
   ],
-  "revision_note": "기획→설계 큰 결정에서 세부 책임을 순차 구체화하는 정책, 용어·논리 실행 단위와 물리 배포 구분, 공통 도메인 계약 참조를 추가. 제품 미선정/설계 미승인.",
+  "revision_note": "V4 design scope: AI execution playbook detached; validation/test design is first-class at every level, real execution/results remain separate.",
   "version_history": [
     {
       "version": 1,
@@ -2450,6 +2667,11 @@
       "version": 3,
       "date": "2026-11-19",
       "description": "coarse-to-fine decision boundaries and precise runtime unit vs component vs deployment terminology"
+    },
+    {
+      "version": 4,
+      "date": "2026-11-19",
+      "description": "refocus on planning & software design, with multi-level validation and test design inside each refinement stage"
     }
   ],
   "stage_policies": {
@@ -3009,6 +3231,142 @@
       "relation": "verified_by",
       "contract_phase": "draft_and_baseline",
       "propagate_review": true
+    },
+    {
+      "id": "TE-068",
+      "from_type": "IT-01",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-069",
+      "from_type": "IT-02",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-070",
+      "from_type": "IT-03",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-071",
+      "from_type": "IT-04",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-072",
+      "from_type": "IT-05",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-073",
+      "from_type": "IT-06",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-074",
+      "from_type": "IT-07",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-075",
+      "from_type": "IT-08",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-076",
+      "from_type": "IT-11",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-077",
+      "from_type": "IT-12",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-078",
+      "from_type": "IT-14",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-079",
+      "from_type": "IT-15",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-080",
+      "from_type": "IT-16",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-081",
+      "from_type": "IT-17",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-082",
+      "from_type": "IT-18",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-083",
+      "from_type": "IT-25",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-084",
+      "from_type": "IT-27",
+      "to_type": "IT-20",
+      "relation": "verified_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
     }
   ],
   "record_contract": {
@@ -3118,7 +3476,15 @@
         "INTENT/Phase/공식 제약"
       ],
       "completion_for_next": "현재 의도·권한·제약의 정본을 참조할 수 있다",
-      "reopen_trigger": "의도나 기관 제약 변경"
+      "reopen_trigger": "의도나 기관 제약 변경",
+      "verification_design": {
+        "objective": "목적·제약의 적절성 확인",
+        "what_to_define": "기획 원본·요건의 출처/모순 점검",
+        "kind": "planning_review",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "product_planning"
     },
     {
       "id": "L1",
@@ -3146,7 +3512,15 @@
         "사용자/기관 정보와 후보 근거"
       ],
       "completion_for_next": "근거·반대 근거·미확인을 구분하고 제품 문제를 선택/보류",
-      "reopen_trigger": "기존 대안 또는 접근·권한 조건 변화"
+      "reopen_trigger": "기존 대안 또는 접근·권한 조건 변화",
+      "verification_design": {
+        "objective": "사용자 문제의 실재·잔여 Pain 검증 설계",
+        "what_to_define": "관측 자료·인터뷰/대안 비교·반증 시나리오",
+        "kind": "problem_validation",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "product_planning"
     },
     {
       "id": "L2",
@@ -3158,7 +3532,7 @@
       "decide_now": [
         "대표 사용자 목표/유스케이스",
         "핵심 기능 요구·품질 목표",
-        "수용·반증 조건",
+        "수용 조건·검증 데이터의 종류",
         "MVP 포함/제외"
       ],
       "defer_now": [
@@ -3169,7 +3543,15 @@
         "채택/조건부 문제 가설과 유효한 제약"
       ],
       "completion_for_next": "대표 시나리오와 FR/NFR·검증 계획을 일대일 또는 명시적 다대다 연결",
-      "reopen_trigger": "가치 가설 반증·핵심 문제 변경"
+      "reopen_trigger": "가치 가설 반증·핵심 문제 변경",
+      "verification_design": {
+        "objective": "사용자 가치·요구사항의 수용 기준·시험 설계",
+        "what_to_define": "대표·예외 시나리오, FR/NFR별 판정 조건·시험 데이터 개요",
+        "kind": "requirements_verification",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "product_planning"
     },
     {
       "id": "L3",
@@ -3190,7 +3572,15 @@
         "대표 시나리오·요구사항"
       ],
       "completion_for_next": "다른 설계자가 동일 의미로 업무 객체와 경계를 설명",
-      "reopen_trigger": "업무 규칙/외부 권한 바뀜"
+      "reopen_trigger": "업무 규칙/외부 권한 바뀜",
+      "verification_design": {
+        "objective": "도메인 불변식·시스템 경계의 설계 검토",
+        "what_to_define": "반례·신뢰 경계·역할별 접근 규칙·용어 충돌",
+        "kind": "design_review",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
     },
     {
       "id": "L4",
@@ -3213,7 +3603,15 @@
         "시스템 경계·도메인 불변식·품질 제약"
       ],
       "completion_for_next": "상위 책임이 겹치지 않고 실행 단위/컴포넌트의 입력·출력·의존을 추적할 수 있음",
-      "reopen_trigger": "실측 성능·권한·비용이 상위 전략을 반증"
+      "reopen_trigger": "실측 성능·권한·비용이 상위 전략을 반증",
+      "verification_design": {
+        "objective": "상위 구조의 품질 시나리오·구성요소 책임 검토",
+        "what_to_define": "전략 비교·요구/책임 매핑·컴포넌트 인터페이스 및 시험 대상",
+        "kind": "architecture_evaluation",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
     },
     {
       "id": "L5",
@@ -3239,7 +3637,15 @@
         "구성요소 책임·공통 도메인 용어"
       ],
       "completion_for_next": "상태·오류·키·권한·UI 표현이 서로 대응되는 초안",
-      "reopen_trigger": "상태/키/권한의 모순 발견"
+      "reopen_trigger": "상태/키/권한의 모순 발견",
+      "verification_design": {
+        "objective": "상태·데이터·API/UI·보안/배포의 상세 시험 설계",
+        "what_to_define": "상태 전이·무결성·계약·권한·오류·회복·사용자 경로별 예상 결과",
+        "kind": "test_design",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
     },
     {
       "id": "L6",
@@ -3260,27 +3666,44 @@
         "네 가지 상세 설계의 동기화된 초안"
       ],
       "completion_for_next": "서로 다른 설계가 하나의 도메인 계약을 설명하고 미결사항·재검토 조건 명시",
-      "reopen_trigger": "계약 충돌·새 실제 근거"
+      "reopen_trigger": "계약 충돌·새 실제 근거",
+      "verification_design": {
+        "objective": "설계와 검증 설계의 양방향 추적·교차 정합성 확인",
+        "what_to_define": "요구/계약/상태/데이터/UI/테스트의 연결 및 누락·미확인",
+        "kind": "design_verification",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
     },
     {
       "id": "L7",
-      "name": "실행 단위의 작업 분해와 산출물",
+      "name": "설계의 후속 전달(작업 분해·산출물)",
       "stage_ids": [
         "PD-11"
       ],
       "decide_now": [
-        "작업 담당·의존·완료 기준",
-        "테스트 실행 방법",
-        "정본→제출 문서 필드 투영"
+        "확정/가정/미확인 설계 기준선 전달",
+        "시험 실행에 필요한 데이터·환경·판정 규칙",
+        "공식 문서로 정보 참조 연결"
       ],
       "defer_now": [
-        "아직 수행하지 않은 결과값 작성"
+        "수행하지 않은 테스트 결과",
+        "구현 없이 근거 없는 성능 수치"
       ],
       "minimum_input": [
         "승인/조건부 설계 기준선과 공식 양식"
       ],
       "completion_for_next": "실행 가능한 TASK/검증 계획과 독립적인 제출 상태",
-      "reopen_trigger": "실행 실패·실측 반증·공식 요구 변경"
+      "reopen_trigger": "실행 실패·실측 반증·공식 요구 변경",
+      "verification_design": {
+        "objective": "설계→실행/제출에 필요한 계획 전달",
+        "what_to_define": "시험 환경·데이터·실행 조건과 산출물 매핑(실제 결과는 Run)",
+        "kind": "handoff_review",
+        "execution_result": "not_run",
+        "design_record_type": "IT-20"
+      },
+      "scope": "downstream_handoff"
     }
   ],
   "terms_policy": {
@@ -3326,5 +3749,30 @@
         ]
       }
     ]
+  },
+  "design_scope": {
+    "primary": "제품 기획과 시스템 설계에서 다루는 실제 정보 객체, 상위→하위 선행관계, 단계별 검증·시험 설계",
+    "included": [
+      "사용자/문제/제품 타당성 확인 계획",
+      "요구사항 수용 기준·검증 방법",
+      "도메인·시스템/컴포넌트·상태·데이터·API/UI·보안·배포 상세 설계",
+      "각 설계 수준의 품질/검증/시험 설계",
+      "설계 간 추적성·정합성"
+    ],
+    "excluded": [
+      "AI 작업 위임·작업 모드 S/M/H·자동 이슈 배정",
+      "실제 시험 수행·실측 결과 작성",
+      "WBS 운영·업무 승인 절차",
+      "공식 제출·접수 상태 변경",
+      "제품 채택·특정 기술 스택 확정"
+    ],
+    "handoff": "PD-11/IT-21/IT-22는 기존 모델과 연결을 보존하기 위한 후속 투영 항목이며 핵심 설계 단계가 아니다."
+  },
+  "verification_concepts": {
+    "validation": "사용자 목표·문제/제품의 실제 적절성을 확인하는 계획. 사실 검증·대안 비교·사용자 시험 계획 포함",
+    "verification": "명시한 요구/업무 규칙/설계 명세 충족을 확인하는 계획. 리뷰·분석·시험·시연 중 적절한 방법을 선택",
+    "test_design": "검증 대상·입력 데이터·환경·절차·예상·판정 기준을 설계하는 행위; 설계와 함께 반복해 구체화",
+    "test_execution": "실제 결과/커밋/환경/로그를 관측하는 실행. 별도 Run/Eval의 책임이며 미실행은 not_run",
+    "design_review": "도메인 용어·구조·계약의 누락·충돌 등을 문서/모델로 분석해 확인; 작동 성능 입증은 아님"
   }
 }
