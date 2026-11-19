@@ -392,7 +392,7 @@
         "requirement_contributions": [
           {
             "requirement_ref": "EX-FR",
-            "contribution": "사용자가 observed/inferred/unknown 분류로 관측 자료를 입력하도록 함"
+            "contribution": "사용자가 observed/inferred/unknown 분류를 입력할 수 있도록 제공"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -416,7 +416,8 @@
         "depends_on": [],
         "owned_state": "표시 상태만 소유",
         "requirements": [
-          "EX-FR"
+          "EX-FR",
+          "EX-NFR"
         ],
         "verification_refs": [
           "EX-T-UI"
@@ -429,7 +430,11 @@
         "requirement_contributions": [
           {
             "requirement_ref": "EX-FR",
-            "contribution": "미확인을 위반 확정으로 표시하지 않고 reviewed는 사람의 검토 완료로만 표시"
+            "contribution": "관측 유형을 구분해 표시"
+          },
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "미확인 자료에 대해 개인·좌석/위반 단정 방지"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -457,7 +462,7 @@
         "owned_state": "업무 상태를 소유하지 않음",
         "requirements": [
           "EX-FR",
-          "EX-NFR"
+          "EX-NFR-AUTH"
         ],
         "verification_refs": [
           "EX-T-ACCESS",
@@ -471,11 +476,11 @@
         "requirement_contributions": [
           {
             "requirement_ref": "EX-FR",
-            "contribution": "외부 요청의 권한·입출력·실패 코드를 계약대로 반환"
+            "contribution": "요청·응답에 관측 유형 정보 보존"
           },
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "외부 요청의 권한·입출력·실패 코드를 계약대로 반환"
+            "requirement_ref": "EX-NFR-AUTH",
+            "contribution": "조회/전이 요청의 역할/권한 계약 적용"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -498,7 +503,7 @@
         "depends_on": [],
         "owned_state": "접근 정책 참조",
         "requirements": [
-          "EX-NFR"
+          "EX-NFR-AUTH"
         ],
         "verification_refs": [
           "EX-T-ACCESS"
@@ -510,8 +515,8 @@
         "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
         "requirement_contributions": [
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "역할에 따른 접근/전이 승인, 거절 시 업무 부작용 방지"
+            "requirement_ref": "EX-NFR-AUTH",
+            "contribution": "사용자/검토자 역할별 읽기·상태 변경 거절"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -542,7 +547,7 @@
         "owned_state": "트랜잭션 조정만 수행",
         "requirements": [
           "EX-FR",
-          "EX-NFR"
+          "EX-NFR-ATOMIC"
         ],
         "verification_refs": [
           "EX-T-CLASSIFY",
@@ -556,11 +561,11 @@
         "requirement_contributions": [
           {
             "requirement_ref": "EX-FR",
-            "contribution": "사건 유스케이스의 분류·상태·정본·이력 변경을 조정"
+            "contribution": "분류와 상태 흐름 조정"
           },
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "사건 유스케이스의 분류·상태·정본·이력 변경을 조정"
+            "requirement_ref": "EX-NFR-ATOMIC",
+            "contribution": "사건과 이력 저장을 한 논리적 성공/실패로 조정"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -596,7 +601,7 @@
         "requirement_contributions": [
           {
             "requirement_ref": "EX-FR",
-            "contribution": "관측/추정/미확인 입력의 의미 보존"
+            "contribution": "관측/추정/미확인의 의미 보존"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -621,7 +626,7 @@
         ],
         "owned_state": "논리 상태 전이 규칙",
         "requirements": [
-          "EX-NFR"
+          "EX-NFR-AUTH"
         ],
         "verification_refs": [
           "EX-T-STATUS"
@@ -633,8 +638,8 @@
         "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
         "requirement_contributions": [
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "규정된 CaseStatus 전이·가드를 적용하고 잘못된 전이 거부"
+            "requirement_ref": "EX-NFR-AUTH",
+            "contribution": "무권한 상태 전이 거부"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -660,7 +665,8 @@
         ],
         "owned_state": "정본 DB 접근·트랜잭션",
         "requirements": [
-          "EX-NFR"
+          "EX-NFR-ATOMIC",
+          "EX-NFR-AUDIT"
         ],
         "verification_refs": [
           "EX-T-STORE",
@@ -673,8 +679,12 @@
         "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
         "requirement_contributions": [
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "Case·Observation·Action 정본을 실패 시 일관되게 처리"
+            "requirement_ref": "EX-NFR-ATOMIC",
+            "contribution": "사건·관측·Action 정본의 원자적 저장"
+          },
+          {
+            "requirement_ref": "EX-NFR-AUDIT",
+            "contribution": "저장 성공과 감사 이력 정합성 유지"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -699,7 +709,7 @@
         ],
         "owned_state": "이력은 DB에 저장",
         "requirements": [
-          "EX-NFR"
+          "EX-NFR-AUDIT"
         ],
         "verification_refs": [
           "EX-T-AUDIT"
@@ -711,8 +721,8 @@
         "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
         "requirement_contributions": [
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "조치 주체·시각·이력을 저장 성공과 정합적으로 기록"
+            "requirement_ref": "EX-NFR-AUDIT",
+            "contribution": "누가 언제 어떤 조치를 했는지 이력 생성"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
@@ -735,7 +745,7 @@
         "depends_on": [],
         "owned_state": "운영 로그는 업무 원본과 분리",
         "requirements": [
-          "EX-NFR"
+          "EX-NFR-LOG"
         ],
         "verification_refs": [
           "EX-T-OBSERVE"
@@ -747,8 +757,8 @@
         "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
         "requirement_contributions": [
           {
-            "requirement_ref": "EX-NFR",
-            "contribution": "민감정보를 제외한 실패/지연 관측 이벤트 기록"
+            "requirement_ref": "EX-NFR-LOG",
+            "contribution": "운영 실패 로그에서 테스트 식별정보 제거"
           }
         ],
         "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
