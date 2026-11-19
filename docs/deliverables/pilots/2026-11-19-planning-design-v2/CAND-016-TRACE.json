@@ -1,0 +1,742 @@
+{
+  "schema_version": 1,
+  "id": "PILOT-PD-V2-CAND-016",
+  "purpose": "기획→설계 정보 관계·미확인 상태 수동 적용 및 기계 검증을 위한 비실행·비채택 사례",
+  "candidate_ref": "docs/artifacts/candidates/CAND-016.json",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+  "status": "illustrative_only_not_approved",
+  "source_version": "CAND-016 V1.2 (2026-11-16)",
+  "no_product_adoption": true,
+  "no_real_world_test_run": true,
+  "sampling_notes": "CAND-016의 사용자·상황·기존 대안은 원본 요약. 가상 IT-09~20 설계와 샘플 API는 작동 검증이나 사실 주장 아님; 마커 draft_hypothesis",
+  "records": [
+    {
+      "id": "EX-ACTOR",
+      "type_id": "IT-01",
+      "title": "대면시험 감독관",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "actor_role": "시험감독관(주 사용자); 도입 주체는 대면시험 운영기관",
+        "job": "시험 중 의심 상황을 규정과 증거에 맞게 기록·확인·이관",
+        "trigger": "허가되지 않은 전자기기 의심 또는 불확실한 징후",
+        "environment": "대면 지필시험, 기관별 시험 규정과 감독 권한이 서로 다를 수 있음",
+        "source_refs": [
+          "docs/artifacts/candidates/CAND-016-v1.2-proposal.md"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-CONCERN",
+      "type_id": "IT-24",
+      "title": "수험생 오인과 감독관 부담",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "stakeholder_ref": "EX-ACTOR",
+        "concern": "무고한 수험생 지목·불필요 개입 방지와 감독관 확인 누락 방지",
+        "authority_boundary": "시험별 운영기관 승인 없는 데이터 수집·제재는 금지",
+        "open_question": "실제 기관 규정과 현장 업무량은 아직 직접 확인되지 않음"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-ASIS",
+      "type_id": "IT-02",
+      "title": "현행 감독·이관 절차",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "start_condition": "불확실한 징후 또는 신고가 발생",
+        "steps": [
+          "감독관 육안 관측",
+          "시험별 지침 확인",
+          "가능한 시점에 확인 또는 전담요원 이관",
+          "사실 기록·사후 검토"
+        ],
+        "failure_or_workaround": [
+          "관측 정보 재설명 가능성",
+          "현장 기록 누락 가능성"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-PAIN",
+      "type_id": "IT-03",
+      "title": "잔여 업무 부담 가설",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "affected_actor_ref": "EX-ACTOR",
+        "occurrence_context": "시험 중 의심·이관·사후 사실확인",
+        "unmet_job": "관측 사실·추정·규정·조치 이력을 무리 없이 연결",
+        "observed_impact": "부적절 개입·재질의·재구성 시간이 남을 가능성; 실제 손실 규모 미측정",
+        "evidence_refs": [
+          "docs/artifacts/candidates/CAND-016-evidence-review-2026-11-16.md"
+        ],
+        "counter_evidence_refs": [
+          "현행 감독·검사·사건 기록 시스템이 이미 일부 기능 제공"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-ALT",
+      "type_id": "IT-04",
+      "title": "공식 지침과 비AI 체크리스트 대안",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "alternatives": [
+          "공식 시험 지침+기존 조서",
+          "비AI 체크리스트",
+          "상용 감독·사건관리 제품"
+        ],
+        "comparison_scenario": "같은 시험 규정과 같은 모의 사건에서 감독관이 확인·보류·이관 결정",
+        "remaining_gap": "비AI 체크리스트 대비 실제 추가 효과는 아직 미검증",
+        "supporting_evidence": [
+          "docs/artifacts/candidates/CAND-016-evidence-review-2026-11-16.md"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-FEAS",
+      "type_id": "IT-05",
+      "title": "접근 허가·실험 제약",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "required_resources": [
+          "시험 규정",
+          "모의 사건 자료",
+          "비AI 대조군"
+        ],
+        "access_and_rights": "기관 승인 전 실제 수험생·현장 무선 데이터 수집하지 않음",
+        "stop_conditions": [
+          "기관 승인 불가이면서 실제 시험장 실증이 필수인 경우 범위 재검토"
+        ],
+        "minimum_disproof": "모의 사건에서 비AI 체크리스트 대비 판단 품질·시간 비교"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-CHOICE",
+      "type_id": "IT-06",
+      "title": "공식 제품 미선정",
+      "status": "deferred",
+      "evidence_level": "sourced",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "problem_refs": [
+          "EX-PAIN"
+        ],
+        "in_scope": [
+          "모의 사건 기반 기획·설계 검토"
+        ],
+        "out_of_scope": [
+          "기관 승인 없는 현장 실증",
+          "자동 부정행위 확정·제재"
+        ],
+        "authority_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+        "revisit_when": "11/21 팀 의사결정·새 증거 확인"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-OUTCOME",
+      "type_id": "IT-07",
+      "title": "사용자 가치 가설",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "desired_outcome": "같은 관측 정보에서 부적절 개입·기록 누락 감소",
+        "observable_signal": "필요 확인 누락 수, 부적절 개입 수, 인계 정보 누락, 전체 소요시간",
+        "measurement_method": "모의 사건 12~20개, 공식 지침+비AI 체크리스트 대조"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-UC",
+      "type_id": "IT-08",
+      "title": "불확실 사건을 보류·이관하는 예시",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "actor_ref": "EX-ACTOR",
+        "trigger": "시험 중 미확인 무선 경고를 받은 것으로 가정",
+        "main_flow": [
+          "관측 사실·출처 기록",
+          "규정 버전 확인",
+          "근거 부족 시 미확인으로 보류",
+          "담당 전담요원에게 적법 경로로 이관"
+        ],
+        "end_state": "확인 또는 보류·이관 기록; 부정행위 자동 확정 없음"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-FR",
+      "type_id": "IT-09",
+      "title": "미확인 정보 구분 요구(가상)",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "statement": "모의 사건 카드에서 관측 사실·추정·미확인을 서로 구별하여 표시한다",
+        "reason_ref": "EX-UC",
+        "priority": "must",
+        "acceptance": "미확인 관측 자료만 입력한 테스트에서 확정 위반·확정 사용자 식별을 표시하지 않음"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-NFR",
+      "type_id": "IT-10",
+      "title": "권한·증거 정확성 품질 시나리오",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "quality_attribute": "기록 정확성·안전성",
+        "stimulus": "미확인 경고만 포함된 사건 입력",
+        "environment": "합성 사건 카드·테스트 계정",
+        "expected_response": "사용자 개인·좌석 귀속 또는 부정행위 단정 금지",
+        "verification_method": "정답 포함 모의 사건으로 잘못된 확정 문구 여부 확인"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-STRATEGY",
+      "type_id": "IT-25",
+      "title": "비AI 기준선과 사건카드 비교 전략",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "driving_requirements": [
+          "EX-FR",
+          "EX-NFR"
+        ],
+        "strategy_options": [
+          "기존 공식 지침만 사용",
+          "비AI 체크리스트",
+          "동일 입력 정보 기반 사건 카드"
+        ],
+        "top_level_choice": "비AI 기준선과 동일 정보 사건 카드를 비교하는 PoC",
+        "tradeoff": "기록 일관성 개선 가능성 대 입력 부담 증가 가능성",
+        "selection_state": "proposed",
+        "revisit_when": "기준선보다 부적절 개입·누락·전체 소요시간이 개선되지 않으면 축소/보류"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-CONTEXT",
+      "type_id": "IT-12",
+      "title": "사건 카드 시스템 경계(가정)",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "system_purpose": "모의 사건의 관측 사실·추정·조치 이력 구분",
+        "external_actors": [
+          "시험감독관 역할의 평가 참가자",
+          "전담요원 역할 평가 참가자"
+        ],
+        "in_out_boundary": "승인된 모의 데이터 입력과 검토만; 실제 감독·제재·센서 측정 불포함",
+        "flows": [
+          "모의 관측 입력→상태 기록→검토자에게 표시"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-COMP",
+      "type_id": "IT-13",
+      "title": "기록·표시 컴포넌트(가정)",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "component": "사건 입력·기록·조회",
+        "responsibility": "관측/추정/미확인 구분과 변경 이력 제공",
+        "inbound_outbound": [
+          "사건 입력→저장",
+          "상태 조회→표시"
+        ],
+        "dependencies": [
+          "모의 사건 ID와 검토 상태 정의"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-WF",
+      "type_id": "IT-14",
+      "title": "모의 사건 상태 전이",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "states": [
+          "draft",
+          "unverified",
+          "review_pending",
+          "reviewed"
+        ],
+        "transitions": [
+          "draft→unverified: 자료 불완전",
+          "unverified→review_pending: 승인된 인계",
+          "review_pending→reviewed: 사람 검토"
+        ],
+        "guards": [
+          "reviewed로의 전이는 검토자 역할만 가능"
+        ],
+        "terminal_states": [
+          "reviewed",
+          "cancelled"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-DATA",
+      "type_id": "IT-15",
+      "title": "모의 사건 최소 데이터 모델",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "entities": [
+          "Case(case_id,case_status)",
+          "Observation(obs_id,case_id,kind,source)",
+          "Action(action_id,case_id,actor,kind)"
+        ],
+        "identifiers": [
+          "case_id",
+          "obs_id",
+          "action_id"
+        ],
+        "relationships": [
+          "Case 1:N Observation",
+          "Case 1:N Action"
+        ],
+        "integrity": [
+          "Observation.case_id는 존재하는 Case 참조",
+          "kind 구분은 enum 사용"
+        ],
+        "ownership": "사건 기록은 평가 환경에서만 저장"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-API",
+      "type_id": "IT-16",
+      "title": "모의 사건 API 계약",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "operation": "POST /cases; GET /cases/{case_id}",
+        "input_schema": {
+          "case_id": "string",
+          "observations": "array"
+        },
+        "output_schema": {
+          "case_id": "string",
+          "status": "draft|unverified|review_pending|reviewed",
+          "evidence_kind": "observed|inferred|unknown"
+        },
+        "auth": {
+          "rule": "모의 참여자 역할에 따른 접근 제한"
+        },
+        "errors": [
+          "invalid_input",
+          "permission_denied",
+          "not_found"
+        ],
+        "behavior_refs": [
+          "EX-WF",
+          "EX-DATA"
+        ]
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-UI",
+      "type_id": "IT-17",
+      "title": "모의 사건 화면",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "screen_or_surface": "사건 등록·검토 화면",
+        "inputs_actions": [
+          "관측 내용 입력",
+          "관측/추정/미확인 유형 선택"
+        ],
+        "presentation_states": [
+          "빈 사건",
+          "입력 중",
+          "미확인",
+          "검토 대기",
+          "오류"
+        ],
+        "feedback": "확인되지 않은 정보는 확정 위반으로 표시하지 않음"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    },
+    {
+      "id": "EX-TEST",
+      "type_id": "IT-20",
+      "title": "미확인 강제 표시 검증 예시",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "fields": {
+        "subject_refs": [
+          "EX-FR",
+          "EX-NFR"
+        ],
+        "case_conditions": [
+          "사건 자료가 unknown만 포함",
+          "유효하지 않은 검토자 권한으로 완료 요청"
+        ],
+        "expected": "위반 확정 표시 없음; 권한 없는 검토 완료 거절",
+        "method": "모의 사건 E2E 또는 계약 테스트",
+        "verdict_boundary": "모의 테스트를 실제 실행하지 않았으므로 결과 not_run",
+        "run_ref": null
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
+    }
+  ],
+  "edges": [
+    {
+      "id": "E01",
+      "from": "EX-ACTOR",
+      "to": "EX-ASIS",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E02",
+      "from": "EX-ASIS",
+      "to": "EX-PAIN",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E03",
+      "from": "EX-PAIN",
+      "to": "EX-ALT",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E04",
+      "from": "EX-PAIN",
+      "to": "EX-FEAS",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E05",
+      "from": "EX-PAIN",
+      "to": "EX-CHOICE",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E06",
+      "from": "EX-ALT",
+      "to": "EX-CHOICE",
+      "relation": "constrains"
+    },
+    {
+      "id": "E07",
+      "from": "EX-FEAS",
+      "to": "EX-CHOICE",
+      "relation": "constrains"
+    },
+    {
+      "id": "E08",
+      "from": "EX-ACTOR",
+      "to": "EX-CONCERN",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E09",
+      "from": "EX-CHOICE",
+      "to": "EX-OUTCOME",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E10",
+      "from": "EX-CHOICE",
+      "to": "EX-UC",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E11",
+      "from": "EX-UC",
+      "to": "EX-FR",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E12",
+      "from": "EX-OUTCOME",
+      "to": "EX-NFR",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E13",
+      "from": "EX-CONCERN",
+      "to": "EX-NFR",
+      "relation": "constrains"
+    },
+    {
+      "id": "E14",
+      "from": "EX-FR",
+      "to": "EX-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "id": "E15",
+      "from": "EX-NFR",
+      "to": "EX-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "id": "E16",
+      "from": "EX-STRATEGY",
+      "to": "EX-CONTEXT",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E17",
+      "from": "EX-STRATEGY",
+      "to": "EX-COMP",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E18",
+      "from": "EX-CONTEXT",
+      "to": "EX-COMP",
+      "relation": "constrains"
+    },
+    {
+      "id": "E19",
+      "from": "EX-FR",
+      "to": "EX-WF",
+      "relation": "satisfies"
+    },
+    {
+      "id": "E20",
+      "from": "EX-FR",
+      "to": "EX-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "id": "E21",
+      "from": "EX-FR",
+      "to": "EX-API",
+      "relation": "satisfies"
+    },
+    {
+      "id": "E22",
+      "from": "EX-FR",
+      "to": "EX-UI",
+      "relation": "satisfies"
+    },
+    {
+      "id": "E23",
+      "from": "EX-COMP",
+      "to": "EX-WF",
+      "relation": "constrains"
+    },
+    {
+      "id": "E24",
+      "from": "EX-COMP",
+      "to": "EX-DATA",
+      "relation": "constrains"
+    },
+    {
+      "id": "E25",
+      "from": "EX-COMP",
+      "to": "EX-API",
+      "relation": "constrains"
+    },
+    {
+      "id": "E26",
+      "from": "EX-WF",
+      "to": "EX-API",
+      "relation": "constrains"
+    },
+    {
+      "id": "E27",
+      "from": "EX-DATA",
+      "to": "EX-API",
+      "relation": "constrains"
+    },
+    {
+      "id": "E28",
+      "from": "EX-API",
+      "to": "EX-UI",
+      "relation": "constrains"
+    },
+    {
+      "id": "E29",
+      "from": "EX-WF",
+      "to": "EX-UI",
+      "relation": "constrains"
+    },
+    {
+      "id": "E30",
+      "from": "EX-FR",
+      "to": "EX-TEST",
+      "relation": "verified_by"
+    },
+    {
+      "id": "E31",
+      "from": "EX-NFR",
+      "to": "EX-TEST",
+      "relation": "verified_by"
+    },
+    {
+      "id": "E32",
+      "from": "EX-FR",
+      "to": "EX-API",
+      "relation": "impacts"
+    },
+    {
+      "id": "E33",
+      "from": "EX-FR",
+      "to": "EX-DATA",
+      "relation": "impacts"
+    },
+    {
+      "id": "E34",
+      "from": "EX-FR",
+      "to": "EX-WF",
+      "relation": "impacts"
+    },
+    {
+      "id": "E35",
+      "from": "EX-FR",
+      "to": "EX-UI",
+      "relation": "impacts"
+    },
+    {
+      "id": "E36",
+      "from": "EX-FR",
+      "to": "EX-TEST",
+      "relation": "impacts"
+    }
+  ],
+  "assertions": {
+    "adoption": "EX-CHOICE remains deferred; downstream EX-STRATEGY/EX-FR/EX-API stay draft_hypothesis",
+    "minimum_trace": [
+      "EX-ACTOR",
+      "EX-ASIS",
+      "EX-PAIN",
+      "EX-ALT",
+      "EX-CHOICE",
+      "EX-UC",
+      "EX-FR",
+      "EX-STRATEGY",
+      "EX-CONTEXT",
+      "EX-COMP",
+      "EX-API",
+      "EX-TEST"
+    ],
+    "change_case": {
+      "changed_record": "EX-FR",
+      "expected_impact": [
+        "EX-API",
+        "EX-DATA",
+        "EX-WF",
+        "EX-UI",
+        "EX-TEST"
+      ],
+      "action": "review_candidates_only_not_automatic_invalidation"
+    },
+    "run_status": "not_run",
+    "projection_preview": {
+      "deliverable_id": "DLV-01",
+      "record_refs": [
+        "EX-ACTOR",
+        "EX-ASIS",
+        "EX-PAIN",
+        "EX-ALT",
+        "EX-FEAS",
+        "EX-CHOICE",
+        "EX-OUTCOME",
+        "EX-UC",
+        "EX-FR"
+      ],
+      "official_outline_status": "not_verified"
+    }
+  }
+}
