@@ -95,6 +95,33 @@ erDiagram
 
 **요청 소유:** JWT의 검증된 subject로 생성 시 `research_request.owner_id`를 할당합니다. API가 소유권을 검사한다면 DB도 이를 추적할 수 있어야 합니다.
 
+### 대시보드 강사 피드백 반영: 공통 사용자 요청에서 데이터 정본 도출
+
+**단일 사례(잠정):** 사용자가 PomoToki/Focus To-Do의 오프라인/무계정 조건을 입력하면, 서버가 검증한 사용자 소유자별 request를 만들고, 지정 후보의 조사 task/attempt, 허가된 source, evidence, 조건별 verdict를 연결합니다. 특정 제품·DBMS·검색 공급자 채택이나 실제 저장 성공을 의미하지 않습니다.
+
+| 순서 | API/사용자 흐름 | 필요한 저장 정보·무결성 | 조건부 검증 |
+| --- | --- | --- | --- |
+| 1 | 요청 생성 API-01 | research_request.owner_id는 인증 주체에서 생성; 입력 targets·criteria 저장 | 클라이언트 owner_id 무시·잘못된 입력 거부 |
+| 2 | 계획·실행 | research_task.request_id와 task_attempt.task_id, 재시도마다 새 attempt_id | 허가된 작업/출처 접근과 시도 상태의 연결 확인 |
+| 3 | 근거 수집 | source.task_id → evidence.source_id, locator·retrieved_at | 실패 source는 근거로 미충족 확정을 만들지 않음 |
+| 4 | 판정 기록 | verdict.request_id/task_id → verdict_evidence → evidence/source | 다른 request의 evidence 인용/참조 거부 |
+| 5 | 결과 API-02/03/04 | parent request owner 검사 후 상태·이력·근거 반환 | 미확인과 실패/부분 결과 분리, 타인 자원 비노출 |
+
+**도메인 재사용의 경계:** request/task/attempt/source/evidence/verdict 구조는 후보 제품의 참고 자산입니다. 중고거래 신고 전 준비나 매장 안 메뉴 선택으로 최종 주제가 변경되면 *업무 엔터티, 관계/권한, 식별자, 인덱스, 데이터 수명주기, 사용자의 실제 성공 기준*을 새 도메인에 맞게 다시 검증합니다.
+
+### 가이드 필수 기술 항목의 적용/비적용 판단 기준
+
+| 기술·가이드 항목 | 지금 가능한 설계/대안 | 검증할 의사결정과 미확인 |
+| --- | --- | --- |
+| PostgreSQL·관계 스키마 | 7개 테이블(논리 기준), FK/복합 참조/원자 저장·동일 요청 범위 원칙 | 선정 제품의 데이터량·동시성·호스팅/비용 확인 |
+| RLS | DB에서 검증된 subject와 owner_id의 조회/쓰기 일치 확인하는 정책 후보 | 서버 parent-scoped 조회와 RLS의 실제 선택·중복 방어·테스트 필요 |
+| JWT | sub·exp·서명 및 토큰 범위의 서버 검증 필요 | 검증 공급자, 키 수명주기, 실제 만료·재발급 정책 |
+| Redis | 작업 큐/세션/캐시가 실제 필요할 때만 채택하는 대안 | 캐시 진실원천 불가·TTL·만료/재시도·중복 전달 검증 |
+| pgvector / 문서 청크 | 문서 임베딩/검색이 실질적으로 필요한 범위에 한하여 적용 | 현재 APP-A 두 후보는 구조화 근거/원문 위치 중심. RAG 여부는 미정; 교육 요구 비적용은 강사 확인 |
+| 인덱스/성능 | research_task(request_id), task_attempt(task_id, attempt_no), source(task_id), evidence(source_id), verdict(request_id,candidate_id,condition_id), verdict_evidence(verdict_id) 등 후보 | 실제 explain/analyze·행수·부하·지연 결과 없음. 선택된 DBMS와 쿼리에 맞춰 검증 |
+
+**트랜잭션과 권한 실패의 시험 설계:** 다른 owner 조회/쓰기, 다른 request의 evidence 링크, task.request_id와 verdict.request_id 불일치, 중간 저장 실패(부분 반영 방지), 동일 멱등성 키 충돌, source_access_failed→not_fulfilled 오판을 각각 *별도 케이스*로 정의합니다. 현 단계에서는 문서상 규칙·입력/기대 결과만 있고 실행된 DB 통합 시험 결과는 없습니다.
+
 ## 2. 엔터티별 컬럼 타입·제약·의미
 
 원본 DB 작성 가이드가 요구하는 **컬럼별 4칸(테이블/컬럼/타입·제약/의미)**을 테이블별로 분리해 표시합니다. 7개 테이블, 총 48개 컬럼은 **개념 설계**이며 SQL 실행/DB 생성 완료가 아닙니다.
