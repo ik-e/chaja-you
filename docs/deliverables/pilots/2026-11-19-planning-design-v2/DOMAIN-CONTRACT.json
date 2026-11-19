@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "CONTRACT-CAND016-MOCK-V1",
+  "status": "illustrative_only_not_approved",
+  "scope": "모의 사건 카드 예시의 도메인 용어 및 계약(현장 제품 설계 아님)",
+  "source_candidate_ref": "docs/artifacts/candidates/CAND-016.json",
+  "concept_definitions": {
+    "Case": "해당 모의시험 상황에서 관찰·조치 기록을 모으는 사건(부정행위 확정 판단 아님)",
+    "Observation": "특정 자료의 원천·시각·분류를 보존한 관측 기록; 수험생의 위반 판정을 의미하지 않음",
+    "Action": "사건 생성·검토 요청·검토에 관한 조치 이력",
+    "CaseStatus": "모의 사건이 현재 어느 업무 단계에 있는지 나타내는 상태이며 증거 확신도와 별개",
+    "ObservationKind": "관측 사실·추정·미확인을 나타내는 정보의 성격. 사실 확인의 법적 효력을 의미하지 않음",
+    "ErrorCode": "API 동작 실패 원인을 구분하는 오류 코드이며 사건 상태와 별개",
+    "ActorRole": "모의시험에서 접근·검토 권한을 확인하기 위한 역할. 실제 시험기관의 법적 권한이 아님"
+  },
+  "enums": {
+    "CaseStatus": [
+      "draft",
+      "unverified",
+      "review_pending",
+      "reviewed"
+    ],
+    "ObservationKind": [
+      "observed",
+      "inferred",
+      "unknown"
+    ],
+    "ErrorCode": [
+      "invalid_input",
+      "permission_denied",
+      "not_found",
+      "invalid_transition",
+      "storage_failure"
+    ],
+    "ActorRole": [
+      "supervisor_sim",
+      "reviewer_sim"
+    ]
+  },
+  "transitions": [
+    {
+      "from": "draft",
+      "to": "unverified",
+      "trigger": "insufficient_or_unconfirmed_evidence",
+      "authorized_roles": [
+        "supervisor_sim"
+      ],
+      "meaning": "미확인 관측 정보를 포함한 사건 카드 생성"
+    },
+    {
+      "from": "unverified",
+      "to": "review_pending",
+      "trigger": "request_review",
+      "authorized_roles": [
+        "supervisor_sim"
+      ],
+      "meaning": "규정에 따른 모의 검토 요청"
+    },
+    {
+      "from": "review_pending",
+      "to": "reviewed",
+      "trigger": "complete_review",
+      "authorized_roles": [
+        "reviewer_sim"
+      ],
+      "meaning": "사람이 검토 완료했다고 기록; 부정행위 확정과 다른 상태"
+    }
+  ],
+  "terminal_states": [
+    "reviewed"
+  ],
+  "field_mapping": {
+    "Case.case_status": "CaseStatus",
+    "Observation.kind": "ObservationKind",
+    "API.POST_cases.response.status": "CaseStatus",
+    "API.GET_cases.response.status": "CaseStatus",
+    "API.POST_cases.response.evidence_kind": "ObservationKind",
+    "UI.case_status": "CaseStatus",
+    "API.error.code": "ErrorCode"
+  },
+  "rules": [
+    {
+      "id": "INV-01",
+      "meaning": "unknown/inferred는 부정행위 확정값으로 자동 변환하지 않음",
+      "requirement_ref": "EX-FR"
+    },
+    {
+      "id": "INV-02",
+      "meaning": "reviewed는 사람 검토 상태이며 위반 결론·제재 아님",
+      "requirement_ref": "EX-NFR"
+    },
+    {
+      "id": "INV-03",
+      "meaning": "실패한 원자적 저장은 성공 응답을 반환하지 않음",
+      "requirement_ref": "EX-NFR"
+    }
+  ],
+  "invalid_cases": [
+    {
+      "status": "cancelled",
+      "reason": "V1 가상 워크플로에서 전이·화면·API가 정의되지 않아 MVP 예시에서 제외. 실제 취소 흐름이 필요하면 모든 계약을 함께 수정"
+    },
+    {
+      "status": "confirmed_cheating",
+      "reason": "부정행위 확정·제재 기능은 범위 밖"
+    }
+  ],
+  "baseline_status": "draft_hypothesis"
+}
