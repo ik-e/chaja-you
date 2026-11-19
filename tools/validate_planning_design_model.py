@@ -117,6 +117,8 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
                 if f["required_for_baseline"]:
                     check(f["key"] in fields and fields[f["key"]] not in (None, "", [], {}),
                         f"{rec['id']}.{f['key']}: baseline mandatory field missing", errors)
+        if rec["status"] == "adopted" and rec["type_id"] in {"IT-06", "IT-19", "IT-25"}:
+            check(bool(fields.get("authority_ref")), f"{rec['id']}: adoption without human authority", errors)
         check(isinstance(rec.get("source_refs"), list), f"{rec['id']}: source_refs missing", errors)
 
     edge_ids = []
