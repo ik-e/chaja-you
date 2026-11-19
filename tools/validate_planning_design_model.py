@@ -132,6 +132,22 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
         forward.setdefault(a, []).append((b, rel))
     check(len(edge_ids) == len(set(edge_ids)), "Pilot duplicate edge IDs", errors)
 
+    # Every example FR/NFR needs an explicit verification relationship, even before a run.
+    verified_sources = {e["from"] for e in pilot.get("edges", []) if e["relation"] == "verified_by"}
+    for rec in records:
+        if rec.get("type_id") in {"IT-09", "IT-10"} and rec.get("status") != "not_applicable":
+            check(rec["id"] in verified_sources, f"Requirement lacks verification link: {rec['id']}", errors)
+
+    projection_ids = {d["id"] for d in model.get("projection_examples", [])}
+    projection_edges = pilot.get("projection_edges", [])
+    check(len({e["id"] for e in projection_edges}) == len(projection_edges),
+          "Duplicate projection edge IDs", errors)
+    for e in projection_edges:
+        check(e.get("relation") == "materialized_in", f"Wrong projection relation: {e['id']}", errors)
+        check(e.get("from") in record_map, f"Unknown projection source: {e['id']}", errors)
+        check(e.get("to") in projection_ids, f"Unknown projection target: {e['id']}", errors)
+        check(e.get("status") == "preview_only", f"Pilot must not claim submitted DLV: {e['id']}", errors)
+
     assertions = pilot.get("assertions", {})
     trace = assertions.get("minimum_trace", [])
     for id in trace:
@@ -167,7 +183,7 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
     stats = {"stages":len(stages),"information_types":len(types),
              "typed_fields":sum(len(t["fields"]) for t in types),
              "typed_edges":len(model.get("type_edges",[])),
-             "pilot_records":len(records),"pilot_edges":len(edge_ids),"trace_nodes":len(trace),
+             "pilot_records":len(records),"pilot_edges":len(edge_ids),"projection_preview_edges":len(projection_edges),"trace_nodes":len(trace),
              "change_impact_targets":len(change.get("expected_impact",[]))}
     return errors, stats
 
