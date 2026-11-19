@@ -3,42 +3,27 @@
 > **R01 검토용 제안 · 2026-11-19.** 이 문서는 [기획→설계 결정·정보 모델](PLANNING-DESIGN-INFO-MODEL.md)의 **구체적 구성요소 및 설계 순서 시각화**입니다. 아래 CAND-016 구성은 가상 검토 사례이고 팀 제품·기술·배포/코드가 확정됐다는 뜻이 아닙니다.
 > 구조화 원본: [component-design-model.json](component-design-model.json) · 단계/정보 ID의 정본: [planning-design-info-model.json](planning-design-info-model.json)
 
-## 1. 설계 결정 순서도 — 무엇을 입력받아 어떤 정보가 생기는가?
-
+## 1. 점진적 설계 결정 순서 — 넓은 범위에서 구체 책임으로
 ```mermaid
-flowchart TB
-  A["PD-01~02<br/>사용자·As-Is·문제 가설<br/>IT-01/02/03/24"]
-  B["PD-03/04<br/>기존 대안·잔여 문제/제약<br/>IT-04/05"]
-  C{"PD-05<br/>문제 선택 또는 보류<br/>IT-06"}
-  D["PD-06<br/>유스케이스·가치 지표<br/>IT-07/08"]
-  E["PD-07<br/>FR/NFR·수용 기준<br/>IT-09/10/20"]
-  F{"PD-07A<br/>상위 해결 전략·대안<br/>IT-25/19"}
-  G["PD-08<br/>도메인 개념/규칙<br/>시스템 경계·책임<br/>IT-11/12/13"]
-  H["설계 대상의 실행 단위 식별<br/>Web·API·Storage 등<br/>IT-13 · IT-26"]
-  I["컴포넌트 내부 책임 분해<br/>입출력·의존·상태 소유<br/>IT-13"]
-  J["PD-09A 상태·실행·AI 조건부<br/>IT-14/23"]
-  K["PD-09B 데이터·키·보존<br/>IT-15"]
-  L["PD-09C API·Tool·UI 계약<br/>IT-16/17"]
-  M["PD-09D 보안·운영·배포<br/>IT-18/26"]
-  N{"PD-10<br/>계약·책임·검증 정합성"}
-  O["PD-11<br/>상세 WBS·TASK·제출물 투영<br/>IT-21/22"]
-  A --> B --> C
-  C -->|선택 또는 설계 가설| D --> E --> F --> G --> H --> I
-  C -->|근거 부족·보류| B
-  I --> J
+flowchart TD
+  A["L1 사용자·현재 업무·잔여 Pain"] --> B["L2 사용자 목표·요구·검증 기준"]
+  B --> C["L3 도메인 개념·불변식·시스템 경계\\nPD-08 · IT-11/12"]
+  C --> D{"L4 상위 해결 전략·대안\\nPD-08A · IT-25"}
+  D --> E["논리 실행·저장 단위\\nPD-08B · IT-27"]
+  E --> F["내부 컴포넌트·책임 분해\\nPD-08B · IT-13"]
+  F --> G["L5 상태·실행 흐름\\nIT-14"]
+  F --> H["L5 데이터·무결성\\nIT-15"]
+  F --> I["L5 API·Tool·UI 계약\\nIT-16/17"]
+  F --> J["L5 운영 통제·물리 배포\\nIT-18/26"]
+  G --> K{"L6 공통 상태·오류·권한·키 정합성\\nPD-10"}
+  H --> K
   I --> K
-  I --> L
-  I --> M
-  J --> N
-  K --> N
-  L --> N
-  M --> N
-  N -->|일치·미결 명시| O
-  N -.->|충돌| I
-  O -.->|실측 반증| E
+  J --> K
+  K -->|"충돌"| F
+  K -->|"일치·조건 기록"| L["L7 상세 TASK·WBS·문서 투영\\nPD-11"]
 ```
 
-**순서의 의미:** 하위 컴포넌트의 세부 설계는 상위 책임과 시스템 경계를 전제로 하지만, 상태·데이터·인터페이스·배포는 **병렬 초안**으로 만들고 PD-10에서 함께 확정합니다. 상위 WBS와 공식 제출 준비는 PD-00 시점에도 시작할 수 있으므로 이 차트가 모든 문서 작성의 절대적인 순서는 아닙니다.
+**이 순서로 '모든 작업을 시작'하라는 뜻이 아니라, 실제 결정을 확정할 때 필요한 선행 정보를 보여줍니다.** 초안·현장 조사·기술 PoC·잠정 제출은 병렬로 진행할 수 있습니다. 지금 단계에서 고정하지 않을 사항은 [점진적 설계 결정표](PROGRESSIVE-DESIGN-ORDER.md)를 참고합니다. 용어는 [정밀 용어집](DESIGN-GLOSSARY.md)을 기준으로 합니다.
 
 ## 2. 구성요소 구조도 — 시스템을 실제로 어떻게 분해하는가?
 
@@ -73,7 +58,7 @@ flowchart TB
   Ctrl --> Result --> User
 ```
 
-**각 ID의 정보 계약:** `C-...` 레코드는 [component-design-model.json](component-design-model.json)의 `example.components`에 있습니다. 각 레코드에 `parent_container`, `responsibility`, `public_operations`, `inbound`, `outbound`, `depends_on`, `owned_state`, `failure_policy`, `requirements`, `verification_refs`가 연결됩니다. 실제 예시는 **3개 실행·저장 단위, 10개 구성요소, 13개 연결, 3개 논리 데이터 엔터티**입니다.
+**각 ID의 정보 계약:** `C-...`는 [component-design-model.json](component-design-model.json)의 `example.components`이며, 각자 고유한 `CR-C-*` IT-13 레코드를 [추적 JSON](pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json)에 연결합니다. 각 구성요소에는 `parent_container`, `responsibility`, `public_operations`, `inbound`, `outbound`, `depends_on`, `owned_state`, `failure_policy`, `requirements`, `verification_refs`, 그리고 요구사항별 **실제 책임 설명**이 연결됩니다. 실제 예시는 **3개 실행·저장 단위, 10개 구성요소, 13개 연결, 3개 논리 데이터 엔터티**입니다.
 
 ## 3. 한 구성요소를 설계한다는 의미
 
@@ -100,6 +85,7 @@ sequenceDiagram
   participant Rule as C-EVIDENCE-POLICY
   participant State as C-STATE
   participant Repo as C-REPOSITORY
+  participant Audit as C-AUDIT
   participant DB as CTN-DATA
   U->>UI: 관측 사실·추정·미확인 입력
   UI->>API: POST /cases (가상)
@@ -114,7 +100,9 @@ sequenceDiagram
     Rule-->>App: 분류 보존 / 불확실
     App->>State: 초기 상태 계산
     State-->>App: draft 또는 unverified
-    App->>Repo: 사건+관측+이력 원자 저장
+    App->>Audit: 조치·변경 이력 준비
+    Audit-->>App: Action 기록 단위
+    App->>Repo: 사건+관측+Action 하나의 논리 트랜잭션 저장
     Repo->>DB: Write
     alt 저장 성공
       DB-->>Repo: case_id
@@ -158,7 +146,7 @@ erDiagram
   }
 ```
 
-- `CASE` 정본과 상태 전이는 IT-14·15를 통해 설계하고 `C-REPOSITORY`로 접근합니다.
+- 업무 상태의 단일 의미적 기준은 [DOMAIN-CONTRACT.json](pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json)의 `CaseStatus` 네 값이며, IT-14·15·16·17에서 함께 참조하고 `C-REPOSITORY`로 저장합니다. 예전 시범안의 `cancelled`는 전이/요구가 없어 제외했습니다.
 - 관측 분류 `observed / inferred / unknown`은 도메인 정책과 UI 응답 스키마에서 동일한 의미로 사용해야 합니다.
 - 키·상태·권한·표시가 다르면 **PD-10에서 충돌로 반환**합니다.
 
@@ -167,13 +155,14 @@ erDiagram
 | 설계 순서 | 작성할 구체 항목 | 처음 완성해야 하는 수준 | 확정 시 확인할 것 |
 |---|---|---|---|
 | 상위 전략 IT-25 | 구조 대안·품질 목표·제약·비용·실패 모드 | 핵심 전략 가설 | 사용자 요구·품질·권한 충족, 반증 조건 |
-| 시스템 맥락 IT-12 | 외부 사용자/시스템·경계·신뢰 영역 | 맥락 다이어그램 | 외부 책임·권한 누락 없음 |
-| 실행 단위 IT-13/26 | UI·API·DB 등 논리 실행/저장 단위 | 배치 가설 | 업무 책임·동기/비동기·데이터 정본 경계 |
-| 컴포넌트 IT-13 | Controller/Service/Policy/State/Repository 등 필요한 책임 | 호출·소유 관계 초안 | 누락·중복 책임, 순환·권한 침해 없음 |
+| 시스템 맥락·업무 규칙 IT-11/12 | Case/Observation·상태 의미·외부 사용자/시스템·권한 경계 | 개념·맥락 모델 | 용어·불변식·권한 누락 없음 |
+| 상위 해결 전략 IT-25 | 독립 서비스/단일 앱 등 대안·품질 목표·비용·실패 모드 | 구조 전략 가설 | 요구·제약·품질의 비교 근거 |
+| **논리 실행·저장 단위 IT-27** | UI·API·DB 등 논리 실행/저장 단위 | 배치 가설 | 업무 책임·동기/비동기·데이터 정본 경계 |
+| 내부 컴포넌트 IT-13 | Controller/Service/Policy/State/Repository 등 필요한 책임 | 호출·소유 관계 초안 | 누락·중복 책임, 순환·권한 침해 없음 |
 | 흐름 IT-14 | 정상/실패 시퀀스·상태·전이·가드 | 예외를 포함한 초안 | API 오류·UI 표시·권한 일치 |
 | 데이터 IT-15 | 엔터티·속성·키·관계·무결성·보존 | 논리 모델 | 상태·API 필드·소유권 일치 |
 | API/UI IT-16/17 | 요청·응답·오류·화면 상태·이벤트 | 계약 초안 | 데이터·상태·인증 규칙 일치 |
-| 배포·운영 IT-18/26 | 실제 환경 노드·네트워크·비밀·로그·복구 | 실현 가능성 가설 | 제약·운영비·검증 계획 연결 |
+| **물리 배포·운영 IT-18/26** | 실제 환경 노드·네트워크·비밀·로그·복구 | 실현 가능성 가설 | 제약·운영비·검증 계획 연결 |
 | 설계 합류 PD-10 | 전체 참조·필드·권한·오류·검증 정합성 | 관련 분야 합의·ADR | 변경 영향 범위와 미결정 분리 |
 
 ## 7. 시스템 종류에 따라 빼거나 더하는 컴포넌트
