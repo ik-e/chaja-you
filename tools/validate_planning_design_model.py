@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency/type/traceability validation for the R01 planning-design V3 proposal.
+"""Dependency/type/traceability validation for the R01 planning-design design-only V4 proposal.
 No network access; never accepts sample evidence as real-world product proof.
 Usage: python tools/validate_planning_design_model.py [model_json] [pilot_json]
 """
@@ -184,6 +184,33 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
     check(assertions.get("run_status") == "not_run", "Pilot must not invent test executions", errors)
     check("EX-CHOICE" in record_map and record_map["EX-CHOICE"].get("status") == "deferred",
           "Non-adopted product choice must remain deferred", errors)
+
+    # Design-stage verification/test planning is first-class, not a final gate.
+    for stage in stages:
+        plan = stage.get("verification_design", {})
+        check(bool(plan.get("question")), f"{stage['id']}: missing verification question", errors)
+        check(bool(plan.get("planned_methods")), f"{stage['id']}: missing planned method", errors)
+        check(plan.get("test_plan_type_ref") == "IT-20", f"{stage['id']}: wrong test-plan type", errors)
+        check(plan.get("execution_result") == "not_run",
+              f"{stage['id']}: design plan falsely asserts execution", errors)
+    for level in model.get("progressive_design_layers", []):
+        plan = level.get("verification_design", {})
+        check(bool(plan.get("objective") and plan.get("what_to_define")),
+              f"{level['id']}: missing level verification/test design", errors)
+        check(plan.get("design_record_type") == "IT-20",
+              f"{level['id']}: missing IT-20 planning reference", errors)
+        check(plan.get("execution_result") == "not_run",
+              f"{level['id']}: verification design confused with execution", errors)
+    check(model.get("design_scope", {}).get("primary", "").startswith("제품 기획"),
+          "Model scope is not focused on product planning and system design", errors)
+    check(bool(model.get("verification_concepts", {}).get("test_design"))
+          and bool(model.get("verification_concepts", {}).get("test_execution")),
+          "Missing test design vs execution distinction", errors)
+    type20 = type_map.get("IT-20", {})
+    required_test_fields = {"subject_refs","case_conditions","expected","method",
+                            "verdict_boundary","verification_kind","design_level"}
+    actual_fields = {f["key"] for f in type20.get("fields", [])}
+    check(required_test_fields <= actual_fields, "Missing verification/test planning fields", errors)
 
     for typ in types:
         first = stage_map.get(typ.get("first_defined_at"))
