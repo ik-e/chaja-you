@@ -92,7 +92,7 @@
     {
       "id": "INV-03",
       "meaning": "실패한 원자적 저장은 성공 응답을 반환하지 않음",
-      "requirement_ref": "EX-NFR"
+      "requirement_ref": "EX-NFR-ATOMIC"
     }
   ],
   "invalid_cases": [
