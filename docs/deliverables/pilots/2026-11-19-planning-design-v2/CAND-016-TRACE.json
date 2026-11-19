@@ -341,17 +341,18 @@
           "reviewed"
         ],
         "transitions": [
-          "draft→unverified: 자료 불완전",
-          "unverified→review_pending: 승인된 인계",
-          "review_pending→reviewed: 사람 검토"
+          "draft→unverified: insufficient_or_unconfirmed_evidence; role=supervisor_sim",
+          "unverified→review_pending: request_review; role=supervisor_sim",
+          "review_pending→reviewed: complete_review; role=reviewer_sim"
         ],
         "guards": [
-          "reviewed로의 전이는 검토자 역할만 가능"
+          "reviewed 전이는 reviewer_sim만 허용",
+          "미확인 정보는 자동 위반 판정으로 승격 불가"
         ],
         "terminal_states": [
-          "reviewed",
-          "cancelled"
-        ]
+          "reviewed"
+        ],
+        "canonical_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
@@ -367,8 +368,8 @@
       ],
       "fields": {
         "entities": [
-          "Case(case_id,case_status)",
-          "Observation(obs_id,case_id,kind,source)",
+          "Case(case_id,case_status:CaseStatus)",
+          "Observation(obs_id,case_id,kind:ObservationKind,source)",
           "Action(action_id,case_id,actor,kind)"
         ],
         "identifiers": [
@@ -384,7 +385,8 @@
           "Observation.case_id는 존재하는 Case 참조",
           "kind 구분은 enum 사용"
         ],
-        "ownership": "사건 기록은 평가 환경에서만 저장"
+        "ownership": "사건 기록은 평가 환경에서만 저장",
+        "canonical_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
@@ -401,8 +403,8 @@
       "fields": {
         "operation": "POST /cases; GET /cases/{case_id}",
         "input_schema": {
-          "case_id": "string",
-          "observations": "array"
+          "observations": "array<Observation[kind,source]>",
+          "memo": "optional string"
         },
         "output_schema": {
           "case_id": "string",
@@ -415,12 +417,15 @@
         "errors": [
           "invalid_input",
           "permission_denied",
-          "not_found"
+          "not_found",
+          "invalid_transition",
+          "storage_failure"
         ],
         "behavior_refs": [
           "EX-WF",
           "EX-DATA"
-        ]
+        ],
+        "canonical_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
@@ -443,11 +448,14 @@
         "presentation_states": [
           "빈 사건",
           "입력 중",
-          "미확인",
-          "검토 대기",
-          "오류"
+          "draft (작성 중)",
+          "unverified (미확인)",
+          "review_pending (검토 대기)",
+          "reviewed (사람 검토 완료)",
+          "API 오류"
         ],
-        "feedback": "확인되지 않은 정보는 확정 위반으로 표시하지 않음"
+        "feedback": "확인되지 않은 정보는 확정 위반으로 표시하지 않음",
+        "canonical_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
