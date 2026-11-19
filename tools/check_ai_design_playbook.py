@@ -97,6 +97,31 @@ def main() -> int:
         variant = copy.deepcopy(example)
         mutate(variant)
         caught.append({"case": name, "caught": bool(check_slice(variant, pilot, comp, domain))})
+    # Additional design-specific regressions. These distinguish strict dependency
+    # errors from permitted impact-driven reconsideration.
+    design_mutations = [
+        ("reintroduced_causal_cycle", "model",
+         lambda x: x["type_edges"].append({
+             "id":"TE-FORCED-CYCLE", "from_type":"IT-25","to_type":"IT-12",
+             "relation":"derived_from", "contract_phase":"draft_and_baseline",
+             "propagate_review":True})),
+        ("unknown_verification_kind", "model",
+         lambda x: x["decision_stages"][0]["verification_design"].update(kind="not_a_kind")),
+        ("missing_test_verdict", "pilot",
+         lambda x: x["records"][next(i for i,r in enumerate(x["records"]) if r["id"]=="EX-T-UI")]
+             ["fields"].update(verdict_boundary="not_run")),
+    ]
+    for name, subject, mutate in design_mutations:
+        mod_model, mod_pilot = copy.deepcopy(model), copy.deepcopy(pilot)
+        target = mod_model if subject=="model" else mod_pilot
+        mutate(target)
+        failures, _ = validate(mod_model, mod_pilot)
+        caught.append({"case":name, "caught":bool(failures)})
+    variant_comp = copy.deepcopy(comp)
+    affected = next(x for x in variant_comp["example"]["components"] if x["id"]=="C-AUDIT")
+    affected["verification_refs"] = ["EX-T-CLASSIFY"]
+    check_errors, _ = validate_component(model, pilot, variant_comp, domain)
+    caught.append({"case":"test_without_requirement_coverage","caught":bool(check_errors)})
     if not all(x["caught"] for x in caught):
         errors.append("Regression mutation unexpectedly passed")
     result = {
