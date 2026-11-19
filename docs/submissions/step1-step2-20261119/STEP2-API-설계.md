@@ -48,6 +48,30 @@
 
 **변경 이력:** V1 일반 구상 → V2 4개 경로 초안 → **V3 owner_id 명시, 작업/판정 참조 통일, 멱등성과 재시도 계약 및 정식 Markdown 예시 보완**. 실제 채택/구현 이력은 아닙니다.
 
+### 강사 피드백에 따른 단일 사용자 흐름과 API 책임
+
+**입력 → 계획 → 허용된 자료 조회 → 근거 분류 → 저장 → 응답**을 하나의 사례로 고정합니다. 입력 예시: Android 집중 앱 PomoToki/Focus To-Do, 필수 오프라인 타이머·선호 무계정. 이 흐름은 11/19 **미선정 제품의 과거 APP-A 사례**이며 11/21 주제 변경 시 API·도메인 데이터를 새로 설계합니다.
+
+| 단계 | 사용자·서버·Agent의 책임 | 식별자·계약 | 상태·검증 조건 |
+| --- | --- | --- | --- |
+| 사용자 생성 | API-01: 검증된 사용자 입력·조건/우선순위 저장 | 인증 subject → owner_id, request_id | 202 또는 401/409/422, 같은 멱등성 키 중복 방지 |
+| 계획 분해 | 요청 분석 컴포넌트가 APP-A 지정 후보용 task 후보/조건 생성 | request_id → task_id, depends_on, run_if | 출처 접근 승인·예산을 검사하기 전 실행 금지 |
+| 자료 조회 | 서버 허가를 거친 read_allowed_source 도구 호출 | task_id→attempt_id→source_id | 실패를 조건 미충족으로 변환하지 않음; 비허용 출처 중단 |
+| 판정·근거 | 후보×조건별 verdict와 evidence/source 연결 | task_id, verdict_id→evidence_id→source_id | 근거 부족/출처 장애는 unknown, 임의 확정 금지 |
+| 저장·결과 | API-02/03/04로 상태/이력/결과 제공 | request/status/task/attempt/source/evidence/verdict | 다른 owner의 하위 자료 조회 금지 |
+
+**정상·실패 두 경로**를 API 명세와 시험 기준으로 명시합니다. 정상: 허용된 출처 조회→검증 가능한 근거 연결→조건별 결과 조회. 실패: 공급자 일시 장애→최대 허용 재시도 범위 안에서 재요청→성공이면 데이터 재검증/종료, 실패면 source_access_failed와 unknown/partial 및 attempt 이력을 기록합니다. **부분 결과를 반환한 것만으로 복구 성공을 주장하지 않습니다.** 실제 API·Tool·LLM 호출/서버 배포·로그·BFCL 측정은 미실시입니다.
+
+### 기술 선택·교육 요건·미결정
+
+| 설계 선택 | 현재 잠정 정의 | 최종 결정 조건 |
+| --- | --- | --- |
+| API 백엔드 | Python/FastAPI 및 /docs·OpenAPI 경로는 예시. 실제 서버 없음 | R05 검토와 제품 선택 후 강사 교육 요구 대조 |
+| Graph/에이전트 | LangGraph 검토 중, 단순 Python 기준선과 비교 가능 | 상태 전이·Agent 간 인계가 실제 필요하다는 근거 |
+| 화면 | React 결과 화면과 Streamlit 학습/시연 역할 제안 | 사용자 흐름/강사 요구 충족·대체 협의 |
+| 자료·Tool | 허용 공급자/공식 API의 allowlist, 사이트별 수집 제약 | 공급자 키·약관·비용·호출 정책 승인 후 실행 |
+| 시간/호출 예산 | timeout·backoff·retry·멱등성 **유한 상한 필요** | 공급자·실행 환경 확정 후 설정값/테스트 로그 확인 |
+
 ## 2. API 목록·요구사항 연결
 
 | API ID | Method | Path | 인증(가설) | 목적 | 요구사항 |
