@@ -1,0 +1,3825 @@
+{
+  "schema_version": 4,
+  "id": "PLANNING-DESIGN-INFORMATION-MODEL-V4-20261119",
+  "kind": "planning_design_information_model",
+  "status": "design_only_progressive_refinement_proposal",
+  "updated_at": "2026-11-19",
+  "owner": "R01_review_proposed",
+  "purpose": "기획부터 상세 설계까지 결정의 선행관계와 실제 정보 항목을 연결한 재사용 가능한 정보 모델(제품/기술 미확정).",
+  "scope": "정보 유형·선행 판단·상호 관계·문서 투영의 설계 초안; 실제 제품/구현/제출 승인 아님.",
+  "compatibility": {
+    "active_phase_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+    "work_domains_ref": "docs/deliverables/WORK-MODEL.md",
+    "deliverable_registry_ref": "docs/deliverables/registry.json",
+    "target_design_ref": "docs/artifacts/design/target_design.json",
+    "does_not_replace": [
+      "docs/human/INTENT.md",
+      "docs/artifacts/state/current.json",
+      "docs/artifacts/tasks",
+      "docs/adr",
+      "docs/artifacts/planning/WBS.json"
+    ],
+    "source_of_truth_rule": "본 파일은 기존 13개 정보영역의 세부 정보 유형·결정 그래프 정의. 기존 Intent/Phase/CURRENT/TASK/Spec/ADR/Run/Eval의 정본 권위와 직접 파일 소유를 변경하지 않음"
+  },
+  "record_envelope": {
+    "suggested_core_fields": [
+      "id",
+      "kind",
+      "title",
+      "owner",
+      "phase_intent_ref",
+      "status",
+      "source_refs",
+      "assumptions",
+      "uncertainties",
+      "updated_at"
+    ],
+    "optional_relationship_fields": [
+      "intent_refs",
+      "problem_refs",
+      "use_case_refs",
+      "requirement_refs",
+      "design_refs",
+      "decision_refs",
+      "test_refs",
+      "output_refs"
+    ],
+    "decision_authority": "AI proposal and human adoption are separate. High-impact product/scope/Done decisions require an authority reference.",
+    "evidence_levels": [
+      "observed",
+      "sourced",
+      "synthetic",
+      "hypothesis",
+      "unknown",
+      "contradicted"
+    ],
+    "decision_states": [
+      "open",
+      "proposed",
+      "adopted",
+      "deferred",
+      "rejected"
+    ],
+    "content_states": [
+      "draft",
+      "reviewed",
+      "superseded"
+    ],
+    "note": "status/evidence/decision are separate dimensions. Missing fields may be null with an explicit reason at early stages."
+  },
+  "relationship_types": [
+    {
+      "id": "prerequisite_for",
+      "edge_scope": "stage",
+      "direction": "from 선행 → to 후행",
+      "meaning": "후행 단계의 확정에 선행 판단 필요",
+      "propagate_review": false
+    },
+    {
+      "id": "derived_from",
+      "edge_scope": "information",
+      "direction": "from 근거/상위 → to 파생 정보",
+      "meaning": "to 정보가 from을 근거로 도출",
+      "propagate_review": true
+    },
+    {
+      "id": "satisfies",
+      "edge_scope": "information",
+      "direction": "from 요구 → to 해당 요구를 충족하는 설계",
+      "meaning": "to 설계가 from을 만족하도록 책임",
+      "propagate_review": true
+    },
+    {
+      "id": "constrains",
+      "edge_scope": "information",
+      "direction": "from 제약/정책/선행 계약 → to 제한받는 정보",
+      "meaning": "from 조건이 to 선택을 제한",
+      "propagate_review": true
+    },
+    {
+      "id": "verified_by",
+      "edge_scope": "information",
+      "direction": "from 검증 대상 → to 실제 실행·관측 근거(Run/Eval)",
+      "meaning": "실제 수행·관찰된 증거로 요구/설계 적합성이 확인되었을 때만 사용. 이 모의 사례에서는 사용하지 않음",
+      "propagate_review": true,
+      "note": "계획 IT-20은 planned_check_by로만 연결하고 실제 확인 근거가 없으면 verified_by 미사용"
+    },
+    {
+      "id": "materialized_in",
+      "edge_scope": "projection",
+      "direction": "from 정보 인스턴스 → to DLV ID",
+      "meaning": "to 문서의 해당 절에 from을 재표현",
+      "propagate_review": true
+    },
+    {
+      "id": "impacts",
+      "edge_scope": "information",
+      "direction": "from 변경 출발 → to 잠재 영향 대상",
+      "meaning": "인과가 확인되지 않았어도 재검토 대상으로 연결; 자동 수정/폐기 아님",
+      "propagate_review": true
+    },
+    {
+      "id": "planned_check_by",
+      "edge_scope": "information",
+      "direction": "from 검증 대상 → to 시험/확인 계획",
+      "meaning": "검증할 질문·수용조건·시험방법으로 연결한 계획 관계. 실제 검증 완료를 주장하지 않음",
+      "propagate_review": true
+    }
+  ],
+  "decision_principles": [
+    "상위 사용자 문제·범위·품질 목표를 먼저 결정한 뒤 종속되는 도메인·경계·구성·상태·데이터·인터페이스를 필요한 수준만 상세화",
+    "각 설계 수준에서 검증 질문을 마련하되 상세 시험 조건은 필요한 수준에서만 구체화한다",
+    "문제/제품 타당성 검증(Validation)과 명세·설계 적합성 확인(Verification)을 구분하고 구조 검사/시험 계획을 실측 성공으로 대체하지 않는다",
+    "선행 정보가 없으면 초안은 가정으로 표시하고, 나중에 근거를 확보한 후 정합성을 확인한다",
+    "상태·데이터·API·UI·보안의 상세 설계는 병렬 초안 작성 후 공통 업무/오류 계약을 기준으로 합류",
+    "의존성은 설계 결정의 확정 순서이지 문서 작성 순서, 개발 절차, 자동 업무 할당을 강제하지 않는다",
+    "물리 구현·실제 시험·작업 분해·제출은 설계에서 도출되는 후속 활동으로 분리한다"
+  ],
+  "information_types": [
+    {
+      "id": "IT-00",
+      "key": "intent_constraint",
+      "name": "제품 목적·기획/설계 제약",
+      "work_domain": "decision",
+      "first_defined_at": "PD-00",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "intent_ref",
+          "meaning": "유효한 사람 의도·권한 출처",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "goal",
+          "meaning": "이번 판단 목적",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "scope_boundary",
+          "meaning": "포함·제외 범위",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "hard_constraints",
+          "meaning": "법적·일정·자원·조직상 필수 제약",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "decision_owner",
+          "meaning": "누가 어떤 결정을 승인하는가",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "review_trigger",
+          "meaning": "언제 다시 확인하는가",
+          "value_type": "string",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-01",
+      "key": "actor_context",
+      "name": "사용자·이해관계자 맥락",
+      "work_domain": "problem",
+      "first_defined_at": "PD-01",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "actor_role",
+          "meaning": "역할·이해관계자",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "job",
+          "meaning": "이용자가 달성하려는 일",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "trigger",
+          "meaning": "문제가 발생하는 계기",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "environment",
+          "meaning": "장소·시간·기기·제약",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "current_tools",
+          "meaning": "현재 사용하는 도구",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "source_refs",
+          "meaning": "사용자 맥락의 근거",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-00"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-02",
+      "key": "as_is_flow",
+      "name": "현재 수행 과정 As-Is",
+      "work_domain": "problem",
+      "first_defined_at": "PD-02",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "start_condition",
+          "meaning": "시작 상황",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "steps",
+          "meaning": "실제 수행 행동 순서",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "actors_and_tools",
+          "meaning": "참여자·도구",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "decision_points",
+          "meaning": "현재 분기·판단 지점",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "failure_or_workaround",
+          "meaning": "실패·우회·반복 행동",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "observable_cost",
+          "meaning": "시간·비용·오류 등 관찰 가능한 손실",
+          "value_type": "string",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-03",
+      "key": "pain_claim",
+      "name": "문제·원인·손실 가설",
+      "work_domain": "problem",
+      "first_defined_at": "PD-02",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "affected_actor_ref",
+          "meaning": "영향받는 사용자",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "occurrence_context",
+          "meaning": "어느 상황에서",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "unmet_job",
+          "meaning": "무엇을 달성하지 못하는가",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "observed_impact",
+          "meaning": "손실·후속 결과",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "cause_hypothesis",
+          "meaning": "추정 원인과 관찰 사실 분리",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "evidence_refs",
+          "meaning": "지지 근거",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "counter_evidence_refs",
+          "meaning": "반대 근거·범위",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01",
+        "IT-02"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-04",
+      "key": "alternative_gap",
+      "name": "기존 대안과 잔여 문제",
+      "work_domain": "problem",
+      "first_defined_at": "PD-03",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "alternatives",
+          "meaning": "기존 제품·수작업·일반 AI·무대응",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "comparison_scenario",
+          "meaning": "같은 사용자 작업·조건",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "covered_steps",
+          "meaning": "대안이 해결하는 부분",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "remaining_gap",
+          "meaning": "여전히 해결하지 못한 부분",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "switching_cost",
+          "meaning": "도입·전환 비용",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "supporting_evidence",
+          "meaning": "실사용·문서 근거와 한계",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-02",
+        "IT-03"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-05",
+      "key": "feasibility_risk",
+      "name": "실현가능성·치명적 위험",
+      "work_domain": "risk",
+      "first_defined_at": "PD-04",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "required_resources",
+          "meaning": "핵심 데이터·도구·인력",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "access_and_rights",
+          "meaning": "접근·수집·저장·재사용 권한",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "technical_unknowns",
+          "meaning": "미검증 기술 전제",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "deadline_constraints",
+          "meaning": "일정과 외부 의존",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "stop_conditions",
+          "meaning": "진행할 수 없는 조건",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "minimum_disproof",
+          "meaning": "가장 저렴한 반증 방법",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "fallbacks",
+          "meaning": "대체 경로·범위 축소",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-03"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-06",
+      "key": "product_choice",
+      "name": "문제 선택·제품 범위 결정",
+      "work_domain": "decision",
+      "first_defined_at": "PD-05",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "problem_refs",
+          "meaning": "선택한 문제·대안 비교 참조",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "target_outcome",
+          "meaning": "의도한 변화",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "in_scope",
+          "meaning": "이번 제품에서 해결하는 범위",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "out_of_scope",
+          "meaning": "명시적인 제외 범위",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "options",
+          "meaning": "선택·보류·거절 대안",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "authority_ref",
+          "meaning": "사람 결정권·결정 기록",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "revisit_when",
+          "meaning": "재검토 조건",
+          "value_type": "string",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-03",
+        "IT-04",
+        "IT-05"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-07",
+      "key": "outcome_measure",
+      "name": "사용자 가치·성공 지표",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-06",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "desired_outcome",
+          "meaning": "사용자가 얻어야 할 결과",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "observable_signal",
+          "meaning": "관찰할 행동·결과",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "baseline",
+          "meaning": "현 상태 또는 측정 전 표기",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "target_hypothesis",
+          "meaning": "목표값·임시 가설 구분",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "measurement_method",
+          "meaning": "측정 방법·대상",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "failure_boundary",
+          "meaning": "실패·미확인 경계",
+          "value_type": "string",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-06"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-08",
+      "key": "use_case",
+      "name": "사용자 시나리오·유스케이스",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-06",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "actor_ref",
+          "meaning": "행동 주체",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "trigger",
+          "meaning": "시작 이벤트",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "preconditions",
+          "meaning": "성립 조건",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "main_flow",
+          "meaning": "정상 행동·시스템 반응",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "alternative_flows",
+          "meaning": "예외·취소·우회 경로",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "end_state",
+          "meaning": "완료·부분·실패 상태",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "outcome_refs",
+          "meaning": "검증할 가치 지표",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01",
+        "IT-06",
+        "IT-07"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-09",
+      "key": "functional_requirement",
+      "name": "기능 요구사항",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-07",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "statement",
+          "meaning": "주체와 관찰 가능한 필수 동작",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "reason_ref",
+          "meaning": "문제·유스케이스와의 근거 연결",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "input",
+          "meaning": "필요한 입력",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "processing_rule",
+          "meaning": "기능 규칙·예외",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "output",
+          "meaning": "반환 결과·상태",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "priority",
+          "meaning": "Must·Later·제외 사유",
+          "value_type": "enum",
+          "required_for_baseline": true,
+          "allowed_values": [
+            "must",
+            "later",
+            "excluded"
+          ]
+        },
+        {
+          "key": "acceptance",
+          "meaning": "수용 기준과 예시 조건",
+          "value_type": "string",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-08",
+        "IT-07"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-10",
+      "key": "quality_requirement",
+      "name": "비기능·품질 시나리오",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-07",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "quality_attribute",
+          "meaning": "성능·안전·사용성 등 특성",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "stimulus",
+          "meaning": "품질 요구가 발생하는 자극",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "environment",
+          "meaning": "시험할 환경과 조건",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "expected_response",
+          "meaning": "요구되는 반응",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "response_measure",
+          "meaning": "측정 가능한 수준 또는 가설",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verification_method",
+          "meaning": "측정·판정 방법",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "constraint_ref",
+          "meaning": "상위 제약 근거",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-00",
+        "IT-08",
+        "IT-07"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-11",
+      "key": "domain_rule",
+      "name": "도메인 개념·업무 불변식",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "terms",
+          "meaning": "개념·정의·동의어",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "entities_and_relations",
+          "meaning": "업무 객체와 관계",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "invariants",
+          "meaning": "항상 성립해야 할 규칙",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "event_triggers",
+          "meaning": "업무 이벤트",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "exception_rules",
+          "meaning": "예외·충돌 처리",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "requirement_refs",
+          "meaning": "규칙이 필요한 요구사항",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "업무 상태·관측 유형·권한·오류 등 공통 계약(단일 의미적 정본)의 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-12",
+      "key": "system_context",
+      "name": "시스템 경계·외부 맥락",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "system_purpose",
+          "meaning": "시스템 책임",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "external_actors",
+          "meaning": "외부 이용자·조직",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "external_systems",
+          "meaning": "외부 서비스·도구",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "in_out_boundary",
+          "meaning": "시스템 내·외부 포함 범위",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "trust_boundaries",
+          "meaning": "권한·데이터 신뢰 경계",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "flows",
+          "meaning": "주요 입출력·정보 흐름",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-06",
+        "IT-09",
+        "IT-10"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-13",
+      "key": "component_responsibility",
+      "name": "구성요소·책임·의존관계",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08B",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "component",
+          "meaning": "구성요소 이름",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "responsibility",
+          "meaning": "소유하는 기능·판단",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "inbound_outbound",
+          "meaning": "들어오고 나가는 정보",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "owned_state",
+          "meaning": "상태·데이터 소유",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "dependencies",
+          "meaning": "외부·내부 의존",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "failure_boundary",
+          "meaning": "실패 시 책임과 대체 경로",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "parent_runtime_unit_ref",
+          "meaning": "이 컴포넌트를 포함하는 논리 실행/저장 단위 ID",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "requirement_contributions",
+          "meaning": "구성요소가 각 요구사항의 어떤 책임을 수행하는지에 대한 명시적 매핑",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verification_refs",
+          "meaning": "이 구성요소의 책임을 검증할 테스트 ID",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-12",
+        "IT-11"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-14",
+      "key": "workflow_state",
+      "name": "행동 흐름·상태 전이",
+      "work_domain": "workflow",
+      "first_defined_at": "PD-09A",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "steps_and_order",
+          "meaning": "활동·실행 순서",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "states",
+          "meaning": "상태와 의미",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "transitions",
+          "meaning": "전이 조건·이벤트",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "guards",
+          "meaning": "권한·검증·제약 가드",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "side_effects",
+          "meaning": "외부 작업·변경 효과",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "failure_retry",
+          "meaning": "오류·재시도·멱등성",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "terminal_states",
+          "meaning": "성공·부분·보류·실패·종료",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-08",
+        "IT-11",
+        "IT-13"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-15",
+      "key": "data_model",
+      "name": "논리 데이터·생명주기",
+      "work_domain": "data",
+      "first_defined_at": "PD-09B",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "entities",
+          "meaning": "엔터티·필드·타입",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "identifiers",
+          "meaning": "키·식별자",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "relationships",
+          "meaning": "관계·카디널리티",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "integrity",
+          "meaning": "무결성·일관성 불변식",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "ownership",
+          "meaning": "읽기·쓰기 소유·권한",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "retention",
+          "meaning": "보관·삭제·변경 이력",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "source_of_truth",
+          "meaning": "정본·파생·캐시 구별",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-11",
+        "IT-13",
+        "IT-10"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-16",
+      "key": "interface_contract",
+      "name": "API·Tool·컴포넌트 계약",
+      "work_domain": "interface",
+      "first_defined_at": "PD-09C",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "operation",
+          "meaning": "동작·목적·호출자·대상",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "input_schema",
+          "meaning": "요청 필드·제약",
+          "value_type": "object",
+          "required_for_baseline": true
+        },
+        {
+          "key": "output_schema",
+          "meaning": "응답 필드·상태",
+          "value_type": "object",
+          "required_for_baseline": true
+        },
+        {
+          "key": "auth",
+          "meaning": "인증·인가·도구 권한",
+          "value_type": "object",
+          "required_for_baseline": true
+        },
+        {
+          "key": "errors",
+          "meaning": "오류 코드·미확인·부분 결과",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "call_policy",
+          "meaning": "타임아웃·재시도·멱등성·버전",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "behavior_refs",
+          "meaning": "연결할 상태·데이터 계약",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-13",
+        "IT-14",
+        "IT-15"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-17",
+      "key": "ui_interaction",
+      "name": "화면·상호작용 상태",
+      "work_domain": "interface",
+      "first_defined_at": "PD-09C",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "screen_or_surface",
+          "meaning": "사용자에게 보이는 화면·접점",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "actor_and_goal",
+          "meaning": "사용자 역할·달성 목표",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "inputs_actions",
+          "meaning": "입력·행동·검증",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "navigation",
+          "meaning": "화면 이동·완료 경로",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "presentation_states",
+          "meaning": "로딩·빈 결과·부분·오류",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "feedback",
+          "meaning": "진행·실패·재시도 안내",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "accessibility",
+          "meaning": "필요한 접근성·환경 제약",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "canonical_contract_ref",
+          "meaning": "공유 도메인 용어/상태/오류 계약의 안정적인 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-08",
+        "IT-09",
+        "IT-14",
+        "IT-16"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-18",
+      "key": "crosscutting_control",
+      "name": "보안·운영·품질 통제",
+      "work_domain": "risk",
+      "first_defined_at": "PD-09D",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "concern",
+          "meaning": "위협·운영·신뢰성 문제",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "affected_assets",
+          "meaning": "대상 데이터·기능",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "control",
+          "meaning": "통제·완화 수단",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "permission_boundary",
+          "meaning": "권한·신뢰·책임 경계",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "detection_and_recovery",
+          "meaning": "탐지·경보·복구",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "residual_risk",
+          "meaning": "남은 위험",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "verification_ref",
+          "meaning": "실제로 확인할 시험",
+          "value_type": "ref",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-05",
+        "IT-10",
+        "IT-12",
+        "IT-13"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-19",
+      "key": "architecture_decision",
+      "name": "설계 대안·선택 기록",
+      "work_domain": "decision",
+      "first_defined_at": "PD-08A",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "decision_question",
+          "meaning": "무엇을 선택하는가",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "options",
+          "meaning": "비교한 대안",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "drivers",
+          "meaning": "요구·품질·제약 기준",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "tradeoffs",
+          "meaning": "비용·복잡성·위험 비교",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "selection_and_reason",
+          "meaning": "선택안과 이유 또는 보류",
+          "value_type": "object",
+          "required_for_baseline": true
+        },
+        {
+          "key": "authority_ref",
+          "meaning": "결정권자·ADR 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        },
+        {
+          "key": "revisit_when",
+          "meaning": "전제 붕괴·재검토 신호",
+          "value_type": "string",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-13",
+        "IT-18"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-20",
+      "key": "verification_plan",
+      "name": "단계별 확인 질문·검증/시험 계획",
+      "work_domain": "test",
+      "first_defined_at": "PD-00",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "subject_refs",
+          "meaning": "검증 대상 요구·계약·가설",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "case_conditions",
+          "meaning": "입력·환경·전제",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "expected",
+          "meaning": "예상 결과 또는 비교 기준선",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "observable",
+          "meaning": "관찰할 로그·출력·지표",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "method",
+          "meaning": "검증 방법·표본·분석 절차. 질문 수준 초안에서는 미확정 가능하며 구체 검증 전 보완",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verdict_boundary",
+          "meaning": "성공·실패·미확인 기준",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "run_ref",
+          "meaning": "실행된 검증 결과 Run/Eval 정본 참조(실행 전 null). '검증 설계'와 '검증 성공'을 구별",
+          "value_type": "ref",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verification_kind",
+          "meaning": "검증 질문의 분류(단계별 리뷰·관찰·시나리오·명세·계약·시험 설계 목적 포함)",
+          "value_type": "enum",
+          "required_for_baseline": false,
+          "allowed_values": [
+            "architecture_evaluation",
+            "component_verification",
+            "contract_test",
+            "design_review",
+            "design_verification",
+            "feasibility_review",
+            "handoff_review",
+            "integration_test",
+            "planning_review",
+            "problem_validation",
+            "quality_test",
+            "requirements_verification",
+            "scenario_validation",
+            "test_design",
+            "user_acceptance"
+          ]
+        },
+        {
+          "key": "design_level",
+          "meaning": "이 시험·검증 계획이 유도된 설계 수준 L0~L6",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "coverage_refs",
+          "meaning": "검증 대상 요구·규칙·컴포넌트·계약 식별자",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "test_data_plan",
+          "meaning": "정상·경계·예외 입력의 출처·생성/권한·기준선 정의",
+          "value_type": "object",
+          "required_for_baseline": false
+        },
+        {
+          "key": "environment_plan",
+          "meaning": "실행 때 필요한 환경/버전/권한 조건; 아직 미선정 가능",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "execution_separation",
+          "meaning": "테스트를 설계했다는 사실과 실제 수행 증거는 구분",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "verification_question",
+          "meaning": "이 기획·설계 정보의 어떤 가정 또는 명세를 확인하거나 반증할 것인가?",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "plan_maturity",
+          "meaning": "검증 계획의 구체화 정도: 질문 → 관찰/비교 방법 → 수용 조건 → 상세 시험",
+          "value_type": "enum",
+          "required_for_baseline": false,
+          "allowed_values": [
+            "question",
+            "validation_method",
+            "acceptance_criteria",
+            "detailed_test_case"
+          ]
+        },
+        {
+          "key": "inconclusive_condition",
+          "meaning": "근거 부족·권한/환경 미확인으로 판정할 수 없는 조건",
+          "value_type": "string",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-07"
+      ],
+      "baseline_policy": "L0~L1: 확인 대상·질문/관찰 방법·근거 수준만 계획할 수 있음. L2: FR/NFR 수용 기준·반례를 정의. L3~L5: 상태·키·API·UI·보안 등 상세 입력·예상/판정 규칙을 보강. 상세 시험으로 채택 시 정상/실패/미확인 기준 필수. 실행 결과는 Run/Eval만 참조. L0 질문 단계에서는 method/세부 테스트 조건을 필수화하지 않는다.",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-21",
+      "key": "work_package",
+      "name": "작업 패키지·선행관계",
+      "work_domain": "task",
+      "first_defined_at": "PD-11",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "goal_and_scope",
+          "meaning": "작업 목적·범위",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "inputs",
+          "meaning": "필요한 설계·결정 참조",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "depends_on",
+          "meaning": "실제 완료를 막는 선행 조건",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "owner",
+          "meaning": "단일 책임자·협력자",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "outputs",
+          "meaning": "제출·구현·검증 산출",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "done_when",
+          "meaning": "완료·검증 기준",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "estimate_and_due",
+          "meaning": "공수·기한·제약",
+          "value_type": "string",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-19",
+        "IT-20"
+      ],
+      "baseline_policy": "상세 설계 기준선 이후 후속 작업으로 투영. 앞선 단계에서 탐색 과제를 수행할 수 있으나 필수 설계 정보는 아님",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-22",
+      "key": "document_projection",
+      "name": "공식 문서 투영·상태",
+      "work_domain": "submission",
+      "first_defined_at": "PD-11",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "deliverable_id",
+          "meaning": "DLV-01~16 식별자",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "outline_source",
+          "meaning": "공식 목차의 출처·검증 상태",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "source_refs",
+          "meaning": "원본 설계 정보·커밋",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "section_mapping",
+          "meaning": "목차별 정보 필드 연결",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "content_status",
+          "meaning": "내용·근거 검토 상태",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "submission_status",
+          "meaning": "제출·접수 상태 별도 기록",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "revision",
+          "meaning": "출력 기준 버전·일시",
+          "value_type": "string",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-21"
+      ],
+      "baseline_policy": "공식 산출물 목차·요건은 초기부터 제약으로 참고할 수 있으나 실제 정보→문서 투영·제출 상태는 PD-11에서 별도 관리",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-23",
+      "key": "agent_design",
+      "name": "AI·에이전트 역할·도구 설계",
+      "work_domain": "workflow",
+      "first_defined_at": "PD-09A",
+      "applicability": "only_if_ai_is_needed",
+      "fields": [
+        {
+          "key": "ai_goal",
+          "meaning": "AI 사용이 필요한 실제 작업",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "model_role",
+          "meaning": "모델·에이전트의 책임·한계",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "tool_scope",
+          "meaning": "도구 계약·권한·금지 작업",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "context_memory",
+          "meaning": "컨텍스트·저장·유효기간",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "handoff_orchestration",
+          "meaning": "역할 인계·분기·감독",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "failure_and_fallback",
+          "meaning": "중단·사람 개입·대체 경로",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "evaluation",
+          "meaning": "단순 방식 대비 품질·비용 검증",
+          "value_type": "string",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-14",
+        "IT-16",
+        "IT-18"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-24",
+      "key": "stakeholder_concern",
+      "name": "이해관계자별 관심사·수용 제약",
+      "work_domain": "problem",
+      "first_defined_at": "PD-01",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "stakeholder_ref",
+          "meaning": "실사용자/도입자/운영자/보호 대상 식별자",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "concern",
+          "meaning": "관심사·두려움·책임·기대",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "relevant_context",
+          "meaning": "그 관심사가 중요한 상황",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "satisfaction_signal",
+          "meaning": "충족 여부의 관찰 또는 판정 방식",
+          "value_type": "string",
+          "required_for_baseline": false
+        },
+        {
+          "key": "authority_boundary",
+          "meaning": "결정·접근·승인 권한 한계",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "evidence_refs",
+          "meaning": "해당 관심사에 대한 인터뷰/규정/자료 근거",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "open_question",
+          "meaning": "미확인되거나 이해관계자 간 충돌하는 질문",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-25",
+      "key": "solution_strategy",
+      "name": "상위 해결 전략·주요 구조 가설",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08A",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "driving_requirements",
+          "meaning": "핵심 요구·품질·제약 참조",
+          "value_type": "ref[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "strategy_options",
+          "meaning": "최소 2개 대안 또는 유력 단일안에 대한 대비군",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "top_level_choice",
+          "meaning": "잠정 접근 방식과 주요 책임 경계",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "tradeoff",
+          "meaning": "장단점·복잡도·비용·실패 양상",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "assumptions",
+          "meaning": "성립해야 하는 미검증 가정",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "selection_state",
+          "meaning": "가설·잠정·채택·보류 구분",
+          "value_type": "enum",
+          "required_for_baseline": true,
+          "allowed_values": [
+            "proposed",
+            "provisional",
+            "adopted",
+            "deferred",
+            "rejected"
+          ]
+        },
+        {
+          "key": "revisit_when",
+          "meaning": "실험 또는 상세 설계에서 번복할 조건",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "authority_ref",
+          "meaning": "제품 범위·Must/Done·공통 구조에 영향을 주는 전략 채택 시 승인 권한/ADR 참조",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-05",
+        "IT-24"
+      ],
+      "baseline_policy": "작성 단계에서는 미확인/null을 허용. 채택/확정 시 required_for_baseline 필드가 없거나 모호하면 보류 또는 근거 있는 N/A",
+      "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
+    },
+    {
+      "id": "IT-26",
+      "key": "deployment_topology",
+      "name": "배포 단위·실행 환경·운영 토폴로지",
+      "work_domain": "deployment",
+      "first_defined_at": "PD-09D",
+      "applicability": "conditional",
+      "fields": [
+        {
+          "key": "environment_nodes",
+          "meaning": "실행 환경과 노드·격리 경계",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "software_unit_mapping",
+          "meaning": "UI/API/작업자/저장소 등 소프트웨어 단위가 실행 환경 어디에 놓이는가",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "network_and_trust",
+          "meaning": "네트워크 접근, 방화벽·신뢰 경계와 전송 정책",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "runtime_dependencies",
+          "meaning": "운영 시 필요한 외부 서비스·도구·비밀 관리 경로",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "release_strategy",
+          "meaning": "설치·버전·배포 및 정상 확인 절차",
+          "value_type": "string[]",
+          "required_for_baseline": true
+        },
+        {
+          "key": "observability",
+          "meaning": "로그·메트릭·트레이스·알림·운영책임",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "recovery_and_rollback",
+          "meaning": "백업·복원·롤백·장애 복구 기준",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "capacity_and_cost",
+          "meaning": "운영 부하·성능·자원·비용 가정",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "source_refs",
+          "meaning": "배포 설계의 근거 자료·ADR·수용 기준",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-10",
+        "IT-12",
+        "IT-13",
+        "IT-18"
+      ],
+      "baseline_policy": "배포 환경·실행 제약이 실제 설계 선택에 영향을 줄 때만 구체화. 아직 미선정이라면 제약과 미확인 사유를 기록하고 가상 인프라를 확정하지 않음",
+      "evidence_policy": "실제 URL/배포/운영 상태는 실행 증거가 있을 때만 confirmed. 제품 선택 이전은 proposed."
+    },
+    {
+      "id": "IT-27",
+      "key": "runtime_unit",
+      "name": "실행·저장 단위(C4 컨테이너)와 책임 경계",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08B",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "system_context_ref",
+          "meaning": "해당 시스템 경계(IT-12) 참조",
+          "value_type": "ref",
+          "required_for_baseline": true
+        },
+        {
+          "key": "name",
+          "meaning": "앱·데이터 저장소 등 실행·저장 단위의 이름",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "runtime_kind",
+          "meaning": "browser application/server application/data store/background worker 등 논리 런타임 종류",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "responsibility",
+          "meaning": "해당 실행 단위의 외부에서 관측 가능한 책임",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "communication_boundary",
+          "meaning": "다른 실행 단위와의 호출/메시지·신뢰 경계",
+          "value_type": "string[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "data_ownership",
+          "meaning": "정본 데이터와 읽기/쓰기 책임·캐시 구분",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "component_refs",
+          "meaning": "내부 논리 컴포넌트 ID 참조",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "external_interface_refs",
+          "meaning": "외부 계약·공식 API 등 참조",
+          "value_type": "ref[]",
+          "required_for_baseline": false
+        },
+        {
+          "key": "technology_choice_status",
+          "meaning": "미선정/가설/승인 상태를 구분하고 제품/프레임워크 고정 금지",
+          "value_type": "string",
+          "required_for_baseline": true
+        },
+        {
+          "key": "deployment_mapping_ref",
+          "meaning": "구체 배포 환경·노드 매핑 IT-26 참조(아직 미정 가능)",
+          "value_type": "ref",
+          "required_for_baseline": false
+        }
+      ],
+      "typically_relates_to": [
+        "IT-12",
+        "IT-25",
+        "IT-13",
+        "IT-26"
+      ],
+      "baseline_policy": "논리 실행/저장 단위의 책임·정본 소유를 먼저 정의. 구체 호스팅/물리 인프라는 IT-26에서 승인한다.",
+      "evidence_policy": "외부 접근·비용·실측이 확인되지 않은 기술 선택은 provisional/unknown으로 구별"
+    }
+  ],
+  "decision_stages": [
+    {
+      "id": "PD-00",
+      "phase": "planning",
+      "label": "목적·제약·권한",
+      "decision_question": "이 프로젝트에서 무엇이 고정이고 무엇이 보류인가?",
+      "blocking_on": [],
+      "output_types": [
+        "IT-00",
+        "IT-20"
+      ],
+      "exit_when": "유효한 Intent·Phase와 권한·법적/일정 제약이 구별됨",
+      "parallel_group": null,
+      "draft_requirements": [
+        "유효한 Intent/Phase를 확인"
+      ],
+      "baseline_requirements": [
+        "유효한 Intent·Phase와 권한·법적/일정 제약이 구별됨",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "planning_review",
+        "question": "상위 목적·범위·법적/자원 제약에 실제 근거가 있는가?",
+        "planned_methods": [
+          "유효한 Intent·Phase·기준 원본의 출처와 충돌 확인"
+        ],
+        "designed_output": "목적·제약·미확인 목록",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "question"
+      }
+    },
+    {
+      "id": "PD-01",
+      "phase": "planning",
+      "label": "사용자·사용 맥락",
+      "decision_question": "누가 어떤 조건에서 어떤 일을 달성하려 하는가?",
+      "blocking_on": [
+        "PD-00"
+      ],
+      "output_types": [
+        "IT-01",
+        "IT-24"
+      ],
+      "exit_when": "사용자 역할·발생 상황·현재 행동을 특정하거나 미확인임을 표시",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "사용자 역할·발생 상황·현재 행동을 특정하거나 미확인임을 표시",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "해당 역할·사용 환경이 실재하고 적절하게 정의됐는가?",
+        "planned_methods": [
+          "사용자/기관 자료, 관찰·인터뷰 계획과 반대 사례 정의"
+        ],
+        "designed_output": "검증 가능한 사용자·맥락 가설",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "validation_method"
+      }
+    },
+    {
+      "id": "PD-02",
+      "phase": "planning",
+      "label": "As-Is·문제 가설",
+      "decision_question": "실제로 어디서 왜 실패하고 어떤 손실이 발생하는가?",
+      "blocking_on": [
+        "PD-01"
+      ],
+      "output_types": [
+        "IT-02",
+        "IT-03"
+      ],
+      "exit_when": "현 상태·관찰 사실과 원인 가설·지지/반대 근거를 구분",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "현 상태·관찰 사실과 원인 가설·지지/반대 근거를 구분",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "As-Is의 어느 단계에서 어떤 손실이 발생하는가?",
+        "planned_methods": [
+          "현행 업무 관찰·업무 흐름 검토·관측 및 반증 계획"
+        ],
+        "designed_output": "관찰/추정·손실 기준 구분",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "validation_method"
+      }
+    },
+    {
+      "id": "PD-03",
+      "phase": "planning",
+      "label": "기존 대안·잔여 문제",
+      "decision_question": "다른 대안을 사용해도 남는 문제는 무엇인가?",
+      "blocking_on": [
+        "PD-02"
+      ],
+      "output_types": [
+        "IT-04"
+      ],
+      "exit_when": "같은 작업 기준의 대안 비교·잔여 문제·근거 수준 기록",
+      "parallel_group": "pain_assessment",
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "같은 작업 기준의 대안 비교·잔여 문제·근거 수준 기록",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "기존 대안과 비교한 뒤에도 잔여 문제가 있는가?",
+        "planned_methods": [
+          "동일 작업·환경의 기준선 비교 설계, 대안 반례 수집"
+        ],
+        "designed_output": "기존 대안 대비 남은 손실 가설",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "validation_method"
+      }
+    },
+    {
+      "id": "PD-04",
+      "phase": "planning",
+      "label": "치명적 실현가능성",
+      "decision_question": "합법적 데이터·기술·8주 일정으로 검증 가능한가?",
+      "blocking_on": [
+        "PD-02"
+      ],
+      "output_types": [
+        "IT-05"
+      ],
+      "exit_when": "치명적 위험·중단 조건·최소 반증·대체 경로 기록",
+      "parallel_group": "pain_assessment",
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "치명적 위험·중단 조건·최소 반증·대체 경로 기록",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "feasibility_review",
+        "question": "데이터·권한·기술·비용 제약 때문에 검증 자체가 불가능한가?",
+        "planned_methods": [
+          "접근 허가·공식 출처 확인, 필요시 최소 PoC의 반증 조건"
+        ],
+        "designed_output": "치명적 제한과 불확실성 목록",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "validation_method"
+      }
+    },
+    {
+      "id": "PD-05",
+      "phase": "planning",
+      "label": "문제 선택·제품 가설",
+      "decision_question": "어떤 문제를 지금 해결하거나 보류할 것인가?",
+      "blocking_on": [
+        "PD-03",
+        "PD-04"
+      ],
+      "output_types": [
+        "IT-06"
+      ],
+      "exit_when": "사람의 채택·보류 결정과 포함/제외 범위·재검토 조건 기록",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "사람의 채택·보류 결정과 포함/제외 범위·재검토 조건 기록",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "problem_validation",
+        "question": "이 문제를 선택할 만큼 사용자 가치와 가능성이 있는가?",
+        "planned_methods": [
+          "문제 선택 근거·대안·반증 및 보류 조건 비교"
+        ],
+        "designed_output": "사람의 선택 또는 보류 근거",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "validation_method"
+      }
+    },
+    {
+      "id": "PD-06",
+      "phase": "planning",
+      "label": "사용자 가치·시나리오",
+      "decision_question": "어떤 사용자 경험·행동 변화가 성공인가?",
+      "blocking_on": [
+        "PD-05"
+      ],
+      "output_types": [
+        "IT-07",
+        "IT-08"
+      ],
+      "exit_when": "시작·정상·예외·종료와 관찰 가능한 결과 정의",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "시작·정상·예외·종료와 관찰 가능한 결과 정의",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "scenario_validation",
+        "question": "제안된 사용 시나리오가 목표 달성을 의미하는가?",
+        "planned_methods": [
+          "대표·예외 시나리오의 사용자 확인 계획, 관찰 성과 지표"
+        ],
+        "designed_output": "가치 지표·유스케이스 검증 질문",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "validation_method"
+      }
+    },
+    {
+      "id": "PD-07",
+      "phase": "planning",
+      "label": "기능·품질 요구사항 및 시험 설계",
+      "decision_question": "무엇이 반드시 동작하고 어떤 품질을 충족해야 하는가?",
+      "blocking_on": [
+        "PD-06"
+      ],
+      "output_types": [
+        "IT-09",
+        "IT-10",
+        "IT-20"
+      ],
+      "exit_when": "우선순위·수용 기준·시험 질문 및 미확인 경계 연결",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "우선순위·수용 기준·시험 질문 및 미확인 경계 연결",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "requirements_verification",
+        "question": "요구사항 각각이 관찰·측정·시험 가능하며 사용자 가치와 연결되는가?",
+        "planned_methods": [
+          "FR/NFR마다 수용 기준·시험 입력·예상 결과·판정 한계 설계"
+        ],
+        "designed_output": "초기 IT-20 검증·시험 계획",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "acceptance_criteria"
+      }
+    },
+    {
+      "id": "PD-08",
+      "phase": "design",
+      "label": "도메인 용어·핵심 규칙·시스템 맥락",
+      "decision_question": "제품의 주요 업무 객체와 불변식, 사용자·외부 시스템·권한 경계가 무엇인가?",
+      "blocking_on": [
+        "PD-07"
+      ],
+      "output_types": [
+        "IT-11",
+        "IT-12"
+      ],
+      "exit_when": "공통 업무 용어·핵심 데이터 개념·규칙과 시스템 내외부의 책임·정보 흐름을 구분",
+      "parallel_group": null,
+      "draft_requirements": [
+        "요구사항 또는 유스케이스 초안과 실제 사용자·외부 시스템"
+      ],
+      "baseline_requirements": [
+        "상위 시나리오/FR에 필요한 업무 용어·핵심 규칙·시스템 경계·권한/데이터 접근 경계 정합성"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "design_review",
+        "question": "도메인 용어·불변식·신뢰 경계가 모순되거나 누락되지 않았는가?",
+        "planned_methods": [
+          "업무 규칙 반례·경계/권한 도표·도메인 객체 정의 리뷰"
+        ],
+        "designed_output": "도메인/경계 검토 및 예상 반례",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-08A",
+      "phase": "design",
+      "label": "상위 해결 전략·구조 대안 비교",
+      "decision_question": "도메인 규칙·시스템 경계·주요 품질 목표를 어떤 최상위 책임 배분으로 충족할 것인가?",
+      "blocking_on": [
+        "PD-08"
+      ],
+      "output_types": [
+        "IT-25",
+        "IT-19"
+      ],
+      "exit_when": "컴포넌트·기술 이름 대신 시스템 수준의 상위 해결 전략과 책임 경계만 잠정 결정한다",
+      "draft_requirements": [
+        "사용자 시나리오, 핵심 품질 목표, 도메인 개념·외부 시스템 경계의 초안"
+      ],
+      "baseline_requirements": [
+        "요구·제약·품질 목표에 대응한 상위 해결 전략 대안/비교·선택(또는 보류)·재검토 조건"
+      ],
+      "parallel_group": null,
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "architecture_evaluation",
+        "question": "상위 해결 전략이 주요 품질·비용·법적 제약을 만족할 가능성이 높은가?",
+        "planned_methods": [
+          "대안별 품질 시나리오·비교 가정·필요한 최소 기술 검증 정의"
+        ],
+        "designed_output": "전략 비교 근거와 재검토 지점",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-08B",
+      "phase": "design",
+      "label": "논리 실행·저장 단위 및 구성요소 책임 분해",
+      "decision_question": "동작/저장 책임을 어떤 실행 단위(앱·데이터 저장소)와 내부 컴포넌트에 배분할 것인가?",
+      "blocking_on": [
+        "PD-08A"
+      ],
+      "output_types": [
+        "IT-27",
+        "IT-13"
+      ],
+      "exit_when": "실행 단위의 책임·인터페이스·데이터 정본 경계를 먼저 정의하고 중요한 내부 컴포넌트만 구체화",
+      "parallel_group": null,
+      "draft_requirements": [
+        "상위 해결 전략과 업무/시스템 경계의 잠정 선택"
+      ],
+      "baseline_requirements": [
+        "각 실행/저장 단위의 책임·통신 경계·정본 소유와 필요한 내부 컴포넌트의 인터페이스·책임/검증 연결이 명시"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "개별 컴포넌트는 같은 실행 단위 안의 논리적 책임 묶음. 실행 단위 분해를 물리 인프라/VM/Docker 배포 결정과 혼동하지 않는다.",
+      "verification_design": {
+        "kind": "design_review",
+        "question": "실행 단위·컴포넌트별 책임과 데이터 소유가 요구를 빠짐없이 충족하는가?",
+        "planned_methods": [
+          "요구→책임 매핑·인터페이스/소유권/충돌 점검·컴포넌트 시험 대상 정의"
+        ],
+        "designed_output": "구성요소별 검증 대상과 통합 경계",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-09A",
+      "phase": "design",
+      "label": "행동·상태·선택적 AI",
+      "decision_question": "상태·분기·실패·중단이 어떻게 진행되는가?",
+      "blocking_on": [
+        "PD-08B"
+      ],
+      "output_types": [
+        "IT-14",
+        "IT-23"
+      ],
+      "exit_when": "정상/실패/보류/종료 상태와 전이 조건 표현; AI는 필요할 때만 설계",
+      "parallel_group": "detail_design",
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "정상/실패/보류/종료 상태와 전이 조건 표현; AI는 필요할 때만 설계",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "정상·예외·금지 상태 전이가 정확히 정의됐는가?",
+        "planned_methods": [
+          "상태 전이 표/경계값/권한 가드·실패/재시도 케이스 설계"
+        ],
+        "designed_output": "상태·행동 단위 및 통합 시험 조건",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-09B",
+      "phase": "design",
+      "label": "데이터·생명주기",
+      "decision_question": "무슨 데이터를 누구 책임으로 보존하고 바꾸는가?",
+      "blocking_on": [
+        "PD-08B"
+      ],
+      "output_types": [
+        "IT-15"
+      ],
+      "exit_when": "엔터티·키·관계·무결성·보관/삭제·접근 규칙 표현",
+      "parallel_group": "detail_design",
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "엔터티·키·관계·무결성·보관/삭제·접근 규칙 표현",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "키·관계·무결성·보관/삭제 조건을 지킬 수 있는가?",
+        "planned_methods": [
+          "참조 무결성·동시성·권한·데이터 생명주기 입력/예상값 설계"
+        ],
+        "designed_output": "데이터 계약·저장/복구 시험 조건",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-09C",
+      "phase": "design",
+      "label": "API·Tool·UI 계약",
+      "decision_question": "어떤 입력·출력과 화면 반응으로 연결되는가?",
+      "blocking_on": [
+        "PD-08B"
+      ],
+      "output_types": [
+        "IT-16",
+        "IT-17"
+      ],
+      "exit_when": "요청/응답/오류/권한과 주요 화면 상태 정의",
+      "parallel_group": "detail_design",
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "요청/응답/오류/권한과 주요 화면 상태 정의",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "API·Tool·UI가 동일한 입력·출력·오류·업무 의미를 나타내는가?",
+        "planned_methods": [
+          "스키마/권한/오류·빈 상태·부분 결과의 계약·화면 시험 설계"
+        ],
+        "designed_output": "API/UI 계약·사용자 시나리오 시험",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-09D",
+      "phase": "design",
+      "label": "횡단 통제·품질",
+      "decision_question": "공통 위험·보안·운영 제약을 어떻게 보장하는가?",
+      "blocking_on": [
+        "PD-08B"
+      ],
+      "output_types": [
+        "IT-18",
+        "IT-26"
+      ],
+      "exit_when": "필요한 품질·보안 통제와 시험·반증 조건 기록. 배포 상세는 실제 요구/권한/환경에 따라 조건부 설계 또는 미정 처리",
+      "parallel_group": "detail_design",
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "핵심 위험에 대응하는 통제·남은 위험·검증 연결",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "lane_contract": "독립 초안 가능; PD-10에서 상태·키·권한·오류·UI 표현 교차 검토 후에만 상세 계약 확정",
+      "verification_design": {
+        "kind": "test_design",
+        "question": "품질·보안·배포 제약의 실패 조건과 판정 기준이 정의됐는가?",
+        "planned_methods": [
+          "위협 시나리오·성능/복구·배포 롤백·접근 통제 시험 설계"
+        ],
+        "designed_output": "보안·성능·복구 시험 계획",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-10",
+      "phase": "design",
+      "label": "설계 정합성·요구 추적·시험 계획 완성",
+      "decision_question": "요구·상태·데이터·API·UI·안전 규칙이 충돌하는가?",
+      "blocking_on": [
+        "PD-09A",
+        "PD-09B",
+        "PD-09C",
+        "PD-09D"
+      ],
+      "output_types": [
+        "IT-19",
+        "IT-20"
+      ],
+      "exit_when": "필수 계약 충돌과 검증 계획의 누락을 식별/정리; 미결사항·영향·재검토 조건을 기록하고 가역적 부분은 조건부 기준선 허용",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "상충하는 ID/상태/권한/필드 정리; 고영향 구조 선택 근거·조건 기록",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "design_verification",
+        "question": "요구→컴포넌트→상태/데이터/API/UI→시험 계획이 일관되고 누락이 없는가?",
+        "planned_methods": [
+          "참조 추적·공통 enum·권한/오류·시험 커버리지의 교차 검토"
+        ],
+        "designed_output": "충돌·미확인·보류를 명시한 설계 기준선",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "detailed_test_case"
+      }
+    },
+    {
+      "id": "PD-11",
+      "phase": "planning_and_design",
+      "label": "설계 전달·산출물 투영(후속 단계)",
+      "decision_question": "이 정보를 어떤 작업과 공식 산출물로 연결하는가?",
+      "blocking_on": [
+        "PD-10"
+      ],
+      "output_types": [
+        "IT-21",
+        "IT-22"
+      ],
+      "exit_when": "확정/가설/미확인 상태를 유지한 채 설계 정보를 후속 작업·문서에 참조로 전달. 실제 제출 상태는 별도 검증",
+      "parallel_group": null,
+      "draft_requirements": [
+        "선행 단계의 가설 또는 결과를 읽을 수 있음"
+      ],
+      "baseline_requirements": [
+        "상세 작업 소유·의존·완료 기준과 공식 목차 매핑; 제출·접수는 별도 확인",
+        "치명적 미확인·제약 위반 없거나 조건부 보류를 기록"
+      ],
+      "gate_status": [
+        "draftable",
+        "review_needed",
+        "provisional",
+        "adopted",
+        "deferred"
+      ],
+      "note": "선행 조건은 확정의 전제이며, 비차단 조사·초안 작성의 금지가 아니다.",
+      "verification_design": {
+        "kind": "handoff_review",
+        "question": "설계 정보와 후속 시험·산출물의 참조가 누락되지 않았는가?",
+        "planned_methods": [
+          "승인/조건부 설계와 시험 데이터/환경·수행 계획·문서 투영을 대조"
+        ],
+        "designed_output": "실제 시험 전 계획, 실행 결과는 별도 Run/Eval",
+        "test_plan_type_ref": "IT-20",
+        "plan_maturity": "acceptance_criteria"
+      }
+    }
+  ],
+  "projection_examples": [
+    {
+      "id": "DLV-01",
+      "name": "기획서(요구사항 포함)",
+      "types": [
+        "IT-00",
+        "IT-01",
+        "IT-02",
+        "IT-03",
+        "IT-04",
+        "IT-05",
+        "IT-06",
+        "IT-07",
+        "IT-08",
+        "IT-09",
+        "IT-10"
+      ]
+    },
+    {
+      "id": "DLV-02",
+      "name": "WBS",
+      "types": [
+        "IT-00",
+        "IT-06",
+        "IT-21"
+      ]
+    },
+    {
+      "id": "DLV-03",
+      "name": "API 설계",
+      "types": [
+        "IT-09",
+        "IT-12",
+        "IT-13",
+        "IT-14",
+        "IT-16",
+        "IT-18",
+        "IT-19"
+      ]
+    },
+    {
+      "id": "DLV-04",
+      "name": "DB 스키마",
+      "types": [
+        "IT-11",
+        "IT-14",
+        "IT-15",
+        "IT-18"
+      ]
+    },
+    {
+      "id": "DLV-05",
+      "name": "상태 전이 설계",
+      "types": [
+        "IT-09",
+        "IT-14",
+        "IT-16"
+      ]
+    },
+    {
+      "id": "DLV-07",
+      "name": "멀티 에이전트 설계(해당 시)",
+      "types": [
+        "IT-13",
+        "IT-14",
+        "IT-16",
+        "IT-19",
+        "IT-23"
+      ]
+    },
+    {
+      "id": "DLV-08",
+      "name": "AI 보안 가드레일",
+      "types": [
+        "IT-05",
+        "IT-10",
+        "IT-18",
+        "IT-20"
+      ]
+    },
+    {
+      "id": "DLV-11",
+      "name": "통합 테스트 결과",
+      "types": [
+        "IT-09",
+        "IT-10",
+        "IT-20"
+      ]
+    }
+  ],
+  "validations_to_add_later": [
+    "ID 존재/중복 및 그래프 순환",
+    "IT-09 요구사항→IT-20 검증 누락",
+    "IT-14 상태 vs IT-16 오류 vs IT-17 UI 표현 불일치",
+    "IT-15 key/owner vs IT-16 schema/auth 불일치",
+    "확정 결정의 authority_ref와 반증 재검토 여부",
+    "정보 변경에 따른 영향받는 DLV 표시"
+  ],
+  "not_implemented": [
+    "실제 정보 인스턴스 자동 생산·이관",
+    "16개 DLV 전체 실시간 생성",
+    "의미적 완전성/설계 타당성의 자동 판정",
+    "사용자 가치 검증·실측",
+    "제품 주제나 기술 확정"
+  ],
+  "revision_note": "V4 design-only elasticity revision: cycles removed from prerequisite graph while feedback remains allowed; staged test planning and one-question-to-detailed-case refinement; requirements/verification examples to be aligned.",
+  "version_history": [
+    {
+      "version": 1,
+      "commit": "a9ff8bf710151a60fce32254461a75958355f221",
+      "description": "기획→설계 정보 유형 초안"
+    },
+    {
+      "version": 2,
+      "date": "2026-11-19",
+      "description": "typed information fields, solution strategy stage, stakeholder concerns, explicit type edges, draft/baseline distinction"
+    },
+    {
+      "version": 3,
+      "date": "2026-11-19",
+      "description": "coarse-to-fine decision boundaries and precise runtime unit vs component vs deployment terminology"
+    },
+    {
+      "version": 4,
+      "date": "2026-11-19",
+      "description": "refocus on planning & software design, with multi-level validation and test design inside each refinement stage"
+    },
+    {
+      "version": 4,
+      "revision": "elasticity-review-2026-11-19",
+      "description": "Separate causal prerequisites from impact-driven revision; begin IT-20 as a validation question at PD-00; defer IT-21/22 until handoff; distinguish planned checks from executed verification evidence"
+    }
+  ],
+  "stage_policies": {
+    "draft_vs_baseline": "선행 가설이 있으면 초안 작성 가능; 최종 선택에는 의존된 핵심 전제와 정합성 확인이 필요",
+    "parallel_lanes": [
+      "PD-03",
+      "PD-04",
+      "PD-09A",
+      "PD-09B",
+      "PD-09C",
+      "PD-09D"
+    ],
+    "cross_lane_reconciliation": "PD-10이 상세 계약의 확정 게이트: 데이터 식별자와 타입·상태/오류·인증/권한·UI 표시·검증 기준 교차 확인",
+    "early_wbs": "IT-21 상위 작업 윤곽은 PD-05 이후 가능, PD-11에서 상세 작업 선행·완료를 갱신",
+    "early_submission": "IT-22 제출물 준비는 PD-00 이후 공식 마감에 맞춰 언제든 가능; 제출은 제품 채택이나 구현 승인과 별개",
+    "candidate_boundary": "PD-05 채택 실패/보류 시 하위 예시는 illustrative_only 상태로 작성할 수 있으나 실제 구현 기준으로 승격 금지",
+    "human_approval": "문제 선택·제품 범위·Must/Done·공통 구조의 고영향 결정만 권한 있는 사람 승인; 사소한 가역 선택은 담당자 위임",
+    "refinement": "현재 단계는 다음 결정을 위한 최소 정보만 구체화하며, 미증명/가역 사항은 뒤로 미룬다. 큰 틀→업무 경계→실행 단위→컴포넌트→계약·배포 상세로 좁힌다.",
+    "never_all_at_once": "각 단계마다 decide_now와 defer_now를 분리. 단계 진입은 일부 가정으로 가능하지만 확정은 근거와 권한 필요.",
+    "runtime_vs_deployment": "IT-27 C4 실행/저장 단위의 논리적 경계는 PD-08B에서, IT-26 물리 배포/환경 매핑은 PD-09D에서 결정.",
+    "canonical_enum_policy": "공유 상태·오류·역할 계약을 하나의 의미적 정본에 선언하고 IT-14/15/16/17이 참조. 문서·API·UI 표현은 정본과 대조.",
+    "exceptions": "8주 PoC 또는 치명적 제약 확인용 기술 스파이크는 언제든 가능; 수행한 프로토타입이 설계 최종 승인으로 자동 승격되지는 않음"
+  },
+  "type_edges": [
+    {
+      "id": "TE-001",
+      "from_type": "IT-00",
+      "to_type": "IT-01",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-002",
+      "from_type": "IT-01",
+      "to_type": "IT-02",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-003",
+      "from_type": "IT-02",
+      "to_type": "IT-03",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-004",
+      "from_type": "IT-03",
+      "to_type": "IT-04",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-005",
+      "from_type": "IT-03",
+      "to_type": "IT-05",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-006",
+      "from_type": "IT-03",
+      "to_type": "IT-06",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-007",
+      "from_type": "IT-04",
+      "to_type": "IT-06",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-008",
+      "from_type": "IT-05",
+      "to_type": "IT-06",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-009",
+      "from_type": "IT-01",
+      "to_type": "IT-24",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-010",
+      "from_type": "IT-24",
+      "to_type": "IT-07",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-011",
+      "from_type": "IT-24",
+      "to_type": "IT-10",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-012",
+      "from_type": "IT-24",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-013",
+      "from_type": "IT-06",
+      "to_type": "IT-07",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-014",
+      "from_type": "IT-06",
+      "to_type": "IT-08",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-015",
+      "from_type": "IT-07",
+      "to_type": "IT-09",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-016",
+      "from_type": "IT-08",
+      "to_type": "IT-09",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-017",
+      "from_type": "IT-07",
+      "to_type": "IT-10",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-018",
+      "from_type": "IT-09",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-019",
+      "from_type": "IT-10",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-020",
+      "from_type": "IT-09",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-021",
+      "from_type": "IT-10",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-022",
+      "from_type": "IT-05",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-023",
+      "from_type": "IT-25",
+      "to_type": "IT-12",
+      "relation": "impacts",
+      "contract_phase": "revisit_on_new_evidence",
+      "propagate_review": true,
+      "note": "전략 변경으로 기존 시스템 경계를 재검토할 수는 있지만 전략이 경계의 선행 정본은 아니다"
+    },
+    {
+      "id": "TE-024",
+      "from_type": "IT-25",
+      "to_type": "IT-13",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-025",
+      "from_type": "IT-25",
+      "to_type": "IT-19",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-026",
+      "from_type": "IT-09",
+      "to_type": "IT-11",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-027",
+      "from_type": "IT-11",
+      "to_type": "IT-13",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-028",
+      "from_type": "IT-12",
+      "to_type": "IT-13",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-029",
+      "from_type": "IT-09",
+      "to_type": "IT-14",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-030",
+      "from_type": "IT-09",
+      "to_type": "IT-15",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-031",
+      "from_type": "IT-09",
+      "to_type": "IT-16",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-032",
+      "from_type": "IT-09",
+      "to_type": "IT-17",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-033",
+      "from_type": "IT-13",
+      "to_type": "IT-14",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-034",
+      "from_type": "IT-13",
+      "to_type": "IT-15",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-035",
+      "from_type": "IT-13",
+      "to_type": "IT-16",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-036",
+      "from_type": "IT-14",
+      "to_type": "IT-16",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-037",
+      "from_type": "IT-15",
+      "to_type": "IT-16",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-038",
+      "from_type": "IT-14",
+      "to_type": "IT-17",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-039",
+      "from_type": "IT-16",
+      "to_type": "IT-17",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-040",
+      "from_type": "IT-10",
+      "to_type": "IT-18",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-041",
+      "from_type": "IT-18",
+      "to_type": "IT-16",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-042",
+      "from_type": "IT-09",
+      "to_type": "IT-23",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-043",
+      "from_type": "IT-10",
+      "to_type": "IT-23",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-044",
+      "from_type": "IT-14",
+      "to_type": "IT-23",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-045",
+      "from_type": "IT-16",
+      "to_type": "IT-23",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-046",
+      "from_type": "IT-18",
+      "to_type": "IT-23",
+      "relation": "constrains",
+      "contract_phase": "baseline_reconcile",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-047",
+      "from_type": "IT-09",
+      "to_type": "IT-21",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-048",
+      "from_type": "IT-19",
+      "to_type": "IT-21",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-049",
+      "from_type": "IT-20",
+      "to_type": "IT-21",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-050",
+      "from_type": "IT-13",
+      "to_type": "IT-26",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-051",
+      "from_type": "IT-12",
+      "to_type": "IT-26",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-052",
+      "from_type": "IT-10",
+      "to_type": "IT-26",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-053",
+      "from_type": "IT-18",
+      "to_type": "IT-26",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-054",
+      "from_type": "IT-26",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-055",
+      "from_type": "IT-11",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-056",
+      "from_type": "IT-12",
+      "to_type": "IT-25",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-057",
+      "from_type": "IT-12",
+      "to_type": "IT-27",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-058",
+      "from_type": "IT-25",
+      "to_type": "IT-27",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-059",
+      "from_type": "IT-27",
+      "to_type": "IT-13",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-060",
+      "from_type": "IT-27",
+      "to_type": "IT-26",
+      "relation": "derived_from",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-061",
+      "from_type": "IT-11",
+      "to_type": "IT-14",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-062",
+      "from_type": "IT-11",
+      "to_type": "IT-15",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-063",
+      "from_type": "IT-11",
+      "to_type": "IT-16",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-064",
+      "from_type": "IT-11",
+      "to_type": "IT-17",
+      "relation": "constrains",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-065",
+      "from_type": "IT-09",
+      "to_type": "IT-13",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-066",
+      "from_type": "IT-10",
+      "to_type": "IT-13",
+      "relation": "satisfies",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-067",
+      "from_type": "IT-13",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-068",
+      "from_type": "IT-01",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-069",
+      "from_type": "IT-02",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-070",
+      "from_type": "IT-03",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-071",
+      "from_type": "IT-04",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-072",
+      "from_type": "IT-05",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-073",
+      "from_type": "IT-06",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-074",
+      "from_type": "IT-07",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-075",
+      "from_type": "IT-08",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-076",
+      "from_type": "IT-11",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-077",
+      "from_type": "IT-12",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-078",
+      "from_type": "IT-14",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-079",
+      "from_type": "IT-15",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-080",
+      "from_type": "IT-16",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-081",
+      "from_type": "IT-17",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-082",
+      "from_type": "IT-18",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-083",
+      "from_type": "IT-25",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    },
+    {
+      "id": "TE-084",
+      "from_type": "IT-27",
+      "to_type": "IT-20",
+      "relation": "planned_check_by",
+      "contract_phase": "draft_and_baseline",
+      "propagate_review": true
+    }
+  ],
+  "record_contract": {
+    "envelope": {
+      "required": [
+        "id",
+        "type_id",
+        "status",
+        "evidence_level",
+        "fields",
+        "source_refs"
+      ],
+      "types": {
+        "id": "string",
+        "type_id": "string",
+        "status": "string",
+        "evidence_level": "string",
+        "fields": "object",
+        "source_refs": "string[]"
+      },
+      "status_values": [
+        "draft_hypothesis",
+        "proposed",
+        "provisional",
+        "adopted",
+        "deferred",
+        "rejected",
+        "not_applicable"
+      ],
+      "evidence_values": [
+        "observed",
+        "sourced",
+        "synthetic",
+        "hypothesis",
+        "unknown",
+        "contradicted"
+      ],
+      "sample_status_rule": "추측으로 작성한 상세 설계는 draft_hypothesis이고 제품 승인 상태와 독립. adopted는 authority_ref 없이는 허용하지 않음."
+    },
+    "field_type_enum": [
+      "string",
+      "string[]",
+      "object",
+      "ref",
+      "ref[]",
+      "enum"
+    ],
+    "missing_policy": "draft에서는 실제 아는 필드만 기록; baseline에서는 required_for_baseline 확인. 미확인과 근거 없음은 null/unknown으로 기록, 실제 없는 사실을 채우지 않음.",
+    "relationship_direction": "from 상위·영향 출발 → to 파생/설계/검증/출력",
+    "typed_edge_policy": "instance_edges는 type_edges에 허용된 from_type/to_type/relation만 사용; 예외는 impacts로 사람 검토 후 명시",
+    "required_at_baseline": "최소 3개 핵심 필드만 관리하는 부담 방지를 위해 모든 필드를 의무화하지 않음. required_for_baseline는 해당 정보 유형을 실제로 확정·사용하는 경우에만 적용.",
+    "adoption_policy": "type_id IT-06/IT-19/IT-25 record.status=adopted is valid only with fields.authority_ref and a human decision record; baseline mandatory fields must also be present. Proposed/provisional decisions do not imply product adoption."
+  },
+  "pilot_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json",
+  "validator_ref": "tools/validate_planning_design_model.py",
+  "external_bases": [
+    {
+      "label": "ISO/IEC/IEEE 29148:2018",
+      "url": "https://www.iso.org/standard/72089.html",
+      "scope": "requirements engineering, official abstract only"
+    },
+    {
+      "label": "ISO/IEC/IEEE 42010:2022",
+      "url": "https://www.iso.org/standard/74393.html",
+      "scope": "architecture description concepts, not development-process mandate"
+    },
+    {
+      "label": "arc42 solution strategy",
+      "url": "https://docs.arc42.org/section-4/",
+      "scope": "solution strategy before detailed building blocks"
+    },
+    {
+      "label": "arc42 runtime view",
+      "url": "https://docs.arc42.org/section-6/",
+      "scope": "runtime scenarios and error flows"
+    },
+    {
+      "label": "C4 model FAQ",
+      "url": "https://github.com/simonbrowndotje/c4model/blob/master/faq.md",
+      "scope": "description levels are not a prescribed process"
+    },
+    {
+      "label": "NASA Systems Engineering Handbook Appendix",
+      "url": "https://www.nasa.gov/reference/system-engineering-handbook-appendix/",
+      "scope": "needs, requirements, verification and validation traceability"
+    }
+  ],
+  "component_submodel_ref": "docs/deliverables/component-design-model.json",
+  "component_views_ref": "docs/deliverables/COMPONENT-DESIGN-VIEWS.md",
+  "progressive_design_layers": [
+    {
+      "id": "L0",
+      "name": "목적·제약의 최상위 경계",
+      "stage_ids": [
+        "PD-00"
+      ],
+      "decide_now": [
+        "문제 해결의 목적",
+        "현재 유효한 의도와 승인권자",
+        "필수 법·자원·기한 제약"
+      ],
+      "defer_now": [
+        "제품 기능",
+        "화면·DB·프레임워크"
+      ],
+      "minimum_input": [
+        "INTENT/Phase/공식 제약"
+      ],
+      "completion_for_next": "현재 의도·권한·제약의 정본을 참조할 수 있다",
+      "reopen_trigger": "의도나 기관 제약 변경",
+      "verification_design": {
+        "objective": "목적·제약의 적절성 확인",
+        "what_to_define": "기획 원본·요건의 출처/모순 점검",
+        "kind": "planning_review",
+        "design_record_type": "IT-20"
+      },
+      "scope": "product_planning"
+    },
+    {
+      "id": "L1",
+      "name": "사용자 문제와 잔여 손실",
+      "stage_ids": [
+        "PD-01",
+        "PD-02",
+        "PD-03",
+        "PD-04",
+        "PD-05"
+      ],
+      "decide_now": [
+        "사용자 역할·업무 상황",
+        "As-Is와 관측 가능한 손실",
+        "기존 대안의 해결 범위",
+        "법적·기술적 불가능 조건",
+        "채택·보류할 문제"
+      ],
+      "defer_now": [
+        "제품 기능 전체 목록",
+        "AI·DB·아키텍처",
+        "예쁜 화면 시안"
+      ],
+      "minimum_input": [
+        "사용자/기관 정보와 후보 근거"
+      ],
+      "completion_for_next": "근거·반대 근거·미확인을 구분하고 제품 문제를 선택/보류",
+      "reopen_trigger": "기존 대안 또는 접근·권한 조건 변화",
+      "verification_design": {
+        "objective": "사용자 문제의 실재·잔여 Pain 검증 설계",
+        "what_to_define": "관측 자료·인터뷰/대안 비교·반증 시나리오",
+        "kind": "problem_validation",
+        "design_record_type": "IT-20"
+      },
+      "scope": "product_planning"
+    },
+    {
+      "id": "L2",
+      "name": "제품 수준 동작과 성공 조건",
+      "stage_ids": [
+        "PD-06",
+        "PD-07"
+      ],
+      "decide_now": [
+        "대표 사용자 목표/유스케이스",
+        "핵심 기능 요구·품질 목표",
+        "수용 조건·검증 데이터의 종류",
+        "MVP 포함/제외"
+      ],
+      "defer_now": [
+        "클래스·테이블·API 경로·화면 픽셀",
+        "단일/다중 에이전트 수"
+      ],
+      "minimum_input": [
+        "채택/조건부 문제 가설과 유효한 제약"
+      ],
+      "completion_for_next": "대표 시나리오와 FR/NFR·검증 계획을 일대일 또는 명시적 다대다 연결",
+      "reopen_trigger": "가치 가설 반증·핵심 문제 변경",
+      "verification_design": {
+        "objective": "사용자 가치·요구사항의 수용 기준·시험 설계",
+        "what_to_define": "대표·예외 시나리오, FR/NFR별 판정 조건·시험 데이터 개요",
+        "kind": "requirements_verification",
+        "design_record_type": "IT-20"
+      },
+      "scope": "product_planning",
+      "draft_note": "업무 용어 초안은 사용자 시나리오를 작성하며 함께 발견할 수 있음. 용어 의미를 PD-08에서 기준선으로 정교화"
+    },
+    {
+      "id": "L3",
+      "name": "업무 개념과 시스템 경계",
+      "stage_ids": [
+        "PD-08"
+      ],
+      "decide_now": [
+        "도메인 객체·용어·핵심 규칙",
+        "외부 사용자·시스템·법/권한 경계",
+        "내부/외부 책임"
+      ],
+      "defer_now": [
+        "DB 테이블·컬럼",
+        "외부 API 구현 코드·배포 방식"
+      ],
+      "minimum_input": [
+        "대표 시나리오·요구사항"
+      ],
+      "completion_for_next": "다른 설계자가 동일 의미로 업무 객체와 경계를 설명",
+      "reopen_trigger": "업무 규칙/외부 권한 바뀜",
+      "verification_design": {
+        "objective": "도메인 불변식·시스템 경계의 설계 검토",
+        "what_to_define": "반례·신뢰 경계·역할별 접근 규칙·용어 충돌",
+        "kind": "design_review",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design",
+      "draft_note": "FR/NFR과 도메인 개념은 초안 상태에서 서로 수정할 수 있음. 기준선 확정 전 용어·규칙과 수용 조건을 상호 대조"
+    },
+    {
+      "id": "L4",
+      "name": "상위 해결 전략과 실행·저장 단위",
+      "stage_ids": [
+        "PD-08A",
+        "PD-08B"
+      ],
+      "decide_now": [
+        "모놀리식/외부 서비스 등 접근 대안",
+        "앱·저장소별 책임과 정보 흐름",
+        "어느 단위가 어떤 정본 데이터를 책임지는지",
+        "중요 컴포넌트 책임"
+      ],
+      "defer_now": [
+        "메서드 목록·DB 인덱스",
+        "특정 클라우드·컨테이너 오케스트레이터"
+      ],
+      "minimum_input": [
+        "시스템 경계·도메인 불변식·품질 제약"
+      ],
+      "completion_for_next": "상위 책임이 겹치지 않고 실행 단위/컴포넌트의 입력·출력·의존을 추적할 수 있음",
+      "reopen_trigger": "실측 성능·권한·비용이 상위 전략을 반증",
+      "verification_design": {
+        "objective": "상위 구조의 품질 시나리오·구성요소 책임 검토",
+        "what_to_define": "전략 비교·요구/책임 매핑·컴포넌트 인터페이스 및 시험 대상",
+        "kind": "architecture_evaluation",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
+    },
+    {
+      "id": "L5",
+      "name": "동작·데이터·인터페이스 상세 설계",
+      "stage_ids": [
+        "PD-09A",
+        "PD-09B",
+        "PD-09C",
+        "PD-09D"
+      ],
+      "decide_now": [
+        "상태/전이/가드·예외",
+        "논리 엔터티·키·무결성",
+        "API 요청/응답/권한/오류",
+        "화면별 사용자 행동·상태",
+        "위험 통제·최소 배포/운영 제약"
+      ],
+      "defer_now": [
+        "미검증 구현 세부 최적화",
+        "기능과 무관한 부가 컴포넌트"
+      ],
+      "minimum_input": [
+        "구성요소 책임·공통 도메인 용어"
+      ],
+      "completion_for_next": "상태·오류·키·권한·UI 표현이 서로 대응되는 초안",
+      "reopen_trigger": "상태/키/권한의 모순 발견",
+      "verification_design": {
+        "objective": "상태·데이터·API/UI·보안/배포의 상세 시험 설계",
+        "what_to_define": "상태 전이·무결성·계약·권한·오류·회복·사용자 경로별 예상 결과",
+        "kind": "test_design",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
+    },
+    {
+      "id": "L6",
+      "name": "설계 계약 정합성·조건부 기준선",
+      "stage_ids": [
+        "PD-10"
+      ],
+      "decide_now": [
+        "요구→컴포넌트→테스트의 책임",
+        "상태·API·DB·UI/실패 교차 정합성",
+        "보류 가정과 ADR",
+        "선택된 기술·비용의 근거"
+      ],
+      "defer_now": [
+        "기여도 낮은 세부 구현 선택까지 사람 승인"
+      ],
+      "minimum_input": [
+        "네 가지 상세 설계의 동기화된 초안"
+      ],
+      "completion_for_next": "서로 다른 설계가 하나의 도메인 계약을 설명하고 미결사항·재검토 조건 명시",
+      "reopen_trigger": "계약 충돌·새 실제 근거",
+      "verification_design": {
+        "objective": "설계와 검증 설계의 양방향 추적·교차 정합성 확인",
+        "what_to_define": "요구/계약/상태/데이터/UI/테스트의 연결 및 누락·미확인",
+        "kind": "design_verification",
+        "design_record_type": "IT-20"
+      },
+      "scope": "system_design"
+    },
+    {
+      "id": "L7",
+      "name": "설계의 후속 전달(작업 분해·산출물)",
+      "stage_ids": [
+        "PD-11"
+      ],
+      "decide_now": [
+        "확정/가정/미확인 설계 기준선 전달",
+        "시험 실행에 필요한 데이터·환경·판정 규칙",
+        "공식 문서로 정보 참조 연결"
+      ],
+      "defer_now": [
+        "수행하지 않은 테스트 결과",
+        "구현 없이 근거 없는 성능 수치"
+      ],
+      "minimum_input": [
+        "승인/조건부 설계 기준선과 공식 양식"
+      ],
+      "completion_for_next": "실행 가능한 TASK/검증 계획과 독립적인 제출 상태",
+      "reopen_trigger": "실행 실패·실측 반증·공식 요구 변경",
+      "verification_design": {
+        "objective": "설계→실행/제출에 필요한 계획 전달",
+        "what_to_define": "시험 환경·데이터·실행 조건과 산출물 매핑(실제 결과는 Run)",
+        "kind": "handoff_review",
+        "design_record_type": "IT-20"
+      },
+      "scope": "downstream_handoff"
+    }
+  ],
+  "terms_policy": {
+    "glossary_ref": "docs/deliverables/DESIGN-GLOSSARY.md",
+    "disallow_ambiguous_terms": [
+      {
+        "ambiguous": "서비스",
+        "replace_with": [
+          "제품 서비스",
+          "애플리케이션 서비스",
+          "외부 API 서비스",
+          "별도 배포 마이크로서비스"
+        ]
+      },
+      {
+        "ambiguous": "컨테이너",
+        "replace_with": [
+          "C4 실행 단위(애플리케이션·데이터 저장소)",
+          "Docker 컨테이너(배포 패키징)"
+        ]
+      },
+      {
+        "ambiguous": "상태",
+        "replace_with": [
+          "업무 상태(CaseStatus)",
+          "UI 표시 상태",
+          "HTTP 응답 상태"
+        ]
+      },
+      {
+        "ambiguous": "설계 확정",
+        "replace_with": [
+          "가설 초안",
+          "잠정 기준선",
+          "승인된 기준선"
+        ]
+      },
+      {
+        "ambiguous": "검증",
+        "replace_with": [
+          "명세 충족 시험(verification)",
+          "사용자 가치 확인(validation)"
+        ]
+      }
+    ]
+  },
+  "design_scope": {
+    "primary": "제품 기획과 시스템 설계에서 다루는 실제 정보 객체, 상위→하위 선행관계, 단계별 검증·시험 설계",
+    "included": [
+      "사용자/문제/제품 타당성 확인 계획",
+      "요구사항 수용 기준·검증 방법",
+      "도메인·시스템/컴포넌트·상태·데이터·API/UI·보안·배포 상세 설계",
+      "각 설계 수준의 품질/검증/시험 설계",
+      "설계 간 추적성·정합성"
+    ],
+    "excluded": [
+      "AI 작업 위임·작업 모드 S/M/H·자동 이슈 배정",
+      "실제 시험 수행·실측 결과 작성",
+      "WBS 운영·업무 승인 절차",
+      "공식 제출·접수 상태 변경",
+      "제품 채택·특정 기술 스택 확정"
+    ],
+    "handoff": "PD-11/IT-21/IT-22는 기존 모델과 연결을 보존하기 위한 후속 투영 항목이며 핵심 설계 단계가 아니다."
+  },
+  "verification_concepts": {
+    "validation": "사용자 목표·문제/제품의 실제 적절성을 확인하는 계획. 사실 검증·대안 비교·사용자 시험 계획 포함",
+    "verification": "명시한 요구/업무 규칙/설계 명세 충족을 확인하는 계획. 리뷰·분석·시험·시연 중 적절한 방법을 선택",
+    "test_design": "검증 대상·입력 데이터·환경·절차·예상·판정 기준을 설계하는 행위; 설계와 함께 반복해 구체화",
+    "test_execution": "실제 결과/커밋/환경/로그를 관측하는 실행. 별도 Run/Eval의 책임이며 미실행은 not_run",
+    "design_review": "도메인 용어·구조·계약의 누락·충돌 등을 문서/모델로 분석해 확인; 작동 성능 입증은 아님"
+  },
+  "refinement_policy": {
+    "aim": "완결된 설계 파일을 먼저 모두 채우는 것이 아니라, 상위 정보로 하위 선택 범위를 점진적으로 좁히되 새 근거를 수용",
+    "decision_graph": "blocking_on 및 derived_from/constrains/satisfies의 정본 선행관계는 비순환. impacts는 검토 알림이며 선행 의존성에 포함하지 않음",
+    "parallel_detail": "PD-09A/B/C/D는 다른 분야를 기다리지 않고 초안 작성. baseline_reconcile 관계는 L6에서 의미를 일치시키는 규칙으로, 초안 작성 차단이 아님",
+    "evidence_backflow": "실측·법/권한·사용자 증거가 가정을 반박하면 가장 작은 영향 범위의 상위 결정으로 돌아감. 기존 선택을 자동 폐기하거나 모든 설계를 다시 작성하지 않음",
+    "uncertainty": "미확인·근거 부족·비적용은 상태와 이유/재검토 조건으로 표현; 영향이 낮은 상세 결정은 보류 가능",
+    "conditional_details": "미선정 배포 기술, AI 컴포넌트, DB 인덱스 등은 필수 요구·환경이 정해질 때까지 N/A 또는 가설로 둘 수 있음",
+    "testing": "검증 질문은 L0부터, 수용 기준은 L2, 상세 시험은 L3~L5에서 발전. 계획 관계와 실제 통과 증거를 엄격히 구분",
+    "stop_and_review": "치명적 법/권한 제약·해결 불가한 공유 계약 충돌·제품 선택 변경만 해당 상위 의사결정을 다시 검토"
+  }
+}

@@ -1,0 +1,1036 @@
+{
+  "schema_version": 1,
+  "id": "COMPONENT-DESIGN-SUBMODEL-20261119",
+  "title": "기획→설계 정보 모델의 구성요소 분해/관점/계약 하위 모델",
+  "status": "proposal_with_illustrative_cand016_no_implementation",
+  "parent_ref": "docs/deliverables/planning-design-info-model.json",
+  "document_ref": "docs/deliverables/COMPONENT-DESIGN-VIEWS.md",
+  "candidate_ref": "docs/artifacts/candidates/CAND-016.json",
+  "pilot_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/CAND-016-TRACE.json",
+  "policy": {
+    "no_new_work_domain": true,
+    "not_each_box_is_a_service": true,
+    "not_all_kinds_required": true,
+    "special_kinds_optional": [
+      "async_optional",
+      "ai_optional"
+    ],
+    "separation": "IT-13은 구성요소·책임 정본의 원소를 대표하고 IT-14/15/16/17/18/20/26이 동작·데이터·계약·UI·운영·검증을 각각 상세 기술한다.",
+    "product_status": "기존 Phase Intent와 팀 제품 미채택 상태 유지; 시범 컴포넌트는 전부 draft_hypothesis",
+    "logical_container_vs_deployment": "CTN-WEB/CTN-API/CTN-DATA는 C4 실행·저장 단위(IT-27) 예시이며 IT-26 물리적 배포 환경과 별도"
+  },
+  "component_record_contract": {
+    "required": [
+      "id",
+      "name",
+      "kind",
+      "parent_container",
+      "responsibility",
+      "public_operations",
+      "inbound",
+      "outbound",
+      "depends_on",
+      "owned_state",
+      "requirements",
+      "verification_refs",
+      "failure_policy",
+      "phase"
+    ],
+    "optional": [
+      "contract_ref",
+      "source_info_ref",
+      "deployment_ref",
+      "risk_refs",
+      "quality_refs",
+      "owner"
+    ],
+    "id_rule": "안정적 구성요소 ID를 부여하고 부모 컨테이너·요구·계약·검증을 참조",
+    "type_rule": "구성요소 category는 categories.key 중 하나; 컨테이너는 별도 실행/저장 단위",
+    "state_rule": "실제 구현/배포 근거 없이 proposal→adopted로 승격하지 않음"
+  },
+  "categories": [
+    {
+      "key": "presentation",
+      "name": "화면·상호작용",
+      "examples": [
+        "화면·뷰",
+        "입력 폼",
+        "상태 관리",
+        "결과 표시",
+        "오류/로딩/접근성"
+      ],
+      "questions": [
+        "사용자는 어디서 무엇을 입력하는가?",
+        "어떤 결과와 상태를 어떻게 표시하는가?"
+      ]
+    },
+    {
+      "key": "api_boundary",
+      "name": "API·입력 경계",
+      "examples": [
+        "Controller/Route",
+        "요청 검증",
+        "응답 변환",
+        "오류 계약",
+        "버전/멱등성"
+      ],
+      "questions": [
+        "외부에 어떤 연산을 제공하는가?",
+        "오류·중복 요청을 어떻게 반환하는가?"
+      ]
+    },
+    {
+      "key": "access_control",
+      "name": "인증·권한",
+      "examples": [
+        "Identity",
+        "Role/Scope Check",
+        "Access Decision",
+        "Audit"
+      ],
+      "questions": [
+        "누가 어떤 자원·동작에 접근할 수 있는가?"
+      ]
+    },
+    {
+      "key": "application",
+      "name": "유스케이스·조정",
+      "examples": [
+        "Command/Query Handler",
+        "Application Service",
+        "Transaction Boundary",
+        "Event Publication"
+      ],
+      "questions": [
+        "어떤 순서로 업무를 조정하고 결과를 만들 것인가?"
+      ]
+    },
+    {
+      "key": "domain",
+      "name": "도메인·업무 규칙",
+      "examples": [
+        "Domain Entity",
+        "Value Object",
+        "Invariant",
+        "Policy",
+        "Domain Service"
+      ],
+      "questions": [
+        "항상 지켜야 할 업무 규칙은 무엇인가?",
+        "입력·판정·상태 변화의 경계는?"
+      ]
+    },
+    {
+      "key": "workflow",
+      "name": "상태·실행 제어",
+      "examples": [
+        "State Machine",
+        "Transition Guard",
+        "Retry/Timeout Policy",
+        "Human Handoff"
+      ],
+      "questions": [
+        "정상/부분/실패 상태와 전이는 무엇인가?"
+      ]
+    },
+    {
+      "key": "data_access",
+      "name": "저장·조회 경계",
+      "examples": [
+        "Repository",
+        "Transaction/Unit of Work",
+        "Schema Adapter",
+        "Migration"
+      ],
+      "questions": [
+        "어떤 정보의 정본을 누가 수정하는가?",
+        "무결성·재처리는 어떻게 보장하는가?"
+      ]
+    },
+    {
+      "key": "data_store",
+      "name": "물리 데이터 저장",
+      "examples": [
+        "Case Store",
+        "Schema/Table",
+        "Key/Index",
+        "Retention/Backup"
+      ],
+      "questions": [
+        "어느 환경에 어떤 데이터가 놓이고 보존되는가?"
+      ]
+    },
+    {
+      "key": "external_integration",
+      "name": "외부 연동",
+      "examples": [
+        "Official API Client",
+        "Tool Adapter",
+        "Contract Mapper",
+        "Rate/Failure Handling"
+      ],
+      "questions": [
+        "이용 권한과 이용 조건은 무엇인가?",
+        "실패하면 어떻게 대체·중단하는가?"
+      ]
+    },
+    {
+      "key": "async_optional",
+      "name": "비동기 작업·메시징(조건부)",
+      "examples": [
+        "Queue",
+        "Worker",
+        "Scheduler",
+        "Dedup/Dead Letter"
+      ],
+      "questions": [
+        "요청을 동기 처리할 수 없는 실제 이유가 있는가?",
+        "재시도 시 중복 부작용은?"
+      ]
+    },
+    {
+      "key": "ai_optional",
+      "name": "AI·에이전트(조건부)",
+      "examples": [
+        "Model Adapter",
+        "Prompt/Policy",
+        "Tool Permission",
+        "Context/Mem Store",
+        "Orchestrator",
+        "Evaluator"
+      ],
+      "questions": [
+        "규칙 기반 대비 AI의 증분 가치가 입증되는가?",
+        "모델·도구 오류, 권한·근거는 어떻게 통제되는가?"
+      ]
+    },
+    {
+      "key": "operability",
+      "name": "운영·관측·배포",
+      "examples": [
+        "Config/Secrets",
+        "Structured Log",
+        "Metrics/Trace",
+        "Health Check",
+        "CI/CD/Rollback"
+      ],
+      "questions": [
+        "문제 발생 시 어떤 증거로 복구하는가?",
+        "소프트웨어 블록을 어디에 배치하는가?"
+      ]
+    }
+  ],
+  "views": [
+    {
+      "id": "CTX",
+      "name": "시스템 맥락",
+      "answers": "사용자·역할·외부 서비스·시스템 경계",
+      "source_type_ids": [
+        "IT-01",
+        "IT-12",
+        "IT-24"
+      ]
+    },
+    {
+      "id": "CNT",
+      "name": "실행 단위/저장소",
+      "answers": "웹·서버·저장소 및 외부 시스템의 주요 관계",
+      "source_type_ids": [
+        "IT-12",
+        "IT-13",
+        "IT-26"
+      ]
+    },
+    {
+      "id": "CMP",
+      "name": "컨테이너 내부 컴포넌트",
+      "answers": "Controller·Application Service·Policy·State·Repository·Audit의 책임과 호출·소유",
+      "source_type_ids": [
+        "IT-11",
+        "IT-13",
+        "IT-14",
+        "IT-16",
+        "IT-18"
+      ]
+    },
+    {
+      "id": "CNTC",
+      "name": "컴포넌트 계약",
+      "answers": "입출력·오류·권한·상태·데이터·상위 요구/검증 관계",
+      "source_type_ids": [
+        "IT-09",
+        "IT-10",
+        "IT-13",
+        "IT-16",
+        "IT-20"
+      ]
+    },
+    {
+      "id": "RUN",
+      "name": "실행/실패 시퀀스",
+      "answers": "대표 정상/거절/실패 상황에서 구성요소가 협업하는 방법",
+      "source_type_ids": [
+        "IT-08",
+        "IT-14",
+        "IT-16",
+        "IT-18"
+      ]
+    },
+    {
+      "id": "DATA",
+      "name": "도메인·데이터",
+      "answers": "업무 객체/상태와 저장 스키마·키·관계·정본",
+      "source_type_ids": [
+        "IT-11",
+        "IT-15"
+      ]
+    },
+    {
+      "id": "DEP",
+      "name": "배포·운영",
+      "answers": "실행 환경·배포 단위 매핑·설정/비밀·관측·백업·롤백",
+      "source_type_ids": [
+        "IT-18",
+        "IT-26"
+      ]
+    },
+    {
+      "id": "TRACE",
+      "name": "문제→설계→검증",
+      "answers": "FR/NFR를 어떤 컴포넌트가 충족하고 무엇이 검증하는가",
+      "source_type_ids": [
+        "IT-03",
+        "IT-08",
+        "IT-09",
+        "IT-10",
+        "IT-13",
+        "IT-20"
+      ]
+    }
+  ],
+  "example": {
+    "system": {
+      "id": "SYS-CARD",
+      "name": "시험감독 사건 카드 모의 시스템",
+      "status": "illustrative_only",
+      "motivation": "CAND-016의 가상 요구 EX-FR(미확인 정보 구분)으로 설계 구성요소를 검증; 정식 제품 아님",
+      "actors": [
+        {
+          "id": "ACT-SUPERVISOR",
+          "name": "시험감독관 역할 평가 참가자"
+        },
+        {
+          "id": "ACT-REVIEWER",
+          "name": "전담 검토자 역할 평가 참가자"
+        }
+      ],
+      "external": [
+        {
+          "id": "EXT-OFFICIAL-RULES",
+          "name": "모의에 사용될 승인된 시험 규정 자료",
+          "contract": "사람이 출처·버전 확인 후 시험 환경에 제공, 실서비스 호출 전제 없음"
+        }
+      ]
+    },
+    "containers": [
+      {
+        "id": "CTN-WEB",
+        "name": "Web UI",
+        "kind": "frontend",
+        "responsibility": "모의 사건 입력·현재 상태·검토 결과 표시",
+        "runtime_note": "브라우저 UI 또는 동등한 화면, 실제 프레임워크 미선정",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CTN-API",
+        "name": "Application API",
+        "kind": "backend",
+        "responsibility": "입력 검증·권한·유스케이스·상태 변경·데이터 계약",
+        "runtime_note": "모놀리식 배포도 허용, 마이크로서비스 전제 없음",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CTN-DATA",
+        "name": "Case Data Store",
+        "kind": "data_store",
+        "responsibility": "모의 Case·Observation·Action 정본 저장",
+        "runtime_note": "논리적 저장소, DBMS 미선정",
+        "status": "illustrative_only"
+      }
+    ],
+    "components": [
+      {
+        "id": "C-UI-ENTRY",
+        "name": "사건 입력 화면",
+        "kind": "presentation",
+        "parent_container": "CTN-WEB",
+        "responsibility": "관측 사실·추정·미확인 구분 입력 및 검증",
+        "public_operations": [
+          "submitDraft"
+        ],
+        "inbound": [
+          "사건 메모·관측 유형"
+        ],
+        "outbound": [
+          "입력 요청"
+        ],
+        "depends_on": [
+          "C-UI-RESULT"
+        ],
+        "owned_state": "표시 상태만 소유",
+        "requirements": [
+          "EX-FR"
+        ],
+        "verification_refs": [
+          "EX-T-UI"
+        ],
+        "source_info_ref": "CR-C-UI-ENTRY",
+        "phase": "draft_hypothesis",
+        "failure_policy": "검증 오류를 사용자에게 표시; 확정 판정 생성 금지",
+        "contract_ref": "IT-17",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "사용자가 observed/inferred/unknown 분류를 입력할 수 있도록 제공"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-UI-RESULT",
+        "name": "사건 상태 표시",
+        "kind": "presentation",
+        "parent_container": "CTN-WEB",
+        "responsibility": "사건 상태·근거 구분·오류·로딩 표현",
+        "public_operations": [
+          "renderCase",
+          "renderError"
+        ],
+        "inbound": [
+          "사건 응답·오류"
+        ],
+        "outbound": [
+          "확인 상태 UI"
+        ],
+        "depends_on": [],
+        "owned_state": "표시 상태만 소유",
+        "requirements": [
+          "EX-FR",
+          "EX-NFR"
+        ],
+        "verification_refs": [
+          "EX-T-UI"
+        ],
+        "source_info_ref": "CR-C-UI-RESULT",
+        "phase": "draft_hypothesis",
+        "failure_policy": "미확인을 '부정행위 확정'으로 표시하지 않음",
+        "contract_ref": "IT-17",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "관측 유형을 구분해 표시"
+          },
+          {
+            "requirement_ref": "EX-NFR",
+            "contribution": "미확인 자료에 대해 개인·좌석/위반 단정 방지"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-API-CASE",
+        "name": "사건 API 경계",
+        "kind": "api_boundary",
+        "parent_container": "CTN-API",
+        "responsibility": "POST/GET 요청 검증·응답 및 오류 매핑",
+        "public_operations": [
+          "POST /cases",
+          "GET /cases/{case_id}"
+        ],
+        "inbound": [
+          "CaseDraft / CaseId"
+        ],
+        "outbound": [
+          "CaseStatus / BadRequest / Forbidden / Conflict"
+        ],
+        "depends_on": [
+          "C-AUTHZ",
+          "C-APP-CASE"
+        ],
+        "owned_state": "업무 상태를 소유하지 않음",
+        "requirements": [
+          "EX-FR",
+          "EX-NFR-AUTH"
+        ],
+        "verification_refs": [
+          "EX-T-ACCESS",
+          "EX-T-STATUS"
+        ],
+        "source_info_ref": "CR-C-API-CASE",
+        "phase": "draft_hypothesis",
+        "failure_policy": "입력 오류·권한 거절·상태 충돌·저장 실패를 구분",
+        "contract_ref": "IT-16",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "요청·응답에 관측 유형 정보 보존"
+          },
+          {
+            "requirement_ref": "EX-NFR-AUTH",
+            "contribution": "조회/전이 요청의 역할/권한 계약 적용"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-AUTHZ",
+        "name": "역할·권한 정책",
+        "kind": "access_control",
+        "parent_container": "CTN-API",
+        "responsibility": "모의 평가 역할에 따라 접근·검토 가능 여부 결정",
+        "public_operations": [
+          "authorize"
+        ],
+        "inbound": [
+          "actor_role,operation,resource"
+        ],
+        "outbound": [
+          "allow/deny"
+        ],
+        "depends_on": [],
+        "owned_state": "접근 정책 참조",
+        "requirements": [
+          "EX-NFR-AUTH"
+        ],
+        "verification_refs": [
+          "EX-T-ACCESS"
+        ],
+        "source_info_ref": "CR-C-AUTHZ",
+        "phase": "draft_hypothesis",
+        "failure_policy": "권한 불충족이면 저장·상태 전이 전 거절",
+        "contract_ref": "IT-18",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR-AUTH",
+            "contribution": "사용자/검토자 역할별 읽기·상태 변경 거절"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-APP-CASE",
+        "name": "사건 처리 유스케이스",
+        "kind": "application",
+        "parent_container": "CTN-API",
+        "responsibility": "관측 검증·상태 결정·저장·결과 조정",
+        "public_operations": [
+          "createCase",
+          "getCase",
+          "requestReview"
+        ],
+        "inbound": [
+          "유효한 요청/사용자 컨텍스트"
+        ],
+        "outbound": [
+          "CaseId/CaseSummary"
+        ],
+        "depends_on": [
+          "C-EVIDENCE-POLICY",
+          "C-STATE",
+          "C-REPOSITORY",
+          "C-AUDIT"
+        ],
+        "owned_state": "트랜잭션 조정만 수행",
+        "requirements": [
+          "EX-FR",
+          "EX-NFR-ATOMIC"
+        ],
+        "verification_refs": [
+          "EX-T-CLASSIFY",
+          "EX-T-STORE"
+        ],
+        "source_info_ref": "CR-C-APP-CASE",
+        "phase": "draft_hypothesis",
+        "failure_policy": "정합성 오류 시 저장 취소·안전한 실패 응답",
+        "contract_ref": "IT-09",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "분류와 상태 흐름 조정"
+          },
+          {
+            "requirement_ref": "EX-NFR-ATOMIC",
+            "contribution": "사건과 이력 저장을 한 논리적 성공/실패로 조정"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-EVIDENCE-POLICY",
+        "name": "관측 정보 분류 규칙",
+        "kind": "domain",
+        "parent_container": "CTN-API",
+        "responsibility": "관측 사실·시스템 추정·미확인을 혼동하지 않도록 제약",
+        "public_operations": [
+          "classifyObservation"
+        ],
+        "inbound": [
+          "Observation.kind,source"
+        ],
+        "outbound": [
+          "보존된 분류/오류"
+        ],
+        "depends_on": [],
+        "owned_state": "순수 정책(상태 비소유)",
+        "requirements": [
+          "EX-FR"
+        ],
+        "verification_refs": [
+          "EX-T-CLASSIFY"
+        ],
+        "source_info_ref": "CR-C-EVIDENCE-POLICY",
+        "phase": "draft_hypothesis",
+        "failure_policy": "출처 불명이나 미확인 자료를 확정 사실로 승격하지 않음",
+        "contract_ref": "IT-11",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-FR",
+            "contribution": "관측/추정/미확인의 의미 보존"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-STATE",
+        "name": "사건 상태 전이",
+        "kind": "workflow",
+        "parent_container": "CTN-API",
+        "responsibility": "draft→unverified→review_pending→reviewed 전이·권한 가드",
+        "public_operations": [
+          "transition"
+        ],
+        "inbound": [
+          "현재 상태,이벤트,role"
+        ],
+        "outbound": [
+          "다음 상태/전이 거절"
+        ],
+        "depends_on": [
+          "C-AUTHZ"
+        ],
+        "owned_state": "논리 상태 전이 규칙",
+        "requirements": [
+          "EX-NFR-AUTH"
+        ],
+        "verification_refs": [
+          "EX-T-STATUS"
+        ],
+        "source_info_ref": "CR-C-STATE",
+        "phase": "draft_hypothesis",
+        "failure_policy": "잘못된 전이 409; 자동 제재 없음",
+        "contract_ref": "IT-14",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR-AUTH",
+            "contribution": "무권한 상태 전이 거부"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-REPOSITORY",
+        "name": "사건 저장 어댑터",
+        "kind": "data_access",
+        "parent_container": "CTN-API",
+        "responsibility": "Case·Observation·Action 원자적 저장 및 조회 계약",
+        "public_operations": [
+          "save",
+          "find"
+        ],
+        "inbound": [
+          "도메인 객체"
+        ],
+        "outbound": [
+          "저장 결과/NotFound"
+        ],
+        "depends_on": [
+          "CTN-DATA"
+        ],
+        "owned_state": "정본 DB 접근·트랜잭션",
+        "requirements": [
+          "EX-NFR-ATOMIC",
+          "EX-NFR-AUDIT"
+        ],
+        "verification_refs": [
+          "EX-T-STORE",
+          "EX-T-AUDIT"
+        ],
+        "source_info_ref": "CR-C-REPOSITORY",
+        "phase": "draft_hypothesis",
+        "failure_policy": "저장 실패 시 상태만 성공 반환 금지",
+        "contract_ref": "IT-15",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR-ATOMIC",
+            "contribution": "사건·관측·Action 정본의 원자적 저장"
+          },
+          {
+            "requirement_ref": "EX-NFR-AUDIT",
+            "contribution": "저장 성공과 감사 이력 정합성 유지"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-AUDIT",
+        "name": "변경 이력 기록",
+        "kind": "application",
+        "parent_container": "CTN-API",
+        "responsibility": "관측·이관·검토 변경의 시각·주체·행위를 남김",
+        "public_operations": [
+          "appendAudit"
+        ],
+        "inbound": [
+          "Action,actor,time"
+        ],
+        "outbound": [
+          "기록 성공/실패"
+        ],
+        "depends_on": [
+          "C-REPOSITORY"
+        ],
+        "owned_state": "이력은 DB에 저장",
+        "requirements": [
+          "EX-NFR-AUDIT"
+        ],
+        "verification_refs": [
+          "EX-T-AUDIT"
+        ],
+        "source_info_ref": "CR-C-AUDIT",
+        "phase": "draft_hypothesis",
+        "failure_policy": "업무 결정과 이력이 함께 기록돼야 하는 동작은 원자적 처리",
+        "contract_ref": "IT-18",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR-AUDIT",
+            "contribution": "누가 언제 어떤 조치를 했는지 이력 생성"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      },
+      {
+        "id": "C-OBSERVE",
+        "name": "실행 관측(조건부)",
+        "kind": "operability",
+        "parent_container": "CTN-API",
+        "responsibility": "개인정보 최소화된 오류·지연·감사 로그 관측",
+        "public_operations": [
+          "recordEvent"
+        ],
+        "inbound": [
+          "민감정보 제외 이벤트"
+        ],
+        "outbound": [
+          "운영 진단 데이터"
+        ],
+        "depends_on": [],
+        "owned_state": "운영 로그는 업무 원본과 분리",
+        "requirements": [
+          "EX-NFR-LOG"
+        ],
+        "verification_refs": [
+          "EX-T-OBSERVE"
+        ],
+        "source_info_ref": "CR-C-OBSERVE",
+        "phase": "draft_hypothesis",
+        "failure_policy": "비밀·개인정보 유출 로그 금지",
+        "contract_ref": "IT-18",
+        "note": "설계 구성요소 예시이며 실제 모듈·코드·프로세스가 생성됐다는 뜻이 아님",
+        "requirement_contributions": [
+          {
+            "requirement_ref": "EX-NFR-LOG",
+            "contribution": "운영 실패 로그에서 테스트 식별정보 제거"
+          }
+        ],
+        "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+      }
+    ],
+    "connections": [
+      {
+        "id": "CX-01",
+        "from": "ACT-SUPERVISOR",
+        "to": "C-UI-ENTRY",
+        "kind": "uses",
+        "contract": "사건 입력",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-02",
+        "from": "C-UI-ENTRY",
+        "to": "C-API-CASE",
+        "kind": "calls",
+        "contract": "POST /cases",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-03",
+        "from": "C-API-CASE",
+        "to": "C-AUTHZ",
+        "kind": "enforces",
+        "contract": "역할 확인",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-04",
+        "from": "C-API-CASE",
+        "to": "C-APP-CASE",
+        "kind": "calls",
+        "contract": "승인된 유스케이스",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-05",
+        "from": "C-APP-CASE",
+        "to": "C-EVIDENCE-POLICY",
+        "kind": "calls",
+        "contract": "증거 구분",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-06",
+        "from": "C-APP-CASE",
+        "to": "C-STATE",
+        "kind": "calls",
+        "contract": "상태 전이",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-07",
+        "from": "C-STATE",
+        "to": "C-AUTHZ",
+        "kind": "enforces",
+        "contract": "검토 권한 가드",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-08",
+        "from": "C-APP-CASE",
+        "to": "C-REPOSITORY",
+        "kind": "calls",
+        "contract": "사건 저장",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-09",
+        "from": "C-APP-CASE",
+        "to": "C-AUDIT",
+        "kind": "calls",
+        "contract": "변경 이력",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-10",
+        "from": "C-AUDIT",
+        "to": "C-REPOSITORY",
+        "kind": "calls",
+        "contract": "이력 저장",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-11",
+        "from": "C-REPOSITORY",
+        "to": "CTN-DATA",
+        "kind": "reads_writes",
+        "contract": "Case/Observation/Action",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-12",
+        "from": "C-API-CASE",
+        "to": "C-UI-RESULT",
+        "kind": "returns",
+        "contract": "상태/오류 표시",
+        "status": "illustrative_only"
+      },
+      {
+        "id": "CX-13",
+        "from": "C-API-CASE",
+        "to": "C-OBSERVE",
+        "kind": "observes",
+        "contract": "실패·지연",
+        "status": "illustrative_only"
+      }
+    ],
+    "logical_data_entities": [
+      {
+        "id": "DT-CASE",
+        "name": "Case",
+        "fields": [
+          "case_id: unique identifier",
+          "case_status: draft|unverified|review_pending|reviewed",
+          "created_at: timestamp"
+        ],
+        "constraints": [
+          "상태 변경은 허가된 전이를 통해서만"
+        ],
+        "owner_container": "CTN-DATA",
+        "logical_owner": "C-APP-CASE"
+      },
+      {
+        "id": "DT-OBS",
+        "name": "Observation",
+        "fields": [
+          "obs_id: unique identifier",
+          "case_id: Case reference",
+          "kind: observed|inferred|unknown",
+          "source: information origin"
+        ],
+        "constraints": [
+          "unknown은 확정 위반을 의미하지 않음"
+        ],
+        "owner_container": "CTN-DATA",
+        "logical_owner": "C-EVIDENCE-POLICY"
+      },
+      {
+        "id": "DT-ACTION",
+        "name": "Action",
+        "fields": [
+          "action_id: unique identifier",
+          "case_id: Case reference",
+          "actor: role/id in simulation",
+          "kind: create|review_request|review",
+          "timestamp: recorded time"
+        ],
+        "constraints": [
+          "이력의 임의 자동 삭제·허구 시각 생성 불허"
+        ],
+        "owner_container": "CTN-DATA",
+        "logical_owner": "C-AUDIT"
+      }
+    ],
+    "example_contracts": [
+      {
+        "id": "IF-CASE-CREATE",
+        "entrypoint": "POST /cases",
+        "request": "Observation[kind:ObservationKind,source] + optional memo; actor context (case_id is server generated)",
+        "response": "case_id (server generated), status:CaseStatus, evidence_kind:ObservationKind",
+        "errors": [
+          "invalid_input",
+          "permission_denied",
+          "invalid_transition",
+          "storage_failure"
+        ],
+        "domain_refs": [
+          "EX-FR",
+          "EX-WF",
+          "EX-DATA",
+          "EX-API"
+        ],
+        "status": "illustrative_only"
+      },
+      {
+        "id": "IF-CASE-GET",
+        "entrypoint": "GET /cases/{case_id}",
+        "request": "case_id,actor context",
+        "response": "Case Summary with evidence kinds and review status",
+        "errors": [
+          "permission_denied",
+          "not_found",
+          "storage_failure"
+        ],
+        "domain_refs": [
+          "EX-API",
+          "EX-UI"
+        ],
+        "status": "illustrative_only"
+      }
+    ],
+    "example_deployment": {
+      "environments": [
+        "local_test"
+      ],
+      "mapping": [
+        {
+          "container": "CTN-WEB",
+          "runtime": "browser"
+        },
+        {
+          "container": "CTN-API",
+          "runtime": "application process"
+        },
+        {
+          "container": "CTN-DATA",
+          "runtime": "local test data store"
+        }
+      ],
+      "note": "물리 배포 환경·Docker·클라우드·DBMS는 미선정. 브라우저/서버/저장소는 논리 실행·저장 단위의 가상 배치"
+    },
+    "shared_contracts": {
+      "CaseStatus": [
+        "draft",
+        "unverified",
+        "review_pending",
+        "reviewed"
+      ],
+      "ObservationKind": [
+        "observed",
+        "inferred",
+        "unknown"
+      ],
+      "ErrorCode": [
+        "invalid_input",
+        "permission_denied",
+        "not_found",
+        "invalid_transition",
+        "storage_failure"
+      ],
+      "ActorRole": [
+        "supervisor_sim",
+        "reviewer_sim"
+      ]
+    }
+  },
+  "acceptance_checks": [
+    "모든 component.kind가 category에 존재",
+    "모든 component.parent_container가 container에 존재",
+    "모든 내부 종속성 ID가 component 또는 container ID에 존재",
+    "모든 connection.from,to가 actor/component/container/external ID에 존재",
+    "모든 component 요구·검증 참조가 CAND-016 추적 파일의 레코드 ID에 존재",
+    "도메인 엔터티는 컴포넌트와 구분하며 키·관계를 명시",
+    "동일 FR가 화면·API·도메인·저장·검증에 관여하는 경로를 추적",
+    "비동기·AI 같은 미채택 구성은 실제 구성요소로 생성하지 않음",
+    "모든 시범 구성요소 상태는 draft_hypothesis"
+  ],
+  "source_bases": [
+    {
+      "name": "C4 model (System Context/Container/Component/Code)",
+      "url": "https://c4model.com/introduction"
+    },
+    {
+      "name": "arc42 Building Block View",
+      "url": "https://docs.arc42.org/section-5/"
+    },
+    {
+      "name": "arc42 Runtime View",
+      "url": "https://docs.arc42.org/section-6/"
+    },
+    {
+      "name": "arc42 Deployment View",
+      "url": "https://docs.arc42.org/section-7/"
+    },
+    {
+      "name": "ISO/IEC/IEEE 42010:2022",
+      "url": "https://www.iso.org/standard/74393.html"
+    }
+  ],
+  "canonical_domain_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
+}

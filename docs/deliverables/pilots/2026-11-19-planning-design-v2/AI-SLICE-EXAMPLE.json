@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "id": "SLICE-EXAMPLE-CAND016-001",
+  "status": "illustrative_only_not_approved",
+  "kind": "example_design_and_validation_plan",
+  "authority": {
+    "intent_ref": "docs/human/INTENT.md",
+    "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+    "candidate_ref": "docs/artifacts/candidates/CAND-016.json",
+    "task_ref": null,
+    "approval_state": "not_approved_for_product_implementation"
+  },
+  "one_flow": {
+    "actor": "시험감독관 역할 평가 참가자",
+    "trigger": "합성 사건에서 observation.kind = unknown으로 입력",
+    "desired_result": "모의 사건에 미확인 분류를 보존하고 UI가 위반 확정으로 표시하지 않음",
+    "requirement_ref": "EX-FR",
+    "quality_requirement_ref": "EX-NFR"
+  },
+  "boundaries": {
+    "in_scope": [
+      "합성 관측 입력의 분류 보존",
+      "업무 상태와 화면 표기의 정합성 검토",
+      "테스트 설계"
+    ],
+    "out_of_scope": [
+      "기관 승인 없는 실제 현장/개인 데이터 수집",
+      "부정행위 확정·제재",
+      "실제 시스템 구현·배포",
+      "제품 선정"
+    ],
+    "constraints": [
+      "현재 후보 상태 deferred 유지",
+      "실측 실행 결과를 꾸며내지 않기",
+      "인간 승인 없이 외부 시스템 연결 금지"
+    ]
+  },
+  "design_impact": {
+    "depth": "M",
+    "reason": "관측 종류의 공통 도메인 계약이 API·상태·저장·UI에 걸쳐 공유됨",
+    "canonical_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json",
+    "runtime_units": [
+      "RU-CTN-WEB",
+      "RU-CTN-API",
+      "RU-CTN-DATA"
+    ],
+    "components": [
+      "CR-C-UI-ENTRY",
+      "CR-C-EVIDENCE-POLICY",
+      "CR-C-APP-CASE",
+      "CR-C-REPOSITORY",
+      "CR-C-UI-RESULT"
+    ],
+    "interfaces": [
+      "IF-CASE-CREATE",
+      "IF-CASE-GET"
+    ],
+    "defer": [
+      "DBMS·프레임워크·클라우드 결정",
+      "멀티에이전트/큐 도입",
+      "현장 사용자 가치에 대한 확정 판단"
+    ]
+  },
+  "acceptance": {
+    "examples": [
+      {
+        "case_id": "T-UNKNOWN",
+        "input": "observation.kind=unknown",
+        "expected": "stored kind=unknown, UI no definitive violation label"
+      },
+      {
+        "case_id": "T-INFERRED",
+        "input": "observation.kind=inferred",
+        "expected": "stored kind=inferred, UI no definitive violation label"
+      },
+      {
+        "case_id": "T-ERROR",
+        "input": "invalid observation kind",
+        "expected": "invalid_input, no successful persistence"
+      }
+    ],
+    "verification_refs": [
+      "EX-TEST",
+      "EX-T-CLASSIFY",
+      "EX-T-UI"
+    ],
+    "real_world_validation_status": "not_run"
+  },
+  "execution_plan": {
+    "operator": "AI in assigned TASK after product/implementation approval",
+    "command_or_test_target": "TBD; no runnable implementation exists in this candidate",
+    "evidence_to_capture": [
+      "revision/commit ID",
+      "command and test inputs",
+      "actual output/error",
+      "pass/fail/not_run, environment"
+    ],
+    "run_status": "not_run",
+    "measured_time_minutes": null,
+    "human_corrections_count": null
+  },
+  "decision_boundary": {
+    "ai_may": [
+      "propose minimal contract and test plan",
+      "compare model/diagram fields",
+      "report missing evidence"
+    ],
+    "requires_human": [
+      "candidate adoption",
+      "real-world collection permissions",
+      "product scope/Must-Do changes",
+      "cross-task unresolved contract conflicts"
+    ],
+    "recheck_when": [
+      "actual user evidence contradicts residual Pain",
+      "baseline checklist performs equally or better",
+      "new access/permission restriction"
+    ]
+  },
+  "results": {
+    "structure_status": "illustrative_only",
+    "execution_status": "not_run",
+    "measured_quality": null,
+    "claim": "This example checks information references and design contracts, not user benefit or implemented software"
+  }
+}
