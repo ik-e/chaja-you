@@ -79,6 +79,48 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
         check((a,b,relation) not in allowed_edges, f"Duplicate typed edge: {a},{b},{relation}", errors)
         allowed_edges.add((a,b,relation))
 
+
+    # Strict causal prerequisites must be acyclic. Impact/review links are explicitly reversible.
+    causal_relations = {"derived_from", "constrains", "satisfies"}
+    causal_next = {t: [] for t in type_ids}
+    for edge in model.get("type_edges", []):
+        if edge["relation"] in causal_relations and edge["from_type"] in causal_next:
+            causal_next[edge["from_type"]].append(edge["to_type"])
+    active, complete = set(), set()
+    def visit_type(t: str, chain: list[str]) -> None:
+        if t in active:
+            errors.append("Information prerequisite cycle: " + " -> ".join(chain+[t]))
+            return
+        if t in complete:
+            return
+        active.add(t)
+        for to in causal_next.get(t, []):
+            visit_type(to, chain+[t])
+        active.remove(t)
+        complete.add(t)
+    for t in type_ids:
+        visit_type(t, [])
+    # Only strict prerequisites need chronological ordering. Conditional
+    # baseline_reconcile relations can cross parallel detail-design stages.
+    def predecessors(stage_id: str) -> set[str]:
+        seen = set()
+        todo = list(stage_map.get(stage_id,{}).get("blocking_on",[]))
+        while todo:
+            at = todo.pop()
+            if at not in seen:
+                seen.add(at)
+                todo.extend(stage_map.get(at,{}).get("blocking_on", []))
+        return seen
+    for edge in model.get("type_edges", []):
+        if edge["relation"] not in causal_relations or edge.get("contract_phase") == "baseline_reconcile":
+            continue
+        prior = type_map.get(edge["from_type"])
+        later = type_map.get(edge["to_type"])
+        if prior and later:
+            from_stage, to_stage = prior["first_defined_at"], later["first_defined_at"]
+            check(from_stage == to_stage or from_stage in predecessors(to_stage),
+                  f"{edge['id']}: prerequisite {from_stage} not established before {to_stage}", errors)
+
     for t in types:
         check(t.get("first_defined_at") in stage_map, f"{t['id']}: missing first stage", errors)
         check(t.get("work_domain") in domains, f"{t['id']}: unknown work domain", errors)
@@ -136,8 +178,8 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
         forward.setdefault(a, []).append((b, rel))
     check(len(edge_ids) == len(set(edge_ids)), "Pilot duplicate edge IDs", errors)
 
-    # Every example FR/NFR needs an explicit verification relationship, even before a run.
-    verified_sources = {e["from"] for e in pilot.get("edges", []) if e["relation"] == "verified_by"}
+    # Requirements must have planned checks; only observed executions justify verified_by.
+    verified_sources = {e["from"] for e in pilot.get("edges", []) if e["relation"] in {"planned_check_by", "verified_by"}}
     for rec in records:
         if rec.get("type_id") in {"IT-09", "IT-10"} and rec.get("status") != "not_applicable":
             check(rec["id"] in verified_sources, f"Requirement lacks verification link: {rec['id']}", errors)
@@ -206,6 +248,38 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
     check(bool(model.get("verification_concepts", {}).get("test_design"))
           and bool(model.get("verification_concepts", {}).get("test_execution")),
           "Missing test design vs execution distinction", errors)
+
+    allowed_kinds = set(next((x.get("allowed_values", []) for x in type_map.get("IT-20", {}).get("fields", [])
+                              if x["key"]=="verification_kind"), []))
+    for s in stages:
+        plan = s.get("verification_design", {})
+        check(plan.get("kind") in allowed_kinds,
+              f"{s['id']}: unrecognized verification_kind", errors)
+        check(plan.get("plan_maturity") in {"question","validation_method","acceptance_criteria","detailed_test_case"},
+              f"{s['id']}: invalid plan maturity", errors)
+    for rec in records:
+        if rec.get("type_id") != "IT-20":
+            continue
+        fields = rec.get("fields", {})
+        if "verification_kind" in fields:
+            check(fields["verification_kind"] in allowed_kinds,
+                  f"{rec['id']}: invalid verification kind", errors)
+        check(fields.get("run_ref") is None, f"{rec['id']}: simulated check falsely points to an execution", errors)
+        maturity = fields.get("plan_maturity")
+        if maturity == "detailed_test_case":
+            check(bool(fields.get("case_conditions") and fields.get("expected") and fields.get("verdict_boundary")),
+                  f"{rec['id']}: incomplete detailed test plan", errors)
+            boundary = fields.get("verdict_boundary","")
+            check("pass:" in boundary and "fail:" in boundary and "unknown:" in boundary,
+                  f"{rec['id']}: pass/fail/unknown criteria must be explicit", errors)
+            check("not_run" not in boundary,
+                  f"{rec['id']}: verdict boundary confused with execution status", errors)
+        if maturity:
+            check(fields.get("design_level") in {f"L{i}" for i in range(7)},
+                  f"{rec['id']}: invalid design level", errors)
+    check(model.get("refinement_policy", {}).get("decision_graph") is not None,
+          "Missing elastic refinement policy", errors)
+
     type20 = type_map.get("IT-20", {})
     required_test_fields = {"subject_refs","case_conditions","expected","method",
                             "verdict_boundary","verification_kind","design_level"}
@@ -261,6 +335,14 @@ def validate_component(model, pilot, component, domain):
         for req in c.get("requirements", []):
             check(req in recs and recs[req].get("type_id") in {"IT-09", "IT-10"},
                   f"{cid}: unknown requirement {req}", errors)
+        for req in c.get("requirements", []):
+            matching = [k for k in c.get("requirement_contributions", []) if k.get("requirement_ref")==req]
+            check(len(matching) == 1, f"{cid}: required contribution must be unique", errors)
+        for test_id in c.get("verification_refs", []):
+            test = recs.get(test_id, {})
+            subjects = set(test.get("fields", {}).get("subject_refs", []))
+            check(bool(subjects.intersection(c.get("requirements", []))),
+                  f"{cid}: planned test {test_id} does not cover any of its requirements", errors)
         for test in c.get("verification_refs", []):
             check(test in recs and recs[test].get("type_id") == "IT-20",
                   f"{cid}: unknown verification {test}", errors)
