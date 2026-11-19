@@ -99,9 +99,10 @@
     {
       "id": "verified_by",
       "edge_scope": "information",
-      "direction": "from 가설/요구 → to 검증 계획",
+      "direction": "from 검증 대상 → to 실제 실행·관측 근거(Run/Eval)",
       "meaning": "실제 수행·관찰된 증거로 요구/설계 적합성이 확인되었을 때만 사용. 이 모의 사례에서는 사용하지 않음",
-      "propagate_review": true
+      "propagate_review": true,
+      "note": "계획 IT-20은 planned_check_by로만 연결하고 실제 확인 근거가 없으면 verified_by 미사용"
     },
     {
       "id": "materialized_in",
@@ -1340,9 +1341,9 @@
         },
         {
           "key": "method",
-          "meaning": "테스트 방법·샘플",
+          "meaning": "검증 방법·표본·분석 절차. 질문 수준 초안에서는 미확정 가능하며 구체 검증 전 보완",
           "value_type": "string",
-          "required_for_baseline": true
+          "required_for_baseline": false
         },
         {
           "key": "verdict_boundary",
@@ -1439,7 +1440,7 @@
         "IT-10",
         "IT-07"
       ],
-      "baseline_policy": "L0~L1: 확인 대상·질문/관찰 방법·근거 수준만 계획할 수 있음. L2: FR/NFR 수용 기준·반례를 정의. L3~L5: 상태·키·API·UI·보안 등 상세 입력·예상/판정 규칙을 보강. 상세 시험으로 채택 시 정상/실패/미확인 기준 필수. 실행 결과는 Run/Eval만 참조.",
+      "baseline_policy": "L0~L1: 확인 대상·질문/관찰 방법·근거 수준만 계획할 수 있음. L2: FR/NFR 수용 기준·반례를 정의. L3~L5: 상태·키·API·UI·보안 등 상세 입력·예상/판정 규칙을 보강. 상세 시험으로 채택 시 정상/실패/미확인 기준 필수. 실행 결과는 Run/Eval만 참조. L0 질문 단계에서는 method/세부 테스트 조건을 필수화하지 않는다.",
       "evidence_policy": "확정 시 source_refs 등 근거·유효 범위를 연결; absent/unknown과 false를 혼동하지 않음"
     },
     {
