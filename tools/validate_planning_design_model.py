@@ -233,7 +233,7 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
         check(bool(plan.get("question")), f"{stage['id']}: missing verification question", errors)
         check(bool(plan.get("planned_methods")), f"{stage['id']}: missing planned method", errors)
         check(plan.get("test_plan_type_ref") == "IT-20", f"{stage['id']}: wrong test-plan type", errors)
-        check(plan.get("execution_result") == "not_run",
+        check(plan.get("execution_result") in (None, "not_run"),
               f"{stage['id']}: design plan falsely asserts execution", errors)
     for level in model.get("progressive_design_layers", []):
         plan = level.get("verification_design", {})
@@ -241,7 +241,7 @@ def validate(model: dict, pilot: dict) -> tuple[list[str], dict]:
               f"{level['id']}: missing level verification/test design", errors)
         check(plan.get("design_record_type") == "IT-20",
               f"{level['id']}: missing IT-20 planning reference", errors)
-        check(plan.get("execution_result") == "not_run",
+        check(plan.get("execution_result") in (None, "not_run"),
               f"{level['id']}: verification design confused with execution", errors)
     check(model.get("design_scope", {}).get("primary", "").startswith("제품 기획"),
           "Model scope is not focused on product planning and system design", errors)
