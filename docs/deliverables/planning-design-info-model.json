@@ -206,7 +206,7 @@
         {
           "key": "environment",
           "meaning": "장소·시간·기기·제약",
-          "value_type": "object",
+          "value_type": "string",
           "required_for_baseline": true
         },
         {
@@ -378,7 +378,7 @@
         {
           "key": "supporting_evidence",
           "meaning": "실사용·문서 근거와 한계",
-          "value_type": "string",
+          "value_type": "ref[]",
           "required_for_baseline": true
         }
       ],
@@ -701,7 +701,7 @@
         {
           "key": "environment",
           "meaning": "시험할 환경과 조건",
-          "value_type": "object",
+          "value_type": "string",
           "required_for_baseline": true
         },
         {
@@ -864,7 +864,7 @@
         {
           "key": "inbound_outbound",
           "meaning": "들어오고 나가는 정보",
-          "value_type": "string",
+          "value_type": "string[]",
           "required_for_baseline": true
         },
         {
@@ -1112,7 +1112,7 @@
         {
           "key": "feedback",
           "meaning": "진행·실패·재시도 안내",
-          "value_type": "string[]",
+          "value_type": "string",
           "required_for_baseline": true
         },
         {
@@ -1567,7 +1567,7 @@
         {
           "key": "top_level_choice",
           "meaning": "잠정 접근 방식과 주요 책임 경계",
-          "value_type": "object",
+          "value_type": "string",
           "required_for_baseline": true
         },
         {
