@@ -1626,7 +1626,8 @@
       "decision_question": "이 프로젝트에서 무엇이 고정이고 무엇이 보류인가?",
       "blocking_on": [],
       "output_types": [
-        "IT-00"
+        "IT-00",
+        "IT-22"
       ],
       "exit_when": "유효한 Intent·Phase와 권한·법적/일정 제약이 구별됨",
       "parallel_group": null,
