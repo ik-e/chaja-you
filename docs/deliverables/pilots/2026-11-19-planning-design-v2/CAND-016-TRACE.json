@@ -475,13 +475,17 @@
           "EX-NFR"
         ],
         "case_conditions": [
-          "사건 자료가 unknown만 포함",
-          "유효하지 않은 검토자 권한으로 완료 요청"
+          "Case의 ObservationKind=unknown",
+          "무근거 추정을 사실·위반으로 표시할 유혹이 있는 화면 상태"
         ],
         "expected": "위반 확정 표시 없음; 권한 없는 검토 완료 거절",
         "method": "모의 사건 E2E 또는 계약 테스트",
-        "verdict_boundary": "모의 테스트를 실제 실행하지 않았으므로 결과 not_run",
-        "run_ref": null
+        "verdict_boundary": "pass: unknown 입력 후 모든 결과 필드/화면에 확정 위반·개인 식별 단정 문구 없음; fail: 하나라도 잘못된 단정 존재; unknown: 조회/화면을 관찰할 수 없음",
+        "run_ref": null,
+        "verification_kind": "requirements_verification",
+        "design_level": "L2",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "미확인 강제 표시 검증 예시 조건에서 예상 결과와 금지 조건이 성립하는가?"
       },
       "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
       "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님"
@@ -514,7 +518,8 @@
         ],
         "requirement_refs": [
           "EX-FR",
-          "EX-NFR"
+          "EX-NFR",
+          "EX-NFR-AUTH"
         ],
         "canonical_contract_ref": "docs/deliverables/pilots/2026-11-19-planning-design-v2/DOMAIN-CONTRACT.json"
       }
@@ -640,7 +645,7 @@
           "items": [
             {
               "requirement_ref": "EX-FR",
-              "contribution": "사용자가 observed/inferred/unknown 분류로 관측 자료를 입력하도록 함"
+              "contribution": "사용자가 observed/inferred/unknown 분류를 입력할 수 있도록 제공"
             }
           ]
         },
@@ -674,7 +679,11 @@
           "items": [
             {
               "requirement_ref": "EX-FR",
-              "contribution": "미확인을 위반 확정으로 표시하지 않고 reviewed는 사람의 검토 완료로만 표시"
+              "contribution": "관측 유형을 구분해 표시"
+            },
+            {
+              "requirement_ref": "EX-NFR",
+              "contribution": "미확인 자료에 대해 개인·좌석/위반 단정 방지"
             }
           ]
         },
@@ -711,11 +720,11 @@
           "items": [
             {
               "requirement_ref": "EX-FR",
-              "contribution": "외부 요청의 권한·입출력·실패 코드를 계약대로 반환"
+              "contribution": "요청·응답에 관측 유형 정보 보존"
             },
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "외부 요청의 권한·입출력·실패 코드를 계약대로 반환"
+              "requirement_ref": "EX-NFR-AUTH",
+              "contribution": "조회/전이 요청의 역할/권한 계약 적용"
             }
           ]
         },
@@ -749,8 +758,8 @@
         "requirement_contributions": {
           "items": [
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "역할에 따른 접근/전이 승인, 거절 시 업무 부작용 방지"
+              "requirement_ref": "EX-NFR-AUTH",
+              "contribution": "사용자/검토자 역할별 읽기·상태 변경 거절"
             }
           ]
         },
@@ -789,11 +798,11 @@
           "items": [
             {
               "requirement_ref": "EX-FR",
-              "contribution": "사건 유스케이스의 분류·상태·정본·이력 변경을 조정"
+              "contribution": "분류와 상태 흐름 조정"
             },
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "사건 유스케이스의 분류·상태·정본·이력 변경을 조정"
+              "requirement_ref": "EX-NFR-ATOMIC",
+              "contribution": "사건과 이력 저장을 한 논리적 성공/실패로 조정"
             }
           ]
         },
@@ -828,7 +837,7 @@
           "items": [
             {
               "requirement_ref": "EX-FR",
-              "contribution": "관측/추정/미확인 입력의 의미 보존"
+              "contribution": "관측/추정/미확인의 의미 보존"
             }
           ]
         },
@@ -863,8 +872,8 @@
         "requirement_contributions": {
           "items": [
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "규정된 CaseStatus 전이·가드를 적용하고 잘못된 전이 거부"
+              "requirement_ref": "EX-NFR-AUTH",
+              "contribution": "무권한 상태 전이 거부"
             }
           ]
         },
@@ -899,8 +908,12 @@
         "requirement_contributions": {
           "items": [
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "Case·Observation·Action 정본을 실패 시 일관되게 처리"
+              "requirement_ref": "EX-NFR-ATOMIC",
+              "contribution": "사건·관측·Action 정본의 원자적 저장"
+            },
+            {
+              "requirement_ref": "EX-NFR-AUDIT",
+              "contribution": "저장 성공과 감사 이력 정합성 유지"
             }
           ]
         },
@@ -936,8 +949,8 @@
         "requirement_contributions": {
           "items": [
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "조치 주체·시각·이력을 저장 성공과 정합적으로 기록"
+              "requirement_ref": "EX-NFR-AUDIT",
+              "contribution": "누가 언제 어떤 조치를 했는지 이력 생성"
             }
           ]
         },
@@ -970,8 +983,8 @@
         "requirement_contributions": {
           "items": [
             {
-              "requirement_ref": "EX-NFR",
-              "contribution": "민감정보를 제외한 실패/지연 관측 이벤트 기록"
+              "requirement_ref": "EX-NFR-LOG",
+              "contribution": "운영 실패 로그에서 테스트 식별정보 제거"
             }
           ]
         },
@@ -993,7 +1006,8 @@
       "scope": "가상 계약 검증 설계. 사용자 가치·현장 성능·작동 여부는 검증되지 않음",
       "fields": {
         "subject_refs": [
-          "EX-FR"
+          "EX-FR",
+          "EX-NFR"
         ],
         "case_conditions": [
           "관측 정보가 unknown인 사건 카드 조회"
@@ -1003,8 +1017,12 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
-        "run_ref": null
+        "verdict_boundary": "pass: 미확인 분류 표시 및 검토 완료 상태와 위반 판정 분리, 확정 위반 단정 없음; fail: 잘못된 표시 1회 이상; unknown: UI 부재",
+        "run_ref": null,
+        "verification_kind": "contract_test",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "화면에서 관측 유형·결과 상태 구분 조건에서 예상 결과와 금지 조건이 성립하는가?"
       }
     },
     {
@@ -1020,7 +1038,7 @@
       "scope": "가상 계약 검증 설계. 사용자 가치·현장 성능·작동 여부는 검증되지 않음",
       "fields": {
         "subject_refs": [
-          "EX-NFR"
+          "EX-NFR-AUTH"
         ],
         "case_conditions": [
           "권한 없는 actor가 GET/POST 사용"
@@ -1030,8 +1048,12 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
-        "run_ref": null
+        "verdict_boundary": "pass: 무권한 GET/POST 거절 및 사건/Action 변경 없음; fail: 조회/쓰기 성공 또는 부작용 존재; unknown: 접근·DB 결과 확인 불가",
+        "run_ref": null,
+        "verification_kind": "contract_test",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "허가되지 않은 사용자 거절 조건에서 예상 결과와 금지 조건이 성립하는가?"
       }
     },
     {
@@ -1057,8 +1079,12 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
-        "run_ref": null
+        "verdict_boundary": "pass: observed/inferred/unknown 각 입력에서 저장·조회 분류 일치, unknown 확정 변환 없음; fail: 오분류; unknown: 저장/조회 확인 불가",
+        "run_ref": null,
+        "verification_kind": "component_verification",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "관측 사실·추정·미확인 분류 보존 조건에서 예상 결과와 금지 조건이 성립하는가?"
       }
     },
     {
@@ -1074,7 +1100,7 @@
       "scope": "가상 계약 검증 설계. 사용자 가치·현장 성능·작동 여부는 검증되지 않음",
       "fields": {
         "subject_refs": [
-          "EX-NFR"
+          "EX-NFR-AUTH"
         ],
         "case_conditions": [
           "supervisor_sim이 reviewed 전이 시도"
@@ -1084,8 +1110,12 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
-        "run_ref": null
+        "verdict_boundary": "pass: supervisor_sim의 reviewed 전이 거절 및 상태 불변; fail: 상태 변경; unknown: 요청 또는 상태 미관측",
+        "run_ref": null,
+        "verification_kind": "component_verification",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "승인된 상태 전이·보류 조건에서 예상 결과와 금지 조건이 성립하는가?"
       }
     },
     {
@@ -1101,7 +1131,7 @@
       "scope": "가상 계약 검증 설계. 사용자 가치·현장 성능·작동 여부는 검증되지 않음",
       "fields": {
         "subject_refs": [
-          "EX-NFR"
+          "EX-NFR-ATOMIC"
         ],
         "case_conditions": [
           "저장소 오류 주입"
@@ -1111,8 +1141,12 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
-        "run_ref": null
+        "verdict_boundary": "pass: 오류 주입 시 원자적 실패·성공 응답 없음·중복 기록 없음; fail: 부분 커밋 또는 허위 성공; unknown: 트랜잭션 증거 없음",
+        "run_ref": null,
+        "verification_kind": "integration_test",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "원자 저장 실패 시 성공 반환 금지 조건에서 예상 결과와 금지 조건이 성립하는가?"
       }
     },
     {
@@ -1128,7 +1162,7 @@
       "scope": "가상 계약 검증 설계. 사용자 가치·현장 성능·작동 여부는 검증되지 않음",
       "fields": {
         "subject_refs": [
-          "EX-NFR"
+          "EX-NFR-AUDIT"
         ],
         "case_conditions": [
           "사건 생성 성공·감사 기록 실패를 모의"
@@ -1138,8 +1172,12 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
-        "run_ref": null
+        "verdict_boundary": "pass: 사건 상태/Action 이력/성공 응답이 일치하고 감사 기록 실패 시 성공 처리 없음; fail: 이력 누락·불일치; unknown: 이력 조회 불가",
+        "run_ref": null,
+        "verification_kind": "integration_test",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "조치 이력 원자 기록 조건에서 예상 결과와 금지 조건이 성립하는가?"
       }
     },
     {
@@ -1155,7 +1193,7 @@
       "scope": "가상 계약 검증 설계. 사용자 가치·현장 성능·작동 여부는 검증되지 않음",
       "fields": {
         "subject_refs": [
-          "EX-NFR"
+          "EX-NFR-LOG"
         ],
         "case_conditions": [
           "실패 요청에 테스트 식별정보 포함"
@@ -1165,7 +1203,207 @@
           "요청/응답/상태/저장 기록"
         ],
         "method": "모의 입력 단위·계약·통합 시험 설계",
-        "verdict_boundary": "not_run / 성공·실패 판정 미실시",
+        "verdict_boundary": "pass: 로그에 가짜 개인식별 문자열 미포함; fail: 원문 노출; unknown: 로그 접근 불가",
+        "run_ref": null,
+        "verification_kind": "quality_test",
+        "design_level": "L5",
+        "plan_maturity": "detailed_test_case",
+        "verification_question": "운영 오류 로그 민감정보 제외 조건에서 예상 결과와 금지 조건이 성립하는가?"
+      }
+    },
+    {
+      "id": "EX-NFR-AUTH",
+      "type_id": "IT-10",
+      "title": "업무 권한에 따른 조회·전이 제한",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "quality_attribute": "보안·권한",
+        "stimulus": "권한 없는 사용자/역할의 사건 조회·상태 변경 요청",
+        "environment": "합성 사건·테스트 역할",
+        "expected_response": "권한 거절, 사건·이력 데이터 변경 없음",
+        "verification_method": "권한 거절 응답 및 저장 불변성 확인"
+      }
+    },
+    {
+      "id": "EX-NFR-ATOMIC",
+      "type_id": "IT-10",
+      "title": "사건·관측·이력 원자 저장",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "quality_attribute": "정합성·복구",
+        "stimulus": "사건과 Action을 저장하는 중 저장소 실패",
+        "environment": "합성 사건 저장 실패 주입 환경",
+        "expected_response": "부분 저장 없음, 성공 응답 없음, 재시도 시 중복 기록 없음",
+        "verification_method": "저장 오류/부분 저장/재시도 결과 비교"
+      }
+    },
+    {
+      "id": "EX-NFR-AUDIT",
+      "type_id": "IT-10",
+      "title": "검토·변경 조치 이력 보존",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "quality_attribute": "감사 추적성",
+        "stimulus": "사건 생성·검토 요청·완료 또는 이력 기록 실패",
+        "environment": "합성 사건·가상 검토자 계정",
+        "expected_response": "성공 동작에는 액터·시각·조치 결과가 연결되고, 이력 실패 시 성공으로 보고되지 않음",
+        "verification_method": "Action 기록과 사건 상태 및 응답 정합성 대조"
+      }
+    },
+    {
+      "id": "EX-NFR-LOG",
+      "type_id": "IT-10",
+      "title": "운영 로그에 불필요한 개인식별 정보 제외",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "quality_attribute": "최소 수집·개인정보",
+        "stimulus": "오류 요청에 합성 개인식별 테스트 문자열 포함",
+        "environment": "합성 요청·가짜 식별자·로그 확인 환경",
+        "expected_response": "허용된 오류 메타데이터만 기록, 가짜 식별 문자열은 로그에 없음",
+        "verification_method": "로그 출력 검사와 금지문자열 부재 확인"
+      }
+    },
+    {
+      "id": "EX-V-PROBLEM",
+      "type_id": "IT-20",
+      "title": "L1 기존 대안의 잔여 문제 검증 계획",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "subject_refs": [
+          "EX-PAIN"
+        ],
+        "verification_question": "어떤 업무 손실이 실제 남아 있으며 비AI 대안의 비교 결과가 다른가?",
+        "verification_kind": "problem_validation",
+        "design_level": "L1",
+        "plan_maturity": "validation_method",
+        "method": "동일한 합성 사건 12~20건, 동일 참가자 조건의 기존 비AI 체크리스트/사건 카드 대조",
+        "verdict_boundary": "질문·비교 계획 단계(측정 전); 현재 미확인, 데이터·기관 접근 여부가 확인되면 기준선 설정",
+        "run_ref": null
+      }
+    },
+    {
+      "id": "EX-V-DOMAIN",
+      "type_id": "IT-20",
+      "title": "L3 사건·관측 업무 불변식 검토 계획",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "subject_refs": [
+          "EX-DOMAIN"
+        ],
+        "verification_question": "관측의 불확실성과 사람 검토 완료를 위반 단정과 혼동하는 규칙이 존재하는가?",
+        "verification_kind": "design_review",
+        "design_level": "L3",
+        "plan_maturity": "acceptance_criteria",
+        "method": "observed/inferred/unknown과 reviewed의 의미/금지 상태 반례 테이블",
+        "verdict_boundary": "pass: 모든 정의·전이/금지 규칙에 의미 충돌 없음; fail: 모순 발견; unknown: 도메인 결정 미완료",
+        "run_ref": null
+      }
+    },
+    {
+      "id": "EX-V-STRATEGY",
+      "type_id": "IT-20",
+      "title": "L4 해결 전략 품질 대안 비교 계획",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "subject_refs": [
+          "EX-STRATEGY"
+        ],
+        "verification_question": "대안별 사용자 가치·실행 가능성·법적 제약을 같은 조건에서 비교할 수 있는가?",
+        "verification_kind": "architecture_evaluation",
+        "design_level": "L4",
+        "plan_maturity": "validation_method",
+        "method": "비AI 체크리스트/사건 카드의 품질·접근 제약 비교, 원인 설명 가능성·검증 비용 표",
+        "verdict_boundary": "비교 계획 단계(실측 전); 가설·미확인 구분, 초안 전략 채택 금지",
+        "run_ref": null
+      }
+    },
+    {
+      "id": "EX-V-COMP",
+      "type_id": "IT-20",
+      "title": "L4 구성요소 책임·검증 경계 리뷰",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "subject_refs": [
+          "CR-C-APP-CASE"
+        ],
+        "verification_question": "책임 중복·누락 없이 요구와 품질 기준을 담당 컴포넌트·통합 경계에 연결할 수 있는가?",
+        "verification_kind": "design_review",
+        "design_level": "L4",
+        "plan_maturity": "acceptance_criteria",
+        "method": "API→권한→유스케이스→업무 규칙·상태→저장 경계와 인터페이스 목록",
+        "verdict_boundary": "pass: 주요 요구별 책임·입출력·실패 경계 확인; fail: 누락·중복; unknown: 미확인 컴포넌트 계약",
+        "run_ref": null
+      }
+    },
+    {
+      "id": "EX-V-CONTRACT",
+      "type_id": "IT-20",
+      "title": "L6 상태·데이터·API·UI 교차 계약 검토",
+      "status": "draft_hypothesis",
+      "evidence_level": "hypothesis",
+      "source_refs": [
+        "docs/artifacts/candidates/CAND-016.json"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+      "scope": "CAND-016 독립 후보의 정보 모델 시험, 현장 운영 승인 또는 정식 제품 채택 아님",
+      "fields": {
+        "subject_refs": [
+          "EX-API"
+        ],
+        "verification_question": "동일한 업무 상태가 컴포넌트·저장·API·화면에서 일관되는가?",
+        "verification_kind": "design_verification",
+        "design_level": "L6",
+        "plan_maturity": "acceptance_criteria",
+        "method": "CaseStatus, ObservationKind, ErrorCode가 계약/저장/API/UI 간 일치",
+        "verdict_boundary": "pass: 공통 상태·오류·표시 규칙에 모순 없음; fail: 누락·차이 존재; unknown: 미정 설계로 비교 불가",
         "run_ref": null
       }
     }
@@ -1264,284 +1502,284 @@
     {
       "id": "E16",
       "from": "EX-STRATEGY",
-      "to": "EX-CONTEXT",
-      "relation": "derived_from"
-    },
-    {
-      "id": "E17",
-      "from": "EX-STRATEGY",
       "to": "EX-COMP",
       "relation": "derived_from"
     },
     {
-      "id": "E18",
+      "id": "E17",
       "from": "EX-CONTEXT",
       "to": "EX-COMP",
       "relation": "constrains"
     },
     {
-      "id": "E19",
-      "from": "EX-FR",
+      "id": "E18",
+      "from": "EX-COMP",
       "to": "EX-WF",
-      "relation": "satisfies"
+      "relation": "constrains"
+    },
+    {
+      "id": "E19",
+      "from": "EX-COMP",
+      "to": "EX-DATA",
+      "relation": "constrains"
     },
     {
       "id": "E20",
-      "from": "EX-FR",
-      "to": "EX-DATA",
-      "relation": "satisfies"
+      "from": "EX-COMP",
+      "to": "EX-API",
+      "relation": "constrains"
     },
     {
       "id": "E21",
-      "from": "EX-FR",
-      "to": "EX-API",
-      "relation": "satisfies"
-    },
-    {
-      "id": "E22",
-      "from": "EX-FR",
-      "to": "EX-UI",
-      "relation": "satisfies"
-    },
-    {
-      "id": "E23",
-      "from": "EX-COMP",
-      "to": "EX-WF",
-      "relation": "constrains"
-    },
-    {
-      "id": "E24",
-      "from": "EX-COMP",
-      "to": "EX-DATA",
-      "relation": "constrains"
-    },
-    {
-      "id": "E25",
-      "from": "EX-COMP",
-      "to": "EX-API",
-      "relation": "constrains"
-    },
-    {
-      "id": "E26",
       "from": "EX-WF",
       "to": "EX-API",
       "relation": "constrains"
     },
     {
-      "id": "E27",
+      "id": "E22",
       "from": "EX-DATA",
       "to": "EX-API",
       "relation": "constrains"
     },
     {
-      "id": "E28",
+      "id": "E23",
       "from": "EX-API",
       "to": "EX-UI",
       "relation": "constrains"
     },
     {
-      "id": "E29",
+      "id": "E24",
       "from": "EX-WF",
       "to": "EX-UI",
       "relation": "constrains"
     },
     {
-      "id": "E30",
-      "from": "EX-FR",
-      "to": "EX-TEST",
-      "relation": "verified_by"
-    },
-    {
-      "id": "E31",
-      "from": "EX-NFR",
-      "to": "EX-TEST",
-      "relation": "verified_by"
-    },
-    {
-      "id": "E32",
+      "id": "E25",
       "from": "EX-FR",
       "to": "EX-API",
       "relation": "impacts"
     },
     {
-      "id": "E33",
+      "id": "E26",
       "from": "EX-FR",
       "to": "EX-DATA",
       "relation": "impacts"
     },
     {
-      "id": "E34",
+      "id": "E27",
       "from": "EX-FR",
       "to": "EX-WF",
       "relation": "impacts"
     },
     {
-      "id": "E35",
+      "id": "E28",
       "from": "EX-FR",
       "to": "EX-UI",
       "relation": "impacts"
     },
     {
-      "id": "E36",
+      "id": "E29",
       "from": "EX-FR",
       "to": "EX-TEST",
       "relation": "impacts"
     },
     {
-      "id": "E37",
+      "id": "E30",
       "from": "EX-FR",
       "to": "EX-DOMAIN",
       "relation": "derived_from"
     },
     {
-      "id": "E38",
+      "id": "E31",
       "from": "EX-DOMAIN",
       "to": "EX-WF",
       "relation": "constrains"
     },
     {
-      "id": "E39",
+      "id": "E32",
       "from": "EX-DOMAIN",
       "to": "EX-DATA",
       "relation": "constrains"
     },
     {
-      "id": "E40",
+      "id": "E33",
       "from": "EX-DOMAIN",
       "to": "EX-API",
       "relation": "constrains"
     },
     {
-      "id": "E41",
+      "id": "E34",
       "from": "EX-DOMAIN",
       "to": "EX-UI",
       "relation": "constrains"
     },
     {
-      "id": "E42",
+      "id": "E35",
       "from": "EX-CONTEXT",
       "to": "RU-CTN-WEB",
+      "relation": "constrains"
+    },
+    {
+      "id": "E36",
+      "from": "EX-STRATEGY",
+      "to": "RU-CTN-WEB",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E37",
+      "from": "EX-CONTEXT",
+      "to": "RU-CTN-API",
+      "relation": "constrains"
+    },
+    {
+      "id": "E38",
+      "from": "EX-STRATEGY",
+      "to": "RU-CTN-API",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E39",
+      "from": "EX-CONTEXT",
+      "to": "RU-CTN-DATA",
+      "relation": "constrains"
+    },
+    {
+      "id": "E40",
+      "from": "EX-STRATEGY",
+      "to": "RU-CTN-DATA",
+      "relation": "derived_from"
+    },
+    {
+      "id": "E41",
+      "from": "RU-CTN-WEB",
+      "to": "CR-C-UI-ENTRY",
+      "relation": "constrains"
+    },
+    {
+      "id": "E42",
+      "from": "RU-CTN-WEB",
+      "to": "CR-C-UI-RESULT",
       "relation": "constrains"
     },
     {
       "id": "E43",
-      "from": "EX-STRATEGY",
-      "to": "RU-CTN-WEB",
-      "relation": "derived_from"
+      "from": "RU-CTN-API",
+      "to": "CR-C-API-CASE",
+      "relation": "constrains"
     },
     {
       "id": "E44",
-      "from": "EX-CONTEXT",
-      "to": "RU-CTN-API",
+      "from": "RU-CTN-API",
+      "to": "CR-C-AUTHZ",
       "relation": "constrains"
     },
     {
       "id": "E45",
-      "from": "EX-STRATEGY",
-      "to": "RU-CTN-API",
-      "relation": "derived_from"
+      "from": "RU-CTN-API",
+      "to": "CR-C-APP-CASE",
+      "relation": "constrains"
     },
     {
       "id": "E46",
-      "from": "EX-CONTEXT",
-      "to": "RU-CTN-DATA",
+      "from": "RU-CTN-API",
+      "to": "CR-C-EVIDENCE-POLICY",
       "relation": "constrains"
     },
     {
       "id": "E47",
-      "from": "EX-STRATEGY",
-      "to": "RU-CTN-DATA",
-      "relation": "derived_from"
+      "from": "RU-CTN-API",
+      "to": "CR-C-STATE",
+      "relation": "constrains"
     },
     {
       "id": "E48",
-      "from": "RU-CTN-WEB",
-      "to": "CR-C-UI-ENTRY",
+      "from": "RU-CTN-API",
+      "to": "CR-C-REPOSITORY",
       "relation": "constrains"
     },
     {
       "id": "E49",
-      "from": "EX-FR",
-      "to": "CR-C-UI-ENTRY",
-      "relation": "satisfies"
+      "from": "RU-CTN-API",
+      "to": "CR-C-AUDIT",
+      "relation": "constrains"
     },
     {
       "id": "E50",
-      "from": "CR-C-UI-ENTRY",
-      "to": "EX-T-UI",
-      "relation": "verified_by"
+      "from": "RU-CTN-API",
+      "to": "CR-C-OBSERVE",
+      "relation": "constrains"
     },
     {
       "id": "E51",
-      "from": "RU-CTN-WEB",
-      "to": "CR-C-UI-RESULT",
+      "from": "EX-CONTEXT",
+      "to": "EX-STRATEGY",
       "relation": "constrains"
     },
     {
       "id": "E52",
       "from": "EX-FR",
-      "to": "CR-C-UI-RESULT",
+      "to": "CR-C-UI-ENTRY",
       "relation": "satisfies"
     },
     {
       "id": "E53",
-      "from": "CR-C-UI-RESULT",
+      "from": "CR-C-UI-ENTRY",
       "to": "EX-T-UI",
-      "relation": "verified_by"
+      "relation": "planned_check_by"
     },
     {
       "id": "E54",
-      "from": "RU-CTN-API",
-      "to": "CR-C-API-CASE",
-      "relation": "constrains"
+      "from": "EX-FR",
+      "to": "CR-C-UI-RESULT",
+      "relation": "satisfies"
     },
     {
       "id": "E55",
+      "from": "EX-NFR",
+      "to": "CR-C-UI-RESULT",
+      "relation": "satisfies"
+    },
+    {
+      "id": "E56",
+      "from": "CR-C-UI-RESULT",
+      "to": "EX-T-UI",
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E57",
       "from": "EX-FR",
       "to": "CR-C-API-CASE",
       "relation": "satisfies"
     },
     {
-      "id": "E56",
-      "from": "EX-NFR",
+      "id": "E58",
+      "from": "EX-NFR-AUTH",
       "to": "CR-C-API-CASE",
       "relation": "satisfies"
     },
     {
-      "id": "E57",
+      "id": "E59",
       "from": "CR-C-API-CASE",
       "to": "EX-T-ACCESS",
-      "relation": "verified_by"
-    },
-    {
-      "id": "E58",
-      "from": "CR-C-API-CASE",
-      "to": "EX-T-STATUS",
-      "relation": "verified_by"
-    },
-    {
-      "id": "E59",
-      "from": "RU-CTN-API",
-      "to": "CR-C-AUTHZ",
-      "relation": "constrains"
+      "relation": "planned_check_by"
     },
     {
       "id": "E60",
-      "from": "EX-NFR",
+      "from": "CR-C-API-CASE",
+      "to": "EX-T-STATUS",
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E61",
+      "from": "EX-NFR-AUTH",
       "to": "CR-C-AUTHZ",
       "relation": "satisfies"
     },
     {
-      "id": "E61",
+      "id": "E62",
       "from": "CR-C-AUTHZ",
       "to": "EX-T-ACCESS",
-      "relation": "verified_by"
-    },
-    {
-      "id": "E62",
-      "from": "RU-CTN-API",
-      "to": "CR-C-APP-CASE",
-      "relation": "constrains"
+      "relation": "planned_check_by"
     },
     {
       "id": "E63",
@@ -1551,7 +1789,7 @@
     },
     {
       "id": "E64",
-      "from": "EX-NFR",
+      "from": "EX-NFR-ATOMIC",
       "to": "CR-C-APP-CASE",
       "relation": "satisfies"
     },
@@ -1559,151 +1797,175 @@
       "id": "E65",
       "from": "CR-C-APP-CASE",
       "to": "EX-T-CLASSIFY",
-      "relation": "verified_by"
+      "relation": "planned_check_by"
     },
     {
       "id": "E66",
       "from": "CR-C-APP-CASE",
       "to": "EX-T-STORE",
-      "relation": "verified_by"
+      "relation": "planned_check_by"
     },
     {
       "id": "E67",
-      "from": "RU-CTN-API",
-      "to": "CR-C-EVIDENCE-POLICY",
-      "relation": "constrains"
-    },
-    {
-      "id": "E68",
       "from": "EX-FR",
       "to": "CR-C-EVIDENCE-POLICY",
       "relation": "satisfies"
     },
     {
-      "id": "E69",
+      "id": "E68",
       "from": "CR-C-EVIDENCE-POLICY",
       "to": "EX-T-CLASSIFY",
-      "relation": "verified_by"
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E69",
+      "from": "EX-NFR-AUTH",
+      "to": "CR-C-STATE",
+      "relation": "satisfies"
     },
     {
       "id": "E70",
-      "from": "RU-CTN-API",
-      "to": "CR-C-STATE",
-      "relation": "constrains"
+      "from": "CR-C-STATE",
+      "to": "EX-T-STATUS",
+      "relation": "planned_check_by"
     },
     {
       "id": "E71",
-      "from": "EX-NFR",
-      "to": "CR-C-STATE",
+      "from": "EX-NFR-ATOMIC",
+      "to": "CR-C-REPOSITORY",
       "relation": "satisfies"
     },
     {
       "id": "E72",
-      "from": "CR-C-STATE",
-      "to": "EX-T-STATUS",
-      "relation": "verified_by"
+      "from": "EX-NFR-AUDIT",
+      "to": "CR-C-REPOSITORY",
+      "relation": "satisfies"
     },
     {
       "id": "E73",
-      "from": "RU-CTN-API",
-      "to": "CR-C-REPOSITORY",
-      "relation": "constrains"
+      "from": "CR-C-REPOSITORY",
+      "to": "EX-T-STORE",
+      "relation": "planned_check_by"
     },
     {
       "id": "E74",
-      "from": "EX-NFR",
-      "to": "CR-C-REPOSITORY",
-      "relation": "satisfies"
+      "from": "CR-C-REPOSITORY",
+      "to": "EX-T-AUDIT",
+      "relation": "planned_check_by"
     },
     {
       "id": "E75",
-      "from": "CR-C-REPOSITORY",
-      "to": "EX-T-STORE",
-      "relation": "verified_by"
+      "from": "EX-NFR-AUDIT",
+      "to": "CR-C-AUDIT",
+      "relation": "satisfies"
     },
     {
       "id": "E76",
-      "from": "CR-C-REPOSITORY",
+      "from": "CR-C-AUDIT",
       "to": "EX-T-AUDIT",
-      "relation": "verified_by"
+      "relation": "planned_check_by"
     },
     {
       "id": "E77",
-      "from": "RU-CTN-API",
-      "to": "CR-C-AUDIT",
-      "relation": "constrains"
+      "from": "EX-NFR-LOG",
+      "to": "CR-C-OBSERVE",
+      "relation": "satisfies"
     },
     {
       "id": "E78",
-      "from": "EX-NFR",
-      "to": "CR-C-AUDIT",
-      "relation": "satisfies"
+      "from": "CR-C-OBSERVE",
+      "to": "EX-T-OBSERVE",
+      "relation": "planned_check_by"
     },
     {
       "id": "E79",
-      "from": "CR-C-AUDIT",
-      "to": "EX-T-AUDIT",
-      "relation": "verified_by"
+      "from": "EX-FR",
+      "to": "EX-TEST",
+      "relation": "planned_check_by"
     },
     {
       "id": "E80",
-      "from": "RU-CTN-API",
-      "to": "CR-C-OBSERVE",
-      "relation": "constrains"
+      "from": "EX-NFR",
+      "to": "EX-TEST",
+      "relation": "planned_check_by"
     },
     {
       "id": "E81",
-      "from": "EX-NFR",
-      "to": "CR-C-OBSERVE",
-      "relation": "satisfies"
+      "from": "EX-FR",
+      "to": "EX-T-UI",
+      "relation": "planned_check_by"
     },
     {
       "id": "E82",
-      "from": "CR-C-OBSERVE",
-      "to": "EX-T-OBSERVE",
-      "relation": "verified_by"
+      "from": "EX-NFR",
+      "to": "EX-T-UI",
+      "relation": "planned_check_by"
     },
     {
       "id": "E83",
-      "from": "EX-FR",
-      "to": "EX-T-UI",
-      "relation": "verified_by"
+      "from": "EX-NFR-AUTH",
+      "to": "EX-T-ACCESS",
+      "relation": "planned_check_by"
     },
     {
       "id": "E84",
-      "from": "EX-NFR",
-      "to": "EX-T-ACCESS",
-      "relation": "verified_by"
+      "from": "EX-FR",
+      "to": "EX-T-CLASSIFY",
+      "relation": "planned_check_by"
     },
     {
       "id": "E85",
-      "from": "EX-FR",
-      "to": "EX-T-CLASSIFY",
-      "relation": "verified_by"
+      "from": "EX-NFR-AUTH",
+      "to": "EX-T-STATUS",
+      "relation": "planned_check_by"
     },
     {
       "id": "E86",
-      "from": "EX-NFR",
-      "to": "EX-T-STATUS",
-      "relation": "verified_by"
+      "from": "EX-NFR-ATOMIC",
+      "to": "EX-T-STORE",
+      "relation": "planned_check_by"
     },
     {
       "id": "E87",
-      "from": "EX-NFR",
-      "to": "EX-T-STORE",
-      "relation": "verified_by"
+      "from": "EX-NFR-AUDIT",
+      "to": "EX-T-AUDIT",
+      "relation": "planned_check_by"
     },
     {
       "id": "E88",
-      "from": "EX-NFR",
-      "to": "EX-T-AUDIT",
-      "relation": "verified_by"
+      "from": "EX-NFR-LOG",
+      "to": "EX-T-OBSERVE",
+      "relation": "planned_check_by"
     },
     {
       "id": "E89",
-      "from": "EX-NFR",
-      "to": "EX-T-OBSERVE",
-      "relation": "verified_by"
+      "from": "EX-PAIN",
+      "to": "EX-V-PROBLEM",
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E90",
+      "from": "EX-DOMAIN",
+      "to": "EX-V-DOMAIN",
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E91",
+      "from": "EX-STRATEGY",
+      "to": "EX-V-STRATEGY",
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E92",
+      "from": "CR-C-APP-CASE",
+      "to": "EX-V-COMP",
+      "relation": "planned_check_by"
+    },
+    {
+      "id": "E93",
+      "from": "EX-API",
+      "to": "EX-V-CONTRACT",
+      "relation": "planned_check_by"
     }
   ],
   "assertions": {
@@ -1716,9 +1978,7 @@
       "EX-CHOICE",
       "EX-UC",
       "EX-FR",
-      "EX-STRATEGY",
-      "EX-CONTEXT",
-      "EX-COMP",
+      "EX-DOMAIN",
       "EX-API",
       "EX-UI"
     ],
@@ -1769,15 +2029,28 @@
       ],
       "shared_domain_record": "EX-DOMAIN",
       "requirement_specific_verifications": [
+        "EX-TEST",
         "EX-T-UI",
         "EX-T-ACCESS",
         "EX-T-CLASSIFY",
         "EX-T-STATUS",
         "EX-T-STORE",
         "EX-T-AUDIT",
-        "EX-T-OBSERVE"
+        "EX-T-OBSERVE",
+        "EX-V-PROBLEM",
+        "EX-V-DOMAIN",
+        "EX-V-STRATEGY",
+        "EX-V-COMP",
+        "EX-V-CONTRACT"
       ],
-      "note": "각 컴포넌트 책임이 동일 FR/NFR/검증 ID를 무의미하게 일괄 복제하지 않도록 구체적으로 분배"
+      "note": "각 컴포넌트 책임이 동일 FR/NFR/검증 ID를 무의미하게 일괄 복제하지 않도록 구체적으로 분배",
+      "quality_requirements": [
+        "EX-NFR-AUTH",
+        "EX-NFR-ATOMIC",
+        "EX-NFR-AUDIT",
+        "EX-NFR-LOG"
+      ],
+      "validation_plan_maturity": "L1 question/method through L5 detailed test and L6 cross-contract; no actual tests run"
     }
   },
   "projection_edges": [
