@@ -1,0 +1,1427 @@
+{
+  "schema_version": 1,
+  "id": "PLANNING-DESIGN-INFO-MODEL-V1-20261119",
+  "kind": "planning_design_information_model",
+  "status": "proposal_only_not_adopted",
+  "updated_at": "2026-11-19",
+  "owner": "R01_review_proposed",
+  "purpose": "기획부터 상세 설계까지 결정의 선행관계와 실제 정보 항목을 연결한 재사용 가능한 정보 모델(제품/기술 미확정).",
+  "scope": "정보 유형·선행 판단·상호 관계·문서 투영의 설계 초안; 실제 제품/구현/제출 승인 아님.",
+  "compatibility": {
+    "active_phase_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
+    "work_domains_ref": "docs/deliverables/WORK-MODEL.md",
+    "deliverable_registry_ref": "docs/deliverables/registry.json",
+    "target_design_ref": "docs/artifacts/design/target_design.json",
+    "does_not_replace": [
+      "docs/human/INTENT.md",
+      "docs/artifacts/state/current.json",
+      "docs/artifacts/tasks",
+      "docs/adr",
+      "docs/artifacts/planning/WBS.json"
+    ],
+    "source_of_truth_rule": "각 정보는 기존 정본 하나에 기록하고 이 모델은 유형·관계·투영 규칙만 제안한다."
+  },
+  "record_envelope": {
+    "suggested_core_fields": [
+      "id",
+      "kind",
+      "title",
+      "owner",
+      "phase_intent_ref",
+      "status",
+      "source_refs",
+      "assumptions",
+      "uncertainties",
+      "updated_at"
+    ],
+    "optional_relationship_fields": [
+      "intent_refs",
+      "problem_refs",
+      "use_case_refs",
+      "requirement_refs",
+      "design_refs",
+      "decision_refs",
+      "test_refs",
+      "output_refs"
+    ],
+    "decision_authority": "AI proposal and human adoption are separate. High-impact product/scope/Done decisions require an authority reference.",
+    "evidence_levels": [
+      "observed",
+      "sourced",
+      "synthetic",
+      "hypothesis",
+      "unknown",
+      "contradicted"
+    ],
+    "decision_states": [
+      "open",
+      "proposed",
+      "adopted",
+      "deferred",
+      "rejected"
+    ],
+    "content_states": [
+      "draft",
+      "reviewed",
+      "superseded"
+    ],
+    "note": "status/evidence/decision are separate dimensions. Missing fields may be null with an explicit reason at early stages."
+  },
+  "relationship_types": [
+    {
+      "id": "prerequisite_for",
+      "meaning": "선행 결정이 없으면 후속 확정을 할 수 없음; stage blocking_on에 사용"
+    },
+    {
+      "id": "derived_from",
+      "meaning": "상위 문제·시나리오·근거에서 도출"
+    },
+    {
+      "id": "satisfies",
+      "meaning": "설계 요소가 요구사항·품질 목표를 충족하도록 책임"
+    },
+    {
+      "id": "constrains",
+      "meaning": "법적·운영·품질 조건이 설계 선택을 제한"
+    },
+    {
+      "id": "verified_by",
+      "meaning": "가설/요구/계약을 검증 계획과 실제 실행 근거로 연결"
+    },
+    {
+      "id": "materialized_in",
+      "meaning": "동일 정보가 특정 공식 산출물의 절에 재사용"
+    },
+    {
+      "id": "impacts",
+      "meaning": "변경 시 재검토할 설계 요소 또는 문서; 자동 무효화가 아닌 영향 후보"
+    }
+  ],
+  "decision_principles": [
+    "선행/치명적 제약 먼저",
+    "파급력이 크고 불확실한 선택은 최소 반증부터",
+    "되돌릴 수 있는 세부 선택은 담당자 병렬 진행",
+    "실측 전 값은 가설/미확인으로 남김",
+    "서로 영향을 주는 상세 설계는 병렬 초안 후 계약 정합성 확인",
+    "상위 WBS는 조기 작성 가능하며 PD-11에서 상세 계획으로 갱신",
+    "문서 상태와 제출/접수 상태는 독립적"
+  ],
+  "information_types": [
+    {
+      "id": "IT-00",
+      "key": "intent_constraint",
+      "name": "목적·운영 제약",
+      "work_domain": "decision",
+      "first_defined_at": "PD-00",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "intent_ref",
+          "meaning": "유효한 사람 의도·권한 출처"
+        },
+        {
+          "key": "goal",
+          "meaning": "이번 판단 목적"
+        },
+        {
+          "key": "scope_boundary",
+          "meaning": "포함·제외 범위"
+        },
+        {
+          "key": "hard_constraints",
+          "meaning": "법적·일정·자원·조직상 필수 제약"
+        },
+        {
+          "key": "decision_owner",
+          "meaning": "누가 어떤 결정을 승인하는가"
+        },
+        {
+          "key": "review_trigger",
+          "meaning": "언제 다시 확인하는가"
+        }
+      ],
+      "typically_relates_to": []
+    },
+    {
+      "id": "IT-01",
+      "key": "actor_context",
+      "name": "사용자·이해관계자 맥락",
+      "work_domain": "problem",
+      "first_defined_at": "PD-01",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "actor_role",
+          "meaning": "역할·이해관계자"
+        },
+        {
+          "key": "job",
+          "meaning": "이용자가 달성하려는 일"
+        },
+        {
+          "key": "trigger",
+          "meaning": "문제가 발생하는 계기"
+        },
+        {
+          "key": "environment",
+          "meaning": "장소·시간·기기·제약"
+        },
+        {
+          "key": "current_tools",
+          "meaning": "현재 사용하는 도구"
+        },
+        {
+          "key": "source_refs",
+          "meaning": "사용자 맥락의 근거"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-00"
+      ]
+    },
+    {
+      "id": "IT-02",
+      "key": "as_is_flow",
+      "name": "현재 수행 과정 As-Is",
+      "work_domain": "problem",
+      "first_defined_at": "PD-02",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "start_condition",
+          "meaning": "시작 상황"
+        },
+        {
+          "key": "steps",
+          "meaning": "실제 수행 행동 순서"
+        },
+        {
+          "key": "actors_and_tools",
+          "meaning": "참여자·도구"
+        },
+        {
+          "key": "decision_points",
+          "meaning": "현재 분기·판단 지점"
+        },
+        {
+          "key": "failure_or_workaround",
+          "meaning": "실패·우회·반복 행동"
+        },
+        {
+          "key": "observable_cost",
+          "meaning": "시간·비용·오류 등 관찰 가능한 손실"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01"
+      ]
+    },
+    {
+      "id": "IT-03",
+      "key": "pain_claim",
+      "name": "문제·원인·손실 가설",
+      "work_domain": "problem",
+      "first_defined_at": "PD-02",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "affected_actor_ref",
+          "meaning": "영향받는 사용자"
+        },
+        {
+          "key": "occurrence_context",
+          "meaning": "어느 상황에서"
+        },
+        {
+          "key": "unmet_job",
+          "meaning": "무엇을 달성하지 못하는가"
+        },
+        {
+          "key": "observed_impact",
+          "meaning": "손실·후속 결과"
+        },
+        {
+          "key": "cause_hypothesis",
+          "meaning": "추정 원인과 관찰 사실 분리"
+        },
+        {
+          "key": "evidence_refs",
+          "meaning": "지지 근거"
+        },
+        {
+          "key": "counter_evidence_refs",
+          "meaning": "반대 근거·범위"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01",
+        "IT-02"
+      ]
+    },
+    {
+      "id": "IT-04",
+      "key": "alternative_gap",
+      "name": "기존 대안과 잔여 문제",
+      "work_domain": "problem",
+      "first_defined_at": "PD-03",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "alternatives",
+          "meaning": "기존 제품·수작업·일반 AI·무대응"
+        },
+        {
+          "key": "comparison_scenario",
+          "meaning": "같은 사용자 작업·조건"
+        },
+        {
+          "key": "covered_steps",
+          "meaning": "대안이 해결하는 부분"
+        },
+        {
+          "key": "remaining_gap",
+          "meaning": "여전히 해결하지 못한 부분"
+        },
+        {
+          "key": "switching_cost",
+          "meaning": "도입·전환 비용"
+        },
+        {
+          "key": "supporting_evidence",
+          "meaning": "실사용·문서 근거와 한계"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-02",
+        "IT-03"
+      ]
+    },
+    {
+      "id": "IT-05",
+      "key": "feasibility_risk",
+      "name": "실현가능성·치명적 위험",
+      "work_domain": "risk",
+      "first_defined_at": "PD-04",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "required_resources",
+          "meaning": "핵심 데이터·도구·인력"
+        },
+        {
+          "key": "access_and_rights",
+          "meaning": "접근·수집·저장·재사용 권한"
+        },
+        {
+          "key": "technical_unknowns",
+          "meaning": "미검증 기술 전제"
+        },
+        {
+          "key": "deadline_constraints",
+          "meaning": "일정과 외부 의존"
+        },
+        {
+          "key": "stop_conditions",
+          "meaning": "진행할 수 없는 조건"
+        },
+        {
+          "key": "minimum_disproof",
+          "meaning": "가장 저렴한 반증 방법"
+        },
+        {
+          "key": "fallbacks",
+          "meaning": "대체 경로·범위 축소"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-03",
+        "IT-04"
+      ]
+    },
+    {
+      "id": "IT-06",
+      "key": "product_choice",
+      "name": "문제 선택·제품 범위 결정",
+      "work_domain": "decision",
+      "first_defined_at": "PD-05",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "problem_refs",
+          "meaning": "선택한 문제·대안 비교 참조"
+        },
+        {
+          "key": "target_outcome",
+          "meaning": "의도한 변화"
+        },
+        {
+          "key": "in_scope",
+          "meaning": "이번 제품에서 해결하는 범위"
+        },
+        {
+          "key": "out_of_scope",
+          "meaning": "명시적인 제외 범위"
+        },
+        {
+          "key": "options",
+          "meaning": "선택·보류·거절 대안"
+        },
+        {
+          "key": "authority_ref",
+          "meaning": "사람 결정권·결정 기록"
+        },
+        {
+          "key": "revisit_when",
+          "meaning": "재검토 조건"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-03",
+        "IT-04",
+        "IT-05"
+      ]
+    },
+    {
+      "id": "IT-07",
+      "key": "outcome_measure",
+      "name": "사용자 가치·성공 지표",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-06",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "desired_outcome",
+          "meaning": "사용자가 얻어야 할 결과"
+        },
+        {
+          "key": "observable_signal",
+          "meaning": "관찰할 행동·결과"
+        },
+        {
+          "key": "baseline",
+          "meaning": "현 상태 또는 측정 전 표기"
+        },
+        {
+          "key": "target_hypothesis",
+          "meaning": "목표값·임시 가설 구분"
+        },
+        {
+          "key": "measurement_method",
+          "meaning": "측정 방법·대상"
+        },
+        {
+          "key": "failure_boundary",
+          "meaning": "실패·미확인 경계"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-06"
+      ]
+    },
+    {
+      "id": "IT-08",
+      "key": "use_case",
+      "name": "사용자 시나리오·유스케이스",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-06",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "actor_ref",
+          "meaning": "행동 주체"
+        },
+        {
+          "key": "trigger",
+          "meaning": "시작 이벤트"
+        },
+        {
+          "key": "preconditions",
+          "meaning": "성립 조건"
+        },
+        {
+          "key": "main_flow",
+          "meaning": "정상 행동·시스템 반응"
+        },
+        {
+          "key": "alternative_flows",
+          "meaning": "예외·취소·우회 경로"
+        },
+        {
+          "key": "end_state",
+          "meaning": "완료·부분·실패 상태"
+        },
+        {
+          "key": "outcome_refs",
+          "meaning": "검증할 가치 지표"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-01",
+        "IT-06",
+        "IT-07"
+      ]
+    },
+    {
+      "id": "IT-09",
+      "key": "functional_requirement",
+      "name": "기능 요구사항",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-07",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "statement",
+          "meaning": "주체와 관찰 가능한 필수 동작"
+        },
+        {
+          "key": "reason_ref",
+          "meaning": "문제·유스케이스와의 근거 연결"
+        },
+        {
+          "key": "input",
+          "meaning": "필요한 입력"
+        },
+        {
+          "key": "processing_rule",
+          "meaning": "기능 규칙·예외"
+        },
+        {
+          "key": "output",
+          "meaning": "반환 결과·상태"
+        },
+        {
+          "key": "priority",
+          "meaning": "Must·Later·제외 사유"
+        },
+        {
+          "key": "acceptance",
+          "meaning": "수용 기준과 예시 조건"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-08",
+        "IT-07"
+      ]
+    },
+    {
+      "id": "IT-10",
+      "key": "quality_requirement",
+      "name": "비기능·품질 시나리오",
+      "work_domain": "requirements",
+      "first_defined_at": "PD-07",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "quality_attribute",
+          "meaning": "성능·안전·사용성 등 특성"
+        },
+        {
+          "key": "stimulus",
+          "meaning": "품질 요구가 발생하는 자극"
+        },
+        {
+          "key": "environment",
+          "meaning": "시험할 환경과 조건"
+        },
+        {
+          "key": "expected_response",
+          "meaning": "요구되는 반응"
+        },
+        {
+          "key": "response_measure",
+          "meaning": "측정 가능한 수준 또는 가설"
+        },
+        {
+          "key": "verification_method",
+          "meaning": "측정·판정 방법"
+        },
+        {
+          "key": "constraint_ref",
+          "meaning": "상위 제약 근거"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-00",
+        "IT-08",
+        "IT-07"
+      ]
+    },
+    {
+      "id": "IT-11",
+      "key": "domain_rule",
+      "name": "도메인 개념·업무 불변식",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "terms",
+          "meaning": "개념·정의·동의어"
+        },
+        {
+          "key": "entities_and_relations",
+          "meaning": "업무 객체와 관계"
+        },
+        {
+          "key": "invariants",
+          "meaning": "항상 성립해야 할 규칙"
+        },
+        {
+          "key": "event_triggers",
+          "meaning": "업무 이벤트"
+        },
+        {
+          "key": "exception_rules",
+          "meaning": "예외·충돌 처리"
+        },
+        {
+          "key": "requirement_refs",
+          "meaning": "규칙이 필요한 요구사항"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09"
+      ]
+    },
+    {
+      "id": "IT-12",
+      "key": "system_context",
+      "name": "시스템 경계·외부 맥락",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "system_purpose",
+          "meaning": "시스템 책임"
+        },
+        {
+          "key": "external_actors",
+          "meaning": "외부 이용자·조직"
+        },
+        {
+          "key": "external_systems",
+          "meaning": "외부 서비스·도구"
+        },
+        {
+          "key": "in_out_boundary",
+          "meaning": "시스템 내·외부 포함 범위"
+        },
+        {
+          "key": "trust_boundaries",
+          "meaning": "권한·데이터 신뢰 경계"
+        },
+        {
+          "key": "flows",
+          "meaning": "주요 입출력·정보 흐름"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-06",
+        "IT-09",
+        "IT-10"
+      ]
+    },
+    {
+      "id": "IT-13",
+      "key": "component_responsibility",
+      "name": "구성요소·책임·의존관계",
+      "work_domain": "architecture",
+      "first_defined_at": "PD-08",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "component",
+          "meaning": "구성요소 이름"
+        },
+        {
+          "key": "responsibility",
+          "meaning": "소유하는 기능·판단"
+        },
+        {
+          "key": "inbound_outbound",
+          "meaning": "들어오고 나가는 정보"
+        },
+        {
+          "key": "owned_state",
+          "meaning": "상태·데이터 소유"
+        },
+        {
+          "key": "dependencies",
+          "meaning": "외부·내부 의존"
+        },
+        {
+          "key": "failure_boundary",
+          "meaning": "실패 시 책임과 대체 경로"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-12",
+        "IT-11"
+      ]
+    },
+    {
+      "id": "IT-14",
+      "key": "workflow_state",
+      "name": "행동 흐름·상태 전이",
+      "work_domain": "workflow",
+      "first_defined_at": "PD-09A",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "steps_and_order",
+          "meaning": "활동·실행 순서"
+        },
+        {
+          "key": "states",
+          "meaning": "상태와 의미"
+        },
+        {
+          "key": "transitions",
+          "meaning": "전이 조건·이벤트"
+        },
+        {
+          "key": "guards",
+          "meaning": "권한·검증·제약 가드"
+        },
+        {
+          "key": "side_effects",
+          "meaning": "외부 작업·변경 효과"
+        },
+        {
+          "key": "failure_retry",
+          "meaning": "오류·재시도·멱등성"
+        },
+        {
+          "key": "terminal_states",
+          "meaning": "성공·부분·보류·실패·종료"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-08",
+        "IT-11",
+        "IT-13"
+      ]
+    },
+    {
+      "id": "IT-15",
+      "key": "data_model",
+      "name": "논리 데이터·생명주기",
+      "work_domain": "data",
+      "first_defined_at": "PD-09B",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "entities",
+          "meaning": "엔터티·필드·타입"
+        },
+        {
+          "key": "identifiers",
+          "meaning": "키·식별자"
+        },
+        {
+          "key": "relationships",
+          "meaning": "관계·카디널리티"
+        },
+        {
+          "key": "integrity",
+          "meaning": "무결성·일관성 불변식"
+        },
+        {
+          "key": "ownership",
+          "meaning": "읽기·쓰기 소유·권한"
+        },
+        {
+          "key": "retention",
+          "meaning": "보관·삭제·변경 이력"
+        },
+        {
+          "key": "source_of_truth",
+          "meaning": "정본·파생·캐시 구별"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-11",
+        "IT-13",
+        "IT-10"
+      ]
+    },
+    {
+      "id": "IT-16",
+      "key": "interface_contract",
+      "name": "API·Tool·컴포넌트 계약",
+      "work_domain": "interface",
+      "first_defined_at": "PD-09C",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "operation",
+          "meaning": "동작·목적·호출자·대상"
+        },
+        {
+          "key": "input_schema",
+          "meaning": "요청 필드·제약"
+        },
+        {
+          "key": "output_schema",
+          "meaning": "응답 필드·상태"
+        },
+        {
+          "key": "auth",
+          "meaning": "인증·인가·도구 권한"
+        },
+        {
+          "key": "errors",
+          "meaning": "오류 코드·미확인·부분 결과"
+        },
+        {
+          "key": "call_policy",
+          "meaning": "타임아웃·재시도·멱등성·버전"
+        },
+        {
+          "key": "behavior_refs",
+          "meaning": "연결할 상태·데이터 계약"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-13",
+        "IT-14",
+        "IT-15"
+      ]
+    },
+    {
+      "id": "IT-17",
+      "key": "ui_interaction",
+      "name": "화면·상호작용 상태",
+      "work_domain": "interface",
+      "first_defined_at": "PD-09C",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "screen_or_surface",
+          "meaning": "사용자에게 보이는 화면·접점"
+        },
+        {
+          "key": "actor_and_goal",
+          "meaning": "사용자 역할·달성 목표"
+        },
+        {
+          "key": "inputs_actions",
+          "meaning": "입력·행동·검증"
+        },
+        {
+          "key": "navigation",
+          "meaning": "화면 이동·완료 경로"
+        },
+        {
+          "key": "presentation_states",
+          "meaning": "로딩·빈 결과·부분·오류"
+        },
+        {
+          "key": "feedback",
+          "meaning": "진행·실패·재시도 안내"
+        },
+        {
+          "key": "accessibility",
+          "meaning": "필요한 접근성·환경 제약"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-08",
+        "IT-09",
+        "IT-14",
+        "IT-16"
+      ]
+    },
+    {
+      "id": "IT-18",
+      "key": "crosscutting_control",
+      "name": "보안·운영·품질 통제",
+      "work_domain": "risk",
+      "first_defined_at": "PD-09D",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "concern",
+          "meaning": "위협·운영·신뢰성 문제"
+        },
+        {
+          "key": "affected_assets",
+          "meaning": "대상 데이터·기능"
+        },
+        {
+          "key": "control",
+          "meaning": "통제·완화 수단"
+        },
+        {
+          "key": "permission_boundary",
+          "meaning": "권한·신뢰·책임 경계"
+        },
+        {
+          "key": "detection_and_recovery",
+          "meaning": "탐지·경보·복구"
+        },
+        {
+          "key": "residual_risk",
+          "meaning": "남은 위험"
+        },
+        {
+          "key": "verification_ref",
+          "meaning": "실제로 확인할 시험"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-05",
+        "IT-10",
+        "IT-12",
+        "IT-13"
+      ]
+    },
+    {
+      "id": "IT-19",
+      "key": "architecture_decision",
+      "name": "설계 대안·선택 기록",
+      "work_domain": "decision",
+      "first_defined_at": "PD-10",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "decision_question",
+          "meaning": "무엇을 선택하는가"
+        },
+        {
+          "key": "options",
+          "meaning": "비교한 대안"
+        },
+        {
+          "key": "drivers",
+          "meaning": "요구·품질·제약 기준"
+        },
+        {
+          "key": "tradeoffs",
+          "meaning": "비용·복잡성·위험 비교"
+        },
+        {
+          "key": "selection_and_reason",
+          "meaning": "선택안과 이유 또는 보류"
+        },
+        {
+          "key": "authority_ref",
+          "meaning": "결정권자·ADR 참조"
+        },
+        {
+          "key": "revisit_when",
+          "meaning": "전제 붕괴·재검토 신호"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-13",
+        "IT-18"
+      ]
+    },
+    {
+      "id": "IT-20",
+      "key": "verification_case",
+      "name": "요구·설계 검증 계획",
+      "work_domain": "test",
+      "first_defined_at": "PD-07",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "subject_refs",
+          "meaning": "검증 대상 요구·계약·가설"
+        },
+        {
+          "key": "case_conditions",
+          "meaning": "입력·환경·전제"
+        },
+        {
+          "key": "expected",
+          "meaning": "예상 결과 또는 비교 기준선"
+        },
+        {
+          "key": "observable",
+          "meaning": "관찰할 로그·출력·지표"
+        },
+        {
+          "key": "method",
+          "meaning": "테스트 방법·샘플"
+        },
+        {
+          "key": "verdict_boundary",
+          "meaning": "성공·실패·미확인 기준"
+        },
+        {
+          "key": "run_ref",
+          "meaning": "실행 후에만 연결할 실측 근거"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-07"
+      ]
+    },
+    {
+      "id": "IT-21",
+      "key": "work_package",
+      "name": "작업 패키지·선행관계",
+      "work_domain": "task",
+      "first_defined_at": "PD-11",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "goal_and_scope",
+          "meaning": "작업 목적·범위"
+        },
+        {
+          "key": "inputs",
+          "meaning": "필요한 설계·결정 참조"
+        },
+        {
+          "key": "depends_on",
+          "meaning": "실제 완료를 막는 선행 조건"
+        },
+        {
+          "key": "owner",
+          "meaning": "단일 책임자·협력자"
+        },
+        {
+          "key": "outputs",
+          "meaning": "제출·구현·검증 산출"
+        },
+        {
+          "key": "done_when",
+          "meaning": "완료·검증 기준"
+        },
+        {
+          "key": "estimate_and_due",
+          "meaning": "공수·기한·제약"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-19",
+        "IT-20"
+      ]
+    },
+    {
+      "id": "IT-22",
+      "key": "document_projection",
+      "name": "공식 문서 투영·상태",
+      "work_domain": "submission",
+      "first_defined_at": "PD-11",
+      "applicability": "general",
+      "fields": [
+        {
+          "key": "deliverable_id",
+          "meaning": "DLV-01~16 식별자"
+        },
+        {
+          "key": "outline_source",
+          "meaning": "공식 목차의 출처·검증 상태"
+        },
+        {
+          "key": "source_refs",
+          "meaning": "원본 설계 정보·커밋"
+        },
+        {
+          "key": "section_mapping",
+          "meaning": "목차별 정보 필드 연결"
+        },
+        {
+          "key": "content_status",
+          "meaning": "내용·근거 검토 상태"
+        },
+        {
+          "key": "submission_status",
+          "meaning": "제출·접수 상태 별도 기록"
+        },
+        {
+          "key": "revision",
+          "meaning": "출력 기준 버전·일시"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-21"
+      ]
+    },
+    {
+      "id": "IT-23",
+      "key": "agent_design",
+      "name": "AI·에이전트 역할·도구 설계",
+      "work_domain": "workflow",
+      "first_defined_at": "PD-09A",
+      "applicability": "only_if_ai_is_needed",
+      "fields": [
+        {
+          "key": "ai_goal",
+          "meaning": "AI 사용이 필요한 실제 작업"
+        },
+        {
+          "key": "model_role",
+          "meaning": "모델·에이전트의 책임·한계"
+        },
+        {
+          "key": "tool_scope",
+          "meaning": "도구 계약·권한·금지 작업"
+        },
+        {
+          "key": "context_memory",
+          "meaning": "컨텍스트·저장·유효기간"
+        },
+        {
+          "key": "handoff_orchestration",
+          "meaning": "역할 인계·분기·감독"
+        },
+        {
+          "key": "failure_and_fallback",
+          "meaning": "중단·사람 개입·대체 경로"
+        },
+        {
+          "key": "evaluation",
+          "meaning": "단순 방식 대비 품질·비용 검증"
+        }
+      ],
+      "typically_relates_to": [
+        "IT-09",
+        "IT-10",
+        "IT-14",
+        "IT-16",
+        "IT-18"
+      ]
+    }
+  ],
+  "decision_stages": [
+    {
+      "id": "PD-00",
+      "phase": "planning",
+      "label": "목적·제약·권한",
+      "decision_question": "이 프로젝트에서 무엇이 고정이고 무엇이 보류인가?",
+      "blocking_on": [],
+      "output_types": [
+        "IT-00"
+      ],
+      "exit_when": "유효한 Intent·Phase와 권한·법적/일정 제약이 구별됨",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-01",
+      "phase": "planning",
+      "label": "사용자·사용 맥락",
+      "decision_question": "누가 어떤 조건에서 어떤 일을 달성하려 하는가?",
+      "blocking_on": [
+        "PD-00"
+      ],
+      "output_types": [
+        "IT-01"
+      ],
+      "exit_when": "사용자 역할·발생 상황·현재 행동을 특정하거나 미확인임을 표시",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-02",
+      "phase": "planning",
+      "label": "As-Is·문제 가설",
+      "decision_question": "실제로 어디서 왜 실패하고 어떤 손실이 발생하는가?",
+      "blocking_on": [
+        "PD-01"
+      ],
+      "output_types": [
+        "IT-02",
+        "IT-03"
+      ],
+      "exit_when": "현 상태·관찰 사실과 원인 가설·지지/반대 근거를 구분",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-03",
+      "phase": "planning",
+      "label": "기존 대안·잔여 문제",
+      "decision_question": "다른 대안을 사용해도 남는 문제는 무엇인가?",
+      "blocking_on": [
+        "PD-02"
+      ],
+      "output_types": [
+        "IT-04"
+      ],
+      "exit_when": "같은 작업 기준의 대안 비교·잔여 문제·근거 수준 기록",
+      "parallel_group": "pain_assessment"
+    },
+    {
+      "id": "PD-04",
+      "phase": "planning",
+      "label": "치명적 실현가능성",
+      "decision_question": "합법적 데이터·기술·8주 일정으로 검증 가능한가?",
+      "blocking_on": [
+        "PD-02"
+      ],
+      "output_types": [
+        "IT-05"
+      ],
+      "exit_when": "치명적 위험·중단 조건·최소 반증·대체 경로 기록",
+      "parallel_group": "pain_assessment"
+    },
+    {
+      "id": "PD-05",
+      "phase": "planning",
+      "label": "문제 선택·제품 가설",
+      "decision_question": "어떤 문제를 지금 해결하거나 보류할 것인가?",
+      "blocking_on": [
+        "PD-03",
+        "PD-04"
+      ],
+      "output_types": [
+        "IT-06"
+      ],
+      "exit_when": "사람의 채택·보류 결정과 포함/제외 범위·재검토 조건 기록",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-06",
+      "phase": "planning",
+      "label": "사용자 가치·시나리오",
+      "decision_question": "어떤 사용자 경험·행동 변화가 성공인가?",
+      "blocking_on": [
+        "PD-05"
+      ],
+      "output_types": [
+        "IT-07",
+        "IT-08"
+      ],
+      "exit_when": "시작·정상·예외·종료와 관찰 가능한 결과 정의",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-07",
+      "phase": "planning",
+      "label": "요구사항·검증 계획",
+      "decision_question": "무엇이 반드시 동작하고 어떤 품질을 충족해야 하는가?",
+      "blocking_on": [
+        "PD-06"
+      ],
+      "output_types": [
+        "IT-09",
+        "IT-10",
+        "IT-20"
+      ],
+      "exit_when": "우선순위·수용 기준·시험 질문 및 미확인 경계 연결",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-08",
+      "phase": "design",
+      "label": "도메인·시스템 경계",
+      "decision_question": "무엇을 누가 책임지고 어떤 개념과 규칙이 필요한가?",
+      "blocking_on": [
+        "PD-07"
+      ],
+      "output_types": [
+        "IT-11",
+        "IT-12",
+        "IT-13"
+      ],
+      "exit_when": "도메인 불변식·시스템 내외부·구성요소 책임·주요 입출력 구분",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-09A",
+      "phase": "design",
+      "label": "행동·상태·선택적 AI",
+      "decision_question": "상태·분기·실패·중단이 어떻게 진행되는가?",
+      "blocking_on": [
+        "PD-08"
+      ],
+      "output_types": [
+        "IT-14",
+        "IT-23"
+      ],
+      "exit_when": "정상/실패/보류/종료 상태와 전이 조건 표현; AI는 필요할 때만 설계",
+      "parallel_group": "detail_design"
+    },
+    {
+      "id": "PD-09B",
+      "phase": "design",
+      "label": "데이터·생명주기",
+      "decision_question": "무슨 데이터를 누구 책임으로 보존하고 바꾸는가?",
+      "blocking_on": [
+        "PD-08"
+      ],
+      "output_types": [
+        "IT-15"
+      ],
+      "exit_when": "엔터티·키·관계·무결성·보관/삭제·접근 규칙 표현",
+      "parallel_group": "detail_design"
+    },
+    {
+      "id": "PD-09C",
+      "phase": "design",
+      "label": "API·Tool·UI 계약",
+      "decision_question": "어떤 입력·출력과 화면 반응으로 연결되는가?",
+      "blocking_on": [
+        "PD-08"
+      ],
+      "output_types": [
+        "IT-16",
+        "IT-17"
+      ],
+      "exit_when": "요청/응답/오류/권한과 주요 화면 상태 정의",
+      "parallel_group": "detail_design"
+    },
+    {
+      "id": "PD-09D",
+      "phase": "design",
+      "label": "횡단 통제·품질",
+      "decision_question": "공통 위험·보안·운영 제약을 어떻게 보장하는가?",
+      "blocking_on": [
+        "PD-08"
+      ],
+      "output_types": [
+        "IT-18"
+      ],
+      "exit_when": "핵심 위험에 대응하는 통제·남은 위험·검증 연결",
+      "parallel_group": "detail_design"
+    },
+    {
+      "id": "PD-10",
+      "phase": "design",
+      "label": "계약 정합성·핵심 대안 결정",
+      "decision_question": "요구·상태·데이터·API·UI·안전 규칙이 충돌하는가?",
+      "blocking_on": [
+        "PD-09A",
+        "PD-09B",
+        "PD-09C",
+        "PD-09D"
+      ],
+      "output_types": [
+        "IT-19",
+        "IT-20"
+      ],
+      "exit_when": "상충하는 ID/상태/권한/필드 정리; 고영향 구조 선택 근거·조건 기록",
+      "parallel_group": null
+    },
+    {
+      "id": "PD-11",
+      "phase": "planning_and_design",
+      "label": "실행 계획·문서 프로젝션",
+      "decision_question": "이 정보를 어떤 작업과 공식 산출물로 연결하는가?",
+      "blocking_on": [
+        "PD-10"
+      ],
+      "output_types": [
+        "IT-21",
+        "IT-22"
+      ],
+      "exit_when": "상세 작업 소유·의존·완료 기준과 공식 목차 매핑; 제출·접수는 별도 확인",
+      "parallel_group": null
+    }
+  ],
+  "projection_examples": [
+    {
+      "id": "DLV-01",
+      "name": "기획서(요구사항 포함)",
+      "types": [
+        "IT-00",
+        "IT-01",
+        "IT-02",
+        "IT-03",
+        "IT-04",
+        "IT-05",
+        "IT-06",
+        "IT-07",
+        "IT-08",
+        "IT-09",
+        "IT-10"
+      ]
+    },
+    {
+      "id": "DLV-02",
+      "name": "WBS",
+      "types": [
+        "IT-00",
+        "IT-06",
+        "IT-21"
+      ]
+    },
+    {
+      "id": "DLV-03",
+      "name": "API 설계",
+      "types": [
+        "IT-09",
+        "IT-12",
+        "IT-13",
+        "IT-14",
+        "IT-16",
+        "IT-18",
+        "IT-19"
+      ]
+    },
+    {
+      "id": "DLV-04",
+      "name": "DB 스키마",
+      "types": [
+        "IT-11",
+        "IT-14",
+        "IT-15",
+        "IT-18"
+      ]
+    },
+    {
+      "id": "DLV-05",
+      "name": "상태 전이 설계",
+      "types": [
+        "IT-09",
+        "IT-14",
+        "IT-16"
+      ]
+    },
+    {
+      "id": "DLV-07",
+      "name": "멀티 에이전트 설계(해당 시)",
+      "types": [
+        "IT-13",
+        "IT-14",
+        "IT-16",
+        "IT-19",
+        "IT-23"
+      ]
+    },
+    {
+      "id": "DLV-08",
+      "name": "AI 보안 가드레일",
+      "types": [
+        "IT-05",
+        "IT-10",
+        "IT-18",
+        "IT-20"
+      ]
+    },
+    {
+      "id": "DLV-11",
+      "name": "통합 테스트 결과",
+      "types": [
+        "IT-09",
+        "IT-10",
+        "IT-20"
+      ]
+    }
+  ],
+  "validations_to_add_later": [
+    "ID 존재/중복 및 그래프 순환",
+    "IT-09 요구사항→IT-20 검증 누락",
+    "IT-14 상태 vs IT-16 오류 vs IT-17 UI 표현 불일치",
+    "IT-15 key/owner vs IT-16 schema/auth 불일치",
+    "확정 결정의 authority_ref와 반증 재검토 여부",
+    "정보 변경에 따른 영향받는 DLV 표시"
+  ],
+  "not_implemented": [
+    "새 JSON 레코드의 자동 생성/이관",
+    "실제 설계 의존 그래프 런타임",
+    "16개 문서 자동 프로젝션",
+    "의미적 정합성 검증",
+    "제품 기능 구현/실측"
+  ]
+}
