@@ -7,7 +7,7 @@
 ## 바로 읽을 순서
 
 1. **[V4 경량 AI 설계·실행 플레이북](AI-DESIGN-PLAYBOOK.md)**: 7개 작업 정보, S/M/H 설계 깊이, 최소 슬라이스와 실측·피드백 루프. 매 작업의 기본 진입점
-3. [기획 → 설계 결정·정보 모델 V3](PLANNING-DESIGN-INFO-MODEL.md): 점진적 설계 결정 순서, 실제 정보 필드, 병렬 설계·확정 조건 및 추적 사례(2026-11-19 검토용 제안)
+2. [기획 → 설계 결정·정보 모델 V3](PLANNING-DESIGN-INFO-MODEL.md): 점진적 설계 결정 순서, 실제 정보 필드, 병렬 설계·확정 조건 및 추적 사례(2026-11-19 검토용 제안)
 3. [점진적 설계 순서와 이번에 결정하지 않을 항목](PROGRESSIVE-DESIGN-ORDER.md): 큰 틀부터 구체화하는 L0~L7 판단·보류 기준
 4. [정밀 설계 용어집](DESIGN-GLOSSARY.md): System / C4 실행 단위 / Component / Deployment 및 상태·계약 구분
 5. [구성요소 설계 순서도·구조도](COMPONENT-DESIGN-VIEWS.md): System→실행 단위→컴포넌트→데이터·API·상태의 실제 설계 내용과 순서
