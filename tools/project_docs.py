@@ -1,7 +1,7 @@
 """Validate AI artifacts and build the human-readable project projections."""
 
 import argparse
-import hashlib
+import subprocess
 import json
 import difflib
 import os
@@ -656,8 +656,14 @@ def build():
         path = ROOT / entry["snapshot_path"]
         if not path.is_file():
             raise ValueError(f"missing immutable source snapshot {path}")
-        content = path.read_bytes()
-        blob_sha = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\x00" + content).hexdigest()
+        # Use Git's path-aware clean filters so Windows CRLF checkout conversion
+        # does not invalidate the source blob digest.
+        blob_sha = subprocess.check_output(
+            ["git", "hash-object", f"--path={entry['snapshot_path']}", str(path)],
+            cwd=ROOT,
+            text=True,
+            encoding="ascii",
+        ).strip()
         if blob_sha != entry["blob_sha"]:
             raise ValueError(f"immutable source blob digest mismatch: {path}")
     for entry in closeout["entries"]:
