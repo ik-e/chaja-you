@@ -1,0 +1,41 @@
+name: isolated-step1-step2-pilot-v3-check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/deliverables/pilots/2026-11-18-v3/**'
+      - 'tools/pilot_step1_step2_v3.py'
+      - '.github/workflows/isolated-step1-step2-pilot-v3-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/deliverables/pilots/2026-11-18-v3/**'
+      - 'tools/pilot_step1_step2_v3.py'
+permissions:
+  contents: read
+jobs:
+  validate-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse and cross-check generated Markdown, JSON and contract
+        run: |
+          python -m py_compile tools/pilot_step1_step2_v3.py
+          python tools/pilot_step1_step2_v3.py --check
+      - name: Ensure only isolated V3 paths modified
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          git fetch origin "${{ github.base_ref }}"
+          git -c core.quotePath=false diff --name-only "origin/${{ github.base_ref }}" HEAD > /tmp/changed-v3.txt
+          python - <<'PY'
+          from pathlib import Path
+          paths=Path('/tmp/changed-v3.txt').read_text(encoding='utf-8').splitlines()
+          root='docs/deliverables/pilots/2026-11-18-v3/'
+          extras={'tools/pilot_step1_step2_v3.py','.github/workflows/isolated-step1-step2-pilot-v3-check.yml'}
+          other=[p for p in paths if not(p.startswith(root) or p in extras)]
+          if other: raise SystemExit('V3 touched canonical or other files: '+repr(other))
+          print('V3 non-interference PASS:',len(paths),'paths')
+          PY

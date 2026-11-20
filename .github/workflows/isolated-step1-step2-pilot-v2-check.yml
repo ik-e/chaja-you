@@ -1,0 +1,41 @@
+name: isolated-step1-step2-pilot-v2-check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/deliverables/pilots/2026-11-18-v2/**'
+      - 'tools/pilot_step1_step2_v2.py'
+      - '.github/workflows/isolated-step1-step2-pilot-v2-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/deliverables/pilots/2026-11-18-v2/**'
+      - 'tools/pilot_step1_step2_v2.py'
+permissions:
+  contents: read
+jobs:
+  check-pilot-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate V2 feedback hierarchy, generated files, and API-DB mapping
+        run: |
+          python -m py_compile tools/pilot_step1_step2_v2.py
+          python tools/pilot_step1_step2_v2.py --check
+      - name: Assert isolated change scope
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          git fetch origin "${{ github.base_ref }}"
+          git -c core.quotePath=false diff --name-only "origin/${{ github.base_ref }}" HEAD > /tmp/changed-v2.txt
+          python - <<'PY'
+          from pathlib import Path
+          changed = Path('/tmp/changed-v2.txt').read_text(encoding='utf-8').splitlines()
+          d='docs/deliverables/pilots/2026-11-18-v2/'
+          allowed={'tools/pilot_step1_step2_v2.py', '.github/workflows/isolated-step1-step2-pilot-v2-check.yml'}
+          extra=[x for x in changed if not x.startswith(d) and x not in allowed]
+          if extra: raise SystemExit('Out-of-scope files: '+str(extra))
+          print('Scope PASS: V1, canonical Step1, original WBS, TASK and Phase unchanged')
+          PY

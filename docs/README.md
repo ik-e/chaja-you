@@ -7,6 +7,7 @@
 | 이전 찾아you 제품 목표(실제 구현 보류) | [PROJECT](../PROJECT.md) |
 | 현재 범위·우선순위·작업 | [CURRENT](../CURRENT.md) |
 | 사람이 확인할 결과·근거·결정 요청 | [검토 화면](review/README.md) |
+| 작업 정보·품질 게이트·16개 산출물 프로젝션 설계(제안) | [산출물 작업 체계](deliverables/README.md) |
 | 필수 제출물과 준비·제출 상태 | [제출물 인덱스](submissions/README.md) · [Step 1](step1/README.md) |
 | 이전 찾아you 평가 기준(제출용 잠정) | [EVAL](../EVAL.md) |
 | AI가 작업할 입력·상세 산출물 | [TASK](../TASK.md) · [AI 산출물](artifacts/README.md) |
