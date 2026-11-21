@@ -49,6 +49,6 @@ Design / Spec / ADR / Task / State
 - [CAND-013 · 범용 Workflow / Recovery Runtime](CAND-013.json)
 - [CAND-014 · AI-native PR / Verification Workflow](CAND-014.json)
 - [CAND-015 · 프로젝트 메타구조 개선군](CAND-015.json)
-- [CAND-016 · 시험장 부정행위 감독 지원 (V1.2 근거 검증안 · V1.0 동결)](CAND-016.json) — [기획안](CAND-016-v1.2-proposal.md) · [대안/잔여 문제 조사](CAND-016-evidence-review-2026-11-16.md)
+- [CAND-016 · 시험장 부정행위 감독 지원 (V1.3 기획안 · 독립 후보)](CAND-016.json) — [V1.3 기획안](CAND-016-v1.3-proposal.md) · [1페이지 요약](CAND-016-mentor-onepager-v1.3.md) · [근거 조사](CAND-016-evidence-review-2026-11-16.md) · [변경 기록](CAND-016-v1.3-changelog.md)
 
 [AI 산출물 목차](../README.md)
