@@ -3,7 +3,7 @@
 | 확인할 내용 | 경로 |
 |---|---|
 | 사람이 읽고 의도·판단을 남기는 진입점 | [사람 작업 공간](human/README.md) |
-| 현재 적용 중인 실행 의도·보류 범위 | [현재 단계 의도](human/phase-intents/PHASE-20261118-01.md) |
+| 현재 적용 중인 실행 의도·보류 범위 | [현재 단계 의도](human/phase-intents/README.md) |
 | 이전 찾아you 제품 목표(실제 구현 보류) | [PROJECT](../PROJECT.md) |
 | 현재 범위·우선순위·작업 | [CURRENT](../CURRENT.md) |
 | 사람이 확인할 결과·근거·결정 요청 | [검토 화면](review/README.md) |
