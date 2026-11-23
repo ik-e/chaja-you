@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "id": "TASK-030",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R05",
+  "due": "2026-11-23",
+  "depends_on": [],
+  "suggested_owner": "R05",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-23",
+  "title": "레슨 등록 서버·로컬·인증 기술 타당성 및 권한 제약 조사",
+  "question": "사용자가 인증을 수행한 후 서버/로컬/브라우저 도구가 어디까지 등록할 수 있으며 무엇이 막히는가?",
+  "goal": "기획서의 기술 제약과 불확실성을 분리하고, 실행 구조를 결정하기 전에 필요한 최소 검증 질문을 만든다.",
+  "inputs": [
+    "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json",
+    "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+  ],
+  "scope": [
+    "R02가 이미 조사한 10개 플랫폼 약관을 다시 전수 조사하지 않고 당근 모임·크몽의 미확인 등록 위임 경로를 우선 분석한다.",
+    "공식 API·사용자 기기 실행·서버 브라우저·일회성 인증정보 처리(비밀번호 폐기와 세션 폐기 구분)의 기술 조건·정책 조건을 비교한다.",
+    "범용 AI와 Browser Use를 실행 엔진 후보로 정리하되 R03의 평가 기준에 맞춘 최소 비교 계획만 제안한다.",
+    "실제 비밀번호 수집·로그인·무단 자동 게시·보안 우회·구현 설계와 PoC 코딩은 하지 않는다."
+  ],
+  "outputs": [
+    "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+    "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
+  ],
+  "acceptance": [
+    "서버/로컬/공식 API별 인증·세션·사진 첨부·최종 제출 가능성 및 제약이 출처와 함께 정리돼 있다.",
+    "플랫폼 운영사의 명시적 허용/제한/미확인을 기술적 성공 여부와 별개로 표기한다.",
+    "일회성 비밀번호 처리 뒤에도 남는 세션·개인정보·권한 위험과 대응이 목록화돼 있다.",
+    "실제 실행 없이 확인 가능한 사실과 꼭 필요한 후속 확인/실험을 구분하고, 기획서에 반영할 2~3개 결정 조건을 제시한다."
+  ],
+  "verification": [
+    "지정 경로 파일과 URL/커밋을 확인한다.",
+    "문서의 주장 및 표를 근거와 대조하고, 확인/추정/미확인을 임의로 섞지 않았는지 확인한다.",
+    "요청 범위 외 작업이 포함되지 않았는지 검토한다.",
+    "TASK result의 실제 증거·검증 판정과 남은 결정 요청을 확인한다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    },
+    {
+      "path": "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261123-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "사용자가 인증을 수행한 후 서버/로컬/브라우저 도구가 어디까지 등록할 수 있으며 무엇이 막히는가?",
+    "observables": [
+      "서버/로컬/공식 API별 인증·세션·사진 첨부·최종 제출 가능성 및 제약이 출처와 함께 정리돼 있다.",
+      "플랫폼 운영사의 명시적 허용/제한/미확인을 기술적 성공 여부와 별개로 표기한다.",
+      "일회성 비밀번호 처리 뒤에도 남는 세션·개인정보·권한 위험과 대응이 목록화돼 있다.",
+      "실제 실행 없이 확인 가능한 사실과 꼭 필요한 후속 확인/실험을 구분하고, 기획서에 반영할 2~3개 결정 조건을 제시한다."
+    ],
+    "success_condition": "문서·출처·확인 상태·TASK result가 모두 갖춰져 담당 작업의 검토가 가능한 수준",
+    "unknown_condition": "실행이나 제3자 확인이 불가능하면 미확인과 사유·후속 질문으로 기록하고 검증됐다고 쓰지 않는다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
+  "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
+  "output_path": "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+  "review_owner": "R01 (기획 방향·통합 결정만)"
+}
