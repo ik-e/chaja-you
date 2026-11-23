@@ -3,44 +3,43 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-19",
-  "scope": "11/18~21: 실제 제품 미선정·기획안 탐색(트랙 A) + 기존 찾아you 잠정 문서 제출 대응(트랙 B); 기존 기획·WBS 구현 보류",
+  "as_of": "2026-11-23",
+  "scope": "2026-11-23~: R02 음악 레슨 등록 지원 서비스 12항목 기획 구체화; 사용자 Pain→핵심 기능→가치→BM 검증 및 후속 설계 입력 정리. 상세 설계·구현은 보류.",
   "confirmed": [
-    "2026-11-18 이후 R02~R05는 각자 기존 기획안을 심화하거나 새 사용자 문제를 탐색하는 경로 중 하나를 자율 선택한다.",
-    "R01은 팀원 기획안 검토·운영 정합성·제출 기한에 대응하는 임시 문서 관리를 맡는다.",
-    "2026-11-21(토) 오프라인 모임에서 실제 제품 기획을 결정하는 것을 목표로 하며, 그 전에 후보를 최종 제품으로 승격하지 않는다.",
-    "지난 TASK-001~021의 당시 기록과 미완료·미확인 사항은 보존하고 11/18의 실행 업무에서 분리한다.",
-    "멘토링에서 강조된 사용자 상황·실제 불편·강한 기존 대안 후 잔여 문제를 기획안 검토의 중심으로 둔다.",
-    "공개 자료를 읽을 수 있다는 사실과 자동 수집·저장·재사용 권한을 구별한다.",
-    "기존 찾아you 기획서·APP-A/C 명세·WBS·기술설계는 실제 제품 구현 기준에서 보류하고, 공식 제출 대응용 잠정 기준본으로만 유지한다."
+    "R01은 멘토링 이후 R02 음악 레슨 강사의 모집 등록 업무 지원을 이번 기획 구체화의 방향으로 선택했다. 최종 기술 방식과 MVP는 미확정이다.",
+    "기획서는 서비스 개요부터 사용자·Pain·원인·핵심 기능·가치·비즈니스 모델·요구사항·기술 제약·MVP·검증까지 12항목을 갖추며, 실제 가치와 설계 입력의 연결을 설명해야 한다.",
+    "기존 R02 근거를 재사용하고, R02 사용자·Pain / R04 기존 대안·가격 / R05 기술·권한 / R03 기능·검증 / R01 통합·BM으로 업무를 나눈다. UI 설계·PoC 구현은 이번 작업에 포함하지 않는다.",
+    "R02~R05 개인 산출물과 TASK 결과는 각 담당자가 관리하고, R01이 공통 기획 원본에 통합한다.",
+    "기존 찾아you 기획·WBS·API·DB 잠정 제출본을 현재 레슨 등록 제품 구현 지시로 재사용하지 않는다."
   ],
   "priorities": [
-    "11/19 R01 리뷰 #18/#19/#20/#22를 후보 판단 근거로 연결하고 R02~R05 소유 TASK·개인 문서는 해당 owner가 관리한다.",
-    "TASK-026: 11/21 후보 선택을 위한 실제 사용자 사건·손실, 강한 대안 후 잔여 Pain, 적법한 최소 반증, 8주 범위/중단 조건을 취합한다.",
-    "TASK-027: Step1 기획서/WBS·Step2 API/DB 잠정 MD 4종을 관리하되 공식 제출·접수, R05 계약 검토, WBS 시트/Projects 캡처와 열람권한은 확인 전으로 둔다.",
-    "11/21 실제 제품 채택·보류 결정을 근거와 함께 남긴 뒤 PROJECT·Spec·WBS·실행 TASK를 재구성하며, 그 전에는 어떤 후보도 자동 확정하지 않는다."
+    "TASK-028(R02): 실제 강사 업무별 빈도·손실·선택한 첫 Pain과 타깃을 근거로 정리한다.",
+    "TASK-029(R04): 기존 서비스/범용 AI/수작업의 해결 범위·사용 장벽·가격 사례를 조사한다.",
+    "TASK-030(R05): 서버/로컬·일회성 인증·외부 등록 허용 조건을 검토한다. 실제 자격증명 수집·자동 게시 실행 금지.",
+    "TASK-031(R03): F1~F3의 입출력·예외·완료 조건과 대조 검증 기준을 정의한다.",
+    "TASK-032(R01): 위 결과를 12항목 기획서·Pain→기능→가치→BM·MVP/미확인에 통합한다."
   ],
   "decisions_needed": [
     {
-      "id": "OPEN-20261118-01",
-      "question": "11/21 오프라인에서 어떤 사용자 문제와 제품 방향을 최종 선택할까",
-      "action": "각자 후보 1개, 실제 Pain·잔여 문제·가장 저렴한 반증·허용된 MVP 경로를 비교해 R01/팀 결정으로 남긴다.",
-      "evidence_needed": "대안 실사용 또는 공개 근거, 직접 사용자 맥락, 손실 강도, 기존 대안 이후 잔여 문제, 8주 시연·수집권한"
+      "id": "OPEN-20261123-01",
+      "question": "최초 등록과 후기 재게시·문의 대응 중 무엇을 첫 MVP Pain으로 확정할까?",
+      "action": "R02의 관찰·반대 근거와 R04의 대안 잔여 Pain을 비교해 R01 결정",
+      "evidence_needed": "실제 반복 빈도·누적 손실·이용 의향·첫 채널 개설 부담"
     },
     {
-      "id": "OPEN-20261118-02",
-      "question": "11/20 API·DB 설계와 과거 기획서·WBS의 실제 제출·접수 상태를 어떻게 처리할까",
-      "action": "TASK-027에서 공식 목차·제출 방식과 기존 TASK-011의 접수를 확인하고, 잠정 설계임을 명시한 문서를 제출한다.",
-      "evidence_needed": "최신 교육기관 안내/대시보드, 열람 가능 링크, 등록·상태 변경 및 접수 증빙"
+      "id": "OPEN-20261123-02",
+      "question": "외부 등록을 어떤 실행 방식으로 허용 범위 안에서 제공할까?",
+      "action": "R05의 공식 권한·보안 제약과 R03 요구사항으로 서버/로컬/API 가능 경로 판단",
+      "evidence_needed": "플랫폼 자동화 허용 근거·인증/세션 모델·필요한 강사 개입"
     },
     {
-      "id": "OPEN-20261118-03",
-      "question": "토요일 이후 기존 찾아you APP-A/C·R03/R05 우선안을 유지할지 교체할지",
-      "action": "기획 결정 뒤 관련 PROJECT/Spec/WBS/TASK를 사람 결정에 근거해 변경한다. 이전 상태는 보존한다.",
-      "evidence_needed": "최종 후보 결정과 재검토 조건, 기술·데이터·법적 제약"
+      "id": "OPEN-20261123-03",
+      "question": "어떤 가치·가격·업무 범위에서 전용 서비스를 제공할 것인가?",
+      "action": "R01이 12항목 통합 기획서에 수익/비용 가설과 MVP 경계를 기록",
+      "evidence_needed": "직접 작업 시간·대안 사용 부담·지불 의향·건당 운영비·기능 완료 조건"
     }
   ],
-  "review_summary": "적용 Phase: PHASE-20261118-01. 2026-11-19 현재 최종 제품 미선정·기존 찾아you 구현 보류, 11/21 오프라인 선택 목표를 유지한다.\n\n**R01 검토 기록:** R02 음악 레슨 기획안 [#18](https://github.com/ik-e/chaja-you/issues/18), R04 후보 집중 [#20](https://github.com/ik-e/chaja-you/issues/20), R05 가맹점 입지 [#19](https://github.com/ik-e/chaja-you/issues/19) 및 테이블 음성 도우미 [#22](https://github.com/ik-e/chaja-you/issues/22) 리뷰 완료. 리뷰 기록은 팀원 수신·수정 반영이나 최종 제품 승인을 뜻하지 않는다.\n\n**추가 확인:** R04의 11/19 일일 기록은 자동 점검 중심이라 조사 결과 기재 여부만 확인되며 실제 업무 여부를 단정하지 않는다.\n\n**제출:** [Step1 잠정 기획서](../step1/기획서_제출본.md)·[WBS](../step1/WBS_제출본.md)와 [Step2 API/DB](../step2/README.md) Markdown 후보는 준비됐다. 이 파일은 기존 JSON 자동 프로젝션과 구분하며 공식 제출·접수·R05 검토·열람권한은 미확인이다. [TASK-026](../artifacts/tasks/TASK-026.json) · [TASK-027](../artifacts/tasks/TASK-027.json) · [11/19 R01 지시](../human/responses/HRESP-20261119-01_r01-owned-doc-sync.md).",
+  "review_summary": "2026-11-23 R01 직접 지시: R02 음악 레슨 강사용 등록 서비스로 기획 구체화. 12항목 기획/비즈니스 모델/후속 설계 입력을 목표로 하며 개발·UI 상세 설계는 아직 수행하지 않는다. 공통 계약은 docs/artifacts/planning/lesson-registration-20261123/plan.json; 신규 TASK-028~032는 담당자별 결과 작성 전. 기존 찾아you Step1/2 자료는 별도 잠정 제출본이다.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -236,46 +235,34 @@
   },
   "confirmed_provenance": [
     {
-      "text": "2026-11-18 이후 R02~R05는 각자 기존 기획안을 심화하거나 새 사용자 문제를 탐색하는 경로 중 하나를 자율 선택한다.",
+      "text": "R01은 멘토링 이후 R02 음악 레슨 강사의 모집 등록 업무 지원을 이번 기획 구체화의 방향으로 선택했다. 최종 기술 방식과 MVP는 미확정이다.",
       "authority": "human",
-      "source_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
-      "source_id": "HRESP-20261118-01"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "R01은 팀원 기획안 검토·운영 정합성·제출 기한에 대응하는 임시 문서 관리를 맡는다.",
+      "text": "기획서는 서비스 개요부터 사용자·Pain·원인·핵심 기능·가치·비즈니스 모델·요구사항·기술 제약·MVP·검증까지 12항목을 갖추며, 실제 가치와 설계 입력의 연결을 설명해야 한다.",
       "authority": "human",
-      "source_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
-      "source_id": "HRESP-20261118-01"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "2026-11-21(토) 오프라인 모임에서 실제 제품 기획을 결정하는 것을 목표로 하며, 그 전에 후보를 최종 제품으로 승격하지 않는다.",
+      "text": "기존 R02 근거를 재사용하고, R02 사용자·Pain / R04 기존 대안·가격 / R05 기술·권한 / R03 기능·검증 / R01 통합·BM으로 업무를 나눈다. UI 설계·PoC 구현은 이번 작업에 포함하지 않는다.",
       "authority": "human",
-      "source_ref": "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
-      "source_id": "HRESP-20261118-01"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "지난 TASK-001~021의 당시 기록과 미완료·미확인 사항은 보존하고 11/18의 실행 업무에서 분리한다.",
-      "authority": "team",
-      "source_ref": "docs/문서_관리_규칙.md",
-      "source_id": "DOC-MGMT-HISTORY"
-    },
-    {
-      "text": "멘토링에서 강조된 사용자 상황·실제 불편·강한 기존 대안 후 잔여 문제를 기획안 검토의 중심으로 둔다.",
-      "authority": "team",
-      "source_ref": "docs/meetings/reviews/MEET-20261117-01.md",
-      "source_id": "MEET-20261117-01"
-    },
-    {
-      "text": "공개 자료를 읽을 수 있다는 사실과 자동 수집·저장·재사용 권한을 구별한다.",
+      "text": "R02~R05 개인 산출물과 TASK 결과는 각 담당자가 관리하고, R01이 공통 기획 원본에 통합한다.",
       "authority": "human",
-      "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-DATA-001"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "기존 찾아you 기획서·APP-A/C 명세·WBS·기술설계는 실제 제품 구현 기준에서 보류하고, 공식 제출 대응용 잠정 기준본으로만 유지한다.",
+      "text": "기존 찾아you 기획·WBS·API·DB 잠정 제출본을 현재 레슨 등록 제품 구현 지시로 재사용하지 않는다.",
       "authority": "human",
-      "source_ref": "docs/human/responses/HRESP-20261118-02_phase-sync.md",
-      "source_id": "HRESP-20261118-02"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     }
   ],
   "human_input": {
@@ -284,6 +271,29 @@
   },
   "operating_transition_ref": "docs/artifacts/state/transition-20261118.json",
   "active_task_ids": [
+    "TASK-028",
+    "TASK-029",
+    "TASK-030",
+    "TASK-031",
+    "TASK-032"
+  ],
+  "inactive_historical_task_range": "TASK-001~027 (이전 단계 기록 보존, 신규 배정 제외; 001~021 정산원장 참고)",
+  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "active_phase_intent_id": "PHASE-20261123-01",
+  "current_product_status": "R02 음악 레슨 등록 지원 기획 구체화 방향 채택(11/23 R01 지시); 핵심 Pain 우선순위·MVP·기술·BM 미확정",
+  "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
+  "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
+  "current_baseline_lifecycle": {
+    "product_selection": "R02 음악 레슨 등록 기획 구체화 방향 선택; 설계/구현 확정 전",
+    "previous_plan_and_wbs": "이전 찾아you 구현 보류",
+    "previous_plan_and_wbs_submission_use": "기존 제출용 잠정 문서만 유지",
+    "future_after_offline": "2026-11-23 사용자 지시에 따라 12항목 기획 후 검증 결과 기반 설계·WBS 재수립",
+    "phase_ref": "docs/human/phase-intents/PHASE-20261123-01.md"
+  },
+  "legacy_task_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+  "legacy_evidence_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json",
+  "legacy_task_status_policy": "TASK-001~021 원본 상태/결과 유지. 운영상 신규 실행은 종료/비활성화했으며 분류·근거·대체 TASK는 closeout 원본과 고정 blob 사본 참조.",
+  "previous_phase_task_ids": [
     "TASK-022",
     "TASK-023",
     "TASK-024",
@@ -291,20 +301,5 @@
     "TASK-026",
     "TASK-027"
   ],
-  "inactive_historical_task_range": "TASK-001~TASK-021 (상태 원본 유지; 신규 일정 실행은 아님)",
-  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md",
-  "active_phase_intent_id": "PHASE-20261118-01",
-  "current_product_status": "실제 개발 제품·주제 미선정 (R02~R05 기존안 구체화 또는 신규 탐색 중; 11/21 오프라인 결정 목표)",
-  "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
-  "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
-  "current_baseline_lifecycle": {
-    "product_selection": "미선정",
-    "previous_plan_and_wbs": "실제 구현 보류",
-    "previous_plan_and_wbs_submission_use": "잠정 제출 전용",
-    "future_after_offline": "R01/팀 결정 후 제품 기획·개발 WBS 재수립",
-    "phase_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
-  },
-  "legacy_task_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
-  "legacy_evidence_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json",
-  "legacy_task_status_policy": "TASK-001~021 원본 상태/결과 유지. 운영상 신규 실행은 종료/비활성화했으며 분류·근거·대체 TASK는 closeout 원본과 고정 blob 사본 참조."
+  "previous_phase_task_status_policy": "이전 022~027은 당시 원본 status/result를 그대로 보존하며 현재 실행 지시에서 제외한다. 과거 001~021의 정산원장은 종전대로 유지."
 }

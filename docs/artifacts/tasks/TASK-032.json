@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "id": "TASK-032",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R01",
+  "due": "2026-11-24",
+  "depends_on": [
+    "TASK-028",
+    "TASK-029",
+    "TASK-030",
+    "TASK-031"
+  ],
+  "suggested_owner": "R01",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-23",
+  "title": "레슨 등록 12항목 기획안·가치·BM·MVP 통합",
+  "question": "현재 근거만으로 서비스 가치, 수익 구조, 후속 설계에 필요한 기능 요구사항과 미결정 조건을 일관되게 설명할 수 있는가?",
+  "goal": "12항목 기획서를 기획 단계의 기준선으로 통합해 사업 모델과 후속 설계 입력의 경계를 명확히 한다.",
+  "inputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/plan.json",
+    "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+  ],
+  "scope": [
+    "R02 Pain/타깃, R04 기존 대안, R05 기술, R03 요구사항을 출처와 상태를 유지해 하나의 12항목 기획서로 통합한다.",
+    "고객/결제자, 채널, 가치 전달, 가격 가설, 주요 비용, 반복 사용 가능성을 매핑한다. 가격·매출 가설을 실적처럼 표현하지 않는다.",
+    "Pain → 원인 → F1~F3 → 사용자 가치 → 지불 동기 → 성공 지표의 연결표를 포함한다.",
+    "최초 등록/후기 재게시 중 1차 문제와 MVP 포함/제외 범위를 근거로 결정하되 실제 기술·수요 검증 전 단정하지 않는다.",
+    "설계 착수에 필요한 사용자 입력, 데이터 항목, 상태, 예외, 통제권이 충분한지 확인하되 화면·DB/API 상세 설계와 코딩은 하지 않는다."
+  ],
+  "outputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
+    "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
+  ],
+  "acceptance": [
+    "12개 항목 모두 내용 또는 미확인·필요한 근거·검증 담당이 기록된다.",
+    "핵심 문제별 실제 근거, 원인, 기능, 사용자 가치, BM 연결이 끊기지 않는다.",
+    "첫 이용 시나리오와 주요 예외·입출력·완료 상태가 후속 기능 설계의 입력으로 재사용 가능하다.",
+    "비용·수익·재이용 가설과 정책·인증 핵심 위험을 분리해 기록한다.",
+    "최소 1개 MVP 범위와 제외 범위·재검토 조건 및 설계 착수 여부/차단 조건을 기록한다."
+  ],
+  "verification": [
+    "지정 경로 파일과 URL/커밋을 확인한다.",
+    "문서의 주장 및 표를 근거와 대조하고, 확인/추정/미확인을 임의로 섞지 않았는지 확인한다.",
+    "요청 범위 외 작업이 포함되지 않았는지 검토한다.",
+    "TASK result의 실제 증거·검증 판정과 남은 결정 요청을 확인한다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261123-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "현재 근거만으로 서비스 가치, 수익 구조, 후속 설계에 필요한 기능 요구사항과 미결정 조건을 일관되게 설명할 수 있는가?",
+    "observables": [
+      "12개 항목 모두 내용 또는 미확인·필요한 근거·검증 담당이 기록된다.",
+      "핵심 문제별 실제 근거, 원인, 기능, 사용자 가치, BM 연결이 끊기지 않는다.",
+      "첫 이용 시나리오와 주요 예외·입출력·완료 상태가 후속 기능 설계의 입력으로 재사용 가능하다.",
+      "비용·수익·재이용 가설과 정책·인증 핵심 위험을 분리해 기록한다.",
+      "최소 1개 MVP 범위와 제외 범위·재검토 조건 및 설계 착수 여부/차단 조건을 기록한다."
+    ],
+    "success_condition": "문서·출처·확인 상태·TASK result가 모두 갖춰져 담당 작업의 검토가 가능한 수준",
+    "unknown_condition": "실행이나 제3자 확인이 불가능하면 미확인과 사유·후속 질문으로 기록하고 검증됐다고 쓰지 않는다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
+  "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
+  "output_path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
+  "review_owner": "R01"
+}

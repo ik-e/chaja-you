@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "id": "TASK-031",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R03",
+  "due": "2026-11-23",
+  "depends_on": [],
+  "suggested_owner": "R03",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-23",
+  "title": "핵심 기능 요구사항·서비스 시나리오·검증 기준 정리",
+  "question": "레슨 등록 F1~F3의 정상/실패 이용 흐름과 완료 판정은 무엇이어야 하는가?",
+  "goal": "구현 설계 전 단계에서 핵심 기능을 입력·처리·출력·실패·완료 조건으로 구체화한다.",
+  "inputs": [
+    "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+  ],
+  "scope": [
+    "기존 원본 공고 1건으로 F1 정보 추출·플랫폼별 변환, F2 등록 실행 지원, F3 상태 확인·실패 처리의 업무 계약을 구성한다.",
+    "정상·정보 누락·인증 만료·제출 성공 불명확 사례를 사용자가 겪는 흐름 중심으로 정리한다.",
+    "직접 등록/범용 AI 직접 사용/전용 서비스에서 사용자 직접 시간, 개입 횟수, 정확한 완료 여부를 비교할 수 있는 평가 설계를 만든다.",
+    "화면 와이어프레임, DB/API 스키마, 코드·자동화 PoC는 작성하지 않는다."
+  ],
+  "outputs": [
+    "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+    "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
+  ],
+  "acceptance": [
+    "F1~F3 각각 트리거·입력·처리·출력·예외·완료 조건과 사용자/서비스 책임이 명시돼 있다.",
+    "정상 1건·오류/미확인 2건 이상에서 사용자가 원하는 최종 상태가 관찰 가능하다.",
+    "직접 등록·범용 AI·전용 서비스의 비교에서 동일 입력·시작 상태·종료 기준·측정값을 정의한다.",
+    "기술 가능성이 아직 미확인인 최종 자동 제출은 조건부 요구사항으로 표시한다."
+  ],
+  "verification": [
+    "지정 경로 파일과 URL/커밋을 확인한다.",
+    "문서의 주장 및 표를 근거와 대조하고, 확인/추정/미확인을 임의로 섞지 않았는지 확인한다.",
+    "요청 범위 외 작업이 포함되지 않았는지 검토한다.",
+    "TASK result의 실제 증거·검증 판정과 남은 결정 요청을 확인한다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261123-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "레슨 등록 F1~F3의 정상/실패 이용 흐름과 완료 판정은 무엇이어야 하는가?",
+    "observables": [
+      "F1~F3 각각 트리거·입력·처리·출력·예외·완료 조건과 사용자/서비스 책임이 명시돼 있다.",
+      "정상 1건·오류/미확인 2건 이상에서 사용자가 원하는 최종 상태가 관찰 가능하다.",
+      "직접 등록·범용 AI·전용 서비스의 비교에서 동일 입력·시작 상태·종료 기준·측정값을 정의한다.",
+      "기술 가능성이 아직 미확인인 최종 자동 제출은 조건부 요구사항으로 표시한다."
+    ],
+    "success_condition": "문서·출처·확인 상태·TASK result가 모두 갖춰져 담당 작업의 검토가 가능한 수준",
+    "unknown_condition": "실행이나 제3자 확인이 불가능하면 미확인과 사유·후속 질문으로 기록하고 검증됐다고 쓰지 않는다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
+  "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
+  "output_path": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+  "review_owner": "R01 (기획 방향·통합 결정만)"
+}
