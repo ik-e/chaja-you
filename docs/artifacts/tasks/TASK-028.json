@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-028",
   "kind": "task",
-  "status": "할 일",
+  "status": "완료",
   "owner": "R02",
   "due": "2026-11-23",
   "depends_on": [],
@@ -57,7 +57,66 @@
       "path": "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "R02 문답과 동료 2명 회상 사례를 통해 네 업무 비교, 최초 등록 우선 제안, 타깃·승인·결과 확인 조건을 정리했다.",
+    "evidence": [
+      {
+        "id": "E28-1",
+        "label": "사용자 문답 결과",
+        "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+      },
+      {
+        "id": "E28-2",
+        "label": "점심 체크",
+        "path": "docs/members/R02/daily/2026-11-23.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "최종 정정값과 네 업무 비교표 대조",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      },
+      {
+        "criterion": "타깃 조건·우선 제안·반대 근거 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      },
+      {
+        "criterion": "동료 발언 시점·표본 수·회상 한계와 미확인 후속 검증 기재",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "시간 실측과 실제 결제 없음",
+      "강사 B 날짜·이용 의향 미확인",
+      "플랫폼별 자동화 권한·실행 가능성 미확인"
+    ],
+    "decision_requests": [
+      "R01 최초 등록 우선·플랫폼·과금·추가 기능 범위 통합 판단"
+    ],
+    "completed_at": "2026-11-23",
+    "claims": [
+      {
+        "id": "C28-1",
+        "text": "최초 등록 우선 검증을 제안하며 시간은 회상 추정, 채널 확대의 모집 효과는 미확인이다.",
+        "status": "제안",
+        "evidence_ids": [
+          "E28-1"
+        ]
+      }
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "PHASE-20261123-01"
