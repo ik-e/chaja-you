@@ -72,14 +72,30 @@
       "source_ref": "R05-RETRY-REPLY",
       "meaning": "같은 논리 작업을 재시도하면 기존 task_id를 유지하고 실행 시도별 ID·상태·실패 이유를 별도로 기록하여 이전 실패를 덮어쓰지 않음",
       "limit": "시도 ID 발급 주체·고유 범위·전달 필드, 자동 재시도 여부·상한, 실제 구현·실행 검증까지 확정한 것은 아님"
+    },
+    {
+      "id": "ACK-07",
+      "review_ids": [],
+      "topic": "실행 시도 ID 전달",
+      "source_ref": "R05-ATTEMPT-CONTRACT",
+      "meaning": "R05가 request_id/task_id/attempt_id를 발급·전달하고 R03이 결과·실패 기록에 그대로 반환. 한 시도의 개별 도구 호출과 출처·근거·판정은 같은 attempt로 추적",
+      "limit": "실제 출력 코드 보완·연동 검증과 자동 재시도 정책은 미수행/미확정"
+    },
+    {
+      "id": "ACK-08",
+      "review_ids": [],
+      "topic": "계획과 작업 ID 발급 순서",
+      "source_ref": "R05-PLAN-ID-PROPOSAL",
+      "meaning": "R03 계획 제안 후 R05가 task_id를 부여하고 R03이 정식 ID로 선행 관계와 판정·결정의 작업 참조를 연결하는 흐름을 R03이 수용",
+      "limit": "임시 참조값·대응표의 구체적인 필드 표기는 R03 보완안으로 R05에게 전달할 대상이며 R05가 이미 수용했다고 기록하지 않음"
     }
   ],
   "remaining_shared_contract": [
     {
       "id": "OPEN-ID",
-      "question": "요청·작업·판정·결정 ID의 발급 주체·고유 범위와 재시도 시도 ID의 발급·전달 계약",
-      "status": "미합의",
-      "note": "재시도 task_id 유지·시도 이력 보존은 합의. 시도 ID 발급 주체·고유 범위·전달 필드와 요청/하위 ID 발급 분담은 미합의."
+      "question": "계획 임시 참조와 정식 task_id 대응의 전달 표현 및 나머지 결과 식별자 연결",
+      "status": "request/task/attempt 발급·반환 의미 확인 / 대응표 보완안 전달 대상",
+      "note": "세 ID는 R05 발급으로 정리. 계획 참조 대응표는 R03이 선택한 연결안이며 R05 최종 예시 반영 전. 판정·결정 ID 발급 규칙 전체가 확정된 것은 아님."
     },
     {
       "id": "OPEN-CONDITION",
@@ -121,15 +137,45 @@
       "received_at": null,
       "summary": "재시도 시 기존 task_id 유지, 실행 시도별 ID·상태·실패 이유 별도 보존, 시도 ID 발급 주체·전달 필드는 함께 조정",
       "user_confirmation": "사용자가 이 메시지를 전달하며 이 원칙으로 정하기로 했다고 명시함"
+    },
+    {
+      "id": "R05-ATTEMPT-CONTRACT",
+      "type": "user_relayed_R05_message",
+      "sender_as_reported": "R05",
+      "received_at": null,
+      "summary": "R05 발급 request_id/task_id/attempt_id를 R03이 그대로 반환하고 한 시도의 도구 호출·출처·근거·판정도 같은 attempt로 추적하는 데 동의"
+    },
+    {
+      "id": "R05-PLAN-ID-PROPOSAL",
+      "type": "user_relayed_R05_message_and_R03_choice",
+      "received_at": null,
+      "summary": "R05가 R03 계획 제안→R05 task_id 발급→R03 depends_on 및 판정/결정 참조 연결을 제안. 사용자가 선택을 위임해 R03이 수용하고 임시 참조 대응표 방식을 보완안으로 선택"
     }
   ],
   "retry_identity": {
-    "status": "식별·이력 보존 원칙 합의 / 시도 ID 전달 계약 미합의",
+    "status": "발급 주체·세 ID 반환 및 시도 추적 의미 확인 / 실제 적용 전",
     "task_id_policy": "같은 논리 작업의 재시도는 기존 task_id 유지",
     "attempt_history_policy": "시도별 ID·상태·실패 이유를 별도 보존하고 이전 실패를 덮어쓰지 않음",
-    "attempt_id_issuer": null,
-    "attempt_id_field": null,
+    "attempt_id_issuer": "R05",
+    "attempt_id_field": "attempt_id",
     "implementation_status": "새 재시도 구현·실행 없음",
-    "source_ref": "R05-RETRY-REPLY"
+    "source_ref": "R05-ATTEMPT-CONTRACT"
+  },
+  "planning_identity_flow": {
+    "status": "R05 제안 흐름 R03 수용 / 임시 참조 대응표는 R03 선택 보완안",
+    "request_id_issuer": "R05",
+    "task_id_issuer": "R05",
+    "local_reference_field": "plan_task_ref",
+    "local_dependency_field": "depends_on_refs",
+    "mapping_field_example": "task_id_map",
+    "field_status": "R03 예시명; R05 저장·전송 표현과 의미를 맞춰 연결",
+    "steps": [
+      "R03이 요청 내 임시 참조로 목표·역할·조건·선행 관계 제안",
+      "R05가 임시 참조와 정식 task_id 대응 반환",
+      "R03이 참조를 정식 ID로 연결한 계획을 반환한 뒤 실행"
+    ],
+    "followup": "기존 매핑·task_id는 유지하고 추가 작업에 대해서만 정식 ID 발급",
+    "execution": "R05가 발급한 세 ID를 결과·실패 기록에 그대로 반환. 같은 실행 안의 도구 호출마다 attempt_id를 새로 만들지 않음",
+    "not_implemented": true
   }
 }

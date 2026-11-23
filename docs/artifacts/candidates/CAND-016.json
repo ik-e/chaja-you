@@ -3,7 +3,7 @@
   "id": "CAND-016",
   "kind": "candidate",
   "status": "후보",
-  "title": "시험장 부정행위 위험 탐지 및 감독 지원 시스템 — V1.2 근거 검증안 (V1.0 동결 보존)",
+  "title": "시험장 부정행위 위험 탐지 및 감독 지원 시스템 — V1.3 기획 구조 정리 (독립 후보)",
   "proposed_by": [
     "R01",
     "AI"
@@ -12,7 +12,7 @@
   "created_at": "2026-11-16",
   "origin_note": "R01이 타깃→상황별 페인포인트→문제 정의→핵심 피처의 흐름을 고정하고, 기술·하드웨어는 후보별 실험 결과로 결정하도록 요청해 정리한 독립 기획안. 2026-11-16 V1.0 내용 동결 요청을 반영한다.",
   "source_idea_refs": [],
-  "summary": "대면시험 운영기관/시험감독관 대상 독립 후보. V1.2에서 Monito·SmarterProctoring·ProctorU·Innovatiview·공개 구현의 기존 해결 범위를 확인하고, F1~F3의 기능 조합 자체가 아닌 특정 시험의 오인·인계·기록 업무를 비AI 체크리스트 대비 개선할 수 있는지 검증하도록 수정했다. 잔여 업무·성과는 미입증.",
+  "summary": "대면시험 운영기관/감독관 대상 독립 후보. V1.3에서 타깃 사용자→상황별 페인포인트→문제 정의·원인→F1~F3 기능의 인과 흐름을 명확히 분리했다. V1.2의 기존 서비스 검증과 미확인 사항은 유지하며 실제 사용자 손실·효과·기관 승인은 미입증이다.",
   "potential_value": [
     "시험 중 불필요한 개입·필요한 확인 누락 감소 가능성",
     "사건 이관 시 관찰 사실·추정 혼동과 재질의 감소 가능성",
@@ -54,9 +54,12 @@
     "docs/artifacts/candidates/CAND-016-evidence-review-2026-11-16.md",
     "docs/artifacts/candidates/CAND-016-v1.2-proposal.md",
     "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.2.md",
-    "docs/artifacts/candidates/CAND-016-v1.2-changelog.md"
+    "docs/artifacts/candidates/CAND-016-v1.2-changelog.md",
+    "docs/artifacts/candidates/CAND-016-v1.3-proposal.md",
+    "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.3.md",
+    "docs/artifacts/candidates/CAND-016-v1.3-changelog.md"
   ],
-  "promotion_note": "V1.0/V1.1 원문 동결 보존. V1.2는 근거 재검증을 반영한 R01 독립 후보이며, 팀 정식 주제·기관 승인·도입 효과 확정이 아니다. 기존 대안 대비 개선과 사람 결정 전에는 공식 Design/Spec/ADR/TASK/State를 바꾸지 않는다.",
+  "promotion_note": "V1.0~V1.2 원문 보존. V1.3은 R01 독립 후보의 설명 구조만 개선했으며, 팀 정식 주제·기관 승인·도입 효과 확정이 아니다. 기존 대안 대비 실측과 사람 결정 전에는 공식 Design/Spec/ADR/TASK/State를 바꾸지 않는다.",
   "baseline": {
     "version": "V1.0",
     "date": "2026-11-16",
@@ -129,14 +132,14 @@
     "residual_user_pain": "P1 기술적 한계 일부 근거 확인, P2/P3 현장 잔여 업무의 양과 개선 효과 미측정"
   },
   "latest_revision": {
-    "version": "V1.2",
-    "date": "2026-11-16",
-    "status": "멘토 검토용 독립 후보·미채택",
-    "document": "docs/artifacts/candidates/CAND-016-v1.2-proposal.md",
-    "onepager": "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.2.md",
-    "changelog": "docs/artifacts/candidates/CAND-016-v1.2-changelog.md",
+    "version": "V1.3",
+    "date": "2026-11-21",
+    "status": "멘토 검토용 독립 후보·미채택 (설명 구조 개선, 새 실증 없음)",
+    "document": "docs/artifacts/candidates/CAND-016-v1.3-proposal.md",
+    "onepager": "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.3.md",
+    "changelog": "docs/artifacts/candidates/CAND-016-v1.3-changelog.md",
     "evidence_review": "docs/artifacts/candidates/CAND-016-evidence-review-2026-11-16.md",
-    "previous_version": "docs/artifacts/candidates/CAND-016-v1.1-proposal.md",
+    "previous_version": "docs/artifacts/candidates/CAND-016-v1.2-proposal.md",
     "previous_frozen_version": "docs/artifacts/candidates/CAND-016-v1.0-snapshot.md"
   },
   "review_improvements": {

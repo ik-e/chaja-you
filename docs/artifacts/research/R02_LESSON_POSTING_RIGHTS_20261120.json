@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261120-R02-LESSON-POSTING-RIGHTS",
+  "kind": "research",
+  "title": "강사용 AI 최초 공고 등록의 로그인·제출 권한과 지도 재게재 검토",
+  "status": "공개 법령·판례·약관 조사 완료 / 개별 운영사 허용 및 실사용 미확인",
+  "owner": "R02",
+  "date": "2026-11-20",
+  "inputs": {
+    "task": "TASK-022",
+    "team_review": "https://github.com/ik-e/chaja-you/pull/29",
+    "user_evidence": "R02의 직접 등록 경험, 동료 강사 한 명의 이용 조건, 당근 모임·크몽 등록 화면, R02가 정정한 레슨 포스터",
+    "proposal": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+  },
+  "outputs": {
+    "priority_owner": "R02",
+    "first": "강사용 레슨 공고 최초 등록 대행. 당근 모임 개설·사진·첫 글 게시와 크몽 패키지 구성·심사 접수를 검증한다.",
+    "first_test": "강사가 게시처·공고 자료·가격·최종 단계를 미리 지정하고 직접 로그인하면, 자기 기기에서 AI가 정해진 범위의 게시 또는 심사 접수를 마치는 방식을 먼저 검증한다. 게시처가 해당 방식을 허용하는 범위에서는 강사에게 마지막 클릭을 다시 요청하지 않는다. 강사가 직접 로그인한 원격 대행은 후속 대조 대상이다. 외부 계정 비밀번호를 사업자 서버가 받아 재로그인하는 구조는 첫 구현에서 제외한다.",
+    "second": "수강생용 근거리 지도는 외부 공고의 저작물 이용허락·플랫폼 데이터 이용조건·제휴 경로가 미확인이라 보류한다. 강사가 직접 제공하고 지도 공개를 선택한 자료나 재표시 권한이 확인된 공급처를 통해 재검토한다.",
+    "decision_scope": "R02의 조사·검증 순위. 팀의 제품 선정과 플랫폼의 구현 허가는 미확정이다."
+  },
+  "evidence": [
+    {"topic": "명의자 동의와 정당한 접근권한", "finding": "플랫폼이 정한 접근권한을 따진다. 명의자의 뜻에 따른 사실행위 대행으로 본인 사용에 준하는 경우 등이 예외가 될 수 있다. 군 계정을 위임 범위 밖에서 자기 목적으로 쓴 사건은 유죄였다.", "sources": ["https://www.law.go.kr/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900629439", "https://law.go.kr/LSW/precInfoP.do?evtNo=2005도870"]},
+    {"topic": "본인이 로그인한 세션", "finding": "명의자·서비스제공자 승낙 없이 이미 로그인된 사진첩에 접속한 사건에서 무죄 부분을 파기환송했다. 강사가 명시적으로 공고 제출을 의뢰한 경우와는 다르다.", "sources": ["https://law.go.kr/LSW/precInfoP.do?mode=0&precSeq=599601"]},
+    {"topic": "자동 게시 프로그램", "finding": "광고 글 게시 등을 자동화하는 프로그램이 시스템 운용을 방해할 수 있는 악성프로그램이라는 입증이 부족해 무죄가 확정됐다. 계정 위임·약관 준수를 직접 판단한 사건은 아니다.", "sources": ["https://law.go.kr/LSW/precInfoP.do?precSeq=225803"]},
+    {"topic": "인증정보·공고 자료 처리", "finding": "개인정보 처리 근거·최소 수집·파기·안전조치를 확인한다. 고시는 인증정보 저장·송수신 보호와 비밀번호 저장 시 일방향 암호화를 규정한다. 외부 AI로 자료가 넘어가면 실제 흐름에 따라 위탁, 제3자 제공, 국외이전도 검토한다.", "sources": ["https://www.law.go.kr/법령/개인정보보호법", "https://www.law.go.kr/admRulInfoP.do?admRulSeq=2100000281400", "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1020398611"]},
+    {"topic": "게시처의 운영조건", "finding": "당근 모임은 취지와 관계없는 홍보와 비정상적 시스템 접근을 제한한다. 크몽은 제3자 계정 사용 인지 시 통보, 비정상적 판매글 등록 제한 및 심사 절차를 둔다. 강사의 광고를 그 게시판에 올려도 되는지와 외부 서비스가 자동 제출해도 되는지를 별도로 확인한다.", "sources": ["https://cs.kr.karrotmarket.com/wv/faqs/3730?q=%EC%9A%B4%EC%98%81%EC%9E%90", "https://kmong.com/support/customer-center/posts/179", "https://kmong.com/support/customer-center/posts/189", "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1022126141"]},
+    {"topic": "공개 지도", "finding": "공고 글·사진의 이용허락 범위와 플랫폼 DB의 반복적 추출은 별도 쟁점이다. 유사 부동산 정보 서비스에 대한 특허법원 판결은 DB 제작자 권리 침해를 인정했다. 중고닷·모아줌 소개에서 개별 계약의 범위는 알 수 없다.", "sources": ["https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1033063209", "https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1029423451", "https://file.scourt.go.kr/dcboard/1779236599426_092319.pdf", "https://www.joongmo.com/faq", "https://moajung.com/about"]}
+  ],
+  "verification": {
+    "confirmed": "법령, 대법원 판결 세 건, 지도 관련 특허법원 판결 및 대상 게시처의 공개 안내를 대조했다. 15분·20분은 강사의 추정치이며 5만 원은 동료 한 명이 10곳 최초 등록에 표한 지불 의향이다.",
+    "unverified": ["두 게시처가 설치형·원격 유료 대행과 강사 부재 중 최종 게시·심사 접수를 허용하는지", "동일한 음악 강사 AI 최초 등록 사례를 직접 판단한 국내 공개 판례 및 타사 로그인용 비밀번호의 복호화 가능 보관을 허용하는 구체적 해석", "동일 조건의 Codex 대비 직접 작업 시간·개입 횟수·정확한 완료 건수, 두 방식의 결과를 본 강사의 실제 구매 의향", "지역별로 지도 공개가 허용된 공고를 충분히 확보할 수 있는지"],
+    "next": "동일 자료·게시처 규칙·로그인 조건·모의 양식에서 수동 템플릿, Codex에 재사용 지시문으로 최종 제출까지 맡기는 방식, 전용 프로그램을 비교한다. 정확한 완료 건수와 강사의 직접 시간·개입을 대조한다. 각 게시처의 허용 단계와 조건이 확인되면 강사 개입 횟수와 실제 게시·심사 접수 결과를 기록한다."
+  }
+}

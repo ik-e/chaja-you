@@ -1,7 +1,7 @@
 """Validate AI artifacts and build the human-readable project projections."""
 
 import argparse
-import hashlib
+import subprocess
 import json
 import difflib
 import os
@@ -656,8 +656,14 @@ def build():
         path = ROOT / entry["snapshot_path"]
         if not path.is_file():
             raise ValueError(f"missing immutable source snapshot {path}")
-        content = path.read_bytes()
-        blob_sha = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\x00" + content).hexdigest()
+        # Use Git's path-aware clean filters so Windows CRLF checkout conversion
+        # does not invalidate the source blob digest.
+        blob_sha = subprocess.check_output(
+            ["git", "hash-object", f"--path={entry['snapshot_path']}", str(path)],
+            cwd=ROOT,
+            text=True,
+            encoding="ascii",
+        ).strip()
         if blob_sha != entry["blob_sha"]:
             raise ValueError(f"immutable source blob digest mismatch: {path}")
     for entry in closeout["entries"]:
@@ -744,7 +750,7 @@ def build():
             "",
             "## 현재 운영 적용 범위",
             "",
-            "**주의: 이 문서는 이전 찾아you 제품 기준안입니다. 현재 실제 제품은 미선정이며 이 목표·MVP의 구현을 보류합니다. 제출용 잠정 기준 및 과거 이력으로만 사용합니다.**",
+            "**주의: 이 문서는 이전 찾아you 제품 기준안이며 현재 레슨 등록 서비스의 기획·구현 기준이 아닙니다. 이전 목표·MVP의 구현을 보류하고 제출용 잠정 기준 및 과거 이력으로만 보존합니다. 현재 제품 기획 방향과 미확정 범위는 CURRENT를 따릅니다.**",
             "",
             local_link(project["phase_intent_ref"], "현재 단계 의도", output)
             + " · " + local_link("CURRENT.md", "실제 운영 상태", output),
