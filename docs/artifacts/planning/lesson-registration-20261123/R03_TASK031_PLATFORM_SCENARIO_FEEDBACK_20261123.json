@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "id": "REVIEW-20261123-R03-TASK031-PLATFORM-SCENARIOS",
+  "kind": "review_feedback",
+  "status": "R01 검토 의견 / 기존 공통 요구 충족 / 플랫폼별 상세 보완 요청 / TASK 완료 승인 아님",
+  "owner": "R01",
+  "prepared_by": "AI (R01 요청에 따른 리뷰 기록)",
+  "date": "2026-11-23",
+  "target": {
+    "member": "R03",
+    "task": "TASK-031",
+    "source_path": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+    "source_commit": "0f91cc9d6913dd2e0171d0f782f788414a88f997",
+    "feedback_issue": "https://github.com/ik-e/chaja-you/issues/35"
+  },
+  "assessment": {
+    "confirmed": [
+      "F1~F3 공통 트리거/입력/처리/출력/예외/완료 조건과 사용자·서비스 책임 작성",
+      "정상 1건 및 정보누락·인증만료·결과미확인 예외 3건 작성",
+      "직접 등록·Codex·전용 서비스 비교의 공통 입력·시작·종료·측정 기준 제시",
+      "자동 게시 허용 경로 미확인·실제 실험 미실행 구분"
+    ],
+    "gap": "당근/크몽 2개 사이트의 단계별 필수 필드·절차·사람 개입·외부 관측 근거가 각각 분리된 F1→F2→F3 매핑이 부족함",
+    "decision": "기존 기획 요구사항은 부분 충족/재작성 반려 없음; 설계 인계를 위한 플랫폼별 상세화만 보완 요청"
+  },
+  "feedback": [
+    "당근: 원본 정보 변환·모임 생성·첫 레슨 글 게시·각 단계의 상태와 관측 증거를 F1/F2/F3로 매핑합니다.",
+    "크몽: 상품명·설명·가격 패키지·진행 절차·준비물·사진 등 입력 필드 변환·정보 검증·심사 접수·이후 공개를 구별합니다.",
+    "각 플랫폼·각 단계에 트리거, 필수/선택 입력, 현재 알려진 제약, 처리, 출력, 예외, 완료 기준, 사용자/서비스/플랫폼 책임 및 근거를 작성합니다.",
+    "정보 누락·인증 만료·제출 후 결과 미확인·부분 성공의 상태·안전 재개·중복 게시 방지 경계를 구체화합니다.",
+    "R02의 기존 조사/화면 관찰을 먼저 재활용하고 최신 UI·입력 제약을 새로 확인하지 못하면 출처·확인일·미확인으로 표시합니다.",
+    "R02에게 사용자 경험과 실제 입력 사례, R05에게 자동화 허용·인증·세션·기술 가능성에 대한 확인 질문을 구분해 제시합니다."
+  ],
+  "owner_boundaries": {
+    "R03": "기존 TASK-031 본인 산출물에서 플랫폼별 업무 시나리오 구성, 부족한 증거 질문 목록화, owner TASK result 기록",
+    "R02": "기존 TASK-028의 사용자 Pain/업무 경험 정보와 기존 R02 플랫폼 조사 참조; 범위 밖 신규 조사 자동 배정 금지",
+    "R05": "기존 TASK-030의 운영사 허용/API/서버·로컬/세션·권한 검토; 범위 밖 신규 조사 자동 배정 금지",
+    "R01": "첫 Pain·MVP·업무 경계와 후속 설계 착수 판단, 추가 TASK가 필요할 때 별도 승인"
+  },
+  "minimum_response": "당근과 크몽 각각에 대해 단계별 F1→F2→F3 매핑 표, 입력/처리/출력/예외/완료/책임/근거·미확인, R02·R05 확인 질문 목록을 기존 작업 결과에 보완합니다. 확인 불가한 단계는 미확인과 검증 경로를 남기면 됩니다.",
+  "boundary": [
+    "현재 최초 등록은 우선 검증 가설이며 후기 재게시 등에 대한 최종 MVP 결정 전",
+    "UI/DB/API 상세 설계·코드·PoC·실제 사이트 무단 자동 게시 요구 없음",
+    "기존 R03 workspace/daily 및 owner TASK-031 원본은 R01이 수정하지 않음",
+    "리뷰는 수신 확인·작업 착수·TASK 공식 완료 처리와 별개이며 R03 개인 산출물 수정은 담당자 책임",
+    "기존 자료 전체 재조사·신규 기능 제안 요구 아님"
+  ],
+  "evidence": [
+    {
+      "type": "R03_output",
+      "path": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+      "commit": "0f91cc9d6913dd2e0171d0f782f788414a88f997"
+    },
+    {
+      "type": "task",
+      "path": "docs/artifacts/tasks/TASK-031.json"
+    },
+    {
+      "type": "R02_source",
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "type": "R05_task",
+      "path": "docs/artifacts/tasks/TASK-030.json"
+    },
+    {
+      "type": "phase",
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "type": "review_issue",
+      "url": "https://github.com/ik-e/chaja-you/issues/35"
+    }
+  ],
+  "verification": {
+    "confirmed": "R03 공통 기능 계약·대표 예외·대조 설계 및 기존 R02 원안에 기초한 시나리오 확인",
+    "unverified": "당근·크몽의 최신 필수 필드·자동 등록 허용·실제 접수/게시 관측 방식, R03의 피드백 수신",
+    "follow_up": "R03 보완 결과와 TASK result 제출 후 R01이 12항목 기획서 섹션 7/9/12 인계 여부 검토"
+  }
+}

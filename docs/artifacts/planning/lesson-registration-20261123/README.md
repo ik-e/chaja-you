@@ -19,6 +19,8 @@
 | R03 | [TASK-031](../../tasks/TASK-031.json) | [기능 요구사항·검증](../../../members/R03/workspace/2026-11-23_lesson-requirements-validation.md) | F1~F3 입출력·예외·완료 및 동일 조건 비교 계획 |
 | R01 | [TASK-032](../../tasks/TASK-032.json) | `proposal-v0.1.json` | 12항목·Pain→F→가치→수익 연결·MVP 경계·미확인 표시 |
 
+**R03 TASK-031 검토 피드백(2026-11-23):** [당근·크몽별 F1~F3 시나리오 상세화 리뷰](R03_TASK031_PLATFORM_SCENARIO_FEEDBACK_20261123.json) · [팀원 전달·보완 이슈 #35](https://github.com/ik-e/chaja-you/issues/35). 공통 기능 계약·대표 시나리오 작성은 인정하되, 사이트별 단계·필드·책임·실패/완료 증거의 연결을 추가 요청했습니다. **R03 개인 결과와 TASK 원본은 담당자가 수정**하며, R02·R05에게 중복 조사를 자동 배정하지 않습니다.
+
 개인 결과 파일은 담당자가 직접 만들고 관리합니다. 링크는 업로드 전까지 존재하지 않을 수 있으며, 이는 완료 증거가 아닙니다.
 
 ## 완료 판단과 인계
