@@ -180,5 +180,59 @@
     "not_complete": "파일만 존재하거나 근거 없이 추정한 결론, 허용되지 않은 자동 실행을 성공으로 기록한 경우",
     "handoff": "담당자가 본인 workspace 결과 및 관련 TASK result에 출처와 검증 상태를 기록하고 URL/commit을 R01에 전달한다. R01만 공통 기획 원본을 통합한다.",
     "limits": "오늘은 조사·기획과 요구사항 정리까지만. UX 화면, DB/API 상세, PoC 코딩, 실제 사이트 무단 자동 등록 제외."
+  },
+  "technical_feasibility_handoff": {
+    "decision_ref": "docs/human/responses/HRESP-20261123-02_r05-technical-feasibility-scope.md",
+    "owner_task": "TASK-030",
+    "platforms": [
+      "크몽",
+      "탈잉",
+      "숨고"
+    ],
+    "research_owner": "R05",
+    "inputs_by_member": [
+      {
+        "role": "R02",
+        "task_id": "TASK-028",
+        "role_type": "기존 완료 근거 제공",
+        "provides": "사용자 실제 등록 경험·우선 Pain·원본 자료/사진·이용 기대 조건 및 기존 플랫폼 법률·약관 조사",
+        "to": "R05 ①②③④⑧ 및 R01 타깃·가치",
+        "handoff": "기존 완료 결과와 R02_LESSON_POSTING_RIGHTS_20261120.json 재사용; 추가 신규 조사 자동 배정 금지"
+      },
+      {
+        "role": "R04",
+        "task_id": "TASK-029",
+        "role_type": "기존 담당 조사 인계",
+        "provides": "수작업·범용 AI·Browser Use/대행 등 3~5개 대안의 실제 등록 기능·가격·사용자 개입·잔여 Pain",
+        "to": "R05 ⑥⑦의 비교 기준 및 R01 차별화·BM",
+        "handoff": "기존 TASK-029의 범위를 유지하며 API·보안·법률 재조사는 R05가 담당"
+      },
+      {
+        "role": "R03",
+        "task_id": "TASK-031",
+        "role_type": "기존 담당 요구사항 인계",
+        "provides": "F1~F3 트리거·입출력·사용자 승인·완료/실패/미확인 판정, 동일 조건 기술 비교의 관측 지표",
+        "to": "R05 ②③④⑤⑥⑦ 및 R01 기능 요구사항",
+        "handoff": "기존 TASK-031 범위·플랫폼 상세화 피드백 유지; 기술·정책 허용 판단은 R05 결과에 의존"
+      },
+      {
+        "role": "R05",
+        "task_id": "TASK-030",
+        "role_type": "기술 조사 주담당",
+        "provides": "세 플랫폼 × ①~⑤, 공통 ⑥⑦, 법적·계약적 ⑧; 추천 구조 1개+대안 1개와 결정 요청",
+        "to": "R01 기획서 제10·11장 및 R03 제7·9·12장 확인",
+        "handoff": "기존 개인 브랜치 결과 보존 후 TASK-030 보고서 보완; 구현·최종 제품 결정 제외"
+      },
+      {
+        "role": "R01",
+        "task_id": "TASK-032",
+        "role_type": "통합·승인",
+        "provides": "팀 결과 종합, 첫 플랫폼·MVP·기술 선정과 보류/조건부 결정",
+        "to": "통합 기획서 12항목 및 후속 설계 기준선",
+        "handoff": "R02 완료 TASK를 재개하거나 팀원 소유 TASK를 대신 완료 처리하지 않음"
+      }
+    ],
+    "ownership_rule": "기존 TASK-028~032를 그대로 사용한다. 각 팀원의 기존 작업 책임을 변경하지 않고 R05 조사에 필요한 결과의 전달·의존 관계만 명시한다. 새 TASK/PR 없음.",
+    "status_note": "GitHub 계획에 역할·인계 추가. 담당자에게 실제 전달되었거나 수신이 확인되었다는 의미는 아니다."
   }
 }
