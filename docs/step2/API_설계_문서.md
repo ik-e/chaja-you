@@ -1,394 +1,160 @@
-# 찾아you API 설계 문서 — 잠정 제출본
+# 음악 레슨 강사 등록 지원 서비스 API 설계 문서 — 조건부 개정 제출 후보
 
-> **Step 2 · DLV-03 · 2026-11-19 기준 / 잠정 제출안 · 제품 미선정 · 미제출/접수 미확인**. 기존 찾아you의 APP-A/C 설계 자료를 사용한 제출 일정 대응용 문서입니다. 11/21 오프라인 제품 선택 또는 보류 후 재작성할 수 있습니다.
+> **Step 2 · DLV-03 · 2026-11-23 / 설계 가설, 미승인·미구현 · 실제 제출/접수 미확인.** 이 문서는 [기획 12항목 V0.1](../artifacts/planning/lesson-registration-20261123/proposal-v0.1.md)과 [Step1 요구사항](../step1/기획서_제출본.md)을 바탕으로 공식 가이드의 6개 항목에 맞춰 작성한 **제출용 논리 API 후보**입니다. [TASK-030](../artifacts/tasks/TASK-030.json)의 플랫폼 정책/인증, [TASK-031](../artifacts/tasks/TASK-031.json)의 기능 완료 조건 및 R01의 설계 착수 결정 **전에는 개발 지시가 아닙니다**. 과거 찾아you API 및 실제 이력은 [11/19 스냅샷](../submissions/step1-step2-20261119/README.md)에 보존합니다.
 
-## 1. 공통 정보·인증과 권한 경계
+## 1. 공통 정보·인증 및 API 정책
 
-**문서 상태:** 찾아you APP-A 임시 다중 사용자 모델의 제안 API, 서버 미구현·기술 미승인. API와 DB가 공유하는 유일한 구조화 의미 기준은 [contract.json](https://github.com/ik-e/chaja-you/blob/main/docs/deliverables/pilots/2026-11-18-v3/contract.json)입니다. 제품 방향은 강사님·매니저님께 공유됐으나 특정 기술·기간 연기 승인으로 간주하지 않습니다.
-
-| 항목 | 내용 |
+| 항목 | 후보 설계 / 현재 판단 |
 | --- | --- |
-| 문서 버전 | V3 잠정 설계 / 2026-11-18, 이전 V2는 보존 |
-| 개발 기본 주소 | `http://localhost:8000/api/v1` (**구현 전 예시**) |
-| 배포 서버 | 미정·배포되지 않음. 배포 전 실제 URL 기록 |
-| 자동 문서 | `/docs`, `/openapi.json` (**FastAPI 선택 시 위치 제안**, 현재 미동작) |
-| 인증 | 임시 설계: `Authorization: Bearer <JWT>`; 서명·만료·주체 검증 필요 |
-| 자원 소유권 | 인증된 `JWT.sub = research_request.owner_id` 일 때 조회, 그렇지 않으면 404로 자원 존재 은닉 |
-| 데이터 저장 | request/owner/task/attempt/source/evidence/verdict 7개 테이블의 개념 계약 |
-| 공통 오류 | 모든 API에서 `error.code/message/request_id/retryable` |
+| 문서 버전 | LESSON-API-PREVIEW-0.1 / 2026-11-23 / 작성 중 |
+| 서비스 업무 경계 | 강사 제공 공고 1건 → 필드 구조화 → 게시처별 미리보기·누락 확인 → 등록 지원(허용 시에만) → 증거 기반 결과 상태 |
+| 개발 주소 | `http://localhost:8000/api/v1` **예시**, 서버 없음 |
+| 배포 서버 | 없음. 실제 URL·호스트·전송 구간 암호화 설정은 미정 |
+| 자동 명세 | OpenAPI `/docs`, `/openapi.json`은 **FastAPI 채택 시 가설**, 동작하지 않음 |
+| 인증 | 사용자 소유 확인이 필요하나 로그인·Bearer/JWT 방식 **미결정**; 사용자 인증과 외부 플랫폼 세션은 분리 |
+| 외부 인증정보 | 외부 비밀번호·쿠키·세션을 요청 JSON과 로그에 수집/저장하지 않음. 향후 실제 경로는 R05의 권한 검토를 통과해야 함 |
+| 응답 공통 형태 | 성공 시 `request_id`와 처리 자원 ID·증거 상태; 오류 시 `error.code/message/request_id/retryable` (제안) |
+| 업데이트 | 정책·접근 권한 변경 시 API 상태·도메인 모델 재검토. 신규 외부 등록 API 확정 전 |
 
-**신뢰 경계:** client에서 `owner_id`를 받거나 믿지 않고 서버의 검증된 인증 주체로 할당합니다. 모든 하위 task/verdict/source/evidence 조회는 대상 request의 owner 확인을 거쳐야 합니다. 인증 방식 미선정 상태로 공개 배포하는 것을 허용하는 설계가 아닙니다.
+**논리 상태:** `drafted`(초안) → `prepared`(필수 정보 준비) → `needs_action`(확인·인증 필요) → 조건 충족 시 `submitted`(제출 관찰) → `review_pending`(심사 대기) 또는 `posted`(실제 게시 확인). `blocked`/ `failed`/ `unknown`은 독립 종료·대기 상태입니다. **API 202/작업 생성은 외부 사이트 게시 완료가 아닙니다.**
 
-**변경 이력:** V1 일반 구상 → V2 4개 경로 초안 → **V3 owner_id 명시, 작업/판정 참조 통일, 멱등성과 재시도 계약 및 정식 Markdown 예시 보완**. 실제 채택/구현 이력은 아닙니다.
+**완료 정의 차이:** 당근 모임은 '모임 개설'과 '첫 레슨 글 게시'를 구분하며, 크몽은 '상품 정보 입력'과 '심사 접수'를 구분합니다. 실제 UI·정책 검증 전 현재 예시 값으로 인수 기준을 확정하지 않습니다.
 
-### 강사 피드백에 따른 단일 사용자 흐름과 API 책임
+## 2. API 목록 및 요구사항 매핑
 
-**입력 → 계획 → 허용된 자료 조회 → 근거 분류 → 저장 → 응답**을 하나의 사례로 고정합니다. 입력 예시: Android 집중 앱 PomoToki/Focus To-Do, 필수 오프라인 타이머·선호 무계정. 이 흐름은 11/19 **미선정 제품의 과거 APP-A 사례**이며 11/21 주제 변경 시 API·도메인 데이터를 새로 설계합니다.
+| ID | Method / Path (제안) | 목적 | 대상 FR | 인증·실행 범위 |
+| --- | --- | --- | --- | --- |
+| API-L01 | `POST /api/v1/lesson-drafts` | 사용자 공고·레슨 조건·사진 참조 등록 및 검증 | FR-01,05,06 | 사용자 인증 후보, **내부 초안만** |
+| API-L02 | `GET /api/v1/lesson-drafts/{draft_id}/previews/{platform_id}` | 게시처 필드 변환 미리보기와 부족 조건 반환 | FR-02,05,06 | 소유자 조회, **외부 제출 없음** |
+| API-L03 | `POST /api/v1/registration-jobs` | 준비/승인 가능 여부 평가 및 등록 작업 생성 | FR-03,04,06 | 기본 `plan_only`; 실제 제출은 **정책 허용+사용자 권한 확인 후 별도 조건** |
+| API-L04 | `GET /api/v1/registration-jobs/{job_id}` | 준비·접수·게시·실패·불명확 상태와 관측 근거 조회 | FR-04,06 | 소유자 조회, 읽기 전용 |
 
-| 단계 | 사용자·서버·Agent의 책임 | 식별자·계약 | 상태·검증 조건 |
+**설계가 해결하지 못한 것:** 범용 AI/Codex가 강사 직접 로그인 뒤 동일한 등록을 수행할 때 전용 서비스의 추가 가치, 실제 외부 플랫폼 위임 허용, 사이트별 인증 방식·API 제공 여부. 이 세 사항은 API 존재와 무관하게 검증해야 합니다.
+
+## 3. 엔드포인트별 상세 계약 (공식 가이드 8개 항목)
+
+### API-L01 · POST /api/v1/lesson-drafts
+
+| 항목 | 설계 초안 (실제 엔드포인트 아님) |
+| --- | --- |
+| 1. 호출 목적 | 강사가 보유한 레슨 원본·가격·이미지 참조를 수령해 미리보기 가능한 초안을 기록 |
+| 2. Method/Path | `POST /api/v1/lesson-drafts` |
+| 3. Headers | `Content-Type: application/json`, 서비스 인증 주체(방식 미정), `Idempotency-Key` 후보 |
+| 4. Path/Query | 없음. 서버가 인증된 강사 소유권을 부여, body의 임의 owner 값은 신뢰하지 않음 |
+| 5. Body | `source_text`, `lesson.monthly_fee_krw`, `sessions_per_month`, `minutes_per_session`, `media_asset_refs[]`, `target_platform_ids[]` |
+| 6. 검증·권한 | 원본·금액 양수·횟수/시간 단위·미디어 권리·선택한 플랫폼 확인; 체험가·할인은 누락 시 추정하지 않음 |
+| 7. 정상 응답 | `201 {draft_id, status:"drafted", missing_fields:[], request_id}` (예시, 실데이터 없음) |
+| 8. 오류·실행 규칙 | 401/403 인증·소유권, 422 입력 불일치, 409 멱등 충돌. 외부 플랫폼 접근 없음 |
+
+**요청 예시(합성):**
+```json
+{
+  "source_text": "1:1 랩 레슨 안내 (강사 제공 원문이라고 가정)",
+  "lesson": {
+    "monthly_fee_krw": 300000,
+    "sessions_per_month": 4,
+    "minutes_per_session": 90
+  },
+  "media_asset_refs": ["media:sample-01"],
+  "target_platform_ids": ["carrot-group", "kmong"]
+}
+```
+
+**주의:** 월 300,000원·4회·회당 90분은 [R02 기존 기획의 예시](../members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md)와 맞추기 위한 합성 요청입니다. 1회 유료 체험 상품 가격은 입력되지 않았으며 자동 산정하지 않습니다.
+
+### API-L02 · GET /api/v1/lesson-drafts/{draft_id}/previews/{platform_id}
+
+| 항목 | 설계 초안 |
+| --- | --- |
+| 1. 호출 목적 | 게시처에 필요한 제목·설명·절차·가격·이미지 등의 표시값 및 누락 항목 미리보기 |
+| 2. Method/Path | `GET /api/v1/lesson-drafts/{draft_id}/previews/{platform_id}` |
+| 3. Headers | 서비스 인증(방식 미정), 외부 사이트 자격증명 불필요 |
+| 4. Path/Query | `draft_id`(소유 초안), `platform_id`(등록한 규칙); 조회시 규칙 버전도 반환 |
+| 5. Body | 없음 |
+| 6. 검증·권한 | 강사 소유권, 규칙 최신 확인일, 공고 가격 단위·이미지 규격·미확인 필드 |
+| 7. 정상 응답 | `200 {draft_id, platform_id, preview, missing_fields, rule_checked_at, policy_status, status:"prepared"|"needs_action"}` |
+| 8. 오류·실행 규칙 | 404 소유권 없음/대상 없음, 409 규칙 미확인, 422 변환 불가능; GET 호출이 실제 게시를 하지 않음 |
+
+### API-L03 · POST /api/v1/registration-jobs
+
+| 항목 | 설계 초안 |
+| --- | --- |
+| 1. 호출 목적 | 게시처별 등록 작업을 계획하고 실행 가능 조건을 점검. **자동 제출 자체는 조건부 미승인** |
+| 2. Method/Path | `POST /api/v1/registration-jobs` |
+| 3. Headers | 서비스 인증 + `Idempotency-Key` 필수 후보; 외부 비밀번호/세션 전달 금지 |
+| 4. Path/Query | 없음 |
+| 5. Body | `draft_id`, `platform_id`, `execution_mode:"plan_only"`, `user_approval_ref`(있을 때만, 인증 대체 불가) |
+| 6. 검증·권한 | 소유자·초안 완결성·게시처 자동화 허용 근거·업무 위임·세션 안전·최종 승인 필요 여부. 통과하지 않으면 외부 실행 호출 금지 |
+| 7. 정상 응답 | `202 {job_id, status:"prepared"|"needs_action"|"blocked", policy_status, next_action, request_id}` |
+| 8. 오류·실행 규칙 | 정책 미확인/권한 부족이면 `blocked`; 중복 key는 기존 작업 식별자를 재사용. `submitted`/ `posted`를 가정해 반환 금지 |
+
+**등록 완료 조건부 경로:** 향후 정책 허용, 사용자 확인, 설치형/공식 API 등 허가된 실행 주체를 결정할 때만 별도 `approved_connector` 모드를 요구사항·권한·서버 통제와 함께 명세 변경합니다. **이번 문서로 원격 브라우저나 최종 등록 권한을 승인하지 않습니다.**
+
+### API-L04 · GET /api/v1/registration-jobs/{job_id}
+
+| 항목 | 설계 초안 |
+| --- | --- |
+| 1. 호출 목적 | 등록 작업의 현재 상태·확실성·필요한 사용자 행동·최종 증거를 조회 |
+| 2. Method/Path | `GET /api/v1/registration-jobs/{job_id}` |
+| 3. Headers | 서비스 인증(미정) |
+| 4. Path/Query | `job_id`(소유자 범위). 결과 접근에도 초안·작업 소유권 검증 |
+| 5. Body | 없음 |
+| 6. 검증·권한 | 외부 이벤트의 출처/시각/관측 수준 확인. "제출 시도"와 "사이트가 접수"를 구분 |
+| 7. 정상 응답 | `200 {job_id, platform_id, status, completion_kind, evidence_refs, observed_at, retry_allowed, next_action}` |
+| 8. 오류·실행 규칙 | 404 타인/없는 작업, 상태 관측 실패 시 200+ `status:"unknown"` 또는 외부 접근 오류 기록; 자동 중복 제출 금지 |
+
+## 4. 입력·권한 검증과 공통 오류
+
+| 검증 계층 | 검사 대상 | 처리 |
+| --- | --- | --- |
+| 사용자/소유권 | 강사 ID·draft/job 관계 | 서비스의 인증 주체 기준 조회; 타인 요청은 404/403, 임의 owner 전달 무시 |
+| 원본 진실성 | 소개글/사진의 권한, 시간·횟수·가격·옵션 | 출처와 사용자 입력 분리; 불명확값은 needs_action |
+| 플랫폼 양식 | 당근 모임·크몽의 실제 입력 필수값·정책 변경 | 규칙 버전·확인일 없으면 자동 제출 불가 |
+| 외부 실행 허용 | 운영사 약관/공식 위임·사용자 승인·세션 위험 | **모든 조건 충족 전 외부 게시 실행 금지** |
+| 결과 검증 | 모임 개설 vs 첫 글 게시, 상품 입력 vs 심사 접수 | 완료 유형과 관찰 증거를 함께 보존 |
+
+| HTTP / 코드(설계값) | 의미·예시 |
+| --- | --- |
+| 400/422 `INVALID_LISTING` | 잘못된 단위·필수값·체험가 미지정 |
+| 401 `AUTH_REQUIRED` | 서비스 인증 부재 (외부 플랫폼 로그인 실패와 다름) |
+| 403/404 `NOT_OWNED` | 소유권 불일치·없는 자원 |
+| 409 `POLICY_NOT_CONFIRMED` | 사용자 위임은 있지만 운영사 허용 경로 미확인 |
+| 409 `DUPLICATE_OR_UNKNOWN` | 기존 제출의 성공 여부 불명확·중복 위험 |
+| 503 `UPSTREAM_UNAVAILABLE` | 허용된 외부 조회의 일시 장애. 게시 실패 판정과 구별 |
+
+## 5. Tool 정의 및 실행·실패 흐름 (구현 전)
+
+| 논리 Tool | 입력 | 출력·검증 | 안전한 실행 경계 |
 | --- | --- | --- | --- |
-| 사용자 생성 | API-01: 검증된 사용자 입력·조건/우선순위 저장 | 인증 subject → owner_id, request_id | 202 또는 401/409/422, 같은 멱등성 키 중복 방지 |
-| 계획 분해 | 요청 분석 컴포넌트가 APP-A 지정 후보용 task 후보/조건 생성 | request_id → task_id, depends_on, run_if | 출처 접근 승인·예산을 검사하기 전 실행 금지 |
-| 자료 조회 | 서버 허가를 거친 read_allowed_source 도구 호출 | task_id→attempt_id→source_id | 실패를 조건 미충족으로 변환하지 않음; 비허용 출처 중단 |
-| 판정·근거 | 후보×조건별 verdict와 evidence/source 연결 | task_id, verdict_id→evidence_id→source_id | 근거 부족/출처 장애는 unknown, 임의 확정 금지 |
-| 저장·결과 | API-02/03/04로 상태/이력/결과 제공 | request/status/task/attempt/source/evidence/verdict | 다른 owner의 하위 자료 조회 금지 |
-
-**정상·실패 두 경로**를 API 명세와 시험 기준으로 명시합니다. 정상: 허용된 출처 조회→검증 가능한 근거 연결→조건별 결과 조회. 실패: 공급자 일시 장애→최대 허용 재시도 범위 안에서 재요청→성공이면 데이터 재검증/종료, 실패면 source_access_failed와 unknown/partial 및 attempt 이력을 기록합니다. **부분 결과를 반환한 것만으로 복구 성공을 주장하지 않습니다.** 실제 API·Tool·LLM 호출/서버 배포·로그·BFCL 측정은 미실시입니다.
-
-### 기술 선택·교육 요건·미결정
-
-| 설계 선택 | 현재 잠정 정의 | 최종 결정 조건 |
-| --- | --- | --- |
-| API 백엔드 | Python/FastAPI 및 /docs·OpenAPI 경로는 예시. 실제 서버 없음 | R05 검토와 제품 선택 후 강사 교육 요구 대조 |
-| Graph/에이전트 | LangGraph 검토 중, 단순 Python 기준선과 비교 가능 | 상태 전이·Agent 간 인계가 실제 필요하다는 근거 |
-| 화면 | React 결과 화면과 Streamlit 학습/시연 역할 제안 | 사용자 흐름/강사 요구 충족·대체 협의 |
-| 자료·Tool | 허용 공급자/공식 API의 allowlist, 사이트별 수집 제약 | 공급자 키·약관·비용·호출 정책 승인 후 실행 |
-| 시간/호출 예산 | timeout·backoff·retry·멱등성 **유한 상한 필요** | 공급자·실행 환경 확정 후 설정값/테스트 로그 확인 |
-
-## 2. API 목록·요구사항 연결
-
-| API ID | Method | Path | 인증(가설) | 목적 | 요구사항 |
-| --- | --- | --- | --- | --- | --- |
-| API-01 | POST | `/api/v1/research-requests` | Bearer JWT (provisional) | create an APP-A request and enqueue allowed work | FR-01, FR-02 |
-| API-02 | GET | `/api/v1/research-requests/{request_id}` | Bearer JWT (provisional) | read request state and task count | FR-03 |
-| API-03 | GET | `/api/v1/research-requests/{request_id}/results` | Bearer JWT (provisional) | read evidence-linked comparison results including unknown and partial | FR-04 |
-| API-04 | GET | `/api/v1/research-requests/{request_id}/tasks` | Bearer JWT (provisional) | read task/attempt execution history | FR-02, FR-03 |
-
-사용자 요청은 조건/대상 입력 → 검증과 request_id 부여 → task 제안·task_id 확정 → attempt 상태 기록 → 근거 있는 verdict 반환으로 흐릅니다. FR-01~04와의 연결은 **문서상 계약**이며 실제 엔드포인트가 배포됐다는 뜻이 아닙니다.
+| `extract_listing_fields` | 강사 제공 원문·사진 참조 | 구조화된 항목, 근거 원문, 충돌·누락 | 임의 금액/동의 생성 금지 |
+| `validate_platform_rules` | 게시처·필드·규칙 확인일 | 필수값 충족/누락/미확인 | 미확인 정책을 허용으로 변경 금지 |
+| `prepare_registration` | 승인된 초안·게시처 | 제출 전 미리보기·예외·필요 행동 | 외부 접근 전 read-only |
+| `submit_via_authorized_route` | 허용된 커넥터·명시적 승인 범위 | 외부 접수/게시 결과·증거 | **미승인·미구현**. 운영사 허용/인증 격리 없으면 실행 불가 |
+| `observe_registration_status` | 허용된 결과 확인 경로·작업 ID | submitted/review_pending/posted/unknown과 관측근거 | 미확인 성공 처리·자동 재제출 금지 |
 
 ```mermaid
 flowchart LR
-  U["사용자 요청"] --> A["API-01 POST: 202 + request_id"]
-  A --> B["task 계획·실행 시도"]
-  B --> C["API-02/04 상태 조회"]
-  B --> D["근거·판정 기록"]
-  D --> E["API-03 결과 조회"]
+  A[강사 원본 제공] --> B[추출·필수값 검증]
+  B --> C[게시처별 미리보기]
+  C --> D{플랫폼 허용·인증·승인 확인?}
+  D -- 아니오/미확인 --> E[blocked·needs_action]
+  D -- 확인된 경로만 --> F[조건부 등록 실행]
+  F --> G[결과 관측·중복 점검]
+  G --> H[posted / review_pending / failed / unknown]
 ```
 
-## 3. 엔드포인트별 8항목 상세·JSON 예시
+## 6. 타임아웃·재시도·멱등성 및 평가 계획
 
-### API-01 POST `/api/v1/research-requests`
-
-| 상세 계약 항목 | 설계안 (현재 구현 아님) |
-| --- | --- |
-| 1. 호출 목적 | create an APP-A request and enqueue allowed work |
-| 2. 요청 헤더·인증 | Bearer JWT (provisional), `Idempotency-Key` (권장; 실제 반복시 필수) |
-| 3. 경로·쿼리 | 없음 |
-| 4. 요청 본문·필드 | ResearchRequestCreate |
-| 5. 서버 검증·권한 | owner_id from verified JWT sub; never accepted from request JSON |
-| 6. 정상 응답·상태 | HTTP 202; 상태는 응답 JSON에 포함 |
-| 7. 오류·실패 | 401, 409, 422, 429, 503. 세부 의미는 공통 오류표 참조 |
-| 8. 실행·재시도 | Idempotency-Key optional for test but required before production retries; unique (owner_id,idempotency_key), same key same input returns same request_id; same key/different input 409 |
-
-**요청 JSON 예시 (가상, 실측 아님)**
-
-```json
-{
-  "domain": "focus_apps",
-  "targets": [
-    "PomoToki",
-    "Focus To-Do"
-  ],
-  "criteria": [
-    {
-      "id": "C-OFFLINE",
-      "name": "offline_timer",
-      "importance": "must"
-    },
-    {
-      "id": "C-ACCOUNT",
-      "name": "no_account",
-      "importance": "prefer"
-    }
-  ],
-  "discovery_rule": "specified_candidates_only"
-}
-```
-
-**응답 예시 (가상, 실제 호출 아님)**
-
-```json
-{
-  "request_id": "req_example_001",
-  "status": "queued",
-  "result_url": "/api/v1/research-requests/req_example_001/results"
-}
-```
-
-### API-02 GET `/api/v1/research-requests/{request_id}`
-
-| 상세 계약 항목 | 설계안 (현재 구현 아님) |
-| --- | --- |
-| 1. 호출 목적 | read request state and task count |
-| 2. 요청 헤더·인증 | Bearer JWT (provisional) |
-| 3. 경로·쿼리 | `request_id`: opaque text, required |
-| 4. 요청 본문·필드 | 조회 전용, JSON 본문 없음 |
-| 5. 서버 검증·권한 | server resolves owner_id and checks JWT sub before returning state |
-| 6. 정상 응답·상태 | HTTP 200; 상태는 응답 JSON에 포함 |
-| 7. 오류·실패 | 401, 404, 503. 세부 의미는 공통 오류표 참조 |
-| 8. 실행·재시도 | read-only |
-
-**응답 예시 (가상, 실제 호출 아님)**
-
-```json
-{
-  "request_id": "req_example_001",
-  "status": "running",
-  "task_count": 2,
-  "completed_count": 1
-}
-```
-
-### API-03 GET `/api/v1/research-requests/{request_id}/results`
-
-| 상세 계약 항목 | 설계안 (현재 구현 아님) |
-| --- | --- |
-| 1. 호출 목적 | read evidence-linked comparison results including unknown and partial |
-| 2. 요청 헤더·인증 | Bearer JWT (provisional) |
-| 3. 경로·쿼리 | `request_id`: opaque text, required |
-| 4. 요청 본문·필드 | 조회 전용, JSON 본문 없음 |
-| 5. 서버 검증·권한 | same request ownership applied to every nested verdict/source/evidence |
-| 6. 정상 응답·상태 | HTTP 200; 상태는 응답 JSON에 포함 |
-| 7. 오류·실패 | 401, 404, 503. 세부 의미는 공통 오류표 참조 |
-| 8. 실행·재시도 | read-only |
-
-**응답 예시 (가상, 실제 호출 아님)**
-
-```json
-{
-  "request_id": "req_example_001",
-  "status": "partial",
-  "verdicts": [
-    {
-      "verdict_id": "verdict_example_001",
-      "task_id": "task_example_001",
-      "candidate_id": "PomoToki",
-      "condition_id": "C-OFFLINE",
-      "status": "unknown",
-      "evidence_ids": [],
-      "unknown_reason": "source_access_failed"
-    }
-  ],
-  "sources": [],
-  "failures": [
-    {
-      "task_id": "task_example_001",
-      "error_code": "SOURCE_UNAVAILABLE"
-    }
-  ]
-}
-```
-
-### API-04 GET `/api/v1/research-requests/{request_id}/tasks`
-
-| 상세 계약 항목 | 설계안 (현재 구현 아님) |
-| --- | --- |
-| 1. 호출 목적 | read task/attempt execution history |
-| 2. 요청 헤더·인증 | Bearer JWT (provisional) |
-| 3. 경로·쿼리 | `request_id`: opaque text, required |
-| 4. 요청 본문·필드 | 조회 전용, JSON 본문 없음 |
-| 5. 서버 검증·권한 | task/request linkage must be checked before nested attempt output |
-| 6. 정상 응답·상태 | HTTP 200; 상태는 응답 JSON에 포함 |
-| 7. 오류·실패 | 401, 404, 503. 세부 의미는 공통 오류표 참조 |
-| 8. 실행·재시도 | read-only |
-
-**응답 예시 (가상, 실제 호출 아님)**
-
-```json
-{
-  "request_id": "req_example_001",
-  "tasks": [
-    {
-      "task_id": "task_example_001",
-      "request_id": "req_example_001",
-      "status": "failed",
-      "attempts": [
-        {
-          "attempt_id": "attempt_example_001",
-          "status": "failed",
-          "error_code": "SOURCE_UNAVAILABLE"
-        }
-      ]
-    }
-  ]
-}
-```
-
-## 4. 필드 검증·권한 및 오류 정책
-
-### 입력·출력의 형식 검증
-
-| 필드 | 형식·검증(잠정) | 실패 코드 |
+| 실행 단계 | 보수적 초기 **제안값** (R05 재검토 대상) | 장애 시 원칙 |
 | --- | --- | --- |
-| `domain` | 허용 도메인 `focus_apps` 등 명시 허용 목록 | 422 |
-| `targets` | APP-A는 서로 다른 2개 비공백 문자열 | 422 |
-| `criteria[].id` | 요청 내 유일·비공백; 중요도 `must`/`prefer` | 422 |
-| `discovery_rule` | `specified_candidates_only` 또는 `conditional_discovery` | 422 |
-| `request_id` | 서버 발급 opaque TEXT, 클라이언트 자유 지정 불가 | 404 |
-| `verdict.status` | fulfilled, not_fulfilled, unknown | 잘못된 전이 409/검증 422 |
+| 내부 원본 추출·검증 | 요청당 15초 예산 후보, 사용자 수정 가능 | 재실행 시 동일 key/원본 버전 구분; 원문 보존 |
+| 게시처 규칙·허용 정보 조회 | 10초/요청, 읽기 작업 1회 한정 재시도·2초 backoff 후보 | 자료 부재·권한 제한은 미확인/blocked |
+| 허용된 업로드/실제 제출 | 환경별 타임아웃 미정; **쓰기 자동 재시도 0회**를 기본값 후보로 검토 | 타임아웃은 성공/실패 미확인, 결과 재조회 후 사람 판단 |
+| 멱등성 | `owner+draft+platform+logical_attempt` 기준 고유 key 후보 | 같은 키로 다른 payload면 409, 중복 게시 시도 차단 |
+| 기록·관측 | 상태 전이·원인·증거·시각을 별도 이벤트로 남기는 구조 후보 | 입력/준비/접수/게시 단계 혼동 방지 |
 
-**형식 검사와 서버 권한 검사는 다릅니다.** Pydantic을 사용하는 백엔드라면 Literal/Field로 422를 검사할 수 있으나, 실제 owner·자료 접근·Tool 실행 허가는 DB 조회와 서버 로직이 판단합니다. 계약 구조는 JSON에서도 검증할 수 있도록 둡니다.
+**측정 전에 정할 대조:** 동일 원본·사진·처음 상태·완료 기준에서 (1) 직접 수동 등록 (2) 충분한 지시를 받은 Codex/브라우저 (3) 전용 서비스의 사용자 직접 시간·추가 개입·가격 오류·완결 상태·건당 비용을 관측. **실제 실행 결과·성능/시간 기준선·승인된 기술 스택은 없습니다.**
 
-### 공통 오류 HTTP 의미
+**실제 설계 착수의 차단 조건:** [TASK-030](../artifacts/tasks/TASK-030.json)의 공식 권한/인증 경로 검토, [TASK-031](../artifacts/tasks/TASK-031.json)의 수용 기준, R01 MVP 범위 결정. 이는 [Step2 DB 제출 초안](데이터베이스_스키마_설계서.md)과 교차 대조해야 합니다.
 
-| HTTP | 의미(제안) |
-| --- | --- |
-| 400 | malformed JSON or unsupported syntax |
-| 401 | missing or invalid authentication |
-| 404 | request not found or not authorized (mask owner existence) |
-| 409 | invalid transition or idempotency key reused with different payload |
-| 422 | invalid input semantics |
-| 429 | request budget/rate exceeded |
-| 503 | external source/tool failure; prefer partial with explanation when possible |
-
-```json
-{
-  "error": {
-    "code": "EXAMPLE",
-    "message": "safe end-user message",
-    "request_id": null,
-    "retryable": false
-  }
-}
-```
-
-**보안 조항:** 오류 응답에는 다른 사용자 ID·토큰·외부 인증키·민감한 자료 위치를 노출하지 않습니다. 미인증은 401, 타인의 request는 404(존재 은닉)로 고정하고 실제 API 시험으로 확인해야 합니다.
-
-## 5. 에이전트 Tool 정의와 실행·실패
-
-**아래 Tool은 제안이지 실제 연결된 기능이 아닙니다.** 허가된 공식 API/정보만 사용하며 무단 웹 스크래핑을 수행하지 않습니다. 모델이 Tool을 제안하더라도 서버가 요청 소유권·allowlist·예산·자료 이용 범위를 재검사합니다.
-
-### Tool `read_allowed_source`
-
-- **용도·실행 주체:** retrieve a source using an approved provider/official API under explicit permission; researcher proposal
-- **권한·서버 검사:** server checks owning request, tool allowlist, budget and source terms before execution; no arbitrary scraping
-- **실패·재시도 정책:** maximum one retry on eligible transient access errors, with bounded backoff; not a currently deployed tool
-
-입력 제안:
-
-```json
-{
-  "request_id": "req_example_001",
-  "task_id": "task_example_001",
-  "source_locator": "approved provider reference"
-}
-```
-
-성공 결과 제안:
-
-```json
-{
-  "ok": true,
-  "source_id": "source_example_001",
-  "access_status": "retrieved",
-  "retrieved_at": "ISO-8601"
-}
-```
-
-실패 결과 제안:
-
-```json
-{
-  "ok": false,
-  "code": "SOURCE_UNAVAILABLE",
-  "retryable": true
-}
-```
-
-### Tool `link_verdict_evidence`
-
-- **용도·실행 주체:** write only evidence-backed condition verdict or mark unknown; verifier proposal
-- **권한·서버 검사:** server verifies task/request ownership and that all evidence belongs to same request; model cannot authorize its own writes
-- **실패·재시도 정책:** do not replay non-idempotent write without stable unique command id
-
-입력 제안:
-
-```json
-{
-  "request_id": "req_example_001",
-  "task_id": "task_example_001",
-  "candidate_id": "PomoToki",
-  "condition_id": "C-OFFLINE",
-  "evidence_ids": []
-}
-```
-
-성공 결과 제안:
-
-```json
-{
-  "ok": true,
-  "verdict_id": "verdict_example_001",
-  "status": "unknown"
-}
-```
-
-실패 결과 제안:
-
-```json
-{
-  "ok": false,
-  "code": "EVIDENCE_SCOPE_MISMATCH",
-  "retryable": false
-}
-```
-
-
-### Tool 실행 흐름
-
-```mermaid
-flowchart LR
-  A["에이전트: Tool 제안"] --> B["서버: owner·allowlist·budget 확인"]
-  B --> C{"허용되었나?"}
-  C -->|아니요| D["거절 + 사유·실패 기록"]
-  C -->|예| E["허용 출처 조회"]
-  E --> F["성공: source_id, evidence"]
-  E --> G["실패: unknown/partial, 재시도 정책"]
-  F --> H["verdict 범위·근거 검사"]
-```
-
-재검증되지 않은 결과를 근거 있는 fulfilled로 저장할 수 없고, 다른 요청의 evidence를 연결하는 쓰기는 서버에서 거부해야 합니다.
-
-## 6. 타임아웃·재시도·멱등성 및 검증 계획
-
-| 실행 정책 | 값·상태 | 검증 조건 |
-| --- | --- | --- |
-| 요청 전체 제한 | **90초 제안값, 미측정** | 한도 시 실패/부분 결과와 이유를 반환·기록 |
-| 외부 Tool timeout | **20초 제안값, 미측정** | timeout과 영구적 조건 미충족 구분 |
-| 최대 Tool 호출 | **요청당 6회 제안값, 미측정** | 도구 무한 반복 금지 |
-| 일시적 오류 재시도 | **최대 1회**, backoff 1초 제안 | 권한 거절/404/입력오류는 재시도하지 않음 |
-| POST 멱등성 | `Idempotency-Key` + (owner_id,key) 유일성 | 같은 주체·키·본문이면 동일 request_id, 키 재사용·본문 변경은 409 |
-| 부작용 Tool | 안정적인 command ID 없이 무조건 재실행하지 않음 | 중복 작업·외부 부작용 방지 |
-| 실제 적용 | 백엔드/도구 연결 미구현 | 실측으로 값 검증하고 제품 선정 후 승인 |
-
-**확인할 시험(모두 미실행):** T-INPUT 422, T-OWNER 타인 조회 404, T-TRACE 요청/근거 범위 위반 거절, T-UNKNOWN 실패한 접근의 확정 판정 금지, T-IDEMPOTENCY 동일키 중복 제한. 이 표는 테스트 수행 결과서가 아니라 **수용 시험 계획**입니다.
-
-**주제 선정 이후:** FastAPI/개발 URL/인증·호스팅/검색 공급자/예산 등을 채택·변경하고, 강사 가이드의 기술과 다르면 협의 여부를 기록합니다. 제출용 문서는 제품 실행·시험 완료 증거가 아닙니다.
-
----
-
-**현재 완료 판정:** 강사 피드백 반영 잠정안·공식 제출 검토 대상 · 실제 제품 미선정/미구현 · 산출물 미제출 · 공식 제출 전 최종 검토 별도
-
-
-## 부록. 출처·판단 상태 및 제출 조건
-
-### 제출용 사용 기준
-
-- 교육용 샘플/HTML 가이드와 실제 공식 필수 양식의 구분: 확인 기록은 [가이드 감사](https://github.com/ik-e/chaja-you/blob/main/docs/guidelines/instructor-snapshots/reviews/STEP1-STEP2-V2-GUIDE-AUDIT-20261118.md)를 참조합니다.
-- 정보 정본과 샘플의 세부 계약/필드 예시는 [원본 V3](https://github.com/ik-e/chaja-you/blob/main/docs/deliverables/pilots/2026-11-18-v3/STEP2-API-설계.md)에 연결됩니다. 본 파일은 검토용 제출 후보이며 정본을 변경하지 않습니다.
-- 실제 제출 전 문서 렌더 가독성·공식 목차 최종본·교원 열람권한·대시보드 상태를 별도 검증해야 합니다.
-
-### 문서 근거와 적용 제한
-
-아래 원본은 당시 저장소의 **고정 참조**입니다. 사실·가설·합성 검증·실측을 구분하며 과거 정본이나 타인 TASK를 수정하지 않습니다.
-
-| 참조 원본 | 커밋 |
-| --- | --- |
-| [`docs/artifacts/planning/기획서_초안.json`](https://github.com/ik-e/chaja-you/blob/53b73584069042225298c97c6c5688f8b429f56b/docs/artifacts/planning/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B4%88%EC%95%88.json) | `53b735840690` |
-| [`docs/artifacts/tasks/TASK-006.json`](https://github.com/ik-e/chaja-you/blob/53b73584069042225298c97c6c5688f8b429f56b/docs/artifacts/tasks/TASK-006.json) | `53b735840690` |
-| [`docs/artifacts/specs/focus_apps.json`](https://github.com/ik-e/chaja-you/blob/53b73584069042225298c97c6c5688f8b429f56b/docs/artifacts/specs/focus_apps.json) | `53b735840690` |
-| [`docs/artifacts/planning/WBS.json`](https://github.com/ik-e/chaja-you/blob/53b73584069042225298c97c6c5688f8b429f56b/docs/artifacts/planning/WBS.json) | `53b735840690` |
-
-
-
-**주요 근거:** [기존 설계 원본·목차 대조](../submissions/step1-step2-20261119/README.md) · [강사 피드백 항목별 반영](../submissions/step1-step2-20261119/INSTRUCTOR-FEEDBACK-MATRIX.md) · [현재 Phase](../human/phase-intents/PHASE-20261118-01.md).
+[공식 가이드 6영역 감사](../guidelines/instructor-snapshots/reviews/STEP1-STEP2-V2-GUIDE-AUDIT-20261118.md) · [현재 상태](../../CURRENT.md) · [제출 준비·접수 구분](README.md).
