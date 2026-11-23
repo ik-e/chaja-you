@@ -25,7 +25,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | [TASK-028](../artifacts/tasks/TASK-028.json) | 음악 레슨 강사 실제 Pain·타깃·우선 업무 검증 | R02 | 2026-11-23 | 없음 | 보완 | 할 일 |
 | [TASK-029](../artifacts/tasks/TASK-029.json) | 레슨 등록의 기존 대안·시장·가격 사례 조사 | R04 | 2026-11-23 | 없음 | 보완 | 할 일 |
-| [TASK-030](../artifacts/tasks/TASK-030.json) | 레슨 등록 서버·로컬·인증 기술 타당성 및 권한 제약 조사 | R05 | 2026-11-23 | 없음 | 보완 | 할 일 |
+| [TASK-030](../artifacts/tasks/TASK-030.json) | 레슨 등록 서버·로컬·인증 기술 타당성 및 권한 제약 조사 | R05 | 2026-11-23 | 없음 | 보완 | 검토 중 |
 | [TASK-031](../artifacts/tasks/TASK-031.json) | 핵심 기능 요구사항·서비스 시나리오·검증 기준 정리 | R03 | 2026-11-23 | 없음 | 보완 | 할 일 |
 | [TASK-032](../artifacts/tasks/TASK-032.json) | 레슨 등록 12항목 기획안·가치·BM·MVP 통합 | R01 | 2026-11-24 | TASK-028, TASK-029, TASK-030, TASK-031 | 보완 | 할 일 |
 
@@ -45,11 +45,40 @@
 
 결과 미기록.
 
-### TASK-030 · 할 일
+### TASK-030 · 검토 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-030.json)
 
-결과 미기록.
+당근 모임과 강사용 과외/레슨 등록은 앱에서만 가능하다(PC 웹 직접 확인: 로그인 버튼 없음, 모임 페이지는 '당근 앱에서 보기'만 있음). 따라서 브라우저 기반 실행(서버·Browser Use·범용 AI)으로는 당근 등록이 불가하다. 크몽은 웹 등록·심사 메뉴가 있어 사용자 기기 실행 검증 대상이지만, 판매 약관의 '비정상적인 방법' 등록 금지(제9조 4호)가 외부 도구 대리 입력을 포함하는지는 운영사 확인이 필요하다. 두 곳 모두 게시용 공식 API·위임 기능은 찾지 못했다. 비밀번호를 받지 않아도 세션 파일·화면의 외부 AI 전송·위임 범위 밖 접근 위험이 남는다. 범용 AI 내장 브라우저는 파일 업로드 자동화가 불가해 크몽 필수 이미지 첨부를 끝낼 수 없다.
+
+검증과 근거
+
+- 서버/로컬/공식 API별 인증·세션·사진 첨부·최종 제출 가능성 및 제약이 출처와 함께 정리돼 있다. · pass
+- 플랫폼 운영사의 명시적 허용/제한/미확인을 기술적 성공 여부와 별개로 표기한다. · pass
+- 일회성 비밀번호 처리 뒤에도 남는 세션·개인정보·권한 위험과 대응이 목록화돼 있다. · pass
+- 실제 실행 없이 확인 가능한 사실과 꼭 필요한 후속 확인/실험을 구분하고, 기획서에 반영할 2~3개 결정 조건을 제시한다. · pass
+- 실제 로그인·제출·PoC 없이 범위 안에서만 조사했는가 · pass
+- [R05 기술·권한 조사 문서](../members/R05/workspace/2026-11-23_lesson-technical-feasibility.md)
+- [당근 PC 웹 직접 확인(2026-11-23): 로그인 버튼 없음, 모임 페이지는 '당근 앱에서 보기'만 있음](https://www.daangn.com/kr/search/group/)
+- [App Store 당근 앱 설명 — 웹 버전 로그인 시 앱 QR 촬영](https://apps.apple.com/kr/app/%EB%8B%B9%EA%B7%BC/id1018769995)
+- [크몽 판매 이용약관 — 제7조 심사, 제9조 4호 비정상적 방법 등록 금지, 제9조 7호 중복 등록 금지](https://kmong.com/support/customer-center/posts/189)
+- [크몽 서비스 이용약관 — 제4조 본인인증, 제6조 제3자 사용 통보 의무](https://kmong.com/support/customer-center/posts/179)
+- [크몽 서비스 등록 가이드 — 등록 메뉴·순서·심사 기간](https://kmong.com/support/expert-center/posts/754)
+- [ChatGPT Work 로컬 보안 문서 — 내장 브라우저 파일 업로드 자동화 불가, 화면·내용 외부 전송](https://learn.chatgpt.com/codex/enterprise/chatgpt-work-local-security)
+- [Browser Use 민감정보 문서 — 스크린샷은 가려지지 않음](https://docs.browser-use.com/customize/sensitive-data)
+- [Browser Use 브라우저 설정 — user_data_dir·storage_state로 세션 저장](https://docs.browser-use.com/customize/browser-settings)
+- [R02 인증·권한 조사(당근 광고 OpenAPI, 모임 운영정책 등 재인용 출처)](https://github.com/ik-e/chaja-you/blob/plan/r02-lesson-20261123/docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json)
+
+남은 불확실성과 결정 요청
+
+- 당근·크몽의 외부 도구 대리 입력·최종 제출 허용 여부(운영사 회신 필요)
+- 크몽 사진 첨부·필수 항목 자동 입력의 실제 성공 여부(비교 실험 필요)
+- 서버 접속 시 추가 인증·차단 여부
+- 크몽 공개 개발자 API·제휴 프로그램 존재 여부
+- 당근 모임 운영정책·이용약관 자동화 조항 원문(R05 조회 시 로딩 실패, R02 재인용으로 대체)
+- 당근 MVP 범위: (a) 자료 준비 후 강사 앱 게시 (b) 당근 비즈니스 소식으로 게시처 변경 검토 (c) 운영사 허용 시에만 앱 자동화 (d) 앱 과외/레슨 등록을 게시처 후보로 추가 — R01·R02 선택
+- 크몽은 운영사 회신 전 심사 신청 직전까지만 검증한다는 조건 승인(R01)
+- 운영사 문의(문서 부록 A) 발송 주체와 비교 실험에 쓸 계정(테스트 계정 여부)
 
 ### TASK-031 · 할 일
 
