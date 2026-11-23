@@ -24,7 +24,7 @@
     "새 아이디어 탐색, UI/화면 설계, 구현은 범위에서 제외한다."
   ],
   "outputs": [
-    "docs/members/R04/workspace/2026-11-23_lesson-existing-alternatives.md",
+    "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md",
     "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
   ],
   "acceptance": [
@@ -59,7 +59,7 @@
       {
         "id": "E29-1",
         "label": "기존 대안·시장 조사 보고서",
-        "path": "docs/members/R04/workspace/2026-11-23_lesson-existing-alternatives.md"
+        "path": "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md"
       }
     ],
     "verification": [
@@ -152,6 +152,6 @@
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
   "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
   "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
-  "output_path": "docs/members/R04/workspace/2026-11-23_lesson-existing-alternatives.md",
+  "output_path": "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md",
   "review_owner": "R01 (기획 방향·통합 결정만)"
 }

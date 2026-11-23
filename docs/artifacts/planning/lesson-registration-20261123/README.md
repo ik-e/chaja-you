@@ -14,7 +14,7 @@
 | 담당 | TASK 계약 | 개인 작업 경로 | 완료 확인 핵심 |
 |---|---|---|---|
 | R02 | [TASK-028](../../tasks/TASK-028.json) | [Pain·타깃·업무 우선순위](../../../members/R02/workspace/2026-11-23_lesson-pain-priority.md) | 4개 업무별 상황/빈도/손실/증거, 핵심 타깃, 첫 Pain 선택·보류 근거 |
-| R04 | [TASK-029](../../tasks/TASK-029.json) | [기존 대안·시장 조사](../../../members/R04/workspace/2026-11-23_lesson-existing-alternatives.md) | 강한 대안 3~5개, 실제 해결/미해결, 출처·가격·이용 장벽 |
+| R04 | [TASK-029](../../tasks/TASK-029.json) | [기존 대안·시장 조사](../../../members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md) | 강한 대안 3~5개, 실제 해결/미해결, 출처·가격·이용 장벽 |
 | R05 | [TASK-030](../../tasks/TASK-030.json) | [기술·권한 검토](../../../members/R05/workspace/2026-11-23_lesson-technical-feasibility.md) | 서버/로컬/인증·허용 범위, 확인/미확인, 후속 기술 판단 조건 |
 | R03 | [TASK-031](../../tasks/TASK-031.json) | [기능 요구사항·검증](../../../members/R03/workspace/2026-11-23_lesson-requirements-validation.md) | F1~F3 입출력·예외·완료 및 동일 조건 비교 계획 |
 | R01 | [TASK-032](../../tasks/TASK-032.json) | `proposal-v0.1.json` | 12항목·Pain→F→가치→수익 연결·MVP 경계·미확인 표시 |
