@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "ADR-004",
+  "kind": "decision",
+  "status": "제안",
+  "decided_at": null,
+  "title": "음악 레슨 등록 서비스 12/8 MVP 설계 착수 기준선(검토안)",
+  "owner": "R01",
+  "decided_by": null,
+  "authority_ref": null,
+  "authority_id": null,
+  "context": "현재 V1.1 기획의 문제→핵심 피처→발생 가치 인과를 유지하면서 기존 L0~L7 설계 정보 체계로 전환한다. 2026-11-23 R01은 업무를 작업 브랜치에서 진행하고 2026-12-08 작동하는 MVP, 2027-01-04 완성품 목표를 제시했다. 다만 최초 플랫폼·MVP Must/Done·실행 위치를 최종 채택했다는 결정 기록은 아직 없다. 기존 Step2 API/DB 및 WBS는 설계/제출 후보로 재사용한다.",
+  "options": [
+    "모든 플랫폼·기술·사업 검증을 끝낸 뒤 설계 착수",
+    "크몽 1건 최초 등록 F1→승인→F2→F3 수직 경로를 먼저 기획·검증·설계하고, 로컬/서버·정책·확장 범위는 비교 검토",
+    "12/8부터 크몽·탈잉·숨고 동시 자동 최종 등록을 필수로 구현",
+    "문안 생성 F1만 먼저 만들고 완결 대행의 가치를 이미 실현했다고 처리"
+  ],
+  "evidence": [
+    "R01의 2026-11-23 작업 브랜치 진행 및 12/08 MVP / 2027-01-04 완성품 목표 발화(현재 대화)",
+    "R02 조사: 개인 강사 최초 크몽 등록 1~2시간 회상, 직접 업무 위임 희망, 최신 수업 조건: docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+    "R03 F1~F3, 크몽/탈잉 정상·실패·unknown 시나리오: docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+    "R05 1차 기술 보고: 크몽 웹 상품 등록 가능성 vs 외부 자동 제출 운영사 허용 미확인; TASK-030 세 플랫폼 8영역 후속 조사",
+    "기존 기획·설계 체계: docs/deliverables/PLANNING-DESIGN-INFO-MODEL.md / planning-design-info-model.json",
+    "기존 11/23 WBS는 12/08 중간 발표, 12/09~ 구현으로 되어 R01 신규 MVP 마일스톤과 재조정 필요"
+  ],
+  "decision": "[R01 승인 전 제안] 기존 L0~L7/IT-00~27 모델을 변경하지 않고 이번 제품에 적용한다. 첫 수직 흐름은 크몽 신규 상품 1건의 원본→F1 사실 변환→강사 승인/직접 로그인→허용된 F2 입력·사진 첨부→F3 접수/심사/실패·unknown 상태 확인을 기준으로 설계한다. 2026-12-08 실제로 작동하는 MVP, 2027-01-04 완성품을 일정 목표로 둔다. 로컬 브라우저는 우선 설계 가설이며 원격/서버/공식 위임과 비교 후 결정한다. 실서비스 자동 최종 제출은 운영사 허용 경로가 확인된 경우에만 시도하고, 모의 실행과 구분한다. 팀원 후속 작업 TASK-033~037은 작업 브랜치의 검토 제안으로 두며 실제 배정·승인/수신을 주장하지 않는다.",
+  "reason": "R02의 직접 사용자 사례가 있고 R03의 F1~F3 완료 계약이 있어 크몽 최초 등록 1건이 문제 해결과 제품의 기능을 수직으로 시험하기 가장 구체적이다. 동일 원본을 유지하며 R03 도메인/상태, R05 기술 경계, R04 UX, R02 사실 검증을 병렬화하면 12/08 목표를 역산할 수 있다. 위험한 구조·플랫폼 권한을 근거 없이 확정하지 않고 가역적인 초안부터 진행한다.",
+  "revisit": "R01이 범위/Done/후속 업무 배정을 공식 승인하거나 수정했을 때 adopted/보류로 갱신. R05의 운영사 권한·로컬/서버 비교·공수, R03 인수 조건, 범용 AI 대비 실측, 12/04 구현 완성도·12/07 통합 검토에서 기준선을 재평가한다. 실제 접수 불허이면 완결 대행 성공을 주장하지 않고 제품 가설부터 재판단한다.",
+  "references": [
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261123/design-intake.json"
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261123/milestone-plan.json"
+    },
+    {
+      "path": "docs/deliverables/planning-design-info-model.json"
+    },
+    {
+      "path": "docs/deliverables/PLANNING-DESIGN-INFO-MODEL.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-030.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-031.json"
+    },
+    {
+      "path": "docs/step1/WBS_제출본.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    }
+  ]
+}
