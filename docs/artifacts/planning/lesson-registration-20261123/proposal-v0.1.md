@@ -8,6 +8,7 @@
 - [R02 기존 기획안](https://github.com/ik-e/chaja-you/blob/main/docs/members/R02/workspace/2026-11-18_%EC%9D%8C%EC%95%85_%EB%A0%88%EC%8A%A8_%EB%93%B1%EB%A1%9D_%EC%A7%80%EC%9B%90_1%EC%B0%A8_%EA%B8%B0%ED%9A%8D%EC%95%88.md)
 - [플랫폼 이용·권한 조사](https://github.com/ik-e/chaja-you/blob/main/docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json)
 - [기획 TASK/진행 PR](https://github.com/ik-e/chaja-you/pull/33)
+- [멘토 검토용 Notion 페이지](https://app.notion.com/p/42149106016081fcb08eea1e70f7869c)
 
 ## 1. 서비스 개요와 목표
 

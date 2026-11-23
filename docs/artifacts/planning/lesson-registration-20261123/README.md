@@ -4,6 +4,7 @@
 - **통합 담당:** R01
 - **공통 원본:** [plan.json](plan.json)
 - **R01 기획 초안:** [읽기용 V0.1](proposal-v0.1.md) · [구조화 원본 V0.1](proposal-v0.1.json) (R01만 작성·동기화, 팀 조사 반영 전)
+- **멘토 검토용 Notion:** [음악 레슨 등록 지원 · 멘토 공유 페이지](https://app.notion.com/p/42149106016081fcb08eea1e70f7869c)
 - **공유 원칙:** GitHub가 정본이고 Notion은 멘토용 요약 페이지입니다.
 - **직전 기획 근거:** [R02 원본](../../../members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md) · [인증/권한 조사](../../research/R02_LESSON_POSTING_RIGHTS_20261120.json)
 - **권한 입력:** [R01 단계 결정](../../../human/responses/HRESP-20261123-01_r02-lesson-planning.md)
