@@ -42,7 +42,7 @@
 | 작업 | 할 일 | 담당 | 내부 목표일 | 선행 작업 | 구분 | 상태 |
 | --- | --- | --- | --- | --- | --- | --- |
 | [TASK-028](docs/artifacts/tasks/TASK-028.json) | 음악 레슨 강사 실제 Pain·타깃·우선 업무 검증 | R02 | 2026-11-23 | 없음 | 보완 | 완료 |
-| [TASK-029](docs/artifacts/tasks/TASK-029.json) | 레슨 등록의 기존 대안·시장·가격 사례 조사 | R04 | 2026-11-23 | 없음 | 보완 | 할 일 |
+| [TASK-029](docs/artifacts/tasks/TASK-029.json) | 레슨 등록의 기존 대안·시장·가격 사례 조사 | R04 | 2026-11-23 | 없음 | 보완 | 검토 중 |
 | [TASK-030](docs/artifacts/tasks/TASK-030.json) | 레슨 등록 서버·로컬·인증 기술 타당성 및 권한 제약 조사 | R05 | 2026-11-23 | 없음 | 보완 | 할 일 |
 | [TASK-031](docs/artifacts/tasks/TASK-031.json) | 핵심 기능 요구사항·서비스 시나리오·검증 기준 정리 | R03 | 2026-11-23 | 없음 | 보완 | 할 일 |
 | [TASK-032](docs/artifacts/tasks/TASK-032.json) | 레슨 등록 12항목 기획안·가치·BM·MVP 통합 | R01 | 2026-11-24 | TASK-028, TASK-029, TASK-030, TASK-031 | 보완 | 할 일 |
