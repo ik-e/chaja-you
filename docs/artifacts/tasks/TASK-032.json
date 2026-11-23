@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-032",
   "kind": "task",
-  "status": "할 일",
+  "status": "검토 중",
   "owner": "R01",
   "due": "2026-11-24",
   "depends_on": [
@@ -31,8 +31,9 @@
     "설계 착수에 필요한 사용자 입력, 데이터 항목, 상태, 예외, 통제권이 충분한지 확인하되 화면·DB/API 상세 설계와 코딩은 하지 않는다."
   ],
   "outputs": [
-    "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
-    "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md",
+    "최종 R01 승인 시 TASK 결과·증거·후속 판단 기록"
   ],
   "acceptance": [
     "12개 항목 모두 내용 또는 미확인·필요한 근거·검증 담당이 기록된다.",
@@ -59,9 +60,114 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "R02 사용자·Pain·법률 조사, R03 F1~F3 크몽·탈잉 시나리오, R04 5개 대안, R05 당근·크몽 1차 기술·권한 결과를 활용하여 12항목 기획 V1.0과 읽기용 동기화 문서를 작성했다. 최초 등록을 1차 문제로, 크몽 웹 상품 심사 접수 1건을 첫 검증 후보로 제안했다. 최신 레슨 가격(90/180/270분 월 25/40/50만원) 정정, Pain→원인→기능→가치→지불 가설 연결, 필수/조건부/제외 범위와 검증·승격 게이트를 정의했다. 기획 문서 작성과 최종 제품 채택·운영사 허용·실제 구현/제출 승인은 구분한다.",
+    "evidence": [
+      {
+        "id": "T032-E01",
+        "type": "canonical",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json"
+      },
+      {
+        "id": "T032-E02",
+        "type": "readable",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md"
+      },
+      {
+        "id": "T032-E03",
+        "type": "prior_draft",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json"
+      },
+      {
+        "id": "T032-E04",
+        "type": "user_pain",
+        "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+      },
+      {
+        "id": "T032-E05",
+        "type": "requirements",
+        "path": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md"
+      },
+      {
+        "id": "T032-E06",
+        "type": "market",
+        "path": "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md"
+      },
+      {
+        "id": "T032-E07",
+        "type": "technical_previous",
+        "url": "https://github.com/ik-e/chaja-you/blob/r05/task-030-20261123/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "12개 항목에 근거/미확인 포함",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E02"
+        ]
+      },
+      {
+        "criterion": "Pain→원인→기능→사용자 직접 가치→BM 추적",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01"
+        ]
+      },
+      {
+        "criterion": "대표 시나리오·오류·완료 상태·후속 설계 업무 의미",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E05"
+        ]
+      },
+      {
+        "criterion": "사업모델 가격 가설과 기술/약관/인증 위험 분리",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E06",
+          "T032-E07"
+        ]
+      },
+      {
+        "criterion": "조건부 MVP/첫 플랫폼 후보/제외·재검토 조건",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E02"
+        ]
+      },
+      {
+        "criterion": "최종 R01 제품 범위 채택 및 구현/설계 착수 승인",
+        "verdict": "pending",
+        "reason": "사용자 최종 채택 판단 및 R05의 3개 플랫폼 8영역·공수 결과 미완료"
+      }
+    ],
+    "uncertainties": [
+      "R05 TASK-030의 크몽·탈잉·숨고 8개 조사·권한/기술/근거 3축 판정 미완료",
+      "3개 플랫폼 자동 최종 제출의 기술/약관·법적 허용 미입증",
+      "R04 전문 대행 시세·범용 브라우저 도구와의 실제 비교 성과 미검증",
+      "동료 A 10개 채널 5만원 간접 의향 외 3곳 실제 결제·원가 미검증",
+      "실제 강사 사용 테스트/정량 성과 미실시"
+    ],
+    "decision_requests": [
+      "R01: 최초 등록 및 크몽 1차 검증 후보의 기획 범위 최종 채택 여부",
+      "R01: 기술/권한/공수 정보에 근거한 실제 MVP 플랫폼과 실행 구조 결정",
+      "R01: 후속 설계/WBS/제출본 승격을 허용할 구체 조건과 시점 결정"
+    ],
+    "state": "기획 본문 V1.0 작성·출처 연결 확인 / R01 최종 채택과 연계 TASK 완료 전 / 실제 플랫폼 시험 미실행"
+  },
   "traceability": {
     "intent_refs": [
       "PHASE-20261123-01"
@@ -85,6 +191,6 @@
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
   "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
   "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
-  "output_path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
+  "output_path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json",
   "review_owner": "R01"
 }
