@@ -31,9 +31,9 @@
     "설계 착수에 필요한 사용자 입력, 데이터 항목, 상태, 예외, 통제권이 충분한지 확인하되 화면·DB/API 상세 설계와 코딩은 하지 않는다."
   ],
   "outputs": [
-    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json",
-    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md",
-    "최종 R01 승인 시 TASK 결과·증거·후속 판단 기록"
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "최종 R01 채택 시 TASK 결과·검증·후속 판단 기록"
   ],
   "acceptance": [
     "12개 항목 모두 내용 또는 미확인·필요한 근거·검증 담당이 기록된다.",
@@ -66,10 +66,16 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
     }
   ],
   "result": {
-    "summary": "R02 사용자·Pain·법률 조사, R03 F1~F3 크몽·탈잉 시나리오, R04 5개 대안, R05 당근·크몽 1차 기술·권한 결과를 활용하여 12항목 기획 V1.0과 읽기용 동기화 문서를 작성했다. 최초 등록을 1차 문제로, 크몽 웹 상품 심사 접수 1건을 첫 검증 후보로 제안했다. 최신 레슨 가격(90/180/270분 월 25/40/50만원) 정정, Pain→원인→기능→가치→지불 가설 연결, 필수/조건부/제외 범위와 검증·승격 게이트를 정의했다. 기획 문서 작성과 최종 제품 채택·운영사 허용·실제 구현/제출 승인은 구분한다. 8장 BM에서 기능별 Pain 해결 작동, 사용자 업무의 Before/After, 가치·지불 이유 및 미충족 시 사업 가설 재판단을 연결했다.",
+    "summary": "R02 사용자·Pain·법률 조사, R03 F1~F3 크몽·탈잉 시나리오, R04 5개 대안, R05 당근·크몽 1차 기술·권한 결과를 활용하여 12항목 기획 V1.0과 읽기용 동기화 문서를 작성했다. 최초 등록을 1차 문제로, 크몽 웹 상품 심사 접수 1건을 첫 검증 후보로 제안했다. 최신 레슨 가격(90/180/270분 월 25/40/50만원) 정정, Pain→원인→기능→가치→지불 가설 연결, 필수/조건부/제외 범위와 검증·승격 게이트를 정의했다. 기획 문서 작성과 최종 제품 채택·운영사 허용·실제 구현/제출 승인은 구분한다. 8장 BM에서 기능별 Pain 해결 작동, 사용자 업무의 Before/After, 가치·지불 이유 및 미충족 시 사업 가설 재판단을 연결했다. 2026-11-23 V1.1은 타깃→Pain→발생 원인→핵심 피처가 실제로 줄이는 일→사용자 가치→지불 동기의 순서로 12항목을 재배열했다. 기존 대안·시나리오·요구사항·기술·MVP·검증은 근거/실행 장으로 배치했고 V1.0 및 원본 조사 수치·미확인·게이트는 보존했다.",
     "evidence": [
       {
         "id": "T032-E01",
@@ -105,6 +111,16 @@
         "id": "T032-E07",
         "type": "technical_previous",
         "url": "https://github.com/ik-e/chaja-you/blob/r05/task-030-20261123/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md"
+      },
+      {
+        "id": "T032-E08",
+        "type": "canonical_restructured",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      },
+      {
+        "id": "T032-E09",
+        "type": "readable_restructured",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
       }
     ],
     "verification": [
@@ -161,6 +177,15 @@
           "T032-E02"
         ],
         "note": "수익·가격·사용자 시간 절감·플랫폼 자동 제출 허용은 실측/결정 전"
+      },
+      {
+        "criterion": "12항목 재구성 후 타깃→Pain→원인→기능 작동→업무 변화·가치→BM의 문서 전체 흐름 및 같은 내용 JSON/Markdown 일치",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E08",
+          "T032-E09"
+        ],
+        "note": "완성된 문서 구조에 대한 검증이며 최종 플랫폼·BM·기술 승인 아님"
       }
     ],
     "uncertainties": [
@@ -200,6 +225,6 @@
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
   "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
   "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
-  "output_path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json",
+  "output_path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
   "review_owner": "R01"
 }
