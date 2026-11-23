@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261123-R02-PLATFORM-LOGIN",
+  "kind": "research",
+  "title": "강사 계정으로 크몽·탈잉·숨고를 연결하는 방법과 등록 권한",
+  "owner": "R02",
+  "date": "2026-11-23",
+  "status": "공개 문서 조사 완료 · 브라우저 보조 허용 범위와 무인 제출 미검증",
+  "inputs": {
+    "user_constraint": "R02가 2026-11-23 대화에서 확인한 조사 전제. 크몽·탈잉·숨고에서 사용할 수 있는 레슨 등록용 공식 제휴 API는 없다.",
+    "user_goal": "강사가 자료를 주고 초안을 승인한 다음 각 사이트에 직접 로그인·본인인증하면, 계속 지켜보지 않아도 승인한 레슨 정보가 제출되는 경험을 원한다.",
+    "research_scope": "완료된 TASK-028의 사용자 조건을 바탕으로 TASK-030의 ① 공식 경로, ② 등록 대상, ③ 인증 후 실행, ⑥ 로컬·서버·혼합 방식과 ⑧ 인증정보 처리 경계를 보완한다. 최종 범위는 R01, 기술 통합은 R05가 담당한다.",
+    "prior_r05": "https://github.com/ik-e/chaja-you/blob/8e3a8ee161f018d55d9e50f6071d8ab544d37b6d/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+    "prior_scope": "R05의 당근·크몽 1차 조사 중 크몽 세션·약관 판단을 재사용하고 탈잉·숨고의 강사 로그인과 등록 대상을 추가 대조했다."
+  },
+  "references": [
+    {"path": "docs/artifacts/tasks/TASK-030.json"},
+    {"path": "docs/human/responses/HRESP-20261123-02_r05-technical-feasibility-scope.md"},
+    {"path": "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json"},
+    {"path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"},
+    {"path": "docs/members/R02/workspace/2026-11-23_platform-login.md"}
+  ],
+  "outputs": {
+    "platforms": [
+      {
+        "name": "크몽",
+        "login": "이메일 또는 기존 연동 SNS로 본인이 로그인한다. 서비스 판매 전 전문가 인증을 확인한다.",
+        "resource": "전문가 서비스 판매글과 심사 요청",
+        "technical": "직접 로그인은 공식 안내로 확인. 강사의 브라우저에서 초안 입력·첨부·심사 요청·결과 확인을 보조하는 흐름은 미검증.",
+        "policy": "판매 이용약관 제9조 제4호와 제7호는 비정상적인 방법의 등록과 실질적으로 동일한 글의 중복 등록을 제한한다. 강사가 승인한 1회 입력 보조·심사 접수의 허용 범위는 운영사 확인 필요.",
+        "evidence": ["K1", "K2", "K3"],
+        "ask": "강사가 직접 인증한 뒤 승인한 단일 판매글의 초안·사진·최종 심사 접수·심사 상태를 로컬 브라우저와 서버 원격 브라우저 각각에서 보조할 때 허용되는 단계는 어디까지인가?"
+      },
+      {
+        "name": "탈잉",
+        "login": "기존 튜터의 이메일 또는 해당 SNS 로그인 방식을 재사용한다. 안내에 이메일·카카오·네이버·Apple이 있고, 페이스북에는 별도 종료 공지가 있다. 같은 연락처여도 로그인 수단이 다르면 별개 계정일 수 있다.",
+        "resource": "튜터 프로필과 PC 탈잉 스튜디오의 클래스",
+        "technical": "튜터 등록 시 프로필 이미지·전화번호 인증·튜터 소개 필수. 클래스 등록·수정은 PC 웹으로 안내된다. 외부에서 기존 튜터 식별·클래스 초안 저장·등록 신청·결과 조회가 가능한지는 미검증.",
+        "policy": "공개 약관에서 우리 서비스의 튜터 계정 대행 또는 자동 제출 허용 근거 미확인.",
+        "evidence": ["T1", "T2", "T3", "T4", "T5"],
+        "ask": "기존 튜터 계정의 브라우저에서 클래스 초안·첨부·등록 신청·결과 확인 중 로컬·서버 각각에 허용되는 단계는 어디까지인가? 계정 확인이나 추가 인증 시 직접 진행할 단계는 어디인가?"
+      },
+      {
+        "name": "숨고",
+        "login": "공개 웹 화면은 이메일·비밀번호, 카카오, 네이버를 제공한다. 프로필의 휴대폰 본인인증은 본인 명의 번호로 진행한다.",
+        "resource": "고수 프로필의 제공 서비스·소개·사진. 유료 견적 발송은 별개 동작.",
+        "technical": "웹 로그인과 고수 프로필 관리 안내는 공식 확인. 외부의 프로필 편집 위임·사진 저장·공개 결과 조회·세션 재인증 시점은 미검증.",
+        "policy": "이용약관 제21조 제4항은 계정 공유 중 위반 시 본인 계정에도 제재가 적용될 수 있다고 명시하고, 제34조는 프로필 등록·관리 기준을 정한다. 사용자 기기에서 브라우저로 프로필 편집을 보조할 수 있는 범위는 미확인.",
+        "evidence": ["S1", "S2", "S3", "S4"],
+        "ask": "고수 프로필의 소개·사진 입력과 공개 상태 확인을 사용자 기기와 사용자별 원격 브라우저 각각에서 보조할 수 있는가? 견적 발송·캐시 사용은 조사 대상에서 제외한다."
+      }
+    ],
+    "recommendation": {
+      "common": "두 환경 모두 강사가 공식 화면에서 자기 계정에 직접 로그인·인증한다. 최초 등록 동안 화면을 계속 지켜봐야 하는 부담을 줄인다. PC 종료 후 계속 처리하는 것까지 필수인지는 사용자에게 미확인이다.",
+      "local": "평소 쓰는 브라우저에서 유효 세션을 재사용하고 사진을 로컬에서 첨부한다. 설치·권한 승인·브라우저 전환과 OS별 지원 비용이 생긴다. 절전·등록 탭 종료·재인증 시 중단하며 강사 세션은 기기에 둔다.",
+      "remote": "강사가 웹에서 작업별 원격 브라우저를 열어 직접 인증한다. 확장 설치를 줄이고 등록 실행 환경을 통일할 수 있으나 기존 로컬 세션은 이어지지 않는다. 실제 소셜 인증 호환성, 사용자 연결 종료 후 계속 처리, 플랫폼 허용은 미검증이다. 입력과 화면이 원격 인프라를 거치므로 계정별 격리, 인증 중 녹화·로그·AI 접근 차단, 종료 시 세션·임시 사진 폐기와 동시 실행 비용을 검토한다.",
+      "hybrid_recommendation": "1차 모의 검증은 서버에서 플랫폼별 초안·승인본·결과를 관리하고 사용자 기기에서 인증·첨부·등록하는 혼합 방식이다. 설치 이탈이나 PC 종료 필요가 확인되고 운영사가 원격 방식을 허용하며 인증·보호·비용 기준을 만족하는 플랫폼은 서버 방식을 대안으로 선택한다.",
+      "reversible_password_handling": "로컬 복호화는 설치·기기 의존성을 줄이지 않는다. 서버 복호화는 팀이 평문을 사용하는 시점과 로그인 세션을 보호해야 한다. 두 방식 모두 소셜·추가인증이 남을 수 있어 직접 인증을 우선한다.",
+      "interim": "권한 미확인 시 플랫폼별 문구·사진을 준비하고 강사가 직접 제출한다. 결과는 본인 확인과 플랫폼 증빙을 구분한다.",
+      "evidence": ["W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+    }
+  },
+  "evidence": {
+    "checked_on": "2026-11-23",
+    "K1": "https://kmong.com/support/customer-center/posts/59",
+    "K2": "https://kmong.com/article/384",
+    "K3": "https://kmong.com/support/customer-center/posts/189",
+    "T1": "https://talingtutorguide.oopy.io/26341f37-bd7f-8049-b2dd-cdc835b14a19",
+    "T2": "https://talingtutorguide.oopy.io/tutorprofile",
+    "T3": "https://talingtutor.oopy.io/talingone2",
+    "T4": "https://taling.oopy.io/",
+    "T5": "https://talingrules.oopy.io/rule",
+    "S1": "https://soomgo.com/login",
+    "S2": "https://help.soomgo.com/hc/ko/articles/17993542523673",
+    "S3": "https://soomgo.com/terms/usage/2026-11-19",
+    "S4": "https://help.soomgo.com/hc/ko/articles/360036037131",
+    "W2": "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy",
+    "W3": "https://developer.chrome.com/docs/extensions/develop/concepts/activeTab",
+    "W4": "https://playwright.dev/docs/auth",
+    "W5": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-dcv-integration.html",
+    "W6": "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
+    "W7": "https://learn.microsoft.com/en-us/microsoft-edge/extensions/developer-guide/port-chrome-extension",
+    "W8": "https://developer.apple.com/safari/extensions/"
+  },
+  "verification": {
+    "performed": "세 플랫폼의 공개 로그인·계정 안내와 강사 등록 대상, 약관을 대조했다. R02가 제공한 공식 제휴 API 부재 조건을 적용했다. 브라우저 보조 구현은 브라우저 및 시험 도구 공식 문서에 근거한 제안이다.",
+    "unknown": "플랫폼별 로컬·원격 보조 허용 단계와 원격 로그인 호환성, 사용자 환경별 설치 이탈, 동시 작업 비용, 실제 세션 유지시간·추가 인증 빈도, 강사의 무인 제출 성공률과 직접 소요시간은 미확인. 플랫폼 회신과 실계정 시험은 없다.",
+    "followup_decision": "다음 확인 항목과 담당은 2026-11-24 회의가 끝난 뒤 정한다.",
+    "validation_candidates": [
+      "운영사 문의 후보. 플랫폼별로 로컬·서버 실행을 구별해 허용 단계와 시험 환경 제공 여부를 확인하는 방법.",
+      "모의 화면에서 다른 계정·동의 취소·인증 만료 시 중단, 승인값 변경 시 재승인, 제출 응답 유실 시 결과를 먼저 확인해 중복 제출을 방지하는 흐름을 검증한다.",
+      "공식 허용 후에만 플랫폼별 시험을 진행하고 접수·심사·게시 또는 프로필 공개 증거를 확인한다. 세 곳 합계 사용자 직접 시간 20~30분은 목표로만 사용한다. 동일 입력으로 맥·윈도우와 기존 브라우저별 첫 이용부터 비교한다. 확장 설치·권한·브라우저 전환·자료·검토·질문·로그인·재인증은 직접 시간에 포함한다. 설치 이탈·확인된 등록당 서버 비용을 측정하며 신규 가입·심사 대기 및 사용자가 다시 화면을 봐야 한 횟수도 별도 기록한다."
+    ]
+  }
+}
