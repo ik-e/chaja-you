@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "id": "TASK-030",
+  "kind": "task",
+  "status": "검토 중",
+  "owner": "R05",
+  "due": "2026-11-23",
+  "depends_on": [],
+  "suggested_owner": "R05",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-23",
+  "title": "레슨 등록 서버·로컬·인증 기술 타당성 및 권한 제약 조사",
+  "question": "사용자가 인증을 수행한 후 서버/로컬/브라우저 도구가 어디까지 등록할 수 있으며 무엇이 막히는가?",
+  "goal": "기획서의 기술 제약과 불확실성을 분리하고, 실행 구조를 결정하기 전에 필요한 최소 검증 질문을 만든다.",
+  "inputs": [
+    "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json",
+    "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+  ],
+  "scope": [
+    "R02가 이미 조사한 10개 플랫폼 약관을 다시 전수 조사하지 않고 당근 모임·크몽의 미확인 등록 위임 경로를 우선 분석한다.",
+    "공식 API·사용자 기기 실행·서버 브라우저·일회성 인증정보 처리(비밀번호 폐기와 세션 폐기 구분)의 기술 조건·정책 조건을 비교한다.",
+    "범용 AI와 Browser Use를 실행 엔진 후보로 정리하되 R03의 평가 기준에 맞춘 최소 비교 계획만 제안한다.",
+    "실제 비밀번호 수집·로그인·무단 자동 게시·보안 우회·구현 설계와 PoC 코딩은 하지 않는다."
+  ],
+  "outputs": [
+    "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+    "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
+  ],
+  "acceptance": [
+    "서버/로컬/공식 API별 인증·세션·사진 첨부·최종 제출 가능성 및 제약이 출처와 함께 정리돼 있다.",
+    "플랫폼 운영사의 명시적 허용/제한/미확인을 기술적 성공 여부와 별개로 표기한다.",
+    "일회성 비밀번호 처리 뒤에도 남는 세션·개인정보·권한 위험과 대응이 목록화돼 있다.",
+    "실제 실행 없이 확인 가능한 사실과 꼭 필요한 후속 확인/실험을 구분하고, 기획서에 반영할 2~3개 결정 조건을 제시한다."
+  ],
+  "verification": [
+    "지정 경로 파일과 URL/커밋을 확인한다.",
+    "문서의 주장 및 표를 근거와 대조하고, 확인/추정/미확인을 임의로 섞지 않았는지 확인한다.",
+    "요청 범위 외 작업이 포함되지 않았는지 검토한다.",
+    "TASK result의 실제 증거·검증 판정과 남은 결정 요청을 확인한다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    },
+    {
+      "path": "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json"
+    }
+  ],
+  "result": {
+    "summary": "당근 모임과 강사용 과외/레슨 등록은 앱에서만 가능하다(PC 웹 직접 확인: 로그인 버튼 없음, 모임 페이지는 '당근 앱에서 보기'만 있음). 따라서 브라우저 기반 실행(서버·Browser Use·범용 AI)으로는 당근 등록이 불가하다. 크몽은 웹 등록·심사 메뉴가 있어 사용자 기기 실행 검증 대상이지만, 판매 약관의 '비정상적인 방법' 등록 금지(제9조 4호)가 외부 도구 대리 입력을 포함하는지는 운영사 확인이 필요하다. 두 곳 모두 게시용 공식 API·위임 기능은 찾지 못했다. 비밀번호를 받지 않아도 세션 파일·화면의 외부 AI 전송·위임 범위 밖 접근 위험이 남는다. 범용 AI 내장 브라우저는 파일 업로드 자동화가 불가해 크몽 필수 이미지 첨부를 끝낼 수 없다.",
+    "evidence": [
+      "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md"
+    ],
+    "verification": "주장마다 공식/관찰/2차/R02 재인용/추정/미확인을 표기했다. 운영사 정책과 기술 가능성은 별도 열로 분리했다. 당근 웹은 PC Chrome으로 직접 열어 확인했다. 실제 로그인·제출·PoC는 하지 않았다.",
+    "unverified": [
+      "당근·크몽의 외부 도구 대리 입력·최종 제출 허용 여부(운영사 회신 필요)",
+      "크몽 사진 첨부·필수 항목 자동 입력의 실제 성공 여부(비교 실험 필요)",
+      "서버 접속 시 추가 인증·차단 여부",
+      "크몽 공개 개발자 API·제휴 프로그램 존재 여부"
+    ],
+    "decision_requests": [
+      "당근 MVP 범위: (a) 자료 준비 후 강사 앱 게시 (b) 당근 비즈니스 소식으로 게시처 변경 검토 (c) 운영사 허용 시에만 앱 자동화 (d) 앱 과외/레슨 등록을 게시처 후보로 추가 — R01·R02 선택",
+      "크몽은 운영사 회신 전 심사 신청 직전까지만 검증한다는 조건 승인(R01)",
+      "운영사 문의(문서 부록 A) 발송 주체와 비교 실험에 쓸 계정(테스트 계정 여부)"
+    ]
+  },
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261123-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "사용자가 인증을 수행한 후 서버/로컬/브라우저 도구가 어디까지 등록할 수 있으며 무엇이 막히는가?",
+    "observables": [
+      "서버/로컬/공식 API별 인증·세션·사진 첨부·최종 제출 가능성 및 제약이 출처와 함께 정리돼 있다.",
+      "플랫폼 운영사의 명시적 허용/제한/미확인을 기술적 성공 여부와 별개로 표기한다.",
+      "일회성 비밀번호 처리 뒤에도 남는 세션·개인정보·권한 위험과 대응이 목록화돼 있다.",
+      "실제 실행 없이 확인 가능한 사실과 꼭 필요한 후속 확인/실험을 구분하고, 기획서에 반영할 2~3개 결정 조건을 제시한다."
+    ],
+    "success_condition": "문서·출처·확인 상태·TASK result가 모두 갖춰져 담당 작업의 검토가 가능한 수준",
+    "unknown_condition": "실행이나 제3자 확인이 불가능하면 미확인과 사유·후속 질문으로 기록하고 검증됐다고 쓰지 않는다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
+  "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
+  "output_path": "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+  "review_owner": "R01 (기획 방향·통합 결정만)"
+}
