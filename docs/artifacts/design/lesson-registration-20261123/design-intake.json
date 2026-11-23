@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "id": "LESSON-DESIGN-INTAKE-20261123",
+  "kind": "planning_design_records",
+  "status": "provisional_branch_review_not_main_adopted",
+  "version": "0.1",
+  "owner": "R01",
+  "updated_at": "2026-11-23",
+  "branch": "r01/lesson-design-kickoff-20261123",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "source_refs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/deliverables/planning-design-info-model.json",
+    "docs/deliverables/PROGRESSIVE-DESIGN-ORDER.md",
+    "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+    "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+    "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md",
+    "docs/artifacts/tasks/TASK-030.json"
+  ],
+  "existing_model_ref": "docs/deliverables/planning-design-info-model.json",
+  "record_contract_ref": "docs/deliverables/planning-design-info-model.json#record_contract",
+  "design_layers": [
+    {
+      "level": "L0",
+      "records": [
+        "IT-00"
+      ],
+      "status": "draft_from_existing",
+      "owner": "R01"
+    },
+    {
+      "level": "L1",
+      "records": [
+        "IT-01",
+        "IT-03",
+        "IT-06"
+      ],
+      "status": "provisional_problem_scope",
+      "owner": "R01/R02"
+    },
+    {
+      "level": "L2",
+      "records": [
+        "IT-07",
+        "IT-08",
+        "IT-09",
+        "IT-10",
+        "IT-20"
+      ],
+      "status": "provisional_requirements",
+      "owner": "R03"
+    },
+    {
+      "level": "L3",
+      "records": [
+        "IT-11",
+        "IT-12"
+      ],
+      "status": "draft_hypothesis",
+      "owner": "R03/R05"
+    },
+    {
+      "level": "L4",
+      "records": [
+        "IT-19"
+      ],
+      "status": "candidate_comparison",
+      "owner": "R05"
+    },
+    {
+      "level": "L5",
+      "records": [
+        "IT-14",
+        "IT-15",
+        "IT-16",
+        "IT-17",
+        "IT-18",
+        "IT-26"
+      ],
+      "status": "delegate_after_common_contract",
+      "owner": "R03/R04/R05"
+    },
+    {
+      "level": "L6",
+      "records": [
+        "IT-19",
+        "IT-20"
+      ],
+      "status": "cross_review_pending",
+      "owner": "R01"
+    },
+    {
+      "level": "L7",
+      "records": [
+        "IT-21",
+        "IT-22"
+      ],
+      "status": "workplan_draft",
+      "owner": "R01"
+    }
+  ],
+  "records": [
+    {
+      "id": "LESSON-IT-00",
+      "type_id": "IT-00",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+        "goal": "12/08 동작하는 크몽 MVP와 2027/01/04 완성품을 위해 기존 설계 체계를 사용한 L0~L7 정보 연결",
+        "hard_constraints": [
+          "2026-12-08: 작동하는 MVP(중간 발표만 하는 날 아님)",
+          "2027-01-04: 완성품·최종 발표 목표",
+          "담당 5명(R01~R05), 기존 8주 프로젝트",
+          "허가되지 않은 실제 자동 등록·인증정보 수집·보안 우회 금지",
+          "GitHub main은 정본, 본 브랜치의 의사결정은 채택 전 검토안; Notion은 읽기 사본"
+        ],
+        "decision_owner": "R01 (고영향 제품/범위/마일스톤 판단); 팀원은 설계·비교 근거를 작성",
+        "review_trigger": "플랫폼 정책·권한, 브라우저 실행 장애, 11/27 범위 검토, 12/08 기능 수용",
+        "authority_input": "2026-11-23 현재 대화에서 R01은 12/08 MVP·01/04 완성품 목표와 작업 브랜치 진행을 지시. 나머지 제품 선택은 검토 가능한 설계 제안이다."
+      },
+      "source_refs": [
+        "docs/human/phase-intents/PHASE-20261123-01.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/step1/WBS_제출본.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-01",
+      "type_id": "IT-01",
+      "status": "provisional",
+      "evidence_level": "observed",
+      "fields": {
+        "actor_role": "기존 공고·사진을 보유한 개인 음악 레슨 강사",
+        "job": "새 모집 플랫폼에 정확한 수업 조건으로 최초 등록하고 완료 상태 확인",
+        "trigger": "추가 모집 채널 개설",
+        "environment": "강사 자기 PC 브라우저(우선 실행 가설), 본인 명의 플랫폼 계정, 직접 로그인"
+      },
+      "source_refs": [
+        "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-03",
+      "type_id": "IT-03",
+      "status": "provisional",
+      "evidence_level": "observed",
+      "fields": {
+        "affected_actor_ref": "LESSON-IT-01",
+        "occurrence_context": "다른 플랫폼 최초 레슨 상품 등록",
+        "unmet_job": "동일한 수업 조건을 플랫폼별로 재작성·확인·입력·첨부·제출",
+        "observed_impact": "R02 직접 사례 최초 크몽 등록 1~2시간 회상, 임시 저장/지연, 가격 조건 AI 오류 수정",
+        "evidence_refs": [
+          "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+        ],
+        "counter_evidence": "최초 등록은 일회성, 실제 수업 모집 효과 미측정. 반복 재게시·상담의 장기 부담은 더 클 수 있다."
+      },
+      "source_refs": [
+        "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+        "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-06",
+      "type_id": "IT-06",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "fields": {
+        "problem_refs": [
+          "LESSON-IT-03"
+        ],
+        "in_scope": [
+          "기존 원본·사진 재사용",
+          "F1 사실 기반 크몽 필드 변환",
+          "F2 사용자 승인 후 허용된 크몽 브라우저 입력·이미지 첨부, 제출은 허용 시에만",
+          "F3 심사 접수 상태·결과 미확인·실패/중복 방지"
+        ],
+        "out_of_scope": [
+          "12/08까지 탈잉·숨고 자동 제출 필수",
+          "10개 플랫폼 일괄 지원",
+          "후기 재게시·상담/견적",
+          "서버 비밀번호 수집",
+          "실서비스 무허용 자동 제출"
+        ],
+        "authority_ref": null,
+        "authority_note": "R01이 브랜치 설계 작업을 지시했으나 위 기능 범위의 최종 채택을 별도로 확인한 것은 아니다.",
+        "revisit_when": [
+          "크몽 실제 제출 허용 불명확/제한 판정",
+          "R05 공수 추정이 12/08에 맞지 않을 때",
+          "직접 업무 감소와 사용자 가치 반증"
+        ]
+      },
+      "source_refs": [
+        "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/tasks/TASK-030.json"
+      ]
+    },
+    {
+      "id": "LESSON-IT-07",
+      "type_id": "IT-07",
+      "status": "provisional",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "desired_outcome": "사용자가 승인한 레슨 조건으로 최초 등록을 처리하면서 강사 능동 입력·검수·재확인 부담이 감소",
+        "observable_signal": [
+          "승인값의 가격/횟수/수업시간/조건 일치",
+          "사용자 능동 작업 시간 및 추가 개입 횟수",
+          "심사 접수의 증빙 여부",
+          "미확인 상태의 중복 재제출 수"
+        ],
+        "measurement_method": "같은 레슨 원본·사진·플랫폼·로그인 조건에서 수동+템플릿 / 범용 AI+브라우저 / 전용 제품 비교",
+        "caveat": "사용자 가치 및 지불 의향은 미실증이며 MVP 기술 성공은 시장 성과의 입증이 아님"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+        "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-08",
+      "type_id": "IT-08",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "actor_ref": "LESSON-IT-01",
+        "trigger": "강사가 크몽 최초 상품 등록 선택",
+        "main_flow": [
+          "레슨 원문·사진·운영 조건 제공",
+          "F1 필드 변환·가격·시간·필수 항목 충돌 점검",
+          "강사가 조건·사진·실행 범위 승인",
+          "강사가 크몽 로그인/인증 직접 수행",
+          "허용된 경우 F2 입력·사진 첨부 및 심사 접수 시도",
+          "F3 제출·심사·공개·실패·미확인 중 증거 있는 단계 표시"
+        ],
+        "end_state": "12/08 기술적 목표는 크몽 상품 심사 접수 확인. 실제 제출은 허용 조건 충족 시에만. 제한되면 모의 완료와 실서비스 중단을 명확히 구분.",
+        "edge_cases": [
+          "가격·시간 충돌",
+          "로그인/인증 만료",
+          "사진 첨부 실패",
+          "제출 응답 유실",
+          "반려·재제출",
+          "결과 미확인 시 중복 시도 금지"
+        ]
+      },
+      "source_refs": [
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-09",
+      "type_id": "IT-09",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "statement": "F1 원본 정확한 구조화·변환 / F2 인증 후 승인된 등록 실행 / F3 상태·실패·미확인 추적",
+        "reason_ref": "LESSON-IT-03",
+        "priority": "must for 12/08 vertical slice; real final submission conditional on permission",
+        "acceptance": [
+          "원본 실제 조건(월4회·90/180/270분·25/40/50만원) 임의 변경 없음",
+          "승인 전 외부 실행·의미 있는 정보 변경 없음",
+          "허용된 실행 범위 내 이미지 포함 웹 입력 가능(시험 환경 명시)",
+          "심사 접수 성공·실패·미확인·심사 승인·공개 분리",
+          "불명확한 결과 자동 재제출 0건"
+        ],
+        "source_contract": "R03 TASK-031 초안은 최신 가격 불일치 가능성; R02 2026-11-23 최신 값 우선"
+      },
+      "source_refs": [
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+        "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      ]
+    },
+    {
+      "id": "LESSON-IT-10",
+      "type_id": "IT-10",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "quality_attribute": "안전·정확성·관측가능성·사용성",
+        "stimulus": "AI 생성값 불일치, 로그인 만료, 이미지 실패, 접수 응답 유실",
+        "environment": "로컬 브라우저(가설)/모의 등록 환경 및 허용된 실서비스 환경을 구분",
+        "expected_response": "미승인 판매조건 변경 없음; 승인 불가 시 중단; 미확인 상태에서 자동 재제출 없음; 근거 없는 성공 판정 없음",
+        "verification_method": "모의/허용된 실서비스 케이스별 성공/실패/unknown 로그와 승인값 대조"
+      },
+      "source_refs": [
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-11",
+      "type_id": "IT-11",
+      "status": "draft_hypothesis",
+      "evidence_level": "sourced",
+      "fields": {
+        "terms": {
+          "LessonSource": "강사가 제공한 레슨 원본",
+          "VerifiedLesson": "확인된 수업 사실·가격·조건",
+          "PlatformMapping": "대상 플랫폼 필드 맵 및 규칙 버전",
+          "RegistrationDraft": "플랫폼별 등록안",
+          "ExecutionApproval": "사용자 승인 범위와 내용 버전",
+          "RegistrationJob": "플랫폼별 등록 실행 작업",
+          "RegistrationEvidence": "관측된 접수/게시 상태 증거"
+        },
+        "invariants": [
+          "강사가 승인하지 않은 가격/시간/횟수/조건을 자동 게시하지 않음",
+          "사용자 승인 버전과 등록 실행 대상 버전 일치",
+          "심사 접수는 심사 승인·게시 완료와 별개의 상태",
+          "접수 결과 unknown인 작업은 증거 확인 전 자동 재제출 금지",
+          "모의 검증 상태는 실서비스 등록 완료가 아님"
+        ],
+        "requirement_refs": [
+          "LESSON-IT-09",
+          "LESSON-IT-10"
+        ]
+      },
+      "source_refs": [
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      ]
+    },
+    {
+      "id": "LESSON-IT-12",
+      "type_id": "IT-12",
+      "status": "draft_hypothesis",
+      "evidence_level": "sourced",
+      "fields": {
+        "system_purpose": "사용자 승인에 근거한 최초 레슨 상품 등록 업무 지원",
+        "external_actors": [
+          "강사",
+          "크몽(등록/심사 시스템)",
+          "LLM 제공자(사실 추출·텍스트 변환)"
+        ],
+        "in_out_boundary": {
+          "inside": [
+            "원본 변환·검증",
+            "승인 범위·작업 상태·증빙 기록",
+            "허용된 브라우저 조작 엔진 및 플랫폼 어댑터"
+          ],
+          "outside": [
+            "크몽 인증/심사 결정",
+            "플랫폼 약관과 등록 허용 권한",
+            "수강생 모집·레슨 결제·강의 자체"
+          ]
+        },
+        "flows": [
+          "강사→서비스: 원본·승인",
+          "서비스→강사 PC 브라우저: 승인된 입력 명령(가설)",
+          "PC 브라우저↔크몽: 로그인·입력·결과 관찰",
+          "브라우저→서비스: 개인정보 최소화한 상태·증빙"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/tasks/TASK-030.json",
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md"
+      ]
+    },
+    {
+      "id": "LESSON-IT-19",
+      "type_id": "IT-19",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "로컬 브라우저와 원격/서버 브라우저 중 무엇을 채택할 것인가?",
+        "options": [
+          "사용자 기기 브라우저 제어(우선 설계 가설)",
+          "서버 브라우저(비교)",
+          "공식 API·위임(허용 경로 발견 시 우선 검토)"
+        ],
+        "drivers": [
+          "사용자 직접 로그인/설치 부담",
+          "인증 세션·사진 처리 위치",
+          "플랫폼 실행 권한",
+          "8주 구축·지원 공수",
+          "오류 및 배포 운영비"
+        ],
+        "selection_and_reason": "로컬 브라우저를 설계 초안의 기본 가정으로 두되 사용자 설치 부담·운영 위험을 비교하지 않아 adopted 상태로 승격하지 않는다.",
+        "revisit_when": [
+          "R05 TASK-030 8개 영역 최종 보고",
+          "운영사 허용 확인",
+          "파일 업로드/인증 PoC 실패",
+          "예상 공수·사용자 편의 차이"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/tasks/TASK-030.json",
+        "https://github.com/ik-e/chaja-you/blob/r05/task-030-20261123/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      ]
+    },
+    {
+      "id": "LESSON-IT-20",
+      "type_id": "IT-20",
+      "status": "draft_hypothesis",
+      "evidence_level": "sourced",
+      "fields": {
+        "subject_refs": [
+          "LESSON-IT-06",
+          "LESSON-IT-07",
+          "LESSON-IT-08",
+          "LESSON-IT-09",
+          "LESSON-IT-10",
+          "LESSON-IT-11",
+          "LESSON-IT-12",
+          "LESSON-IT-19"
+        ],
+        "checks": [
+          {
+            "id": "V01",
+            "kind": "document_review",
+            "question": "사용자 Pain→FR→가치→유료 결과 논리가 유지되는가?",
+            "status": "planned"
+          },
+          {
+            "id": "V02",
+            "kind": "design_verification",
+            "question": "승인한 값과 입력/제출한 값이 정확히 일치하는가?",
+            "expected": "미승인 임의 변경 0건",
+            "status": "planned"
+          },
+          {
+            "id": "V03",
+            "kind": "test_design",
+            "question": "로그인 만료/이미지 실패/접수 불명확 시 정상 중단·복구하는가?",
+            "expected": "접수 미확인 자동 재제출 0건",
+            "status": "planned"
+          },
+          {
+            "id": "V04",
+            "kind": "user_validation",
+            "question": "동일 조건 범용 AI보다 강사 직접 시간·개입이 줄어드는가?",
+            "status": "planned"
+          },
+          {
+            "id": "V05",
+            "kind": "feasibility",
+            "question": "외부 플랫폼 실제 자동 제출이 허용되며 기능·운영상 가능한가?",
+            "status": "unknown"
+          }
+        ]
+      },
+      "source_refs": [
+        "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+        "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md",
+        "https://github.com/ik-e/chaja-you/blob/r05/task-030-20261123/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md"
+      ]
+    }
+  ],
+  "relationship_intent": [
+    {
+      "from": "LESSON-IT-03",
+      "to": "LESSON-IT-06",
+      "relation": "derived_from",
+      "state": "proposed"
+    },
+    {
+      "from": "LESSON-IT-06",
+      "to": "LESSON-IT-08",
+      "relation": "constrains",
+      "state": "proposed"
+    },
+    {
+      "from": "LESSON-IT-08",
+      "to": "LESSON-IT-09",
+      "relation": "derived_from",
+      "state": "proposed"
+    },
+    {
+      "from": "LESSON-IT-09",
+      "to": "LESSON-IT-11",
+      "relation": "constrains",
+      "state": "proposed"
+    },
+    {
+      "from": "LESSON-IT-09",
+      "to": "LESSON-IT-20",
+      "relation": "planned_check_by",
+      "state": "planned"
+    },
+    {
+      "from": "LESSON-IT-19",
+      "to": "LESSON-IT-12",
+      "relation": "impacts",
+      "state": "review_on_arch_choice"
+    }
+  ],
+  "milestones": [
+    {
+      "date": "2026-12-08",
+      "type": "user_milestone",
+      "label": "동작하는 MVP (크몽 1개 vertical slice)",
+      "status": "target_not_achieved"
+    },
+    {
+      "date": "2027-01-04",
+      "type": "user_milestone",
+      "label": "완성품 및 최종 발표",
+      "status": "target_not_achieved"
+    }
+  ],
+  "decisions_review": [
+    {
+      "id": "DES-01",
+      "status": "proposed",
+      "question": "첫 Pain·플랫폼",
+      "recommendation": "최초 등록·크몽 상품 1건",
+      "reason": "R02 사용자 경험+R03 시나리오+R05 웹 등록 경로",
+      "reopen": "12/08 완료 지연 또는 실제 등록 허용/가치 반증"
+    },
+    {
+      "id": "DES-02",
+      "status": "proposed",
+      "question": "MVP Done",
+      "recommendation": "F1→강사 승인→F2 브라우저 입력·사진→F3 증빙까지 작동. 실제 심사 접수는 허용 시 수행하며 불허면 제한 상태와 차이를 명시",
+      "reason": "R02 완결 대행 기대와 R03 상태/실패 분류",
+      "reopen": "플랫폼 정책·제품 목적과 시연 성과 불일치"
+    },
+    {
+      "id": "DES-03",
+      "status": "proposed",
+      "question": "실행 위치",
+      "recommendation": "사용자 브라우저 로컬 실행 우선 설계·원격 실행 비교 후 R01 최종 선택",
+      "reason": "계정/세션 경계와 12/08 구현 비용 검토",
+      "reopen": "R05 비교 결과 및 사용성 시험"
+    },
+    {
+      "id": "DES-04",
+      "status": "proposed",
+      "question": "AI/규칙/실행 책임",
+      "recommendation": "AI는 원본 추출·문구 변환; 결정론 규칙은 가격·수업 조건·승인 검사; 브라우저 어댑터는 실행; 상태 기록은 증빙·복구",
+      "reason": "사실 오류 사례 및 실패/미확인 요구사항",
+      "reopen": "사용자 상황 또는 컴포넌트 책임 충돌"
+    },
+    {
+      "id": "DES-05",
+      "status": "proposed",
+      "question": "안전 규칙",
+      "recommendation": "강사 직접 로그인, 승인 범위 준수, 비밀번호/코드 미수집, 미확인시 중복 제출 금지",
+      "reason": "R02·R03 요구와 R05 보안 조사",
+      "reopen": "공식 위임 경로 변경 시 권한 설계 재검토"
+    }
+  ],
+  "existing_document_handoff": {
+    "info_model": [
+      "docs/deliverables/planning-design-info-model.json",
+      "docs/deliverables/PLANNING-DESIGN-INFO-MODEL.md",
+      "docs/deliverables/PROGRESSIVE-DESIGN-ORDER.md"
+    ],
+    "requirement_source": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+    "preliminary_step2": [
+      "docs/step2/API_설계_문서.md",
+      "docs/step2/데이터베이스_스키마_설계서.md"
+    ],
+    "milestone_projection": "docs/step1/WBS_제출본.md",
+    "deliverable_policy": "새 문서 체계 신설 아님. 이 JSON은 기존 L0~L7 모델의 특정 제품 인스턴스만 기록한다. Step2 기존 문서는 각 확정 단계에서 파생 반영, 지금은 현재 제출/접수로 표시하지 않음."
+  },
+  "team_ownership": "신규 검토용 TASK-033~037은 브랜치에서 제안. 팀원 개별 워크스페이스/TASK-028~032는 수정하지 않으며 배정 공지는 아직 발송하지 않음.",
+  "risks": [
+    "12/08까지 15일의 작업량 실증 없음",
+    "크몽 외부 자동 등록 허용 미확인",
+    "로컬 실행이 최적의 UX인지 검증 전",
+    "동일 조건 비교의 강사 직접 시간·실구매 미측정"
+  ]
+}
