@@ -9,7 +9,7 @@
 
 **주의: 이 문서는 이전 찾아you 제품 기준안입니다. 현재 실제 제품은 미선정이며 이 목표·MVP의 구현을 보류합니다. 제출용 잠정 기준 및 과거 이력으로만 사용합니다.**
 
-[현재 단계 의도](docs/human/phase-intents/PHASE-20261118-01.md) · [실제 운영 상태](CURRENT.md)
+[현재 단계 의도](docs/human/phase-intents/PHASE-20261123-01.md) · [실제 운영 상태](CURRENT.md)
 
 ## 목적
 
