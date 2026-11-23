@@ -1,0 +1,545 @@
+{
+  "schema_version": 1,
+  "id": "LESSON-MVP-WORKPLAN-20261123",
+  "kind": "milestone_workplan",
+  "status": "draft_branch_review_not_active",
+  "owner": "R01",
+  "updated_at": "2026-11-23",
+  "branch": "r01/lesson-design-kickoff-20261123",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "source_refs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/deliverables/planning-design-info-model.json",
+    "docs/deliverables/PLANNING-DESIGN-INFO-MODEL.md",
+    "docs/deliverables/PROGRESSIVE-DESIGN-ORDER.md",
+    "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+    "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+    "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md",
+    "docs/artifacts/tasks/TASK-030.json"
+  ],
+  "design_intake_ref": "docs/artifacts/design/lesson-registration-20261123/design-intake.json",
+  "model_reuse": "기존 L0~L7, IT-00~27, TASK/ADR/Run/Eval, 공식 문서 투영. 다른 방법론이나 13종 신규 필수 문서 생성 금지",
+  "milestones": [
+    {
+      "id": "M-20261208",
+      "date": "2026-12-08",
+      "label": "실제로 작동하는 최소 MVP / 중간 발표",
+      "state": "target_not_achieved",
+      "acceptance": [
+        "동일 원본·이미지·수업 사실이 F1 변환→강사 승인→F2 브라우저 입력·첨부→F3 상태 확인으로 이어짐",
+        "미승인 정보 변경 0·모의/실제 상태 구별·unknown 자동 재제출 0",
+        "허용되지 않은 실서비스 자동 제출은 하지 않으며 실제 접수 성공은 별도 검증"
+      ]
+    },
+    {
+      "id": "M-20270104",
+      "date": "2027-01-04",
+      "label": "사용자 경험·예외/운영 안정화 및 최종 제품",
+      "state": "target_not_achieved",
+      "acceptance": [
+        "MVP 정상·실패·권한·복구 회귀 검증과 시연",
+        "직접/범용 AI/전용 서비스 사용자 개입·시간·정확도 비교",
+        "탈잉/숨고 확장은 기술/정책·공수 검증을 거쳐 선택",
+        "배포·최종 제출/접수는 별도 증빙 확인"
+      ]
+    }
+  ],
+  "work_windows": [
+    {
+      "start": "2026-11-24",
+      "end": "2026-11-25",
+      "layer": "L0~L2",
+      "activity": "R01 범위·MVP Done / R03 유스케이스·FR/NFR 검토",
+      "task_refs": [
+        "TASK-033",
+        "TASK-035"
+      ],
+      "gate": "업무 범위·수용 기준 제안"
+    },
+    {
+      "start": "2026-11-24",
+      "end": "2026-11-27",
+      "layer": "L3~L4",
+      "activity": "R02 사실 정답, R03 도메인·상태, R05 로컬/원격/공식 실행 대안·공수",
+      "task_refs": [
+        "TASK-034",
+        "TASK-035",
+        "TASK-037"
+      ],
+      "gate": "공통 도메인·실행 경계·대안 비교"
+    },
+    {
+      "start": "2026-11-27",
+      "end": "2026-12-02",
+      "layer": "L5",
+      "activity": "R04 UI/승인 흐름 및 R03 상태와 R05 플랫폼 어댑터/API/저장 책임 정합성",
+      "task_refs": [
+        "TASK-035",
+        "TASK-036",
+        "TASK-037"
+      ],
+      "gate": "상태·데이터·API/UI·권한 계약 정합"
+    },
+    {
+      "start": "2026-11-30",
+      "end": "2026-12-04",
+      "layer": "Build",
+      "activity": "확정된 수직 기능부터 크몽 모의/허용된 실행 경로 구현·통합, 상세 구현 담당·공수는 R01 추가 배정",
+      "task_refs": [],
+      "gate": "12/04 기능 동결 후보(실제 증빙 필요)"
+    },
+    {
+      "start": "2026-12-05",
+      "end": "2026-12-07",
+      "layer": "L6~L7/Test",
+      "activity": "정상·실패·unknown·재시도·가격 정합성·사용자 개입 시험과 중간 시연 준비",
+      "task_refs": [
+        "TASK-033",
+        "TASK-035",
+        "TASK-036",
+        "TASK-037"
+      ],
+      "gate": "12/08 MVP 사전 검수"
+    },
+    {
+      "start": "2026-12-08",
+      "end": "2026-12-08",
+      "layer": "MVP",
+      "activity": "중간 시연: 기능/모의/허용된 실제 접수와 미확인 사항 분리",
+      "task_refs": [],
+      "gate": "M-20261208"
+    },
+    {
+      "start": "2026-12-09",
+      "end": "2027-01-04",
+      "layer": "Finish",
+      "activity": "고객 경험 검증·기능 안정화·선택적 플랫폼 확장·배포/최종 발표",
+      "task_refs": [],
+      "gate": "M-20270104"
+    }
+  ],
+  "task_proposals": [
+    {
+      "schema_version": 1,
+      "id": "TASK-033",
+      "kind": "task_proposal",
+      "status": "review_pending_not_assigned",
+      "owner": null,
+      "suggested_owner": "R01",
+      "due": "2026-11-25",
+      "depends_on": [
+        "TASK-032"
+      ],
+      "title": "L0~L2 제품 범위·크몽 MVP Done·통합 승인 판단",
+      "question": "L0~L2 제품 범위·크몽 MVP Done·통합 승인 판단을 기존 설계 모델과 검증 기준에 맞게 구체화할 수 있는가?",
+      "goal": "L0~L2 제품 범위·크몽 MVP Done·통합 승인 판단",
+      "inputs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/design/lesson-registration-20261123/design-intake.json",
+        "docs/deliverables/planning-design-info-model.json"
+      ],
+      "scope": [
+        "첫 대상 크몽 상품 1건의 시작/최종 접수 확인과 모의/실서비스 차이 정의",
+        "F1→사용자 승인→F2→F3 Must/Conditional/Out 명시",
+        "12/8 MVP·1/4 완성품 산출물과 선택/보류/재검토 조건 기록"
+      ],
+      "outputs": [
+        "docs/members/R01/workspace/2026-11-2x_lesson-design-task-033.md"
+      ],
+      "acceptance": [
+        "정본에서 근거별 승인/제안/미확인 분리",
+        "정상·실패·unknown을 포함한 MVP 수용 기준",
+        "설계/작업 의존성 및 배정 제안 검토"
+      ],
+      "verification": [
+        "관찰·공식근거·가설·미확인 구분",
+        "기존 R02~R05 자료 및 공통 계약과 충돌 검토",
+        "실행하지 않은 테스트를 통과로 기록하지 않음"
+      ],
+      "result": null,
+      "validation_plan": {
+        "question": "해당 작업의 수용 기준을 어떻게 관찰·검증할 것인가?",
+        "observables": [
+          "정본에서 근거별 승인/제안/미확인 분리",
+          "정상·실패·unknown을 포함한 MVP 수용 기준",
+          "설계/작업 의존성 및 배정 제안 검토"
+        ],
+        "success_condition": "문서 근거·상태·책임 및 후속 설계의 입력을 확인",
+        "unknown_condition": "정책 허용/실제 시험 정보 부재는 미확인으로 표기"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+      "traceability": {
+        "intent_refs": [
+          "PHASE-20261123-01"
+        ],
+        "design_refs": [
+          "LESSON-DESIGN-INTAKE-20261123"
+        ],
+        "requirement_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04"
+        ],
+        "evaluation_refs": [
+          "LESSON-IT-20"
+        ]
+      },
+      "design_levels": [
+        "L0",
+        "L1",
+        "L2"
+      ],
+      "owner_boundary": "R01 제품 범위 및 통합",
+      "assignment_status": "branch review only; not informed or accepted by members"
+    },
+    {
+      "schema_version": 1,
+      "id": "TASK-034",
+      "kind": "task_proposal",
+      "status": "review_pending_not_assigned",
+      "owner": null,
+      "suggested_owner": "R02",
+      "due": "2026-11-26",
+      "depends_on": [
+        "TASK-028",
+        "TASK-033"
+      ],
+      "title": "강사 원본·플랫폼 필드·사용자 승인 정답 자료",
+      "question": "강사 원본·플랫폼 필드·사용자 승인 정답 자료을 기존 설계 모델과 검증 기준에 맞게 구체화할 수 있는가?",
+      "goal": "강사 원본·플랫폼 필드·사용자 승인 정답 자료",
+      "inputs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/design/lesson-registration-20261123/design-intake.json",
+        "docs/deliverables/planning-design-info-model.json"
+      ],
+      "scope": [
+        "월 4회 90·180·270분, 월 25·40·50만 원 등 최신 실제 조건의 출처·승인 범위",
+        "사진/학생 정보 사용권·비용·취소/변경 규칙과 누락·충돌/임의 생성 반례",
+        "크몽 등록 양식과 원본의 매핑 및 강사 검수 시간 측정"
+      ],
+      "outputs": [
+        "docs/members/R02/workspace/2026-11-2x_lesson-design-task-034.md"
+      ],
+      "acceptance": [
+        "정답값·근거·미확인·이미지 권한 구분",
+        "F1·F2가 사용할 수 있는 등록 필드 예제",
+        "강사의 개입·수정 비용 측정 기준"
+      ],
+      "verification": [
+        "관찰·공식근거·가설·미확인 구분",
+        "기존 R02~R05 자료 및 공통 계약과 충돌 검토",
+        "실행하지 않은 테스트를 통과로 기록하지 않음"
+      ],
+      "result": null,
+      "validation_plan": {
+        "question": "해당 작업의 수용 기준을 어떻게 관찰·검증할 것인가?",
+        "observables": [
+          "정답값·근거·미확인·이미지 권한 구분",
+          "F1·F2가 사용할 수 있는 등록 필드 예제",
+          "강사의 개입·수정 비용 측정 기준"
+        ],
+        "success_condition": "문서 근거·상태·책임 및 후속 설계의 입력을 확인",
+        "unknown_condition": "정책 허용/실제 시험 정보 부재는 미확인으로 표기"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+      "traceability": {
+        "intent_refs": [
+          "PHASE-20261123-01"
+        ],
+        "design_refs": [
+          "LESSON-DESIGN-INTAKE-20261123"
+        ],
+        "requirement_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04"
+        ],
+        "evaluation_refs": [
+          "LESSON-IT-20"
+        ]
+      },
+      "design_levels": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "owner_boundary": "R02 정답 자료/권한 근거",
+      "assignment_status": "branch review only; not informed or accepted by members"
+    },
+    {
+      "schema_version": 1,
+      "id": "TASK-035",
+      "kind": "task_proposal",
+      "status": "review_pending_not_assigned",
+      "owner": null,
+      "suggested_owner": "R03",
+      "due": "2026-11-27",
+      "depends_on": [
+        "TASK-031",
+        "TASK-033"
+      ],
+      "title": "L2·L3 업무 계약 및 L5 상태·복구/테스트 설계",
+      "question": "L2·L3 업무 계약 및 L5 상태·복구/테스트 설계을 기존 설계 모델과 검증 기준에 맞게 구체화할 수 있는가?",
+      "goal": "L2·L3 업무 계약 및 L5 상태·복구/테스트 설계",
+      "inputs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/design/lesson-registration-20261123/design-intake.json",
+        "docs/deliverables/planning-design-info-model.json"
+      ],
+      "scope": [
+        "기존 F1~F3 계약 재사용, 원본/승인/제출/결과별 상태와 책임 정의",
+        "초안·제출 시도·심사 접수·심사 승인·실제 공개·실패·unknown 구분",
+        "가격/시간 충돌·인증 만료·이미지 실패·응답 유실·재시도 금지 반례"
+      ],
+      "outputs": [
+        "docs/members/R03/workspace/2026-11-2x_lesson-design-task-035.md"
+      ],
+      "acceptance": [
+        "도메인 용어·불변식과 사용자/시스템 경계",
+        "상태/전이/가드/복구 규칙",
+        "FR/NFR별 관측 가능한 수용 기준·케이스"
+      ],
+      "verification": [
+        "관찰·공식근거·가설·미확인 구분",
+        "기존 R02~R05 자료 및 공통 계약과 충돌 검토",
+        "실행하지 않은 테스트를 통과로 기록하지 않음"
+      ],
+      "result": null,
+      "validation_plan": {
+        "question": "해당 작업의 수용 기준을 어떻게 관찰·검증할 것인가?",
+        "observables": [
+          "도메인 용어·불변식과 사용자/시스템 경계",
+          "상태/전이/가드/복구 규칙",
+          "FR/NFR별 관측 가능한 수용 기준·케이스"
+        ],
+        "success_condition": "문서 근거·상태·책임 및 후속 설계의 입력을 확인",
+        "unknown_condition": "정책 허용/실제 시험 정보 부재는 미확인으로 표기"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+      "traceability": {
+        "intent_refs": [
+          "PHASE-20261123-01"
+        ],
+        "design_refs": [
+          "LESSON-DESIGN-INTAKE-20261123"
+        ],
+        "requirement_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04"
+        ],
+        "evaluation_refs": [
+          "LESSON-IT-20"
+        ]
+      },
+      "design_levels": [
+        "L2",
+        "L3",
+        "L5"
+      ],
+      "owner_boundary": "R03 요구/상태/검증",
+      "assignment_status": "branch review only; not informed or accepted by members"
+    },
+    {
+      "schema_version": 1,
+      "id": "TASK-036",
+      "kind": "task_proposal",
+      "status": "review_pending_not_assigned",
+      "owner": null,
+      "suggested_owner": "R04",
+      "due": "2026-11-30",
+      "depends_on": [
+        "TASK-029",
+        "TASK-033"
+      ],
+      "title": "L5 사용자 화면·승인·결과/오류 UX 및 가치 측정",
+      "question": "L5 사용자 화면·승인·결과/오류 UX 및 가치 측정을 기존 설계 모델과 검증 기준에 맞게 구체화할 수 있는가?",
+      "goal": "L5 사용자 화면·승인·결과/오류 UX 및 가치 측정",
+      "inputs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/design/lesson-registration-20261123/design-intake.json",
+        "docs/deliverables/planning-design-info-model.json"
+      ],
+      "scope": [
+        "원본/사진 제출·필드 검토·직접 로그인·실행 승인·진행·실패/미확인 화면/행동",
+        "강사가 직접 입력·확인·설치·개입한 시간을 계측할 지점 정의",
+        "범용 AI 대비 사용성 차별성 가설과 UI/상태 매핑"
+      ],
+      "outputs": [
+        "docs/members/R04/workspace/2026-11-2x_lesson-design-task-036.md"
+      ],
+      "acceptance": [
+        "핵심 화면·액션·입출력 계약",
+        "R03 상태 의미와 UI 표시 일치",
+        "오류·빈/로딩/보류/재개와 사용자 행동 정의"
+      ],
+      "verification": [
+        "관찰·공식근거·가설·미확인 구분",
+        "기존 R02~R05 자료 및 공통 계약과 충돌 검토",
+        "실행하지 않은 테스트를 통과로 기록하지 않음"
+      ],
+      "result": null,
+      "validation_plan": {
+        "question": "해당 작업의 수용 기준을 어떻게 관찰·검증할 것인가?",
+        "observables": [
+          "핵심 화면·액션·입출력 계약",
+          "R03 상태 의미와 UI 표시 일치",
+          "오류·빈/로딩/보류/재개와 사용자 행동 정의"
+        ],
+        "success_condition": "문서 근거·상태·책임 및 후속 설계의 입력을 확인",
+        "unknown_condition": "정책 허용/실제 시험 정보 부재는 미확인으로 표기"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+      "traceability": {
+        "intent_refs": [
+          "PHASE-20261123-01"
+        ],
+        "design_refs": [
+          "LESSON-DESIGN-INTAKE-20261123"
+        ],
+        "requirement_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04"
+        ],
+        "evaluation_refs": [
+          "LESSON-IT-20"
+        ]
+      },
+      "design_levels": [
+        "L2",
+        "L5"
+      ],
+      "owner_boundary": "R04 강사 사용 UX; Python 인프라 제외",
+      "assignment_status": "branch review only; not informed or accepted by members"
+    },
+    {
+      "schema_version": 1,
+      "id": "TASK-037",
+      "kind": "task_proposal",
+      "status": "review_pending_not_assigned",
+      "owner": null,
+      "suggested_owner": "R05",
+      "due": "2026-11-27",
+      "depends_on": [
+        "TASK-030",
+        "TASK-033"
+      ],
+      "title": "L3~L4 로컬/서버 실행 구조 대안 및 L5 기술·권한 경계",
+      "question": "L3~L4 로컬/서버 실행 구조 대안 및 L5 기술·권한 경계을 기존 설계 모델과 검증 기준에 맞게 구체화할 수 있는가?",
+      "goal": "L3~L4 로컬/서버 실행 구조 대안 및 L5 기술·권한 경계",
+      "inputs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/artifacts/design/lesson-registration-20261123/design-intake.json",
+        "docs/deliverables/planning-design-info-model.json"
+      ],
+      "scope": [
+        "공식 권한/API·사용자 PC 브라우저·원격 브라우저 비교; 세션·사진·인증·설치/운영 부담",
+        "F1/F3 공통 코어와 크몽 F2 어댑터, 오류·증빙·복구의 컴포넌트 책임 분해",
+        "기존 Step2 API/DB 재사용 범위, 12/8 최소 완결 흐름/공수·위험/차단 조건 제안"
+      ],
+      "outputs": [
+        "docs/members/R05/workspace/2026-11-2x_lesson-design-task-037.md"
+      ],
+      "acceptance": [
+        "대안별 기술/정책/근거 3축 평가",
+        "실행·저장 단위/신뢰 경계·인터페이스 계약",
+        "12/8 범위별 추정 공수와 통합 테스트 지점"
+      ],
+      "verification": [
+        "관찰·공식근거·가설·미확인 구분",
+        "기존 R02~R05 자료 및 공통 계약과 충돌 검토",
+        "실행하지 않은 테스트를 통과로 기록하지 않음"
+      ],
+      "result": null,
+      "validation_plan": {
+        "question": "해당 작업의 수용 기준을 어떻게 관찰·검증할 것인가?",
+        "observables": [
+          "대안별 기술/정책/근거 3축 평가",
+          "실행·저장 단위/신뢰 경계·인터페이스 계약",
+          "12/8 범위별 추정 공수와 통합 테스트 지점"
+        ],
+        "success_condition": "문서 근거·상태·책임 및 후속 설계의 입력을 확인",
+        "unknown_condition": "정책 허용/실제 시험 정보 부재는 미확인으로 표기"
+      },
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+      "traceability": {
+        "intent_refs": [
+          "PHASE-20261123-01"
+        ],
+        "design_refs": [
+          "LESSON-DESIGN-INTAKE-20261123"
+        ],
+        "requirement_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04"
+        ],
+        "evaluation_refs": [
+          "LESSON-IT-20"
+        ]
+      },
+      "design_levels": [
+        "L3",
+        "L4",
+        "L5"
+      ],
+      "owner_boundary": "R05 기술 전략; 정책 승인은 별도",
+      "assignment_status": "branch review only; not informed or accepted by members"
+    }
+  ],
+  "design_review_gates": [
+    {
+      "id": "G-L2",
+      "requires": "R01 범위·R03 수용 기준·R02 최신 조건"
+    },
+    {
+      "id": "G-L3",
+      "requires": "도메인 불변식·사용자 로그인·시스템/플랫폼 권한 경계"
+    },
+    {
+      "id": "G-L4",
+      "requires": "R05 로컬/원격 대안 및 R01 구조 선택 보류/승인"
+    },
+    {
+      "id": "G-L5",
+      "requires": "R03 상태·R04 UI·R05 API/실행/데이터 책임 의미 일치"
+    },
+    {
+      "id": "G-L6",
+      "requires": "요구→책임→실패 케이스·증빙/모의 vs 실제 추적"
+    },
+    {
+      "id": "G-MVP",
+      "requires": "12/08 실행 화면/증거/제약을 실제 관측하여 완료 판정"
+    }
+  ],
+  "main_ownership": {
+    "originals": [
+      "docs/artifacts/tasks/TASK-028.json",
+      "docs/artifacts/tasks/TASK-029.json",
+      "docs/artifacts/tasks/TASK-030.json",
+      "docs/artifacts/tasks/TASK-031.json",
+      "docs/artifacts/tasks/TASK-032.json"
+    ],
+    "untouched": "Existing TASKs/member workspaces/current.json/official WBS stay unchanged. Proposed TASK-033~037 stored inside this branch-only plan, not formal assigned tasks.",
+    "after_approval": "R01 승인 후 기존 TASK 템플릿을 사용해 정식 TASK 생성·current 활성화·projection regeneration"
+  },
+  "risks": [
+    "크몽 자동 최종 제출 운영사 허용 미확인",
+    "실제 등록 완결 vs 모의 시연 성과 혼동 금지",
+    "R05 작업 공수 아직 추정 전, 12/8 범위 축소 조건 필요",
+    "로컬 설치가 오히려 사용자 개입을 늘릴 수 있음"
+  ],
+  "notion_sync": {
+    "url": "https://app.notion.com/p/42149106016081fcb08eea1e70f7869c",
+    "version": "1.1",
+    "kind": "mentor_readable_copy",
+    "branch_plan_synced": false
+  }
+}
