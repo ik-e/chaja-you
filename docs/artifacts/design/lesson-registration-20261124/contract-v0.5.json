@@ -1,0 +1,1834 @@
+{
+  "id": "LESSON-IMPLEMENTATION-V0.5",
+  "version": "0.5",
+  "status": "implementation_baseline_candidate",
+  "date": "2026-11-24",
+  "authority": "R01 요청: V0.4 재검토 P01~P10 보완. 상위 DIR-01~04 유지. 공통 계약 보완 후보이며 본 구현/실환경/정식 TASK 배정 승인 아님.",
+  "base_commit": "d3e550b2bb24ae684b97b79e799c654124808f44",
+  "precedence": "V0.5의 명시 교정이 V0.3/0.4의 해당 부분을 대체한다. 나머지 V3-R01~14, 상태/효과 계약, V0.4 요구사항, 12/8·1/4 목표, mock-only PHASE 및 T1~T6 보존. V0.5는 공통 경계 명세이며 특정 원격 기술/DB/프론트 강제 없음.",
+  "review": [
+    {
+      "id": "P01",
+      "title": "실행 계획 생성·검토 누락",
+      "fix": "서버 불변 Plan 생성→GET review→plan ref+digest+명시 승인. 클라이언트가 operation/지문을 구성하지 않음.",
+      "remaining": "adapter의 실제 단계/규칙 구현",
+      "refs": "R5-01 HTTP-20/21/09 Plan"
+    },
+    {
+      "id": "P02",
+      "title": "인증 증거 순환 참조",
+      "fix": "IdentityObservation은 connection 기준으로 계정/대상/job 생성 전에 저장. 계정은 이 증거에 연결. 실행 Evidence는 job/target 기준.",
+      "remaining": "실제 identity marker·권한 증거는 live gate",
+      "refs": "R5-02 identity_observations"
+    },
+    {
+      "id": "P03",
+      "title": "구현자 간 계약 정밀성",
+      "fix": "상속 타입+V5 추가 타입, 명시된 method/route/요청/응답/오류, 브라우저 port와 adapter 경계, stub 사례. 연결 방식은 구현자 선택.",
+      "remaining": "실제 코드 생성·호환성 테스트",
+      "refs": "PORT5-01~09"
+    },
+    {
+      "id": "P04",
+      "title": "재인증과 재연결",
+      "fix": "동일 계정·owner·환경·플랫폼 검증, 새 연결/lease binding CAS. unknown 상태에서는 읽기 재확인만. 별도 resume, 이전 연결 무효화.",
+      "remaining": "실제 경쟁/만료/브라우저 시험",
+      "refs": "R5-04 HTTP-24"
+    },
+    {
+      "id": "P05",
+      "title": "재접속 시 작업 찾기",
+      "fix": "owner 기준 source/job 목록·detail, cursor, action reason, 재진입, stored result. 뷰어 종료와 작업 분리.",
+      "remaining": "실제 서비스 인증 및 UI 구현",
+      "refs": "HTTP-22/23/25/26"
+    },
+    {
+      "id": "P06",
+      "title": "공통 정보 재사용",
+      "fix": "원본 snapshot 1개를 플랫폼별 draft/plan/job과 결합. 수정은 새 원본; 이미 승인된 과거 snapshot은 재승인 정책 적용.",
+      "remaining": "동일 fixture 다중 플랫폼 시험",
+      "refs": "R5-06 HTTP-22/23"
+    },
+    {
+      "id": "P07",
+      "title": "등록 가능 상태 혼재",
+      "fix": "registry support, policy, readiness, auth, target, approval, effect 상태 직교. 지원=실행 허용 아님.",
+      "remaining": "플랫폼 규칙/실환경 확인",
+      "refs": "Eligibility R5-07"
+    },
+    {
+      "id": "P08",
+      "title": "AI 책임/수용 기준 약함",
+      "fix": "원본→근거 있는 사실 제안·질문→확인→draft 변환, 모델 미사용 합성 시험과 AI 기능 시험 분리. 담당/인계 명시.",
+      "remaining": "모델·비용·품질 실측 및 담당 합의",
+      "refs": "R5-08 W19"
+    },
+    {
+      "id": "P09",
+      "title": "MVP·최종·운영 혼재",
+      "fix": "모의 MVP, URL 지원 플랫폼 E2E, live 별도 gate·조건부 상태 계약. 공개/접수/설정 구분. 실등록 불가면 최종 live 목표 미달 표기.",
+      "remaining": "실제 플랫폼 정책/인증/효과/권한 및 단계 승인",
+      "refs": "R5-09"
+    },
+    {
+      "id": "P10",
+      "title": "통합 공수 위험",
+      "fix": "11/27 contract/stub, 11/30 skeleton 통합 시작, 12/1~3 일별 합류, 12/4 첫 수직 경로, 12/7 보완, 12/8 MVP. R02 사전 인계, AI 별도 작업, 공수 재판정.",
+      "remaining": "실제 가용시간과 업무량 검토",
+      "refs": "wbs-v0.5.json"
+    }
+  ],
+  "schema_types": {
+    "Support": [
+      "supported",
+      "unsupported",
+      "invalid_url"
+    ],
+    "Policy": [
+      "mock_allowed",
+      "live_blocked",
+      "permission_denied",
+      "unverified",
+      "live_allowed_reserved"
+    ],
+    "Readiness": [
+      "ready",
+      "missing",
+      "conflicting",
+      "unverified"
+    ],
+    "IdentityState": [
+      "unverified",
+      "verified",
+      "expired",
+      "closed"
+    ],
+    "TargetState": [
+      "unresolved",
+      "resolved",
+      "ambiguous",
+      "duplicate_or_unknown"
+    ],
+    "ApprovalState": [
+      "missing",
+      "current",
+      "stale",
+      "revoked"
+    ],
+    "EffectRisk": [
+      "clear",
+      "pending",
+      "unknown"
+    ],
+    "ActionKind": [
+      "confirm_fact",
+      "provide_material",
+      "login",
+      "review_plan",
+      "reconnect",
+      "reconcile",
+      "resume",
+      "blocked"
+    ],
+    "StepStatus": [
+      "ok",
+      "needs_action",
+      "failed_absent",
+      "effect_unknown",
+      "stopped"
+    ],
+    "SessionPhase": [
+      "human_auth",
+      "system_read",
+      "human_review",
+      "worker",
+      "closed"
+    ],
+    "GrantMode": [
+      "auth_view",
+      "intervention_view",
+      "readonly_view"
+    ],
+    "EvidenceKind": [
+      "identity",
+      "target_read",
+      "operation",
+      "goal",
+      "policy"
+    ],
+    "ModelStatus": [
+      "proposed",
+      "unavailable",
+      "invalid_output"
+    ],
+    "LiveGateState": [
+      "blocked",
+      "candidate",
+      "approved_reserved"
+    ],
+    "Error5": [
+      "unauthenticated",
+      "not_authorized",
+      "not_found",
+      "stale_revision",
+      "approval_invalid",
+      "account_mismatch",
+      "identity_unverified",
+      "permission_denied",
+      "live_blocked",
+      "rule_unverified",
+      "input_conflict",
+      "rights_unknown",
+      "target_ambiguous",
+      "duplicate_risk",
+      "idempotency_conflict",
+      "lease_invalid",
+      "auth_required",
+      "effect_unknown",
+      "evidence_insufficient",
+      "operation_out_of_scope",
+      "validation_failed",
+      "unsupported_url",
+      "plan_missing",
+      "invalid_plan",
+      "runtime_unavailable",
+      "model_unavailable",
+      "model_invalid_output",
+      "connection_expired",
+      "pending_effect",
+      "contract_mismatch"
+    ]
+  },
+  "schemas": [
+    {
+      "id": "Action",
+      "fields": [
+        {
+          "name": "kind",
+          "type": "ActionKind",
+          "required": true
+        },
+        {
+          "name": "code",
+          "type": "Error5",
+          "required": true
+        },
+        {
+          "name": "field_keys",
+          "type": "string[]",
+          "required": true
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "related_refs",
+          "type": "id[]",
+          "required": true
+        }
+      ],
+      "note": "서버가 생성. UI 문구와 복구 판단을 구분."
+    },
+    {
+      "id": "Eligibility",
+      "fields": [
+        {
+          "name": "support",
+          "type": "Support",
+          "required": true
+        },
+        {
+          "name": "policy",
+          "type": "Policy",
+          "required": true
+        },
+        {
+          "name": "information",
+          "type": "Readiness",
+          "required": true
+        },
+        {
+          "name": "auth",
+          "type": "IdentityState",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "TargetState",
+          "required": true
+        },
+        {
+          "name": "approval",
+          "type": "ApprovalState",
+          "required": true
+        },
+        {
+          "name": "effect",
+          "type": "EffectRisk",
+          "required": true
+        },
+        {
+          "name": "can_dispatch",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "type": "Action[]",
+          "required": true
+        }
+      ],
+      "note": "정확한 can_dispatch는 현재 operation/lease/revision의 V3-G01~13 및 환경/phase까지 서버 재검사; read readiness에서는 false. URL만으로 true 금지."
+    },
+    {
+      "id": "ResolveUrlRequest",
+      "fields": [
+        {
+          "name": "url",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "environment",
+          "type": "Environment",
+          "required": true
+        }
+      ],
+      "note": "소유자는 인증에서 유도. URL parser로 exact 등록 host/path, query에 비밀값 금지. 네트워크 요청 없음."
+    },
+    {
+      "id": "TargetCandidate",
+      "fields": [
+        {
+          "name": "ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "object_kind",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "environment",
+          "type": "Environment",
+          "required": true
+        },
+        {
+          "name": "route_key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "adapter_version",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "서버 registry 확인된 경로. 원본 URL 대신 route_key 저장."
+    },
+    {
+      "id": "ResolveUrlResponse",
+      "fields": [
+        {
+          "name": "candidate",
+          "type": "TargetCandidate",
+          "required": false
+        },
+        {
+          "name": "eligibility",
+          "type": "Eligibility",
+          "required": true
+        }
+      ],
+      "note": "미지원/잘못된 URL은 candidate 없음. 지원과 권한 독립."
+    },
+    {
+      "id": "SourceConfirmRequest",
+      "fields": [
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "decisions",
+          "type": "FactDecision[]",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "확인된 새 snapshot 생성. 값 수정은 새 원본, 증거/확인 주체 저장."
+    },
+    {
+      "id": "FactDecision",
+      "fields": [
+        {
+          "name": "fact_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "accept",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "corrected_value",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "note": "확인한 값/거절/정정. 필드별 검증, 모델의 confirmed 주장 무시."
+    },
+    {
+      "id": "ModelProposalRequest",
+      "fields": [
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "허용된 텍스트·필드·자료 메타데이터만 모델 전달; 비밀/인증화면 금지."
+    },
+    {
+      "id": "ModelProposal",
+      "fields": [
+        {
+          "name": "status",
+          "type": "ModelStatus",
+          "required": true
+        },
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "proposed_facts",
+          "type": "Fact[]",
+          "required": true
+        },
+        {
+          "name": "mappings",
+          "type": "Mapping[]",
+          "required": true
+        },
+        {
+          "name": "questions",
+          "type": "Action[]",
+          "required": true
+        },
+        {
+          "name": "model_ref",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "prompt_version",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "input_digest",
+          "type": "digest",
+          "required": false
+        }
+      ],
+      "note": "proposed_facts는 unverified; deterministic validation, 없는 가격/조건 생성 금지."
+    },
+    {
+      "id": "IdentityObservation",
+      "fields": [
+        {
+          "name": "ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "owner_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "environment",
+          "type": "Environment",
+          "required": true
+        },
+        {
+          "name": "stable_subject_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "observed_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "collector_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "verified",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "note": "job/target/account FK 없이 생성. 신뢰된 시스템 read observation, 표시명 아님. 인증 비밀 저장 없음."
+    },
+    {
+      "id": "SessionView",
+      "fields": [
+        {
+          "name": "connection",
+          "type": "Connection",
+          "required": true
+        },
+        {
+          "name": "phase",
+          "type": "SessionPhase",
+          "required": true
+        },
+        {
+          "name": "lease",
+          "type": "Lease",
+          "required": false
+        },
+        {
+          "name": "identity",
+          "type": "IdentityObservation",
+          "required": false
+        }
+      ],
+      "note": "human_auth→system_read→human_review→worker; system_read는 인증 종료 후 제한 조회만. worker lease는 승인 후에만 부여."
+    },
+    {
+      "id": "VerifySessionRequest",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "사용자 인증 완료 신호; 게이트웨이가 입력을 멈춘 뒤 read-only identity 확인."
+    },
+    {
+      "id": "ViewGrantRequest",
+      "fields": [
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "mode",
+          "type": "GrantMode",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "owner와 connection/세대/용도 결합, 단기 grant; raw endpoint는 노출 안 함."
+    },
+    {
+      "id": "ViewGrant",
+      "fields": [
+        {
+          "name": "grant_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "viewer_url",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "mode",
+          "type": "GrantMode",
+          "required": true
+        }
+      ],
+      "note": "viewer_url은 service-origin 단기 경로; access secret 응답 이외 로그/DB 제외."
+    },
+    {
+      "id": "PlanRequest",
+      "fields": [
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "draft",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "Target",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "서버가 승인 전 plan을 구성하고 저장. 인증 readback 후 target resolve; mutation 없음."
+    },
+    {
+      "id": "StepSpec",
+      "fields": [
+        {
+          "name": "operation_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "effect_key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "ordinal",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "effect_class",
+          "type": "EffectClass",
+          "required": true
+        },
+        {
+          "name": "action_key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "allowed_origin_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "field_keys",
+          "type": "string[]",
+          "required": true
+        },
+        {
+          "name": "asset_refs",
+          "type": "Version[]",
+          "required": true
+        },
+        {
+          "name": "before_spec",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "after_spec",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "evidence_spec",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "digest",
+          "type": "digest",
+          "required": true
+        }
+      ],
+      "note": "순서·안정 논리 효과·허용 동작·값/자료 스냅샷. before/after/evidence는 rule 내 사양 ID. 원시 selector/URL 코드 실행을 API로 전달하지 않음."
+    },
+    {
+      "id": "Plan",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "draft",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "Target",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "media",
+          "type": "Version[]",
+          "required": true
+        },
+        {
+          "name": "adapter_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "permission",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "steps",
+          "type": "StepSpec[]",
+          "required": true
+        },
+        {
+          "name": "digest",
+          "type": "digest",
+          "required": true
+        }
+      ],
+      "note": "server-generated immutable. digest binds full semantic scope including approved mappings/media digests, ordered steps, target/account/environment, rule/adapter/permission. 서버 동일 직렬화 계약; UI는 표시하고 opaque digest echo."
+    },
+    {
+      "id": "PlanReview",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Plan",
+          "required": true
+        },
+        {
+          "name": "mappings",
+          "type": "Mapping[]",
+          "required": true
+        },
+        {
+          "name": "media",
+          "type": "Media[]",
+          "required": true
+        },
+        {
+          "name": "eligibility",
+          "type": "Eligibility",
+          "required": true
+        },
+        {
+          "name": "questions",
+          "type": "Action[]",
+          "required": true
+        }
+      ],
+      "note": "서버에서 실제 보여준 계획과 사용자가 승인할 범위 동일. live blocked 계획은 실행 불가."
+    },
+    {
+      "id": "ApprovePlanRequest",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "displayed_digest",
+          "type": "digest",
+          "required": true
+        },
+        {
+          "name": "explicit_consent",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "V3 ApprovalRequest 대체; server plan 조회·전체 비교. actor 서버 도출."
+    },
+    {
+      "id": "Approval5",
+      "fields": [
+        {
+          "name": "approval",
+          "type": "Approval",
+          "required": true
+        },
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "permission",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "approved_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ],
+      "note": "기존 Approval의 plan_revision/operation refs는 서버 파생; 현재 허용 별도 검사."
+    },
+    {
+      "id": "RebindRequest",
+      "fields": [
+        {
+          "name": "job_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "new_connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_job_revision",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "expected_new_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "명시 요청. 기존 연결/lease 무효화 및 CAS, 새 동일 계정 검증; pending effect unresolved이면 read-only."
+    },
+    {
+      "id": "RebindResponse",
+      "fields": [
+        {
+          "name": "job",
+          "type": "Job",
+          "required": true
+        },
+        {
+          "name": "connection",
+          "type": "SessionView",
+          "required": true
+        },
+        {
+          "name": "eligibility",
+          "type": "Eligibility",
+          "required": true
+        }
+      ],
+      "note": "binding만 갱신, 자동 dispatch 없음."
+    },
+    {
+      "id": "ListQuery",
+      "fields": [
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "positive_int",
+          "required": false
+        },
+        {
+          "name": "state",
+          "type": "JobState",
+          "required": false
+        }
+      ],
+      "note": "opaque cursor owner-scoped; limit default 20 max 100; source list state 제외."
+    },
+    {
+      "id": "SourceList",
+      "fields": [
+        {
+          "name": "items",
+          "type": "SourceResponse[]",
+          "required": true
+        },
+        {
+          "name": "next_cursor",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "note": "소유자 최신 snapshot 목록. 개별 원본 버전 GET."
+    },
+    {
+      "id": "JobSummary",
+      "fields": [
+        {
+          "name": "job",
+          "type": "Job",
+          "required": true
+        },
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "Target",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "type": "Action[]",
+          "required": true
+        },
+        {
+          "name": "eligibility",
+          "type": "Eligibility",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ],
+      "note": "직접 접속 후 job ID 복구, 비밀 없음."
+    },
+    {
+      "id": "JobList",
+      "fields": [
+        {
+          "name": "items",
+          "type": "JobSummary[]",
+          "required": true
+        },
+        {
+          "name": "next_cursor",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "note": "updated_at desc + ref tie break; owner scoped."
+    },
+    {
+      "id": "Error5Response",
+      "fields": [
+        {
+          "name": "code",
+          "type": "Error5",
+          "required": true
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "retry_blocked",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "related_refs",
+          "type": "id[]",
+          "required": true
+        },
+        {
+          "name": "current_revision",
+          "type": "positive_int",
+          "required": false
+        },
+        {
+          "name": "actions",
+          "type": "Action[]",
+          "required": true
+        }
+      ],
+      "note": "실패 이유와 사용자 조치. 외부 effect 불명은 retry_blocked=true."
+    },
+    {
+      "id": "PlanRefRequest",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        }
+      ],
+      "note": "GET path plan id/version."
+    },
+    {
+      "id": "VersionQuery",
+      "fields": [
+        {
+          "name": "ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "version",
+          "type": "positive_int",
+          "required": false
+        }
+      ],
+      "note": "정확 버전 없으면 최신 소유자 snapshot, immutable version 반환."
+    },
+    {
+      "id": "PreflightRequest",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "step",
+          "type": "StepSpec",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        }
+      ],
+      "note": "서버 plan과 step 재대조. 읽기 전용, 외부 효과 불명 시 blocked."
+    },
+    {
+      "id": "PreflightResult",
+      "fields": [
+        {
+          "name": "eligible",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "type": "Action[]",
+          "required": true
+        },
+        {
+          "name": "observation_refs",
+          "type": "id[]",
+          "required": true
+        }
+      ],
+      "note": "preflight는 effect permission 아님. admission에서 재검사."
+    },
+    {
+      "id": "Dispatch5Request",
+      "fields": [
+        {
+          "name": "job_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "operation_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "expected_revision",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "digest",
+          "type": "digest",
+          "required": true
+        }
+      ],
+      "note": "내부 gateway 전용, all guards, readback current. 불변 plan에서 values/asset 허용."
+    },
+    {
+      "id": "AdmittedStep",
+      "fields": [
+        {
+          "name": "attempt_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "job_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "operation_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "job_revision",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        }
+      ],
+      "note": "durable attempt & single-use permit admission 내부 객체. 외부에 reusable token 미반환."
+    },
+    {
+      "id": "StepInput",
+      "fields": [
+        {
+          "name": "admission",
+          "type": "AdmittedStep",
+          "required": true
+        },
+        {
+          "name": "spec",
+          "type": "StepSpec",
+          "required": true
+        },
+        {
+          "name": "mappings",
+          "type": "Mapping[]",
+          "required": true
+        },
+        {
+          "name": "media",
+          "type": "Media[]",
+          "required": true
+        }
+      ],
+      "note": "adapter에게 제한된 operation context만. 자료 bytes는 scoped ref로 읽기."
+    },
+    {
+      "id": "StepOutcome",
+      "fields": [
+        {
+          "name": "attempt_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "StepStatus",
+          "required": true
+        },
+        {
+          "name": "evidence_refs",
+          "type": "id[]",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "type": "Action[]",
+          "required": true
+        }
+      ],
+      "note": "adapter 보고 후보; gateway/result validator가 독립 관측 확인 후 상태 확정."
+    },
+    {
+      "id": "ObserveRequest",
+      "fields": [
+        {
+          "name": "job_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "Target",
+          "required": true
+        },
+        {
+          "name": "evidence_spec",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        }
+      ],
+      "note": "authorized read-only; unresolved effect와 goal 확인용."
+    },
+    {
+      "id": "ObserveResult",
+      "fields": [
+        {
+          "name": "evidence_refs",
+          "type": "id[]",
+          "required": true
+        },
+        {
+          "name": "conclusive",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "type": "Action[]",
+          "required": true
+        }
+      ],
+      "note": "독립 검증 전 성공 아님."
+    },
+    {
+      "id": "StopAck",
+      "fields": [
+        {
+          "name": "job",
+          "type": "Job",
+          "required": true
+        },
+        {
+          "name": "new_generation",
+          "type": "positive_int",
+          "required": false
+        },
+        {
+          "name": "pending_attempts",
+          "type": "id[]",
+          "required": true
+        }
+      ],
+      "note": "이미 admission된 외부 효과 rollback 보장 아님."
+    },
+    {
+      "id": "LiveGate",
+      "fields": [
+        {
+          "name": "platform",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "object_kind",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "state",
+          "type": "LiveGateState",
+          "required": true
+        },
+        {
+          "name": "policy_evidence",
+          "type": "id[]",
+          "required": true
+        },
+        {
+          "name": "acceptance_evidence",
+          "type": "id[]",
+          "required": true
+        },
+        {
+          "name": "approval_ref",
+          "type": "id",
+          "required": false
+        }
+      ],
+      "note": "현재 blocked. 승인 상태 예약값은 별도 후속 phase에서만 정의/활성화."
+    }
+  ],
+  "routes": [
+    {
+      "id": "HTTP-03",
+      "method": "POST",
+      "path": "/v1/targets/resolve-url",
+      "input": "ResolveUrlRequest",
+      "output": "ResolveUrlResponse",
+      "guard": "owner; static registry only",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-06",
+      "method": "POST",
+      "path": "/v1/connections",
+      "input": "ConnectRequest",
+      "output": "SessionView",
+      "guard": "mock only; selected route candidate bound server-side",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-07",
+      "method": "POST",
+      "path": "/v1/connections/{id}/verify",
+      "input": "VerifySessionRequest",
+      "output": "SessionView",
+      "guard": "body/path ref match; human input fenced before read",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-09",
+      "method": "POST",
+      "path": "/v1/approvals",
+      "input": "ApprovePlanRequest",
+      "output": "Approval5",
+      "guard": "server plan and digest; current policy and explicit consent",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-11",
+      "method": "GET",
+      "path": "/v1/jobs/{id}",
+      "input": "ReadRequest",
+      "output": "JobSummary",
+      "guard": "owner; stored only",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-18",
+      "method": "POST",
+      "path": "/v1/connections/{id}/view-grant",
+      "input": "ViewGrantRequest",
+      "output": "ViewGrant",
+      "guard": "owner; lease phase/mode; no direct CDP/VNC",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-19",
+      "method": "INTERNAL",
+      "path": "gateway.dispatch",
+      "input": "Dispatch5Request",
+      "output": "DispatchResponse",
+      "guard": "single admission; all V3 guards",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-20",
+      "method": "POST",
+      "path": "/v1/plans",
+      "input": "PlanRequest",
+      "output": "PlanReview",
+      "guard": "same owner/account; current draft/rule/permission; read-only",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-21",
+      "method": "GET",
+      "path": "/v1/plans/{id}/versions/{version}",
+      "input": "PlanRefRequest",
+      "output": "PlanReview",
+      "guard": "owner; stored snapshot plus current readiness; no mutation",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-22",
+      "method": "GET",
+      "path": "/v1/sources",
+      "input": "ListQuery",
+      "output": "SourceList",
+      "guard": "owner; latest versions",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-23",
+      "method": "GET",
+      "path": "/v1/sources/{id}",
+      "input": "VersionQuery",
+      "output": "SourceResponse",
+      "guard": "owner; version optional",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-24",
+      "method": "POST",
+      "path": "/v1/jobs/{id}/rebind",
+      "input": "RebindRequest",
+      "output": "RebindResponse",
+      "guard": "owner; same identity; CAS; no automatic dispatch",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-25",
+      "method": "GET",
+      "path": "/v1/jobs",
+      "input": "ListQuery",
+      "output": "JobList",
+      "guard": "owner; stored only",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-26",
+      "method": "GET",
+      "path": "/v1/connections/{id}",
+      "input": "ReadRequest",
+      "output": "SessionView",
+      "guard": "owner; never raw credentials",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-27",
+      "method": "POST",
+      "path": "/v1/sources/{id}/confirm",
+      "input": "SourceConfirmRequest",
+      "output": "SourceResponse",
+      "guard": "owner; source revision; user confirmation",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-28",
+      "method": "POST",
+      "path": "/v1/proposals",
+      "input": "ModelProposalRequest",
+      "output": "ModelProposal",
+      "guard": "owner; safe facts only; no browser/secret",
+      "phase": "MVP"
+    }
+  ],
+  "ports": [
+    {
+      "id": "PORT5-01",
+      "provider": "registry",
+      "method": "resolve",
+      "input": "ResolveUrlRequest",
+      "output": "ResolveUrlResponse",
+      "notes": "C4-04; no network"
+    },
+    {
+      "id": "PORT5-02",
+      "provider": "prep",
+      "method": "propose/confirm",
+      "input": "ModelProposalRequest / SourceConfirmRequest",
+      "output": "ModelProposal / SourceResponse",
+      "notes": "C4-03; external AI only on sanitized data; explicit user confirmation"
+    },
+    {
+      "id": "PORT5-03",
+      "provider": "remote_session",
+      "method": "verify/status/rebind",
+      "input": "VerifySessionRequest / ReadRequest / RebindRequest",
+      "output": "SessionView / SessionView / RebindResponse",
+      "notes": "C4-06 plus coordinator atomic binding; provider runtime choice delegated"
+    },
+    {
+      "id": "PORT5-04",
+      "provider": "adapter",
+      "method": "build_plan",
+      "input": "PlanRequest",
+      "output": "Plan",
+      "notes": "C4-08; pure proposal, server canonicalizes IDs/digest/permission and stores; no raw browser."
+    },
+    {
+      "id": "PORT5-05",
+      "provider": "adapter",
+      "method": "preflight",
+      "input": "PreflightRequest",
+      "output": "PreflightResult",
+      "notes": "only restricted read-only port; no page that autosaves"
+    },
+    {
+      "id": "PORT5-06",
+      "provider": "gateway",
+      "method": "admit_dispatch",
+      "input": "Dispatch5Request",
+      "output": "DispatchResponse",
+      "notes": "C4-07; sole admission, durable attempt and single-use permit"
+    },
+    {
+      "id": "PORT5-07",
+      "provider": "adapter",
+      "method": "execute_step",
+      "input": "StepInput",
+      "output": "StepOutcome",
+      "notes": "inside gateway only. Restricted port commands scoped to step; no raw persistent driver or network token. Unknown/denied/unexpected stops."
+    },
+    {
+      "id": "PORT5-08",
+      "provider": "gateway",
+      "method": "observe",
+      "input": "ObserveRequest",
+      "output": "ObserveResult",
+      "notes": "read permission, same identity/target, exclusive read lease. No mutation."
+    },
+    {
+      "id": "PORT5-09",
+      "provider": "gateway",
+      "method": "stop",
+      "input": "StopRequest",
+      "output": "StopAck",
+      "notes": "same serialization/fencing; no rollback promise."
+    }
+  ],
+  "store": [
+    {
+      "name": "identity_observations",
+      "change": "add",
+      "keys": "PK ref; FK connection_ref→connections; owner scope; no job/target/account FK required",
+      "fields": "IdentityObservation",
+      "invariant": "trusted observation before Account creation; accounts.verification_evidence_ref→identity_observations.ref; verified_at from observation"
+    },
+    {
+      "name": "plans",
+      "change": "add logical record",
+      "keys": "PK(ref,version); owner derived from target; immutable",
+      "fields": "Plan + canonical review mappings/media references",
+      "invariant": "approval plan ref/digest and permission ref; operations ref plan version; stable effect_key independent of plan/job"
+    },
+    {
+      "name": "approvals",
+      "change": "amend",
+      "keys": "FK plan(ref,version); target/account via plan",
+      "fields": "Approval5; approval scope immutability + revoked_at epoch",
+      "invariant": "no approval without persisted review; revocation may change only revision/status"
+    },
+    {
+      "name": "jobs",
+      "change": "amend",
+      "keys": "owner via intent/target; index(owner,updated_at,ref) logical; current connection nullable; CAS revision",
+      "fields": "Job + plan_ref via approval; updated_at; binding_epoch; stop reason",
+      "invariant": "rebind does not mutate plan/approval/intent, only connection ref/epoch; unknown holds"
+    },
+    {
+      "name": "connections",
+      "change": "amend",
+      "keys": "owner/route/identity binding",
+      "fields": "SessionView + candidate_ref + lease generation; runtime opaque",
+      "invariant": "system_read vs worker phases; stale generation cannot use viewer/worker"
+    },
+    {
+      "name": "sources",
+      "change": "amend",
+      "keys": "PK(ref,version), owner/latest index",
+      "fields": "SourceResponse + explicit media version refs + confirmation records",
+      "invariant": "one snapshot reused across independent platform drafts/jobs; no mutable data copied over approval"
+    },
+    {
+      "name": "evidence",
+      "change": "retain",
+      "keys": "job/target; attempt optional; identity evidence separate",
+      "fields": "V3 Evidence + collector_ref",
+      "invariant": "after job creation only; identity observation not fabricated job"
+    },
+    {
+      "name": "rules/operations/attempts",
+      "change": "clarify",
+      "keys": "rule immutable version; stable operation effect key + attempt history; composite FK operation+plan version",
+      "fields": "V3/V4 plus StepSpec and permit admission",
+      "invariant": "unknown across new plans/jobs blocked; atomic checks against current permission/lease; effect ledger survives restart"
+    },
+    {
+      "name": "assets/drafts/accounts/targets/intents/permissions/results/object_observations/idempotency/users",
+      "change": "retain logical constraints",
+      "keys": "V4",
+      "fields": "V4",
+      "invariant": "physical grouping permitted if ownership, versioning, uniqueness, durability and traceability proved"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R5-01",
+      "title": "계획 승인",
+      "rule": "source→confirm→draft→human auth→trusted identity→target→server PlanReview→explicit approval→job→worker lease. Plan digest binds source/draft/rule/media + account/slot/environment + ordered steps/permission/adapter. User receives plan, echoes digest; stale/changed scope requires new plan/approval. Do not require client to derive operation IDs.",
+      "refs": [
+        "V3-R01",
+        "V3-R03",
+        "V3-R10"
+      ]
+    },
+    {
+      "id": "R5-02",
+      "title": "증거 계층",
+      "rule": "identity observation (connection prejob) and target eligibility read (connection/target candidate, minimal trusted observation) are stored before job; latter can be embedded redacted preflight/plan evidence reference with owner/connection scope. Job evidence later only. Account evidence ref links identity record; no circular FK.",
+      "refs": [
+        "V3-R01",
+        "V3-R07"
+      ]
+    },
+    {
+      "id": "R5-03",
+      "title": "제어권과 직렬화",
+      "rule": "human_auth view only; input fenced before system_read, which can only verify identity and resolve existing targets/preflight via trusted operations. human_review state no worker effects; only approved job/lease permits mutation. Worker and human commands pass same gateway. Revoke/cancel/CAS admission single linearization boundary. Adapter never retains raw driver; view disconnect independent. All V3 safety rules mandatory in MVP.",
+      "refs": [
+        "V3-R04",
+        "V3-R05",
+        "V3-R11"
+      ]
+    },
+    {
+      "id": "R5-04",
+      "title": "재연결",
+      "rule": "new connection same owner/platform/env/stable subject; no pending admitted command before new automation. Stop old controller and invalidate old grant/lease/epoch atomically; rebind allowed only needs_action/unknown/blocked with safe observation path (no terminal or running). unknown stays unknown; new session may read reconcile with same target/permission; safe next step evidence + explicit resume + current approval + fresh lease needed. Wrong account no mutation, old job retained.",
+      "refs": [
+        "V3-R01",
+        "V3-R05",
+        "V3-R06"
+      ]
+    },
+    {
+      "id": "R5-05",
+      "title": "재접속 UX",
+      "rule": "service principal authenticates to app; owner list sources/jobs, stored detail and next action; remote grant only authorized phase. UI never guesses completion. user may log in again without resubmitting original data.",
+      "refs": [
+        "V3-R10",
+        "V3-R11"
+      ]
+    },
+    {
+      "id": "R5-06",
+      "title": "한 번 입력·다중 대상",
+      "rule": "source version shared, platform-specific rule/draft/plan/approval/job separate; sequential jobs default; create target per account/object/slot. Reuse existing confirmed facts/media without retyping, missing fields per platform. New source changes no historic result and stale pending approval only if relevant scope changes; explicitly re-review. Separate platform outcomes.",
+      "refs": [
+        "V3-R02",
+        "V3-R08",
+        "V3-R09"
+      ]
+    },
+    {
+      "id": "R5-07",
+      "title": "지원과 실행 판정",
+      "rule": "registry exact approved host/path/route; unsupported/invalid→no fetch. supported can still be live_blocked/info missing/auth required/target ambiguity/approval missing/unknown. can_dispatch only calculated at internal admission with V3 all guards, user API advisory false until current server validation. mock fixtures map separately, live network disabled; no arbitrary redirects/private network.",
+      "refs": [
+        "V3-R04",
+        "V3-R09",
+        "V3-R11"
+      ]
+    },
+    {
+      "id": "R5-08",
+      "title": "AI 최소 제품 경로",
+      "rule": "model receives sanitized source and platform field spec; returns structured candidate facts/mappings/questions/provenance, deterministic schema/units/constraints checks; user confirms substantive facts. Model unavailable/invalid output visibly needs_action, manual confirmed input possible for technical tests but not AI acceptance. AI MVP test raw unstructured lesson text→candidate fields and missing/conflict question→confirmed draft. No fixed-price mock hardcode or invented rule.",
+      "refs": [
+        "V3-R08",
+        "V3-R12",
+        "V3-R13"
+      ]
+    },
+    {
+      "id": "R5-09",
+      "title": "목표 및 release 경계",
+      "rule": "MVP mock: Kmong full first listing receipt readback mandatory; Soomgo confirmed synthetic service configuration second target by 12/8, if not completed R01 replan not falsely pass. Final URL supported platform(s) E2E, one source across Kmong+Soomgo intended baseline. No universal unknown sites. Live target_confirmed transition remains unreachable until separate phase approval after policy, account/eligibility, validated effect/goal evidence, isolation, privacy, user authorization. Future transition candidate running/stopping/unknown→target_confirmed only if live gate approved + platform goal evidence valid + no pending effect; no auto-enabling. If only mock passes, engineering mock verified; actual service objective unverified/not met. Actual scope of Soomgo save/publication remains external gate.",
+      "refs": [
+        "DIR-03",
+        "DIR-04",
+        "V3-R07",
+        "V3-R11"
+      ]
+    },
+    {
+      "id": "R5-10",
+      "title": "최소 구현",
+      "rule": "공통 app + persistent store + remote runtime isolation boundary + test harness. Component IDs logical only, config version files or embedded JSON allowed; no message broker/microservices required for MVP. SQLite or PostgreSQL after atomic/owner tests; Python/FastAPI reuse candidate. Browser internal choice delegated. Use stub first, then actual local synthetic adapter and isolated runtime, progressive contract CI. Implementation package root candidate product/lesson-registration/ with app, contracts, adapters, remote, web, tests, fixtures; no files created or common dependencies modified.",
+      "refs": [
+        "DIR-02",
+        "V3-R14"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "T5-01",
+      "issue": "P01",
+      "scenario": "plan absent, forged digest, stale draft, valid server plan",
+      "expected": "approval denied except exact current plan; mutation 0",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-02",
+      "issue": "P02",
+      "scenario": "first connection with no job/target/account",
+      "expected": "identity record first, account linked; no fabricated job",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-03",
+      "issue": "P03",
+      "scenario": "contract fake providers and real adapter conformance",
+      "expected": "typed valid/invalid envelopes, stable operation IDs and no raw driver access",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-04",
+      "issue": "P04",
+      "scenario": "expired connection, same/wrong account, unresolved effect",
+      "expected": "same account binds read-only when unknown, wrong account denied, old lease fenced, explicit safe resume only",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-05",
+      "issue": "P05",
+      "scenario": "close UI and reconnect with owner/nonowner",
+      "expected": "job still tracked, owner lists, other user inaccessible",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-06",
+      "issue": "P06",
+      "scenario": "same source to two platforms",
+      "expected": "one confirmed snapshot reused, independent drafts/approvals/jobs, no overwritten facts/results",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-07",
+      "issue": "P07",
+      "scenario": "invalid/unsupported/supported but permission missing/info missing/auth missing/unknown",
+      "expected": "distinct readiness, dispatch false until every current guard true",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-08",
+      "issue": "P08",
+      "scenario": "unstructured synthetic source with missing/conflicting condition, unavailable model",
+      "expected": "candidate extraction/question, no fabricated fact, verified draft; manual fallback marked not AI pass",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-09",
+      "issue": "P09",
+      "scenario": "mock goal, reserved live request, incomplete external evidence",
+      "expected": "mock_completed only, live denied; no false service success",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-10",
+      "issue": "P10",
+      "scenario": "stub + real providers daily incremental integration",
+      "expected": "first integrated contract before final module completion; run log, failing checkpoints and replanning",
+      "execution": "not_run"
+    }
+  ],
+  "route_inheritance": "V0.4 HTTP-01,02,04,05,08,10,12,13,14,15,16,17 inherit; V5 routes replace matching IDs. Request path/body ID consistency; key for all mutations per V3. GET path/query typed, no mutation. HTTP-06 ConnectRequest includes candidate_ref (V5 correction); HTTP-08 TargetResponse may omit target/account when ineligible. HTTP-10 uses approval→server plan, verifies user-supplied target/goal, only job kind=create. HTTP-12 accepts no client-provided evidence as proof (server observation only); HTTP-13 explicit resume after safe recovery; HTTP-16 StopRequest route input. Standard 401/403/404/409/422/503 and 202 async; Error5Response on all errors; never silently retry effect.",
+  "ui_flow": [
+    "Source list/create→source confirm (facts/questions)",
+    "Select platform/URL→draft/validation",
+    "Remote auth→verify identity→resolve target",
+    "Plan review→explicit approve→job create",
+    "Job list/detail→progress/needs_action/reconnect/reconcile/explicit resume",
+    "Result→reuse source for another platform"
+  ]
+}
