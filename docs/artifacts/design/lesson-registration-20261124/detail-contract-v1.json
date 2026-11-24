@@ -1,0 +1,480 @@
+{
+  "id": "LR-DETAIL-01",
+  "status": "detail_candidate",
+  "basis": "LR-LOGICAL-04",
+  "profile_ref": "LR-PROFILES-01",
+  "environment": "mock",
+  "precedence": "New candidate supersedes conflicting design proposals only after adoption; no change to approved phase or existing independent experiment contract. Old IDs preserved as history.",
+  "entities": [
+    [
+      "Owner",
+      "owner_id",
+      "service identity; derived server-side",
+      "CO"
+    ],
+    [
+      "SourceVersion",
+      "source_id,version",
+      "owner_id,raw_text,confirmed_facts,asset_refs,confirmed_at; immutable confirmed snapshot",
+      "PREP"
+    ],
+    [
+      "Asset",
+      "asset_id",
+      "owner_id,sha256,mime,bytes,width,height,rights_confirmed,storage_ref; immutable bytes",
+      "PREP"
+    ],
+    [
+      "Profile",
+      "profile_id",
+      "platform,target_kind,environment,field_rules,ordered_steps,goal_spec,digest; immutable version",
+      "KNOW"
+    ],
+    [
+      "DraftVersion",
+      "draft_id,version",
+      "owner_id,source_ref,profile_id,values,provenance,issues,confirmed,content_digest",
+      "PREP"
+    ],
+    [
+      "Connection",
+      "connection_id",
+      "owner_id,platform,environment,verified_account_ref,auth_state,control,generation,expires_at; private session_handle not exposed",
+      "EXEC"
+    ],
+    [
+      "Target",
+      "target_id",
+      "owner_id,platform,account_ref,object_kind,slot_key,environment,observed_external_id?,preflight_evidence_ref",
+      "CO"
+    ],
+    [
+      "Plan",
+      "plan_id",
+      "owner_id,draft_ref,profile_id,connection_id,account_ref,target_id,ordered_bound_steps,goal,digest",
+      "CO"
+    ],
+    [
+      "Approval",
+      "approval_id",
+      "owner_id,plan_id,plan_digest,approved_at",
+      "CO"
+    ],
+    [
+      "Job",
+      "job_id",
+      "owner_id,plan_id,approval_id,target_id,state,step_index,revision,created_at,finished_at?",
+      "CO"
+    ],
+    [
+      "Attempt",
+      "attempt_id",
+      "job_id,operation_key,step_index,action_digest,admitted_at,effect,observed_at?,evidence_refs",
+      "EXEC"
+    ],
+    [
+      "Evidence",
+      "evidence_id",
+      "owner_id,job_id?,target_id?,connection_id?,kind,observed_at,redacted_data,digest",
+      "RESULT"
+    ],
+    [
+      "Result",
+      "job_id,revision",
+      "goal_verdict,confirmed_steps,effect_summary,error?,evidence_refs,next_action,environment",
+      "RESULT"
+    ],
+    [
+      "RequestKey",
+      "owner_id,endpoint,key",
+      "request_digest,response_ref; unique key scope",
+      "CO"
+    ]
+  ],
+  "types": {
+    "Id": "opaque nonempty string",
+    "Ref": "immutable object id + integer version where versioned",
+    "Digest": "lowercase 64 hex SHA256",
+    "Timestamp": "UTC RFC3339",
+    "Package": "{minutes_per_session: positive int,sessions_per_period: positive int,period: month|one_off|other,total_price_krw: nonnegative int}",
+    "JobState": [
+      "active",
+      "stopping",
+      "done",
+      "stopped"
+    ],
+    "GoalVerdict": [
+      "confirmed",
+      "not_reached",
+      "unknown"
+    ],
+    "Effect": [
+      "admitted",
+      "confirmed",
+      "absent",
+      "unknown"
+    ],
+    "Issue": "{field_key,code:missing|conflict|rule_violation|unverified|rights_unknown,message,fact_refs}",
+    "Fact": "{path,value,unit?,source_excerpt?,confirmed_by_user:boolean}",
+    "Error": "{code,message,field_issues?,request_id}; no secrets",
+    "Value": "JSON scalar/array/object strictly validated by profile; unknown fields rejected"
+  },
+  "integrity": [
+    "SourceVersion/DraftVersion/Profile/Plan immutable when confirmed or accepted; edits create version; approval binds canonical digest and owner/account/target/environment/profile/ordered step bindings.",
+    "owner derived from authenticated app context; all references scoped; connection verified account from trusted runtime only. Unique target semantic key environment+platform+account+kind+slot; owner authorization and cross-owner isolation.",
+    "request key same digest returns existing response; different digest conflicts. stable operation_key = target logical intent + profile effect key (not arbitrary request ID); unique active/admitted effect ledger. Prior unknown or confirmed same effect blocks duplicate. No automatic replay after crash.",
+    "transaction: accept validates current plan/approval and key + target uniqueness and creates job; admit validates current job revision/lease generation/approval/profile/policy/step/operation and durably records attempt before command; error fences future commands. External transaction not atomic with local DB.",
+    "Result record includes distinct goal verdict vs job state. Stopped preserves known effects and unknown; no resume. Later authorized evidence append only; user result read never executes external mutation.",
+    "Canonical digest: UTF8 deterministic JSON sorted object keys, ordered arrays, integer-only numeric fields; reject unknown fields, duplicate keys, NaN; use shared canonicalizer and fixture; exclude timestamps/transport secrets from plan scope. Asset sha256 hashes bytes."
+  ],
+  "api": [
+    [
+      "A01",
+      "POST",
+      "/v1/sources",
+      "SourceInput",
+      "SourceView",
+      "PREP",
+      "raw text + asset IDs; return proposed facts/issues; no implicit confirmed fact"
+    ],
+    [
+      "A02",
+      "POST",
+      "/v1/assets",
+      "AssetUpload",
+      "AssetView",
+      "PREP",
+      "multipart metadata rights confirmation + bytes; reject invalid/unknown rights"
+    ],
+    [
+      "A03",
+      "POST",
+      "/v1/sources/{id}/confirm",
+      "SourceConfirm",
+      "SourceView",
+      "PREP",
+      "expected version + user facts; create confirmed version"
+    ],
+    [
+      "A04",
+      "GET",
+      "/v1/sources",
+      "ListQuery",
+      "SourceList",
+      "PREP",
+      "owner scoped"
+    ],
+    [
+      "A05",
+      "GET",
+      "/v1/sources/{id}",
+      "ReadQuery",
+      "SourceView",
+      "PREP",
+      "owner scoped current or specified version"
+    ],
+    [
+      "A06",
+      "POST",
+      "/v1/targets/resolve",
+      "ResolveInput",
+      "ResolveView",
+      "KNOW",
+      "known profile from allowlisted platform/URL, no arbitrary fetch"
+    ],
+    [
+      "A07",
+      "POST",
+      "/v1/drafts",
+      "DraftInput",
+      "DraftView",
+      "PREP",
+      "confirmed source ref + profile; generate mapping and issues"
+    ],
+    [
+      "A08",
+      "POST",
+      "/v1/drafts/{id}/confirm",
+      "DraftConfirm",
+      "DraftView",
+      "PREP",
+      "expected version + corrected/confirmed values; validate all required fields/rights"
+    ],
+    [
+      "A09",
+      "POST",
+      "/v1/connections",
+      "ConnectInput",
+      "ConnectionView",
+      "EXEC",
+      "confirmed draft; synthetic auth viewer grant"
+    ],
+    [
+      "A10",
+      "POST",
+      "/v1/connections/{id}/verify",
+      "VerifyInput",
+      "ConnectionView",
+      "EXEC",
+      "fence human input; verify account read-only"
+    ],
+    [
+      "A11",
+      "GET",
+      "/v1/connections/{id}",
+      "ReadQuery",
+      "ConnectionView",
+      "EXEC",
+      "owner, no secrets"
+    ],
+    [
+      "A12",
+      "POST",
+      "/v1/plans",
+      "PlanInput",
+      "PlanView",
+      "CO",
+      "preflight target read and deterministic binding; existing target returns prior result or blocked, not new plan"
+    ],
+    [
+      "A13",
+      "POST",
+      "/v1/jobs",
+      "StartInput",
+      "JobView",
+      "CO",
+      "one explicit approval+accept action; request key; validate current digest and refs atomically"
+    ],
+    [
+      "A14",
+      "GET",
+      "/v1/jobs/{id}",
+      "ReadQuery",
+      "JobView",
+      "CO",
+      "read persisted state and result only"
+    ],
+    [
+      "A15",
+      "GET",
+      "/v1/jobs",
+      "ListQuery",
+      "JobList",
+      "CO",
+      "owner scoped"
+    ]
+  ],
+  "schemas": {
+    "SourceInput": "{raw_text:string,asset_ids:Id[]}",
+    "SourceView": "{source_ref:Ref,confirmed:boolean,facts:Fact[],issues:Issue[],asset_ids:Id[]}",
+    "AssetUpload": "multipart {metadata:{rights_confirmed:boolean},file:binary}",
+    "AssetView": "{asset_id:Id,digest:Digest,mime:string,bytes:int,width:int,height:int}",
+    "SourceConfirm": "{expected_version:int,facts:Fact[]}",
+    "ListQuery": "{cursor?:string,limit?:int 1..100}",
+    "SourceList": "{items:SourceView[],next_cursor?:string}",
+    "ReadQuery": "{version?:int}",
+    "ResolveInput": "{url_or_platform:string}",
+    "ResolveView": "{status:supported|unsupported|blocked,profile_id?:Id,reason?:string}",
+    "DraftInput": "{source_ref:Ref,profile_id:Id}",
+    "DraftView": "{draft_ref:Ref,source_ref:Ref,profile_id:Id,values:map<string,Value>,issues:Issue[],confirmed:boolean,digest:Digest}",
+    "DraftConfirm": "{expected_version:int,values:map<string,Value>}",
+    "ConnectInput": "{draft_ref:Ref}",
+    "ConnectionView": "{connection_id:Id,auth:unverified|verified|expired,account_label?:string,viewer_grant?:opaque_short_lived_token}",
+    "VerifyInput": "{expected_generation:int}",
+    "PlanInput": "{draft_ref:Ref,connection_id:Id}",
+    "PlanView": "{status:ready|existing|blocked,plan_id?:Id,digest?:Digest,account_label?:string,target_summary?:string,steps?:string[],goal?:string,existing_job_id?:Id,issues?:Issue[]}",
+    "StartInput": "{plan_id:Id,plan_digest:Digest,approved:true,request_key:string}",
+    "JobView": "{job_id:Id,state:JobState,step_index:int,step_count:int,result?:ResultView}",
+    "ResultView": "{goal_verdict:GoalVerdict,environment:mock,confirmed_steps:int,effect_summary:Effect[],error?:Error,evidence_refs:Id[],next_action?:string}",
+    "JobList": "{items:JobView[],next_cursor?:string}"
+  },
+  "ports": [
+    [
+      "P1",
+      "CO",
+      "KNOW",
+      "resolve/profile",
+      "route or profile ID",
+      "immutable profile or blocked"
+    ],
+    [
+      "P2",
+      "CO",
+      "PREP",
+      "prepare/confirm",
+      "source/draft input + profile",
+      "verified source/draft or issues"
+    ],
+    [
+      "P3",
+      "PREP",
+      "KNOW",
+      "get_profile",
+      "profile_id",
+      "field/constraint spec"
+    ],
+    [
+      "P4",
+      "CO",
+      "EXEC",
+      "open/verify/preflight",
+      "owner+draft+connection+profile",
+      "connection/account/target observation"
+    ],
+    [
+      "P5",
+      "CO",
+      "EXEC",
+      "run",
+      "accepted job/plan IDs",
+      "typed step observation or system error"
+    ],
+    [
+      "P6",
+      "EXEC",
+      "KNOW",
+      "get_profile",
+      "pinned profile ID",
+      "ordered action/effect contract"
+    ],
+    [
+      "P7",
+      "CO",
+      "RESULT",
+      "evaluate",
+      "job+attempt+profile+observations",
+      "goal verdict/effect evidence"
+    ],
+    [
+      "P8",
+      "RESULT",
+      "EXEC",
+      "readback",
+      "owner+target+profile+read spec",
+      "trusted observation or error"
+    ],
+    [
+      "P9",
+      "RESULT",
+      "KNOW",
+      "get_profile",
+      "profile ID",
+      "goal/evidence spec"
+    ],
+    [
+      "P10",
+      "EXEC",
+      "BROWSER",
+      "authorized_command/read",
+      "opaque session+grant/generation+registered action+bound args",
+      "redacted observation"
+    ],
+    [
+      "P11",
+      "CO/PREP/KNOW/EXEC/RESULT",
+      "STORE",
+      "persist/query/atomic",
+      "owned typed records",
+      "record or conflict"
+    ]
+  ],
+  "ui": [
+    [
+      "UI1",
+      "원본 및 대상",
+      "A01~A06",
+      "원본 제공/재사용, 지원 대상, 확인 질문"
+    ],
+    [
+      "UI2",
+      "등록 내용 검토",
+      "A07,A08",
+      "플랫폼 규칙/누락/충돌, 수정 및 확인"
+    ],
+    [
+      "UI3",
+      "직접 인증",
+      "A09~A11",
+      "원격 viewer, 인증 확인; 인증 중 내용 편집 없음"
+    ],
+    [
+      "UI4",
+      "최종 승인 및 시작",
+      "A12,A13",
+      "계정/대상/내용/절차/목표, 시작 후 수정·취소·재개 불가 고지"
+    ],
+    [
+      "UI5",
+      "진행 및 결과",
+      "A14,A15",
+      "자동 실행, 현재 단계, 정상/오류 중단 및 확인된/미확인 결과; 조회만"
+    ]
+  ],
+  "errors": [
+    "VALIDATION_FAILED",
+    "MODEL_UNAVAILABLE",
+    "UNSUPPORTED_TARGET",
+    "RULE_UNVERIFIED",
+    "RIGHTS_UNKNOWN",
+    "AUTH_REQUIRED",
+    "ACCOUNT_MISMATCH",
+    "TARGET_AMBIGUOUS",
+    "DUPLICATE_RISK",
+    "PERMISSION_DENIED",
+    "STALE_VERSION",
+    "APPROVAL_INVALID",
+    "IDEMPOTENCY_CONFLICT",
+    "RUNTIME_ERROR",
+    "EFFECT_UNKNOWN",
+    "EVIDENCE_INSUFFICIENT"
+  ],
+  "sequence": [
+    "CO resolve profile and PREP prepare source/draft; user confirms missing facts and target values",
+    "EXEC opens remote auth, fences input, verifies stable identity, checks target using read-only registered operation",
+    "CO binds confirmed draft to fixed profile steps and presents plan; accept one explicit start with request key",
+    "EXEC acquires exclusive worker control, for each registered step: check current conditions → persist admission → run bound step → observe → persist result; no free-form agent procedure",
+    "RESULT performs authorized independent goal readback using profile; CO marks done only on proof",
+    "Any unrecoverable execution error: fence new operations → stopping → persist known/unknown outcome → stopped; no user stop/resume/rebind"
+  ],
+  "implementation_boundary": {
+    "common": "modular app + persistent store + isolated remote runtime; exact framework/DB/browser technology delegated within shared contract. No code/dependencies selected or changed here.",
+    "mock": "synthetic network allowlist, fake accounts/assets; live hard denied. R03/R04/R05 experiment contracts unchanged.",
+    "security": "service auth and owner scope, current external account, exclusive control, no password/OTP/raw cookie persistence or LLM access, redact logs, scoped grant; test runtime enforcement later."
+  },
+  "requirements": [
+    [
+      "FR-01",
+      "SourceVersion/Asset, A01-A05"
+    ],
+    [
+      "FR-02",
+      "Profile/DraftVersion, A06-A08"
+    ],
+    [
+      "FR-03",
+      "Connection/Plan/Approval, A09-A13"
+    ],
+    [
+      "FR-04",
+      "Job/Attempt/P5/P10; fixed steps"
+    ],
+    [
+      "FR-05",
+      "Evidence/Result, A14-A15"
+    ],
+    [
+      "FR-06",
+      "RequestKey/Target/Attempt unique effects, error stop, no resume"
+    ]
+  ],
+  "legacy_changes": [
+    "REQ-08 and AT-06/T5-04 previous resume/cancel/rebind behavior superseded in new product candidate: error-stop, no resume; T1~T6 independent experiments unchanged.",
+    "Old HTTP cancel/revoke/resume/rebind/reconcile endpoints not exposed in new candidate. Actual external permission loss remains system error.",
+    "Old WBS and product gate require alignment before implementation; dates/owners not changed."
+  ],
+  "open": [
+    "Exact current live platform rule evidence and Soomgo real object/permission remain unknown; mock profile only.",
+    "Physical stack/DDL/transport details, runtime safety tests and real model/adapter execution not run.",
+    "WBS gate version alignment and final acceptance after R01 review."
+  ]
+}
