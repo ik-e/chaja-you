@@ -2,6 +2,8 @@
 
 최종 프로젝트 가이드와 샘플 파일은 원본 Gitea 저장소에서 확인합니다. 복사본은 원본 소유권과 재배포 조건이 명확하지 않아 이 저장소에 포함하지 않습니다.
 
+[원본 파일 13개 바로가기 및 실제 보관 상태](SOURCE-FILE-INDEX.md) — 2026-11-12 커밋 기준. **현재 원본 바이트는 미보존이며 비공개 보관 권한 확인이 필요합니다.**
+
 ## 기준 원문
 
 - [FinalProject 폴더](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject)
