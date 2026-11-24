@@ -788,6 +788,11 @@
           "name": "digest",
           "type": "digest",
           "required": true
+        },
+        {
+          "name": "target_observation_refs",
+          "type": "id[]",
+          "required": true
         }
       ],
       "note": "server-generated immutable. digest binds full semantic scope including approved mappings/media digests, ordered steps, target/account/environment, rule/adapter/permission. 서버 동일 직렬화 계약; UI는 표시하고 opaque digest echo."
@@ -1363,6 +1368,454 @@
         }
       ],
       "note": "현재 blocked. 승인 상태 예약값은 별도 후속 phase에서만 정의/활성화."
+    },
+    {
+      "id": "Connect5Request",
+      "fields": [
+        {
+          "name": "candidate_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "environment",
+          "type": "Environment",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "server resolves candidate and platform; mock only"
+    },
+    {
+      "id": "Target5Request",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "candidate_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "object_kind",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "existing_slot",
+          "type": "id",
+          "required": false
+        },
+        {
+          "name": "distinct_intent",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "candidate bound to same connection, env, platform, goal; source reuse does not determine target slot"
+    },
+    {
+      "id": "Target5Response",
+      "fields": [
+        {
+          "name": "target",
+          "type": "Target",
+          "required": false
+        },
+        {
+          "name": "account",
+          "type": "Account",
+          "required": false
+        },
+        {
+          "name": "eligibility",
+          "type": "Eligibility",
+          "required": true
+        },
+        {
+          "name": "target_observation_refs",
+          "type": "id[]",
+          "required": true
+        }
+      ],
+      "note": "ineligible may omit target; verified identity only"
+    },
+    {
+      "id": "TargetObservation",
+      "fields": [
+        {
+          "name": "ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "account_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "candidate_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "object_kind",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "observed_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "collector_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "external_object_ref",
+          "type": "id",
+          "required": false
+        },
+        {
+          "name": "observation_kind",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "redacted_values",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "note": "pre-job server trusted read evidence, no job/target FK; target resolution can use this before slot exists"
+    },
+    {
+      "id": "Job5Request",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "approval_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "server derives target/goal/kind=create, validates exact plan, owner, policy, account and current approval. Existing matching intent returns existing job/result rather than duplicate creation."
+    },
+    {
+      "id": "Reconcile5Request",
+      "fields": [
+        {
+          "name": "expected_revision",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "server trusted read observations only; path job id, no client evidence"
+    },
+    {
+      "id": "Resume5Request",
+      "fields": [
+        {
+          "name": "expected_revision",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "approval_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "explicit_resume",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "path job id, safe recovery/current approval, same account; gateway acquires fresh lease server-side"
+    },
+    {
+      "id": "BrowserCommand",
+      "fields": [
+        {
+          "name": "action_key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "operation_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "arguments",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "note": "only registry-declared semantic actions; validated argument shape and approved snapshot values; no free-form script or URL"
+    },
+    {
+      "id": "BrowserObservation",
+      "fields": [
+        {
+          "name": "command_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "observed_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "result",
+          "type": "json",
+          "required": true
+        },
+        {
+          "name": "evidence_refs",
+          "type": "id[]",
+          "required": true
+        }
+      ],
+      "note": "redacted/typed according to rule; runtime gateway controls actual browser"
+    },
+    {
+      "id": "RuntimeOpenRequest",
+      "fields": [
+        {
+          "name": "candidate",
+          "type": "TargetCandidate",
+          "required": true
+        },
+        {
+          "name": "owner_ref",
+          "type": "id",
+          "required": true
+        }
+      ],
+      "note": "internal trusted principal; runtime creates isolated context; no credentials"
+    },
+    {
+      "id": "RuntimeLeaseRequest",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "desired_phase",
+          "type": "SessionPhase",
+          "required": true
+        },
+        {
+          "name": "job_ref",
+          "type": "id",
+          "required": false
+        }
+      ],
+      "note": "internal only. phase change from server state; worker requires approved job current guards, system_read has allowlist. human_auth/intervention grant scoped."
+    },
+    {
+      "id": "RuntimeCloseRequest",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "fence+close and verify cleanup; pending effects remain unknown"
+    },
+    {
+      "id": "RuntimeCloseResult",
+      "fields": [
+        {
+          "name": "connection",
+          "type": "SessionView",
+          "required": true
+        },
+        {
+          "name": "cleanup_verified",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "note": "cleanup failure quarantine, not assumed deleted"
+    },
+    {
+      "id": "RuntimeCommandRequest",
+      "fields": [
+        {
+          "name": "admission",
+          "type": "AdmittedStep",
+          "required": true
+        },
+        {
+          "name": "command",
+          "type": "BrowserCommand",
+          "required": true
+        }
+      ],
+      "note": "internal single-use step permit bound to operation; gateway validates every command, no commands after revoke, one effectful action per step"
+    },
+    {
+      "id": "RuntimeReadRequest",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "action_key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "arguments",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "note": "read-only registered action, permitted scope/identity; auth phase cannot be observed by model/worker"
+    },
+    {
+      "id": "PlanBuildInput",
+      "fields": [
+        {
+          "name": "source",
+          "type": "SourceResponse",
+          "required": true
+        },
+        {
+          "name": "draft",
+          "type": "DraftResponse",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "RuleSnapshot",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "Target",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "adapter_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "permission",
+          "type": "Permission",
+          "required": true
+        }
+      ],
+      "note": "trusted internal snapshot, no remote browser"
+    },
+    {
+      "id": "PlanProposal",
+      "fields": [
+        {
+          "name": "steps",
+          "type": "StepSpec[]",
+          "required": true
+        }
+      ],
+      "note": "adapter proposed ordered operations, server validates canonicalizes effect identity and digest; no authorization"
+    },
+    {
+      "id": "EvidenceBundle",
+      "fields": [
+        {
+          "name": "evidence",
+          "type": "Evidence[]",
+          "required": true
+        }
+      ],
+      "note": "only trusted server observations may be persisted; target/attempt bound"
     }
   ],
   "routes": [
@@ -1379,7 +1832,7 @@
       "id": "HTTP-06",
       "method": "POST",
       "path": "/v1/connections",
-      "input": "ConnectRequest",
+      "input": "Connect5Request",
       "output": "SessionView",
       "guard": "mock only; selected route candidate bound server-side",
       "phase": "MVP"
@@ -1509,6 +1962,51 @@
       "output": "ModelProposal",
       "guard": "owner; safe facts only; no browser/secret",
       "phase": "MVP"
+    },
+    {
+      "id": "HTTP-08",
+      "method": "POST",
+      "path": "/v1/targets",
+      "input": "Target5Request",
+      "output": "Target5Response",
+      "guard": "verified identity, candidate binding, authorized read-only target observation",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-10",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "input": "Job5Request",
+      "output": "Job",
+      "guard": "server plan/approval/current permission; intent lookup; 202 async; worker lease only after job",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-12",
+      "method": "POST",
+      "path": "/v1/jobs/{id}/reconcile",
+      "input": "Reconcile5Request",
+      "output": "JobSummary",
+      "guard": "authorized read; server observation; same account; effect remains unknown if inconclusive",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-13",
+      "method": "POST",
+      "path": "/v1/jobs/{id}/resume",
+      "input": "Resume5Request",
+      "output": "JobSummary",
+      "guard": "safe next step + current approval + explicit resume; no direct unknown dispatch",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-16",
+      "method": "DELETE",
+      "path": "/v1/connections/{id}",
+      "input": "StopRequest",
+      "output": "SessionView",
+      "guard": "owner and fence; close proof; unknown retained",
+      "phase": "MVP"
     }
   ],
   "ports": [
@@ -1540,8 +2038,8 @@
       "id": "PORT5-04",
       "provider": "adapter",
       "method": "build_plan",
-      "input": "PlanRequest",
-      "output": "Plan",
+      "input": "PlanBuildInput",
+      "output": "PlanProposal",
       "notes": "C4-08; pure proposal, server canonicalizes IDs/digest/permission and stores; no raw browser."
     },
     {
@@ -1583,6 +2081,22 @@
       "input": "StopRequest",
       "output": "StopAck",
       "notes": "same serialization/fencing; no rollback promise."
+    },
+    {
+      "id": "PORT5-10",
+      "provider": "remote_runtime",
+      "method": "open / change_phase / close",
+      "input": "RuntimeOpenRequest / RuntimeLeaseRequest / RuntimeCloseRequest",
+      "output": "SessionView / SessionView / RuntimeCloseResult",
+      "notes": "Only C4-06/gateway internal trusted calls, shared admission epoch/lease; actual transport delegated"
+    },
+    {
+      "id": "PORT5-11",
+      "provider": "remote_runtime",
+      "method": "command / read",
+      "input": "RuntimeCommandRequest / RuntimeReadRequest",
+      "output": "BrowserObservation / BrowserObservation",
+      "notes": "C4-07 sole gateway; exact registered action/arguments, current permit and generation before each command; read allowlist, no arbitrary CDP/driver/URL. Any mutation outside step blocked."
     }
   ],
   "store": [
@@ -1591,13 +2105,20 @@
       "change": "add",
       "keys": "PK ref; FK connection_ref→connections; owner scope; no job/target/account FK required",
       "fields": "IdentityObservation",
-      "invariant": "trusted observation before Account creation; accounts.verification_evidence_ref→identity_observations.ref; verified_at from observation"
+      "invariant": "trusted observation before Account creation; accounts.verification_evidence_ref→identity_observations.ref; verified_at from observation; verified_at populated in Account from observation"
+    },
+    {
+      "name": "target_observations_prejob",
+      "change": "add logical record",
+      "keys": "PK ref; FK connection/account; owner from connection; candidate/rule ref; no job/target FK",
+      "fields": "TargetObservation",
+      "invariant": "server read-only before resolving slot; freshness/version checked; plan links redacted evidence refs"
     },
     {
       "name": "plans",
       "change": "add logical record",
       "keys": "PK(ref,version); owner derived from target; immutable",
-      "fields": "Plan + canonical review mappings/media references",
+      "fields": "Plan + canonical review mappings/media references + target_observation_refs",
       "invariant": "approval plan ref/digest and permission ref; operations ref plan version; stable effect_key independent of plan/job"
     },
     {
@@ -1664,7 +2185,7 @@
     {
       "id": "R5-02",
       "title": "증거 계층",
-      "rule": "identity observation (connection prejob) and target eligibility read (connection/target candidate, minimal trusted observation) are stored before job; latter can be embedded redacted preflight/plan evidence reference with owner/connection scope. Job evidence later only. Account evidence ref links identity record; no circular FK.",
+      "rule": "IdentityObservation is stored before account/target/job. TargetObservation is stored before target/job after verified account; both owner/connection scoped, typed separate from job Evidence. Plan links trusted target observations. Account evidence ref links IdentityObservation; no circular FK.",
       "refs": [
         "V3-R01",
         "V3-R07"
@@ -1822,7 +2343,7 @@
       "execution": "not_run"
     }
   ],
-  "route_inheritance": "V0.4 HTTP-01,02,04,05,08,10,12,13,14,15,16,17 inherit; V5 routes replace matching IDs. Request path/body ID consistency; key for all mutations per V3. GET path/query typed, no mutation. HTTP-06 ConnectRequest includes candidate_ref (V5 correction); HTTP-08 TargetResponse may omit target/account when ineligible. HTTP-10 uses approval→server plan, verifies user-supplied target/goal, only job kind=create. HTTP-12 accepts no client-provided evidence as proof (server observation only); HTTP-13 explicit resume after safe recovery; HTTP-16 StopRequest route input. Standard 401/403/404/409/422/503 and 202 async; Error5Response on all errors; never silently retry effect.",
+  "route_inheritance": "V0.4 HTTP-01,02,04,05,14,15,17 inherit. V5 routes replace matching IDs; HTTP-07 verify replaces handoff route. Inherited HTTP-01 uses SourceRequest, HTTP-02 multipart MediaRequest + file, HTTP-04 DraftRequest, HTTP-05 DraftEdit, HTTP-14/15 StopRequest, HTTP-17 ReadRequest with stored ObjectObservation[]. All mutations require key (except internal dispatch, bound by durable attempt); path/body ref consistency; owner server principal; GET path/query no body. Standard 401/403/404/409/422/503 and 202 async; Error5Response on errors; never silently retry effect.",
   "ui_flow": [
     "Source list/create→source confirm (facts/questions)",
     "Select platform/URL→draft/validation",
@@ -1830,5 +2351,25 @@
     "Plan review→explicit approve→job create",
     "Job list/detail→progress/needs_action/reconnect/reconcile/explicit resume",
     "Result→reuse source for another platform"
-  ]
+  ],
+  "contract_wire": {
+    "version": "lesson-registration/0.5",
+    "transport": "public JSON HTTP; private logical ports may be direct typed calls within process or authenticated internal RPC; common request and response shapes identical",
+    "primitives": {
+      "id": "opaque nonempty string; generated by server except fixture literals",
+      "positive_int": "integer >=1",
+      "nonnegative_int": "integer >=0",
+      "timestamp": "RFC3339 UTC",
+      "digest": "sha256:<64 lowercase hex>",
+      "string": "UTF-8 string",
+      "boolean": "JSON boolean",
+      "json": "JSON value; schema-specific additional validation",
+      "array": "ordered array; fields with [] are homogeneous"
+    },
+    "requiredness": "required fields must be present and non-null; optional absent rather than null unless explicitly documented; reject unknown fields in versioned contract; semantic error messages separate from machine codes",
+    "digest": "server builds canonical scope object with sorted object keys recursively, array order preserved (explicit sorted order for set-like refs), UTF-8 JSON no whitespace, integers for currency/minutes/count and decimal values as normalized string, excludes digest itself and ephemeral connection IDs; SHA-256. All hash participants use one shared helper; clients echo server digest, not recompute.",
+    "step_boundary": "one logical effectful action per StepSpec. Read/setup commands may be repeated only if classified read-only and authorized. Single-use effect permit bound to attempt and generation, consumed once before external action. Command dispatch after revocation blocked; previously admitted effect not assumed rollback.",
+    "errors": "Error5Response; retry_blocked true for pending/unknown or forbidden effect; retry only explicit safe recovery; schema errors not retry instructions",
+    "contract_tests": "invalid field/enum/unknown property; stale/digest mismatch; same request key; stable effect across plans; command attempts beyond approved spec"
+  }
 }
