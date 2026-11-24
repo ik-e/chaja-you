@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "request_id": "20261124-trace-smoke-01",
+  "suite": "trace",
+  "target_sha": "5a01ec3845415200e0383546e18bfb8a6a78a2e9"
+}
