@@ -11,11 +11,10 @@
   "selection_status": "미선정",
   "notes": [
     "이 파일은 자료 수합용. 팀원 기획안 원본은 각 TASK/기존 경로에서 보존하고 여기서는 링크와 준비 상태만 관리.",
-    "R01의 TASK-016(기존 AI 도구 기획)과 별도 CAND-016(스마트안경 감독 기획)이 병존한다. 이번 비교에는 R01이 지정한 대면시험 감독 지원 V1.2를 사용한다.",
+    "R01의 TASK-016(기존 AI 도구 기획)과 별도 CAND-016(스마트안경 감독 기획)이 함께 존재하므로 이번 5개에 제출할 R01 안 1개를 확정해야 한다.",
     "TASK의 진행 상태는 최초 확인 시점의 스냅샷이며 최신 여부는 각 링크에서 확인. 원본 수정 권한은 owner에게 있음.",
     "2026-11-16: HANDOFF-20261117.md에 평가 기준선과 평가서 수합 현황 정리. 아래 candidate_review_ref는 임시 평가대상 링크, submission_ref는 작성자 확정 제출본 전까지 null 유지.",
-    "11/16 R01 결정: 11/17 임시 진행·평가 취합은 R05. 잠정 멘토 준비 2안 R03/R05. selected_ids는 최종 선정 전 비워둠.",
-    "2026-11-17 R05 임시 취합: R03 최신 1페이지와 R05 본인 제출 v5의 브랜치·커밋을 기록. 이전 버전 평가 점수는 최신안으로 자동 승계하지 않음."
+    "11/16 R01 결정: 11/17 임시 진행·평가 취합은 R05. 잠정 멘토 준비 2안 R03/R05. selected_ids는 최종 선정 전 비워둠."
   ],
   "entries": [
     {
@@ -28,11 +27,9 @@
       "submission_status": "임시 평가본 확보 / 작성자 최종 확인 대기",
       "verified_task_status": "할 일",
       "review_ready": false,
-      "blocking_question": "V1.2의 최종 제출 선언과 최신 버전 기준 독립 평가 확인",
-      "candidate_review_ref": "docs/artifacts/candidates/CAND-016-mentor-onepager-v1.2.md",
-      "candidate_review_note": "R01이 V1.2를 멘토 검토안으로 지정. 최종 제출 선언·동일 버전 독립 평가 확인 필요.",
-      "candidate_review_branch": "main",
-      "candidate_review_commit": "01959ec"
+      "blocking_question": "어느 주제를 R01의 1개 제출안으로 평가할지 확정",
+      "candidate_review_ref": "docs/artifacts/candidates/CAND-016-v1.2-proposal.md",
+      "candidate_review_note": "사용자가 평가할 R01 본문으로 제공; 최종 제출자 확인 기록 필요"
     },
     {
       "id": "R02",
@@ -44,9 +41,7 @@
       "verified_task_status": "할 일",
       "review_ready": false,
       "candidate_review_ref": "docs/members/R02/workspace/AI_연애_리얼리티_멘토_1페이지_요약.md",
-      "candidate_review_note": "AI 연애 리얼리티 요약 확보; TASK-017 타깃 정정은 R02 데일리에서 확인. 최종 제출·직접 평가 확인은 미기록.",
-      "candidate_review_branch": "jangsangok",
-      "candidate_review_commit": "19dde1e"
+      "candidate_review_note": "TASK-017 결혼 주제와 불일치; R02 공식 확인 필요"
     },
     {
       "id": "R03",
@@ -58,9 +53,7 @@
       "verified_task_status": "할 일",
       "review_ready": false,
       "candidate_review_ref": "docs/members/R03/workspace/2026-11-16_중고거래_상담신고_준비_멘토링_1페이지_요약.md",
-      "candidate_review_note": "2026-11-17 갱신 1페이지와 설명문 확보; 작성자 최종 제출 선언은 미기록. 비교 실험·시제품 미구현.",
-      "candidate_review_branch": "choiduna",
-      "candidate_review_commit": "2734f7d"
+      "candidate_review_note": "2026-11-16 본문 확보; 원 작성자 최종 제출 확인 필요"
     },
     {
       "id": "R04",
@@ -73,25 +66,21 @@
       "verified_task_status": "진행 중",
       "review_ready": false,
       "candidate_review_ref": "docs/members/R04/workspace/2026-11-16_R04_공공사업_토지대장_PDF_수집자동화_기획안.md",
-      "candidate_review_note": "지정 v0.2 검토본 확보. R03 재평가 G2 중단 위험; 자동 접근 허용 및 출력물 인정 미확인.",
-      "candidate_review_branch": "akaraywon",
-      "candidate_review_commit": "ba6f530"
+      "candidate_review_note": "akaraywon 브랜치 지정; 2026-11-16 v0.2; 작성자 최종 제출 확인 필요",
+      "candidate_review_branch": "akaraywon"
     },
     {
       "id": "R05",
       "owner": "R05",
       "proposal_title": "키오스크 메뉴 선택 도우미",
       "source_task": "docs/artifacts/tasks/TASK-020.json",
-      "submission_ref": "docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v5.md",
-      "submission_status": "R05 본인 제출 v5 확보 / 사용자 효과 검증 전",
+      "submission_ref": null,
+      "submission_status": "임시 평가본 확보 / 작성자 최종 확인 대기",
       "verified_task_status": "할 일",
-      "review_ready": true,
-      "candidate_review_ref": "docs/ideas/R05_키오스크_메뉴_선택_도우미_멘토재검토_v5.md",
-      "candidate_review_note": "R05가 v5를 제출. R04 독립평가는 v4 대상이므로 v5 점수로 승계하지 않음.",
-      "submission_branch": "Imdahyeok",
-      "submission_commit": "ec424a4",
-      "candidate_review_branch": "Imdahyeok",
-      "candidate_review_commit": "ec424a4"
+      "review_ready": false,
+      "candidate_review_ref": "docs/artifacts/planning/selection-20261117/inbox/IDEA-20261116-R05-01_키오스크_메뉴_선택_도우미.md",
+      "candidate_review_note": "채팅 첨부 임시 평가 스냅샷; R05 원본 제출 경로 및 승인 확인 필요",
+      "candidate_review_snapshot": true
     }
   ],
   "acting_coordinator": "R05",
@@ -105,8 +94,5 @@
     "R03": "docs/artifacts/planning/selection-20261117/drafts/R03-mentor-ready-draft.md",
     "R05": "docs/artifacts/planning/selection-20261117/drafts/R05-mentor-ready-draft.md"
   },
-  "alternative_wbs_ref": "docs/artifacts/planning/selection-20261117/drafts/WBS-alternatives.md",
-  "updated_at": "2026-11-17",
-  "mentor_packet_ref": "docs/artifacts/planning/2026-11-17_R03_R05_멘토_재검토_취합.md",
-  "evaluation_collation_ref": "docs/artifacts/planning/selection-20261117/2026-11-17_5안_평가_취합.md"
+  "alternative_wbs_ref": "docs/artifacts/planning/selection-20261117/drafts/WBS-alternatives.md"
 }

@@ -3,53 +3,58 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-12",
-  "scope": "앱 리서치를 첫 도메인으로 두고 안드로이드 집중 앱을 첫 검증 후보로 진행",
+  "as_of": "2026-11-24",
+  "scope": "2026-11-24~: 레슨 등록 지원 서비스의 플랫폼별 독립 PoC 및 공통 모의 검증. 본 구현과 실서비스 실행은 별도 결정 전 보류.",
   "confirmed": [
-    "최종 목표는 요청에 따른 동적 워크플로·에이전트 팀 구성과 근거 있는 조사 결과 제공",
-    "사람이 확인하는 화면과 제출물은 AI의 구조화된 원본에서 생성",
-    "집중 앱 지정 비교와 신규 발굴, 중간 판정에 따른 대안 발굴을 첫 평가 사례로 사용",
-    "APP-A 지정 후보 비교와 APP-C 중간 판정 분기를 이번 MVP의 핵심 Must로 사용",
-    "APP-B는 후보 없는 요청의 발굴 검증 사례로 유지하되 APP-A·C보다 낮은 우선순위",
-    "R03·R05는 공통 의미와 request/task/attempt ID handoff 설계 순서를 합의했으며 실제 통합은 후속 검증",
-    "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용",
-    "장기 목적과 필요한 능력은 Target Design Hypothesis로 먼저 표현하고, MVP·도메인·컴포넌트 설계는 그 가설을 검증하기 위해 하위로 도출하며 구체 구조는 구현·평가 근거로 수정한다"
+    "R01은 멘토링 이후 R02 음악 레슨 강사의 모집 등록 업무 지원을 이번 기획 구체화의 방향으로 선택했다. 최종 기술 방식과 MVP는 미확정이다.",
+    "기획서는 서비스 개요부터 사용자·Pain·원인·핵심 기능·가치·비즈니스 모델·요구사항·기술 제약·MVP·검증까지 12항목을 갖추며, 실제 가치와 설계 입력의 연결을 설명해야 한다.",
+    "R02~R05 개인 산출물과 TASK 결과는 각 담당자가 관리하고, R01이 공통 기획 원본에 통합한다.",
+    "기존 찾아you 기획·WBS·API·DB 잠정 제출본을 현재 레슨 등록 제품 구현 지시로 재사용하지 않는다.",
+    "R03은 크몽·숨고용 공통 모의 테스트 환경(TASK-043), R04는 숨고 등록 핵심 PoC(TASK-044), R05는 크몽 등록 핵심 PoC(TASK-045)를 독립적으로 담당한다.",
+    "공통 루트에는 검증 도구만 유지하고 플랫폼별 기술·패키지·코드는 각 TASK 브랜치와 실험 디렉터리에 격리한다. 본 구현은 검증 후 별도 채택하며 실제 플랫폼 로그인·등록은 금지한다."
   ],
   "priorities": [
-    "팀 대시보드에서 STEP 1 정확한 마감 시각·WBS 별도 안내·문서 열람 권한을 확인",
-    "기획서·WBS 링크를 산출물 제출 표에 등록하고 제출완료로 전환한 뒤 접수 상태를 실제 확인",
-    "제출 확인 후 WBS 일정에 따라 APP-A vertical slice와 APP-C 동적 분기 구현을 시작"
+    "TASK-043(R03): 공통 시험 계약·합성 fixture·플랫폼별 mock·오류 재현과 실행 로그.",
+    "TASK-044(R04): 숨고 실제 등록 객체 확인, 독립 최소 설계·PoC와 모의 검증.",
+    "TASK-045(R05): 크몽 레슨 상품 등록 독립 최소 설계·PoC와 모의 검증.",
+    "11/26 공통 모의 시험, 11/27 R01 플랫폼별 실현 가능성·채택/통합 판단. 실제 실행 근거 없이는 완료 처리하지 않는다."
   ],
   "decisions_needed": [
     {
-      "id": "OPEN-02",
-      "question": "정량 합격 기준을 얼마로 둘까",
-      "action": "제출본에 평가 계획과 기준 실행 후 결정 절차를 명시",
-      "evidence_needed": "첫 실행의 조건별 응답 완결성과 근거 판정 결과"
+      "id": "OPEN-20261123-01",
+      "question": "최초 등록과 후기 재게시·문의 대응 중 무엇을 첫 MVP Pain으로 확정할까?",
+      "action": "R02의 관찰·반대 근거와 R04의 대안 잔여 Pain을 비교해 R01 결정",
+      "evidence_needed": "실제 반복 빈도·누적 손실·이용 의향·첫 채널 개설 부담"
     },
     {
-      "id": "OPEN-03",
-      "question": "프레임워크와 경험 재사용에 지금 투자할까",
-      "action": "필요가 드러날 때 결정",
-      "evidence_needed": "상태 추적·복구의 구현 부담 또는 검토된 조사 경험을 재사용할 실제 과제"
+      "id": "OPEN-20261123-02",
+      "question": "외부 등록을 어떤 실행 방식으로 허용 범위 안에서 제공할까?",
+      "action": "R04/R05의 플랫폼별 공식 허용·실행 구조와 R03의 공통 검증 증거를 바탕으로 결정",
+      "evidence_needed": "플랫폼 자동화 허용 근거·인증/세션 모델·필요한 강사 개입"
     },
     {
-      "id": "OPEN-04",
-      "question": "APP-C 실제 확인 한도와 부분 결과의 세부 수용 기준을 얼마로 둘까",
-      "action": "첫 APP-A·C 통합에서 시간·호출·실패 패턴을 관찰한 뒤 결정",
-      "evidence_needed": "실제 조사 실행의 소요 시간·호출 수·미확인 원인과 사용자에게 전달 가능한 부분 결과 형태"
+      "id": "OPEN-20261123-03",
+      "question": "어떤 가치·가격·업무 범위에서 전용 서비스를 제공할 것인가?",
+      "action": "R01이 12항목 통합 기획서에 수익/비용 가설과 MVP 경계를 기록",
+      "evidence_needed": "직접 작업 시간·대안 사용 부담·지불 의향·건당 운영비·기능 완료 조건"
+    },
+    {
+      "id": "OPEN-20261124-01",
+      "question": "어떤 PoC 코드·검증 계약을 본 구현에 재사용할까?",
+      "action": "11/27 R01이 플랫폼별 검증 근거와 최종 설계·의존성 영향에 따라 재사용/수정/폐기 결정",
+      "evidence_needed": "구현 commit·실행 로그·정상/오류/unknown 검증·의존성·플랫폼 권한 미확인·재사용 경계"
     }
   ],
-  "review_summary": "TASK-001 대표 요청 수동 조사 점검과 TASK-002·007·008·009·010 제출 준비 작업은 완료됐다. 기획서와 WBS는 검토 완료·미제출 상태다. TASK-011만 실제 팀 대시보드 링크 등록·제출완료 전환·접수 확인이 필요해 막힘으로 남아 있으며, 이 작업을 확인하기 전에는 제출 완료로 표시하지 않는다.",
+  "review_summary": "2026-11-24 R03 공통 테스트 하네스·R04 숨고·R05 크몽 독립 PoC로 업무를 전환했다. 기획 V1.1과 공통 검증 계약을 사용하며 본 구현과 실서비스 자동 등록은 미확정/보류한다. 담당별 TASK·브랜치·작업 공간은 준비했으나 R01이 Discord 전달을 보고했다. 팀원 개별 수신·착수·코드·테스트 실행은 증거 확보 전이다. 기존 기획 및 제출 이력은 보존한다.",
   "deliverables": [
     {
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "검토 완료·제출 준비",
-      "submission_status": "미제출",
+      "status": "11/23 R02 음악 레슨 등록 지원 서비스 Step1 기획서 개정 초안 작성 · 팀 조사·MVP·가치/정책 검증 전",
+      "submission_status": "미확인",
       "source": "docs/artifacts/planning/기획서_초안.json",
-      "projection": "docs/step1/기획서.md",
+      "projection": "docs/step1/기획서_제출본.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-003",
@@ -60,16 +65,19 @@
         "TASK-008",
         "TASK-010",
         "TASK-011"
-      ]
+      ],
+      "revision_ref": "docs/step1/기획서_제출본.md",
+      "revision_date": "2026-11-23",
+      "note": "11/19 준비 ≠ 공식 제출·접수. 11/23 개정은 신규 기획에 맞춘 문서 준비이며 제품 승인·실제 제출/접수/구현을 의미하지 않는다."
     },
     {
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "검토 완료·제출 준비",
-      "submission_status": "미제출",
+      "status": "11/23 레슨 등록 기획·조건부 설계 게이트 중심 WBS 개정 초안 작성 · 상세 개발 WBS·Projects/시트 캡처 미확인",
+      "submission_status": "미확인",
       "source": "docs/artifacts/planning/WBS.json",
-      "projection": "docs/step1/WBS.md",
+      "projection": "docs/step1/WBS_제출본.md",
       "completion_tasks": [
         "TASK-002",
         "TASK-006",
@@ -78,7 +86,10 @@
         "TASK-010",
         "TASK-011"
       ],
-      "target": "docs/step1/WBS.md"
+      "target": "docs/step1/WBS.md",
+      "revision_ref": "docs/step1/WBS_제출본.md",
+      "revision_date": "2026-11-23",
+      "note": "11/19 준비 ≠ 공식 제출·접수. 11/23 개정은 신규 기획에 맞춘 문서 준비이며 제품 승인·실제 제출/접수/구현을 의미하지 않는다."
     },
     {
       "id": "SUB-03",
@@ -106,9 +117,44 @@
       "submission_status": "미확인",
       "source": null,
       "projection": null
+    },
+    {
+      "id": "SUB-API-20261120",
+      "due": "2026-11-20",
+      "title": "API 설계 문서·DB 스키마 설계서 (잠정)",
+      "status": "11/23 레슨 등록 서비스의 조건부 API/DB 논리 설계 제출 후보 2종 개정 · 기술/정책 승인·R05 검토·구현 미확인",
+      "submission_status": "미확인",
+      "source": "docs/submissions/step1-step2-20261119/README.md",
+      "projection": "docs/step2/README.md",
+      "completion_tasks": [
+        "TASK-027"
+      ],
+      "note": "공식 원문·대시보드 마감/제출 절차 확인 필요. 실제 기획은 11/21 결정 목표. 11/19 준비 ≠ 공식 제출·접수. 11/23 개정은 신규 기획에 맞춘 문서 준비이며 제품 승인·실제 제출/접수/구현을 의미하지 않는다.",
+      "revision_date": "2026-11-23"
     }
   ],
   "references": [
+    {
+      "path": "docs/meetings/2026-11-16_멘토링_문제정의_피드백_정리.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-016.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-017.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-018.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-019.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-020.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-021.json"
+    },
     {
       "path": "PROJECT.md"
     },
@@ -120,11 +166,68 @@
     },
     {
       "path": "docs/artifacts/design/target_design.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261118-01_two-track-planning.md"
+    },
+    {
+      "path": "docs/artifacts/state/transition-20261118.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-022.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-023.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-024.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-025.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-026.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-027.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261118-02_phase-sync.md"
+    },
+    {
+      "path": "docs/artifacts/state/legacy_task_closeout_20261118.json"
+    },
+    {
+      "path": "docs/archive/2026-11-18-task-closeout/manifest.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261119-01_r01-owned-doc-sync.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "path": "docs/artifacts/state/task_closeout_20261124.json"
+    },
+    {
+      "path": "docs/artifacts/state/TASK-CLOSEOUT-20261124.md"
     }
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
-    "status": "제출 대기",
+    "status": "11/19 Step1·Step2 잠정 MD 후보 준비; 실제 제출·접수 미확인",
     "due_date": "2026-11-13",
     "due_time": null,
     "timezone": "Asia/Seoul",
@@ -156,56 +259,76 @@
   },
   "confirmed_provenance": [
     {
-      "text": "최종 목표는 요청에 따른 동적 워크플로·에이전트 팀 구성과 근거 있는 조사 결과 제공",
+      "text": "R01은 멘토링 이후 R02 음악 레슨 강사의 모집 등록 업무 지원을 이번 기획 구체화의 방향으로 선택했다. 최종 기술 방식과 MVP는 미확정이다.",
       "authority": "human",
-      "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-PRODUCT-001"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "사람이 확인하는 화면과 제출물은 AI의 구조화된 원본에서 생성",
+      "text": "기획서는 서비스 개요부터 사용자·Pain·원인·핵심 기능·가치·비즈니스 모델·요구사항·기술 제약·MVP·검증까지 12항목을 갖추며, 실제 가치와 설계 입력의 연결을 설명해야 한다.",
       "authority": "human",
-      "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-OPS-001"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "집중 앱 지정 비교와 신규 발굴, 중간 판정에 따른 대안 발굴을 첫 평가 사례로 사용",
-      "authority": "team",
-      "source_ref": "docs/artifacts/specs/focus_apps.json",
-      "source_id": "SPEC-FOCUS-001"
-    },
-    {
-      "text": "APP-A 지정 후보 비교와 APP-C 중간 판정 분기를 이번 MVP의 핵심 Must로 사용",
+      "text": "R02~R05 개인 산출물과 TASK 결과는 각 담당자가 관리하고, R01이 공통 기획 원본에 통합한다.",
       "authority": "human",
-      "source_ref": "docs/artifacts/tasks/TASK-007.json",
-      "source_id": "T007-C02"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "APP-B는 후보 없는 요청의 발굴 검증 사례로 유지하되 APP-A·C보다 낮은 우선순위",
+      "text": "기존 찾아you 기획·WBS·API·DB 잠정 제출본을 현재 레슨 등록 제품 구현 지시로 재사용하지 않는다.",
       "authority": "human",
-      "source_ref": "docs/artifacts/tasks/TASK-007.json",
-      "source_id": "T007-C03"
+      "source_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+      "source_id": "HRESP-20261123-01"
     },
     {
-      "text": "R03·R05는 공통 의미와 request/task/attempt ID handoff 설계 순서를 합의했으며 실제 통합은 후속 검증",
-      "authority": "team",
-      "source_ref": "docs/artifacts/tasks/TASK-006.json",
-      "source_id": "interface_draft.plan_id_handoff"
-    },
-    {
-      "text": "근거 추적·미확인/미충족/실패·부분 결과 구분과 데이터 수집 정책 gate를 Must로 적용",
+      "text": "R03은 크몽·숨고용 공통 모의 테스트 환경(TASK-043), R04는 숨고 등록 핵심 PoC(TASK-044), R05는 크몽 등록 핵심 PoC(TASK-045)를 독립적으로 담당한다.",
       "authority": "human",
-      "source_ref": "docs/artifacts/tasks/TASK-007.json",
-      "source_id": "T007-C06,T007-C12"
+      "source_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "source_id": "PHASE-20261124-02"
     },
     {
-      "text": "장기 목적과 필요한 능력은 Target Design Hypothesis로 먼저 표현하고, MVP·도메인·컴포넌트 설계는 그 가설을 검증하기 위해 하위로 도출하며 구체 구조는 구현·평가 근거로 수정한다",
+      "text": "공통 루트에는 검증 도구만 유지하고 플랫폼별 기술·패키지·코드는 각 TASK 브랜치와 실험 디렉터리에 격리한다. 본 구현은 검증 후 별도 채택하며 실제 플랫폼 로그인·등록은 금지한다.",
       "authority": "human",
-      "source_ref": "docs/human/INTENT.md",
-      "source_id": "INTENT-DESIGN-001"
+      "source_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "source_id": "PHASE-20261124-02"
     }
   ],
   "human_input": {
     "intent_ref": "docs/human/INTENT.md",
     "responses_dir": "docs/human/responses"
-  }
+  },
+  "operating_transition_ref": "docs/artifacts/state/transition-20261118.json",
+  "active_task_ids": [
+    "TASK-043",
+    "TASK-044",
+    "TASK-045"
+  ],
+  "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조)",
+  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "active_phase_intent_id": "PHASE-20261124-02",
+  "current_product_status": "R03 공통 모의 테스트 환경 및 R04 숨고·R05 크몽 독립 PoC 배정(2026-11-24); 실제 실행/기술·정책 검증 전",
+  "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
+  "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
+  "current_baseline_lifecycle": {
+    "product_selection": "레슨 등록 지원 기획 V1.1 기반 독립 PoC 검증; 본 구현 확정 전",
+    "previous_plan_and_wbs": "이전 찾아you 구현 보류",
+    "previous_plan_and_wbs_submission_use": "기존 제출용 잠정 문서만 유지",
+    "future_after_offline": "독립 PoC·모의 시험 결과로 11/27 본 구현 범위·공통 구조·채택 기술을 판단",
+    "phase_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+  },
+  "legacy_task_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+  "legacy_evidence_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json",
+  "legacy_task_status_policy": "TASK-001~021 원본 상태/결과 유지. 운영상 신규 실행은 종료/비활성화했으며 분류·근거·대체 TASK는 closeout 원본과 고정 blob 사본 참조.",
+  "previous_phase_task_ids": [
+    "TASK-028",
+    "TASK-029",
+    "TASK-030",
+    "TASK-031",
+    "TASK-032"
+  ],
+  "previous_phase_task_status_policy": "TASK-028~032의 당시 상태·결과를 보존하고 신규 실행 의무로 자동 해석하지 않는다. TASK-033~042는 미채택/미병합 제안으로 별도 정산한다.",
+  "task_closeout_ref": "docs/artifacts/state/task_closeout_20261124.json",
+  "task_closeout_view_ref": "docs/artifacts/state/TASK-CLOSEOUT-20261124.md"
 }

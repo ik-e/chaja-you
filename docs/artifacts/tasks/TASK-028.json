@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "id": "TASK-028",
+  "kind": "task",
+  "status": "완료",
+  "owner": "R02",
+  "due": "2026-11-23",
+  "depends_on": [],
+  "suggested_owner": "R02",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-23",
+  "title": "음악 레슨 강사 실제 Pain·타깃·우선 업무 검증",
+  "question": "누가 어떤 등록·재게시·상담 업무에서 실제 손실을 겪으며, 최초 등록을 첫 문제로 선택할 근거가 충분한가?",
+  "goal": "기존 경험의 근거 범위를 보존하면서 첫 사용자의 조건과 우선 Pain을 정해 R01 문제 정의의 입력으로 제공한다.",
+  "inputs": [
+    "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json",
+    "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+  ],
+  "scope": [
+    "기존 신규 최초 등록·정기 재게시·후기 영상 재게시·문의 대응 4개 업무에 대해 상황, 빈도, 소요 시간, 작업 포기와 직접 손실을 같은 표로 비교한다.",
+    "R02 본인 회상·동료 진술·최근 실측·추정을 구분한다. 추가 강사 인터뷰는 접근 가능할 때 1~2건 시행하고 응답 수/일시/한계를 기록한다.",
+    "자동화를 모르는 강사라는 특성을 사실로 가정하지 않고 실제 AI 활용 방식과 저항 이유를 질문한다.",
+    "새로운 기능을 결정하거나 다른 강사의 실제 경험을 꾸며내지 않는다."
+  ],
+  "outputs": [
+    "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+    "완료 시 TASK result에 요약·evidence 경로·검증·미확인·결정 요청 반영"
+  ],
+  "acceptance": [
+    "기존 네 업무의 반복 빈도·손실·대안·근거 수준을 비교한 표가 있다. 측정하지 못한 값은 미측정으로 둔다.",
+    "1차 타깃(현재 채널 수·기존 원본 보유·확장 의향)과 핵심 이용 순간이 명확하다.",
+    "최초 등록 우선/다른 업무 우선/판단 보류 중 하나를 이유·반대 증거와 함께 제안한다.",
+    "기존 R02 기획안과 실제 관찰의 출처, 추가 인터뷰가 있다면 일시·표본 수를 연결한다."
+  ],
+  "verification": [
+    "지정 경로 파일과 URL/커밋을 확인한다.",
+    "문서의 주장 및 표를 근거와 대조하고, 확인/추정/미확인을 임의로 섞지 않았는지 확인한다.",
+    "요청 범위 외 작업이 포함되지 않았는지 검토한다.",
+    "TASK result의 실제 증거·검증 판정과 남은 결정 요청을 확인한다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    },
+    {
+      "path": "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json"
+    }
+  ],
+  "result": {
+    "summary": "R02 문답과 동료 2명 회상 사례를 통해 네 업무 비교, 최초 등록 우선 제안, 타깃·승인·결과 확인 조건을 정리했다.",
+    "evidence": [
+      {
+        "id": "E28-1",
+        "label": "사용자 문답 결과",
+        "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+      },
+      {
+        "id": "E28-2",
+        "label": "점심 체크",
+        "path": "docs/members/R02/daily/2026-11-23.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "최종 정정값과 네 업무 비교표 대조",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      },
+      {
+        "criterion": "타깃 조건·우선 제안·반대 근거 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      },
+      {
+        "criterion": "동료 발언 시점·표본 수·회상 한계와 미확인 후속 검증 기재",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      },
+      {
+        "criterion": "후속 문답의 시간 범위·가격·운영 조건과 R05 인계 근거 대조",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "시간 실측과 실제 결제 없음",
+      "강사 B 날짜·이용 의향 미확인",
+      "플랫폼별 자동화 권한·실행 가능성 미확인"
+    ],
+    "decision_requests": [
+      "R01 최초 등록 우선·플랫폼·과금·추가 기능 범위 통합 판단"
+    ],
+    "completed_at": "2026-11-23",
+    "claims": [
+      {
+        "id": "C28-1",
+        "text": "최초 등록 우선 검증을 제안하며 시간은 회상 추정, 채널 확대의 모집 효과는 미확인이다.",
+        "status": "제안",
+        "evidence_ids": [
+          "E28-1"
+        ]
+      },
+      {
+        "id": "C28-2",
+        "text": "오후 문답에서 가입·인증 시간 미확인, 사진 수정 포함 작성 시간, 알림 확인 과정과 최신 수업 조건을 확보하고 R05 인계 질문을 정리했다.",
+        "status": "사용자 진술",
+        "evidence_ids": [
+          "E28-1",
+          "E28-2"
+        ]
+      }
+    ]
+  },
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261123-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "누가 어떤 등록·재게시·상담 업무에서 실제 손실을 겪으며, 최초 등록을 첫 문제로 선택할 근거가 충분한가?",
+    "observables": [
+      "기존 네 업무의 반복 빈도·손실·대안·근거 수준을 비교한 표가 있다. 측정하지 못한 값은 미측정으로 둔다.",
+      "1차 타깃(현재 채널 수·기존 원본 보유·확장 의향)과 핵심 이용 순간이 명확하다.",
+      "최초 등록 우선/다른 업무 우선/판단 보류 중 하나를 이유·반대 증거와 함께 제안한다.",
+      "기존 R02 기획안과 실제 관찰의 출처, 추가 인터뷰가 있다면 일시·표본 수를 연결한다."
+    ],
+    "success_condition": "문서·출처·확인 상태·TASK result가 모두 갖춰져 담당 작업의 검토가 가능한 수준",
+    "unknown_condition": "실행이나 제3자 확인이 불가능하면 미확인과 사유·후속 질문으로 기록하고 검증됐다고 쓰지 않는다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
+  "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
+  "output_path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+  "review_owner": "R01 (기획 방향·통합 결정만)"
+}

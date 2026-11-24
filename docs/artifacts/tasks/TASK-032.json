@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "id": "TASK-032",
+  "kind": "task",
+  "status": "검토 중",
+  "owner": "R01",
+  "due": "2026-11-24",
+  "depends_on": [
+    "TASK-028",
+    "TASK-029",
+    "TASK-030",
+    "TASK-031"
+  ],
+  "suggested_owner": "R01",
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-23",
+  "title": "레슨 등록 12항목 기획안·가치·BM·MVP 통합",
+  "question": "현재 근거만으로 서비스 가치, 수익 구조, 후속 설계에 필요한 기능 요구사항과 미결정 조건을 일관되게 설명할 수 있는가?",
+  "goal": "12항목 기획서를 기획 단계의 기준선으로 통합해 사업 모델과 후속 설계 입력의 경계를 명확히 한다.",
+  "inputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/plan.json",
+    "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+  ],
+  "scope": [
+    "R02 Pain/타깃, R04 기존 대안, R05 기술, R03 요구사항을 출처와 상태를 유지해 하나의 12항목 기획서로 통합한다.",
+    "고객/결제자, 채널, 가치 전달, 가격 가설, 주요 비용, 반복 사용 가능성을 매핑한다. 가격·매출 가설을 실적처럼 표현하지 않는다.",
+    "Pain → 원인 → F1~F3 → 사용자 가치 → 지불 동기 → 성공 지표의 연결표를 포함한다.",
+    "최초 등록/후기 재게시 중 1차 문제와 MVP 포함/제외 범위를 근거로 결정하되 실제 기술·수요 검증 전 단정하지 않는다.",
+    "설계 착수에 필요한 사용자 입력, 데이터 항목, 상태, 예외, 통제권이 충분한지 확인하되 화면·DB/API 상세 설계와 코딩은 하지 않는다."
+  ],
+  "outputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "최종 R01 채택 시 TASK 결과·검증·후속 판단 기록"
+  ],
+  "acceptance": [
+    "12개 항목 모두 내용 또는 미확인·필요한 근거·검증 담당이 기록된다.",
+    "핵심 문제별 실제 근거, 원인, 기능, 사용자 가치, BM 연결이 끊기지 않는다.",
+    "첫 이용 시나리오와 주요 예외·입출력·완료 상태가 후속 기능 설계의 입력으로 재사용 가능하다.",
+    "비용·수익·재이용 가설과 정책·인증 핵심 위험을 분리해 기록한다.",
+    "최소 1개 MVP 범위와 제외 범위·재검토 조건 및 설계 착수 여부/차단 조건을 기록한다."
+  ],
+  "verification": [
+    "지정 경로 파일과 URL/커밋을 확인한다.",
+    "문서의 주장 및 표를 근거와 대조하고, 확인/추정/미확인을 임의로 섞지 않았는지 확인한다.",
+    "요청 범위 외 작업이 포함되지 않았는지 검토한다.",
+    "TASK result의 실제 증거·검증 판정과 남은 결정 요청을 확인한다."
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/plan.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+    }
+  ],
+  "result": {
+    "summary": "R02 사용자·Pain·법률 조사, R03 F1~F3 크몽·탈잉 시나리오, R04 5개 대안, R05 당근·크몽 1차 기술·권한 결과를 활용하여 12항목 기획 V1.0과 읽기용 동기화 문서를 작성했다. 최초 등록을 1차 문제로, 크몽 웹 상품 심사 접수 1건을 첫 검증 후보로 제안했다. 최신 레슨 가격(90/180/270분 월 25/40/50만원) 정정, Pain→원인→기능→가치→지불 가설 연결, 필수/조건부/제외 범위와 검증·승격 게이트를 정의했다. 기획 문서 작성과 최종 제품 채택·운영사 허용·실제 구현/제출 승인은 구분한다. 8장 BM에서 기능별 Pain 해결 작동, 사용자 업무의 Before/After, 가치·지불 이유 및 미충족 시 사업 가설 재판단을 연결했다. 2026-11-23 V1.1은 타깃→Pain→발생 원인→핵심 피처가 실제로 줄이는 일→사용자 가치→지불 동기의 순서로 12항목을 재배열했다. 기존 대안·시나리오·요구사항·기술·MVP·검증은 근거/실행 장으로 배치했고 V1.0 및 원본 조사 수치·미확인·게이트는 보존했다.",
+    "evidence": [
+      {
+        "id": "T032-E01",
+        "type": "canonical",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json"
+      },
+      {
+        "id": "T032-E02",
+        "type": "readable",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.md"
+      },
+      {
+        "id": "T032-E03",
+        "type": "prior_draft",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json"
+      },
+      {
+        "id": "T032-E04",
+        "type": "user_pain",
+        "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+      },
+      {
+        "id": "T032-E05",
+        "type": "requirements",
+        "path": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md"
+      },
+      {
+        "id": "T032-E06",
+        "type": "market",
+        "path": "docs/members/R04/workspace/2026-11-23_레슨_등록_기존_대안_시장_가격_조사_보고서.md"
+      },
+      {
+        "id": "T032-E07",
+        "type": "technical_previous",
+        "url": "https://github.com/ik-e/chaja-you/blob/r05/task-030-20261123/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md"
+      },
+      {
+        "id": "T032-E08",
+        "type": "canonical_restructured",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      },
+      {
+        "id": "T032-E09",
+        "type": "readable_restructured",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "12개 항목에 근거/미확인 포함",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E02"
+        ]
+      },
+      {
+        "criterion": "Pain→원인→기능→사용자 직접 가치→BM 추적",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01"
+        ]
+      },
+      {
+        "criterion": "대표 시나리오·오류·완료 상태·후속 설계 업무 의미",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E05"
+        ]
+      },
+      {
+        "criterion": "사업모델 가격 가설과 기술/약관/인증 위험 분리",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E06",
+          "T032-E07"
+        ]
+      },
+      {
+        "criterion": "조건부 MVP/첫 플랫폼 후보/제외·재검토 조건",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E02"
+        ]
+      },
+      {
+        "criterion": "최종 R01 제품 범위 채택 및 구현/설계 착수 승인",
+        "verdict": "pending",
+        "reason": "사용자 최종 채택 판단 및 R05의 3개 플랫폼 8영역·공수 결과 미완료"
+      },
+      {
+        "criterion": "BM 섹션에서 Pain/원인→F1~F3 실제 업무 변화→사용자 직접 가치→지불 동기/실패 시 사업 판단 연결",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E01",
+          "T032-E02"
+        ],
+        "note": "수익·가격·사용자 시간 절감·플랫폼 자동 제출 허용은 실측/결정 전"
+      },
+      {
+        "criterion": "12항목 재구성 후 타깃→Pain→원인→기능 작동→업무 변화·가치→BM의 문서 전체 흐름 및 같은 내용 JSON/Markdown 일치",
+        "verdict": "pass",
+        "evidence_ids": [
+          "T032-E08",
+          "T032-E09"
+        ],
+        "note": "완성된 문서 구조에 대한 검증이며 최종 플랫폼·BM·기술 승인 아님"
+      }
+    ],
+    "uncertainties": [
+      "R05 TASK-030의 크몽·탈잉·숨고 8개 조사·권한/기술/근거 3축 판정 미완료",
+      "3개 플랫폼 자동 최종 제출의 기술/약관·법적 허용 미입증",
+      "R04 전문 대행 시세·범용 브라우저 도구와의 실제 비교 성과 미검증",
+      "동료 A 10개 채널 5만원 간접 의향 외 3곳 실제 결제·원가 미검증",
+      "실제 강사 사용 테스트/정량 성과 미실시"
+    ],
+    "decision_requests": [
+      "R01: 최초 등록 및 크몽 1차 검증 후보의 기획 범위 최종 채택 여부",
+      "R01: 기술/권한/공수 정보에 근거한 실제 MVP 플랫폼과 실행 구조 결정",
+      "R01: 후속 설계/WBS/제출본 승격을 허용할 구체 조건과 시점 결정"
+    ],
+    "state": "기획 본문 V1.0 작성·출처 연결 확인 / R01 최종 채택과 연계 TASK 완료 전 / 실제 플랫폼 시험 미실행"
+  },
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261123-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "현재 근거만으로 서비스 가치, 수익 구조, 후속 설계에 필요한 기능 요구사항과 미결정 조건을 일관되게 설명할 수 있는가?",
+    "observables": [
+      "12개 항목 모두 내용 또는 미확인·필요한 근거·검증 담당이 기록된다.",
+      "핵심 문제별 실제 근거, 원인, 기능, 사용자 가치, BM 연결이 끊기지 않는다.",
+      "첫 이용 시나리오와 주요 예외·입출력·완료 상태가 후속 기능 설계의 입력으로 재사용 가능하다.",
+      "비용·수익·재이용 가설과 정책·인증 핵심 위험을 분리해 기록한다.",
+      "최소 1개 MVP 범위와 제외 범위·재검토 조건 및 설계 착수 여부/차단 조건을 기록한다."
+    ],
+    "success_condition": "문서·출처·확인 상태·TASK result가 모두 갖춰져 담당 작업의 검토가 가능한 수준",
+    "unknown_condition": "실행이나 제3자 확인이 불가능하면 미확인과 사유·후속 질문으로 기록하고 검증됐다고 쓰지 않는다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "stage": "2026-11-23 R02 음악 레슨 등록 기획(설계 전)",
+  "assignment_status": "R01 승인 배분안; GitHub 등록 후 팀원 전달·수신 미확인",
+  "output_path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+  "review_owner": "R01"
+}

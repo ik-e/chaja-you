@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "id": "PLAN-20261123-R02-LESSON",
+  "kind": "document",
+  "status": "기획서 V1.1 인과관계 중심 12항목 재구성 · 제품 최종 승인/기술 허용/실증 대기",
+  "title": "R02 음악 레슨 강사 등록 서비스 12항목 기획 계약·업무 배분",
+  "owner": "R01",
+  "date": "2026-11-23",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
+  "decision_ref": "docs/human/responses/HRESP-20261123-01_r02-lesson-planning.md",
+  "goal": "비즈니스 모델 가치 흐름과 후속 기능 설계 입력이 드러나는 12개 항목 기획서를 완성한다.",
+  "baseline": {
+    "proposal": "docs/members/R02/workspace/2026-11-18_음악_레슨_등록_지원_1차_기획안.md",
+    "rights_research": "docs/artifacts/research/R02_LESSON_POSTING_RIGHTS_20261120.json",
+    "review": "https://github.com/ik-e/chaja-you/issues/18",
+    "note": "R02 초안의 수치와 사용자 진술은 관찰/추정/미검증을 구별한다. 기존 지도 후보는 별도 확장 검토."
+  },
+  "sections": [
+    {
+      "number": 1,
+      "title": "서비스 개요·목표",
+      "lead": "R01",
+      "requirement": "1차 강사용 등록 지원/지도는 확장 검토",
+      "old_sections": [
+        "1",
+        "6"
+      ],
+      "baseline_status": "상당 부분 확보",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 2,
+      "title": "타깃 사용자·이용 상황",
+      "lead": "R02",
+      "requirement": "기존 공고 보유·확장 희망 개인 음악 강사 구체화",
+      "old_sections": [
+        "5"
+      ],
+      "baseline_status": "상당 부분 확보",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 3,
+      "title": "Pain·근거",
+      "lead": "R02",
+      "requirement": "최초 등록·갱신·후기 재게시·상담의 실측/추정 비교",
+      "old_sections": [
+        "2",
+        "3",
+        "부록 A"
+      ],
+      "baseline_status": "보완 필요",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 4,
+      "title": "문제 정의·원인",
+      "lead": "R01",
+      "requirement": "원인과 단순 현상을 분리",
+      "old_sections": [
+        "4"
+      ],
+      "baseline_status": "보완 필요",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 5,
+      "title": "핵심 피처·사용자 가치",
+      "lead": "R01",
+      "requirement": "P1~P3/원인 C1~C4가 F1~F3의 구체적 작동으로 해결되어 사용자 업무·가치에 변화를 주는 인과관계",
+      "old_sections": [
+        "7",
+        "9"
+      ],
+      "baseline_status": "보완 필요",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 6,
+      "title": "비즈니스 모델",
+      "lead": "R01",
+      "requirement": "5장 기능의 실제 해결 결과→사용자 가치→지불 이유→건별/묶음 과금·비용·재구매 조건",
+      "old_sections": [
+        "13",
+        "14"
+      ],
+      "baseline_status": "주요 공백",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 7,
+      "title": "기존 대안·잔여 Pain",
+      "lead": "R04",
+      "requirement": "수작업/범용 AI/브라우저 도구/대행 대비 잔여 Pain·차별화 실증",
+      "old_sections": [
+        "12",
+        "부록 C"
+      ],
+      "baseline_status": "보완 필요",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 8,
+      "title": "사용자 이용 시나리오",
+      "lead": "R03",
+      "requirement": "R03 사용자 입력·승인·등록·결과/실패 시나리오와 최종 상태",
+      "old_sections": [
+        "8"
+      ],
+      "baseline_status": "보완 필요",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 9,
+      "title": "기능 요구사항",
+      "lead": "R03",
+      "requirement": "F1~F3의 입출력·예외·완료 조건",
+      "old_sections": [
+        "7",
+        "8"
+      ],
+      "baseline_status": "주요 공백",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 10,
+      "title": "기술 실현 가능성·제약",
+      "lead": "R05",
+      "requirement": "크몽·탈잉·숨고의 ①공식 연동·허용 ②등록 대상·절차 ③인증 후 무인 실행 ④정보/사진/결과 확인 ⑤실패 복구·중복 방지(각 플랫폼별) + ⑥로컬/서버/혼합·실제 스택 ⑦8주 MVP·의존성(시스템 전체) + ⑧법·계약 적법성(공통). 기술/정책/근거 3축 별도 판정; 모의 시험·실플랫폼 시험 계획 분리; 추천은 R01 채택 전 가설.",
+      "old_sections": [
+        "9",
+        "부록 B",
+        "부록 D"
+      ],
+      "baseline_status": "조사 보유·후속 확인",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 11,
+      "title": "MVP·개발 범위",
+      "lead": "R01",
+      "requirement": "최소 사용 시나리오·포함/제외·8주 범위",
+      "old_sections": [
+        "1",
+        "7",
+        "15"
+      ],
+      "baseline_status": "방향만 존재",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 12,
+      "title": "검증 계획·성공 기준",
+      "lead": "R03",
+      "requirement": "동일 조건 비교·중단/보류 기준",
+      "old_sections": [
+        "12",
+        "13",
+        "15"
+      ],
+      "baseline_status": "계획 보유·실행 미확인",
+      "evidence_status": "기존 자료 대조 필요"
+    }
+  ],
+  "task_ids": [
+    "TASK-028",
+    "TASK-029",
+    "TASK-030",
+    "TASK-031",
+    "TASK-032"
+  ],
+  "outputs": {
+    "owner_workspace": "docs/members/RXX/workspace/",
+    "canonical_tasks": "docs/artifacts/tasks/TASK-028.json ~ TASK-032.json",
+    "integrated_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "submission": "기존 docs/step1/ 제출본과 분리: 제출 승격은 후속 R01 결정",
+    "integrated_readable": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "previous_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
+    "previous_v1_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json"
+  },
+  "completion_policy": {
+    "complete": "산출물 경로에 결과 존재 + 출처·확인일·주장 상태·반대 증거/미확인 + TASK acceptance 검증을 기록. 질문의 답이 미확인이어도 조사 범위와 차단 사유가 확인되면 문서 작업은 완료 가능.",
+    "not_complete": "파일만 존재하거나 근거 없이 추정한 결론, 허용되지 않은 자동 실행을 성공으로 기록한 경우",
+    "handoff": "담당자가 본인 workspace 결과 및 관련 TASK result에 출처와 검증 상태를 기록하고 URL/commit을 R01에 전달한다. R01만 공통 기획 원본을 통합한다.",
+    "limits": "오늘은 조사·기획과 요구사항 정리까지만. UX 화면, DB/API 상세, PoC 코딩, 실제 사이트 무단 자동 등록 제외.",
+    "proposal_version": "V1.1은 가치 발생의 인과구조가 핵심 흐름으로 보이도록 재구성한 기획 본문이다. 기술·약관·시장 효과 및 공식 제출은 별도 검증/승인이 필요하다."
+  },
+  "technical_feasibility_handoff": {
+    "decision_ref": "docs/human/responses/HRESP-20261123-02_r05-technical-feasibility-scope.md",
+    "owner_task": "TASK-030",
+    "platforms": [
+      "크몽",
+      "탈잉",
+      "숨고"
+    ],
+    "research_owner": "R05",
+    "inputs_by_member": [
+      {
+        "role": "R02",
+        "task_id": "TASK-028",
+        "role_type": "기존 완료 근거 제공",
+        "provides": "사용자 실제 등록 경험·우선 Pain·원본 자료/사진·이용 기대 조건 및 기존 플랫폼 법률·약관 조사",
+        "to": "R05 ①②③④⑧ 및 R01 타깃·가치",
+        "handoff": "기존 완료 결과와 R02_LESSON_POSTING_RIGHTS_20261120.json 재사용; 추가 신규 조사 자동 배정 금지"
+      },
+      {
+        "role": "R04",
+        "task_id": "TASK-029",
+        "role_type": "기존 담당 조사 인계",
+        "provides": "수작업·범용 AI·Browser Use/대행 등 3~5개 대안의 실제 등록 기능·가격·사용자 개입·잔여 Pain",
+        "to": "R05 ⑥⑦의 비교 기준 및 R01 차별화·BM",
+        "handoff": "기존 TASK-029의 범위를 유지하며 API·보안·법률 재조사는 R05가 담당"
+      },
+      {
+        "role": "R03",
+        "task_id": "TASK-031",
+        "role_type": "기존 담당 요구사항 인계",
+        "provides": "F1~F3 트리거·입출력·사용자 승인·완료/실패/미확인 판정, 동일 조건 기술 비교의 관측 지표",
+        "to": "R05 ②③④⑤⑥⑦ 및 R01 기능 요구사항",
+        "handoff": "기존 TASK-031 범위·플랫폼 상세화 피드백 유지; 기술·정책 허용 판단은 R05 결과에 의존"
+      },
+      {
+        "role": "R05",
+        "task_id": "TASK-030",
+        "role_type": "기술 조사 주담당",
+        "provides": "세 플랫폼 × ①~⑤, 공통 ⑥⑦, 법적·계약적 ⑧; 추천 구조 1개+대안 1개와 결정 요청",
+        "to": "R01 기획서 제10·11장 및 R03 제7·9·12장 확인",
+        "handoff": "기존 개인 브랜치 결과 보존 후 TASK-030 보고서 보완; 구현·최종 제품 결정 제외"
+      },
+      {
+        "role": "R01",
+        "task_id": "TASK-032",
+        "role_type": "통합·승인",
+        "provides": "팀 결과 종합, 첫 플랫폼·MVP·기술 선정과 보류/조건부 결정",
+        "to": "통합 기획서 12항목 및 후속 설계 기준선",
+        "handoff": "R02 완료 TASK를 재개하거나 팀원 소유 TASK를 대신 완료 처리하지 않음"
+      }
+    ],
+    "ownership_rule": "기존 TASK-028~032를 그대로 사용한다. 각 팀원의 기존 작업 책임을 변경하지 않고 R05 조사에 필요한 결과의 전달·의존 관계만 명시한다. 새 TASK/PR 없음.",
+    "status_note": "GitHub 계획에 역할·인계 추가. 담당자에게 실제 전달되었거나 수신이 확인되었다는 의미는 아니다."
+  }
+}

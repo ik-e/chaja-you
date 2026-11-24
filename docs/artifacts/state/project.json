@@ -2,9 +2,9 @@
   "schema_version": 1,
   "id": "PROJECT-001",
   "kind": "project",
-  "status": "확정 — 사용자 지정 목표와 운영 원칙",
+  "status": "이전 찾아you 기준안 — 구현 보류 / 제출용 잠정 보존",
   "owner": "프로젝트 리더",
-  "updated_at": "2026-11-12",
+  "updated_at": "2026-11-23",
   "goal": "사용자의 요청과 리서치 도메인에 맞게 조사 워크플로와 에이전트 역할·작업을 구성하고, 도메인에 적합한 출처와 검증 기준을 사용해 공개 자료를 조사하여 근거와 출처가 연결된 결과를 제공한다.",
   "success": [
     "사용자 조건과 리서치 도메인에 맞춰 필요한 조사 작업과 역할을 구성하고 실제 결과까지 실행한다.",
@@ -32,11 +32,19 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261112-05_데이터_수집_정책.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261118-02_phase-sync.md"
     }
   ],
   "authority": {
     "type": "human",
     "ref": "docs/human/INTENT.md",
     "id": "INTENT-PRODUCT-001"
-  }
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "product_scope_lifecycle": "2026-11-24 현재 음악 레슨 등록 지원 V1.1을 기반으로 플랫폼별 독립 PoC·모의 검증을 허용한다. 이 PROJECT의 찾아you 목표·성공 조건은 과거 제품안 및 교육기관 잠정 제출용으로 보존하며 실제 구현 지시가 아니다. 현재 레슨 제품의 본 구현은 별도 결정 전 보류."
 }

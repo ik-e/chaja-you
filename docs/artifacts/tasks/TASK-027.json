@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "id": "TASK-027",
+  "kind": "task",
+  "status": "진행 중",
+  "owner": "R01",
+  "due": "2026-11-20",
+  "depends_on": [],
+  "suggested_owner": "R01",
+  "submission_ids": [
+    "SUB-API-20261120"
+  ],
+  "required_for_submission": true,
+  "updated_at": "2026-11-19",
+  "title": "투 트랙 제출 대응 · 기존 기획 기반 잠정 API 설계/DB 스키마 문서",
+  "question": "11/21 실제 기획 확정 전인 11/20 제출 일정에, 결정되지 않은 제품 사양을 확정 사실로 꾸미지 않고 어떤 최소 형식의 설계 문서를 준비할 수 있는가?",
+  "goal": "WBS의 11/20 API 설계·DB 스키마 마일스톤을 대응하고 기존 Step1 제출·접수 미확인을 확인한다. 토요일 실제 주제가 선택되면 문서를 재작성할 수 있음을 명시한다.",
+  "inputs": [
+    "docs/human/phase-intents/PHASE-20261118-01.md",
+    "docs/human/responses/HRESP-20261118-01_two-track-planning.md",
+    "docs/artifacts/planning/WBS.json",
+    "docs/artifacts/planning/기획서_초안.json",
+    "docs/guidelines/2026-11-16_OUTPUT-GUIDE_적용확인.md",
+    "docs/artifacts/tasks/TASK-011.json"
+  ],
+  "scope": [
+    "트랙 B 산출물: 현재 저장소의 기존 찾아you 기획·설계 기록을 기반으로 최소한의 API 엔드포인트/요청·응답 예시/오류·인증 전제와 개념 ERD/테이블 키·관계를 정리한다.",
+    "문서 표지와 각 설계에 '11/21 이전 잠정 기준안; 실제 제품 선정 후 재검토·전면 교체 가능' 표기. 미구현·미검증·미확정은 그 상태로 작성한다.",
+    "기술 인터페이스 초안 검토는 기존 WBS상 R05 역할에 협조 요청하되 문서 편집·제출 추적은 R01이 맡는다. 담당 재조정은 명시한다.",
+    "11/20은 현재 WBS에 기록된 일정이므로 공식 교육기관의 제출 방식·시각과 다르면 공식 안내가 우선한다. 대시보드 제출 링크 등록·상태 변경 및 실제 접수까지 구분한다.",
+    "기존 11/13 기획서·WBS 제출 상태(TASK-011)를 실제 제출 화면에서 확인하기 전까지 완료로 쓰지 않는다.",
+    "당장 제품 기능 구현, 외부 인증·사이트 자동 접근이나 가상 성공 지표를 요구하지 않는다."
+  ],
+  "outputs": [
+    "API 설계 문서(잠정·버전/범위/가정·미확인 명시)",
+    "DB 스키마/ERD 설계서(잠정·테이블 관계/키·변경 예정 표시)",
+    "공식 가이드 목차·링크·권한·제출 동작 체크리스트",
+    "실제 제출/접수 여부의 확인 기록 또는 접근 불가 사유 및 R05 기술 검토 상태"
+  ],
+  "acceptance": [
+    "문서에 제출 요구 목차를 가능한 범위에서 채우고 모든 미확정 설계를 잠정으로 표시한다.",
+    "문서 작성, 열람 권한, 대시보드 제출 상태, 접수 여부를 별개로 기록한다.",
+    "11/21 주제 선택에 따라 폐기/개정될 수 있는 임시 설계임을 표시하고 이를 제품 최종 결정으로 제시하지 않는다."
+  ],
+  "verification": [
+    "2026-11-20 일정의 원출처와 최신 가이드·대시보드 제출 절차 대조",
+    "문서 파일 열람/목차/버전/미확정 사항 검사",
+    "실제 제출·접수는 해당 화면/기록으로만 pass 판정"
+  ],
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261118-01_two-track-planning.md"
+    },
+    {
+      "path": "docs/artifacts/planning/WBS.json"
+    },
+    {
+      "path": "docs/guidelines/2026-11-16_OUTPUT-GUIDE_적용확인.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-011.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261118-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261119-01_r01-owned-doc-sync.md"
+    }
+  ],
+  "result": {
+    "summary": "R01 11/19 잠정 제출 대응: Step1 기획서·WBS와 Step2 API·DB Markdown 후보 4종은 docs/step1/·docs/step2/에 준비됐다. 최종 제품·구현·공식 제출·접수는 미확인이며 R05 기술 검토·WBS 실제 시트/Projects 캡처·DOCX/PDF/열람권한 검수도 남아 있다.",
+    "claims": [
+      {
+        "id": "R01-C27-1",
+        "text": "Step1/2 Markdown 제출 후보 4종이 GitHub main에 존재한다.",
+        "status": "확인",
+        "evidence_ids": [
+          "E27-P",
+          "E27-W",
+          "E27-A",
+          "E27-D"
+        ]
+      },
+      {
+        "id": "R01-C27-2",
+        "text": "실제 대시보드 제출·접수와 기술 검토 완료는 확인되지 않았다.",
+        "status": "미확인",
+        "evidence_ids": [
+          "E27-C"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E27-P",
+        "label": "기획서 잠정본",
+        "path": "docs/step1/기획서_제출본.md"
+      },
+      {
+        "id": "E27-W",
+        "label": "WBS 잠정본",
+        "path": "docs/step1/WBS_제출본.md"
+      },
+      {
+        "id": "E27-A",
+        "label": "API 잠정 설계",
+        "path": "docs/step2/API_설계_문서.md"
+      },
+      {
+        "id": "E27-D",
+        "label": "DB 잠정 설계",
+        "path": "docs/step2/데이터베이스_스키마_설계서.md"
+      },
+      {
+        "id": "E27-C",
+        "label": "제출 체크리스트",
+        "path": "docs/submissions/step1-step2-20261119/SUBMISSION-CHECKLIST.md"
+      },
+      {
+        "id": "E27-H",
+        "label": "R01 동기화 지시",
+        "path": "docs/human/responses/HRESP-20261119-01_r01-owned-doc-sync.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "잠정 Markdown 문서 네 파일 위치·존재 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E27-P",
+          "E27-W",
+          "E27-A",
+          "E27-D"
+        ]
+      },
+      {
+        "criterion": "R05 기술 검토·WBS 시트 캡처·최종 형식/열람권한",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E27-C"
+        ]
+      },
+      {
+        "criterion": "공식 제출 링크·제출완료·접수",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E27-C"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "Step1 별도 제출본은 기존 JSON 자동 프로젝션(기획서.md/WBS.md)과 다른 일회성 Markdown 스냅샷이다.",
+      "11/20 공식 형식/시각, R05 설계 검토, WBS 별도 화면 증빙 및 실제 접수 미확인이다.",
+      "11/21 최종 제품 선정 후 실제 기획·WBS·API·DB는 재검토/교체될 수 있다."
+    ],
+    "decision_requests": [
+      "11/20 최신 가이드·제출 화면·접수 증빙을 확인한 다음에만 제출 상태를 바꾼다.",
+      "11/21 후보 선택/보류 이후 실제 설계 전환 여부를 결정한다."
+    ]
+  },
+  "traceability": {
+    "intent_refs": [
+      "PHASE-20261118-01"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": null,
+  "stage": "트랙 B 잠정 제출 일정 대응",
+  "assignment_status": "R01 운영 담당; R05는 기존 WBS상 기술 검토 협조자",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261118-01.md"
+}

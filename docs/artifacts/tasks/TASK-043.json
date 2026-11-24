@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "id": "TASK-043",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R03",
+  "suggested_owner": null,
+  "due": "2026-11-24",
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-24",
+  "question": "크몽과 숨고의 등록 흐름을 실제 계정 없이 각각 검증하려면 어떤 공통 모의 환경이 필요한가?",
+  "goal": "플랫폼 독립 공통 테스트 하네스와 플랫폼별 mock 시나리오를 실행 가능하게 제공한다.",
+  "inputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
+    "docs/human/phase-intents/PHASE-20261124-02.md",
+    "prototype/lesson-registration/README.md",
+    "prototype/lesson-registration/test-harness/CONTRACT.md"
+  ],
+  "scope": [
+    "플랫폼별 등록 객체·필드·상태의 확인/추정/미확인을 분리",
+    "크몽 상품 1건과 숨고 고수 프로필/서비스 중 확인된 대상의 mock 폼을 각자 독립 테스트할 수 있게 구성",
+    "합성 레슨 원본/샘플 이미지, 승인 전 차단, 누락/업로드 실패/응답 유실/중복 차단을 재현",
+    "실제 크몽·숨고 계정 접근/게시/인증 및 R04·R05 제품 구현은 제외"
+  ],
+  "outputs": [
+    "prototype/lesson-registration/test-harness/README.md",
+    "prototype/lesson-registration/test-harness/fixtures/",
+    "prototype/lesson-registration/test-harness/mock/",
+    "prototype/lesson-registration/test-harness/tests/",
+    "재현 가능한 실행 명령과 정상/실패/unknown 실행 로그"
+  ],
+  "acceptance": [
+    "크몽·숨고용 독립 mock 대상/입출력/상태의 실제 확인 수준을 표시한다",
+    "합성 데이터로 계정 없이 모의 화면/테스트 코드를 실행할 수 있다",
+    "승인 없음·필수 사실 누락·결과 unknown에서 거짓 성공 또는 자동 중복 제출이 발생하지 않는다",
+    "R04/R05의 기술 스택을 강제하지 않는 입력/출력 계약 및 재현 절차가 있다",
+    "성공·실패·미실행 증거를 구분한다",
+    "공통 계약 버전·fixture 버전·실행 방법·harness commit SHA를 공개해 R04/R05가 읽기 전용으로 재현 가능"
+  ],
+  "verification": [
+    "실제 실행 전에는 '완료'나 성공을 표시하지 않는다",
+    "실행 명령·환경·입력/기대/실제 결과·증거를 담당 실험 공간에 기록하고 TASK result에 연결한다. 이전 focus_apps의 run/evaluation 사례 ID를 혼용하지 않는다."
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "path": "prototype/lesson-registration/README.md"
+    },
+    {
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261124-02.md"
+    ],
+    "design_refs": [
+      "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+    ],
+    "requirement_refs": [],
+    "evaluation_refs": [],
+    "product_spec_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "product_requirement_refs": [
+      "FR-01",
+      "FR-03",
+      "FR-05",
+      "FR-06"
+    ]
+  },
+  "validation_plan": {
+    "question": "모의 환경이 두 플랫폼 각각에 공정하고 독립적인 테스트를 제공하는가?",
+    "baseline": "동일 유형의 승인·정확성·오류 조건; 플랫폼별 객체 차이는 별도 명시",
+    "cases": [
+      "정상 합성 1건",
+      "필수 필드 누락",
+      "승인 없는 실행",
+      "이미지 오류",
+      "결과 유실 unknown",
+      "unknown 중복 시도"
+    ],
+    "observables": [
+      "크몽·숨고용 독립 mock 대상/입출력/상태의 실제 확인 수준을 표시한다",
+      "합성 데이터로 계정 없이 모의 화면/테스트 코드를 실행할 수 있다",
+      "승인 없음·필수 사실 누락·결과 unknown에서 거짓 성공 또는 자동 중복 제출이 발생하지 않는다",
+      "R04/R05의 기술 스택을 강제하지 않는 입력/출력 계약 및 재현 절차가 있다",
+      "성공·실패·미실행 증거를 구분한다",
+      "공통 계약 버전·fixture 버전·실행 방법·harness commit SHA를 공개해 R04/R05가 읽기 전용으로 재현 가능"
+    ],
+    "success_condition": "각 mock 대상에서 적어도 정상·오류·unknown을 재현하고 환경/입력/결과/로그를 저장",
+    "unknown_condition": "플랫폼 공식 필드·완료 상태 미확인 시 가정으로 구분하고 실서비스 완료라 주장하지 않음"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인",
+  "work_branch": "r03/task-043-dual-platform-harness",
+  "workspace_path": "prototype/lesson-registration/test-harness"
+}

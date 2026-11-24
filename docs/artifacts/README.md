@@ -8,6 +8,7 @@ AI가 작성·수정하는 구조화 데이터의 기준 공간이다. 새 산�
 | [candidates](candidates/README.md) | 아직 채택되지 않은 아이디어·가설·대안·미래 기능 후보 |
 | [planning](planning/README.md) | 기획서 원본·기획 제안 |
 | [research](research/README.md) | 조사 결과·이전 기술 제안 |
+| [meetings](meetings/README.md) | Discord 회의별 공개 검토용 요약과 확인할 항목 |
 | [specs](specs/README.md) | 현재 요구사항과 평가 사례 |
 | [state](state/README.md) | 현재 우선순위·결정 요청·제출 상태 |
 | [tasks](tasks/README.md) | 작업 입력과 실행 결과 |
@@ -16,4 +17,4 @@ AI가 작성·수정하는 구조화 데이터의 기준 공간이다. 새 산�
 
 새 AI 정본은 이 디렉터리에서만 만든다. 기존 `docs/research/`와 `docs/members/*/workspace/`는 이관 전 기록·사람 작업 참고 자료로 취급하며, 별도 사람 요청이 없으면 새 AI 정본을 추가하지 않는다. 사람의 권위 입력은 [사람 작업 공간](../human/README.md)에 두고 필요한 원본에서 그 경로를 provenance로 연결한다.
 
-이관한 문서는 원래 담당·상태·출처와 본문을 JSON의 메타데이터와 섹션으로 보존했다. `kind: document`는 조사·제안 자료이고, 현재 목표는 [PROJECT](../../PROJECT.md), 현재 계약은 [EVAL](../../EVAL.md)에서 찾는다. 원본·생성 문서 관계와 갱신 방법은 [문서 관리 규칙](../문서_관리_규칙.md)을 따른다. 작업 담당자가 산출물과 관련 상태를 갱신한다.
+이관한 문서는 원래 담당·상태·출처와 본문을 JSON의 메타데이터와 섹션으로 보존했다. `kind: document`는 조사·제안 자료이고, 현재 활성 실행·보류 기준은 [Phase Intent](../human/phase-intents/PHASE-20261118-01.md)와 [CURRENT](../../CURRENT.md)에서 찾는다. 기존 [PROJECT](../../PROJECT.md)·[EVAL](../../EVAL.md)는 이전 찾아you 및 잠정 제출 기준으로 보존한다. 원본·생성 문서 관계와 갱신 방법은 [문서 관리 규칙](../문서_관리_규칙.md)을 따른다. 작업 담당자가 산출물과 관련 상태를 갱신한다.

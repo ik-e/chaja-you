@@ -1,0 +1,40 @@
+name: Preserve full original Gitea FinalProject directory
+
+on:
+  push:
+    branches: [docs/archive-full-finalproject-20261118]
+    paths:
+      - 'tools/archive_full_finalproject.py'
+      - '.github/workflows/archive-full-instructor-finalproject.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Clone only instructor source directory and write full byte-perfect original snapshot
+        run: python tools/archive_full_finalproject.py --archive
+      - name: Verify every original file matches snapshot SHA256
+        run: python tools/archive_full_finalproject.py --verify
+      - name: Commit originals only to isolated branch
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- docs/guidelines/instructor-snapshots/snapshots/
+          if git diff --cached --quiet; then
+            echo 'No change to already archived original source'
+          else
+            git commit -m 'docs(guidelines): archive complete pinned instructor FinalProject source'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

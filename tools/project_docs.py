@@ -1,7 +1,9 @@
 """Validate AI artifacts and build the human-readable project projections."""
 
 import argparse
+import subprocess
 import json
+import difflib
 import os
 import re
 import sys
@@ -141,15 +143,23 @@ def render_wbs(record, source, output):
             "",
             record["basis"]["guide_rule"],
             "",
-            "## 마일스톤",
-            "",
         ]
     )
+    if record.get("team"):
+        lines.extend([record["basis"].get("revision_note", ""), "", "## 담당자와 역할", ""])
+        lines.extend(table(
+            ["ID", "이름", "역할", "책임"],
+            [(member["id"], member["name"], member["role"], member["responsibility"])
+             for member in record["team"]],
+        ))
+    lines.extend(["## 마일스톤", ""])
     lines.extend(
         table(
-            ["ID", "마감", "마일스톤", "완료 기준"],
+            ["ID", "마감", "마일스톤", "담당", "연결 작업", "완료 기준", "제출 상태"],
             [
-                (m["id"], m["date"], m["title"], m["done_when"])
+                (m["id"], m["date"], m["title"], m.get("owner", "미정"),
+                 ", ".join(m.get("wbs_refs", [])), m["done_when"],
+                 m.get("submission_status", "미확인"))
                 for m in record["milestones"]
             ],
         )
@@ -184,7 +194,9 @@ def render_wbs(record, source, output):
                     item["title"],
                     item["owner"],
                     f"{item['start']}~{item['end']} ({item['estimate_workdays']}일)",
-                    ", ".join(item["depends_on"]) or "-",
+                    (", ".join(item["depends_on"]) or "-")
+                    + (" / 최종 반영: " + ", ".join(item["completion_dependencies"])
+                       if item.get("completion_dependencies") else ""),
                     item["priority"],
                     item["status"],
                     ", ".join(item.get("requirements", [])) or "-",
@@ -195,9 +207,74 @@ def render_wbs(record, source, output):
             ],
         )
     )
+    subtasks = [(item, sub) for item in record["items"] for sub in item.get("subtasks", [])]
+    if subtasks:
+        lines.extend(["## 1~3일 실행 단위", "", "상위 W ID는 묶음이다. 예상 작업일은 투입량이며 날짜 구간의 모든 날에 작업한다는 뜻이 아니다. 상위·하위 투입량을 중복 합산하지 않는다.", ""])
+        lines.extend(table(
+            ["ID", "상위", "담당", "기간·예상 작업일", "산출물", "완료 기준", "상태"],
+            [(sub["id"], item["id"], sub["owner"],
+              f"{sub['start']}~{sub['end']} ({sub['estimate_workdays']}일)",
+              sub["output"], sub["done_when"], sub["status"])
+             for item, sub in subtasks],
+        ))
+    parallel = [item for item in record["items"] if item.get("parallel_contract") or item.get("input_note")]
+    if parallel:
+        lines.extend(["## 병렬 작업과 인계 경계", ""])
+        lines.extend(table(["작업", "경계"], [(i["id"], i.get("parallel_contract", i.get("input_note"))) for i in parallel]))
+    if record.get("deliverable_schedule"):
+        lines.extend(["## 공식 산출물 작성·검토·제출", "", "공개 가이드의 마감 계획이다. 확정 마감일·시각·별도 제출 방식은 팀 대시보드에서 확인한다. 코드 개발·문서 준비·제출·접수는 별개다.", ""])
+        lines.extend(table(
+            ["ID", "산출물", "작성 책임", "작성·시험", "검토·보완", "제출 목표", "연결 작업", "제출 / 접수"],
+            [(d["id"], d["title"], d["owner"], d["write"], d["review"], d["due"],
+              ", ".join(d["wbs_refs"]), d["submission_status"] + " / " + d["receipt_status"])
+             for d in record["deliverable_schedule"]],
+        ))
+    if record.get("weeks"):
+        lines.extend(["## 주차별 간트: 계획과 실적", "", "■ 계획 · ● 증빙이 연결된 실제 수행 기간 · ? 실적 기간 미확인 · — 해당 기록 없음. 미래 실적은 미도래로 표시한다. 기존 완료 상태만으로 실제 작업 날짜를 추정하지 않는다.", ""])
+        weeks = record["weeks"]
+        gantt_rows = []
+        for item in record["items"]:
+            actual = item.get("actual", {})
+            planned = ["■" if item["start"] <= week["end"] and item["end"] >= week["start"] else "—" for week in weeks]
+            observed = []
+            for week in weeks:
+                if week["start"] > actual.get("as_of", record["updated_at"]):
+                    observed.append("미도래")
+                elif actual.get("start") and actual.get("evidence_refs"):
+                    end = actual.get("end") or actual.get("as_of", record["updated_at"])
+                    observed.append("●" if actual["start"] <= week["end"] and end >= week["start"] else "—")
+                else:
+                    observed.append("?")
+            gantt_rows.extend([(item["id"], "계획", *planned), (item["id"], "실적", *observed)])
+        lines.extend(table(["작업", "구분", *[week["label"] for week in weeks]], gantt_rows))
+        lines.extend(["## 진척·지연 기록", "", "수치·실적은 증빙 확인 후 입력한다. 기준 계획과 현재 예상일을 함께 보존한다. 기존 완료는 당시 범위의 상태이며 이번 추가 제출 확인을 소급 완료하지 않는다.", ""])
+        lines.extend(table(
+            ["작업", "기존 상태", "최초 종료", "현재 예상 종료", "실제 시작 / 종료", "진척률", "근거", "지연 원인 / 영향 / 조치"],
+            [(i["id"], i["status"], i.get("baseline", {}).get("end", "미기록"), i["end"],
+              (i["actual"].get("start") or "미확인") + " / " + (i["actual"].get("end") or "미확인"),
+              "미확인" if i["actual"].get("progress_percent") is None else str(i["actual"]["progress_percent"]) + "%",
+              ", ".join(i["actual"].get("evidence_refs", [])) or "미확인",
+              " / ".join(i.get("delay", {}).get(k) or "미확인" for k in ("reason", "impact", "action")))
+             for i in record["items"]],
+        ))
+    if record.get("tracking_rules"):
+        lines.extend(["## 주간 갱신·진척률·지연 규칙", ""])
+        lines.extend("- " + rule for rule in record["tracking_rules"])
+        lines.append("")
+    if record.get("final_acceptance"):
+        lines.extend(["## 최종 제출 기준", ""])
+        lines.extend(table(["대상", "완료 기준"], [(f["deliverable"], f["criterion"]) for f in record["final_acceptance"]]))
     lines.extend(["## 일정·범위 규칙", ""])
     lines.extend("- " + rule for rule in record["schedule_rules"])
     lines.append("")
+    if record.get("references"):
+        lines.extend(["## 근거와 관련 문서", ""])
+        for ref in record["references"]:
+            if ref.get("path"):
+                lines.append("- " + local_link(ref["path"], ref["path"], output))
+            elif ref.get("url"):
+                lines.append(f"- [공식 가이드]({ref['url']})")
+        lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -427,12 +504,20 @@ def validate(sources):
         wbs_items = {item["id"]: item for item in wbs["items"]}
         if len(wbs_items) != len(wbs["items"]):
             raise ValueError(f"{WBS}: duplicate work item ID")
+        owners = {member["id"] for member in wbs.get("team", [])}
+        subtask_ids = set()
+        graph = {}
         for item in wbs["items"]:
             require(
                 item,
                 ["id", "start", "end", "depends_on", "requirements"],
                 f"{WBS}.{item.get('id', '?')}",
             )
+            if not wbs["period"]["start"] <= item["start"] <= item["end"] <= wbs["period"]["end"]:
+                raise ValueError(f"{WBS}: {item['id']} invalid work dates")
+            if owners and item["owner"] not in owners:
+                raise ValueError(f"{WBS}: {item['id']} unknown owner")
+            graph[item["id"]] = item["depends_on"] + item.get("completion_dependencies", [])
             for predecessor_id in item["depends_on"]:
                 if predecessor_id not in wbs_items:
                     raise ValueError(
@@ -444,6 +529,36 @@ def validate(sources):
                         f"{WBS}: {item['id']} starts {item['start']} before "
                         f"{predecessor_id} ends {predecessor['end']}"
                     )
+            for dependency in item.get("completion_dependencies", []):
+                if dependency not in wbs_items or wbs_items[dependency]["end"] > item["end"]:
+                    raise ValueError(f"{WBS}: {item['id']} invalid completion dependency {dependency}")
+            children = item.get("subtasks", [])
+            if not children and not 1 <= item["estimate_workdays"] <= 3:
+                raise ValueError(f"{WBS}: {item['id']} needs 1-3 day subtasks")
+            if children and sum(child["estimate_workdays"] for child in children) != item["estimate_workdays"]:
+                raise ValueError(f"{WBS}: {item['id']} subtask effort mismatch")
+            for child in children:
+                require(child, ["id", "owner", "start", "end", "estimate_workdays", "output", "done_when"], item["id"])
+                if child["id"] in subtask_ids or child["id"] in wbs_items:
+                    raise ValueError(f"{WBS}: duplicate subtask {child['id']}")
+                subtask_ids.add(child["id"])
+                if not item["start"] <= child["start"] <= child["end"] <= item["end"]:
+                    raise ValueError(f"{WBS}: {child['id']} outside parent dates")
+                if not 1 <= child["estimate_workdays"] <= 3 or (owners and child["owner"] not in owners):
+                    raise ValueError(f"{WBS}: {child['id']} invalid effort or owner")
+            actual = item.get("actual", {})
+            progress = actual.get("progress_percent")
+            if progress is not None and (not isinstance(progress, (float, int)) or not 0 <= progress <= 100):
+                raise ValueError(f"{WBS}: {item['id']} invalid progress")
+            if (progress is not None or actual.get("start") or actual.get("end")) and not actual.get("evidence_refs"):
+                raise ValueError(f"{WBS}: {item['id']} actual progress needs evidence")
+        tuple(TopologicalSorter(graph).static_order())
+        milestone_ids = {m["id"] for m in wbs["milestones"]}
+        if len(milestone_ids) != len(wbs["milestones"]):
+            raise ValueError(f"{WBS}: duplicate milestone ID")
+        for deliverable in wbs.get("deliverable_schedule", []):
+            if deliverable["id"] not in milestone_ids or not set(deliverable["wbs_refs"]) <= wbs_items.keys():
+                raise ValueError(f"{WBS}: invalid deliverable mapping {deliverable['id']}")
 
 
 def build():
@@ -525,6 +640,47 @@ def build():
         (path, record) for path, record in sources.items() if record["kind"] == "task"
     ]
     task_ids = {task["id"] for _, task in tasks}
+    active_task_ids = set(state.get("active_task_ids", []))
+    active_tasks = [(path, task) for path, task in tasks if task["id"] in active_task_ids]
+    historical_tasks = [(path, task) for path, task in tasks if task["id"] not in active_task_ids]
+    closeout_path = state.get("legacy_task_closeout_ref")
+    manifest_path = state.get("legacy_evidence_manifest_ref")
+    if not closeout_path or not manifest_path or not (ROOT / closeout_path).is_file() or not (ROOT / manifest_path).is_file():
+        raise ValueError("legacy closeout source or immutable manifest missing")
+    closeout = read_json(closeout_path)
+    manifest = read_json(manifest_path)
+    if set(entry["id"] for entry in closeout["entries"]) != set(f"TASK-{n:03}" for n in range(1, 22)):
+        raise ValueError("legacy closeout needs all 21 original tasks exactly once")
+    source_by_snapshot = {entry["snapshot_path"]: entry for entry in manifest["entries"]}
+    for entry in manifest["entries"]:
+        path = ROOT / entry["snapshot_path"]
+        if not path.is_file():
+            raise ValueError(f"missing immutable source snapshot {path}")
+        # Use Git's path-aware clean filters so Windows CRLF checkout conversion
+        # does not invalidate the source blob digest.
+        blob_sha = subprocess.check_output(
+            ["git", "hash-object", f"--path={entry['snapshot_path']}", str(path)],
+            cwd=ROOT,
+            text=True,
+            encoding="ascii",
+        ).strip()
+        if blob_sha != entry["blob_sha"]:
+            raise ValueError(f"immutable source blob digest mismatch: {path}")
+    for entry in closeout["entries"]:
+        original = entry["source_snapshot"]
+        snapshot = source_by_snapshot.get(original["path"])
+        if not snapshot or snapshot["blob_sha"] != original["git_blob_sha"]:
+            raise ValueError(f"{entry['id']}: closeout snapshot SHA does not match manifest")
+    phase_ref = state.get("active_phase_intent_ref")
+    if (not phase_ref or not phase_ref.startswith("docs/human/phase-intents/")
+            or not (ROOT / phase_ref).is_file()
+            or project.get("phase_intent_ref") != phase_ref):
+        raise ValueError("current phase intent reference missing or inconsistent")
+    if not set(state.get("active_task_ids", [])) <= task_ids:
+        raise ValueError("current state references nonexistent active task")
+    for _, task in tasks:
+        if task["id"] in state.get("active_task_ids", []) and task.get("phase_intent_ref") != phase_ref:
+            raise ValueError(f"{task['id']}: active task phase intent does not match current")
     dependencies = {task["id"]: task.get("depends_on", []) for _, task in tasks}
     for path, record in sources.items():
         if record["kind"] == "evaluation":
@@ -563,14 +719,18 @@ def build():
             "",
             "담당자는 실제 결과와 근거를 각 TASK의 result에 기록합니다. 담당 제안과 내부 목표일은 팀 조정용입니다.",
             "",
+            "## 현재 활성 TASK",
+            "",
         ]
     )
     lines.extend(
         table(
             ["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"],
-            task_rows(tasks, output),
+            task_rows(active_tasks, output),
         )
     )
+    lines.extend(["## 이전 TASK · 종료 정산/증거 보존", "", local_link(closeout_path, "정산 원본", output) + " · " + local_link(manifest_path, "원문 고정 매니페스트", output), "", "이전 TASK의 상태는 당시 원본 상태이며 현재 실행 지시가 아닙니다. 신규 수행 대신 후속 TASK와 보류 의무를 정산 원장에서 확인합니다.", ""])
+    lines.extend(table(["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"], task_rows(historical_tasks, output)))
     lines.extend(
         [
             "보완 작업은 제출 준비의 필수 선행으로 두지 않습니다. 확보된 관찰은 근거로 사용하고 미완료 항목은 후속 검증 계획으로 반영합니다.",
@@ -587,6 +747,13 @@ def build():
     lines.extend(
         [
             f"상태 {project['status']} · 담당 {project['owner']}",
+            "",
+            "## 현재 운영 적용 범위",
+            "",
+            "**주의: 이 문서는 이전 찾아you 제품 기준안이며 현재 레슨 등록 서비스의 기획·구현 기준이 아닙니다. 이전 목표·MVP의 구현을 보류하고 제출용 잠정 기준 및 과거 이력으로만 보존합니다. 현재 제품 기획 방향과 미확정 범위는 CURRENT를 따릅니다.**",
+            "",
+            local_link(project["phase_intent_ref"], "현재 단계 의도", output)
+            + " · " + local_link("CURRENT.md", "실제 운영 상태", output),
             "",
             "## 목적",
             "",
@@ -618,7 +785,20 @@ def build():
     output = "CURRENT.md"
     lines = header("현재 상태", [STATE, *task_sources, *evaluation_sources], output)
     lines.extend(
-        [f"기준일 {state['as_of']} · {state['scope']}", "", "## 확정한 방향", ""]
+        [
+            f"기준일 {state['as_of']} · {state['scope']}",
+            "",
+            "## 현재 적용 의도",
+            "",
+            local_link(state["active_phase_intent_ref"], state["active_phase_intent_id"], output),
+            "",
+            f"- 실제 제품: {state['current_product_status']}",
+            f"- 이전 기획·WBS: {state['legacy_execution_status']}",
+            f"- 제출 문서: {state['legacy_submission_use']}",
+            "",
+            "## 확정한 방향",
+            "",
+        ]
     )
     lines.extend("- " + item for item in state["confirmed"])
     lines.extend(["", "## 우선 작업", ""])
@@ -635,13 +815,14 @@ def build():
             ],
         )
     )
-    lines.extend(["## 작업 상태", ""])
+    lines.extend(["## 현재 활성 TASK", ""])
     lines.extend(
         table(
             ["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"],
-            task_rows(tasks, output),
+            task_rows(active_tasks, output),
         )
     )
+    lines.extend(["## 이전 TASK · 정산 이력", "", f"과거 {len(historical_tasks)}개 TASK의 당시 상태와 결과는 원본에서 보존하며 새 실행 업무에서 제외합니다.", "", local_link(closeout_path, "TASK별 사유·후속 작업 원장", output) + " · " + local_link(manifest_path, "당시 원문 Git blob 보존", output), ""])
     lines.extend(
         [
             "담당 제안과 내부 목표일은 팀 조정용입니다. 공식 제출 시각은 TASK-002에서 확인합니다.",
@@ -712,6 +893,10 @@ def build():
         [
             f"기준일 {state['as_of']}. 작업 담당자는 원본의 결과와 근거를 갱신하고 이 화면을 재생성합니다.",
             "",
+            "## 현재 적용 의도",
+            "",
+            local_link(state["active_phase_intent_ref"], state["active_phase_intent_id"], output),
+            "",
             "## 현재 확인할 내용",
             "",
             state["review_summary"],
@@ -722,11 +907,11 @@ def build():
     )
     for item in state["decisions_needed"]:
         lines.extend([f"- **{item['question']}** — {item['evidence_needed']}"])
-    lines.extend(["", "## 제출 준비 작업", ""])
+    lines.extend(["", "## 현재 활성 작업", ""])
     lines.extend(
         table(
             ["작업", "할 일", "담당", "내부 목표일", "선행 작업", "구분", "상태"],
-            task_rows(tasks, output),
+            task_rows(active_tasks, output),
         )
     )
     lines.extend(
@@ -737,7 +922,7 @@ def build():
             "",
         ]
     )
-    for path, task in tasks:
+    for path, task in active_tasks:
         result = task["result"]
         lines.extend(
             [
@@ -771,7 +956,7 @@ def build():
                 for item in result["uncertainties"] + result["decision_requests"]
             )
             lines.append("")
-    lines.extend(["## 평가 결과", ""])
+    lines.extend(["## 이전 작업 정산/근거", "", local_link(closeout_path, "이전 21개 TASK 종료 사유·후속 작업", output) + " · " + local_link(manifest_path, "불변 원본 매니페스트", output), "", "TASK-001~021은 2026-11-18 이후 신규 실행에서 제외되었지만, 당시 상태와 산출물은 수정되지 않았습니다.", "", "## 평가 결과", ""])
     lines.extend(
         table(
             ["사례", "판정", "상세 근거"],
@@ -824,6 +1009,9 @@ def build():
     )
 
     for source, record in sources.items():
+        if source.startswith("docs/artifacts/meetings/") and record["kind"] == "document":
+            output = f"docs/meetings/reviews/{Path(source).stem}.md"
+            outputs[output] = render_document(record, source, output)
         if record["kind"] == "decision":
             output = source.replace(".json", ".md")
             lines = header(record["title"], [source], output)
@@ -876,6 +1064,11 @@ def main():
             temporary.replace(target)
     if args.check and stale:
         print("Stale projections:\n" + "\n".join(stale), file=sys.stderr)
+        for path in stale[:3]:
+            target = ROOT / path
+            existing = target.read_text(encoding="utf-8").splitlines(keepends=True) if target.exists() else []
+            expected = outputs[path].splitlines(keepends=True)
+            print("".join(list(difflib.unified_diff(existing, expected, fromfile=f"current/{path}", tofile=f"expected/{path}"))[:100]), file=sys.stderr)
         return 1
     print(
         f"{len(outputs)} projections verified; {len(stale)} updated."

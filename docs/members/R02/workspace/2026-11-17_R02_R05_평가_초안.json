@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "id": "SEL-20261117-R02-R05-DRAFT",
+  "kind": "candidate_scoring_template",
+  "status": "AI 보조 초안 / R02 직접 검토 및 대상 버전 확인 전",
+  "task_ref": "docs/artifacts/tasks/TASK-021.json",
+  "criteria_ref": "docs/artifacts/planning/selection-20261117/criteria.json",
+  "candidate_id": "R05",
+  "evaluator_id": "R02",
+  "proposal_revision_or_sha": "키오스크 메뉴 첨부 2026-11-16",
+  "evaluated_at": "2026-11-17",
+  "gates": {
+    "G1": "조건부",
+    "G2": "조건부",
+    "G3": "조건부"
+  },
+  "gate_evidence": [
+    "개인 경험·일반 조사; 필터 대비 잔여 pain·점주 의향 미확인"
+  ],
+  "ratings": {
+    "A": 2,
+    "B": null,
+    "C": 2,
+    "D": 2,
+    "E": 2,
+    "F": null
+  },
+  "per_dimension_evidence": {
+    "A": [
+      {
+        "basis": "docs/artifacts/planning/selection-20261117/inbox/2026-11-16_R02_대화전달_예비평가.md",
+        "note": "이전 대화의 예비 등급. 담당자 원문 최종본 및 항목별 근거 확인 후 수정 필요."
+      }
+    ],
+    "B": [],
+    "C": [
+      {
+        "basis": "docs/artifacts/planning/selection-20261117/inbox/2026-11-16_R02_대화전달_예비평가.md",
+        "note": "이전 대화의 예비 등급. 담당자 원문 최종본 및 항목별 근거 확인 후 수정 필요."
+      }
+    ],
+    "D": [
+      {
+        "basis": "docs/artifacts/planning/selection-20261117/inbox/2026-11-16_R02_대화전달_예비평가.md",
+        "note": "이전 대화의 예비 등급. 담당자 원문 최종본 및 항목별 근거 확인 후 수정 필요."
+      }
+    ],
+    "E": [
+      {
+        "basis": "docs/artifacts/planning/selection-20261117/inbox/2026-11-16_R02_대화전달_예비평가.md",
+        "note": "이전 대화의 예비 등급. 담당자 원문 최종본 및 항목별 근거 확인 후 수정 필요."
+      }
+    ],
+    "F": []
+  },
+  "score_total": null,
+  "score_completeness": "미완료: null 포함, 총점·순위 산출 금지",
+  "strongest_evidence": [
+    "개인 경험·일반 조사; 필터 대비 잔여 pain·점주 의향 미확인"
+  ],
+  "counterevidence": [
+    "기존 대안이 해당 문제를 충분히 해결할 가능성과 실사용 검증 부재"
+  ],
+  "key_unknowns": [
+    "최종 제출본·직접 검토 승인",
+    "사용자 pain 크기와 기존 대안 이후 잔여 문제",
+    "실제 도입 의향"
+  ],
+  "critical_risk": "개인 경험·일반 조사; 필터 대비 잔여 pain·점주 의향 미확인",
+  "cheapest_next_validation": "동등 정보 메뉴판·필터·도우미 비교",
+  "recommendation": "보류/최종본 확인 후 재평가",
+  "notes": "이전 가정 점수 제거. AI 초안이며 평가자 직접 확인과 항목별 출처·반대근거·확신도 보강 전 공식 독립평가 아님."
+}

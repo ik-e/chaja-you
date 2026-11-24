@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "id": "FEEDBACK-SCOPING-20261118-V2",
+  "status": "review_interpretation_not_teacher_approval",
+  "checked_at": "2026-11-18",
+  "sheet": "1팀",
+  "source": "★AIO 1기 최종 프로젝트 대시보드",
+  "source_cells_as_of": {
+    "DLV-01": "L26",
+    "DLV-02": "L27",
+    "DLV-03": "L28 (empty)",
+    "DLV-04": "L29 (empty)",
+    "legacy_daily_1113": "L53",
+    "legacy_daily_1117": "L55"
+  },
+  "source_full_text_in_private_sheet": true,
+  "source_reproduction": "공개 저장소에는 원문 전문을 복제하지 않음. 시트·셀·확인 날짜를 통해 원문 접근/재검토.",
+  "selection_goal": "2026-11-21 is team goal, not teacher-confirmed approval",
+  "precedence": [
+    "explicit_course_template_and_submission_rules",
+    "current_deliverable_specific_feedback",
+    "current_phase_and_task_actual_state",
+    "recent_daily_feedback_if_still_relevant",
+    "old_daily_feedback_historical_only"
+  ],
+  "items": [
+    {
+      "ref": "1팀!L26-1",
+      "area": "DLV-01",
+      "topic": "기존안·신규 후보·팀 최종 합의 구분",
+      "when": "now",
+      "action": "현재 제품 미선정/잠정안·후보 상태 표",
+      "location": "DLV-01 §1.1~1.2"
+    },
+    {
+      "ref": "1팀!L26-2",
+      "area": "DLV-01",
+      "topic": "사용자 불편/가장 강한 대안/남은 Pain",
+      "when": "now",
+      "action": "타깃·사용자 상황·기존 대안·잔여 문제를 가설로 표시하고 비교 시험을 제안",
+      "location": "DLV-01 §1.3~1.5"
+    },
+    {
+      "ref": "1팀!L26-3",
+      "area": "DLV-01",
+      "topic": "재사용 구조와 도메인 한정 기능 분리",
+      "when": "now",
+      "action": "공통 ID/근거 관계 vs 앱 조건·출처·분기를 명시",
+      "location": "DLV-01 §1.4"
+    },
+    {
+      "ref": "1팀!L26-4",
+      "area": "DLV-01",
+      "topic": "실제 멀티에이전트 인계·Auto-Healing",
+      "when": "after_selection",
+      "action": "실제 제품의 정상·실패·복구 흐름 및 실행 시험이 생길 때 검토",
+      "location": "DLV-01 §1.6"
+    },
+    {
+      "ref": "1팀!L26-5",
+      "area": "DLV-01",
+      "topic": "선정한 제품에 맞는 기술·API·DB·화면",
+      "when": "after_selection_except_submission_skeleton",
+      "action": "11/20 Step2 최소 문서만 잠정 생성; 최종 기술/공급자 결정·복구/화면 계약 승인 금지",
+      "location": "DLV-01 §1.6; DLV-03/04"
+    },
+    {
+      "ref": "1팀!L26-6",
+      "area": "DLV-01",
+      "topic": "문서·합성·실측·제출 증거 구분",
+      "when": "now_and_recheck_after_selection",
+      "action": "현재 자료의 검증 수준과 제출 상태를 표시; 실제 평가·최종 요구 재검토는 후속",
+      "location": "DLV-01 §2~3"
+    },
+    {
+      "ref": "1팀!L27-1",
+      "area": "DLV-02",
+      "topic": "재시작 결정 준비·담당·시점",
+      "when": "now",
+      "action": "TASK-022~027·11/21 목표·재기획 트리거를 계획·실적 분리표로 관리",
+      "location": "DLV-02 §1.2,§3"
+    },
+    {
+      "ref": "1팀!L27-2",
+      "area": "DLV-02",
+      "topic": "이전 계획 보존/실적·보류 구분",
+      "when": "now",
+      "action": "구 WBS를 실행 지시로 사용하지 않으며 근거 없는 퍼센트·시각을 채우지 않음",
+      "location": "DLV-02 §1.1,§2"
+    },
+    {
+      "ref": "1팀!L27-3",
+      "area": "DLV-02",
+      "topic": "11/20 제출용 최소 설계/계약 작업 vs 선정 제품 구현 일정",
+      "when": "split",
+      "action": "현재는 TASK-027 문서 검토·제출 관리만 수행, 선정 제품의 새 구현 WBS는 회의 이후",
+      "location": "DLV-02 §3~4"
+    },
+    {
+      "ref": "1팀!L27-4",
+      "area": "DLV-02",
+      "topic": "개발·검토·시험·리허설 공수 배분",
+      "when": "after_selection",
+      "action": "선정된 제품의 실제 가용 공수와 의존성으로 일정 새 산정",
+      "location": "DLV-02 §2,§4"
+    },
+    {
+      "ref": "1팀!L27-5",
+      "area": "DLV-02",
+      "topic": "에이전트·복구·화면의 설계→구현→시험→결과서",
+      "when": "after_selection",
+      "action": "이전 구 WBS 초안 참고만, 실제 제품에서 단계 재설계",
+      "location": "DLV-02 §4"
+    },
+    {
+      "ref": "1팀!L27-6",
+      "area": "DLV-02",
+      "topic": "새로운 제품 WBS/원본/제출 정합성",
+      "when": "after_selection_with_submission_now",
+      "action": "현재는 제출 상태·링크 점검; 선정 뒤 문서·원본·새 WBS를 동기화",
+      "location": "DLV-02 §2,§4"
+    },
+    {
+      "ref": "1팀!L28/L29",
+      "area": "DLV-03/04",
+      "topic": "직접 산출물별 피드백 없음",
+      "when": "unknown",
+      "action": "과거 일일 피드백을 최신 지시로 대체하지 않음; 공식 양식과 현재 TASK-027 우선",
+      "location": "DLV-03/04 §1"
+    },
+    {
+      "ref": "1팀!L53",
+      "area": "legacy",
+      "topic": "11/13 과거 일일 작업 피드백",
+      "when": "historical_reference",
+      "action": "산출물별 양식 경로를 확인하는 단서로만 사용; APP-A 실행 지시/선정 시한 자동 적용 금지",
+      "location": "V2 REVIEW.md"
+    },
+    {
+      "ref": "1팀!L55",
+      "area": "legacy",
+      "topic": "11/17 일일 피드백",
+      "when": "historical_reference_with_contextual_reuse",
+      "action": "11/18 선정 요구 등 현재 11/21 계획과 충돌하는 조치는 재승격하지 않음. 유효한 검증 제안만 향후 검토",
+      "location": "V2 REVIEW.md"
+    }
+  ]
+}
