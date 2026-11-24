@@ -14,3 +14,12 @@ dev = [
     "pytest>=9.2.0",
     "ruff>=0.17.4",
 ]
+
+# Keep the repository as a script/application workspace until packaging is designed.
+[tool.uv]
+package = false
+
+# MVP smoke/behavior tests; existing document tooling still runs independently.
+[tool.pytest.ini_options]
+testpaths = ["prototype/lesson-registration/tests"]
+addopts = "-ra"
