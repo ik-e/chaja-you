@@ -1,3 +1,9 @@
+# 레슨 등록 설계 — R01 재설계 기준 후보
+
+최신 읽기 순서: [최상위 합의](top-design-v1.json) → [상위 보완](top-design-amendment-v1.json) → [상세 결정 D1~D8](detail-decisions-v2.json) → [최소 상세 계약 V2](detail-contract-v2.json) → [논리 실행 모델 V5](logical-behavior-v5.json) → [검증 및 보고](DETAIL-DESIGN-V2.md). V4/V1 및 V0.8은 이전 후보, 충돌 시 이 합의의 명시적 변경 우선. 기존 독립 TASK 및 phase/main 유지. 제품/실서비스 실행 승인 아님.
+
+---
+
 # 레슨 등록 설계 — R01 재설계 후보
 
 최신 검토 순서: [최상위 합의](top-design-v1.json) → [최상위 보완](top-design-amendment-v1.json) → [통합 논리 V4](logical-behavior-v4.json) → [세부 설계 V1](DETAIL-DESIGN-V1.md). 실제 구현/운영 및 기존 WBS·TASK 변경은 아직 승인되지 않음. 기존 V0.8은 역사적 후보로 보존. 새 후보 채택 전 구계약과 혼용하지 않음.
