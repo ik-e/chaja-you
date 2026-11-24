@@ -209,7 +209,9 @@
     {
       "path": "docs/human/phase-intents/PHASE-20261123-01.md"
     },
-    "docs/human/phase-intents/PHASE-20261124-02.md"
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    }
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
