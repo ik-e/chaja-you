@@ -1,0 +1,18 @@
+INFO:     Started server process [969]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18002 (Press CTRL+C to quit)
+INFO:     127.0.0.1:45176 - "WebSocket /ws/0990cbb3e1490433" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:45270 - "WebSocket /ws/0990cbb3e1490433" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52954 - "WebSocket /ws/00defdf8e1518173" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52988 - "WebSocket /ws/00defdf8e1518173" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:53062 - "WebSocket /ws/0990cbb3e1490433" [accepted]
+INFO:     connection open
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [969]

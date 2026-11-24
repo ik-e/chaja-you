@@ -1,0 +1,53 @@
+{"ts": 1795498120.438, "event": "browser_started", "version": "153.0.8010.12"}
+{"ts": 1795498121.136, "event": "session_created", "session": "0990cbb3e1490433"}
+{"ts": 1795498121.54, "event": "viewer_connected", "session": "0990cbb3e1490433", "viewers": 1}
+{"ts": 1795498121.744, "event": "input", "session": "0990cbb3e1490433", "kind": "mouse", "action": "down"}
+{"ts": 1795498121.964, "event": "input", "session": "0990cbb3e1490433", "kind": "mouse", "action": "down"}
+{"ts": 1795498122.451, "event": "input", "session": "0990cbb3e1490433", "kind": "mouse", "action": "down"}
+{"ts": 1795498123.58, "event": "viewer_disconnected", "session": "0990cbb3e1490433", "viewers": 0}
+{"ts": 1795498123.702, "event": "handoff", "session": "0990cbb3e1490433", "viewers": 0}
+{"ts": 1795498123.702, "event": "job_step", "session": "0990cbb3e1490433", "step": "open_form"}
+{"ts": 1795498123.752, "event": "job_step", "session": "0990cbb3e1490433", "step": "fill_text"}
+{"ts": 1795498123.852, "event": "job_step", "session": "0990cbb3e1490433", "step": "attach_image"}
+{"ts": 1795498123.876, "event": "job_step", "session": "0990cbb3e1490433", "step": "submit"}
+{"ts": 1795498125.481, "event": "job_step", "session": "0990cbb3e1490433", "step": "verify_result"}
+{"ts": 1795498125.6, "event": "job_done", "session": "0990cbb3e1490433", "result_state": "mock_success", "submitted": true, "lesson_id": 1, "elapsed": 1.9}
+{"ts": 1795498125.64, "event": "viewer_connected", "session": "0990cbb3e1490433", "viewers": 1}
+{"ts": 1795498125.655, "event": "handoff", "session": "0990cbb3e1490433", "viewers": 1}
+{"ts": 1795498125.656, "event": "job_step", "session": "0990cbb3e1490433", "step": "open_form"}
+{"ts": 1795498125.683, "event": "input_rejected", "session": "0990cbb3e1490433"}
+{"ts": 1795498125.722, "event": "job_step", "session": "0990cbb3e1490433", "step": "fill_text"}
+{"ts": 1795498125.831, "event": "job_step", "session": "0990cbb3e1490433", "step": "attach_image"}
+{"ts": 1795498125.849, "event": "job_step", "session": "0990cbb3e1490433", "step": "submit"}
+{"ts": 1795498127.446, "event": "job_step", "session": "0990cbb3e1490433", "step": "verify_result"}
+{"ts": 1795498127.544, "event": "job_done", "session": "0990cbb3e1490433", "result_state": "mock_success", "submitted": true, "lesson_id": 2, "elapsed": 1.89}
+{"ts": 1795498127.563, "event": "viewer_disconnected", "session": "0990cbb3e1490433", "viewers": 0}
+{"ts": 1795498127.591, "event": "handoff", "session": "0990cbb3e1490433", "viewers": 0}
+{"ts": 1795498127.592, "event": "job_step", "session": "0990cbb3e1490433", "step": "open_form"}
+{"ts": 1795498127.627, "event": "job_done", "session": "0990cbb3e1490433", "result_state": "cancelled", "submitted": false, "lesson_id": null, "elapsed": 0.04}
+{"ts": 1795498127.627, "event": "control_returned", "session": "0990cbb3e1490433", "cancelled": true}
+{"ts": 1795498130.328, "event": "session_created", "session": "00defdf8e1518173"}
+{"ts": 1795498130.353, "event": "viewer_denied", "session": "00defdf8e1518173"}
+{"ts": 1795498130.368, "event": "handoff", "session": "00defdf8e1518173", "viewers": 0}
+{"ts": 1795498130.368, "event": "job_step", "session": "00defdf8e1518173", "step": "open_form"}
+{"ts": 1795498130.41, "event": "job_done", "session": "00defdf8e1518173", "result_state": "needs_login", "submitted": false, "lesson_id": null, "elapsed": 0.04}
+{"ts": 1795498131.075, "event": "viewer_connected", "session": "00defdf8e1518173", "viewers": 1}
+{"ts": 1795498131.198, "event": "input", "session": "00defdf8e1518173", "kind": "mouse", "action": "down"}
+{"ts": 1795498131.436, "event": "input", "session": "00defdf8e1518173", "kind": "mouse", "action": "down"}
+{"ts": 1795498131.896, "event": "input", "session": "00defdf8e1518173", "kind": "mouse", "action": "down"}
+{"ts": 1795498132.164, "event": "viewer_disconnected", "session": "00defdf8e1518173", "viewers": 0}
+{"ts": 1795498132.248, "event": "handoff", "session": "00defdf8e1518173", "viewers": 0}
+{"ts": 1795498132.248, "event": "job_step", "session": "00defdf8e1518173", "step": "open_form"}
+{"ts": 1795498132.293, "event": "job_step", "session": "00defdf8e1518173", "step": "fill_text"}
+{"ts": 1795498132.393, "event": "job_step", "session": "00defdf8e1518173", "step": "attach_image"}
+{"ts": 1795498132.403, "event": "job_step", "session": "00defdf8e1518173", "step": "submit"}
+{"ts": 1795498132.509, "event": "job_step", "session": "00defdf8e1518173", "step": "verify_result"}
+{"ts": 1795498132.544, "event": "job_done", "session": "00defdf8e1518173", "result_state": "failed", "submitted": true, "lesson_id": null, "elapsed": 0.3}
+{"ts": 1795498132.604, "event": "session_closed", "session": "0990cbb3e1490433", "reason": "user_ended"}
+{"ts": 1795498132.625, "event": "viewer_denied", "session": "0990cbb3e1490433"}
+{"ts": 1795498132.805, "event": "session_created", "session": "94941fe831ab275d"}
+{"ts": 1795498132.826, "event": "handoff", "session": "94941fe831ab275d", "viewers": 0}
+{"ts": 1795498132.826, "event": "job_step", "session": "94941fe831ab275d", "step": "open_form"}
+{"ts": 1795498132.896, "event": "job_done", "session": "94941fe831ab275d", "result_state": "needs_login", "submitted": false, "lesson_id": null, "elapsed": 0.07}
+{"ts": 1795498133.136, "event": "session_closed", "session": "94941fe831ab275d", "reason": "user_ended"}
+{"ts": 1795498138.048, "event": "session_closed", "session": "00defdf8e1518173", "reason": "server_shutdown"}
