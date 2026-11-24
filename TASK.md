@@ -36,3 +36,10 @@ canonical TASK 원본은 한 시점에 한 명의 책임자만 직접 수정한�
 ## 현재 레슨 등록 PoC의 요구사항과 실행 기록
 
 이전 `focus_apps.json`의 요구사항/사례 ID와 레슨 등록 기획 V1.1의 FR ID는 같은 의미가 아니다. TASK-043~045는 `traceability.product_spec_ref`와 `product_requirement_refs`로 레슨 요구사항을 별도 연결한다. 기존 검증기의 `requirement_refs`는 기존 focus_apps 기준이므로 혼용하지 않는다. PoC 실행 증거는 우선 담당 작업 디렉터리에 두고 TASK result의 근거로 연결한다. 새로운 제품 평가 사례가 정본에 채택되기 전에는 이전 focus_apps의 case ID로 새 run/evaluation을 등록하지 않는다.
+
+## 종료·미채택 TASK 조회
+
+- [TASK-001~021 기존 정산 원장](docs/artifacts/state/legacy_task_closeout_20261118.json)
+- [TASK-022~042 정산 및 사유](docs/artifacts/state/TASK-CLOSEOUT-20261124.md) · [구조화 정산 원본](docs/artifacts/state/task_closeout_20261124.json)
+
+원본 상태와 운영상 비활성·보류·대체·미채택을 구분하며, 미채택 번호를 다시 사용하지 않는다. 재개는 현재 단계와 R01 결정에 따른 별도 TASK로 기록한다.

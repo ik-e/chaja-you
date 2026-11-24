@@ -45,7 +45,7 @@
       "evidence_needed": "구현 commit·실행 로그·정상/오류/unknown 검증·의존성·플랫폼 권한 미확인·재사용 경계"
     }
   ],
-  "review_summary": "2026-11-24 R03 공통 테스트 하네스·R04 숨고·R05 크몽 독립 PoC로 업무를 전환했다. 기획 V1.1과 공통 검증 계약을 사용하며 본 구현과 실서비스 자동 등록은 미확정/보류한다. 담당별 TASK·브랜치·작업 공간은 준비했으나 코드·테스트 실행과 팀원 수신은 증거 확보 전이다. 기존 기획 및 제출 이력은 보존한다.",
+  "review_summary": "2026-11-24 R03 공통 테스트 하네스·R04 숨고·R05 크몽 독립 PoC로 업무를 전환했다. 기획 V1.1과 공통 검증 계약을 사용하며 본 구현과 실서비스 자동 등록은 미확정/보류한다. 담당별 TASK·브랜치·작업 공간은 준비했으나 R01이 Discord 전달을 보고했다. 팀원 개별 수신·착수·코드·테스트 실행은 증거 확보 전이다. 기존 기획 및 제출 이력은 보존한다.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -217,6 +217,12 @@
     },
     {
       "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "path": "docs/artifacts/state/task_closeout_20261124.json"
+    },
+    {
+      "path": "docs/artifacts/state/TASK-CLOSEOUT-20261124.md"
     }
   ],
   "submission_plan": {
@@ -299,7 +305,7 @@
     "TASK-044",
     "TASK-045"
   ],
-  "inactive_historical_task_range": "TASK-001~027 (이전 단계 기록 보존, 신규 배정 제외; 001~021 정산원장 참고)",
+  "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조)",
   "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
   "active_phase_intent_id": "PHASE-20261124-02",
   "current_product_status": "R03 공통 모의 테스트 환경 및 R04 숨고·R05 크몽 독립 PoC 배정(2026-11-24); 실제 실행/기술·정책 검증 전",
@@ -322,5 +328,7 @@
     "TASK-031",
     "TASK-032"
   ],
-  "previous_phase_task_status_policy": "이전 기획·조사 TASK는 당시 상태/결과를 유지하며 신규 실행 의무로 자동 해석하지 않음"
+  "previous_phase_task_status_policy": "TASK-028~032의 당시 상태·결과를 보존하고 신규 실행 의무로 자동 해석하지 않는다. TASK-033~042는 미채택/미병합 제안으로 별도 정산한다.",
+  "task_closeout_ref": "docs/artifacts/state/task_closeout_20261124.json",
+  "task_closeout_view_ref": "docs/artifacts/state/TASK-CLOSEOUT-20261124.md"
 }
