@@ -125,7 +125,10 @@
     "request key same digest returns existing response; different digest conflicts. stable operation_key = target logical intent + profile effect key (not arbitrary request ID); unique active/admitted effect ledger. Prior unknown or confirmed same effect blocks duplicate. No automatic replay after crash.",
     "transaction: accept validates current plan/approval and key + target uniqueness and creates job; admit validates current job revision/lease generation/approval/profile/policy/step/operation and durably records attempt before command; error fences future commands. External transaction not atomic with local DB.",
     "Result record includes distinct goal verdict vs job state. Stopped preserves known effects and unknown; no resume. Later authorized evidence append only; user result read never executes external mutation.",
-    "Canonical digest: UTF8 deterministic JSON sorted object keys, ordered arrays, integer-only numeric fields; reject unknown fields, duplicate keys, NaN; use shared canonicalizer and fixture; exclude timestamps/transport secrets from plan scope. Asset sha256 hashes bytes."
+    "Canonical digest: UTF8 deterministic JSON sorted object keys, ordered arrays, integer-only numeric fields; reject unknown fields, duplicate keys, NaN; use shared canonicalizer and fixture; exclude timestamps/transport secrets from plan scope. Asset sha256 hashes bytes.",
+    "Ready PlanView requires plan_id,digest,draft_ref,profile_id,connection_id,account_label,target_summary,approved_values,steps,goal. Client displays stored approved_values and steps before start. Blocked/existing responses cannot be started. ConnectionView.generation used in VerifyInput; stale generation rejected.",
+    "SourceConfirm facts are user assertions; server attributes actor from authenticated context and validates values/provenance. Client cannot supply trusted platform evidence. SourceView returns current immutable source version; DraftConfirm creates new version. Draft confirmed only if all profile validation issues resolved.",
+    "Viewer grant issued for auth phase; can refresh through owner-scoped connection GET only while auth input authorized, never during worker phase. Viewer grant not persisted in API logs. Reconnect to product UI uses job list/get, not external browser rebind."
   ],
   "api": [
     [
@@ -268,7 +271,7 @@
     "SourceInput": "{raw_text:string,asset_ids:Id[]}",
     "SourceView": "{source_ref:Ref,confirmed:boolean,facts:Fact[],issues:Issue[],asset_ids:Id[]}",
     "AssetUpload": "multipart {metadata:{rights_confirmed:boolean},file:binary}",
-    "AssetView": "{asset_id:Id,digest:Digest,mime:string,bytes:int,width:int,height:int}",
+    "AssetView": "{asset_id:Id,digest:Digest,mime:string,bytes:int,width:int,height:int,rights_confirmed:boolean}",
     "SourceConfirm": "{expected_version:int,facts:Fact[]}",
     "ListQuery": "{cursor?:string,limit?:int 1..100}",
     "SourceList": "{items:SourceView[],next_cursor?:string}",
@@ -279,10 +282,10 @@
     "DraftView": "{draft_ref:Ref,source_ref:Ref,profile_id:Id,values:map<string,Value>,issues:Issue[],confirmed:boolean,digest:Digest}",
     "DraftConfirm": "{expected_version:int,values:map<string,Value>}",
     "ConnectInput": "{draft_ref:Ref}",
-    "ConnectionView": "{connection_id:Id,auth:unverified|verified|expired,account_label?:string,viewer_grant?:opaque_short_lived_token}",
+    "ConnectionView": "{connection_id:Id,generation:int,auth:unverified|verified|expired,account_label?:string,viewer_grant?:opaque_short_lived_token}",
     "VerifyInput": "{expected_generation:int}",
     "PlanInput": "{draft_ref:Ref,connection_id:Id}",
-    "PlanView": "{status:ready|existing|blocked,plan_id?:Id,digest?:Digest,account_label?:string,target_summary?:string,steps?:string[],goal?:string,existing_job_id?:Id,issues?:Issue[]}",
+    "PlanView": "{status:ready|existing|blocked,plan_id?:Id,digest?:Digest,draft_ref?:Ref,profile_id?:Id,connection_id?:Id,account_label?:string,target_summary?:string,approved_values?:map<string,Value>,steps?:string[],goal?:string,existing_job_id?:Id,issues?:Issue[]}",
     "StartInput": "{plan_id:Id,plan_digest:Digest,approved:true,request_key:string}",
     "JobView": "{job_id:Id,state:JobState,step_index:int,step_count:int,result?:ResultView}",
     "ResultView": "{goal_verdict:GoalVerdict,environment:mock,confirmed_steps:int,effect_summary:Effect[],error?:Error,evidence_refs:Id[],next_action?:string}",
@@ -475,6 +478,6 @@
   "open": [
     "Exact current live platform rule evidence and Soomgo real object/permission remain unknown; mock profile only.",
     "Physical stack/DDL/transport details, runtime safety tests and real model/adapter execution not run.",
-    "WBS gate version alignment and final acceptance after R01 review."
+    "WBS gate V1 overlay supplied; formal adoption/implementation and team assignment remain separate."
   ]
 }
