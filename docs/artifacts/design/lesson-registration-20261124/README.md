@@ -1,21 +1,22 @@
 # 레슨 등록 설계 — R01 재설계 기준선
 
-2026-11-25: 상위 논리적 데이터 계약 합의 완료. 팀원 조사 원문을 기반으로 상세 공통 계약 V4 및 플랫폼별 모의 프로필 V2를 결정하고 선정된 설계 검증을 수행했다. **실제 플랫폼 실행·제품 통합·구현 기술 확정은 별도.**
+2026-11-25: 공통 논리 설계 V1 및 과거 결정 추적 V0.9 반영. 상세 공통 데이터 V4.1·플랫폼별 모의 프로필 V2·5개 포트·9개 API·저장/실행/뷰어 경계·22개 제품 시험 기준을 연결. **공통 물리 착수 게이트(11/27)는 남아 있으며 제품 실행·신규 TASK·실서비스 승인 아님.**
 
 ## 현재 기준선
 
 | 구분 | 문서 | 상태 |
 |---|---|---|
-| 최상위 설계 | [최상위 합의](top-design-v1.json), [상위 보완](top-design-amendment-v1.json) | 합의 |
-| 논리 및 상세 결정 | [D1~D8](detail-decisions-v2.json), [논리 모델 V5](logical-behavior-v5.json) | 상위 방향 합의, 논리 모델 검증 |
-| 상위 논리적 데이터 계약 | [결정 정본](logical-data-contract-decision-v1.json), [설계 보고 V2](DETAIL-DESIGN-V2.md) | 합의 완료·동결 |
-| 상세 공통 계약 | [계약 V4](data-contract-v4.json), [스키마 V4](data-schema-v4.json), [설계 보고 V4](DATA-CONTRACT-V4.md) | 위임 결정·선정된 설계 사례 검증 |
-| 플랫폼별 계약 | [프로필 V2](platform-profiles-v2.json) | 모의 기준선; 실제 규칙 및 허용 미확인 |
-| 인터페이스/API | V4 계약의 wire_compatibility; [V3 후보](interface-contract-v3.json) | 기존 경계 유지, V4 우선, 구현 연계 검증 필요 |
-| 검증 근거 | [V4 검증](data-contract-validation-v4.json), [실행 코드](validate-data-contract-v4.mjs), [이전 V3 결함](interface-review-evidence-v3.json) | 합성 31/31; 실제 통합 미검증 |
-| 구현/통합 | 기존 독립 TASK 및 phase 유지 | 후속 결정, mock-only |
+| 최상위 | [합의](top-design-v1.json), [보완](top-design-amendment-v1.json) | 합의 |
+| 논리 설계 | [D1~D8](detail-decisions-v2.json), [논리 모델 V5](logical-behavior-v5.json) | 상위 합의, 추상 검증 |
+| 상위 데이터 | [결정 정본](logical-data-contract-decision-v1.json), [보고 V2](DETAIL-DESIGN-V2.md) | 합의 완료·동결 |
+| 상세 공통 데이터 | [V4 계약](data-contract-v4.json), [V4.1 스키마](data-schema-v4.1.json), [V4 보고](DATA-CONTRACT-V4.md) | 위임 결정·선정 설계 검증; V4.1 명시 델타 우선 |
+| 플랫폼별 | [프로필 V2](platform-profiles-v2.json) | 모의 기준선; 실제 규칙/허용 미확인 |
+| 공통 설계 | [설계 보고 V1](COMMON-INTEGRATION-V1.md), [공통 계약 정본](common-integration-v1.json) | 논리 경계·HTTP·UI·검증 계약 위임 결정; 실제 환경/착수 게이트 미완료 |
+| 설계 결정 추적 | [추적 보고 V0.9](DECISION-TRACE-V0.9.md), [추적 인덱스 V0.9](trace-index-v0.9.json) | 기존 IT-19/추적 V0.6 연장; 원본 및 당시 상태 보존 |
+| 검증 | [공통 검증 결과](common-integration-validation-v1.json), [검증 코드](validate-common-integration-v1.mjs), [V4 검증](data-contract-validation-v4.json) | 공통 선정 검사 14/14; 제품 22개 미실행 |
+| 구현/통합 | 기존 PHASE, TASK-043~045 | 11/27 근거 검토 후 공통 스택/공간/stub/배분 확정, mock-only |
 
-V4와 상충하는 V2/V3 상세 후보 및 플랫폼 프로필 V1은 역사적 자료다. [V2 상세 후보](detail-contract-v2.json), [V3 스키마](interface-schema-v3.json), [V1 상세 이력](DETAIL-DESIGN-V1.md), [V4 논리 이력](logical-behavior-v4.json). 기존 팀원 작업 및 공통 하네스 계약 변경 없음.
+상위 승인과 A2 오류 전용 중단 원칙 우선. 공통 설계 V1 및 V4.1의 명시 변경이 V3 인터페이스 후보보다 우선. [V0.6 추적 이력](trace-index-v0.6.json), [V2 상세 후보](detail-contract-v2.json), [V3 인터페이스 후보](interface-contract-v3.json), [V3 스키마](interface-schema-v3.json), [V1 상세 이력](DETAIL-DESIGN-V1.md), [V4 논리 이력](logical-behavior-v4.json)은 역사적 참조. 기존 팀원 작업과 공통 하네스 계약 변경 없음.
 
 ---
 
