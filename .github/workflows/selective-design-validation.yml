@@ -1,0 +1,100 @@
+name: Selective design validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: Validation suite
+        required: true
+        type: choice
+        default: trace
+        options:
+          - model
+          - trace
+          - contract
+          - wbs
+          - markdown
+          - all-design
+      target_sha:
+        description: Full commit SHA to validate (same repository)
+        required: true
+        type: string
+  push:
+    branches:
+      - r01/validation-requests
+    paths:
+      - '.github/validation-request.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: selective-validation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout launcher
+        uses: actions/checkout@v4
+        with:
+          path: launcher
+          persist-credentials: false
+      - name: Resolve explicit validation request
+        id: request
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_SUITE: ${{ inputs.suite }}
+          INPUT_SHA: ${{ inputs.target_sha }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          if os.environ['EVENT_NAME'] == 'workflow_dispatch':
+              req = {'suite': os.environ['INPUT_SUITE'], 'target_sha': os.environ['INPUT_SHA'], 'request_id': 'manual-' + os.environ['GITHUB_RUN_ID']}
+          else:
+              req = json.loads(Path('launcher/.github/validation-request.json').read_text())
+              if req.get('schema_version') != 1:
+                  raise SystemExit('Unknown request schema')
+          if req.get('suite') not in {'model','trace','contract','wbs','markdown','all-design'}:
+              raise SystemExit('Unknown suite')
+          if not re.fullmatch(r'[a-f0-9]{40}', req.get('target_sha', '')):
+              raise SystemExit('Full commit SHA required')
+          if not re.fullmatch(r'[A-Za-z0-9_-]{1,80}', req.get('request_id', '')):
+              raise SystemExit('Invalid request ID')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              for k in ('suite','target_sha','request_id'):
+                  print(f'{k}={req[k]}', file=f)
+          Path('request.json').write_text(json.dumps(req, indent=2)+'\n')
+          PY
+      - name: Checkout exact validation target
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.request.outputs.target_sha }}
+          path: target
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run independent validator
+        env:
+          SUITE: ${{ steps.request.outputs.suite }}
+          TARGET_SHA: ${{ steps.request.outputs.target_sha }}
+        run: |
+          node launcher/tools/run_validation.mjs --repo target --suite "$SUITE" --expected-sha "$TARGET_SHA" --out validation-result.json
+      - name: Publish structured evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ steps.request.outputs.request_id }}
+          path: |
+            request.json
+            validation-result.json
+          if-no-files-found: warn
+          retention-days: 14
