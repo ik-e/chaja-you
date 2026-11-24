@@ -2,7 +2,7 @@
   "id": "LR-LOGICAL-01",
   "status": "candidate_review_required",
   "top_ref": "LR-TOP-20261124",
-  "scope": "현재 mock-only 단일 등록 요청의 유한 논리 모델. 소스 및 다른 등록 요청의 독립성, slot ledger, trusted observations, actual concurrency/generation checks are interface obligations, not simulated. No live state or product execution.",
+  "scope": "현재 mock-only 단일 등록 요청의 유한 논리 모델. 중단 원인은 메타데이터, 결과 근거는 lifecycle과 독립. 다중 요청 ledger/실제 검증·동시성·보안은 후속 계약. No live state or product execution.",
   "ownership": {
     "CO": [
       "등록 요청/계획/승인",
@@ -173,14 +173,13 @@
       "planned",
       "ready",
       "running",
-      "stopping",
-      "unknown",
       "verifying",
       "paused",
-      "blocked",
-      "failed",
+      "unknown",
+      "stopping",
       "done",
-      "cancelled"
+      "failed",
+      "stopped"
     ],
     "effect": [
       "none",
@@ -200,9 +199,7 @@
     ],
     "stop": [
       "none",
-      "cancel",
-      "policy",
-      "auth"
+      "requested"
     ]
   },
   "step_meaning": [
@@ -306,9 +303,7 @@
         "job": [
           "none",
           "paused",
-          "blocked",
-          "unknown",
-          "failed"
+          "unknown"
         ],
         "control": [
           "none",
@@ -478,8 +473,7 @@
         "info": "confirmed",
         "job": [
           "none",
-          "paused",
-          "blocked"
+          "paused"
         ],
         "effect": [
           "none",
@@ -623,7 +617,8 @@
         ],
         "step": 0,
         "stop": "none",
-        "auth": "same"
+        "auth": "same",
+        "control": "read"
       },
       "set": {
         "step": 1,
@@ -649,7 +644,8 @@
         ],
         "step": 1,
         "stop": "none",
-        "auth": "same"
+        "auth": "same",
+        "control": "read"
       },
       "set": {
         "step": 2,
@@ -708,8 +704,7 @@
       "when": {
         "job": [
           "running",
-          "unknown",
-          "stopping"
+          "unknown"
         ],
         "effect": [
           "pending",
@@ -815,225 +810,6 @@
       "detail": "제출 효과는 확인됐으나 목표 증거 불충분; 재제출 금지, 읽기 재확인."
     },
     {
-      "id": "cancel_running",
-      "actor": "USER",
-      "handler": "EXEC",
-      "when": {
-        "job": "running",
-        "effect": "pending",
-        "stop": "none"
-      },
-      "set": {
-        "job": "stopping",
-        "stop": "cancel",
-        "control": "none"
-      },
-      "flow": "U06",
-      "detail": "admission과 동일 직렬화 경계에서 새 permit/입력 회수. 기존 admission 효과는 미확인 가능; 먼저 관측."
-    },
-    {
-      "id": "revoke_running",
-      "actor": "USER",
-      "handler": "EXEC",
-      "when": {
-        "job": "running",
-        "effect": "pending",
-        "stop": "none"
-      },
-      "set": {
-        "job": "stopping",
-        "stop": "policy",
-        "control": "none",
-        "approval": "revoked",
-        "policy": "revoked"
-      },
-      "flow": "U06",
-      "detail": "admission과 동일 직렬화 경계에서 새 permit/입력 회수. 기존 admission 효과는 미확인 가능; 먼저 관측."
-    },
-    {
-      "id": "expire_running",
-      "actor": "SYSTEM",
-      "handler": "EXEC",
-      "when": {
-        "job": "running",
-        "effect": "pending",
-        "stop": "none"
-      },
-      "set": {
-        "job": "stopping",
-        "stop": "auth",
-        "control": "none",
-        "auth": "expired"
-      },
-      "flow": "U06",
-      "detail": "admission과 동일 직렬화 경계에서 새 permit/입력 회수. 기존 admission 효과는 미확인 가능; 먼저 관측."
-    },
-    {
-      "id": "cancel_stopping",
-      "actor": "USER",
-      "handler": "EXEC",
-      "when": {
-        "job": "stopping",
-        "effect": "pending",
-        "stop": "none"
-      },
-      "set": {
-        "job": "stopping",
-        "stop": "cancel",
-        "control": "none"
-      },
-      "flow": "U06",
-      "detail": "admission과 동일 직렬화 경계에서 새 permit/입력 회수. 기존 admission 효과는 미확인 가능; 먼저 관측."
-    },
-    {
-      "id": "revoke_stopping",
-      "actor": "USER",
-      "handler": "EXEC",
-      "when": {
-        "job": "stopping",
-        "effect": "pending",
-        "stop": "none"
-      },
-      "set": {
-        "job": "stopping",
-        "stop": "policy",
-        "control": "none",
-        "approval": "revoked",
-        "policy": "revoked"
-      },
-      "flow": "U06",
-      "detail": "admission과 동일 직렬화 경계에서 새 permit/입력 회수. 기존 admission 효과는 미확인 가능; 먼저 관측."
-    },
-    {
-      "id": "expire_stopping",
-      "actor": "SYSTEM",
-      "handler": "EXEC",
-      "when": {
-        "job": "stopping",
-        "effect": "pending",
-        "stop": "none"
-      },
-      "set": {
-        "job": "stopping",
-        "stop": "auth",
-        "control": "none",
-        "auth": "expired"
-      },
-      "flow": "U06",
-      "detail": "admission과 동일 직렬화 경계에서 새 permit/입력 회수. 기존 admission 효과는 미확인 가능; 먼저 관측."
-    },
-    {
-      "id": "cancel_idle",
-      "actor": "USER",
-      "handler": "CO",
-      "when": {
-        "job": [
-          "planned",
-          "ready",
-          "paused",
-          "blocked",
-          "failed"
-        ],
-        "effect": [
-          "none",
-          "absent"
-        ],
-        "step": [
-          0,
-          1,
-          2
-        ],
-        "stop": "none"
-      },
-      "set": {
-        "job": "cancelled",
-        "control": "none",
-        "stop": "cancel"
-      },
-      "flow": "U06",
-      "detail": "pending 없음 확인 후 중단/차단/재인증 요구. 이전 확인된 효과와 결과 기록 보존."
-    },
-    {
-      "id": "revoke_idle",
-      "actor": "USER",
-      "handler": "CO",
-      "when": {
-        "job": [
-          "planned",
-          "ready",
-          "paused",
-          "blocked",
-          "failed"
-        ],
-        "effect": [
-          "none",
-          "absent"
-        ],
-        "step": [
-          0,
-          1,
-          2
-        ],
-        "stop": "none"
-      },
-      "set": {
-        "job": "blocked",
-        "control": "none",
-        "approval": "revoked",
-        "policy": "revoked",
-        "stop": "policy"
-      },
-      "flow": "U06",
-      "detail": "pending 없음 확인 후 중단/차단/재인증 요구. 이전 확인된 효과와 결과 기록 보존."
-    },
-    {
-      "id": "expire_idle",
-      "actor": "SYSTEM",
-      "handler": "CO",
-      "when": {
-        "job": [
-          "planned",
-          "ready",
-          "paused",
-          "blocked",
-          "failed"
-        ],
-        "effect": [
-          "none",
-          "absent"
-        ],
-        "step": [
-          0,
-          1,
-          2
-        ],
-        "stop": "none"
-      },
-      "set": {
-        "job": "paused",
-        "control": "none",
-        "auth": "expired"
-      },
-      "flow": "U06",
-      "detail": "pending 없음 확인 후 중단/차단/재인증 요구. 이전 확인된 효과와 결과 기록 보존."
-    },
-    {
-      "id": "stop_to_unknown",
-      "actor": "SYSTEM",
-      "handler": "EXEC",
-      "when": {
-        "job": "stopping",
-        "effect": "pending"
-      },
-      "set": {
-        "job": "unknown",
-        "effect": "unknown",
-        "control": "none"
-      },
-      "flow": "U06",
-      "detail": "중단된 pending의 효과가 불명; 중단만으로 부재 판단 금지."
-    },
-    {
       "id": "open_readback",
       "actor": "USER",
       "handler": "EXEC",
@@ -1056,240 +832,6 @@
       },
       "flow": "U06",
       "detail": "현재 읽기 권한 확인 및 동일 계정. 조회 자체가 효과 불명이라면 금지."
-    },
-    {
-      "id": "cancel_unknown",
-      "actor": "USER",
-      "handler": "CO",
-      "when": {
-        "job": "unknown",
-        "stop": "none"
-      },
-      "set": {
-        "stop": "cancel",
-        "control": "none"
-      },
-      "flow": "U06",
-      "detail": "취소 의도 기록, unknown 유지. 목표 증거가 확인되면 완료 사실은 보존."
-    },
-    {
-      "id": "revoke_unknown",
-      "actor": "USER",
-      "handler": "CO",
-      "when": {
-        "job": "unknown",
-        "stop": "none"
-      },
-      "set": {
-        "stop": "policy",
-        "policy": "revoked",
-        "approval": "revoked",
-        "control": "none"
-      },
-      "flow": "U06",
-      "detail": "추가 실행 차단; 읽기 허용은 별도 정책 확인."
-    },
-    {
-      "id": "authorize_recovery_read",
-      "actor": "SYSTEM",
-      "handler": "EXEC",
-      "when": {
-        "job": "unknown",
-        "policy": "revoked",
-        "auth": "same",
-        "control": "none"
-      },
-      "set": {
-        "control": "read"
-      },
-      "flow": "U06",
-      "detail": "독립적인 읽기 권한이 실제로 확인된 경우만 발생하는 추상 관측 사건; revoke된 mutation 권한 재사용 아님."
-    },
-    {
-      "id": "stop_absence_cancel",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "cancel",
-        "auth": "same",
-        "control": "read"
-      },
-      "set": {
-        "job": "cancelled",
-        "effect": "absent",
-        "control": "review"
-      },
-      "flow": "U06",
-      "detail": "권위 있는 부재 관측 후 원인별 종료/차단/사용자 확인."
-    },
-    {
-      "id": "stop_intermediate_cancel_0",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "cancel",
-        "auth": "same",
-        "control": "read",
-        "step": 0
-      },
-      "set": {
-        "step": 1,
-        "job": "cancelled",
-        "effect": "none",
-        "control": "review"
-      },
-      "flow": "U06",
-      "detail": "중간 효과를 보존해 다음 단계 식별; 중단 목적에 따라 상태 결정. 취소는 rollback 아님."
-    },
-    {
-      "id": "stop_intermediate_cancel_1",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "cancel",
-        "auth": "same",
-        "control": "read",
-        "step": 1
-      },
-      "set": {
-        "step": 2,
-        "job": "cancelled",
-        "effect": "none",
-        "control": "review"
-      },
-      "flow": "U06",
-      "detail": "중간 효과를 보존해 다음 단계 식별; 중단 목적에 따라 상태 결정. 취소는 rollback 아님."
-    },
-    {
-      "id": "stop_absence_policy",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "policy",
-        "auth": "same",
-        "control": "read"
-      },
-      "set": {
-        "job": "blocked",
-        "effect": "absent",
-        "control": "review"
-      },
-      "flow": "U06",
-      "detail": "권위 있는 부재 관측 후 원인별 종료/차단/사용자 확인."
-    },
-    {
-      "id": "stop_intermediate_policy_0",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "policy",
-        "auth": "same",
-        "control": "read",
-        "step": 0
-      },
-      "set": {
-        "step": 1,
-        "job": "blocked",
-        "effect": "none",
-        "control": "review"
-      },
-      "flow": "U06",
-      "detail": "중간 효과를 보존해 다음 단계 식별; 중단 목적에 따라 상태 결정. 취소는 rollback 아님."
-    },
-    {
-      "id": "stop_intermediate_policy_1",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "policy",
-        "auth": "same",
-        "control": "read",
-        "step": 1
-      },
-      "set": {
-        "step": 2,
-        "job": "blocked",
-        "effect": "none",
-        "control": "review"
-      },
-      "flow": "U06",
-      "detail": "중간 효과를 보존해 다음 단계 식별; 중단 목적에 따라 상태 결정. 취소는 rollback 아님."
-    },
-    {
-      "id": "stop_absence_auth",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "auth",
-        "auth": "same",
-        "control": "read"
-      },
-      "set": {
-        "job": "paused",
-        "effect": "absent",
-        "control": "review",
-        "stop": "none"
-      },
-      "flow": "U06",
-      "detail": "권위 있는 부재 관측 후 원인별 종료/차단/사용자 확인."
-    },
-    {
-      "id": "stop_intermediate_auth_0",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "auth",
-        "auth": "same",
-        "control": "read",
-        "step": 0
-      },
-      "set": {
-        "step": 1,
-        "job": "paused",
-        "effect": "none",
-        "control": "review",
-        "stop": "none"
-      },
-      "flow": "U06",
-      "detail": "중간 효과를 보존해 다음 단계 식별; 중단 목적에 따라 상태 결정. 취소는 rollback 아님."
-    },
-    {
-      "id": "stop_intermediate_auth_1",
-      "actor": "TRUSTED_OBSERVATION",
-      "handler": "RESULT",
-      "when": {
-        "job": "unknown",
-        "effect": "unknown",
-        "stop": "auth",
-        "auth": "same",
-        "control": "read",
-        "step": 1
-      },
-      "set": {
-        "step": 2,
-        "job": "paused",
-        "effect": "none",
-        "control": "review",
-        "stop": "none"
-      },
-      "flow": "U06",
-      "detail": "중간 효과를 보존해 다음 단계 식별; 중단 목적에 따라 상태 결정. 취소는 rollback 아님."
     },
     {
       "id": "explicit_resume",
@@ -1328,30 +870,6 @@
       "detail": "재확인된 동일 계정·계획·안전 다음 step, 명시 재개 요청. lease를 다시 획득해야 함."
     },
     {
-      "id": "restore_permission",
-      "actor": "SYSTEM",
-      "handler": "CO",
-      "when": {
-        "job": "blocked",
-        "policy": "revoked",
-        "stop": "policy",
-        "effect": [
-          "none",
-          "absent"
-        ]
-      },
-      "set": {
-        "policy": "mock_allowed",
-        "stop": "none",
-        "plan": "stale",
-        "approval": "revoked",
-        "job": "paused",
-        "control": "none"
-      },
-      "flow": "U06",
-      "detail": "현재 mock 정책이 다시 허용되는 별도 권한자 판단; 자동 승인 복구 금지. 기존 고정 범위의 동일성·안전성 재검증, 필요 재승인 및 명시 재개. 의미 변경은 차단; 계획 내용 편집 금지."
-    },
-    {
       "id": "revise_before_start",
       "actor": "USER",
       "handler": "CO",
@@ -1380,29 +898,6 @@
       "detail": "등록 작업 수락 전에만 원본/등록 내용 수정. 기존 계획/승인 무효화 후 재검토. 인증/계정 조회 중에는 수정 UI 및 명령을 제공하지 않고 필요 시 인증을 종료한 뒤 수정. 계정/대상 변경은 별개 요청/대상 재확인. 작업 생성 뒤에는 이 사건 금지."
     },
     {
-      "id": "open_recovery_auth",
-      "actor": "USER",
-      "handler": "EXEC",
-      "when": {
-        "route": "supported",
-        "policy": "revoked",
-        "job": "unknown",
-        "control": "none",
-        "auth": [
-          "none",
-          "expired",
-          "wrong",
-          "same"
-        ]
-      },
-      "set": {
-        "auth": "human",
-        "control": "human"
-      },
-      "flow": "U06",
-      "detail": "독립 복구 인증/조회 허용 확인된 경우에만 발생; mutation 금지 유지."
-    },
-    {
       "id": "exit_auth",
       "actor": "USER",
       "handler": "EXEC",
@@ -1421,40 +916,127 @@
       "detail": "인증 완료를 주장하지 않고 현재 인증 상호작용 종료 및 입력/조회 권한 회수. 작업 생성 전 준비 화면으로 복귀 가능. 복구 인증 중이면 기존 작업·시도·효과 유지."
     },
     {
-      "id": "revalidate_locked_scope",
-      "actor": "TRUSTED_OBSERVATION",
+      "id": "request_stop",
+      "actor": "AUTHORIZED_USER_OR_SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "job": [
+          "planned",
+          "ready",
+          "running",
+          "verifying",
+          "paused",
+          "unknown"
+        ],
+        "stop": "none"
+      },
+      "set": {
+        "job": "stopping",
+        "stop": "requested",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "유일한 중단 진입. 사용자 예외적 중단·승인 철회·권한 상실·인증 만료·안전 장애를 같은 사건으로 정규화. admission과 동일 원자 경계에서 새 명령과 permit을 차단. 사유·권한/인증 변동은 별도 기록; effect/step/goal 근거는 유지."
+    },
+    {
+      "id": "finalize_stop_unresolved",
+      "actor": "SYSTEM",
       "handler": "CO",
       "when": {
-        "route": "supported",
-        "policy": "mock_allowed",
-        "info": "confirmed",
-        "auth": "same",
-        "target": "new",
-        "job": "paused",
+        "job": "stopping",
+        "effect": "pending",
+        "stop": "requested"
+      },
+      "set": {
+        "job": "stopped",
+        "effect": "unknown",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "중단 처리의 한정된 시간 안에 이미 허용된 효과를 확정하지 못하면 unknown을 결과에 남기고 종료. 추가 인증/조회/외부 응답을 기다리느라 중단 종료를 막지 않음. rollback/외부 취소를 보장하지 않음."
+    },
+    {
+      "id": "finalize_stop_known_or_unknown",
+      "actor": "SYSTEM",
+      "handler": "CO",
+      "when": {
+        "job": "stopping",
+        "effect": [
+          "none",
+          "absent",
+          "unknown"
+        ],
+        "stop": "requested"
+      },
+      "set": {
+        "job": "stopped",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "같은 중단 종료 사건의 effect 분기. 기존 확정 단계와 미확인 여부를 보존해 결과 반환. 다른 중단 사유가 추가되어도 작업 상태나 종료 경로를 변경하지 않음."
+    },
+    {
+      "id": "definite_failure",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "RESULT",
+      "when": {
+        "job": [
+          "paused",
+          "verifying"
+        ],
         "effect": [
           "none",
           "absent"
         ],
-        "plan": "stale",
-        "control": [
-          "none",
-          "review",
-          "read"
-        ],
+        "goal": false,
         "stop": "none",
-        "step": [
-          0,
-          1,
-          2
+        "control": [
+          "read",
+          "review"
         ]
       },
       "set": {
-        "plan": "current",
-        "approval": "none",
-        "control": "review"
+        "job": "failed",
+        "control": "none"
       },
       "flow": "U06",
-      "detail": "기존 불변 등록 범위(원본/판매조건/자료/계정/슬롯/목표/남은 효과 동작 의미)가 동일하고 최신 규칙 및 권한에서도 안전함을 신뢰된 검증으로 확인한 경우만. 새 버전·권한의 명시 확인과 재승인은 가능하나 사용자가 실행 범위를 편집하는 기능은 아님. 의미가 바뀌면 차단, 중단/새 요청 검토 및 중복 검사. 동일성/권한 비교의 구체 검증은 별도 계약."
+      "detail": "동일 범위에서 목표를 더 진행할 수 없다는 확정 증거가 있을 때만 실패로 종료. 단순 응답 유실/조회 불능은 실패가 아니라 미확인. 이미 확인된 부분 효과 유지."
+    },
+    {
+      "id": "prestart_permission_revoked",
+      "actor": "AUTHORIZED_POLICY",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "policy": "mock_allowed"
+      },
+      "set": {
+        "policy": "revoked",
+        "approval": "revoked",
+        "control": "none",
+        "auth": "none"
+      },
+      "flow": "U06",
+      "detail": "아직 실행 수락 전이면 작업을 생성하지 않고 차단 사유를 표시. 이미 완료/중단한 작업의 권한 변화는 이력 정보로만 남김."
+    },
+    {
+      "id": "prestart_permission_restored",
+      "actor": "AUTHORIZED_POLICY",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "policy": "revoked"
+      },
+      "set": {
+        "policy": "mock_allowed",
+        "approval": "revoked",
+        "plan": "stale",
+        "auth": "none",
+        "control": "none",
+        "target": "unset"
+      },
+      "flow": "U06",
+      "detail": "아직 작업 생성 전의 허용 상태 재판정; 대상/계획/승인 다시 확인."
     }
   ],
   "flow_groups": [
@@ -1493,13 +1075,15 @@
     "One shared immutable source snapshot; each target has separate plan/job/effect/observation. Slot uniqueness is across all requests, even new key/new job; ambiguous existing effect blocks. User cannot supply trusted evidence.",
     "User auth is distinct from external account verification. User viewer disconnect does not revoke job; auth expiry/control loss is an event. Raw credentials/driver never exposed or logged. Auth input restricted to approved auth origin; actual enforcement must be demonstrated.",
     "Result unknown with all steps observed is goal uncertainty, not permission to resubmit. External object review/publication changes append observations independent of completed registration goal.",
-    "Accepted job pins immutable semantic scope; recovery may refresh authorization/observation without editing scope. No general mid-execution edit/rollback; user stop/revoke and safety stops remain mandatory."
+    "Accepted job pins immutable semantic scope; recovery may refresh authorization/observation without editing scope. No general mid-execution edit/rollback; user stop/revoke and safety stops remain mandatory.",
+    "All stop causes use one lifecycle route. Stop facts and effect/goal observations are independent records; once stopping starts, only finalization may change job lifecycle and stopped is terminal. Outcome publication must not require successful external readback. Later authorized observations change evidence, not lifecycle."
   ],
   "deferred": [
     "Soomgo real registration object/evidence",
     "mock action argument/field exact spec, UI/API/DB code, concurrency, isolation, current permission read recovery availability",
     "actual user value and real-world platform permissions",
-    "실제 immutable scope 동일성 비교 및 다중 요청 ledger/새 요청의 중복 차단은 하위 계약 검증. 이전 작업의 부분 효과를 수정/삭제하는 기능은 현재 범위 밖."
+    "실제 immutable scope 동일성 비교 및 다중 요청 ledger/새 요청의 중복 차단은 하위 계약 검증. 이전 작업의 부분 효과를 수정/삭제하는 기능은 현재 범위 밖.",
+    "중단 사유 및 보안 ledger 원자 갱신, bounded 종료/worker fence, 늦은 read-only 증거의 append-only result 구현 시험; 중단된 작업 lifecycle 재개는 범위 밖."
   ],
   "scope_contract": {
     "status": "R01_feedback_applied_candidate",
@@ -1507,7 +1091,37 @@
     "lock_event": "create_job",
     "pre_start": "등록 내용/자료는 작업 수락 전에 확인·수정. 인증 단계에는 별도 등록 편집 동작 없음; 필요하면 인증 종료 후 준비로 돌아감. 수정한 계획은 기존 승인 무효화. 계정/대상 변경은 새 요청/대상 재확인.",
     "locked": "작업 수락부터 실행 범위 불변. 원본/계획 내용의 인플레이스 변경, 중간 단계 삭제/재설정, 자동 역행/rollback 없음. 다른 등록 요청은 별개로 중복/효과 검사. 상태/권한/인증 및 동일 범위 안전 복구는 변경과 구분.",
-    "exception": "승인 철회·권한 상실·인증 만료·안전상 장애·예외적 사용자 중단은 항상 신규 외부 효과 차단. 이미 admission된 외부 효과는 취소/되돌리기 보장하지 않고 확인 가능한 효과·미확인·다음 조치 기록. 안전성 확인 후에만 같은 범위의 명시 재개.",
+    "exception": "승인 철회·권한 상실·인증 만료·안전 장애·사용자 예외적 중단은 동일한 중단 처리로 신규 외부 효과 차단. 이미 admission된 외부 효과는 되돌리기 보장 없음. 중단 처리 후 확인/미확인 결과를 반환하고 작업 종료. 중단된 작업의 재개 없음; 중단 요청이 없는 일시적 확인 대기/효과 미확인은 안전 확인 후 동일 범위 명시 재개 가능.",
     "notice": "등록 시작 후에는 등록 내용을 변경하거나 이미 실행된 외부 동작을 되돌릴 수 없습니다. 중단이 필요한 경우 이후 동작을 중지하며, 이미 처리된 결과는 남을 수 있습니다. 확인이 필요한 경우 결과와 다음 조치를 안내합니다."
+  },
+  "stop_contract": {
+    "revision": "single-terminal-stop-v1",
+    "user_ref": "2026-11-24 R01: 중단 중에 어떤 일이 발생하더라도 중단하고 결과를 보여주면 되고 상태 정의는 제대로 하면 되잖아 복잡할 거 하나도 없는데",
+    "entry": "request_stop",
+    "terminal": "stopped",
+    "completion_event": "finalize_stop",
+    "implementation_rows": [
+      "finalize_stop_unresolved",
+      "finalize_stop_known_or_unknown"
+    ],
+    "stop_reason": "metadata only: append reason/fact observations, no reason-specific lifecycle or transition. Revocation/expiry recorded in authoritative security ledger; no new external command admitted from stopping/stopped.",
+    "outcome": "Return stop status + last confirmed step(s)/effects + unresolved attempt or goal uncertainty + evidence and next action. Never invent success or rollback. Even if readback not possible, terminate with incomplete/unknown result rather than wait indefinitely.",
+    "late_evidence": "After stopped, trusted evidence under separately authorized read-only observation may append a newer result record; lifecycle stays stopped even if the external goal is later confirmed. No automatic resume, new mutation, new attempt, or stage reset. A distinct future request requires slot/effect duplicate check and new authorization. Late result projection tested separately; actual readback execution and evidence validation deferred.",
+    "recovery": "paused and unknown without stop are nonterminal safety/verification states. Re-authentication, safe readback and explicit resume are only for the same locked scope of a non-stopped job. Stopped/failed/done are terminal.",
+    "blocked": "pre-execution eligibility projection derived from unsupported route, unavailable permission, ambiguous existing target, missing facts/auth/approval; not a redundant job state.",
+    "limit": "Real admission fencing, stop timeout, evidence authority, external side effects and security ledger synchronization need actual implementation test."
+  },
+  "state_meanings": {
+    "none": "작업 수락 전(준비·인증·승인·지원/차단은 별도 상태에서 표시)",
+    "planned": "확정 범위를 수락했으나 worker 준비 전",
+    "ready": "현재 실행 가능한 다음 동작 준비",
+    "running": "하나의 동작 허용 및 시도 진행",
+    "verifying": "마지막 효과 확인 후 목표 증거 판정",
+    "paused": "중단 요청은 없고 안전한 후속 조치 확인/사용자 재개 대기",
+    "unknown": "중단 요청은 없으나 외부 효과 또는 목표 미확인; 새 mutation 금지",
+    "stopping": "새 동작 차단, 현재까지 결과 정리; 이유와 무관하게 stopped로 수렴",
+    "stopped": "중단 처리 완료; 결과가 미확인이어도 작업 종료",
+    "failed": "더 진행할 수 없음이 근거로 확인된 종료; 모르는 상태를 실패로 간주하지 않음",
+    "done": "목표 증거 확인된 정상 종료"
   }
 }
