@@ -1,8 +1,10 @@
 # chaja-you
 
-**2026-11-23 현재 R02 음악 레슨 강사용 등록 지원 서비스의 12항목 기획을 구체화하고 있습니다.** 기획 방향은 정했으나 실제 사용자 Pain의 우선순위·MVP·기술 구현 방식·수익 모델은 아직 검증/확정되지 않았습니다. UI/DB/API 상세 설계 및 PoC·구현은 보류 중입니다. 아래 찾아you 앱 리서치 설명은 **이전 제품안 및 교육기관 잠정 제출 기준**으로만 유지합니다.
+**2026-11-24 현재 음악 레슨 등록 지원 서비스의 플랫폼별 독립 PoC와 공통 모의 검증을 진행할 단계입니다.** R03 테스트 환경 / R04 숨고 / R05 크몽을 각각 배정했습니다. 본 구현의 스택·최종 MVP·수익 모델 및 실제 플랫폼 자동 등록 허용은 미확정입니다. 아래 찾아you 앱 리서치 설명은 **이전 제품안 및 교육기관 잠정 제출 기준**으로만 유지합니다.
 
-[현재 단계 의도](docs/human/phase-intents/PHASE-20261123-01.md) · [현재 실행 상태](CURRENT.md) · [레슨 등록 기획·담당별 산출물](docs/artifacts/planning/lesson-registration-20261123/README.md)
+[현재 단계 의도](docs/human/phase-intents/PHASE-20261124-02.md) · [현재 실행 상태](CURRENT.md) · [레슨 등록 기획·담당별 산출물](docs/artifacts/planning/lesson-registration-20261123/README.md)
+
+**개발 진입점:** [독립 PoC 작업 공간·브랜치·실행 환경](prototype/lesson-registration/README.md) · [공통 작업 계약](docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md)
 
 기존 찾아you 방향: 사용자 요청에 따라 조사 워크플로와 에이전트 팀을 동적으로 구성하고, 결과에 근거와 출처를 연결하는 리서치 시스템 (현재 실제 구현 보류).
 

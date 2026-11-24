@@ -1,0 +1,35 @@
+name: prototype-baseline-check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.python-version'
+      - '.github/workflows/prototype-baseline-check.yml'
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.python-version'
+      - '.github/workflows/prototype-baseline-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  shared-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: true
+      - run: uv lock --check
+      - run: uv sync --locked --group dev
+      - run: uv pip check --python .venv/bin/python
+      - run: uv run --locked pytest --version
+      - run: uv run --locked ruff --version
