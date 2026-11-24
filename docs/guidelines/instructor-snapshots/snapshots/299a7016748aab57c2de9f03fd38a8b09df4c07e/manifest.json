@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "kind": "full_course_originals_git_snapshot",
+  "source_repo": "https://gt.isitsoft.kr/publicproj/aio-01d4-stu.git",
+  "source_branch": "main",
+  "source_commit": "299a7016748aab57c2de9f03fd38a8b09df4c07e",
+  "source_subdir": "Lecture/FinalProject",
+  "archive_utc": "2026-11-24T07:48:19.325813+00:00",
+  "origin_permission": "R01 reports instructor verbal permission for GitHub preservation (2026-11-18)",
+  "preservation": "unaltered original bytes; any new original commit is a new immutable snapshot",
+  "file_count": 39,
+  "total_bytes": 15166110,
+  "files": [
+    {
+      "path": "Lecture/FinalProject/DAILY-MEETING.md",
+      "bytes": 6488,
+      "sha256": "ee5ac1625925eb794b7e77bc49e4902b969d556a687aa76c27ab514ef42caecb"
+    },
+    {
+      "path": "Lecture/FinalProject/Data/BFCL-PREPARE.md",
+      "bytes": 50154,
+      "sha256": "1614b4f8fa23a7e46fd8c746e749960621ae242b79db47a0ee23fd3e3e748a05"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.html",
+      "bytes": 64562,
+      "sha256": "4fd9f0305c5b8e7a82c356bea103a8feb0f3e510cdbbebba40c617449c898593"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/AIO_1기_최종프로젝트_가이드.pdf",
+      "bytes": 761856,
+      "sha256": "52fb1dd7df3d93873fa4ed3eb3fcefe99ad28ba38385598d4044c55caeda993a"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/CodingAgent/A2UI_생성형UI_최종프로젝트.html",
+      "bytes": 49378,
+      "sha256": "a8e7f8fba574571c9b9b889048abacaf48f13f31e05f9234449e8dbff61cfffd"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/CodingAgent/A2UI_생성형UI_최종프로젝트.pdf",
+      "bytes": 1049923,
+      "sha256": "dbe6e926d9de378c348cbeafacd8a909ffd296fa7c26cb7f3ecf8520ff3729f2"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/CodingAgent/AI에이전트_절대하면안되는10가지.html",
+      "bytes": 37902,
+      "sha256": "9c33861e72415ba54c6e7410a8513779fb0361582454c47b9bf9ad54595463bc"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/CodingAgent/AI에이전트_절대하면안되는10가지.pdf",
+      "bytes": 825140,
+      "sha256": "f550b3d8083852c6aa0eb0980438827a5a4e9e6c912899a608c96c55f9e18bc4"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/CodingAgent/agent-skills-final-project.html",
+      "bytes": 59663,
+      "sha256": "20aa4b7bf14557a0efb04612a27dc6389922376e47146346a019550daa82fb46"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/CodingAgent/agent-skills-final-project.pdf",
+      "bytes": 854000,
+      "sha256": "2e75f088b71d52eba9bcb4538ab2807f92106276103976934132f6d230b7714d"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/README.md",
+      "bytes": 4761,
+      "sha256": "bfabd653e4011db1007da6a78710dde286292c10ee297694208a582f542e823e"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/AIO_1기_1주차_킥오프.html",
+      "bytes": 62457,
+      "sha256": "6644ff67f980c8a2ae3d61dba4f7715d267167e776cd4aa5fb77906102044524"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/AIO_1기_1주차_킥오프.pdf",
+      "bytes": 747373,
+      "sha256": "b5f3e3bfdf03f8d8b14fdb1f3a6bab14cfcb68965eaa4336b0e46b0bebe9c247"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/WBS_잘_쓰는_법.html",
+      "bytes": 56318,
+      "sha256": "d60dec0997f29418ee4efdc7a0a9c9c1f02481b2750d2edb8c1f0bd0f97c8752"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/WBS_잘_쓰는_법.pdf",
+      "bytes": 709478,
+      "sha256": "0e840e97055b7b66f8705322be4f484e3a9dac77a9262709bbf67e6af2e78aab"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/기획서_잘_쓰는_법.html",
+      "bytes": 58088,
+      "sha256": "de81617d4466d7bc3e866d7527a6d86447b1283f3fd4c89e12acd7fcac1aa52b"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step1/기획서_잘_쓰는_법.pdf",
+      "bytes": 731144,
+      "sha256": "30891fe3fe21992b08975825849442b160d90b7922715806e951b7aa0a6a3b93"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/API설계문서_작성법.html",
+      "bytes": 175555,
+      "sha256": "9f1a1e3ab398388b209a69ca2c92312d990cbe616ad119b5226e435fa6be6dae"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/API설계문서_작성법.pdf",
+      "bytes": 574020,
+      "sha256": "2f0195b648c17a7df6de903f2f085d3962fd892649afc412ded4436c06f7695c"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/DB스키마설계서_작성법.html",
+      "bytes": 119104,
+      "sha256": "548ae9d312f33ba66e7df8b7355d54fe1e93a06da0ff2a9cf3320f04a59149fe"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/DB스키마설계서_작성법.pdf",
+      "bytes": 497247,
+      "sha256": "186f716da82bceb89391dcae9e2978be7b67c0252258658a8dc5bd8063c77b76"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/DESIGN-TO-WORKING-FLOW.html",
+      "bytes": 22520,
+      "sha256": "64941a988856d6757ec4698cfdd76bc2f9864dab98fc31b05324ae54f3f03460"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/DESIGN-TO-WORKING-FLOW.pdf",
+      "bytes": 701204,
+      "sha256": "b354885ae70890848a8efd72a8538cfa5c2b1dd9b96f792dff4a7683a8e4a559"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/최종프로젝트_API서버_백그라운드워커_구조.html",
+      "bytes": 72440,
+      "sha256": "1d716afd890004c63efbb9f096a5889f9fc346ccbec9fe965b8e2a436133ed0d"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step2/최종프로젝트_API서버_백그라운드워커_구조.pdf",
+      "bytes": 998568,
+      "sha256": "9dc5b7e35e02ea4cfc9a352598f81ee1a8326ee9c305d1e805d5f5e4f3b7d6e3"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step3/MODEL-TOOL-SERVICE-EVALUATION.html",
+      "bytes": 21827,
+      "sha256": "148a367b1747c143fac501d0b28ffdd764805117ada86b00aa82a3f631591a5e"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step3/MODEL-TOOL-SERVICE-EVALUATION.pdf",
+      "bytes": 732106,
+      "sha256": "2a3a8d8d4070874d6d68a4ca65c55f225081a78e339dc5231bb766970b502992"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step3/단일에이전트_상태전이그래프_설계서_가이드.html",
+      "bytes": 66670,
+      "sha256": "725b79a8735af809dd73daed9836bbc26e6b51dd102222456a06a6513a5dcdb9"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step3/단일에이전트_상태전이그래프_설계서_가이드.pdf",
+      "bytes": 891744,
+      "sha256": "5a705358cdea8b579e6852de61176962993b05d698184d705c5a62911c093997"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step3/자기성찰_테스트결과서_가이드.html",
+      "bytes": 65346,
+      "sha256": "89b802ee63277fc9e4367f47a0e88ffa89d9aef491bf1f3a1de335d66f32ed84"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step3/자기성찰_테스트결과서_가이드.pdf",
+      "bytes": 2436274,
+      "sha256": "5405ee520022bf6ecf9ff6623183bc8e7e05969ee85ab8beebf93b5ff19972b2"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step4/멀티에이전트_AutoHealing_적용가이드.html",
+      "bytes": 127324,
+      "sha256": "7d02d5be864e30676c5f9c6094b1c353268a0bbc1a90b6a4ba550594c65361df"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step4/멀티에이전트_AutoHealing_적용가이드.pdf",
+      "bytes": 520220,
+      "sha256": "5d16d0412af647099999347891fd65f21aae76ff210a4886f1ff3850dc3afdc4"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step5/최종프로젝트_CICD_따라가기.html",
+      "bytes": 49942,
+      "sha256": "78c982c9dd3c66730444714bc9610aaf2c68a616da01746fc548835a4817fe86"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/Step5/최종프로젝트_CICD_따라가기.pdf",
+      "bytes": 888797,
+      "sha256": "a95810664fac9173fba39bd1826ca60bc7b4848dac5cb459101099eda05ed249"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_WBS_샘플.docx",
+      "bytes": 32843,
+      "sha256": "66c7687e99a9f54e819bbf01bb2fad7ef9510ce573cae6a710022325c5cc7cd7"
+    },
+    {
+      "path": "Lecture/FinalProject/Doc/최종프로젝트_주요산출물_기획서_샘플.docx",
+      "bytes": 32603,
+      "sha256": "b29dac077bdd263b62ed3ae920a700784c85a8564bfd106e812627cb7d39bbab"
+    },
+    {
+      "path": "Lecture/FinalProject/MANAGER-GUIDE.md",
+      "bytes": 9362,
+      "sha256": "152d53a8e1ba18e34fd45e43c63e24b9736bdce77a3dcc19dcdb2c7ca1120f8d"
+    },
+    {
+      "path": "Lecture/FinalProject/OUTPUT-GUIDE.md",
+      "bytes": 1709,
+      "sha256": "0f16b33f0e952900c9c2c41844d6f60e9ab7dc8946b56a7db6b29609b1ff96ee"
+    }
+  ]
+}

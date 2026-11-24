@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>설계서 한 줄을 실제 동작으로 연결하기</title><style>
+  :root{
+    --ink:#14213d; --sub:#4a5568; --mute:#8a94a6; --line:#dfe3ea; --bg:#ffffff; --paper:#f6f7fb;
+    --fe:#2563eb; --fe-bg:#e8f0ff;
+    --api:#059669; --api-bg:#e3f6ee;
+    --q:#d97706; --q-bg:#fdf1de;
+    --wk:#7c3aed; --wk-bg:#f0e9ff;
+    --db:#475569; --db-bg:#eceff4;
+    --ext:#dc2626; --ext-bg:#fdeaea;
+    --code-bg:#0f172a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#2b2f3a;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  #deck{width:1280px;height:720px;position:relative;transform-origin:center center}
+  .slide{position:absolute;inset:0;width:1280px;height:720px;background:var(--bg);padding:56px 72px 48px;display:none;overflow:hidden}
+  .slide.active{display:block}
+  .slide .no{position:absolute;right:40px;bottom:24px;font-size:14px;color:var(--mute);letter-spacing:.05em}
+  .slide .tag{position:absolute;left:72px;bottom:24px;font-size:13px;color:var(--mute)}
+  .kicker{font-size:15px;font-weight:700;letter-spacing:.12em;color:var(--wk);text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:44px;line-height:1.25;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:34px;line-height:1.3;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .lead{font-size:20px;color:var(--sub);line-height:1.6;margin-bottom:26px}
+  p,li{font-size:19px;line-height:1.6}
+  b,strong{font-weight:700}
+  .muted{color:var(--sub)}
+  .small{font-size:15px}
+  ul.clean{list-style:none}
+  ul.clean li{padding-left:22px;position:relative;margin-bottom:8px}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:12px;width:7px;height:7px;border-radius:50%;background:var(--wk)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff}
+  .card h3{font-size:20px;margin-bottom:8px}
+  .card p,.card li{font-size:16.5px;line-height:1.55}
+  .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+  .fe{color:var(--fe);background:var(--fe-bg)} .api{color:var(--api);background:var(--api-bg)}
+  .q{color:var(--q);background:var(--q-bg)} .wk{color:var(--wk);background:var(--wk-bg)}
+  .db{color:var(--db);background:var(--db-bg)} .ext{color:var(--ext);background:var(--ext-bg)}
+  table{border-collapse:collapse;width:100%}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.45;vertical-align:top}
+  th{font-size:14px;color:var(--sub);font-weight:700;background:var(--paper)}
+  pre{background:var(--code-bg);color:#e2e8f0;border-radius:12px;padding:18px 20px;font-family:'JetBrains Mono','D2Coding','Menlo','Consolas','Noto Sans Mono CJK KR',monospace;font-size:14.5px;line-height:1.55;white-space:pre;overflow:hidden}
+  pre .c{color:#7dd3a8} pre .k{color:#c4b5fd} pre .s{color:#fcd34d} pre .h{background:rgba(250,204,21,.16);display:inline-block;width:100%}
+  .tree{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+  .tree .c{color:#6b7280} .tree .d{color:var(--wk);font-weight:700} .tree .f{color:var(--ink)}
+  .callout{border-left:5px solid var(--wk);background:var(--wk-bg);padding:14px 18px;border-radius:8px;font-size:17px;line-height:1.55}
+  .callout.warn{border-color:var(--ext);background:var(--ext-bg)}
+  .callout.ok{border-color:var(--api);background:var(--api-bg)}
+  .file{font-family:'JetBrains Mono','Menlo','Consolas',monospace;font-size:14px;color:var(--sub);margin-bottom:6px}
+  /* cover */
+  .cover{background:linear-gradient(135deg,#14213d 0%,#2a2357 60%,#4c2a85 100%);color:#fff}
+  .cover h1{font-size:54px;color:#fff;margin-top:120px}
+  .cover .lead{color:#cbd5f5;font-size:22px;margin-top:18px}
+  .cover .meta{position:absolute;left:72px;bottom:56px;font-size:16px;color:#aab4d6}
+  .cover .no,.cover .tag{color:#7f8bb3}
+  .section{background:var(--paper)}
+  /* nav */
+  #hud{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;background:rgba(15,23,42,.85);color:#e2e8f0;padding:8px 12px;border-radius:999px;font-size:14px;z-index:10}
+  #hud button{background:#334155;color:#fff;border:0;border-radius:999px;padding:6px 14px;font-size:14px;cursor:pointer;font-family:inherit}
+  #hud button:hover{background:#475569}
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    html,body{background:#fff}
+    #stage{position:static;display:block}
+    #deck{transform:none!important;width:auto;height:auto}
+    .slide{position:relative;display:block!important;page-break-after:always;break-after:page}
+    #hud{display:none}
+  }
+
+  a{color:var(--fe);text-decoration:underline;text-underline-offset:3px}
+  code{font-family:'Menlo','Consolas',monospace;font-size:.92em;overflow-wrap:anywhere}
+  .spaced{margin-top:20px}.stack{display:grid;gap:16px}.badge{font-size:13px;color:var(--wk);font-weight:700;margin-bottom:10px}
+  .compact{gap:20px}.compact .card{padding:16px 22px}
+  .metric{font-size:32px;font-weight:800;color:var(--wk);line-height:1.3;margin:6px 0}
+  .refs{position:absolute;left:72px;right:72px;bottom:58px;color:var(--sub);font-size:13px;line-height:1.5}
+  .strip{display:flex;gap:10px;align-items:stretch;margin:20px 0}.strip>div{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:17px;line-height:1.6}
+  .strip b{display:block;margin-bottom:4px;color:var(--wk)}
+  .form td{height:48px}.checkline{display:flex;gap:12px;margin:10px 0;font-size:18px;line-height:1.6}
+  @media print{.slide:last-child{break-after:auto;page-break-after:auto}a{color:var(--fe);text-decoration:none}}
+</style></head><body><div id="stage"><div id="deck"><section class="slide cover"><div class="kicker" style="color:#c4b5fd;margin-top:24px">최종 프로젝트 · STEP2 → STEP3 · 실습 안내</div><h1 style="margin-top:90px">설계서 한 줄을<br>실제 동작으로 연결하기</h1><p class="lead">요구사항 · 화면 · API · 도구 · DB · 시험<br>한 사용자 요청을 끝까지 이어 보는 방법</p><div class="meta">설명 15분 + 팀 적용 15분 · 팀의 흐름 한 장과 정상·실패 기록 남기기<br>AI 애플리케이션 개발 과정 · 최종 프로젝트 공통 자료</div></section><section class="slide"><div class="kicker">01 · 연결표</div><h2>문서마다 같은 사용자 작업을 가리킨다</h2><p class="lead">예시: 사용자가 고른 시간으로 상담 신청하기. 아래 이름·경로·상태는 교육용 예시입니다.</p><table class=""><thead><tr><th>연결할 것</th><th>예시</th><th>개발 전에 합의할 질문</th></tr></thead><tbody><tr><td>요구사항·화면</td><td>FR-07 / 상담 시간 선택 화면</td><td>누가 어떤 결과를 원하나요?</td></tr><tr><td>API</td><td>POST /api/v1/bookings</td><td>보낼 값과 받을 값은 무엇인가요?</td></tr><tr><td>에이전트·도구</td><td>book_consultation(slot_id)</td><td>조회만 하나요, 신청까지 하나요?</td></tr><tr><td>DB</td><td>bookings · slot_id · status</td><td>저장 성공과 중복을 어떻게 확인하나요?</td></tr><tr><td>시험</td><td>정상 예약 / 다른 사용자 / 중복 클릭</td><td>무엇이 보이면 완료라고 할까요?</td></tr></tbody></table><div class="callout " style="margin-top:20px">팀 적용: 지금 작성한 문서에서 <b>요구사항 ID·화면·API·도구·테이블·시험</b>을 한 줄로 연결해 보세요.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=30">API 작성법 30쪽</a> · <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/DB%EC%8A%A4%ED%82%A4%EB%A7%88%EC%84%A4%EA%B3%84%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=20">DB 작성법 20쪽</a></div></section><section class="slide"><div class="kicker">02 · 공통 계약</div><h2>이름만 같아서는 연결되지 않는다</h2><p class="lead">입력·출력의 의미와 실패 처리까지 정한 것이 계약입니다.</p><div class="grid2 compact"><div class="card "><h3>입력과 결과</h3><ul class="clean"><li>입력: 이름·타입·필수 여부·허용값</li><li>결과: 결과 ID·상태·업무상 의미</li><li>필드가 다르면 API ↔ DB 대응표 작성</li></ul></div><div class="card "><h3>ID는 용도로 구분</h3><ul class="clean"><li>request_id: 요청 추적용인지 명시</li><li>job_id: 오래 걸리는 작업 조회</li><li>멱등성 키: 중복 실행 방지용</li></ul></div><div class="card "><h3>실패와 상태</h3><ul class="clean"><li>형식 오류·권한 오류·충돌 구분</li><li>재시도 가능 여부와 최대 횟수</li><li>화면에 보여 줄 안내 문구</li></ul></div><div class="card "><h3>담당과 변경</h3><ul class="clean"><li>계약 작성·검토·사용 담당 지정</li><li>변경 버전과 인계 날짜 기록</li><li>변경하면 예시·모의 응답·시험도 갱신</li></ul></div></div><div class="callout " style="margin-top:20px">ID 이름은 예시예요. 이미 팀이 정한 이름을 써도 되지만 <b>서로 다른 용도를 한 값으로 혼동하지 않게</b> 해 주세요.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=16">API 작성법 16~22쪽</a></div></section><section class="slide"><div class="kicker">03 · 모의 연결</div><h2>실제 LLM보다 먼저, 정해진 응답으로 연결한다</h2><p class="lead">모의 API는 화면·상태·오류를 맞추는 도구입니다. 실제 예약이나 저장 성공의 증명은 아닙니다.</p><div class="grid2"><div class="card "><h3>먼저 만들 응답 3개</h3><ul class="clean"><li><b>정상:</b> 결과 ID와 완료 상태</li><li><b>진행 중:</b> 아직 결과가 없는 상태</li><li><b>실패:</b> 오류 코드와 다음 행동</li></ul></div><div class="card "><h3>화면 담당이 확인할 것</h3><ul class="clean"><li>로딩·성공·실패 화면이 각각 보이는가</li><li>중복 클릭·새로고침 시 표시가 맞는가</li><li>아직 연결하지 않은 기능이 구분되는가</li></ul></div></div><div class="strip"><div><b>1. 계약 고정</b>예시 JSON·상태</div><div><b>2. 모의 응답</b>정상·지연·실패</div><div><b>3. 화면 연결</b>표시와 사용자 행동</div><div><b>4. 실제 연동</b>하나씩 교체</div></div><div class="callout ok" style="margin-top:20px">이번 단계의 완료: <b>모의임을 표시한 화면</b>에서 세 상태를 재현하고, 사용한 계약 버전을 기록합니다.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_API%EC%84%9C%EB%B2%84_%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EC%9B%8C%EC%BB%A4_%EA%B5%AC%EC%A1%B0.pdf#page=25">API 서버·워커 구조 25쪽</a></div></section><section class="slide"><div class="kicker">04 · 응답 방식</div><h2>작업 시간과 사용자 경험에 맞춰 고른다</h2><p class="lead">모든 기능에 큐·워커·스트리밍을 한꺼번에 넣을 필요는 없습니다.</p><table class=""><thead><tr><th>방식</th><th>서버와 화면의 약속</th><th>시험할 것</th></tr></thead><tbody><tr><td>바로 응답</td><td>요청 안에서 결과 반환</td><td>타임아웃·오류·결과 표시</td></tr><tr><td>202 접수 + 상태 조회</td><td>job_id 반환 → 상태·결과·실패 조회</td><td>작업 소유권·완료·만료·새로고침</td></tr><tr><td>스트리밍</td><td>이벤트를 순서대로 전달</td><td>종료·오류·연결 끊김 뒤 복구</td></tr></tbody></table><div class="grid2"><div class="card "><h3>오래 걸리는 일</h3><p>LLM 여러 번, 외부 API 조합, 승인 대기 등은 HTTP 대기 시간과 분리할지 검토합니다.</p></div><div class="card "><h3>팀이 실제 선택한 구조</h3><p>기존 구현에 맞춰 결정합니다. Celery·Redis·SSE는 가능한 예시이며 이 실습의 필수 선택은 아닙니다.</p></div></div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=28">API 작성법 28~29쪽</a> · <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/%EC%B5%9C%EC%A2%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_API%EC%84%9C%EB%B2%84_%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EC%9B%8C%EC%BB%A4_%EA%B5%AC%EC%A1%B0.pdf#page=10">워커 구조 10쪽</a></div></section><section class="slide"><div class="kicker">05 · 상태 읽기</div><h2>HTTP 성공과 사용자 작업 성공을 구분한다</h2><p class="lead">202는 접수, 조회의 200은 조회 성공입니다. 업무 성공은 작업 상태와 결과로 판단합니다.</p><table class=""><thead><tr><th>응답 예시</th><th>의미</th><th>화면에서 할 일</th></tr></thead><tbody><tr><td>202 · job_id=j-001</td><td>처리 요청을 접수함</td><td>접수 표시 후 진행 확인</td></tr><tr><td>200 · status=running</td><td>작업 조회 성공, 처리 중</td><td>결과를 성공처럼 보여 주지 않기</td></tr><tr><td>200 · status=succeeded</td><td>작업 완료, result 있음</td><td>결과와 완료 시각 표시</td></tr><tr><td>200 · status=failed</td><td>작업 조회 성공, 업무 실패</td><td>error와 가능한 다음 행동 표시</td></tr><tr><td>404 · not_found</td><td>없거나 조회가 허용되지 않는 작업</td><td>팀의 보안 계약에 맞게 안내</td></tr></tbody></table><div class="callout " style="margin-top:20px">재시도도 구분해요. <b>같은 작업을 다시 조회</b>하는 것인지, <b>실패한 일을 새로 실행</b>하는 것인지 계약으로 정합니다.</div><div class="refs">상태 이름은 예시입니다. 참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=29">API 작성법 29쪽</a></div></section><section class="slide"><div class="kicker">06 · 실행 경계</div><h2>모델이 고른 도구도 서버가 확인한 뒤 실행한다</h2><p class="lead">LLM이 인자를 만들었다는 이유만으로 저장·예약·알림을 실행하지 않습니다.</p><div class="grid2"><div class="card "><h3>① 입력·허용 도구</h3><p>필수값·타입·범위를 검사하고, 이 역할이 호출할 수 있는 도구인지 확인합니다.</p></div><div class="card "><h3>② 사용자·소유권</h3><p>사용자의 권한과 대상 데이터가 속한 사용자·기관을 서버가 확인합니다.</p></div><div class="card "><h3>③ 필요한 승인</h3><p>위험하거나 승인이 필요한 업무는 실제 승인 상태를 확인합니다. 모델이 넘긴 승인 ID만 믿지 않습니다.</p></div><div class="card "><h3>④ 중복과 저장 결과</h3><p>이미 처리됐는지 확인하고 저장 성공을 검증합니다. 동시 수정·슬롯 충돌도 DB와 함께 막습니다.</p></div></div><div class="callout warn" style="margin-top:20px">쓰기 요청의 응답이 끊겼다면 이미 저장됐을 수 있어요. <b>무조건 다시 호출하기 전에 처리 결과와 중복 방지 규칙</b>을 확인하세요.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=26">API 작성법 26쪽</a> · <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step4/%EB%A9%80%ED%8B%B0%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8_AutoHealing_%EC%A0%81%EC%9A%A9%EA%B0%80%EC%9D%B4%EB%93%9C.pdf#page=19">Auto-Healing 가이드 19쪽</a></div></section><section class="slide"><div class="kicker">07 · 실제 연동</div><h2>한 번에 전부 붙이지 않고 확인 범위를 넓힌다</h2><p class="lead">어느 부품까지 실제인지 표시해야 실패한 위치를 찾고 결과를 설명할 수 있습니다.</p><table class=""><thead><tr><th>단계</th><th>이번에 실제로 연결할 것</th><th>확인할 결과</th></tr></thead><tbody><tr><td>A · 화면 계약</td><td>모의 응답 ↔ 화면</td><td>입출력·로딩·오류 표시</td></tr><tr><td>B · 저장</td><td>API ↔ 시험 DB</td><td>행 생성·상태·제약·다른 사용자 차단</td></tr><tr><td>C · 외부 연동</td><td>어댑터 ↔ 실제 허용된 API</td><td>필드 매핑·출처·시간·제한</td></tr><tr><td>D · 모델</td><td>LLM ↔ 도구 실행 ↔ 결과</td><td>도구 선택 뒤 실제 업무 완료</td></tr></tbody></table><div class="callout " style="margin-top:20px">공급원 접근이 미확인이라면 <b>모의 연동 성공 / 실제 연동 대기</b>로 적습니다. 실제 키·개인정보는 화면과 로그에 노출하지 않습니다.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/DB%EC%8A%A4%ED%82%A4%EB%A7%88%EC%84%A4%EA%B3%84%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=22">DB 작성법 22쪽</a> · <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=30">API 작성법 30쪽</a></div></section><section class="slide"><div class="kicker">08 · 작업 인계</div><h2>담당자를 나누되 계약과 검수는 함께 본다</h2><p class="lead">폴더 이름보다 어떤 입력을 받아 어떤 결과를 넘기는지가 먼저입니다.</p><table class=""><thead><tr><th>작업</th><th>넘길 것</th><th>받는 사람이 확인할 것</th></tr></thead><tbody><tr><td>화면 ↔ API</td><td>화면별 입력·상태·예시 응답</td><td>모의 API로 정상·실패 표시</td></tr><tr><td>API ↔ 에이전트</td><td>입력 스키마·실행 ID·권한 문맥</td><td>도구 결과와 종료·실패 출력</td></tr><tr><td>외부 연동 ↔ DB</td><td>정규화 필드·적재 기준·출처</td><td>중복·갱신·만료·오류 처리</td></tr><tr><td>개발 ↔ 검토</td><td>커밋·변경 계약·시험 명령</td><td>동작 재현·기존 기능 영향</td></tr></tbody></table><div class="grid2"><div class="card "><h3>개인별 작업</h3><p>담당·검토자·인계일·완료 기준을 정하고 대기하는 작업을 일지에 남깁니다.</p></div><div class="card "><h3>공통 파일</h3><p>라우터·설정·스키마·마이그레이션의 취합·리뷰 담당을 정합니다.</p></div></div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step1/WBS_%EC%9E%98_%EC%93%B0%EB%8A%94_%EB%B2%95.pdf#page=10">WBS 10·15쪽</a></div></section><section class="slide"><div class="kicker">09 · 팀 적용 15분</div><h2>한 흐름, 정상 한 번, 실패 한 번을 남긴다</h2><p class="lead">아래는 학습용 연습 결과입니다. 새로운 공식 산출물이나 고정 마감을 추가하는 것은 아닙니다.</p><table class=""><thead><tr><th>기록 칸</th><th>팀이 채울 내용</th></tr></thead><tbody><tr><td>흐름 연결</td><td>요구사항 → 화면 → API → 도구 → DB → 시험</td></tr><tr><td>실행 범위</td><td>무엇이 실제이고 무엇이 모의인가</td></tr><tr><td>정상·실패</td><td>입력 / 기대 결과 / 실제 결과 / 통과·실패 이유</td></tr><tr><td>재현과 증빙</td><td>기준 커밋·환경·실행 명령·로그·화면 링크</td></tr><tr><td>남은 일</td><td>미연동·미확인 항목 / 담당 / 다음 확인일</td></tr></tbody></table><div class="callout ok" style="margin-top:20px"><b>검토자가 같은 조건으로 다시 확인할 수 있으면 완료.</b> 모의 성공을 실제 연동 성공으로, PR 승인을 배포 성공으로 바꾸어 쓰지 않습니다.</div><div class="refs">다음 자료: <a href="../Step3/MODEL-TOOL-SERVICE-EVALUATION.pdf">모델·도구·서비스 평가와 증빙 남기기</a></div></section></div></div><div id="hud"><button id="prev" aria-label="Previous slide">◀</button><span id="pg" aria-live="polite"></span><button id="next" aria-label="Next slide">▶</button><button id="pdf">Print / PDF</button></div><script>(function(){
+const slides=Array.from(document.querySelectorAll('.slide'));const deck=document.getElementById('deck'),pg=document.getElementById('pg');
+slides.forEach((s,k)=>{const no=document.createElement('div');no.className='no';no.textContent=String(k+1).padStart(2,'0')+' / '+slides.length;s.appendChild(no);if(k){const tag=document.createElement('div');tag.className='tag';tag.textContent='설계 → 동작 · 최종 프로젝트';s.appendChild(tag);}});
+let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));pg.textContent=(i+1)+' / '+slides.length;history.replaceState(null,'','#'+(i+1));}
+function fit(){deck.style.transform='scale('+Math.min(innerWidth/1280,(innerHeight-10)/720)+')';}
+document.getElementById('prev').onclick=()=>show(i-1);document.getElementById('next').onclick=()=>show(i+1);document.getElementById('pdf').onclick=()=>print();
+addEventListener('keydown',e=>{if(e.target.closest('a,button,input,textarea,select'))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1);}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1);}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});addEventListener('resize',fit);fit();show(i);
+})();</script></body></html>

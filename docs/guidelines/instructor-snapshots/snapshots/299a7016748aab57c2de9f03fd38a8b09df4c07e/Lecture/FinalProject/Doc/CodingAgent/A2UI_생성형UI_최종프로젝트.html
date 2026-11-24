@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A2UI로 만드는 유연한 UI — 최종 프로젝트 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --navy:#0E1A2B; --navy2:#16263A; --navy3:#1F3E50;
+  --paper:#F5F7F6; --card:#FCFDFC; --line:#D5DEDB; --band:#EDF2F0;
+  --teal:#157A6E; --teal-l:#4FD1C1; --teal-bg:#DDEFEC; --teal-ink:#2E4A47;
+  --orange:#A04E10; --orange-l:#F2A65A; --orange-bg:#FBF1E8; --orange-line:#EBC9A8; --orange-ink:#5A3A20;
+  --ink:#0E1A2B; --body:#46566A; --muted:#5E6D7E; --on-dark:#E5ECEB; --on-dark2:#BFD2D0;
+  --sans:'Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --mono:'JetBrains Mono','DejaVu Sans Mono',Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0A1320;font-family:var(--sans);color:var(--ink)}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.slide{position:absolute;width:1920px;height:1080px;padding:128px 128px 160px;display:none;flex-direction:column;gap:40px;background:var(--paper);transform-origin:center center;overflow:hidden}
+.slide.active{display:flex}
+.slide.dark{background:var(--navy);color:#F2F5F4}
+.eyebrow{font-size:24px;font-weight:700;color:var(--teal);letter-spacing:2px}
+.dark .eyebrow{color:var(--teal-l)}
+h1{font-size:96px;font-weight:900;line-height:1.15}
+h2{font-size:56px;font-weight:700;line-height:1.2}
+h3{font-size:32px;font-weight:700}
+p,li{font-size:26px;line-height:1.5}
+.small{font-size:24px}
+.body{color:var(--body)} .muted{color:var(--muted)}
+.dark .body{color:var(--on-dark2)}
+.head{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:32px}
+.col{display:flex;flex-direction:column;gap:16px}
+.f1{flex:1;min-width:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px}
+.card.teal{background:var(--teal-bg);border-color:#9FD3CB}
+.card.orange{background:var(--orange-bg);border-color:var(--orange-line)}
+.card.navy{background:var(--navy);border-color:var(--navy);color:#F2F5F4}
+.card.navy .body,.card.navy p{color:var(--on-dark)}
+.dark .card{background:var(--navy2);border-color:var(--navy2)}
+.dark .card p{color:var(--on-dark)}
+.dark .card.hl{border:2px solid var(--teal-l)}
+.tag{display:inline-block;font-size:24px;font-weight:700;padding:6px 18px;border-radius:999px}
+.tag.t{background:var(--teal-bg);color:var(--teal)}
+.tag.o{background:var(--orange-bg);color:var(--orange)}
+.tag.n{background:var(--navy);color:#F2F5F4}
+ul{padding-left:30px} li{margin:4px 0}
+.code{font-family:var(--mono);font-size:24px;line-height:1.38;white-space:pre;color:#D6E2E0;background:var(--navy);padding:24px 30px;border-radius:16px;overflow:hidden}
+.code .c{color:#8FB5B0}.code .k{color:var(--teal-l)}.code .s{color:var(--orange-l)}
+table{width:100%;border-collapse:collapse;font-size:24px;line-height:1.4;color:#22303F}
+th{background:var(--navy);color:#F2F5F4;text-align:left;padding:14px 20px;font-weight:700}
+td{padding:14px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(odd) td{background:var(--card)} tr:nth-child(even) td{background:var(--band)}
+td.k{color:var(--teal);font-weight:700}
+td.bad{color:var(--orange-ink)} td.good{color:var(--teal-ink)}
+.foot{position:absolute;left:128px;right:128px;bottom:64px;display:flex;justify-content:space-between;font-size:24px;color:var(--muted)}
+.dark .foot{color:#8FA6A4}
+.arrow{font-size:40px;color:#9AA8B5;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow{display:flex;align-items:stretch;gap:12px}
+.flow .node{flex:1;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line)}
+.flow .node b{font-size:26px}
+.flow .node span{font-size:24px;color:var(--body);line-height:1.4}
+.flow .node.t{background:var(--teal-bg);border-color:#9FD3CB}
+.flow .node.o{background:var(--orange-bg);border-color:var(--orange-line)}
+.flow .node.n{background:var(--navy);border-color:var(--navy)} .flow .node.n b{color:#F2F5F4} .flow .node.n span{color:var(--on-dark2)}
+/* mock UI widgets */
+.mock{background:#FFFFFF;border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 6px 18px rgba(14,26,43,.08)}
+.mock .mt{font-size:24px;font-weight:700}
+.opt{display:flex;align-items:center;gap:12px;font-size:24px;color:#22303F}
+.box{width:24px;height:24px;border:2px solid var(--teal);border-radius:5px;flex:none}
+.box.on{background:var(--teal)}
+.rad{width:24px;height:24px;border:2px solid var(--teal);border-radius:50%;flex:none}
+.rad.on{background:radial-gradient(circle,var(--teal) 45%,transparent 50%)}
+.btn{align-self:flex-start;font-size:24px;font-weight:700;background:var(--teal);color:#F5F7F6;border-radius:10px;padding:10px 22px}
+.btn.o{background:var(--orange)}
+.map{height:170px;border-radius:10px;background:
+  linear-gradient(90deg,transparent 47%,#CFD9D6 47%,#CFD9D6 53%,transparent 53%),
+  linear-gradient(0deg,transparent 47%,#CFD9D6 47%,#CFD9D6 53%,transparent 53%),
+  linear-gradient(135deg,#E6EFEC,#DCE8E4);position:relative}
+.pin{position:absolute;width:26px;height:26px;border-radius:50%;border:4px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.bar{height:16px;border-radius:8px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%}
+.mini td,.mini th{padding:8px 12px;font-size:24px}
+.badge{font-size:24px;font-weight:700;padding:4px 12px;border-radius:8px}
+.chat{font-size:24px;line-height:1.45;padding:14px 18px;border-radius:14px;max-width:92%}
+.chat.u{align-self:flex-end;background:var(--navy);color:#F2F5F4}
+.chat.a{align-self:flex-start;background:var(--band);color:#22303F}
+#hud{position:fixed;right:18px;bottom:14px;font:14px/1.4 var(--sans);color:#8FA6A4;background:rgba(14,26,43,.75);padding:6px 12px;border-radius:8px;z-index:9;user-select:none}
+#hud button{background:none;border:1px solid #3A4F66;color:#C9D6D4;border-radius:6px;padding:2px 10px;margin-left:6px;cursor:pointer;font:inherit}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:none}
+  #stage{position:static;display:block}
+  #hud{display:none}
+  .slide{display:flex !important;position:relative;transform:none !important;page-break-after:always;break-after:page}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 COVER -->
+<section class="slide dark" style="justify-content:center">
+  <div style="position:absolute;left:0;top:0;width:20px;height:1080px;background:var(--teal-l)"></div>
+  <p class="eyebrow" style="letter-spacing:4px">최종 프로젝트 설계 가이드 · 생성형 UI</p>
+  <h1>하드코딩 UI에서<br>“질문에 맞춰 생기는 UI”로</h1>
+  <p style="font-size:32px;color:var(--on-dark2)">A2UI로 더 유연한 웹 · 앱 만들기 — 세 팀 주제에 적용해 보기</p>
+  <div style="display:flex;gap:16px;flex-wrap:wrap">
+    <span class="tag n" style="background:#1A2B40;color:#D6E2E0">A2UI 1.0 (2026.11)</span>
+    <span class="tag n" style="background:#1A2B40;color:#D6E2E0">컴포넌트 카탈로그</span>
+    <span class="tag n" style="background:#1A2B40;color:#D6E2E0">FastAPI + 에이전트</span>
+    <span class="tag n" style="background:#1A2B40;color:#D6E2E0">Gemini Decision 1</span>
+    <span class="tag n" style="background:#1A2B40;color:#D6E2E0">키오스크 · 하이브리드</span>
+  </div>
+  <div class="foot"><span>AI 애플리케이션 개발 과정 · 최종 프로젝트</span><span></span></div>
+</section>
+
+<!-- 2 PROBLEM -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">왜 지금 생성형 UI인가</p><h2>지금까지의 두 가지 방식, 두 가지 한계</h2></div>
+  <div class="row">
+    <div class="card f1">
+      <span class="tag o" style="align-self:flex-start">방식 1 · 하드코딩 UI</span>
+      <h3>개발자가 미리 정한 화면만 보여 준다</h3>
+      <ul class="body">
+        <li>질문 유형마다 화면 · 메뉴 · 버튼을 미리 만들어야 한다</li>
+        <li>예상 못 한 요구 = 새 화면 개발 = 새 배포</li>
+        <li>사용자는 메뉴를 여러 번 눌러 원하는 정보에 도달</li>
+      </ul>
+    </div>
+    <div class="card f1">
+      <span class="tag o" style="align-self:flex-start">방식 2 · 텍스트 채팅 에이전트</span>
+      <h3>무엇이든 답하지만 글로만 답한다</h3>
+      <ul class="body">
+        <li>비교 · 선택 · 승인을 글로 하면 “몇 번이요?” 왕복이 반복</li>
+        <li>표 · 지도 · 차트가 필요한 정보도 문단으로</li>
+        <li>사용자가 다시 타이핑해야 행동이 일어난다</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card navy" style="flex-direction:row;align-items:center;gap:24px">
+    <p style="font-size:30px;font-weight:700;color:var(--teal-l);white-space:nowrap">세 번째 길</p>
+    <p style="font-size:28px">에이전트가 <b style="color:var(--teal-l)">질문을 이해하고</b>, 우리가 미리 만든 부품으로 <b style="color:var(--teal-l)">그 순간에 맞는 화면을 조립</b>한다 — 이것이 생성형 UI, 그 표준 중 하나가 A2UI다.</p>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>02 / 22</span></div>
+</section>
+
+<!-- 3 THREE WAYS -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">세 가지 방식 비교</p><h2>같은 질문, 세 가지 응답</h2></div>
+  <p class="body">질문: <b style="color:var(--ink)">“오늘 저녁 불꽃축제 근처에서 덜 붐비는 출구랑 가까운 화장실 알려줘”</b></p>
+  <div class="grid3" style="align-items:start">
+    <div class="col">
+      <span class="tag o" style="align-self:flex-start">하드코딩 UI</span>
+      <div class="mock">
+        <p class="mt">메뉴 ▸ 축제 ▸ 행사 선택 ▸ 지도 탭</p>
+        <div class="map"></div>
+        <p class="small muted">출구 혼잡도는 다른 탭, 화장실은 필터에서 다시 선택</p>
+      </div>
+      <p class="small body">화면이 정해져 있어 <b>사용자가 길을 찾아야</b> 한다</p>
+    </div>
+    <div class="col">
+      <span class="tag o" style="align-self:flex-start">텍스트 채팅</span>
+      <div class="mock">
+        <p class="chat a">현재 3번 출구 혼잡도는 62%, 5번 출구는 31%입니다. 화장실은 5번 출구에서 동쪽으로 약 120m, 공원 관리동 옆에 있으며…</p>
+        <p class="chat u">5번 출구가 어디예요?</p>
+      </div>
+      <p class="small body">정확하지만 <b>위치 · 비교가 글로만</b> 전달된다</p>
+    </div>
+    <div class="col">
+      <span class="tag t" style="align-self:flex-start">생성형 UI · A2UI</span>
+      <div class="mock">
+        <div class="map"><i class="pin" style="left:22%;top:30%;background:var(--orange)"></i><i class="pin" style="left:64%;top:58%;background:var(--teal)"></i><i class="pin" style="left:72%;top:22%;background:var(--navy3)"></i></div>
+        <div class="opt"><span style="width:110px">5번 출구</span><div class="bar f1"><i style="width:31%;background:var(--teal)"></i></div><span>31% 여유</span></div>
+        <div class="opt"><span style="width:110px">3번 출구</span><div class="bar f1"><i style="width:62%;background:var(--orange)"></i></div><span>62% 혼잡</span></div>
+        <span class="btn">5번 출구 길안내</span>
+      </div>
+      <p class="small body">지도 + 혼잡도 + 행동 버튼이 <b>한 번에</b></p>
+    </div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>03 / 22</span></div>
+</section>
+
+<!-- 4 WHAT IS A2UI -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">A2UI란</p><h2>A2UI: 에이전트가 “무엇을 보여줄지” 말하는 표준</h2></div>
+  <div class="row">
+    <div class="col f1">
+      <div class="card">
+        <h3>한 줄 정의</h3>
+        <p class="body">에이전트는 <b style="color:var(--ink)">어떤 화면을 보여 줄지</b>를 JSON으로 설명하고, 각 앱은 그것을 <b style="color:var(--ink)">자기 네이티브 컴포넌트로 그린다</b>.</p>
+      </div>
+      <div class="card">
+        <h3>현재 상태</h3>
+        <ul class="body">
+          <li>Google 주도 오픈 프로토콜, 2026년 11월 11일 1.0 정식</li>
+          <li>렌더러: React · Angular · Lit(웹), Flutter, SwiftUI, Jetpack Compose</li>
+          <li>에이전트 SDK: Python · TypeScript · Dart</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col f1">
+      <div class="card teal">
+        <h3 style="color:var(--teal)">HTML을 만드는 게 아니다</h3>
+        <p style="color:var(--teal-ink)">에이전트는 코드를 생성하지 않는다. 우리가 등록한 부품의 <b>이름 · 배치 · 속성</b>만 고른다 → 안전하고 디자인이 깨지지 않는다.</p>
+      </div>
+      <div class="card teal">
+        <h3 style="color:var(--teal)">한 번 설명, 어디서나</h3>
+        <p style="color:var(--teal-ink)">같은 A2UI 응답을 웹 · 안드로이드 · iOS가 각자 네이티브로 렌더링한다.</p>
+      </div>
+      <div class="card orange">
+        <h3 style="color:var(--orange)">주의</h3>
+        <p style="color:var(--orange-ink)">아직 생태계가 빠르게 변하는 중 — 실습 전 공식 문서(a2ui.org)의 최신 버전을 확인할 것</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>출처: Google Developers Blog “A2UI 1.0” (2026.11.11), a2ui.org</span><span>04 / 22</span></div>
+</section>
+
+<!-- 5 HARDCODED vs A2UI table -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">하드코딩 UI vs 생성형 UI</p><h2>무엇이 달라지는가: 8가지 관점</h2></div>
+  <table>
+    <tr><th style="width:18%">관점</th><th style="width:41%">하드코딩 UI (기존)</th><th style="width:41%">생성형 UI (A2UI)</th></tr>
+    <tr><td class="k">화면 결정 시점</td><td>개발할 때 (설계 · 코딩 단계)</td><td>실행할 때 (질문 · 상황마다)</td></tr>
+    <tr><td class="k">누가 화면을 고르나</td><td>개발자 · 기획자</td><td>에이전트 — 단, 우리가 허용한 부품 안에서</td></tr>
+    <tr><td class="k">새 요구가 오면</td><td>화면 추가 개발 → 배포</td><td>기존 부품 조합으로 즉시 대응, 부족하면 부품만 추가</td></tr>
+    <tr><td class="k">개발 단위</td><td>페이지 · 화면</td><td>컴포넌트 카탈로그 + 데이터 API</td></tr>
+    <tr><td class="k">사용자 경험</td><td>메뉴를 찾아 들어간다</td><td>원하는 것을 말하면 필요한 화면이 나온다</td></tr>
+    <tr><td class="k">일관성 · 예측성</td><td class="good">높음 — 늘 같은 위치, 같은 동작</td><td class="bad">낮아질 수 있음 — 매번 다른 배치</td></tr>
+    <tr><td class="k">속도 · 비용</td><td class="good">즉시, LLM 비용 없음</td><td class="bad">LLM 호출 지연 · 토큰 비용</td></tr>
+    <tr><td class="k">테스트</td><td class="good">화면별 테스트로 끝</td><td class="bad">부품 테스트 + 에이전트 출력 평가(eval) 필요</td></tr>
+  </table>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>05 / 22</span></div>
+</section>
+
+<!-- 6 FLOW -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">동작 흐름</p><h2>질문에서 화면까지: 생성과 실행이 분리된다</h2></div>
+  <div class="flow">
+    <div class="node"><b>① 사용자</b><span>자연어 질문 또는 버튼 클릭</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><b>② FastAPI</b><span>인증 · 권한 · 데이터 조회</span></div>
+    <div class="arrow">→</div>
+    <div class="node o"><b>③ 에이전트 (LLM)</b><span>카탈로그에서 부품을 골라 배치 결정</span></div>
+    <div class="arrow">→</div>
+    <div class="node t"><b>④ A2UI 메시지</b><span>부품 목록 + 데이터 바인딩 (JSON)</span></div>
+    <div class="arrow">→</div>
+    <div class="node n"><b>⑤ 렌더러</b><span>우리 디자인의 네이티브 화면</span></div>
+  </div>
+  <div class="row" style="align-items:center">
+    <div class="arrow" style="font-size:36px">↺</div>
+    <p class="body f1"><b style="color:var(--ink)">⑥ 사용자 액션</b>(체크 · 선택 · 승인)은 이벤트로 에이전트에 되돌아가고, 에이전트는 화면을 <b style="color:var(--ink)">부분 갱신</b>한다. 전송은 WebSocket · REST · AG-UI · A2A · MCP 등 어느 것이든 가능.</p>
+  </div>
+  <div class="grid3">
+    <div class="card"><h3>생성 (에이전트)</h3><p class="body">무엇을, 어떤 순서로 보여 줄지 “의도”만 만든다</p></div>
+    <div class="card"><h3>실행 (클라이언트)</h3><p class="body">실제 그리기 · 입력 처리 · 접근성은 앱의 렌더러가</p></div>
+    <div class="card teal"><h3 style="color:var(--teal)">결과</h3><p style="color:var(--teal-ink)">에이전트가 틀려도 앱이 깨지지 않는다 — 허용된 부품밖에 못 쓰니까</p></div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>06 / 22</span></div>
+</section>
+
+<!-- 7 CORE CONCEPTS + concept JSON -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">핵심 개념 3가지</p><h2>카탈로그 · 데이터 바인딩 · 점진 렌더링</h2></div>
+  <div class="row">
+    <div class="col" style="width:760px">
+      <div class="card"><h3 style="color:var(--teal)">① 컴포넌트 카탈로그</h3><p class="body">앱이 미리 승인한 부품 목록. 에이전트는 이 목록 밖의 것을 요청할 수 없다 = 우리의 디자인 시스템</p></div>
+      <div class="card"><h3 style="color:var(--teal)">② 데이터 바인딩</h3><p class="body">부품은 데이터 “경로”만 가리키고 실제 값은 서버가 채운다 → 개인정보 등 민감한 값이 모델을 거치지 않는다</p></div>
+      <div class="card"><h3 style="color:var(--teal)">③ 점진 렌더링</h3><p class="body">ID로 연결된 평평한 부품 목록이라 LLM이 조금씩 생성하고, 화면은 도착하는 대로 그려진다</p></div>
+    </div>
+    <div class="col f1">
+      <p class="small muted">개념 예시 — 실제 필드 이름은 A2UI 스펙 버전에 따라 다르다</p>
+<div class="code"><span class="c">// 에이전트가 보내는 것: 부품 + 배치 + 데이터 경로</span>
+{ <span class="k">"components"</span>: [
+  { <span class="k">"id"</span>: <span class="s">"root"</span>,  <span class="k">"type"</span>: <span class="s">"Column"</span>,
+    <span class="k">"children"</span>: [<span class="s">"map"</span>, <span class="s">"exits"</span>, <span class="s">"go"</span>] },
+  { <span class="k">"id"</span>: <span class="s">"map"</span>,   <span class="k">"type"</span>: <span class="s">"CrowdMap"</span>,
+    <span class="k">"data"</span>: <span class="s">"/festival/exits"</span> },
+  { <span class="k">"id"</span>: <span class="s">"exits"</span>, <span class="k">"type"</span>: <span class="s">"RadioGroup"</span>,
+    <span class="k">"data"</span>: <span class="s">"/festival/exits"</span> },
+  { <span class="k">"id"</span>: <span class="s">"go"</span>,    <span class="k">"type"</span>: <span class="s">"Button"</span>,
+    <span class="k">"label"</span>: <span class="s">"길안내 시작"</span>,
+    <span class="k">"action"</span>: <span class="s">"start_route"</span> }
+]}</div>
+      <p class="small body">CrowdMap · RadioGroup · Button은 <b>우리가 카탈로그에 등록한 부품</b>이다.</p>
+    </div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>07 / 22</span></div>
+</section>
+
+<!-- 8 MINDSET -->
+<section class="slide dark">
+  <div class="head"><p class="eyebrow">사고의 전환</p><h2>“화면을 만든다”에서 “부품과 규칙을 만든다”로</h2></div>
+  <div class="row" style="align-items:stretch">
+    <div class="card f1">
+      <p class="eyebrow" style="color:var(--orange-l)">하드코딩 사고</p>
+      <ul style="color:var(--on-dark)">
+        <li>“어떤 화면이 몇 개 필요하지?”</li>
+        <li>요구사항 → 화면 설계서 → 화면 구현</li>
+        <li>사용자 질문의 범위를 화면 수가 제한</li>
+      </ul>
+    </div>
+    <div class="arrow" style="color:var(--teal-l);font-size:56px">→</div>
+    <div class="card f1 hl">
+      <p class="eyebrow">생성형 UI 사고</p>
+      <ul style="color:var(--on-dark)">
+        <li>“사용자가 어떤 <b style="color:var(--teal-l)">결정</b>을 내려야 하지?”</li>
+        <li>결정 → 필요한 부품 → 데이터 API → 에이전트 규칙</li>
+        <li>질문의 범위는 부품 조합과 데이터가 정한다</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:28px;color:var(--on-dark)">좋은 질문 하나: <b style="color:var(--teal-l)">“이 정보를 받은 사용자는 다음에 무엇을 누르고 싶을까?”</b> — 그 버튼이 화면에 함께 나와야 한다.</p>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>08 / 22</span></div>
+</section>
+
+<!-- 9 TEAM 1 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">팀 ① 적용 예 · 묶음배달 멀티 에이전트 오토힐링</p><h2>장애 대응 콘솔: 상황마다 다른 화면이 필요하다</h2></div>
+  <div class="row">
+    <div class="col" style="width:720px">
+      <div class="card orange"><h3 style="color:var(--orange)">하드코딩이면</h3><p style="color:var(--orange-ink)">장애 유형(결제 · 배차 · 지도 API · 라이더 앱)마다 대응 화면을 따로 만들어야 하고, 새로운 장애 유형은 화면이 없다</p></div>
+      <div class="card teal"><h3 style="color:var(--teal)">A2UI라면</h3><p style="color:var(--teal-ink)">오토힐링 에이전트가 진단 결과에 맞춰 <b>원인 후보 · 영향 범위 · 복구안</b>을 그 장애에 맞는 화면으로 조립하고, 사람은 승인만 한다</p></div>
+      <div class="card"><h3>필요한 부품 (예)</h3><p class="body">IncidentCard · 원인 체크리스트 · 영향 주문 테이블 · 시계열 차트 · 복구안 라디오 · 승인 버튼</p></div>
+    </div>
+    <div class="mock f1">
+      <div style="display:flex;justify-content:space-between;align-items:center"><p class="mt">배차 지연 감지 · 강남권</p><span class="badge" style="background:var(--orange-bg);color:var(--orange)">심각도 높음</span></div>
+      <p class="small muted">에이전트 진단: 지도 API 응답 지연 → 경로 계산 실패</p>
+      <div class="opt"><i class="box on"></i>지도 API 타임아웃 (신뢰도 높음)</div>
+      <div class="opt"><i class="box"></i>배차 워커 큐 적체</div>
+      <table class="mini"><tr><th>영향</th><th>건수</th><th>평균 지연</th></tr><tr><td>묶음 주문</td><td>[__]</td><td>[__]분</td></tr><tr><td>단건 주문</td><td>[__]</td><td>[__]분</td></tr></table>
+      <div class="opt"><i class="rad on"></i>보조 지도 API로 페일오버</div>
+      <div class="opt"><i class="rad"></i>묶음 해제 후 단건 배차</div>
+      <span class="btn o">복구안 승인 · 실행</span>
+    </div>
+  </div>
+  <div class="foot"><span>화면 속 수치는 예시 자리표시 [__]</span><span>09 / 22</span></div>
+</section>
+
+<!-- 10 TEAM 2 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">팀 ② 적용 예 · 축제 인파 대응 다국어 안심 관광 비서</p><h2>관광객마다 언어도, 상황도, 필요한 화면도 다르다</h2></div>
+  <div class="row">
+    <div class="col" style="width:720px">
+      <div class="card orange"><h3 style="color:var(--orange)">하드코딩이면</h3><p style="color:var(--orange-ink)">언어 × 축제 × 상황(길찾기 · 혼잡 · 미아 · 응급) 조합만큼 화면이 늘어난다</p></div>
+      <div class="card teal"><h3 style="color:var(--teal)">A2UI라면</h3><p style="color:var(--teal-ink)">같은 부품이 사용자 언어로 렌더링되고, 혼잡이 심해지면 에이전트가 <b>대체 경로 · 안전 안내</b> 화면으로 바꿔 보여 준다</p></div>
+      <div class="card"><h3>공공 API 페일오버를 화면에</h3><p class="body">주 API 장애 시 “보조 데이터 · 갱신 지연” 배지를 함께 띄워 정보 신뢰도를 사용자에게 알린다</p></div>
+    </div>
+    <div class="mock f1">
+      <div style="display:flex;justify-content:space-between;align-items:center"><p class="mt">Crowd Alert · Exit 3</p><span class="badge" style="background:var(--orange-bg);color:var(--orange)">Backup data · 5 min delay</span></div>
+      <div class="map"><i class="pin" style="left:20%;top:35%;background:var(--orange)"></i><i class="pin" style="left:62%;top:60%;background:var(--teal)"></i></div>
+      <p class="mt">Choose another route</p>
+      <div class="opt"><i class="rad on"></i>Exit 5 · less crowded · 8 min walk</div>
+      <div class="opt"><i class="rad"></i>Shuttle bus stop B · 12 min</div>
+      <div class="opt" style="gap:16px"><span class="badge" style="background:var(--band)">English</span><span class="badge" style="background:var(--band)">日本語</span><span class="badge" style="background:var(--band)">中文</span><span class="badge" style="background:var(--band)">한국어</span></div>
+      <span class="btn">Start navigation</span>
+    </div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>10 / 22</span></div>
+</section>
+
+<!-- 11 TEAM 3 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">팀 ③ 적용 예 · 서울 · 경기 자전거 안전정보 · 코스 추천</p><h2>상담 대화가 그대로 조건 입력 폼과 비교표가 된다</h2></div>
+  <div class="row">
+    <div class="col" style="width:720px">
+      <div class="card orange"><h3 style="color:var(--orange)">하드코딩이면</h3><p style="color:var(--orange-ink)">고정된 검색 필터 화면 → 결과 목록 → 상세 → 지도. 필터에 없는 조건(“아이랑”, “언덕 싫음”)은 반영 불가</p></div>
+      <div class="card teal"><h3 style="color:var(--teal)">A2UI라면</h3><p style="color:var(--teal-ink)">“주말에 아이랑 한강 쪽, 언덕 적게” → 에이전트가 <b>필요한 조건만</b> 폼으로 확인하고, 코스를 비교표 + 지도 + 안전 카드로 보여 준다</p></div>
+      <div class="card"><h3>안전정보는 항상 함께</h3><p class="body">사고 다발 구간 · 공사 · 기상 경보 카드를 추천 화면에 자동으로 붙이도록 에이전트 규칙에 명시</p></div>
+    </div>
+    <div class="mock f1">
+      <p class="mt">조건 확인</p>
+      <div class="opt"><span style="width:130px">거리</span><div class="bar f1"><i style="width:40%;background:var(--teal)"></i></div><span>약 15km</span></div>
+      <div class="opt"><i class="rad on"></i>평지 위주 &#160;&#160;<i class="rad"></i>약간의 언덕</div>
+      <table class="mini"><tr><th>코스</th><th>거리</th><th>경사</th><th>안전</th></tr><tr><td>[코스 A]</td><td>[__]km</td><td>낮음</td><td>주의 1곳</td></tr><tr><td>[코스 B]</td><td>[__]km</td><td>낮음</td><td>양호</td></tr></table>
+      <div class="card orange" style="padding:14px 18px"><p class="small" style="color:var(--orange-ink)"><b>안전 카드</b> · [구간명] 공사로 우회 필요</p></div>
+      <span class="btn">코스 B 지도 보기</span>
+    </div>
+  </div>
+  <div class="foot"><span>코스명 · 수치는 예시 자리표시 [__]</span><span>11 / 22</span></div>
+</section>
+
+<!-- 12 ARCHITECTURE -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">우리 프로젝트 구조에 넣기</p><h2>기존 구성에 A2UI가 들어가는 자리</h2></div>
+  <div class="flow" style="gap:16px">
+    <div class="node t" style="flex:1.1"><b>프런트엔드 (웹 · 앱)</b><span>고정 셸: 로그인 · 메뉴 · 홈<br><b style="color:var(--teal)">+ A2UI 렌더러</b><br><b style="color:var(--teal)">+ 컴포넌트 카탈로그</b></span></div>
+    <div class="arrow">⇄</div>
+    <div class="node" style="flex:1.1"><b>FastAPI API 서버</b><span>인증 · 권한 · 데이터 API<br><b style="color:var(--ink)">+ UI 메시지 전달</b> (WebSocket · SSE)</span></div>
+    <div class="arrow">⇄</div>
+    <div class="node o" style="flex:1.2"><b>에이전트 워커 (Celery)</b><span>멀티 에이전트 · 오토힐링<br><b style="color:var(--orange)">+ A2UI 메시지 생성</b><br>장기 작업 결과도 화면으로 푸시</span></div>
+    <div class="arrow">⇄</div>
+    <div class="node n" style="flex:1"><b>데이터 · 외부 API</b><span>DB · 공공 API · 지도 · LLM</span></div>
+  </div>
+  <div class="grid3">
+    <div class="card"><h3>docker/images</h3><p class="body">{팀}-fe에 렌더러 · 카탈로그, {팀}-agents에 A2UI 생성 로직 — 기존 이미지 구조 그대로</p></div>
+    <div class="card"><h3>계약 파일 추가</h3><p class="body">contracts/ui-catalog.json — 부품 이름 · 속성 · 액션 목록. 프런트와 에이전트가 같은 파일을 본다</p></div>
+    <div class="card teal"><h3 style="color:var(--teal)">핵심</h3><p style="color:var(--teal-ink)">에이전트는 DB를 직접 보지 않는다. 데이터 경로만 쓰고, 값은 FastAPI가 채운다</p></div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>12 / 22</span></div>
+</section>
+
+<!-- 13 HYBRID -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">하이브리드 원칙</p><h2>전부 생성하지 않는다: 고정할 것과 생성할 것</h2></div>
+  <div class="row">
+    <div class="card f1">
+      <span class="tag n" style="align-self:flex-start">고정 (하드코딩)</span>
+      <ul class="body">
+        <li>로그인 · 홈 · 내비게이션 같은 앱 뼈대</li>
+        <li>매일 반복하는 핵심 화면 (운영 대시보드 메인)</li>
+        <li>결제 · 최종 실행 버튼 등 규정 · 감사가 필요한 흐름</li>
+        <li>빠른 응답이 필수인 화면, 오프라인 화면</li>
+      </ul>
+    </div>
+    <div class="card teal f1">
+      <span class="tag t" style="align-self:flex-start;background:var(--teal);color:#F5F7F6">생성 (A2UI)</span>
+      <ul style="color:var(--teal-ink)">
+        <li>질문마다 달라지는 조회 · 비교 결과</li>
+        <li>예외 상황 대응 (장애 · 혼잡 · 경보)</li>
+        <li>조건을 확인하는 짧은 폼</li>
+        <li>드물게 쓰는 다양한 요청 (롱테일)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card orange" style="flex-direction:row;gap:20px;align-items:center">
+    <p style="font-size:28px;font-weight:700;color:var(--orange);white-space:nowrap">8주 프로젝트 권장</p>
+    <p style="color:var(--orange-ink)">전체 앱을 생성형으로 만들지 말고, <b>가장 다양한 질문이 몰리는 화면 1~2개</b>에만 A2UI를 적용해 하드코딩 버전과 비교 시연하라.</p>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>13 / 22</span></div>
+</section>
+
+<!-- NEW A: TEMPLATE + DECISION MODEL -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">더 빠르게 · 템플릿 + 결정 모델</p><h2>화면을 “생성”하지 말고, 미리 만든 템플릿에서 “고르게” 한다</h2></div>
+  <div class="flow">
+    <div class="node"><b>① 입력</b><span>말 · 터치 · 텍스트 · 사진 + 현재 상태</span></div>
+    <div class="arrow">→</div>
+    <div class="node o"><b>② 결정 모델</b><span>Gemini Decision 1이 템플릿 · 부품을 <b>선택</b> (확률 · 신뢰도)</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><b>③ 코드가 조립</b><span>선택된 템플릿에 데이터 바인딩</span></div>
+    <div class="arrow">→</div>
+    <div class="node t"><b>④ 문구만 채움</b><span>필요할 때만 작은 LLM이 안내 문장 작성</span></div>
+    <div class="arrow">→</div>
+    <div class="node n"><b>⑤ 렌더</b><span>A2UI 렌더러가 즉시 표시</span></div>
+  </div>
+  <table>
+    <tr><th style="width:20%">생성 방식</th><th style="width:28%">LLM이 하는 일</th><th style="width:24%">속도</th><th style="width:28%">어울리는 화면</th></tr>
+    <tr><td class="k">Direct JSON</td><td>A2UI JSON을 전부 작성</td><td>느림 (초기 방식)</td><td>—</td></tr>
+    <tr><td class="k">Express (기본값)</td><td>짧은 Python식 문법으로 작성 → SDK가 변환</td><td>JSON 대비 최대 3배 빠름</td><td>모양을 미리 알 수 없는 화면</td></tr>
+    <tr><td class="k">Controlled (결정 모델)</td><td>정해진 질문에 답해 레이아웃 선택</td><td>레이아웃 결정 최대 80배 빠름</td><td>모양이 정해진 화면 — 설정 · 결제 · 확인 · 키오스크</td></tr>
+  </table>
+  <div class="foot"><span>출처: Google Developers Blog “Fast, reliable A2UI, with swappable inference formats” (2026.10.27)</span><span>14 / 22</span></div>
+</section>
+
+<!-- NEW B: GEMINI DECISION 1 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Gemini Decision 1</p><h2>글을 쓰지 않고 선택지에 점수를 매기는 모델</h2></div>
+  <div class="row">
+    <div class="col f1">
+      <div class="grid2">
+        <div class="card navy"><p class="eyebrow" style="color:var(--teal-l)">지연 시간</p><p style="font-size:44px;font-weight:900;color:#F2F5F4">150–250ms</p><p class="small">종단 간, 질문 1개→100개에도 거의 일정</p></div>
+        <div class="card navy"><p class="eyebrow" style="color:var(--teal-l)">비용</p><p style="font-size:44px;font-weight:900;color:#F2F5F4">$0.10</p><p class="small">입력 100만 토큰당, 출력 토큰 과금 없음</p></div>
+      </div>
+      <div class="card">
+        <h3>질문 3종류</h3>
+        <ul class="body">
+          <li><b style="color:var(--ink)">예/아니오</b> — “사용자가 길을 찾고 있나?”</li>
+          <li><b style="color:var(--ink)">선택</b> — 2~255개 중 하나 (예: 템플릿 9종 중 무엇)</li>
+          <li><b style="color:var(--ink)">점수</b> — 정해진 기준으로 등급 매기기 (예: 긴급도)</li>
+        </ul>
+        <p class="small muted">요청 한 번에 최대 1,000개 질문 · 텍스트 · 이미지 · 음성 · 영상 · PDF 입력</p>
+      </div>
+    </div>
+    <div class="col" style="width:720px">
+      <div class="card teal">
+        <h3 style="color:var(--teal)">핵심: 모든 답에 신뢰도(0~1)</h3>
+        <p style="color:var(--teal-ink)">애매하면 코드가 알아서 다른 길로 보낸다</p>
+        <div class="opt" style="color:var(--teal-ink)"><span class="badge" style="background:var(--teal);color:#F5F7F6">≥ 0.8</span>템플릿 바로 표시</div>
+        <div class="opt" style="color:var(--teal-ink)"><span class="badge" style="background:#CFE6E2;color:var(--teal-ink)">0.5–0.8</span>후보 2개를 버튼으로 확인</div>
+        <div class="opt" style="color:var(--teal-ink)"><span class="badge" style="background:var(--orange-bg);color:var(--orange)">&lt; 0.5</span>기본 메뉴 · 사람 연결</div>
+        <p class="small muted">임계값은 예시 — 팀이 평가 데이터로 정한다</p>
+      </div>
+      <div class="card orange"><p style="color:var(--orange-ink)"><b>할 수 없는 것</b>: 처음 보는 모양의 화면은 만들지 못한다 — 문법 · 템플릿에 정의한 레이아웃만 고른다</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>출처: Google “Gemini Decisions API” (2026.11.11)</span><span>15 / 22</span></div>
+</section>
+
+<!-- NEW C: KIOSK -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">적용 예 · 키오스크</p><h2>키오스크에 특히 잘 맞는 이유: 정해진 화면, 빠른 응답</h2></div>
+  <div class="row">
+    <div class="col" style="width:760px">
+      <div class="card"><h3>템플릿 카탈로그 (예: 축제 안내 키오스크)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <span class="tag t">길안내</span><span class="tag t">혼잡 경보</span><span class="tag t">화장실 · 편의시설</span><span class="tag t">미아 · 분실</span><span class="tag t">교통 · 셔틀</span><span class="tag t">공연 일정</span><span class="tag o">응급 · 직원 호출</span>
+        </div>
+      </div>
+      <div class="card"><h3>왜 키오스크인가</h3>
+        <ul class="body">
+          <li>화면 종류가 한정적 → 템플릿으로 미리 정의 가능</li>
+          <li>줄 선 사람 앞 — 0.2초 응답이 체감 품질</li>
+          <li>말 · 터치 · 다국어 입력을 하나의 결정으로</li>
+          <li>메뉴 깊이 대신 첫 화면에서 바로 목적지로</li>
+        </ul>
+      </div>
+      <div class="card orange"><p style="color:var(--orange-ink)"><b>반드시 함께</b>: 네트워크 끊김 · 낮은 신뢰도일 때 쓰는 <b>고정 메뉴 폴백</b>, 카메라 · 음성 수집 고지</p></div>
+    </div>
+    <div class="mock f1">
+      <p class="small muted">입력: (음성, 일본어) “子どもとはぐれました”</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span class="badge" style="background:var(--band)">template = 미아 · 분실 (0.97)</span>
+        <span class="badge" style="background:var(--band)">language = 日本語 (0.99)</span>
+        <span class="badge" style="background:var(--orange-bg);color:var(--orange)">urgency = 높음</span>
+      </div>
+      <div class="card orange" style="padding:18px 22px;gap:8px">
+        <p class="mt" style="color:var(--orange)">迷子センターへご案内します</p>
+        <p class="small" style="color:var(--orange-ink)">最寄りの迷子センター: [위치] · 徒歩 [__] 分</p>
+      </div>
+      <div class="map"><i class="pin" style="left:30%;top:40%;background:var(--navy3)"></i><i class="pin" style="left:68%;top:55%;background:var(--orange)"></i></div>
+      <div style="display:flex;gap:12px"><span class="btn o">スタッフを呼ぶ</span><span class="btn">地図を印刷 · QR</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>화면 속 위치 · 시간은 예시 자리표시</span><span>16 / 22</span></div>
+</section>
+
+<!-- NEW D: HOW TO BUILD -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">만드는 방법</p><h2>템플릿 + 결정 모델 화면을 만드는 순서</h2></div>
+  <div class="row">
+    <div class="grid2 f1" style="align-content:start">
+      <div class="card"><p class="eyebrow">1 · 템플릿 정의</p><p class="body">화면 원형(archetype) 5~10개를 A2UI 부품 조합으로 만들고, 데이터 슬롯을 표시</p></div>
+      <div class="card"><p class="eyebrow">2 · 질문 문법 작성</p><p class="body">“어떤 템플릿?”, “어떤 언어?”, “긴급한가?” 같은 질문과 선택지 · 기준을 파일로 관리</p></div>
+      <div class="card"><p class="eyebrow">3 · 결정 → 조립 → 채움</p><p class="body">결정 모델 답으로 템플릿 선택 → 코드가 데이터 바인딩 → 문장이 필요할 때만 작은 LLM</p></div>
+      <div class="card teal"><p class="eyebrow">4 · 평가</p><p style="color:var(--teal-ink)">대표 입력 50개로 정답 템플릿 일치율 · 지연 · 신뢰도 분포 측정</p></div>
+    </div>
+<div class="code" style="width:860px"><span class="c"># questions.md — 결정 질문 문법 (개념 예시)</span>
+<span class="s">&gt; 사용자에게 보여 줄 화면은?</span>
+- route      : 장소 · 길을 묻는다
+- crowd      : 혼잡 · 대기 상황을 묻는다
+- lost_child : 아이 · 일행을 잃어버렸다
+- facility   : 화장실 · 편의시설
+- emergency  : 다침 · 위급
+<span class="s">&gt; 응답 언어는?</span>
+- ko · en · ja · zh
+<span class="s">&gt; 긴급도 (0~3)</span>
+- 0 일반 · 1 불편 · 2 도움 필요 · 3 위급
+<span class="c"># emergency 이거나 긴급도 3이면</span>
+<span class="c"># 신뢰도와 무관하게 직원 호출 버튼 고정</span></div>
+  </div>
+  <div class="foot"><span>A2UI Agent SDK에는 아직 결정 모델용 형식이 내장되어 있지 않아 이 조립은 직접 구현한다 (2026.11 기준)</span><span>17 / 22</span></div>
+</section>
+
+<!-- 14 STEPS -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">설계 순서</p><h2>A2UI 화면을 만드는 6단계</h2></div>
+  <div class="grid3">
+    <div class="card"><p class="eyebrow">STEP 1</p><h3>결정 목록</h3><p class="body">사용자가 그 화면에서 내리는 결정을 나열</p></div>
+    <div class="card"><p class="eyebrow">STEP 2</p><h3>카탈로그 정의</h3><p class="body">부품 10~15개로 시작: 카드 · 표 · 차트 · 지도 · 체크박스 · 라디오 · 버튼</p></div>
+    <div class="card"><p class="eyebrow">STEP 3</p><h3>데이터 API</h3><p class="body">부품이 가리킬 데이터 경로를 FastAPI 엔드포인트로</p></div>
+    <div class="card"><p class="eyebrow">STEP 4</p><h3>에이전트 규칙</h3><p class="body">카탈로그 스키마 + “언제 어떤 부품” 규칙을 프롬프트에</p></div>
+    <div class="card"><p class="eyebrow">STEP 5</p><h3>액션 처리</h3><p class="body">버튼 · 선택 이벤트를 받아 실행하거나 화면 갱신</p></div>
+    <div class="card teal"><p class="eyebrow">STEP 6</p><h3 style="color:var(--teal)">폴백 · 평가</h3><p style="color:var(--teal-ink)">UI 생성 실패 시 텍스트 응답, 대표 질문 20개로 출력 평가</p></div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>18 / 22</span></div>
+</section>
+
+<!-- 15 PITFALLS -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">주의할 점</p><h2>생성형 UI에서 자주 생기는 문제와 대책</h2></div>
+  <table>
+    <tr><th style="width:28%">문제</th><th style="width:36%">왜 생기나</th><th style="width:36%">대책</th></tr>
+    <tr><td>매번 화면이 달라 혼란</td><td>같은 질문에도 LLM 출력이 흔들림</td><td>질문 유형별 “기본 레이아웃” 규칙 고정</td></tr>
+    <tr><td>카탈로그에 없는 부품 요청</td><td>에이전트가 그럴듯한 부품을 지어냄</td><td>스키마 검증 후 거절 · 재생성, SDK의 오류 교정 활용</td></tr>
+    <tr><td>응답이 느리다</td><td>LLM이 화면 전체를 다 만든 뒤 전송</td><td>점진 렌더링, 무거운 작업은 Celery 워커</td></tr>
+    <tr><td>잘못된 실행</td><td>에이전트가 버튼 동작까지 자동 실행</td><td>되돌리기 어려운 동작은 사람 확인 버튼 필수</td></tr>
+    <tr><td>민감 정보 노출</td><td>값을 프롬프트에 넣어 생성</td><td>데이터 바인딩으로 값은 서버에서만</td></tr>
+    <tr><td>테스트 범위 폭발</td><td>조합이 무한함</td><td>부품 단위 테스트 + 대표 질문 eval</td></tr>
+  </table>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>19 / 22</span></div>
+</section>
+
+<!-- 16 ECOSYSTEM -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">비슷한 선택지</p><h2>A2UI · MCP Apps · AG-UI는 무엇이 다른가</h2></div>
+  <table>
+    <tr><th style="width:18%">이름</th><th style="width:30%">무엇인가</th><th style="width:26%">UI를 누가 그리나</th><th style="width:26%">이럴 때</th></tr>
+    <tr><td class="k">A2UI</td><td>선언형 UI 형식 (JSON)</td><td>앱의 네이티브 렌더러</td><td>우리 앱 디자인에 자연스럽게 녹여야 할 때</td></tr>
+    <tr><td class="k">MCP Apps</td><td>MCP 확장 — 서버가 만든 HTML을 ui:// 리소스로</td><td>샌드박스 iframe 속 서버의 웹앱</td><td>Claude · ChatGPT 같은 AI 호스트 안에 완성된 UI를 넣을 때</td></tr>
+    <tr><td class="k">AG-UI</td><td>에이전트 ↔ 프런트 이벤트 전송 프로토콜</td><td>(그리지 않음 — 파이프)</td><td>A2UI 메시지를 실어 나를 통로가 필요할 때</td></tr>
+  </table>
+  <div class="card teal" style="flex-direction:row;gap:20px;align-items:center">
+    <p style="font-size:28px;font-weight:700;color:var(--teal);white-space:nowrap">한 줄 요약</p>
+    <p style="color:var(--teal-ink)">AG-UI는 <b>통로</b>, A2UI는 <b>내용</b>, MCP Apps는 <b>완성된 앱 상자</b>. 함께 쓸 수 있다.</p>
+  </div>
+  <div class="foot"><span>출처: a2ui.org “How Does A2UI Compare?”, CopilotKit Generative UI 가이드</span><span>20 / 22</span></div>
+</section>
+
+<!-- 17 VIBE PROMPT -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">바이브 코딩으로 시작하기</p><h2>코딩 에이전트에게 주는 첫 지시와 규칙</h2></div>
+  <div class="row">
+<div class="code" style="width:960px"><span class="c"># AGENTS.md — 생성형 UI 규칙</span>
+<span class="s">## 카탈로그</span>
+- UI 부품은 contracts/ui-catalog.json에 있는 것만 사용
+- 새 부품은 카탈로그 PR을 먼저 올린 뒤 구현
+<span class="s">## 데이터</span>
+- 에이전트 출력에는 데이터 경로만, 실제 값 금지
+<span class="s">## 안전</span>
+- 결제 · 삭제 · 외부 발송은 확인 버튼을 거친다
+- UI 생성 실패 시 텍스트로 폴백
+<span class="s">## 완료 조건</span>
+- 대표 질문 20개 eval 통과
+- docker/start.sh 후 전체 흐름 시연 가능</div>
+    <div class="col f1">
+      <div class="card">
+        <h3>첫 프롬프트 예시</h3>
+        <p class="body">“A2UI 최신 공식 문서를 먼저 확인해. 우리 FastAPI 프로젝트에 A2UI를 붙이되, 카탈로그 부품은 지도 · 표 · 라디오 · 체크박스 · 버튼 5개로 시작해. 하드코딩 버전 화면 하나와 A2UI 버전 화면 하나를 나란히 비교할 수 있게 만들어 줘.”</p>
+      </div>
+      <div class="card orange"><p style="color:var(--orange-ink)"><b>AI가 구버전 API로 코드를 쓸 수 있다</b> — 1.0 이전 예제가 많으므로 버전을 명시하라</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>A2UI로 만드는 유연한 UI</span><span>21 / 22</span></div>
+</section>
+
+<!-- 18 CLOSING -->
+<section class="slide dark" style="justify-content:center;gap:48px">
+  <p class="eyebrow">정리</p>
+  <h2 style="font-size:64px;line-height:1.25">화면을 미리 다 그리지 말고,<br>좋은 부품과 규칙을 만들어라</h2>
+  <div class="grid3">
+    <div class="card"><p class="eyebrow">하드코딩 UI</p><p>예측 가능 · 빠름 — 앱의 뼈대와 핵심 흐름에</p></div>
+    <div class="card"><p class="eyebrow">텍스트 채팅</p><p>무엇이든 답함 — 하지만 결정과 행동은 느림</p></div>
+    <div class="card hl"><p class="eyebrow">생성형 UI (A2UI)</p><p>질문에 맞는 화면 — 우리 부품 안에서 안전하게</p></div>
+  </div>
+  <p style="font-size:26px;color:var(--on-dark2)">모양이 정해진 화면은 <b style="color:var(--teal-l)">템플릿 + 결정 모델</b>로 0.2초 만에, 처음 보는 요청은 <b style="color:var(--teal-l)">Express 생성</b>으로.<br>과제: 팀별로 “다양한 질문이 몰리는 화면 1개”를 골라 하드코딩 · A2UI 두 버전으로 시연할 것</p>
+  <div class="foot"><span>참고: developers.googleblog.com (A2UI 1.0) · a2ui.org · github.com/google/A2UI</span><span>22 / 22</span></div>
+</section>
+
+</div>
+<div id="hud"><span id="pg"></span><button id="prev">◀</button><button id="next">▶</button><button id="fs">전체화면</button></div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),i=0;
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);slides.forEach(function(el){el.style.transform='scale('+s+')'});}
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(el,k){el.classList.toggle('active',k===i)});document.getElementById('pg').textContent=(i+1)+' / '+slides.length;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+  addEventListener('resize',fit);
+  addEventListener('keydown',function(e){if(['ArrowRight','PageDown',' '].indexOf(e.key)>=0){e.preventDefault();show(i+1)}if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){e.preventDefault();show(i-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key==='f')toggleFs()});
+  function toggleFs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen()}
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.getElementById('fs').onclick=toggleFs;
+  var h=parseInt((location.hash||'').slice(1),10);fit();show(isNaN(h)?0:h-1);
+})();
+</script>
+</body>
+</html>

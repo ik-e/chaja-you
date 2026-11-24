@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>모델·도구·서비스 평가와 증빙 남기기</title><style>
+  :root{
+    --ink:#14213d; --sub:#4a5568; --mute:#8a94a6; --line:#dfe3ea; --bg:#ffffff; --paper:#f6f7fb;
+    --fe:#2563eb; --fe-bg:#e8f0ff;
+    --api:#059669; --api-bg:#e3f6ee;
+    --q:#d97706; --q-bg:#fdf1de;
+    --wk:#7c3aed; --wk-bg:#f0e9ff;
+    --db:#475569; --db-bg:#eceff4;
+    --ext:#dc2626; --ext-bg:#fdeaea;
+    --code-bg:#0f172a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#2b2f3a;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  #deck{width:1280px;height:720px;position:relative;transform-origin:center center}
+  .slide{position:absolute;inset:0;width:1280px;height:720px;background:var(--bg);padding:56px 72px 48px;display:none;overflow:hidden}
+  .slide.active{display:block}
+  .slide .no{position:absolute;right:40px;bottom:24px;font-size:14px;color:var(--mute);letter-spacing:.05em}
+  .slide .tag{position:absolute;left:72px;bottom:24px;font-size:13px;color:var(--mute)}
+  .kicker{font-size:15px;font-weight:700;letter-spacing:.12em;color:var(--wk);text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:44px;line-height:1.25;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:34px;line-height:1.3;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .lead{font-size:20px;color:var(--sub);line-height:1.6;margin-bottom:26px}
+  p,li{font-size:19px;line-height:1.6}
+  b,strong{font-weight:700}
+  .muted{color:var(--sub)}
+  .small{font-size:15px}
+  ul.clean{list-style:none}
+  ul.clean li{padding-left:22px;position:relative;margin-bottom:8px}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:12px;width:7px;height:7px;border-radius:50%;background:var(--wk)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff}
+  .card h3{font-size:20px;margin-bottom:8px}
+  .card p,.card li{font-size:16.5px;line-height:1.55}
+  .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+  .fe{color:var(--fe);background:var(--fe-bg)} .api{color:var(--api);background:var(--api-bg)}
+  .q{color:var(--q);background:var(--q-bg)} .wk{color:var(--wk);background:var(--wk-bg)}
+  .db{color:var(--db);background:var(--db-bg)} .ext{color:var(--ext);background:var(--ext-bg)}
+  table{border-collapse:collapse;width:100%}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.45;vertical-align:top}
+  th{font-size:14px;color:var(--sub);font-weight:700;background:var(--paper)}
+  pre{background:var(--code-bg);color:#e2e8f0;border-radius:12px;padding:18px 20px;font-family:'JetBrains Mono','D2Coding','Menlo','Consolas','Noto Sans Mono CJK KR',monospace;font-size:14.5px;line-height:1.55;white-space:pre;overflow:hidden}
+  pre .c{color:#7dd3a8} pre .k{color:#c4b5fd} pre .s{color:#fcd34d} pre .h{background:rgba(250,204,21,.16);display:inline-block;width:100%}
+  .tree{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+  .tree .c{color:#6b7280} .tree .d{color:var(--wk);font-weight:700} .tree .f{color:var(--ink)}
+  .callout{border-left:5px solid var(--wk);background:var(--wk-bg);padding:14px 18px;border-radius:8px;font-size:17px;line-height:1.55}
+  .callout.warn{border-color:var(--ext);background:var(--ext-bg)}
+  .callout.ok{border-color:var(--api);background:var(--api-bg)}
+  .file{font-family:'JetBrains Mono','Menlo','Consolas',monospace;font-size:14px;color:var(--sub);margin-bottom:6px}
+  /* cover */
+  .cover{background:linear-gradient(135deg,#14213d 0%,#2a2357 60%,#4c2a85 100%);color:#fff}
+  .cover h1{font-size:54px;color:#fff;margin-top:120px}
+  .cover .lead{color:#cbd5f5;font-size:22px;margin-top:18px}
+  .cover .meta{position:absolute;left:72px;bottom:56px;font-size:16px;color:#aab4d6}
+  .cover .no,.cover .tag{color:#7f8bb3}
+  .section{background:var(--paper)}
+  /* nav */
+  #hud{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;background:rgba(15,23,42,.85);color:#e2e8f0;padding:8px 12px;border-radius:999px;font-size:14px;z-index:10}
+  #hud button{background:#334155;color:#fff;border:0;border-radius:999px;padding:6px 14px;font-size:14px;cursor:pointer;font-family:inherit}
+  #hud button:hover{background:#475569}
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    html,body{background:#fff}
+    #stage{position:static;display:block}
+    #deck{transform:none!important;width:auto;height:auto}
+    .slide{position:relative;display:block!important;page-break-after:always;break-after:page}
+    #hud{display:none}
+  }
+
+  a{color:var(--fe);text-decoration:underline;text-underline-offset:3px}
+  code{font-family:'Menlo','Consolas',monospace;font-size:.92em;overflow-wrap:anywhere}
+  .spaced{margin-top:20px}.stack{display:grid;gap:16px}.badge{font-size:13px;color:var(--wk);font-weight:700;margin-bottom:10px}
+  .compact{gap:20px}.compact .card{padding:16px 22px}
+  .metric{font-size:32px;font-weight:800;color:var(--wk);line-height:1.3;margin:6px 0}
+  .refs{position:absolute;left:72px;right:72px;bottom:58px;color:var(--sub);font-size:13px;line-height:1.5}
+  .strip{display:flex;gap:10px;align-items:stretch;margin:20px 0}.strip>div{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:17px;line-height:1.6}
+  .strip b{display:block;margin-bottom:4px;color:var(--wk)}
+  .form td{height:48px}.checkline{display:flex;gap:12px;margin:10px 0;font-size:18px;line-height:1.6}
+  @media print{.slide:last-child{break-after:auto;page-break-after:auto}a{color:var(--fe);text-decoration:none}}
+</style></head><body><div id="stage"><div id="deck"><section class="slide cover"><div class="kicker" style="color:#c4b5fd;margin-top:24px">최종 프로젝트 · STEP3 · STEP2 평가부터 STEP4 검증까지</div><h1 style="margin-top:90px">모델·도구·서비스 평가와<br>증빙 남기기</h1><p class="lead">BFCL 원본 · 팀 자체 문항 · 모의 실행 · 실제 서비스<br>무엇을 확인했고 어디까지 말할 수 있는가</p><div class="meta">설명 15분 + 팀 적용 15분 · 기존 시험 하나를 재현 가능한 기록으로 정리<br>AI 애플리케이션 개발 과정 · 최종 프로젝트 공통 자료</div></section><section class="slide"><div class="kicker">01 · 평가 목적</div><h2>질문은 같아도 확인하는 대상은 다르다</h2><p class="lead">도구 호출 능력, 팀 업무 판단, 실제 연동 성공을 같은 점수로 섞지 않습니다.</p><table class=""><thead><tr><th>평가 묶음</th><th>확인하는 것</th><th>그 결과만으로 확정할 수 없는 것</th></tr></thead><tbody><tr><td>BFCL 원본</td><td>제공된 함수 정의에 맞는 도구 호출 능력</td><td>우리 DB·권한·화면·내부 API의 정상 동작</td></tr><tr><td>팀 자체 문항</td><td>팀 사용자 상황에서의 도구·업무 판단</td><td>실제 예약·저장·알림의 완료</td></tr><tr><td>모의 도구 실행</td><td>도구 결과를 받은 뒤의 다음 행동</td><td>실제 공급원·DB·권한 계층의 동작</td></tr><tr><td>서비스 통합 시험</td><td>화면·API·모델·저장·외부 연동의 연결</td><td>다른 버전·미실험 상황까지의 성능</td></tr></tbody></table><div class="callout " style="margin-top:20px">보고서에는 <b>무엇을 시험했는지</b>와 <b>아직 시험하지 않은 경계</b>를 한 줄씩 붙입니다.</div><div class="refs">공식 출처: <a href="https://huggingface.co/datasets/gorilla-llm/Berkeley-Function-Calling-Leaderboard">BFCL 데이터셋 카드</a> · 수업 안내: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Data/BFCL-PREPARE.md">BFCL-PREPARE</a></div></section><section class="slide"><div class="kicker">02 · 원본 일부 평가</div><h2>BFCL은 30문항만 있는 데이터셋이 아니다</h2><p class="lead">여러 범주·파일이 있고, 이 수업의 30문항은 원본에서 선택한 교육용 실행 범위입니다.</p><div class="grid2"><div class="card "><h3>실행 전에 고정</h3><ul class="clean"><li>출처 URL과 원본 revision</li><li>사용한 파일·범주·문항 ID 30개</li><li>원본 정답과 채점기 버전</li><li>AST·실행·교육용 비교 등 채점 방식</li></ul></div><div class="card "><h3>결과에 남길 표현</h3><ul class="clean"><li>BFCL 원본 일부 30문항 평가</li><li>팀 자체 30문항은 별도 표·분모</li><li>공식 리더보드 전체 점수와 구분</li><li>준비 완료와 모델 실행 완료 구분</li></ul></div></div><div class="callout " style="margin-top:20px"><b>보고 예시 문장 틀:</b> 고정 revision의 BFCL 원본 중 [범주·ID] 30문항을 [모델]에 실행하고 [채점 방식]으로 평가했다. 이 결과는 해당 부분집합의 결과다.</div><div class="refs">문장 틀은 실제 실행·기록 후에만 채웁니다. 출처: <a href="https://huggingface.co/datasets/gorilla-llm/Berkeley-Function-Calling-Leaderboard">BFCL 데이터셋 카드</a> · <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Data/BFCL-PREPARE.md">수업 실행·채점 안내</a></div></section><section class="slide"><div class="kicker">03 · 여러 단계 실행</div><h2>첫 번째 도구 선택과 업무 완료를 따로 본다</h2><p class="lead">예시: 사용 가능한 상담 시간을 찾아서, 사용자가 동의한 시간으로 신청하는 요청입니다.</p><div class="strip"><div><b>① 조회 호출</b>find_slots()</div><div><b>② 도구 결과</b>모의 시간 후보 반환</div><div><b>③ 후속 행동</b>확인·추가 질문 또는 신청</div><div><b>④ 결과 안내</b>신청 결과와 다음 행동</div></div><div class="grid2"><div class="card "><h3>첫 응답 평가</h3><p>조회 도구를 올바른 인자로 골랐는지 봅니다. 이 점수만으로 신청까지 끝났다고 말하지 않습니다.</p></div><div class="card "><h3>여러 단계 평가</h3><p>고정된 모의 도구 결과를 돌려주고 후속 호출·종료·실패 안내까지 확인합니다. 최대 단계·시간도 정합니다.</p></div></div><div class="callout " style="margin-top:20px">채점 방식이 바뀌면 <b>기존 점수를 덮어쓰지 않고 별도 결과</b>로 남깁니다. 추가 확인이 필요한 요청은 임의로 신청하지 않는 것이 정답일 수 있어요.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=25">API 작성법 25~27쪽</a></div></section><section class="slide"><div class="kicker">04 · 실행 경계</div><h2>모의 예약 성공은 실제 DB 저장 성공과 다르다</h2><p class="lead">외부 호출·저장·알림마다 실제로 확인한 범위를 표시합니다.</p><table class=""><thead><tr><th>시험에서 관찰한 것</th><th>알 수 있는 것</th><th>추가로 확인할 것</th></tr></thead><tbody><tr><td>book 도구가 성공 JSON 반환</td><td>모델이 성공 결과를 해석함</td><td>진짜 DB에 예약이 저장됐는가</td></tr><tr><td>시험 DB에 예약 행 생성</td><td>해당 환경의 저장 경로 동작</td><td>중복·경합·다른 사용자 접근 거부</td></tr><tr><td>알림 생성 행 저장</td><td>발송 대기 기록이 생성됨</td><td>실제 전달·중복 발송·실패 재처리</td></tr><tr><td>실제 외부 API 정상 응답</td><td>그 시점·조건의 연동 성공</td><td>타임아웃·제한·대체 경로 검증</td></tr></tbody></table><div class="callout " style="margin-top:20px">증빙 화면에는 <b>mock / test DB / 실제 공급원</b>을 표시합니다. 실제 사용자에게 예약·발송이 일어나지 않는 시험 환경을 먼저 사용하세요.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/API%EC%84%A4%EA%B3%84%EB%AC%B8%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=26">API 작성법 26쪽</a> · <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step2/DB%EC%8A%A4%ED%82%A4%EB%A7%88%EC%84%A4%EA%B3%84%EC%84%9C_%EC%9E%91%EC%84%B1%EB%B2%95.pdf#page=22">DB 작성법 22쪽</a></div></section><section class="slide"><div class="kicker">05 · 비교 조건</div><h2>바꾼 것과 고정한 것을 남긴다</h2><p class="lead">점수 차이를 모델 때문이라고 설명하려면 다른 조건도 비교 가능해야 합니다.</p><table class=""><thead><tr><th>고정·기록할 항목</th><th>남길 내용</th></tr></thead><tbody><tr><td>문항과 정답</td><td>문항 버전·ID·해시·평가 유형·채점 기준</td></tr><tr><td>모델과 호출 환경</td><td>요청 모델 ID·응답 모델 ID·공급자·실행일</td></tr><tr><td>프롬프트와 도구</td><td>프롬프트 버전·JSON Schema·strict 등 옵션</td></tr><tr><td>반복·한도</td><td>반복 횟수·최대 단계·시간·재시도·실패 포함 기준</td></tr><tr><td>비교 결과</td><td>반복별 결과·평균·변동·오류·제한 사항</td></tr></tbody></table><div class="callout " style="margin-top:20px">채점 정답을 보고 프롬프트를 맞춘 시험은 탐색용으로 표시합니다. 최종 비교에는 따로 준비한 문항도 사용해 과도한 맞춤 여부를 확인하세요.</div><div class="refs">반복 횟수·합격선은 팀이 목적에 맞게 정합니다. 반복 몇 번만으로 모든 상황의 우열을 확정하지 않습니다.</div></section><section class="slide"><div class="kicker">06 · 총점과 중요한 실패</div><h2>점수가 비슷해도 위험한 실패는 따로 센다</h2><p class="lead">아래는 평가표 구성 예시입니다. 숫자나 합격선을 새 공통 요건으로 정하는 자료는 아닙니다.</p><table class=""><thead><tr><th>분리할 항목</th><th>통과 기준을 먼저 쓰기</th><th>함께 남길 결과</th></tr></thead><tbody><tr><td>긴급·사람 인계</td><td>정해진 상황에서 인계·안내</td><td>놓친 사례 ID와 이유</td></tr><tr><td>권한·정보 부족</td><td>금지 도구 미실행·필요한 추가 질문</td><td>권한 밖 실행·값 추정 여부</td></tr><tr><td>저장·중복·경합</td><td>업무 상태 확인·중복 효과 방지</td><td>재시도 뒤 결과·오류 코드</td></tr><tr><td>복구·대체·실패</td><td>검증된 회복·대체·이관을 구분</td><td>감지·전략·검증·종료 기록</td></tr></tbody></table><div class="callout " style="margin-top:20px">오류·타임아웃을 분모에서 조용히 빼지 않습니다. <b>전체 대상 수 / 실행 수 / 성공·실패 / 미실행</b>과 각각의 처리 기준을 적습니다.</div><div class="refs">참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step4/%EB%A9%80%ED%8B%B0%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8_AutoHealing_%EC%A0%81%EC%9A%A9%EA%B0%80%EC%9D%B4%EB%93%9C.pdf#page=20">Auto-Healing 가이드 20~21쪽</a></div></section><section class="slide"><div class="kicker">07 · 지연과 비용</div><h2>사용자 요청 하나의 전체 실행을 잰다</h2><p class="lead">LLM 첫 응답만 빠르거나 저렴해도, 도구·재시도까지 합치면 결과가 달라질 수 있습니다.</p><div class="grid2"><div class="card "><h3>전체 시간</h3><p>요청 접수 → 대기 → 모델·도구 실행 → 재시도 → 최종 결과까지 측정합니다. 겹쳐 실행한 구간은 시간선으로 봅니다.</p></div><div class="card "><h3>전체 비용</h3><p>모든 모델 호출의 실제 사용량·도구 비용을 합산합니다. 호출 실패 비용·캐시·실행일 단가·통화도 구분합니다.</p></div></div><div class="strip"><div><b>모델 기록</b>입력·출력 토큰<br>호출 횟수·모델 ID</div><div><b>실행 기록</b>대기·도구·재시도<br>최종 완료 시각</div><div><b>보고 결과</b>시나리오별 비용<br>지연·실패율 함께</div></div><div class="callout " style="margin-top:20px">단가·토큰을 가정해 계산했다면 <b>예상 비용</b>으로 표시합니다. 실제 사용량 측정값과 같은 열에 섞지 않습니다.</div><div class="refs">평균만으로 숨겨지는 느린 사례도 남깁니다. 동시 실행의 총 시간은 각 호출 시간을 단순히 더한 값과 다릅니다.</div></section><section class="slide"><div class="kicker">08 · 증빙 묶음</div><h2>스크린샷 한 장에 재현 기록을 연결한다</h2><p class="lead">이미지는 결과를 보여 주고, 입력·환경·로그는 그 결과를 다시 확인하게 합니다.</p><div class="grid2"><div class="card "><h3>검토용 폴더 예시</h3><pre style="font-size:15px">evidence/
+  README.md       # 목적·환경·명령·한계
+  manifest.json   # 커밋·모델·문항 버전
+  cases.jsonl     # 공유 가능한 시험 입력
+  runs.jsonl      # 정제한 호출·도구 기록
+  scores.csv      # 문항별 판정·이유
+  screen.png      # 결과 화면</pre></div><div class="card "><h3>같은 실행으로 묶기</h3><ul class="clean"><li>run_id·case_id로 입력·응답·점수 연결</li><li>기대값과 실제값을 나란히 기록</li><li>모의·실제·미실행 구분</li><li>오답·실패의 대표 사례 포함</li><li>처음부터 다시 할 실행 명령 안내</li></ul></div></div><div class="callout " style="margin-top:20px">원본 저장이 제한되면 허용된 메타데이터·가린 화면으로 증빙합니다. <b>API 키·토큰·비밀번호·불필요한 개인정보</b>는 공개 자료에서 제외합니다.</div><div class="refs">형식·폴더 이름은 예시입니다. 참고: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step4/%EB%A9%80%ED%8B%B0%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8_AutoHealing_%EC%A0%81%EC%9A%A9%EA%B0%80%EC%9D%B4%EB%93%9C.pdf#page=20">Auto-Healing 가이드 20쪽</a></div></section><section class="slide"><div class="kicker">09 · 팀 적용 15분</div><h2>기존 시험 하나를 설명 가능한 기록으로 바꾼다</h2><p class="lead">새 공식 제출물을 추가하지 않습니다. 현재 가진 결과에서 빠진 연결을 채워 보세요.</p><table class=""><thead><tr><th>질문</th><th>팀이 한 줄로 답할 것</th></tr></thead><tbody><tr><td>무엇을 확인했나요?</td><td>BFCL 일부 / 자체 문항 / 모의 도구 / 실제 통합 중 선택</td></tr><tr><td>어떤 조건이었나요?</td><td>문항·모델·프롬프트·도구·커밋·환경·반복</td></tr><tr><td>무엇으로 성공을 판정했나요?</td><td>기대 동작·합격 기준·분모·예외 처리</td></tr><tr><td>어디에서 볼 수 있나요?</td><td>실행 ID로 연결된 응답·채점·화면·재현 방법</td></tr><tr><td>어디까지는 아직 모르나요?</td><td>실제 저장·외부 전달·다른 환경 등 미확인 범위</td></tr></tbody></table><div class="callout ok" style="margin-top:20px"><b>좋은 보고는 점수가 높은 보고가 아니라 확인 범위가 분명한 보고입니다.</b> 부족한 부분은 담당·다음 시험·확인일로 이어 주세요.</div><div class="refs">이어서: <a href="https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/Doc/Step4/%EB%A9%80%ED%8B%B0%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8_AutoHealing_%EC%A0%81%EC%9A%A9%EA%B0%80%EC%9D%B4%EB%93%9C.pdf#page=21">STEP4 복구 측정</a> · <a href="../Step2/DESIGN-TO-WORKING-FLOW.pdf">설계에서 실제 동작으로 연결하기</a></div></section></div></div><div id="hud"><button id="prev" aria-label="Previous slide">◀</button><span id="pg" aria-live="polite"></span><button id="next" aria-label="Next slide">▶</button><button id="pdf">Print / PDF</button></div><script>(function(){
+const slides=Array.from(document.querySelectorAll('.slide'));const deck=document.getElementById('deck'),pg=document.getElementById('pg');
+slides.forEach((s,k)=>{const no=document.createElement('div');no.className='no';no.textContent=String(k+1).padStart(2,'0')+' / '+slides.length;s.appendChild(no);if(k){const tag=document.createElement('div');tag.className='tag';tag.textContent='평가와 증빙 · 최종 프로젝트';s.appendChild(tag);}});
+let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));pg.textContent=(i+1)+' / '+slides.length;history.replaceState(null,'','#'+(i+1));}
+function fit(){deck.style.transform='scale('+Math.min(innerWidth/1280,(innerHeight-10)/720)+')';}
+document.getElementById('prev').onclick=()=>show(i-1);document.getElementById('next').onclick=()=>show(i+1);document.getElementById('pdf').onclick=()=>print();
+addEventListener('keydown',e=>{if(e.target.closest('a,button,input,textarea,select'))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1);}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1);}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});addEventListener('resize',fit);fit();show(i);
+})();</script></body></html>

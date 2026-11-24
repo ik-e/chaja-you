@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API 서버 + 백그라운드 워커로 멀티에이전트 운영하기</title>
+<style>
+  :root{
+    --ink:#14213d; --sub:#4a5568; --mute:#8a94a6; --line:#dfe3ea; --bg:#ffffff; --paper:#f6f7fb;
+    --fe:#2563eb; --fe-bg:#e8f0ff;
+    --api:#059669; --api-bg:#e3f6ee;
+    --q:#d97706; --q-bg:#fdf1de;
+    --wk:#7c3aed; --wk-bg:#f0e9ff;
+    --db:#475569; --db-bg:#eceff4;
+    --ext:#dc2626; --ext-bg:#fdeaea;
+    --code-bg:#0f172a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#2b2f3a;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  #deck{width:1280px;height:720px;position:relative;transform-origin:center center}
+  .slide{position:absolute;inset:0;width:1280px;height:720px;background:var(--bg);padding:56px 72px 48px;display:none;overflow:hidden}
+  .slide.active{display:block}
+  .slide .no{position:absolute;right:40px;bottom:24px;font-size:14px;color:var(--mute);letter-spacing:.05em}
+  .slide .tag{position:absolute;left:72px;bottom:24px;font-size:13px;color:var(--mute)}
+  .kicker{font-size:15px;font-weight:700;letter-spacing:.12em;color:var(--wk);text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:44px;line-height:1.25;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:34px;line-height:1.3;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .lead{font-size:20px;color:var(--sub);line-height:1.6;margin-bottom:26px}
+  p,li{font-size:19px;line-height:1.6}
+  b,strong{font-weight:700}
+  .muted{color:var(--sub)}
+  .small{font-size:15px}
+  ul.clean{list-style:none}
+  ul.clean li{padding-left:22px;position:relative;margin-bottom:8px}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:12px;width:7px;height:7px;border-radius:50%;background:var(--wk)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff}
+  .card h3{font-size:20px;margin-bottom:8px}
+  .card p,.card li{font-size:16.5px;line-height:1.55}
+  .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+  .fe{color:var(--fe);background:var(--fe-bg)} .api{color:var(--api);background:var(--api-bg)}
+  .q{color:var(--q);background:var(--q-bg)} .wk{color:var(--wk);background:var(--wk-bg)}
+  .db{color:var(--db);background:var(--db-bg)} .ext{color:var(--ext);background:var(--ext-bg)}
+  table{border-collapse:collapse;width:100%}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.45;vertical-align:top}
+  th{font-size:14px;color:var(--sub);font-weight:700;background:var(--paper)}
+  pre{background:var(--code-bg);color:#e2e8f0;border-radius:12px;padding:18px 20px;font-family:'JetBrains Mono','D2Coding','Menlo','Consolas','Noto Sans Mono CJK KR',monospace;font-size:14.5px;line-height:1.55;white-space:pre;overflow:hidden}
+  pre .c{color:#7dd3a8} pre .k{color:#c4b5fd} pre .s{color:#fcd34d} pre .h{background:rgba(250,204,21,.16);display:inline-block;width:100%}
+  .tree{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+  .tree .c{color:#6b7280} .tree .d{color:var(--wk);font-weight:700} .tree .f{color:var(--ink)}
+  .callout{border-left:5px solid var(--wk);background:var(--wk-bg);padding:14px 18px;border-radius:8px;font-size:17px;line-height:1.55}
+  .callout.warn{border-color:var(--ext);background:var(--ext-bg)}
+  .callout.ok{border-color:var(--api);background:var(--api-bg)}
+  .file{font-family:'JetBrains Mono','Menlo','Consolas',monospace;font-size:14px;color:var(--sub);margin-bottom:6px}
+  /* cover */
+  .cover{background:linear-gradient(135deg,#14213d 0%,#2a2357 60%,#4c2a85 100%);color:#fff}
+  .cover h1{font-size:54px;color:#fff;margin-top:120px}
+  .cover .lead{color:#cbd5f5;font-size:22px;margin-top:18px}
+  .cover .meta{position:absolute;left:72px;bottom:56px;font-size:16px;color:#aab4d6}
+  .cover .no,.cover .tag{color:#7f8bb3}
+  .section{background:var(--paper)}
+  /* nav */
+  #hud{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;background:rgba(15,23,42,.85);color:#e2e8f0;padding:8px 12px;border-radius:999px;font-size:14px;z-index:10}
+  #hud button{background:#334155;color:#fff;border:0;border-radius:999px;padding:6px 14px;font-size:14px;cursor:pointer;font-family:inherit}
+  #hud button:hover{background:#475569}
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    html,body{background:#fff}
+    #stage{position:static;display:block}
+    #deck{transform:none!important;width:auto;height:auto}
+    .slide{position:relative;display:block!important;page-break-after:always;break-after:page}
+    #hud{display:none}
+  }
+</style>
+</head>
+<body>
+<div id="stage"><div id="deck">
+
+<!-- 1. 표지 -->
+<section class="slide cover">
+  <div class="kicker" style="color:#c4b5fd;margin-top:40px">최종 프로젝트 · 아키텍처 가이드</div>
+  <h1>API 서버는 주문만 받고,<br>멀티에이전트는 워커가 돌린다</h1>
+  <p class="lead">프런트엔드 · FastAPI · Celery 워커 · 외부 API · 오토힐링 · Docker<br>— 전체 구조, 예시 폴더 구조, 빌드·실행 구성</p>
+  <div class="meta">AI 애플리케이션 개발 과정 · 최종 프로젝트 공통 자료</div>
+</section>
+
+<!-- 2. 오늘의 목표 -->
+<section class="slide">
+  <div class="kicker">오늘의 목표</div>
+  <h2>이 자료를 다 보고 나면 할 수 있어야 하는 것</h2>
+  <p class="lead">멀티에이전트 + LLM + 외부 API가 섞인 서비스를 <b>"요청 받는 곳"</b>과 <b>"일하는 곳"</b>으로 나눠 설계한다.</p>
+  <div class="grid2" style="margin-top:8px">
+    <div class="card"><h3>① 왜 나누는지 설명한다</h3><p>LLM 호출을 HTTP 요청 안에서 기다리면 무엇이 깨지는지 말할 수 있다.</p></div>
+    <div class="card"><h3>② 전체 그림을 그린다</h3><p>프런트 → API → 큐 → 워커 → LLM/외부 API, 그리고 결과가 돌아오는 길을 그릴 수 있다.</p></div>
+    <div class="card"><h3>③ 폴더를 나눈다</h3><p><code>backend/</code>, <code>agents/</code>, <code>shared/</code>, <code>docker/</code>가 각각 무엇을 담고 어떤 이미지가 되는지 안다.</p></div>
+    <div class="card"><h3>④ 오토힐링 위치를 안다</h3><p>재시도·폴백·자동 재시작을 <b>어느 계층</b>에 넣어야 하는지 구분한다.</p></div>
+  </div>
+  <div class="no">02</div>
+</section>
+
+<!-- 3. 문제 -->
+<section class="slide">
+  <div class="kicker">문제 상황</div>
+  <h2>LLM을 API 요청 안에서 그냥 호출하면?</h2>
+  <p class="lead">멀티에이전트 한 번 = LLM 호출 여러 번 + 외부 API 여러 번 → <b>수십 초 ~ 수 분</b>.</p>
+  <div class="grid2">
+    <div>
+      <pre style="font-size:14px"><span class="c"># ❌ 이렇게 만들면 안 됩니다</span>
+<span class="k">@router.post</span>(<span class="s">"/analyze"</span>)
+<span class="k">async def</span> analyze(body: Req):
+    result = <span class="k">await</span> graph.ainvoke(body.dict())
+    <span class="c">#  ↑ Supervisor → 진단 → 복구 → 검증</span>
+    <span class="c">#    LLM 6번 + 외부 API 4번 … 90초</span>
+    <span class="k">return</span> result</pre>
+      <p class="small muted" style="margin-top:10px">사용자는 90초 동안 로딩 스피너만 봅니다. 그 사이에 무슨 일이 생길까요?</p>
+    </div>
+    <div>
+      <ul class="clean">
+        <li><b>타임아웃</b> — 로드밸런서·프록시(보통 30~60초)가 먼저 연결을 끊음 → 504</li>
+        <li><b>새로고침 = 작업 증발</b> — 브라우저를 닫으면 결과를 받을 길이 없음</li>
+        <li><b>서버 재시작 = 작업 유실</b> — 배포하는 순간 진행 중이던 작업이 사라짐</li>
+        <li><b>재시도 불가</b> — 외부 API가 잠깐 죽었을 때 "나중에 다시"가 안 됨</li>
+        <li><b>서버가 막힘</b> — 무거운 작업이 API 서버 자원을 잡아먹어 로그인·조회까지 느려짐</li>
+      </ul>
+    </div>
+  </div>
+  <div class="no">03</div>
+</section>
+
+<!-- 4. 비유 -->
+<section class="slide">
+  <div class="kicker">한 장으로 이해하기</div>
+  <h2>식당으로 비유하면</h2>
+  <p class="lead">홀 직원이 직접 요리까지 하면 손님 응대가 멈춥니다. 그래서 <b>주문 접수</b>와 <b>조리</b>를 나눕니다.</p>
+  <table>
+    <tr><th style="width:24%">식당</th><th style="width:28%">우리 시스템</th><th>하는 일</th></tr>
+    <tr><td>손님</td><td><span class="pill fe">프런트엔드</span></td><td>웹/앱 화면. 주문하고, 진행 상황을 봄</td></tr>
+    <tr><td>홀 직원 (카운터)</td><td><span class="pill api">FastAPI API 서버</span></td><td>주문 확인(인증·입력 검증) 후 주문표를 걸고 <b>바로</b> 진동벨을 건넴</td></tr>
+    <tr><td>주문표</td><td><span class="pill db">Job (DB 한 행)</span></td><td>무엇을 요청했고 지금 어떤 상태인지 기록</td></tr>
+    <tr><td>주문 레일</td><td><span class="pill q">큐 (Redis)</span></td><td>주방이 처리할 순서대로 주문표가 대기하는 곳</td></tr>
+    <tr><td>주방 / 셰프 팀</td><td><span class="pill wk">워커 / 멀티에이전트</span></td><td>주문표를 하나 꺼내 Supervisor·전문 에이전트들이 협업해 처리</td></tr>
+    <tr><td>식자재 납품업체</td><td><span class="pill ext">LLM · 외부 API</span></td><td>가끔 늦거나 품절 → 재시도하거나 다른 업체로 (= 오토힐링)</td></tr>
+    <tr><td>진동벨</td><td><span class="pill fe">job_id + SSE</span></td><td>"지금 굽는 중", "완성!"을 손님에게 알려줌</td></tr>
+  </table>
+  <div class="no">04</div>
+</section>
+
+<!-- 5. 전체 아키텍처 -->
+<section class="slide">
+  <div class="kicker">전체 구조</div>
+  <h2>최종 프로젝트 표준 아키텍처</h2>
+  <svg viewBox="0 0 1180 500" width="1136" height="482" style="margin-top:6px" font-family="inherit">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+    </defs>
+    <!-- frontend -->
+    <rect x="10" y="185" width="180" height="130" rx="14" fill="#e8f0ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="100" y="230" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">프런트엔드 (fe)</text>
+    <text x="100" y="258" text-anchor="middle" font-size="15" fill="#334155">Web (React 등)</text>
+    <text x="100" y="280" text-anchor="middle" font-size="15" fill="#334155">또는 App</text>
+    <!-- api -->
+    <rect x="270" y="150" width="215" height="200" rx="14" fill="#e3f6ee" stroke="#059669" stroke-width="2"/>
+    <text x="377" y="188" text-anchor="middle" font-size="20" font-weight="800" fill="#059669">FastAPI (be 컨테이너)</text>
+    <text x="377" y="222" text-anchor="middle" font-size="15" fill="#334155">· 인증(JWT)·입력 검증</text>
+    <text x="377" y="248" text-anchor="middle" font-size="15" fill="#334155">· Job 생성 → 큐에 넣기</text>
+    <text x="377" y="274" text-anchor="middle" font-size="15" fill="#334155">· 상태 조회 API</text>
+    <text x="377" y="300" text-anchor="middle" font-size="15" fill="#334155">· 진행 이벤트 SSE 중계</text>
+    <text x="377" y="334" text-anchor="middle" font-size="13" fill="#059669" font-weight="700">빠르게 응답만 (수 ms)</text>
+    <!-- queue -->
+    <rect x="565" y="40" width="190" height="90" rx="12" fill="#fdf1de" stroke="#d97706" stroke-width="2"/>
+    <text x="660" y="78" text-anchor="middle" font-size="18" font-weight="800" fill="#d97706">Redis 큐</text>
+    <text x="660" y="104" text-anchor="middle" font-size="14" fill="#334155">Celery 브로커 (작업 대기열)</text>
+    <!-- db -->
+    <rect x="565" y="205" width="190" height="90" rx="12" fill="#eceff4" stroke="#475569" stroke-width="2"/>
+    <text x="660" y="243" text-anchor="middle" font-size="18" font-weight="800" fill="#475569">DB (PostgreSQL)</text>
+    <text x="660" y="269" text-anchor="middle" font-size="14" fill="#334155">Job 상태·결과·이력</text>
+    <!-- pubsub -->
+    <rect x="565" y="370" width="190" height="90" rx="12" fill="#fdf1de" stroke="#d97706" stroke-width="2"/>
+    <text x="660" y="408" text-anchor="middle" font-size="18" font-weight="800" fill="#d97706">Redis Pub/Sub</text>
+    <text x="660" y="434" text-anchor="middle" font-size="14" fill="#334155">진행 이벤트 전달</text>
+    <!-- worker -->
+    <rect x="835" y="20" width="335" height="330" rx="14" fill="#f0e9ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="1002" y="54" text-anchor="middle" font-size="20" font-weight="800" fill="#7c3aed">Celery 워커 (agents 컨테이너)</text>
+    <rect x="860" y="72" width="285" height="262" rx="10" fill="#fff" stroke="#c4b5fd" stroke-dasharray="5 4"/>
+    <text x="1002" y="96" text-anchor="middle" font-size="14" fill="#7c3aed" font-weight="700">LangGraph 멀티에이전트</text>
+    <rect x="930" y="110" width="145" height="44" rx="8" fill="#7c3aed"/>
+    <text x="1002" y="138" text-anchor="middle" font-size="15" fill="#fff" font-weight="700">Supervisor</text>
+    <line x1="1002" y1="154" x2="912" y2="200" stroke="#a78bfa" stroke-width="2"/>
+    <line x1="1002" y1="154" x2="1002" y2="200" stroke="#a78bfa" stroke-width="2"/>
+    <line x1="1002" y1="154" x2="1092" y2="200" stroke="#a78bfa" stroke-width="2"/>
+    <rect x="872" y="200" width="82" height="44" rx="8" fill="#ede4ff" stroke="#a78bfa"/><text x="913" y="227" text-anchor="middle" font-size="13" fill="#4c1d95">진단</text>
+    <rect x="962" y="200" width="82" height="44" rx="8" fill="#ede4ff" stroke="#a78bfa"/><text x="1003" y="227" text-anchor="middle" font-size="13" fill="#4c1d95">복구</text>
+    <rect x="1052" y="200" width="82" height="44" rx="8" fill="#ede4ff" stroke="#a78bfa"/><text x="1093" y="227" text-anchor="middle" font-size="13" fill="#4c1d95">검증</text>
+    <text x="1002" y="278" text-anchor="middle" font-size="13.5" fill="#334155">공유 State · 자기성찰 · 재시도 노드</text>
+    <text x="1002" y="304" text-anchor="middle" font-size="13.5" fill="#334155">에이전트 = 팀 주제에 맞게 교체</text>
+    <!-- external -->
+    <rect x="835" y="395" width="160" height="80" rx="12" fill="#fdeaea" stroke="#dc2626" stroke-width="2"/>
+    <text x="915" y="430" text-anchor="middle" font-size="17" font-weight="800" fill="#dc2626">LLM API</text>
+    <text x="915" y="454" text-anchor="middle" font-size="13" fill="#334155">OpenAI·Claude 등</text>
+    <rect x="1010" y="395" width="160" height="80" rx="12" fill="#fdeaea" stroke="#dc2626" stroke-width="2"/>
+    <text x="1090" y="430" text-anchor="middle" font-size="17" font-weight="800" fill="#dc2626">외부 API</text>
+    <text x="1090" y="454" text-anchor="middle" font-size="13" fill="#334155">공공·지도·기상 등</text>
+    <!-- arrows -->
+    <line x1="190" y1="215" x2="268" y2="215" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="229" y="205" text-anchor="middle" font-size="12.5" fill="#334155">① POST /jobs</text>
+    <line x1="268" y1="250" x2="192" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="229" y="242" text-anchor="middle" font-size="12.5" fill="#334155">② 202 job_id</text>
+    <line x1="268" y1="290" x2="192" y2="290" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+    <text x="229" y="312" text-anchor="middle" font-size="12.5" fill="#2563eb">⑦ SSE 진행상황</text>
+    <line x1="485" y1="180" x2="563" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="494" y="128" font-size="12.5" fill="#334155">send_task</text>
+    <line x1="485" y1="250" x2="563" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="524" y="242" text-anchor="middle" font-size="12.5" fill="#334155">queued</text>
+    <line x1="563" y1="410" x2="487" y2="335" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+    <text x="492" y="395" font-size="12.5" fill="#2563eb">구독</text>
+    <line x1="755" y1="85" x2="833" y2="85" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="794" y="77" text-anchor="middle" font-size="12.5" fill="#334155">③ 꺼내기</text>
+    <line x1="833" y1="250" x2="757" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="795" y="242" text-anchor="middle" font-size="12.5" fill="#334155">⑥ 결과</text>
+    <line x1="835" y1="330" x2="757" y2="400" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+    <text x="798" y="385" font-size="12.5" fill="#2563eb">⑤ 진행</text>
+    <line x1="915" y1="350" x2="915" y2="393" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="1090" y1="350" x2="1090" y2="393" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="1002" y="378" text-anchor="middle" font-size="12.5" fill="#dc2626" font-weight="700">④ 호출 (재시도·폴백)</text>
+  </svg>
+  <div class="no">05</div>
+</section>
+
+<!-- 6. 구성요소 역할 -->
+<section class="slide">
+  <div class="kicker">구성요소</div>
+  <h2>누가 무엇을 책임지나</h2>
+  <table style="margin-top:14px">
+    <tr><th style="width:19%">구성요소</th><th style="width:37%">책임 (해야 할 일)</th><th style="width:25%">하면 안 되는 일</th><th>기술 예시</th></tr>
+    <tr><td><span class="pill fe">프런트엔드</span></td><td>요청 보내기, job_id로 진행 상황 구독, 결과 표시, 에이전트 사고 과정 가시화</td><td>LLM API 키 보관·직접 호출</td><td>React/Next.js, Streamlit, Flutter</td></tr>
+    <tr><td><span class="pill api">API 서버</span></td><td>인증·권한, 입력 검증, Job 생성, 큐 투입, 상태 조회, SSE 중계</td><td>LLM·에이전트를 요청 안에서 실행</td><td>FastAPI, Pydantic, SQLAlchemy</td></tr>
+    <tr><td><span class="pill q">큐 / 브로커</span></td><td>작업을 안전하게 보관하고 워커에게 순서대로 전달</td><td>결과를 영구 저장 (그건 DB)</td><td>Redis (Celery 브로커)</td></tr>
+    <tr><td><span class="pill wk">워커</span></td><td>Job 꺼내서 LangGraph 실행, 진행 이벤트 발행, 결과 저장, 실패 시 재시도</td><td>HTTP 요청을 직접 받음</td><td><b>Celery</b> (+ Flower 모니터링)</td></tr>
+    <tr><td><span class="pill db">DB</span></td><td>Job 상태·결과·감사 로그의 "단일 진실 공급원"</td><td>—</td><td>PostgreSQL, Supabase</td></tr>
+    <tr><td><span class="pill ext">LLM·외부 API</span></td><td>워커 안의 <b>통합 계층(integrations)</b>에서만 호출, 타임아웃·재시도·폴백 적용</td><td>에이전트 코드 곳곳에서 날것으로 호출</td><td>LiteLLM, httpx, tenacity</td></tr>
+  </table>
+  <div class="no">06</div>
+</section>
+
+<!-- 7. 요청의 일생 -->
+<section class="slide">
+  <div class="kicker">흐름</div>
+  <h2>요청 한 건의 일생 (9단계)</h2>
+  <p class="lead">핵심: API는 ②에서 <b>즉시</b> 응답하고 빠진다. 무거운 일은 ④~⑧, 워커가 한다.</p>
+  <div class="grid2" style="gap:14px 40px">
+    <div>
+      <p><span class="pill fe">FE</span><b>①</b> 사용자가 "분석 요청" 클릭 → <code>POST /api/v1/jobs</code></p>
+      <p style="margin-top:10px"><span class="pill api">API</span><b>②</b> 검증 후 DB에 Job 저장 <code>status=queued</code></p>
+      <p style="margin-top:10px"><span class="pill api">API</span><b>③</b> Celery로 <code>send_task("agents.run_agent_job", [job_id])</code> → <b>202 + job_id</b> 응답</p>
+      <p style="margin-top:10px"><span class="pill fe">FE</span><b>④</b> <code>GET /jobs/{id}/events</code> (SSE) 구독 시작</p>
+      <p style="margin-top:10px"><span class="pill wk">Worker</span><b>⑤</b> Celery 워커가 태스크 수신 → <code>status=running</code></p>
+    </div>
+    <div>
+      <p><span class="pill wk">Worker</span><b>⑥</b> LangGraph 실행. 노드가 끝날 때마다 <code>{"type":"step","node":"diagnosis"}</code> 발행</p>
+      <p style="margin-top:10px"><span class="pill ext">Ext</span><b>⑦</b> 외부 API 실패 → 재시도 / 폴백 (오토힐링)</p>
+      <p style="margin-top:10px"><span class="pill wk">Worker</span><b>⑧</b> 결과 DB 저장 <code>status=succeeded</code> + <code>done</code> 이벤트</p>
+      <p style="margin-top:10px"><span class="pill fe">FE</span><b>⑨</b> done 수신 → <code>GET /jobs/{id}</code>로 최종 결과 표시</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:22px">새로고침해도 괜찮습니다. job_id만 있으면 <code>GET /jobs/{id}</code>로 언제든 현재 상태·결과를 다시 볼 수 있어요.</div>
+  <div class="no">07</div>
+</section>
+
+<!-- 8. 상태 머신 -->
+<section class="slide">
+  <div class="kicker">Job 상태</div>
+  <h2>Job은 "상태 머신"으로 관리한다</h2>
+  <p class="lead">DB의 <code>jobs.status</code> 한 컬럼이 화면·재시도·오토힐링·감사 로그의 기준이 됩니다.</p>
+  <svg viewBox="0 0 1130 300" width="1130" height="300" font-family="inherit">
+    <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+    <rect x="10" y="120" width="160" height="60" rx="30" fill="#fdf1de" stroke="#d97706" stroke-width="2"/><text x="90" y="157" text-anchor="middle" font-size="18" font-weight="800" fill="#b45309">queued</text>
+    <rect x="290" y="120" width="160" height="60" rx="30" fill="#f0e9ff" stroke="#7c3aed" stroke-width="2"/><text x="370" y="157" text-anchor="middle" font-size="18" font-weight="800" fill="#6d28d9">running</text>
+    <rect x="620" y="20" width="200" height="60" rx="30" fill="#e3f6ee" stroke="#059669" stroke-width="2"/><text x="720" y="57" text-anchor="middle" font-size="18" font-weight="800" fill="#047857">succeeded</text>
+    <rect x="620" y="120" width="200" height="60" rx="30" fill="#e8f0ff" stroke="#2563eb" stroke-width="2"/><text x="720" y="157" text-anchor="middle" font-size="18" font-weight="800" fill="#1d4ed8">retrying</text>
+    <rect x="620" y="220" width="200" height="60" rx="30" fill="#fff7d6" stroke="#ca8a04" stroke-width="2"/><text x="720" y="257" text-anchor="middle" font-size="17" font-weight="800" fill="#a16207">waiting_approval</text>
+    <rect x="940" y="120" width="170" height="60" rx="30" fill="#fdeaea" stroke="#dc2626" stroke-width="2"/><text x="1025" y="157" text-anchor="middle" font-size="18" font-weight="800" fill="#b91c1c">failed</text>
+    <line x1="170" y1="150" x2="288" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#ar2)"/><text x="229" y="140" text-anchor="middle" font-size="13" fill="#334155">워커가 꺼냄</text>
+    <line x1="450" y1="135" x2="618" y2="55" stroke="#64748b" stroke-width="2" marker-end="url(#ar2)"/><text x="520" y="80" font-size="13" fill="#334155">완료</text>
+    <line x1="450" y1="150" x2="618" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#ar2)"/><text x="534" y="142" text-anchor="middle" font-size="13" fill="#334155">일시 오류</text>
+    <path d="M720,180 C720,205 450,205 410,182" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar2)"/><rect x="660" y="190" width="120" height="22" rx="4" fill="#fff"/><text x="720" y="206" text-anchor="middle" font-size="13" fill="#2563eb">잠시 후 다시 실행</text>
+    <line x1="430" y1="178" x2="620" y2="245" stroke="#64748b" stroke-width="2" marker-end="url(#ar2)"/><text x="470" y="250" font-size="13" fill="#334155">위험 작업</text>
+    <path d="M620,265 C460,300 340,260 355,182" fill="none" stroke="#ca8a04" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar2)"/><text x="330" y="282" font-size="13" fill="#a16207">운영자 승인</text>
+    <line x1="820" y1="150" x2="938" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#ar2)"/><text x="879" y="140" text-anchor="middle" font-size="13" fill="#334155">재시도 초과</text>
+  </svg>
+  <p class="small muted">※ <b>waiting_approval</b>: 서비스 재시작처럼 위험한 복구는 사람 승인 후 진행 (가드레일·Human-in-the-loop). 팀 주제에 필요 없으면 생략 가능.</p>
+  <div class="no">08</div>
+</section>
+
+<!-- 9. 진행 상황 전달 -->
+<section class="slide">
+  <div class="kicker">실시간 표시</div>
+  <h2>워커의 진행 상황을 화면에 보여주는 3가지 방법</h2>
+  <table style="margin-top:16px">
+    <tr><th style="width:18%">방식</th><th style="width:34%">동작</th><th style="width:24%">장점</th><th>단점</th></tr>
+    <tr><td><b>폴링</b></td><td>프런트가 2초마다 <code>GET /jobs/{id}</code></td><td>가장 쉬움. 일단 이것부터</td><td>지연·불필요한 요청</td></tr>
+    <tr style="background:#f7f3ff"><td><b>SSE</b> ⭐ 권장</td><td>서버 → 브라우저 한 방향 스트림. 이벤트가 생길 때마다 push</td><td>HTTP 그대로, 구현 간단, 자동 재연결</td><td>단방향 (요청은 별도 POST)</td></tr>
+    <tr><td><b>WebSocket</b></td><td>양방향 연결 유지</td><td>채팅처럼 주고받기가 잦을 때</td><td>연결 관리·인증·배포 설정이 더 복잡</td></tr>
+  </table>
+  <div class="grid2" style="margin-top:22px">
+    <div class="callout ok"><b>추천 순서:</b> ① 폴링으로 흐름을 먼저 완성 → ② SSE로 교체해 "에이전트 사고 과정 가시화" 구현</div>
+    <div class="callout"><b>LLM 토큰 스트리밍도 같은 길</b>로 흘려보내면 됩니다: 워커가 <code>{"type":"token","text":"..."}</code> 이벤트를 발행 → SSE로 전달.</div>
+  </div>
+  <div class="no">09</div>
+</section>
+
+<!-- N10 -->
+<section class="slide">
+  <div class="kicker">선택 기준</div>
+  <h2>무엇을 워커로 보내고, 왜 Celery인가</h2>
+  <div class="grid2" style="margin-top:14px;grid-template-columns:0.85fr 1.15fr">
+    <div class="card">
+      <h3>워커로 보낼 작업</h3>
+      <ul class="clean">
+        <li>멀티에이전트 실행 (LLM 여러 번)</li>
+        <li>외부 API 여러 개를 엮는 작업</li>
+        <li>재시도·승인 대기가 필요한 작업</li>
+        <li>주기 작업 (모니터링·이상 감지) → Celery Beat</li>
+      </ul>
+      <h3 style="margin-top:14px">API에서 바로 해도 되는 것</h3>
+      <ul class="clean">
+        <li>DB 조회·저장, 로그인</li>
+        <li>수 초 안에 끝나는 <b>단일</b> LLM 응답 스트리밍</li>
+      </ul>
+    </div>
+    <div>
+      <table>
+        <tr><th style="width:28%">Celery 용어</th><th>뜻 (식당 비유)</th></tr>
+        <tr><td><b>Broker</b></td><td>태스크 메시지가 대기하는 곳 = 주문 레일. 우리는 <b>Redis</b></td></tr>
+        <tr><td><b>Task</b></td><td>워커가 실행할 함수 = 레시피. <code>@app.task</code>로 등록</td></tr>
+        <tr><td><b>Worker</b></td><td>태스크를 꺼내 실행하는 프로세스 = 주방. 컨테이너 여러 개로 확장</td></tr>
+        <tr><td><b>Queue</b></td><td>태스크를 나누는 줄. 예: <code>agents</code>, <code>monitor</code></td></tr>
+        <tr><td><b>Beat</b></td><td>정해진 시각에 태스크를 넣는 스케줄러 = 알람</td></tr>
+        <tr><td><b>Flower</b></td><td>워커·태스크 상태를 보는 웹 대시보드 (시연·모니터링용)</td></tr>
+      </table>
+      <p class="small muted" style="margin-top:10px">왜 Celery? 파이썬 백그라운드 작업의 사실상 표준 → 자료·예제가 가장 많고, 재시도·시간 제한·스케줄·모니터링이 모두 갖춰져 있음. <span style="white-space:nowrap">(가벼운 대안: arq, Taskiq / 데모 전용: FastAPI BackgroundTasks)</span></p>
+    </div>
+  </div>
+  <div class="no">10</div>
+</section>
+
+<!-- N11 -->
+<section class="slide">
+  <div class="kicker">예시 폴더 구조 ①</div>
+  <h2>저장소 최상위: 소스 폴더 = 이미지 단위</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr;margin-top:14px">
+<pre class="tree" style="font-size:15.5px;line-height:1.6"><span class="d">team-project/</span>
+├── <span class="d">frontend/</span>     <span class="c"># → {팀}-fe 이미지 (웹/앱)</span>
+├── <span class="d">backend/</span>      <span class="c"># → {팀}-be 이미지 (FastAPI)</span>
+├── <span class="d">agents/</span>       <span class="c"># → {팀}-agents 이미지</span>
+│                 <span class="c">#   (Celery 워커 + LangGraph)</span>
+├── <span class="d">shared/</span>       <span class="c"># be·agents 공용 코드</span>
+├── tests/
+├── docs/         <span class="c"># 산출물(설계서·결과서)</span>
+├── <span class="d">docker/</span>       <span class="c"># 빌드·실행 스크립트 (뒤에서)</span>
+├── .env          <span class="c"># 실제 값 — 커밋 금지</span>
+├── .env.example  <span class="c"># 키 이름만</span>
+└── .gitignore</pre>
+    <div>
+      <div class="card" style="margin-bottom:14px"><h3>be와 agents를 왜 나누나?</h3><p><b>be</b>는 가볍고 빨라야 하고(요청 응답), <b>agents</b>는 무겁고 오래 걸립니다(LangGraph·LLM SDK). 이미지를 나누면 <b>따로 빌드·배포·확장</b>할 수 있고, 에이전트를 고쳐도 API 서버는 그대로 둘 수 있습니다.</p></div>
+      <div class="card" style="margin-bottom:14px"><h3>shared/에는 무엇을?</h3><p>양쪽이 똑같이 알아야 하는 것만: 설정(Settings), DB 연결, <code>jobs</code> 테이블 모델과 상태 상수. 빌드할 때 두 이미지에 모두 복사됩니다.</p></div>
+      <div class="callout warn" style="font-size:15.5px"><b>.env는 커밋 금지.</b> LLM·외부 API 키는 be·agents 환경변수로만. 프런트 코드에 키가 들어가면 누구나 볼 수 있습니다.</div>
+    </div>
+  </div>
+  <div class="no">11</div>
+</section>
+
+<!-- N12 -->
+<section class="slide">
+  <div class="kicker">예시 폴더 구조 ②</div>
+  <h2>backend / agents / shared 상세</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr;gap:20px;margin-top:10px">
+<pre class="tree" style="font-size:13.6px;line-height:1.5"><span class="d">backend/</span>                   <span class="c"># {팀}-be</span>
+├── app/
+│   ├── main.py            <span class="c"># 앱 생성·라우터 등록</span>
+│   ├── core/
+│   │   ├── security.py    <span class="c"># JWT 검증·권한</span>
+│   │   └── celery_client.py <span class="c"># 태스크 "보내기" 전용</span>
+│   ├── api/v1/
+│   │   ├── jobs.py        <span class="c"># POST/GET /jobs, SSE</span>
+│   │   ├── approvals.py   <span class="c"># 위험 작업 승인</span>
+│   │   └── health.py      <span class="c"># /health</span>
+│   ├── schemas/job.py     <span class="c"># Pydantic 요청·응답</span>
+│   └── services/job_service.py
+└── requirements.txt       <span class="c"># fastapi, celery, redis</span>
+
+<span class="d">shared/</span>                    <span class="c"># 두 이미지 공용</span>
+├── config.py              <span class="c"># Settings(환경변수)</span>
+├── db.py                  <span class="c"># 엔진·세션</span>
+└── models.py              <span class="c"># jobs 테이블·상태 상수</span></pre>
+<pre class="tree" style="font-size:13.6px;line-height:1.5"><span class="d">agents/</span>                    <span class="c"># {팀}-agents</span>
+├── worker/
+│   ├── celery_app.py      <span class="c"># Celery 앱·설정</span>
+│   ├── tasks.py           <span class="c"># run_agent_job 태스크</span>
+│   ├── job_store.py       <span class="c"># jobs 상태 변경</span>
+│   └── events.py          <span class="c"># 진행 이벤트 발행</span>
+├── graph/                 <span class="c"># LangGraph 멀티에이전트</span>
+│   ├── build.py           <span class="c"># build_graph()</span>
+│   ├── state.py           <span class="c"># 공유 State</span>
+│   ├── supervisor.py
+│   ├── nodes/             <span class="c"># 팀 주제에 맞게</span>
+│   │   └── diagnosis.py, recovery.py …
+│   └── prompts/
+├── integrations/          <span class="c"># 바깥 세상과의 경계</span>
+│   ├── base.py            <span class="c"># 타임아웃·재시도 공통</span>
+│   ├── llm.py             <span class="c"># LLM 게이트웨이</span>
+│   └── public_api.py
+├── healing/               <span class="c"># 폴백·정책·주기 점검</span>
+└── requirements.txt       <span class="c"># celery, langgraph, httpx</span></pre>
+  </div>
+  <div class="no">12</div>
+</section>
+
+<!-- N13 -->
+<section class="slide">
+  <div class="kicker">가장 중요한 규칙</div>
+  <h2>be는 agents 코드를 import하지 않는다</h2>
+  <svg viewBox="0 0 1130 200" width="1130" height="200" font-family="inherit" style="margin-top:6px">
+    <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+    <rect x="0" y="20" width="200" height="70" rx="12" fill="#e3f6ee" stroke="#059669" stroke-width="2"/><text x="100" y="52" text-anchor="middle" font-size="19" font-weight="800" fill="#047857">backend/</text><text x="100" y="74" text-anchor="middle" font-size="13" fill="#334155">{팀}-be</text>
+    <rect x="240" y="20" width="190" height="70" rx="12" fill="#fdf1de" stroke="#d97706" stroke-width="2"/><text x="335" y="52" text-anchor="middle" font-size="19" font-weight="800" fill="#b45309">Redis</text><text x="335" y="74" text-anchor="middle" font-size="13" fill="#334155">Celery 브로커</text>
+    <rect x="470" y="20" width="190" height="70" rx="12" fill="#f0e9ff" stroke="#7c3aed" stroke-width="2"/><text x="565" y="52" text-anchor="middle" font-size="19" font-weight="800" fill="#6d28d9">agents/worker</text><text x="565" y="74" text-anchor="middle" font-size="13" fill="#334155">{팀}-agents</text>
+    <rect x="705" y="20" width="190" height="70" rx="12" fill="#f0e9ff" stroke="#7c3aed" stroke-width="2"/><text x="800" y="60" text-anchor="middle" font-size="19" font-weight="800" fill="#6d28d9">agents/graph</text>
+    <rect x="940" y="20" width="190" height="70" rx="12" fill="#fdeaea" stroke="#dc2626" stroke-width="2"/><text x="1035" y="60" text-anchor="middle" font-size="19" font-weight="800" fill="#b91c1c">integrations</text>
+    <line x1="200" y1="55" x2="238" y2="55" stroke="#475569" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="430" y1="55" x2="468" y2="55" stroke="#475569" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="660" y1="55" x2="703" y2="55" stroke="#475569" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="895" y1="55" x2="938" y2="55" stroke="#475569" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <text x="218" y="122" text-anchor="middle" font-size="14" fill="#334155">태스크 이름 + job_id만</text>
+    <text x="565" y="122" text-anchor="middle" font-size="14" fill="#334155">job_id로 DB에서 입력을 읽음</text>
+    <text x="1035" y="122" text-anchor="middle" font-size="14" fill="#334155">healing 정책 적용</text>
+    <rect x="300" y="150" width="530" height="44" rx="10" fill="#eceff4" stroke="#475569"/><text x="565" y="178" text-anchor="middle" font-size="15" fill="#334155" font-weight="700">shared/ (config · db · models) — be·agents 모두 import 가능</text>
+  </svg>
+  <div class="grid3" style="margin-top:16px">
+    <div class="card"><h3>✅ 이름으로 보내기</h3><p>be는 <code>send_task("agents.run_agent_job", ...)</code>처럼 <b>문자열 이름</b>으로 보냅니다. 그래서 be 이미지에는 LangGraph·LLM 라이브러리가 없어도 됩니다.</p></div>
+    <div class="card"><h3>✅ 인자에는 ID만</h3><p>큰 입력(문서·대화 내용)은 DB에 저장하고 태스크 인자로는 <code>job_id</code>만. 재시도·감사 추적이 쉬워지고 브로커가 가벼워집니다.</p></div>
+    <div class="card"><h3>❌ agents → backend</h3><p>에이전트 노드에서 FastAPI·Request를 import하면 안 됩니다. 에이전트는 HTTP를 몰라야 단독으로 테스트할 수 있습니다.</p></div>
+  </div>
+  <div class="no">13</div>
+</section>
+
+<!-- N14 -->
+<section class="slide">
+  <div class="kicker">예시 코드 ① · API 서버 (be)</div>
+  <h2>Job 만들고 Celery로 보낸 뒤 바로 202</h2>
+  <div class="grid2" style="grid-template-columns:1.18fr .82fr;gap:20px;margin-top:8px">
+    <div>
+      <div class="file">backend/app/api/v1/jobs.py</div>
+<pre style="font-size:13.4px"><span class="k">from</span> fastapi <span class="k">import</span> APIRouter, Depends, status
+<span class="k">from</span> app.core.celery_client <span class="k">import</span> celery_client
+<span class="k">from</span> app.core.security <span class="k">import</span> current_user
+<span class="k">from</span> app.schemas.job <span class="k">import</span> JobCreate, JobAccepted, JobRead
+<span class="k">from</span> app.services <span class="k">import</span> job_service
+<span class="k">from</span> shared.db <span class="k">import</span> get_db
+
+router = APIRouter(prefix=<span class="s">"/jobs"</span>, tags=[<span class="s">"jobs"</span>])
+
+<span class="k">@router.post</span>(<span class="s">""</span>, status_code=status.HTTP_202_ACCEPTED,
+             response_model=JobAccepted)
+<span class="k">async def</span> create_job(body: JobCreate, db=Depends(get_db),
+                     user=Depends(current_user)):
+<span class="h">    job = <span class="k">await</span> job_service.create(db, user.id, body)  <span class="c"># ① DB: queued</span></span>
+<span class="h">    celery_client.send_task(<span class="s">"agents.run_agent_job"</span>,      <span class="c"># ② 이름으로 전송</span></span>
+<span class="h">                            args=[job.id], queue=<span class="s">"agents"</span>)</span>
+    <span class="k">return</span> JobAccepted(job_id=job.id, status=<span class="s">"queued"</span>)  <span class="c"># ③ 즉시 응답</span>
+
+<span class="k">@router.get</span>(<span class="s">"/{job_id}"</span>, response_model=JobRead)
+<span class="k">async def</span> get_job(job_id: str, db=Depends(get_db)):
+    <span class="k">return await</span> job_service.get(db, job_id)  <span class="c"># 상태·결과 조회</span></pre>
+    </div>
+    <div>
+      <div class="file">backend/app/core/celery_client.py</div>
+<pre style="font-size:13.4px"><span class="k">from</span> celery <span class="k">import</span> Celery
+<span class="k">from</span> shared.config <span class="k">import</span> settings
+
+<span class="c"># 보내기 전용 클라이언트</span>
+<span class="c"># (태스크 함수는 여기 없음!)</span>
+celery_client = Celery(
+    <span class="s">"be"</span>, broker=settings.redis_url)</pre>
+      <div class="card" style="margin-top:14px"><h3>포인트</h3>
+        <p>· <code>send_task</code>는 브로커에 메시지만 넣고 즉시 돌아옵니다 (수 ms).<br>
+        · 태스크 이름 <code>"agents.run_agent_job"</code>은 워커 쪽 <code>@app.task(name=...)</code>와 <b>정확히 같아야</b> 합니다.<br>
+        · 결과는 Celery가 아니라 <b>DB의 jobs 테이블</b>에서 조회합니다.</p></div>
+    </div>
+  </div>
+  <div class="no">14</div>
+</section>
+
+<!-- N15 -->
+<section class="slide">
+  <div class="kicker">예시 코드 ② · Celery 워커 (agents)</div>
+  <h2>워커: 태스크를 받아 LangGraph를 돌리고 진행 상황을 알린다</h2>
+  <div class="grid2" style="grid-template-columns:1.15fr .85fr;gap:20px;margin-top:8px">
+    <div>
+      <div class="file">agents/worker/tasks.py</div>
+<pre style="font-size:12.8px;line-height:1.45"><span class="k">from</span> agents.worker.celery_app <span class="k">import</span> app
+<span class="k">from</span> agents.worker <span class="k">import</span> job_store <span class="k">as</span> js
+<span class="k">from</span> agents.worker.events <span class="k">import</span> publish
+<span class="k">from</span> agents.graph.build <span class="k">import</span> build_graph
+<span class="k">from</span> agents.integrations.base <span class="k">import</span> TransientError
+graph = build_graph()                     <span class="c"># 워커 시작 시 한 번만 조립</span>
+<span class="k">@app.task</span>(name=<span class="s">"agents.run_agent_job"</span>, bind=<span class="k">True</span>, max_retries=3)
+<span class="k">def</span> run_agent_job(self, job_id: str):
+<span class="h">    <span class="k">if not</span> js.claim(job_id):              <span class="c"># queued→running 선점 실패면</span></span>
+<span class="h">        <span class="k">return</span>                            <span class="c"># 이미 처리 중 → 중복 실행 방지</span></span>
+    <span class="k">try</span>:
+        state = {}
+        <span class="k">for</span> upd <span class="k">in</span> graph.stream(js.get_input(job_id), stream_mode=<span class="s">"updates"</span>):
+            node, data = next(iter(upd.items()))
+            publish(job_id, {<span class="s">"type"</span>: <span class="s">"step"</span>, <span class="s">"node"</span>: node})
+            state.update(data <span class="k">or</span> {})
+        js.succeed(job_id, state)
+        publish(job_id, {<span class="s">"type"</span>: <span class="s">"done"</span>})
+<span class="h">    <span class="k">except</span> TransientError <span class="k">as</span> e:            <span class="c"># 잠깐의 장애 → 다시</span></span>
+<span class="h">        <span class="k">if</span> self.request.retries &lt; self.max_retries:</span>
+<span class="h">            js.mark_retrying(job_id)</span>
+<span class="h">            <span class="k">raise</span> self.retry(exc=e, countdown=10 * (self.request.retries + 1))</span>
+        js.fail(job_id, e); <span class="k">raise</span>       <span class="c"># 재시도 소진</span>
+    <span class="k">except</span> Exception <span class="k">as</span> e:                 <span class="c"># 복구 불가 → 실패 기록</span>
+        js.fail(job_id, e); <span class="k">raise</span>       <span class="c"># status=failed + failed 이벤트</span></pre>
+    </div>
+    <div>
+      <div class="file">agents/worker/celery_app.py</div>
+<pre style="font-size:12.8px;line-height:1.45"><span class="k">from</span> celery <span class="k">import</span> Celery
+<span class="k">from</span> shared.config <span class="k">import</span> settings
+
+app = Celery(<span class="s">"agents"</span>, broker=settings.redis_url,
+             include=[<span class="s">"agents.worker.tasks"</span>])
+app.conf.update(
+    task_default_queue=<span class="s">"agents"</span>,
+    task_acks_late=<span class="k">True</span>,      <span class="c"># 끝난 뒤 완료 처리</span>
+    task_reject_on_worker_lost=<span class="k">True</span>, <span class="c"># 워커가</span>
+                     <span class="c"># 죽으면 다른 워커가 다시 받음</span>
+    worker_prefetch_multiplier=1, <span class="c"># 하나씩</span>
+    task_soft_time_limit=540,  <span class="c"># 9분: 예외로 경고</span>
+    task_time_limit=600,       <span class="c"># 10분: 강제 종료</span>
+    task_ignore_result=<span class="k">True</span>,   <span class="c"># 결과는 DB에</span>
+)</pre>
+      <div class="file" style="margin-top:10px">agents/worker/events.py</div>
+<pre style="font-size:12.8px;line-height:1.45"><span class="k">import</span> json, redis
+r = redis.Redis.from_url(settings.redis_url)
+
+<span class="k">def</span> publish(job_id, ev):
+    r.publish(<span class="s">f"job:{job_id}"</span>,
+              json.dumps(ev, ensure_ascii=<span class="k">False</span>))</pre>
+    </div>
+  </div>
+  <div class="no">15</div>
+</section>
+
+<!-- N15b -->
+<section class="slide">
+  <div class="kicker">Celery 실전 메모</div>
+  <h2>중복 실행 막기와 워커 실행 방법</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr;gap:24px;margin-top:12px">
+    <div>
+      <div class="file">agents/worker/job_store.py — 상태 "선점(claim)"</div>
+<pre style="font-size:13.4px"><span class="k">from</span> sqlalchemy <span class="k">import</span> update
+<span class="k">from</span> shared.db <span class="k">import</span> SessionLocal
+<span class="k">from</span> shared.models <span class="k">import</span> Job
+
+<span class="k">def</span> claim(job_id: str) -> bool:
+    <span class="c">"""queued/retrying 인 Job만 running으로.</span>
+<span class="c">    UPDATE 한 번이라 두 워커가 동시에 와도</span>
+<span class="c">    한 명만 성공(rowcount == 1)."""</span>
+    <span class="k">with</span> SessionLocal() <span class="k">as</span> s, s.begin():
+        res = s.execute(
+            update(Job)
+            .where(Job.id == job_id,
+                   Job.status.in_([<span class="s">"queued"</span>, <span class="s">"retrying"</span>]))
+            .values(status=<span class="s">"running"</span>))
+    <span class="k">return</span> res.rowcount == 1</pre>
+      <p class="small muted" style="margin-top:10px"><code>acks_late</code>를 켜면 같은 태스크가 두 번 올 수 있습니다 → 이 선점 로직이 "복구가 두 번 실행"을 막아 줍니다.</p>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px"><h3>Celery 태스크는 동기 함수</h3>
+        <p>워커 쪽 코드(<code>graph.stream</code>, <code>httpx.Client</code>, 동기 DB 세션)는 <b>동기로 작성</b>하는 것이 가장 단순합니다. async 코드를 꼭 써야 하면 태스크 안에서 <code>asyncio.run(...)</code>으로 감쌉니다.</p></div>
+      <div class="card" style="margin-bottom:12px"><h3>로컬 개발 실행 (터미널 3개)</h3>
+<pre style="font-size:12.6px;padding:10px 12px;margin-top:6px">docker run -p 6379:6379 redis:7-alpine
+uvicorn app.main:app --reload            <span class="c"># backend/</span>
+celery -A agents.worker.celery_app worker \
+       -Q agents -l INFO                 <span class="c"># 루트에서</span></pre>
+        <p class="small" style="margin-top:6px">Windows에서는 워커에 <code>--pool=solo</code>를 붙이세요.</p></div>
+      <div class="callout ok" style="font-size:15px"><b>Flower</b> (<code>localhost:5555</code>)로 워커 수·대기 태스크·실패·재시도를 실시간으로 보여주면 오토힐링 시연에 좋습니다.</div>
+    </div>
+  </div>
+  <div class="no">16</div>
+</section>
+
+<!-- 16. 코드 SSE -->
+<section class="slide">
+  <div class="kicker">예시 코드 ③ · 진행 상황 스트리밍</div>
+  <h2>SSE: 워커 이벤트를 브라우저까지</h2>
+  <div class="grid2" style="grid-template-columns:1.1fr .9fr;gap:20px;margin-top:8px">
+    <div>
+      <div class="file">backend/app/api/v1/jobs.py (이어서) — 워커가 Redis로 발행한 이벤트를 중계</div>
+<pre style="font-size:13.6px"><span class="k">import</span> json
+<span class="k">from</span> fastapi.responses <span class="k">import</span> StreamingResponse
+
+<span class="k">@router.get</span>(<span class="s">"/{job_id}/events"</span>)
+<span class="k">async def</span> job_events(job_id: str, request: Request):
+    <span class="k">async def</span> stream():
+        ps = request.app.state.redis.pubsub()
+        <span class="k">await</span> ps.subscribe(<span class="s">f"job:{job_id}"</span>)
+        <span class="k">try</span>:
+            <span class="k">async for</span> msg <span class="k">in</span> ps.listen():
+                <span class="k">if</span> msg[<span class="s">"type"</span>] != <span class="s">"message"</span>:
+                    <span class="k">continue</span>
+<span class="h">                <span class="k">yield</span> <span class="s">f"data: {msg['data']}\n\n"</span>  <span class="c"># SSE 형식</span></span>
+                <span class="k">if</span> json.loads(msg[<span class="s">"data"</span>])[<span class="s">"type"</span>] <span class="k">in</span> (<span class="s">"done"</span>, <span class="s">"failed"</span>):
+                    <span class="k">break</span>
+        <span class="k">finally</span>:
+            <span class="k">await</span> ps.unsubscribe()
+            <span class="k">await</span> ps.aclose()
+    <span class="k">return</span> StreamingResponse(stream(),
+                             media_type=<span class="s">"text/event-stream"</span>)</pre>
+    </div>
+    <div>
+      <div class="file">frontend/src/hooks/useJob.ts</div>
+<pre style="font-size:13.6px"><span class="k">const</span> res = <span class="k">await</span> fetch(<span class="s">"/api/v1/jobs"</span>, {
+  method: <span class="s">"POST"</span>, headers, body });
+<span class="k">const</span> { job_id } = <span class="k">await</span> res.json();
+
+<span class="k">const</span> es = <span class="k">new</span> EventSource(
+  <span class="s">`/api/v1/jobs/${job_id}/events`</span>);
+es.onmessage = (e) => {
+  <span class="k">const</span> ev = JSON.parse(e.data);
+  <span class="k">if</span> (ev.type === <span class="s">"step"</span>) showStep(ev.node);
+  <span class="k">if</span> (ev.type === <span class="s">"done"</span> || ev.type === <span class="s">"failed"</span>) {
+    es.close();
+    loadResult(job_id); <span class="c">// GET /jobs/{id}</span>
+  }
+};</pre>
+      <div class="callout" style="margin-top:12px;font-size:14.5px"><b>주의 2가지</b><br>
+      · Pub/Sub은 구독 전 이벤트를 저장하지 않음 → 화면 진입 시 <code>GET /jobs/{id}</code>로 현재 상태를 먼저 그리기<br>
+      · <code>EventSource</code>는 Authorization 헤더를 못 붙임 → 쿠키 인증 또는 fetch 기반 SSE 라이브러리 사용</div>
+    </div>
+  </div>
+  <div class="no">17</div>
+</section>
+
+<!-- 17. 오토힐링 계층 -->
+<section class="slide">
+  <div class="kicker">오토힐링</div>
+  <h2>오토힐링은 4개 계층에 나눠서 넣는다</h2>
+  <p class="lead">"오토힐링 = 에이전트가 알아서 고친다"가 전부가 아닙니다. <b>아래 계층일수록 단순·확실</b>하게.</p>
+  <table>
+    <tr><th style="width:21%">계층</th><th style="width:30%">무엇이 고장나나</th><th style="width:31%">자동 조치</th><th>코드 위치</th></tr>
+    <tr><td><span class="pill ext">① 호출</span></td><td>외부 API 타임아웃·5xx·429, LLM 과부하</td><td>타임아웃 → 지수 백오프 재시도 → <b>폴백</b>(백업 API·캐시·다른 모델)</td><td><code>agents/integrations/</code><br><code>agents/healing/</code></td></tr>
+    <tr><td><span class="pill wk">② 에이전트</span></td><td>LLM 출력 형식 오류, 근거 부족, 잘못된 판단</td><td>스키마 검증 실패 → 재생성, 자기성찰 노드에서 재진단(최대 N회) → 사람 이관</td><td><code>agents/graph/</code></td></tr>
+    <tr><td><span class="pill q">③ 작업</span></td><td>Job 처리 중 예외, 워커 강제 종료</td><td>Celery <code>self.retry()</code>, <code>acks_late</code>로 워커가 죽어도 재전달, 상태 선점(claim)으로 중복 방지, 최종 실패는 failed</td><td><code>agents/worker/tasks.py</code><br><code>celery_app.py</code></td></tr>
+    <tr><td><span class="pill db">④ 인프라</span></td><td>프로세스 다운, 메모리 초과</td><td>헬스체크 실패 → 컨테이너 자동 재시작, 워커 여러 개 띄우기</td><td><code>docker/compose/compose.yml</code><br><code>agents/healing/monitor.py</code></td></tr>
+  </table>
+  <div class="callout warn" style="margin-top:16px">평가 포인트: 복구를 <b>시연</b>하려면 장애를 일부러 주입하고(예: 외부 API URL을 끊기) 감지 시각·복구 시각을 <b>로그로 남겨야</b> 합니다.</div>
+  <div class="no">18</div>
+</section>
+
+<!-- N18 -->
+<section class="slide">
+  <div class="kicker">예시 코드 ④ · 호출 계층 오토힐링</div>
+  <h2>외부 API 래퍼: 타임아웃 → 재시도 → 폴백</h2>
+  <div class="grid2" style="grid-template-columns:1.2fr .8fr;gap:20px;margin-top:8px">
+    <div>
+      <div class="file">agents/integrations/base.py · public_api.py</div>
+<pre style="font-size:12.6px;line-height:1.45"><span class="k">import</span> httpx
+<span class="k">from</span> tenacity <span class="k">import</span> (retry, stop_after_attempt,
+    wait_exponential, retry_if_exception_type)
+
+<span class="k">class</span> TransientError(Exception): ...  <span class="c"># "잠깐 기다리면 될 오류"</span>
+
+<span class="k">@retry</span>(stop=stop_after_attempt(3),
+       wait=wait_exponential(min=1, max=8),       <span class="c"># 1→2→4초</span>
+       retry=retry_if_exception_type(TransientError), reraise=<span class="k">True</span>)
+<span class="k">def</span> get_json(client, url, params):
+    <span class="k">try</span>:
+        r = client.get(url, params=params, timeout=5.0)
+    <span class="k">except</span> (httpx.TimeoutException, httpx.NetworkError) <span class="k">as</span> e:
+        <span class="k">raise</span> TransientError(str(e)) <span class="k">from</span> e
+    <span class="k">if</span> r.status_code == 429 <span class="k">or</span> r.status_code >= 500:
+        <span class="k">raise</span> TransientError(<span class="s">f"HTTP {r.status_code}"</span>)
+    r.raise_for_status()           <span class="c"># 4xx = 내 잘못 → 재시도 X</span>
+    <span class="k">return</span> r.json()
+
+<span class="k">def</span> get_crowd(area: str) -> dict:
+    <span class="k">with</span> httpx.Client() <span class="k">as</span> c:
+        <span class="k">try</span>:
+            <span class="k">return</span> get_json(c, PRIMARY_URL, {<span class="s">"area"</span>: area})
+<span class="h">        <span class="k">except</span> TransientError:</span>
+<span class="h">            <span class="k">if</span> cached := cache.get(area):             <span class="c"># 폴백 ① 캐시</span></span>
+<span class="h">                <span class="k">return</span> {**cached, <span class="s">"stale"</span>: <span class="k">True</span>}</span>
+<span class="h">            <span class="k">return</span> get_json(c, BACKUP_URL, {<span class="s">"area"</span>: area})  <span class="c"># ② 백업</span></span></pre>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px"><h3>오류를 두 종류로 나누기</h3>
+        <p><b>일시적</b> (타임아웃·5xx·429) → 재시도할 가치 있음<br><b>영구적</b> (400·401·404) → 재시도해도 똑같음, 즉시 실패</p></div>
+      <div class="card" style="margin-bottom:12px"><h3>재시도는 두 겹</h3>
+        <p>① 여기(tenacity): 몇 초 안의 짧은 재시도<br>② 그래도 실패 → <code>TransientError</code>가 태스크까지 올라가 Celery <code>self.retry()</code>로 <b>수십 초 뒤 전체 재실행</b></p></div>
+      <div class="card"><h3>폴백 결과는 표시하기</h3>
+        <p><code>"stale": true</code>처럼 남겨 에이전트·화면이 "최신 아님"을 알게 합니다. LLM도 <code>integrations/llm.py</code>(LiteLLM 등)에 모아 모델 폴백을 한 곳에서.</p></div>
+    </div>
+  </div>
+  <div class="no">19</div>
+</section>
+
+<!-- D1 -->
+<section class="slide section">
+  <div class="kicker">Docker ①</div>
+  <h2>docker/ 폴더: 빌드와 실행을 한곳에</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr;gap:24px;margin-top:12px">
+<pre class="tree" style="font-size:14.6px;line-height:1.55;background:#fff"><span class="d">docker/</span>
+├── build.sh             <span class="c"># 모든 이미지 빌드 + VERSION 갱신</span>
+├── start.sh             <span class="c"># 컴포즈 시작</span>
+├── stop.sh              <span class="c"># 컴포즈 종료</span>
+├── restart.sh           <span class="c"># 재시작 (stop → start)</span>
+├── <span class="d">compose/</span>
+│   ├── compose.yml      <span class="c"># 서비스 정의</span>
+│   └── .env             <span class="c"># 서비스 환경설정</span>
+│                        <span class="c">#  (루트 .env 심볼릭 링크 가능)</span>
+└── <span class="d">images/</span>              <span class="c"># 우리 소스로 빌드하는 이미지</span>
+    ├── <span class="d">{팀}-fe/</span>          <span class="c"># 프런트엔드</span>
+    │   ├── Dockerfile
+    │   └── VERSION      <span class="c"># 예: 261119-1650</span>
+    ├── <span class="d">{팀}-be/</span>          <span class="c"># 백엔드 API 서버</span>
+    │   ├── Dockerfile
+    │   └── VERSION
+    ├── <span class="d">{팀}-agents/</span>      <span class="c"># Celery 워커 + 에이전트</span>
+    │   ├── Dockerfile
+    │   └── VERSION
+    └── …                <span class="c"># 필요 시 추가</span></pre>
+    <div>
+      <div class="card" style="margin-bottom:12px"><h3>폴더 이름 = 이미지 이름</h3><p><code>images/bike-be/</code> → 이미지 <code>bike-be:261119-1650</code>. 팀 프리픽스로 다른 팀·프로젝트 이미지와 섞이지 않습니다.</p></div>
+      <div class="card" style="margin-bottom:12px"><h3>images/에 없는 것</h3><p>Redis·PostgreSQL·Flower처럼 <b>공식 이미지를 그대로 쓰는 서비스</b>는 빌드하지 않고 compose.yml에서 바로 가져옵니다.</p></div>
+      <div class="card" style="margin-bottom:12px"><h3>VERSION = 빌드 시각</h3><p><code>YYMMDD-hhmm</code> 형식으로 build.sh가 자동 기록. 문제가 생기면 이전 시각 태그로 바로 되돌릴 수 있습니다.</p></div>
+      <div class="callout" style="font-size:15px"><b>.env 링크:</b> <code>ln -s ../../.env docker/compose/.env</code><br>compose는 <code>compose.yml</code>과 같은 폴더의 <code>.env</code>를 자동으로 읽습니다.</div>
+    </div>
+  </div>
+  <div class="no">20</div>
+</section>
+
+<!-- D2 -->
+<section class="slide section">
+  <div class="kicker">Docker ②</div>
+  <h2>build.sh와 Dockerfile</h2>
+  <div class="grid2" style="grid-template-columns:1.05fr .95fr;gap:20px;margin-top:8px">
+    <div>
+      <div class="file">docker/build.sh</div>
+<pre style="font-size:13px;line-height:1.48">#!/usr/bin/env bash
+<span class="c"># 사용법: ./docker/build.sh            (전체)</span>
+<span class="c">#        ./docker/build.sh bike-agents (일부만)</span>
+set -euo pipefail
+cd "$(dirname "$0")/.."            <span class="c"># 프로젝트 루트로 이동</span>
+
+VERSION=$(date +%y%m%d-%H%M)       <span class="c"># 예: 261119-1650</span>
+TARGETS=("$@")
+if [ ${#TARGETS[@]} -eq 0 ]; then
+  TARGETS=($(ls docker/images))    <span class="c"># 인자 없으면 전부</span>
+fi
+
+for name in "${TARGETS[@]}"; do
+  dir="docker/images/$name"
+  echo "▶ $name:$VERSION"
+<span class="h">  docker build -f "$dir/Dockerfile" \</span>
+<span class="h">    -t "$name:$VERSION" -t "$name:latest" .   <span class="c"># 컨텍스트=루트</span></span>
+  echo "$VERSION" > "$dir/VERSION"  <span class="c"># 성공했을 때만 기록</span>
+done</pre>
+      <p class="small muted" style="margin-top:8px">빌드 컨텍스트가 <b>프로젝트 루트</b>라서 Dockerfile이 <code>shared/</code>, <code>backend/</code>, <code>agents/</code>를 모두 COPY할 수 있습니다.</p>
+    </div>
+    <div>
+      <div class="file">docker/images/{팀}-be/Dockerfile</div>
+<pre style="font-size:13px;line-height:1.48">FROM python:3.12-slim
+WORKDIR /srv
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY shared/ ./shared/
+COPY backend/app/ ./app/
+ENV PYTHONPATH=/srv
+CMD ["uvicorn", "app.main:app", \
+     "--host", "0.0.0.0", "--port", "8000"]</pre>
+      <div class="file" style="margin-top:10px">docker/images/{팀}-agents/Dockerfile</div>
+<pre style="font-size:13px;line-height:1.48">FROM python:3.12-slim
+WORKDIR /srv
+COPY agents/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY shared/ ./shared/
+COPY agents/ ./agents/
+ENV PYTHONPATH=/srv
+CMD ["celery", "-A", "agents.worker.celery_app", \
+     "worker", "-Q", "agents", "-l", "INFO"]</pre>
+      <p class="small muted" style="margin-top:6px">requirements를 먼저 COPY → 소스만 바뀌면 pip 단계는 캐시 재사용 (빌드 빨라짐).</p>
+    </div>
+  </div>
+  <div class="no">21</div>
+</section>
+
+<!-- D3 -->
+<section class="slide section">
+  <div class="kicker">Docker ③</div>
+  <h2>compose.yml: 서비스 조립</h2>
+  <div class="grid2" style="grid-template-columns:1.05fr .95fr;gap:22px;margin-top:8px">
+    <div>
+      <div class="file">docker/compose/compose.yml</div>
+<pre style="font-size:11.4px;line-height:1.33;padding:12px 16px">services:
+  fe:
+    image: ${TEAM}-fe:${FE_VERSION:-latest}
+    ports: ["80:80"]
+  be:
+    image: ${TEAM}-be:${BE_VERSION:-latest}
+    env_file: .env
+    ports: ["8000:8000"]
+    depends_on: [redis, db]
+    restart: unless-stopped
+  agents:
+    image: ${TEAM}-agents:${AGENTS_VERSION:-latest}
+    env_file: .env
+    depends_on: [redis, db]
+<span class="h">    restart: unless-stopped      <span class="c"># 죽으면 자동 재시작</span></span>
+<span class="h">    deploy: { replicas: 2 }      <span class="c"># 워커 2개</span></span>
+  agents-beat:                   <span class="c"># 주기 작업 (같은 이미지!)</span>
+    image: ${TEAM}-agents:${AGENTS_VERSION:-latest}
+    env_file: .env
+<span class="h">    command: celery -A agents.worker.celery_app beat -l INFO</span>
+  flower:                        <span class="c"># 모니터링 대시보드</span>
+    image: mher/flower
+    command: celery --broker=redis://redis:6379/0 flower
+    ports: ["5555:5555"]
+  redis: { image: redis:7-alpine, restart: unless-stopped }
+  db:
+    image: postgres:16
+    env_file: .env
+    volumes: [pgdata:/var/lib/postgresql/data]
+volumes: { pgdata: {} }</pre>
+    </div>
+    <div>
+      <div class="file">docker/compose/.env (예시)</div>
+<pre style="font-size:12.6px;line-height:1.45">COMPOSE_PROJECT_NAME=bike
+TEAM=bike
+<span class="c"># 롤백할 때만 지정 (비우면 latest)</span>
+# AGENTS_VERSION=261118-0930
+REDIS_URL=redis://redis:6379/0
+POSTGRES_PASSWORD=change-me
+DATABASE_URL=postgresql://postgres:change-me@db/app
+OPENAI_API_KEY=...</pre>
+      <ul class="clean" style="margin-top:12px">
+        <li style="font-size:16px"><b>버전 고정·롤백</b>: <code>AGENTS_VERSION</code>만 바꾸고 start → 그 시각 이미지로</li>
+        <li style="font-size:16px"><b>같은 이미지, 다른 command</b>: agents와 agents-beat</li>
+        <li style="font-size:16px"><b>주의</b>: 단독 Docker의 <code>restart</code>는 <b>프로세스가 죽었을 때만</b> 재시작합니다. 응답 없음(unhealthy) 감지·재시작은 <code>healing/monitor</code>가 맡도록 설계하세요.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="no">22</div>
+</section>
+
+<!-- D4 -->
+<section class="slide section">
+  <div class="kicker">Docker ④</div>
+  <h2>start · stop · restart 스크립트와 일상 작업 흐름</h2>
+  <div class="grid3" style="gap:16px;margin-top:10px">
+    <div><div class="file">docker/start.sh</div>
+<pre style="font-size:12.8px;line-height:1.45">#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/compose"
+docker compose up -d "$@"
+docker compose ps</pre></div>
+    <div><div class="file">docker/stop.sh</div>
+<pre style="font-size:12.8px;line-height:1.45">#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/compose"
+docker compose down
+<span class="c"># DB 볼륨은 유지됨</span>
+<span class="c"># (down -v 는 DB 삭제!)</span></pre></div>
+    <div><div class="file">docker/restart.sh</div>
+<pre style="font-size:12.8px;line-height:1.45">#!/usr/bin/env bash
+set -euo pipefail
+DIR="$(cd "$(dirname "$0")" &amp;&amp; pwd)"
+"$DIR/stop.sh"
+"$DIR/start.sh"</pre></div>
+  </div>
+  <table style="margin-top:20px">
+    <tr><th style="width:34%">상황</th><th>명령</th></tr>
+    <tr><td>처음 띄우기</td><td><code>./docker/build.sh && ./docker/start.sh</code></td></tr>
+    <tr><td>에이전트 코드만 고침</td><td><code>./docker/build.sh bike-agents && ./docker/start.sh</code> <span class="small muted">(바뀐 서비스만 새로 생성)</span></td></tr>
+    <tr><td>깨끗하게 다시 시작</td><td><code>./docker/restart.sh</code></td></tr>
+    <tr><td>워커 로그 보기 / 워커 늘리기</td><td><code>cd docker/compose && docker compose logs -f agents</code> / <code>docker compose up -d --scale agents=4</code></td></tr>
+    <tr><td>장애 주입 (오토힐링 시연)</td><td><code>docker compose exec agents sh -c "kill 1"</code> → 워커 자동 재시작·태스크 재전달 확인 (Flower로 시연)</td></tr>
+  </table>
+  <p class="small muted" style="margin-top:10px">처음 한 번 실행 권한 부여: <code>chmod +x docker/*.sh</code></p>
+  <div class="no">23</div>
+</section>
+<!-- 20. 팀 주제 대입 -->
+<section class="slide">
+  <div class="kicker">우리 팀에 대입하기</div>
+  <h2>같은 구조, 다른 내용물</h2>
+  <p class="lead">구조는 그대로 두고 <b>Job · 에이전트 · 외부 API · 힐링 포인트</b>만 팀 주제에 맞게 채웁니다. (아래는 예시)</p>
+  <table>
+    <tr><th style="width:16%"></th><th style="width:28%">묶음배달 오토힐링</th><th style="width:28%">축제 다국어 안심 관광 비서</th><th>자전거 안전 상담·코스 추천</th></tr>
+    <tr><td><b>Job 1건</b></td><td>"이 배달 묶음에 이상 있음 → 진단·재배정"</td><td>"외국인 관광객 질문 1건 → 안전 답변 생성"</td><td>"출발지·조건 → 코스 추천 + 안전 상담"</td></tr>
+    <tr><td><b>에이전트</b></td><td>감지 → 진단 → 재배정(복구) → 검증</td><td>언어·의도 파악 → 혼잡도 조회 → 경로·대피 안내 → 응답 검증</td><td>상담 → 코스 탐색 → 위험구간 결합 → 검증</td></tr>
+    <tr><td><b>외부 API</b></td><td>지도·경로, 기상</td><td>공공 혼잡도·관광 정보, 번역(LLM)</td><td>자전거도로·사고다발 공공데이터, 기상</td></tr>
+    <tr><td><b>힐링 포인트</b></td><td>지연·이탈 감지 시 재배정 / 경로 API 실패 시 거리 추정 폴백</td><td>공공 API 1차 → 2차 → 캐시(stale 표시) 페일오버</td><td>기상 API 장애 시 기본 안전 안내 + 재시도 / LLM 모델 폴백</td></tr>
+    <tr><td><b>주기 작업</b></td><td>N분마다 진행 중 배달 점검</td><td>N분마다 혼잡도 수집·캐시 갱신</td><td>매일 공공데이터 갱신</td></tr>
+  </table>
+  <div class="no">24</div>
+</section>
+
+<!-- 21. 구현 순서 -->
+<section class="slide">
+  <div class="kicker">구현 순서</div>
+  <h2>처음부터 LLM 붙이지 말고, 뼈대부터</h2>
+  <div class="grid3" style="grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px">
+    <div class="card"><h3><span class="pill api">1</span>가짜 워커</h3><p>Celery 태스크 안에서 <code>time.sleep(3)</code> 세 번 + 이벤트 발행만. <b>POST → 202 → 폴링 → done</b>이 돌면 성공.</p></div>
+    <div class="card"><h3><span class="pill api">2</span>상태·DB</h3><p>jobs 테이블과 상태 머신(queued/running/succeeded/failed) 완성. 새로고침해도 결과가 보여야 함.</p></div>
+    <div class="card"><h3><span class="pill fe">3</span>SSE 화면</h3><p>폴링을 SSE로 교체. 노드 이름이 화면에 하나씩 찍히는 "사고 과정 타임라인".</p></div>
+    <div class="card"><h3><span class="pill wk">4</span>에이전트 연결</h3><p>sleep 자리에 <code>graph.stream()</code>. 에이전트는 노트북/단위 테스트로 먼저 검증한 뒤 붙이기.</p></div>
+    <div class="card"><h3><span class="pill ext">5</span>외부 API·힐링</h3><p><code>agents/integrations/</code> 래퍼에 재시도·폴백. 장애 주입 스위치(환경변수)를 만들어 둔다.</p></div>
+    <div class="card"><h3><span class="pill db">6</span>측정·배포</h3><p><code>docker/build.sh</code> → <code>start.sh</code>로 배포. 장애 주입 → 감지·복구 시간 로그 → Auto-Healing 결과서.</p></div>
+  </div>
+  <div class="callout ok" style="margin-top:18px">1~3단계는 <b>LLM 비용 0원</b>으로 끝납니다. 구조가 먼저 돌아가야 에이전트 문제와 인프라 문제를 구분해서 디버깅할 수 있어요.</div>
+  <div class="no">25</div>
+</section>
+
+<!-- 22. 체크리스트 -->
+<section class="slide">
+  <div class="kicker">점검</div>
+  <h2>흔한 실수 체크리스트</h2>
+  <div class="grid2" style="margin-top:14px;gap:16px 36px">
+    <div>
+      <p>☐ API 엔드포인트 안에서 <code>graph.ainvoke()</code>를 기다리고 있다</p>
+      <p style="margin-top:10px">☐ <code>BackgroundTasks</code>로 멀티에이전트를 돌린다 (재시작 시 유실)</p>
+      <p style="margin-top:10px">☐ Celery 태스크 인자로 대화 전문·파일 내용을 통째로 넘긴다 → ID만</p>
+      <p style="margin-top:10px">☐ Job 상태를 DB에 안 남겨서 새로고침하면 결과가 사라진다</p><p style="margin-top:10px">☐ <code>docker compose down -v</code>로 DB 볼륨까지 지운다</p>
+      <p style="margin-top:10px">☐ 모든 오류를 무조건 재시도한다 (400·401도)</p>
+    </div>
+    <div>
+      <p>☐ 재시도 횟수·타임아웃 상한이 없다 → 무한 루프·비용 폭탄</p>
+      <p style="margin-top:10px">☐ LLM·외부 API 키가 프런트 코드나 GitHub에 있다</p>
+      <p style="margin-top:10px">☐ API 서버의 <code>async def</code> 안에서 <code>requests</code>·<code>time.sleep</code> 같은 동기 호출을 한다</p>
+      <p style="margin-top:10px">☐ 같은 요청이 두 번 들어와 복구가 두 번 실행된다 → 멱등 키</p>
+      <p style="margin-top:10px">☐ 이미지를 <code>latest</code>로만 관리해 이전 버전으로 되돌릴 수 없다</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:24px">한 줄 요약: <b>API는 주문만 받고(202), 워커가 요리하고(LangGraph), 진동벨로 알리고(SSE), 납품이 늦으면 다른 길로 간다(오토힐링).</b></div>
+  <div class="no">26</div>
+</section>
+
+</div></div>
+
+<div id="hud">
+  <button id="prev">◀</button><span id="pg">1 / 1</span><button id="next">▶</button>
+  <button id="pdf" title="브라우저 인쇄 → PDF로 저장">인쇄/PDF</button>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var deck=document.getElementById('deck'), pg=document.getElementById('pg');
+  slides.forEach(function(s,i){ if(i>0 && !s.querySelector('.tag')){var t=document.createElement('div');t.className='tag';t.textContent='API 서버 + 백그라운드 워커 · 최종 프로젝트';s.appendChild(t);} });
+  var i=0; var h=parseInt((location.hash||'').replace('#',''),10); if(h>0&&h<=slides.length) i=h-1;
+  function show(n){ i=Math.max(0,Math.min(slides.length-1,n)); slides.forEach(function(s,k){s.classList.toggle('active',k===i)}); pg.textContent=(i+1)+' / '+slides.length; history.replaceState(null,'','#'+(i+1)); }
+  function fit(){ var s=Math.min(window.innerWidth/1280,(window.innerHeight-10)/720); deck.style.transform='scale('+s+')'; }
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.getElementById('pdf').onclick=function(){window.print()};
+  document.addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>=0){e.preventDefault();show(i+1)}
+    if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){e.preventDefault();show(i-1)}
+    if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);
+  });
+  window.addEventListener('resize',fit); fit(); show(i);
+})();
+</script>
+</body>
+</html>
