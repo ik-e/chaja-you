@@ -126,9 +126,33 @@
       "id": "HTTP-02",
       "method": "POST",
       "path": "/v1/assets",
-      "input": "multipart file + rights + key",
+      "input": "AssetUploadMetadata",
       "output": "Media",
-      "guard": "owner; rights; size/MIME; server digest"
+      "guard": "owner from service auth; rights_confirmed=true; nonempty permitted_use; approved mock MIME/size; server digest; key scoped to owner+endpoint and metadata+byte digest; malformed/oversize/unconfirmed rejected before asset publication",
+      "request_wire": {
+        "content_type": "multipart/form-data",
+        "parts": [
+          {
+            "name": "file",
+            "kind": "binary",
+            "required": true
+          },
+          {
+            "name": "metadata",
+            "kind": "json",
+            "schema": "AssetUploadMetadata",
+            "required": true
+          }
+        ],
+        "server_generated": [
+          "upload_ref",
+          "digest",
+          "mime",
+          "bytes",
+          "asset"
+        ],
+        "reject_unknown_parts": true
+      }
     },
     {
       "id": "HTTP-03",
@@ -246,9 +270,24 @@
       "id": "HTTP-17",
       "method": "GET",
       "path": "/v1/targets/{id}/observations",
-      "input": "after_revision optional",
+      "input": "ReadRequest",
       "output": "ObjectObservation[]",
-      "guard": "owner; stored records"
+      "guard": "owner from service auth; stored observations only; no external fetch; path id supplies ref; invalid query rejected",
+      "request_wire": {
+        "path": {
+          "id": "ref"
+        },
+        "query": {
+          "after_revision": {
+            "type": "positive_int",
+            "required": false
+          }
+        },
+        "body": "none",
+        "order": "revision ascending",
+        "filter": "revision > after_revision if supplied",
+        "empty_result": "[]"
+      }
     },
     {
       "id": "HTTP-18",
@@ -375,5 +414,6 @@
   "db_notes": [
     "컬럼 표는 relational physical candidate; UUID/TIMESTAMP/JSON은 SQL 타입 계열, PostgreSQL DDL/SQLite migration은 공통 구현자 결정. FK·partial unique·transaction의 실제 지원/DDL 검증 필요. JSON ref는 위 owner/version 제약을 애플리케이션/DB에서 검증한다.",
     "모든 시간 UTC 저장/KST 표시; active job/attempt 유일성은 intent와 target/effect key를 함께 직렬화하여 구현. 단순 job ID 유일성만으로 충분하지 않음."
-  ]
+  ],
+  "revision": "0.4.1-v08"
 }

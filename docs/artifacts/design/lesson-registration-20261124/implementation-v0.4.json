@@ -279,7 +279,8 @@
         "C4-05",
         "C4-06",
         "C4-07",
-        "C4-10"
+        "C4-10",
+        "C4-09"
       ],
       "requirement_refs": [
         "REQ-01",
@@ -328,12 +329,15 @@
       "id": "C4-05",
       "title": "Approval/Intent/Job coordinator",
       "unit": "app",
-      "responsibility": "계정/대상/버전 결합, 슬롯·멱등·승인·권한 검사, 작업 계획 및 중단",
+      "responsibility": "계정/대상/버전 결합, 슬롯·멱등·승인·권한 검사, 작업 계획 및 중단; 계획/중지/재개는 gateway port 요청, 실제 admission은 C4-07 단독. state/ledger 조회는 C4-10; gateway 직렬화 경계에서 coordinator callback 금지.",
       "inputs": "draft, target, account, policy",
       "outputs": "job/approved plan/state",
       "depends_on": [
         "C4-04",
-        "C4-10"
+        "C4-10",
+        "C4-06",
+        "C4-07",
+        "C4-08"
       ],
       "requirement_refs": [
         "REQ-05",
@@ -361,11 +365,10 @@
       "id": "C4-07",
       "title": "Execution gateway & worker",
       "unit": "remote_runtime",
-      "responsibility": "승인/대상/lease/효과 원자 admission, 단일 operation, stop/fencing; gateway 안에서만 브라우저 조작",
+      "responsibility": "승인/대상/lease/효과 원자 admission, 단일 operation, stop/fencing; gateway 안에서만 브라우저 조작; immutable plan/step 입력과 C4-10 원자 admission 상태·revision·lease/효과 ledger 확인. C4-05 역호출 금지; 결과/stop ack 반환 및 durable 기록.",
       "inputs": "approved job/plan/current state",
       "outputs": "attempt/observations/stop acknowledgement",
       "depends_on": [
-        "C4-05",
         "C4-06",
         "C4-08",
         "C4-10"
@@ -399,13 +402,14 @@
       "id": "C4-09",
       "title": "Result/reconcile",
       "unit": "app",
-      "responsibility": "증거 검증·작업/효과/객체 상태 분리·read-only 재확인",
+      "responsibility": "증거 검증·작업/효과/객체 상태 분리·read-only 재확인; C4-07 observe port로 authorized readback, 별도 효과 기록 검증 및 C4-10 저장.",
       "inputs": "attempt/evidence/target goal",
       "outputs": "result revision/next action",
       "depends_on": [
         "C4-04",
         "C4-05",
-        "C4-10"
+        "C4-10",
+        "C4-07"
       ],
       "requirement_refs": [
         "REQ-08",
@@ -666,5 +670,58 @@
       "status": "conditional",
       "value": "숨고 실제 등록 객체·완료 정의, 12/8 두 번째 경로 범위 및 1/4 지원 플랫폼 목록은 기존 조사/통합 결과로 R01 검토. 범위 축소는 명시 결정."
     }
-  ]
+  ],
+  "dependency_contract": {
+    "revision": "0.8",
+    "depends_on_semantics": "논리 컴포넌트 제공 기능/포트 및 상태 소유권 사용 의존성; 정적 import/프로세스 배치 강제 아님. 공통 contracts/port 주입 및 composition root 연결.",
+    "admission_owner": "C4-07",
+    "atomic_store": "C4-10",
+    "coordinator": "C4-05",
+    "no_gateway_callback": true,
+    "required_port_directions": [
+      {
+        "consumer": "C4-02",
+        "provider": "C4-09",
+        "refs": [
+          "HTTP-11",
+          "HTTP-12",
+          "HTTP-17",
+          "HTTP-25"
+        ]
+      },
+      {
+        "consumer": "C4-05",
+        "provider": "C4-07",
+        "refs": [
+          "HTTP-19",
+          "PORT5-06",
+          "PORT5-09"
+        ]
+      },
+      {
+        "consumer": "C4-05",
+        "provider": "C4-06",
+        "refs": [
+          "PORT5-03",
+          "PORT5-10"
+        ]
+      },
+      {
+        "consumer": "C4-05",
+        "provider": "C4-08",
+        "refs": [
+          "PORT5-04"
+        ]
+      },
+      {
+        "consumer": "C4-09",
+        "provider": "C4-07",
+        "refs": [
+          "PORT5-08"
+        ]
+      }
+    ],
+    "boundary": "C4-05→C4-07 command/response; gateway reads current immutable plan and atomic ledger at C4-10, fences under one serialization boundary; no nested coordinator lock/callback. C4-09 read-only observe."
+  },
+  "revision": "0.4.1-v08"
 }

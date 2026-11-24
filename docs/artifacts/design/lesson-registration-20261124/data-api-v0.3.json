@@ -1540,6 +1540,27 @@
         }
       ],
       "note": "타 사용자 존재/민감정보 노출 금지."
+    },
+    {
+      "id": "AssetUploadMetadata",
+      "fields": [
+        {
+          "name": "rights_confirmed",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "permitted_use",
+          "type": "string[]",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "HTTP-02 multipart metadata JSON. 서버 스트림 검증 후 upload_ref 생성 및 내부 MediaRequest 구성. client upload_ref/owner/digest 신뢰 금지. 합성 자료만."
     }
   ],
   "apis": [
@@ -1668,5 +1689,6 @@
     "뷰어 접속 비밀은 일반 응답 제외, 별도 단기 인증 경로. 실제 물리 강제는 PoC 필요.",
     "Operation의 효과/JobState/EffectState는 core-contract-v0.3.json 참조. 모든 ID 참조는 소유권·환경·버전 검사.",
     "기존 V0.2 필드 매핑 및 공통 하네스 계약을 보존하며 여기서 명시한 의미만 교정."
-  ]
+  ],
+  "revision": "0.3.1-v08"
 }

@@ -156,7 +156,7 @@
         "S07",
         "S12"
       ],
-      "contract": "job 상태와 개별 attempt 효과 상태 분리. 실행 중 취소/철회/인증 문제는 stopping, 새 admission 금지. pending 효과가 확인될 때까지 unknown 우선. 효과 없음 또는 안전한 중간 효과 확인 후 원인에 맞춰 cancelled/blocked/needs_action; 이미 목표 달성은 증거대로 완료. 이전 확인된 부분 효과는 남는다. unknown에서 단순 timeout/검색 실패/취소/새 ID로 효과 없음 간주 금지. 권한 있는 읽기 전용 재확인 후 안전한 다음 단계+명시 재개+가드 필요. crash 후 admission 기록 있고 결과 불명확이면 unknown."
+      "contract": "job 상태와 개별 attempt 효과 상태 분리. 실행 중 취소/철회/인증 문제는 stopping, 새 admission 금지. pending 효과가 확인될 때까지 unknown 우선. 효과 없음 또는 안전한 중간 효과 확인 후 원인에 맞춰 cancelled/blocked/needs_action; 이미 목표 달성은 증거대로 완료. 이전 확인된 부분 효과는 남는다. unknown에서 단순 timeout/검색 실패/취소/새 ID로 효과 없음 간주 금지. 권한 있는 읽기 전용 재확인 후 안전한 다음 단계+명시 재개+가드 필요. crash 후 admission 기록 있고 결과 불명확이면 unknown. V3-J03은 최초 planned 준비, V3-J20은 needs_action/blocked의 검증된 명시 재개; 최초 차단 해제도 사용자가 명시적으로 계속한다."
     },
     {
       "id": "V3-R07",
@@ -448,9 +448,7 @@
     {
       "id": "V3-J03",
       "from": [
-        "planned",
-        "needs_action",
-        "blocked"
+        "planned"
       ],
       "event": "all_preconditions_met",
       "to": "ready",
@@ -469,7 +467,7 @@
         "operation_not_already_effective",
         "not_stopping"
       ],
-      "meaning": "재개 시 명시 요청 추가 확인"
+      "meaning": "신규 작업 최초 준비. 복구/차단 상태는 V3-J20만 허용."
     },
     {
       "id": "V3-J04",
@@ -693,6 +691,33 @@
         "stop_is_policy"
       ],
       "meaning": "확인 후 차단"
+    },
+    {
+      "id": "V3-J20",
+      "from": [
+        "needs_action",
+        "blocked"
+      ],
+      "event": "explicit_resume_requested",
+      "to": "ready",
+      "conditions": [
+        "mock_environment",
+        "owner_verified",
+        "account_verified_same",
+        "approval_current",
+        "permission_current",
+        "target_resolved",
+        "no_unresolved_effect",
+        "operation_allowed",
+        "before_state_verified",
+        "lease_current_exclusive",
+        "revision_current",
+        "operation_not_already_effective",
+        "not_stopping",
+        "safe_next_step_proven",
+        "explicit_resume_current"
+      ],
+      "meaning": "HTTP-13 명시 요청에서만 서버 CAS로 ready. 현재 revision/승인/계정/권한/다음 동작/새 lease 확인. 관측/rebind/폴링만으로 재개 금지."
     }
   ],
   "evidence_profiles": [
@@ -920,5 +945,23 @@
     "각 동작 가드 및 실행",
     "증거·부분 효과·결과 표시",
     "필요 시 읽기 전용 재확인 및 명시 재개"
-  ]
+  ],
+  "recovery_contract": {
+    "revision": "0.8",
+    "initial_transition": "V3-J03",
+    "resume_transition": "V3-J20",
+    "interruption_states": [
+      "needs_action",
+      "blocked",
+      "failed",
+      "unknown",
+      "stopping"
+    ],
+    "resume_request_route": "HTTP-13",
+    "condition": "explicit_resume_current",
+    "condition_definition": "인증 owner의 HTTP-13 explicit_resume=true, path job/expected_revision/approval_ref 일치, 현재 승인·권한·동일 계정·안전 다음 동작·새 lease 확인; 서버 CAS 단일 전이. 반복 키는 이전 응답/충돌만. 관측·rebind·폴링은 이 조건을 생성하지 않음.",
+    "continuation_transition": "V3-J05",
+    "unknown_policy": "unknown은 증거에 의한 안전 다음 단계 확인(V3-J11) 전까지 조회만; 이후 명시 재개."
+  },
+  "revision": "0.3.1-v08"
 }

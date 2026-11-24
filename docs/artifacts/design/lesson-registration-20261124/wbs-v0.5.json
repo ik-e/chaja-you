@@ -31,7 +31,7 @@
         "REQ-09"
       ],
       "output": "타입/오류/fixture, provider stub, 공통 실행 명령·mock guard, 통합 체크포인트, 플랫폼별 완료 조건",
-      "done": "11/26 독립 PoC 근거 대조; 11/27 공통 계약·stub·smoke 재현 및 R01 착수 판단. AI/숨고 범위와 공수 확인; live 허용 문의는 지연 위험으로 착수 단계에 시작할 수 있으나 별도 공식 승인.",
+      "done": "11/26 독립 PoC 근거 대조; 11/27 공통 계약·stub·smoke 재현 및 R01 착수 판단. AI/숨고 범위와 공수 확인; live 허용 문의는 지연 위험으로 착수 단계에 시작할 수 있으나 별도 공식 승인. V0.8 typed HTTP-02/17, action spec, resume 및 MVP gate fixture/port 합의; 착수 시 공수·가용성 확인.",
       "status": "proposed",
       "work_dates": [
         "2026-11-25",
@@ -80,7 +80,7 @@
         "REQ-11"
       ],
       "output": "AI provider + deterministic validation contract, raw source fixture/예상 질문, 12/3 코드·실행법·미완료 항목 인계",
-      "done": "T5-08 원문→후보 사실→누락 질문→확인→초안 검증. 모델 미사용 fixture는 별도 기술 시험. 실제 구현 가용성은 W01에서 확인; 불가 시 R01이 AI 범위를 축소/재배정하고 다른 업무 조정, 무조건 추가 업무 부과 금지. 12/3 인계 후 R03이 공통 모듈 유지보수.",
+      "done": "T5-08 원문→후보 사실→누락 질문→확인→초안 검증. 모델 미사용 fixture는 별도 기술 시험. 실제 구현 가용성은 W01에서 확인; 불가 시 R01이 AI 범위를 축소/재배정하고 다른 업무 조정, 무조건 추가 업무 부과 금지. 12/3 인계 후 R03이 공통 모듈 유지보수. IC05에서 R02→R03 순으로 provider 계약·fixture·실행법 인계 후 연결/시험. stub 경로 유지, 지연 시 R01에게 범위/일정 영향만 보고.",
       "status": "proposed",
       "work_dates": [
         "2026-11-30",
@@ -282,14 +282,20 @@
         "W08"
       ],
       "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
         "REQ-06",
         "REQ-07",
         "REQ-08",
         "REQ-09",
+        "REQ-10",
         "REQ-11"
       ],
       "output": "크몽 먼저 완료, 숨고 확장 시연 및 상태표",
-      "done": "크몽 정상 경로/AI/재접속/기본 가드와 숨고 확장 검증. 각 수용 항목 상태 표시. 미충족 시 R01의 명시 범위/일정 재판정, 성공 위장 금지.",
+      "done": "크몽 정상 경로/AI/재접속/기본 가드와 숨고 확장 검증. 각 수용 항목 상태 표시. 미충족 시 R01의 명시 범위/일정 재판정, 성공 위장 금지. MVP-GATE-01 필수 시험의 동일 후보 근거 확인 및 변경 후 회귀. gate 불완전이면 완료 주장 금지.",
       "status": "proposed",
       "work_dates": [
         "2026-12-08"
@@ -1040,7 +1046,7 @@
         "R03",
         "R04"
       ],
-      "expected": "AI 원문 입력/질문→draft, 크몽 독립 readback, 최종 R02 인계; 원격 담당 완료 산출물 사용",
+      "expected": "AI 원문 입력/질문→draft, 크몽 독립 readback, 최종 R02 인계; 원격 담당 완료 산출물 사용; R02 artifact/fixture 인계 먼저, 이후 R03 연결·실제 모델 수용 시험. 시간 초과 시 미완료 및 범위 판단.",
       "within_tasks": [
         "W19",
         "W03",
@@ -1085,10 +1091,135 @@
         "R04",
         "R05"
       ],
-      "expected": "MVP 수용표, 실제 통과/실패/미검증 구분",
+      "expected": "MVP 수용표, 실제 통과/실패/미검증 구분; MVP-GATE-01 동일 후보 검증 결과, 미실행/실패/구버전 근거 분리.",
       "within_tasks": [
         "W09"
       ]
     }
-  ]
+  ],
+  "mvp_gate": {
+    "id": "MVP-GATE-01",
+    "work_ref": "W09",
+    "milestone_ref": "M04",
+    "date": "2026-12-08",
+    "scope": "integrated_mock_product",
+    "groups": [
+      {
+        "id": "source_and_ai",
+        "test_refs": [
+          "AT-01",
+          "T5-08",
+          "T5-11",
+          "T6-01",
+          "T6-02"
+        ],
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-03"
+        ]
+      },
+      {
+        "id": "remote_auth_and_approval",
+        "test_refs": [
+          "AT-02",
+          "AT-03",
+          "T5-01",
+          "T5-02",
+          "T5-04",
+          "T5-12"
+        ],
+        "requirement_refs": [
+          "REQ-04",
+          "REQ-05",
+          "REQ-10"
+        ]
+      },
+      {
+        "id": "target_and_contract",
+        "test_refs": [
+          "T5-03",
+          "T5-07"
+        ],
+        "requirement_refs": [
+          "REQ-02",
+          "REQ-09"
+        ]
+      },
+      {
+        "id": "platform_goals",
+        "test_refs": [
+          "AT-04",
+          "AT-05",
+          "T5-06",
+          "T5-09",
+          "T5-13"
+        ],
+        "requirement_refs": [
+          "REQ-06",
+          "REQ-07",
+          "REQ-09"
+        ]
+      },
+      {
+        "id": "result_and_recovery",
+        "test_refs": [
+          "AT-06",
+          "T5-05"
+        ],
+        "requirement_refs": [
+          "REQ-08",
+          "REQ-11"
+        ]
+      }
+    ],
+    "required_test_refs": [
+      "AT-01",
+      "T5-08",
+      "T5-11",
+      "T6-01",
+      "T6-02",
+      "AT-02",
+      "AT-03",
+      "T5-01",
+      "T5-02",
+      "T5-04",
+      "T5-12",
+      "T5-03",
+      "T5-07",
+      "AT-04",
+      "AT-05",
+      "T5-06",
+      "T5-09",
+      "T5-13",
+      "AT-06",
+      "T5-05"
+    ],
+    "actual_model_test_refs": [
+      "T5-08"
+    ],
+    "candidate_fields": [
+      "build_sha",
+      "contract_digest",
+      "fixture_digest",
+      "environment"
+    ],
+    "environment": "mock",
+    "verdicts": [
+      "pass",
+      "fail",
+      "incomplete"
+    ],
+    "evidence_required": [
+      "test_ref",
+      "run_ref",
+      "verdict",
+      "execution_kind",
+      "candidate"
+    ],
+    "execution_kind": "integrated_mock_product",
+    "reuse": "동일 build/contract/fixture/environment 식별자 근거만 재사용. W18 또는 통합 변경으로 식별자 변경 시 필수 자동 suite 재실행. 누락/unknown/not_run/stale/수동 AI 대체는 incomplete. 정적/추상 설계 검증 제외.",
+    "completion": "모든 필수 시험 pass만 MVP mock 통과. 실패·미확인 시 기존 범위/일정 판단 규칙 유지; mock pass는 live/실서비스 목표 달성 아님.",
+    "execution_status": "not_run"
+  },
+  "revision": "0.5.1-v08"
 }
