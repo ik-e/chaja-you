@@ -1,0 +1,392 @@
+{
+  "kind": "direct_js_execution_against_pinned_github_json",
+  "source_commit": "5a01ec3845415200e0383546e18bfb8a6a78a2e9",
+  "sources": {
+    "core": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json",
+      "blob_sha": "5235a09bc6e33a9f98dd6f529d4c830eff23ea76"
+    },
+    "contract": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
+      "blob_sha": "5c931704861137f4f2343b17f7e8b087733fe60a"
+    },
+    "api": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json",
+      "blob_sha": "56dc44e2549efe1f6141c5fe5843d66ff69bfe8d"
+    },
+    "physical": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/physical-v0.4.json",
+      "blob_sha": "e29aee98040b990addf91e3e1516fea8dd5c75e6"
+    },
+    "implementation": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+      "blob_sha": "1238195995c899b1bb3cf0d8496c07a2648dfa99"
+    },
+    "index": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.6.json",
+      "blob_sha": "716ecf9114cb2868c87156a828ab13df1e25dfe6"
+    },
+    "wbs": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+      "blob_sha": "0993011ba75ef3a050e49017b58e7b0c3e23e800"
+    },
+    "review": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/review-v0.3.json",
+      "blob_sha": "7961bce5e04b3377559dca93ee98df8c0dc2febf"
+    }
+  },
+  "normal": {
+    "kind": "design_constraint_validation",
+    "checks": [
+      {
+        "id": "STATE-01 declared states and transitions",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "STATE-02 structural reachability and terminal isolation",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "STATE-03 all-guard dispatch admission",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "STATE-04 uncertainty, stop and completion safety",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "EFFECT-01 attempt lifecycle and proof events",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "WIRE-01 full inherited schema and enum resolution",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "WIRE-02 effective typed route/port resolution",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "WIRE-03 UI cannot call internal routes",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "ARCH-01 declared component dependency DAG",
+        "pass": true,
+        "findings": []
+      },
+      {
+        "id": "TRACE-01 preserve original acceptance test subjects",
+        "pass": true,
+        "findings": []
+      }
+    ],
+    "passed": 10,
+    "total": 10,
+    "review": [
+      {
+        "id": "ARCH-R01",
+        "contract": "HTTP-11",
+        "consumer": "C4-02",
+        "provider": "C4-09",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "HTTP-12",
+        "consumer": "C4-02",
+        "provider": "C4-09",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "HTTP-17",
+        "consumer": "C4-02",
+        "provider": "C4-09",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "HTTP-19",
+        "consumer": "C4-05",
+        "provider": "C4-07",
+        "reverse_dependency": true,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "HTTP-25",
+        "consumer": "C4-02",
+        "provider": "C4-09",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "PORT5-03",
+        "consumer": "C4-05",
+        "provider": "C4-06",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "PORT5-04",
+        "consumer": "C4-05",
+        "provider": "C4-08",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "PORT5-06",
+        "consumer": "C4-05",
+        "provider": "C4-07",
+        "reverse_dependency": true,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "PORT5-08",
+        "consumer": "C4-09",
+        "provider": "C4-07",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "PORT5-09",
+        "consumer": "C4-05",
+        "provider": "C4-07",
+        "reverse_dependency": true,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      },
+      {
+        "id": "ARCH-R01",
+        "contract": "PORT5-10",
+        "consumer": "C4-05",
+        "provider": "C4-06",
+        "reverse_dependency": false,
+        "reason": "Consumer/provider call has no corresponding path in declared component dependencies; classify runtime call vs static dependency and update current architecture or mapping"
+      }
+    ],
+    "unverified": [
+      {
+        "id": "HTTP-02",
+        "reason": "Inherited input is descriptive, not a typed wire schema"
+      },
+      {
+        "id": "HTTP-17",
+        "reason": "Inherited input is descriptive, not a typed wire schema"
+      },
+      {
+        "id": "GUARD-SEMANTICS",
+        "conditions": [
+          "no_pending_effect",
+          "intermediate_verified",
+          "effect_absent",
+          "pending_or_unresolved_effect",
+          "goal_evidence_valid",
+          "safe_next_step_proven",
+          "not_cancelled_or_policy_revoked",
+          "goal_not_reached",
+          "stop_is_cancel",
+          "stop_is_policy",
+          "stop_needs_human"
+        ],
+        "reason": "Guard/event predicates lack a machine-readable truth/update model; topology and conjunct presence only, no semantic reachability/liveness proof"
+      },
+      {
+        "id": "PRODUCT",
+        "reason": "No implementation/DB/browser/concurrency/security/real platform/user value execution"
+      }
+    ],
+    "product_execution": "not_run",
+    "scope": "Pinned source contracts; no design or phase adoption."
+  },
+  "regression": {
+    "cases": [
+      {
+        "name": "transition to nonexistent state",
+        "target": "STATE-01",
+        "pass": true,
+        "detected": [
+          "STATE-01 declared states and transitions",
+          "STATE-02 structural reachability and terminal isolation"
+        ]
+      },
+      {
+        "name": "duplicate event from same state",
+        "target": "STATE-01",
+        "pass": true,
+        "detected": [
+          "STATE-01 declared states and transitions"
+        ]
+      },
+      {
+        "name": "orphan state",
+        "target": "STATE-02",
+        "pass": true,
+        "detected": [
+          "STATE-02 structural reachability and terminal isolation"
+        ]
+      },
+      {
+        "name": "live reserved state reachable",
+        "target": "STATE-02",
+        "pass": true,
+        "detected": [
+          "STATE-02 structural reachability and terminal isolation"
+        ]
+      },
+      {
+        "name": "terminal can restart",
+        "target": "STATE-02",
+        "pass": true,
+        "detected": [
+          "STATE-02 structural reachability and terminal isolation"
+        ]
+      },
+      {
+        "name": "remove approval guard from actual dispatch",
+        "target": "STATE-03",
+        "pass": true,
+        "detected": [
+          "STATE-03 all-guard dispatch admission"
+        ]
+      },
+      {
+        "name": "remove mandatory guard reference and actual condition",
+        "target": "STATE-03",
+        "pass": true,
+        "detected": [
+          "STATE-03 all-guard dispatch admission"
+        ]
+      },
+      {
+        "name": "delete owner safety obligation from all declarations",
+        "target": "STATE-03",
+        "pass": true,
+        "detected": [
+          "STATE-03 all-guard dispatch admission"
+        ]
+      },
+      {
+        "name": "direct dispatch from unknown",
+        "target": "STATE-03",
+        "pass": true,
+        "detected": [
+          "STATE-03 all-guard dispatch admission",
+          "STATE-04 uncertainty, stop and completion safety"
+        ]
+      },
+      {
+        "name": "uncertain recovery without absence gate",
+        "target": "STATE-04",
+        "pass": true,
+        "detected": [
+          "STATE-04 uncertainty, stop and completion safety"
+        ]
+      },
+      {
+        "name": "completion without goal proof",
+        "target": "STATE-04",
+        "pass": true,
+        "detected": [
+          "STATE-04 uncertainty, stop and completion safety"
+        ]
+      },
+      {
+        "name": "cancel with pending effect",
+        "target": "STATE-04",
+        "pass": true,
+        "detected": [
+          "STATE-04 uncertainty, stop and completion safety"
+        ]
+      },
+      {
+        "name": "unknown attempt readmitted",
+        "target": "EFFECT-01",
+        "pass": true,
+        "detected": [
+          "EFFECT-01 attempt lifecycle and proof events"
+        ]
+      },
+      {
+        "name": "timeout interpreted as absence",
+        "target": "EFFECT-01",
+        "pass": true,
+        "detected": [
+          "EFFECT-01 attempt lifecycle and proof events"
+        ]
+      },
+      {
+        "name": "inherited schema type broken",
+        "target": "WIRE-01",
+        "pass": true,
+        "detected": [
+          "WIRE-01 full inherited schema and enum resolution"
+        ]
+      },
+      {
+        "name": "duplicate enum value",
+        "target": "WIRE-01",
+        "pass": true,
+        "detected": [
+          "WIRE-01 full inherited schema and enum resolution"
+        ]
+      },
+      {
+        "name": "inherited output type broken",
+        "target": "WIRE-02",
+        "pass": true,
+        "detected": [
+          "WIRE-02 effective typed route/port resolution"
+        ]
+      },
+      {
+        "name": "internal route exposed to UI",
+        "target": "WIRE-03",
+        "pass": true,
+        "detected": [
+          "WIRE-03 UI cannot call internal routes"
+        ]
+      },
+      {
+        "name": "component dependency cycle",
+        "target": "ARCH-01",
+        "pass": true,
+        "detected": [
+          "ARCH-01 declared component dependency DAG"
+        ]
+      },
+      {
+        "name": "acceptance requirement removed from index",
+        "target": "TRACE-01",
+        "pass": true,
+        "detected": [
+          "TRACE-01 preserve original acceptance test subjects"
+        ]
+      },
+      {
+        "name": "new call/dependency discrepancy",
+        "target": "ARCH-R01",
+        "pass": true
+      }
+    ],
+    "passed": 21,
+    "total": 21
+  },
+  "product_execution": "not_run"
+}
