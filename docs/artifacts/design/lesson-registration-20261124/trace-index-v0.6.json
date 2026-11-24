@@ -63,13 +63,13 @@
     },
     "v03core": {
       "path": "docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json",
-      "blob_sha": "5235a09bc6e33a9f98dd6f529d4c830eff23ea76",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "be77eba784c90b89b510a20d9d7af7f355db4992",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
     },
     "v03api": {
       "path": "docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json",
-      "blob_sha": "56dc44e2549efe1f6141c5fe5843d66ff69bfe8d",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "14438ccb80be4fb8a03094c5aa60cbacde53129f",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
     },
     "v03review": {
       "path": "docs/artifacts/design/lesson-registration-20261124/review-v0.3.json",
@@ -83,23 +83,23 @@
     },
     "v04implementation": {
       "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
-      "blob_sha": "1238195995c899b1bb3cf0d8496c07a2648dfa99",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "f7b49262a4d470f6a2764e0fd2c559e6358cc416",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
     },
     "v04physical": {
       "path": "docs/artifacts/design/lesson-registration-20261124/physical-v0.4.json",
-      "blob_sha": "e29aee98040b990addf91e3e1516fea8dd5c75e6",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "d6bffc13289c569ec0fe4e3877d7b5b8c22abba1",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
     },
     "v05contract": {
       "path": "docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
-      "blob_sha": "5c931704861137f4f2343b17f7e8b087733fe60a",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "b773142f11580c098a5e90a99d4f633083b116ad",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
     },
     "v05wbs": {
       "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
-      "blob_sha": "0993011ba75ef3a050e49017b58e7b0c3e23e800",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
     }
   },
   "precedence": [
@@ -250,7 +250,7 @@
         "REQ-01",
         "REQ-10"
       ],
-      "inheritance_note": "V0.5 route_inheritance도 함께 적용. 본 참조는 기존 wire 경로 유지이며 상세 schema 교정은 해당 명세 참조."
+      "inheritance_note": "V0.8 typed request_wire in V0.4 physical + V0.3 data API/V0.5 wire; same endpoint and owner boundary."
     },
     {
       "id": "HTTP-03",
@@ -429,7 +429,7 @@
       "requirement_refs": [
         "REQ-08"
       ],
-      "inheritance_note": "V0.5 route_inheritance도 함께 적용. 본 참조는 기존 wire 경로 유지이며 상세 schema 교정은 해당 명세 참조."
+      "inheritance_note": "V0.8 typed request_wire in V0.4 physical + V0.3 data API/V0.5 wire; same endpoint and owner boundary."
     },
     {
       "id": "HTTP-18",
@@ -965,7 +965,8 @@
       "work_refs": [
         "W03",
         "W06",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     },
@@ -994,7 +995,8 @@
       "work_refs": [
         "W03",
         "W04",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1030,7 +1032,8 @@
         "W04",
         "W06",
         "W08",
-        "W16"
+        "W16",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1065,7 +1068,8 @@
         "W03",
         "W04",
         "W11",
-        "W14"
+        "W14",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1095,7 +1099,8 @@
         "W03",
         "W04",
         "W05",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1164,7 +1169,8 @@
       "work_refs": [
         "W03",
         "W10",
-        "W14"
+        "W14",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1195,7 +1201,8 @@
         "W19",
         "W03",
         "W07",
-        "W15"
+        "W15",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1302,7 +1309,8 @@
         "W03",
         "W05",
         "W19",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1335,7 +1343,8 @@
         "W03",
         "W04",
         "W11",
-        "W14"
+        "W14",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1739,7 +1748,8 @@
         "W02",
         "W19",
         "W03",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1767,7 +1777,8 @@
       "work_refs": [
         "W04",
         "W07",
-        "W11"
+        "W11",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1794,7 +1805,8 @@
       "work_refs": [
         "W03",
         "W07",
-        "W11"
+        "W11",
+        "W09"
       ],
       "other_refs": []
     },
@@ -1884,7 +1896,8 @@
         "W03",
         "W07",
         "W11",
-        "W18"
+        "W18",
+        "W09"
       ],
       "other_refs": []
     },
@@ -2027,7 +2040,8 @@
       "work_refs": [
         "W03",
         "W05",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     },
@@ -2055,7 +2069,8 @@
       "work_refs": [
         "W03",
         "W05",
-        "W07"
+        "W07",
+        "W09"
       ],
       "other_refs": []
     }
@@ -3702,7 +3717,7 @@
     {
       "code": "GAP-03",
       "subject": "L5",
-      "detail": "29개 HTTP/내부 경로의 선언과 공통 타입 연결은 설계. V0.5 명시 교정 외 계승된 multipart/GET/stop 오류·응답 세부 규약 및 실행 DDL, UI 접근성, 배포 공수는 구현 전 검토.",
+      "detail": "V0.8 typed multipart/GET wire and logical port dependencies 보완. 실행 DDL, 실제 serializer/adapter conformance, UI 접근성, 배포 공수 및 플랫폼별 구체 동작 조건은 구현/실험 필요.",
       "work_refs": [
         "W01",
         "W03",
@@ -3713,7 +3728,7 @@
     {
       "code": "GAP-04",
       "subject": "L6",
-      "detail": "일부 시험의 구체 fixture/오류 주입·정량 판정·환경 미동결. 추적 연결은 시험 실행이나 안전 증명 아님.",
+      "detail": "V0.8 MVP 필수 gate와 AI 합성 fixture 보완. 나머지 플랫폼 fixture/경쟁·격리·정량 판정·환경은 W01/W04/W06/W08/W11에서 구현·실행. 제품 시험 미실행.",
       "work_refs": [
         "W01",
         "W07",
@@ -3771,10 +3786,11 @@
       "verdict": "새 버전 및 차단 관측 일치 시 pass; 원본/승인 덮어쓰기 또는 무단 실행 시 fail; 필수 관측 부족 시 unknown"
     }
   ],
-  "validation_revision": "0.6.1",
+  "validation_revision": "0.8",
   "validation_notes": [
     "이전 직접 검증 참조 미연결 HTTP-02/05는 보완 시험 계획 T6-01/02로 추가. 원본 제품 시험 실행이나 새로운 TASK 승인 아님.",
     "W12는 AT-05/07/10, W18은 AT-04/06과 회귀/검수 관점 연결. 작업이 새로 배정되었다는 뜻 아님.",
-    "검증기 enum은 모델 record_contract.envelope 기준. 선행 작업/컴포넌트 의존이 없는 빈 배열은 유효한 명시 값."
+    "검증기 enum은 모델 record_contract.envelope 기준. 선행 작업/컴포넌트 의존이 없는 빈 배열은 유효한 명시 값.",
+    "V0.8: V0.7 IR-01~03/05 설계 정합성 보완; V3-J20 explicit resume, 2개 inherited typed route, MVP-GATE-01. 모든 시험 계획 not_run; 기존 원본은 Git 이력 보존."
   ]
 }
