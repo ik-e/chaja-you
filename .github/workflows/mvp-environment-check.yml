@@ -1,0 +1,38 @@
+name: lesson-mvp-environment-check
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.python-version'
+      - 'prototype/lesson-registration/**'
+      - '.github/workflows/mvp-environment-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.python-version'
+      - 'prototype/lesson-registration/**'
+      - '.github/workflows/mvp-environment-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  mvp-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+          enable-cache: true
+      - name: Install pinned development dependencies
+        run: uv sync --locked --group dev
+      - name: Check MVP smoke tests
+        run: uv run --locked pytest prototype/lesson-registration/tests -q
+      - name: Lint MVP environment smoke test
+        run: uv run --locked ruff check prototype/lesson-registration/tests
