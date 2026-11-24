@@ -8,7 +8,7 @@ export function validateDesignInformation(model, graph, {authorityRefs=[], regis
   const fieldsOk=(v,t)=>v===null||(["string","enum","ref"].includes(t)?typeof v==="string":["string[]","ref[]"].includes(t)?Array.isArray(v)&&v.every(x=>typeof x==="string"):t==="object"&&isObj(v));
   const stages=new Map(model.decision_stages.map(x=>[x.id,x])), types=new Map(model.information_types.map(x=>[x.id,x])), relations=new Map(model.relationship_types.map(x=>[x.id,x])), allowed=new Set(model.type_edges.map(x=>`${x.from_type}|${x.to_type}|${x.relation}`));
   const rs=graph.records??[], es=graph.edges??[], by=new Map(rs.map(x=>[x.id,x])), current=rs.filter(x=>x.lifecycle==="current"), causal=new Set(["derived_from","constrains","satisfies"]);
-  const validTypes=new Set(model.field_type_enum??["string","string[]","object","ref","ref[]","enum"]);
+  const validTypes=new Set(model.record_contract.field_type_enum??["string","string[]","object","ref","ref[]","enum"]);
   function acyclic(nodes,links){const next=new Map(nodes.map(x=>[x,[]])), inDeg=new Map(nodes.map(x=>[x,0]));for(const [a,b] of links){if(!next.has(a)||!inDeg.has(b))return false;next.get(a).push(b);inDeg.set(b,inDeg.get(b)+1);}const q=nodes.filter(x=>inDeg.get(x)===0);for(let i=0;i<q.length;i++){for(const b of next.get(q[i])){inDeg.set(b,inDeg.get(b)-1);if(inDeg.get(b)===0)q.push(b);}}return q.length===nodes.length;}
   group("MODEL-01 stage and type definitions",need=>{
     need(stages.size===model.decision_stages.length&&types.size===model.information_types.length&&relations.size===model.relationship_types.length,"duplicate stage/type/relation");
@@ -24,7 +24,10 @@ export function validateDesignInformation(model, graph, {authorityRefs=[], regis
   });
   group("INFO-01 record envelope, fields and status",need=>{
     need(by.size===rs.length,"duplicate record ID");
-    const statuses=new Set(model.record_contract.status_values), evidence=new Set(model.record_contract.evidence_values), required=model.record_contract.envelope.required;
+    const envelope=model.record_contract.envelope;
+    const statusValues=envelope.status_values??model.record_contract.status_values, evidenceValues=envelope.evidence_values??model.record_contract.evidence_values;
+    need(Array.isArray(statusValues)&&statusValues.length>0&&Array.isArray(evidenceValues)&&evidenceValues.length>0,"model status/evidence enums missing");
+    const statuses=new Set(statusValues??[]), evidence=new Set(evidenceValues??[]), required=envelope.required;
     for(const r of rs){
       need(required.every(k=>Object.hasOwn(r,k)),`${r.id}: incomplete envelope`);
       need(typeof r.id==="string"&&r.id.length>0&&types.has(r.type_id),`${r.id}: invalid id/type`);
@@ -35,7 +38,7 @@ export function validateDesignInformation(model, graph, {authorityRefs=[], regis
       const t=types.get(r.type_id);if(!t||!isObj(r.fields))continue;
       const spec=new Map(t.fields.map(f=>[f.key,f]));
       for(const [k,v] of Object.entries(r.fields)){const f=spec.get(k);need(!!f,`${r.id}.${k}: unknown field`);if(f){need(fieldsOk(v,f.value_type),`${r.id}.${k}: wrong type ${f.value_type}`);need(v===null||!f.allowed_values||f.allowed_values.includes(v),`${r.id}.${k}: invalid enum`);}}
-      const absent=t.fields.filter(f=>f.required_for_baseline&&!nonempty(r.fields[f.key])).map(f=>f.key);
+      const absent=t.fields.filter(f=>f.required_for_baseline&&(!nonempty(r.fields[f.key])&&!(["dependencies","depends_on"].includes(f.key)&&Array.isArray(r.fields[f.key])&&r.fields[f.key].length===0))).map(f=>f.key);
       if(["provisional","adopted"].includes(r.status))need(!absent.length,`${r.id}: missing baseline fields ${absent.join(",")}`);
       else if(r.lifecycle==="current"&&absent.length&&r.status!=="not_applicable")warnings.push({kind:"candidate_baseline_fields",id:r.id,fields:absent,note:"제안 상태; 기준선 확정 전에 의미와 필요성 검토"});
     }
