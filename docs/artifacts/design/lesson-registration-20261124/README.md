@@ -1,12 +1,20 @@
-# 레슨 등록 설계 — R01 재설계 기준 후보
+# 레슨 등록 설계 — R01 재설계 기준선
 
-최신 읽기 순서: [최상위 합의](top-design-v1.json) → [상위 보완](top-design-amendment-v1.json) → [상세 결정 D1~D8](detail-decisions-v2.json) → [최소 상세 계약 V2](detail-contract-v2.json) → [논리 실행 모델 V5](logical-behavior-v5.json) → [검증 및 보고](DETAIL-DESIGN-V2.md). V4/V1 및 V0.8은 이전 후보, 충돌 시 이 합의의 명시적 변경 우선. 기존 독립 TASK 및 phase/main 유지. 제품/실서비스 실행 승인 아님.
+2026-11-25: 상위 논리적 데이터 계약 합의 완료·동결. 상세 데이터 계약과 인터페이스/API는 검증·보완이 필요한 후보이며 실제 제품 구현 또는 실서비스 실행을 승인하지 않는다.
 
----
+## 현재 기준선
 
-# 레슨 등록 설계 — R01 재설계 후보
+| 구분 | 문서 | 상태 |
+|---|---|---|
+| 최상위 설계 | [최상위 합의](top-design-v1.json), [상위 보완](top-design-amendment-v1.json) | 합의 |
+| 논리 및 상세 결정 | [D1~D8](detail-decisions-v2.json), [논리 모델 V5](logical-behavior-v5.json) | 상위 방향 합의, 상세 후보 |
+| 상위 논리적 데이터 계약 | [결정 정본](logical-data-contract-decision-v1.json), [설계 보고](DETAIL-DESIGN-V2.md) | **합의 완료** |
+| 상세 데이터 계약 | [최소 상세 계약 V2](detail-contract-v2.json) | 보완 필요 |
+| 인터페이스/API | [계약 V3](interface-contract-v3.json), [스키마 V3](interface-schema-v3.json) | 보완 필요 |
+| 검증 근거 | [논리 검증 V5](logical-validation-v5.json), [인터페이스 검토 V3](interface-review-evidence-v3.json) | 추상 모델·타입/참조 검증, 의미·통합 미검증 |
+| 구현/통합 | 기존 독립 TASK 및 phase 유지 | 후속 결정, mock-only |
 
-최신 검토 순서: [최상위 합의](top-design-v1.json) → [최상위 보완](top-design-amendment-v1.json) → [통합 논리 V4](logical-behavior-v4.json) → [세부 설계 V1](DETAIL-DESIGN-V1.md). 실제 구현/운영 및 기존 WBS·TASK 변경은 아직 승인되지 않음. 기존 V0.8은 역사적 후보로 보존. 새 후보 채택 전 구계약과 혼용하지 않음.
+상위 데이터 계약과 상충하는 상세 후보를 확정본으로 사용하지 않는다. 상세 문제 P1~P5는 [설계 보고](DETAIL-DESIGN-V2.md#검증-및-미해결-항목)에 기록. 아래 V0.8 및 이전 문서는 역사적 자료로 보존한다. [V1 상세 설계 이력](DETAIL-DESIGN-V1.md), [V4 논리 이력](logical-behavior-v4.json).
 
 ---
 
