@@ -1,0 +1,1942 @@
+{
+  "id": "LR-COMMON-01",
+  "version": "1.0",
+  "date": "2026-11-25",
+  "status": "logical_common_baseline_delegated_physical_gate_pending",
+  "authority": {
+    "actor": "R01",
+    "request": "너가 권장한대로 공통 설계를 하는데 각 설계 결정 사항에 대해서 왜 그렇게 결정을 내렸는지 근거가 추적될 수 있으면 좋겠는데",
+    "scope": "common logical design and traceability; no new task assignments, live or implementation authorization"
+  },
+  "basis": {
+    "commit": "e847b634cf427ac1681eb39c4ad61d8c55e7b42f",
+    "data": "data-contract-v4.json",
+    "schema": "data-schema-v4.1.json",
+    "profile": "platform-profiles-v2.json",
+    "prior_interface": "interface-contract-v3.json",
+    "approved": "logical-data-contract-decision-v1.json",
+    "precedence": "Latest common contract replaces V3 wire/ports and refines V4 only stated delta. A2 overrides historical resume/cancel/rollback. V4 platform/profile mock definitions and independent T1~T6 unchanged."
+  },
+  "schema_delta": {
+    "source": "data-schema-v4.json",
+    "changes": [
+      "FieldCorrection and ResolvedAnswer added",
+      "PreparationEdit.corrections optional",
+      "PrepareInput.answers uses ResolvedAnswer, normalized server-side"
+    ],
+    "rationale": "CS-02: previous issue_id-only transfer and no correction of reviewed field without existing issue; no new business endpoint or workflow state"
+  },
+  "decisions": [
+    {
+      "id": "CS-01",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "플랫폼 지식과 업무 포트 연결 방식",
+        "options": [
+          "고정 프로필 하나를 버전으로 조회",
+          "모듈별 규칙 복제",
+          "범용 AI 매번 절차 생성"
+        ],
+        "drivers": "REQ-02, REQ-03, REQ-06, REQ-07, REQ-09",
+        "tradeoffs": [
+          "공통 registry 조회 필요",
+          "플랫폼별 정의만 추가, 공통 계약에 플랫폼 enum 없음"
+        ],
+        "selection_and_reason": {
+          "selection": "기존 5개 업무 포트 및 버전 고정 registry; 값 스키마·절차·목표·작업 정의를 동일 참조로 조회. 새로운 업무 API/AI 재계획 없음.",
+          "reason": "S04/S09/S10의 필드·객체 차이를 독립 프로필로 보존하고 준비/실행/판정 규칙이 달라지지 않게 함.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "새 플랫폼 등록이 공통 계약 수정 없이 불가능하거나 같은 profile hash에서 내용이 다를 때"
+      },
+      "source_refs": [
+        "data",
+        "profiles"
+      ],
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "prior_decision_refs": [
+        "D1",
+        "LD-01",
+        "LD-04",
+        "DC2"
+      ],
+      "target_refs": [
+        "I1",
+        "I2",
+        "I4",
+        "I5",
+        "RUNTIME"
+      ],
+      "planned_test_refs": [
+        "T5-03",
+        "T5-13",
+        "DV-04",
+        "AT-04",
+        "AT-05"
+      ]
+    },
+    {
+      "id": "CS-02",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "준비/수정/승인 및 사용자 API 경계",
+        "options": [
+          "원본과 등록 요청의 기존 9개 API",
+          "초안/계획/승인/작업 각각 API",
+          "등록 전 변경 불가"
+        ],
+        "drivers": "REQ-01, REQ-02, REQ-03, REQ-05, REQ-08",
+        "tradeoffs": [
+          "V4.1 PrepareInput 변경은 내부 계약에만 적용",
+          "UI 값 덮어쓰기 금지; 동일 프로필에서 필요한 질문만"
+        ],
+        "selection_and_reason": {
+          "selection": "기존 /v1 API 9개 유지. H5는 현재 이슈 답변 외에 승인 전 표시 필드의 명시적 수정 제안을 허용. 서버가 현재 질문→field→answer_id를 확정하여 PREP에 전달하고 다시 검사. 원본 사실 변경은 새 Source, 플랫폼별 선택은 등록 요청에만.",
+          "reason": "V4 Answer에는 issue_id만 있어 PREP가 어떤 필드 답인지 모를 수 있고, 이슈 없는 표시값을 수정할 경로가 없다. 작은 타입 보완 2개로 최종 승인 1회와 원본 불변성 유지. 추가 계획 API 불필요.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "현 수정/질문 흐름으로 실제 사용자 오류 교정이 불가능할 때"
+      },
+      "source_refs": [
+        "data",
+        "schema",
+        "iface"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "prior_decision_refs": [
+        "D2",
+        "D3",
+        "D6",
+        "D7",
+        "LD-02",
+        "LD-05",
+        "DC1",
+        "DC7"
+      ],
+      "target_refs": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H7",
+        "I2",
+        "STATE",
+        "UI"
+      ],
+      "planned_test_refs": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "T5-01",
+        "T5-06"
+      ]
+    },
+    {
+      "id": "CS-03",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "동기 준비/인증과 비동기 실행, 오류 표현",
+        "options": [
+          "준비/인증 bounded request, 실행만 비동기",
+          "전 단계 별도 job/polling",
+          "브라우저 실행까지 HTTP 동기"
+        ],
+        "drivers": "REQ-01, REQ-03, REQ-04, REQ-05, REQ-08",
+        "tradeoffs": [
+          "bounded prepare/auth 실패 처리 필요",
+          "별도 준비 큐·상태·API 불필요"
+        ],
+        "selection_and_reason": {
+          "selection": "원본/준비/인증 확인은 요청 내 완료 또는 명시적 오류/준비 이슈. 실행 H7은 durable 수락 직후 202, H8/9 저장 상태 조회. 오류 코드와 status mapping 통일. 준비·인증 시간 제한 수치는 구현 실험 후 설정.",
+          "reason": "긴 브라우저 업무 수명을 UI 연결과 분리해야 하나 준비를 별도 job으로 만들 실측 근거 없음. 정상 업무 차단과 시스템 오류 구분.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "측정상 준비/인증이 요청 제한을 반복적으로 넘거나 UX 실패가 발생할 때"
+      },
+      "source_refs": [
+        "iface",
+        "data",
+        "logic"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "prior_decision_refs": [
+        "D2",
+        "D3",
+        "C03",
+        "LD-06",
+        "DC7"
+      ],
+      "target_refs": [
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8",
+        "H9",
+        "I2",
+        "I3",
+        "I4",
+        "STATE",
+        "UI"
+      ],
+      "planned_test_refs": [
+        "T5-07",
+        "AT-02",
+        "T5-05",
+        "DV-01",
+        "DV-05"
+      ]
+    },
+    {
+      "id": "CS-04",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "인증 확인에서 실행으로 연결 및 UI viewer 경계",
+        "options": [
+          "사용자 직접 인증 같은 서버 세션+제어권 인계",
+          "자격증명 수집/재로그인",
+          "UI가 브라우저 기술 직접 제어"
+        ],
+        "drivers": "REQ-04, REQ-05, REQ-10",
+        "tradeoffs": [
+          "runtime이 viewer 클라이언트 경계를 제공해야 함",
+          "실제 전송·격리/TTL 구현 위임, 실제 권한 미확인"
+        ],
+        "selection_and_reason": {
+          "selection": "AuthOutput 내부 binding 고정; public AuthResponse는 grant와 안전한 표시 정보만. runtime 담당 viewer mount/dispose 인터페이스 제공, UI는 인증 완료 버튼·현재 grant만 사용. finish에서 인간 입력 차단 후 identity/target 확인; 실행 승인 후 동일 binding의 worker lease.",
+          "reason": "R05 로컬 합성 PoC의 동일 맥락·뷰어 종료 독립 근거, 외부 계정과 실행 세션 불일치 방지. 제품 UI와 remote 내부 전송 기술을 결합하지 않음.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "11/27 원격 독립 구현이 동일 인증 맥락·제어권·격리를 입증하지 못할 때"
+      },
+      "source_refs": [
+        "direction",
+        "data",
+        "schema",
+        "phase"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "prior_decision_refs": [
+        "DIR-01",
+        "DIR-02",
+        "A4",
+        "D3",
+        "LD-06",
+        "DC5"
+      ],
+      "target_refs": [
+        "H6",
+        "I3",
+        "I4",
+        "VIEWER",
+        "RUNTIME",
+        "UI",
+        "STORE"
+      ],
+      "planned_test_refs": [
+        "AT-02",
+        "AT-03",
+        "T5-02",
+        "DV-02",
+        "DV-05"
+      ]
+    },
+    {
+      "id": "CS-05",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "상태/승인/멱등성 및 외부 효과 직렬화",
+        "options": [
+          "CO 단일 상태 소유+공통 저장 원자 경계+등록된 runtime command",
+          "각 모듈 임의 상태/브라우저 직접 mutation",
+          "별도 분산 이벤트/복구 시스템"
+        ],
+        "drivers": "REQ-05, REQ-08, REQ-10",
+        "tradeoffs": [
+          "원자 저장·admission 경계를 구현/시험해야 함",
+          "분산 서비스·별도 취소/재개 불필요"
+        ],
+        "selection_and_reason": {
+          "selection": "CO만 업무 상태 전이 소유, STORE 원자 accept/admit/fence/observe/terminal; runtime gateway에 등록된 Operation만 허용. 같은 key 재조회; 다른 key로 동일 효과 재발급 차단. 오류에만 stopping→stopped, 새 admission 금지, pending unknown 보존, user cancel/resume/rollback 없음.",
+          "reason": "상위 I2/I3·A2 요구를 만족하는 최소 직렬화. 승인 범위와 실제 operation을 일치시키고, 브라우저 효과의 exactly-once는 주장하지 않음.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "경쟁/응답 유실 시험에서 중복·미승인 동작 또는 활성 작업 방치 발생"
+      },
+      "source_refs": [
+        "top",
+        "amend",
+        "data",
+        "logic"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "prior_decision_refs": [
+        "A2",
+        "A3",
+        "D3",
+        "D5",
+        "LD-06",
+        "DC5",
+        "C04",
+        "C05"
+      ],
+      "target_refs": [
+        "H7",
+        "I4",
+        "STATE",
+        "STORE",
+        "RUNTIME"
+      ],
+      "planned_test_refs": [
+        "T5-01",
+        "AT-03",
+        "T5-12",
+        "DV-01",
+        "DV-02",
+        "DV-04"
+      ]
+    },
+    {
+      "id": "CS-06",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "결과의 증거와 실패 판정",
+        "options": [
+          "프로필 요구 증거를 실제 관측으로 대조",
+          "클릭 성공 또는 runner completed=등록 성공",
+          "모든 플랫폼 고정 재조회"
+        ],
+        "drivers": "REQ-06, REQ-07, REQ-08, REQ-10",
+        "tradeoffs": [
+          "증거 관측·정규화가 플랫폼별 필요",
+          "불필요한 추가 조회 강제하지 않음"
+        ],
+        "selection_and_reason": {
+          "selection": "EXEC가 실제 관측·EvidenceRecord를 기록, RESULT는 profile goal/method/target/payload/asset 확인, CO가 판정 저장. 두 mock은 독립 readback, 다른 지원 profile은 신뢰 가능한 응답 증거 허용. 완료와 게시 구분, stopped 이후 확인 근거 추가 가능하지만 상태 재개 없음.",
+          "reason": "S04/S07의 접수 ID 및 재조회 대조가 필요하다는 근거, 숨고는 설정 저장 대상이 다름. 근거가 부족하면 unknown.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "결과를 판정할 증거가 부족하거나 실제 완료 객체가 변경될 때"
+      },
+      "source_refs": [
+        "top",
+        "data",
+        "profiles"
+      ],
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "prior_decision_refs": [
+        "A2",
+        "D4",
+        "D5",
+        "LD-07",
+        "DC6"
+      ],
+      "target_refs": [
+        "I4",
+        "I5",
+        "H8",
+        "H9",
+        "STATE",
+        "UI"
+      ],
+      "planned_test_refs": [
+        "AT-04",
+        "AT-05",
+        "T5-13",
+        "DV-01",
+        "DV-03",
+        "DV-04"
+      ]
+    },
+    {
+      "id": "CS-07",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "최소 논리 통합 구조와 공통 저장 책임",
+        "options": [
+          "모듈형 앱+공통 영속 저장+격리 remote+독립 adapter",
+          "업무별 microservice/브로커",
+          "각 담당이 별도 제품 정본"
+        ],
+        "drivers": "REQ-01, REQ-04, REQ-05, REQ-08, REQ-09, REQ-10, REQ-11",
+        "tradeoffs": [
+          "통합 스택 결정 전 실행 가능한 실제 제품 skeleton 없음",
+          "담당자 내부 기술은 계약 호환 범위에서 위임"
+        ],
+        "selection_and_reason": {
+          "selection": "한 제품 root와 공통 계약, 서버/준비/브라우저/플랫폼/UI/테스트 경계. 저장소 하나의 논리 정본과 runtime 격리. 모듈 경계·호출과 소유권·stub 우선 결정; 언어/DB/패키지/물리 배포·launch 구현은 11/27 근거 후.",
+          "reason": "5인 팀, 단일 등록 업무, 원자 수락과 상태 일관성이 중요. 기존 WBS W01 및 독립 작업 그대로, 별도 서비스 배포/동기화 비용을 먼저 지지 않음.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "독립 검증 결과로 shared dependency/transport/isolated runtime이 결정되거나 단일 앱이 요구를 못 충족할 때"
+      },
+      "source_refs": [
+        "direction",
+        "data",
+        "iface",
+        "phase",
+        "wbs"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "prior_decision_refs": [
+        "DIR-02",
+        "D8",
+        "LD-08",
+        "C06",
+        "DC8",
+        "B4-02",
+        "R5-10"
+      ],
+      "target_refs": [
+        "INTEGRATION",
+        "STORE",
+        "RUNTIME",
+        "VIEWER",
+        "I1",
+        "I2",
+        "I3",
+        "I4",
+        "I5"
+      ],
+      "planned_test_refs": [
+        "T5-03",
+        "T5-05",
+        "T5-06",
+        "AT-02",
+        "DV-05"
+      ]
+    },
+    {
+      "id": "CS-08",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "공통 시험 및 착수/통합 수용 기준",
+        "options": [
+          "현재 22개 시험 정합화·동일 후보 증거·stub→real 점진 통합",
+          "팀원별 성공 주장 합산",
+          "완성 후 일괄 연결"
+        ],
+        "drivers": "REQ-01, REQ-02, REQ-03, REQ-04, REQ-05, REQ-06, REQ-07, REQ-08, REQ-09, REQ-10, REQ-11",
+        "tradeoffs": [
+          "실행 결과 수집은 후속 작업 필요",
+          "불필요한 새 평가 시스템 대신 기존 게이트 재사용"
+        ],
+        "selection_and_reason": {
+          "selection": "22개 기존 제품 mock gate 유지 및 최신 의미로 갱신; T1~T6 독립 시험은 변경 없음. 동일 build/contract/fixture/environment 근거만, T5-08 실제 모델 시험 필수. stub을 기능 검증과 구분, 단계별 연결 기록. 12/8 크몽 우선/숨고 확장 미충족은 R01 판단.",
+          "reason": "기존 test gate와 단계별 검증 체계 재사용. 다른 후보/환경/수동 대체 성공을 현재 전체 제품 성공으로 합산하지 않음.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "제품 범위·완료 조건·공통 계약이 변경되거나 공통 harness와 어댑터 결과가 확보될 때"
+      },
+      "source_refs": [
+        "gate",
+        "trace",
+        "data",
+        "phase",
+        "wbs"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "prior_decision_refs": [
+        "A2",
+        "A4",
+        "LD-08",
+        "DC8",
+        "D8",
+        "R5-09",
+        "R5-11"
+      ],
+      "target_refs": [
+        "GATE",
+        "INTEGRATION"
+      ],
+      "planned_test_refs": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "AT-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-03",
+        "T5-07",
+        "AT-04",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-04",
+        "DV-05"
+      ]
+    },
+    {
+      "id": "CS-09",
+      "type_id": "IT-19",
+      "status": "provisional",
+      "evidence_level": "sourced",
+      "fields": {
+        "decision_question": "설계 변경의 근거 추적 및 책임 배분",
+        "options": [
+          "기존 IT-19 및 추적 인덱스 이어서 갱신",
+          "새 ADR 체계/중복 요구사항 정본",
+          "별도 근거 없이 결정"
+        ],
+        "drivers": "REQ-09, REQ-11",
+        "tradeoffs": [
+          "현재 적용 판정과 link 갱신 필요",
+          "일반 모델/검증기를 새로 만들지 않음"
+        ],
+        "selection_and_reason": {
+          "selection": "IT-19 결정 기록으로 원문/버전/요구/선행/대안/선택/검증/작업을 연결. V0.6 추적 이력 보존, V0.9 현재 투영 및 supersession. 과거 근거 부족은 unknown/후속 해석으로 표기. 작업 배분은 실제 phase 이후 단일 책임자로 확정.",
+          "reason": "기존 설계 정보 모델과 trace가 이미 목적을 충족하며 재설계로 링크만 끊겼음. 원본 중복·상태 승격 방지.",
+          "scope": "delegated logical common mock baseline; not independently human-adopted or implementation success"
+        },
+        "authority_ref": "LR-COMMON-01/authority",
+        "revisit_when": "상위 의도/근거/계약/시험/작업 변경 때 영향 후보 검토"
+      },
+      "source_refs": [
+        "trace",
+        "model",
+        "phase",
+        "wbs"
+      ],
+      "requirement_refs": [
+        "REQ-09",
+        "REQ-11"
+      ],
+      "prior_decision_refs": [
+        "D8",
+        "LD-08",
+        "DC8"
+      ],
+      "target_refs": [
+        "TRACE",
+        "INTEGRATION",
+        "GATE"
+      ],
+      "planned_test_refs": [
+        "T5-03",
+        "DV-04"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "H1",
+      "method": "POST",
+      "path": "/v1/sources",
+      "input": "SourceInput",
+      "output": "SourceView",
+      "flow": "F1",
+      "purpose": "원본/첨부 생성",
+      "success": [
+        201
+      ],
+      "preconditions": "owner 인증; 기존 source/asset owner 일치; raw_text 또는 권리 확인된 유효 asset",
+      "request_and_effect": "application/json if no new files; multipart/form-data: manifest JSON SourceInput + exact new_assets.part_name parts; reject duplicate/missing/extra; bytes media verify; rights false or unsafe asset reject 422, keep existing immutable sources",
+      "response": "201 new immutable snapshot; H1 no external mutation; client may explicitly retry if response lost; duplicate source alone no external effect",
+      "errors": [
+        "INVALID_REQUEST",
+        "VALIDATION_FAILED",
+        "NOT_FOUND",
+        "PERMISSION_DENIED"
+      ]
+    },
+    {
+      "id": "H2",
+      "method": "GET",
+      "path": "/v1/sources",
+      "input": "ListQuery",
+      "output": "SourceList",
+      "flow": "F1",
+      "purpose": "원본 목록",
+      "success": [
+        200
+      ],
+      "preconditions": "owner 인증",
+      "request_and_effect": "ListQuery cursor/limit; default limit 20; opaque owner-bound cursor, order created_at DESC then source_id DESC; invalid cursor 400",
+      "response": "200 persisted summaries; omit next_cursor when end",
+      "errors": [
+        "INVALID_REQUEST",
+        "NOT_FOUND"
+      ]
+    },
+    {
+      "id": "H3",
+      "method": "GET",
+      "path": "/v1/sources/{id}",
+      "input": null,
+      "output": "SourceView",
+      "flow": "F1",
+      "purpose": "원본 조회",
+      "success": [
+        200
+      ],
+      "preconditions": "owner 인증; id owner",
+      "request_and_effect": "id path opaque source_id; no body",
+      "response": "200 persisted SourceView; other owner=404",
+      "errors": [
+        "NOT_FOUND"
+      ]
+    },
+    {
+      "id": "H4",
+      "method": "POST",
+      "path": "/v1/registrations",
+      "input": "RegistrationInput",
+      "output": "RegistrationView",
+      "flow": "F1/F2",
+      "purpose": "등록 요청 생성 및 준비",
+      "success": [
+        201
+      ],
+      "preconditions": "owner owns source; selector only",
+      "request_and_effect": "server resolves supported registry; unsupported/blocked persist normal view, no external navigation; supported prepares; model unavailable => persisted ready=false issue; no raw credentials",
+      "response": "201 RegistrationView, job_state=null, no start; synchronous bounded",
+      "errors": [
+        "NOT_FOUND",
+        "INVALID_REQUEST",
+        "VALIDATION_FAILED",
+        "MODEL_UNAVAILABLE"
+      ]
+    },
+    {
+      "id": "H5",
+      "method": "PATCH",
+      "path": "/v1/registrations/{id}",
+      "input": "PreparationEdit",
+      "output": "RegistrationView",
+      "flow": "F2",
+      "purpose": "등록 전 답변/수정",
+      "success": [
+        200
+      ],
+      "preconditions": "owner; job_state=null; revision current; auth human/verifying must close first",
+      "request_and_effect": "at least one source_id/selector/answers/corrections. Source/selector changed -> no simultaneous old answers/corrections; clear incompatible facts/answers and binding, regenerate. Same source_id may explicitly reprepare after transient model failure. Current issue_id->field; corrections reference valid profile field JSON Pointer; normalize server ResolvedAnswer; no direct values/status patch; duplicate/conflicting paths rejected. Shared fact correction needs new Source. Material change invalidates review/binding. Recalculate ready; source/profile unchanged retain compatible answers.",
+      "response": "200 current RegistrationView, revision increment on persisted mutation; no browser mutation",
+      "errors": [
+        "INVALID_REQUEST",
+        "NOT_FOUND",
+        "STALE_REVISION",
+        "INVALID_PHASE",
+        "VALIDATION_FAILED",
+        "FACT_CONFLICT",
+        "PROFILE_CHANGED"
+      ]
+    },
+    {
+      "id": "H6",
+      "method": "POST",
+      "path": "/v1/registrations/{id}/authentication",
+      "input": "AuthCommand",
+      "output": "AuthResponse",
+      "flow": "F3",
+      "purpose": "직접 인증 및 대상 확인",
+      "success": [
+        200
+      ],
+      "preconditions": "owner; job_state=null; supported+ready for open; expected_revision current; generation required for finish/close/refresh",
+      "request_and_effect": "open from none/closed; return human grant. finish only human current generation: fence human then verify account, target, connection; verified even target existing/ambiguous but no review. close prestart only, fence and invalidate binding/review; refresh human only current generation; rotate grant, prior grant invalid; timeout closes/fences, no verified binding. Do not expose internal ref or credentials. Viewer disconnect not close command.",
+      "response": "200 AuthResponse; grant only open/refresh; state/target on returned registration; 409 stale/phase, 503 runtime timeout/error with safe state reread",
+      "errors": [
+        "INVALID_REQUEST",
+        "NOT_FOUND",
+        "STALE_REVISION",
+        "INVALID_PHASE",
+        "AUTH_REQUIRED",
+        "ACCOUNT_MISMATCH",
+        "CONNECTION_MISMATCH",
+        "PERMISSION_DENIED",
+        "RUNTIME_ERROR"
+      ]
+    },
+    {
+      "id": "H7",
+      "method": "POST",
+      "path": "/v1/registrations/{id}/start",
+      "input": "StartInput",
+      "output": "RegistrationView",
+      "flow": "F4/F5",
+      "purpose": "최종 승인 및 작업 수락",
+      "success": [
+        202,
+        200
+      ],
+      "preconditions": "owner; id owned; exact current revision/review digest, ready, verified/new, supported, scope/permission/connection current",
+      "request_and_effect": "lookup owner+start request_key before stale/phase checks (after authentication/owner check); same key+same canonical payload -> persisted same registration (200); same key different payload -> 409; different key on accepted registration -> 409; new registration same unresolved/confirmed effect/ambiguous target blocked. Accept snapshot + key + active state atomically before dispatch; no additional user approval/cancel/resume",
+      "response": "202 first durable acceptance; 200 exact replay; job execution errors afterward stored, not HTTP rejection; response lost retry exact key",
+      "errors": [
+        "INVALID_REQUEST",
+        "NOT_FOUND",
+        "STALE_REVISION",
+        "APPROVAL_INVALID",
+        "INVALID_PHASE",
+        "AUTH_REQUIRED",
+        "ACCOUNT_MISMATCH",
+        "CONNECTION_MISMATCH",
+        "TARGET_AMBIGUOUS",
+        "DUPLICATE_RISK",
+        "IDEMPOTENCY_CONFLICT",
+        "PERMISSION_DENIED",
+        "PROFILE_CHANGED"
+      ]
+    },
+    {
+      "id": "H8",
+      "method": "GET",
+      "path": "/v1/registrations/{id}",
+      "input": null,
+      "output": "RegistrationView",
+      "flow": "F6",
+      "purpose": "등록 상세 및 결과 조회",
+      "success": [
+        200
+      ],
+      "preconditions": "owner; id owned",
+      "request_and_effect": "GET persisted view only; no external mutation/readback; terminal result mandatory; progress advisory; poll without keeping viewer alive",
+      "response": "200 RegistrationView; use revision to ignore stale UI response",
+      "errors": [
+        "NOT_FOUND"
+      ]
+    },
+    {
+      "id": "H9",
+      "method": "GET",
+      "path": "/v1/registrations",
+      "input": "ListQuery",
+      "output": "RegistrationList",
+      "flow": "F6",
+      "purpose": "등록 목록",
+      "success": [
+        200
+      ],
+      "preconditions": "owner 인증",
+      "request_and_effect": "ListQuery cursor/limit; default 20; opaque owner-bound cursor ordered creation then registration_id; no external access",
+      "response": "200 RegistrationList; no internal connection/viewer secret",
+      "errors": [
+        "INVALID_REQUEST",
+        "NOT_FOUND"
+      ]
+    }
+  ],
+  "ports": [
+    {
+      "id": "I1",
+      "consumer": "CO",
+      "provider": "KNOW",
+      "input": "selector:string",
+      "output": "ResolveOutput",
+      "pre": "selector allowed length; pure local registry lookup; no arbitrary network",
+      "post": "supported carries immutable ProfileRef and resolvable value_contract_ref/manifest; unsupported/blocked typed normal; exact identity validated",
+      "failure": "invalid syntax INVALID_REQUEST; corrupt/missing pinned registry PROFILE_CHANGED/RUNTIME_ERROR; no execution",
+      "calls": "CO resolves once, PREP/EXEC/RESULT retrieve same pinned content by ref, not re-resolve selector",
+      "refs": [
+        "B01",
+        "V02"
+      ]
+    },
+    {
+      "id": "I2",
+      "consumer": "CO",
+      "provider": "PREP",
+      "input": "PrepareInput",
+      "output": "Preparation",
+      "pre": "owner-scoped SourceView, exact pinned Profile, normalized ResolvedAnswer[] for current source/profile, no auth secrets",
+      "post": "values/facts/provenance/issues; computed ready; source facts/units not overwritten; no external platform mutation",
+      "failure": "missing/conflict/invalid/model unavailable -> blocking Issue (ready=false); schema/runtime failures typed error; no start",
+      "refs": [
+        "B02",
+        "V01",
+        "V03",
+        "V04",
+        "V05"
+      ]
+    },
+    {
+      "id": "I3",
+      "consumer": "CO",
+      "provider": "EXEC",
+      "input": "AuthInput",
+      "output": "AuthOutput",
+      "pre": "current registration context, pinned profile, owner and auth command; open ready; current rev/generation checks; runtime reads current target intent from CO-owned state",
+      "post": "verified carries trusted target+ConnectionBinding; open/refresh only human grant; close/failure fence; no job fabricated",
+      "failure": "prestart no mutation beyond scoped authentication/target read; wrong/unknown account/expired generation/timeout -> unverified or closed; typed Error, no start",
+      "refs": [
+        "B03",
+        "V06"
+      ]
+    },
+    {
+      "id": "I4",
+      "consumer": "CO",
+      "provider": "EXEC",
+      "input": "ExecuteInput",
+      "output": "ExecutionReport",
+      "pre": "durably accepted immutable scope, active state, pinned profile/runtime binding, exclusive worker lease current, mock permission",
+      "post": "observations and errors linked to persisted evidence; gateway command admission before potential mutation; only actual observations; no direct job state change by adapter",
+      "failure": "on unexpected error fence via common store, stop future effects; report known/unknown/absence; if runner crashes CO detects orphan and stops, not resume",
+      "refs": [
+        "B04",
+        "B05",
+        "V06",
+        "V07"
+      ]
+    },
+    {
+      "id": "I5",
+      "consumer": "CO",
+      "provider": "RESULT",
+      "input": "EvaluateInput",
+      "output": "Result",
+      "pre": "same pinned profile and AcceptedScope; trusted stored ExecutionReport/EvidenceRecord[]; no browser commands",
+      "post": "profile goal/proof and scope compared; done only verified goal with no unresolved effects; otherwise stopped outcome, next_action; CO commits result",
+      "failure": "insufficient/mismatched evidence never success; evaluator error fail closed/unknown unless authoritative absence; terminal record persists",
+      "refs": [
+        "B05",
+        "B06",
+        "V08",
+        "V09"
+      ]
+    }
+  ],
+  "http": {
+    "base": "/v1",
+    "auth": "owner from authenticated app context; path ids opaque; never accept client owner_ref, approval plan, state, credentials; not found or foreign owner 404",
+    "content": "application/json except H1 described; named $defs validation (not schema root); unknown keys rejected; UTC timestamps; profile validation and relational guards additional; responses redacted",
+    "error_schema": "Error",
+    "status_codes": {
+      "400": [
+        "INVALID_REQUEST"
+      ],
+      "401": [
+        "UNAUTHENTICATED"
+      ],
+      "403": [
+        "PERMISSION_DENIED"
+      ],
+      "404": [
+        "NOT_FOUND"
+      ],
+      "409": [
+        "STALE_REVISION",
+        "APPROVAL_INVALID",
+        "IDEMPOTENCY_CONFLICT",
+        "INVALID_PHASE",
+        "ACCOUNT_MISMATCH",
+        "CONNECTION_MISMATCH",
+        "TARGET_AMBIGUOUS",
+        "DUPLICATE_RISK",
+        "PROFILE_CHANGED"
+      ],
+      "422": [
+        "VALIDATION_FAILED",
+        "FACT_CONFLICT",
+        "AUTH_REQUIRED",
+        "UNSUPPORTED_TARGET"
+      ],
+      "503": [
+        "MODEL_UNAVAILABLE",
+        "RUNTIME_ERROR"
+      ]
+    },
+    "result_only_codes": [
+      "EFFECT_UNKNOWN",
+      "EVIDENCE_INSUFFICIENT"
+    ],
+    "note": "H4 unsupported/blocked and model issue are normal view when persisted; 503 when cannot complete bounded dependency/transaction. For failures after accepted H7 only persisted job result. All errors carry safe Error message; 409 current_revision when owner allowed. Server unexpected internal errors use 500/RUNTIME_ERROR only when safe response; no stack traces. 401/404/403 common guards apply to all routes."
+  },
+  "state": {
+    "owner": "CO",
+    "states": [
+      "active",
+      "stopping",
+      "done",
+      "stopped"
+    ],
+    "prestart": "job_state=null; ready computed; auth separate view; review only ready + verified + target new + policy; approval atomic at start",
+    "transition_contract": [
+      [
+        "null",
+        "active",
+        "exact current scope approved & atomically accepted"
+      ],
+      [
+        "active",
+        "done",
+        "trusted goal confirmed and required effects resolved"
+      ],
+      [
+        "active",
+        "stopping",
+        "system detected error/condition loss/worker loss"
+      ],
+      [
+        "stopping",
+        "stopped",
+        "fence new admission; bounded in-flight observation or unknown; persist terminal result"
+      ]
+    ],
+    "invariants": [
+      "No user cancellation, modification, resume or rollback after start.",
+      "Auth/viewer close button prestart only; viewer dispose alone never stops.",
+      "CO changes job lifecycle; STORE transaction enforces state; EXEC records observations and requests error-stop; RESULT pure verdict; never reopen terminal.",
+      "Late trustworthy read-only evidence may refine goal verdict with new evidence, not reopen lifecycle; no rebind/resubmit.",
+      "At restart, accepted active job without current worker and unobserved admission: fence and stop, preserve uncertainty; do not auto-resume."
+    ],
+    "revision": "Every material prestart scope mutation increments registration revision, invalidates prior review. Persist progress/result with monotonic revision; UI ignores older response. Refresh viewer grant fences old grant without silently changing verified binding. Exact key replay precedes stale check. Start key scoped owner+command, canonical request incl path id; no expiration during job/effect retention."
+  },
+  "storage": {
+    "unit": "STORE logical single durable authority, not DB schema; CO owner job transitions; gateway may record admission/observation through shared transactional operations; no callbacks while atomic lock",
+    "operations": [
+      {
+        "id": "S-ACCEPT",
+        "call": "accept(owner, registration_id, StartInput, internal Scope) -> RegistrationView or Error",
+        "atomic": "authenticate owner, lookup key/hash, compare revision/review/scope/profile/connection/permission and semantic target/effect guard; write immutable scope, key, active job together before dispatch; key conflict/duplicate no new job"
+      },
+      {
+        "id": "S-ADMIT",
+        "call": "admit(scoped execution context, Operation) -> one-shot dispatch permit or typed Error",
+        "atomic": "compare active state/current lease+permission+profile+target+binding and registry allowed operation; reserve stable logical effect key before external potential mutation. Reads scoped and cannot execute unknown mutating commands. Exclusive one dispatch; confirmed/pending/unknown duplicate deny. Permit never user-visible."
+      },
+      {
+        "id": "S-OBSERVE",
+        "call": "record scoped Observation + trusted EvidenceRecord[] -> durable observation or Error",
+        "atomic": "match admitted operation/lease/registration/target; preserve proof/unknown; dedupe observation IDs, retain prior effects; actual observation only"
+      },
+      {
+        "id": "S-FENCE",
+        "call": "fence(registration_id, typed Error) -> stopping; finalize(registration_id, Result) -> stopped or done",
+        "atomic": "serialize fence with S-ADMIT; no later admissions; pending operation not proven absent becomes unknown, bounded in-flight resolution; CO persists result and terminal state; done only confirmed; no terminal reopen"
+      }
+    ],
+    "effect_key": "(environment, platform, external_account_ref, object_kind, stable slot_ref, stable logical_operation_id). Version/request/worker change cannot bypass existing effect. Mock listing slot uses server source lineage + verified account/platform/object and existing effect check; service configuration target includes category. Distinct actual lesson intent requires distinct legitimate slot and evidence; ambiguous cross-source existing/duplicate => block. Real stable target policy per verified profile. Physical uniqueness/CAS/transaction implementation delegated."
+  },
+  "runtime": {
+    "boundary": "EXEC owns auth/runtime facade and platform adapters; RUNTIME gateway is shared internal boundary, not sixth business role or new HTTP API; VIEWER client is runtime-provided UI adapter",
+    "calls": [
+      {
+        "id": "RT-01",
+        "signature": "withVerifiedConnection(AcceptedScope) -> scoped execution context or Error",
+        "rule": "runtime lookup exact connection_ref/verified_generation/account, acquire exclusive worker lease; no raw driver or credential to adapter; CO-authorized only"
+      },
+      {
+        "id": "RT-02",
+        "signature": "listOperations(scoped context) -> Operation[]",
+        "rule": "derive stable logical operations from pinned profile, adapter registered operation definitions and accepted values; binding_digest over exact immutable bound values, no ad hoc actions; platform-specific manifest/driver is delegated, registration checks before integration"
+      },
+      {
+        "id": "RT-03",
+        "signature": "perform(scoped context, Operation) -> Observation or typed Error",
+        "rule": "match registry operation identity/step/effect class/binding_digest; actual args from immutable scope/trusted config, never caller free arguments; effect admission durable before browser command; record real observation and evidence; unknown class treated potentially mutating, unexpected action error-stop"
+      },
+      {
+        "id": "RT-04",
+        "signature": "observeGoal(scoped context) -> GoalObservation or typed Error",
+        "rule": "scoped registered read-only operation, actual normalized readback/payload digest and trusted evidence; no copy from input; only profile-required method, after fence no new effects; optional late read observation separate from run; no resume"
+      }
+    ],
+    "viewer": {
+      "id": "VIEWER",
+      "input": "AuthGrant (current generation + opaque short-lived grant + expiry)",
+      "client_contract": "runtime provides mount(container, grant) -> dispose() and ready/error/disconnected events; caller only displays allowed authentication viewer and separately invokes H6 finish/close; dispose is UI detach, not job cancellation. Mount rejects expired/stale/foreign grant. Grant protected by service identity, not logged/URL leaked; no raw driver or credentials in UI API.",
+      "deferred": "Actual frontend framework/client adapter package path, transport, endpoints, TTL and timeout numbers chosen 11/27 based on evidence; same-origin or secured allowed origin/owner binding verified."
+    }
+  },
+  "ui": {
+    "id": "UI",
+    "layout": "screen count/layout/design system delegated",
+    "surfaces": [
+      [
+        "source",
+        "H1 H2 H3",
+        "raw text/assets, reuse; owner errors; create immutable version on correction"
+      ],
+      [
+        "prepare",
+        "H4 H5 H8",
+        "support, issues/questions, values/source; user answer/correction, reprepare; no start before ready"
+      ],
+      [
+        "auth",
+        "H6 H8",
+        "open/refresh/finish/close prestart; runtime viewer mount; display verified account/target; existing/ambiguous blocked"
+      ],
+      [
+        "review",
+        "H5 H7 H8",
+        "show exact values/assets/provenance/target/profile goal/steps, notice no user rollback/cancel/change after start; approve once with current revision/digest/key; same request key retained across transport retry"
+      ],
+      [
+        "progress_result",
+        "H8 H9",
+        "active/stopping/done/stopped, goal verdict/evidence/next_action, reconnect; no cancel/edit/resume; distinguish mock from actual and unknown from failure"
+      ]
+    ],
+    "presentation": "loading, blocked/unsupported, required questions, stale response recovery via H8, owner errors, unknown explicit; no UI inference of success; HTTP response revision monotonic"
+  },
+  "integration": {
+    "id": "INTEGRATION",
+    "layout": [
+      "contracts/ common schema/profile/test fixtures and typed examples (R01 baseline)",
+      "app/ CO/HTTP/store/result",
+      "preparation/ PREP",
+      "remote/ EXEC auth/runtime/viewer gateway",
+      "platforms/ registered profile/adapters",
+      "web/ UI",
+      "tests/ contract and integrated tests"
+    ],
+    "root_proposal": "product/lesson-registration/ (logical proposal, no actual file creation or root dependency changes)",
+    "dependencies": [
+      [
+        "UI",
+        "CO"
+      ],
+      [
+        "UI",
+        "VIEWER"
+      ],
+      [
+        "CO",
+        "KNOW"
+      ],
+      [
+        "CO",
+        "PREP"
+      ],
+      [
+        "CO",
+        "EXEC"
+      ],
+      [
+        "CO",
+        "RESULT"
+      ],
+      [
+        "CO",
+        "STORE"
+      ],
+      [
+        "PREP",
+        "KNOW"
+      ],
+      [
+        "EXEC",
+        "KNOW"
+      ],
+      [
+        "EXEC",
+        "RUNTIME"
+      ],
+      [
+        "VIEWER",
+        "RUNTIME"
+      ],
+      [
+        "RUNTIME",
+        "KNOW"
+      ],
+      [
+        "RUNTIME",
+        "STORE"
+      ]
+    ],
+    "calls": [
+      {
+        "id": "I1",
+        "consumer": "CO",
+        "provider": "KNOW"
+      },
+      {
+        "id": "I2",
+        "consumer": "CO",
+        "provider": "PREP"
+      },
+      {
+        "id": "I3",
+        "consumer": "CO",
+        "provider": "EXEC"
+      },
+      {
+        "id": "I4",
+        "consumer": "CO",
+        "provider": "EXEC"
+      },
+      {
+        "id": "I5",
+        "consumer": "CO",
+        "provider": "RESULT"
+      },
+      {
+        "id": "HTTP",
+        "consumer": "UI",
+        "provider": "CO"
+      },
+      {
+        "id": "VIEWER",
+        "consumer": "UI",
+        "provider": "VIEWER"
+      },
+      {
+        "id": "AUTH-RUNTIME",
+        "consumer": "EXEC",
+        "provider": "RUNTIME"
+      },
+      {
+        "id": "VIEWER-RUNTIME",
+        "consumer": "VIEWER",
+        "provider": "RUNTIME"
+      },
+      {
+        "id": "ATOMIC",
+        "consumer": "RUNTIME",
+        "provider": "STORE"
+      }
+    ],
+    "node_note": "Provider graph = logical use dependencies, not imports/processes. Platform adapters inside EXEC and registry rules inside KNOW; runtime-provided gateway scopes operations; STORE has no callback to CO/EXEC. RESULT receives immutable input and no state/driver access.",
+    "handoff": [
+      "freeze schema/ports/API examples and mock-only guard",
+      "per-boundary fake provider and typed examples; each module tests against fake others",
+      "shared run command and real adapter/runtime conformance after shared stack selection",
+      "first integrated Kmong path then Soomgo extension; regress failures and unknown; use same build+contract+fixture identities"
+    ],
+    "pending": [
+      "11/27 R01 independent R03/R04/R05 evidence review: common language/framework/DB/runtime transport/actual paths and commands, dependency lock, shared fixture/adapter manifest, minimal product skeleton smoke, single owners and WBS actual effort",
+      "runtime operation registry exact action definitions, stable target resolution and physical atomic tests",
+      "actual platform permission/goal/fields remain separate live gate"
+    ],
+    "work_packages_proposed": [
+      [
+        "R01",
+        "common contract/trace/acceptance + integration decision",
+        "W01 W07 W09",
+        "confirmed contract/stub and end-to-end evidence"
+      ],
+      [
+        "R02",
+        "source truth/AI preparation + fixture handoff",
+        "W02 W19",
+        "PREP I2, fixture/questions exact; capability/availability confirm before assigning AI implementation, 12/4 handoff"
+      ],
+      [
+        "R03",
+        "common server, registry, store/result, harness",
+        "W03 W10",
+        "I1 I5 HTTP/storage/gate; scope and effort after independent evidence"
+      ],
+      [
+        "R04",
+        "web UI + Soomgo adapter",
+        "W05 W08",
+        "UI/H6 viewer and profile conformance; sequence by workload"
+      ],
+      [
+        "R05",
+        "remote runtime & Kmong independent adapter reuse",
+        "W04 W06",
+        "I3 I4 gateway; final Kmong owner R01/R05 based on workload/results, one owner before product task"
+      ]
+    ],
+    "task_status": "proposal only, no assignment; existing independent tasks remain and 11/27 gate unchanged"
+  },
+  "gate": {
+    "id": "GATE",
+    "required": [
+      "AT-01",
+      "T5-08",
+      "T5-11",
+      "T6-01",
+      "T6-02",
+      "AT-02",
+      "AT-03",
+      "T5-01",
+      "T5-02",
+      "T5-12",
+      "T5-03",
+      "T5-07",
+      "AT-04",
+      "AT-05",
+      "T5-06",
+      "T5-13",
+      "T5-05",
+      "DV-01",
+      "DV-02",
+      "DV-03",
+      "DV-04",
+      "DV-05"
+    ],
+    "tests": [
+      {
+        "id": "AT-01",
+        "prior": {
+          "source": "wbs-v0.5.json",
+          "id": "AT-01"
+        },
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-03"
+        ],
+        "targets": [
+          "I2",
+          "H4",
+          "H5"
+        ],
+        "scenario": "unstructured source with exact distinct 250/400/500k, 90/180/270min, month4, VAT unknown, invented free production/notice",
+        "expected": "questions and no fabricated fact; no accepted start",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-08",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-08"
+        },
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-03",
+          "REQ-11"
+        ],
+        "targets": [
+          "I2",
+          "H4",
+          "H5"
+        ],
+        "scenario": "actual model raw source→facts/mapping, missing and conflicting price/VAT, unavailable model; 3 fixtures incl known/unknown/conflict",
+        "expected": "linked source/answer facts; exact units/price/terms; unavailable ready=false; manual stub never AI pass",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": true
+      },
+      {
+        "id": "T5-11",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-11"
+        },
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-03"
+        ],
+        "targets": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H8"
+        ],
+        "scenario": "immutable source create/reuse detail, exact persisted version, path/body injection and other owner",
+        "expected": "source/asset identity preserved; server-only review; invalid/other owner denied",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T6-01",
+        "prior": {
+          "source": "trace-index-v0.6.json",
+          "id": "T6-01"
+        },
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-10"
+        ],
+        "targets": [
+          "H1",
+          "H3",
+          "STORE"
+        ],
+        "scenario": "synthetic allowed image, no rights, MIME/size mismatch, foreign reference, missing/extra multipart part",
+        "expected": "only authorized valid assets stored/linked, byte hash matches, rejected no external effect",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T6-02",
+        "prior": {
+          "source": "trace-index-v0.6.json",
+          "id": "T6-02"
+        },
+        "requirement_refs": [
+          "REQ-03",
+          "REQ-05"
+        ],
+        "targets": [
+          "H5",
+          "I2",
+          "H7",
+          "STATE"
+        ],
+        "scenario": "valid prestart platform correction, current issue resolved field, stale edit, source fact conflict, source version change, postaccept edit",
+        "expected": "normalized answer bound to field, new revision, old review unusable, shared source preserved, postaccept no mutation",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "AT-02",
+        "prior": {
+          "source": "wbs-v0.5.json",
+          "id": "AT-02"
+        },
+        "requirement_refs": [
+          "REQ-04",
+          "REQ-10"
+        ],
+        "targets": [
+          "H6",
+          "I3",
+          "I4",
+          "VIEWER",
+          "RUNTIME"
+        ],
+        "scenario": "direct mock auth, same context handoff, viewer dispose, other session/old generation, cleanup",
+        "expected": "exclusive control, job continues on disconnect, other session denied, no secrets, cleanup",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "AT-03",
+        "prior": {
+          "source": "wbs-v0.5.json",
+          "id": "AT-03"
+        },
+        "requirement_refs": [
+          "REQ-05",
+          "REQ-10"
+        ],
+        "targets": [
+          "H7",
+          "I4",
+          "STORE",
+          "RUNTIME"
+        ],
+        "scenario": "wrong account, forged approval, permission denied, stale binding, unregistered operation",
+        "expected": "zero external mutation",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-01",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-01"
+        },
+        "requirement_refs": [
+          "REQ-05"
+        ],
+        "targets": [
+          "H7",
+          "STATE",
+          "STORE"
+        ],
+        "scenario": "missing/stale/forged digest or profile, exact current review",
+        "expected": "only exact current scope accepted once; invalid cases zero effect",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-02",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-02"
+        },
+        "requirement_refs": [
+          "REQ-04",
+          "REQ-05"
+        ],
+        "targets": [
+          "H6",
+          "I3"
+        ],
+        "scenario": "first auth without job/target/account, finish/target resolution, wrong account",
+        "expected": "trusted identity before target, verified output includes connection, no fabricated job",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-12",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-12"
+        },
+        "requirement_refs": [
+          "REQ-05",
+          "REQ-10"
+        ],
+        "targets": [
+          "I4",
+          "RUNTIME",
+          "STORE"
+        ],
+        "scenario": "duplicate operation, wrong binding, unknown action, old lease, error fence race; read steps",
+        "expected": "only registered bound action; atomic admission; stale and postfence denied; unknown retained",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-03",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-03"
+        },
+        "requirement_refs": [
+          "REQ-03",
+          "REQ-04",
+          "REQ-09",
+          "REQ-11"
+        ],
+        "targets": [
+          "I1",
+          "I2",
+          "I3",
+          "I4",
+          "I5",
+          "INTEGRATION"
+        ],
+        "scenario": "fake providers and then actual adapters conform; valid/invalid typed I/O; shared registry; third synthetic profile",
+        "expected": "same contracts; no raw driver bypass; actual adapters required for product pass",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-07",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-07"
+        },
+        "requirement_refs": [
+          "REQ-02",
+          "REQ-03",
+          "REQ-05"
+        ],
+        "targets": [
+          "I1",
+          "H4",
+          "H5",
+          "H6",
+          "H7"
+        ],
+        "scenario": "invalid/unsupported/blocked, missing input/auth, ambiguous/existing target",
+        "expected": "distinct views/errors; no arbitrary fetch or unapproved start",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "AT-04",
+        "prior": {
+          "source": "wbs-v0.5.json",
+          "id": "AT-04"
+        },
+        "requirement_refs": [
+          "REQ-06",
+          "REQ-08"
+        ],
+        "targets": [
+          "I4",
+          "I5",
+          "H7",
+          "H8"
+        ],
+        "scenario": "Kmong synthetic registered profile K1..K7 with exact tiers/values/approved image and independent receipt",
+        "expected": "confirmed goal only on matching stored target/payload/image receipt; mock not live",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "AT-05",
+        "prior": {
+          "source": "wbs-v0.5.json",
+          "id": "AT-05"
+        },
+        "requirement_refs": [
+          "REQ-07",
+          "REQ-08",
+          "REQ-09"
+        ],
+        "targets": [
+          "I4",
+          "I5",
+          "H7",
+          "H8"
+        ],
+        "scenario": "Soomgo synthetic existing provider S1..S6, selected category/questions, independent saved configuration",
+        "expected": "matching stored category and responses; no image/price invented; mock not publication",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-06",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-06"
+        },
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-06",
+          "REQ-07",
+          "REQ-09"
+        ],
+        "targets": [
+          "H1",
+          "H4",
+          "H5",
+          "H8",
+          "H9",
+          "STORE"
+        ],
+        "scenario": "one source across two platform requests, platform-local correction or new source version",
+        "expected": "independent values/target/approval/results; historical source unchanged",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-13",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-13"
+        },
+        "requirement_refs": [
+          "REQ-06",
+          "REQ-07",
+          "REQ-09"
+        ],
+        "targets": [
+          "I1",
+          "I2",
+          "I4",
+          "I5"
+        ],
+        "scenario": "Kmong requires image; Soomgo service configuration has none; independent harness mapping",
+        "expected": "platform-specific validation and evidence; no fake shared image or price",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "T5-05",
+        "prior": {
+          "source": "contract-v0.5.json",
+          "id": "T5-05"
+        },
+        "requirement_refs": [
+          "REQ-08",
+          "REQ-10"
+        ],
+        "targets": [
+          "H2",
+          "H8",
+          "H9",
+          "UI",
+          "STATE"
+        ],
+        "scenario": "close/reconnect UI, owner/nonowner list/detail, active/terminal states",
+        "expected": "job remains, owner sees persisted data; other owner 404; no GET mutation",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "DV-01",
+        "prior": {
+          "source": "detail-gate-v1.json",
+          "id": "AT-06"
+        },
+        "requirement_refs": [
+          "REQ-05",
+          "REQ-08",
+          "REQ-10"
+        ],
+        "targets": [
+          "H7",
+          "I4",
+          "I5",
+          "STORE",
+          "STATE",
+          "RUNTIME"
+        ],
+        "scenario": "attachment failure, response lost before/after effect, accepted worker crash; same key replay/conflicting payload/different key same intent",
+        "expected": "error-only stop, no later effects; evidence absent/confirmed/unknown separated; no cancel/resume/rollback; identical key same registration",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "DV-02",
+        "prior": {
+          "source": "detail-gate-v1.json",
+          "id": "T5-04"
+        },
+        "requirement_refs": [
+          "REQ-04",
+          "REQ-05",
+          "REQ-10"
+        ],
+        "targets": [
+          "H6",
+          "I3",
+          "I4",
+          "RUNTIME",
+          "STATE"
+        ],
+        "scenario": "prestart reauth same/different account, same account other binding, stale generation; postaccept auth loss",
+        "expected": "old review invalid before start; after accept stop/fence no rebind/resume, no mutation on stale",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "DV-03",
+        "prior": {
+          "source": "detail-gate-v1.json",
+          "id": "T5-09"
+        },
+        "requirement_refs": [
+          "REQ-06",
+          "REQ-07",
+          "REQ-08",
+          "REQ-10"
+        ],
+        "targets": [
+          "I5",
+          "H8",
+          "STATE"
+        ],
+        "scenario": "wrong target/payload/image/method, missing trusted evidence; live request",
+        "expected": "goal proof only, otherwise stopped/not_reached or unknown; live denied",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "DV-04",
+        "prior": {
+          "source": "detail-gate-v1.json",
+          "id": "DV-04"
+        },
+        "requirement_refs": [
+          "REQ-03",
+          "REQ-05",
+          "REQ-09"
+        ],
+        "targets": [
+          "I1",
+          "I4",
+          "I5",
+          "H7",
+          "RUNTIME"
+        ],
+        "scenario": "profile digest changed, unknown step/operation, operation registry binding changed",
+        "expected": "pinned profile throughout, prestart deny or error stop, no unapproved new action",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      },
+      {
+        "id": "DV-05",
+        "prior": {
+          "source": "detail-gate-v1.json",
+          "id": "DV-05"
+        },
+        "requirement_refs": [
+          "REQ-04",
+          "REQ-08",
+          "REQ-10"
+        ],
+        "targets": [
+          "H6",
+          "H8",
+          "H9",
+          "VIEWER",
+          "UI"
+        ],
+        "scenario": "owner reconnect after approval, viewer grant stale, nonowner lookup, UI closes",
+        "expected": "stored approved values/result, stale input denied, job independent, no secret leakage",
+        "observables": [
+          "exact input/candidate/version",
+          "response/state and permitted external mutation count",
+          "trusted observation/evidence or explicit absence/unknown"
+        ],
+        "verdict": "pass iff all expected assertions observed; fail on violated assertion; incomplete if required observation absent",
+        "execution": "not_run",
+        "actual_model_required": false
+      }
+    ],
+    "environment": "mock",
+    "execution_kind": "integrated_product",
+    "candidate_fields": [
+      "build_sha",
+      "contract_digest",
+      "fixture_digest",
+      "environment"
+    ],
+    "actual_model_test_refs": [
+      "T5-08"
+    ],
+    "completion": "All required tests pass for exact candidate and execution_kind; any fail fail, missing/inconclusive incomplete. Actual_model flag for T5-08. No mock/live conflation. Existing independent T1~T6 unchanged; map evidence only after conformance, not substitute for integrated product gate.",
+    "final_tests": [
+      {
+        "id": "AT-07",
+        "requirement_refs": [
+          "REQ-02",
+          "REQ-09",
+          "REQ-10"
+        ],
+        "scenario": "지원 홈/등록 URL, 미지원/내부망/redirect",
+        "expected": "registry match, 무단 fetch 0, 적합 adapter",
+        "stage": "FINAL",
+        "execution": "not_run"
+      },
+      {
+        "id": "AT-08",
+        "requirement_refs": [
+          "REQ-04",
+          "REQ-05",
+          "REQ-08",
+          "REQ-10"
+        ],
+        "scenario": "crash/error fence/old lease/concurrent control/isolation",
+        "expected": "no subsequent admission, durable unknown, isolation/disposal; no user cancel/resume",
+        "stage": "FINAL",
+        "execution": "not_run"
+      },
+      {
+        "id": "AT-09",
+        "requirement_refs": [
+          "REQ-01",
+          "REQ-03",
+          "REQ-11"
+        ],
+        "scenario": "A/B/C 동일 목표 업무 비교",
+        "expected": "활동 시간·오류·개입·비용/대기 분리, 실패 포함",
+        "stage": "FINAL",
+        "execution": "not_run"
+      },
+      {
+        "id": "AT-10",
+        "requirement_refs": [
+          "REQ-02",
+          "REQ-06",
+          "REQ-07",
+          "REQ-08",
+          "REQ-09"
+        ],
+        "scenario": "지원 URL 입력→최초 등록→결과",
+        "expected": "각 지원 플랫폼 목표/증거 일치; 미지원 차단; actual 권한 없으면 mock only",
+        "stage": "FINAL",
+        "execution": "not_run"
+      }
+    ],
+    "execution": "not_run"
+  },
+  "closure": {
+    "logical_contract": "decided_with_explicit_deltas",
+    "status": "design_candidate_ready_for_static_review",
+    "pending": [
+      "shared stack/workspace/skeleton/launch command and actual adapter registry decisions after independent evidence",
+      "real product integrated tests 22 not run; standards JSON Schema engine, digest implementation, real model, permission/DB concurrency and remote isolation not proven",
+      "prior R03/R04/R05 independent tasks unchanged, no new WBS assignment",
+      "live only separate R01 phase and permission evidence"
+    ],
+    "no_claim": "No runtime product completion, no live support claim. No new general design framework."
+  }
+}
