@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scope": "Lesson registration design refinement/composition replay; not product execution or stage approval",
+  "adapter": "docs/artifacts/design/lesson-registration-20261124/stage-verification-adapter.mjs",
+  "sources": {
+    "core": "docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json",
+    "implementation": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+    "physical": "docs/artifacts/design/lesson-registration-20261124/physical-v0.4.json",
+    "contract": "docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
+    "api": "docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json",
+    "index": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.6.json",
+    "wbs": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json"
+  },
+  "rules": [
+    {
+      "id": "LR-REF-RESUME",
+      "revision": "1",
+      "kind": "refinement",
+      "method": "deterministic",
+      "stage": "L5",
+      "required": true,
+      "question": "Is explicit safe resume preserved in interrupted-to-ready transitions?",
+      "source_refs": [
+        "core"
+      ],
+      "policy_refs": [
+        "V3-R03",
+        "V3-R06",
+        "R5-04"
+      ],
+      "checker": "resume"
+    },
+    {
+      "id": "LR-COMP-CALL",
+      "revision": "1",
+      "kind": "composition",
+      "method": "deterministic",
+      "stage": "L5",
+      "required": true,
+      "question": "Do mapped runtime calls agree with logical dependency graph without cycles?",
+      "source_refs": [
+        "implementation",
+        "index"
+      ],
+      "policy_refs": [
+        "C4-05",
+        "C4-07",
+        "dependency_contract"
+      ],
+      "checker": "calls"
+    },
+    {
+      "id": "LR-COMP-WIRE",
+      "revision": "1",
+      "kind": "composition",
+      "method": "deterministic",
+      "stage": "L5",
+      "required": true,
+      "question": "Do effective route input/output names resolve to inherited/overlay types?",
+      "source_refs": [
+        "physical",
+        "contract",
+        "api"
+      ],
+      "policy_refs": [
+        "R5-11",
+        "contract_wire"
+      ],
+      "checker": "wire"
+    },
+    {
+      "id": "LR-REF-MVP",
+      "revision": "1",
+      "kind": "refinement",
+      "method": "deterministic",
+      "stage": "L6",
+      "required": true,
+      "question": "Are mandatory selected acceptance obligations declared and linked to MVP completion work?",
+      "source_refs": [
+        "wbs",
+        "index"
+      ],
+      "policy_refs": [
+        "R5-09",
+        "W09"
+      ],
+      "checker": "mvp"
+    }
+  ]
+}

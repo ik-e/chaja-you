@@ -1,0 +1,385 @@
+{
+  "kind": "historical_replay_not_prospective_trial",
+  "before_commit": "3d0ebdf2a19e48ea00533566ddbb209232f8e6fa",
+  "after_commit": "efda32882eedef889763974e8963711d6489f3b2",
+  "revisions": {
+    "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+    "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074"
+  },
+  "before": [
+    {
+      "id": "LR-REF-RESUME",
+      "kind": "refinement",
+      "method": "deterministic",
+      "stage": "L5",
+      "verdict": "fail",
+      "findings": [
+        {
+          "state": "needs_action",
+          "transition": "V3-J03",
+          "event": "all_preconditions_met",
+          "expected_event": "explicit_resume_requested",
+          "missing_guards": [
+            "explicit_resume_current",
+            "safe_next_step_proven"
+          ]
+        },
+        {
+          "state": "blocked",
+          "transition": "V3-J03",
+          "event": "all_preconditions_met",
+          "expected_event": "explicit_resume_requested",
+          "missing_guards": [
+            "explicit_resume_current",
+            "safe_next_step_proven"
+          ]
+        }
+      ],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"resume\",\"id\":\"LR-REF-RESUME\",\"kind\":\"refinement\",\"method\":\"deterministic\",\"policy_refs\":[\"V3-R03\",\"V3-R06\",\"R5-04\"],\"question\":\"Is explicit safe resume preserved in interrupted-to-ready transitions?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"core\"],\"stage\":\"L5\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "core": "5235a09bc6e33a9f98dd6f529d4c830eff23ea76"
+        }
+      },
+      "limit": "Declared edge/guard presence, not truth/update semantics or executable safety."
+    },
+    {
+      "id": "LR-COMP-CALL",
+      "kind": "composition",
+      "method": "deterministic",
+      "stage": "L5",
+      "verdict": "fail",
+      "findings": [
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "HTTP-11",
+          "consumer": "C4-02",
+          "provider": "C4-09",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "HTTP-12",
+          "consumer": "C4-02",
+          "provider": "C4-09",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "HTTP-17",
+          "consumer": "C4-02",
+          "provider": "C4-09",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "HTTP-19",
+          "consumer": "C4-05",
+          "provider": "C4-07",
+          "reverse_dependency": true
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "HTTP-25",
+          "consumer": "C4-02",
+          "provider": "C4-09",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "PORT5-03",
+          "consumer": "C4-05",
+          "provider": "C4-06",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "PORT5-04",
+          "consumer": "C4-05",
+          "provider": "C4-08",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "PORT5-06",
+          "consumer": "C4-05",
+          "provider": "C4-07",
+          "reverse_dependency": true
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "PORT5-08",
+          "consumer": "C4-09",
+          "provider": "C4-07",
+          "reverse_dependency": false
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "PORT5-09",
+          "consumer": "C4-05",
+          "provider": "C4-07",
+          "reverse_dependency": true
+        },
+        {
+          "reason": "call not covered by declared dependency path",
+          "id": "PORT5-10",
+          "consumer": "C4-05",
+          "provider": "C4-06",
+          "reverse_dependency": false
+        }
+      ],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"calls\",\"id\":\"LR-COMP-CALL\",\"kind\":\"composition\",\"method\":\"deterministic\",\"policy_refs\":[\"C4-05\",\"C4-07\",\"dependency_contract\"],\"question\":\"Do mapped runtime calls agree with logical dependency graph without cycles?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"implementation\",\"index\"],\"stage\":\"L5\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "implementation": "1238195995c899b1bb3cf0d8496c07a2648dfa99",
+          "index": "716ecf9114cb2868c87156a828ab13df1e25dfe6"
+        }
+      },
+      "limit": "Only valid if selected dependency graph is defined as logical call/use dependency; not implementation imports or actual runtime."
+    },
+    {
+      "id": "LR-COMP-WIRE",
+      "kind": "composition",
+      "method": "deterministic",
+      "stage": "L5",
+      "verdict": "fail",
+      "findings": [
+        {
+          "id": "HTTP-02",
+          "field": "input",
+          "type": "multipart file + rights + key",
+          "reason": "unresolved type declaration"
+        },
+        {
+          "id": "HTTP-17",
+          "field": "input",
+          "type": "after_revision optional",
+          "reason": "unresolved type declaration"
+        }
+      ],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"wire\",\"id\":\"LR-COMP-WIRE\",\"kind\":\"composition\",\"method\":\"deterministic\",\"policy_refs\":[\"R5-11\",\"contract_wire\"],\"question\":\"Do effective route input/output names resolve to inherited/overlay types?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"physical\",\"contract\",\"api\"],\"stage\":\"L5\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "physical": "e29aee98040b990addf91e3e1516fea8dd5c75e6",
+          "contract": "5c931704861137f4f2343b17f7e8b087733fe60a",
+          "api": "56dc44e2549efe1f6141c5fe5843d66ff69bfe8d"
+        }
+      },
+      "limit": "Type-name resolution, not value-level compatibility or transport implementation."
+    },
+    {
+      "id": "LR-REF-MVP",
+      "kind": "refinement",
+      "method": "deterministic",
+      "stage": "L6",
+      "verdict": "fail",
+      "findings": [
+        {
+          "id": "AT-01",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "AT-02",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "AT-03",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "AT-04",
+          "declared": false,
+          "linked": true
+        },
+        {
+          "id": "AT-05",
+          "declared": false,
+          "linked": true
+        },
+        {
+          "id": "AT-06",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "T5-08",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "T5-04",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "T5-12",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "T5-07",
+          "declared": false,
+          "linked": false
+        },
+        {
+          "id": "T5-09",
+          "declared": false,
+          "linked": true
+        }
+      ],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"mvp\",\"id\":\"LR-REF-MVP\",\"kind\":\"refinement\",\"method\":\"deterministic\",\"policy_refs\":[\"R5-09\",\"W09\"],\"question\":\"Are mandatory selected acceptance obligations declared and linked to MVP completion work?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"wbs\",\"index\"],\"stage\":\"L6\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "wbs": "0993011ba75ef3a050e49017b58e7b0c3e23e800",
+          "index": "716ecf9114cb2868c87156a828ab13df1e25dfe6"
+        }
+      },
+      "limit": "Coverage of explicitly selected obligations only; not completeness of requirements or test execution."
+    }
+  ],
+  "after": [
+    {
+      "id": "LR-REF-RESUME",
+      "kind": "refinement",
+      "method": "deterministic",
+      "stage": "L5",
+      "verdict": "pass",
+      "findings": [],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"resume\",\"id\":\"LR-REF-RESUME\",\"kind\":\"refinement\",\"method\":\"deterministic\",\"policy_refs\":[\"V3-R03\",\"V3-R06\",\"R5-04\"],\"question\":\"Is explicit safe resume preserved in interrupted-to-ready transitions?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"core\"],\"stage\":\"L5\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "core": "be77eba784c90b89b510a20d9d7af7f355db4992"
+        }
+      },
+      "limit": "Declared edge/guard presence, not truth/update semantics or executable safety."
+    },
+    {
+      "id": "LR-COMP-CALL",
+      "kind": "composition",
+      "method": "deterministic",
+      "stage": "L5",
+      "verdict": "pass",
+      "findings": [],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"calls\",\"id\":\"LR-COMP-CALL\",\"kind\":\"composition\",\"method\":\"deterministic\",\"policy_refs\":[\"C4-05\",\"C4-07\",\"dependency_contract\"],\"question\":\"Do mapped runtime calls agree with logical dependency graph without cycles?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"implementation\",\"index\"],\"stage\":\"L5\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "implementation": "f7b49262a4d470f6a2764e0fd2c559e6358cc416",
+          "index": "95ace6473f1e23974c08f960619c1b42db839522"
+        }
+      },
+      "limit": "Only valid if selected dependency graph is defined as logical call/use dependency; not implementation imports or actual runtime."
+    },
+    {
+      "id": "LR-COMP-WIRE",
+      "kind": "composition",
+      "method": "deterministic",
+      "stage": "L5",
+      "verdict": "pass",
+      "findings": [],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"wire\",\"id\":\"LR-COMP-WIRE\",\"kind\":\"composition\",\"method\":\"deterministic\",\"policy_refs\":[\"R5-11\",\"contract_wire\"],\"question\":\"Do effective route input/output names resolve to inherited/overlay types?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"physical\",\"contract\",\"api\"],\"stage\":\"L5\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "physical": "d6bffc13289c569ec0fe4e3877d7b5b8c22abba1",
+          "contract": "b773142f11580c098a5e90a99d4f633083b116ad",
+          "api": "14438ccb80be4fb8a03094c5aa60cbacde53129f"
+        }
+      },
+      "limit": "Type-name resolution, not value-level compatibility or transport implementation."
+    },
+    {
+      "id": "LR-REF-MVP",
+      "kind": "refinement",
+      "method": "deterministic",
+      "stage": "L6",
+      "verdict": "pass",
+      "findings": [],
+      "product_execution": "not_run",
+      "identity": {
+        "rule_signature": "{\"checker\":\"mvp\",\"id\":\"LR-REF-MVP\",\"kind\":\"refinement\",\"method\":\"deterministic\",\"policy_refs\":[\"R5-09\",\"W09\"],\"question\":\"Are mandatory selected acceptance obligations declared and linked to MVP completion work?\",\"required\":true,\"revision\":\"1\",\"source_refs\":[\"wbs\",\"index\"],\"stage\":\"L6\"}",
+        "engine": "bdb4c90b3f699432343a0c8a3c77f668dc050546",
+        "adapter": "f8258fa4c589c18a2111631c18905a1d586e8074",
+        "inputs": {
+          "wbs": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+          "index": "95ace6473f1e23974c08f960619c1b42db839522"
+        }
+      },
+      "limit": "Coverage of explicitly selected obligations only; not completeness of requirements or test execution."
+    }
+  ],
+  "gates": [
+    {
+      "stage": "L5",
+      "status": "declared_checks_pass",
+      "failed": [],
+      "unresolved": [],
+      "fresh": [
+        "LR-REF-RESUME",
+        "LR-COMP-CALL",
+        "LR-COMP-WIRE"
+      ],
+      "authority": "not_granted",
+      "product_execution": "not_run",
+      "limit": "Only the selected required deterministic rules; no stage adoption or overall completeness claim."
+    },
+    {
+      "stage": "L6",
+      "status": "declared_checks_pass",
+      "failed": [],
+      "unresolved": [],
+      "fresh": [
+        "LR-REF-MVP"
+      ],
+      "authority": "not_granted",
+      "product_execution": "not_run",
+      "limit": "Only the selected required deterministic rules; no stage adoption or overall completeness claim."
+    }
+  ],
+  "stale_before_on_after": {
+    "status": "review_required",
+    "failed": [],
+    "unresolved": [
+      {
+        "id": "LR-REF-RESUME",
+        "reason": "missing or stale evidence"
+      },
+      {
+        "id": "LR-COMP-CALL",
+        "reason": "missing or stale evidence"
+      },
+      {
+        "id": "LR-COMP-WIRE",
+        "reason": "missing or stale evidence"
+      }
+    ],
+    "fresh": [],
+    "authority": "not_granted",
+    "product_execution": "not_run",
+    "limit": "Only the selected required deterministic rules; no stage adoption or overall completeness claim."
+  },
+  "product_execution": "not_run",
+  "limits": "Rules selected from already known defects. No claim of unseen defect detection, time savings, overall semantic correctness or stage adoption."
+}
