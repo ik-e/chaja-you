@@ -10,3 +10,10 @@
 **제외:** 숨고 기능 구현, 운영사 허용 미확인 상태의 실제 크몽 자동 접수, 실 계정/OTP/세션 수집, 승인 없는 조건 변경.
 
 [공통 모의 환경](../../test-harness/README.md) · [TASK-045](../../../../docs/artifacts/tasks/TASK-045.json). **현재 코드 미구현.**
+
+## 작업 시작 및 격리
+
+- 전용 브랜치: `r05/task-045-kmong-registration`
+- 담당 디렉터리: `prototype/lesson-registration/implementations/r05-kmong/`
+- [공통 작업 공간](../../README.md)의 실행 환경·제품 승격 기준을 따른다. 새 의존성/lock은 이 디렉터리 안에서만 관리한다.
+- [공통 모의 계약](../../test-harness/CONTRACT.md)을 읽고 R03이 공유한 고정 commit의 mock을 별도 worktree에서 사용한다. 독립 착수 가능, 공통 검증 전 통과 주장 금지.

@@ -10,3 +10,10 @@
 **제외:** 크몽 코드 재사용을 전제로 설계, 실제 숨고 계정 로그인·자동 등록·견적 전송, 비밀번호/OTP/세션 수집.
 
 [공통 모의 환경](../../test-harness/README.md) · [TASK-044](../../../../docs/artifacts/tasks/TASK-044.json). **현재 코드 미구현.**
+
+## 작업 시작 및 격리
+
+- 전용 브랜치: `r04/task-044-soomgo-registration`
+- 담당 디렉터리: `prototype/lesson-registration/implementations/r04-soomgo/`
+- [공통 작업 공간](../../README.md)의 실행 환경·제품 승격 기준을 따른다. 새 의존성/lock은 이 디렉터리 안에서만 관리한다.
+- [공통 모의 계약](../../test-harness/CONTRACT.md)을 읽고 R03이 공유한 고정 commit의 mock을 별도 worktree에서 사용한다. 독립 착수 가능, 공통 검증 전 통과 주장 금지.

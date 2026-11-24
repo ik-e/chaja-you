@@ -9,3 +9,10 @@
 - **설계:** 시작 시 입력/출력/상태/오류 최소 계약을 기록. 기술은 담당자 선택, 공통 루트 의존성은 협의 후 반영.
 
 상위: [TASK-043](../../../docs/artifacts/tasks/TASK-043.json) / [작업 계약](../../../docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md). **현재 코드 구현 전.**
+
+## 작업 시작 및 격리
+
+- 전용 브랜치: `r03/task-043-dual-platform-harness`
+- 담당 디렉터리: `prototype/lesson-registration/test-harness/`
+- [공통 작업 공간](../README.md)의 실행 환경·제품 승격 기준을 따른다. 새 의존성/lock은 이 디렉터리 안에서만 관리한다.
+- [공통 모의 계약](CONTRACT.md)의 버전·fixture·실행 명령을 배포하고 commit SHA를 전달한다.
