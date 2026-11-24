@@ -1,0 +1,3204 @@
+{
+  "id": "LESSON-DESIGN-TRACE-V0.9",
+  "status": "projection_current_candidate",
+  "base_trace": "trace-index-v0.6.json",
+  "model_ref": "docs/deliverables/planning-design-info-model.json",
+  "date": "2026-11-25",
+  "purpose": "Existing trace extension, not second canonical decision/requirement source. Source_ref+blob+locator resolves original. Later links are retrospective review relationships, not contemporaneous evidence or retroactive adoption.",
+  "sources": {
+    "model": {
+      "path": "docs/deliverables/planning-design-info-model.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "abcf59b611d3eccde0292f48af1c43fb76d65eb2"
+    },
+    "phase": {
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "6b790bf85ed6295cb096e56560ddc86d34031087"
+    },
+    "plan": {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "a81b521898cc516cd88b8b53ec39dbf008b164eb"
+    },
+    "harness": {
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "f93daf71aebc1a4272739956c7753968e7655d5b"
+    },
+    "trace": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.6.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "57bf34466c96c7f86c3e1a630eedbd3c29647e41"
+    },
+    "v01verify": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/verification-decisions-v0.1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "f2c0940ed7e10ca410e14896f789fc6752702488"
+    },
+    "v02": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-design-v0.2.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "ee0490e7bad742cb4e9cf3f593da1bc1421c16c2"
+    },
+    "review": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/review-v0.3.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "7961bce5e04b3377559dca93ee98df8c0dc2febf"
+    },
+    "direction": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "54beb7c357e580b087442bb8f00e40ab2a3567af"
+    },
+    "requirements": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "f7b49262a4d470f6a2764e0fd2c559e6358cc416"
+    },
+    "rules": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "b773142f11580c098a5e90a99d4f633083b116ad"
+    },
+    "wbs": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "5203828cc220187ec53d1602579b9e12ab1cf5d0"
+    },
+    "top": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/top-design-v1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "1ed54afd5b541fa3a9d4030267ba65c54729ff2b"
+    },
+    "amend": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/top-design-amendment-v1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "ad4f09689896206163dfce72d972281b10075891"
+    },
+    "detail": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-decisions-v2.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "3c04b85cb9ee45d8aa21b9cfdea0713fe8dc3014"
+    },
+    "iface": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/interface-contract-v3.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "e6b73da91c0856e815601739301a53adcc321e70"
+    },
+    "upper": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "7141bcc48dabc36e42736035f4a6fcc2b8526f34"
+    },
+    "data": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "edd84980d5df53c8df0800dd28f7878396ad4397"
+    },
+    "schema": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "de6c147216ee68bae75a9d18f9127c327701fa5a"
+    },
+    "profiles": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "b0b2044526f63f0244d920f85b2d9676b94bbe72"
+    },
+    "logic": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v5.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "2c13b86a44b10f7877678509819e97d1d1b72c17"
+    },
+    "gate": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-gate-v1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "55c66d285183fb4a8a12041b883c12e7775d12f7"
+    },
+    "common": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "9df34e576f8a7c63c7ee84d01893a77631ce0360"
+    },
+    "validation": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-contract-validation-v4.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "0710bcf3676e23712e5d02d749e74d8cf47f9a6e"
+    },
+    "reviewEvidence": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/interface-review-evidence-v3.json",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "5c1d8d800a3f7a05fc93789938f6856519370dad"
+    },
+    "legacy_validator": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-interface-review-v3.mjs",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "1d49665ea105450c87b97a6a7cd6f72aec869321"
+    },
+    "data_validator": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-data-contract-v4.mjs",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "2484c5df659962145af1ee2d94dd36d1f41e5f6f"
+    },
+    "logic_validator": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-logical-v5.mjs",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "660dd54af6cf7d2db72da25d724b728b00f1c550"
+    },
+    "validator": {
+      "path": "tools/verify_design_stage.mjs",
+      "commit": "e71e8238a568e5661de46b354c72481d762bc381",
+      "blob_sha": "bdb4c90b3f699432343a0c8a3c77f668dc050546"
+    },
+    "S03": {
+      "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "blob_sha": "c1aba280833039a5787b4460d948de231b44e135",
+      "limit": "사용자 진술·회상·최신 확인값, 실측 없음"
+    },
+    "S04": {
+      "path": "docs/members/R03/workspace/test/SPEC.md",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "blob_sha": "7ef82683df7826330ec00a1348b56c7b48973c0f",
+      "limit": "크몽형 모의 실험, 고정 fixture"
+    },
+    "S07": {
+      "path": "docs/members/R03/workspace/test/verification.json",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "blob_sha": "5a343dd028889970e2cd64dbf0f2bab4e27a5fb9",
+      "limit": "19 pass 자기 보고, 모의 Skyvern 입력·첨부·영수증; 독립 재실행 아님"
+    },
+    "S08": {
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수등록_교육신청_사용자흐름_서비스절차_설계분석보고서.md",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "blob_sha": "0de56aa480c4d207a09f4f9f560d707f8004a979",
+      "limit": "기존 고수 계정 관측 및 제안, 신규 가입·공개 추론 분리"
+    },
+    "S09": {
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수전환_및_등록절차_화면스크린샷_상세보고서.md",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "blob_sha": "4062a83b314fd6db11d4572edfefc8873a367287",
+      "limit": "STEP 06~12, 15, 16 보고서 관측; 스크린샷 원본 개별 검증 안 함"
+    },
+    "S10": {
+      "path": "docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md",
+      "commit": "c5cef60dceb98390b008e7345fc5c0492695e8e3",
+      "blob_sha": "ba0a1f1d6243876929efd4b8aad6cd602570d47a",
+      "limit": "수동 작성 화면·임시저장 보고, 플랫폼별 제약 후보; 실제 자동화 아님"
+    },
+    "S11": {
+      "path": "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+      "commit": "c5cef60dceb98390b008e7345fc5c0492695e8e3",
+      "blob_sha": "48428cf787b919f44245d584729ffdc62b6a1857",
+      "limit": "공식/관찰/추정 구분, 운영사 허용 미확인"
+    },
+    "S12": {
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "blob_sha": "f93daf71aebc1a4272739956c7753968e7655d5b",
+      "limit": "T1~T6, 변경하지 않음; release 미확인"
+    },
+    "EV-R05-REMOTE-20261124": {
+      "path": "docs/members/R05/workspace/remote-browser-poc/README.md",
+      "commit": "fc59a4b8f5e8adea3c4dc3b2264df2907131c018",
+      "limit": "로컬 합성 환경, Chrome 프로세스 공유 BrowserContext, 실제 플랫폼·Docker/운영 격리·HTTPS/WSS 외부 접속·부하·IME 미검증.",
+      "blob_sha": "e50832e02312684798c9f65c25d2ee410d513e12"
+    }
+  },
+  "precedence": [
+    "Current phase/permission and human top decisions first; A2 overrides legacy cancel/resume/rollback",
+    "V4.1 schema delta and common-integration-v1 wire/ports/constraints current; V4 remaining data and profile V2 current; old contracts historical except explicitly retained requirements",
+    "V0.6 trace historical; original status preserved; current status is projection, not actual product verification"
+  ],
+  "inventory": [
+    {
+      "id": "LR-D01",
+      "source_ref": "v01verify",
+      "locator": {
+        "collection": "records",
+        "index": 12,
+        "id": "LR-D01"
+      },
+      "original_status": "deferred",
+      "current_status": "scope_agreed_live_detail_open",
+      "question": "첫 제품 플랫폼·완료 단위",
+      "related_later_refs": [
+        "DEC-01",
+        "DEC-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LR-D02",
+      "source_ref": "v01verify",
+      "locator": {
+        "collection": "records",
+        "index": 13,
+        "id": "LR-D02"
+      },
+      "original_status": "deferred",
+      "current_status": "direction_agreed_live_gate_open",
+      "question": "실행·인증·허용 경계",
+      "related_later_refs": [
+        "DEC-03",
+        "DEC-04",
+        "DEC-05"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LR-D03",
+      "source_ref": "v01verify",
+      "locator": {
+        "collection": "records",
+        "index": 14,
+        "id": "LR-D03"
+      },
+      "original_status": "deferred",
+      "current_status": "logical_boundary_defined_stack_deferred",
+      "question": "상위 실행 단위·스택·AI 구성",
+      "related_later_refs": [
+        "DEC-06",
+        "DEC-10",
+        "DEC-12"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LR-D04",
+      "source_ref": "v01verify",
+      "locator": {
+        "collection": "records",
+        "index": 15,
+        "id": "LR-D04"
+      },
+      "original_status": "deferred",
+      "current_status": "logical_wire_storage_defined_physical_deferred",
+      "question": "물리 API·DB·저장·배포",
+      "related_later_refs": [
+        "DEC-11",
+        "DEC-12"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LR-D05",
+      "source_ref": "v01verify",
+      "locator": {
+        "collection": "records",
+        "index": 16,
+        "id": "LR-D05"
+      },
+      "original_status": "deferred",
+      "current_status": "first_registration_scope_agreed_value_unverified",
+      "question": "사용자 범위 및 사업 가치",
+      "related_later_refs": [
+        "DEC-01",
+        "DEC-13",
+        "DEC-17"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LR-D06",
+      "source_ref": "v01verify",
+      "locator": {
+        "collection": "records",
+        "index": 17,
+        "id": "LR-D06"
+      },
+      "original_status": "deferred",
+      "current_status": "safety_contract_defined_quantitative_policy_open",
+      "question": "정량 품질·운영 정책",
+      "related_later_refs": [
+        "DEC-13",
+        "DEC-14",
+        "DEC-15"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DEC-01",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "DEC-01"
+      },
+      "original_status": "open",
+      "current_status": "scope_agreed_live_detail_open",
+      "question": "MVP 지원 플랫폼",
+      "related_later_refs": [
+        "DIR-03",
+        "DIR-04",
+        "DC4"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "work_refs": [
+        "W01",
+        "W09",
+        "W13"
+      ]
+    },
+    {
+      "id": "DEC-02",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "DEC-02"
+      },
+      "original_status": "partial",
+      "current_status": "mock_goal_defined_live_unverified",
+      "question": "플랫폼별 완료 범위",
+      "related_later_refs": [
+        "DIR-03",
+        "DC3",
+        "DC4",
+        "DC6"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08"
+      ],
+      "work_refs": [
+        "W01",
+        "W08",
+        "W09",
+        "W13"
+      ]
+    },
+    {
+      "id": "DEC-03",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "DEC-03"
+      },
+      "original_status": "open",
+      "current_status": "direction_agreed",
+      "question": "실행 구조",
+      "related_later_refs": [
+        "DIR-01",
+        "A4"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W07"
+      ]
+    },
+    {
+      "id": "DEC-04",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "DEC-04"
+      },
+      "original_status": "external_unverified",
+      "current_status": "external_gate_open",
+      "question": "운영사 허용",
+      "related_later_refs": [
+        "B4-05",
+        "R5-09"
+      ],
+      "note": "현 PHASE 실제 접근/제출 금지, mock 설계 진행 가능.",
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W13",
+        "W14",
+        "W17"
+      ]
+    },
+    {
+      "id": "DEC-05",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 4,
+        "id": "DEC-05"
+      },
+      "original_status": "contract_proposed",
+      "current_status": "logical_contract_defined_runtime_unverified",
+      "question": "계정·승인 결합",
+      "related_later_refs": [
+        "R5-01",
+        "R5-02",
+        "R5-03",
+        "R5-04",
+        "D3",
+        "DC5",
+        "CS-05"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W07"
+      ]
+    },
+    {
+      "id": "DEC-06",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 5,
+        "id": "DEC-06"
+      },
+      "original_status": "contract_proposed",
+      "current_status": "logical_boundary_defined_model_unverified",
+      "question": "AI/코드 역할",
+      "related_later_refs": [
+        "R5-08",
+        "A1",
+        "D2",
+        "DC7"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-05"
+      ],
+      "work_refs": [
+        "W19",
+        "W03"
+      ]
+    },
+    {
+      "id": "DEC-07",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 6,
+        "id": "DEC-07"
+      },
+      "original_status": "open",
+      "current_status": "delegated",
+      "question": "실행 엔진",
+      "related_later_refs": [
+        "DIR-02",
+        "B4-03",
+        "D8"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "work_refs": [
+        "W04",
+        "W06",
+        "W08"
+      ]
+    },
+    {
+      "id": "DEC-08",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 7,
+        "id": "DEC-08"
+      },
+      "original_status": "open",
+      "current_status": "logical_binding_defined_ttl_deferred",
+      "question": "세션 TTL·재인증",
+      "related_later_refs": [
+        "DIR-02",
+        "A2",
+        "DC5",
+        "CS-04"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W11"
+      ]
+    },
+    {
+      "id": "DEC-09",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 8,
+        "id": "DEC-09"
+      },
+      "original_status": "open",
+      "current_status": "independent_jobs_defined_concurrency_policy_unselected",
+      "question": "순차/동시 등록",
+      "related_later_refs": [
+        "B4-02",
+        "R5-06",
+        "D3"
+      ],
+      "note": "개별 요청/결과 독립; 전역 동시성 정책은 미선정.",
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "id": "DEC-10",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 9,
+        "id": "DEC-10"
+      },
+      "original_status": "open",
+      "current_status": "logical_boundary_defined_physical_deferred",
+      "question": "물리 실행 단위",
+      "related_later_refs": [
+        "B4-02",
+        "R5-10",
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04"
+      ]
+    },
+    {
+      "id": "DEC-11",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 10,
+        "id": "DEC-11"
+      },
+      "original_status": "deferred",
+      "current_status": "logical_storage_defined_physical_deferred",
+      "question": "DB·파일 저장",
+      "related_later_refs": [
+        "B4-04",
+        "LD-02",
+        "LD-08",
+        "CS-05",
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W16"
+      ]
+    },
+    {
+      "id": "DEC-12",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 11,
+        "id": "DEC-12"
+      },
+      "original_status": "deferred",
+      "current_status": "logical_wire_defined_stack_deferred",
+      "question": "스택·배포·물리 API",
+      "related_later_refs": [
+        "DIR-02",
+        "B4-04",
+        "R5-11",
+        "D7",
+        "D8",
+        "CS-02",
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-04",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W16"
+      ]
+    },
+    {
+      "id": "DEC-13",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 12,
+        "id": "DEC-13"
+      },
+      "original_status": "open",
+      "current_status": "measurement_gate_open",
+      "question": "성능·비용·직접 시간",
+      "related_later_refs": [
+        "R5-08",
+        "R5-09"
+      ],
+      "note": "시간/비용/가치 실측 없음.",
+      "requirement_refs": [
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "id": "DEC-14",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 13,
+        "id": "DEC-14"
+      },
+      "original_status": "open",
+      "current_status": "logical_minimum_control_retention_deferred",
+      "question": "개인정보·로그·보존",
+      "related_later_refs": [
+        "R5-03",
+        "R5-04",
+        "R5-09",
+        "DC5",
+        "CS-04"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W11",
+        "W13"
+      ]
+    },
+    {
+      "id": "DEC-15",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 14,
+        "id": "DEC-15"
+      },
+      "original_status": "partial",
+      "current_status": "partially_superseded_error_only_stop",
+      "question": "장애 복구·통지",
+      "related_later_refs": [
+        "R5-03",
+        "R5-04",
+        "R5-05",
+        "A2",
+        "D4",
+        "D5",
+        "CS-05",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W11"
+      ]
+    },
+    {
+      "id": "DEC-16",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 15,
+        "id": "DEC-16"
+      },
+      "original_status": "open",
+      "current_status": "reuse_evidence_review_pending",
+      "question": "PoC 재사용",
+      "related_later_refs": [
+        "R5-10",
+        "R5-11",
+        "D8",
+        "CS-07",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-04",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W06",
+        "W08"
+      ]
+    },
+    {
+      "id": "DEC-17",
+      "source_ref": "review",
+      "locator": {
+        "collection": "decisions",
+        "index": 16,
+        "id": "DEC-17"
+      },
+      "original_status": "deferred",
+      "current_status": "deferred_out_of_scope",
+      "question": "이행·환불",
+      "related_later_refs": [],
+      "note": "환불/이행/사업화 범위 미추가.",
+      "requirement_refs": [
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W13",
+        "W15"
+      ]
+    },
+    {
+      "id": "DIR-01",
+      "source_ref": "direction",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "DIR-01"
+      },
+      "original_status": "decided",
+      "current_status": "decided",
+      "question": "목표 실행 구조",
+      "related_later_refs": [
+        "A4",
+        "CS-04"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DIR-02",
+      "source_ref": "direction",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "DIR-02"
+      },
+      "original_status": "delegated_with_constraints",
+      "current_status": "delegated_with_constraints",
+      "question": "원격 브라우저 세부 구현",
+      "related_later_refs": [
+        "A4",
+        "D8",
+        "CS-04",
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DIR-03",
+      "source_ref": "direction",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "DIR-03"
+      },
+      "original_status": "scope_decided_target_detail_pending",
+      "current_status": "scope_decided_target_detail_pending",
+      "question": "2026-12-08 MVP",
+      "related_later_refs": [
+        "A4",
+        "DC3",
+        "DC4",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DIR-04",
+      "source_ref": "direction",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "DIR-04"
+      },
+      "original_status": "goal_decided_acceptance_pending",
+      "current_status": "goal_decided_acceptance_pending",
+      "question": "2027-01-04 최종 목표",
+      "related_later_refs": [
+        "A1",
+        "LD-04",
+        "DC2",
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "B4-01",
+      "source_ref": "requirements",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "B4-01"
+      },
+      "original_status": "decided",
+      "current_status": "direction_agreed",
+      "question": "DIR-01~04 채택: 원격 브라우저, 구현자 세부 기술, 크몽→숨고, URL 지원 플랫폼 최초 등록.",
+      "related_later_refs": [
+        "A4"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "B4-02",
+      "source_ref": "requirements",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "B4-02"
+      },
+      "original_status": "proposed",
+      "current_status": "refined_logical_topology",
+      "question": "모듈형 앱 + 논리적으로 분리된 remote runtime, 하나의 영속 데이터 정본. 초기 지원은 플랫폼별 순차 job.",
+      "related_later_refs": [
+        "D3",
+        "C06",
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "B4-03",
+      "source_ref": "requirements",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "B4-03"
+      },
+      "original_status": "delegated",
+      "current_status": "delegated",
+      "question": "CDP/noVNC/WebRTC, 자동화 엔진/브라우저/원격 격리 구체 구현; 명시 계약/시험·보안 준수.",
+      "related_later_refs": [
+        "D8",
+        "CS-04"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "B4-04",
+      "source_ref": "requirements",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "B4-04"
+      },
+      "original_status": "proposed",
+      "current_status": "historical_stack_candidate_not_adopted",
+      "question": "공통 Python/FastAPI/관계형 DB 및 동일-origin UI 초기 기준. 구현자 검토·변경 조건 기록, 특정 프론트/DB 강제 전 검토.",
+      "related_later_refs": [
+        "D8",
+        "CS-07"
+      ],
+      "note": "Python/FastAPI/DB 후보를 채택으로 승격하지 않음.",
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "B4-05",
+      "source_ref": "requirements",
+      "locator": {
+        "collection": "decisions",
+        "index": 4,
+        "id": "B4-05"
+      },
+      "original_status": "external_gate",
+      "current_status": "external_gate_open",
+      "question": "실환경 정책/권한·계정 안정 식별·실제 효과/증거·운영 보안·비용/가치. 모의 성공과 실서비스 완료 구분.",
+      "related_later_refs": [
+        "A4",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "B4-06",
+      "source_ref": "requirements",
+      "locator": {
+        "collection": "decisions",
+        "index": 5,
+        "id": "B4-06"
+      },
+      "original_status": "conditional",
+      "current_status": "live_scope_open",
+      "question": "숨고 실제 등록 객체·완료 정의, 12/8 두 번째 경로 범위 및 1/4 지원 플랫폼 목록은 기존 조사/통합 결과로 R01 검토. 범위 축소는 명시 결정.",
+      "related_later_refs": [
+        "DC4",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-01",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 0,
+        "id": "R5-01"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "partially_superseded_single_approval",
+      "question": "계획 승인",
+      "related_later_refs": [
+        "A2",
+        "D2",
+        "D3",
+        "LD-06",
+        "CS-02",
+        "CS-05"
+      ],
+      "note": "기존 여러 승인 단계는 D2/D3 단일 최종 승인으로 대체.",
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-02",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 1,
+        "id": "R5-02"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "refined_no_separate_business_resources",
+      "question": "증거 계층",
+      "related_later_refs": [
+        "DC5",
+        "DC6",
+        "CS-04"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-03",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 2,
+        "id": "R5-03"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "partially_superseded_no_user_cancel_resume",
+      "question": "제어권과 직렬화",
+      "related_later_refs": [
+        "A2",
+        "A3",
+        "DC5",
+        "CS-05"
+      ],
+      "note": "사용자 실행 중 중단/변경/재개는 A2로 대체.",
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-04",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 3,
+        "id": "R5-04"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "superseded_postaccept_rebind_resume",
+      "question": "재연결",
+      "related_later_refs": [
+        "A2",
+        "DC5",
+        "CS-04",
+        "CS-05"
+      ],
+      "note": "수락 이후 재연결/재개 폐기; 실행 전 재확인 및 종료 후 읽기 증거만 허용.",
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-05",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 4,
+        "id": "R5-05"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "retained",
+      "question": "재접속 UX",
+      "related_later_refs": [
+        "D3",
+        "CS-03",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-06",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 5,
+        "id": "R5-06"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "refined_independent_requests",
+      "question": "한 번 입력·다중 대상",
+      "related_later_refs": [
+        "D6",
+        "LD-02",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-07",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 6,
+        "id": "R5-07"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "retained_registry_guard",
+      "question": "지원과 실행 판정",
+      "related_later_refs": [
+        "LD-04",
+        "DC2",
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-08",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 7,
+        "id": "R5-08"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "retained_ai_boundary_model_unverified",
+      "question": "AI 최소 제품 경로",
+      "related_later_refs": [
+        "D2",
+        "DC1",
+        "DC7",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-09",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 8,
+        "id": "R5-09"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "refined_mock_goal_error_only_stop",
+      "question": "목표 및 release 경계",
+      "related_later_refs": [
+        "A2",
+        "A4",
+        "DC6",
+        "CS-06",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-10",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 9,
+        "id": "R5-10"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "refined_logical_boundary_technology_deferred",
+      "question": "최소 구현",
+      "related_later_refs": [
+        "D8",
+        "C06",
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "R5-11",
+      "source_ref": "rules",
+      "locator": {
+        "collection": "rules",
+        "index": 10,
+        "id": "R5-11"
+      },
+      "original_status": "historical_rule_candidate",
+      "current_status": "refined_common_contract_launch_deferred",
+      "question": "최소 실행·개발 환경",
+      "related_later_refs": [
+        "D8",
+        "CS-07",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "A1",
+      "source_ref": "amend",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "A1"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_amendment",
+      "question": "사전 확보 플랫폼 지식에 따라 사람의 최초 등록 업무를 대행; 원본과 플랫폼 요구 사항 사전 검사",
+      "related_later_refs": [
+        "D1",
+        "D2",
+        "DC2",
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "A2",
+      "source_ref": "amend",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "A2"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_amendment",
+      "question": "실행 후 사용자 중단/변경/재개/rollback 없음; 오류 시에만 중단 후 결과 반환",
+      "related_later_refs": [
+        "D5",
+        "LD-07",
+        "CS-05",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "A3",
+      "source_ref": "amend",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "A3"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_amendment",
+      "question": "멱등성은 키/논리 효과 식별을 기본 원칙으로 두고 물리 구현은 세부 설계",
+      "related_later_refs": [
+        "D5",
+        "C04",
+        "CS-05"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "A4",
+      "source_ref": "amend",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "A4"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_amendment",
+      "question": "서버 원격 브라우저 구조 및 크몽 우선·숨고 확장 유지; 기술 위임, mock-only phase 유지",
+      "related_later_refs": [
+        "D8",
+        "DC8",
+        "CS-04",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D1",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "D1"
+      },
+      "original_status": "R01_agreed",
+      "current_status": "R01_agreed",
+      "question": "하나의 고정 플랫폼 프로필 버전을 준비/실행/판정이 함께 참조",
+      "related_later_refs": [
+        "LD-01",
+        "LD-04",
+        "DC2",
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D2",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "D2"
+      },
+      "original_status": "R01_agreed",
+      "current_status": "R01_agreed",
+      "question": "원본과 플랫폼 조건을 내부 검사, 불확실한 정보만 질문, 인증 후 한 번 최종 등록 정보 확인 및 실행 승인",
+      "related_later_refs": [
+        "LD-05",
+        "LD-06",
+        "DC7",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D3",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "D3"
+      },
+      "original_status": "R01_agreed_refinement",
+      "current_status": "R01_agreed_refinement",
+      "question": "준비부터 결과까지 하나의 등록 요청 식별자, 수락 시 불변 실행 범위를 내부 snapshot으로 고정",
+      "related_later_refs": [
+        "LD-02",
+        "LD-06",
+        "DC5",
+        "CS-05"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D4",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "D4"
+      },
+      "original_status": "R01_agreed",
+      "current_status": "R01_agreed",
+      "question": "결과 판정 책임 분리, 신뢰할 수 있는 증거가 충분한 경우 추가 조회 없음; 프로필이 요구할 때만 readback",
+      "related_later_refs": [
+        "LD-07",
+        "DC6",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D5",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 4,
+        "id": "D5"
+      },
+      "original_status": "R01_agreed",
+      "current_status": "R01_agreed",
+      "question": "업무상 의미 있는 단계와 외부 효과의 실행 전 기록/관측/결과만 보존, 기본 키 관리",
+      "related_later_refs": [
+        "LD-07",
+        "CS-05",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D6",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 5,
+        "id": "D6"
+      },
+      "original_status": "delegated_design",
+      "current_status": "delegated_design",
+      "question": "원본 버전은 독립 재사용, 개별 플랫폼 답변/변환은 그 요청에만 적용; 공통 사실 변경은 명시적인 새 원본 버전",
+      "related_later_refs": [
+        "LD-02",
+        "DC1",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D7",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 6,
+        "id": "D7"
+      },
+      "original_status": "delegated_design_candidate",
+      "current_status": "delegated_design_candidate",
+      "question": "사용자 HTTP는 원본과 등록 요청 두 업무 자원; 인증 명령은 등록 요청의 하위 동작; 내부 단계/승인/효과 관리 API 없음",
+      "related_later_refs": [
+        "C03",
+        "CS-02",
+        "CS-03"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "D8",
+      "source_ref": "detail",
+      "locator": {
+        "collection": "decisions",
+        "index": 7,
+        "id": "D8"
+      },
+      "original_status": "deferred",
+      "current_status": "deferred",
+      "question": "구체적 DB 테이블/프레임워크/브라우저/배포 선택 미확정",
+      "related_later_refs": [
+        "CS-07",
+        "CS-08"
+      ],
+      "note": "11/27 독립 실행 결과 후 공통 기술 경계 결정.",
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C01",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "C01"
+      },
+      "original_status": "candidate",
+      "current_status": "refined",
+      "question": "공통 업무 데이터 3개 구조와 타입이 명시된 하위 값; 별도 테이블 수 미정",
+      "related_later_refs": [
+        "LD-02",
+        "DC1",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C02",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "C02"
+      },
+      "original_status": "candidate",
+      "current_status": "superseded_closed_platform_enum",
+      "question": "공통 봉투는 닫힌 스키마, 실제 등록값은 플랫폼 프로필 타입과 별도 조건 검사",
+      "related_later_refs": [
+        "LD-01",
+        "LD-04",
+        "DC2",
+        "CS-01"
+      ],
+      "note": "공통 플랫폼 enum은 V4 개방 ID+registry로 대체.",
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C03",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "C03"
+      },
+      "original_status": "candidate",
+      "current_status": "refined",
+      "question": "9개 업무 API 유지, 인증은 등록 요청의 open/finish/close/refresh 명령. 준비/인증 확인은 설정된 시간 내 응답, 실패는 실행 수락 전 안내; 실행만 비동기 job, GET 조회",
+      "related_later_refs": [
+        "CS-02",
+        "CS-03"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C04",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "C04"
+      },
+      "original_status": "candidate",
+      "current_status": "refined",
+      "question": "서버가 승인 범위 digest와 revision을 생성하고 start에서 원자 수락; 일반적인 요청 키·대상/동작 키",
+      "related_later_refs": [
+        "CS-05"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C05",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 4,
+        "id": "C05"
+      },
+      "original_status": "candidate",
+      "current_status": "refined",
+      "question": "준비/인증/실행/판정의 5개 업무 포트, 실행기는 의미 있는 단계 내 실제 mutation 경계에서만 durable admission; 판정은 프로필 증거",
+      "related_later_refs": [
+        "CS-05",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C06",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 5,
+        "id": "C06"
+      },
+      "original_status": "candidate",
+      "current_status": "retained_logical_technology_deferred",
+      "question": "웹 UI + 하나의 논리 앱 + 공통 영속 저장소 + 격리된 원격 브라우저 실행 영역, 추가 microservice/메시지 브로커 없음; 같은 프로세스/별도 실행자 여부는 후속",
+      "related_later_refs": [
+        "CS-07"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "C07",
+      "source_ref": "iface",
+      "locator": {
+        "collection": "decisions",
+        "index": 6,
+        "id": "C07"
+      },
+      "original_status": "candidate",
+      "current_status": "retained_mock_only",
+      "question": "지원 프로필과 실제 플랫폼 규칙의 검증 수준을 명시; 현재 두 mock value schema는 통합 설계 fixture, 실제 업체 필드나 팀원 독립 계약 강제 아님",
+      "related_later_refs": [
+        "DC3",
+        "DC4",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-01",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 0,
+        "id": "LD-01"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "공통 업무에서 사용하는 정보의 의미와 전달만 공통 계약으로 정의하고 플랫폼별 항목·타입·필수/조건부 제약·절차·완료 조건은 플랫폼 프로필이 정의한다.",
+      "related_later_refs": [
+        "DC2",
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-02",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 1,
+        "id": "LD-02"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "원본(Source), 플랫폼 프로필(Profile), 등록 요청(Registration)의 3개 핵심 논리 구조를 유지한다. 준비·인증·승인 범위·진행·결과는 등록 요청에 속하는 정보이며 독립 업무 자원을 강제하지 않는다.",
+      "related_later_refs": [
+        "DC1",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-03",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 2,
+        "id": "LD-03"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "동일 의미의 정보는 동일 타입을 사용하며 데이터의 생성·수신·변경·검증 책임을 명시한다.",
+      "related_later_refs": [
+        "DC5",
+        "DC6",
+        "CS-01",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-04",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 3,
+        "id": "LD-04"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "등록값은 해당 프로필의 계약으로 검사한다. 공통 식별자는 특정 플랫폼 열거형에 묶지 않고 서버의 지원 프로필 조회 및 유효성 검사로 제한한다.",
+      "related_later_refs": [
+        "DC2",
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-05",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 4,
+        "id": "LD-05"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "준비 결과는 등록값·정보 근거·문제를 전달한다. 준비 완료 여부는 필수 조건 충족 및 해결되지 않은 차단 문제 여부에서 도출하며 별도 독립 상태로 관리하지 않는다.",
+      "related_later_refs": [
+        "DC7",
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-06",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 5,
+        "id": "LD-06"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "실행 범위는 승인된 등록값·원본/프로필 버전·인증된 계정 및 대상·확인된 연결을 결합하여 고정한다. 승인 참조는 등록 요청 내 고정 범위를 식별하며 별도 계획 생성이나 승인 관리 자원을 추가하지 않는다.",
+      "related_later_refs": [
+        "DC5",
+        "CS-04",
+        "CS-05"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-07",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 6,
+        "id": "LD-07"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "등록 결과는 목표 판정·확인된 수행/효과·관측 대상과 방식이 포함된 근거·오류를 제공한다. 목표 달성은 해당 프로필의 완료 조건으로 판정한다.",
+      "related_later_refs": [
+        "DC6",
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "LD-08",
+      "source_ref": "upper",
+      "locator": {
+        "collection": "principles",
+        "index": 7,
+        "id": "LD-08"
+      },
+      "original_status": "human_agreed",
+      "current_status": "human_agreed_upper_contract",
+      "question": "공통 타입·플랫폼 규칙·업무 관계·실행 조건·결과 검사를 각 책임 경계에서 수행한다. 논리 계약과 물리적 저장 및 코드 구조를 구분한다.",
+      "related_later_refs": [
+        "DC8",
+        "CS-07",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC1",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "DC1"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "원본의 불변 원문·자료, 등록 요청 내 fact/근거",
+      "related_later_refs": [
+        "CS-02"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC2",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "DC2"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "프로필에 실제 입력값 스키마·제약·절차·완료 조건",
+      "related_later_refs": [
+        "CS-01"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC3",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "DC3"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "크몽 패키지의 누락 화면 항목 및 모집 형태·지역·이미지 목록",
+      "related_later_refs": [
+        "CS-01",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC4",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "DC4"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "숨고 서비스 설정과 고수 프로필/견적 분리",
+      "related_later_refs": [
+        "CS-01",
+        "CS-08"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC5",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 4,
+        "id": "DC5"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "인증 결과의 내부 연결 바인딩을 승인 범위에 포함",
+      "related_later_refs": [
+        "CS-04",
+        "CS-05"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC6",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 5,
+        "id": "DC6"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "관측 대상·방법·근거 연결과 프로필별 완료 조건",
+      "related_later_refs": [
+        "CS-06"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC7",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 6,
+        "id": "DC7"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "준비 완료는 검증의 계산값, 검사 책임 명시",
+      "related_later_refs": [
+        "CS-02",
+        "CS-03"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "DC8",
+      "source_ref": "data",
+      "locator": {
+        "collection": "decisions",
+        "index": 7,
+        "id": "DC8"
+      },
+      "original_status": "delegated_mock_baseline",
+      "current_status": "delegated_mock_design_checked",
+      "question": "기존 API 경계 유지, 세부 기술·미확인 항목만 보류",
+      "related_later_refs": [
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "note": null,
+      "requirement_refs": [],
+      "work_refs": []
+    },
+    {
+      "id": "CS-01",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 0,
+        "id": "CS-01"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "플랫폼 지식과 업무 포트 연결 방식",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W06",
+        "W08",
+        "W10"
+      ]
+    },
+    {
+      "id": "CS-02",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 1,
+        "id": "CS-02"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "준비/수정/승인 및 사용자 API 경계",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "work_refs": [
+        "W01",
+        "W02",
+        "W19",
+        "W03",
+        "W05"
+      ]
+    },
+    {
+      "id": "CS-03",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 2,
+        "id": "CS-03"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "동기 준비/인증과 비동기 실행, 오류 표현",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W05"
+      ]
+    },
+    {
+      "id": "CS-04",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 3,
+        "id": "CS-04"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "인증 확인에서 실행으로 연결 및 UI viewer 경계",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W05",
+        "W07",
+        "W11"
+      ]
+    },
+    {
+      "id": "CS-05",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 4,
+        "id": "CS-05"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "상태/승인/멱등성 및 외부 효과 직렬화",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W07",
+        "W11"
+      ]
+    },
+    {
+      "id": "CS-06",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 5,
+        "id": "CS-06"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "결과의 증거와 실패 판정",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W06",
+        "W08",
+        "W07",
+        "W09"
+      ]
+    },
+    {
+      "id": "CS-07",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 6,
+        "id": "CS-07"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "최소 논리 통합 구조와 공통 저장 책임",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W08"
+      ]
+    },
+    {
+      "id": "CS-08",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 7,
+        "id": "CS-08"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "공통 시험 및 착수/통합 수용 기준",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W01",
+        "W07",
+        "W09",
+        "W14",
+        "W17"
+      ]
+    },
+    {
+      "id": "CS-09",
+      "source_ref": "common",
+      "locator": {
+        "collection": "decisions",
+        "index": 8,
+        "id": "CS-09"
+      },
+      "original_status": "provisional",
+      "current_status": "provisional_common_baseline",
+      "question": "설계 변경의 근거 추적 및 책임 배분",
+      "related_later_refs": [],
+      "note": null,
+      "requirement_refs": [
+        "REQ-09",
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W01",
+        "W07",
+        "W17"
+      ]
+    }
+  ],
+  "legacy_detail_refs": {
+    "source": "v02",
+    "sections": [
+      {
+        "file": "DETAIL-DATA-V0.2.md",
+        "tables": [
+          {
+            "title": "D-A. 요구에서 상세 계약으로",
+            "row_ids": [
+              "DD-01",
+              "DD-02",
+              "DD-03",
+              "DD-04"
+            ]
+          },
+          {
+            "title": "D-B. 공통 사실 사전",
+            "row_ids": [
+              "F01",
+              "F02",
+              "F03",
+              "F04",
+              "F05",
+              "F06",
+              "F07",
+              "F08",
+              "F09",
+              "F10",
+              "F11",
+              "F12",
+              "F13",
+              "F14",
+              "F15"
+            ]
+          },
+          {
+            "title": "D-C. 논리 엔터티 필드와 무결성",
+            "row_ids": [
+              "E01",
+              "E02",
+              "E03",
+              "E04",
+              "E05",
+              "E06",
+              "E07",
+              "E08",
+              "E09",
+              "E10",
+              "E11",
+              "E12",
+              "E13",
+              "E14",
+              "E15"
+            ]
+          },
+          {
+            "title": "D-D. 검증 및 변환 규칙",
+            "row_ids": [
+              "M01",
+              "M02",
+              "M03",
+              "M04",
+              "M05",
+              "M06"
+            ]
+          }
+        ]
+      },
+      {
+        "file": "DETAIL-PLATFORM-FLOWS-V0.2.md",
+        "tables": [
+          {
+            "title": "P-A. 대상 및 목표",
+            "row_ids": [
+              "P-K",
+              "P-S",
+              "P-T"
+            ]
+          },
+          {
+            "title": "P-B. 크몽 필드 매핑 후보",
+            "row_ids": [
+              "K01",
+              "K02",
+              "K03",
+              "K04",
+              "K05",
+              "K06",
+              "K07",
+              "K08",
+              "K09",
+              "K10"
+            ]
+          },
+          {
+            "title": "P-C. 크몽 실행 및 증거 체크포인트",
+            "row_ids": [
+              "KF01",
+              "KF02",
+              "KF03",
+              "KF04",
+              "KF05",
+              "KF06"
+            ]
+          },
+          {
+            "title": "P-D. 숨고 필드 매핑 후보",
+            "row_ids": [
+              "Sg01",
+              "Sg02",
+              "Sg03",
+              "Sg04",
+              "Sg05",
+              "Sg06",
+              "Sg07",
+              "Sg08",
+              "Sg09"
+            ]
+          },
+          {
+            "title": "P-E. 숨고 실행 및 증거 체크포인트",
+            "row_ids": [
+              "SF01",
+              "SF02",
+              "SF03",
+              "SF04",
+              "SF05",
+              "SF06"
+            ]
+          },
+          {
+            "title": "P-F. 탈잉 확장 및 차이 보존",
+            "row_ids": [
+              "Tg01",
+              "Tg02",
+              "Tg03",
+              "Tg04"
+            ]
+          }
+        ]
+      },
+      {
+        "file": "DETAIL-SYSTEM-V0.2.md",
+        "tables": [
+          {
+            "title": "S-A. 논리 모듈 상세",
+            "row_ids": [
+              "C01a",
+              "C02a",
+              "C03a",
+              "C04a",
+              "C04b",
+              "C05a",
+              "C06a",
+              "C07a"
+            ]
+          },
+          {
+            "title": "S-B. 우리 서비스 사용자 흐름 (TO-BE, 화면 후보)",
+            "row_ids": [
+              "U01",
+              "U02",
+              "U03",
+              "U04",
+              "U05",
+              "U06",
+              "U07",
+              "U08"
+            ]
+          },
+          {
+            "title": "S-C. 논리 API → HTTP 후보 (구현 지시 아님)",
+            "row_ids": [
+              "A01",
+              "A02",
+              "A03",
+              "A04",
+              "A05",
+              "A06",
+              "A07",
+              "A08",
+              "A09",
+              "A10",
+              "A11"
+            ]
+          },
+          {
+            "title": "S-D. 작업/관측/오류 상태 계약 보완",
+            "row_ids": [
+              "ST01",
+              "ST02",
+              "ST03",
+              "ST04",
+              "ST05",
+              "ST06",
+              "ST07",
+              "ST08"
+            ]
+          },
+          {
+            "title": "S-E. 원격 브라우저 후보 세션·제어권 수명주기",
+            "row_ids": [
+              "RB01",
+              "RB02",
+              "RB03",
+              "RB04",
+              "RB05",
+              "RB06",
+              "RB07",
+              "RB08"
+            ]
+          },
+          {
+            "title": "S-F. 보안·배치 후보와 기술 판단",
+            "row_ids": [
+              "SEC01",
+              "SEC02",
+              "SEC03",
+              "SEC04",
+              "SEC05",
+              "SEC06",
+              "SEC07",
+              "SEC08"
+            ]
+          }
+        ]
+      },
+      {
+        "file": "DETAIL-VERIFICATION-V0.2.md",
+        "tables": [
+          {
+            "title": "V-A. 근거의 채택과 잔여 불일치",
+            "row_ids": [
+              "EV01",
+              "EV02",
+              "EV03",
+              "EV04",
+              "EV05",
+              "EV06"
+            ]
+          },
+          {
+            "title": "V-B. 검증 추적 매트릭스",
+            "row_ids": [
+              "VT01",
+              "VT02",
+              "VT03",
+              "VT04",
+              "VT05",
+              "VT06",
+              "VT07",
+              "VT08",
+              "VT09",
+              "VT10",
+              "VT11"
+            ]
+          },
+          {
+            "title": "V-C. 설계·채택 게이트",
+            "row_ids": [
+              "G1",
+              "G2",
+              "G3",
+              "G4",
+              "G5",
+              "G6"
+            ]
+          },
+          {
+            "title": "V-D. 팀원 산출물 재사용 계획 (배정 아님)",
+            "row_ids": [
+              "W01",
+              "W02",
+              "W03",
+              "W04",
+              "W05"
+            ]
+          }
+        ]
+      }
+    ],
+    "scope": "Earlier V0.2 detailed rows reference original table/evidence; not retrospectively reconstructed into standalone ADRs."
+  },
+  "current_trace": [
+    {
+      "id": "CS-01",
+      "requirements": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "prior": [
+        "D1",
+        "LD-01",
+        "LD-04",
+        "DC2"
+      ],
+      "sources": [
+        "data",
+        "profiles"
+      ],
+      "targets": [
+        "I1",
+        "I2",
+        "I4",
+        "I5",
+        "RUNTIME"
+      ],
+      "planned_checks": [
+        "T5-03",
+        "T5-13",
+        "DV-04",
+        "AT-04",
+        "AT-05"
+      ],
+      "work_candidates": [
+        "W01",
+        "W03",
+        "W06",
+        "W08",
+        "W10"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-02",
+      "requirements": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "prior": [
+        "D2",
+        "D3",
+        "D6",
+        "D7",
+        "LD-02",
+        "LD-05",
+        "DC1",
+        "DC7"
+      ],
+      "sources": [
+        "data",
+        "schema",
+        "iface"
+      ],
+      "targets": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H7",
+        "I2",
+        "STATE",
+        "UI"
+      ],
+      "planned_checks": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "T5-01",
+        "T5-06"
+      ],
+      "work_candidates": [
+        "W01",
+        "W02",
+        "W19",
+        "W03",
+        "W05"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-03",
+      "requirements": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "prior": [
+        "D2",
+        "D3",
+        "C03",
+        "LD-06",
+        "DC7"
+      ],
+      "sources": [
+        "iface",
+        "data",
+        "logic"
+      ],
+      "targets": [
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8",
+        "H9",
+        "I2",
+        "I3",
+        "I4",
+        "STATE",
+        "UI"
+      ],
+      "planned_checks": [
+        "T5-07",
+        "AT-02",
+        "T5-05",
+        "DV-01",
+        "DV-05"
+      ],
+      "work_candidates": [
+        "W01",
+        "W03",
+        "W05"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-04",
+      "requirements": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "prior": [
+        "DIR-01",
+        "DIR-02",
+        "A4",
+        "D3",
+        "LD-06",
+        "DC5"
+      ],
+      "sources": [
+        "direction",
+        "data",
+        "schema",
+        "phase"
+      ],
+      "targets": [
+        "H6",
+        "I3",
+        "I4",
+        "VIEWER",
+        "RUNTIME",
+        "UI",
+        "STORE"
+      ],
+      "planned_checks": [
+        "AT-02",
+        "AT-03",
+        "T5-02",
+        "DV-02",
+        "DV-05"
+      ],
+      "work_candidates": [
+        "W04",
+        "W05",
+        "W07",
+        "W11"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-05",
+      "requirements": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "prior": [
+        "A2",
+        "A3",
+        "D3",
+        "D5",
+        "LD-06",
+        "DC5",
+        "C04",
+        "C05"
+      ],
+      "sources": [
+        "top",
+        "amend",
+        "data",
+        "logic"
+      ],
+      "targets": [
+        "H7",
+        "I4",
+        "STATE",
+        "STORE",
+        "RUNTIME"
+      ],
+      "planned_checks": [
+        "T5-01",
+        "AT-03",
+        "T5-12",
+        "DV-01",
+        "DV-02",
+        "DV-04"
+      ],
+      "work_candidates": [
+        "W03",
+        "W04",
+        "W07",
+        "W11"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-06",
+      "requirements": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "prior": [
+        "A2",
+        "D4",
+        "D5",
+        "LD-07",
+        "DC6"
+      ],
+      "sources": [
+        "top",
+        "data",
+        "profiles"
+      ],
+      "targets": [
+        "I4",
+        "I5",
+        "H8",
+        "H9",
+        "STATE",
+        "UI"
+      ],
+      "planned_checks": [
+        "AT-04",
+        "AT-05",
+        "T5-13",
+        "DV-01",
+        "DV-03",
+        "DV-04"
+      ],
+      "work_candidates": [
+        "W03",
+        "W06",
+        "W08",
+        "W07",
+        "W09"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-07",
+      "requirements": [
+        "REQ-01",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "prior": [
+        "DIR-02",
+        "D8",
+        "LD-08",
+        "C06",
+        "DC8",
+        "B4-02",
+        "R5-10"
+      ],
+      "sources": [
+        "direction",
+        "data",
+        "iface",
+        "phase",
+        "wbs"
+      ],
+      "targets": [
+        "INTEGRATION",
+        "STORE",
+        "RUNTIME",
+        "VIEWER",
+        "I1",
+        "I2",
+        "I3",
+        "I4",
+        "I5"
+      ],
+      "planned_checks": [
+        "T5-03",
+        "T5-05",
+        "T5-06",
+        "AT-02",
+        "DV-05"
+      ],
+      "work_candidates": [
+        "W01",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W08"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-08",
+      "requirements": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "prior": [
+        "A2",
+        "A4",
+        "LD-08",
+        "DC8",
+        "D8",
+        "R5-09",
+        "R5-11"
+      ],
+      "sources": [
+        "gate",
+        "trace",
+        "data",
+        "phase",
+        "wbs"
+      ],
+      "targets": [
+        "GATE",
+        "INTEGRATION"
+      ],
+      "planned_checks": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "AT-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-03",
+        "T5-07",
+        "AT-04",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-04",
+        "DV-05"
+      ],
+      "work_candidates": [
+        "W01",
+        "W07",
+        "W09",
+        "W14",
+        "W17"
+      ],
+      "work_state": "proposed_not_assigned"
+    },
+    {
+      "id": "CS-09",
+      "requirements": [
+        "REQ-09",
+        "REQ-11"
+      ],
+      "prior": [
+        "D8",
+        "LD-08",
+        "DC8"
+      ],
+      "sources": [
+        "trace",
+        "model",
+        "phase",
+        "wbs"
+      ],
+      "targets": [
+        "TRACE",
+        "INTEGRATION",
+        "GATE"
+      ],
+      "planned_checks": [
+        "T5-03",
+        "DV-04"
+      ],
+      "work_candidates": [
+        "W01",
+        "W07",
+        "W17"
+      ],
+      "work_state": "proposed_not_assigned"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "source": "requirements",
+      "original_prior_refs": [
+        "FR-01",
+        "V3-R08"
+      ],
+      "current_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T5-06"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-02",
+      "source": "requirements",
+      "original_prior_refs": [
+        "DIR-04",
+        "V3-R02",
+        "V3-R09"
+      ],
+      "current_decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "T5-07"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-03",
+      "source": "requirements",
+      "original_prior_refs": [
+        "FR-02",
+        "V3-R08",
+        "V3-R09",
+        "V3-R12"
+      ],
+      "current_decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-03",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-02",
+        "T5-03",
+        "T5-07",
+        "DV-04"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-04",
+      "source": "requirements",
+      "original_prior_refs": [
+        "DIR-01",
+        "DIR-02",
+        "V3-R01",
+        "V3-R05",
+        "V3-R11"
+      ],
+      "current_decisions": [
+        "CS-03",
+        "CS-04",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "AT-02",
+        "T5-02",
+        "T5-03",
+        "DV-02",
+        "DV-05"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-05",
+      "source": "requirements",
+      "original_prior_refs": [
+        "FR-03",
+        "V3-R01",
+        "V3-R02",
+        "V3-R03",
+        "V3-R04",
+        "V3-R05"
+      ],
+      "current_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-04",
+        "CS-05",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "T6-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-07",
+        "DV-01",
+        "DV-02",
+        "DV-04"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-06",
+      "source": "requirements",
+      "original_prior_refs": [
+        "DIR-03",
+        "FR-04",
+        "V3-R07"
+      ],
+      "current_decisions": [
+        "CS-01",
+        "CS-06",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "AT-04",
+        "T5-06",
+        "T5-13",
+        "DV-03"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-07",
+      "source": "requirements",
+      "original_prior_refs": [
+        "DIR-03",
+        "FR-04",
+        "V3-R07"
+      ],
+      "current_decisions": [
+        "CS-01",
+        "CS-06",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "DV-03"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-08",
+      "source": "requirements",
+      "original_prior_refs": [
+        "FR-05",
+        "FR-06",
+        "V3-R06",
+        "V3-R07"
+      ],
+      "current_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-05",
+        "CS-06",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "AT-04",
+        "AT-05",
+        "T5-05",
+        "DV-01",
+        "DV-03",
+        "DV-05"
+      ],
+      "note": "Legacy explicit resume clause superseded by A2 and CS-05/06; original retained."
+    },
+    {
+      "id": "REQ-09",
+      "source": "requirements",
+      "original_prior_refs": [
+        "DIR-04",
+        "V3-R09"
+      ],
+      "current_decisions": [
+        "CS-01",
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "planned_checks": [
+        "T5-03",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "DV-04"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-10",
+      "source": "requirements",
+      "original_prior_refs": [
+        "V3-R05",
+        "V3-R11"
+      ],
+      "current_decisions": [
+        "CS-04",
+        "CS-05",
+        "CS-06",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_checks": [
+        "T6-01",
+        "AT-02",
+        "AT-03",
+        "T5-12",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-05"
+      ],
+      "note": null
+    },
+    {
+      "id": "REQ-11",
+      "source": "requirements",
+      "original_prior_refs": [
+        "V3-R13",
+        "V3-R14"
+      ],
+      "current_decisions": [
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "planned_checks": [
+        "T5-08",
+        "T5-03"
+      ],
+      "note": null
+    }
+  ],
+  "actual_evidence": {
+    "design": [
+      {
+        "source": "validation",
+        "kind": "selected_synthetic_design_check",
+        "counts": "31/31 on V4 before V4.1; not integrated product",
+        "refs": [
+          "DC1",
+          "DC2",
+          "DC3",
+          "DC4",
+          "DC5",
+          "DC6",
+          "DC7"
+        ]
+      },
+      {
+        "source": "reviewEvidence",
+        "kind": "historical_design_review",
+        "refs": [
+          "C01",
+          "C02",
+          "C03",
+          "C04",
+          "C05",
+          "C06",
+          "C07"
+        ]
+      },
+      {
+        "source": "EV-R05-REMOTE-20261124",
+        "kind": "team_reported_local_mock_poc",
+        "refs": [
+          "DIR-01",
+          "DIR-02",
+          "CS-04"
+        ]
+      }
+    ],
+    "product_verified_by": [],
+    "planned_check_relation": "planned_check_by; product test execution not run"
+  },
+  "update_rule": "원본 변경→source blob 확인→유효 레코드/관계 갱신→영향 후보 산출→담당 검토→정적 검사→사람용 뷰 재생성. 영향 후보는 자동 승인/무효화 또는 업무 배정이 아니다.",
+  "limits": [
+    "Decision inventory covers explicit IDs LR-D01~06, DEC-01~17, DIR-01~04, B4-01~06, R5-01~11, A1~4, D1~8, C01~07, LD-01~08, DC1~8, CS-01~09. Earlier V0.2 rows are traceable to original tables, not retroactively authored decisions.",
+    "Historical rationale not present in original remains unrecorded; new relations are retrospective review.",
+    "No implementation assignment; WBS refs candidates. No physical stack closure/live approval."
+  ]
+}
