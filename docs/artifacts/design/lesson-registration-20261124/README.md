@@ -1,20 +1,21 @@
 # 레슨 등록 설계 — R01 재설계 기준선
 
-2026-11-25: 상위 논리적 데이터 계약 합의 완료·동결. 상세 데이터 계약과 인터페이스/API는 검증·보완이 필요한 후보이며 실제 제품 구현 또는 실서비스 실행을 승인하지 않는다.
+2026-11-25: 상위 논리적 데이터 계약 합의 완료. 팀원 조사 원문을 기반으로 상세 공통 계약 V4 및 플랫폼별 모의 프로필 V2를 결정하고 선정된 설계 검증을 수행했다. **실제 플랫폼 실행·제품 통합·구현 기술 확정은 별도.**
 
 ## 현재 기준선
 
 | 구분 | 문서 | 상태 |
 |---|---|---|
 | 최상위 설계 | [최상위 합의](top-design-v1.json), [상위 보완](top-design-amendment-v1.json) | 합의 |
-| 논리 및 상세 결정 | [D1~D8](detail-decisions-v2.json), [논리 모델 V5](logical-behavior-v5.json) | 상위 방향 합의, 상세 후보 |
-| 상위 논리적 데이터 계약 | [결정 정본](logical-data-contract-decision-v1.json), [설계 보고](DETAIL-DESIGN-V2.md) | **합의 완료** |
-| 상세 데이터 계약 | [최소 상세 계약 V2](detail-contract-v2.json) | 보완 필요 |
-| 인터페이스/API | [계약 V3](interface-contract-v3.json), [스키마 V3](interface-schema-v3.json) | 보완 필요 |
-| 검증 근거 | [논리 검증 V5](logical-validation-v5.json), [인터페이스 검토 V3](interface-review-evidence-v3.json) | 추상 모델·타입/참조 검증, 의미·통합 미검증 |
+| 논리 및 상세 결정 | [D1~D8](detail-decisions-v2.json), [논리 모델 V5](logical-behavior-v5.json) | 상위 방향 합의, 논리 모델 검증 |
+| 상위 논리적 데이터 계약 | [결정 정본](logical-data-contract-decision-v1.json), [설계 보고 V2](DETAIL-DESIGN-V2.md) | 합의 완료·동결 |
+| 상세 공통 계약 | [계약 V4](data-contract-v4.json), [스키마 V4](data-schema-v4.json), [설계 보고 V4](DATA-CONTRACT-V4.md) | 위임 결정·선정된 설계 사례 검증 |
+| 플랫폼별 계약 | [프로필 V2](platform-profiles-v2.json) | 모의 기준선; 실제 규칙 및 허용 미확인 |
+| 인터페이스/API | V4 계약의 wire_compatibility; [V3 후보](interface-contract-v3.json) | 기존 경계 유지, V4 우선, 구현 연계 검증 필요 |
+| 검증 근거 | [V4 검증](data-contract-validation-v4.json), [실행 코드](validate-data-contract-v4.mjs), [이전 V3 결함](interface-review-evidence-v3.json) | 합성 31/31; 실제 통합 미검증 |
 | 구현/통합 | 기존 독립 TASK 및 phase 유지 | 후속 결정, mock-only |
 
-상위 데이터 계약과 상충하는 상세 후보를 확정본으로 사용하지 않는다. 상세 문제 P1~P5는 [설계 보고](DETAIL-DESIGN-V2.md#검증-및-미해결-항목)에 기록. 아래 V0.8 및 이전 문서는 역사적 자료로 보존한다. [V1 상세 설계 이력](DETAIL-DESIGN-V1.md), [V4 논리 이력](logical-behavior-v4.json).
+V4와 상충하는 V2/V3 상세 후보 및 플랫폼 프로필 V1은 역사적 자료다. [V2 상세 후보](detail-contract-v2.json), [V3 스키마](interface-schema-v3.json), [V1 상세 이력](DETAIL-DESIGN-V1.md), [V4 논리 이력](logical-behavior-v4.json). 기존 팀원 작업 및 공통 하네스 계약 변경 없음.
 
 ---
 

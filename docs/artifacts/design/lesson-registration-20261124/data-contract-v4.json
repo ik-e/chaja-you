@@ -1,7 +1,7 @@
 {
   "id": "LR-DATA-04",
   "date": "2026-11-25",
-  "status": "delegated_detailed_contract_mock_baseline_pending_validation",
+  "status": "delegated_detailed_contract_mock_baseline_design_checked",
   "authority": "R01: 그러면 기존 조사 자료를 근거로 상세 계약을 결정하고 권장대로 진행해 단 나를 설득할 수 있어야 해",
   "basis": {
     "commit": "b5317a5a3ca8081117b512a394831c112a1c1d15",
@@ -551,14 +551,21 @@
     "rule": "Use server canonical UTF-8 sorted-key JSON, integer safe range, order arrays, preserve Unicode, SHA256. Profile content excludes self digest; scope digest exact internal Scope; payload digest exact platform values excluding transport-only source/approval/connection refs; when platform observations normalize to canonical values, profile defines same mapping; asset digest list in upload order. Test vectors and implementation must match; no client-supplied hash authority."
   },
   "verification_status": {
-    "static": "to_execute",
-    "semantic": "to_execute",
+    "static": "subset_reference_shape_checked",
+    "semantic": "31_of_31_selected_synthetic_contract_cases_pass",
     "product": "not_run",
     "deferred": [
       "actual Kmong dropdown/category/region IDs, single package toggle, live policies/receipt",
       "Soomgo real initial object, new account workflow, category-requiredness/cardinality and save proof",
       "actual independent T1~T6 release/adapter implementation, runtime DB/HTTP/concurrency/permission/lease enforcement",
       "actual user efficiency, physical stack and final integration"
+    ],
+    "evidence_ref": "data-contract-validation-v4.json",
+    "limits": [
+      "Subset JS shape checker, not standard JSON Schema engine.",
+      "Semantic sample checks use synthetic fixtures, trusted origin/evidence lists and expected payload digest supplied by test. Not actual extraction/provenance proof, digest generation, registry selection, database concurrency, runtime permission/session enforcement or real browser execution.",
+      "Third platform synthetic sample demonstrates shape/profile extension only, not actual adapter support.",
+      "Logical model remains abstract, N=6/7 also examined; actual runtime tests not run."
     ]
   },
   "non_changes": "No new task, no main/PHASE changes, no live access. Mock rule set explicitly synthetic, exact adapter operations and transport delegated after independent results."
