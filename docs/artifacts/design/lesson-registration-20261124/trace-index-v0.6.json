@@ -1822,7 +1822,8 @@
       "work_refs": [
         "W06",
         "W07",
-        "W09"
+        "W09",
+        "W18"
       ],
       "other_refs": []
     },
@@ -1849,7 +1850,8 @@
       ],
       "work_refs": [
         "W08",
-        "W09"
+        "W09",
+        "W12"
       ],
       "other_refs": []
     },
@@ -1881,7 +1883,8 @@
       "work_refs": [
         "W03",
         "W07",
-        "W11"
+        "W11",
+        "W18"
       ],
       "other_refs": []
     },
@@ -1909,7 +1912,8 @@
       ],
       "work_refs": [
         "W10",
-        "W14"
+        "W14",
+        "W12"
       ],
       "other_refs": []
     },
@@ -1997,7 +2001,61 @@
       ],
       "work_refs": [
         "W14",
-        "W17"
+        "W17",
+        "W12"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T6-01",
+      "source": "index",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-03",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-02"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W03",
+        "W05",
+        "W07"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T6-02",
+      "source": "index",
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-05"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-03",
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-05",
+        "HTTP-09",
+        "HTTP-29"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W03",
+        "W05",
+        "W07"
       ],
       "other_refs": []
     }
@@ -2809,7 +2867,9 @@
         "AT-07",
         "AT-08",
         "AT-09",
-        "AT-10"
+        "AT-10",
+        "T6-01",
+        "T6-02"
       ],
       "sections": [
         "통합/수용/보안/가치 시험 계획"
@@ -3678,5 +3738,43 @@
         "W01"
       ]
     }
+  ],
+  "additional_test_plans": [
+    {
+      "id": "T6-01",
+      "title": "자료 업로드 및 권리·소유자 경계",
+      "scenario": "권리 확인된 합성 이미지 1건과 권리 미확인·잘못된 형식·크기·다른 소유자의 참조를 입력",
+      "expected": "허용 자료만 원본 해시·권리·owner에 결합해 버전 저장. 부적합 자료는 거부하고 등록 동작 0. 재조회로 동일 자료 확인.",
+      "execution": "not_run",
+      "basis": [
+        "HTTP-02",
+        "REQ-01",
+        "REQ-10",
+        "V3-R08",
+        "LR-T07"
+      ],
+      "verdict": "필드/권리/owner/해시 일치 및 거부 관측 시 pass; 무단 저장/등록 시 fail; 필수 관측 부족 시 unknown"
+    },
+    {
+      "id": "T6-02",
+      "title": "초안 수정과 불변 버전·재승인",
+      "scenario": "승인 이전 유효 문구 수정, 사실과 모순된 변경, 기존 승인 후 관련 초안 버전 변경, 타 소유자 초안 수정 및 stale revision",
+      "expected": "유효한 수정만 새 draft version으로 저장하고 기존 snapshot 유지. 사실 변경은 원본 재확인으로 연결. 이전 승인과 일치하지 않으면 신규 실행 차단, 타 소유자/stale 요청 거부.",
+      "execution": "not_run",
+      "basis": [
+        "HTTP-05",
+        "REQ-03",
+        "REQ-05",
+        "R5-01",
+        "T5-01"
+      ],
+      "verdict": "새 버전 및 차단 관측 일치 시 pass; 원본/승인 덮어쓰기 또는 무단 실행 시 fail; 필수 관측 부족 시 unknown"
+    }
+  ],
+  "validation_revision": "0.6.1",
+  "validation_notes": [
+    "이전 직접 검증 참조 미연결 HTTP-02/05는 보완 시험 계획 T6-01/02로 추가. 원본 제품 시험 실행이나 새로운 TASK 승인 아님.",
+    "W12는 AT-05/07/10, W18은 AT-04/06과 회귀/검수 관점 연결. 작업이 새로 배정되었다는 뜻 아님.",
+    "검증기 enum은 모델 record_contract.envelope 기준. 선행 작업/컴포넌트 의존이 없는 빈 배열은 유효한 명시 값."
   ]
 }
