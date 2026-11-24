@@ -1,0 +1,1407 @@
+{
+  "schema_version": 1,
+  "kind": "lesson_design_draft",
+  "version": "0.1",
+  "status": "R01 검토용 설계 초안·채택 아님",
+  "owner": "R01",
+  "date": "2026-11-24",
+  "base_commit": "3465df351c0dc1af85c6b44600cdc5738a792617",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "model_ref": "docs/deliverables/planning-design-info-model.json",
+  "source_refs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/human/phase-intents/PHASE-20261124-02.md",
+    "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
+    "prototype/lesson-registration/test-harness/CONTRACT.md"
+  ],
+  "scope": "기술 독립 논리 설계; 기존 활성 TASK 및 제품 범위 변경 없음",
+  "id": "LESSON-SYSTEM-CONTRACTS-V0.1",
+  "records": [
+    {
+      "id": "LR-BOUNDARY",
+      "type_id": "IT-12",
+      "title": "시스템·신뢰 경계",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "system_purpose": "원본·대상별 초안·승인·실행·관측 결과 연결",
+        "external_actors": [
+          "강사: 사실·권리·동작 승인 및 향후 직접 인증",
+          "운영사: 플랫폼 규칙·허용·인증·최종 상태",
+          "외부 AI 제공자(채택 시): 최소 범위 정보 처리"
+        ],
+        "external_systems": [
+          "R03 mock",
+          "크몽",
+          "숨고",
+          "탈잉(확장 조사)"
+        ],
+        "in_out_boundary": "내부: 사실·변환·승인·실행 가드·관측/판정·복구. 외부: 인증, 플랫폼 정책과 실제 등록 결과.",
+        "trust_boundaries": [
+          "확인 사실/AI 제안",
+          "사용자 승인/운영사 허용",
+          "mock/live 증거",
+          "자료·외부 모델 전송 및 삭제"
+        ],
+        "flows": [
+          "강사→시스템: 원본·자료·목표·승인",
+          "시스템→강사: 초안·이슈·상태·근거·조치",
+          "시스템↔mock: 승인 동작·관측",
+          "시스템↔live: 현 단계 금지"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-FEAS",
+      "type_id": "IT-05",
+      "title": "실현 가능성과 제한",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "fields": {
+        "required_resources": [
+          "합성 원본·사진",
+          "R03 고정 하네스",
+          "R04/R05 독립 PoC 및 공식 조사"
+        ],
+        "access_and_rights": "현재 mock만 허용; 실제 플랫폼 권한·계정·자료 권리 별도",
+        "technical_unknowns": [
+          "숨고 객체/완료 단위",
+          "실행 허용·인증·관측 증거",
+          "스택·공수·운영비"
+        ],
+        "deadline_constraints": [
+          "11/26 공통 시험",
+          "11/27 판단",
+          "12/8 MVP",
+          "1/4 완성품"
+        ],
+        "stop_conditions": [
+          "미확인 live 실행",
+          "승인 위반",
+          "허위 완료",
+          "사용자 가치 반증"
+        ],
+        "minimum_disproof": "핵심 정확성/안전 위반 또는 허용 경로 부재 시 축소/보류",
+        "fallbacks": [
+          "초안/수동 지원은 완결 등록과 다른 가치 검증"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-STRATEGY",
+      "type_id": "IT-25",
+      "title": "실행 전략 대안",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "driving_requirements": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04",
+          "FR-05",
+          "FR-06"
+        ],
+        "strategy_options": [
+          "A 로컬: 세션 외부 전송 감소 후보; 설치/운영·화면 변경 부담",
+          "B 혼합: 콘텐츠 처리와 인증 실행 분리; 통신/권한 책임 증가",
+          "C 서버 브라우저: 운영 편의; 신원/세션/사진·정책 위험, 현재 미허용",
+          "D 공식 API/위임: 허용·제공 확인 필요",
+          "E 초안/수동 보조: 실제 실행 제약 시 별도 가치 재검증"
+        ],
+        "top_level_choice": "미결정. 논리 책임 후보만 분리.",
+        "tradeoff": "정확성·완료 단위·허용·사용자 시간·보안·재현성·공수/지원 비용 비교; 모의 성공만으로 live 선택 금지",
+        "assumptions": [
+          "R03은 시험 계약, 제품 API 아님",
+          "R04/R05 실행·공식 근거 필요"
+        ],
+        "selection_state": "deferred",
+        "revisit_when": "11/27 또는 필요한 근거 확보 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-C-01",
+      "type_id": "IT-13",
+      "title": "원본 사실·자료 검증",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "component": "원본 사실·자료 검증",
+        "responsibility": "값·단위·출처·권리·충돌 구조화",
+        "inbound_outbound": [
+          "원본/자료 → 사실·이슈"
+        ],
+        "owned_state": "원본/사실/자료 버전",
+        "dependencies": [],
+        "failure_boundary": "실패/미확인을 성공으로 전파하지 않음",
+        "requirement_contributions": {
+          "FR-01": "값·단위·출처·권리·충돌 구조화",
+          "FR-03": "값·단위·출처·권리·충돌 구조화"
+        },
+        "verification_refs": [
+          "LR-T02",
+          "LR-T07"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "uncertainties": [
+        "parent_runtime_unit_ref 미지정; 물리 실행 단위·코드·담당 미확정"
+      ]
+    },
+    {
+      "id": "LR-C-02",
+      "type_id": "IT-13",
+      "title": "플랫폼 매핑",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "component": "플랫폼 매핑",
+        "responsibility": "규칙/대상별 초안과 미해결 항목 작성",
+        "inbound_outbound": [
+          "사실/규칙 → 초안·이슈"
+        ],
+        "owned_state": "초안·규칙 참조",
+        "dependencies": [
+          "LR-C-01"
+        ],
+        "failure_boundary": "실패/미확인을 성공으로 전파하지 않음",
+        "requirement_contributions": {
+          "FR-02": "규칙/대상별 초안과 미해결 항목 작성"
+        },
+        "verification_refs": [
+          "LR-T01",
+          "LR-T02"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "uncertainties": [
+        "parent_runtime_unit_ref 미지정; 물리 실행 단위·코드·담당 미확정"
+      ]
+    },
+    {
+      "id": "LR-C-03",
+      "type_id": "IT-13",
+      "title": "승인·실행 가드",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "component": "승인·실행 가드",
+        "responsibility": "승인 스냅샷·동작·환경·허용·기존 효과 검사",
+        "inbound_outbound": [
+          "초안/승인/허용 → 실행 판단"
+        ],
+        "owned_state": "승인·허용·의도 참조",
+        "dependencies": [
+          "LR-C-02"
+        ],
+        "failure_boundary": "실패/미확인을 성공으로 전파하지 않음",
+        "requirement_contributions": {
+          "FR-03": "승인 스냅샷·동작·환경·허용·기존 효과 검사",
+          "FR-06": "승인 스냅샷·동작·환경·허용·기존 효과 검사"
+        },
+        "verification_refs": [
+          "LR-T03",
+          "LR-T06",
+          "LR-T08"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "uncertainties": [
+        "parent_runtime_unit_ref 미지정; 물리 실행 단위·코드·담당 미확정"
+      ]
+    },
+    {
+      "id": "LR-C-04",
+      "type_id": "IT-13",
+      "title": "플랫폼 동작 경계",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "component": "플랫폼 동작 경계",
+        "responsibility": "승인된 동작 및 원시 관측/오류 반환",
+        "inbound_outbound": [
+          "동작 → 시도·관측·오류"
+        ],
+        "owned_state": "실행 시도·원시 관측",
+        "dependencies": [
+          "LR-C-03"
+        ],
+        "failure_boundary": "실패/미확인을 성공으로 전파하지 않음",
+        "requirement_contributions": {
+          "FR-04": "승인된 동작 및 원시 관측/오류 반환",
+          "FR-05": "승인된 동작 및 원시 관측/오류 반환"
+        },
+        "verification_refs": [
+          "LR-T01",
+          "LR-T04",
+          "LR-T05"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "uncertainties": [
+        "parent_runtime_unit_ref 미지정; 물리 실행 단위·코드·담당 미확정"
+      ]
+    },
+    {
+      "id": "LR-C-05",
+      "type_id": "IT-13",
+      "title": "결과·재개 판단",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "component": "결과·재개 판단",
+        "responsibility": "목표 증거 대조·unknown 차단·재확인",
+        "inbound_outbound": [
+          "시도/관측/이력 → 결과·조치"
+        ],
+        "owned_state": "판정·증거·차단",
+        "dependencies": [
+          "LR-C-03",
+          "LR-C-04"
+        ],
+        "failure_boundary": "실패/미확인을 성공으로 전파하지 않음",
+        "requirement_contributions": {
+          "FR-05": "목표 증거 대조·unknown 차단·재확인",
+          "FR-06": "목표 증거 대조·unknown 차단·재확인"
+        },
+        "verification_refs": [
+          "LR-T04",
+          "LR-T05",
+          "LR-T08",
+          "LR-T09"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "uncertainties": [
+        "parent_runtime_unit_ref 미지정; 물리 실행 단위·코드·담당 미확정"
+      ]
+    },
+    {
+      "id": "LR-C-06",
+      "type_id": "IT-13",
+      "title": "사용자 상호작용",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "component": "사용자 상호작용",
+        "responsibility": "입력·검토·승인·진행/결과 및 다음 조치",
+        "inbound_outbound": [
+          "사용자 ↔ 논리 동작·상태"
+        ],
+        "owned_state": "사용자 행동·표시; 결과 정본 아님",
+        "dependencies": [
+          "LR-C-01",
+          "LR-C-02",
+          "LR-C-03",
+          "LR-C-05"
+        ],
+        "failure_boundary": "실패/미확인을 성공으로 전파하지 않음",
+        "requirement_contributions": {
+          "FR-01": "입력·검토·승인·진행/결과 및 다음 조치",
+          "FR-02": "입력·검토·승인·진행/결과 및 다음 조치",
+          "FR-03": "입력·검토·승인·진행/결과 및 다음 조치",
+          "FR-05": "입력·검토·승인·진행/결과 및 다음 조치",
+          "FR-06": "입력·검토·승인·진행/결과 및 다음 조치"
+        },
+        "verification_refs": [
+          "LR-T11"
+        ]
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "uncertainties": [
+        "parent_runtime_unit_ref 미지정; 물리 실행 단위·코드·담당 미확정"
+      ]
+    },
+    {
+      "id": "LR-OP-01",
+      "type_id": "IT-16",
+      "title": "prepare_source",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "prepare_source",
+        "input_schema": {
+          "source_text": "원문/입력",
+          "facts": "사실 후보",
+          "media_refs": "자료 버전"
+        },
+        "output_schema": {
+          "source_version": "원본 버전",
+          "facts": "근거 있는 후보",
+          "issues": "누락·충돌·권리"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "missing",
+          "conflict",
+          "media_rights_unknown"
+        ],
+        "call_policy": [
+          "AI 제안과 사용자 확인 구분; 외부 실행 없음"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-OP-02",
+      "type_id": "IT-16",
+      "title": "prepare_draft",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "prepare_draft",
+        "input_schema": {
+          "source_version": "원본",
+          "platform": "대상",
+          "object_kind": "등록 객체 또는 미확인",
+          "rule_version": "규칙"
+        },
+        "output_schema": {
+          "draft_version": "초안",
+          "field_mappings": "값·출처·규칙",
+          "issues": "충돌·미확인",
+          "target_outcome": "목표 또는 미정"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "rule_unknown",
+          "object_unknown",
+          "mapping_conflict"
+        ],
+        "call_policy": [
+          "수정은 새 버전; 외부 실행 없음"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-OP-03",
+      "type_id": "IT-16",
+      "title": "record_approval",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "record_approval",
+        "input_schema": {
+          "source_version": "원본",
+          "draft_version": "초안",
+          "rule_version": "규칙",
+          "media_versions": "자료 버전",
+          "target": "플랫폼/객체/목표",
+          "actions": "승인 동작",
+          "environment": "환경",
+          "user_confirmation": "명시 승인"
+        },
+        "output_schema": {
+          "approval_ref": "승인 참조",
+          "scope": "승인 스냅샷",
+          "issues": "확인/차단"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "stale_version",
+          "unresolved_fact",
+          "unapproved_asset",
+          "scope_mismatch"
+        ],
+        "call_policy": [
+          "사용자 승인≠운영사 허용; 철회·버전 변경 시 다음 실행 차단"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-OP-04",
+      "type_id": "IT-16",
+      "title": "plan_and_check_execution",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "plan_and_check_execution",
+        "input_schema": {
+          "intent_ref": "등록 의도",
+          "approval_ref": "승인",
+          "permission_ref": "허용 근거",
+          "requested_action": "동작/환경"
+        },
+        "output_schema": {
+          "job_ref": "작업",
+          "job_state": "계획/준비/확인/차단",
+          "retry_blocked": "부작용 차단",
+          "reasons": "사유"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "approval_invalid",
+          "permission_unknown",
+          "live_blocked",
+          "duplicate_risk"
+        ],
+        "call_policy": [
+          "동일 의도의 기존 효과/미확인 검사; 작업 생성은 실행 아님"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-OP-05",
+      "type_id": "IT-16",
+      "title": "execute_approved_action",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "execute_approved_action",
+        "input_schema": {
+          "job_ref": "작업",
+          "action": "단일 승인 동작",
+          "approval_ref": "승인",
+          "environment": "현 mock만"
+        },
+        "output_schema": {
+          "attempt_ref": "시도",
+          "observations": "관측",
+          "job_state": "상태",
+          "evidence_refs": "근거"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "input_failed",
+          "attachment_failed",
+          "outcome_unknown",
+          "blocked"
+        ],
+        "call_policy": [
+          "직전 가드 및 시도 기록; 현 실제 실행 금지"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-OP-06",
+      "type_id": "IT-16",
+      "title": "read_result",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "read_result",
+        "input_schema": {
+          "job_ref": "작업"
+        },
+        "output_schema": {
+          "job_state": "작업 상태",
+          "observed_stage": "관측 단계",
+          "target_outcome": "목표",
+          "result_state": "판정",
+          "evidence_refs": "근거",
+          "next_action": "조치",
+          "retry_blocked": "차단"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "not_authorized",
+          "unknown",
+          "evidence_conflict"
+        ],
+        "call_policy": [
+          "읽기 전용; mock/live 구분"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-OP-07",
+      "type_id": "IT-16",
+      "title": "reconcile_and_request_resume",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "operation": "reconcile_and_request_resume",
+        "input_schema": {
+          "job_ref": "기존 작업",
+          "evidence_refs": "재확인 근거",
+          "user_resume_request": "명시 요청",
+          "approval_ref": "현재 승인"
+        },
+        "output_schema": {
+          "job_state": "unknown 유지/목표 확인/needs_action",
+          "retry_blocked": "차단 여부",
+          "reason": "근거·재개 조건"
+        },
+        "auth": {
+          "principal": "해당 원본/작업 소유자 또는 제한된 위임 주체",
+          "scope": "자기 작업·승인 범위; 인증 수단 미정; 외부 자격증명 전달 금지"
+        },
+        "errors": [
+          "still_unknown",
+          "already_effective",
+          "approval_invalid",
+          "permission_unknown"
+        ],
+        "call_policy": [
+          "부작용 없는 확인; 효과 없음/안전한 다음 단계 확인 후 별도 실행"
+        ],
+        "behavior_refs": [
+          "LR-STATE",
+          "LR-DATA"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "note": "논리 호출; API 경로/전송/실제 타입 미확정"
+    },
+    {
+      "id": "LR-UI-01",
+      "type_id": "IT-17",
+      "title": "원본 입력·대상 선택",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "screen_or_surface": "원본 입력·대상 선택",
+        "actor_and_goal": "강사의 목표 달성을 위한 행동 단위",
+        "inputs_actions": [
+          "원고·조건·자료·대상 입력 및 누락 응답"
+        ],
+        "presentation_states": [
+          "초기",
+          "검증 중",
+          "누락",
+          "충돌",
+          "준비"
+        ],
+        "feedback": "제공하지 않은 값을 확정하지 않음",
+        "accessibility": "상태/조치를 텍스트로 구분, 색상만 사용하지 않음",
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-UI-02",
+      "type_id": "IT-17",
+      "title": "초안 검토·승인",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "screen_or_surface": "초안 검토·승인",
+        "actor_and_goal": "강사의 목표 달성을 위한 행동 단위",
+        "inputs_actions": [
+          "원본/변환값·권리·목표·동작/환경 검토 및 승인/수정"
+        ],
+        "presentation_states": [
+          "검토 필요",
+          "수정",
+          "승인 가능",
+          "승인됨",
+          "버전 변경"
+        ],
+        "feedback": "승인 범위 표시, 변경 시 재승인",
+        "accessibility": "상태/조치를 텍스트로 구분, 색상만 사용하지 않음",
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-UI-03",
+      "type_id": "IT-17",
+      "title": "실행·사용자 확인",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "screen_or_surface": "실행·사용자 확인",
+        "actor_and_goal": "강사의 목표 달성을 위한 행동 단위",
+        "inputs_actions": [
+          "승인 동작 요청·중단·확인"
+        ],
+        "presentation_states": [
+          "ready",
+          "running",
+          "needs_action",
+          "blocked",
+          "failed",
+          "unknown"
+        ],
+        "feedback": "상태·차단 사유·다음 조치; 현 live 금지",
+        "accessibility": "상태/조치를 텍스트로 구분, 색상만 사용하지 않음",
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-UI-04",
+      "type_id": "IT-17",
+      "title": "결과·근거 확인",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "screen_or_surface": "결과·근거 확인",
+        "actor_and_goal": "강사의 목표 달성을 위한 행동 단위",
+        "inputs_actions": [
+          "대상별 목표·관측·근거·재확인 요청"
+        ],
+        "presentation_states": [
+          "mock_completed",
+          "unknown",
+          "failed",
+          "향후 실제 목표 확인",
+          "부분 결과"
+        ],
+        "feedback": "입력 완료/제출 시도/접수/공개 구분; 재제출 차단 사유",
+        "accessibility": "상태/조치를 텍스트로 구분, 색상만 사용하지 않음",
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-SECURITY",
+      "type_id": "IT-18",
+      "title": "자료·권한·운영 통제",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "concern": "외부 계정·자료 권리·개인정보·승인·중복·허위 성공",
+        "affected_assets": [
+          "원본/자료",
+          "승인·허용",
+          "실행·관측/판정"
+        ],
+        "control": [
+          "현 단계 loopback mock만",
+          "사용자 인증과 외부 플랫폼 인증 분리",
+          "직전 승인/허용/대상/버전 가드",
+          "unknown 중 동일 의도 부작용 금지",
+          "실자료·외부 AI 전송 별도 권리 확인"
+        ],
+        "permission_boundary": {
+          "mock": "합성 자료",
+          "live": "blocked",
+          "credentials": "collect/store/log 금지"
+        },
+        "detection_and_recovery": [
+          "거절·관측 기록",
+          "증거 대조",
+          "미확인 재실행 차단"
+        ],
+        "residual_risk": "인증·세션 배치·보존/삭제·외부 모델 전송·운영사 허용 미선정",
+        "verification_ref": "LR-T06"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-AI",
+      "type_id": "IT-23",
+      "title": "AI 역할 경계",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "ai_goal": "원본 사실 후보 추출·대상별 변환 지원",
+        "model_role": "표현·매핑·질문 제안; 사용자 사실·허용·성공 판정을 단독 확정하지 않음",
+        "tool_scope": "현재 모의 및 안전한 읽기만; 실제 외부 동작·자격증명 접근 금지",
+        "context_memory": "원본/규칙/승인 버전 참조; 미확인 가정 확정 금지",
+        "failure_and_fallback": "불확실·충돌 시 확인/보류; 성공은 관측 증거 판정",
+        "evaluation": "사실/단위/출처 보존·미승인 변경 0; 모델/에이전트/엔진 미정"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "LR-PAIN",
+      "to": "LR-FEAS",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-FEAS",
+      "to": "LR-SCOPE",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-01",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-01",
+      "to": "LR-SECURITY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-02",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-02",
+      "to": "LR-SECURITY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-03",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-03",
+      "to": "LR-SECURITY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-04",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-04",
+      "to": "LR-SECURITY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-05",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-NFR-05",
+      "to": "LR-SECURITY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-FEAS",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-STRATEGY",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-C-01",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-C-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-C-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-C-01",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-C-01",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-C-02",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-C-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-C-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-C-02",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-C-03",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-C-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-C-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-C-03",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-C-03",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-C-04",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-C-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-C-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-C-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-C-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-C-05",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-C-05",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-C-05",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-C-05",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-C-05",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-C-06",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-C-06",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-C-06",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-C-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-C-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-C-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-C-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-C-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-OP-01",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-OP-02",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-OP-03",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-OP-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-OP-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-OP-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-OP-05",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-OP-05",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-OP-05",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-05",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-05",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-05",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-OP-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-OP-06",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-06",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-06",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-06",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-OP-07",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-OP-07",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-OP-07",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-OP-07",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-OP-07",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-UI-01",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-UI-01",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-UI-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-UI-01",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-UI-02",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-UI-02",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-UI-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-UI-02",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-UI-03",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-UI-03",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-UI-03",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-UI-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-UI-03",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-UI-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-UI-04",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-UI-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-UI-04",
+      "relation": "constrains"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-AI",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-AI",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-AI",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-AI",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-AI",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-AI",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-SECURITY",
+      "to": "LR-AI",
+      "relation": "constrains"
+    }
+  ]
+}

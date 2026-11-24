@@ -1,0 +1,1380 @@
+{
+  "schema_version": 1,
+  "kind": "lesson_design_draft",
+  "version": "0.1",
+  "status": "R01 검토용 설계 초안·채택 아님",
+  "owner": "R01",
+  "date": "2026-11-24",
+  "base_commit": "3465df351c0dc1af85c6b44600cdc5738a792617",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "model_ref": "docs/deliverables/planning-design-info-model.json",
+  "source_refs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/human/phase-intents/PHASE-20261124-02.md",
+    "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
+    "prototype/lesson-registration/test-harness/CONTRACT.md"
+  ],
+  "scope": "기술 독립 논리 설계; 기존 활성 TASK 및 제품 범위 변경 없음",
+  "id": "LESSON-VERIFICATION-DECISIONS-V0.1",
+  "records": [
+    {
+      "id": "LR-T01",
+      "type_id": "IT-20",
+      "title": "정상 모의 등록",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04",
+          "FR-05",
+          "LR-C-02",
+          "LR-C-04",
+          "LR-OP-02",
+          "LR-OP-05",
+          "LR-UI-02"
+        ],
+        "case_conditions": [
+          "정상 합성 원본·권리 확인 자료·유효 승인·대상 규칙·mock"
+        ],
+        "expected": "승인값/첨부와 실제 모의 관측 일치; 모의 목표만 확인",
+        "observable": [
+          "필드·첨부·시도·mock 증거·판정"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "불일치/거짓 성공 fail; 증거/대상 부족 inconclusive",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04",
+          "FR-05",
+          "LR-C-02",
+          "LR-C-04",
+          "LR-OP-02",
+          "LR-OP-05",
+          "LR-UI-02"
+        ],
+        "test_data_plan": {
+          "existing_case": "T1",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "정상 모의 등록 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "기존 공통 케이스 해석"
+    },
+    {
+      "id": "LR-T02",
+      "type_id": "IT-20",
+      "title": "사실·규칙 충돌",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-01",
+          "FR-02",
+          "LR-NFR-01",
+          "LR-C-01",
+          "LR-C-02",
+          "LR-OP-01",
+          "LR-OP-02",
+          "LR-UI-01"
+        ],
+        "case_conditions": [
+          "90분 월25만원 최신값과 30만원 구값 충돌",
+          "필수값 누락·미확인 규칙/단위"
+        ],
+        "expected": "확인/보류; 임의 생성·변경 및 부작용 0",
+        "observable": [
+          "원본·초안·이슈·호출 수"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "임의 값 채택/동작 fail; 관측 부족 inconclusive",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-01",
+          "FR-02",
+          "LR-NFR-01",
+          "LR-C-01",
+          "LR-C-02",
+          "LR-OP-01",
+          "LR-OP-02",
+          "LR-UI-01"
+        ],
+        "test_data_plan": {
+          "existing_case": "T2",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "사실·규칙 충돌 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "기존 공통 케이스 해석"
+    },
+    {
+      "id": "LR-T03",
+      "type_id": "IT-20",
+      "title": "미승인·버전 불일치",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-03",
+          "FR-04",
+          "LR-NFR-02",
+          "LR-C-03",
+          "LR-OP-03",
+          "LR-OP-04",
+          "LR-UI-02"
+        ],
+        "case_conditions": [
+          "draft v2 승인 후 v3 요청",
+          "자료/환경/동작 불일치·철회"
+        ],
+        "expected": "차단·재확인; 부작용 0",
+        "observable": [
+          "승인 스냅샷·요청·호출 수"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "동작 발생 fail; 가드 관측 없음 inconclusive",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-03",
+          "FR-04",
+          "LR-NFR-02",
+          "LR-C-03",
+          "LR-OP-03",
+          "LR-OP-04",
+          "LR-UI-02"
+        ],
+        "test_data_plan": {
+          "existing_case": "T3",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "미승인·버전 불일치 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "기존 공통 케이스 해석"
+    },
+    {
+      "id": "LR-T04",
+      "type_id": "IT-20",
+      "title": "입력·첨부 오류",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-04",
+          "FR-05",
+          "FR-06",
+          "LR-NFR-03",
+          "LR-C-04",
+          "LR-C-05",
+          "LR-OP-05",
+          "LR-UI-03"
+        ],
+        "case_conditions": [
+          "모의 폼 거절/첨부 오류, 해당 동작 효과 없음 확인"
+        ],
+        "expected": "failed/needs_action; 마지막 확인 단계·근거·재개 조건; 성공 아님",
+        "observable": [
+          "오류·단계·판정·표시"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "허위 완료 fail; 효과 불명확은 unknown",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-04",
+          "FR-05",
+          "FR-06",
+          "LR-NFR-03",
+          "LR-C-04",
+          "LR-C-05",
+          "LR-OP-05",
+          "LR-UI-03"
+        ],
+        "test_data_plan": {
+          "existing_case": "T4",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "입력·첨부 오류 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "기존 공통 케이스 해석"
+    },
+    {
+      "id": "LR-T05",
+      "type_id": "IT-20",
+      "title": "결과 응답 유실",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-05",
+          "FR-06",
+          "LR-NFR-03",
+          "LR-NFR-04",
+          "LR-C-04",
+          "LR-C-05",
+          "LR-OP-05",
+          "LR-OP-06",
+          "LR-OP-07",
+          "LR-UI-03",
+          "LR-UI-04"
+        ],
+        "case_conditions": [
+          "제출 직후 응답 유실·효과 가능",
+          "동일 의도 재실행 요청"
+        ],
+        "expected": "unknown + retry_blocked; 기존 효과 확인 전 반복 0",
+        "observable": [
+          "시도·증거·판정·호출 수"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "거짓 성공/재제출 fail; 관측 부족 inconclusive",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-05",
+          "FR-06",
+          "LR-NFR-03",
+          "LR-NFR-04",
+          "LR-C-04",
+          "LR-C-05",
+          "LR-OP-05",
+          "LR-OP-06",
+          "LR-OP-07",
+          "LR-UI-03",
+          "LR-UI-04"
+        ],
+        "test_data_plan": {
+          "existing_case": "T5",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "결과 응답 유실 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "기존 공통 케이스 해석"
+    },
+    {
+      "id": "LR-T06",
+      "type_id": "IT-20",
+      "title": "live 차단·권한",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-03",
+          "FR-04",
+          "LR-NFR-02",
+          "LR-NFR-05",
+          "LR-SECURITY",
+          "LR-C-03",
+          "LR-OP-04",
+          "LR-OP-05",
+          "LR-UI-03"
+        ],
+        "case_conditions": [
+          "live/미확인 허용 요청; 실제 계정 없이 가드 검사"
+        ],
+        "expected": "blocked; 실제 외부 조작·자격증명 수집 0",
+        "observable": [
+          "환경·허용·호출·로그"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "실제 조작/자격증명 수집 fail; 격리 증거 부족 inconclusive",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-03",
+          "FR-04",
+          "LR-NFR-02",
+          "LR-NFR-05",
+          "LR-SECURITY",
+          "LR-C-03",
+          "LR-OP-04",
+          "LR-OP-05",
+          "LR-UI-03"
+        ],
+        "test_data_plan": {
+          "existing_case": "T6",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "live 차단·권한 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "기존 공통 케이스 해석"
+    },
+    {
+      "id": "LR-T07",
+      "type_id": "IT-20",
+      "title": "자료 권리·사실 변경",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-01",
+          "FR-03",
+          "LR-NFR-01",
+          "LR-NFR-05",
+          "LR-C-01",
+          "LR-OP-01",
+          "LR-OP-03",
+          "LR-UI-01"
+        ],
+        "case_conditions": [
+          "권리 미확인 사진·새 자료/원본 버전",
+          "이전 승인 재사용"
+        ],
+        "expected": "새 버전·새 승인 전 차단",
+        "observable": [
+          "권리·버전·승인·호출 수"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "무단 자료/stale 승인 실행 fail",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-01",
+          "FR-03",
+          "LR-NFR-01",
+          "LR-NFR-05",
+          "LR-C-01",
+          "LR-OP-01",
+          "LR-OP-03",
+          "LR-UI-01"
+        ],
+        "test_data_plan": {
+          "existing_case": "후속",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "자료 권리·사실 변경 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "후속 설계 제안; 활성 TASK 추가 지시 아님"
+    },
+    {
+      "id": "LR-T08",
+      "type_id": "IT-20",
+      "title": "재확인 및 복구",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-03",
+          "FR-05",
+          "FR-06",
+          "LR-NFR-04",
+          "LR-C-03",
+          "LR-C-05",
+          "LR-OP-04",
+          "LR-OP-07",
+          "LR-UI-04"
+        ],
+        "case_conditions": [
+          "기존 효과 확인/효과 없음/미확인 각각",
+          "명시 재개 요청/철회"
+        ],
+        "expected": "기존 효과 확인은 판정 갱신만; 미확인 차단 유지; 안전한 단계와 현재 승인·허용 확인 후 별도 실행",
+        "observable": [
+          "재확인 증거·상태·승인·호출 수"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "중복/미확인 중 재실행 fail",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-03",
+          "FR-05",
+          "FR-06",
+          "LR-NFR-04",
+          "LR-C-03",
+          "LR-C-05",
+          "LR-OP-04",
+          "LR-OP-07",
+          "LR-UI-04"
+        ],
+        "test_data_plan": {
+          "existing_case": "후속",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "재확인 및 복구 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "후속 설계 제안; 활성 TASK 추가 지시 아님"
+    },
+    {
+      "id": "LR-T09",
+      "type_id": "IT-20",
+      "title": "플랫폼별 독립 결과",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "FR-05",
+          "FR-06",
+          "LR-NFR-03",
+          "LR-C-05",
+          "LR-OP-06",
+          "LR-UI-04"
+        ],
+        "case_conditions": [
+          "독립 작업 A mock 완료, B unknown/실패"
+        ],
+        "expected": "대상별 목표·환경·결과·근거 독립 표시",
+        "observable": [
+          "A/B 결과·표시"
+        ],
+        "method": "모의 입력·오류 주입 및 관측 대조",
+        "verdict_boundary": "타 작업 덮어쓰기/전체 성공 fail",
+        "verification_kind": "integration_test",
+        "design_level": "L2/L3/L5",
+        "coverage_refs": [
+          "FR-05",
+          "FR-06",
+          "LR-NFR-03",
+          "LR-C-05",
+          "LR-OP-06",
+          "LR-UI-04"
+        ],
+        "test_data_plan": {
+          "existing_case": "후속",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "mock",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "플랫폼별 독립 결과 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "후속 설계 제안; 활성 TASK 추가 지시 아님"
+    },
+    {
+      "id": "LR-T10",
+      "type_id": "IT-20",
+      "title": "실사용 가치 비교",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "LR-VALUE"
+        ],
+        "case_conditions": [
+          "동일 원본·대상·목표·품질로 A 직접/B 범용 AI/C 전용",
+          "실제 허용 경로 및 사용자 승인 이후"
+        ],
+        "expected": "능동 시간·개입·재작업·완료·선택/지불 비교; 수치 합격선 미확정",
+        "observable": [
+          "설치·능동/총시간·결과·사용자 평가·지원 공수"
+        ],
+        "method": "동일 조건 실측 및 사용자 평가",
+        "verdict_boundary": "목표/품질 다르면 inconclusive; 효과 없으면 가치 가설 재검토",
+        "verification_kind": "user_acceptance",
+        "design_level": "L1/L2",
+        "coverage_refs": [
+          "LR-VALUE"
+        ],
+        "test_data_plan": {
+          "existing_case": "후속",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "후속 승인된 사용자 비교",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "실사용 가치 비교 조건에서 기대 결과 충족?",
+        "plan_maturity": "validation_method",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "후속 설계 제안; 활성 TASK 추가 지시 아님"
+    },
+    {
+      "id": "LR-T11",
+      "type_id": "IT-20",
+      "title": "설계 정합성",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "LR-DOMAIN",
+          "LR-STATE",
+          "LR-DATA",
+          "LR-BOUNDARY",
+          "LR-SECURITY",
+          "LR-C-06"
+        ],
+        "case_conditions": [
+          "업무 규칙·논리 데이터·상태·호출·UI·시험 연결"
+        ],
+        "expected": "의미·권한·오류·증거 일치; 누락/충돌 수정",
+        "observable": [
+          "참조 그래프·전이·가드·데이터"
+        ],
+        "method": "정적 설계 리뷰",
+        "verdict_boundary": "불일치/누락 fail; 현장 동작 입증 아님",
+        "verification_kind": "design_verification",
+        "design_level": "L6",
+        "coverage_refs": [
+          "LR-DOMAIN",
+          "LR-STATE",
+          "LR-DATA",
+          "LR-BOUNDARY",
+          "LR-SECURITY",
+          "LR-C-06"
+        ],
+        "test_data_plan": {
+          "existing_case": "정적 설계",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "정적 설계",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "설계 정합성 조건에서 기대 결과 충족?",
+        "plan_maturity": "acceptance_criteria",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "후속 설계 제안; 활성 TASK 추가 지시 아님"
+    },
+    {
+      "id": "LR-T12",
+      "type_id": "IT-20",
+      "title": "구조·플랫폼 채택 비교",
+      "status": "proposed",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "subject_refs": [
+          "LR-FEAS",
+          "LR-STRATEGY"
+        ],
+        "case_conditions": [
+          "R03 고정 하네스, R04/R05 실행 및 공식 근거·공수"
+        ],
+        "expected": "기술 가능/허용/완료/가치·미확인 분리 및 채택/보류/축소 제안",
+        "observable": [
+          "구현/하네스 커밋·로그·공식 근거/확인일·공수"
+        ],
+        "method": "공식 조사·실행 근거 비교",
+        "verdict_boundary": "공식 허용·실제 증거 부족 시 live deferred",
+        "verification_kind": "architecture_evaluation",
+        "design_level": "L4",
+        "coverage_refs": [
+          "LR-FEAS",
+          "LR-STRATEGY"
+        ],
+        "test_data_plan": {
+          "existing_case": "11/27 판단",
+          "fixture_version": "실행 전 고정"
+        },
+        "environment_plan": "모의+공식 조사",
+        "execution_separation": "시험 계획만 작성; Run/Eval 없음",
+        "verification_question": "구조·플랫폼 채택 비교 조건에서 기대 결과 충족?",
+        "plan_maturity": "validation_method",
+        "inconclusive_condition": "필수 대상·근거·관측 불충분"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md",
+        "prototype/lesson-registration/test-harness/CONTRACT.md",
+        "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "execution_status": "not_run",
+      "scope": "후속 설계 제안; 활성 TASK 추가 지시 아님"
+    },
+    {
+      "id": "LR-D01",
+      "type_id": "IT-19",
+      "title": "첫 제품 플랫폼·완료 단위",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "첫 제품 플랫폼·완료 단위",
+        "options": [
+          "크몽 심사 접수",
+          "숨고 확인 객체 추가",
+          "숨고 보류",
+          "탈잉 후속"
+        ],
+        "drivers": "공식 객체/완료·허용 근거 및 목표 가치",
+        "selection_and_reason": {
+          "state": "deferred",
+          "reason": "선행 근거 및 제품 채택 판단 필요",
+          "existing_open_ref": "OPEN-20261123-01"
+        },
+        "revisit_when": "11/27 모의 검증·공식 조사 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-D02",
+      "type_id": "IT-19",
+      "title": "실행·인증·허용 경계",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "실행·인증·허용 경계",
+        "options": [
+          "로컬",
+          "혼합",
+          "서버",
+          "공식 API/위임",
+          "수동 지원"
+        ],
+        "drivers": "운영사 허용·세션/자료·인증 위험·공수",
+        "selection_and_reason": {
+          "state": "deferred",
+          "reason": "선행 근거 및 제품 채택 판단 필요",
+          "existing_open_ref": "OPEN-20261123-02"
+        },
+        "revisit_when": "공식 근거 및 별도 live 승인 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-D03",
+      "type_id": "IT-19",
+      "title": "상위 실행 단위·스택·AI 구성",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "상위 실행 단위·스택·AI 구성",
+        "options": [
+          "단일 앱",
+          "로컬+서버",
+          "공식 위임"
+        ],
+        "drivers": "재현성·요구/오류/권한 충족·공수·지원 비용",
+        "selection_and_reason": {
+          "state": "deferred",
+          "reason": "선행 근거 및 제품 채택 판단 필요",
+          "existing_open_ref": "OPEN-20261124-01"
+        },
+        "revisit_when": "11/27 기술 결과 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-D04",
+      "type_id": "IT-19",
+      "title": "물리 API·DB·저장·배포",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "물리 API·DB·저장·배포",
+        "options": [
+          "로컬/서버 저장",
+          "DB/파일",
+          "로컬 호출/HTTP"
+        ],
+        "drivers": "논리 무결성·권한·복구·삭제·실행 구조",
+        "selection_and_reason": {
+          "state": "deferred",
+          "reason": "선행 근거 및 제품 채택 판단 필요",
+          "existing_open_ref": "OPEN-20261124-01"
+        },
+        "revisit_when": "D02/D03 선택 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-D05",
+      "type_id": "IT-19",
+      "title": "사용자 범위 및 사업 가치",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "사용자 범위 및 사업 가치",
+        "options": [
+          "최초 1건",
+          "복수 대상",
+          "초안만 지원"
+        ],
+        "drivers": "A/B/C 실측·완료·지불·원가",
+        "selection_and_reason": {
+          "state": "deferred",
+          "reason": "선행 근거 및 제품 채택 판단 필요",
+          "existing_open_ref": "OPEN-20261123-03"
+        },
+        "revisit_when": "목표 완료 및 사용자 근거 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-D06",
+      "type_id": "IT-19",
+      "title": "정량 품질·운영 정책",
+      "status": "deferred",
+      "evidence_level": "hypothesis",
+      "fields": {
+        "decision_question": "정량 품질·운영 정책",
+        "options": [
+          "정확성/권한/중복 0 위반 유지",
+          "성능·보존·지원 기준 별도 결정"
+        ],
+        "drivers": "반복 시험·사용자 관측·보존 요구",
+        "selection_and_reason": {
+          "state": "deferred",
+          "reason": "선행 근거 및 제품 채택 판단 필요",
+          "existing_open_ref": "OPEN-20261124-01"
+        },
+        "revisit_when": "시험 결과와 후속 검증 설계 후"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "FR-01",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-02",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-04",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-02",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-05",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-02",
+      "to": "LR-T01",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-01",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-01",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-02",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-01",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-02",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-01",
+      "to": "LR-T02",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-02",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-03",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-03",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-04",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-02",
+      "to": "LR-T03",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-03",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-04",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-05",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-05",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-03",
+      "to": "LR-T04",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-03",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-04",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-04",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-05",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-05",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-06",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-07",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-03",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-04",
+      "to": "LR-T05",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-02",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-05",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-SECURITY",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-03",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-04",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-05",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-03",
+      "to": "LR-T06",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-01",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-05",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-01",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-01",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-03",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-01",
+      "to": "LR-T07",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-04",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-03",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-05",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-04",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-07",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-04",
+      "to": "LR-T08",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-T09",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-T09",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-NFR-03",
+      "to": "LR-T09",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-05",
+      "to": "LR-T09",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-OP-06",
+      "to": "LR-T09",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-UI-04",
+      "to": "LR-T09",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-VALUE",
+      "to": "LR-T10",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-T11",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-STATE",
+      "to": "LR-T11",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-DATA",
+      "to": "LR-T11",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-BOUNDARY",
+      "to": "LR-T11",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-SECURITY",
+      "to": "LR-T11",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-C-06",
+      "to": "LR-T11",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-FEAS",
+      "to": "LR-T12",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-T12",
+      "relation": "planned_check_by"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-D01",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-D02",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-D03",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-D04",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-D05",
+      "relation": "derived_from"
+    },
+    {
+      "from": "LR-STRATEGY",
+      "to": "LR-D06",
+      "relation": "derived_from"
+    }
+  ],
+  "test_reference_data": {
+    "source": "기획 V1.1의 최신 강사 확인값을 참조한 시험 계획. 실제 자료/개인정보 대신 합성 입력 사용.",
+    "packages": [
+      {
+        "minutes_per_session": 90,
+        "sessions_per_month": 4,
+        "monthly_fee_krw": 250000
+      },
+      {
+        "minutes_per_session": 180,
+        "sessions_per_month": 4,
+        "monthly_fee_krw": 400000
+      },
+      {
+        "minutes_per_session": 270,
+        "sessions_per_month": 4,
+        "monthly_fee_krw": 500000
+      }
+    ],
+    "included": [
+      "기본 녹음",
+      "믹싱",
+      "마스터링"
+    ],
+    "extra_production_release": "상담 후 결정",
+    "reschedule": "고정 사전 통보 기한 없음",
+    "same_day_cancel_no_show": "회차 사용 처리",
+    "first_visit": "무료 상담·테스트 녹음",
+    "format": "작업실 대면 1:1",
+    "counterexample": "90분 월 30만원은 이전 값; 충돌 발견 시 현재 승인 확인 전 임의 선택 금지",
+    "media": "사용권 확인된 합성 이미지; 외부 계정·세션·신원·연락처 미사용"
+  },
+  "static_validation": {
+    "status": "pass",
+    "scope": "생성 시 정적 모델 검사만 수행",
+    "records": 62,
+    "edges": 243,
+    "fr_count": 6,
+    "nfr_count": 5,
+    "planned_tests": 12,
+    "executed_product_tests": 0,
+    "checked": [
+      "기존 정보 유형 및 필드 타입/enum",
+      "ID 중복·허용 관계·참조",
+      "인과 관계 순환",
+      "FR/NFR별 시험 연결",
+      "미승인 설계 및 실행 미수행 상태"
+    ],
+    "pending": [
+      "LR-C-01.parent_runtime_unit_ref",
+      "LR-C-02.parent_runtime_unit_ref",
+      "LR-C-03.parent_runtime_unit_ref",
+      "LR-C-04.parent_runtime_unit_ref",
+      "LR-C-05.parent_runtime_unit_ref",
+      "LR-C-06.parent_runtime_unit_ref"
+    ],
+    "note": "기존 project_docs.py 및 CAND-016 전용 검증기는 실행하지 않음. 물리 실행 단위의 부모 참조는 의도적으로 미확정."
+  }
+}
