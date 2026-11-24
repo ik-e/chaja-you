@@ -1,0 +1,120 @@
+{
+  "sources": [
+    {
+      "path": "logical-behavior-v4.json",
+      "sha": "80bcaca22e8915f4f8def196e5c829a20ea98c4e"
+    },
+    {
+      "path": "platform-profiles-v1.json",
+      "sha": "829a9b793b8f8039dc280dfc251f9f9cd8ea786b"
+    },
+    {
+      "path": "detail-contract-v1.json",
+      "sha": "0e157a37c101b236c7ee0f25844a4927a36925d3"
+    },
+    {
+      "path": "validate-logical-v3.mjs",
+      "sha": "9c397d63ba819107386f32913007a2d52b7bcca4"
+    }
+  ],
+  "logical": {
+    "states": 62,
+    "edges": 203,
+    "counts": {
+      "active": 8,
+      "stopping": 10,
+      "done": 1,
+      "stopped": 10
+    },
+    "unused": [],
+    "violations": [],
+    "no_outcome": 0,
+    "normal_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "progress_0",
+      "admit",
+      "progress_1",
+      "admit",
+      "final_effect_proven",
+      "goal_proven"
+    ],
+    "unknown_stop_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "error_detected",
+      "finish_stop_pending"
+    ],
+    "known_absent_stop_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "error_effect_absent",
+      "finish_stop_other"
+    ],
+    "limits": "Finite declared logical model only; error source, evidence, external effects, key storage and execution environment not tested."
+  },
+  "detail_static_errors": [],
+  "mutations": [
+    {
+      "name": "live flag",
+      "detected": true
+    },
+    {
+      "name": "missing binding",
+      "detected": true
+    },
+    {
+      "name": "omit pre-submit read",
+      "detected": true
+    },
+    {
+      "name": "force image on soomgo",
+      "detected": true
+    }
+  ],
+  "execution": "direct JavaScript model and structural profile/contract checks; no product implementation, field value validation, browser or actual platform tests",
+  "limitations": [
+    "String-form schema and binding contracts are design notation, not executable schema; detailed type conformance still needed.",
+    "Current static check validates references and selected step constraints only, not actual platform rule correctness.",
+    "WBS gate and old resume/cancel acceptance criteria need reconciliation; independent experiment contract unchanged."
+  ]
+}
