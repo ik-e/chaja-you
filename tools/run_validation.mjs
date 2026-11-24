@@ -77,7 +77,13 @@ async function suite(repo,name){
   if(name==='trace')return traceSuite(repo);
   if(name==='wbs')return traceSuite(repo,true);
   if(name==='model')return result(name,[subprocessCheck(repo,'tools/validate_planning_design_model.py','python3')],{note:'Original planning model and example validator, separate from lesson trace.'});
-  if(name==='contract')return result(name,[subprocessCheck(repo,root+'/validate-v0.5.mjs',process.execPath)],{note:'Existing V0.5 static and abstract contract tests; not real product execution.'});
+  if(name==='contract'){
+    const checks=[subprocessCheck(repo,root+'/validate-v0.5.mjs',process.execPath)];
+    const v07=root+'/run-constraints-v0.7.mjs';
+    const present=existsSync(resolve(repo,v07));
+    if(present)checks.push(subprocessCheck(repo,v07,process.execPath));
+    return result(name,checks,{note:'V0.5 legacy static/abstract checks plus V0.7 original-contract constraints and mutation tests when present on target. Review findings and unverified areas remain distinct from hard checks. No product execution.',v07_status:present?'executed':'not_present_in_target'});
+  }
   if(name==='markdown'){
     const tool='tools/check_markdown_ranges.mjs';
     return result(name,[subprocessCheck(repo,tool,process.execPath,['--self-test']),subprocessCheck(repo,tool,process.execPath,[root])],{note:'Read-only Markdown scan scoped to the lesson design directory. Existing findings are not automatically changed.'});

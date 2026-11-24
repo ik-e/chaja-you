@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "request_id": "20261124-trace-smoke-01",
-  "suite": "trace",
-  "target_sha": "5a01ec3845415200e0383546e18bfb8a6a78a2e9"
+  "request_id": "20261124-contract-v07-01",
+  "suite": "contract",
+  "target_sha": "3d0ebdf2a19e48ea00533566ddbb209232f8e6fa"
 }
