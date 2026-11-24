@@ -418,7 +418,7 @@
         {
           "name": "rule",
           "type": "Version",
-          "required": true
+          "required": false
         },
         {
           "name": "key",
@@ -426,7 +426,7 @@
           "required": true
         }
       ],
-      "note": "허용된 텍스트·필드·자료 메타데이터만 모델 전달; 비밀/인증화면 금지."
+      "note": "Optional rule: initial common fact extraction with no rule, platform-specific mapping/questions when rule selected. Only sanitized source + applicable field specification passed to model; no credentials or browser content."
     },
     {
       "id": "ModelProposal",
@@ -958,7 +958,7 @@
       "fields": [
         {
           "name": "items",
-          "type": "SourceResponse[]",
+          "type": "SourceView[]",
           "required": true
         },
         {
@@ -1759,12 +1759,12 @@
       "fields": [
         {
           "name": "source",
-          "type": "SourceResponse",
+          "type": "SourceView",
           "required": true
         },
         {
           "name": "draft",
-          "type": "DraftResponse",
+          "type": "Draft5Response",
           "required": true
         },
         {
@@ -1816,6 +1816,210 @@
         }
       ],
       "note": "only trusted server observations may be persisted; target/attempt bound"
+    },
+    {
+      "id": "SourceView",
+      "fields": [
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "source_text",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "facts",
+          "type": "Fact[]",
+          "required": true
+        },
+        {
+          "name": "media",
+          "type": "Media[]",
+          "required": true
+        },
+        {
+          "name": "issues",
+          "type": "Action[]",
+          "required": true
+        }
+      ],
+      "note": "owner scoped snapshot, redacted as necessary; source content and asset metadata reusable across platforms."
+    },
+    {
+      "id": "SourceCreate5Request",
+      "fields": [
+        {
+          "name": "source_text",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "media",
+          "type": "Version[]",
+          "required": true
+        },
+        {
+          "name": "previous",
+          "type": "Version",
+          "required": false
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "raw source accepted without structured facts. Server assigns IDs; cannot set confirmed flag from client."
+    },
+    {
+      "id": "Draft5Request",
+      "fields": [
+        {
+          "name": "source",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "candidate_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "server resolves immutable candidate/rule, uses confirmed facts, validates model proposals; no client rule injection"
+    },
+    {
+      "id": "Draft5Response",
+      "fields": [
+        {
+          "name": "draft",
+          "type": "DraftResponse",
+          "required": true
+        },
+        {
+          "name": "questions",
+          "type": "Action[]",
+          "required": true
+        },
+        {
+          "name": "model_status",
+          "type": "ModelStatus",
+          "required": true
+        }
+      ],
+      "note": "draft issues and human actions. Manual technical fallback visibly distinguished from AI; version persisted."
+    },
+    {
+      "id": "Draft5Edit",
+      "fields": [
+        {
+          "name": "draft",
+          "type": "Version",
+          "required": true
+        },
+        {
+          "name": "edits",
+          "type": "Mapping[]",
+          "required": true
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "note": "copy edits only if facts unchanged; fact changes via source confirm/new snapshot. Server validates and persists new draft."
+    },
+    {
+      "id": "PlanReview5Request",
+      "fields": [
+        {
+          "name": "plan",
+          "type": "Version",
+          "required": true
+        }
+      ],
+      "note": "GET path only, no body."
+    },
+    {
+      "id": "IdentityReadRequest",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        }
+      ],
+      "note": "trusted internal read, human input stopped; only registered identity marker"
+    },
+    {
+      "id": "TargetReadRequest",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "candidate_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "expected_generation",
+          "type": "positive_int",
+          "required": true
+        }
+      ],
+      "note": "trusted internal read, verified same account; no external effects"
+    },
+    {
+      "id": "ViewerInputEnvelope",
+      "fields": [
+        {
+          "name": "connection_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "generation",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "grant_ref",
+          "type": "id",
+          "required": true
+        },
+        {
+          "name": "event_seq",
+          "type": "positive_int",
+          "required": true
+        },
+        {
+          "name": "payload",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "note": "input payload transport-specific; runtime validates phase/allowed origin and schema; no persistence of login payload"
     }
   ],
   "routes": [
@@ -1914,7 +2118,7 @@
       "method": "GET",
       "path": "/v1/sources/{id}",
       "input": "VersionQuery",
-      "output": "SourceResponse",
+      "output": "SourceView",
       "guard": "owner; version optional",
       "phase": "MVP"
     },
@@ -1950,7 +2154,7 @@
       "method": "POST",
       "path": "/v1/sources/{id}/confirm",
       "input": "SourceConfirmRequest",
-      "output": "SourceResponse",
+      "output": "SourceView",
       "guard": "owner; source revision; user confirmation",
       "phase": "MVP"
     },
@@ -2007,6 +2211,42 @@
       "output": "SessionView",
       "guard": "owner and fence; close proof; unknown retained",
       "phase": "MVP"
+    },
+    {
+      "id": "HTTP-01",
+      "method": "POST",
+      "path": "/v1/sources",
+      "input": "SourceCreate5Request",
+      "output": "SourceView",
+      "guard": "owner; raw source; server assigns fact IDs",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-04",
+      "method": "POST",
+      "path": "/v1/drafts",
+      "input": "Draft5Request",
+      "output": "Draft5Response",
+      "guard": "owner; candidate/rule/source snapshot current",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-05",
+      "method": "PATCH",
+      "path": "/v1/drafts/{id}",
+      "input": "Draft5Edit",
+      "output": "Draft5Response",
+      "guard": "owner; server validates immutable next version",
+      "phase": "MVP"
+    },
+    {
+      "id": "HTTP-29",
+      "method": "GET",
+      "path": "/v1/drafts/{id}",
+      "input": "VersionQuery",
+      "output": "Draft5Response",
+      "guard": "owner; stored draft only",
+      "phase": "MVP"
     }
   ],
   "ports": [
@@ -2023,7 +2263,7 @@
       "provider": "prep",
       "method": "propose/confirm",
       "input": "ModelProposalRequest / SourceConfirmRequest",
-      "output": "ModelProposal / SourceResponse",
+      "output": "ModelProposal / SourceView",
       "notes": "C4-03; external AI only on sanitized data; explicit user confirmation"
     },
     {
@@ -2097,6 +2337,14 @@
       "input": "RuntimeCommandRequest / RuntimeReadRequest",
       "output": "BrowserObservation / BrowserObservation",
       "notes": "C4-07 sole gateway; exact registered action/arguments, current permit and generation before each command; read allowlist, no arbitrary CDP/driver/URL. Any mutation outside step blocked."
+    },
+    {
+      "id": "PORT5-12",
+      "provider": "remote_runtime",
+      "method": "observe_identity / observe_target",
+      "input": "IdentityReadRequest / TargetReadRequest",
+      "output": "IdentityObservation / TargetObservation",
+      "notes": "trusted runtime server observation only; identity before account creation, target after verified account; server persists evidence; no auth input recording"
     }
   ],
   "store": [
@@ -2169,6 +2417,13 @@
       "keys": "V4",
       "fields": "V4",
       "invariant": "physical grouping permitted if ownership, versioning, uniqueness, durability and traceability proved"
+    },
+    {
+      "name": "route_candidates",
+      "change": "logical registry reference",
+      "keys": "candidate ref derived server-side from platform/object/route/environment/rule version/adapter version; no arbitrary URL persisted",
+      "fields": "TargetCandidate",
+      "invariant": "candidate references immutable registry entry, server lookup from ref, policy may change separately; no user-invented ref accepted"
     }
   ],
   "rules": [
@@ -2194,7 +2449,7 @@
     {
       "id": "R5-03",
       "title": "제어권과 직렬화",
-      "rule": "human_auth view only; input fenced before system_read, which can only verify identity and resolve existing targets/preflight via trusted operations. human_review state no worker effects; only approved job/lease permits mutation. Worker and human commands pass same gateway. Revoke/cancel/CAS admission single linearization boundary. Adapter never retains raw driver; view disconnect independent. All V3 safety rules mandatory in MVP.",
+      "rule": "human_auth view only; input fenced before system_read, which can only verify identity and resolve existing targets/preflight via trusted operations. human_review state no worker effects; only approved job/lease permits mutation. Worker and human commands pass same gateway. Revoke/cancel/CAS admission single linearization boundary. Adapter never retains raw driver; view disconnect independent. All V3 safety rules mandatory in MVP. A human intervention grant may permit only authentication or user-directed correction within registered scope. Human input that can change external state is not treated as an approved automated effect; before resuming automation, re-observe target/effect and ask for approval if scope changes. Unclassifiable pending effect blocks further automation.",
       "refs": [
         "V3-R04",
         "V3-R05",
@@ -2253,7 +2508,7 @@
     {
       "id": "R5-09",
       "title": "목표 및 release 경계",
-      "rule": "MVP mock: Kmong full first listing receipt readback mandatory; Soomgo confirmed synthetic service configuration second target by 12/8, if not completed R01 replan not falsely pass. Final URL supported platform(s) E2E, one source across Kmong+Soomgo intended baseline. No universal unknown sites. Live target_confirmed transition remains unreachable until separate phase approval after policy, account/eligibility, validated effect/goal evidence, isolation, privacy, user authorization. Future transition candidate running/stopping/unknown→target_confirmed only if live gate approved + platform goal evidence valid + no pending effect; no auto-enabling. If only mock passes, engineering mock verified; actual service objective unverified/not met. Actual scope of Soomgo save/publication remains external gate.",
+      "rule": "MVP mock: Kmong full first listing receipt readback mandatory; Soomgo confirmed synthetic service configuration second target by 12/8, if not completed R01 replan not falsely pass. Final URL supported platform(s) E2E, one source across Kmong+Soomgo intended baseline. No universal unknown sites. Live target_confirmed transition remains unreachable until separate phase approval after policy, account/eligibility, validated effect/goal evidence, isolation, privacy, user authorization. Future transition candidate running/stopping/unknown→target_confirmed only if live gate approved + platform goal evidence valid + no pending effect; no auto-enabling. If only mock passes, engineering mock verified; actual service objective unverified/not met. Actual scope of Soomgo save/publication remains external gate. MVP includes basic fact proposal and missing/conflict clarification (T5-08) plus per-platform mapping. Product gate can report mock registration pass independently of AI or Soomgo failure; the overall MVP is incomplete until required scope passes or R01 explicitly changes scope. Final operational target not equivalent to a dry run.",
       "refs": [
         "DIR-03",
         "DIR-04",
@@ -2268,6 +2523,16 @@
       "refs": [
         "DIR-02",
         "V3-R14"
+      ]
+    },
+    {
+      "id": "R5-11",
+      "title": "최소 실행·개발 환경",
+      "rule": "One shared contracts/ module, server-owned registry and sample fixtures, app/remote/adapters/web/test modules in product/lesson-registration/ candidate root. W01 freezes wire version, common error codes, contract package and one launch command with fake providers. Implementers can select internal technology; shared transport/dependencies changes require R01 coordination. At minimum shared contract fixtures, provider unit tests, smoke command, lint/CI, mock network allowlist; no common root dependency edit before decision.",
+      "refs": [
+        "V3-R10",
+        "V3-R14",
+        "DIR-02"
       ]
     }
   ],
@@ -2341,16 +2606,37 @@
       "scenario": "stub + real providers daily incremental integration",
       "expected": "first integrated contract before final module completion; run log, failing checkpoints and replanning",
       "execution": "not_run"
+    },
+    {
+      "id": "T5-11",
+      "issue": "P03",
+      "scenario": "source create with raw text; source list/get and draft detail; plan generation using stored versions only",
+      "expected": "raw input accepted without forged fact; same source+media refs reused, canonical stored plan and draft detail; path/body mismatch rejected",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-12",
+      "issue": "P03",
+      "scenario": "same step permit repeated or wrong action arguments, revoke before command",
+      "expected": "only allowed single effect; stale generation blocked; read commands classified; previously admitted uncertainty retained",
+      "execution": "not_run"
+    },
+    {
+      "id": "T5-13",
+      "issue": "P09",
+      "scenario": "test Soomgo category has no image step, Kmong image required",
+      "expected": "platform evidence-specific validation; legacy T1 harness mapped explicitly without synthetic fake field; no unauthorized profile change",
+      "execution": "not_run"
     }
   ],
-  "route_inheritance": "V0.4 HTTP-01,02,04,05,14,15,17 inherit. V5 routes replace matching IDs; HTTP-07 verify replaces handoff route. Inherited HTTP-01 uses SourceRequest, HTTP-02 multipart MediaRequest + file, HTTP-04 DraftRequest, HTTP-05 DraftEdit, HTTP-14/15 StopRequest, HTTP-17 ReadRequest with stored ObjectObservation[]. All mutations require key (except internal dispatch, bound by durable attempt); path/body ref consistency; owner server principal; GET path/query no body. Standard 401/403/404/409/422/503 and 202 async; Error5Response on errors; never silently retry effect.",
+  "route_inheritance": "V0.4 HTTP-02,14,15,17 inherit; HTTP-02 multipart MediaRequest + file, HTTP-14/15 StopRequest, HTTP-17 ReadRequest with stored ObjectObservation[]. All other IDs replaced/added by V5. HTTP-07 verify replaces handoff route. All mutations require key (except internal dispatch, bound by durable attempt); path/body ref consistency; owner server principal; GET path/query no body. Standard 401/403/404/409/422/503 and 202 async; Error5Response on errors; never silently retry effect.",
   "ui_flow": [
-    "Source list/create→source confirm (facts/questions)",
-    "Select platform/URL→draft/validation",
+    "Source list/create→AI common proposal→source confirm (facts/questions)",
+    "Select platform/URL→AI mapping/draft→validation→user content review (no execution approval yet)",
     "Remote auth→verify identity→resolve target",
-    "Plan review→explicit approve→job create",
-    "Job list/detail→progress/needs_action/reconnect/reconcile/explicit resume",
-    "Result→reuse source for another platform"
+    "Plan review→explicit approve→job create→worker lease acquired internally",
+    "Job list/detail→progress/needs_action/reconnect/rebind/read-only reconcile/explicit resume",
+    "Result→reuse same source snapshot for another platform"
   ],
   "contract_wire": {
     "version": "lesson-registration/0.5",
@@ -2367,9 +2653,10 @@
       "array": "ordered array; fields with [] are homogeneous"
     },
     "requiredness": "required fields must be present and non-null; optional absent rather than null unless explicitly documented; reject unknown fields in versioned contract; semantic error messages separate from machine codes",
-    "digest": "server builds canonical scope object with sorted object keys recursively, array order preserved (explicit sorted order for set-like refs), UTF-8 JSON no whitespace, integers for currency/minutes/count and decimal values as normalized string, excludes digest itself and ephemeral connection IDs; SHA-256. All hash participants use one shared helper; clients echo server digest, not recompute.",
+    "digest": "server builds canonical scope object with sorted object keys recursively, array order preserved (explicit sorted order for set-like refs), UTF-8 JSON no whitespace, integers for currency/minutes/count and decimal values as normalized string, excludes digest itself and ephemeral connection IDs; SHA-256. All hash participants use one shared helper; clients echo server digest, not recompute. Include target_observation_refs only as evidence for target identity at plan creation, not subsequent observation timestamps; stale readback triggers revalidation, not arbitrary change to approved plan. Use explicit canonical field list in shared helper implementation.",
     "step_boundary": "one logical effectful action per StepSpec. Read/setup commands may be repeated only if classified read-only and authorized. Single-use effect permit bound to attempt and generation, consumed once before external action. Command dispatch after revocation blocked; previously admitted effect not assumed rollback.",
     "errors": "Error5Response; retry_blocked true for pending/unknown or forbidden effect; retry only explicit safe recovery; schema errors not retry instructions",
-    "contract_tests": "invalid field/enum/unknown property; stale/digest mismatch; same request key; stable effect across plans; command attempts beyond approved spec"
+    "contract_tests": "invalid field/enum/unknown property; stale/digest mismatch; same request key; stable effect across plans; command attempts beyond approved spec",
+    "security": "Service authentication is separate from platform authentication. Local mock may use explicit synthetic service principals with server-side sessions; no client owner header trusted. External production auth, cookie/CSRF, TLS, secrets, retention and egress enforced before live. Browser input during human auth is permitted only for registered origin and grant/phase; human arbitrary mutations outside the task not delegated or classified as completed. If human effect possible, re-observe target; unknown blocks automation."
   }
 }
