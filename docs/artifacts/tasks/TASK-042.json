@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "id": "TASK-042",
+  "kind": "task",
+  "title": "오후 합성 레슨 fixture 사실성·사진 권리 검증",
+  "status": "할 일",
+  "owner": "R02",
+  "suggested_owner": null,
+  "due": "2026-11-24",
+  "depends_on": [
+    "TASK-038"
+  ],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-24",
+  "question": "테스트용 합성 데이터가 실제 레슨 업무를 충분히 대표하면서 개인정보/등록 부담이 없는가?",
+  "goal": "테스트 데이터에 실사용 정당성·판매 조건의 무단 변경 위험이 섞이지 않도록 검증한다.",
+  "inputs": [
+    "docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "prototype/lesson-registration/README.md"
+  ],
+  "scope": [
+    "오전 부재를 고려해 오후에만 검토",
+    "synthetic-lesson-001.json의 수업 유형/가격/분/횟수/비용·조건 불확실성 확인",
+    "실제 판매와 다른 정보는 '합성'으로 표시, 테스트 이미지 권리 보증되지 않으면 대체/미확인",
+    "실계정·실사진·신원정보·정산정보·실상품 생성은 요구하지 않음"
+  ],
+  "outputs": [
+    "prototype/lesson-registration/fixtures/synthetic-lesson-001.json",
+    "fixture-v0.1 근거·미확인·예상 동작을 기록한 검토 결과"
+  ],
+  "acceptance": [
+    "개인정보·세션·실제 로그인 요구가 없고 합성 표시됨",
+    "값 누락/조건 충돌의 기대값이 R03 사례와 일치",
+    "실등록 정보가 아님과 사진 출처/사용권 미확인을 분리해서 표시",
+    "오후 검토 결과의 변경·보류 항목을 공유"
+  ],
+  "verification": [],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-01.md"
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261123/TEST-ENV-WORK-20261124.md"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261124-01.md"
+    ],
+    "design_refs": [
+      "docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md"
+    ],
+    "requirement_refs": [
+      "FR-01",
+      "FR-02"
+    ],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "테스트용 합성 데이터가 실제 레슨 업무를 충분히 대표하면서 개인정보/등록 부담이 없는가?",
+    "observables": [
+      "개인정보·세션·실제 로그인 요구가 없고 합성 표시됨",
+      "값 누락/조건 충돌의 기대값이 R03 사례와 일치",
+      "실등록 정보가 아님과 사진 출처/사용권 미확인을 분리해서 표시",
+      "오후 검토 결과의 변경·보류 항목을 공유"
+    ],
+    "success_condition": "실제 실행 결과·입력·명령·증거를 기록하고 모든 acceptance 충족",
+    "unknown_condition": "증거 없음·외부 환경 불가·정책 미확인은 미검증으로 기록"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-01.md",
+  "assignment_status": "2026-11-24 R01 대화 의도 기반 작업 브랜치 배정; 팀원 개별 수신/착수 미확인"
+}
