@@ -46,7 +46,7 @@
       "pass": true
     },
     {
-      "id": "task dates and precedence",
+      "id": "task dates and strict precedence",
       "pass": true
     },
     {
@@ -76,10 +76,50 @@
     {
       "id": "remote technical choice delegated",
       "pass": true
+    },
+    {
+      "id": "calendar weekend and holiday rule",
+      "pass": true
+    },
+    {
+      "id": "all task endpoints and milestones on workdays",
+      "pass": true
+    },
+    {
+      "id": "exact working dates/counts, no weekends or holidays",
+      "pass": true
+    },
+    {
+      "id": "calendar totals",
+      "pass": true
+    },
+    {
+      "id": "no double-booked primary owner workdays",
+      "pass": true
+    },
+    {
+      "id": "MVP reserve after first integration and before MVP",
+      "pass": true
+    },
+    {
+      "id": "final acceptance only on 12/31 and 1/4",
+      "pass": true
     }
   ],
-  "passed": 19,
-  "total": 19,
+  "passed": 26,
+  "total": 26,
+  "calendar_summary": {
+    "timezone": "Asia/Seoul",
+    "project_workdays": 27,
+    "mvp_workdays": 10,
+    "post_mvp_workdays": 17,
+    "r02_unavailable_workdays": 12,
+    "excluded_holidays": [
+      "2026-12-25",
+      "2027-01-01"
+    ],
+    "tasks": 18
+  },
   "product_execution": "not_run",
-  "limitations": "참조·일정·구조·선행조건의 정적 검사만. 실제 DDL·API·보안·브라우저·사용자 가치·공수·실서비스 검증 아님."
+  "limitations": "참조·일정·구조·선행조건·근무일·주책임자 중복의 정적 검사만. 실제 DDL·API·보안·브라우저·사용자 가치·공수·실서비스 검증 아님. 보조 참여와 시간 단위 업무량은 배정 전 검토."
 }
