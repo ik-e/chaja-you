@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "TASK-041",
+  "kind": "task",
+  "title": "uv 의존성 정리·재현 가능한 테스트 환경 및 CI 실행",
+  "status": "할 일",
+  "owner": "R05",
+  "suggested_owner": null,
+  "due": "2026-11-24",
+  "depends_on": [
+    "TASK-038"
+  ],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-24",
+  "question": "팀원들이 별도 미채택 패키지 없이 동일한 명령으로 테스트를 실행할 수 있는가?",
+  "goal": "미채택 패키지 제거 및 Python/uv/pytest/ruff 환경의 재현성 확인과 mock 사용법을 준비한다.",
+  "inputs": [
+    "docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "prototype/lesson-registration/README.md"
+  ],
+  "scope": [
+    "미사용 런타임 패키지 제거 후 pyproject/uv.lock 일관성·로컬 실행을 확인",
+    "pyproject/uv.lock 변경 전후 직접·전이 의존성 차이 및 근거 기록",
+    "mock·test 경로를 CI에서 검사하고 오류 재현·로그 저장 명령 설명",
+    "실제 브라우저 자동화 라이브러리/서버/API 프레임워크는 선정·설치하지 않음"
+  ],
+  "outputs": [
+    "pyproject.toml",
+    "uv.lock",
+    ".github/workflows/mvp-environment-check.yml",
+    "prototype/lesson-registration/ENVIRONMENT.md",
+    "prototype/lesson-registration/UV-AUDIT-20261124.md",
+    "실제 uv lock --check / uv sync --locked / pytest / ruff / 기존 docs 체크 실행 결과"
+  ],
+  "acceptance": [
+    "프로젝트 런타임 의존성 0개와 개발용 pytest·ruff만 유지하는 이유 기록",
+    "uv.lock의 설치 일관성을 실제 명령으로 확인하고 실패 시 명확히 보고",
+    "mock·테스트가 단일 실행 명령으로 재현됨",
+    "기존 문서 체크를 깨뜨리지 않음; CI/로컬 실행 근거를 제시"
+  ],
+  "verification": [],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-01.md"
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261123/TEST-ENV-WORK-20261124.md"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261124-01.md"
+    ],
+    "design_refs": [
+      "docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md"
+    ],
+    "requirement_refs": [
+      "FR-01",
+      "FR-05"
+    ],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "팀원들이 별도 미채택 패키지 없이 동일한 명령으로 테스트를 실행할 수 있는가?",
+    "observables": [
+      "프로젝트 런타임 의존성 0개와 개발용 pytest·ruff만 유지하는 이유 기록",
+      "uv.lock의 설치 일관성을 실제 명령으로 확인하고 실패 시 명확히 보고",
+      "mock·테스트가 단일 실행 명령으로 재현됨",
+      "기존 문서 체크를 깨뜨리지 않음; CI/로컬 실행 근거를 제시"
+    ],
+    "success_condition": "실제 실행 결과·입력·명령·증거를 기록하고 모든 acceptance 충족",
+    "unknown_condition": "증거 없음·외부 환경 불가·정책 미확인은 미검증으로 기록"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-01.md",
+  "assignment_status": "2026-11-24 R01 대화 의도 기반 작업 브랜치 배정; 팀원 개별 수신/착수 미확인"
+}
