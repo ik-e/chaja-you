@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-044",
   "kind": "task",
-  "status": "할 일",
+  "status": "검토 중",
   "owner": "R04",
   "suggested_owner": null,
   "due": "2026-11-24",
@@ -10,84 +10,169 @@
   "submission_ids": [],
   "required_for_submission": false,
   "updated_at": "2026-11-24",
-  "question": "숨고에서 강사의 최초 진입·등록 대상은 무엇이고, 허용된 범위 내에 어떤 핵심 단계를 시제품으로 실행할 수 있는가?",
-  "goal": "숨고 등록 객체를 확인한 후 독립 구현안의 최소 설계·실행 코드·모의 검증 근거를 만든다.",
+  "question": "숨고 고수 전환·서비스 등록 흐름과 타 플랫폼의 등록 객체·필드·완료 상태는 어떻게 다른가?",
+  "goal": "실제 화면 조사와 비교 설계로 플랫폼별 등록 요구 및 adapter 설계 입력 확보.",
   "inputs": [
     "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
-    "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
-    "docs/human/phase-intents/PHASE-20261124-02.md",
-    "prototype/lesson-registration/README.md",
-    "prototype/lesson-registration/test-harness/CONTRACT.md"
+    "docs/human/phase-intents/PHASE-20261124-03.md",
+    "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
   ],
   "scope": [
-    "고수 프로필, 서비스 등록, 포트폴리오, 견적 발송 중 **최초 등록의 실제 객체**와 완료 기준을 공식 출처/접근 가능한 화면으로 구분",
-    "확인된 객체 1개에 대해 승인된 레슨/서비스 입력과 이미지·문구 첨부 가능 범위를 최소 설계",
-    "R05 크몽 구현과 독립 기술·구조 선택; R03 모의 환경의 입력/결과 계약만 준수",
-    "불명확한 공식 절차·자동화 허용은 미확인으로 보존하고 플랫폼 실제 제출 금지"
+    "숨고 고수 전환·프로필·서비스 카테고리·질문지 흐름 조사",
+    "화면 및 사용자/서비스 흐름 보고서",
+    "숨고·크몽·탈잉 등록 구조 비교와 공통 데이터 변환안; 설계 제안으로 보존"
   ],
   "outputs": [
-    "prototype/lesson-registration/implementations/r04-soomgo/README.md",
-    "prototype/lesson-registration/implementations/r04-soomgo/design.md",
-    "prototype/lesson-registration/implementations/r04-soomgo/ (실행 가능한 코드와 테스트)",
-    "공식 출처·관측 일자·미확인 매트릭스 및 재현 로그"
+    "docs/members/R04/workspace/2026-11-24_숨고_고수등록_교육신청_사용자흐름_서비스절차_설계분석보고서.md",
+    "docs/members/R04/workspace/2026-11-24_숨고_고수전환_및_등록절차_화면스크린샷_상세보고서.md",
+    "docs/members/R04/workspace/screenshots/"
   ],
   "acceptance": [
-    "숨고 등록 객체/선행 인증/완료 상태를 구분해 한 가지 대상의 선택 이유를 설명한다",
-    "실제 계정 없이 독립 코드가 최소 한 경로에서 실행되고 mock 성공/실패/unknown을 오인 없이 표시한다",
-    "사용자 미승인/모의 결과를 실제 숨고 등록으로 기록하지 않는다",
-    "R03 test-harness에 연결할 입출력 예제/실행 명령을 제공한다",
-    "R05 크몽 코드에 의존하거나 변경하지 않는다",
-    "R03 하네스의 고정 commit/계약 버전으로 시험하고 자신의 구현 commit·명령·환경·결과를 기록한다. 개발 착수는 독립적이다."
+    "등록 대상과 사용자 흐름에 대한 보고서·화면 근거가 존재한다.",
+    "플랫폼별 차이 및 공통 데이터/변환 설계 제안이 구분된다.",
+    "실제 등록 성공·정책 허용·공식 수치 등 미검증 주장과 관측을 구분한다."
   ],
   "verification": [
-    "실제 실행 전에는 '완료'나 성공을 표시하지 않는다",
-    "실행 명령·환경·입력/기대/실제 결과·증거를 담당 실험 공간에 기록하고 TASK result에 연결한다. 이전 focus_apps의 run/evaluation 사례 ID를 혼용하지 않는다."
+    "담당자가 남긴 코드·문서·실행 기록을 고정 커밋으로 대조하고 미실행·미확인을 분리한다.",
+    "R01 검토 전 완료로 전환하지 않는다. 실제 사이트 로그인·등록은 승인하지 않는다."
   ],
   "references": [
     {
-      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+      "path": "docs/human/phase-intents/PHASE-20261124-03.md"
     },
     {
-      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+      "path": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
     },
     {
-      "path": "prototype/lesson-registration/README.md"
+      "url": "https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/docs/artifacts/tasks/TASK-044.json"
     },
     {
-      "path": "prototype/lesson-registration/test-harness/CONTRACT.md"
+      "url": "https://github.com/ik-e/chaja-you/blob/926b5de767/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EB%93%B1%EB%A1%9D_%EA%B5%90%EC%9C%A1%EC%8B%A0%EC%B2%AD_%EC%82%AC%EC%9A%A9%EC%9E%90%ED%9D%90%EB%A6%84_%EC%84%9C%EB%B9%84%EC%8A%A4%EC%A0%88%EC%B0%A8_%EC%84%A4%EA%B3%84%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C.md"
     },
     {
-      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      "url": "https://github.com/ik-e/chaja-you/blob/926b5de767/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EC%A0%84%ED%99%98_%EB%B0%8F_%EB%93%B1%EB%A1%9D%EC%A0%88%EC%B0%A8_%ED%99%94%EB%A9%B4%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_%EC%83%81%EC%84%B8%EB%B3%B4%EA%B3%A0%EC%84%9C.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/commit/1a2d4ecd15"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "R04 개인 브랜치에 숨고 고수 전환 및 서비스 등록 분석 보고서·화면 스크린샷, 3사 비교·브리지 데이터 모델 제안이 있다. 실제 숨고 구현 코드·실행 검증은 이 개정 범위의 결과가 아니며 외부 정책과 수치의 정확성은 추가 확인이 필요하다.",
+    "claims": [
+      {
+        "id": "C044-1",
+        "text": "숨고 사용자/서비스 흐름 보고서 및 스크린샷이 존재한다.",
+        "status": "확인",
+        "evidence_ids": [
+          "E044-1",
+          "E044-2",
+          "E044-3"
+        ]
+      },
+      {
+        "id": "C044-2",
+        "text": "3사 비교 및 브리지 설계안이 존재하며 채택되지 않았다.",
+        "status": "확인",
+        "evidence_ids": [
+          "E044-1"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E044-1",
+        "label": "숨고 흐름 및 3사 비교·브리지 설계 보고서",
+        "url": "https://github.com/ik-e/chaja-you/blob/926b5de767/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EB%93%B1%EB%A1%9D_%EA%B5%90%EC%9C%A1%EC%8B%A0%EC%B2%AD_%EC%82%AC%EC%9A%A9%EC%9E%90%ED%9D%90%EB%A6%84_%EC%84%9C%EB%B9%84%EC%8A%A4%EC%A0%88%EC%B0%A8_%EC%84%A4%EA%B3%84%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C.md"
+      },
+      {
+        "id": "E044-2",
+        "label": "화면 스크린샷 상세 보고서",
+        "url": "https://github.com/ik-e/chaja-you/blob/926b5de767/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EC%A0%84%ED%99%98_%EB%B0%8F_%EB%93%B1%EB%A1%9D%EC%A0%88%EC%B0%A8_%ED%99%94%EB%A9%B4%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_%EC%83%81%EC%84%B8%EB%B3%B4%EA%B3%A0%EC%84%9C.md"
+      },
+      {
+        "id": "E044-3",
+        "label": "최초 화면 자료 커밋",
+        "url": "https://github.com/ik-e/chaja-you/commit/1a2d4ecd15"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "보고서와 화면 근거 존재",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E044-1",
+          "E044-2",
+          "E044-3"
+        ]
+      },
+      {
+        "criterion": "비교 설계 제안 존재",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E044-1"
+        ]
+      },
+      {
+        "criterion": "공식 조건·자동화 허용 및 완료 상태 독립 대조",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E044-1",
+          "E044-2"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "신규 숨고 실행 PoC 미확인",
+      "정책·가격·심사 및 검색 노출 등 보고서 주장 별도 검증 필요",
+      "실제 계정 접근 여부·권한·실제 변경 여부는 원본 근거를 추가 확인; 현 단계 금지 유지"
+    ],
+    "decision_requests": [
+      "R01: 확인된 등록 객체 및 공통 설계로 채택할 항목 결정"
+    ]
+  },
   "traceability": {
     "intent_refs": [
-      "docs/human/phase-intents/PHASE-20261124-02.md"
+      "docs/human/phase-intents/PHASE-20261124-03.md",
+      "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
     ],
-    "design_refs": [
-      "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
-    ],
+    "design_refs": [],
     "requirement_refs": [],
     "evaluation_refs": [],
     "product_spec_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
     "product_requirement_refs": [
-      "FR-02",
-      "FR-03",
-      "FR-04",
-      "FR-05",
-      "FR-06"
+      "FR-01",
+      "FR-03"
     ]
   },
   "validation_plan": {
-    "question": "숨고의 실제 등록 객체에 해당하는 최소 단계가 모의 환경에서 재현 가능한가?",
-    "cases": [
-      "공식 등록 객체 확인",
-      "조건 승인 뒤 mock 입력",
-      "결과 유실 unknown",
-      "계정·정책 허용 불명 구간 차단"
-    ],
+    "question": "숨고 고수 전환·서비스 등록 흐름과 타 플랫폼의 등록 객체·필드·완료 상태는 어떻게 다른가?",
     "observables": [
+      "등록 대상과 사용자 흐름에 대한 보고서·화면 근거가 존재한다.",
+      "플랫폼별 차이 및 공통 데이터/변환 설계 제안이 구분된다.",
+      "실제 등록 성공·정책 허용·공식 수치 등 미검증 주장과 관측을 구분한다."
+    ],
+    "success_condition": "개정 범위의 결과와 재현 근거를 확인하고 R01이 검토한다.",
+    "unknown_condition": "실행되지 않은 조건 또는 공식 확인되지 않은 외부 플랫폼 권한은 미확인으로 남긴다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-03.md",
+  "assignment_status": "R01 승인에 따른 사후 범위 개정·결과 연결. 담당자 추가 확인 및 R01 검토 전.",
+  "work_branch": "akaraywon",
+  "workspace_path": "docs/members/R04/workspace",
+  "title": "숨고 등록 절차 분석 및 플랫폼별 등록 구조 비교 설계",
+  "workspace_snapshot": "https://github.com/ik-e/chaja-you/tree/926b5de767/docs/members/R04/workspace",
+  "deferred_original_scope": [
+    "숨고 최소 실행 코드 및 모의 정상/실패/unknown 시험",
+    "공통 시험 연계는 후속 설계·WBS에서 별도 판단"
+  ],
+  "scope_revision": {
+    "date": "2026-11-24",
+    "authority_ref": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md",
+    "reason": "최초 전달 의도와 실제 수행 범위 불일치. 실제 작업에 맞춰 범위를 정리하되 기존 미충족 의무를 완료 처리하지 않음.",
+    "previous_task_url": "https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/docs/artifacts/tasks/TASK-044.json",
+    "previous_phase_url": "https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/docs/human/phase-intents/PHASE-20261124-02.md",
+    "previous_work_branch": "r04/task-044-soomgo-registration",
+    "previous_workspace_path": "prototype/lesson-registration/implementations/r04-soomgo",
+    "previous_acceptance": [
       "숨고 등록 객체/선행 인증/완료 상태를 구분해 한 가지 대상의 선택 이유를 설명한다",
       "실제 계정 없이 독립 코드가 최소 한 경로에서 실행되고 mock 성공/실패/unknown을 오인 없이 표시한다",
       "사용자 미승인/모의 결과를 실제 숨고 등록으로 기록하지 않는다",
@@ -95,11 +180,6 @@
       "R05 크몽 코드에 의존하거나 변경하지 않는다",
       "R03 하네스의 고정 commit/계약 버전으로 시험하고 자신의 구현 commit·명령·환경·결과를 기록한다. 개발 착수는 독립적이다."
     ],
-    "success_condition": "독립 실행 코드·최소 설계·재현 로그·공식 근거를 함께 제출",
-    "unknown_condition": "숨고 등록 객체 또는 자동 실행 허용이 미확인인 경우 임의로 상품 등록 성공을 가정하지 않음"
-  },
-  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
-  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인",
-  "work_branch": "r04/task-044-soomgo-registration",
-  "workspace_path": "prototype/lesson-registration/implementations/r04-soomgo"
+    "previous_due": "2026-11-24"
+  }
 }

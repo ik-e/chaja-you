@@ -1,3 +1,5 @@
+> **이전 배정 공간 — 신규 실행 지시 아님.** TASK-043는 2026-11-24 실제 작업으로 개정되었다. [실제 작업 공간](https://github.com/ik-e/chaja-you/tree/5f2e98e95b/docs/members/R03/workspace/test) · [이전 원문](https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/prototype/lesson-registration/test-harness/README.md). 기존 미충족 범위는 정본 TASK의 개정 이력에서 확인한다. 파일·브랜치는 삭제하지 않았다.
+
 # R03 · 공통 모의 테스트 환경 (TASK-043)
 
 - **목표:** R04 숨고 및 R05 크몽 구현에 공통으로 제공할 오프라인/로컬 모의 등록 환경.

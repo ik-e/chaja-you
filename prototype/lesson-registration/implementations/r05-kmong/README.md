@@ -1,3 +1,5 @@
+> **이전 배정 공간 — 신규 실행 지시 아님.** TASK-045는 2026-11-24 실제 작업으로 개정되었다. [실제 작업 공간](https://github.com/ik-e/chaja-you/tree/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc) · [이전 원문](https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/prototype/lesson-registration/implementations/r05-kmong/README.md). 기존 미충족 범위는 정본 TASK의 개정 이력에서 확인한다. 파일·브랜치는 삭제하지 않았다.
+
 # R05 · 크몽 독립 등록 기능 PoC (TASK-045)
 
 **대상:** 크몽 PC 웹 레슨 **서비스 상품 한 건**. 실제 '심사 접수 확인'과 이후 공개 상태를 구분한다.

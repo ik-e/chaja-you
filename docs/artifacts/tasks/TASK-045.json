@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-045",
   "kind": "task",
-  "status": "할 일",
+  "status": "검토 중",
   "owner": "R05",
   "suggested_owner": null,
   "due": "2026-11-24",
@@ -10,86 +10,177 @@
   "submission_ids": [],
   "required_for_submission": false,
   "updated_at": "2026-11-24",
-  "question": "크몽 전문가 레슨 상품의 최초 등록을 위해 승인된 정보를 어떻게 입력·첨부하고 결과를 구분할 수 있는가?",
-  "goal": "크몽 레슨 상품 1건 핵심 등록 흐름을 독립 PoC로 구현하고 모의·실제 가능성을 근거로 분리한다.",
+  "question": "사용자가 원격 브라우저에서 직접 인증한 뒤 동일 세션으로 서버 작업을 이어가고 안전하게 제어권을 반환할 수 있는가?",
+  "goal": "모의 사이트에서 원격 화면·인증 세션 인계·서버 실행·격리·종료의 기술 가능성 검증.",
   "inputs": [
     "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
-    "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
-    "docs/human/phase-intents/PHASE-20261124-02.md",
-    "prototype/lesson-registration/README.md",
-    "prototype/lesson-registration/test-harness/CONTRACT.md"
+    "docs/human/phase-intents/PHASE-20261124-03.md",
+    "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
   ],
   "scope": [
-    "크몽 레슨 서비스 상품 필수 필드·이미지/승인·인증/심사 접수 경로 확인 수준 기록",
-    "합성 레슨 원본 → 승인 버전 확인 → 모의 필드 입력·이미지 첨부 → mock 결과·오류/unknown 증빙",
-    "R04 숨고와 독립 기술·구현 선택; R03 mock 입력/출력 계약 준수",
-    "실제 사이트 로그인/자동 게시/무허용 제출·비밀번호/OTP 수집 금지; 미선정 패키지는 해당 작업 브랜치에서 근거와 함께 제안"
+    "원격 뷰어 및 가상 계정 직접 로그인",
+    "동일 인증 세션에서 서버 입력·이미지·모의 저장 및 뷰어 종료 후 지속",
+    "제어권 반환·취소·세션 격리·폐기·민감정보 비노출 및 실패 구분"
   ],
   "outputs": [
-    "prototype/lesson-registration/implementations/r05-kmong/README.md",
-    "prototype/lesson-registration/implementations/r05-kmong/design.md",
-    "prototype/lesson-registration/implementations/r05-kmong/ (실행 가능한 코드와 테스트)",
-    "크몽 절차/필드 확인 출처 및 실행·오류 로그"
+    "docs/members/R05/workspace/remote-browser-poc/README.md",
+    "docs/members/R05/workspace/remote-browser-poc/DESIGN.md",
+    "docs/members/R05/workspace/remote-browser-poc/ (코드·테스트·실행 증거)",
+    "docs/members/R05/workspace/remote-browser-poc/evidence/pytest_output.txt"
   ],
   "acceptance": [
-    "실제 크몽 등록 객체와 모의 실험 범위 및 확인/미확인을 구분한다",
-    "합성 입력 1건에서 승인한 정확한 값으로 모의 폼에 입력하고 이미지 첨부 결과를 실제 코드로 확인한다",
-    "승인 버전 불일치·업로드 실패·unknown에서 부정확한 완료 판정/자동 중복 제출이 없다",
-    "실행 명령·로그·테스트 결과 및 R03 연계 I/O 예제 제출",
-    "숨고 구현/R04 브랜치에 의존하거나 변경하지 않는다",
-    "R03 하네스의 고정 commit/계약 버전으로 시험하고 자신의 구현 commit·명령·환경·결과를 기록한다. 개발 착수는 독립적이다."
+    "모의 인증·세션 인계·실행 코드 및 테스트 증거가 존재한다.",
+    "연결 종료 후 지속·제어권·격리·종료·실패 검증 결과를 구분한다.",
+    "로컬 모의 검증과 실제 플랫폼·외부 네트워크 미검증을 구분한다."
   ],
   "verification": [
-    "실제 실행 전에는 '완료'나 성공을 표시하지 않는다",
-    "실행 명령·환경·입력/기대/실제 결과·증거를 담당 실험 공간에 기록하고 TASK result에 연결한다. 이전 focus_apps의 run/evaluation 사례 ID를 혼용하지 않는다."
+    "담당자가 남긴 코드·문서·실행 기록을 고정 커밋으로 대조하고 미실행·미확인을 분리한다.",
+    "R01 검토 전 완료로 전환하지 않는다. 실제 사이트 로그인·등록은 승인하지 않는다."
   ],
   "references": [
     {
-      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+      "path": "docs/human/phase-intents/PHASE-20261124-03.md"
     },
     {
-      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+      "path": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
     },
     {
-      "path": "prototype/lesson-registration/README.md"
+      "url": "https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/docs/artifacts/tasks/TASK-045.json"
     },
     {
-      "path": "prototype/lesson-registration/test-harness/CONTRACT.md"
+      "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/README.md"
     },
     {
-      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
+      "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/DESIGN.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/evidence/pytest_output.txt"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/evidence/results.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/c5cef60dce/docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "R05는 원격 브라우저 인증/제어 서버 및 mock 사이트를 구현했다. 저장된 pytest 출력은 10개 통과이며 README는 3회 연속 10/10 통과를 보고한다. 로컬 모의 환경에서 동일 세션 인계, 뷰어 종료 후 실행, 제어권 반환·격리·TTL·실패 처리의 근거가 존재한다. 외부 접속·실제 플랫폼 검증은 아니다.",
+    "claims": [
+      {
+        "id": "C045-1",
+        "text": "실행 코드·설계·시험 로그가 존재한다.",
+        "status": "확인",
+        "evidence_ids": [
+          "E045-1",
+          "E045-2",
+          "E045-3"
+        ]
+      },
+      {
+        "id": "C045-2",
+        "text": "저장된 pytest 로그 10개 통과, 반복 3회 통과는 README 보고.",
+        "status": "보고 확인",
+        "evidence_ids": [
+          "E045-1",
+          "E045-3"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E045-1",
+        "label": "원격 브라우저 PoC 결과·재현 방법",
+        "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/README.md"
+      },
+      {
+        "id": "E045-2",
+        "label": "설계·제약",
+        "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/DESIGN.md"
+      },
+      {
+        "id": "E045-3",
+        "label": "pytest 실제 저장 출력",
+        "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/evidence/pytest_output.txt"
+      },
+      {
+        "id": "E045-4",
+        "label": "구조화 실행 증거",
+        "url": "https://github.com/ik-e/chaja-you/blob/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc/evidence/results.json"
+      },
+      {
+        "id": "E045-5",
+        "label": "플랫폼 입력 뼈대 참고",
+        "url": "https://github.com/ik-e/chaja-you/blob/c5cef60dce/docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "코드·재현 및 저장된 10개 테스트 결과",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E045-1",
+          "E045-3",
+          "E045-4"
+        ]
+      },
+      {
+        "criterion": "R01 독립 재실행·외부 네트워크·실제 플랫폼",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E045-1",
+          "E045-2"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "Docker/noVNC·HTTPS/WSS 외부 환경·부하·한글 입력·실제 플랫폼 미검증",
+      "크몽 전용 등록 adapter 및 공통 계약 미검증",
+      "unknown 처리 및 운영 보안은 별도 시험"
+    ],
+    "decision_requests": [
+      "R01: 원격 브라우저 PoC의 본 구현 재사용 범위와 운영 보안/플랫폼 허용 검증 결정"
+    ]
+  },
   "traceability": {
     "intent_refs": [
-      "docs/human/phase-intents/PHASE-20261124-02.md"
+      "docs/human/phase-intents/PHASE-20261124-03.md",
+      "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
     ],
-    "design_refs": [
-      "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
-    ],
+    "design_refs": [],
     "requirement_refs": [],
     "evaluation_refs": [],
     "product_spec_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
-    "product_requirement_refs": [
-      "FR-01",
-      "FR-02",
-      "FR-03",
-      "FR-04",
-      "FR-05",
-      "FR-06"
-    ]
+    "product_requirement_refs": []
   },
   "validation_plan": {
-    "question": "크몽 신규 레슨 상품의 핵심 입력·첨부·상태 동작을 계정 없이 안전하게 증명할 수 있는가?",
-    "cases": [
-      "정상 합성 원본",
-      "승인 버전 변경",
-      "이미지 실패",
-      "응답 유실 unknown",
-      "실서비스 허용 미확인 차단"
-    ],
+    "question": "사용자가 원격 브라우저에서 직접 인증한 뒤 동일 세션으로 서버 작업을 이어가고 안전하게 제어권을 반환할 수 있는가?",
     "observables": [
+      "모의 인증·세션 인계·실행 코드 및 테스트 증거가 존재한다.",
+      "연결 종료 후 지속·제어권·격리·종료·실패 검증 결과를 구분한다.",
+      "로컬 모의 검증과 실제 플랫폼·외부 네트워크 미검증을 구분한다."
+    ],
+    "success_condition": "개정 범위의 결과와 재현 근거를 확인하고 R01이 검토한다.",
+    "unknown_condition": "실행되지 않은 조건 또는 공식 확인되지 않은 외부 플랫폼 권한은 미확인으로 남긴다."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-03.md",
+  "assignment_status": "R01 승인에 따른 사후 범위 개정·결과 연결. 담당자 추가 확인 및 R01 검토 전.",
+  "work_branch": "Imdahyeok",
+  "workspace_path": "docs/members/R05/workspace/remote-browser-poc",
+  "title": "원격 브라우저 기반 사용자 인증 및 서버 실행 가능성 검증",
+  "workspace_snapshot": "https://github.com/ik-e/chaja-you/tree/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc",
+  "deferred_original_scope": [
+    "크몽 상품 특화 필드·승인 버전 및 등록 adapter",
+    "R03 공통 mock 계약 연결·unknown 재조회/중복 방지 검증 및 실제 허용은 후속 판단"
+  ],
+  "scope_revision": {
+    "date": "2026-11-24",
+    "authority_ref": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md",
+    "reason": "최초 전달 의도와 실제 수행 범위 불일치. 실제 작업에 맞춰 범위를 정리하되 기존 미충족 의무를 완료 처리하지 않음.",
+    "previous_task_url": "https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/docs/artifacts/tasks/TASK-045.json",
+    "previous_phase_url": "https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/docs/human/phase-intents/PHASE-20261124-02.md",
+    "previous_work_branch": "r05/task-045-kmong-registration",
+    "previous_workspace_path": "prototype/lesson-registration/implementations/r05-kmong",
+    "previous_acceptance": [
       "실제 크몽 등록 객체와 모의 실험 범위 및 확인/미확인을 구분한다",
       "합성 입력 1건에서 승인한 정확한 값으로 모의 폼에 입력하고 이미지 첨부 결과를 실제 코드로 확인한다",
       "승인 버전 불일치·업로드 실패·unknown에서 부정확한 완료 판정/자동 중복 제출이 없다",
@@ -97,11 +188,6 @@
       "숨고 구현/R04 브랜치에 의존하거나 변경하지 않는다",
       "R03 하네스의 고정 commit/계약 버전으로 시험하고 자신의 구현 commit·명령·환경·결과를 기록한다. 개발 착수는 독립적이다."
     ],
-    "success_condition": "독립 코드·설계·모의 실행 로그·실제 플랫폼에 관한 미확인 근거가 제출됨",
-    "unknown_condition": "실제 크몽 접수 및 외부 자동화 허용은 별도 검증 전까지 성공 아님"
-  },
-  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
-  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인",
-  "work_branch": "r05/task-045-kmong-registration",
-  "workspace_path": "prototype/lesson-registration/implementations/r05-kmong"
+    "previous_due": "2026-11-24"
+  }
 }

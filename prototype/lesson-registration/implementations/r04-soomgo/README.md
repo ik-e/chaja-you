@@ -1,3 +1,5 @@
+> **이전 배정 공간 — 신규 실행 지시 아님.** TASK-044는 2026-11-24 실제 작업으로 개정되었다. [실제 작업 공간](https://github.com/ik-e/chaja-you/tree/926b5de767/docs/members/R04/workspace) · [이전 원문](https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/prototype/lesson-registration/implementations/r04-soomgo/README.md). 기존 미충족 범위는 정본 TASK의 개정 이력에서 확인한다. 파일·브랜치는 삭제하지 않았다.
+
 # R04 · 숨고 독립 등록 기능 PoC (TASK-044)
 
 **최초 조사 질문:** 숨고 고수 프로필, 서비스 등록, 포트폴리오, 견적 중 현재 '신규 등록'에 해당하는 실제 객체와 업무 완료의 의미는 무엇인가? 크몽 상품 등록의 복제라는 가정은 금지.

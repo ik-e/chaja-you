@@ -33,6 +33,16 @@ canonical TASK 원본은 한 시점에 한 명의 책임자만 직접 수정한�
 
 원본 변경 후 `uv run --no-project python tools/project_docs.py`로 프로젝션을 생성한다. `uv run --no-project python tools/project_docs.py --check`로 원본 형식과 프로젝션 최신 여부를 확인한다.
 
+## R01 자기 주도형 TASK 등록
+
+R01은 자신에게 별도 배정 문서를 작성하거나 승인 요청할 필요 없이 기존 방식으로 AI와 작업한다. AI는 실제 수행 지시와 산출물을 기준으로 목적 단위의 정본 TASK를 등록·갱신한다. `owner: R01`, `assignment_mode: self_directed`를 사용하고, 결정 근거와 작업 공간/커밋을 연결한다. 사후 등록이면 이를 명시하며 시작·완료 시각을 소급 생성하지 않는다.
+
+- 새 목적의 실질 작업은 기존 TASK 재사용 여부를 먼저 확인하고 필요할 때 새 ID를 만든다. 세부 문서 수정·반복 검증·연속 작업은 기존 TASK에 추가한다. 단순 질의·아이디어 논의는 TASK를 만들지 않는다.
+- 작업 후 실제 결과·검증·남은 불확실성과 상태를 정본에 반영한다. 기한은 근거 있는 일정이 없으면 null로 둔다. 상태 문서 및 프로젝션을 같이 갱신한다. AI가 기록을 관리해도 제품/팀원 배정/중요 범위·완료 기준 변경은 R01 결정이 필요하다.
+- 전달 의도와 실제 수행이 다르면 R01 결정 하에 같은 목적·담당의 기존 TASK를 개정할 수 있다. 이전 정본 커밋·배정·범위·사유·미충족 범위를 보존하고 실제 작업 공간과 고정 근거를 연결한다. 근거 없는 완료나 새 배정은 하지 않는다. 담당자의 결과 소유권은 유지하며 R01 승인에 따른 정산 개정은 예외로 기록한다.
+
+[승인 기록](docs/human/responses/HRESP-20261124-03_task-reconciliation.md)
+
 ## 현재 레슨 등록 PoC의 요구사항과 실행 기록
 
 이전 `focus_apps.json`의 요구사항/사례 ID와 레슨 등록 기획 V1.1의 FR ID는 같은 의미가 아니다. TASK-043~045는 `traceability.product_spec_ref`와 `product_requirement_refs`로 레슨 요구사항을 별도 연결한다. 기존 검증기의 `requirement_refs`는 기존 focus_apps 기준이므로 혼용하지 않는다. PoC 실행 증거는 우선 담당 작업 디렉터리에 두고 TASK result의 근거로 연결한다. 새로운 제품 평가 사례가 정본에 채택되기 전에는 이전 focus_apps의 case ID로 새 run/evaluation을 등록하지 않는다.

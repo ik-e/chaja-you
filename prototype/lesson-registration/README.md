@@ -1,3 +1,9 @@
+> **2026-11-24 개정 이후 보존용 공간.** 최초 배정은 [고정 원문](https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/prototype/lesson-registration/README.md)에 보존했다. 현재 작업은 [개정 단계](../../docs/human/phase-intents/PHASE-20261124-03.md)와 아래 고정 작업 공간을 기준으로 검토한다. 기존 전용 브랜치/공간은 참조 확인 후 정리 후보이며 삭제 또는 신규 실행 지시가 아니다.
+>
+> - TASK-043: [R03 크몽형 모의 PoC](https://github.com/ik-e/chaja-you/tree/5f2e98e95b/docs/members/R03/workspace/test)
+> - TASK-044: [R04 숨고 조사·설계](https://github.com/ik-e/chaja-you/tree/926b5de767/docs/members/R04/workspace)
+> - TASK-045: [R05 원격 브라우저 PoC](https://github.com/ik-e/chaja-you/tree/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc)
+
 # 레슨 등록 플랫폼별 독립 PoC 작업 공간
 
 **적용 단계:** [PHASE-20261124-02](../../docs/human/phase-intents/PHASE-20261124-02.md) · [작업 계약](../../docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md)

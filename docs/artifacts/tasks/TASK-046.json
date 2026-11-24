@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "id": "TASK-046",
+  "kind": "task",
+  "status": "진행 중",
+  "owner": "R01",
+  "due": null,
+  "depends_on": [],
+  "suggested_owner": null,
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-24",
+  "question": "기획·사용자 가치·PoC 근거를 일관된 제품 설계와 실행 WBS로 연결하려면 어떤 기준선이 필요한가?",
+  "goal": "요구사항·도메인·시스템·데이터/API·UI·검증·WBS를 일관된 검토 가능한 설계로 구체화한다.",
+  "inputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "docs/human/phase-intents/PHASE-20261124-03.md",
+    "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
+  ],
+  "scope": [
+    "V0.1–V0.5 설계와 상위 방향·계약·WBS",
+    "PoC 근거 반영 및 안전/미확인/실제 실행 게이트",
+    "설계 확정과 구현 승인 구분"
+  ],
+  "outputs": [
+    "docs/artifacts/design/lesson-registration-20261124/README.md",
+    "docs/artifacts/design/lesson-registration-20261124/CONTRACT-V0.5.md",
+    "docs/artifacts/design/lesson-registration-20261124/WBS-V0.5.md",
+    "docs/artifacts/design/lesson-registration-20261124/validation-v0.5.json"
+  ],
+  "acceptance": [
+    "기획·요구·계약·인터페이스·검증·WBS 관계가 검토 가능하다.",
+    "설계 결함과 미결정, 외부 실행 제한이 명시된다.",
+    "검토와 기준선 채택 여부가 별도로 기록된다."
+  ],
+  "verification": [
+    "고정된 설계 커밋의 원본과 정적/추상 검사 기록 대조; 본 제품 시험으로 간주하지 않음."
+  ],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-03.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/README.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/CONTRACT-V0.5.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/WBS-V0.5.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/validation-v0.5.json"
+    }
+  ],
+  "result": {
+    "summary": "R01 설계 브랜치에 V0.1–V0.5 요구/계약·데이터/API·물리 설계·WBS가 존재한다. V0.5 결과 파일상 정적 25/25와 추상 31/31 통과. 설계 브랜치의 후보이며 main 채택 또는 제품 실행 검증이 아니다.",
+    "claims": [
+      {
+        "id": "C046-1",
+        "text": "설계 및 WBS 후보가 존재한다.",
+        "status": "확인",
+        "evidence_ids": [
+          "E046-1",
+          "E046-2",
+          "E046-3"
+        ]
+      },
+      {
+        "id": "C046-2",
+        "text": "V0.5 결과 파일에 정적 25/25·추상 31/31 기록.",
+        "status": "보고 확인",
+        "evidence_ids": [
+          "E046-4"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E046-1",
+        "label": "설계 인덱스",
+        "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/README.md"
+      },
+      {
+        "id": "E046-2",
+        "label": "공통 계약 V0.5",
+        "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/CONTRACT-V0.5.md"
+      },
+      {
+        "id": "E046-3",
+        "label": "WBS V0.5",
+        "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/WBS-V0.5.md"
+      },
+      {
+        "id": "E046-4",
+        "label": "V0.5 정적/추상 검증 기록",
+        "url": "https://github.com/ik-e/chaja-you/blob/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124/validation-v0.5.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "설계 및 WBS 파일 존재",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E046-1",
+          "E046-2",
+          "E046-3"
+        ]
+      },
+      {
+        "criterion": "저장된 검증 결과 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E046-4"
+        ]
+      },
+      {
+        "criterion": "최종 기준선 승인 및 제품 검증",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E046-1"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "개정 TASK 범위와 새로운 PHASE 참조를 설계 통합 시 재대조해야 함",
+      "상세 계약·WBS 채택 및 실환경 검증 미확정"
+    ],
+    "decision_requests": [
+      "R01: 설계 채택·후속 업무 배정 및 미결정 범위 판단"
+    ]
+  },
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261124-03.md",
+      "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "설계 기준선의 계약과 일정이 정합적인가?",
+    "observables": [
+      "설계 원본과 검증 결과",
+      "미결정 및 WBS 선행관계"
+    ],
+    "success_condition": "설계 검토·남은 결정·채택 범위 기록",
+    "unknown_condition": "실제 제품 실행·외부 허용 미검증"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-03.md",
+  "assignment_mode": "self_directed",
+  "assignment_status": "R01 작업 지시와 산출물을 AI가 사후 등록. 별도 자기 배정 절차 없음.",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md",
+  "work_branch": "r01/lesson-design-baseline-20261124",
+  "workspace_path": "docs/artifacts/design/lesson-registration-20261124",
+  "workspace_snapshot": "https://github.com/ik-e/chaja-you/tree/5a01ec3845415200e0383546e18bfb8a6a78a2e9/docs/artifacts/design/lesson-registration-20261124",
+  "title": "레슨 등록 지원 서비스 설계 기준선 구축 및 구체화"
+}
