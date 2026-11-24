@@ -1,0 +1,85 @@
+{
+  "kind": "static_design_validation",
+  "checks": [
+    {
+      "id": "unique IDs",
+      "pass": true
+    },
+    {
+      "id": "source refs",
+      "pass": true
+    },
+    {
+      "id": "component req and dependency refs",
+      "pass": true
+    },
+    {
+      "id": "port endpoints",
+      "pass": true
+    },
+    {
+      "id": "API schemas",
+      "pass": true
+    },
+    {
+      "id": "UI API refs",
+      "pass": true
+    },
+    {
+      "id": "table names",
+      "pass": true
+    },
+    {
+      "id": "test refs",
+      "pass": true
+    },
+    {
+      "id": "all requirements covered by tests",
+      "pass": true
+    },
+    {
+      "id": "all requirements covered by work",
+      "pass": true
+    },
+    {
+      "id": "task refs",
+      "pass": true
+    },
+    {
+      "id": "task dates and precedence",
+      "pass": true
+    },
+    {
+      "id": "R02 unavailable interval excluded",
+      "pass": true
+    },
+    {
+      "id": "R02 handoff before absence",
+      "pass": true
+    },
+    {
+      "id": "milestone refs/date",
+      "pass": true
+    },
+    {
+      "id": "WBS DAG",
+      "pass": true
+    },
+    {
+      "id": "MVP and final dates",
+      "pass": true
+    },
+    {
+      "id": "existing state and mock gate",
+      "pass": true
+    },
+    {
+      "id": "remote technical choice delegated",
+      "pass": true
+    }
+  ],
+  "passed": 19,
+  "total": 19,
+  "product_execution": "not_run",
+  "limitations": "참조·일정·구조·선행조건의 정적 검사만. 실제 DDL·API·보안·브라우저·사용자 가치·공수·실서비스 검증 아님."
+}
