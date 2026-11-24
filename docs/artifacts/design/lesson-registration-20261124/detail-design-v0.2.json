@@ -1,0 +1,1435 @@
+{
+  "schema_version": 1,
+  "kind": "lesson_design_detail_overlay",
+  "id": "LESSON-DETAIL-V0.2",
+  "version": "0.2",
+  "date": "2026-11-24",
+  "owner": "R01",
+  "status": "proposed_not_adopted",
+  "baseline_commit": "88251a3e26ecdf29b60b0737268f96d6e5100f6b",
+  "evidence_main_commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+  "baseline_files": {
+    "REQUIREMENTS-V0.1.md": "5cfd403fb37a95fa2d897343ca38fbbd894f12f3",
+    "DOMAIN-WORKFLOW-V0.1.md": "c6d17ac1d8ce67c800fd7319a5b99938e4047bc4",
+    "SYSTEM-CONTRACTS-V0.1.md": "7ce2bf0cd59bcadee290b61455b8b08889b44a9b",
+    "VERIFICATION-DECISIONS-V0.1.md": "47aaf4b0c41a612ecc6ecb935cfda7d1eb06b0b7",
+    "requirements-v0.1.json": "bdb3588eb75c239244a4dc57c8c378e3518024ad",
+    "domain-workflow-v0.1.json": "07c95483b78a2dc30175d0b3edcc0123b085bfba",
+    "system-contracts-v0.1.json": "fb2cab908fdd3432c13d0eb2a6f2335f7ed60ffd",
+    "verification-decisions-v0.1.json": "f2c0940ed7e10ca410e14896f789fc6752702488"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "scope": "V0.1의 논리 설계 보완. 현 단계 mock only, 실제 외부 계정/로그인/제출/세션 수집 불가. 기존 TASK 및 제품 채택 변경 없음.",
+  "sources": [
+    {
+      "id": "S01",
+      "title": "R01 공통 V0.1",
+      "commit": "88251a3e26ecdf29b60b0737268f96d6e5100f6b",
+      "path": "docs/artifacts/design/lesson-registration-20261124/README.md",
+      "limit": "불변식·기존 ID 유지; 설계 초안",
+      "url": "https://github.com/ik-e/chaja-you/blob/88251a3e26ecdf29b60b0737268f96d6e5100f6b/docs/artifacts/design/lesson-registration-20261124/README.md"
+    },
+    {
+      "id": "S02",
+      "title": "R01 현재 단계",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "limit": "mock만 허용, 실서비스 금지",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "S03",
+      "title": "R02 강사 요구·최신 조건",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+      "limit": "사용자 진술·회상·최신 확인값, 실측 없음",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+    },
+    {
+      "id": "S04",
+      "title": "R03 개인 PoC 명세",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/SPEC.md",
+      "limit": "크몽형 모의 실험, 고정 fixture",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R03/workspace/test/SPEC.md"
+    },
+    {
+      "id": "S05",
+      "title": "R03 코드",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/app.py",
+      "limit": "FastAPI·SQLite·검증·승인·작업, 개인 코드",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R03/workspace/test/app.py"
+    },
+    {
+      "id": "S06",
+      "title": "R03 실행기",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/runner.py",
+      "limit": "Skyvern SDK 및 고정 DOM 필드 조작, 새 브라우저 생성",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R03/workspace/test/runner.py"
+    },
+    {
+      "id": "S07",
+      "title": "R03 검증 기록",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/verification.json",
+      "limit": "19 pass 자기 보고, 모의 Skyvern 입력·첨부·영수증; 독립 재실행 아님",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R03/workspace/test/verification.json"
+    },
+    {
+      "id": "S08",
+      "title": "R04 숨고 업무 흐름",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수등록_교육신청_사용자흐름_서비스절차_설계분석보고서.md",
+      "limit": "기존 고수 계정 관측 및 제안, 신규 가입·공개 추론 분리",
+      "url": "https://github.com/ik-e/chaja-you/blob/926b5de7678f8984be035409d386c6347d749f56/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EB%93%B1%EB%A1%9D_%EA%B5%90%EC%9C%A1%EC%8B%A0%EC%B2%AD_%EC%82%AC%EC%9A%A9%EC%9E%90%ED%9D%90%EB%A6%84_%EC%84%9C%EB%B9%84%EC%8A%A4%EC%A0%88%EC%B0%A8_%EC%84%A4%EA%B3%84%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C.md"
+    },
+    {
+      "id": "S09",
+      "title": "R04 화면 보고서",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수전환_및_등록절차_화면스크린샷_상세보고서.md",
+      "limit": "STEP 06~12, 15, 16 보고서 관측; 스크린샷 원본 개별 검증 안 함",
+      "url": "https://github.com/ik-e/chaja-you/blob/926b5de7678f8984be035409d386c6347d749f56/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EC%A0%84%ED%99%98_%EB%B0%8F_%EB%93%B1%EB%A1%9D%EC%A0%88%EC%B0%A8_%ED%99%94%EB%A9%B4%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_%EC%83%81%EC%84%B8%EB%B3%B4%EA%B3%A0%EC%84%9C.md"
+    },
+    {
+      "id": "S10",
+      "title": "R05 입력 뼈대",
+      "commit": "c5cef60dceb98390b008e7345fc5c0492695e8e3",
+      "path": "docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md",
+      "limit": "수동 작성 화면·임시저장 보고, 플랫폼별 제약 후보; 실제 자동화 아님",
+      "url": "https://github.com/ik-e/chaja-you/blob/c5cef60dceb98390b008e7345fc5c0492695e8e3/docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md"
+    },
+    {
+      "id": "S11",
+      "title": "R05 기술·권한 조사",
+      "commit": "c5cef60dceb98390b008e7345fc5c0492695e8e3",
+      "path": "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+      "limit": "공식/관찰/추정 구분, 운영사 허용 미확인",
+      "url": "https://github.com/ik-e/chaja-you/blob/c5cef60dceb98390b008e7345fc5c0492695e8e3/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md"
+    },
+    {
+      "id": "S12",
+      "title": "R03 공통 시험 계약",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md",
+      "limit": "T1~T6, 변경하지 않음; release 미확인",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/prototype/lesson-registration/test-harness/CONTRACT.md"
+    },
+    {
+      "id": "S13",
+      "title": "R01 기획 V1.1",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+      "limit": "크몽 최초 상품 우선, 숨고 독립 검증",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+    },
+    {
+      "id": "S14",
+      "title": "R01 작업 범위",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
+      "limit": "R03 공통, R04 숨고, R05 크몽; 현재 분리",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
+    }
+  ],
+  "sections": [
+    {
+      "file": "DETAIL-DATA-V0.2.md",
+      "title": "L2/L3/L5 · 공통 도메인·데이터 상세 설계",
+      "intro": "V0.1의 FR-01~06, I-01~09, 13개 엔터티를 유지하며 필드·단위·권리·변환의 상세 계약을 제안한다. 실제 DBMS나 ORM, 개인의 실제 계정 및 자료 사용은 채택하지 않는다. 새로운 사실을 만들지 않고 원본/확인된 값/파생값/플랫폼별 추가 결정/합성 fixture를 구분한다.",
+      "tables": [
+        {
+          "title": "D-A. 요구에서 상세 계약으로",
+          "columns": [
+            "ID",
+            "V0.1 연결",
+            "설계 상세",
+            "근거"
+          ],
+          "rows": [
+            [
+              "DD-01",
+              "FR-01; I-01",
+              "원본 입력 → 필드별 Fact 후보 → 사용자가 확인하거나 충돌/누락 표기 → 원본 버전 고정. AI 추출은 확인이 아님. 공통 사실과 플랫폼 전용 입력을 분리.",
+              "S03,S04,S13"
+            ],
+            [
+              "DD-02",
+              "FR-02; I-01,I-09",
+              "대상·객체별 RuleSnapshot과 매핑을 버전화. 같은 원본이라도 크몽 상품/숨고 서비스 설정/탈잉 클래스는 다른 객체·단위. 미확인 규칙은 실행 불가 또는 가설 표시.",
+              "S08,S09,S10"
+            ],
+            [
+              "DD-03",
+              "FR-03,FR-04; I-02,I-03",
+              "자료·원본·규칙·초안·대상·동작·환경·허용을 각각 참조. 새 승인 없이 값 변경/추가 제출 금지.",
+              "S03,S05,S11"
+            ],
+            [
+              "DD-04",
+              "FR-05,FR-06; I-04~I-08",
+              "실행 시도, 관측, 결과 판정, 재개 의도를 분리; 모의 접수≠실제 접수≠공개.",
+              "S05,S07,S12"
+            ]
+          ]
+        },
+        {
+          "title": "D-B. 공통 사실 사전",
+          "columns": [
+            "ID",
+            "경로",
+            "논리 타입·단위",
+            "확인 및 제약",
+            "근거"
+          ],
+          "rows": [
+            [
+              "F01",
+              "source_text",
+              "string",
+              "원문 보존, 빈 값 불가. AI 문구는 별도 초안. 개인정보는 필요한 범위만.",
+              "S03,S04"
+            ],
+            [
+              "F02",
+              "instructor.public_name",
+              "string|null",
+              "공개 활동명. 실제 실명/외부 계정 표시명과 동일하다고 추정 금지.",
+              "S08,S10"
+            ],
+            [
+              "F03",
+              "lesson.subjects",
+              "list<category_intent>",
+              "음악 분야, 제공 대상, 목적; 플랫폼 카테고리 ID로 직접 변환하지 않고 선택 확인.",
+              "S03,S09,S10"
+            ],
+            [
+              "F04",
+              "lesson.description / teaching_scope",
+              "string/list<string>",
+              "수업 내용·제공 범위, 경력·학력 등 사실은 근거와 분리. 임의 성과·경력 생성 금지.",
+              "S03,S08"
+            ],
+            [
+              "F05",
+              "lesson.audience / goals / skill / age / gender",
+              "각 optional fact",
+              "대상자 문구와 숨고 연령/성별/건반 필터는 다른 의미. 명시 확인 없으면 null, 전체 선택으로 추정 금지.",
+              "S09,S10"
+            ],
+            [
+              "F06",
+              "lesson.delivery_mode / group_size",
+              "enum + integer|null",
+              "in_person/online/hybrid; individual/group 별도. 현재 기준 대면 1:1; 다른 방식은 미확인.",
+              "S03,S09"
+            ],
+            [
+              "F07",
+              "lesson.location / travel_policy",
+              "public_region, private_address_ref?, travel_radius_km?",
+              "공개 지역·주소·출장반경 구분, 상세주소 공개 범위 승인 필요. 대면 작업실 ≠ 출장.",
+              "S03,S09,S10"
+            ],
+            [
+              "F08",
+              "packages[]",
+              "id, minutes_per_session:int>0, sessions_per_period:int>0, period:month/one_off/other, total_price_krw:int>=0",
+              "각 요금제를 독립 저장. 90/180/270분 월4회 25/40/50만원은 현재 확인값; 세 패키지 동일 금액 강제 금지. VAT 포함 여부 별도 확인.",
+              "S03,S04,S10"
+            ],
+            [
+              "F09",
+              "included_services / additional_fees",
+              "list<fact>, pricing_mode",
+              "수업 내 녹음·기본 믹싱/마스터링 포함; 별도 음원 제작·발매 비용 상담. 무료 포함으로 변환 금지.",
+              "S03"
+            ],
+            [
+              "F10",
+              "reschedule / cancel_no_show",
+              "structured policy + free_text",
+              "고정 사전통보기한 없음; 당일 취소·무단 불참 회차 사용. 임의 2일 전 규정 금지.",
+              "S03"
+            ],
+            [
+              "F11",
+              "first_visit / preparation",
+              "structured fact + list<string>",
+              "무료 상담·테스트 녹음, 준비물 필수 없음·참고곡 등 선택. 유료 체험 상품으로 생성 금지.",
+              "S03"
+            ],
+            [
+              "F12",
+              "curriculum / service_process",
+              "list<item>, text",
+              "수준·목표별 맞춤; 회차별 사실이 없으면 강사에게 질문. 4회 고정 커리큘럼 창작 금지.",
+              "S03,S10"
+            ],
+            [
+              "F13",
+              "daw_tools / qualification / availability / contact_window",
+              "optional list/structured facts",
+              "도구·자격·근무시간 미확인 시 null. 연락 가능 시간은 공개 연락처와 별도.",
+              "S09,S10"
+            ],
+            [
+              "F14",
+              "media_refs[]",
+              "asset_ref+version",
+              "원본 이미지, 공개 허용·권리, MIME·크기·해상도·digest, 변환 파생 관계. 외부 URL/연락처·제3자 정보 확인.",
+              "S03,S10,S11"
+            ],
+            [
+              "F15",
+              "platform_specific_inputs",
+              "platform+object_kind+field_key -> fact_ref/value",
+              "크몽 작업기간·수정횟수·패키지명, 숨고 질문 선택, 탈잉 회차 등 별도 확인. 회차를 작업일로 임의 변환 금지.",
+              "S04,S09,S10"
+            ]
+          ]
+        },
+        {
+          "title": "D-C. 논리 엔터티 필드와 무결성",
+          "columns": [
+            "ID",
+            "엔터티 / 키",
+            "필수 논리 속성",
+            "무결성·소유"
+          ],
+          "rows": [
+            [
+              "E01",
+              "Instructor / instructor_ref",
+              "owner_principal_ref, public_profile_ref, created_at",
+              "우리 서비스 소유자; 외부 로그인 비밀번호나 쿠키 없음."
+            ],
+            [
+              "E02",
+              "LessonSourceVersion / source_ref+source_version",
+              "instructor_ref, source_text_ref, confirmed_at?, status, previous_version?, fact_refs, media_refs",
+              "immutable 버전, 수정은 새 버전; 최신 값 참조와 이전 근거 보존."
+            ],
+            [
+              "E03",
+              "Fact / fact_ref",
+              "source_version, path, value, unit?, provenance_ref, confirmation_state, observed_at?, conflict_refs[]",
+              "confirmed/proposed/missing/conflicting/derived; confirmed 사용자 확인; 파생 계산은 입력 fact와 식 기록; null≠0≠빈 문자열."
+            ],
+            [
+              "E04",
+              "MediaAssetVersion / asset_ref+asset_version",
+              "owner, storage_ref, digest, mime, bytes, width?, height?, rights_state, permitted_use, parent_ref?",
+              "권리 unknown이면 외부 첨부 차단; 합성 fixture와 실제 분리; 변환하면 새 digest·버전."
+            ],
+            [
+              "E05",
+              "PlatformRuleSnapshot / platform+object_kind+rule_version",
+              "field_rules[], flow_version, outcome_spec, source_refs, checked_at, confidence, scope",
+              "reported_observation/official/assumption/unverified 구분; 권한은 별도. 규칙 변경 시 승인 무효."
+            ],
+            [
+              "E06",
+              "ExecutionPermission / permission_ref+revision",
+              "environment, platform, object_kind, action_set, policy_evidence_ref, status, expires_at?",
+              "mock만 현재 허용; live는 default deny; 사용자 승인으로 생성하지 않음."
+            ],
+            [
+              "E07",
+              "RegistrationDraftVersion / draft_ref+draft_version",
+              "source_version, rule_version, media_versions, target, field_mappings[], issues[], state, content_digest",
+              "각 mapping: field_key,value,unit,fact_refs,transform_id,confirmation_state; 미해결 필수/권리 차단."
+            ],
+            [
+              "E08",
+              "Approval / approval_ref",
+              "actor, scope_snapshot, digest, approved_at, revoked_at?",
+              "source/draft/rule/media/target/environment/actions 버전 및 지문 고정; 동일 버전도 권한 철회 시 차단."
+            ],
+            [
+              "E09",
+              "RegistrationIntent / intent_ref",
+              "owner, platform, object_kind, target_slot_ref, goal, source_ref, active_job_ref?",
+              "대상 슬롯은 신규 상품 의도 또는 기존 객체 식별자. 내용 수정해도 동일 효과 의도 유지. 사용자 간 독립."
+            ],
+            [
+              "E10",
+              "RegistrationJob / job_ref",
+              "intent_ref, approval_ref, permission_ref, environment, state, checkpoint, retry_blocked, revision",
+              "한 의도에 진행/unknown 작업이 있으면 신규 부작용 차단. 전이 CAS 또는 동등한 원자적 가드 후보."
+            ],
+            [
+              "E11",
+              "ExecutionAttempt / attempt_ref",
+              "job_ref, operation_id, step_id, action_digest, approval_scope, permission_revision, status, started_at, completed_at?, error_code?",
+              "부작용 직전 durable 기록; 같은 operation_id 재사용은 이전 시도 조회만; 프로세스 중단 후 in-flight는 unknown."
+            ],
+            [
+              "E12",
+              "ObservationEvidence / evidence_ref",
+              "job_ref, attempt_ref?, platform, environment, observed_at, kind, observed_fields, redacted_ref?, confidence",
+              "영수증/재조회/폼 값/사용자 확인 구분. 외부 세션, 주민번호, 인증코드, 전체 화면 무조건 저장 금지."
+            ],
+            [
+              "E13",
+              "RegistrationResult / job_ref+result_revision",
+              "goal, observed_stage, verdict, evidence_refs[], reason_code?, next_action, retry_blocked",
+              "append-only 판정 이력. 근거가 부족하면 unknown, 클릭 성공만으로 완료 금지."
+            ],
+            [
+              "E14",
+              "PlatformConnection / connection_ref (후보)",
+              "owner, platform, environment, session_handle_ref, auth_state, expires_at?, revision",
+              "우리 서비스 로그인과 외부 로그인 분리. 지금은 합성 세션만; 원문 자격증명·토큰 저장 금지."
+            ],
+            [
+              "E15",
+              "BrowserLease / lease_ref (후보)",
+              "connection_ref, instance_ref, controller, generation, lease_expires_at, state",
+              "human/automation/none 상호배타; 임대 재발급 세대 확인. 세션은 데이터 레코드와 분리된 격리 실행 환경."
+            ]
+          ]
+        },
+        {
+          "title": "D-D. 검증 및 변환 규칙",
+          "columns": [
+            "ID",
+            "판정/처리",
+            "예외 및 근거"
+          ],
+          "rows": [
+            [
+              "M01",
+              "confirmed Fact만 사실로 배치; AI 제안은 proposed; 누락은 missing, 충돌은 conflicting.",
+              "미확인 필수 필드에는 사용자 질문. 선택 필드는 미입력 허용 여부 확인. S03"
+            ],
+            [
+              "M02",
+              "가격은 정수 KRW, 기간/회차/분 독립; 월 총액÷회차÷분×60은 파생 시급(유리수)으로만 표기.",
+              "시간 단위/반올림/VAT 때문에 원본과 동등하지 않으면 승인 요청, 반올림으로 총액을 맞춘 척하지 않음. S03,S10"
+            ],
+            [
+              "M03",
+              "platform field마다 transform_id와 fact_refs, 규칙 버전, 변환 전후 값 기록.",
+              "글자수 축약은 의미 보존; 없던 경력/가격/정책 만들지 않음. S03,S04"
+            ],
+            [
+              "M04",
+              "이미지는 decode→MIME·바이트·픽셀·권리 검사→필요 시 파생 이미지→미리보기→새 승인.",
+              "규격 출처/허용 오차 미확인 시 질문/가설. 4:3 또는 16:9로 변환해도 내용 잘림·연락처 노출 확인. S10,S11"
+            ],
+            [
+              "M05",
+              "플랫폼 규칙은 observed/official/unknown과 mock فرض(가설)를 별도 태그; 실환경 실행에는 별도 허용·검증.",
+              "UI 관측만으로 약관 허용이나 공개 여부 단정 금지. S08~S12"
+            ],
+            [
+              "M06",
+              "사용자 원본 기준 예시: 90/180/270분 × 월4회 250000/400000/500000 KRW.",
+              "R03 300000×세 tier는 synthetic_regression으로 분리. R04 예시 임의 수업료/이력 및 R05 예시 150000은 원본이 아님. S03,S04,S08,S10"
+            ]
+          ]
+        }
+      ],
+      "notes": [
+        "저장 후보: 원본·규칙·초안·승인·작업·증거의 논리적 관계는 위 키를 사용한다. 구조화 DB 테이블/JSONB/파일 등의 물리 선택은 LR-D03/04 후. 필요 최소 보존 기간 및 개인정보 삭제/백업 정책은 LR-D06으로 남긴다. 실험 자료는 합성, 권리 확인 이미지와 고정 fixture만 사용한다."
+      ]
+    },
+    {
+      "file": "DETAIL-PLATFORM-FLOWS-V0.2.md",
+      "title": "L3/L5 · 플랫폼별 등록 객체·필드·업무 흐름",
+      "intro": "크몽을 현재 우선 제품 후보로 유지하고 숨고를 독립 검증 대상으로 둔다. 탈잉은 확장 조사이며 구현 대상 아님. 아래 화면·규칙은 팀원 보고에 근거한 설계 후보로, 실제 사이트 접근·등록 허용 또는 검증을 의미하지 않는다.",
+      "tables": [
+        {
+          "title": "P-A. 대상 및 목표",
+          "columns": [
+            "ID",
+            "대상",
+            "현재 확인 수준",
+            "모의 완료 기준",
+            "실제 목표 후보 / 미확인"
+          ],
+          "rows": [
+            [
+              "P-K",
+              "kmong.service_listing",
+              "R03 제공 화면·R05 수동 양식/임시저장 보고",
+              "승인된 상품 필드·이미지와 mock receipt 고유 ID를 재조회하여 일치",
+              "심사 접수 증거 + 상품 ID; 공개는 별도. 패키지 토글 및 옵션, 실제 접수/권한 미확인."
+            ],
+            [
+              "P-S",
+              "soomgo.service_configuration",
+              "R04 기존 고수의 서비스 목록·추가 모달·질문지 화면 보고; 신규 가입과 저장 재조회 미확인",
+              "합성 기존 고수 프로필에서 한 category 설정을 저장 후 독립 재조회, 선택값·대상 일치",
+              "서비스 설정 저장 후보; 고수 프로필 저장은 별도 의도. 공개·검색·견적 도착은 목표 아님. R01 결정 전 후보."
+            ],
+            [
+              "P-T",
+              "taling.class",
+              "R05 수동 작성·임시저장 보고",
+              "이번 공통 하네스 제외; 설계 대비용",
+              "향후 심사 접수 후보; 가격 단위, 정산/본인인증 및 정책 제한, 시간 호환성 미확인."
+            ]
+          ]
+        },
+        {
+          "title": "P-B. 크몽 필드 매핑 후보",
+          "columns": [
+            "ID",
+            "화면 항목",
+            "관측된 규칙 (S04,S10)",
+            "원본/변환",
+            "미확인·처리"
+          ],
+          "rows": [
+            [
+              "K01",
+              "제목",
+              "10~30자; 허용 기호 후보 + - # / . ( )",
+              "F03,F04 → 축약 제목",
+              "문자 카운트·실제 검증 재확인; 미확인 특수문자 차단/확인"
+            ],
+            [
+              "K02",
+              "카테고리",
+              "3단계; 보컬 등 카테고리 예",
+              "F03 → 선택 ID/라벨",
+              "현재 옵션·목록 확인; AI 추측 ID 금지"
+            ],
+            [
+              "K03",
+              "설명",
+              "100자 이상, 특정 문자 제한 보고",
+              "F04,F08~F12 → 승인된 문구",
+              "금칙어/외부연락처·리치텍스트 검사 후보"
+            ],
+            [
+              "K04",
+              "모집 형태/지역",
+              "개인/그룹/기업; 온라인/오프라인 및 지역·상세주소",
+              "F06,F07",
+              "공개 상세주소 필요 시 질문; 지역 코드 확인"
+            ],
+            [
+              "K05",
+              "메인 이미지",
+              "1~4장 PNG/JPG, 652×488 규격 보고",
+              "F14 → 파생 이미지",
+              "정확 크기/최소/비율 차이 확인; 권리·digest 확인"
+            ],
+            [
+              "K06",
+              "제공 절차/준비사항",
+              "각 50자 이상 보고",
+              "F11,F12",
+              "원본 부족하면 질문; 준비물 없음도 허위 내용으로 늘리지 않음"
+            ],
+            [
+              "K07",
+              "패키지별 제목/설명",
+              "20자/60자 이하 보고",
+              "F08,F04",
+              "단일/복수 패키지 토글 실제 확인; 요금제 복제 금지"
+            ],
+            [
+              "K08",
+              "패키지별 금액/기간/수정 횟수/수업 시간/횟수",
+              "금액 VAT 포함, 나머지 드롭다운 보고",
+              "F08 + F15; minutes, sessions, amount 그대로",
+              "VAT/기간/수정 횟수 확인, 90/180/270 옵션 가능성 검증. 작업기간 ≠ 회차"
+            ],
+            [
+              "K09",
+              "상세이미지/영상",
+              "0~9장·652~2000 가로·세로≤3000, 영상 0~6 합계 500MB 보고",
+              "F14",
+              "선택. 이번 핵심은 대표 이미지 1장"
+            ],
+            [
+              "K10",
+              "추가 정보/키워드/FAQ/추가 옵션",
+              "키워드 5개×20자, FAQ 50개 등 보고",
+              "F03,F09,F12,F15",
+              "선택 지원 범위 미채택; 가격이 변경되는 옵션 별도 승인"
+            ]
+          ]
+        },
+        {
+          "title": "P-C. 크몽 실행 및 증거 체크포인트",
+          "columns": [
+            "ID",
+            "선행/동작",
+            "확인할 관측",
+            "실패·분기"
+          ],
+          "rows": [
+            [
+              "KF01",
+              "계정/전문가 자격 확인 (실제는 사용자 직접; 지금 mock)",
+              "platform account context, eligibility flag",
+              "미확인/인증 필요 → needs_action; 실환경 blocked"
+            ],
+            [
+              "KF02",
+              "상품 목록에서 기존 의도·상품 존재 확인 → 신규 등록 객체 진입",
+              "대상 slot, 신규/수정 구분",
+              "기존 효과/중복 의심 → read-only 확인; unknown 차단"
+            ],
+            [
+              "KF03",
+              "기본정보·상세/지역 입력 → 이미지 첨부 → 가격/패키지 → 선택 필드",
+              "단계별 필드/선택 라벨·파일 digest, 오류",
+              "필수/값 충돌 → needs_action; 폼/첨부 오류 효과 없으면 failed"
+            ],
+            [
+              "KF04",
+              "제출 직전 전체 read-back 및 승인 digest 대조",
+              "누락·차이·권리·권한·버전, 대상·동작 범위",
+              "UI 변경/불일치/승인 철회 → 중단, 새 승인"
+            ],
+            [
+              "KF05",
+              "모의 접수 1회 (실제 제출 금지)",
+              "attempt durable 기록, receipt id·payload hash",
+              "응답 유실/상충 → unknown, 반복 금지"
+            ],
+            [
+              "KF06",
+              "독립 재조회",
+              "mock receipt에 필드·asset digest 일치",
+              "mock_completed; 실제는 심사 접수/심사중/반려/공개 각각 별도 증거"
+            ]
+          ]
+        },
+        {
+          "title": "P-D. 숨고 필드 매핑 후보",
+          "columns": [
+            "ID",
+            "객체/항목",
+            "관측된 규칙 (S08,S09,S10)",
+            "원본/변환 및 제한"
+          ],
+          "rows": [
+            [
+              "Sg01",
+              "고수 프로필/활동명·한줄소개",
+              "각 30/80자 보고",
+              "F02,F04; 별도 프로필 편집 승인, 서비스 등록과 분리"
+            ],
+            [
+              "Sg02",
+              "고수 프로필/연락시간·직원수·링크·지역",
+              "연락 시간 dropdown, 활동 주소·이동 반경",
+              "F07,F13,F15; 링크/연락처 공개 범위 확인. 출장 추정 금지"
+            ],
+            [
+              "Sg03",
+              "서비스 카테고리",
+              "음악 검색, MIDI/작곡/음향/보컬 등",
+              "F03 → category 선택 확인; 기존 카드 확인 후 추가/수정 구분"
+            ],
+            [
+              "Sg04",
+              "MIDI 질문지/DAW",
+              "상담 후 결정, Logic Pro X, Cubase, Ableton, FL, GarageBand 보고",
+              "F13; 제공 가능 도구를 확인. 사용자/고객 희망을 강사 사실로 역추론 금지"
+            ],
+            [
+              "Sg05",
+              "질문지/목적·건반",
+              "취미/입시/작업; 건반 가능/코드만/불가",
+              "F05; 지원 범위 사용자 확인"
+            ],
+            [
+              "Sg06",
+              "질문지/연령·성별",
+              "10대 미만~50대 이상; 남/여 선택 보고",
+              "F05; 타깃 문구만으로 임의 설정 금지; 필요성과 플랫폼 규칙 확인"
+            ],
+            [
+              "Sg07",
+              "질문지/레슨 형태·진행 방식",
+              "개인/그룹/온라인/학원, 강사 작업실/출장/온라인/무관",
+              "F06,F07; 대면 1:1 작업실은 해당 후보, 선택 조합 확인"
+            ],
+            [
+              "Sg08",
+              "프로필 사진·전문성/포트폴리오",
+              "사진·영상, 설명 등 별도 화면 보고",
+              "F04,F14; 권리·별도 객체·검수 구분. 서비스 질문지에 이미지 필수라고 가정 금지"
+            ],
+            [
+              "Sg09",
+              "견적·스마트견적",
+              "본인인증·고객 요청·캐시 등 별도 보고",
+              "최초 서비스 설정과 분리; 비용·메시지·자동 발송 이번 범위 밖"
+            ]
+          ]
+        },
+        {
+          "title": "P-E. 숨고 실행 및 증거 체크포인트",
+          "columns": [
+            "ID",
+            "선행/동작",
+            "확인할 관측",
+            "실패·분기"
+          ],
+          "rows": [
+            [
+              "SF01",
+              "고객/고수 역할과 기존 프로필 상태 확인 (mock)",
+              "role=provider, 기존 서비스 목록",
+              "신규 고수 등록은 R04의 기존 계정 전환과 다름; 미확인 → needs_action"
+            ],
+            [
+              "SF02",
+              "프로필 관리 → 제공 서비스 목록 → 카테고리 선택",
+              "대상 category, 이미 존재 여부",
+              "이미 있으면 무단 추가 금지; 수정 목적/기존 상태 확인"
+            ],
+            [
+              "SF03",
+              "선택형 문항 구성 (카테고리별 schema)",
+              "실제 옵션 라벨/선택값, 필수 여부",
+              "MIDI 7문항을 모든 음악 서비스에 복제하지 않음; 미확인 항목 질문"
+            ],
+            [
+              "SF04",
+              "승인값 read-back → 모의 저장 1회",
+              "대상 및 선택값 일치, 승인·허용·기존 효과",
+              "저장 응답 유실 → unknown"
+            ],
+            [
+              "SF05",
+              "서비스 목록 및 해당 설정 다시 열어 독립 확인",
+              "저장된 category+응답 set, synthetic receipt/revision",
+              "mock_completed만 표시. 실제 신규 추가/저장 재조회 증거 필요"
+            ],
+            [
+              "SF06",
+              "프로필 preview (선택적 읽기)",
+              "표시된 내용 및 조회 조건",
+              "preview≠검색 노출≠견적 수신. 공개 확인은 별도 목표·허용 필요"
+            ]
+          ]
+        },
+        {
+          "title": "P-F. 탈잉 확장 및 차이 보존",
+          "columns": [
+            "ID",
+            "항목",
+            "관측/제약 후보 (S10,S11)",
+            "설계 결과"
+          ],
+          "rows": [
+            [
+              "Tg01",
+              "튜터/클래스",
+              "프로필 이미지, 전화 인증, 소개 선행; 운영 방식·카테고리·클래스명 10~30",
+              "선행 인증 직접; 클래스 별도 object_kind"
+            ],
+            [
+              "Tg02",
+              "썸네일·대상·소개",
+              "1~10장 10MB 이하 1280×720 권장, 홍보문구 제한; 대상 50~500자",
+              "이미지 변환은 새 버전/승인, 연락처·외부 URL 규칙 재확인"
+            ],
+            [
+              "Tg03",
+              "회차·시간·가격",
+              "1~30회 보고, 회차별 50~500자, 시간당 가격×시간×회차; 시간 1시간 단위 보고",
+              "90/270분 등 원본 단위가 불호환하면 강사 결정 없이는 변환 금지; 타 플랫폼 가격 동등 조건 별도 확인"
+            ],
+            [
+              "Tg04",
+              "정산·제출·정책",
+              "정산계좌/신원 정보 요구 보고, 비승인 자동등록 제한 조항 조사",
+              "신원/정산 자료 수집 제외, 운영사 허용 필요. 이번 구현·시험 제외"
+            ]
+          ]
+        }
+      ],
+      "notes": [
+        "모의 공통 T1의 이미지 요구와 숨고 서비스 설정의 사진 필수성이 다를 수 있다. 공통 시험 계약은 변경하지 않는다. R03/R04 협의 시 fixture와 목표 객체별 증거(프로필 이미지 첨부가 별도 단계라면 별도 의도)를 명시하고, 이미지가 없는 객체에 무리하게 가짜 필드를 강제하지 않는다. 현 단계 어떤 live 실행도 금지."
+      ]
+    },
+    {
+      "file": "DETAIL-SYSTEM-V0.2.md",
+      "title": "L4/L5 · 시스템 책임·사용자 흐름·인터페이스·인증",
+      "intro": "V0.1 논리 책임 6개 유지. 지금 확정하는 것은 입력/출력·가드·책임 경계의 제안이며, 프로세스/서비스 수, DB, 프레임워크, 실행 엔진은 미채택. 원격 브라우저는 C 후보의 구체화로 합성 로그인에만 적용한다.",
+      "tables": [
+        {
+          "title": "S-A. 논리 모듈 상세",
+          "columns": [
+            "ID",
+            "책임/부모",
+            "입력 → 출력",
+            "금지·실패 경계"
+          ],
+          "rows": [
+            [
+              "C01a",
+              "LR-C-01 원본/자료",
+              "원문·확인값·이미지 → source_version, facts, issues",
+              "AI 사실 후보만; 권리/충돌 확인"
+            ],
+            [
+              "C02a",
+              "LR-C-02 규칙/변환",
+              "source+platform rule → draft_version, field mappings, questions",
+              "플랫폼별 매퍼 분리; 엔진으로 사실 생성 금지"
+            ],
+            [
+              "C03a",
+              "LR-C-03 승인/권한/의도 가드",
+              "approval+permission+intent+job+lease → allow/deny(reason)",
+              "동작 직전 검사, unknown/중복/철회/live 차단"
+            ],
+            [
+              "C04a",
+              "LR-C-04 실행 오케스트레이션/adapter",
+              "승인된 step+opaque session handle → attempt/observations",
+              "실행기는 정책·성공 단독 확정 금지; mock origin 고정"
+            ],
+            [
+              "C04b",
+              "LR-C-04 세션/제어권 경계 (후보)",
+              "connection/lease → human view or worker capability",
+              "로그인 중 AI 접근 없음; 합성 전용; 동시 제어 금지"
+            ],
+            [
+              "C05a",
+              "LR-C-05 결과/복구",
+              "attempt+관측+goal → result_revision, next_action",
+              "외부 효과 불명확 unknown, 부작용 없는 재확인"
+            ],
+            [
+              "C06a",
+              "LR-C-06 웹 UI/API",
+              "사용자 명시 입력·결정 → 위 논리 호출; 상태/증거 표시",
+              "외부 자격증명을 우리 서비스 폼에 넣지 않음"
+            ],
+            [
+              "C07a",
+              "공통 저장/감사 포트 (물리 미정)",
+              "immutable snapshot/attempt/result; owner-scoped 조회",
+              "실행 중 상태 손실 대비; 민감정보 기록 금지; 삭제 정책 미정"
+            ]
+          ]
+        },
+        {
+          "title": "S-B. 우리 서비스 사용자 흐름 (TO-BE, 화면 후보)",
+          "columns": [
+            "ID",
+            "화면/행동",
+            "표시 및 요청",
+            "이동·예외"
+          ],
+          "rows": [
+            [
+              "U01",
+              "원본 입력",
+              "기존 원고, 확인된 레슨 조건, 사진·권리, 공개 범위",
+              "구조화 → U02; 빈 값/상충은 질문; 로그인 요구 전 정보 준비 가능"
+            ],
+            [
+              "U02",
+              "대상 및 목표 선택",
+              "크몽 상품 / 숨고 서비스 설정 후보; 탈잉 연구 표시",
+              "객체·선행조건·지원 범위 표시. current mock only; 각 대상 독립"
+            ],
+            [
+              "U03",
+              "플랫폼별 초안 검토",
+              "원본 대비 변환값, 가격/단위, 이미지 preview, 필수 누락, 규칙 출처",
+              "사용자 수정 → 새 version; 전용 추가 질문 → U01/U03"
+            ],
+            [
+              "U04",
+              "승인/실행 준비",
+              "대상 객체/목표·환경·승인 동작, 변경 시 재승인 안내",
+              "권한·승인 확인, live 불가. 원격 인증 후보 U05; 승인과 인증 별개"
+            ],
+            [
+              "U05",
+              "계정 연결/원격 화면 (후보)",
+              "합성 로그인 전용 화면; 로그인·추가 인증은 사용자; 화면 기록 OFF",
+              "사용자가 완료 → 인증 상태 최소 관측 → 제어권 반환/인계. 만료/취소는 needs_action"
+            ],
+            [
+              "U06",
+              "실행/중단/사용자 개입",
+              "현재 step, 마지막 확인 시점, 사람 개입 사유, 중단",
+              "비동기 서버 작업 후보; 모의 실행만. 추가 결정 시 정지, 승인 영향 재확인"
+            ],
+            [
+              "U07",
+              "결과/증거",
+              "대상별 목표/환경, 입력·저장/접수·심사·공개 구분, 근거/오류",
+              "unknown → U08; 독립 결과 유지. 실제 게시 상태를 모의 결과로 표시하지 않음"
+            ],
+            [
+              "U08",
+              "재확인 및 재개",
+              "기존 효과 조회, 가능한 다음 조치, 재승인 요구",
+              "이미 성공은 상태만 수정, 불명확은 차단, 안전한 다음 단계+현재 승인 확인 후 별도 시도"
+            ]
+          ]
+        },
+        {
+          "title": "S-C. 논리 API → HTTP 후보 (구현 지시 아님)",
+          "columns": [
+            "ID",
+            "동작/후보 경로",
+            "요청 핵심",
+            "응답 핵심",
+            "가드/오류"
+          ],
+          "rows": [
+            [
+              "A01",
+              "prepare_source POST /v1/sources",
+              "source_text, facts[], media_versions[], prior_version?",
+              "source_ref/version, facts[], issues[]",
+              "owner, rights; 422 missing/conflict, 수정은 새 버전"
+            ],
+            [
+              "A02",
+              "prepare_draft POST /v1/drafts",
+              "source_ref/version, platform, object_kind, rule_version, target_goal",
+              "draft_ref/version, field_mappings[], issues[], digest",
+              "rule/object unknown, unsupported value; 422/409"
+            ],
+            [
+              "A03",
+              "수정 PATCH /v1/drafts/{ref}",
+              "expected_version, explicit field edits",
+              "new draft_version, digest, issues",
+              "409 stale; 확인되지 않은 사실은 원본 수정/재검토"
+            ],
+            [
+              "A04",
+              "record_approval POST /v1/approvals",
+              "source/draft/rule/media versions, target, environment, actions, digest, explicit consent",
+              "approval_ref, scope_digest, status",
+              "409 stale, 422 unresolved, 403 scope; 철회 endpoint 별도"
+            ],
+            [
+              "A05",
+              "plan_and_check_execution POST /v1/jobs",
+              "intent_ref/target_slot, approval_ref, requested environment/actions, idempotency_key",
+              "job_ref, state, retry_blocked, reasons",
+              "서버가 permission 평가; 동일 intent/operation 키 및 기존 효과 검사; 403 live,409 duplicate"
+            ],
+            [
+              "A06",
+              "execute_approved_action 내부 worker command",
+              "job_ref, step_id, operation_id, expected_revision, lease_generation?",
+              "attempt_ref, observations[], error_code",
+              "직전 원자 가드, 기록 후 단일 동작; 외부에서 직접 호출 불가"
+            ],
+            [
+              "A07",
+              "read_result GET /v1/jobs/{ref}",
+              "owner context, after_revision?",
+              "state, target_goal, observed_stage, result_revision, evidence_refs, next_action, retry_blocked",
+              "소유자 검사; 증거 조회 읽기 전용"
+            ],
+            [
+              "A08",
+              "reconcile POST /v1/jobs/{ref}/reconcile",
+              "expected_revision, evidence_refs/user observation",
+              "updated result, safe_next_step?, retry_blocked",
+              "재확인만, 증거 부족이면 unknown"
+            ],
+            [
+              "A09",
+              "resume POST /v1/jobs/{ref}/resume",
+              "expected_revision, explicit_resume, current approval_ref",
+              "state, safe_step, reasons",
+              "현재 승인·permission·인증 재검사; unknown 중 효과 반복 금지"
+            ],
+            [
+              "A10",
+              "cancel / revoke POST /v1/jobs/{ref}/cancel, /v1/approvals/{ref}/revoke",
+              "expected_revision, reason",
+              "state, lease_revoked, pending_effect?",
+              "새 동작 차단. 이미 시도된 효과 불명확하면 unknown"
+            ],
+            [
+              "A11",
+              "connection/lease 후보 POST /v1/connections, /{ref}/handoff, /{ref}/close",
+              "platform, mock, owner, expected_generation, action",
+              "opaque connection_ref, auth_state, controller, expiry",
+              "접속 URL/토큰은 짧은 수명·권한 범위, 일반 로그 미포함; live 차단"
+            ]
+          ]
+        },
+        {
+          "title": "S-D. 작업/관측/오류 상태 계약 보완",
+          "columns": [
+            "ID",
+            "조건",
+            "표현/효과",
+            "다음 행동"
+          ],
+          "rows": [
+            [
+              "ST01",
+              "필수값/권리/규칙/선행조건 미해결",
+              "draft needs_confirmation / job needs_action; reason_code, field_key",
+              "사용자 확인·새 버전·재승인"
+            ],
+            [
+              "ST02",
+              "현재 mock 권한 없음 / live 요청 / 타 사용자",
+              "blocked 또는 접근 거부; 실행 0",
+              "권한 재검토, 현재 live 해제 금지"
+            ],
+            [
+              "ST03",
+              "실행 중 세션 만료/추가 인증, 효과 미발생 확인",
+              "needs_action, auth_required, checkpoint",
+              "사용자 재인증 후 가드·승인 재검사"
+            ],
+            [
+              "ST04",
+              "입력/업로드 실패 및 해당 동작 효과 없음 입증",
+              "failed 또는 needs_action; last_verified_step",
+              "수정 후 명시 재개, 승인 변경 시 재승인"
+            ],
+            [
+              "ST05",
+              "제출/저장 직후 응답 유실, 프로세스 중단 또는 충돌",
+              "unknown, retry_blocked=true; attempt/evidence refs",
+              "읽기 전용 재확인; 실패/취소로 강등해 재시도 금지"
+            ],
+            [
+              "ST06",
+              "목표 mock receipt 또는 설정 재조회 일치",
+              "mock_completed, observed_stage platform_specific/receipt_confirmed",
+              "실제 target_confirmed 금지; 결과 revision 기록"
+            ],
+            [
+              "ST07",
+              "사용자 중단 또는 권한 철회",
+              "추가 부작용 0, 진행 중 효과 불명확 unknown; 효과 없음 확인 시 cancelled",
+              "제어권 제거, 재확인만"
+            ],
+            [
+              "ST08",
+              "타 플랫폼 job 상태 변경",
+              "해당 job/result만 업데이트",
+              "다른 대상은 그대로; 복수 동시 실행 미채택"
+            ]
+          ]
+        },
+        {
+          "title": "S-E. 원격 브라우저 후보 세션·제어권 수명주기",
+          "columns": [
+            "ID",
+            "상태/전이",
+            "가드·구현 요구",
+            "관측/실패"
+          ],
+          "rows": [
+            [
+              "RB01",
+              "created → human_control",
+              "사용자별 격리 브라우저 생성; 인증된 우리 서비스 사용자의 short-lived view grant; loopback synthetic only",
+              "다른 사용자 접속 차단; worker/LLM 캡처·DOM 관측·trace·입력 기록 금지 during auth"
+            ],
+            [
+              "RB02",
+              "human_control → auth_check",
+              "사용자가 직접 모의 계정 로그인하고 완료 요청; 원격 입력 lease 회수/세대 증가",
+              "인증 성공은 보호 페이지 또는 합성 auth marker 확인; 입력 내용/쿠키/비번 읽지 않음"
+            ],
+            [
+              "RB03",
+              "auth_check → automation_control",
+              "동일 instance/context, auth state verified; permission+approval+intent+lease generation 확인",
+              "worker만 제어. 사람과 자동화 동시 입력 불가; 외부 실제 계정/토큰 없음"
+            ],
+            [
+              "RB04",
+              "automation_control → running/disconnected viewer",
+              "뷰어 연결 종료와 작업 생명주기 분리; 승인 범위 안에서만 worker 실행",
+              "사용자 웹 탭 닫혀도 모의 작업 완료 가능성 시험; 실제 계정은 미검증"
+            ],
+            [
+              "RB05",
+              "automation_control → needs_human",
+              "추가 인증/차단/결정/예상 외 화면; worker 중지·lease 회수 확인 후 사람에 인계",
+              "시도 중 외부 효과 불명확하면 job unknown; 인증과 재개는 별개"
+            ],
+            [
+              "RB06",
+              "needs_human → auth_check → automation_control",
+              "재인증/사용자 결정, 현재 버전·권한·기존 효과 확인",
+              "새 내용 승인 필요하면 U03/U04. 동일 의도 unknown이면 조회만"
+            ],
+            [
+              "RB07",
+              "any → closing → closed",
+              "중단/만료/철회; view grant, worker lease, 브라우저 프로세스 및 임시 프로필 폐기",
+              "폐기된 연결 접근 불가; 외부 플랫폼의 전역 로그아웃과는 별개. 폐기 실패 경고/격리"
+            ],
+            [
+              "RB08",
+              "crash / heartbeat lost",
+              "lease 만료 후 이전 worker fencing; attempt 상태 durable; 복구 전 read-only 확인",
+              "in-flight effect unknown; 자동 재제출 금지. 브라우저 상태 보존·장기 세션은 미채택"
+            ]
+          ]
+        },
+        {
+          "title": "S-F. 보안·배치 후보와 기술 판단",
+          "columns": [
+            "ID",
+            "항목",
+            "현 단계 / 채택 조건"
+          ],
+          "rows": [
+            [
+              "SEC01",
+              "신뢰 경계",
+              "우리 서비스 인증/사용자 데이터/외부 인증/운영사 허용 분리. mock 사용자만. 플랫폼 사이트가 사용자 승인 대신 권한을 준다고 추정 금지."
+            ],
+            [
+              "SEC02",
+              "원격 접속",
+              "noVNC+websockify+x11vnc+Xvfb+Chromium/Playwright 후보 또는 관리형 서비스. 실험 로컬/격리. VNC·CDP 포트 외부 직접 노출 금지; 서비스 공개 시 HTTPS/WSS·인증·세션별 ACL 필요."
+            ],
+            [
+              "SEC03",
+              "인증 정보",
+              "사용자 원격 입력 중 AI·스크린샷 기록·세션 덤프 차단. 서버가 인증 세션을 보유한다는 민감성 유지; 실제 로그인/쿠키 수집/재사용은 승인 전 금지. MFA/CAPTCHA/본인 인증 우회 금지."
+            ],
+            [
+              "SEC04",
+              "브라우저 권한",
+              "대상 origin 및 허용 경로·행위 제한; navigation/redirect 검증, 파일 업로드는 승인 asset만. 화면 표시만으로 접근 통제했다고 보지 않음."
+            ],
+            [
+              "SEC05",
+              "실행 방식",
+              "단일 앱+독립 worker/로컬 혼합/서버 브라우저/API/수동 보조 후보; durable job/queue는 책임만 정의. FastAPI, SQLite, Skyvern은 R03 실험의 증거이지 제품 채택 아님."
+            ],
+            [
+              "SEC06",
+              "AI 경계",
+              "LLM은 사실 추출·문안 변환 후보만. 가격/횟수/권리/승인/정책/결과는 결정적 검사 및 사람 확인. 브라우저의 외부 텍스트는 데이터, 시스템 지시 아님."
+            ],
+            [
+              "SEC07",
+              "저장·배포",
+              "개발: loopback, synthetic fixture, 독립 manifest/lock. 제품: 저장 위치, 암호화/키, worker 격리, 감사, 장애·삭제·백업·운영비는 LR-D03/04/06 이후."
+            ],
+            [
+              "SEC08",
+              "운영사·자료",
+              "공식 허용, 강사 동의, 플랫폼별 위임 범위와 본인인증, 외부 모델/호스팅의 처리 위탁 검토. 가격·비용·정산·메시지 자동화는 별도 결정."
+            ]
+          ]
+        }
+      ],
+      "notes": [
+        "예시 호출 순서: A01 → A02 → A03(필요 시) → A04 → A05 → A11(합성 인증·인계) → A06 반복(동작별 가드) → A07; unknown이면 A08 후 A09는 안전한 다음 단계가 확인될 때만. 작업 생성은 외부 부작용이 아니다. 원격 브라우저 인증이 필수가 아닌 mock simulator에서는 A11을 생략하되 실제 인증 성공으로 표시하지 않는다. HTTP 경로·응답 코드는 구현 검토 후보이며 기존 R03 시험 계약을 대체하지 않는다."
+      ]
+    },
+    {
+      "file": "DETAIL-VERIFICATION-V0.2.md",
+      "title": "L6/L7 · 근거 추적·검증·결정 게이트",
+      "intro": "현재 결과를 조사/모의 실행/미확인으로 나누어 설계와 연결한다. 이 문서의 시험 계획은 새 TASK 할당·본 구현 승인·실행 기록이 아니다. R03의 검증 보고는 독립 재실행 없이 인용하고, R04/R05의 수동 관측은 자동화 성공으로 계산하지 않는다.",
+      "tables": [
+        {
+          "title": "V-A. 근거의 채택과 잔여 불일치",
+          "columns": [
+            "ID",
+            "자료",
+            "채택할 내용",
+            "제외/보류",
+            "설계 연결"
+          ],
+          "rows": [
+            [
+              "EV01",
+              "R02 S03",
+              "강사 업무 흐름, 원본 조건, 승인/무인 희망, 20~30분 목표",
+              "시간 회상·지불 의향 미실측; 실제 게시 가격 차이",
+              "DD-01,F08~F12,U01~U08,LR-T10"
+            ],
+            [
+              "EV02",
+              "R03 S04~S07",
+              "원본/preview/승인/작업/영수증, 오류 주입 19개 통과 보고, Skyvern mock 입력/첨부/접수",
+              "개인 실험, 크몽형 전용·30만원 고정·3 tier 강제; SDK DOM 조작은 일반 AI 자율성/인증 인계 아님",
+              "C01a~C05a,KF03~KF06,LR-T01~T08"
+            ],
+            [
+              "EV03",
+              "R04 S08,S09",
+              "숨고 기존 계정 역할/서비스 목록/선택 질문/preview 관측",
+              "신규 고수 가입·신규 서비스 저장 재조회·검색노출 미확인; 예시 강사 가격·이력 채택 안 함",
+              "P-S,Sg01~09,SF01~06"
+            ],
+            [
+              "EV04",
+              "R05 S10,S11",
+              "필수/선택 규칙 후보, 단위/이미지/인증·위임 제약",
+              "단일 패키지 토글, 옵션·VAT, 실제 자동화/허용 미확인. 임시저장·프로필 공개는 R05 보고일 뿐",
+              "K01~K10,Tg01~04,SEC08"
+            ],
+            [
+              "EV05",
+              "R01 대화 실험",
+              "서버 브라우저·VNC·CDP 연결까지 일부 확인했다고 보고",
+              "모의 페이지 접근 정책 차단; 원격 로그인/제어권 인계 미검증; GitHub 재현 로그 미등록",
+              "RB01~08; 증거가 제출될 때만 실행 판정"
+            ],
+            [
+              "EV06",
+              "공통 S02,S12,S14",
+              "동일 최소 어휘·T1~T6·mock only·독립 작업",
+              "R03 개인 PoC를 TASK-043 완료로 간주하지 않음; R04/R05 조사=TASK 전체 완료 아님",
+              "LR-T01~06, gate G1"
+            ]
+          ]
+        },
+        {
+          "title": "V-B. 검증 추적 매트릭스",
+          "columns": [
+            "ID",
+            "V0.1 연결",
+            "시험/입력",
+            "기대 결과·관측",
+            "현재 증거/판정"
+          ],
+          "rows": [
+            [
+              "VT01",
+              "FR-01/02; LR-T02; DD-01/02",
+              "최신 합성 25/40/50만원 vs 이전 30만원, 누락·충돌·VAT·지원 단위",
+              "변환 결과·fact_refs·issue, 임의 값/부작용 0",
+              "계획; R03 30만원 테스트는 별도 fixture"
+            ],
+            [
+              "VT02",
+              "FR-02/03; LR-T01,T07; M04",
+              "권리 승인 이미지, 잘못된 MIME/규격, 파생본 변경",
+              "권리/형식/digest와 승인을 대조, 오류 또는 재승인",
+              "R03 기본 이미지 검사 통과 보고; 플랫폼 규격 전체 미검증"
+            ],
+            [
+              "VT03",
+              "FR-03/04; LR-T03,T06; C03a",
+              "stale draft/rule/media, 미승인, 철회, 타 owner, live 요청",
+              "부작용 호출 0, blocked/needs_action; 권한·로그 확인",
+              "R03 stale/live/ownership 일부 보고; 통합 미실행"
+            ],
+            [
+              "VT04",
+              "FR-04/05; LR-T01; P-K",
+              "합성 상품, 승인된 값/이미지, mock 폼 제출",
+              "독립 receipt 재조회·필드/hash 일치, mock_completed",
+              "R03 개인 mock 보고 있음; 공통 고정 하네스 미검증"
+            ],
+            [
+              "VT05",
+              "FR-04/05; LR-T01; P-S",
+              "합성 기존 고수, category/문항 선택 및 저장",
+              "설정 재조회·category/answers 일치, mock_completed",
+              "계획; R04 화면 근거만"
+            ],
+            [
+              "VT06",
+              "FR-05/06; LR-T04,T05,T08; ST04/05",
+              "폼 거절, 이미지 오류, 저장 응답 유실, 중복 요청, worker crash",
+              "효과 없음은 failed/needs_action; 효과 불명확 unknown, 반복 0; 재확인 증거",
+              "R03 유실/중복 등 보고; crash·공통 검증 미실행"
+            ],
+            [
+              "VT07",
+              "FR-05/06; LR-T09; ST08",
+              "A mock 완료/B unknown, 결과 재조회",
+              "대상·의도·환경·근거 독립, 전체 성공 오표시 0",
+              "계획"
+            ],
+            [
+              "VT08",
+              "FR-03/04; LR-T03,T06; RB01~03",
+              "웹 뷰어로 합성 로그인, 동일 browser/context 인계",
+              "보호 페이지 접근, 사용자→worker 제어권 상호배타, 로그인 입력/쿠키 로그 0",
+              "미검증; 별도 원격 PoC 제안"
+            ],
+            [
+              "VT09",
+              "FR-04/06; RB04~08",
+              "뷰어 종료, 추가 인증, 사용자 중단, TTL/격리, worker 충돌",
+              "서버 모의 지속, 안전 handoff, 타 사용자 차단, 폐기 후 접근 불가, unknown 보호",
+              "계획, 실제 플랫폼 인증 제외"
+            ],
+            [
+              "VT10",
+              "FR-01~06; LR-T10",
+              "동일 fixture·목표·시작상태에서 직접/A, 범용AI/B, 전용/C",
+              "직접 활동 시간/총시간/심사대기 분리, 수정/개입, 정확성/첨부/결과, 비용·지불 의향",
+              "미실측, 목표 20~30분은 희망치"
+            ],
+            [
+              "VT11",
+              "LR-T11; DD-01~04",
+              "V0.1 ID, 상세 객체/흐름/가드/테스트/근거 참조 대조",
+              "충돌·누락 및 mock/live 분리 확인; 정적 검토 ≠ 제품 검증",
+              "이번 문서 표 구조/출처 참조 검사만; 구현 미실행"
+            ]
+          ]
+        },
+        {
+          "title": "V-C. 설계·채택 게이트",
+          "columns": [
+            "ID",
+            "연결된 결정",
+            "현재 처리",
+            "필요한 입력/종료 조건"
+          ],
+          "rows": [
+            [
+              "G1",
+              "LR-D01,LR-D03 / 11월 26일 공통 시험",
+              "현재 TASK-043~045 유지",
+              "R03 고정 harness commit/fixture, R04/R05 독립 코드·재현 로그 T1~T6. 개인 PoC를 자동 승격하지 않음"
+            ],
+            [
+              "G2",
+              "LR-D01 / 대상·완료",
+              "크몽 심사 접수 후보·숨고 서비스 설정 후보; 탈잉 확장",
+              "숨고 기존/신규 객체 및 저장 재조회, 크몽 옵션·VAT·접수 근거. 정책·사용자 가치 separate"
+            ],
+            [
+              "G3",
+              "LR-D02 / 인증·실행",
+              "원격 브라우저 우선 시험 후보, 로컬/혼합/API/수동 대안 유지",
+              "합성 remote login, same-context handoff, viewer 종료 후 실행, 제어권·격리·폐기 시험. TASK-046 제안 미등록; 실제 계정 금지"
+            ],
+            [
+              "G4",
+              "LR-D03/04 / 스택·물리 API/DB/배포",
+              "논리 schema·상태·가드·호출 초안까지만",
+              "PoC 비교·보안·비용·운영·공수. 채택 후 실제 컴포넌트/스키마/배포 설계와 WBS"
+            ],
+            [
+              "G5",
+              "LR-D05/06 / 가치·품질",
+              "20~30분 가설, 무단/거짓 성공/중복 0 원칙",
+              "A/B/C 실측, 자료/로그 보존 및 삭제, latency/cost/운영 목표"
+            ],
+            [
+              "G6",
+              "11월 27일 R01 판단",
+              "검증 근거 기반 채택·보류·수정·폐기",
+              "권한·목표·기술·가치·공수 독립 기록. 현재 실서비스 금지 유지; 12/8 MVP 범위는 별도 확정"
+            ]
+          ]
+        },
+        {
+          "title": "V-D. 팀원 산출물 재사용 계획 (배정 아님)",
+          "columns": [
+            "ID",
+            "담당/현재 위치",
+            "재사용 후보",
+            "남은 확인"
+          ],
+          "rows": [
+            [
+              "W01",
+              "R02 main/TASK-028",
+              "최신 조건·UX·비교 기준",
+              "직접 시간·사용자 가치 및 추가 필드 확인"
+            ],
+            [
+              "W02",
+              "R03 main 개인 workspace/test",
+              "검증/승인/receipt/오류 로직 및 일부 테스트",
+              "공통 harness 두 플랫폼, 고정 release 및 증거, 30만원 fixture 분리, 실제 CLI 비활성 유지"
+            ],
+            [
+              "W03",
+              "R04 akaraywon",
+              "숨고 AS-IS 흐름·questionnaire",
+              "등록 객체/저장 검증, 합성 mock, 실제 신규 가입 미확인"
+            ],
+            [
+              "W04",
+              "R05 Imdahyeok",
+              "크몽 필드/제약·정책, 탈잉 후보",
+              "크몽 최소 독립 PoC, 규칙 불일치, 정책 허용 확인"
+            ],
+            [
+              "W05",
+              "R01 현재 브랜치",
+              "V0.1 + V0.2 상세 계약, 근거 스냅샷",
+              "검토 및 결정, 기존 TASK 결과 정산은 별도; PR/main 미변경"
+            ]
+          ]
+        }
+      ],
+      "notes": [
+        "팀원의 실제 계정 접근·임시저장/프로필 변경 보고는 현재 PHASE의 실서비스 접근 제한과 별도로 시점·범위·허용 여부를 검토한다. 해당 보고의 존재를 새로운 실행 허용으로 해석하지 않는다. 실제 계정명/주소/스크린샷 속 개인정보를 복제하지 않았으며 원문은 커밋 링크로만 연결했다."
+      ]
+    }
+  ],
+  "validation": {
+    "kind": "static_shape_and_reference_check",
+    "table_count": 20,
+    "row_count": 157,
+    "unique_row_ids": true,
+    "baseline_record_ids_checked": [
+      "FR-01",
+      "FR-02",
+      "FR-03",
+      "FR-04",
+      "FR-05",
+      "FR-06",
+      "LR-D03",
+      "LR-D06",
+      "LR-C-01",
+      "LR-C-02",
+      "LR-C-03",
+      "LR-C-04",
+      "LR-C-05",
+      "LR-C-06",
+      "LR-T10",
+      "LR-T01",
+      "LR-T02",
+      "LR-T03",
+      "LR-T04",
+      "LR-T09",
+      "LR-T11",
+      "LR-D01",
+      "LR-D02",
+      "LR-D05"
+    ],
+    "source_ids_checked": [
+      "S03",
+      "S04",
+      "S13",
+      "S08",
+      "S09",
+      "S10",
+      "S05",
+      "S11",
+      "S07",
+      "S12",
+      "S02",
+      "S14"
+    ],
+    "execution_status": "not_run",
+    "limitations": "표 폭·ID 중복·명시 단일 출처 ID 및 V0.1 FR/LR 참조 확인만 수행. 전체 의미·물리 구현·스키마 적합성·PoC 실행 검증 아님."
+  }
+}
