@@ -10,6 +10,7 @@ const read=rel=>{if(typeof rel!=='string'||rel.startsWith('/')||rel.split('/').s
 if(process.argv[2]==='--self-test'){const t=selfTest();console.log(JSON.stringify(t,null,2));process.exitCode=t.passed===t.total?0:1;}
 else {
  const manifest=JSON.parse(read(process.argv[2]).bytes.toString('utf8'));
+ if(manifest.schema_version!==1||!Array.isArray(manifest.rules)||!manifest.rules.length)throw Error('Nonempty schema v1 rule manifest required');
  const adapter=read(manifest.adapter),module=await import(pathToFileURL(adapter.path).href);
  const engine=readFileSync(resolve(dirname(fileURLToPath(import.meta.url)),'verify_design_stage.mjs'));
  const revisions={engine:blob(engine),adapter:blob(adapter.bytes)};

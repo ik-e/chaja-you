@@ -65,3 +65,8 @@ flowchart TD
 **검증 용어:** 문제·사용자 가치 적절성은 Validation, 명세와 설계의 충족 여부는 Verification, 입력·환경·기대 결과의 구체화는 Test Design, 실제 실행 기록은 Test Execution입니다.
 
 **정본:** [planning-design-info-model.json](planning-design-info-model.json)에는 단계별 `verification_design`, 각 L단계의 검증 설계와 `IT-20` 참조를 기록합니다. 실제 제품 범위·기술·개발 결과는 승인되지 않았습니다.
+
+
+## 2026-11-24 보완: 설계 중 실제 검증
+
+검증 계획 작성만으로 해당 설계 수준의 정합성이 확인되지는 않는다. 영향을 받는 슬라이스에서 상위 의무 보존(정제), 관련 계약 결합(합성), 변경 후 근거 최신성 검사를 실제 실행하고 실패를 수정·재검증한다. [공통 검증 루프와 실행 방법](DESIGN-VERIFICATION-LOOP.md). 선택한 규칙 통과는 전체 단계 승인이나 제품 시험 통과가 아니다. 초안 병렬 작성과 기존 권한 기준은 유지한다.
