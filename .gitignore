@@ -35,3 +35,10 @@ Desktop.ini
 /docs/guidelines/final_project_repository/Doc/*.pdf
 /docs/guidelines/final_project_repository/Doc/*.html
 /docs/archive/legacy/*.docx
+
+# MVP local test and tool artifacts
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+prototype/lesson-registration/runtime/
