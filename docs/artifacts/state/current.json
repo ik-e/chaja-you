@@ -3,7 +3,7 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-23",
+  "as_of": "2026-11-24",
   "scope": "2026-11-23~: R02 음악 레슨 등록 지원 서비스 12항목 기획 구체화; 사용자 Pain→핵심 기능→가치→BM 검증 및 후속 설계 입력 정리. 상세 설계·구현은 보류.",
   "confirmed": [
     "R01은 멘토링 이후 R02 음악 레슨 강사의 모집 등록 업무 지원을 이번 기획 구체화의 방향으로 선택했다. 최종 기술 방식과 MVP는 미확정이다.",
@@ -208,7 +208,8 @@
     },
     {
       "path": "docs/human/phase-intents/PHASE-20261123-01.md"
-    }
+    },
+    "docs/human/phase-intents/PHASE-20261124-02.md"
   ],
   "submission_plan": {
     "id": "PLAN-SUB-20261113",
@@ -280,16 +281,14 @@
   },
   "operating_transition_ref": "docs/artifacts/state/transition-20261118.json",
   "active_task_ids": [
-    "TASK-028",
-    "TASK-029",
-    "TASK-030",
-    "TASK-031",
-    "TASK-032"
+    "TASK-043",
+    "TASK-044",
+    "TASK-045"
   ],
   "inactive_historical_task_range": "TASK-001~027 (이전 단계 기록 보존, 신규 배정 제외; 001~021 정산원장 참고)",
-  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
-  "active_phase_intent_id": "PHASE-20261123-01",
-  "current_product_status": "R02 음악 레슨 등록 지원 기획 구체화 방향 채택(11/23 R01 지시); 핵심 Pain 우선순위·MVP·기술·BM 미확정",
+  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "active_phase_intent_id": "PHASE-20261124-02",
+  "current_product_status": "R03 공통 모의 테스트 환경 및 R04 숨고·R05 크몽 독립 PoC 배정(2026-11-24); 실제 실행/기술·정책 검증 전",
   "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
   "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
   "current_baseline_lifecycle": {
@@ -303,12 +302,11 @@
   "legacy_evidence_manifest_ref": "docs/archive/2026-11-18-task-closeout/manifest.json",
   "legacy_task_status_policy": "TASK-001~021 원본 상태/결과 유지. 운영상 신규 실행은 종료/비활성화했으며 분류·근거·대체 TASK는 closeout 원본과 고정 blob 사본 참조.",
   "previous_phase_task_ids": [
-    "TASK-022",
-    "TASK-023",
-    "TASK-024",
-    "TASK-025",
-    "TASK-026",
-    "TASK-027"
+    "TASK-028",
+    "TASK-029",
+    "TASK-030",
+    "TASK-031",
+    "TASK-032"
   ],
-  "previous_phase_task_status_policy": "이전 022~027은 당시 원본 status/result를 그대로 보존하며 현재 실행 지시에서 제외한다. 과거 001~021의 정산원장은 종전대로 유지."
+  "previous_phase_task_status_policy": "이전 기획·조사 TASK는 당시 상태/결과를 유지하며 신규 실행 의무로 자동 해석하지 않음"
 }
