@@ -1,0 +1,32 @@
+// Reuse existing design validators. Run with parsed source objects from pinned versions.
+import { validate, schemaAudit } from "./validate-interface-review-v3.mjs";
+import { run, checkProfile } from "./validate-data-contract-v4.mjs";
+import { compositionGraph } from "../../../../tools/verify_design_stage.mjs";
+import { evaluateMvpGate } from "./validate-closure-v0.8.mjs";
+
+export function validateCommon(C,T,S,P,G,W,helpers){
+ const {validate,schemaAudit,run,checkProfile,compositionGraph,evaluateMvpGate}=helpers;
+ const checks=[];const add=(id,pass,detail=null)=>checks.push({id,pass:!!pass,detail});const set=xs=>new Set(xs),unique=xs=>xs.length===set(xs).size,all=(xs,ys)=>xs.every(x=>ys.has(x)),equal=(a,b)=>a.length===b.length&&all(a,set(b))&&all(b,set(a));
+ const req=set(T.requirements.map(x=>x.id)),dec=set(T.inventory.map(x=>x.id)),test=set(C.gate.tests.map(x=>x.id)),work=set(W.tasks.map(x=>x.id)),targets=set([...C.routes.map(x=>x.id),...C.ports.map(x=>x.id),"STATE","UI","VIEWER","RUNTIME","STORE","INTEGRATION","TRACE","GATE"]),codes=set(S.$defs.Error.properties.code.enum);
+ const a=schemaAudit(S,{routes:C.routes,ports:C.ports});add("COMMON-01 type and route references",!a.unresolved.length&&!a.route_missing.length&&!a.port_missing.length&&!a.duplicate_routes,a);
+ add("COMMON-02 profile schema and bindings",P.profiles.every(p=>!checkProfile(S,p).errors.length&&!schemaAudit(checkProfile(S,p).merged,{routes:[],ports:[]}).unresolved.length));
+ const g=compositionGraph({nodes:["UI","CO","KNOW","PREP","EXEC","RESULT","STORE","RUNTIME","VIEWER"],dependencies:C.integration.dependencies,calls:C.integration.calls});add("COMMON-03 logical dependency DAG",g.pass,g.findings);
+ add("COMMON-04 error vocabulary",C.routes.every(x=>all(x.errors,codes))&&all(Object.values(C.http.status_codes).flat(),codes));
+ add("COMMON-05 decision IDs and original locators",unique(T.inventory.map(x=>x.id))&&T.inventory.every(x=>!!T.sources[x.source_ref]&&x.locator.id===x.id&&all(x.related_later_refs,dec)));
+ add("COMMON-06 IT-19 required fields and prior refs",C.decisions.every(x=>x.type_id==="IT-19"&&x.status==="provisional"&&["decision_question","options","drivers","selection_and_reason","revisit_when","authority_ref"].every(k=>!!x.fields[k])&&x.fields.options.length>=2&&x.source_refs.every(k=>T.sources[k])&&all(x.prior_decision_refs,dec)&&all(x.requirement_refs,req)&&all(x.target_refs,targets)&&all(x.planned_test_refs,test)&&x.prior_decision_refs.length>0&&x.requirement_refs.length>0&&x.planned_test_refs.length>0));
+ add("COMMON-07 decision projection",equal(T.current_trace.map(x=>x.id),C.decisions.map(x=>x.id))&&T.current_trace.every(x=>{const d=C.decisions.find(y=>y.id===x.id);return d&&equal(x.requirements,d.requirement_refs)&&equal(x.prior,d.prior_decision_refs)&&equal(x.targets,d.target_refs)&&equal(x.planned_checks,d.planned_test_refs)&&equal(x.sources,d.source_refs)&&all(x.work_candidates,work)&&x.work_state==="proposed_not_assigned";}));
+ add("COMMON-08 requirement and interface coverage",T.requirements.every(x=>x.current_decisions.length&&x.planned_checks.length&&all(x.current_decisions,dec)&&all(x.planned_checks,test))&&[...C.routes,...C.ports].every(x=>C.gate.tests.some(t=>t.targets.includes(x.id))));
+ add("COMMON-09 original product gate inventory",unique(C.gate.tests.map(x=>x.id))&&equal(C.gate.required,G.required)&&equal(C.gate.tests.map(x=>x.id),G.required)&&C.gate.tests.every(x=>x.execution==="not_run"&&x.scenario&&x.expected&&all(x.targets,targets)&&all(x.requirement_refs,req)));
+ add("COMMON-10 current lifecycle boundary",equal(C.state.states,["active","stopping","done","stopped"])&&equal(C.state.transition_contract.map(x=>x[0]+"->"+x[1]),["null->active","active->done","active->stopping","stopping->stopped"])&&!C.routes.some(x=>/\/(resume|cancel|rollback)(\/|$)/.test(x.path)));
+ add("COMMON-11 mock and physical limits",S.$defs.Environment.const==="mock"&&C.gate.environment==="mock"&&C.gate.execution==="not_run"&&T.actual_evidence.product_verified_by.length===0&&C.integration.pending.length>0&&C.integration.task_status.includes("proposal"));
+ const regression=run(S,P);add("COMMON-12 V4 selected synthetic regression",regression.every(x=>x.pass),{passed:regression.filter(x=>x.pass).length,total:regression.length});
+ const h="a".repeat(64),cor={field:"/title",value:"수정 문구"},ans={answer_id:"a-1",field:"/title",value:"수정 문구",origin_issue_id:"i-1"};
+ const vcases=[["PreparationEdit",{expected_revision:2,corrections:[cor]},true],["PreparationEdit",{expected_revision:2,corrections:[{value:"x"}]},false],["PreparationEdit",{expected_revision:2,values:{title:"x"}},false],["ResolvedAnswer",ans,true],["ResolvedAnswer",{issue_id:"i-1",value:"x"},false],["ResolvedAnswer",{answer_id:"a-1",field:"/title",value:"x"},true],["StartInput",{expected_revision:2,review_digest:h,approved:true,request_key:"key"},true]];
+ const shapes=vcases.map(([type,value,expected])=>({type,expected,actual:validate(S,type,value).length===0}));add("COMMON-13 V4.1 field correction and normalized answer shapes",shapes.every(x=>x.expected===x.actual),shapes);
+ const gate={...C.gate,required_test_refs:C.gate.required};const candidate={build_sha:"synthetic-build",contract_digest:"synthetic-contract",fixture_digest:"synthetic-fixture",environment:"mock"};const observations=C.gate.required.map(id=>({test_ref:id,verdict:"pass",candidate:{...candidate},run_ref:"synthetic-"+id,execution_kind:"integrated_product",actual_model:true}));
+ const scenarios=[["same_candidate_all_pass",observations,"pass"],["missing_case",observations.slice(1),"incomplete"],["wrong_candidate",observations.map((x,i)=>i===0?{...x,candidate:{...candidate,build_sha:"other"}}:x),"incomplete"],["failure_not_hidden",observations.concat([{...observations[0],verdict:"fail"}]),"fail"],["manual_stub_not_ai",observations.map(x=>x.test_ref==="T5-08"?{...x,actual_model:false}:x),"incomplete"],["independent_harness_not_integrated",observations.map(x=>({...x,execution_kind:"independent_harness"})),"incomplete"]];
+ const gres=scenarios.map(([id,obs,expected])=>({id,expected,actual:evaluateMvpGate(gate,candidate,obs).verdict}));add("COMMON-14 gate evaluator counterexamples",gres.every(x=>x.expected===x.actual),gres);
+ return {checks,regression,shapes,gate_cases:gres,pass:checks.every(x=>x.pass)};
+}
+
+export function verify(C,T,S,P,G,W){ return validateCommon(C,T,S,P,G,W,{validate,schemaAudit,run,checkProfile,compositionGraph,evaluateMvpGate}); }
