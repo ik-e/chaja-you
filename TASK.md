@@ -32,3 +32,7 @@ canonical TASK 원본은 한 시점에 한 명의 책임자만 직접 수정한�
 사람은 [검토 화면](docs/review/README.md)에서 결론·검증·남은 불확실성·결정 요청을 확인하고, 중요한 결정은 [ADR](docs/adr/README.md)의 원본에 기록한다.
 
 원본 변경 후 `uv run --no-project python tools/project_docs.py`로 프로젝션을 생성한다. `uv run --no-project python tools/project_docs.py --check`로 원본 형식과 프로젝션 최신 여부를 확인한다.
+
+## 현재 레슨 등록 PoC의 요구사항과 실행 기록
+
+이전 `focus_apps.json`의 요구사항/사례 ID와 레슨 등록 기획 V1.1의 FR ID는 같은 의미가 아니다. TASK-043~045는 `traceability.product_spec_ref`와 `product_requirement_refs`로 레슨 요구사항을 별도 연결한다. 기존 검증기의 `requirement_refs`는 기존 focus_apps 기준이므로 혼용하지 않는다. PoC 실행 증거는 우선 담당 작업 디렉터리에 두고 TASK result의 근거로 연결한다. 새로운 제품 평가 사례가 정본에 채택되기 전에는 이전 focus_apps의 case ID로 새 run/evaluation을 등록하지 않는다.

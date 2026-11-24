@@ -15,7 +15,9 @@
   "inputs": [
     "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
     "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
-    "docs/human/phase-intents/PHASE-20261124-02.md"
+    "docs/human/phase-intents/PHASE-20261124-02.md",
+    "prototype/lesson-registration/README.md",
+    "prototype/lesson-registration/test-harness/CONTRACT.md"
   ],
   "scope": [
     "고수 프로필, 서비스 등록, 포트폴리오, 견적 발송 중 **최초 등록의 실제 객체**와 완료 기준을 공식 출처/접근 가능한 화면으로 구분",
@@ -34,11 +36,12 @@
     "실제 계정 없이 독립 코드가 최소 한 경로에서 실행되고 mock 성공/실패/unknown을 오인 없이 표시한다",
     "사용자 미승인/모의 결과를 실제 숨고 등록으로 기록하지 않는다",
     "R03 test-harness에 연결할 입출력 예제/실행 명령을 제공한다",
-    "R05 크몽 코드에 의존하거나 변경하지 않는다"
+    "R05 크몽 코드에 의존하거나 변경하지 않는다",
+    "R03 하네스의 고정 commit/계약 버전으로 시험하고 자신의 구현 commit·명령·환경·결과를 기록한다. 개발 착수는 독립적이다."
   ],
   "verification": [
     "실제 실행 전에는 '완료'나 성공을 표시하지 않는다",
-    "실행 명령·환경·기대와 실제 결과·근거를 TASK result 및 run/evaluation에 연결한다"
+    "실행 명령·환경·입력/기대/실제 결과·증거를 담당 실험 공간에 기록하고 TASK result에 연결한다. 이전 focus_apps의 run/evaluation 사례 ID를 혼용하지 않는다."
   ],
   "references": [
     {
@@ -46,6 +49,15 @@
     },
     {
       "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "path": "prototype/lesson-registration/README.md"
+    },
+    {
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
     }
   ],
   "result": null,
@@ -56,14 +68,16 @@
     "design_refs": [
       "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
     ],
-    "requirement_refs": [
+    "requirement_refs": [],
+    "evaluation_refs": [],
+    "product_spec_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "product_requirement_refs": [
       "FR-02",
       "FR-03",
       "FR-04",
       "FR-05",
       "FR-06"
-    ],
-    "evaluation_refs": []
+    ]
   },
   "validation_plan": {
     "question": "숨고의 실제 등록 객체에 해당하는 최소 단계가 모의 환경에서 재현 가능한가?",
@@ -73,9 +87,19 @@
       "결과 유실 unknown",
       "계정·정책 허용 불명 구간 차단"
     ],
-    "success": "독립 실행 코드·최소 설계·재현 로그·공식 근거를 함께 제출",
-    "unknown": "숨고 등록 객체 또는 자동 실행 허용이 미확인인 경우 임의로 상품 등록 성공을 가정하지 않음"
+    "observables": [
+      "숨고 등록 객체/선행 인증/완료 상태를 구분해 한 가지 대상의 선택 이유를 설명한다",
+      "실제 계정 없이 독립 코드가 최소 한 경로에서 실행되고 mock 성공/실패/unknown을 오인 없이 표시한다",
+      "사용자 미승인/모의 결과를 실제 숨고 등록으로 기록하지 않는다",
+      "R03 test-harness에 연결할 입출력 예제/실행 명령을 제공한다",
+      "R05 크몽 코드에 의존하거나 변경하지 않는다",
+      "R03 하네스의 고정 commit/계약 버전으로 시험하고 자신의 구현 commit·명령·환경·결과를 기록한다. 개발 착수는 독립적이다."
+    ],
+    "success_condition": "독립 실행 코드·최소 설계·재현 로그·공식 근거를 함께 제출",
+    "unknown_condition": "숨고 등록 객체 또는 자동 실행 허용이 미확인인 경우 임의로 상품 등록 성공을 가정하지 않음"
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
-  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인"
+  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인",
+  "work_branch": "r04/task-044-soomgo-registration",
+  "workspace_path": "prototype/lesson-registration/implementations/r04-soomgo"
 }

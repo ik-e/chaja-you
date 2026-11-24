@@ -45,6 +45,6 @@
     "ref": "docs/human/INTENT.md",
     "id": "INTENT-PRODUCT-001"
   },
-  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261123-01.md",
-  "product_scope_lifecycle": "2026-11-23 현재 R02 음악 레슨 강사용 등록 지원 서비스 기획 방향을 선택해 12항목 기획을 진행 중이다. 이 PROJECT의 찾아you 목표·성공 조건은 과거 제품안 및 교육기관 잠정 제출용으로만 보존하며, 실제 구현 지시가 아니다. 현재 제품의 Pain/MVP·기술·BM 및 구현 착수는 검증/결정 전이다."
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "product_scope_lifecycle": "2026-11-24 현재 음악 레슨 등록 지원 V1.1을 기반으로 플랫폼별 독립 PoC·모의 검증을 허용한다. 이 PROJECT의 찾아you 목표·성공 조건은 과거 제품안 및 교육기관 잠정 제출용으로 보존하며 실제 구현 지시가 아니다. 현재 레슨 제품의 본 구현은 별도 결정 전 보류."
 }

@@ -15,7 +15,9 @@
   "inputs": [
     "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
     "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
-    "docs/human/phase-intents/PHASE-20261124-02.md"
+    "docs/human/phase-intents/PHASE-20261124-02.md",
+    "prototype/lesson-registration/README.md",
+    "prototype/lesson-registration/test-harness/CONTRACT.md"
   ],
   "scope": [
     "플랫폼별 등록 객체·필드·상태의 확인/추정/미확인을 분리",
@@ -35,11 +37,12 @@
     "합성 데이터로 계정 없이 모의 화면/테스트 코드를 실행할 수 있다",
     "승인 없음·필수 사실 누락·결과 unknown에서 거짓 성공 또는 자동 중복 제출이 발생하지 않는다",
     "R04/R05의 기술 스택을 강제하지 않는 입력/출력 계약 및 재현 절차가 있다",
-    "성공·실패·미실행 증거를 구분한다"
+    "성공·실패·미실행 증거를 구분한다",
+    "공통 계약 버전·fixture 버전·실행 방법·harness commit SHA를 공개해 R04/R05가 읽기 전용으로 재현 가능"
   ],
   "verification": [
     "실제 실행 전에는 '완료'나 성공을 표시하지 않는다",
-    "실행 명령·환경·기대와 실제 결과·근거를 TASK result 및 run/evaluation에 연결한다"
+    "실행 명령·환경·입력/기대/실제 결과·증거를 담당 실험 공간에 기록하고 TASK result에 연결한다. 이전 focus_apps의 run/evaluation 사례 ID를 혼용하지 않는다."
   ],
   "references": [
     {
@@ -47,6 +50,15 @@
     },
     {
       "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "path": "prototype/lesson-registration/README.md"
+    },
+    {
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json"
     }
   ],
   "result": null,
@@ -57,13 +69,15 @@
     "design_refs": [
       "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md"
     ],
-    "requirement_refs": [
+    "requirement_refs": [],
+    "evaluation_refs": [],
+    "product_spec_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "product_requirement_refs": [
       "FR-01",
       "FR-03",
       "FR-05",
       "FR-06"
-    ],
-    "evaluation_refs": []
+    ]
   },
   "validation_plan": {
     "question": "모의 환경이 두 플랫폼 각각에 공정하고 독립적인 테스트를 제공하는가?",
@@ -76,9 +90,19 @@
       "결과 유실 unknown",
       "unknown 중복 시도"
     ],
-    "success": "각 mock 대상에서 적어도 정상·오류·unknown을 재현하고 환경/입력/결과/로그를 저장",
-    "unknown": "플랫폼 공식 필드·완료 상태 미확인 시 가정으로 구분하고 실서비스 완료라 주장하지 않음"
+    "observables": [
+      "크몽·숨고용 독립 mock 대상/입출력/상태의 실제 확인 수준을 표시한다",
+      "합성 데이터로 계정 없이 모의 화면/테스트 코드를 실행할 수 있다",
+      "승인 없음·필수 사실 누락·결과 unknown에서 거짓 성공 또는 자동 중복 제출이 발생하지 않는다",
+      "R04/R05의 기술 스택을 강제하지 않는 입력/출력 계약 및 재현 절차가 있다",
+      "성공·실패·미실행 증거를 구분한다",
+      "공통 계약 버전·fixture 버전·실행 방법·harness commit SHA를 공개해 R04/R05가 읽기 전용으로 재현 가능"
+    ],
+    "success_condition": "각 mock 대상에서 적어도 정상·오류·unknown을 재현하고 환경/입력/결과/로그를 저장",
+    "unknown_condition": "플랫폼 공식 필드·완료 상태 미확인 시 가정으로 구분하고 실서비스 완료라 주장하지 않음"
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
-  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인"
+  "assignment_status": "R01 의도에 따라 owner·범위 지정 및 정본 등록, 팀원 개별 수신/실행 여부 미확인",
+  "work_branch": "r03/task-043-dual-platform-harness",
+  "workspace_path": "prototype/lesson-registration/test-harness"
 }
