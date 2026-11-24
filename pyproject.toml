@@ -2,12 +2,7 @@
 name = "chaja-you"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = [
-    "pydantic>=2.14.3",
-    "pydantic-settings>=2.16.2",
-    "python-dotenv>=1.2.4",
-    "requests>=2.34.2",
-]
+dependencies = []
 
 [dependency-groups]
 dev = [
