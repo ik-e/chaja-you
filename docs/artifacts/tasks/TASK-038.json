@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "id": "TASK-038",
+  "kind": "task",
+  "title": "11/24 테스트 환경 범위·인수 기준 및 통합 검수",
+  "status": "할 일",
+  "owner": "R01",
+  "suggested_owner": null,
+  "due": "2026-11-24",
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-24",
+  "question": "오늘 모의 테스트 환경을 어떤 범위로 만들고, 어떤 실행 증거가 있어야 완료인가?",
+  "goal": "제품 개발과 테스트 인프라를 분리해 오늘의 Done 및 안전 경계를 단일 계약으로 제공한다.",
+  "inputs": [
+    "docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "prototype/lesson-registration/README.md"
+  ],
+  "scope": [
+    "오늘 범위는 합성 fixture·로컬 mock 페이지·pytest/ruff/uv 검증·CI 준비에 한정",
+    "실 크몽 접수, F1/F2/F3 제품 구현, 스택/서버/DB 채택은 제외",
+    "R03/R04/R05 결과 간 연결 충돌·미확인을 확인"
+  ],
+  "outputs": [
+    "docs/artifacts/design/lesson-registration-20261123/TEST-ENV-WORK-20261124.md",
+    "각 담당의 링크/실행 명령/관측 로그/미해결 사항을 포함한 통합 결과 기록"
+  ],
+  "acceptance": [
+    "정상/입력 누락/mock 응답 유실 케이스의 필수 관측 결과가 정의됨",
+    "R02 오전 부재가 전체 작업을 차단하지 않음",
+    "모든 TASK가 범위·제출 경로·미검증 상태를 구분함",
+    "테스트 실행 증거 없이 성공 판정하지 않음"
+  ],
+  "verification": [],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-01.md"
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261123/TEST-ENV-WORK-20261124.md"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261124-01.md"
+    ],
+    "design_refs": [
+      "docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md"
+    ],
+    "requirement_refs": [
+      "FR-01",
+      "FR-03",
+      "FR-05",
+      "FR-06"
+    ],
+    "evaluation_refs": []
+  },
+  "validation_plan": {
+    "question": "오늘 모의 테스트 환경을 어떤 범위로 만들고, 어떤 실행 증거가 있어야 완료인가?",
+    "observables": [
+      "정상/입력 누락/mock 응답 유실 케이스의 필수 관측 결과가 정의됨",
+      "R02 오전 부재가 전체 작업을 차단하지 않음",
+      "모든 TASK가 범위·제출 경로·미검증 상태를 구분함",
+      "테스트 실행 증거 없이 성공 판정하지 않음"
+    ],
+    "success_condition": "실제 실행 결과·입력·명령·증거를 기록하고 모든 acceptance 충족",
+    "unknown_condition": "증거 없음·외부 환경 불가·정책 미확인은 미검증으로 기록"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-01.md",
+  "assignment_status": "2026-11-24 R01 대화 의도 기반 작업 브랜치 배정; 팀원 개별 수신/착수 미확인"
+}
