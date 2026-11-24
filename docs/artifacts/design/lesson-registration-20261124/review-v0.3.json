@@ -1,0 +1,465 @@
+{
+  "id": "LESSON-REVIEW-V0.3",
+  "status": "review_candidate_not_adopted",
+  "issues": [
+    {
+      "id": "ISSUE-01",
+      "title": "승인·외부 계정",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R01",
+        "V3-R10"
+      ],
+      "remaining": "실제 식별 수단·원격 인증"
+    },
+    {
+      "id": "ISSUE-02",
+      "title": "동일 의도·중복",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R02",
+        "V3-R03",
+        "V3-R06"
+      ],
+      "remaining": "실제 저장소 유일성·동시성"
+    },
+    {
+      "id": "ISSUE-03",
+      "title": "부작용 분류",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R04"
+      ],
+      "remaining": "실제 화면별 효과 조사"
+    },
+    {
+      "id": "ISSUE-04",
+      "title": "철회 경쟁 상태",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R03",
+        "V3-R05",
+        "V3-R06"
+      ],
+      "remaining": "강제 게이트웨이·race 시험"
+    },
+    {
+      "id": "ISSUE-05",
+      "title": "상태 전이",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R06",
+        "V3-R07"
+      ],
+      "remaining": "worker/저장 구현"
+    },
+    {
+      "id": "ISSUE-06",
+      "title": "완료 증거",
+      "status": "부분 보완",
+      "rule_refs": [
+        "V3-R07"
+      ],
+      "remaining": "실제 플랫폼 완료 증거"
+    },
+    {
+      "id": "ISSUE-07",
+      "title": "사실과 파생값",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R08"
+      ],
+      "remaining": "변환 정확성"
+    },
+    {
+      "id": "ISSUE-08",
+      "title": "플랫폼 규칙",
+      "status": "부분 보완",
+      "rule_refs": [
+        "V3-R09"
+      ],
+      "remaining": "필수/옵션/VAT/효과 확인"
+    },
+    {
+      "id": "ISSUE-09",
+      "title": "API 타입·오류",
+      "status": "논리 계약 보완",
+      "rule_refs": [
+        "V3-R10"
+      ],
+      "remaining": "wire schema·HTTP/DB 구현"
+    },
+    {
+      "id": "ISSUE-10",
+      "title": "격리·보안",
+      "status": "부분 보완",
+      "rule_refs": [
+        "V3-R05",
+        "V3-R11"
+      ],
+      "remaining": "실제 강제·TTL·보존"
+    },
+    {
+      "id": "ISSUE-11",
+      "title": "AI 역할",
+      "status": "계약 보완",
+      "rule_refs": [
+        "V3-R12"
+      ],
+      "remaining": "엔진·모델 비교"
+    },
+    {
+      "id": "ISSUE-12",
+      "title": "가치 비교",
+      "status": "부분 보완",
+      "rule_refs": [
+        "V3-R13"
+      ],
+      "remaining": "실측·합격선"
+    },
+    {
+      "id": "ISSUE-13",
+      "title": "정합성 검증",
+      "status": "부분 보완",
+      "rule_refs": [
+        "V3-R14"
+      ],
+      "remaining": "전체 의미·제품 검증"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-01",
+      "title": "MVP 지원 플랫폼",
+      "status": "open",
+      "depends_on": [
+        "DEC-02",
+        "DEC-04"
+      ],
+      "evidence": "공통 mock, 실제 목표·권한·가치",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-02",
+      "title": "플랫폼별 완료 범위",
+      "status": "partial",
+      "depends_on": [],
+      "evidence": "실제 등록 객체와 증거",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-03",
+      "title": "실행 구조",
+      "status": "open",
+      "depends_on": [
+        "DEC-04",
+        "DEC-05"
+      ],
+      "evidence": "원격 합성 PoC 및 로컬/혼합 비교",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-04",
+      "title": "운영사 허용",
+      "status": "external_unverified",
+      "depends_on": [],
+      "evidence": "공식 정책·운영사 허용",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-05",
+      "title": "계정·승인 결합",
+      "status": "contract_proposed",
+      "depends_on": [],
+      "evidence": "합성 wrong-account/중복/철회 검증",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-06",
+      "title": "AI/코드 역할",
+      "status": "contract_proposed",
+      "depends_on": [],
+      "evidence": "정확성·예외·비용 시험",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-07",
+      "title": "실행 엔진",
+      "status": "open",
+      "depends_on": [
+        "DEC-03",
+        "DEC-06"
+      ],
+      "evidence": "동일 fixture로 엔진 비교",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-08",
+      "title": "세션 TTL·재인증",
+      "status": "open",
+      "depends_on": [
+        "DEC-03",
+        "DEC-05"
+      ],
+      "evidence": "격리·수명·폐기·비용",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-09",
+      "title": "순차/동시 등록",
+      "status": "open",
+      "depends_on": [
+        "DEC-01"
+      ],
+      "evidence": "사용자 요구·운영 자원",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-10",
+      "title": "물리 실행 단위",
+      "status": "open",
+      "depends_on": [
+        "DEC-03",
+        "DEC-06",
+        "DEC-09",
+        "DEC-15"
+      ],
+      "evidence": "게이트웨이 강제·복구·공수",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-11",
+      "title": "DB·파일 저장",
+      "status": "deferred",
+      "depends_on": [
+        "DEC-10",
+        "DEC-14"
+      ],
+      "evidence": "원자성·유일성·보존",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-12",
+      "title": "스택·배포·물리 API",
+      "status": "deferred",
+      "depends_on": [
+        "DEC-10",
+        "DEC-11"
+      ],
+      "evidence": "공수·환경·보안",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-13",
+      "title": "성능·비용·직접 시간",
+      "status": "open",
+      "depends_on": [],
+      "evidence": "동일 목표 A/B/C 실측",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-14",
+      "title": "개인정보·로그·보존",
+      "status": "open",
+      "depends_on": [
+        "DEC-03",
+        "DEC-08"
+      ],
+      "evidence": "처리 위치·법·삭제 검증",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-15",
+      "title": "장애 복구·통지",
+      "status": "partial",
+      "depends_on": [
+        "DEC-03",
+        "DEC-05"
+      ],
+      "evidence": "crash·lease·중단 검증",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-16",
+      "title": "PoC 재사용",
+      "status": "open",
+      "depends_on": [
+        "DEC-06",
+        "DEC-07",
+        "DEC-10"
+      ],
+      "evidence": "공통 harness·코드 검토",
+      "owner": "R01"
+    },
+    {
+      "id": "DEC-17",
+      "title": "이행·환불",
+      "status": "deferred",
+      "depends_on": [
+        "DEC-01",
+        "DEC-02",
+        "DEC-04",
+        "DEC-13"
+      ],
+      "evidence": "허용 범위·가치·원가",
+      "owner": "R01"
+    }
+  ],
+  "tests": [
+    {
+      "id": "V3-T01",
+      "title": "wrong account·재인증",
+      "issue_refs": [
+        "ISSUE-01"
+      ],
+      "expected": "불일치 시 admission 0",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T02",
+      "title": "새 ID·제목으로 중복 우회",
+      "issue_refs": [
+        "ISSUE-02"
+      ],
+      "expected": "미확인 대상 차단",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T03",
+      "title": "동시 요청·철회 race",
+      "issue_refs": [
+        "ISSUE-02",
+        "ISSUE-04"
+      ],
+      "expected": "철회 이후 새 admission 0",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T04",
+      "title": "자동저장·첨부·공개",
+      "issue_refs": [
+        "ISSUE-03",
+        "ISSUE-08"
+      ],
+      "expected": "미확인 효과 차단, 부분 효과 보존",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T05",
+      "title": "낡은 lease·게이트웨이 우회",
+      "issue_refs": [
+        "ISSUE-04",
+        "ISSUE-10"
+      ],
+      "expected": "명령 차단, pending 효과 unknown",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T06",
+      "title": "취소·인증 만료·crash",
+      "issue_refs": [
+        "ISSUE-05"
+      ],
+      "expected": "stopping/unknown 등 올바른 전이",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T07",
+      "title": "접수·반려·상충 증거",
+      "issue_refs": [
+        "ISSUE-05",
+        "ISSUE-06"
+      ],
+      "expected": "목표 완료와 후속 관측 분리",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T08",
+      "title": "사실·파생값·가격 충돌",
+      "issue_refs": [
+        "ISSUE-07",
+        "ISSUE-08",
+        "ISSUE-11"
+      ],
+      "expected": "임의 사실/반올림 없음",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T09",
+      "title": "API 소유권·버전·타입",
+      "issue_refs": [
+        "ISSUE-09"
+      ],
+      "expected": "타 사용자/오래된 버전 차단",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T10",
+      "title": "합성 원격 인증·인계·격리·폐기",
+      "issue_refs": [
+        "ISSUE-01",
+        "ISSUE-10"
+      ],
+      "expected": "동일 context 및 상호배타 제어",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T11",
+      "title": "AI 예상 외 화면/외부 지시",
+      "issue_refs": [
+        "ISSUE-11"
+      ],
+      "expected": "중단 후 제안, 무승인 조작 0",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T12",
+      "title": "동일 업무 A/B/C",
+      "issue_refs": [
+        "ISSUE-12"
+      ],
+      "expected": "활동·대기·비용·오류 분리 실측",
+      "product_execution": "not_run"
+    },
+    {
+      "id": "V3-T13",
+      "title": "정적/추상 설계 검증",
+      "issue_refs": [
+        "ISSUE-13"
+      ],
+      "expected": "참조·전이·가드·결정 DAG 검사",
+      "product_execution": "not_run"
+    }
+  ],
+  "value_protocol": {
+    "arms": [
+      "direct",
+      "general_ai",
+      "dedicated"
+    ],
+    "controls": [
+      "source",
+      "media",
+      "platform",
+      "goal",
+      "initial_state",
+      "permission",
+      "quality"
+    ],
+    "metrics": [
+      "active_user_seconds",
+      "system_seconds",
+      "review_wait_seconds",
+      "interventions",
+      "rework",
+      "fact_errors",
+      "unauthorized_mutations",
+      "duplicate_effects",
+      "goal_verdict",
+      "cost",
+      "willingness_to_pay"
+    ],
+    "status": "not_run"
+  },
+  "scope": "기존 LR-D01~06의 세분화 검토 후보. 최종 채택 의존성이지 조사/PoC 진행 순서 강제 아님. TASK-043~045 변경 없음, TASK-046 제안 미등록."
+}
