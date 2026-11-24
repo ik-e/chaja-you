@@ -1,0 +1,33 @@
+{
+  "schema_version": 0,
+  "fixture_id": "SYNTHETIC-LESSON-001",
+  "kind": "synthetic_test_fixture",
+  "status": "proposed_not_executed",
+  "source_id": "sample-lesson-001",
+  "source_version": "v1",
+  "platform_candidate": "mock-kmong",
+  "environment": "mock",
+  "source_text": "가상 1:1 작곡/미디 레슨. 월 4회, 회당 90분, 월 250000원. 사진은 테스트용 대체 이미지 사용.",
+  "facts": {
+    "lesson_type": "1:1 작곡/미디 레슨",
+    "sessions_per_month": 4,
+    "minutes_per_session": 90,
+    "price_krw_per_month": 250000,
+    "additional_costs": "unconfirmed",
+    "reschedule_policy": "unconfirmed",
+    "service_scope": "unconfirmed"
+  },
+  "media_refs": [],
+  "provenance": {
+    "type": "synthetic",
+    "contains_real_person_data": false,
+    "source": "R01 설계 검토용 합성 사례",
+    "note": "실제 판매 조건·크몽 플랫폼 입력 가능 여부를 입증하지 않음"
+  },
+  "expected_behavior": {
+    "on_missing_policy": "unresolved_confirmation_required",
+    "on_unknown": "block_retry",
+    "on_live_submission": "block"
+  },
+  "requires_real_identity": false
+}
