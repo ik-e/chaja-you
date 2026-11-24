@@ -1,0 +1,389 @@
+{
+  "kind": "design_abstract_validation",
+  "checks": [
+    {
+      "name": "unique IDs",
+      "pass": true
+    },
+    {
+      "name": "baseline/source references",
+      "pass": true
+    },
+    {
+      "name": "issue and rule references",
+      "pass": true
+    },
+    {
+      "name": "all issues covered by test plans",
+      "pass": true
+    },
+    {
+      "name": "typed fields",
+      "pass": true
+    },
+    {
+      "name": "API references",
+      "pass": true
+    },
+    {
+      "name": "deterministic state transitions",
+      "pass": true
+    },
+    {
+      "name": "active states reachable",
+      "pass": true
+    },
+    {
+      "name": "live state unreachable",
+      "pass": true
+    },
+    {
+      "name": "terminal states have no transitions",
+      "pass": true
+    },
+    {
+      "name": "dispatch guards complete",
+      "pass": true
+    },
+    {
+      "name": "effect transitions",
+      "pass": true
+    },
+    {
+      "name": "decision DAG",
+      "pass": true
+    }
+  ],
+  "cases": [
+    {
+      "name": "normal admission",
+      "actual": "running",
+      "expected": "running",
+      "pass": true
+    },
+    {
+      "name": "guard false: mock_environment",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: owner_verified",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: account_verified_same",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: approval_current",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: permission_current",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: target_resolved",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: no_unresolved_effect",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: operation_allowed",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: before_state_verified",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: lease_current_exclusive",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: revision_current",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: operation_not_already_effective",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "guard false: not_stopping",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "missing account",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "ready revoked",
+      "actual": "blocked",
+      "expected": "blocked",
+      "pass": true
+    },
+    {
+      "name": "ready auth expired",
+      "actual": "needs_action",
+      "expected": "needs_action",
+      "pass": true
+    },
+    {
+      "name": "running stop",
+      "actual": "stopping",
+      "expected": "stopping",
+      "pass": true
+    },
+    {
+      "name": "stop effect absent",
+      "actual": "cancelled",
+      "expected": "cancelled",
+      "pass": true
+    },
+    {
+      "name": "stop uncertain",
+      "actual": "unknown",
+      "expected": "unknown",
+      "pass": true
+    },
+    {
+      "name": "unknown cancel",
+      "actual": "unknown",
+      "expected": "unknown",
+      "pass": true
+    },
+    {
+      "name": "unknown dispatch",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "stopping dispatch",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "stop but goal verified",
+      "actual": "mock_completed",
+      "expected": "mock_completed",
+      "pass": true
+    },
+    {
+      "name": "uncertain proof",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "safe recovery",
+      "actual": "needs_action",
+      "expected": "needs_action",
+      "pass": true
+    },
+    {
+      "name": "cancelled recovery denied",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "stop policy",
+      "actual": "blocked",
+      "expected": "blocked",
+      "pass": true
+    },
+    {
+      "name": "stop human",
+      "actual": "needs_action",
+      "expected": "needs_action",
+      "pass": true
+    },
+    {
+      "name": "live goal",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "completed overwrite",
+      "actual": null,
+      "expected": null,
+      "pass": true
+    },
+    {
+      "name": "unknown cancel resolved",
+      "actual": "cancelled",
+      "expected": "cancelled",
+      "pass": true
+    },
+    {
+      "name": "unknown policy resolved",
+      "actual": "blocked",
+      "expected": "blocked",
+      "pass": true
+    },
+    {
+      "name": "V3-P01 valid",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 wrong environment",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 click only",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing account_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing target_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing operation_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing receipt_retrieved",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing approved_fields_match",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing approved_assets_match",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing independent_readback",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P01 missing no_conflict",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 valid",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 wrong environment",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 click only",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing account_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing target_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing operation_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing category_matches",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing approved_fields_match",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing independent_readback",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "V3-P02 missing no_conflict",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    }
+  ],
+  "static_pass": 13,
+  "static_total": 13,
+  "abstract_pass": 54,
+  "abstract_total": 54,
+  "product_execution": "not_run",
+  "limitations": "Boolean guard, declared transitions and evidence predicates only; no actual concurrency, browser, database, platform, API or user value execution. Prior design semantics not exhaustively proven."
+}
