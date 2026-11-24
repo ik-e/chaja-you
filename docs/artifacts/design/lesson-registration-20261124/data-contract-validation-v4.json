@@ -1,0 +1,384 @@
+{
+  "source_commit": "1e865d32d5624c4c73c06f07aaa0347e8b0a7ca9",
+  "source_blobs": [
+    {
+      "path": "data-schema-v4.json",
+      "sha": "772b29eed0ac4dbf60229f833a0064cb8ad65c14"
+    },
+    {
+      "path": "platform-profiles-v2.json",
+      "sha": "b0b2044526f63f0244d920f85b2d9676b94bbe72"
+    },
+    {
+      "path": "data-contract-v4.json",
+      "sha": "a5989cbe586237432a5dbb7081c0f80b2bc98d99"
+    },
+    {
+      "path": "validate-interface-review-v3.mjs",
+      "sha": "1d49665ea105450c87b97a6a7cd6f72aec869321"
+    },
+    {
+      "path": "logical-behavior-v5.json",
+      "sha": "2c13b86a44b10f7877678509819e97d1d1b72c17"
+    },
+    {
+      "path": "validate-logical-v5.mjs",
+      "sha": "660dd54af6cf7d2db72da25d724b728b00f1c550"
+    }
+  ],
+  "audit": {
+    "definitions": 65,
+    "references": 217,
+    "unresolved": [],
+    "unsupported_keywords": [],
+    "route_missing": [],
+    "port_missing": [],
+    "duplicate_routes": 0,
+    "root_has_validation": false
+  },
+  "profileAudits": [
+    {
+      "id": "kmong.service_listing.mock.v2",
+      "errors": [],
+      "definitions": 68,
+      "references": 225,
+      "unresolved": [],
+      "unsupported_keywords": [],
+      "route_missing": [],
+      "port_missing": [],
+      "duplicate_routes": 0,
+      "root_has_validation": false
+    },
+    {
+      "id": "soomgo.service_configuration.mock.v2",
+      "errors": [],
+      "definitions": 66,
+      "references": 217,
+      "unresolved": [],
+      "unsupported_keywords": [],
+      "route_missing": [],
+      "port_missing": [],
+      "duplicate_routes": 0,
+      "root_has_validation": false
+    }
+  ],
+  "cases": [
+    {
+      "id": "K-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "S-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "K-region-required",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "offline region missing"
+      ]
+    },
+    {
+      "id": "K-image-rights",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "asset rights or scope mismatch"
+      ]
+    },
+    {
+      "id": "K-package-fields",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.packages[0].work_days required",
+        "$.packages[1].work_days required",
+        "$.packages[2].work_days required"
+      ]
+    },
+    {
+      "id": "K-package-tiers",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "tier mismatch"
+      ]
+    },
+    {
+      "id": "K-option",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "unknown option minutes_per_session",
+        "unknown option minutes_per_session",
+        "unknown option minutes_per_session"
+      ]
+    },
+    {
+      "id": "S-no-image",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.main_images additional"
+      ]
+    },
+    {
+      "id": "S-no-invalid-option",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.daw[0] enum"
+      ]
+    },
+    {
+      "id": "PREP-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "PREP-VAT-unknown",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "commercial mismatch or VAT unknown 0",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-price-changed",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "commercial mismatch or VAT unknown 0",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-work-days-invented",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "missing package option evidence 0",
+        "missing package option evidence 1",
+        "missing package option evidence 2",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-conflict-ready",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-unlinked-fact",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "invalid mapping",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "AUTH-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "AUTH-no-connection",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$ oneOf"
+      ]
+    },
+    {
+      "id": "AUTH-other-connection-same-account",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "connection/target/generation mismatch"
+      ]
+    },
+    {
+      "id": "AUTH-stale-generation",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "connection/target/generation mismatch"
+      ]
+    },
+    {
+      "id": "AUTH-execute-single-pinned-scope",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "AUTH-execute-override-denied",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.connection additional"
+      ]
+    },
+    {
+      "id": "GOAL-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "GOAL-submission-only",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "goal mismatch",
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-wrong-target",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "goal mismatch",
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-no-trusted-evidence",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-wrong-asset",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "asset proof mismatch",
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-unresolved-effect",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "error or unresolved effect",
+        "step not proven K6"
+      ]
+    },
+    {
+      "id": "GOAL-missing-step",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "step not proven K1"
+      ]
+    },
+    {
+      "id": "EXT-open-platform-id",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "EXT-separate-profile",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "EXT-mock-only",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.environment const"
+      ]
+    }
+  ],
+  "logic": [
+    {
+      "N": 4,
+      "states": 53,
+      "edges": 134,
+      "violations": 0,
+      "unused": [],
+      "no_outcome": 0
+    },
+    {
+      "N": 5,
+      "states": 61,
+      "edges": 142,
+      "violations": 0,
+      "unused": [],
+      "no_outcome": 0
+    },
+    {
+      "N": 6,
+      "states": 69,
+      "edges": 150,
+      "violations": 0,
+      "unused": [],
+      "no_outcome": 0
+    },
+    {
+      "N": 7,
+      "states": 77,
+      "edges": 158,
+      "violations": 0,
+      "unused": [],
+      "no_outcome": 0
+    }
+  ],
+  "limitations": [
+    "Subset JS shape checker, not standard JSON Schema engine.",
+    "Semantic sample checks use synthetic fixtures, trusted origin/evidence lists and expected payload digest supplied by test. Not actual extraction/provenance proof, digest generation, registry selection, database concurrency, runtime permission/session enforcement or real browser execution.",
+    "Third platform synthetic sample demonstrates shape/profile extension only, not actual adapter support.",
+    "Logical model remains abstract, N=6/7 also examined; actual runtime tests not run."
+  ]
+}
