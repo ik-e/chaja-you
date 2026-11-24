@@ -3,6 +3,7 @@
 **상태:** 2026-11-24 R01 준비 브랜치. **코드 구현·실행·업무 배정 미착수.** 현재 Phase Intent의 설계·PoC 보류를 해제하는 R01 공식 결정 이전에는 코드 실행을 승인된 제품 작업으로 간주하지 않는다.
 
 - 제품 기준: [기획안 V1.1](../../docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md)
+- **개발 환경:** [uv 실행 계약·테스트 명령](ENVIRONMENT.md) (루트 pyproject와 uv.lock 유지)
 - 필수 선행: [MVP 최소 설계 V0.1](../../docs/artifacts/design/lesson-registration-20261123/MVP-MINIMUM-DESIGN-V0.1.md)
 - 팀 작업 계약 초안: [MVP-WORK-PACKAGES](../../docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md)
 - 현재 적용 단계: [PHASE-20261123-01](../../docs/human/phase-intents/PHASE-20261123-01.md)
