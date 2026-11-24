@@ -13,8 +13,8 @@
   "sources": {
     "model": {
       "path": "docs/deliverables/planning-design-info-model.json",
-      "blob_sha": "c304de08a0d6daff80912aa3b889a62f19dcc970",
-      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+      "blob_sha": "abcf59b611d3eccde0292f48af1c43fb76d65eb2",
+      "commit": "9b6ff0463722372d577747e89cb853e773c78591"
     },
     "registry": {
       "path": "docs/deliverables/registry.json",
@@ -3791,6 +3791,7 @@
     "이전 직접 검증 참조 미연결 HTTP-02/05는 보완 시험 계획 T6-01/02로 추가. 원본 제품 시험 실행이나 새로운 TASK 승인 아님.",
     "W12는 AT-05/07/10, W18은 AT-04/06과 회귀/검수 관점 연결. 작업이 새로 배정되었다는 뜻 아님.",
     "검증기 enum은 모델 record_contract.envelope 기준. 선행 작업/컴포넌트 의존이 없는 빈 배열은 유효한 명시 값.",
-    "V0.8: V0.7 IR-01~03/05 설계 정합성 보완; V3-J20 explicit resume, 2개 inherited typed route, MVP-GATE-01. 모든 시험 계획 not_run; 기존 원본은 Git 이력 보존."
+    "V0.8: V0.7 IR-01~03/05 설계 정합성 보완; V3-J20 explicit resume, 2개 inherited typed route, MVP-GATE-01. 모든 시험 계획 not_run; 기존 원본은 Git 이력 보존.",
+    "공통 설계 체계의 executed_verification 정책 연결. 기존 IT/관계 유지. stage-verification-manifest.json은 별도 실행 규칙 선택."
   ]
 }

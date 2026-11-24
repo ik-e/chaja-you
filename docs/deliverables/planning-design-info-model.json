@@ -2714,6 +2714,11 @@
       "version": 4,
       "revision": "elasticity-review-2026-11-19",
       "description": "Separate causal prerequisites from impact-driven revision; begin IT-20 as a validation question at PD-00; defer IT-21/22 until handoff; distinguish planned checks from executed verification evidence"
+    },
+    {
+      "version": 4,
+      "revision": "executed-verification-2026-11-24",
+      "description": "Execute applicable design checks at each affected slice before advancing; verify refinement, composition, and evidence freshness; distinguish review and product experiments."
     }
   ],
   "stage_policies": {
@@ -3820,6 +3825,20 @@
     "uncertainty": "미확인·근거 부족·비적용은 상태와 이유/재검토 조건으로 표현; 영향이 낮은 상세 결정은 보류 가능",
     "conditional_details": "미선정 배포 기술, AI 컴포넌트, DB 인덱스 등은 필수 요구·환경이 정해질 때까지 N/A 또는 가설로 둘 수 있음",
     "testing": "검증 질문은 L0부터, 수용 기준은 L2, 상세 시험은 L3~L5에서 발전. 계획 관계와 실제 통과 증거를 엄격히 구분",
-    "stop_and_review": "치명적 법/권한 제약·해결 불가한 공유 계약 충돌·제품 선택 변경만 해당 상위 의사결정을 다시 검토"
+    "stop_and_review": "치명적 법/권한 제약·해결 불가한 공유 계약 충돌·제품 선택 변경만 해당 상위 의사결정을 다시 검토",
+    "executed_verification": {
+      "revision": "2026-11-24",
+      "policy_ref": "docs/deliverables/DESIGN-VERIFICATION-LOOP.md",
+      "engine_ref": "tools/verify_design_stage.mjs",
+      "runner_ref": "tools/run_design_stage_verification.mjs",
+      "scope": "affected slice, before advancing its baseline",
+      "required_axes": [
+        "refinement",
+        "composition",
+        "change"
+      ],
+      "evidence": "source blob fingerprints + rule signature + engine/adapter revisions + actual verdict/findings/limit",
+      "gate": "declared_checks_pass only for selected required deterministic checks; failed blocks affected slice; missing/stale/unknown/external evidence requires review; no automatic adoption"
+    }
   }
 }
