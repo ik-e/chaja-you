@@ -109,3 +109,5 @@ def main():
         for p in sorted(folders): verify_one(p)
 if __name__=="__main__":
     main()
+
+# Archive refresh requested 2026-11-24 (KST); run existing verified snapshot workflow.
