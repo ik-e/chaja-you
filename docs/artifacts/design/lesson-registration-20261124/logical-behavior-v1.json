@@ -226,6 +226,16 @@
         "approval": [
           "none",
           "revoked"
+        ],
+        "auth": [
+          "none",
+          "same",
+          "expired",
+          "wrong"
+        ],
+        "control": [
+          "none",
+          "review"
         ]
       },
       "set": {
@@ -240,7 +250,17 @@
       "handler": "PREP",
       "when": {
         "job": "none",
-        "info": "review"
+        "info": "review",
+        "auth": [
+          "none",
+          "same",
+          "expired",
+          "wrong"
+        ],
+        "control": [
+          "none",
+          "review"
+        ]
       },
       "set": {
         "info": "confirmed"
@@ -419,11 +439,7 @@
         "info": "confirmed",
         "auth": "same",
         "target": "new",
-        "job": [
-          "none",
-          "paused",
-          "blocked"
-        ],
+        "job": "none",
         "effect": [
           "none",
           "absent"
@@ -468,7 +484,8 @@
         "effect": [
           "none",
           "absent"
-        ]
+        ],
+        "control": "review"
       },
       "set": {
         "approval": "current"
@@ -497,7 +514,7 @@
         "job": "planned"
       },
       "flow": "U04",
-      "detail": "동일 등록 의도/멱등 요청은 기존 작업/결과 반환. 하나의 논리 효과에 안정 ID; 공유 저장소 원자 유일성은 추후 계약."
+      "detail": "동일 등록 의도/멱등 요청은 기존 작업/결과 반환. 하나의 논리 효과에 안정 ID; 공유 저장소 원자 유일성은 추후 계약. 이 시점에 사용자 확인 계획의 실행 범위 고정. 등록 중 변경/되돌리기 없음과 중단 시 이미 발생한 효과가 남을 수 있음을 실행 전에 표시. 실제 승인 범위와 고지 동일."
     },
     {
       "id": "acquire_lease",
@@ -1332,35 +1349,35 @@
         "control": "none"
       },
       "flow": "U06",
-      "detail": "현재 mock 정책이 다시 허용되는 별도 권한자 판단; 자동 승인 복구 금지. 재계획·승인·명시 재개 필요."
+      "detail": "현재 mock 정책이 다시 허용되는 별도 권한자 판단; 자동 승인 복구 금지. 기존 고정 범위의 동일성·안전성 재검증, 필요 재승인 및 명시 재개. 의미 변경은 차단; 계획 내용 편집 금지."
     },
     {
-      "id": "change_scope",
+      "id": "revise_before_start",
       "actor": "USER",
       "handler": "CO",
       "when": {
-        "job": [
-          "none",
-          "planned",
-          "ready",
-          "paused"
-        ],
-        "effect": [
-          "none",
-          "absent"
-        ],
+        "job": "none",
+        "effect": "none",
         "step": 0,
-        "stop": "none"
+        "stop": "none",
+        "auth": [
+          "none",
+          "same",
+          "expired",
+          "wrong"
+        ],
+        "control": [
+          "none",
+          "review"
+        ]
       },
       "set": {
         "plan": "stale",
         "approval": "revoked",
-        "info": "review",
-        "job": "none",
-        "control": "review"
+        "info": "review"
       },
       "flow": "U03",
-      "detail": "효과 없는 기존 요청을 폐기/재계획. 기존 기록은 보존. 새로운 정보는 새 원본/초안; 부분 효과가 있으면 기존 작업 별도 보존하고 안전한 계획 재검토(현재 최소 모의 모델 밖)."
+      "detail": "등록 작업 수락 전에만 원본/등록 내용 수정. 기존 계획/승인 무효화 후 재검토. 인증/계정 조회 중에는 수정 UI 및 명령을 제공하지 않고 필요 시 인증을 종료한 뒤 수정. 계정/대상 변경은 별개 요청/대상 재확인. 작업 생성 뒤에는 이 사건 금지."
     },
     {
       "id": "open_recovery_auth",
@@ -1384,6 +1401,60 @@
       },
       "flow": "U06",
       "detail": "독립 복구 인증/조회 허용 확인된 경우에만 발생; mutation 금지 유지."
+    },
+    {
+      "id": "exit_auth",
+      "actor": "USER",
+      "handler": "EXEC",
+      "when": {
+        "auth": "human",
+        "control": [
+          "human",
+          "read"
+        ]
+      },
+      "set": {
+        "auth": "none",
+        "control": "none"
+      },
+      "flow": "U02",
+      "detail": "인증 완료를 주장하지 않고 현재 인증 상호작용 종료 및 입력/조회 권한 회수. 작업 생성 전 준비 화면으로 복귀 가능. 복구 인증 중이면 기존 작업·시도·효과 유지."
+    },
+    {
+      "id": "revalidate_locked_scope",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "CO",
+      "when": {
+        "route": "supported",
+        "policy": "mock_allowed",
+        "info": "confirmed",
+        "auth": "same",
+        "target": "new",
+        "job": "paused",
+        "effect": [
+          "none",
+          "absent"
+        ],
+        "plan": "stale",
+        "control": [
+          "none",
+          "review",
+          "read"
+        ],
+        "stop": "none",
+        "step": [
+          0,
+          1,
+          2
+        ]
+      },
+      "set": {
+        "plan": "current",
+        "approval": "none",
+        "control": "review"
+      },
+      "flow": "U06",
+      "detail": "기존 불변 등록 범위(원본/판매조건/자료/계정/슬롯/목표/남은 효과 동작 의미)가 동일하고 최신 규칙 및 권한에서도 안전함을 신뢰된 검증으로 확인한 경우만. 새 버전·권한의 명시 확인과 재승인은 가능하나 사용자가 실행 범위를 편집하는 기능은 아님. 의미가 바뀌면 차단, 중단/새 요청 검토 및 중복 검사. 동일성/권한 비교의 구체 검증은 별도 계약."
     }
   ],
   "flow_groups": [
@@ -1421,12 +1492,22 @@
     "Before any attempt, independently verify current source/plan hash, current permission, owner, same account/slot, allowed operation and before-state, current generation/revision, stable effect identity and current stop. These predicates are not modeled as independent variables; admission must test at runtime.",
     "One shared immutable source snapshot; each target has separate plan/job/effect/observation. Slot uniqueness is across all requests, even new key/new job; ambiguous existing effect blocks. User cannot supply trusted evidence.",
     "User auth is distinct from external account verification. User viewer disconnect does not revoke job; auth expiry/control loss is an event. Raw credentials/driver never exposed or logged. Auth input restricted to approved auth origin; actual enforcement must be demonstrated.",
-    "Result unknown with all steps observed is goal uncertainty, not permission to resubmit. External object review/publication changes append observations independent of completed registration goal."
+    "Result unknown with all steps observed is goal uncertainty, not permission to resubmit. External object review/publication changes append observations independent of completed registration goal.",
+    "Accepted job pins immutable semantic scope; recovery may refresh authorization/observation without editing scope. No general mid-execution edit/rollback; user stop/revoke and safety stops remain mandatory."
   ],
   "deferred": [
     "Soomgo real registration object/evidence",
     "mock action argument/field exact spec, UI/API/DB code, concurrency, isolation, current permission read recovery availability",
-    "partial-effect scope change contract: preserve prior ledger, create new plan only for safe remaining work; not implemented in this finite model",
-    "actual user value and real-world platform permissions"
-  ]
+    "actual user value and real-world platform permissions",
+    "실제 immutable scope 동일성 비교 및 다중 요청 ledger/새 요청의 중복 차단은 하위 계약 검증. 이전 작업의 부분 효과를 수정/삭제하는 기능은 현재 범위 밖."
+  ],
+  "scope_contract": {
+    "status": "R01_feedback_applied_candidate",
+    "ref": "2026-11-24 R01 대화: 인증 도중에 등록 범위 변경 문제는 없다고 보는데 굳이 대응하자면 실행 이후에는 되돌리기는 없다고 고지해서 중간의 변경을 없애는 게 좋을 것 같은데 이미 출발한 열차를 멈추는 건 특별한 일이 아니고는 오히려 어려워",
+    "lock_event": "create_job",
+    "pre_start": "등록 내용/자료는 작업 수락 전에 확인·수정. 인증 단계에는 별도 등록 편집 동작 없음; 필요하면 인증 종료 후 준비로 돌아감. 수정한 계획은 기존 승인 무효화. 계정/대상 변경은 새 요청/대상 재확인.",
+    "locked": "작업 수락부터 실행 범위 불변. 원본/계획 내용의 인플레이스 변경, 중간 단계 삭제/재설정, 자동 역행/rollback 없음. 다른 등록 요청은 별개로 중복/효과 검사. 상태/권한/인증 및 동일 범위 안전 복구는 변경과 구분.",
+    "exception": "승인 철회·권한 상실·인증 만료·안전상 장애·예외적 사용자 중단은 항상 신규 외부 효과 차단. 이미 admission된 외부 효과는 취소/되돌리기 보장하지 않고 확인 가능한 효과·미확인·다음 조치 기록. 안전성 확인 후에만 같은 범위의 명시 재개.",
+    "notice": "등록 시작 후에는 등록 내용을 변경하거나 이미 실행된 외부 동작을 되돌릴 수 없습니다. 중단이 필요한 경우 이후 동작을 중지하며, 이미 처리된 결과는 남을 수 있습니다. 확인이 필요한 경우 결과와 다음 조치를 안내합니다."
+  }
 }
