@@ -20,9 +20,10 @@
 | 논리·상태·업무 경계 | 채택 | [detail-decisions-v2.json](../../artifacts/design/lesson-registration-20261124/detail-decisions-v2.json) · [logical-behavior-v5.json](../../artifacts/design/lesson-registration-20261124/logical-behavior-v5.json) · [common-integration-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [adoption-20261125.json](../../artifacts/design/lesson-registration-20261124/adoption-20261125.json) | [02-LOGIC.md](02-LOGIC.md) · [06-API-PORTS.md](06-API-PORTS.md) · [07-EXECUTION.md](07-EXECUTION.md) — CS-01~09 원본 당시 상태 유지, 현행 채택은 승인 기록 |
 | 데이터·프로필 | 동결/채택·mock | [logical-data-contract-decision-v1.json](../../artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json) · [data-contract-v4.json](../../artifacts/design/lesson-registration-20261124/data-contract-v4.json) · [data-schema-v4.1.json](../../artifacts/design/lesson-registration-20261124/data-schema-v4.1.json) · [platform-profiles-v2.json](../../artifacts/design/lesson-registration-20261124/platform-profiles-v2.json) | [03-DATA.md](03-DATA.md) · [04-SCHEMA.md](04-SCHEMA.md) · [05-PLATFORMS.md](05-PLATFORMS.md) — V4.1 명시 델타·공통 V1 우선. 실제 운영사 규칙 미검증 |
 | 공통 구현 계약 | 방향 승인·초기 공유 | [IMPLEMENTATION-BINDING.json](../../../product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json) · [HRESP-20261125-02_common-implementation-binding.md](../../human/responses/HRESP-20261125-02_common-implementation-binding.md) · [interfaces.py](../../../product/lesson-registration/contracts/interfaces.py) · [validation.py](../../../product/lesson-registration/contracts/validation.py) · [viewer.d.ts](../../../product/lesson-registration/contracts/viewer.d.ts) · [wiring.py](../../../product/lesson-registration/src/lesson_registration/composition/wiring.py) | [README.md](../../../product/lesson-registration/contracts/README.md) — IB-01~05, 세부 provider/제품 스택 미확정 |
-| 공통 물리 설계·실행환경 | 부분 준비·후속 설계 | [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [pyproject.toml](../../../product/lesson-registration/pyproject.toml) · [uv.lock](../../../product/lesson-registration/uv.lock) · [bootstrap-ci-20261125.json](../../../product/lesson-registration/evidence/bootstrap-ci-20261125.json) | [README.md](../../../product/lesson-registration/README.md) · [PLAN.md](../../../product/lesson-registration/evidence/PLAN.md) — Python bootstrap 검증, 실제 DB/transport/launch/lock 미확정 |
+| 공통 물리 설계·실행환경 | PD-01~08 방향 채택·세부 검증 | [PHYSICAL-BINDING.json](../../../product/lesson-registration/contracts/PHYSICAL-BINDING.json) · [HRESP-20261125-03_common-physical-direction.md](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [pyproject.toml](../../../product/lesson-registration/pyproject.toml) · [uv.lock](../../../product/lesson-registration/uv.lock) · [bootstrap-ci-20261125.json](../../../product/lesson-registration/evidence/bootstrap-ci-20261125.json) · [pyproject.toml](../../../product/lesson-registration/evidence/physical-env/pyproject.toml) · [lesson-physical-probe.yml](../../../.github/workflows/lesson-physical-probe.yml) | [README.md](../../../product/lesson-registration/README.md) · [PLAN.md](../../../product/lesson-registration/evidence/PLAN.md) — 정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도 |
 | 담당별 상세 설계·작업 | TASK 배정 | [current.json](../../artifacts/state/current.json) · [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [TASK-048.json](../../artifacts/tasks/TASK-048.json) · [TASK-049.json](../../artifacts/tasks/TASK-049.json) · [TASK-050.json](../../artifacts/tasks/TASK-050.json) · [TASK-051.json](../../artifacts/tasks/TASK-051.json) · [TASK-052.json](../../artifacts/tasks/TASK-052.json) · [TASK-053.json](../../artifacts/tasks/TASK-053.json) · [TASK-054.json](../../artifacts/tasks/TASK-054.json) | [CURRENT.md](../../../CURRENT.md) · [WORK-PACKAGES.md](../../../product/lesson-registration/WORK-PACKAGES.md) — 담당자 PLAN/수신/착수 및 일정 별도 확인 |
 | 검증·수용 시험 | 설계/합성 검증 | [common-integration-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) `/gate` · [common-integration-validation-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-validation-v1.json) · [common-contract-ci-20261125.json](../../../product/lesson-registration/evidence/common-contract-ci-20261125.json) · [TASK-048.json](../../artifacts/tasks/TASK-048.json) | [09-TESTS.md](09-TESTS.md) · [README.md](../../review/README.md) — 제품 22개 시험 실제 결과는 TASK/고정 실행 근거로 판정 |
+| 현행 WBS 후보 | 미확정 | [wbs-v0.6-candidate.json](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json) | [PLAN.md](../../../product/lesson-registration/evidence/PLAN.md) — R05 7근무일 추정·R02 12/4 인계; 전체 owner PLAN 후 확정 |
 | 과거 설계·WBS | 이력/선별 참조 | [MANIFEST.json](MANIFEST.json) · [trace-index-v0.9.json](../../artifacts/design/lesson-registration-20261124/trace-index-v0.9.json) · [wbs-v0.5.json](../../artifacts/design/lesson-registration-20261124/wbs-v0.5.json) | [10-DECISIONS.md](10-DECISIONS.md) · [11-WBS.md](11-WBS.md) · [12-HISTORY.md](12-HISTORY.md) · [TARGET-DESIGN.md](../TARGET-DESIGN.md) — 고정 98개 원본·88개 추적 보존, 이전 찾아you 및 WBS는 현행 배정 아님 |
 
 ## 3. 요구사항 추적
@@ -134,6 +135,21 @@
 - 남은 검토: Owner factory signatures, shared launch configuration and module-level testing strategy before actual assembly.
 - 재검토 조건: First real provider ready.
 
+### PD-01~08 · 공통 물리 방향
+
+[PHYSICAL-BINDING.json](../../../product/lesson-registration/contracts/PHYSICAL-BINDING.json) · [HRESP-20261125-03_common-physical-direction.md](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [wbs-v0.6-candidate.json](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)
+
+| ID | 채택 방향 | 담당자 확인 |
+| --- | --- | --- |
+| PD-01 시스템 구조 | 모듈형 모놀리스 + 격리 browser runtime; 프로세스 분리 필요성은 근거 후 판단 | R03/R05: lifecycle, shutdown, process isolation 조건 |
+| PD-02 실행 기술 | Python 3.12, FastAPI/ASGI, SQLite, Playwright/Chromium; UI/AI 내부 기술은 owner 제안 | R01/R03/R05: product regression and owner OS/local install confirmation; R02/R04 additional needs |
+| PD-03 공통 데이터 | 기존 named JSON Schema/profile; 서버 권위 UTF-8 sorted-key JSON·safe integer·Unicode 보존·SHA256, 배열 순서·asset raw bytes; 기존 data contract 범위 | R02/R03/R04/R05: supplied server byte helper/golden vectors; exact digest target scope, slot mapping, error/time/ID semantics |
+| PD-04 Worker/저장 | CO 단일 상태 소유, accepted worker는 request/viewer와 수명 분리, SQLite 원자 accept/admit/observe/fence/finalize; runtime exclusive lease | R03/R05: transaction/timeout, permit/lease generation, crash/fence race |
+| PD-05 모듈 호출 | 기존 Python Protocol/JSON 및 BoundGateway; runtime owns permit/context; adapter 등록 operation만; event loop에서 blocking 금지 | R03/R05 STORE 호출, R04/R05 operation manifest와 fake gateway, R02/R03 I2 timeout |
+| PD-06 Viewer | CDP screencast + WebSocket 방향 수용; R05 viewer mount/dispose, R03 서버 경계, R04 UI 소비 | R03/R04/R05 endpoint/message schema, grant owner/generation/expiry/origin, input cutoff, disconnect detach, WSS 검증 |
+| PD-07 Composition | 명시 provider 주입·설정·수명 관리, fake는 개발·검증에 명시 선택; 자동 replay fallback 없음 | 각 owner factory signature, config/launch, port, shutdown |
+| PD-08 통합 검증 | 독립 기술 검사 → 공유 계약 → 실제 provider → 크몽/숨고 통합 → 22개 동일 후보 gate | R01: shared product-lock regression, owner PLAN and actual provider/product gate; R02 handoff 12/4 |
+
 ## 5. 현재 담당별 작업
 
 | TASK | 담당 | 패키지 | 관련 IB | PLAN 작성 위치 |
@@ -153,10 +169,10 @@
 - [공통 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382) · 계약 10개, 합성 포트 36개, HTTP 36개, 회귀 9개, 문서 27개. 고정 후보에 대한 검사다.
 - 제품 gate 22개: [수용 기준](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) `/gate` · [실제 결과 원본](../../artifacts/tasks/TASK-048.json). 합성/제품 시험 구분, T5-08 실제 모델 필수.
 
-- Actual common dependency lock and provider runtime transport/async choice
-- Operation manifest, stable slot resolution and canonical digest byte rules require owner review
-- Actual runtime atomic transaction, leases, evidence and viewer security
-- Real app launch, product test results and calendar
+- Owner-specific environment confirmation, remaining UI/AI dependencies and product provider transport/async choices
+- R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config: contracts/INTERFACE-REVIEW.md
+- Canonical helper and golden vectors supplied; actual scope/slot/profile readback mapping and provider integration require owner confirmation
+- Other owner PLAN/availability and WBS confirmation; actual product tests not run
 
 ## 7. 갱신
 

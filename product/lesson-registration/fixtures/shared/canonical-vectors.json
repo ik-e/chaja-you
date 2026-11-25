@@ -1,0 +1,38 @@
+{
+  "id": "LR-CANONICAL-VECTORS-01",
+  "scope": "synthetic server JSON byte convention; no actual evidence or profile/scope/slot resolution",
+  "vectors": [
+    {
+      "value": {
+        "z": [
+          2,
+          1,
+          true,
+          null
+        ],
+        "a": "한글😀"
+      },
+      "canonical_utf8": "{\"a\":\"한글😀\",\"z\":[2,1,true,null]}",
+      "sha256": "a0fc834dd500e3b9f4d00ec9fb7476d5ac5603bb4527fdb3169cef56314274c7"
+    },
+    {
+      "value": {
+        "e": "é",
+        "é": "é",
+        "𐀀": "astral",
+        "": "bmp"
+      },
+      "canonical_utf8": "{\"e\":\"é\",\"é\":\"é\",\"\":\"bmp\",\"𐀀\":\"astral\"}",
+      "sha256": "64b9ed4bd95935fcb2a84a71ecf3e9f44997f2a762b2f949e1012c49c40bb5fd"
+    },
+    {
+      "value": {
+        "max": 9007199254740991,
+        "min": -9007199254740991,
+        "text": "a\nb\t\"\\"
+      },
+      "canonical_utf8": "{\"max\":9007199254740991,\"min\":-9007199254740991,\"text\":\"a\\nb\\t\\\"\\\\\"}",
+      "sha256": "d1776f05cf3e28a7f9be2d447ddd23dd1b823c907d8690175bf2c9e3d20d99b1"
+    }
+  ]
+}

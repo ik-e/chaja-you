@@ -1,0 +1,69 @@
+{
+  "id": "LR-PHYSICAL-CI-20261125",
+  "scope": "Independent technology candidate, not actual product acceptance",
+  "date": "2026-11-25",
+  "tested_commit": "bb267b40d943581d3e90f6ce26ad4e1ca6755d2c",
+  "run": 45534844447,
+  "job": 138938802224,
+  "url": "https://github.com/ik-e/chaja-you/actions/runs/45534844447",
+  "conclusion": "success",
+  "environment": {
+    "runner": "ubuntu-24.04",
+    "python": "3.12.3",
+    "uv": "0.10.0",
+    "resolved_packages": 26,
+    "dependencies": {
+      "jsonschema": "4.25.1",
+      "fastapi": "0.128.2",
+      "uvicorn": "0.48.0",
+      "websockets": "16.0",
+      "playwright": "1.57.0",
+      "httpx": "0.28.1"
+    },
+    "browser": "Chromium 143.0.7499.4 / Playwright build v1200"
+  },
+  "checks": [
+    {
+      "id": "dependency-lock",
+      "result": "pass",
+      "observed": "uv lock, uv lock --check, uv sync --locked --all-groups, uv pip check"
+    },
+    {
+      "id": "browser-install",
+      "result": "pass",
+      "observed": "Chromium and Headless Shell build v1200 installed"
+    },
+    {
+      "id": "http-ws-bridge",
+      "result": "pass",
+      "test": "test_http_ws_thread_bridge"
+    },
+    {
+      "id": "schema",
+      "result": "pass",
+      "test": "test_jsonschema"
+    },
+    {
+      "id": "browser-context-cdp",
+      "result": "pass",
+      "test": "test_loopback_context_and_screencast"
+    },
+    {
+      "id": "sqlite-competition",
+      "result": "pass",
+      "test": "test_sqlite_competing_insert"
+    }
+  ],
+  "lock_origin": "Exact lock lines between LR_LOCK_BEGIN/END in successful job log; initial product pyproject uses same dependency spec.",
+  "first_failure": {
+    "commit": "56079752a3802287ac98e1f5c5ca56d31cb12d0d",
+    "url": "https://github.com/ik-e/chaja-you/actions/runs/45534634454",
+    "cause": "ubuntu-latest selected unsupported Ubuntu 26.04 for pinned Playwright; fixed runner to ubuntu-24.04"
+  },
+  "limits": [
+    "Synthetic loopback only; TestClient rather than real network ASGI deployment.",
+    "No product STORE atomicity, lease, external effects, actual viewer transport/security or model proof.",
+    "Linux Python 3.12 only; local Windows/other OS, product security and complete acceptance not tested."
+  ],
+  "product_acceptance": "not_run"
+}
