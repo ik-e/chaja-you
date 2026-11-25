@@ -118,7 +118,7 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-049.json)
 
-PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 draft의 실제 합성 모델 초기 비교 각 5사례(3/5·4/5, 양 모델 가격 충돌 오류), 44개 합성 회귀 독립 CI 확인. R01 리뷰 등록. API 접근 전달·실제 호출 담당 보고, 모델 선정·총비용·중첩 수정/timeout·인계·전체 gate 미확정.
+PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 draft의 실제 합성 모델 초기 비교 각 5사례(3/5·4/5, 양 모델 가격 충돌 오류), 44개 합성 회귀 독립 CI 확인. R01 리뷰 등록. API 접근 전달·실제 호출 담당 보고, 모델 선정·총비용·중첩 수정/timeout·인계·전체 gate 미확정. 후속 PR51에서 합성 61개 통과, R03 D05 구현 예정 응답과 R01 실험·비용 제안 반영; 실제 결합·추가 유료 시험은 미실행.
 
 검증과 근거
 
@@ -129,12 +129,14 @@ PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 draft
 - 실제 모델 전체 수용 · inconclusive
 - PR51 합성 44개 · pass
 - 실제 모델 동일 합성 5개 사례 비교 · fail
+- 후속 r02-preparation 합성 테스트 61개 및 bootstrap replay · pass
 - [최신 팀 검토](../../product/lesson-registration/evidence/team-integration-checkpoint-20261125.json)
 - [실제 모델 합성 실행 결과](../artifacts/runs/RUN-TASK-049-OPENAI-20261125.json)
 - [R02 계획과 실험·제약](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/PLAN.md)
 - [합성 준비 및 R03 연결 시험](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_provider.py)
 - [OpenAI 모의 HTTP 시험](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_openai_extractor.py)
 - [PR51 합성 회귀 CI](https://github.com/ik-e/chaja-you/actions/runs/45561308184)
+- [R02 후속 구현·합성 시험 및 협의 제안](https://github.com/ik-e/chaja-you/pull/51)
 
 남은 불확실성과 결정 요청
 
@@ -142,8 +144,10 @@ PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 draft
 - 양 모델 가격 충돌 오류 및 실제 의미·단위/VAT 누락 탐지 성능 미확인
 - H5 부모·형제 보존, timeout/late revision 실제 연결 필요
 - 자기 성찰 루프 및 전체 gate 미실행, 잔여/인계 미확인
-- R02가 실험 설계·예상 비용·품질 기준·잔여 공수/12/4 인계를 제안하고 R01은 검토만
-- R03과 중첩 수정/timeout·revision 공동 시험, PR51/52 준비 시 병합 요청
+- R03이 D05 수정안을 수신해 구현 예정으로 답했으며 HTTP FACT_CONFLICT 422/409 차이를 확인 중; 실제 결합 시험은 미실행
+- R01에게 추가 모델 평가 사례·예상 비용 검토를 제안했으며 허용 범위 회신 전 유료 실험은 진행하지 않음
+- R03의 D05 구현 SHA를 받은 뒤 실제 PREP과 공동 시험하고 FACT_CONFLICT 422 고정 계약을 확인
+- 12/4 인계는 R03 일정·가용성·모델 검증 결과에 따라 재산정
 
 ### TASK-050 · 진행 중
 
