@@ -2,6 +2,8 @@
 
 원격 브라우저 runtime (mock 전용). EXEC provider로 I3 `authenticate`, I4 `execute`를 제공합니다.
 
+R03 main `089b8a4` 연결에서는 STORE admit의 Permit을 STORE dispatch에 전달한다. dispatch 내부의 consume과 동기 browser I/O가 공통 등록별 잠금을 공유한다. 별도 consume 호출은 하지 않는다. 내부 make_worker_context factory를 사용하는 binding은 실제 worker context로 권한이 제한된 asset reader를 구성할 수 있다. 기존 make_context caller는 유지한다. 실제 cookie/HTTP/WS 및 경합 시험 결과는 PLAN의 R03 연결 절을 참조한다.
+
 변경 요청의 307·308 응답은 브라우저에 전달하기 전에 차단한다. 첫 요청이 이미 처리됐을 가능성이 있어 자동 후속 POST를 허용하지 않으며 결과를 unknown으로 보존한다. 접수 전 리다이렉트에서도 작업은 중단된다. 지원이 필요한 리다이렉트 흐름은 별도 실행 경계 협의 대상이다. 관련 관측과 회귀 시험은 PLAN의 POST 307·308 절에 기록했다.
 
 | 파일 | 역할 |

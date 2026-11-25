@@ -4,8 +4,9 @@ The runtime owns the opaque worker context and permit (IB-03). Platform drivers 
 ``BoundGateway`` (list_operations / perform / observe_goal) and a ScopedPage; no store, lease,
 permit, raw browser or credential is reachable from them.
 
-Order per operation: exact registry match -> STORE admit (durable) -> driver acts -> STORE
-record_observation. Any error or unknown effect requests S-FENCE; nothing is retried.
+Order per operation: exact registry match -> STORE admit (durable) -> STORE dispatch
+(consume and synchronous driver I/O under the registration gate) -> record_observation.
+Any error or unknown effect requests S-FENCE; nothing is retried.
 """
 from __future__ import annotations
 
@@ -69,10 +70,14 @@ class ExecutionGateway:
             raise PortFailure(_error("INVALID_PHASE", "session already has a worker"))
         try:
             store_ctx = self._store.acquire_context(rid)
+            if s.binding.make_worker_context is not None:
+                driver_ctx = s.binding.make_worker_context(copy.deepcopy(accepted), s.scoped_page,
+                                                           self._rt.clock.now, store_ctx)
+            else:
+                driver_ctx = s.binding.make_context(copy.deepcopy(accepted), s.scoped_page, self._rt.clock.now)
         except Exception as e:
             s.release_lease()
             raise PortFailure(_store_failure(e)) from None
-        driver_ctx = s.binding.make_context(copy.deepcopy(accepted), s.scoped_page, self._rt.clock.now)
         return ExecContext(rid, copy.deepcopy(accepted), s, store_ctx, driver_ctx)
 
     # ---------- RT-02 ----------
@@ -97,14 +102,24 @@ class ExecutionGateway:
             self._fence(ctx, _error("INVALID_REQUEST", "operation is not registered for this accepted scope"))
             raise PortFailure(ctx.error)
         try:
-            self._store.admit(ctx.store_ctx, copy.deepcopy(operation))   # durable before any browser command
+            permit = self._store.admit(ctx.store_ctx, copy.deepcopy(operation))
         except Exception as e:
             self._fence(ctx, _store_failure(e))
             raise PortFailure(ctx.error) from None
         driver = ctx.session.binding.driver
+        invoked = False
+
+        def invoke():
+            nonlocal invoked
+            invoked = True
+            return driver.perform(ctx.driver_ctx, copy.deepcopy(operation))
+
         try:
-            outcome = driver.perform(ctx.driver_ctx, copy.deepcopy(operation))
+            outcome = self._store.dispatch(ctx.store_ctx, permit, copy.deepcopy(operation), invoke)
         except Exception as e:
+            if not invoked:
+                self._fence(ctx, _store_failure(e))
+                raise PortFailure(ctx.error) from None
             err, obs, evidence = self._driver_failure(ctx, operation, e)
             if obs is not None:
                 self._record(ctx, obs, evidence)

@@ -1,5 +1,20 @@
 # r05-remote PLAN · TASK-053 원격 브라우저 runtime·인증·뷰어
 
+## 2026-11-25 R03 main 089b8a4 실제 연결
+
+R03 구현 `ab5f8b1`을 포함한 main `089b8a4`를 병합했다. 담당 경로에서 다음을 연결했다.
+
+- `PlatformBinding.make_worker_context` 내부 factory에 실제 STORE worker context 전달. 기존 3인자 make_context는 기존 caller용으로 유지하며 adapter에는 제한된 결과 context만 전달한다.
+- RT-03은 `admit` 반환 Permit을 `store.dispatch(context, permit, operation, invoke)`에 전달한다. consume은 별도로 호출하지 않는다. invoke는 동기 driver.perform과 BrowserHost.run의 완료 후 반환한다. dispatch가 callback 전에 거절하면 실행 관측을 생성하지 않고 fence한다.
+- actual browser race 3개를 추가했다. admit 이후 Coordinator fence 완료 시 K6 driver 호출·접수 0건. consume 이후 Coordinator fence 경합 시 callback 종료까지 fence 대기, 실제 접수 1건. 응답 유실이면 unknown을 보존하고 K7·재실행을 차단한다.
+- R03 create_viewer_app의 실제 HttpOnly cookie와 HTTP H6 및 Viewer router를 Chromium에서 연결했다. 무세션 HTTP 401, 세션 발급 후 H6 open, 실제 WS 프레임과 가상 로그인, H6 finish의 verified 응답을 확인했다. R04 버튼 자체의 바인딩은 별도다.
+
+Windows / Python 3.12.7 / Chromium 143.0.7499.4에서 `uv run --locked --all-groups python dev.py test r05-remote` 34개 통과, 실패·skip 0개(71.481초). 이전 307·308 6개도 포함한다. 공통 시험은 Windows 기본 cp949에서 기존 파일 read_text 오류가 났고, 공통 파일을 수정하지 않고 `PYTHONUTF8=1`로 다시 실행해 24개 통과했다. doctor와 `check-changes r05-remote --base 089b8a4`, diff 검사도 통과했다.
+
+별도 `r05-integration-check-089b8a4` 검증 작업 공간에서 두 R05 담당 디렉터리만 조합해 크몽 40개를 모두 실행했다. RuntimeSupport.slot_resolver와 실제 worker-bound 승인 이미지 reader, StoreGateway/Adapter 양쪽 binding.v1, 동기 dispatch 및 독립 재조회를 검증했다. 성공 실행의 Permit 7개가 모두 소비됨도 추가 확인했다. R03의 DB당 단일 서버 프로세스 보장 범위가 적용된다.
+
+R04 실제 버튼부터 등록까지의 전체 UI E2E 및 새 변경의 커밋·push·GitHub CI는 후속이다. 종료 후 read 권한은 확장하지 않았다. R01의 공유 helper 승격과 전체 제품 gate 판정은 별도다.
+
 ## 2026-11-25 POST 307·308 재전송 회귀
 
 기준 커밋은 `2baeb2b5d42432f8b0bd6218c02d9d6d6965b9f8`이다. NeutralSite에 접수 전/후 307·308과 후속 제출 endpoint를 추가했다. 중복 차단을 하지 않는 모의 사이트에서 요청 경로별 POST 횟수와 실제 접수 건수를 관측한다. 요청 본문·쿠키·Grant는 새 관측 목록에 저장하지 않는다.

@@ -153,11 +153,12 @@ class Transport(unittest.TestCase):
                 ws.send_json({'t': 'attach', 'grant': grant})
                 self.assertEqual(ws.receive_json()['state'], 'human')
 
-    def serve_ui(self):
+    def serve_ui(self, app_factory=None):
         listener = socket.socket()
         listener.bind(('127.0.0.1', 0))
         origin = f'http://127.0.0.1:{listener.getsockname()[1]}'
-        server = uvicorn.Server(uvicorn.Config(self.app(origin), log_level='critical', access_log=False))
+        app = app_factory(origin) if app_factory else self.app(origin)
+        server = uvicorn.Server(uvicorn.Config(app, log_level='critical', access_log=False))
         thread = threading.Thread(target=server.run, kwargs={'sockets': [listener]}, daemon=True)
         thread.start()
 
@@ -169,6 +170,80 @@ class Transport(unittest.TestCase):
         self.addCleanup(shutdown)
         self.assertTrue(s.wait_until(lambda: server.started))
         return origin
+
+    def login_through_canvas(self, page):
+        canvas = page.locator('canvas')
+        for field, text in [('username', 'acct-a'), ('password', self.site.accounts['acct-a'])]:
+            x, y = s.LOGIN_POS[field]
+            box = canvas.bounding_box()
+            canvas.click(position={'x': x * box['width'] / 1280, 'y': y * box['height'] / 800})
+            page.keyboard.type(text)
+        x, y = s.LOGIN_POS['login']
+        box = canvas.bounding_box()
+        canvas.click(position={'x': x * box['width'] / 1280, 'y': y * box['height'] / 800})
+        self.assertTrue(s.wait_until(lambda: self.site.logins == 1))
+
+    def test_r03_session_cookie_authenticates_http_and_actual_viewer(self):
+        from lesson_registration.app.coordinator import Coordinator
+        from lesson_registration.app.store import Store
+        from lesson_registration.app.http.viewer_composition import create_viewer_app
+        co = Coordinator(Store(s.temp_db(self)), prep=s.ReplayPrep(), exec_port=self.rt)
+        source = co.create_source('owner-a', {'raw_text': '합성 원본', 'new_assets': [
+            {'part_name': 'image', 'rights_confirmed': True}]}, {'image': s.MOCK_IMAGE})
+        reg = co.create_registration('owner-a', {'source_id': source['source_id'], 'selector': 'kmong'})
+
+        def app_factory(origin):
+            app = create_viewer_app(co, self.rt, viewer_router, service_origin=origin, mock_owner='owner-a')
+
+            @app.get('/')
+            def index():
+                return FileResponse(s.ROOT / 'web' / 'index.html')
+
+            @app.get('/app.js')
+            def script():
+                return FileResponse(s.ROOT / 'web' / 'app.js', media_type='text/javascript')
+
+            return app
+
+        origin = self.serve_ui(app_factory)
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            try:
+                page = browser.new_page(viewport={'width': 1440, 'height': 1000})
+                page.goto(origin)
+                code = page.evaluate('''async id => (await fetch('/v1/registrations/' + id)).status''', reg['registration_id'])
+                self.assertEqual(code, 401)
+                self.assertEqual(page.evaluate("async () => (await fetch('/_mock/session', {method:'POST'})).status"), 200)
+                self.assertNotIn('lr_mock_session', page.evaluate('document.cookie'))
+                opened = page.evaluate('''async reg => {
+                    const r = await fetch('/v1/registrations/' + reg.registration_id + '/authentication', {
+                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({action:'open', expected_revision:reg.revision})});
+                    return {status:r.status, data:await r.json()};
+                }''', reg)
+                self.assertEqual(opened['status'], 200)
+                page.locator('.tab-btn[data-target="surface-auth"]').click()
+                page.evaluate('''async grant => {
+                    const {mount} = await import('/remote/viewer.js');
+                    window.cookieEvents = [];
+                    window.cookieViewer = mount(document.querySelector('#viewer-container'), grant,
+                                               e => cookieEvents.push(e));
+                }''', opened['data']['grant'])
+                page.wait_for_function("cookieEvents.includes('ready') && document.querySelector('canvas').width === 1280")
+                self.login_through_canvas(page)
+                status = page.evaluate('''async data => {
+                    const r = await fetch('/v1/registrations/' + data.registration.registration_id + '/authentication', {
+                        method:'POST', headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify({action:'finish', expected_revision:data.registration.revision,
+                                             generation:data.grant.generation})});
+                    return {status:r.status, data:await r.json()};
+                }''', opened['data'])
+                self.assertEqual(status['status'], 200)
+                self.assertEqual(status['data']['registration']['auth']['state'], 'verified')
+                page.evaluate('cookieViewer.dispose()')
+                self.assertEqual(self.site.logins, 1)
+            finally:
+                browser.close()
 
     def test_actual_mount_login_finish_detach(self):
         origin = self.serve_ui()

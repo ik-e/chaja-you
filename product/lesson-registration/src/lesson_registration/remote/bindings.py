@@ -38,3 +38,5 @@ class PlatformBinding:
     structure_exc: type = PageStructureError
     view_factory: Callable[..., Any] = PageView
     viewport: dict = field(default_factory=lambda: {"width": 1280, "height": 800})
+    # Trusted composition factory only. The adapter receives its resulting restricted context.
+    make_worker_context: Callable[[dict, Any, Callable[[], str], Any], Any] | None = None

@@ -4,6 +4,9 @@ admission precedes every browser action; lost response stays unknown and is neve
 import json
 import sqlite3
 import unittest
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from unittest.mock import patch
 
 import support as s
 from contracts.interfaces import PortFailure
@@ -182,6 +185,87 @@ class Denials(Flow):
             bound.perform(ops[0])                               # fenced after the violation
         self.assertEqual(e.exception.error["code"], "INVALID_PHASE")
         self.assertEqual(self.driver.calls, [])
+
+
+class BrowserDispatchRaces(Flow):
+    def ready_to_submit(self):
+        rid = self.accept()
+        ctx = self.rt.gateway.with_verified_connection(json.loads(self.job(rid)['accepted_scope_json']))
+        bound = BoundGateway(self.rt.gateway, ctx)
+        operations = bound.list_operations()
+        for operation in operations[:5]:
+            bound.perform(operation)
+        return rid, bound, operations[5:]
+
+    def test_fence_after_admit_before_dispatch_has_zero_browser_submits(self):
+        rid, bound, operations = self.ready_to_submit()
+        admit = self.gateway.admit
+
+        def stop_after_admit(context, operation):
+            permit = admit(context, operation)
+            self.co.coord_store.fence(rid, {'code': 'RUNTIME_ERROR', 'message': 'synthetic stop'})
+            return permit
+
+        with patch.object(self.gateway, 'admit', side_effect=stop_after_admit):
+            with self.assertRaises(PortFailure) as error:
+                bound.perform(operations[0])
+        self.assertEqual(error.exception.error['code'], 'PERMISSION_DENIED')
+        self.assertEqual(self.site.submissions, 0)
+        self.assertNotIn('K6', self.driver.calls)
+
+    def assert_dispatch_fence_race(self, *, response_lost):
+        rid, bound, operations = self.ready_to_submit()
+        if response_lost:
+            self.site.faults['submit'] = 'drop_after_commit'
+        consumed, release, attempting, fenced = [threading.Event() for _ in range(4)]
+        consume = self.gateway.consume
+
+        def pause_after_consume(*args):
+            consume(*args)
+            consumed.set()
+            if not release.wait(5):
+                raise AssertionError('synthetic dispatch barrier timed out')
+
+        def fence():
+            attempting.set()
+            self.co.coord_store.fence(rid, {'code': 'RUNTIME_ERROR', 'message': 'synthetic stop'})
+            fenced.set()
+
+        with ThreadPoolExecutor(2) as pool, patch.object(self.gateway, 'consume', side_effect=pause_after_consume):
+            executing = pool.submit(bound.perform, operations[0])
+            try:
+                self.assertTrue(consumed.wait(5))
+                stopping = pool.submit(fence)
+                self.assertTrue(attempting.wait(5))
+                self.assertFalse(fenced.wait(.1))
+                self.assertEqual(self.site.submissions, 0)
+            finally:
+                release.set()
+            if response_lost:
+                with self.assertRaises(PortFailure) as error:
+                    executing.result(15)
+                self.assertEqual(error.exception.error['code'], 'EFFECT_UNKNOWN')
+            else:
+                self.assertEqual(executing.result(15)['verdict'], 'confirmed')
+            stopping.result(10)
+        self.assertEqual(self.site.submissions, 1)
+        self.assertEqual(self.driver.calls.count('K6'), 1)
+        with self.assertRaises(PortFailure):
+            bound.perform(operations[1])
+        self.assertNotIn('K7', self.driver.calls)
+        self.assertEqual(self.site.submissions, 1)
+        if response_lost:
+            self.assertEqual(self.effects(rid)['K6'], 'unknown')
+        state = self.co.run_job(rid)
+        self.assertNotEqual(state, 'active')
+        self.assertEqual(self.co.run_job(rid), state)
+        self.assertEqual(self.site.submissions, 1)
+
+    def test_consume_then_fence_waits_for_real_browser_dispatch(self):
+        self.assert_dispatch_fence_race(response_lost=False)
+
+    def test_consume_then_fence_lost_response_stays_unknown(self):
+        self.assert_dispatch_fence_race(response_lost=True)
 
 
 if __name__ == "__main__":
