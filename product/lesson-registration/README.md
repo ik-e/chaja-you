@@ -1,10 +1,14 @@
 # 제품 작업 공간 · TASK 배정 완료
 
-R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행기는 R04(숨고), R05(크몽) 담당으로 별도 TASK 배정. 담당자 수신·착수 및 가용성 확인 전이며 일정·세부 기술은 협의한다. [활성 단계](../../docs/human/phase-intents/PHASE-20261125-01.md) · [배정 근거](../../docs/human/responses/HRESP-20261125-01_product-task-assignment.md) · [bootstrap CI](https://github.com/ik-e/chaja-you/actions/runs/45525881756).
+R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행기는 R04(숨고), R05(크몽) 담당으로 별도 TASK 배정. R05 수신과 공수 추정은 확인했으며 다른 담당자의 수신·착수 및 가용성과 세부 일정은 협의한다. [활성 단계](../../docs/human/phase-intents/PHASE-20261125-01.md) · [배정 근거](../../docs/human/responses/HRESP-20261125-01_product-task-assignment.md) · [bootstrap CI](https://github.com/ik-e/chaja-you/actions/runs/45525881756).
 
-- [팀 설계 검토 홈](https://github.com/ik-e/chaja-you/blob/d68406b895b344819eb7ed6c3524167789bfdb84/docs/design/lesson-registration/README.md)
+- [현행 설계 기준](../../docs/design/lesson-registration/CURRENT-DESIGN.md) · [AI 현행 인덱스](../../docs/design/lesson-registration/CURRENT-DESIGN.json) · [채택 전 고정 검토 스냅샷](https://github.com/ik-e/chaja-you/blob/d68406b895b344819eb7ed6c3524167789bfdb84/docs/design/lesson-registration/README.md)
 - [공통 계약](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [결정 추적](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json)
-- [작업 공간 정본 후보](WORKSPACE.json) · [replay 예시](fixtures/shared/replay.json). 원본 설계 파일을 복사해 별도 정본으로 만들지 않는다.
+- [작업 공간 정본](WORKSPACE.json) · [replay 예시](fixtures/shared/replay.json). 원본 설계 파일을 복사해 별도 정본으로 만들지 않는다.
+
+## 승인된 공통 구현 계약
+
+[공통 구현 규격](contracts/README.md) · [R01 결정](../../docs/human/responses/HRESP-20261125-02_common-implementation-binding.md) · [실행 근거](https://github.com/ik-e/chaja-you/actions/runs/45527624382). 기존 논리 계약과 pin은 유지한다. 각자 main의 승인된 공통 기준선을 자신의 브랜치에 병합하고 기준 SHA를 기록한 뒤 담당 영역만 수정한다. 세부 기술/실행 환경과 공수는 담당자 검토 후 조정한다.
 
 ## 작업 공간 / 독립 검증
 
@@ -22,15 +26,23 @@ R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행
 
 ## 로컬 실행
 
-현재 준비 골격은 표준 라이브러리만 사용한다. 제품 FastAPI/DB/frontend/browser 의존성과 세부 기술은 별도 채택. 새 checkout마다 별도 .venv와 임시 실행 상태.
+PD-01~08 방향 및 초기 공통 제품 lock을 적용한다. Python 3.12 / Ubuntu 24.04에서 [최소 기술 검증](evidence/physical-ci-20261125.json)이 통과했다. 실제 제품 구현과 담당자 OS 검증은 별도. 새 checkout마다 별도 .venv와 임시 실행 상태.
 
 ```sh
 cd product/lesson-registration
 uv sync --locked --python 3.12
 uv run --locked --python 3.12 python dev.py doctor
 uv run --locked --python 3.12 python dev.py smoke
-uv run --locked --python 3.12 python dev.py test all
+uv run --locked --all-groups --python 3.12 python dev.py test all
 ```
+
+### 담당자별 의존성 그룹
+
+- 기본 설치: jsonschema 4.25.1; R02 등 별도 그룹이 필요 없으면 기본 명령 사용.
+- R03 app/API: `uv sync --locked --python 3.12 --group app --group verification`, `uv run --locked --group app --group verification python dev.py test r03-app`.
+- R05 remote: `uv sync --locked --python 3.12 --group remote`, `uv run --locked --group remote python -m playwright install chromium`, `uv run --locked --group remote python dev.py test r05-remote`. Linux 시스템 의존성이 없으면 지원 Ubuntu 24.04에서 `uv run --locked --group remote python -m playwright install --with-deps chromium` 사용. 브라우저 시험이 필요한 다른 담당자도 remote 그룹 사용. 실제 서비스 접근 금지.
+- 전체 환경: `uv sync --locked --all-groups --python 3.12`. 브라우저 제품 시험은 해당 브라우저 설치 필요. [독립 기술 probe](evidence/probe_physical.py)는 `uv run --locked --all-groups python evidence/probe_physical.py`로 재현한다. AI SDK/Node 프런트 의존성은 담당자 제안 및 검토 후 별도 반영.
+- [세부 공동 경계 협의](contracts/INTERFACE-REVIEW.md) 기준으로 기존 PLAN에 적용 SHA, 호환/변경 요청, 시험 결과를 기록한다.
 
 UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serve api --platform soomgo --port 0` (또는 kmong). 출력한 loopback URL을 UI 개발 설정으로 전달. `/_dev/fixtures`에서 정확한 요청/응답 조회. H1~H9는 합성 replay이며 고정 입력 외에는 거절한다; multipart/임의 수정/상태 전이 구현 없음. 브라우저 UI 통합의 실제 CORS/동일 origin 구성은 R04/R03의 제품 개발에서 검증한다.
 
@@ -57,4 +69,10 @@ UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serv
 | [TASK-053](../../docs/artifacts/tasks/TASK-053.json) | R05 | r05-remote | r05/product-remote |
 | [TASK-054](../../docs/artifacts/tasks/TASK-054.json) | R05 | r05-kmong | r05/product-kmong |
 
-공통 bootstrap CI는 통과했다. 실제 담당자 수신·공수·스택 및 22개 제품 시험은 미확인/미실행. TASK 결과 갱신은 제품 경로 소유권 검사와 분리한 문서 갱신으로 처리한다.
+공통 bootstrap CI는 통과했다. R05는 수신/7근무일 추정 보고. 다른 담당자 수신·공수, 담당자별 환경 및 실제 22개 제품 시험은 별도 확인/미실행. TASK 결과 갱신은 제품 경로 소유권 검사와 분리한 문서 갱신으로 처리한다.
+
+## 공통 기준선 갱신 확인 (2026-11-25)
+
+[공통 물리 방향](contracts/PHYSICAL-BINDING.json) · [잠정 WBS](../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json) · [R01 PLAN](evidence/PLAN.md). 제품 pyproject.toml/uv.lock이 초기 공통 환경의 정본이다. 후보 환경은 이력 전용. R05 수신 확인 및 7근무일 추정 보고; 타 owner 공수/PLAN 별도 확인.
+
+팀원은 main에 통합된 공통 기준만 사용한다. 자신의 변경을 먼저 커밋/보존한 뒤 `git fetch origin`, `git merge origin/main`으로 공통 변경을 병합한다. 충돌 시 강제 reset/rebase하지 말고 관련 owner/R01에게 공유한다. 적용한 main SHA를 PLAN에 기록하고 갱신된 제품 lock으로 `uv sync --locked --python 3.12`, `uv run --locked --python 3.12 python dev.py doctor`, `uv run --locked --python 3.12 python dev.py test <package>`, `uv run --locked --python 3.12 python dev.py check-changes <package> --base <적용한-main-SHA>` 실행. 공동 계약 이견은 signature/예제/시험으로 반환한다. 팀원 브랜치를 강제로 갱신하지 않는다.

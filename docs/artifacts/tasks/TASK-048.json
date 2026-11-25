@@ -46,7 +46,8 @@
   "verification": [
     "uv run --locked --python 3.12 python dev.py test common",
     "실제 구현의 정상/오류/unknown 시험 및 입력·기대·관측·commit 기록; bootstrap replay는 제품 통과 아님",
-    "제품 시험 참조: AT-01, T5-08, T5-11, T6-01, T6-02, AT-02, AT-03, T5-01, T5-02, T5-12, T5-03, T5-07, AT-04, AT-05, T5-06, T5-13, T5-05, DV-01, DV-02, DV-03, DV-04, DV-05"
+    "제품 시험 참조: AT-01, T5-08, T5-11, T6-01, T6-02, AT-02, AT-03, T5-01, T5-02, T5-12, T5-03, T5-07, AT-04, AT-05, T5-06, T5-13, T5-05, DV-01, DV-02, DV-03, DV-04, DV-05",
+    "공통 표준 스키마·포트 계약 시험: evidence/PLAN.md의 독립 명령. 22개 제품 시험과 구분."
   ],
   "references": [
     {
@@ -63,10 +64,67 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json"
+    },
+    {
+      "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+    },
+    {
+      "path": "product/lesson-registration/evidence/physical-ci-20261125.json"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-04_r03-app-followup.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/r03-progress-20261125.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-05_common-detail-direction.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/DETAIL-CANDIDATE.json"
+    },
+    {
+      "path": "product/lesson-registration/contracts/SESSION-SECURITY.md"
+    },
+    {
+      "path": "product/lesson-registration/tests/contract/test_detail_candidate.py"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-07_openai-model-experiment-direction.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/OPENAI-EXPERIMENT.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-08_common-baseline-release.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/CURRENT-BASELINE.md"
     }
   ],
   "result": {
-    "summary": "Python 3.12 locked bootstrap 환경과 공통 pin·독립 패키지 smoke 및 ownership 양성/음성 검사 CI 성공. 모듈 실제 구현 및 22개 제품 수용 시험은 미실행. R01 공통 계약/통합 후속 진행.",
+    "summary": "Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 81ade0f CI 4종 성공. 최신 main의 R04 추가 구현과 함께 재검증. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정). R01 Discord 전달의 확정 경계와 D01~D06 협의/적용 기준을 CURRENT-BASELINE.md에 정리. 기관 API 권한 미확인에 맞춰 실험 환경 계획 수정.",
     "claims": [
       {
         "id": "C048-1",
@@ -74,6 +132,71 @@
         "status": "확인",
         "evidence_ids": [
           "E048-1"
+        ]
+      },
+      {
+        "id": "C048-2",
+        "text": "공통 구현 방향 IB-01~05 R01 승인",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-3"
+        ]
+      },
+      {
+        "id": "C048-3",
+        "text": "고정 커밋의 표준 계약 10개 및 기존 회귀 9개, 합성 payload 72개, 문서 검사 성공",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-4",
+          "E048-5"
+        ]
+      },
+      {
+        "id": "C048-4",
+        "text": "R01 PD-01~08 공통 물리 방향 수용",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-6"
+        ]
+      },
+      {
+        "id": "C048-5",
+        "text": "독립 기술 후보 4/4 통과, 정확한 제품 lock 기반 공통 회귀 통과",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-7",
+          "E048-8",
+          "E048-12"
+        ]
+      },
+      {
+        "id": "C048-6",
+        "text": "서버 canonical byte helper/테스트, 공통 인터페이스 협의 항목 및 WBS 후보",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-9",
+          "E048-10",
+          "E048-11"
+        ]
+      },
+      {
+        "id": "C048-7",
+        "text": "R03 후속 요청 처리 및 서버 공통 schema 판정 기준 명문화",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-13",
+          "E048-14"
+        ]
+      },
+      {
+        "id": "C048-8",
+        "text": "D01~D06 방향 및 remote session threat/guard 후보, 독립 reference와 재현 시험 제공",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-15",
+          "E048-16",
+          "E048-17",
+          "E048-18"
         ]
       }
     ],
@@ -87,6 +210,136 @@
         "id": "E048-2",
         "label": "검증 범위 기록",
         "path": "product/lesson-registration/evidence/bootstrap-ci-20261125.json"
+      },
+      {
+        "id": "E048-3",
+        "label": "R01 공통 설계 방향 승인",
+        "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      },
+      {
+        "id": "E048-4",
+        "label": "공통 계약 CI 검증 기록",
+        "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+      },
+      {
+        "id": "E048-5",
+        "label": "수정 후 실제 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382"
+      },
+      {
+        "id": "E048-6",
+        "label": "R01 공통 물리 방향 승인",
+        "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+      },
+      {
+        "id": "E048-7",
+        "label": "물리 기술 CI 증거 및 범위",
+        "path": "product/lesson-registration/evidence/physical-ci-20261125.json"
+      },
+      {
+        "id": "E048-8",
+        "label": "물리 기술 검증 실제 실행",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45534844447"
+      },
+      {
+        "id": "E048-9",
+        "label": "canonical helper 및 공통 경계 회귀",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45534986964"
+      },
+      {
+        "id": "E048-10",
+        "label": "담당자 공통 접점 및 R03 PLAN 피드백",
+        "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      },
+      {
+        "id": "E048-11",
+        "label": "WBS V0.6 후보",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+      },
+      {
+        "id": "E048-12",
+        "label": "제품 lock 공통 회귀 검증",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45535125564"
+      },
+      {
+        "id": "E048-13",
+        "label": "R01 후속 전달 및 기준",
+        "path": "docs/human/responses/HRESP-20261125-04_r03-app-followup.md"
+      },
+      {
+        "id": "E048-14",
+        "label": "R03 진행 보고 및 근거",
+        "path": "product/lesson-registration/evidence/r03-progress-20261125.json"
+      },
+      {
+        "id": "E048-15",
+        "label": "R01 D01~D06 방향 및 보안 검증 지시",
+        "path": "docs/human/responses/HRESP-20261125-05_common-detail-direction.md"
+      },
+      {
+        "id": "E048-16",
+        "label": "공통 세부 계약 후보",
+        "path": "product/lesson-registration/contracts/DETAIL-CANDIDATE.json"
+      },
+      {
+        "id": "E048-17",
+        "label": "원격 인증 세션 위협/통제/운영 경계",
+        "path": "product/lesson-registration/contracts/SESSION-SECURITY.md"
+      },
+      {
+        "id": "E048-18",
+        "label": "독립 후보 재현 시험",
+        "path": "product/lesson-registration/tests/contract/test_detail_candidate.py"
+      },
+      {
+        "id": "E048-19",
+        "label": "이전 D01~D06 후보 공통 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45539145817"
+      },
+      {
+        "id": "E048-20",
+        "label": "이전 원격 세션 기술 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45539145758"
+      },
+      {
+        "id": "E048-21",
+        "label": "OpenAI API 실험 방향",
+        "path": "docs/human/responses/HRESP-20261125-07_openai-model-experiment-direction.md"
+      },
+      {
+        "id": "E048-22",
+        "label": "실제 모델 실험 환경 계획",
+        "path": "product/lesson-registration/evidence/OPENAI-EXPERIMENT.md"
+      },
+      {
+        "id": "E048-23",
+        "label": "보완 후보 공통 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45551936586"
+      },
+      {
+        "id": "E048-24",
+        "label": "보완 후보 물리 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45551936592"
+      },
+      {
+        "id": "E048-25",
+        "label": "보완 후보 bootstrap CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45551937159"
+      },
+      {
+        "id": "E048-26",
+        "label": "보완 후보 문서 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45551936530"
+      },
+      {
+        "id": "E048-27",
+        "label": "공동 기준 전달 기록",
+        "path": "docs/human/responses/HRESP-20261125-08_common-baseline-release.md"
+      },
+      {
+        "id": "E048-28",
+        "label": "공동 개발 기준선",
+        "path": "product/lesson-registration/contracts/CURRENT-BASELINE.md"
       }
     ],
     "verification": [
@@ -104,24 +357,133 @@
         "evidence_ids": [
           "E048-2"
         ]
+      },
+      {
+        "criterion": "IB-01~05 방향 승인 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-3"
+        ]
+      },
+      {
+        "criterion": "표준 계약·회귀·문서 재생성 검사",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-4",
+          "E048-5"
+        ]
+      },
+      {
+        "criterion": "PD-01~08 방향 승인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-6"
+        ]
+      },
+      {
+        "criterion": "독립 기술 후보·제품 lock 공통 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-7",
+          "E048-8",
+          "E048-12"
+        ]
+      },
+      {
+        "criterion": "canonical byte vectors·공통 경계 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-9"
+        ]
+      },
+      {
+        "criterion": "owner 간 세부 계약 합의 및 WBS 확정",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E048-10",
+          "E048-11"
+        ]
+      },
+      {
+        "criterion": "D01~D06 독립 후보 시험 및 실제 owner 구현 적합성 (구분; 결과 CI 확인)",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E048-16",
+          "E048-18"
+        ]
+      },
+      {
+        "criterion": "24a1c35 이전 reference/물리 후보 (새 후보/실제 제품 별도)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-19",
+          "E048-20"
+        ]
+      },
+      {
+        "criterion": "OpenAI API 접근·비용·실제 모델 실험",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E048-21",
+          "E048-22"
+        ]
+      },
+      {
+        "criterion": "81ade0f 보완 후보 4개 CI (실제 provider/gate 별도)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-23",
+          "E048-24",
+          "E048-25",
+          "E048-26"
+        ]
       }
     ],
     "uncertainties": [
-      "담당자 실제 구현, 기술 및 공수 미확인",
-      "제품 시험 및 실서비스 미실행"
+      "R03 S0~S7 및 174/10/2 보고(독립 재현 미확인), 초기 11인일·잔여 공수 미확인; R05 7근무일 추정, R02/R04 가용성 및 실제 준비 상태 별도 확인",
+      "12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정",
+      "실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증",
+      "초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요",
+      "실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도.",
+      "OpenAI 공급자 방향 수용; API 계정/예산/SDK/모델 비교 및 시험 미확인; 81ade0f CI 통과; 실제 담당자 적합성 및 최신 main 추가 구현 회귀 별도.",
+      "기관 조직 Member 권한·API 이용 정책 및 실험 비용 미확정. 다른 담당자의 기준 적용/협의 반환은 확인 전."
     ],
-    "decision_requests": []
+    "decision_requests": [
+      "관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.",
+      "R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.",
+      "D01~D06 R01 후보 기준으로 담당자별 실제 구현 차이·반례·공수 반환. 안정적인 slot/manifest/readback, actual dispatch fence, viewer/I2/factory 세부 서명·환경은 실제 확인 후 확정. 기존 제품 범위 및 업무 배정 유지.",
+      "R04 A안은 H8 기존 schema, grant URL/log 금지, polling과 goal_verdict 분리로 교정. 기존 계약 변경이 필요한 경우에만 근거·영향·시험 반환."
+    ]
   },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
-      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+      "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
+      "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
+      "docs/human/responses/HRESP-20261125-04_r03-app-followup.md",
+      "docs/human/responses/HRESP-20261125-05_common-detail-direction.md",
+      "docs/human/responses/HRESP-20261125-07_openai-model-experiment-direction.md",
+      "docs/human/responses/HRESP-20261125-08_common-baseline-release.md"
     ],
     "design_refs": [
       "CS-01",
       "CS-07",
       "CS-08",
-      "CS-09"
+      "CS-09",
+      "IB-01",
+      "IB-02",
+      "IB-03",
+      "IB-04",
+      "IB-05",
+      "PD-01",
+      "PD-02",
+      "PD-03",
+      "PD-04",
+      "PD-05",
+      "PD-06",
+      "PD-07",
+      "PD-08"
     ],
     "requirement_refs": [],
     "product_requirement_refs": [

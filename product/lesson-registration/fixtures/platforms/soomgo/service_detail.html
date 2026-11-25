@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>숨고 고수 - 등록된 서비스 상세 (독립 Readback용 합성 Fixture)</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; padding: 20px; }
+    .card { border: 1px solid #ccc; padding: 1.5rem; border-radius: 6px; }
+    .item { margin-bottom: 0.8rem; }
+    .label { font-weight: bold; color: #555; }
+    .val { color: #111; margin-left: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>고수 서비스 상세 관리</h1>
+  <div class="card" id="service-summary-card" data-config-id="cfg-soomgo-midi-99">
+    <!-- S6: Independent Readback Extraction Elements -->
+    <div class="item">
+      <span class="label">제공 서비스:</span>
+      <span class="val" id="readback-category" data-key="category">midi_mock</span>
+    </div>
+    <div class="item">
+      <span class="label">지원 DAW:</span>
+      <span class="val" id="readback-daw" data-key="daw" data-values="logic">Logic Pro</span>
+    </div>
+    <div class="item">
+      <span class="label">레슨 목적:</span>
+      <span class="val" id="readback-goals" data-key="goals" data-values="hobby">취미</span>
+    </div>
+    <div class="item">
+      <span class="label">건반 가능 수준:</span>
+      <span class="val" id="readback-keyboard" data-key="keyboard" data-value="yes">가능</span>
+    </div>
+    <div class="item">
+      <span class="label">레슨생 연령대:</span>
+      <span class="val" id="readback-ages" data-key="ages" data-values="20s">20대</span>
+    </div>
+    <div class="item">
+      <span class="label">레슨생 성별:</span>
+      <span class="val" id="readback-genders" data-key="genders" data-values="female">여성</span>
+    </div>
+    <div class="item">
+      <span class="label">레슨 형태:</span>
+      <span class="val" id="readback-format" data-key="format" data-values="individual">1:1 개인 레슨</span>
+    </div>
+    <div class="item">
+      <span class="label">진행 방식:</span>
+      <span class="val" id="readback-location-mode" data-key="location_mode" data-values="studio">고수 작업실/스튜디오</span>
+    </div>
+  </div>
+</body>
+</html>
