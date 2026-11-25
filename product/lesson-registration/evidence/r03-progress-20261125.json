@@ -1,0 +1,60 @@
+{
+  "id": "LR-R03-PROGRESS-20261125",
+  "date": "2026-11-25",
+  "task": "TASK-050",
+  "owner": "R03",
+  "source": "R03 report supplied by R01 in chat; Discord delivery reported by R01, not independently read",
+  "branch": "r03/product-app",
+  "reported_commit": "e29fb6939f1ec49d9b4a89fbe2874bb6331498cf",
+  "reported_common_base": "75caa4e",
+  "new_common_base": "c4742a139697811264666d7bc37ad54688887b14",
+  "artifacts": {
+    "plan": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md",
+    "spec": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/SPEC.md",
+    "code": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/src/lesson_registration/app/"
+  },
+  "reported": {
+    "stages_completed": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7"
+    ],
+    "S8": "HTTP not started at report; initial FastAPI lock available",
+    "tests": [
+      {
+        "command": "dev.py test r03-app",
+        "passed": 174
+      },
+      {
+        "suite": "R01 common contract",
+        "passed": 10
+      },
+      {
+        "suite": "integration",
+        "passed": 2
+      }
+    ],
+    "schema_comparison": "Replay and selected mutations matched jsonschema 4.25.1; comparison skips if dependency absent",
+    "scope": "mock only",
+    "product_acceptance": {
+      "run": 0,
+      "required": 22
+    },
+    "initial_estimated_person_days": 11,
+    "remaining_person_days": null
+  },
+  "review": {
+    "code": "26 added files, all R03 owned paths; static review only",
+    "limitations": [
+      "No independent rerun of 174/10/2 on latest baseline or raw test logs",
+      "Schema comparison is not general equivalence",
+      "HTTP, actual providers, full product gate unverified"
+    ]
+  },
+  "followup_authority": "docs/human/responses/HRESP-20261125-04_r03-app-followup.md"
+}

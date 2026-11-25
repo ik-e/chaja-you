@@ -100,7 +100,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-053.md",
-  "assignment_status": "R01 배정; 담당자 전달·수신·착수 미확인",
+  "assignment_status": "R05 2026-11-25 범위 수신 확인 및 구현 가능성·공수·PLAN 작성 예정 보고; 실제 착수/PLAN commit·제품 결과 미확인",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r05/product-remote",
@@ -112,5 +112,5 @@
   ],
   "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
   "plan_path": "product/lesson-registration/tests/modules/remote/PLAN.md",
-  "priority_note": "가용성 확인 후 내부 일정 확정"
+  "priority_note": "runtime 공통 계약 우선; 7근무일(053·054 합계) 추정, WBS 미확정"
 }

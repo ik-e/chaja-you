@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   bootstrap:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     defaults:
       run:
@@ -40,32 +40,32 @@ jobs:
           git rev-parse HEAD
           uv --version
           uv lock --check
-          uv sync --locked --python 3.12
-          uv run --locked --python 3.12 python --version
+          uv sync --locked --all-groups --python 3.12
+          uv run --locked --all-groups --python 3.12 python --version
           uv pip check --python .venv/bin/python
       - name: Doctor and loopback smoke
         run: |
-          uv run --locked --python 3.12 python dev.py doctor
-          uv run --locked --python 3.12 python dev.py smoke
+          uv run --locked --all-groups --python 3.12 python dev.py doctor
+          uv run --locked --all-groups --python 3.12 python dev.py smoke
       - name: Run all isolated package and integration bootstrap tests
-        run: uv run --locked --python 3.12 python dev.py test all
+        run: uv run --locked --all-groups --python 3.12 python dev.py test all
       - name: Ownership checker positive and negative cases
         shell: bash
         run: |
           set -euo pipefail
           base="$(git rev-parse HEAD)"
           for p in common r02-preparation r03-app r04-web r04-soomgo r05-remote r05-kmong; do
-            uv run --locked --python 3.12 python dev.py check-changes "$p" --base "$base"
+            uv run --locked --all-groups --python 3.12 python dev.py check-changes "$p" --base "$base"
           done
           f="web/bootstrap-ownership-probe.tmp"
           trap 'rm -f "$f"' EXIT
           printf 'synthetic probe\n' > "$f"
-          uv run --locked --python 3.12 python dev.py check-changes r04-web --base "$base"
-          if uv run --locked --python 3.12 python dev.py check-changes r05-remote --base "$base"; then
+          uv run --locked --all-groups --python 3.12 python dev.py check-changes r04-web --base "$base"
+          if uv run --locked --all-groups --python 3.12 python dev.py check-changes r05-remote --base "$base"; then
             echo 'Ownership checker incorrectly accepted another package'
             exit 1
           fi
           rm "$f"
           echo 'Ownership checker positive/negative cases passed'
       - name: Scope
-        run: echo 'Bootstrap only; no real browser, model, platform or 22 product acceptance tests executed.'
+        run: echo 'Locked environment and isolated package regression; no real model/platform or 22 product acceptance tests claimed.'

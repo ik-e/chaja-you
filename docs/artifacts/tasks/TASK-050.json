@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-050",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R03",
   "suggested_owner": null,
   "due": null,
@@ -58,9 +58,60 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.",
+    "claims": [
+      {
+        "id": "C-T050-S8",
+        "text": "H1~H9, 요청과 독립된 실행, HTTP 응답 유실·재시작·소유권·오류 매핑을 합성 provider와 실제 loopback HTTP로 검증했다.",
+        "status": "독립 검증",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E-T050-S8",
+        "path": "docs/artifacts/runs/TASK-050-s8-http-20261125.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "AC1~AC3 관련 독립 앱 회귀 및 HTTP 경계",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      },
+      {
+        "criterion": "실제 UI/viewer/provider 및 22개 제품 gate",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "R04 actual UI, R05 viewer and real providers not connected",
+      "22 product gates not executed",
+      "single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05",
+      "mock header identity is not production authentication",
+      "stdlib bounded MIME parsing and 16MiB total limit are local mock choices"
+    ],
+    "decision_requests": [
+      "기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다."
+    ],
+    "remaining_effort_person_days_estimate": 3
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
@@ -107,7 +158,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-050.md",
-  "assignment_status": "R01 배정; 담당자 전달·수신·착수 미확인",
+  "assignment_status": "R03 2026-11-25 PLAN 제출 및 자체 bootstrap 보고 확인; 실제 제품 구현/완료 미확인",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r03/product-app",
@@ -119,5 +170,5 @@
   ],
   "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
   "plan_path": "product/lesson-registration/tests/modules/app/PLAN.md",
-  "priority_note": "가용성 확인 후 내부 일정 확정"
+  "priority_note": "R03 11인일 추정, 12/8 목표 위험; 공통 계약 정합성·core guard·크몽 vertical path 우선; 기존 22개 gate 축소 없음; 관련 owner 협의 및 WBS 미확정"
 }

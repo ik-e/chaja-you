@@ -1,0 +1,60 @@
+<!-- Prepare Surface: H4, H5, H8 -->
+<div id="surface-prepare" class="surface-pane">
+  <div class="card">
+    <h2>2. 등록 준비 및 질문지 확인 (Prepare)</h2>
+    <p class="desc">선택한 플랫폼에 맞게 AI가 구조화한 필수 문항 답변을 검토하고 수정합니다. 준비 상태가 완료(Ready)되어야 승인 단계로 진행할 수 있습니다.</p>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="prepare-platform">대상 플랫폼</label>
+        <select id="prepare-platform" class="form-control">
+          <option value="soomgo">숨고 (Soomgo) - MIDI 레슨</option>
+          <option value="kmong">크몽 (Kmong) - 레슨 서비스</option>
+        </select>
+      </div>
+      <div class="form-group col">
+        <label>준비 상태</label>
+        <div id="badge-ready-status" class="badge badge-warning">준비 미완료 (Not Ready)</div>
+      </div>
+    </div>
+
+    <!-- AI 질문지 폼 (숨고 MIDI 기준) -->
+    <div id="prepare-questions-box" class="sub-card">
+      <h3>플랫폼 필수 문항 확인</h3>
+      
+      <div class="form-group">
+        <label for="prep-daw">지원 DAW (다중 선택)</label>
+        <input type="text" id="prep-daw" value="logic, ableton" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="prep-goals">레슨 목적</label>
+        <input type="text" id="prep-goals" value="hobby, entrance" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="prep-keyboard">건반 가능 수준</label>
+        <select id="prep-keyboard" class="form-control">
+          <option value="available" selected>자유로운 연주 가능</option>
+          <option value="chords_only">기본 코드 반주 가능</option>
+          <option value="unavailable">건반 연주 불가</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="prep-location">진행 방식</label>
+        <input type="text" id="prep-location" value="studio, online" class="form-control" />
+      </div>
+    </div>
+
+    <div id="prepare-issues-container" class="alert alert-warning" style="display: none;">
+      <strong>확인 필요 이슈:</strong>
+      <span id="prepare-issue-text">누락된 필수 항목이 있습니다.</span>
+    </div>
+
+    <div class="actions">
+      <button type="button" id="btn-save-prepare" class="btn btn-primary">수정사항 반영 (H5)</button>
+      <button type="button" id="btn-next-to-auth" class="btn btn-success" disabled>인증 단계로 이동 &rarr;</button>
+    </div>
+  </div>
+</div>

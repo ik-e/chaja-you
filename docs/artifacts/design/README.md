@@ -1,5 +1,11 @@
 # 설계 정본 공간
 
+## 현재 제품의 설계 탐색
+
+- [현행 AI용 인덱스](../../design/lesson-registration/CURRENT-DESIGN.json) · [현행 사람용 설계 기준](../../design/lesson-registration/CURRENT-DESIGN.md)
+- [논리 채택 기록](lesson-registration-20261124/adoption-20261125.json) · [공통 구현 결정](../../../product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json)
+- 아래 Target Design 가설 및 일반 계층은 설계 방법/이전 찾아you 기록이며 현재 레슨 등록 제품의 실행 지시가 아니다. 현행 적용은 위 인덱스 및 CURRENT의 Phase/TASK를 확인한다.
+
 이 디렉터리는 찾아you의 설계를 **상위 가설 → 하위 검증 설계** 관계로 관리하는 AI 정본 공간이다.
 
 ## 설계 계층

@@ -1,0 +1,79 @@
+name: r01-common-review-check
+on:
+  workflow_dispatch:
+  push:
+    branches: [r01/product-integration, main]
+    paths:
+      - 'product/lesson-registration/**'
+      - 'docs/artifacts/**'
+      - 'docs/design/**'
+      - 'docs/review/**'
+      - 'docs/meetings/reviews/**'
+      - 'docs/human/**'
+      - 'CURRENT.md'
+      - 'tools/project_docs.py'
+      - 'tools/generate_lesson_design_review.mjs'
+      - 'tools/generate_lesson_current_design.mjs'
+      - '.github/workflows/r01-common-review-check.yml'
+  pull_request:
+    paths:
+      - 'product/lesson-registration/**'
+      - 'docs/artifacts/**'
+      - 'docs/design/**'
+      - 'docs/review/**'
+      - 'docs/human/**'
+      - 'tools/project_docs.py'
+      - 'tools/generate_lesson_design_review.mjs'
+      - 'tools/generate_lesson_current_design.mjs'
+      - '.github/workflows/r01-common-review-check.yml'
+permissions:
+  contents: read
+jobs:
+  projections:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check committed projections and adopted design snapshot
+        run: |
+          node tools/generate_lesson_design_review.mjs --check
+          node tools/generate_lesson_current_design.mjs --check
+          python tools/project_docs.py --check
+      - name: Existing deliverable mapping
+        run: python tools/check_deliverables.py
+  bootstrap-and-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: product/lesson-registration
+    env:
+      LR_ENVIRONMENT: mock
+      PYTHONPATH: .:src
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Existing locked bootstrap regression
+        run: |
+          uv sync --locked --all-groups --python 3.12
+          uv run --locked --python 3.12 python dev.py doctor
+          uv run --locked --all-groups --python 3.12 python dev.py test all
+      - name: Standard JSON Schema and common implementation boundary tests
+        run: uv run --locked --python 3.12 python -m unittest discover -s tests/contract/standard_schema -v
+      - name: Scope
+        if: always()
+        run: echo 'Candidate contract and synthetic replay checks only. Integrated product acceptance not executed.'

@@ -1,0 +1,57 @@
+name: Current design selective validation
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        type: choice
+        required: true
+        default: all-design
+        options: [all-design, logical, data, integration, trace, model, implementation, markdown]
+      target_sha:
+        type: string
+        required: true
+        description: Full commit SHA containing current launcher
+  push:
+    branches: [r01/product-integration]
+    paths:
+      - 'tools/run_current_design_validation.mjs'
+      - '.github/workflows/current-design-selective-validation.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TARGET: ${{ inputs.target_sha || github.sha }}
+      SUITE: ${{ inputs.suite || 'all-design' }}
+    steps:
+      - name: Validate explicit input
+        run: |
+          [[ "$TARGET" =~ ^[a-f0-9]{40}$ ]]
+          case "$SUITE" in all-design|logical|data|integration|trace|model|implementation|markdown) ;; *) exit 1;; esac
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TARGET }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+        if: env.SUITE == 'implementation'
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Execute selected validation
+        run: node tools/run_current_design_validation.mjs --suite "$SUITE" --expected-sha "$TARGET" --out "$RUNNER_TEMP/current-validation.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: current-design-validation
+          path: ${{ runner.temp }}/current-validation.json
+          if-no-files-found: warn

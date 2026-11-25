@@ -1,0 +1,47 @@
+name: lesson-physical-probe
+on:
+  workflow_dispatch:
+  push:
+    branches: [r01/product-integration, main]
+    paths:
+      - 'product/lesson-registration/pyproject.toml'
+      - 'product/lesson-registration/uv.lock'
+      - 'product/lesson-registration/evidence/probe_physical.py'
+      - '.github/workflows/lesson-physical-probe.yml'
+  pull_request:
+    paths:
+      - 'product/lesson-registration/pyproject.toml'
+      - 'product/lesson-registration/uv.lock'
+      - 'product/lesson-registration/evidence/probe_physical.py'
+      - '.github/workflows/lesson-physical-probe.yml'
+permissions:
+  contents: read
+jobs:
+  physical-product-lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: product/lesson-registration
+    env:
+      LR_ENVIRONMENT: mock
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Verify exact product lock
+        run: |
+          git rev-parse HEAD
+          uv lock --check
+          uv sync --locked --all-groups --python 3.12
+          uv run --locked --all-groups --python 3.12 python --version
+          uv pip check --python .venv/bin/python
+      - name: Install pinned Playwright browser
+        run: uv run --locked --all-groups --python 3.12 python -m playwright install --with-deps chromium
+      - name: Independent physical probe
+        run: uv run --locked --all-groups --python 3.12 python evidence/probe_physical.py
+      - name: Scope
+        run: echo 'Technology probe only; no product acceptance, live website or production credential use.'
