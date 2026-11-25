@@ -87,3 +87,35 @@ PYTHONPATH=.:src uv run --locked --python 3.12 python tests/modules/preparation/
 - R01 방향은 OpenAI API 후보 모델을 같은 합성 입력·품질 기준으로 비교하고 비용을 평가하는 것이다. R01이 실험 접근·예산을 준비 중이므로 실제 호출과 모델 선택은 아직 하지 않았다. OpenAI 응답·거절 시험은 가짜 HTTP다. 동기 호출 제한시간·늦은 revision 폐기는 R03과 실제 연결 검증 전이다.
 - `uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation`: 합성 단위·연동 시험 32개 및 별도 bootstrap replay 통과. 실제 모델/플랫폼이나 AT-01·T5-08·T6-02 전체 제품 gate 통과를 의미하지 않는다.
 - `uv run --locked --all-groups --python 3.12 python dev.py test r03-app`: R03 독립 시험 191개 및 bootstrap replay 통과. R02 실제 모델 provider의 timeout·late revision 통합 시험을 대신하지 않는다.
+
+## 실제 모델 합성 실험 및 추가 안전 보완 · 2026-11-25
+
+- PR #49·#50을 main에 반영한 뒤 `094e4d2c5dd3fbb8e9c9352296f87d90cd659308`에서 후속 작업했다. 사용자 제공 키를 보호된 임시 입력으로 받아 OpenAI Responses API에 고정 합성 텍스트만 전송했다. 시험 후 임시 키 파일은 삭제했다. 실제 플랫폼·개인정보는 사용하지 않았다.
+- `model_compare.py --run`은 명시적으로만 실행하며 같은 합성 5개 사례(명시 제목, 가격 미제공, 가격 후보 충돌, VAT 별도, 숨고 정보 누락)를 두 모델에 각각 1회 보낸다. 성공·실패·오류, API 응답 토큰 수와 경과 시간을 저장한다. 하나의 소규모 관측으로 운영 모델을 확정하거나 전체 제품 품질로 일반화하지 않는다.
+- 반복 실험 중 모델이 제목 라벨이 없는 본문을 제목으로 제안하는 사례가 관측돼, 원문에 등장한다는 사실만으로 자동 반영하지 않고 인접한 명시적 항목 라벨을 요구하도록 보완했다. 별칭 가격은 근거 후보로만 취급하며, 입력한 패키지가 있을 때 원문에 VAT 별도나 복수 금액이 드러나면 모델이 누락해도 확인을 요구한다. 이 제한적 규칙이 모든 표현을 찾는다는 보장은 없다.
+- 최종 후보의 5개 사례 각 1회 관측: `gpt-6-luna` 3개 통과·2개 `RUNTIME_ERROR`, `gpt-5.6-luna` 4개 통과·1개 `RUNTIME_ERROR`. 양쪽 모두 가격 충돌 사례에서 오류가 발생해 모델 선택·AC1 완료를 보류한다. 각 모델은 입력 5,071 토큰을 썼고 출력은 각각 2,155·1,281 토큰이었다. 이는 마지막 10회 호출의 사용량이며 앞선 실험·진단이나 실제 청구액의 합계가 아니다.
+- 별도 I2 단위 시험에서는 부모 패키지 전체와 하위 수정이 **동시에 입력으로 제공되는 경우** 수정한 값만 바꾸고 형제 패키지 및 입력 원본을 보존한다. 현재 R03은 중첩 수정 시 부모 답변을 제거하므로 이 조건이 충족되지 않는다. 기존 통합 경계는 여전히 차단되고 D05 협의가 필요하다.
+- 독립 `r02-preparation` 합성 시험 44개와 bootstrap replay 및 담당 영역 변경 검사를 통과했다. 실제 모델 평가 결과는 실패를 포함하며, timeout·late revision, 완전한 가격·단위·VAT 검증, AT-01·T5-08·T6-02, 전체 제품 수용 및 12/4 인계는 미완료다.
+- 참조: [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna), [GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna), [구조화 출력](https://developers.openai.com/api/docs/guides/structured-outputs). 비용은 실제 사용량과 해당 계정의 청구 조건에 따라 달라진다.
+
+## D05 R03 협의 제안 · 2026-11-25
+
+- 목표: H5 부분 수정에도 삭제 의도가 없는 패키지와 기존 facts/provenance를 보존하고 원본 충돌·오류 시 기존 revision을 잃지 않는다. 제안이며 R03 합의·실제 결합 전이다.
+- 권장: 기존 I2 계약을 유지하고 R03이 기존 `/packages` 부모 답변과 새 leaf 답변을 함께 I2에 전달한다. R02는 복사한 부모에 leaf만 적용하고 전체 결과를 반환한다. `/packages`가 없는 leaf는 추측하지 않고 `unsupported` blocking으로 반환한다. R03은 지원 불가한 부분 수정 또는 패키지 누락을 기존 revision/preparation/answers를 유지하며 거부하는 방식을 검토한다. 변경이 어렵다면 H5에서 기존 부모를 정확히 보존한 전체 `/packages` 답변으로 정규화하는 대안을 비교한다.
+- 사례 A: 부모 패키지 3개가 있고 `/packages/0/amount_vat_included_krw`만 수정하면 나머지 2개와 수정하지 않은 필드, facts/provenance가 그대로인지 검증한다. 사례 B: 원문과 수정 금액이 충돌하면 해당 leaf `conflict`·blocking을 반환하고 R03은 `FACT_CONFLICT`로 매핑해 이전 revision을 유지한다. 부모가 없는 leaf도 조용히 일부만 저장하지 않는다.
+- timeout/동시성 권장: 30초는 현재 추출기의 시험 설정으로만 제안하고 운영값은 측정 후 정한다. R02는 timeout을 `MODEL_UNAVAILABLE`로 안전하게 전달한다. R03은 호출 시작 revision을 기준으로 종료 후 CAS해 오래된 결과를 버린다. H4 신규 요청의 model_unavailable 이슈 저장과 H5 실패 시 이전 preparation/answers 보존을 어떻게 함께 표현할지는 R03과 실제 응답·저장 예제로 확정한다. timeout이 원격 모델 작업 자체를 취소한다고 가정하지 않는다.
+- 완료 기준: 두 담당 구현을 실제로 연결한 정상 수정, 충돌, 부모 부재, timeout, 다른 revision의 선행 저장, 늦은 결과 미반영 시험과 커밋·재현 명령을 함께 기록한다. 현행 mock-only·공통 스키마를 바꾸지 않으며, 변경이 불가피할 때만 R01에 근거와 영향을 전달한다.
+
+## R01 리뷰 반영 및 자기 성찰 후보 · 2026-11-25
+
+- 지원하지 않는 모델 필드가 있으면 임의 내용을 출력하지 않고 `unsupported`로 차단하되, 정상 후보의 사실·근거는 보존한다. 원문 숫자가 같은 것만으로 금액·분·회·일을 동일시하지 않도록 숫자 바로 옆 단위를 요구한다. 단위가 없거나 다르면 원문 후보를 확정하지 않고 차단한다. 라벨 문맥과 VAT 별도/가격 대안에 대한 합성 반례를 보강했으며 모든 자연어 표현을 포괄한다고 주장하지 않는다.
+- `BoundedReflectionExtractor`는 명시 주입되는 **미채택 실험 후보**다. 근거가 있는 후보의 지원 불가 필드만 교정기에 한 번 제안하고, 원래 후보의 값·인용을 추가·삭제·변경하는 수정은 받아들이지 않는다. 원본 누락·충돌은 보정하지 않으며 결과는 기존 PREP 검증을 다시 통과해야 한다. 실제 모델/API나 앱에는 자동 연결하지 않는다.
+- 가짜 추출기·교정기 A/B에서 유효 근거 보존, 형식 교정 1회 제한, 값·인용 변경 거절, 원본 가격 충돌 보존, 모델 timeout 차단을 시험했다. 이는 합성 코드 시험이며 실제 모델 자기 성찰 A/B 결과나 DLV-06 완료가 아니다.
+- 최신 main `089b8a4` 적용 후 `uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation`에서 55개 및 bootstrap replay 통과, `dev.py check-changes r02-preparation --base 089b8a4` 통과. 실제 모델 재시험은 R01에 제안한 비용·사례 검토 전 실행하지 않았다.
+
+## 후속 실험 자료와 deadline 후보
+
+- [실험·비용 제안 원본](https://github.com/ik-e/chaja-you/blob/codex/task049-model-run-record/docs/artifacts/planning/R02-TASK-049-EXPERIMENT-20261125.json)에 고정 합성 사례 10개, 2모델×2회(최대 40호출), 정답·안전 기준, 추정 비용과 중단 조건을 제시했다. 입력·사례는 `fixtures/source/model-evaluation-cases.json`에 고정하고 SHA-256을 확인한다. 시험 도구의 $0.20은 **제안된 추정액 중단 기준**이며 실제 청구의 하드 상한이나 승인된 예산이 아니다. 추가 실제 호출은 검토 대기 중이다.
+- `DeadlineExtractor`는 명시 주입용 후보로, 설정한 시간이 지나면 `TimeoutError`를 반환해 PREP의 `MODEL_UNAVAILABLE`로 연결한다. 느린 원격 호출을 취소한다고 가정하지 않고, wrapper당 미완료 worker를 하나로 제한하며 늦은 결과는 다음 호출에 재사용하지 않는다. 가짜 지연/후속 호출 테스트는 통과했다. 앱 조립과 H4/H5 저장·revision CAS는 R03과 공동 시험 전이다. 운영 timeout은 미확정이다.
+- R03은 부모·leaf 동시 전달, unsupported 시 기존 상태 보존, H4 실패 이슈 저장 및 H5 실패 상태 보존을 제안하고 담당 구현을 준비 중이다. `FACT_CONFLICT` HTTP 409라는 전달 내용은 현재 고정 계약·R03 구현의 422와 달라 422 유지안을 전달했다. 실제 구현·공동 시험 전 완료로 보지 않는다.
+- `PYTHONPATH=.:src .venv/bin/python tests/modules/preparation/d05_integration_probe.py`는 R02 실제 provider와 R03 `089b8a4` 조합의 별도 안전 통합 probe다. 최초 관측: 5개 중 늦은 revision 미덮어쓰기 1개 통과, 부분 수정 패키지 누락 1개 오류, 원문 충돌·부모 부재·H5 timeout 시 기존 상태 보존 3개 실패. 이는 현재 알려진 미완료 경계이며 독립 R02 CI의 성공으로 감추지 않는다. R03 수정 SHA 반영 후 같은 명령을 재실행한다.
