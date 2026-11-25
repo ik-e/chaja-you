@@ -1,0 +1,411 @@
+{
+  "source_commit": "d56d6385e3667a9efeb39ebf24a2858b764f52bf",
+  "source_blobs": [
+    {
+      "path": "interface-schema-v3.json",
+      "sha": "ea45fc389d1c9159bfd2e53f6a0d16aa4734eb89"
+    },
+    {
+      "path": "interface-contract-v3.json",
+      "sha": "e6b73da91c0856e815601739301a53adcc321e70"
+    },
+    {
+      "path": "platform-profiles-v1.json",
+      "sha": "829a9b793b8f8039dc280dfc251f9f9cd8ea786b"
+    },
+    {
+      "path": "detail-contract-v2.json",
+      "sha": "3502a35177b66e710b324445713a4c76360c5637"
+    },
+    {
+      "path": "detail-gate-v1.json",
+      "sha": "55c66d285183fb4a8a12041b883c12e7775d12f7"
+    },
+    {
+      "path": "logical-behavior-v5.json",
+      "sha": "2c13b86a44b10f7877678509819e97d1d1b72c17"
+    },
+    {
+      "path": "validate-logical-v5.mjs",
+      "sha": "660dd54af6cf7d2db72da25d724b728b00f1c550"
+    },
+    {
+      "path": "README.md",
+      "sha": "1e65d896aec69c8522e7a800157f9bb544e492de"
+    }
+  ],
+  "audit": {
+    "definitions": 61,
+    "references": 173,
+    "unresolved": [],
+    "unsupported_keywords": [],
+    "route_missing": [],
+    "port_missing": [],
+    "duplicate_routes": 0,
+    "root_has_validation": false
+  },
+  "syntax_tests": [
+    {
+      "id": "P01",
+      "def": "KmongValues",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "synthetic exact 90/180/270 min and amounts, VAT false",
+      "errors": []
+    },
+    {
+      "id": "P02",
+      "def": "SoomgoValues",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "no fake image",
+      "errors": []
+    },
+    {
+      "id": "P03",
+      "def": "StartInput",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "one explicit start",
+      "errors": []
+    },
+    {
+      "id": "P04",
+      "def": "AuthCommand",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "generation-bound finish",
+      "errors": []
+    },
+    {
+      "id": "P05",
+      "def": "ExecuteInput",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "accepted scope plus runtime connection",
+      "errors": []
+    },
+    {
+      "id": "P06",
+      "def": "GoalObservation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "valid mock goal shape",
+      "errors": []
+    },
+    {
+      "id": "P07",
+      "def": "RegistrationView",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "valid prestart review shape",
+      "errors": []
+    },
+    {
+      "id": "N01",
+      "def": "KmongValues",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "price string rejected",
+      "errors": [
+        "$.packages[0].total_price_krw type"
+      ]
+    },
+    {
+      "id": "N02",
+      "def": "KmongValues",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "missing VAT rejected",
+      "errors": [
+        "$.vat_included required"
+      ]
+    },
+    {
+      "id": "N03",
+      "def": "SoomgoValues",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "foreign field rejected",
+      "errors": [
+        "$.main_image additional"
+      ]
+    },
+    {
+      "id": "N04",
+      "def": "StartInput",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "no approval",
+      "errors": [
+        "$.approved const"
+      ]
+    },
+    {
+      "id": "N05",
+      "def": "StartInput",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "digest shape",
+      "errors": [
+        "$.review_digest pattern"
+      ]
+    },
+    {
+      "id": "N06",
+      "def": "AuthCommand",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "generation required",
+      "errors": [
+        "$ oneOf"
+      ]
+    },
+    {
+      "id": "N07",
+      "def": "AuthCommand",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "no cancel",
+      "errors": [
+        "$ oneOf"
+      ]
+    },
+    {
+      "id": "N08",
+      "def": "ProfileRef",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "no live",
+      "errors": [
+        "$.environment const"
+      ]
+    },
+    {
+      "id": "N09",
+      "def": "SoomgoValues",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "duplicate enum options",
+      "errors": [
+        "$.daw uniqueItems"
+      ]
+    },
+    {
+      "id": "N10",
+      "def": "RegistrationInput",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "client cannot choose steps",
+      "errors": [
+        "$.steps additional"
+      ]
+    },
+    {
+      "id": "N11",
+      "def": "SourceInput",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "why": "owner not supplied by client",
+      "errors": [
+        "$.owner_id additional"
+      ]
+    }
+  ],
+  "semantic_and_gap_tests": [
+    {
+      "id": "S01",
+      "def": "KmongValues",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S03 conditional region, separate check required",
+      "errors": []
+    },
+    {
+      "id": "S02",
+      "def": "KmongValues",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S03 rights/dimensions",
+      "errors": []
+    },
+    {
+      "id": "S03",
+      "def": "Preparation",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S02 blocking issue",
+      "errors": []
+    },
+    {
+      "id": "S04",
+      "def": "RegistrationView",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S12 terminal result required",
+      "errors": []
+    },
+    {
+      "id": "S05",
+      "def": "RegistrationView",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S12 unsupported not ready",
+      "errors": []
+    },
+    {
+      "id": "S06",
+      "def": "PreparationEdit",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S11 requires change",
+      "errors": []
+    },
+    {
+      "id": "S07",
+      "def": "GoalObservation",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S08 Kmong proof needs asset",
+      "errors": []
+    },
+    {
+      "id": "S08",
+      "def": "ExecuteInput",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S05/S07 account binding",
+      "errors": []
+    },
+    {
+      "id": "S09",
+      "def": "SourceInput",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S01 no content",
+      "errors": []
+    },
+    {
+      "id": "S10",
+      "def": "Value",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "semantic S10 safe integers",
+      "errors": []
+    },
+    {
+      "id": "G01",
+      "def": "ProfileRef",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "registry pair validation, not schema",
+      "errors": []
+    },
+    {
+      "id": "G02",
+      "def": "ProfileRef",
+      "expected": true,
+      "actual": false,
+      "match": false,
+      "why": "C02 expansion requires common schema change despite registry",
+      "errors": [
+        "$.platform enum",
+        "$.object_kind enum"
+      ]
+    },
+    {
+      "id": "G03",
+      "def": "AuthOutput",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "verified auth output contains no connection_ref",
+      "errors": []
+    },
+    {
+      "id": "G04",
+      "def": "ExecuteInput",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "same account, different runtime connection cannot compare against AcceptedScope",
+      "errors": []
+    },
+    {
+      "id": "G05",
+      "def": "GoalObservation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "why": "no field distinguishes readback from submit response",
+      "errors": []
+    },
+    {
+      "id": "G06",
+      "def": "ExecutionReport",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "confirmed effect without evidence accepted by shape; trusted evidence semantic guard",
+      "errors": []
+    },
+    {
+      "id": "G07",
+      "def": "Result",
+      "expected": false,
+      "actual": true,
+      "match": false,
+      "why": "success shape lacks evidence; semantic rule requires proof",
+      "errors": []
+    }
+  ],
+  "logic": [
+    {
+      "N": 4,
+      "states": 53,
+      "edges": 134,
+      "unused": [],
+      "violations": [],
+      "no_outcome": 0
+    },
+    {
+      "N": 5,
+      "states": 61,
+      "edges": 142,
+      "unused": [],
+      "violations": [],
+      "no_outcome": 0
+    }
+  ],
+  "method": "Direct execution in JS of local reference/schema-subset validator covering every keyword used by $defs, not an independent standards-complete JSON Schema implementation. S/G cases check schema acceptance; semantic guards described separately are not implemented/tested.",
+  "product_execution": "not_run"
+}

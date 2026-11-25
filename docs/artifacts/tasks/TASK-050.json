@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "id": "TASK-050",
+  "kind": "task",
+  "status": "진행 중",
+  "owner": "R03",
+  "suggested_owner": null,
+  "due": null,
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-25",
+  "title": "공통 앱·API·저장·결과 판정 구현",
+  "question": "H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도 브라우저·PREP 구현 제외 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+  "goal": "H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도 브라우저·PREP 구현 제외",
+  "inputs": [
+    "docs/human/phase-intents/PHASE-20261125-01.md",
+    "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+    "product/lesson-registration/WORKSPACE.json",
+    "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
+    "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+    "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json"
+  ],
+  "scope": [
+    "H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도 브라우저·PREP 구현 제외",
+    "담당 경로의 상세 설계·PLAN·코드·독립 테스트; 공통 계약 및 다른 담당 경로 무단 변경 금지",
+    "mock-only; 실제 플랫폼 실행/자격증명 금지"
+  ],
+  "outputs": [
+    "product/lesson-registration/tests/modules/app/PLAN.md",
+    "product/lesson-registration/src/lesson_registration/app/",
+    "product/lesson-registration/tests/modules/app/"
+  ],
+  "acceptance": [
+    "r03-app-AC1: H1~H9, I1/I5 구현 및 I2/I3/I4 주입; 소유권·revision 검사",
+    "r03-app-AC2: 영속 저장 원자 accept/admit/fence, 중복·경쟁·응답 유실 테스트",
+    "r03-app-AC3: 실제 관측 근거 없으면 성공 금지; 오류 중단 및 조회 복구"
+  ],
+  "verification": [
+    "uv run --locked --python 3.12 python dev.py test r03-app",
+    "실제 구현의 정상/오류/unknown 시험 및 입력·기대·관측·commit 기록; bootstrap replay는 제품 통과 아님",
+    "제품 시험 참조: T5-01, T5-05, T5-06, T5-11, T5-12, T6-01, DV-01"
+  ],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    },
+    {
+      "path": "product/lesson-registration/WORKSPACE.json"
+    },
+    {
+      "path": "docs/design/lesson-registration/MANIFEST.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    }
+  ],
+  "result": {
+    "summary": "S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.",
+    "claims": [
+      {
+        "id": "C-T050-S8",
+        "text": "H1~H9, 요청과 독립된 실행, HTTP 응답 유실·재시작·소유권·오류 매핑을 합성 provider와 실제 loopback HTTP로 검증했다.",
+        "status": "독립 검증",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E-T050-S8",
+        "path": "docs/artifacts/runs/TASK-050-s8-http-20261125.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "AC1~AC3 관련 독립 앱 회귀 및 HTTP 경계",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      },
+      {
+        "criterion": "실제 UI/viewer/provider 및 22개 제품 gate",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "R04 actual UI, R05 viewer and real providers not connected",
+      "22 product gates not executed",
+      "single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05",
+      "mock header identity is not production authentication",
+      "stdlib bounded MIME parsing and 16MiB total limit are local mock choices"
+    ],
+    "decision_requests": [
+      "기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다."
+    ],
+    "remaining_effort_person_days_estimate": 3
+  },
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261125-01.md",
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    ],
+    "design_refs": [
+      "CS-01",
+      "CS-02",
+      "CS-03",
+      "CS-05",
+      "CS-06"
+    ],
+    "requirement_refs": [],
+    "product_requirement_refs": [
+      "REQ-01",
+      "REQ-02",
+      "REQ-03",
+      "REQ-05",
+      "REQ-06",
+      "REQ-07",
+      "REQ-08",
+      "REQ-10"
+    ],
+    "evaluation_refs": [],
+    "planned_product_test_refs": [
+      "T5-01",
+      "T5-05",
+      "T5-06",
+      "T5-11",
+      "T5-12",
+      "T6-01",
+      "DV-01"
+    ]
+  },
+  "validation_plan": {
+    "question": "H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도 브라우저·PREP 구현 제외 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+    "observables": [
+      "H1~H9, I1/I5 구현 및 I2/I3/I4 주입; 소유권·revision 검사",
+      "영속 저장 원자 accept/admit/fence, 중복·경쟁·응답 유실 테스트",
+      "실제 관측 근거 없으면 성공 금지; 오류 중단 및 조회 복구"
+    ],
+    "success_condition": "패키지별 실제 구현 및 수용 조건 증거, 공통 계약 정합성, 재현 명령",
+    "unknown_condition": "실제 구현/모델/환경/시험 결과 없음 또는 근거 불충분"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "intent_ref": "docs/human/task-intents/TASK-050.md",
+  "assignment_status": "R03 2026-11-25 PLAN 제출 및 자체 bootstrap 보고 확인; 실제 제품 구현/완료 미확인",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+  "assignment_mode": "assigned",
+  "work_branch": "r03/product-app",
+  "workspace_path": "product/lesson-registration/src/lesson_registration/app/",
+  "package_id": "r03-app",
+  "owned_paths": [
+    "product/lesson-registration/src/lesson_registration/app/",
+    "product/lesson-registration/tests/modules/app/"
+  ],
+  "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+  "plan_path": "product/lesson-registration/tests/modules/app/PLAN.md",
+  "priority_note": "R03 11인일 추정, 12/8 목표 위험; 공통 계약 정합성·core guard·크몽 vertical path 우선; 기존 22개 gate 축소 없음; 관련 owner 협의 및 WBS 미확정"
+}

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>단일 에이전트 상태 전이 그래프 설계서 작성 가이드</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ink:#161a33; --muted:#5b6175; --soft:#8a8fa3; --line:#e7e4f0;
+  --p:#6d3fe0; --p2:#8b5cf6; --pl:#f4f0ff; --pll:#faf8ff;
+  --g:#14915a; --gl:#e8f7ef; --r:#d63c3c; --rl:#fdeeee; --o:#e08a1e; --ol:#fff5e6;
+  --b:#2563eb; --z:1;
+  --sans:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Noto Sans CJK KR","Noto Sans KR","Malgun Gothic",sans-serif;
+  --mono:"JetBrains Mono","D2Coding","SF Mono",Menlo,Consolas,"Noto Sans Mono CJK KR",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:#e9e8ef;-webkit-print-color-adjust:exact;print-color-adjust:exact;word-break:keep-all}
+.deck{display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0}
+.slide{width:960px;height:540px;position:relative;overflow:hidden;background:#fff;padding:32px 48px 0;box-shadow:0 6px 24px rgba(22,26,51,.12);zoom:var(--z)}
+.kicker{font-size:11px;font-weight:700;color:var(--p);letter-spacing:.14em}
+h2{font-size:25px;line-height:1.25;margin:6px 0 4px;font-weight:800;letter-spacing:-.02em}
+.lead{font-size:12.5px;color:var(--muted);margin:0 0 14px;line-height:1.5}
+.foot{position:absolute;left:48px;right:48px;bottom:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--soft)}
+.ref{position:absolute;left:48px;right:48px;bottom:38px;font-size:10px;color:var(--muted);line-height:1.5}
+.ref b{color:var(--b);font-weight:600}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.card h4{margin:0 0 7px;font-size:13px;font-weight:800}
+.tip{background:var(--pl);border-left:4px solid var(--p2);border-radius:8px;padding:9px 14px;font-size:12px;line-height:1.55}
+.tip .tag{display:inline-block;background:#fff;color:var(--p);font-weight:800;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-right:6px}
+.warn{background:var(--ol);border-left-color:var(--o)}
+.warn .tag{color:var(--o)}
+ul.dot{margin:0;padding:0;list-style:none}
+ul.dot li{position:relative;padding-left:14px;font-size:12px;line-height:1.55;margin:3px 0}
+ul.dot li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--p2)}
+ul.dot.chk li{padding-left:0}ul.dot.chk li::before{display:none}
+ul.dot.g li::before{background:var(--g)} ul.dot.r li::before{background:var(--r)}
+table.t{width:100%;border-collapse:collapse;font-size:11.5px}
+table.t th{background:#f3f2f8;text-align:left;padding:6px 10px;font-weight:700;color:#2b2f48}
+table.t td{padding:5px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+.mono,code{font-family:var(--mono);font-size:.94em}
+code{background:#f3f2f8;border-radius:4px;padding:0 4px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--pl);color:var(--p)}
+.pill.g{background:var(--gl);color:var(--g)}.pill.r{background:var(--rl);color:var(--r)}.pill.o{background:var(--ol);color:var(--o)}
+.num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--p);color:#fff;font-size:11px;font-weight:800;flex:none}
+.small{font-size:11px;color:var(--muted)}
+.muted{color:var(--muted)}
+.hl{background:linear-gradient(transparent 58%,#e6dcff 58%);font-weight:700}
+pre.code{margin:0;background:#171a2e;color:#e6e6f0;border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:10.4px;line-height:1.55;white-space:pre;overflow:hidden}
+pre.code .c{color:#8a90b0}.code .k{color:#c3a6ff}.code .s{color:#9ee6b8}.code .f{color:#ffd28a}
+/* cover */
+.cover{background:linear-gradient(135deg,#1b2038 0%,#2a2350 55%,#4a2a86 100%);color:#fff;padding:52px 64px}
+.cover .kicker{color:#c8b6ff}
+.cover h1{font-size:40px;line-height:1.28;margin:58px 0 18px;font-weight:800;letter-spacing:-.02em}
+.cover .sub{font-size:16px;line-height:1.7;color:#e6e1fa}
+.cover .meta{position:absolute;left:64px;bottom:44px;font-size:11.5px;line-height:1.7;color:#cfc8ea}
+.cover .pg{position:absolute;right:48px;bottom:20px;font-size:10px;color:#a9a2c8}
+/* section slide */
+.sec{background:linear-gradient(135deg,#1b2038 0%,#2e2556 60%,#4a2a86 100%);color:#fff;padding:0 64px;display:flex;flex-direction:column;justify-content:center}
+.sec .kicker{color:#c8b6ff}
+.sec h2{font-size:32px;color:#fff;margin:12px 0 10px}
+.sec p{color:#ddd6f6;font-size:14px;line-height:1.7;margin:0}
+.sec .foot{color:#a9a2c8}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tl .card{padding:11px 12px}
+.tl .when{font-size:10.5px;font-weight:700;color:var(--soft)}
+.tl .what{font-size:13.5px;font-weight:800;margin:4px 0 3px}
+.tl .card.on{border:2px solid var(--p2);background:var(--pll)}
+.tl .card.on .when{color:var(--p)}
+/* trace */
+table.trace td{font-size:11px;padding:4px 9px}
+table.trace td.n{font-family:var(--mono);font-weight:700;color:var(--p)}
+table.trace tr.bad td{background:#fff8f0}
+table.trace tr.end td{background:var(--gl)}
+
+/* ===== slideshow mode ===== */
+body.show{background:#0f1020;overflow:hidden}
+body.show .deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:0;gap:0}
+body.show .slide{display:none;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+body.show .slide.active{display:block;animation:fadein .25s ease}
+body.show .slide.sec.active{display:flex}
+@keyframes fadein{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+.nav{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:rgba(22,24,44,.88);color:#e6e1fa;border-radius:999px;padding:6px 10px;font:600 12px var(--sans);z-index:10;transition:opacity .3s;backdrop-filter:blur(6px)}
+body.show .nav{display:flex}
+body.show.idle .nav{opacity:0}
+.nav button{all:unset;cursor:pointer;padding:4px 9px;border-radius:999px;font-size:13px;line-height:1}
+.nav button:hover{background:rgba(255,255,255,.14)}
+.nav .cnt{min-width:58px;text-align:center;font-variant-numeric:tabular-nums}
+.bar{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,#8b5cf6,#c3a6ff);z-index:10;display:none;transition:width .25s}
+body.show .bar{display:block}
+.help{position:fixed;inset:0;background:rgba(10,10,25,.72);display:none;align-items:center;justify-content:center;z-index:20}
+.help.on{display:flex}
+.help .box{background:#fff;color:var(--ink);border-radius:14px;padding:22px 26px;font:13px/1.9 var(--sans);min-width:320px}
+.help kbd{font-family:var(--mono);background:#f3f2f8;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:11.5px}
+.scrollbtn{position:fixed;right:16px;top:14px;z-index:10;all:unset;cursor:pointer;background:#2a2350;color:#fff;font:600 12px var(--sans);padding:7px 12px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+body.show .scrollbtn{display:none}
+
+@media print{
+  .nav,.bar,.help,.scrollbtn{display:none!important}
+  body.show{overflow:visible}
+  body.show .deck{position:static;display:block}
+  body.show .slide{display:block!important;animation:none}
+  body.show .slide.sec{display:flex!important}
+  body{background:none}
+  .deck{padding:0;gap:0;display:block}
+  .slide{box-shadow:none;zoom:1;page-break-after:always;break-after:page}
+  @page{size:960px 540px;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 01 COVER -->
+<section class="slide cover">
+  <div class="kicker">최종 프로젝트 · STEP3 · 11/27 산출물</div>
+  <h1>단일 에이전트<br>상태 전이 그래프 설계서</h1>
+  <div class="sub">상태 · 노드 · 전이 · State · 종료 조건을<br>코드를 짜기 전에 한 장으로 합의하는 방법</div>
+  <div class="meta">설명 20분 + 팀 적용 15분 · 문서 형식 기준: 주요 산출물 문서 05번 · 사례는 교육용 가상 예시<br>AI 애플리케이션 개발 과정 · 최종 프로젝트 STEP3 자료</div>
+  <div class="pg">01 / 21</div>
+</section>
+
+<!-- 02 AGENDA -->
+<section class="slide">
+  <div class="kicker">00 · 오늘의 흐름</div>
+  <h2>그림 한 장 → 표 아홉 칸 → 코드 순서로 갑니다</h2>
+  <p class="lead">처음엔 비유로 용어를 맞추고, 예시 에이전트 하나를 끝까지 따라간 뒤, 팀 에이전트에 그대로 옮겨 적습니다.</p>
+  <div class="grid g4" style="margin-top:6px">
+    <div class="card"><span class="pill">03~06장</span><h4 style="margin-top:8px">① 왜 그래프부터?</h4><ul class="dot"><li>문서의 자리와 평가 포인트</li><li>지하철 노선도 비유</li><li>용어 다섯 개 맞추기</li></ul></div>
+    <div class="card"><span class="pill">07~11장</span><h4 style="margin-top:8px">② 흐름 정하기</h4><ul class="dot"><li>아홉 칸 한눈에 보기</li><li>1칸 목적 · 2칸 그래프</li><li>예시 장애 한 건 따라가기</li></ul></div>
+    <div class="card"><span class="pill">12~20장</span><h4 style="margin-top:8px">③ 칸 채우기</h4><ul class="dot"><li>모델 · 기록 · 도구 정책</li><li>메모리 · State · 전이표</li><li>표를 LangGraph 코드로 · 종료 조건</li></ul></div>
+    <div class="card"><span class="pill g">21장</span><h4 style="margin-top:8px">④ 팀 적용 15분</h4><ul class="dot g"><li>다른 주제로 옮긴 예시</li><li>제출 전 체크리스트</li><li>서로 빠진 전이 찾기</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px;background:var(--pll)">
+    <h4>끝나고 나면 할 수 있는 것</h4>
+    <div class="grid g3" style="gap:10px">
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5"><span class="num">1</span><span>우리 에이전트의 노드 5~8개와 전이를 <b>표 한 장</b>으로 적는다</span></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5"><span class="num">2</span><span>모든 반복에 <b>상한</b>을, 모든 노드에 <b>실패 출구</b>를 붙인다</span></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5"><span class="num">3</span><span>그 표를 LangGraph 코드의 <b>간선과 1:1</b>로 옮긴다</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>02 / 21</span></div>
+</section>
+
+<!-- 03 WHERE -->
+<section class="slide">
+  <div class="kicker">01 · 이 문서의 자리</div>
+  <h2>에이전트가 어떤 순서로 움직이는지 미리 합의하는 문서</h2>
+  <p class="lead">상태와 전이를 먼저 정해 두면 구현 · 시험 · 자기 성찰 루프가 같은 그림을 보고 움직입니다.</p>
+  <div class="tl">
+    <div class="card"><div class="when">STEP2 · 11/20</div><div class="what">API · DB 설계서</div><div class="small">도구와 저장 규칙</div></div>
+    <div class="card on"><div class="when">STEP3 · 11/27 ← 지금</div><div class="what">상태 전이 그래프 설계서</div><div class="small">한 에이전트의 흐름</div></div>
+    <div class="card"><div class="when">STEP3 · 12/04</div><div class="what">자기 성찰 테스트 결과서</div><div class="small">보정 · 재시도 루프 시험</div></div>
+    <div class="card"><div class="when">STEP4 · 12/11 · 12/18</div><div class="what">협업 아키텍처 · Auto-Healing</div><div class="small">역할을 나누고 복구 측정</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h4>평가에서 보는 것</h4><ul class="dot"><li>상태 노드와 전이 조건이 빠짐없이 있는가</li><li>CoT/ReAct 설명과 그래프 흐름이 서로 맞는가</li><li>노드를 모듈로 나눠 확장할 수 있는가</li></ul></div>
+    <div class="card"><h4>이번 문서의 범위</h4><ul class="dot"><li>에이전트 <b>하나</b>의 흐름 (역할 분리는 STEP4)</li><li>도구 · 저장 이름은 STEP2 문서와 같게</li><li>예시 값은 형태 참고용, 팀 주제로 바꿔 쓰기</li></ul></div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">연결</span>이 문서의 전이표가 다음 주 <b>자기 성찰 테스트 결과서</b>의 시험 케이스 목록이 됩니다. 전이 하나 = 시험 하나로 생각하세요.</div>
+  <div class="ref">근거: <b>최종 프로젝트 가이드 7쪽</b>(STEP3 산출물 · 평가 포인트) · 문서 형식은 <b>주요 산출물 문서 05</b> · 모든 ID · 수치는 교육용 가상 샘플</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>03 / 21</span></div>
+</section>
+
+<!-- 04 WHY -->
+<section class="slide">
+  <div class="kicker">02 · 왜 그래프부터 그리나</div>
+  <h2>노선도 없이 열차를 출발시키지 않는다</h2>
+  <p class="lead">LLM 에이전트는 같은 입력에도 다른 길로 갈 수 있습니다. 그래서 “갈 수 있는 길”을 사람이 먼저 정해 두는 게 설계서의 역할입니다.</p>
+  <div class="grid g2">
+    <div class="card" style="border-color:#f3c7c7;background:#fffafa">
+      <h4 style="color:var(--r)">그래프 없이 바로 코딩하면</h4>
+      <ul class="dot r">
+        <li><b>무한 루프</b> — “다시 생각해” 가 끝없이 반복되고 토큰만 소모</li>
+        <li><b>멈춤</b> — 도구가 실패했을 때 갈 곳이 없어 예외로 종료</li>
+        <li><b>이름 혼란</b> — 팀원마다 노드 이름 · State 필드가 다름</li>
+        <li><b>시험 불가</b> — 무엇이 정상 종료인지 기준이 없음</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:#bfe6d2;background:#f8fdfa">
+      <h4 style="color:var(--g)">그래프를 먼저 합의하면</h4>
+      <ul class="dot g">
+        <li><b>모든 길에 출구</b> — 반복마다 상한, 실패마다 갈 곳</li>
+        <li><b>구현이 기계적</b> — 표의 한 행이 코드의 간선 하나</li>
+        <li><b>시험이 표에서 나옴</b> — 전이 하나마다 시험 하나</li>
+        <li><b>리뷰가 쉬움</b> — 코드 대신 표를 보고 빠진 길을 찾음</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--pll)">
+    <div style="font-size:13px;font-weight:800;color:var(--p)">지하철 노선도로<br>읽어 보기</div>
+    <div class="grid g4" style="gap:8px;font-size:11.5px;line-height:1.5">
+      <div><b>역</b> = 노드<br><span class="muted">지금 하는 일</span></div>
+      <div><b>노선 · 환승</b> = 전이<br><span class="muted">조건 따라 다음 역</span></div>
+      <div><b>승차권</b> = State<br><span class="muted">들고 다니는 정보</span></div>
+      <div><b>종점</b> = 종료 조건<br><span class="muted">정상 · 오류 · 이관</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>04 / 21</span></div>
+</section>
+
+<!-- 05 TERMS -->
+<section class="slide">
+  <div class="kicker">03 · 용어 다섯 개</div>
+  <h2>식당 주문 처리로 용어부터 맞춘다</h2>
+  <p class="lead">설계서의 모든 칸은 이 다섯 단어로 쓰입니다. 팀 안에서 같은 단어를 같은 뜻으로 쓰는 것부터 시작하세요.</p>
+  <table class="t">
+    <tr><th style="width:120px">용어</th><th style="width:250px">한 줄 정의</th><th style="width:250px">식당 비유</th><th>이번 예시(DiagnosisAgent)</th></tr>
+    <tr><td><b>상태 · 노드</b></td><td>에이전트가 지금 하는 일 한 단계</td><td>주문 받기 → 조리 → 검수 → 서빙</td><td><code>diagnose</code>, <code>validate</code></td></tr>
+    <tr><td><b>전이</b></td><td>다음 단계로 가는 화살표와 그 <b>조건</b></td><td>“재료가 없으면 → 손님께 안내”</td><td>근거 부족 → <code>diagnose</code></td></tr>
+    <tr><td><b>State</b></td><td>모든 노드가 함께 읽고 쓰는 공용 메모지</td><td>주문서 (테이블 · 메뉴 · 요청)</td><td><code>incident_id</code>, <code>retry_count</code></td></tr>
+    <tr><td><b>상한(가드)</b></td><td>반복을 멈추게 하는 숫자</td><td>“다시 조리는 최대 2번까지”</td><td><code>retry_count &lt; 2</code></td></tr>
+    <tr><td><b>종료 조건</b></td><td>언제 끝났다고 보는지, 무엇을 돌려주는지</td><td>서빙 완료 / 주문 취소 안내 / 매니저 호출</td><td><code>finalize</code> / <code>finalize_error</code> / 사람 이관</td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="tip"><span class="tag">구분</span><b>상태(노드)</b>는 “지금 어디에 있나”, <b>State</b>는 “무엇을 들고 다니나”입니다. 이름이 비슷해 가장 많이 헷갈립니다.</div>
+    <div class="tip warn"><span class="tag">주의</span>DB의 작업 상태 컬럼(<code>queued</code> · <code>running</code> · <code>done</code>)은 노드 이름과 다른 것입니다. 섞어 쓰지 않습니다.</div>
+  </div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>05 / 21</span></div>
+</section>
+
+<!-- 06 CONCEPT vs IMPL -->
+<section class="slide">
+  <div class="kicker">04 · 개념 그림과 구현 표</div>
+  <h2>같은 흐름을 두 번 적는다: 생각 단계와 코드 단계</h2>
+  <p class="lead">2칸은 사람이 이해하는 단계(ReAct 흐름), 8칸은 실제 함수 이름입니다. 둘을 잇는 <b>대응표 한 줄</b>이 있으면 리뷰어가 길을 잃지 않습니다.</p>
+  <div style="display:grid;grid-template-columns:1fr 70px 1fr;gap:0;align-items:stretch">
+    <div class="card"><h4>2칸 · 개념 단계 <span class="pill">왜 · 무엇을</span></h4>
+      <div class="small" style="margin-bottom:6px">설명 · 발표 · CoT/ReAct 매핑에 사용</div>
+      <table class="t"><tr><th>개념 단계</th><th>하는 일</th></tr>
+      <tr><td class="mono">collect_context</td><td>장애 정보 모으기</td></tr>
+      <tr><td class="mono">reason</td><td>원인 가설 세우기 (Thought)</td></tr>
+      <tr><td class="mono">tool_call · observe</td><td>도구 호출과 결과 읽기 (Action · Observation)</td></tr>
+      <tr><td class="mono">verify</td><td>근거 · 형식 검증</td></tr>
+      <tr><td class="mono">END · handoff</td><td>끝내기 · 사람에게 넘기기</td></tr></table>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--p2);font-weight:800">⇄</div>
+    <div class="card"><h4>8칸 · 구현 노드 <span class="pill g">어떻게</span></h4>
+      <div class="small" style="margin-bottom:6px">그래프 코드의 <code>add_node</code> 이름과 똑같이</div>
+      <table class="t"><tr><th>구현 노드</th><th>대응하는 개념</th></tr>
+      <tr><td class="mono">load_incident</td><td>collect_context</td></tr>
+      <tr><td class="mono">diagnose</td><td>reason</td></tr>
+      <tr><td class="mono">fetch_logs</td><td>tool_call + observe</td></tr>
+      <tr><td class="mono">validate</td><td>verify</td></tr>
+      <tr><td class="mono">finalize · finalize_error</td><td>END · handoff</td></tr></table>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">팁</span>가장 쉬운 방법은 <b>처음부터 같은 이름</b>을 쓰는 것입니다. 이름을 나눠야 한다면 위 오른쪽 표처럼 “구현 노드 ↔ 개념” 대응표를 문서에 붙이세요. (위 대응은 교육용 예시)</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>06 / 21</span></div>
+</section>
+
+<!-- 07 NINE -->
+<section class="slide">
+  <div class="kicker">05 · 아홉 칸</div>
+  <h2>문서는 아홉 칸을 순서대로 채운다</h2>
+  <p class="lead">칸마다 팀 에이전트에 대한 답을 한 줄 이상 적습니다. 색은 칸의 성격(흐름 · 모델 · 데이터)입니다.</p>
+  <table class="t">
+    <tr><th style="width:44px">칸</th><th style="width:170px">이름</th><th style="width:330px">답할 질문</th><th>쉽게 말하면</th><th style="width:60px">성격</th></tr>
+    <tr><td><b>1</b></td><td>목적과 범위</td><td>이 에이전트는 무엇을 하고, 무엇은 하지 않나?</td><td>직무 기술서</td><td><span class="pill">흐름</span></td></tr>
+    <tr><td><b>2</b></td><td>상태 · 노드 · 전이</td><td>어떤 단계가 있고, 어떤 조건에서 다음으로 가나?</td><td>노선도 (개념)</td><td><span class="pill">흐름</span></td></tr>
+    <tr><td><b>3</b></td><td>LLM 및 프롬프트 정책</td><td>모델에게 무엇을 주고, 무엇을 받고, 실패하면?</td><td>주문서 양식</td><td><span class="pill o">모델</span></td></tr>
+    <tr><td><b>4</b></td><td>CoT · ReAct 매핑</td><td>생각과 행동을 어떤 기록으로 남기나?</td><td>업무 일지</td><td><span class="pill o">모델</span></td></tr>
+    <tr><td><b>5</b></td><td>Tool 선택 및 재추론</td><td>언제 어떤 도구를 부르고, 몇 번 다시 하나?</td><td>공구 사용 규칙</td><td><span class="pill o">모델</span></td></tr>
+    <tr><td><b>6</b></td><td>메모리 및 체크포인트</td><td>무엇을 기억하고, 어디서 이어서 하나?</td><td>책갈피</td><td><span class="pill g">데이터</span></td></tr>
+    <tr><td><b>7</b></td><td>State 정의</td><td>노드들이 함께 읽고 쓰는 값은 무엇인가?</td><td>공용 메모지</td><td><span class="pill g">데이터</span></td></tr>
+    <tr><td><b>8</b></td><td>노드 및 전이</td><td>실제 구현 노드마다 다음 노드는 어디인가?</td><td>노선도 (구현)</td><td><span class="pill">흐름</span></td></tr>
+    <tr><td><b>9</b></td><td>종료 조건</td><td>언제 끝나고, 실패하면 무엇을 돌려주나?</td><td>종점 안내</td><td><span class="pill">흐름</span></td></tr>
+  </table>
+  <div class="tip" style="margin-top:10px"><span class="tag">순서 팁</span>1 → 2 → 8 → 9 (뼈대) 를 먼저 쓰고, 7 (State) 을 정한 다음 3 · 4 · 5 · 6 을 채우면 덜 고칩니다.</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>07 / 21</span></div>
+</section>
+
+<!-- 08 SECTION -->
+<section class="slide sec">
+  <div class="kicker">PART 2 · 흐름 정하기</div>
+  <h2>1칸 · 2칸 — 무엇을 하고, 어떤 길로 가나</h2>
+  <p>예시 에이전트 <b>DiagnosisAgent</b> (1팀 예시 · 기업용 인프라 장애 진단)를 끝까지 따라갑니다.<br>이 예시는 형태 참고용입니다. 팀은 자기 주제의 에이전트로 바꿔서 적습니다.</p>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>08 / 21</span></div>
+</section>
+
+<!-- 09 SCOPE -->
+<section class="slide">
+  <div class="kicker">06 · 1칸 목적과 범위</div>
+  <h2>에이전트 하나가 하는 일과 하지 않는 일을 먼저 적는다</h2>
+  <p class="lead">예시: <b>DiagnosisAgent</b>는 인프라 로그와 상태 지표로 원인 후보를 추정하고, 복구 실행 권한은 없이 <b>RecoveryAgent</b>에 구조화된 권고만 전달합니다.</p>
+  <div class="grid g3">
+    <div class="card"><h4 style="color:var(--g)">✓ 한다</h4><ul class="dot g"><li>장애 입력을 받아 근거를 모은다</li><li>원인 후보 · 근거 · 신뢰도를 만든다</li><li>권고 action을 구조화해 넘긴다</li></ul></div>
+    <div class="card"><h4 style="color:var(--r)">✕ 하지 않는다</h4><ul class="dot r"><li>복구를 직접 실행하지 않는다</li><li>근거 없이 단정하지 않는다</li><li>승인 없이 위험 작업을 하지 않는다</li></ul></div>
+    <div class="card"><h4>⇢ 입력 · 출력</h4><ul class="dot"><li><b>입력</b>: 장애 ID, 관측 로그, 지표 요약</li><li><b>출력</b>: 원인 후보, 근거 ID, 권고, 신뢰도</li><li><b>넘기는 곳</b>: RecoveryAgent</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h4>“하지 않는다”가 왜 중요할까?</h4>
+    <div class="grid g3" style="gap:12px;font-size:11.5px;line-height:1.55">
+      <div><span class="pill">그래프</span><br>하지 않는 일은 <b>노드가 없다</b>는 뜻입니다. 복구 노드가 없으니 복구 간선도 없습니다.</div>
+      <div><span class="pill">보안</span><br>하지 않는 일은 <b>Tool 권한이 없다</b>는 뜻입니다. <code>recovery.execute</code>는 이 에이전트에 주지 않습니다.</div>
+      <div><span class="pill">시험</span><br>“복구해 줘” 입력이 오면 거절 · 이관되는지가 <b>시험 케이스</b>가 됩니다.</div>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">팀 적용</span>우리 에이전트의 <b>이름 · 하는 일 · 하지 않는 일 · 입력과 출력</b> 네 칸을 먼저 채웁니다. 하는 일이 둘 이상으로 갈리면 단일 에이전트 범위를 다시 점검하세요.</div>
+  <div class="ref">참고: <b>Auto-Healing 가이드 7~8쪽</b>(역할 카드와 하지 않는 일) · 에이전트를 나누는 이유는 STEP4(같은 가이드 6쪽)에서 다룹니다.</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>09 / 21</span></div>
+</section>
+
+<!-- 10 GRAPH -->
+<section class="slide">
+  <div class="kicker">07 · 2칸 상태 · 노드 · 전이</div>
+  <h2>단계마다 들어오는 조건과 나가는 길을 적는다</h2>
+  <svg viewBox="0 0 864 222" width="864" height="222" style="display:block;margin:2px 0 4px">
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4b5070"/></marker>
+      <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e08a1e"/></marker>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d63c3c"/></marker>
+      <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14915a"/></marker>
+    </defs>
+    <g font-size="10" fill="#4b5070" style="font-family:var(--sans)">
+      <!-- edges -->
+      <path d="M150,52 H196" stroke="#4b5070" stroke-width="1.4" fill="none" marker-end="url(#a)"/><text x="152" y="45">근거 확보</text>
+      <path d="M336,52 H382" stroke="#4b5070" stroke-width="1.4" fill="none" marker-end="url(#a)"/><text x="336" y="45">Tool 필요</text>
+      <path d="M522,52 H568" stroke="#4b5070" stroke-width="1.4" fill="none" marker-end="url(#a)"/><text x="534" y="45">성공</text>
+      <path d="M638,36 V14 H266 V34" stroke="#e08a1e" stroke-width="1.4" stroke-dasharray="5 4" fill="none" marker-end="url(#ao)"/><text x="400" y="10" fill="#c27414">증거 부족 → 다시 reason</text>
+      <path d="M246,70 V118" stroke="#4b5070" stroke-width="1.4" fill="none" marker-end="url(#a)"/><text x="214" y="98">충분</text>
+      <path d="M286,118 V72" stroke="#e08a1e" stroke-width="1.4" stroke-dasharray="5 4" fill="none" marker-end="url(#ao)"/><text x="292" y="98" fill="#c27414">미달 (최대 2회)</text>
+      <path d="M336,136 H382" stroke="#14915a" stroke-width="1.4" fill="none" marker-end="url(#ag)"/><text x="344" y="129" fill="#14915a">통과</text>
+      <path d="M608,70 V178 H266 V156" stroke="#4b5070" stroke-width="1.4" fill="none" marker-end="url(#a)"/><text x="420" y="173">증거 충분 → verify</text>
+      <path d="M470,70 V96 H770 V118" stroke="#d63c3c" stroke-width="1.4" fill="none" marker-end="url(#ar)"/><text x="660" y="91" fill="#d63c3c">실패 · 재시도 초과</text>
+      <path d="M70,70 V204 H780 V156" stroke="#d63c3c" stroke-width="1.4" fill="none" marker-end="url(#ar)"/><text x="80" y="199" fill="#d63c3c">수집 실패</text>
+    </g>
+    <!-- nodes -->
+    <g font-size="12" text-anchor="middle" style="font-family:var(--mono)" fill="#161a33">
+      <rect x="10" y="34" width="140" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="80" y="57">collect_context</text>
+      <rect x="196" y="34" width="140" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="266" y="57">reason</text>
+      <rect x="382" y="34" width="140" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="452" y="57">tool_call</text>
+      <rect x="568" y="34" width="140" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="638" y="57">observe</text>
+      <rect x="196" y="118" width="140" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="266" y="141">verify</text>
+      <rect x="382" y="118" width="140" height="36" rx="8" fill="#e8f7ef" stroke="#14915a" stroke-width="1.5"/><text x="452" y="141">END</text>
+      <rect x="690" y="118" width="160" height="36" rx="8" fill="#fdeeee" stroke="#d63c3c" stroke-width="1.5"/><text x="770" y="141" style="font-family:var(--sans)">handoff (사람)</text>
+    </g>
+  </svg>
+  <table class="t">
+    <tr><th style="width:150px">상태 / 노드</th><th style="width:200px">진입 조건</th><th>다음 전이</th></tr>
+    <tr><td class="mono">collect_context</td><td>신규 장애</td><td>근거 확보 → reason · 실패 → handoff</td></tr>
+    <tr><td class="mono">reason</td><td>로그 수집 완료</td><td>Tool 필요 → tool_call · 충분 → verify</td></tr>
+    <tr><td class="mono">tool_call</td><td>조회 권한 충족</td><td>성공 → observe · 실패(재시도 1회 후) → handoff</td></tr>
+    <tr><td class="mono">observe</td><td>Tool 결과 수신</td><td>증거 충분 → verify · 부족 → reason</td></tr>
+    <tr><td class="mono">verify</td><td>근거 · 스키마 검증</td><td>통과 → END · 미달 → reason (최대 2회)</td></tr>
+  </table>
+  <div class="ref" style="bottom:36px">그림은 표와 같은 내용을 그린 예시입니다. <b>그림의 선 개수 = 표의 전이 개수</b>인지 세어 보세요. 팀은 노드 5~8개로 시작합니다.</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>10 / 21</span></div>
+</section>
+
+<!-- 11 TRACE -->
+<section class="slide">
+  <div class="kicker">08 · 한 건 따라가 보기</div>
+  <h2>장애 inc-001 하나가 그래프를 지나가는 모습</h2>
+  <p class="lead">그래프를 읽는 가장 쉬운 방법은 실제 입력 하나를 손으로 따라가는 것입니다. 한 줄 = 노드 한 번 실행, 오른쪽은 그때 바뀐 State입니다.</p>
+  <table class="t trace">
+    <tr><th style="width:62px">시각</th><th style="width:118px">노드</th><th style="width:330px">일어난 일 (요약 기록)</th><th style="width:140px">나간 전이</th><th>바뀐 State</th></tr>
+    <tr><td>10:01:00</td><td class="n">collect_context</td><td>장애 inc-001 접수, 최근 로그 120줄 수집</td><td>근거 확보 → reason</td><td class="mono">incident_id="inc-001"</td></tr>
+    <tr><td>10:01:01</td><td class="n">reason</td><td>“API 타임아웃 의심, 지연 지표가 필요” (가설 요약)</td><td>Tool 필요 → tool_call</td><td class="mono">—</td></tr>
+    <tr><td>10:01:02</td><td class="n">tool_call</td><td><code>get_service_metrics(svc-api-01)</code> 호출</td><td>성공 → observe</td><td class="mono">tool_result={p95: 9.8s}</td></tr>
+    <tr><td>10:01:03</td><td class="n">observe</td><td>p95 지연 9.8초 확인 → 지표 근거 1건 확보</td><td>충분 → verify</td><td class="mono">diagnosis={cause:"API timeout"}</td></tr>
+    <tr class="bad"><td>10:01:04</td><td class="n">verify</td><td>검증 실패: <b>근거 로그 ID가 비어 있음</b></td><td>미달 → reason</td><td class="mono">retry_count=1</td></tr>
+    <tr><td>10:01:05</td><td class="n">reason</td><td>“오류 로그로 타임아웃을 확인해야 함”</td><td>Tool 필요 → tool_call</td><td class="mono">—</td></tr>
+    <tr><td>10:01:06</td><td class="n">tool_call</td><td><code>get_recent_logs(svc-api-01)</code> 호출</td><td>성공 → observe</td><td class="mono">tool_result={logs:[…]}</td></tr>
+    <tr><td>10:01:07</td><td class="n">observe</td><td>타임아웃 오류 로그 <code>log-01</code> 확인 → 근거 확보</td><td>충분 → verify</td><td class="mono">evidence=["log-01"]</td></tr>
+    <tr class="end"><td>10:01:08</td><td class="n">verify</td><td>근거 · JSON 스키마 통과, 신뢰도 0.91</td><td>통과 → END</td><td class="mono">diagnosis.confidence=0.91</td></tr>
+  </table>
+  <div class="grid g3" style="margin-top:12px">
+    <div class="tip"><span class="tag">읽는 법</span>주황 줄이 <b>자기 성찰 루프</b>입니다. verify가 되돌려 보냈고 retry_count가 1 올랐습니다.</div>
+    <div class="tip"><span class="tag">만약</span>세 번째 verify도 실패했다면? retry_count=2 → 한도 초과 → <b>handoff</b>.</div>
+    <div class="tip"><span class="tag">연결</span>이 표가 다음 주 결과서의 <b>실행 추적 샘플</b> 모양 그대로입니다.</div>
+  </div>
+  <div class="ref" style="bottom:36px">모든 시각 · ID · 수치는 교육용 가상 샘플입니다.</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>11 / 21</span></div>
+</section>
+
+<!-- 12 SECTION -->
+<section class="slide sec">
+  <div class="kicker">PART 3 · 칸 채우기</div>
+  <h2>3 ~ 9칸 — 모델 · 도구 · 기억 · 데이터 · 출구</h2>
+  <p>흐름(노선도)이 정해졌으니 이제 각 역에서 지킬 규칙을 적습니다.<br>숫자(재시도 · 타임아웃)와 이름(Tool · State 필드)은 <b>STEP2 API · DB 문서와 같은 값</b>을 씁니다.</p>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>12 / 21</span></div>
+</section>
+
+<!-- 13 LLM POLICY -->
+<section class="slide">
+  <div class="kicker">09 · 3칸 LLM 및 프롬프트 정책</div>
+  <h2>모델에게 주는 것, 받는 것, 실패했을 때를 정한다</h2>
+  <p class="lead">LLM 노드는 “입력 → 출력” 계약이 있는 함수처럼 다룹니다. 출력 형식을 고정해야 다음 노드(검증)가 판정할 수 있습니다.</p>
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:14px">
+    <div>
+      <table class="t">
+        <tr><th style="width:56px">항목</th><th>정책(예시)</th></tr>
+        <tr><td><b>입력</b></td><td>장애 ID, 관측 로그, 지표 요약, 허용 Tool 목록</td></tr>
+        <tr><td><b>출력</b></td><td>원인 후보 · 근거 로그 ID · 권고 action · 신뢰도 (JSON 스키마)</td></tr>
+        <tr><td><b>제약</b></td><td>근거 없는 단정 금지, Tool 결과는 불신 입력, 비밀정보 마스킹</td></tr>
+        <tr><td><b>실패</b></td><td>JSON 파싱 실패 시 1회 재생성, 이후 사람 검토</td></tr>
+      </table>
+      <div class="card" style="margin-top:10px;padding:10px 12px">
+        <h4>흐린 정책 → 쓸 수 있는 정책</h4>
+        <table class="t" style="font-size:11px">
+          <tr><td style="color:var(--r);width:44%">“필요한 정보를 준다”</td><td style="color:var(--g)">입력 필드 4개를 이름으로 나열</td></tr>
+          <tr><td style="color:var(--r)">“원인을 설명하게 한다”</td><td style="color:var(--g)">JSON 필드 · 타입 · 필수 여부 고정</td></tr>
+          <tr><td style="color:var(--r)">“실패하면 다시 한다”</td><td style="color:var(--g)">1회 재생성 → 그다음 사람 검토</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="small" style="font-weight:700;margin-bottom:5px">출력 스키마 예시 (diagnose 노드)</div>
+<pre class="code">{
+  <span class="s">"cause_candidates"</span>: [
+    {<span class="s">"cause"</span>: <span class="s">"API timeout"</span>,
+     <span class="s">"confidence"</span>: <span class="f">0.91</span>}
+  ],
+  <span class="s">"evidence_ids"</span>: [<span class="s">"log-01"</span>, <span class="s">"met-07"</span>],
+  <span class="s">"recommended_action"</span>: <span class="s">"restart_request"</span>,
+  <span class="s">"needs_approval"</span>: <span class="k">true</span>,
+  <span class="s">"need_logs"</span>: <span class="k">false</span>
+}</pre>
+      <div class="tip" style="margin-top:10px"><span class="tag">왜</span><code>evidence_ids</code>가 비어 있으면 verify가 기계적으로 “미달”을 판정할 수 있습니다. <code>need_logs</code>는 다음 전이를 고르는 데 쓰입니다.</div>
+    </div>
+  </div>
+  <div class="ref">참고: <b>API 작성법 24~27쪽</b>(Tool 정의 · 출력 · 실행 전 확인) · <b>AI 보안 가드레일 문서</b>(Tool 결과는 비신뢰 데이터)</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>13 / 21</span></div>
+</section>
+
+<!-- 14 COT REACT -->
+<section class="slide">
+  <div class="kicker">10 · 4칸 CoT · ReAct 매핑</div>
+  <h2>생각은 요약만, 행동과 관찰은 그대로 남긴다</h2>
+  <p class="lead"><b>CoT</b>는 문제를 단계로 나눠 추론하는 방식, <b>ReAct</b>는 생각(Thought) → 행동(Action) → 관찰(Observation)을 반복하는 방식입니다. 설계서는 이 반복이 <b>그래프의 어느 노드</b>인지 적습니다.</p>
+  <div style="display:grid;grid-template-columns:300px 1fr;gap:16px">
+    <div class="card" style="background:var(--pll)">
+      <h4>ReAct 한 바퀴 = 노드 세 개</h4>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:11.5px">
+        <div style="display:flex;gap:8px;align-items:center"><span class="pill">Thought</span>→ <code>reason</code> 노드 (가설 요약)</div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="pill o">Action</span>→ <code>tool_call</code> 노드 (조회 Tool)</div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="pill g">Observation</span>→ <code>observe</code> 노드 (로그 · 지표)</div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="pill r">Check</span>→ <code>verify</code> 노드 (검증 결과)</div>
+      </div>
+      <div class="small" style="margin-top:10px;line-height:1.5">그래프에서 reason → tool_call → observe → reason 으로 돌아오는 고리가 바로 ReAct 루프입니다.</div>
+    </div>
+    <div>
+      <div class="small" style="font-weight:700;margin-bottom:5px">기록 예시 (한 단계 = 한 줄, JSON Lines)</div>
+<pre class="code">{<span class="s">"step"</span>:<span class="f">1</span>,<span class="s">"node"</span>:<span class="s">"reason"</span>,<span class="s">"thought_summary"</span>:<span class="s">"지연 지표 필요"</span>}
+{<span class="s">"step"</span>:<span class="f">2</span>,<span class="s">"node"</span>:<span class="s">"tool_call"</span>,<span class="s">"action"</span>:<span class="s">"get_service_metrics"</span>,<span class="s">"ok"</span>:<span class="k">true</span>}
+{<span class="s">"step"</span>:<span class="f">3</span>,<span class="s">"node"</span>:<span class="s">"observe"</span>,<span class="s">"observation"</span>:<span class="s">"p95=9.8s"</span>}
+{<span class="s">"step"</span>:<span class="f">4</span>,<span class="s">"node"</span>:<span class="s">"verify"</span>,<span class="s">"result"</span>:<span class="s">"missing_evidence"</span>,<span class="s">"retry"</span>:<span class="f">1</span>}</pre>
+      <div class="grid g2" style="margin-top:10px;gap:10px">
+        <div class="card" style="padding:9px 12px"><h4 style="color:var(--g);margin-bottom:4px">저장 · 노출한다</h4><ul class="dot g"><li>단계 · 노드 이름 · 가설 <b>요약</b></li><li>호출한 Tool과 성공 여부</li><li>관찰 결과 요약 · 검증 결과</li></ul></div>
+        <div class="card" style="padding:9px 12px"><h4 style="color:var(--r);margin-bottom:4px">저장 · 노출하지 않는다</h4><ul class="dot r"><li>모델 내부 추론 원문</li><li>비밀정보가 담긴 로그 원문</li><li>사용자에게 사고 과정 전체</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="ref">참고: <b>Auto-Healing 가이드 11~12쪽</b>(자기 성찰 루프 규칙) · 다음 주 결과서의 추적 증빙(trace_id · node · retry_count)과 같은 필드를 쓰면 편합니다.</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>14 / 21</span></div>
+</section>
+
+<!-- 15 TOOL -->
+<section class="slide">
+  <div class="kicker">11 · 5칸 Tool 선택 및 재추론</div>
+  <h2>어떤 상황에 어떤 도구를, 몇 번까지 다시 하나</h2>
+  <p class="lead">“상황 → 도구 → 재시도 → 한도 초과 시” 네 열로 적으면 빠진 경우가 바로 보입니다.</p>
+  <table class="t">
+    <tr><th style="width:190px">상황</th><th style="width:190px">선택(예시)</th><th style="width:170px">다시 하기</th><th>한도를 넘으면</th></tr>
+    <tr><td>지표가 부족하다</td><td><code>get_service_metrics</code></td><td>타임아웃 시 <b>재시도 1회</b></td><td>handoff (사람 검토)</td></tr>
+    <tr><td>오류 로그가 부족하다</td><td><code>get_recent_logs</code></td><td>타임아웃 시 <b>재시도 1회</b></td><td>handoff (사람 검토)</td></tr>
+    <tr><td>검증 미달 (근거 불충분)</td><td>Tool 없이 <b>재추론</b></td><td><b>최대 2회</b></td><td>finalize_error + 수동 점검 권고</td></tr>
+    <tr><td>허용 목록에 없는 Tool 요청</td><td>호출하지 않음</td><td>0회</td><td>거부 사유 기록 후 계속 / 이관</td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <h4>재시도와 재추론은 다른 것</h4>
+      <div class="grid g2" style="gap:10px;font-size:11.5px;line-height:1.55">
+        <div><span class="pill o">재시도 (retry)</span><br><b>같은 호출</b>을 한 번 더. 네트워크 · 타임아웃 같은 일시 오류용.</div>
+        <div><span class="pill">재추론 (re-reason)</span><br><b>LLM이 다시 생각</b>. 근거 부족 · 형식 오류 같은 판단 오류용.</div>
+      </div>
+      <div class="small" style="margin-top:8px">→ 카운터도 따로 둡니다. 하나로 합치면 “몇 번 실패했는지” 해석이 꼬입니다.</div>
+    </div>
+    <div class="tip" style="display:flex;flex-direction:column;justify-content:center"><div><span class="tag">팁</span>재시도 횟수와 타임아웃 숫자는 <b>API 설계 문서의 규칙과 같은 값</b>으로 적으세요. 숫자가 다르면 시험 결과를 비교할 수 없습니다.</div>
+    <div style="margin-top:8px"><span class="tag">보안</span>Tool 목록은 1칸 “하지 않는다”와 맞아야 합니다. 진단 에이전트 목록에 <code>restart_service</code>가 있으면 범위 위반입니다.</div></div>
+  </div>
+  <div class="ref">참고: <b>API 작성법 24~27쪽</b> · <b>AI 보안 가드레일 설계 문서</b>(도구별 권한표)</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>15 / 21</span></div>
+</section>
+
+<!-- 16 MEMORY -->
+<section class="slide">
+  <div class="kicker">12 · 6칸 메모리 및 체크포인트</div>
+  <h2>무엇을 기억하고, 끊기면 어디서 이어 하나</h2>
+  <p class="lead">메모리는 세 종류로 나눠 적습니다. “어디에 저장하고 언제 지우는지”까지 써야 DB 설계서와 맞출 수 있습니다.</p>
+  <table class="t">
+    <tr><th style="width:110px">종류</th><th style="width:250px">무엇을 (예시)</th><th style="width:220px">어디에</th><th>언제까지</th></tr>
+    <tr><td><span class="pill">단기</span></td><td>장애 ID, 최근 관측, 현재 node, retry_count</td><td>그래프 State (한 실행 안)</td><td>실행이 끝나면 결과만 남김</td></tr>
+    <tr><td><span class="pill g">장기</span></td><td>유사 장애 해결 사례</td><td>pgvector 검색 (DB 설계서의 표)</td><td>운영 정책에 따라 보관</td></tr>
+    <tr><td><span class="pill o">체크포인트</span></td><td>노드 실행 직후의 State 스냅샷</td><td>체크포인터, <code>thread_id = 장애 ID</code></td><td>재개 · 감사에 필요한 기간</td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <h4>재개 시나리오: 워커가 중간에 죽었다</h4>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:11.5px;line-height:1.5">
+        <div style="display:flex;gap:8px"><span class="num">1</span><span><code>fetch_logs</code> 실행 직후 체크포인트 저장</span></div>
+        <div style="display:flex;gap:8px"><span class="num">2</span><span>워커 재시작 (배포 · 장애 등)</span></div>
+        <div style="display:flex;gap:8px"><span class="num">3</span><span>같은 <code>thread_id="inc-001"</code>로 다시 실행</span></div>
+        <div style="display:flex;gap:8px"><span class="num">4</span><span>처음부터가 아니라 <b>다음 노드부터</b> 이어서 진행</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h4>헷갈리기 쉬운 두 “상태”</h4>
+      <table class="t" style="font-size:11px">
+        <tr><th></th><th>Job 상태 (워커)</th><th>그래프 노드</th></tr>
+        <tr><td><b>예</b></td><td class="mono">queued · running · done</td><td class="mono">diagnose · validate</td></tr>
+        <tr><td><b>누가</b></td><td>API · 워커가 DB에 기록</td><td>그래프가 State로 관리</td></tr>
+        <tr><td><b>보는 사람</b></td><td>사용자 화면 · 운영자</td><td>개발자 · 추적 로그</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="ref">참고: <b>DB 작성법 20쪽</b>(다른 산출물과 같은 이름 쓰기) · <b>워커 구조 8쪽</b>(Job 상태 머신)</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>16 / 21</span></div>
+</section>
+
+<!-- 17 STATE -->
+<section class="slide">
+  <div class="kicker">13 · 7칸 State 정의</div>
+  <h2>노드들이 함께 읽고 쓰는 값을 표와 코드로 같이 적는다</h2>
+  <p class="lead">표는 문서용, 오른쪽 <code>TypedDict</code>는 코드용입니다. 두 곳의 필드 이름 · 타입이 글자 하나까지 같아야 합니다.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <table class="t">
+      <tr><th>필드</th><th>타입</th><th>설명</th><th>쓰는 노드</th></tr>
+      <tr><td class="mono">incident_id</td><td class="mono">str</td><td>장애 식별자</td><td class="small">load_incident</td></tr>
+      <tr><td class="mono">diagnosis</td><td class="mono">dict | None</td><td>진단 결과</td><td class="small">diagnose</td></tr>
+      <tr><td class="mono">tool_result</td><td class="mono">dict | None</td><td>도구 실행 결과</td><td class="small">fetch_logs</td></tr>
+      <tr><td class="mono">retry_count</td><td class="mono">int</td><td>재추론 횟수</td><td class="small">validate</td></tr>
+      <tr><td class="mono">approved</td><td class="mono">bool</td><td>복구 승인 여부</td><td class="small">(STEP4 인계)</td></tr>
+      <tr><td class="mono">error</td><td class="mono">str | None</td><td>오류 요약</td><td class="small">모든 노드</td></tr>
+      <tr style="background:var(--pll)"><td class="mono">fetch_count</td><td class="mono">int</td><td>로그 조회 횟수 <span class="pill">추가</span></td><td class="small">fetch_logs</td></tr>
+      <tr style="background:var(--pll)"><td class="mono">verdict</td><td class="mono">str</td><td>검증 판정 <span class="pill">추가</span></td><td class="small">validate</td></tr>
+    </table>
+<pre class="code"><span class="k">from</span> typing <span class="k">import</span> TypedDict
+
+<span class="k">class</span> <span class="f">AgentState</span>(TypedDict):
+    incident_id: str
+    diagnosis: dict | <span class="k">None</span>
+    tool_result: dict | <span class="k">None</span>
+    retry_count: int      <span class="c"># 재추론 상한용</span>
+    approved: bool
+    error: str | <span class="k">None</span>
+    fetch_count: int      <span class="c"># 조회 반복 상한용</span>
+    verdict: str          <span class="c"># "pass"|"retry"|"give_up"</span></pre>
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="tip"><span class="tag">팁</span>State 필드 이름은 <b>DB 설계서와 같게</b> 적습니다. 체크포인트를 저장하는 곳(표 · 키)도 DB 문서에 있어야 합니다.</div>
+    <div class="tip"><span class="tag">추가 이유</span><code>fetch_count</code>와 <code>verdict</code>는 8칸 전이를 코드로 옮길 때 필요해 예시에 더했습니다(18 · 19장).</div>
+  </div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>17 / 21</span></div>
+</section>
+
+<!-- 18 TRANSITIONS -->
+<section class="slide">
+  <div class="kicker">14 · 8칸 노드 및 전이</div>
+  <h2>구현할 노드마다 갈 곳이 빠짐없이 있다</h2>
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:16px;margin-top:8px">
+    <table class="t">
+      <tr><th>현재 노드</th><th>조건</th><th>다음 노드</th></tr>
+      <tr><td class="mono">load_incident</td><td>조회 성공</td><td class="mono">diagnose</td></tr>
+      <tr><td class="mono">load_incident</td><td>조회 실패</td><td class="mono">finalize_error</td></tr>
+      <tr style="background:#fff8f0"><td class="mono">diagnose</td><td>추가 로그 필요 <b style="color:var(--o)">& fetch_count &lt; 3</b></td><td class="mono">fetch_logs</td></tr>
+      <tr><td class="mono">fetch_logs</td><td>로그 확보</td><td class="mono">diagnose</td></tr>
+      <tr><td class="mono">diagnose</td><td>진단 완료 (또는 조회 한도 도달)</td><td class="mono">validate</td></tr>
+      <tr><td class="mono">validate</td><td>근거 부족 & retry_count &lt; 2</td><td class="mono">diagnose</td></tr>
+      <tr><td class="mono">validate</td><td>근거 충분</td><td class="mono">finalize</td></tr>
+      <tr><td class="mono">validate</td><td>재시도 초과</td><td class="mono">finalize_error</td></tr>
+    </table>
+    <div>
+      <div class="card">
+        <h4>완전성 점검 4가지</h4>
+        <ul class="dot chk" style="font-size:12px">
+          <li>☐ 모든 노드에 성공 · 실패 전이가 있다</li>
+          <li>☐ 같은 노드에서 나가는 조건이 겹치지 않는다</li>
+          <li>☐ 반복 전이마다 상한(카운터)이 있다</li>
+          <li>☐ 모든 길이 끝(finalize)이나 사람 이관으로 닫힌다</li>
+        </ul>
+      </div>
+      <div class="tip warn" style="margin-top:10px"><span class="tag">찾아보기</span>원래 예시 표에는 <b>상한 없는 반복이 하나</b> 숨어 있었습니다. <code>diagnose ↔ fetch_logs</code> 고리입니다. LLM이 계속 “로그 더 필요”라고 하면 끝나지 않습니다. → 주황 행처럼 <code>fetch_count &lt; 3</code>을 붙여 막습니다.</div>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">규칙</span>2칸의 그림(개념)과 이 표(구현)는 같은 흐름이어야 합니다. 표에 있는 전이는 그래프 코드의 <b>간선과 1:1</b>로 대응합니다. 다음 장에서 실제로 옮겨 봅니다.</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>18 / 21</span></div>
+</section>
+
+<!-- 19 CODE -->
+<section class="slide">
+  <div class="kicker">15 · 표를 코드로</div>
+  <h2>전이표 한 행 = LangGraph 간선 하나</h2>
+  <p class="lead">조건은 <b>라우터 함수의 반환값</b>, 다음 노드는 <b>매핑 dict의 값</b>이 됩니다. 아래 코드는 18장 표를 그대로 옮긴 구조 예시입니다.</p>
+  <div style="display:grid;grid-template-columns:1.45fr 1fr;gap:14px">
+<pre class="code" style="font-size:10px;line-height:1.5"><span class="k">def</span> <span class="f">route_diagnose</span>(s) -> Literal[<span class="s">"need_logs"</span>, <span class="s">"done"</span>]:
+    <span class="k">if</span> s[<span class="s">"diagnosis"</span>][<span class="s">"need_logs"</span>] <span class="k">and</span> s[<span class="s">"fetch_count"</span>] &lt; <span class="f">3</span>:
+        <span class="k">return</span> <span class="s">"need_logs"</span>
+    <span class="k">return</span> <span class="s">"done"</span>
+<span class="k">def</span> <span class="f">route_validate</span>(s): <span class="k">return</span> s[<span class="s">"verdict"</span>]  <span class="c"># pass|retry|give_up</span>
+
+g = StateGraph(AgentState)
+<span class="k">for</span> fn <span class="k">in</span> [load_incident, diagnose, fetch_logs, validate, finalize, finalize_error]:
+    g.add_node(fn.__name__, fn)
+g.add_edge(START, <span class="s">"load_incident"</span>)
+g.add_conditional_edges(<span class="s">"load_incident"</span>, route_load,
+    {<span class="s">"ok"</span>: <span class="s">"diagnose"</span>, <span class="s">"fail"</span>: <span class="s">"finalize_error"</span>})
+g.add_conditional_edges(<span class="s">"diagnose"</span>, route_diagnose,
+    {<span class="s">"need_logs"</span>: <span class="s">"fetch_logs"</span>, <span class="s">"done"</span>: <span class="s">"validate"</span>})
+g.add_edge(<span class="s">"fetch_logs"</span>, <span class="s">"diagnose"</span>)
+g.add_conditional_edges(<span class="s">"validate"</span>, route_validate,
+    {<span class="s">"pass"</span>: <span class="s">"finalize"</span>, <span class="s">"retry"</span>: <span class="s">"diagnose"</span>, <span class="s">"give_up"</span>: <span class="s">"finalize_error"</span>})
+g.add_edge(<span class="s">"finalize"</span>, END); g.add_edge(<span class="s">"finalize_error"</span>, END)
+
+app = g.compile(checkpointer=MemorySaver())   <span class="c"># 6칸 체크포인트</span>
+app.invoke(init, {<span class="s">"configurable"</span>: {<span class="s">"thread_id"</span>: <span class="s">"inc-001"</span>}})</pre>
+    <div>
+      <table class="t" style="font-size:11px">
+        <tr><th>설계서</th><th>코드</th></tr>
+        <tr><td>8칸 노드 이름</td><td><code>add_node</code></td></tr>
+        <tr><td>조건 없는 전이</td><td><code>add_edge</code></td></tr>
+        <tr><td>조건 있는 전이</td><td><code>add_conditional_edges</code></td></tr>
+        <tr><td>조건 칸</td><td>라우터 반환값</td></tr>
+        <tr><td>7칸 State</td><td><code>StateGraph(AgentState)</code></td></tr>
+        <tr><td>6칸 체크포인트</td><td><code>checkpointer</code> · <code>thread_id</code></td></tr>
+        <tr><td>9칸 종료</td><td><code>→ END</code> 간선</td></tr>
+      </table>
+      <div class="tip" style="margin-top:10px;font-size:11px"><span class="tag">확인함</span>노드 함수를 가짜 값으로 채워 실행하면 load_incident → diagnose → fetch_logs → diagnose → validate → finalize 순서로 지나갑니다.</div>
+      <div class="small" style="margin-top:8px;line-height:1.5">라우터는 <b>판단하지 않고 State만 읽습니다</b>. 판정은 노드가 State에 써 둡니다(<code>verdict</code>).</div>
+    </div>
+  </div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>19 / 21</span></div>
+</section>
+
+<!-- 20 END + MISTAKES -->
+<section class="slide">
+  <div class="kicker">16 · 9칸 종료 조건과 흔한 실수</div>
+  <h2>끝나는 길을 세 가지로 나누면 무한 루프가 사라진다</h2>
+  <p class="lead">좋은 종료 조건은 <b>정상 종료 · 오류 종료 · 사람 이관</b>을 서로 다른 결과로 남깁니다. 섞으면 12/18 복구율을 셀 수 없습니다.</p>
+  <div class="grid g3">
+    <div class="card" style="border-color:#bfe6d2;background:#f8fdfa"><span class="pill g">정상 종료 · finalize</span><div style="font-size:11.5px;line-height:1.55;margin-top:6px">근거가 충분하면 원인 · 근거 ID · 권고를 반환<br><span class="mono small">status="completed"</span></div></div>
+    <div class="card" style="border-color:#f3c7c7;background:#fffafa"><span class="pill r">오류 종료 · finalize_error</span><div style="font-size:11.5px;line-height:1.55;margin-top:6px">재추론 2회 초과 · 조회 실패 시 오류 원인과 수동 점검 권고를 반환<br><span class="mono small">status="failed", error="…"</span></div></div>
+    <div class="card" style="border-color:#f5d9b0;background:#fffbf4"><span class="pill o">사람 이관 · handoff</span><div style="font-size:11.5px;line-height:1.55;margin-top:6px">Tool 실패 · 판정 불가 시 담당자 검토로 넘김, 수집한 근거 첨부<br><span class="mono small">status="handoff"</span></div></div>
+  </div>
+  <table class="t" style="margin-top:12px">
+    <tr><th style="width:300px">흔한 실수</th><th>이렇게 고친다</th></tr>
+    <tr><td>노드에 실패 전이가 없다</td><td>실패 · 한도 초과 출구를 추가</td></tr>
+    <tr><td>재시도 상한이 없다 (숨은 고리 포함)</td><td><code>retry_count</code> · <code>fetch_count</code>와 최대 횟수를 State에</td></tr>
+    <tr><td>2칸 · 8칸 이름이 다르다</td><td>한 이름으로 통일하거나 대응표</td></tr>
+    <tr><td>추론 원문을 그대로 저장</td><td>단계 · 도구 · 결과 요약만 기록</td></tr>
+    <tr><td>“다시 해 봐”로 복구한다</td><td>검증 코드가 합격을 판정</td></tr>
+    <tr><td>API 요청 안에서 그래프를 기다린다</td><td>202 접수 후 백그라운드 워커 작업으로 분리</td></tr>
+  </table>
+  <div class="ref" style="bottom:36px">참고: <b>Auto-Healing 가이드 3쪽</b>(오해 네 가지) · <b>워커 구조 3쪽</b>(요청 안에서 LLM을 기다리면) · 15~16쪽(분류와 복구 순서)</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>20 / 21</span></div>
+</section>
+
+<!-- 21 OTHER TOPIC + CHECK -->
+<section class="slide">
+  <div class="kicker">17 · 팀 적용 15분</div>
+  <h2>다른 주제로 옮겨 보고, 서로 빠진 전이를 찾는다</h2>
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-top:8px">
+    <div class="card" style="padding:11px 13px">
+      <h4>옮겨 적기 예시 · 가상 “주문 문의 응대 에이전트”</h4>
+      <table class="t" style="font-size:10.6px">
+        <tr><td style="width:62px"><b>1 범위</b></td><td>주문번호로 배송 상태를 조회 · 안내 / 환불 실행은 하지 않음</td></tr>
+        <tr><td><b>2 · 8 흐름</b></td><td><code>load_order → classify → lookup → compose → check</code></td></tr>
+        <tr><td><b>3 LLM</b></td><td>출력 <code>{intent, answer, source_ids}</code> JSON</td></tr>
+        <tr><td><b>5 Tool</b></td><td><code>get_order</code>, <code>get_shipping</code> · 타임아웃 재시도 1회</td></tr>
+        <tr><td><b>6 · 7</b></td><td><code>thread_id</code> = 문의 ID · State: inquiry_id, intent, answer, retry_count</td></tr>
+        <tr><td><b>전이</b></td><td>check 실패 & retry&lt;2 → compose · <b>환불 의도 → handoff</b></td></tr>
+        <tr><td><b>9 종료</b></td><td>답변 완료 / 조회 실패 안내 / 상담원 이관</td></tr>
+      </table>
+      <div class="small" style="margin-top:6px">주제가 달라도 칸은 같습니다. 이름과 숫자만 바뀝니다.</div>
+    </div>
+    <div class="card" style="padding:11px 13px">
+      <h4>제출 전 체크</h4>
+      <ul class="dot chk" style="font-size:11.6px;line-height:1.75">
+        <li>☐ 아홉 칸이 모두 있고 예시 값은 우리 값으로 바꿨다</li>
+        <li>☐ 그림 · 표의 전이가 서로 일치한다</li>
+        <li>☐ 모든 노드에 성공 · 실패 전이, 반복에는 상한</li>
+        <li>☐ 도구 이름 · 재시도 · 타임아웃이 API 문서와 같다</li>
+        <li>☐ State 필드가 DB · 체크포인트 이름과 같다</li>
+        <li>☐ 추론 원문 비공개 · 요약 기록 정책이 있다</li>
+        <li>☐ 정상 · 오류 · 사람 이관 종료가 구분된다</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px;background:var(--pll);padding:10px 13px">
+    <h4>팀 적용 순서 (15분)</h4>
+    <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:8px;font-size:11px;line-height:1.45">
+      <div style="display:flex;gap:6px"><span class="num">1</span>핵심 사용자 흐름 하나를 고른다</div>
+      <div style="display:flex;gap:6px"><span class="num">2</span>노드 5~8개에 이름을 붙인다</div>
+      <div style="display:flex;gap:6px"><span class="num">3</span>노드마다 성공 · 실패 · 한도 초과 전이를 쓴다</div>
+      <div style="display:flex;gap:6px"><span class="num">4</span>State 필드와 종료 조건을 정한다</div>
+      <div style="display:flex;gap:6px"><span class="num">5</span>다른 팀원이 표만 보고 그림을 그려 빠진 길을 찾는다</div>
+    </div>
+  </div>
+  <div class="ref" style="bottom:34px">학습용 안내입니다. 새 공식 제출물이나 마감을 추가하지 않습니다. 최종 요건은 매니저 안내와 대시보드를 따릅니다. 이어서: 12/04 자기 성찰 테스트 결과서 · Auto-Healing 시연</div>
+  <div class="foot"><span>상태 전이 그래프 설계서 · 최종 프로젝트</span><span>21 / 21</span></div>
+</section>
+
+</div>
+
+<div class="bar" id="bar"></div>
+<div class="nav" id="nav">
+  <button id="bFirst" title="처음 (Home)">⏮</button>
+  <button id="bPrev" title="이전 (←)">◀</button>
+  <span class="cnt" id="cnt">1 / 21</span>
+  <button id="bNext" title="다음 (→)">▶</button>
+  <button id="bFull" title="전체 화면 (F)">⛶</button>
+  <button id="bGrid" title="스크롤 보기 (Esc)">☰</button>
+  <button id="bHelp" title="단축키 (?)">?</button>
+</div>
+<button class="scrollbtn" id="bShow">▶ 슬라이드 쇼</button>
+<div class="help" id="help"><div class="box">
+  <b style="font-size:15px">단축키</b><br>
+  <kbd>→</kbd> <kbd>Space</kbd> <kbd>PageDown</kbd> 다음 &nbsp; <kbd>←</kbd> <kbd>PageUp</kbd> 이전<br>
+  <kbd>Home</kbd> 처음 &nbsp; <kbd>End</kbd> 마지막 &nbsp; 숫자 + <kbd>Enter</kbd> 해당 장으로<br>
+  <kbd>F</kbd> 전체 화면 &nbsp; <kbd>Esc</kbd> 스크롤 보기 ↔ 슬라이드 쇼<br>
+  화면 오른쪽/왼쪽 클릭 · 스와이프로도 넘길 수 있습니다.<br>
+  <span class="small">인쇄(Ctrl/⌘+P)하면 21장이 모두 PDF로 나옵니다.</span>
+</div></div>
+<script>
+(function(){
+  var B=document.body, S=[].slice.call(document.querySelectorAll('.slide')), n=S.length, i=0, buf='', t;
+  var $=function(id){return document.getElementById(id)};
+  function fit(){
+    var z = B.classList.contains('show')
+      ? Math.min((innerWidth-32)/960,(innerHeight-32)/540)
+      : Math.min(1,(innerWidth-24)/960);
+    document.documentElement.style.setProperty('--z', z);
+  }
+  function go(k){
+    i=Math.max(0,Math.min(n-1,k));
+    S.forEach(function(s,j){s.classList.toggle('active',j===i)});
+    $('cnt').textContent=(i+1)+' / '+n;
+    $('bar').style.width=((i+1)/n*100)+'%';
+    if(B.classList.contains('show')) history.replaceState(null,'','#'+(i+1));
+  }
+  function show(on){
+    B.classList.toggle('show',on);
+    if(on){go(i)} else {history.replaceState(null,'',location.pathname); S[i].scrollIntoView({block:'center'})}
+    fit();
+  }
+  function full(){
+    if(!document.fullscreenElement){(document.documentElement.requestFullscreen||function(){}).call(document.documentElement); if(!B.classList.contains('show')) show(true);}
+    else document.exitFullscreen();
+  }
+  function poke(){B.classList.remove('idle');clearTimeout(t);t=setTimeout(function(){B.classList.add('idle')},2500)}
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k==='?'){ $('help').classList.toggle('on'); return; }
+    if($('help').classList.contains('on')&&k==='Escape'){ $('help').classList.remove('on'); return; }
+    if(k==='f'||k==='F'){ full(); return; }
+    if(k==='Escape'){ show(!B.classList.contains('show')); return; }
+    if(!B.classList.contains('show')) return;
+    if(/^[0-9]$/.test(k)){ buf+=k; return; }
+    if(k==='Enter'&&buf){ go(parseInt(buf,10)-1); buf=''; return; }
+    buf='';
+    if(['ArrowRight','ArrowDown','PageDown',' '].indexOf(k)>=0){e.preventDefault();go(i+1)}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].indexOf(k)>=0){e.preventDefault();go(i-1)}
+    else if(k==='Home') go(0); else if(k==='End') go(n-1);
+    poke();
+  });
+  document.querySelector('.deck').addEventListener('click',function(e){
+    if(!B.classList.contains('show')){ var s=e.target.closest('.slide'); if(s){ i=S.indexOf(s); } return; }
+    if(e.target.closest('a,button')) return;
+    go(e.clientX > innerWidth/3 ? i+1 : i-1);
+  });
+  var x0=null;
+  addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',function(e){ if(x0===null||!B.classList.contains('show'))return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) go(dx<0?i+1:i-1); x0=null; },{passive:true});
+  addEventListener('mousemove',function(){ if(B.classList.contains('show')) poke(); });
+  $('bFirst').onclick=function(){go(0)}; $('bPrev').onclick=function(){go(i-1)}; $('bNext').onclick=function(){go(i+1)};
+  $('bFull').onclick=full; $('bGrid').onclick=function(){show(false)}; $('bHelp').onclick=function(){$('help').classList.add('on')};
+  $('bShow').onclick=function(){show(true)};
+  $('help').onclick=function(){this.classList.remove('on')};
+  addEventListener('resize',fit);
+  addEventListener('beforeprint',function(){document.documentElement.style.setProperty('--z',1)});
+  addEventListener('afterprint',fit);
+  var h=parseInt((location.hash||'').slice(1),10);
+  i = h>0 ? h-1 : 0;
+  show(true); poke();
+})();
+</script>
+</body>
+</html>

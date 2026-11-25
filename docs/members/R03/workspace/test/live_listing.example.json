@@ -1,0 +1,18 @@
+{
+  "expected_account": "본인 계정 표시명으로 교체",
+  "content_approved": false,
+  "image_rights_confirmed": false,
+  "service_title": "실제 제공하는 랩 레슨 제목으로 교체",
+  "category": ["취미 레슨", "보컬·랩 레슨", "랩 레슨"],
+  "service_description": "강사가 확인한 실제 서비스 설명으로 교체하세요. 크몽 화면에서 요구하는 최소 글자 수와 실제 제공 조건을 함께 확인하세요.",
+  "process": "강사가 확인한 실제 수업 절차로 교체하세요. 수업 순서와 방법을 사실에 맞게 구체적으로 작성하세요.",
+  "requirements": "강사가 확인한 실제 의뢰인 준비사항으로 교체하세요. 수업 전에 필요한 정보와 준비물을 구체적으로 작성하세요.",
+  "recruitment_type": "실제 화면의 선택지로 교체",
+  "delivery_mode": "온라인",
+  "region_option": "온라인",
+  "packages": {
+    "STANDARD": {"title": "실제 과정명", "description": "실제 제공 조건", "price_krw_vat_included": 0, "work_days": 0, "revision_count": 0, "minutes_per_session": 0, "sessions": 0, "materials_included": false, "classroom_included": false},
+    "DELUXE": {"title": "실제 과정명", "description": "실제 제공 조건", "price_krw_vat_included": 0, "work_days": 0, "revision_count": 0, "minutes_per_session": 0, "sessions": 0, "materials_included": false, "classroom_included": false},
+    "PREMIUM": {"title": "실제 과정명", "description": "실제 제공 조건", "price_krw_vat_included": 0, "work_days": 0, "revision_count": 0, "minutes_per_session": 0, "sessions": 0, "materials_included": false, "classroom_included": false}
+  }
+}

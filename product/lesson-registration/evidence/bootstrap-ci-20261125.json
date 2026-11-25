@@ -1,0 +1,23 @@
+{
+  "id": "LR-BOOTSTRAP-CI-20261125",
+  "date": "2026-11-25",
+  "source_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+  "workflow_run": 45525881756,
+  "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756",
+  "status": "completed",
+  "conclusion": "success",
+  "checks": [
+    "Python 3.12 uv locked environment",
+    "source pin/ownership doctor and loopback smoke",
+    "all isolated package and integration bootstrap tests",
+    "ownership positive/negative probe"
+  ],
+  "product_acceptance": {
+    "required": 22,
+    "execution": "not_run"
+  },
+  "limits": [
+    "No real browser/model/platform/product validation",
+    "Assignment metadata added after this tested commit; bootstrap executable and pins unchanged"
+  ]
+}

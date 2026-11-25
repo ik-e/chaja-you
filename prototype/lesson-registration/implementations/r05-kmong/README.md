@@ -1,0 +1,21 @@
+> **이전 배정 공간 — 신규 실행 지시 아님.** TASK-045는 2026-11-24 실제 작업으로 개정되었다. [실제 작업 공간](https://github.com/ik-e/chaja-you/tree/fc59a4b8f5e8adea3c4dc3b2264df2907131c018/docs/members/R05/workspace/remote-browser-poc) · [이전 원문](https://github.com/ik-e/chaja-you/blob/b46200de40f0290bc1ab2c06ab8a5f9a62c73a2e/prototype/lesson-registration/implementations/r05-kmong/README.md). 기존 미충족 범위는 정본 TASK의 개정 이력에서 확인한다. 파일·브랜치는 삭제하지 않았다.
+
+# R05 · 크몽 독립 등록 기능 PoC (TASK-045)
+
+**대상:** 크몽 PC 웹 레슨 **서비스 상품 한 건**. 실제 '심사 접수 확인'과 이후 공개 상태를 구분한다.
+
+1. **design.md 작성:** 강사 원본/사진→크몽 필드 매핑→승인→모의 폼 입력/이미지 첨부→결과 관측, 로컬/서버 구조 가설과 권한·정확성·중복 제약.
+2. **독립 실행 코드:** 다른 담당의 구현에 의존하지 않고 mock 환경을 통해 최소 정상 경로 실동작.
+3. **검증:** 정상·원본 사실 충돌·승인 버전 불일치·이미지 오류·응답 유실/unknown, 실제 재현 명령/로그.
+4. **결과 제출:** 실제 사이트에서 필요한 계정/인증/허용·심사 증빙은 미확인과 구별해 기록.
+
+**제외:** 숨고 기능 구현, 운영사 허용 미확인 상태의 실제 크몽 자동 접수, 실 계정/OTP/세션 수집, 승인 없는 조건 변경.
+
+[공통 모의 환경](../../test-harness/README.md) · [TASK-045](../../../../docs/artifacts/tasks/TASK-045.json). **현재 코드 미구현.**
+
+## 작업 시작 및 격리
+
+- 전용 브랜치: `r05/task-045-kmong-registration`
+- 담당 디렉터리: `prototype/lesson-registration/implementations/r05-kmong/`
+- [공통 작업 공간](../../README.md)의 실행 환경·제품 승격 기준을 따른다. 새 의존성/lock은 이 디렉터리 안에서만 관리한다.
+- [공통 모의 계약](../../test-harness/CONTRACT.md)을 읽고 R03이 공유한 고정 commit의 mock을 별도 worktree에서 사용한다. 독립 착수 가능, 공통 검증 전 통과 주장 금지.

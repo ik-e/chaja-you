@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "id": "TASK-049",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R02",
+  "suggested_owner": null,
+  "due": null,
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-25",
+  "title": "등록 정보 준비·AI 구조화 및 검증",
+  "question": "PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계 후보, 실제 모델/역량 확인 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+  "goal": "PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계 후보, 실제 모델/역량 확인",
+  "inputs": [
+    "docs/human/phase-intents/PHASE-20261125-01.md",
+    "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+    "product/lesson-registration/WORKSPACE.json",
+    "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
+    "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+    "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json"
+  ],
+  "scope": [
+    "PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계 후보, 실제 모델/역량 확인",
+    "담당 경로의 상세 설계·PLAN·코드·독립 테스트; 공통 계약 및 다른 담당 경로 무단 변경 금지",
+    "mock-only; 실제 플랫폼 실행/자격증명 금지"
+  ],
+  "outputs": [
+    "product/lesson-registration/tests/modules/preparation/PLAN.md",
+    "product/lesson-registration/src/lesson_registration/preparation/",
+    "product/lesson-registration/fixtures/source/",
+    "product/lesson-registration/tests/modules/preparation/"
+  ],
+  "acceptance": [
+    "r02-preparation-AC1: I2 구현: 실제 모델로 사실·근거·질문 생성, 양 플랫폼 프로필 검증",
+    "r02-preparation-AC2: 가격/단위/VAT 누락·충돌 보존, 임의 값 생성 금지",
+    "r02-preparation-AC3: 12/4까지 재현 명령과 합성 데이터·유지보수 인계"
+  ],
+  "verification": [
+    "uv run --locked --python 3.12 python dev.py test r02-preparation",
+    "실제 구현의 정상/오류/unknown 시험 및 입력·기대·관측·commit 기록; bootstrap replay는 제품 통과 아님",
+    "제품 시험 참조: AT-01, T5-08, T6-02"
+  ],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    },
+    {
+      "path": "product/lesson-registration/WORKSPACE.json"
+    },
+    {
+      "path": "docs/design/lesson-registration/MANIFEST.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261125-01.md",
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    ],
+    "design_refs": [
+      "CS-01",
+      "CS-02"
+    ],
+    "requirement_refs": [],
+    "product_requirement_refs": [
+      "REQ-01",
+      "REQ-03",
+      "REQ-11"
+    ],
+    "evaluation_refs": [],
+    "planned_product_test_refs": [
+      "AT-01",
+      "T5-08",
+      "T6-02"
+    ]
+  },
+  "validation_plan": {
+    "question": "PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계 후보, 실제 모델/역량 확인 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+    "observables": [
+      "I2 구현: 실제 모델로 사실·근거·질문 생성, 양 플랫폼 프로필 검증",
+      "가격/단위/VAT 누락·충돌 보존, 임의 값 생성 금지",
+      "12/4까지 재현 명령과 합성 데이터·유지보수 인계"
+    ],
+    "success_condition": "패키지별 실제 구현 및 수용 조건 증거, 공통 계약 정합성, 재현 명령",
+    "unknown_condition": "실제 구현/모델/환경/시험 결과 없음 또는 근거 불충분"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "intent_ref": "docs/human/task-intents/TASK-049.md",
+  "assignment_status": "R01 배정; 담당자 전달·수신·착수 미확인",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+  "assignment_mode": "assigned",
+  "work_branch": "r02/product-preparation",
+  "workspace_path": "product/lesson-registration/src/lesson_registration/preparation/",
+  "package_id": "r02-preparation",
+  "owned_paths": [
+    "product/lesson-registration/src/lesson_registration/preparation/",
+    "product/lesson-registration/fixtures/source/",
+    "product/lesson-registration/tests/modules/preparation/"
+  ],
+  "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+  "plan_path": "product/lesson-registration/tests/modules/preparation/PLAN.md",
+  "priority_note": "12/4 인계 목표 후보, 공수 확인"
+}

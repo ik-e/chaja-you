@@ -1,0 +1,467 @@
+{
+  "id": "LR-LOGICAL-05",
+  "authority": "LR-DETAIL-DECISIONS-02",
+  "scope": "Single registration, fixed profile length parameter; logical state only. User answers only before acceptance. Confirming source separately not required. Actual permission, identity, error and evidence are trusted event preconditions.",
+  "initial": {
+    "source": false,
+    "profile": "unset",
+    "prep": "missing",
+    "auth": "none",
+    "target": "unset",
+    "review": false,
+    "job": "none",
+    "effect": "clear",
+    "step": 0
+  },
+  "domains": {
+    "source": [
+      false,
+      true
+    ],
+    "profile": [
+      "unset",
+      "supported",
+      "unsupported",
+      "blocked"
+    ],
+    "prep": [
+      "missing",
+      "issues",
+      "ready"
+    ],
+    "auth": [
+      "none",
+      "human",
+      "read",
+      "verified",
+      "worker"
+    ],
+    "target": [
+      "unset",
+      "new",
+      "existing",
+      "ambiguous"
+    ],
+    "review": [
+      false,
+      true
+    ],
+    "job": [
+      "none",
+      "active",
+      "stopping",
+      "done",
+      "stopped"
+    ],
+    "effect": [
+      "clear",
+      "pending",
+      "unknown",
+      "absent"
+    ],
+    "step": "0..N"
+  },
+  "rules": [
+    {
+      "id": "source_select",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ]
+      },
+      "set": {
+        "source": true,
+        "prep": "missing",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "provide immutable source or select existing"
+    },
+    {
+      "id": "select_supported",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ]
+      },
+      "set": {
+        "profile": "supported",
+        "prep": "missing",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "registry resolution; unsupported/blocked no execution"
+    },
+    {
+      "id": "select_unsupported",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ]
+      },
+      "set": {
+        "profile": "unsupported",
+        "prep": "missing",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "registry resolution; unsupported/blocked no execution"
+    },
+    {
+      "id": "select_blocked",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ]
+      },
+      "set": {
+        "profile": "blocked",
+        "prep": "missing",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "registry resolution; unsupported/blocked no execution"
+    },
+    {
+      "id": "prepare_issues",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ],
+        "source": true,
+        "profile": "supported"
+      },
+      "set": {
+        "prep": "issues",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "unresolved required fields or validation issues"
+    },
+    {
+      "id": "prepare_ready",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ],
+        "source": true,
+        "profile": "supported"
+      },
+      "set": {
+        "prep": "ready",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "confirmed by source or explicit answers, valid under profile; AI proposal not proof"
+    },
+    {
+      "id": "answer_or_edit",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": [
+          "none",
+          "verified"
+        ],
+        "source": true,
+        "profile": "supported"
+      },
+      "set": {
+        "prep": "missing",
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "revalidate after answer/edit, invalidate old review"
+    },
+    {
+      "id": "auth_open",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "prep": "ready",
+        "profile": "supported",
+        "auth": "none"
+      },
+      "set": {
+        "auth": "human",
+        "target": "unset",
+        "review": false
+      },
+      "why": "direct authentication only"
+    },
+    {
+      "id": "auth_finish",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": "human"
+      },
+      "set": {
+        "auth": "read"
+      },
+      "why": "fence human input"
+    },
+    {
+      "id": "auth_close",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "auth": [
+          "human",
+          "read",
+          "verified"
+        ]
+      },
+      "set": {
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "prestart abandon only"
+    },
+    {
+      "id": "auth_invalid",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "none",
+        "auth": [
+          "human",
+          "read",
+          "verified"
+        ]
+      },
+      "set": {
+        "auth": "none",
+        "target": "unset",
+        "review": false
+      },
+      "why": "unverified or expired; no stale review"
+    },
+    {
+      "id": "target_new",
+      "actor": "TRUSTED_OBSERVATION",
+      "when": {
+        "job": "none",
+        "auth": "read",
+        "prep": "ready",
+        "profile": "supported"
+      },
+      "set": {
+        "auth": "verified",
+        "target": "new",
+        "review": false
+      },
+      "why": "stable identity and registered target evidence"
+    },
+    {
+      "id": "target_existing",
+      "actor": "TRUSTED_OBSERVATION",
+      "when": {
+        "job": "none",
+        "auth": "read",
+        "prep": "ready",
+        "profile": "supported"
+      },
+      "set": {
+        "auth": "verified",
+        "target": "existing",
+        "review": false
+      },
+      "why": "stable identity and registered target evidence"
+    },
+    {
+      "id": "target_ambiguous",
+      "actor": "TRUSTED_OBSERVATION",
+      "when": {
+        "job": "none",
+        "auth": "read",
+        "prep": "ready",
+        "profile": "supported"
+      },
+      "set": {
+        "auth": "verified",
+        "target": "ambiguous",
+        "review": false
+      },
+      "why": "stable identity and registered target evidence"
+    },
+    {
+      "id": "make_review",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "none",
+        "prep": "ready",
+        "profile": "supported",
+        "auth": "verified",
+        "target": "new"
+      },
+      "set": {
+        "review": true
+      },
+      "why": "stored exact values/target/profile/goal, no separate plan object"
+    },
+    {
+      "id": "accept",
+      "actor": "USER",
+      "when": {
+        "job": "none",
+        "prep": "ready",
+        "profile": "supported",
+        "auth": "verified",
+        "target": "new",
+        "review": true,
+        "effect": "clear",
+        "step": 0
+      },
+      "set": {
+        "job": "active"
+      },
+      "why": "explicit start, revision/digest/key/target guard and immutable scope atomically"
+    },
+    {
+      "id": "worker",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "active",
+        "auth": "verified",
+        "effect": "clear",
+        "step": "ltN"
+      },
+      "set": {
+        "auth": "worker"
+      },
+      "why": "exclusive authorized runtime control"
+    },
+    {
+      "id": "admit",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "active",
+        "auth": "worker",
+        "effect": "clear",
+        "step": "ltN"
+      },
+      "set": {
+        "effect": "pending"
+      },
+      "why": "current guard plus durable stable operation key"
+    },
+    {
+      "id": "operation_proven",
+      "actor": "TRUSTED_OBSERVATION",
+      "when": {
+        "job": "active",
+        "auth": "worker",
+        "effect": "pending",
+        "step": "ltN"
+      },
+      "set": {
+        "step": "inc",
+        "effect": "clear"
+      },
+      "why": "accepted evidence; advance only once"
+    },
+    {
+      "id": "goal_proven",
+      "actor": "TRUSTED_OBSERVATION",
+      "when": {
+        "job": "active",
+        "auth": "worker",
+        "effect": "clear",
+        "step": "eqN"
+      },
+      "set": {
+        "job": "done",
+        "auth": "none"
+      },
+      "why": "profile-specific proof; extra readback only if required"
+    },
+    {
+      "id": "error_effect_absent",
+      "actor": "TRUSTED_OBSERVATION",
+      "when": {
+        "job": "active",
+        "effect": "pending"
+      },
+      "set": {
+        "job": "stopping",
+        "auth": "none",
+        "effect": "absent"
+      },
+      "why": "system error with effect absence evidence"
+    },
+    {
+      "id": "error_detected",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "active"
+      },
+      "set": {
+        "job": "stopping",
+        "auth": "none"
+      },
+      "why": "actual error or loss of conditions, trusted system event only"
+    },
+    {
+      "id": "finish_stop_pending",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "stopping",
+        "effect": "pending"
+      },
+      "set": {
+        "job": "stopped",
+        "effect": "unknown"
+      },
+      "why": "preserve uncertainty"
+    },
+    {
+      "id": "finish_stop_other",
+      "actor": "SYSTEM",
+      "when": {
+        "job": "stopping",
+        "effect": [
+          "clear",
+          "absent",
+          "unknown"
+        ]
+      },
+      "set": {
+        "job": "stopped"
+      },
+      "why": "preserve prior effects"
+    }
+  ],
+  "notes": [
+    "profile and source revisions are abstracted; every prestart edit invalidates auth/target/review",
+    "review true represents server scope preview, not approval; accept atomically confirms and freezes scope",
+    "N is profile procedure length; every step modeled conservatively as potentially mutating; read-only steps may use same guard without effect risk in implementation",
+    "terminal states immutable; later evidence append independent of lifecycle",
+    "external authorization/lease and actual error event trust are required at runtime, not proved by reachability"
+  ]
+}

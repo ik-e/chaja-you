@@ -23,3 +23,12 @@ GitHub Action [archive-full-instructor-finalproject.yml](../../../.github/workfl
 ## 스냅샷 내 파일
 
 실제 업로드된 각 버전의 `manifest.json`에서 파일 목록과 링크를 확인합니다. 가이드 개정 시 `snapshot commit`을 갱신하지 않고 새 스냅샷을 만듭니다.
+
+
+## 2026-11-24 동기화
+
+- 최신 원본: [`299a7016748aab57c2de9f03fd38a8b09df4c07e`](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/commit/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject)
+- [최신 자료 목차](snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) · [무결성 manifest](snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/manifest.json)
+- 이전 원본 `f074d8f2698728102a40fba6d0bacb7b4e702ea3` 대비 22개에서 39개 파일로 증가. 신규 17개(가이드 8종의 HTML/PDF와 목차 1개), 경로 이동 6개(기존 문서 3종의 HTML/PDF), 내용 변경 0개, 실제 삭제 0개(SHA-256 비교).
+- 신규: Step2 설계-동작 연결, API 서버·백그라운드 워커; Step3 모델·도구·서비스 평가, 단일 에이전트 상태전이 그래프, 자기성찰 테스트 결과서; Step5 CI/CD; CodingAgent A2UI, AI 에이전트 금지사항.
+- [원본 수집 및 검증 실행](https://github.com/ik-e/chaja-you/actions/runs/45350802771) 성공. R01 요청에 따라 PR 없이 main에 원본과 보존 안내만 반영. 기존 기획·설계·TASK·WBS 및 기술 선택은 변경하지 않음.

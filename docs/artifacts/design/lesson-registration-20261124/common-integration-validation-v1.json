@@ -1,0 +1,570 @@
+{
+  "source_commit": "485290a694a05db514855741d8d249a669507a10",
+  "inputs": {
+    "common": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+    "trace": "987018e3e41f15521de6ba2fef33867cea81a88d",
+    "schema": "de6c147216ee68bae75a9d18f9127c327701fa5a",
+    "profiles": "b0b2044526f63f0244d920f85b2d9676b94bbe72",
+    "gate": "55c66d285183fb4a8a12041b883c12e7775d12f7",
+    "wbs": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+    "shape": "1d49665ea105450c87b97a6a7cd6f72aec869321",
+    "data": "2484c5df659962145af1ee2d94dd36d1f41e5f6f",
+    "closure": "ec9e1b21c139b8f9115b1661596d0f385cba1b12",
+    "general": "bdb4c90b3f699432343a0c8a3c77f668dc050546"
+  },
+  "checks": [
+    {
+      "id": "COMMON-01 type and route references",
+      "pass": true,
+      "detail": {
+        "definitions": 67,
+        "references": 224,
+        "unresolved": [],
+        "unsupported_keywords": [],
+        "route_missing": [],
+        "port_missing": [],
+        "duplicate_routes": 0,
+        "root_has_validation": false
+      }
+    },
+    {
+      "id": "COMMON-02 profile schema and bindings",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-03 logical dependency DAG",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "id": "COMMON-04 error vocabulary",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-05 decision IDs and original locators",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-06 IT-19 required fields and prior refs",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-07 decision projection",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-08 requirement and interface coverage",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-09 original product gate inventory",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-10 current lifecycle boundary",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-11 mock and physical limits",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "COMMON-12 V4 selected synthetic regression",
+      "pass": true,
+      "detail": {
+        "passed": 31,
+        "total": 31
+      }
+    },
+    {
+      "id": "COMMON-13 V4.1 field correction and normalized answer shapes",
+      "pass": true,
+      "detail": [
+        {
+          "type": "PreparationEdit",
+          "expected": true,
+          "actual": true
+        },
+        {
+          "type": "PreparationEdit",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "type": "PreparationEdit",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "type": "ResolvedAnswer",
+          "expected": true,
+          "actual": true
+        },
+        {
+          "type": "ResolvedAnswer",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "type": "ResolvedAnswer",
+          "expected": true,
+          "actual": true
+        },
+        {
+          "type": "StartInput",
+          "expected": true,
+          "actual": true
+        }
+      ]
+    },
+    {
+      "id": "COMMON-14 gate evaluator counterexamples",
+      "pass": true,
+      "detail": [
+        {
+          "id": "same_candidate_all_pass",
+          "expected": "pass",
+          "actual": "pass"
+        },
+        {
+          "id": "missing_case",
+          "expected": "incomplete",
+          "actual": "incomplete"
+        },
+        {
+          "id": "wrong_candidate",
+          "expected": "incomplete",
+          "actual": "incomplete"
+        },
+        {
+          "id": "failure_not_hidden",
+          "expected": "fail",
+          "actual": "fail"
+        },
+        {
+          "id": "manual_stub_not_ai",
+          "expected": "incomplete",
+          "actual": "incomplete"
+        },
+        {
+          "id": "independent_harness_not_integrated",
+          "expected": "incomplete",
+          "actual": "incomplete"
+        }
+      ]
+    }
+  ],
+  "regression": [
+    {
+      "id": "K-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "S-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "K-region-required",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "offline region missing"
+      ]
+    },
+    {
+      "id": "K-image-rights",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "asset rights or scope mismatch"
+      ]
+    },
+    {
+      "id": "K-package-fields",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.packages[0].work_days required",
+        "$.packages[1].work_days required",
+        "$.packages[2].work_days required"
+      ]
+    },
+    {
+      "id": "K-package-tiers",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "tier mismatch"
+      ]
+    },
+    {
+      "id": "K-option",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "unknown option minutes_per_session",
+        "unknown option minutes_per_session",
+        "unknown option minutes_per_session"
+      ]
+    },
+    {
+      "id": "S-no-image",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.main_images additional"
+      ]
+    },
+    {
+      "id": "S-no-invalid-option",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.daw[0] enum"
+      ]
+    },
+    {
+      "id": "PREP-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "PREP-VAT-unknown",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "commercial mismatch or VAT unknown 0",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-price-changed",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "commercial mismatch or VAT unknown 0",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-work-days-invented",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "missing package option evidence 0",
+        "missing package option evidence 1",
+        "missing package option evidence 2",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-conflict-ready",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "PREP-unlinked-fact",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "invalid mapping",
+        "incorrect ready"
+      ]
+    },
+    {
+      "id": "AUTH-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "AUTH-no-connection",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$ oneOf"
+      ]
+    },
+    {
+      "id": "AUTH-other-connection-same-account",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "connection/target/generation mismatch"
+      ]
+    },
+    {
+      "id": "AUTH-stale-generation",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "connection/target/generation mismatch"
+      ]
+    },
+    {
+      "id": "AUTH-execute-single-pinned-scope",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "AUTH-execute-override-denied",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.connection additional"
+      ]
+    },
+    {
+      "id": "GOAL-valid",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "GOAL-submission-only",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "goal mismatch",
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-wrong-target",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "goal mismatch",
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-no-trusted-evidence",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-wrong-asset",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "asset proof mismatch",
+        "unlinked goal evidence"
+      ]
+    },
+    {
+      "id": "GOAL-unresolved-effect",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "error or unresolved effect",
+        "step not proven K6"
+      ]
+    },
+    {
+      "id": "GOAL-missing-step",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "step not proven K1"
+      ]
+    },
+    {
+      "id": "EXT-open-platform-id",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "EXT-separate-profile",
+      "expected": true,
+      "actual": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "EXT-mock-only",
+      "expected": false,
+      "actual": false,
+      "pass": true,
+      "errors": [
+        "$.environment const"
+      ]
+    }
+  ],
+  "shapes": [
+    {
+      "type": "PreparationEdit",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "type": "PreparationEdit",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "type": "PreparationEdit",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "type": "ResolvedAnswer",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "type": "ResolvedAnswer",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "type": "ResolvedAnswer",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "type": "StartInput",
+      "expected": true,
+      "actual": true
+    }
+  ],
+  "gate_cases": [
+    {
+      "id": "same_candidate_all_pass",
+      "expected": "pass",
+      "actual": "pass"
+    },
+    {
+      "id": "missing_case",
+      "expected": "incomplete",
+      "actual": "incomplete"
+    },
+    {
+      "id": "wrong_candidate",
+      "expected": "incomplete",
+      "actual": "incomplete"
+    },
+    {
+      "id": "failure_not_hidden",
+      "expected": "fail",
+      "actual": "fail"
+    },
+    {
+      "id": "manual_stub_not_ai",
+      "expected": "incomplete",
+      "actual": "incomplete"
+    },
+    {
+      "id": "independent_harness_not_integrated",
+      "expected": "incomplete",
+      "actual": "incomplete"
+    }
+  ],
+  "pass": true,
+  "mutations": [
+    {
+      "id": "drop_test",
+      "detected": true,
+      "failed": [
+        "COMMON-06 IT-19 required fields and prior refs",
+        "COMMON-08 requirement and interface coverage",
+        "COMMON-09 original product gate inventory"
+      ]
+    },
+    {
+      "id": "unknown_prior",
+      "detected": true,
+      "failed": [
+        "COMMON-06 IT-19 required fields and prior refs",
+        "COMMON-07 decision projection"
+      ]
+    },
+    {
+      "id": "unknown_source",
+      "detected": true,
+      "failed": [
+        "COMMON-06 IT-19 required fields and prior refs",
+        "COMMON-07 decision projection"
+      ]
+    },
+    {
+      "id": "cycle_dependency",
+      "detected": true,
+      "failed": [
+        "COMMON-03 logical dependency DAG"
+      ]
+    },
+    {
+      "id": "reintroduce_resume",
+      "detected": true,
+      "failed": [
+        "COMMON-08 requirement and interface coverage",
+        "COMMON-10 current lifecycle boundary"
+      ]
+    },
+    {
+      "id": "unmapped_work",
+      "detected": true,
+      "failed": [
+        "COMMON-07 decision projection"
+      ]
+    }
+  ],
+  "limits": [
+    "Executed JS subset schema checker and existing logical composition/gate validators in code mode; not an independent standards-complete JSON Schema validator or a GitHub Actions run.",
+    "31 V4 synthetic regression checks passed on V4.1 types; 7 additional shape checks do not prove full H5 normalization/corrections behavior.",
+    "Synthetic gate evaluator inputs are not actual product results. Product 22 tests still not run.",
+    "Source blob and original locator verification are separate checks; no physical DB/HTTP/runtime or actual model tests."
+  ]
+}

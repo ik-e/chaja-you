@@ -1,0 +1,727 @@
+{
+  "id": "LESSON-IMPLEMENTATION-V0.4",
+  "version": "0.4",
+  "status": "implementation_baseline_candidate",
+  "date": "2026-11-24",
+  "owner": "R01",
+  "baseline_commit": "8d381ebcf7383a341bc148945317ec546ae87981",
+  "authority": "DIR-01~04의 R01 결정은 확정. 아래 상세 인터페이스/일정/배정은 결정에 부합하는 구현 기준선 후보이며 현재 TASK의 변경·실행 지시가 아님.",
+  "scope": "현 PHASE-20261124-02 mock-only 유지. 실제 플랫폼의 접근·인증·등록은 운영사 허용, 사용자 동의, 보안 검증 및 R01 단계 승인 이후 별도. 목표는 등록 가능한 플랫폼에서 최초 등록이며 범용 미지원 URL 자동 적응을 요구하지 않음.",
+  "sources": [
+    {
+      "id": "SRC-01",
+      "commit": "8d381ebcf7383a341bc148945317ec546ae87981",
+      "path": "docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json"
+    },
+    {
+      "id": "SRC-02",
+      "commit": "8d381ebcf7383a341bc148945317ec546ae87981",
+      "path": "docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json"
+    },
+    {
+      "id": "SRC-03",
+      "commit": "8d381ebcf7383a341bc148945317ec546ae87981",
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json"
+    },
+    {
+      "id": "SRC-04",
+      "commit": "8d381ebcf7383a341bc148945317ec546ae87981",
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-PLATFORM-FLOWS-V0.2.md"
+    },
+    {
+      "id": "SRC-05",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md"
+    },
+    {
+      "id": "SRC-06",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/SPEC.md"
+    },
+    {
+      "id": "SRC-07",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수등록_교육신청_사용자흐름_서비스절차_설계분석보고서.md"
+    },
+    {
+      "id": "SRC-08",
+      "commit": "fc59a4b8f5e8adea3c4dc3b2264df2907131c018",
+      "path": "docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md"
+    },
+    {
+      "id": "SRC-09",
+      "commit": "fc59a4b8f5e8adea3c4dc3b2264df2907131c018",
+      "path": "docs/members/R05/workspace/remote-browser-poc/README.md"
+    },
+    {
+      "id": "SRC-10",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "SRC-11",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "title": "원본·필수 정보·자료 준비",
+      "prior_refs": [
+        "FR-01",
+        "V3-R08"
+      ],
+      "mvp": "required",
+      "final": "required",
+      "acceptance": "사용자 확인된 사실/이미지와 출처·버전, 누락/충돌 질문. 합성 90/180/270분 월4회 25/40/50만원을 변경하지 않음.",
+      "source_refs": [
+        "SRC-05",
+        "SRC-08"
+      ]
+    },
+    {
+      "id": "REQ-02",
+      "title": "등록 대상 식별",
+      "prior_refs": [
+        "DIR-04",
+        "V3-R02",
+        "V3-R09"
+      ],
+      "mvp": "지원 플랫폼 선택 및 등록 경로 결정",
+      "final": "URL로 지원 플랫폼/경로 선택",
+      "acceptance": "등록 가능한 대상 registry에 연결, 미지원/잘못된/권한 미확인 URL은 차단/안내, 임의 URL 요청 수행 금지.",
+      "source_refs": [
+        "SRC-01",
+        "SRC-04"
+      ]
+    },
+    {
+      "id": "REQ-03",
+      "title": "플랫폼별 변환·검토",
+      "prior_refs": [
+        "FR-02",
+        "V3-R08",
+        "V3-R09",
+        "V3-R12"
+      ],
+      "mvp": "required",
+      "final": "required",
+      "acceptance": "사실/단위 유지, LLM 제안과 확인값 구분, 필수 규칙/조건/권리 검사 및 확인 필요 항목 노출. AI 또는 확인된 대체 입력으로 모의 경로 가능; AI 기능 시연 별도.",
+      "source_refs": [
+        "SRC-05",
+        "SRC-06",
+        "SRC-08"
+      ]
+    },
+    {
+      "id": "REQ-04",
+      "title": "원격 직접 인증·제어권 인계",
+      "prior_refs": [
+        "DIR-01",
+        "DIR-02",
+        "V3-R01",
+        "V3-R05",
+        "V3-R11"
+      ],
+      "mvp": "required",
+      "final": "required",
+      "acceptance": "일반 브라우저에서 합성 인증, 동일 세션 서버 인계, 사용자/worker 상호배타, 뷰어 종료 후 계속. 세션 폐기·타 계정 거부. 기술 내부는 위임.",
+      "source_refs": [
+        "SRC-09"
+      ]
+    },
+    {
+      "id": "REQ-05",
+      "title": "실행 대상·승인·권한",
+      "prior_refs": [
+        "FR-03",
+        "V3-R01",
+        "V3-R02",
+        "V3-R03",
+        "V3-R04",
+        "V3-R05"
+      ],
+      "mvp": "required",
+      "final": "required",
+      "acceptance": "계정/대상/버전/동작/환경 승인 및 운영 허용 별도, 가드 미충족이면 동작 0, 동일 효과 차단.",
+      "source_refs": [
+        "SRC-02",
+        "SRC-05"
+      ]
+    },
+    {
+      "id": "REQ-06",
+      "title": "크몽 최초 등록",
+      "prior_refs": [
+        "DIR-03",
+        "FR-04",
+        "V3-R07"
+      ],
+      "mvp": "first_required",
+      "final": "required_if_supported",
+      "acceptance": "크몽형 합성 상품 1건, 필드·이미지·가격 입력과 모의 심사 접수 후 독립 receipt 재조회 일치. 실제 심사 접수/공개 구별.",
+      "source_refs": [
+        "SRC-06",
+        "SRC-08"
+      ]
+    },
+    {
+      "id": "REQ-07",
+      "title": "숨고 최초 등록 확장",
+      "prior_refs": [
+        "DIR-03",
+        "FR-04",
+        "V3-R07"
+      ],
+      "mvp": "second_planned",
+      "final": "required_if_supported",
+      "acceptance": "숨고형 기존 합성 고수의 서비스 카테고리 및 문항 설정 저장 후 다시 조회 일치. 객체 후보이며 신규 고수·프로필·공개는 별도 결정; 12/8 통합 목표, 미충족시 R01 재계획.",
+      "source_refs": [
+        "SRC-07",
+        "SRC-08"
+      ]
+    },
+    {
+      "id": "REQ-08",
+      "title": "결과·부분 효과·실패·재개",
+      "prior_refs": [
+        "FR-05",
+        "FR-06",
+        "V3-R06",
+        "V3-R07"
+      ],
+      "mvp": "required",
+      "final": "required",
+      "acceptance": "대상별 모의 완료/실패/차단/확인 필요/미확인 표시, 증거·다음 조치. 응답 유실 후 중복 없음, 읽기 재확인+명시 재개. 접수와 공개 분리.",
+      "source_refs": [
+        "SRC-02",
+        "SRC-06"
+      ]
+    },
+    {
+      "id": "REQ-09",
+      "title": "플랫폼 확장",
+      "prior_refs": [
+        "DIR-04",
+        "V3-R09"
+      ],
+      "mvp": "registry+두 adapter 포트",
+      "final": "지원 가능 플랫폼 확대 구조",
+      "acceptance": "지원 플랫폼/경로 추가는 registry·규칙·adapter·시험 단위. 공통 job/approval/DB/UI 계약 변경 최소화; 최종 지원 목록은 허용/일정/검증으로 확정. 신규 미지원 자동 적응 불필요.",
+      "source_refs": [
+        "SRC-01",
+        "SRC-04"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "title": "격리·개인정보·안전한 운영",
+      "prior_refs": [
+        "V3-R05",
+        "V3-R11"
+      ],
+      "mvp": "mock 최소 보안",
+      "final": "운영 허용 시 강화 검증",
+      "acceptance": "owner 격리, mock/live 서버 정책 차단, login 입력/비밀 미기록, 승인 자료만, 세션 만료·폐기, 실제 배포 보안과 권한 검증 전 live 불가.",
+      "source_refs": [
+        "SRC-02",
+        "SRC-09",
+        "SRC-10"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "title": "재현성과 서비스 가치",
+      "prior_refs": [
+        "V3-R13",
+        "V3-R14"
+      ],
+      "mvp": "재현 가능한 통합 시연",
+      "final": "비교 평가·최종 증거",
+      "acceptance": "고정 fixture/버전/환경/실행 결과, 실패 포함. 능동 시간/시스템/심사대기·오류·비용 분리. 20~30분 희망치, 측정 전 성공 주장 금지.",
+      "source_refs": [
+        "SRC-05",
+        "SRC-11"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "C4-01",
+      "title": "웹 UI",
+      "unit": "web",
+      "responsibility": "원본·URL·검토·원격 인증·결과 화면, 사용자 결정만 전달",
+      "inputs": "사용자 입력·API 상태",
+      "outputs": "API 요청·사용자 표시",
+      "depends_on": [
+        "C4-02"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ]
+    },
+    {
+      "id": "C4-02",
+      "title": "Application API",
+      "unit": "app",
+      "responsibility": "우리 서비스 인증·owner·입력/응답·revision 검사",
+      "inputs": "HTTP/인증 주체",
+      "outputs": "도메인 호출/정규 상태",
+      "depends_on": [
+        "C4-03",
+        "C4-04",
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-10",
+        "C4-09"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "C4-03",
+      "title": "Source/Media/AI preparation",
+      "unit": "app",
+      "responsibility": "원본 버전·fact/권리·구조화/문구·질문·파생 이미지; 모델은 제안",
+      "inputs": "source/media/target rule",
+      "outputs": "draft·mapping·issues",
+      "depends_on": [
+        "C4-04",
+        "C4-10"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03"
+      ]
+    },
+    {
+      "id": "C4-04",
+      "title": "Platform registry & rules",
+      "unit": "app",
+      "responsibility": "URL 정규화, 지원 경로/규칙 버전/adapter 등록, 목적·효과/증거 사양",
+      "inputs": "URL/플랫폼/환경",
+      "outputs": "TargetCandidate·rule snapshot·eligibility",
+      "depends_on": [
+        "C4-10"
+      ],
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-09",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "C4-05",
+      "title": "Approval/Intent/Job coordinator",
+      "unit": "app",
+      "responsibility": "계정/대상/버전 결합, 슬롯·멱등·승인·권한 검사, 작업 계획 및 중단; 계획/중지/재개는 gateway port 요청, 실제 admission은 C4-07 단독. state/ledger 조회는 C4-10; gateway 직렬화 경계에서 coordinator callback 금지.",
+      "inputs": "draft, target, account, policy",
+      "outputs": "job/approved plan/state",
+      "depends_on": [
+        "C4-04",
+        "C4-10",
+        "C4-06",
+        "C4-07",
+        "C4-08"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08"
+      ]
+    },
+    {
+      "id": "C4-06",
+      "title": "Remote session boundary",
+      "unit": "remote_runtime",
+      "responsibility": "사용자 인증용 뷰어, 계정 관측, 제어권·세션 lifecycle; 원격 기술 위임",
+      "inputs": "owner/target candidate/control request",
+      "outputs": "opaque connection/identity/lease; view grant",
+      "depends_on": [
+        "C4-10"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "C4-07",
+      "title": "Execution gateway & worker",
+      "unit": "remote_runtime",
+      "responsibility": "승인/대상/lease/효과 원자 admission, 단일 operation, stop/fencing; gateway 안에서만 브라우저 조작; immutable plan/step 입력과 C4-10 원자 admission 상태·revision·lease/효과 ledger 확인. C4-05 역호출 금지; 결과/stop ack 반환 및 durable 기록.",
+      "inputs": "approved job/plan/current state",
+      "outputs": "attempt/observations/stop acknowledgement",
+      "depends_on": [
+        "C4-06",
+        "C4-08",
+        "C4-10"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "C4-08",
+      "title": "Platform adapters",
+      "unit": "remote_runtime",
+      "responsibility": "대상별 사전조건·필드/동작·저장·readback·결과 후보; 원시 브라우저 권한 외부 노출 금지",
+      "inputs": "rule/approved operation/restricted browser port",
+      "outputs": "observations/effect verdict candidate",
+      "depends_on": [
+        "C4-04"
+      ],
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ]
+    },
+    {
+      "id": "C4-09",
+      "title": "Result/reconcile",
+      "unit": "app",
+      "responsibility": "증거 검증·작업/효과/객체 상태 분리·read-only 재확인; C4-07 observe port로 authorized readback, 별도 효과 기록 검증 및 C4-10 저장.",
+      "inputs": "attempt/evidence/target goal",
+      "outputs": "result revision/next action",
+      "depends_on": [
+        "C4-04",
+        "C4-05",
+        "C4-10",
+        "C4-07"
+      ],
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-11"
+      ]
+    },
+    {
+      "id": "C4-10",
+      "title": "Persistence/audit",
+      "unit": "store",
+      "responsibility": "owner-scoped 영속 데이터·버전·원자 guard/attempt·증거 기록; 비밀값 제외",
+      "inputs": "domain data/atomic commands",
+      "outputs": "durable record/revision",
+      "depends_on": [],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10",
+        "REQ-11"
+      ]
+    },
+    {
+      "id": "C4-11",
+      "title": "Mock & verification harness",
+      "unit": "test",
+      "responsibility": "R03 기존 공통 계약 및 합성 사이트, 고정 fixture·오류 주입·재현 기록",
+      "inputs": "public contract/fixture",
+      "outputs": "test observations",
+      "depends_on": [],
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ]
+    }
+  ],
+  "ports": [
+    {
+      "id": "PORT-01",
+      "name": "resolve_url / get_rule",
+      "consumer": "C4-02",
+      "provider": "C4-04",
+      "input": "raw_url, environment, goal",
+      "output": "TargetCandidate or unsupported/blocked; rule_version",
+      "conditions": "정적 registry host/path 규칙, URL만으로 네트워크 fetch 안 함; mock URL은 별도 고정 매핑. 등록 URL/홈 URL 둘 다 허용 여부 명시."
+    },
+    {
+      "id": "PORT-02",
+      "name": "prepare / validate draft",
+      "consumer": "C4-02",
+      "provider": "C4-03",
+      "input": "source_version, rule_version, media",
+      "output": "draft_version/mappings/issues/digest",
+      "conditions": "AI 제안과 사실/검증 상태 구분; 원본 수정/재승인."
+    },
+    {
+      "id": "PORT-03",
+      "name": "open / verify / handoff / close",
+      "consumer": "C4-02",
+      "provider": "C4-06",
+      "input": "owner, target, environment, connection_ref, expected_generation",
+      "output": "opaque connection, verified account, controller/generation, state",
+      "conditions": "사람 인증 중 자동화/모델 접근 금지; 뷰어 별도 단기 grant, 동일 인증 맥락, 원시 비밀 미노출."
+    },
+    {
+      "id": "PORT-04",
+      "name": "plan / preflight",
+      "consumer": "C4-05",
+      "provider": "C4-08",
+      "input": "rule_version, draft_version, target, goal",
+      "output": "immutable operation plan, required fields, effect classes, evidence specs",
+      "conditions": "순수 계획 단계에서 실제 외부 효과 없음; 미확인 동작은 차단; 생성/변경 구분."
+    },
+    {
+      "id": "PORT-05",
+      "name": "admit / execute / observe",
+      "consumer": "C4-05",
+      "provider": "C4-07",
+      "input": "job_ref, operation_ref, expected_revision, lease_generation, approved digest",
+      "output": "attempt + typed observations",
+      "conditions": "V3-G01~13 검사, permit 소비/기록 원자화, 기존 효과 미확인 차단. gateway 안의 adapter만 브라우저 명령 수행."
+    },
+    {
+      "id": "PORT-06",
+      "name": "read-only reconcile",
+      "consumer": "C4-09",
+      "provider": "C4-07",
+      "input": "job_ref, target, evidence spec, current auth/permission",
+      "output": "observations or inconclusive",
+      "conditions": "읽기 권한·동일 계정·대상·lease 필요; 자동 저장 등 효과 불명 조회 금지."
+    },
+    {
+      "id": "PORT-07",
+      "name": "atomic store",
+      "consumer": "C4-05",
+      "provider": "C4-10",
+      "input": "intent/slot, job/revision, approval/permission/lease epoch",
+      "output": "accepted or conflict; durable attempt",
+      "conditions": "single writer admission; 외부 요청과 DB는 하나의 원자 트랜잭션 아님."
+    },
+    {
+      "id": "PORT-08",
+      "name": "result projections",
+      "consumer": "C4-02",
+      "provider": "C4-09",
+      "input": "owner, job_ref, after_revision",
+      "output": "Result, ObjectObservation",
+      "conditions": "실행/효과/외부 객체 상태 독립; unknown 유지. 읽기 전용."
+    }
+  ],
+  "flows": [
+    {
+      "id": "FLOW-01",
+      "name": "최초 등록 정상",
+      "steps": [
+        "UI→API 원본·자료 저장",
+        "대상 선택/URL resolve→rule→draft 제안/확인",
+        "원격 세션 생성→사용자 직접 합성 인증→읽기 전용 identity 확인",
+        "대상 슬롯/기존 효과 resolve→immutable plan→사용자 실행 승인",
+        "job 생성→worker lease 인계→guard/admit→adapter 단계 실행·관측",
+        "독립 readback→결과 revision→뷰어 반환/세션 종료"
+      ]
+    },
+    {
+      "id": "FLOW-02",
+      "name": "추가 확인·인증",
+      "steps": [
+        "누락/충돌/규칙 변경은 실행 전 needs_action",
+        "작업 중 추가 인증/예외는 stopping, pending 효과 확인",
+        "worker 제어 회수 후 사용자 직접 조작; 새 계정이면 차단",
+        "원본/초안/계획 변경은 재승인; 동일 계정·유효 승인·safe next step에서 명시 재개"
+      ]
+    },
+    {
+      "id": "FLOW-03",
+      "name": "취소/장애/unknown",
+      "steps": [
+        "승인 철회·취소→같은 admission 경계에서 epoch/lease 회수",
+        "이미 허가된 요청의 효과 확인, 부분 효과 보존",
+        "응답 유실/crash/효과 불명은 unknown, 동작 재발급 금지",
+        "권한 있는 read-only 관측으로 효과 증명; 성공/안전 단계/불명확 구분",
+        "새 mutation은 명시 재개+전체 가드 통과"
+      ]
+    },
+    {
+      "id": "FLOW-04",
+      "name": "URL 기반 플랫폼 확장",
+      "steps": [
+        "URL parse 및 등록된 host/path/environment 매칭(네트워크 불필요)",
+        "지원 registry/rule/adapter revision 및 허용 확인",
+        "필요 데이터·인증/업무 준비도 판정",
+        "기존 FLOW-01~03 재사용",
+        "미지원은 명시 안내, 신규 플랫폼은 registry/rules/adapter/증거/테스트 추가 후 검토"
+      ]
+    }
+  ],
+  "platforms": [
+    {
+      "id": "PLAT-K",
+      "platform": "kmong",
+      "object_kind": "service_listing",
+      "priority": "mvp_first",
+      "known_fields": "V0.2 K01~K10",
+      "flow": "KF01~KF06",
+      "mock_goal": "mock_listing_receipt",
+      "evidence_profile": "V3-P01",
+      "live_candidate": "심사 접수 확인; 공개 별도",
+      "unknown": "단일 패키지 토글·VAT·지원 시간/기간·이미지 규격·실제 접수/권한"
+    },
+    {
+      "id": "PLAT-S",
+      "platform": "soomgo",
+      "object_kind": "service_configuration",
+      "priority": "mvp_second",
+      "known_fields": "V0.2 Sg01~Sg09",
+      "flow": "SF01~SF06",
+      "mock_goal": "mock_service_configuration_saved",
+      "evidence_profile": "V3-P02",
+      "live_candidate": "서비스 설정 저장 후보; 저장이 공개 변경을 수반하면 별도 명시 허용/승인 필요",
+      "unknown": "신규 고수 가입, 실제 대상/저장/공개, 카테고리별 규칙; R04 확인"
+    },
+    {
+      "id": "PLAT-T",
+      "platform": "taling",
+      "object_kind": "class",
+      "priority": "optional_after_mvp",
+      "known_fields": "V0.2 Tg01~Tg04",
+      "flow": "후속 설계",
+      "mock_goal": null,
+      "evidence_profile": null,
+      "live_candidate": "클래스 접수 후보",
+      "unknown": "시간 단위 충돌·정책·정산; 일정/허용 전 구현 강제 없음"
+    }
+  ],
+  "deployment": [
+    {
+      "id": "DEP-01",
+      "unit": "web+app",
+      "proposal": "동일 origin의 단순 웹 UI 및 Python/FastAPI 모듈형 앱을 초기 통합 후보. R03/R05 코드 적합 근거. 프론트 내부 구현은 HTML/JS 또는 React 중 담당이 공수에 따라 선정; HTTP 계약 고정.",
+      "constraint": "별도 microservice/분산 agent 강제 안 함. 공통 dependency 변경은 R01 합의."
+    },
+    {
+      "id": "DEP-02",
+      "unit": "store",
+      "proposal": "관계형 저장소 + 권리 확인 asset store. PostgreSQL 후보, 로컬 단일 프로세스 SQLite는 스키마/원자 제약 시험을 충족할 때 개발 대안. 실제 DB 선정은 공통 담당 검토 후.",
+      "constraint": "영속 상태·유일성·원자 admission, owner scope, 비밀값 제외."
+    },
+    {
+      "id": "DEP-03",
+      "unit": "remote_runtime",
+      "proposal": "앱과 논리적 분리된 격리 실행 영역; R05 PoC 재사용 검토. 화면 전송, 브라우저, 컨테이너/프로세스 방식은 구현자 선택.",
+      "constraint": "gateway 우회 불가, 사용자별 세션/자원 격리, 임시 프로필 폐기, viewer disconnect와 job 독립. 운영 강제 격리 검증."
+    },
+    {
+      "id": "DEP-04",
+      "unit": "test",
+      "proposal": "loopback isolated synthetic mock; R03 T1~T6 계약 유지. CI에서 unit/contract/test fixture, 통합은 isolated browser 환경. 제품 구현 경로 예시 product/lesson-registration/ (아직 생성/채택 안 함).",
+      "constraint": "실서비스 DNS/외부 호출 금지, 실제 계정/자료 금지."
+    },
+    {
+      "id": "DEP-05",
+      "unit": "release",
+      "proposal": "개발/시연/운영 환경 분리. 운영은 TLS, 서비스 인증, 접근제어, egress 제한, 보존/삭제, 로그 마스킹, 백업/복구, 브라우저 자원 제한. 이미지 저장소와 DB는 내부망.",
+      "constraint": "실제 사이트 사용 가능 여부는 별도 release gate. 실제 계정 세션 및 비밀 기록 금지; 입력 중계는 민감 처리 경계."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "B4-01",
+      "status": "decided",
+      "value": "DIR-01~04 채택: 원격 브라우저, 구현자 세부 기술, 크몽→숨고, URL 지원 플랫폼 최초 등록."
+    },
+    {
+      "id": "B4-02",
+      "status": "proposed",
+      "value": "모듈형 앱 + 논리적으로 분리된 remote runtime, 하나의 영속 데이터 정본. 초기 지원은 플랫폼별 순차 job."
+    },
+    {
+      "id": "B4-03",
+      "status": "delegated",
+      "value": "CDP/noVNC/WebRTC, 자동화 엔진/브라우저/원격 격리 구체 구현; 명시 계약/시험·보안 준수."
+    },
+    {
+      "id": "B4-04",
+      "status": "proposed",
+      "value": "공통 Python/FastAPI/관계형 DB 및 동일-origin UI 초기 기준. 구현자 검토·변경 조건 기록, 특정 프론트/DB 강제 전 검토."
+    },
+    {
+      "id": "B4-05",
+      "status": "external_gate",
+      "value": "실환경 정책/권한·계정 안정 식별·실제 효과/증거·운영 보안·비용/가치. 모의 성공과 실서비스 완료 구분."
+    },
+    {
+      "id": "B4-06",
+      "status": "conditional",
+      "value": "숨고 실제 등록 객체·완료 정의, 12/8 두 번째 경로 범위 및 1/4 지원 플랫폼 목록은 기존 조사/통합 결과로 R01 검토. 범위 축소는 명시 결정."
+    }
+  ],
+  "dependency_contract": {
+    "revision": "0.8",
+    "depends_on_semantics": "논리 컴포넌트 제공 기능/포트 및 상태 소유권 사용 의존성; 정적 import/프로세스 배치 강제 아님. 공통 contracts/port 주입 및 composition root 연결.",
+    "admission_owner": "C4-07",
+    "atomic_store": "C4-10",
+    "coordinator": "C4-05",
+    "no_gateway_callback": true,
+    "required_port_directions": [
+      {
+        "consumer": "C4-02",
+        "provider": "C4-09",
+        "refs": [
+          "HTTP-11",
+          "HTTP-12",
+          "HTTP-17",
+          "HTTP-25"
+        ]
+      },
+      {
+        "consumer": "C4-05",
+        "provider": "C4-07",
+        "refs": [
+          "HTTP-19",
+          "PORT5-06",
+          "PORT5-09"
+        ]
+      },
+      {
+        "consumer": "C4-05",
+        "provider": "C4-06",
+        "refs": [
+          "PORT5-03",
+          "PORT5-10"
+        ]
+      },
+      {
+        "consumer": "C4-05",
+        "provider": "C4-08",
+        "refs": [
+          "PORT5-04"
+        ]
+      },
+      {
+        "consumer": "C4-09",
+        "provider": "C4-07",
+        "refs": [
+          "PORT5-08"
+        ]
+      }
+    ],
+    "boundary": "C4-05→C4-07 command/response; gateway reads current immutable plan and atomic ledger at C4-10, fences under one serialization boundary; no nested coordinator lock/callback. C4-09 read-only observe."
+  },
+  "revision": "0.4.1-v08"
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "kind": "wbs_candidate",
+  "id": "WBS-LESSON-V0.6-CANDIDATE",
+  "status": "draft_unconfirmed",
+  "date": "2026-11-25",
+  "authority": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
+  "prior": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+  "notes": [
+    "R05 estimate 7 days; R03 PLAN estimate 11 person-days; R02 handoff by 12/4 preserved. R02/R04 capacity and actual implementation pending. Dates not confirmed.",
+    "Dependencies describe integration prerequisites, not barriers to independent development.",
+    "Do not set task due/status from this candidate.",
+    "R03 reports only 9 working days 11/26~12/8. 12/4 vertical and 12/8 mock MVP are at risk; prioritize vertical slice and safety, never declare MVP complete on partial tests. Any scope/gate change needs explicit R01 decision.",
+    "R03 e29fb69 S0~S7 and 174/10/2 mock test counts reported; S8 pending at report. Initial 11 person-days is not remaining effort; new common lock enables S8. Revised residual effort and readiness needed. W10/W16/PREP maintenance remain unassigned."
+  ],
+  "items": [
+    {
+      "id": "C01",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "PD, lock, interfaces, common tests/baseline",
+      "depends_on": [],
+      "target": "11/27 candidate; validation dependent"
+    },
+    {
+      "id": "P01",
+      "task": "TASK-049",
+      "owner": "R02",
+      "work": "Preparation/actual model",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "12/4 handoff by; workdays pending"
+    },
+    {
+      "id": "A01",
+      "task": "TASK-050",
+      "owner": "R03",
+      "work": "App/API/STORE/RESULT",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "S0-S7 reported; S8 HTTP, common validator/canonical alignment and provider integration pending; update remaining effort before confirming schedule. All required H2/H9, T5-06/T6-01 and 22-test gate retained.",
+      "estimated_workdays": 11,
+      "estimate_ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
+    },
+    {
+      "id": "U01",
+      "task": "TASK-051",
+      "owner": "R04",
+      "work": "UI and viewer",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "pending PLAN"
+    },
+    {
+      "id": "S01",
+      "task": "TASK-052",
+      "owner": "R04",
+      "work": "Soomgo adapter",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "pending PLAN; sequence with U01"
+    },
+    {
+      "id": "R00",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "Both PLAN and interfaces; runtime contract priority",
+      "depends_on": [],
+      "estimated_workdays": 0.5,
+      "target": "11/25~27"
+    },
+    {
+      "id": "K01",
+      "task": "TASK-054",
+      "owner": "R05",
+      "work": "Kmong independent mock/adapter",
+      "depends_on": [
+        "R00"
+      ],
+      "estimated_workdays": 2.5,
+      "target": "11/25~27 candidate"
+    },
+    {
+      "id": "R01",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "Runtime fake STORE and mock browser",
+      "depends_on": [
+        "R00"
+      ],
+      "estimated_workdays": 3,
+      "target": "11/30~12/2 candidate"
+    },
+    {
+      "id": "R02",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "STORE connection and integration",
+      "depends_on": [
+        "R01",
+        "K01",
+        "A01"
+      ],
+      "estimated_workdays": 1,
+      "target": "12/3 candidate; 1~2 days adjustment; 12/4 proposed buffer"
+    },
+    {
+      "id": "I01",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "Progressive kmong integration",
+      "depends_on": [
+        "C01",
+        "P01",
+        "A01",
+        "U01",
+        "K01",
+        "R02"
+      ],
+      "target": "12/4 prior target at risk; actual app+PREP+UI+remote+adapter readiness needed; not committed"
+    },
+    {
+      "id": "I02",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "Soomgo integration, regression and mock gate",
+      "depends_on": [
+        "I01",
+        "S01"
+      ],
+      "target": "12/8 target at risk; gate remains all 22 required tests, partial demo only if incomplete"
+    }
+  ],
+  "milestones": [
+    {
+      "date": "2026-12-04",
+      "description": "R02 handoff constraint / vertical integration candidate"
+    },
+    {
+      "date": "2026-12-08",
+      "description": "mock MVP target"
+    },
+    {
+      "date": "2027-01-04",
+      "description": "final target"
+    }
+  ],
+  "remaining": "Rebuild schedule after R02/R04 PLAN and all availability, R03/R05 shared boundary review and actual readiness; R01 decide resource/schedule adjustment, not automatic gate reduction.",
+  "owner_plan_review": {
+    "as_of": "2026-11-25",
+    "R03": {
+      "ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md",
+      "status": "S0-S7 reported; owned code paths verified, tests not independently rerun; S8 and latest-main regression pending",
+      "estimated_person_days": 11,
+      "estimate_notes": "R03 estimates 9 working days from 11/26 to 12/8. Sequence proposed, not gate reduction. Initial estimate; remaining effort update requested, no new due date.",
+      "remaining_person_days": null,
+      "progress_ref": "product/lesson-registration/evidence/r03-progress-20261125.json"
+    },
+    "R05": {
+      "status": "scope and 7-day estimate reported; PLAN files not yet on assigned branches",
+      "estimated_person_days": 7
+    },
+    "R02": {
+      "status": "assigned branch PLAN not found; 12/4 handoff constraint"
+    },
+    "R04": {
+      "status": "assigned branches PLAN not found; web/soomgo capacity pending"
+    }
+  }
+}

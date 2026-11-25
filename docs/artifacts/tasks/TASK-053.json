@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "id": "TASK-053",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R05",
+  "suggested_owner": null,
+  "due": null,
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-25",
+  "title": "원격 브라우저 runtime·인증·뷰어 구현",
+  "question": "I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+  "goal": "I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외",
+  "inputs": [
+    "docs/human/phase-intents/PHASE-20261125-01.md",
+    "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+    "product/lesson-registration/WORKSPACE.json",
+    "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
+    "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+    "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json"
+  ],
+  "scope": [
+    "I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외",
+    "담당 경로의 상세 설계·PLAN·코드·독립 테스트; 공통 계약 및 다른 담당 경로 무단 변경 금지",
+    "mock-only; 실제 플랫폼 실행/자격증명 금지"
+  ],
+  "outputs": [
+    "product/lesson-registration/tests/modules/remote/PLAN.md",
+    "product/lesson-registration/src/lesson_registration/remote/",
+    "product/lesson-registration/tests/modules/remote/"
+  ],
+  "acceptance": [
+    "r05-remote-AC1: I3/I4 facade와 RT-01~04, viewer 제공; 같은 인증 연결 인계",
+    "r05-remote-AC2: 세션·계정·lease 격리, STORE admission 및 fence 연결; raw driver 노출 금지",
+    "r05-remote-AC3: 중립 mock에서 실제 브라우저 제어·뷰어 분리·응답 유실 시험"
+  ],
+  "verification": [
+    "uv run --locked --python 3.12 python dev.py test r05-remote",
+    "실제 구현의 정상/오류/unknown 시험 및 입력·기대·관측·commit 기록; bootstrap replay는 제품 통과 아님",
+    "제품 시험 참조: AT-02, AT-03, T5-02, T5-12, DV-02, DV-05"
+  ],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    },
+    {
+      "path": "product/lesson-registration/WORKSPACE.json"
+    },
+    {
+      "path": "docs/design/lesson-registration/MANIFEST.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261125-01.md",
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    ],
+    "design_refs": [
+      "CS-04",
+      "CS-05",
+      "CS-07"
+    ],
+    "requirement_refs": [],
+    "product_requirement_refs": [
+      "REQ-04",
+      "REQ-05",
+      "REQ-08",
+      "REQ-10"
+    ],
+    "evaluation_refs": [],
+    "planned_product_test_refs": [
+      "AT-02",
+      "AT-03",
+      "T5-02",
+      "T5-12",
+      "DV-02",
+      "DV-05"
+    ]
+  },
+  "validation_plan": {
+    "question": "I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+    "observables": [
+      "I3/I4 facade와 RT-01~04, viewer 제공; 같은 인증 연결 인계",
+      "세션·계정·lease 격리, STORE admission 및 fence 연결; raw driver 노출 금지",
+      "중립 mock에서 실제 브라우저 제어·뷰어 분리·응답 유실 시험"
+    ],
+    "success_condition": "패키지별 실제 구현 및 수용 조건 증거, 공통 계약 정합성, 재현 명령",
+    "unknown_condition": "실제 구현/모델/환경/시험 결과 없음 또는 근거 불충분"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "intent_ref": "docs/human/task-intents/TASK-053.md",
+  "assignment_status": "R05 2026-11-25 범위 수신 확인 및 구현 가능성·공수·PLAN 작성 예정 보고; 실제 착수/PLAN commit·제품 결과 미확인",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+  "assignment_mode": "assigned",
+  "work_branch": "r05/product-remote",
+  "workspace_path": "product/lesson-registration/src/lesson_registration/remote/",
+  "package_id": "r05-remote",
+  "owned_paths": [
+    "product/lesson-registration/src/lesson_registration/remote/",
+    "product/lesson-registration/tests/modules/remote/"
+  ],
+  "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+  "plan_path": "product/lesson-registration/tests/modules/remote/PLAN.md",
+  "priority_note": "runtime 공통 계약 우선; 7근무일(053·054 합계) 추정, WBS 미확정"
+}

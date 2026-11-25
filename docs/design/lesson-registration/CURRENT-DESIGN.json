@@ -1,0 +1,1994 @@
+{
+  "id": "LR-CURRENT-DESIGN",
+  "kind": "generated_navigation_not_authority",
+  "phase": {
+    "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+  },
+  "operational_state": {
+    "path": "docs/artifacts/state/current.json"
+  },
+  "adoption": {
+    "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+  },
+  "snapshot": {
+    "manifest": {
+      "path": "docs/design/lesson-registration/MANIFEST.json"
+    },
+    "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+    "original_files": 98,
+    "original_decisions": 88
+  },
+  "implementation_approval": {
+    "source": {
+      "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json"
+    },
+    "authority": {
+      "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+    },
+    "approved_ids": [
+      "IB-01",
+      "IB-02",
+      "IB-03",
+      "IB-04",
+      "IB-05"
+    ],
+    "reviewed_commit": "5876907585666c0389719d90331b2b231afea3d0"
+  },
+  "precedence": [
+    "Current phase/permission and human top decisions first; A2 overrides legacy cancel/resume/rollback",
+    "V4.1 schema delta and common-integration-v1 wire/ports/constraints current; V4 remaining data and profile V2 current; old contracts historical except explicitly retained requirements",
+    "V0.6 trace historical; original status preserved; current status is projection, not actual product verification",
+    "Adoption sets current application without rewriting snapshot statuses.",
+    "IB approved direction is subordinate to logical contract. Current phase/workspace/TASK outrank older WBS. No new assignment, acceptance criterion or approval."
+  ],
+  "trace_semantics": {
+    "related_tasks": "Navigation via common logical decisions or affected interface, not direct requirement assignment or new acceptance criterion.",
+    "inherited_requirements": "Context from prior CS decisions, not claim of satisfaction.",
+    "planned_tests": "Related future product test IDs, not executed proof.",
+    "actual_evidence": "Bounded synthetic checks only; IB-04 has no runtime check."
+  },
+  "layers": [
+    {
+      "title": "상위 의도·목표",
+      "status": "현재 적용",
+      "sources": [
+        {
+          "path": "docs/human/INTENT.md"
+        },
+        {
+          "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/top-design-v1.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/top-design-amendment-v1.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "docs/design/lesson-registration/01-GOALS.md"
+        }
+      ],
+      "note": "현재 Phase 우선, A2 오류 전용 중단·mock-only"
+    },
+    {
+      "title": "제품 요구사항",
+      "status": "명시 보존",
+      "sources": [
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+          "pointer": "/requirements"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json",
+          "pointer": "/requirements"
+        }
+      ],
+      "views": [
+        {
+          "path": "docs/design/lesson-registration/01-GOALS.md"
+        }
+      ],
+      "note": "REQ-08 재개 문구는 A2 및 CS-05/06으로 대체. 구 컴포넌트/물리 설계는 이력"
+    },
+    {
+      "title": "논리·상태·업무 경계",
+      "status": "채택",
+      "sources": [
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/detail-decisions-v2.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v5.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "docs/design/lesson-registration/02-LOGIC.md"
+        },
+        {
+          "path": "docs/design/lesson-registration/06-API-PORTS.md"
+        },
+        {
+          "path": "docs/design/lesson-registration/07-EXECUTION.md"
+        }
+      ],
+      "note": "CS-01~09 원본 당시 상태 유지, 현행 채택은 승인 기록"
+    },
+    {
+      "title": "데이터·프로필",
+      "status": "동결/채택·mock",
+      "sources": [
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "docs/design/lesson-registration/03-DATA.md"
+        },
+        {
+          "path": "docs/design/lesson-registration/04-SCHEMA.md"
+        },
+        {
+          "path": "docs/design/lesson-registration/05-PLATFORMS.md"
+        }
+      ],
+      "note": "V4.1 명시 델타·공통 V1 우선. 실제 운영사 규칙 미검증"
+    },
+    {
+      "title": "공통 구현 계약",
+      "status": "방향 승인·초기 공유",
+      "sources": [
+        {
+          "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json"
+        },
+        {
+          "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+        },
+        {
+          "path": "product/lesson-registration/contracts/interfaces.py"
+        },
+        {
+          "path": "product/lesson-registration/contracts/validation.py"
+        },
+        {
+          "path": "product/lesson-registration/contracts/viewer.d.ts"
+        },
+        {
+          "path": "product/lesson-registration/src/lesson_registration/composition/wiring.py"
+        }
+      ],
+      "views": [
+        {
+          "path": "product/lesson-registration/contracts/README.md"
+        }
+      ],
+      "note": "IB-01~05, 세부 provider/제품 스택 미확정"
+    },
+    {
+      "title": "공통 물리 설계·실행환경",
+      "status": "PD-01~08 방향 채택·세부 검증",
+      "sources": [
+        {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+        },
+        {
+          "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+        },
+        {
+          "path": "product/lesson-registration/WORKSPACE.json"
+        },
+        {
+          "path": "product/lesson-registration/pyproject.toml"
+        },
+        {
+          "path": "product/lesson-registration/uv.lock"
+        },
+        {
+          "path": "product/lesson-registration/evidence/bootstrap-ci-20261125.json"
+        },
+        {
+          "path": "product/lesson-registration/evidence/physical-env/pyproject.toml"
+        },
+        {
+          "path": ".github/workflows/lesson-physical-probe.yml"
+        }
+      ],
+      "views": [
+        {
+          "path": "product/lesson-registration/README.md"
+        },
+        {
+          "path": "product/lesson-registration/evidence/PLAN.md"
+        }
+      ],
+      "note": "정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도"
+    },
+    {
+      "title": "담당별 상세 설계·작업",
+      "status": "TASK 배정",
+      "sources": [
+        {
+          "path": "docs/artifacts/state/current.json"
+        },
+        {
+          "path": "product/lesson-registration/WORKSPACE.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-048.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-049.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-050.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-051.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-052.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-053.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-054.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "CURRENT.md"
+        },
+        {
+          "path": "product/lesson-registration/WORK-PACKAGES.md"
+        }
+      ],
+      "note": "담당자 PLAN/수신/착수 및 일정 별도 확인"
+    },
+    {
+      "title": "검증·수용 시험",
+      "status": "설계/합성 검증",
+      "sources": [
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+          "pointer": "/gate"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-validation-v1.json"
+        },
+        {
+          "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-048.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "docs/design/lesson-registration/09-TESTS.md"
+        },
+        {
+          "path": "docs/review/README.md"
+        }
+      ],
+      "note": "제품 22개 시험 실제 결과는 TASK/고정 실행 근거로 판정"
+    },
+    {
+      "title": "현행 WBS 후보",
+      "status": "미확정",
+      "sources": [
+        {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "product/lesson-registration/evidence/PLAN.md"
+        }
+      ],
+      "note": "R05 7근무일 추정·R02 12/4 인계; 전체 owner PLAN 후 확정"
+    },
+    {
+      "title": "과거 설계·WBS",
+      "status": "이력/선별 참조",
+      "sources": [
+        {
+          "path": "docs/design/lesson-registration/MANIFEST.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json"
+        },
+        {
+          "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "docs/design/lesson-registration/10-DECISIONS.md"
+        },
+        {
+          "path": "docs/design/lesson-registration/11-WBS.md"
+        },
+        {
+          "path": "docs/design/lesson-registration/12-HISTORY.md"
+        },
+        {
+          "path": "docs/design/TARGET-DESIGN.md"
+        }
+      ],
+      "note": "고정 98개 원본·88개 추적 보존, 이전 찾아you 및 WBS는 현행 배정 아님"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "title": "원본·필수 정보·자료 준비",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/0"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T5-06"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-053"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-02",
+      "title": "등록 대상 식별",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/1"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "T5-07"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-03",
+      "title": "플랫폼별 변환·검토",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/2"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-03",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-02",
+        "T5-03",
+        "T5-07",
+        "DV-04"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-04",
+      "title": "원격 직접 인증·제어권 인계",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/3"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-03",
+        "CS-04",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "AT-02",
+        "T5-02",
+        "T5-03",
+        "DV-02",
+        "DV-05"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-050",
+        "TASK-051",
+        "TASK-053"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-05",
+      "title": "실행 대상·승인·권한",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/4"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-04",
+        "CS-05",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "T6-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-07",
+        "DV-01",
+        "DV-02",
+        "DV-04"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-06",
+      "title": "크몽 최초 등록",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/5"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-01",
+        "CS-06",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "AT-04",
+        "T5-06",
+        "T5-13",
+        "DV-03"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-07",
+      "title": "숨고 최초 등록 확장",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/6"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-01",
+        "CS-06",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "DV-03"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-08",
+      "title": "결과·부분 효과·실패 (재개 조항 대체)",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/7"
+      },
+      "retained_note": "Legacy explicit resume clause superseded by A2 and CS-05/06; original retained.",
+      "logical_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-05",
+        "CS-06",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "AT-04",
+        "AT-05",
+        "T5-05",
+        "DV-01",
+        "DV-03",
+        "DV-05"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-09",
+      "title": "플랫폼 확장",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/8"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-01",
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "planned_tests": [
+        "T5-03",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "DV-04"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "title": "격리·개인정보·안전한 운영",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/9"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-04",
+        "CS-05",
+        "CS-06",
+        "CS-07",
+        "CS-08"
+      ],
+      "planned_tests": [
+        "T6-01",
+        "AT-02",
+        "AT-03",
+        "T5-12",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-05"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "title": "재현성과 서비스 가치",
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+        "pointer": "/requirements/10"
+      },
+      "retained_note": null,
+      "logical_decisions": [
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "planned_tests": [
+        "T5-08",
+        "T5-03"
+      ],
+      "related_tasks_via_logical_decisions": [
+        "TASK-048",
+        "TASK-053"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-04",
+        "IB-05"
+      ]
+    }
+  ],
+  "logical_decisions": [
+    {
+      "id": "CS-01",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/0"
+      },
+      "prior": [
+        "D1",
+        "LD-01",
+        "LD-04",
+        "DC2"
+      ],
+      "requirements": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "planned_tests": [
+        "T5-03",
+        "T5-13",
+        "DV-04",
+        "AT-04",
+        "AT-05"
+      ],
+      "related_tasks": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-052",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-01"
+      ]
+    },
+    {
+      "id": "CS-02",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/1"
+      },
+      "prior": [
+        "D2",
+        "D3",
+        "D6",
+        "D7",
+        "LD-02",
+        "LD-05",
+        "DC1",
+        "DC7"
+      ],
+      "requirements": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "planned_tests": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "T5-01",
+        "T5-06"
+      ],
+      "related_tasks": [
+        "TASK-049",
+        "TASK-050",
+        "TASK-051"
+      ],
+      "related_implementation_decisions": [
+        "IB-02"
+      ]
+    },
+    {
+      "id": "CS-03",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/2"
+      },
+      "prior": [
+        "D2",
+        "D3",
+        "C03",
+        "LD-06",
+        "DC7"
+      ],
+      "requirements": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "planned_tests": [
+        "T5-07",
+        "AT-02",
+        "T5-05",
+        "DV-01",
+        "DV-05"
+      ],
+      "related_tasks": [
+        "TASK-050",
+        "TASK-051"
+      ],
+      "related_implementation_decisions": []
+    },
+    {
+      "id": "CS-04",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/3"
+      },
+      "prior": [
+        "DIR-01",
+        "DIR-02",
+        "A4",
+        "D3",
+        "LD-06",
+        "DC5"
+      ],
+      "requirements": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "planned_tests": [
+        "AT-02",
+        "AT-03",
+        "T5-02",
+        "DV-02",
+        "DV-05"
+      ],
+      "related_tasks": [
+        "TASK-051",
+        "TASK-053"
+      ],
+      "related_implementation_decisions": [
+        "IB-03",
+        "IB-04"
+      ]
+    },
+    {
+      "id": "CS-05",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/4"
+      },
+      "prior": [
+        "A2",
+        "A3",
+        "D3",
+        "D5",
+        "LD-06",
+        "DC5",
+        "C04",
+        "C05"
+      ],
+      "requirements": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "planned_tests": [
+        "T5-01",
+        "AT-03",
+        "T5-12",
+        "DV-01",
+        "DV-02",
+        "DV-04"
+      ],
+      "related_tasks": [
+        "TASK-050",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-03"
+      ]
+    },
+    {
+      "id": "CS-06",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/5"
+      },
+      "prior": [
+        "A2",
+        "D4",
+        "D5",
+        "LD-07",
+        "DC6"
+      ],
+      "requirements": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "planned_tests": [
+        "AT-04",
+        "AT-05",
+        "T5-13",
+        "DV-01",
+        "DV-03",
+        "DV-04"
+      ],
+      "related_tasks": [
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-054"
+      ],
+      "related_implementation_decisions": [
+        "IB-03"
+      ]
+    },
+    {
+      "id": "CS-07",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/6"
+      },
+      "prior": [
+        "DIR-02",
+        "D8",
+        "LD-08",
+        "C06",
+        "DC8",
+        "B4-02",
+        "R5-10"
+      ],
+      "requirements": [
+        "REQ-01",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "planned_tests": [
+        "T5-03",
+        "T5-05",
+        "T5-06",
+        "AT-02",
+        "DV-05"
+      ],
+      "related_tasks": [
+        "TASK-048",
+        "TASK-053"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "CS-08",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/7"
+      },
+      "prior": [
+        "A2",
+        "A4",
+        "LD-08",
+        "DC8",
+        "D8",
+        "R5-09",
+        "R5-11"
+      ],
+      "requirements": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "planned_tests": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "AT-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-03",
+        "T5-07",
+        "AT-04",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-04",
+        "DV-05"
+      ],
+      "related_tasks": [
+        "TASK-048"
+      ],
+      "related_implementation_decisions": [
+        "IB-02",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "CS-09",
+      "original_status": "provisional",
+      "snapshot_status": "provisional_common_baseline",
+      "current_application": "adopted_logical_baseline",
+      "authority": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json"
+      },
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/decisions/8"
+      },
+      "prior": [
+        "D8",
+        "LD-08",
+        "DC8"
+      ],
+      "requirements": [
+        "REQ-09",
+        "REQ-11"
+      ],
+      "planned_tests": [
+        "T5-03",
+        "DV-04"
+      ],
+      "related_tasks": [
+        "TASK-048"
+      ],
+      "related_implementation_decisions": []
+    }
+  ],
+  "implementation_decisions": [
+    {
+      "id": "IB-01",
+      "title": "공통 호출 규약",
+      "status": "direction_approved",
+      "source": {
+        "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json",
+        "pointer": "/decisions/0"
+      },
+      "authority": {
+        "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      },
+      "prior_decision_ids": [
+        "CS-01",
+        "CS-07",
+        "LD-03"
+      ],
+      "inherited_requirements": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09",
+        "REQ-01",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "selection": "Python 3.12 Protocol + JSON object at in-process service boundary; provider bridges may use async or other internal transport; I4 only called by accepted worker",
+      "alternatives": [
+        "Separate microservice/RPC for each provider",
+        "Async-only port signatures",
+        "Framework model types as shared canonical schema"
+      ],
+      "reason": "Current isolated Python bootstrap passed, common types are JSON and physical separation not required. Minimal provider contracts avoid mandatory framework or distributed infrastructure.",
+      "revisit_when": "Provider requires process isolation, streaming or latency constraints.",
+      "pending_review": "R02/R03/R05 confirm concrete provider signatures/transport; change only by shared review.",
+      "related_tasks": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "planned_product_tests": [
+        "T5-03"
+      ],
+      "actual_evidence": {
+        "source": {
+          "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+        },
+        "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+        "selected_checks": [
+          "test_port_wiring_and_missing_unknown",
+          "test_provider_error_and_invalid_output"
+        ],
+        "kind": "selected_synthetic_checks",
+        "limit": "실제 provider timeout/동시성/worker·IPC 미검증"
+      }
+    },
+    {
+      "id": "IB-02",
+      "title": "공통 스키마 검사",
+      "status": "direction_approved",
+      "source": {
+        "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json",
+        "pointer": "/decisions/1"
+      },
+      "authority": {
+        "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      },
+      "prior_decision_ids": [
+        "CS-02",
+        "CS-08",
+        "LD-08"
+      ],
+      "inherited_requirements": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-05",
+        "REQ-08",
+        "REQ-04",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; product server uses common contracts/validation.py (jsonschema 4.25.1 pinned in product lock); no second authoritative schema engine. Module error mapping and business guards remain local.",
+      "alternatives": [
+        "Custom schema checker",
+        "Pydantic as new source",
+        "Pre-generate model classes"
+      ],
+      "reason": "Standards-based validation avoids drift; replay agreement is not general equivalence. Product lock supplied by PD-02; standard server validator reuse is default.",
+      "revisit_when": "Missing schema constraints, incompatible profile or performance need.",
+      "pending_review": "R03 and other server providers confirm shared validator integration; any alternative engine needs evidence, divergence tests and R01 review. See HRESP-20261125-04. Frontend UX checks are not server authority.",
+      "related_tasks": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "planned_product_tests": [
+        "T5-03",
+        "T5-13",
+        "DV-04"
+      ],
+      "actual_evidence": {
+        "source": {
+          "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+        },
+        "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+        "selected_checks": [
+          "test_all_named_replay_shapes",
+          "test_http_named_shapes",
+          "test_platform_specific_values",
+          "test_datetime_and_digest_negative"
+        ],
+        "kind": "selected_synthetic_checks",
+        "limit": "선정 합성 payload 검사. 당시 제품 lock 별도였으며 현재 PD-02 초기 lock 제공; 실제 provider 적용 미검증. 프런트에 Python 엔진 강제 아님."
+      }
+    },
+    {
+      "id": "IB-03",
+      "title": "Storage·Runtime·Adapter 권한 경계",
+      "status": "direction_approved",
+      "source": {
+        "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json",
+        "pointer": "/decisions/2"
+      },
+      "authority": {
+        "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      },
+      "prior_decision_ids": [
+        "CS-04",
+        "CS-05",
+        "CS-06"
+      ],
+      "inherited_requirements": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10",
+        "REQ-08",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "selection": "Split store coordinator/gateway capabilities; runtime owns opaque context/permit; adapter gets bound gateway only; no actual permit stub",
+      "alternatives": [
+        "Expose raw driver to adapter",
+        "Shared unrestricted storage object"
+      ],
+      "reason": "Retain logical owner/atomicity and deny bypass; actual registry/lease implementation remains provider responsibility.",
+      "revisit_when": "Real implementation cannot enforce atomic guard or adapter needs additional typed operation.",
+      "pending_review": "R03/R05 confirm storage transaction signatures, fence/finalize return, adapter registry and operation binding.",
+      "related_tasks": [
+        "TASK-048",
+        "TASK-050",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "planned_product_tests": [
+        "AT-03",
+        "T5-12",
+        "DV-01",
+        "DV-02",
+        "DV-04"
+      ],
+      "actual_evidence": {
+        "source": {
+          "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+        },
+        "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+        "selected_checks": [
+          "test_input_guards_before_provider",
+          "test_mismatched_auth_generation_rejected"
+        ],
+        "kind": "selected_synthetic_checks",
+        "limit": "입력 및 인증 관계 일부만 검증. 실제 원자성·permit·lease·권한 검증 아님"
+      }
+    },
+    {
+      "id": "IB-04",
+      "title": "프레임워크 독립 Viewer",
+      "status": "direction_approved",
+      "source": {
+        "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json",
+        "pointer": "/decisions/3"
+      },
+      "authority": {
+        "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      },
+      "prior_decision_ids": [
+        "CS-04",
+        "CS-07"
+      ],
+      "inherited_requirements": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10",
+        "REQ-01",
+        "REQ-08",
+        "REQ-09",
+        "REQ-11"
+      ],
+      "selection": "Framework-neutral viewer mount/dispose with AuthGrant and event callback; transport/client package remains open",
+      "alternatives": [
+        "Direct remote URL or browser control from UI",
+        "Choose framework-specific viewer now"
+      ],
+      "reason": "UI can design independent of remote stack, grant and detach semantics retained.",
+      "revisit_when": "Viewer PoC demonstrates unsupported lifecycle/transport.",
+      "pending_review": "R04/R05 jointly decide transport and owner/generation/origin binding.",
+      "related_tasks": [
+        "TASK-048",
+        "TASK-051",
+        "TASK-053"
+      ],
+      "planned_product_tests": [
+        "AT-02",
+        "T5-02",
+        "DV-05"
+      ],
+      "actual_evidence": {
+        "source": {
+          "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+        },
+        "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+        "selected_checks": [],
+        "kind": "no_runtime_check",
+        "limit": "타입 선언만. transport·브라우저·grant 보안 미검증"
+      }
+    },
+    {
+      "id": "IB-05",
+      "title": "명시적 provider 조립",
+      "status": "direction_approved",
+      "source": {
+        "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json",
+        "pointer": "/decisions/4"
+      },
+      "authority": {
+        "path": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      },
+      "prior_decision_ids": [
+        "CS-07",
+        "CS-08"
+      ],
+      "inherited_requirements": [
+        "REQ-01",
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11",
+        "REQ-02",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "selection": "Explicit provider injection and exact synthetic replay; no automatic replay fallback in product, no fake workflow",
+      "alternatives": [
+        "Build replacement full mock app",
+        "Wait for all implementations"
+      ],
+      "reason": "Validate edges early while avoiding competing CO implementation. Actual stateful flow needs R03 app and genuine providers.",
+      "revisit_when": "First real provider ready.",
+      "pending_review": "Owner factory signatures, shared launch configuration and module-level testing strategy before actual assembly.",
+      "related_tasks": [
+        "TASK-048",
+        "TASK-049",
+        "TASK-050",
+        "TASK-051",
+        "TASK-052",
+        "TASK-053",
+        "TASK-054"
+      ],
+      "planned_product_tests": [
+        "T5-03"
+      ],
+      "actual_evidence": {
+        "source": {
+          "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+        },
+        "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+        "selected_checks": [
+          "test_port_wiring_and_missing_unknown",
+          "test_separate_instances_and_no_implicit_provider"
+        ],
+        "kind": "selected_synthetic_checks",
+        "limit": "합성 주입/독립성만. 실제 CO·모듈 연결 및 launch 미검증"
+      }
+    }
+  ],
+  "active_packages": [
+    {
+      "id": "TASK-048",
+      "owner": "R01",
+      "package": "common",
+      "branch": "r01/product-integration",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-048.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-048.md"
+      },
+      "plan_path": "product/lesson-registration/evidence/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "planned_product_tests": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "AT-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-03",
+        "T5-07",
+        "AT-04",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-04",
+        "DV-05"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-049",
+      "owner": "R02",
+      "package": "r02-preparation",
+      "branch": "r02/product-preparation",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-049.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-049.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/preparation/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-02"
+      ],
+      "planned_product_tests": [
+        "AT-01",
+        "T5-08",
+        "T6-02"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-050",
+      "owner": "R03",
+      "package": "r03-app",
+      "branch": "r03/product-app",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-050.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-050.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/app/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-03",
+        "CS-05",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "T5-01",
+        "T5-05",
+        "T5-06",
+        "T5-11",
+        "T5-12",
+        "T6-01",
+        "DV-01"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-051",
+      "owner": "R04",
+      "package": "r04-web",
+      "branch": "r04/product-web",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-051.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-051.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/web/PLAN.md",
+      "logical_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-04",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "AT-02",
+        "T5-05",
+        "T6-02",
+        "DV-05"
+      ],
+      "related_implementation_decisions": [
+        "IB-02",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-052",
+      "owner": "R04",
+      "package": "r04-soomgo",
+      "branch": "r04/product-soomgo",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-052.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-052.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/soomgo/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-05",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "AT-05",
+        "T5-13",
+        "DV-03",
+        "DV-04"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-053",
+      "owner": "R05",
+      "package": "r05-remote",
+      "branch": "r05/product-remote",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-053.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-053.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/remote/PLAN.md",
+      "logical_decisions": [
+        "CS-04",
+        "CS-05",
+        "CS-07"
+      ],
+      "planned_product_tests": [
+        "AT-02",
+        "AT-03",
+        "T5-02",
+        "T5-12",
+        "DV-02",
+        "DV-05"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-054",
+      "owner": "R05",
+      "package": "r05-kmong",
+      "branch": "r05/product-kmong",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-054.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-054.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/kmong/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-05",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "AT-04",
+        "T5-13",
+        "DV-03",
+        "DV-04"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    }
+  ],
+  "verification": {
+    "source": {
+      "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+    },
+    "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+    "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+    "checks": {
+      "standard_contract_unittest": {
+        "pass": 10,
+        "fail": 0
+      },
+      "named_replay_payloads": 36,
+      "http_replay_payloads": 36,
+      "bootstrap_and_wiring_unittest": {
+        "pass": 9,
+        "fail": 0
+      },
+      "project_projections": {
+        "count": 27,
+        "regenerated_and_checked": true,
+        "committed_by_this_update": [
+          "docs/design/lesson-registration/README.md",
+          "docs/meetings/reviews/MEET-20261120-01.md"
+        ]
+      },
+      "design_projection": {
+        "pass": true
+      },
+      "deliverable_mapping": {
+        "pass": true
+      }
+    },
+    "product_gate": {
+      "source": {
+        "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+        "pointer": "/gate"
+      },
+      "required": 22,
+      "snapshot_execution": "not_run",
+      "actual_result": {
+        "path": "docs/artifacts/tasks/TASK-048.json"
+      }
+    }
+  },
+  "pending_physical": [
+    "Owner-specific environment confirmation, remaining UI/AI dependencies and product provider transport/async choices",
+    "R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config: contracts/INTERFACE-REVIEW.md",
+    "Canonical helper and golden vectors supplied; actual scope/slot/profile readback mapping and provider integration require owner confirmation",
+    "Other owner PLAN/availability and WBS confirmation; actual product tests not run"
+  ],
+  "physical_direction": {
+    "source": {
+      "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+    },
+    "authority": {
+      "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+    },
+    "status": "direction_accepted_details_pending",
+    "decisions": [
+      {
+        "id": "PD-01",
+        "title": "시스템 구조",
+        "status": "direction_accepted",
+        "selection": "모듈형 모놀리스 + 격리 browser runtime; 프로세스 분리 필요성은 근거 후 판단",
+        "reason": "공통 영속 상태/단일 제품; 세션 격리와 비밀 경계 유지",
+        "prior": [
+          "CS-04",
+          "CS-07",
+          "IB-01"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-050",
+          "TASK-053"
+        ],
+        "pending": "R03/R05: lifecycle, shutdown, process isolation 조건",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/0"
+        }
+      },
+      {
+        "id": "PD-02",
+        "title": "실행 기술",
+        "status": "direction_accepted",
+        "selection": "Python 3.12, FastAPI/ASGI, SQLite, Playwright/Chromium; UI/AI 내부 기술은 owner 제안",
+        "reason": "Python bootstrap, SQLite stdlib, R05 PoC and independent Python 3.12 candidate CI successful; exact initial lock supplied; actual product and owner environment verification separate.",
+        "prior": [
+          "CS-07",
+          "IB-01",
+          "IB-02"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-053"
+        ],
+        "pending": "R01/R03/R05: product regression and owner OS/local install confirmation; R02/R04 additional needs",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/1"
+        }
+      },
+      {
+        "id": "PD-03",
+        "title": "공통 데이터",
+        "status": "direction_accepted",
+        "selection": "기존 named JSON Schema/profile; 서버 권위 UTF-8 sorted-key JSON·safe integer·Unicode 보존·SHA256, 배열 순서·asset raw bytes; 기존 data contract 범위",
+        "reason": "승인과 readback 비교 및 ID/시간/오류 일관성; client hash 권위 금지",
+        "prior": [
+          "CS-02",
+          "CS-05",
+          "CS-06",
+          "CS-08",
+          "IB-02",
+          "IB-03"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "R02/R03/R04/R05: supplied server byte helper/golden vectors; exact digest target scope, slot mapping, error/time/ID semantics",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/2"
+        }
+      },
+      {
+        "id": "PD-04",
+        "title": "Worker/저장",
+        "status": "direction_accepted",
+        "selection": "CO 단일 상태 소유, accepted worker는 request/viewer와 수명 분리, SQLite 원자 accept/admit/observe/fence/finalize; runtime exclusive lease",
+        "reason": "승인 고정, 중복 차단, unknown 보존 및 오류 전용 중단; external exactly-once 주장 금지",
+        "prior": [
+          "CS-04",
+          "CS-05",
+          "CS-06",
+          "IB-03"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-050",
+          "TASK-053"
+        ],
+        "pending": "R03/R05: transaction/timeout, permit/lease generation, crash/fence race",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/3"
+        }
+      },
+      {
+        "id": "PD-05",
+        "title": "모듈 호출",
+        "status": "direction_accepted",
+        "selection": "기존 Python Protocol/JSON 및 BoundGateway; runtime owns permit/context; adapter 등록 operation만; event loop에서 blocking 금지",
+        "reason": "기존 IB 권한 분리 및 adapter 독립 구현",
+        "prior": [
+          "CS-01",
+          "CS-05",
+          "CS-07",
+          "IB-01",
+          "IB-03"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "R03/R05 STORE 호출, R04/R05 operation manifest와 fake gateway, R02/R03 I2 timeout",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/4"
+        }
+      },
+      {
+        "id": "PD-06",
+        "title": "Viewer",
+        "status": "direction_accepted",
+        "selection": "CDP screencast + WebSocket 방향 수용; R05 viewer mount/dispose, R03 서버 경계, R04 UI 소비",
+        "reason": "R05 합성 PoC 근거; UI와 CDP 분리",
+        "prior": [
+          "CS-04",
+          "CS-07",
+          "IB-04"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-050",
+          "TASK-051",
+          "TASK-053"
+        ],
+        "pending": "R03/R04/R05 endpoint/message schema, grant owner/generation/expiry/origin, input cutoff, disconnect detach, WSS 검증",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/5"
+        }
+      },
+      {
+        "id": "PD-07",
+        "title": "Composition",
+        "status": "direction_accepted",
+        "selection": "명시 provider 주입·설정·수명 관리, fake는 개발·검증에 명시 선택; 자동 replay fallback 없음",
+        "reason": "기존 wiring 재사용, 팀별 독립",
+        "prior": [
+          "CS-07",
+          "CS-08",
+          "IB-01",
+          "IB-05"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "각 owner factory signature, config/launch, port, shutdown",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/6"
+        }
+      },
+      {
+        "id": "PD-08",
+        "title": "통합 검증",
+        "status": "direction_accepted",
+        "selection": "독립 기술 검사 → 공유 계약 → 실제 provider → 크몽/숨고 통합 → 22개 동일 후보 gate",
+        "reason": "합성 smoke와 실제 수용 구분; T5-08 실제 모델 필수",
+        "prior": [
+          "CS-07",
+          "CS-08",
+          "CS-09",
+          "IB-05"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "R01: shared product-lock regression, owner PLAN and actual provider/product gate; R02 handoff 12/4",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/7"
+        }
+      }
+    ],
+    "environment": {
+      "status": "initial_product_lock_from_verified_candidate",
+      "candidate": "product/lesson-registration/evidence/physical-env/pyproject.toml",
+      "probe": "product/lesson-registration/evidence/probe_physical.py",
+      "workflow": ".github/workflows/lesson-physical-probe.yml",
+      "product_pyproject": "product/lesson-registration/pyproject.toml",
+      "product_lock": "product/lesson-registration/uv.lock",
+      "attempts": [
+        {
+          "commit": "56079752a3802287ac98e1f5c5ca56d31cb12d0d",
+          "url": "https://github.com/ik-e/chaja-you/actions/runs/45534634454",
+          "dependency_resolution": "pass",
+          "browser_install": "fail",
+          "reason": "ubuntu-latest resolved to Ubuntu 26.04, Chromium unsupported by pinned Playwright 1.57.0",
+          "probe": "not_run"
+        },
+        {
+          "commit": "bb267b40d943581d3e90f6ce26ad4e1ca6755d2c",
+          "url": "https://github.com/ik-e/chaja-you/actions/runs/45534844447",
+          "dependency_resolution": "pass",
+          "browser_install": "pass",
+          "probe": "4/4 pass",
+          "runner": "ubuntu-24.04"
+        }
+      ],
+      "runner": "ubuntu-24.04",
+      "note": "The same dependency specification and exact resolved candidate lock are installed as the initial shared product lock. Linux Python 3.12 technology probe passed; product regression on promotion commit and owner-specific local/actual implementation verification remain separate.",
+      "evidence": "product/lesson-registration/evidence/physical-ci-20261125.json",
+      "versions": {
+        "jsonschema": "4.25.1",
+        "fastapi": "0.128.2",
+        "uvicorn": "0.48.0",
+        "websockets": "16.0",
+        "playwright": "1.57.0",
+        "httpx": "0.28.1"
+      },
+      "browser": "Chromium 143.0.7499.4 / Playwright build v1200",
+      "candidate_history": "Candidate specification retained as history of initial dependency selection; current product pyproject.toml/uv.lock are authoritative."
+    },
+    "schedule": {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+    }
+  }
+}

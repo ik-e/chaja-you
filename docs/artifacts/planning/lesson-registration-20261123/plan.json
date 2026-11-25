@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "PLAN-20261123-R02-LESSON",
   "kind": "document",
-  "status": "기획 중",
+  "status": "기획서 V1.1 인과관계 중심 12항목 재구성 · 제품 최종 승인/기술 허용/실증 대기",
   "title": "R02 음악 레슨 강사 등록 서비스 12항목 기획 계약·업무 배분",
   "owner": "R01",
   "date": "2026-11-23",
@@ -54,18 +54,6 @@
     },
     {
       "number": 4,
-      "title": "기존 대안·잔여 Pain",
-      "lead": "R04",
-      "requirement": "수작업/범용 AI/브라우저 도구/대행 대비 사용 부담",
-      "old_sections": [
-        "12",
-        "부록 C"
-      ],
-      "baseline_status": "보완 필요",
-      "evidence_status": "기존 자료 대조 필요"
-    },
-    {
-      "number": 5,
       "title": "문제 정의·원인",
       "lead": "R01",
       "requirement": "원인과 단순 현상을 분리",
@@ -76,10 +64,10 @@
       "evidence_status": "기존 자료 대조 필요"
     },
     {
-      "number": 6,
+      "number": 5,
       "title": "핵심 피처·사용자 가치",
       "lead": "R01",
-      "requirement": "P→원인→F→직접 가치→지표",
+      "requirement": "P1~P3/원인 C1~C4가 F1~F3의 구체적 작동으로 해결되어 사용자 업무·가치에 변화를 주는 인과관계",
       "old_sections": [
         "7",
         "9"
@@ -88,26 +76,38 @@
       "evidence_status": "기존 자료 대조 필요"
     },
     {
-      "number": 7,
-      "title": "사용자 이용 시나리오",
-      "lead": "R03",
-      "requirement": "사용자·서비스의 조치와 결과/실패 상태",
+      "number": 6,
+      "title": "비즈니스 모델",
+      "lead": "R01",
+      "requirement": "5장 기능의 실제 해결 결과→사용자 가치→지불 이유→건별/묶음 과금·비용·재구매 조건",
       "old_sections": [
-        "8"
+        "13",
+        "14"
+      ],
+      "baseline_status": "주요 공백",
+      "evidence_status": "기존 자료 대조 필요"
+    },
+    {
+      "number": 7,
+      "title": "기존 대안·잔여 Pain",
+      "lead": "R04",
+      "requirement": "수작업/범용 AI/브라우저 도구/대행 대비 잔여 Pain·차별화 실증",
+      "old_sections": [
+        "12",
+        "부록 C"
       ],
       "baseline_status": "보완 필요",
       "evidence_status": "기존 자료 대조 필요"
     },
     {
       "number": 8,
-      "title": "비즈니스 모델",
-      "lead": "R01",
-      "requirement": "결제자/가치/채널/과금/비용/재이용",
+      "title": "사용자 이용 시나리오",
+      "lead": "R03",
+      "requirement": "R03 사용자 입력·승인·등록·결과/실패 시나리오와 최종 상태",
       "old_sections": [
-        "13",
-        "14"
+        "8"
       ],
-      "baseline_status": "주요 공백",
+      "baseline_status": "보완 필요",
       "evidence_status": "기존 자료 대조 필요"
     },
     {
@@ -172,14 +172,18 @@
   "outputs": {
     "owner_workspace": "docs/members/RXX/workspace/",
     "canonical_tasks": "docs/artifacts/tasks/TASK-028.json ~ TASK-032.json",
-    "integrated_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
-    "submission": "기존 docs/step1/ 제출본과 분리: 제출 승격은 후속 R01 결정"
+    "integrated_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "submission": "기존 docs/step1/ 제출본과 분리: 제출 승격은 후속 R01 결정",
+    "integrated_readable": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md",
+    "previous_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v0.1.json",
+    "previous_v1_proposal": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.0.json"
   },
   "completion_policy": {
     "complete": "산출물 경로에 결과 존재 + 출처·확인일·주장 상태·반대 증거/미확인 + TASK acceptance 검증을 기록. 질문의 답이 미확인이어도 조사 범위와 차단 사유가 확인되면 문서 작업은 완료 가능.",
     "not_complete": "파일만 존재하거나 근거 없이 추정한 결론, 허용되지 않은 자동 실행을 성공으로 기록한 경우",
     "handoff": "담당자가 본인 workspace 결과 및 관련 TASK result에 출처와 검증 상태를 기록하고 URL/commit을 R01에 전달한다. R01만 공통 기획 원본을 통합한다.",
-    "limits": "오늘은 조사·기획과 요구사항 정리까지만. UX 화면, DB/API 상세, PoC 코딩, 실제 사이트 무단 자동 등록 제외."
+    "limits": "오늘은 조사·기획과 요구사항 정리까지만. UX 화면, DB/API 상세, PoC 코딩, 실제 사이트 무단 자동 등록 제외.",
+    "proposal_version": "V1.1은 가치 발생의 인과구조가 핵심 흐름으로 보이도록 재구성한 기획 본문이다. 기술·약관·시장 효과 및 공식 제출은 별도 검증/승인이 필요하다."
   },
   "technical_feasibility_handoff": {
     "decision_ref": "docs/human/responses/HRESP-20261123-02_r05-technical-feasibility-scope.md",

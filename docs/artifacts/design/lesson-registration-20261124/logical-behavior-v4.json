@@ -1,0 +1,928 @@
+{
+  "id": "LR-LOGICAL-04",
+  "revision": "2026-11-24-known-platform-procedure",
+  "status": "accepted_direction_detail_candidate",
+  "top_ref": "LR-TOP-20261124",
+  "scope": "최상위 합의의 논리 동작 후보. 현재 mock-only. 실행 수락 전 준비/확인; 수락 후 확정된 작업 자동 진행; 시스템 오류일 때만 중단하고 결과 제공. 구현 기술/실제 실행 환경/키 저장 방식은 하위 설계.",
+  "ownership": {
+    "CO": [
+      "등록 요청/계획/승인",
+      "job lifecycle/stop intent"
+    ],
+    "PREP": [
+      "원본 사실 확인",
+      "플랫폼 프로필과 대조한 초안·누락/충돌 검사"
+    ],
+    "KNOW": [
+      "지원 경로와 버전 고정 플랫폼 프로필",
+      "등록에 필요한 정보·제약·주의/금지·절차·완료 증거"
+    ],
+    "EXEC": [
+      "인증·제어권",
+      "프로필 절차에 결합한 승인된 동작 수행·시도"
+    ],
+    "RESULT": [
+      "프로필 완료 조건에 따른 관측·결과 판정",
+      "오류 중단 결과; 자동 재개 없음"
+    ],
+    "STORE": [
+      "모든 소유 기록 보관",
+      "admission/stop의 원자적 직렬화 경계"
+    ]
+  },
+  "call_graph": [
+    [
+      "USER",
+      "CO",
+      "준비/승인/실행 요청/결과 조회 (중단·재개 없음)"
+    ],
+    [
+      "CO",
+      "PREP",
+      "원본·확인·변환 요청"
+    ],
+    [
+      "CO",
+      "KNOW",
+      "지원/규칙/절차/목표 기준"
+    ],
+    [
+      "PREP",
+      "KNOW",
+      "필드/변환 규칙"
+    ],
+    [
+      "CO",
+      "EXEC",
+      "인증·실행·오류 중단 처리"
+    ],
+    [
+      "CO",
+      "RESULT",
+      "관측 결과/판정/복구 요청"
+    ],
+    [
+      "EXEC",
+      "KNOW",
+      "허용 동작/사전·사후조건"
+    ],
+    [
+      "RESULT",
+      "KNOW",
+      "증거/목표 판정 규칙"
+    ],
+    [
+      "RESULT",
+      "EXEC",
+      "권한 있는 read-only 관측"
+    ],
+    [
+      "EXEC",
+      "BROWSER",
+      "인증 입력 및 승인된 동작/조회"
+    ],
+    [
+      "BROWSER",
+      "PLATFORM",
+      "제한된 대상 접근"
+    ],
+    [
+      "CO",
+      "STORE",
+      "소유 기록의 읽기/쓰기, 공통 원자 경계"
+    ],
+    [
+      "PREP",
+      "STORE",
+      "소유 기록의 읽기/쓰기, 공통 원자 경계"
+    ],
+    [
+      "KNOW",
+      "STORE",
+      "소유 기록의 읽기/쓰기, 공통 원자 경계"
+    ],
+    [
+      "EXEC",
+      "STORE",
+      "소유 기록의 읽기/쓰기, 공통 원자 경계"
+    ],
+    [
+      "RESULT",
+      "STORE",
+      "소유 기록의 읽기/쓰기, 공통 원자 경계"
+    ]
+  ],
+  "flow_groups": [
+    [
+      "U01",
+      "원본/플랫폼 선택·확인"
+    ],
+    [
+      "U02",
+      "직접 인증·계정·대상 확정"
+    ],
+    [
+      "U03",
+      "계획/승인"
+    ],
+    [
+      "U04",
+      "작업/제어권"
+    ],
+    [
+      "U05",
+      "외부 동작/증거"
+    ],
+    [
+      "U06",
+      "중단/미확인/복구"
+    ],
+    [
+      "U07",
+      "결과"
+    ]
+  ],
+  "initial": {
+    "route": "unset",
+    "policy": "allowed",
+    "source": "missing",
+    "draft": "none",
+    "auth": "unverified",
+    "control": "none",
+    "target": "unset",
+    "plan": "none",
+    "approval": "none",
+    "job": "none",
+    "effect": "none",
+    "step": 0
+  },
+  "states": {
+    "route": [
+      "unset",
+      "supported",
+      "unsupported"
+    ],
+    "policy": [
+      "allowed",
+      "blocked"
+    ],
+    "source": [
+      "missing",
+      "review",
+      "confirmed"
+    ],
+    "draft": [
+      "none",
+      "review",
+      "confirmed"
+    ],
+    "auth": [
+      "unverified",
+      "verified"
+    ],
+    "control": [
+      "none",
+      "human",
+      "read",
+      "worker"
+    ],
+    "target": [
+      "unset",
+      "new",
+      "existing",
+      "ambiguous"
+    ],
+    "plan": [
+      "none",
+      "current"
+    ],
+    "approval": [
+      "none",
+      "current"
+    ],
+    "job": [
+      "none",
+      "active",
+      "stopping",
+      "done",
+      "stopped"
+    ],
+    "effect": [
+      "none",
+      "pending",
+      "unknown",
+      "absent"
+    ],
+    "step": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "step_meaning": [
+    "합성 필드 입력",
+    "합성 자료 첨부",
+    "합성 최종 제출",
+    "동작 완료, 목표 독립 판정 대기"
+  ],
+  "transition_semantics": "Guard is conjunction; array is membership. Atomic logical record changes. Observations and execution errors originate from trusted system events. Error event validity is an explicit external precondition, not a user-supplied boolean. No product execution.",
+  "state_meanings": {
+    "none": "작업 수락 전 준비/검토/인증/승인",
+    "active": "확정된 등록 작업 진행 및 결과 확인",
+    "stopping": "실행 오류로 이후 동작 차단, 이미 수행된 결과 정리",
+    "done": "목표 증거 확인된 정상 종료",
+    "stopped": "오류로 중단 종료; 확인된 실패·부분 효과·미확인 여부는 결과로 표현"
+  },
+  "scope_contract": {
+    "status": "R01_feedback_applied_candidate",
+    "ref": "2026-11-24 R01 대화: 인증 도중에 등록 범위 변경 문제는 없다고 보는데 굳이 대응하자면 실행 이후에는 되돌리기는 없다고 고지해서 중간의 변경을 없애는 게 좋을 것 같은데 이미 출발한 열차를 멈추는 건 특별한 일이 아니고는 오히려 어려워",
+    "lock_event": "accept_job",
+    "pre_start": "등록 내용/자료는 작업 수락 전에 확인·수정. 인증 단계에는 별도 등록 편집 동작 없음; 필요하면 인증 종료 후 준비로 돌아감. 수정한 계획은 기존 승인 무효화. 계정/대상 변경은 새 요청/대상 재확인.",
+    "locked": "작업 수락부터 실행 범위 불변. 원본/계획 내용의 인플레이스 변경, 중간 단계 삭제/재설정, 자동 역행/rollback 없음. 다른 등록 요청은 별개로 중복/효과 검사. 상태/권한/인증 및 동일 범위 안전 복구는 변경과 구분.",
+    "exception": "실행 수락 후 범위 변경, 사용자 중단/취소, 자동 rollback, 중단된 작업 재개 기능 없음. 정상 동작과 필요한 증거 확인은 자동 진행. 실행 오류/권한·인증 상실 등 계속할 수 없는 조건에서는 시스템이 중단하고 확인된 결과 및 미확인 내용을 반환. 권한이 실제로 철회되면 오류로 처리하며 무시하지 않음. 종료 후 별도 요청은 현재 대상/기존 효과를 검사.",
+    "notice": "등록 시작 후 등록 내용을 변경하거나 이미 실행된 외부 동작을 되돌릴 수 없습니다. 실행 중 오류가 발생하면 이후 동작을 중지하고 확인된 결과와 확인되지 않은 사항을 안내합니다."
+  },
+  "stop_contract": {
+    "revision": "error-only-stop-v1",
+    "user_ref": "2026-11-24 R01: 중단 요청은 없어 중단은 오류 상황에서만 되도록 할거고 멱등성은 키 관리가 기본이고 실제 실행 환경은 세부 사항인데",
+    "entry": "error_detected / error_effect_absent (one system error-stop path)",
+    "terminal": "stopped",
+    "completion_event": "finish_stop",
+    "implementation_rows": [
+      "finish_stop_pending",
+      "finish_stop_other"
+    ],
+    "stop_reason": "오류 원인/증거·권한 상실은 결과 메타데이터. 이유별 lifecycle 분기 없음. UI/사용자 API에 취소·중단 기능 없음.",
+    "outcome": "정상 완료인지 오류 중단인지 표시. 목표의 확인 여부, 확인된 단계/부분 효과, 부재 증거, 미확인 효과 및 다음 행동을 분리한다. 결과를 확인할 수 없더라도 종료.",
+    "late_evidence": "나중에 권한 있는 관측 근거가 생기면 기존 결과에 추가 가능. 종료된 작업은 그대로 종료. 신규 외부 mutation/자동 재개 없음.",
+    "recovery": "중단된 작업 재개나 중간 사용자 개입은 기본 범위 밖. 단순히 화면을 닫아도 작업은 계속. 조회를 위한 기술적 재시도 정책은 하위 설계이며 미확인 효과를 다시 수행하는 것은 금지.",
+    "blocked": "실행 수락 전은 준비 조건으로 차단. 실행 수락 후 권한/인증 상실은 시스템 오류로 중단.",
+    "limit": "Real admission fencing, stop timeout, evidence authority, external side effects and security ledger synchronization need actual implementation test."
+  },
+  "cross_contracts": [
+    "USER는 CO를 통해 준비/실행 요청/결과 조회를 이용한다. 원격 화면의 사용자 입력만 CO가 부여한 grant로 EXEC의 제한된 입력 경계에 연결된다. 로그인 입력은 PREP/LLM/기록으로 전달하지 않는다.",
+    "CO owns lifecycle/plan/approval, PREP owns verified source and per-platform draft, KNOW owns route/rule/allowed action/goal criteria, EXEC owns session/control/admission/attempt, RESULT owns trusted observations and outcome proof. Owners exchange commands/results or append records; STORE is a shared persistence/atomic boundary, not a decision-maker. In one transaction CO lifecycle and EXEC/RESULT evidence changes use explicit typed events; no callback inside admission lock.",
+    "Source confirmation is platform-neutral. Target draft confirmation proves current source and exact platform rule/field mapping; missing values ask before authentication/approval. No separate user approval of every execution step. Confirm facts and one platform plan execution separately.",
+    "Authentication is not a separate workflow status. While HUMAN has control, only registered auth interactions; after input fencing READ verifies identity; account change or re-auth before acceptance invalidates prior target/plan/approval. After acceptance no rebind or content edit; loss of current authorized account stops. Service auth separate.",
+    "Eligibility is derived; supported route is not permission. Platform-specific action plan contains ordered logical operations, effects and evidence requirements. The runner admits one operation per durable attempt under current owner, scope, rule, target, policy, generation/revision, before state, unresolved effect, and stop predicates. Current read permission independently verified.",
+    "Shared immutable source version, per-platform plan/approval/job/ledger; same stable target and logical effect across keys/new requests. Existing goal returns existing evidence, ambiguous/unresolved blocks creation. Different account/platform/slot separately identified with owner isolation. No external exactly-once or rollback claim.",
+    "Actual permission, identity, action/goal evidence and concurrent fencing are external obligations. Mock-only fixed; live access denied until separate permission/phase approval.",
+    "Error-stop only: after accept_job, user has no transition that changes the execution or stops/resumes it. A genuine loss of required permission/auth is a system error and must prevent subsequent effects. Uncertain or absent effect from an execution error is reported, not retried automatically. Lifecycle and result evidence are independent.",
+    "Same profile revision/digest governs PREP validation, CO plan binding, EXEC action order and RESULT proof. No free-form LLM step sequence or unknown route. User checks before work acceptance. Rule change after acceptance is system error/stop, not silent plan rewrite."
+  ],
+  "deferred": [
+    "구체적 키/DB/API/UI 계약, 내부 동작·플랫폼 adapter 및 fixture",
+    "원격 브라우저 구현 기술, 실제 실행 환경, 동시성/원자성/격리/권한·인증 정보 보호의 구현과 시험",
+    "숨고 실제 등록 객체, 실서비스 허용 및 사용자 가치"
+  ],
+  "transitions": [
+    {
+      "id": "provide_or_revise_source",
+      "actor": "USER",
+      "handler": "PREP",
+      "when": {
+        "job": "none",
+        "control": "none"
+      },
+      "set": {
+        "source": "review",
+        "draft": "none",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U01",
+      "detail": "新 원본 버전/정정 후보. 다른 작업 및 확정 원본은 보존. 출처·권리 확인 필요."
+    },
+    {
+      "id": "confirm_source",
+      "actor": "USER",
+      "handler": "PREP",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "source": "review"
+      },
+      "set": {
+        "source": "confirmed"
+      },
+      "flow": "U01",
+      "detail": "공통 사실·단위·권리 사용자 확인. 미확인/충돌이면 review 유지."
+    },
+    {
+      "id": "select_supported",
+      "actor": "USER",
+      "handler": "KNOW",
+      "when": {
+        "job": "none",
+        "control": "none"
+      },
+      "set": {
+        "route": "supported",
+        "draft": "none",
+        "auth": "unverified",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U01",
+      "detail": "대상 선택/변경. 원본은 재사용. 허용 registry match 또는 미지원 안내, 임의 URL 접근 없음; 이전 계정/대상/승인 재사용 금지."
+    },
+    {
+      "id": "select_unsupported",
+      "actor": "USER",
+      "handler": "KNOW",
+      "when": {
+        "job": "none",
+        "control": "none"
+      },
+      "set": {
+        "route": "unsupported",
+        "draft": "none",
+        "auth": "unverified",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U01",
+      "detail": "대상 선택/변경. 원본은 재사용. 허용 registry match 또는 미지원 안내, 임의 URL 접근 없음; 이전 계정/대상/승인 재사용 금지."
+    },
+    {
+      "id": "prepare_draft",
+      "actor": "SYSTEM",
+      "handler": "PREP",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "source": "confirmed",
+        "policy": "allowed"
+      },
+      "set": {
+        "draft": "review",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U01",
+      "detail": "서버에 저장된 사전 조사 플랫폼 프로필의 필수/조건부 필드·금지/제약을 기준으로 원본을 변환·검사. 필요한 질문만 생성. 현재 프로필 미확인 항목은 가설 mock으로만; live 금지."
+    },
+    {
+      "id": "confirm_draft",
+      "actor": "USER",
+      "handler": "PREP",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "review"
+      },
+      "set": {
+        "draft": "confirmed"
+      },
+      "flow": "U01",
+      "detail": "규칙·필수 필드·값·자료·출처 검증 및 사용자 내용 확인. 원본 사실 변경은 원본 수정으로 되돌아감."
+    },
+    {
+      "id": "open_auth",
+      "actor": "USER",
+      "handler": "EXEC",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed"
+      },
+      "set": {
+        "auth": "unverified",
+        "control": "human",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U02",
+      "detail": "등록 내용 확인 후 직접 인증. 이전 계정/대상/계획/승인 무효화; 사용자 인증 입력만."
+    },
+    {
+      "id": "finish_auth_input",
+      "actor": "USER",
+      "handler": "EXEC",
+      "when": {
+        "job": "none",
+        "control": "human",
+        "auth": "unverified",
+        "policy": "allowed"
+      },
+      "set": {
+        "control": "read"
+      },
+      "flow": "U02",
+      "detail": "입력 grant fenced, 신뢰된 계정 읽기."
+    },
+    {
+      "id": "identity_verified",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "EXEC",
+      "when": {
+        "job": "none",
+        "control": "read",
+        "auth": "unverified",
+        "policy": "allowed"
+      },
+      "set": {
+        "auth": "verified",
+        "control": "none"
+      },
+      "flow": "U02",
+      "detail": "안정 계정 관측 근거에 연결. 사용자 표시명/주장만으로 확인 금지."
+    },
+    {
+      "id": "exit_auth_or_identity_unverified",
+      "actor": "AUTHORIZED_USER_OR_SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "job": "none",
+        "control": [
+          "human",
+          "read"
+        ],
+        "auth": "unverified"
+      },
+      "set": {
+        "control": "none",
+        "auth": "unverified",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U02",
+      "detail": "인증 종료 또는 확인 불가. 사용자에게 재인증/종료 안내; 기존 계획 없음."
+    },
+    {
+      "id": "preflight_read",
+      "actor": "SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": [
+          "unset",
+          "ambiguous"
+        ]
+      },
+      "set": {
+        "control": "read"
+      },
+      "flow": "U02",
+      "detail": "현재 계정/권한에서 기존 대상·미확인 효과를 안전하게 조회."
+    },
+    {
+      "id": "target_new",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "read",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": [
+          "unset",
+          "ambiguous"
+        ]
+      },
+      "set": {
+        "target": "new",
+        "control": "none"
+      },
+      "flow": "U02",
+      "detail": "신규 논리 슬롯 및 기존 효과 없음 확인. accept 때 원자 재검사."
+    },
+    {
+      "id": "target_existing",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "read",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": [
+          "unset",
+          "ambiguous"
+        ]
+      },
+      "set": {
+        "target": "existing",
+        "control": "none"
+      },
+      "flow": "U02",
+      "detail": "동일 등록 결과/기존 작업 근거 반환; 새 생성 없음."
+    },
+    {
+      "id": "target_ambiguous",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "read",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": [
+          "unset",
+          "ambiguous"
+        ]
+      },
+      "set": {
+        "target": "ambiguous",
+        "control": "none"
+      },
+      "flow": "U02",
+      "detail": "대상/효과 불명확. 생성 금지; 별도 읽기로만 확인."
+    },
+    {
+      "id": "make_plan",
+      "actor": "SYSTEM",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": "new",
+        "plan": "none"
+      },
+      "set": {
+        "plan": "current",
+        "approval": "none"
+      },
+      "flow": "U03",
+      "detail": "승인할 고정 프로필 절차에 확인된 초안·자료를 바인딩하고 현재 계정/대상과 버전을 고정. 임의 절차 추론 없음. 실행 전 목표/범위와 제한을 제시."
+    },
+    {
+      "id": "approve_plan",
+      "actor": "USER",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": "new",
+        "plan": "current",
+        "approval": "none"
+      },
+      "set": {
+        "approval": "current"
+      },
+      "flow": "U03",
+      "detail": "실행 범위와 중단/되돌리기 불가 고지 확인. 사실 확인과 실행 승인 분리. 승인과 시작은 하나의 UI action/transaction으로 합칠 수 있으나 논리 검사는 구별."
+    },
+    {
+      "id": "withdraw_approval_before_start",
+      "actor": "USER",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "approval": "current"
+      },
+      "set": {
+        "approval": "none"
+      },
+      "flow": "U03",
+      "detail": "아직 작업 미수락. 승인만 철회."
+    },
+    {
+      "id": "accept_job",
+      "actor": "USER",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "control": "none",
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": "new",
+        "plan": "current",
+        "approval": "current",
+        "effect": "none",
+        "step": 0
+      },
+      "set": {
+        "job": "active"
+      },
+      "flow": "U04",
+      "detail": "승인 범위 잠금 및 동일 target/intent 원자 유일성 확인. 같은 요청은 이전 결과 반환. acceptance와 실행 허용은 구별."
+    },
+    {
+      "id": "acquire_worker",
+      "actor": "SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": "new",
+        "plan": "current",
+        "approval": "current",
+        "job": "active",
+        "control": "none",
+        "effect": "none",
+        "step": [
+          0,
+          1,
+          2
+        ]
+      },
+      "set": {
+        "control": "worker"
+      },
+      "flow": "U04",
+      "detail": "lease 획득은 기존 lease를 전제로 하지 않음; 사용자 입력 없음. 획득과 admission은 별도 검사."
+    },
+    {
+      "id": "admit",
+      "actor": "SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "route": "supported",
+        "policy": "allowed",
+        "source": "confirmed",
+        "draft": "confirmed",
+        "auth": "verified",
+        "target": "new",
+        "plan": "current",
+        "approval": "current",
+        "job": "active",
+        "control": "worker",
+        "effect": "none",
+        "step": [
+          0,
+          1,
+          2
+        ]
+      },
+      "set": {
+        "effect": "pending"
+      },
+      "flow": "U05",
+      "detail": "현재 전체 가드 재검사, 안정 operation ID/단일 permit 및 durable attempt 기록; 외부 실행은 이후."
+    },
+    {
+      "id": "progress_0",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "RESULT",
+      "when": {
+        "job": "active",
+        "control": "worker",
+        "auth": "verified",
+        "effect": "pending",
+        "step": 0
+      },
+      "set": {
+        "step": 1,
+        "effect": "none"
+      },
+      "flow": "U05",
+      "detail": "중간 효과 확인; 다음 논리 동작. 재실행 없음."
+    },
+    {
+      "id": "progress_1",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "RESULT",
+      "when": {
+        "job": "active",
+        "control": "worker",
+        "auth": "verified",
+        "effect": "pending",
+        "step": 1
+      },
+      "set": {
+        "step": 2,
+        "effect": "none"
+      },
+      "flow": "U05",
+      "detail": "중간 효과 확인; 다음 논리 동작. 재실행 없음."
+    },
+    {
+      "id": "final_effect_proven",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "RESULT",
+      "when": {
+        "job": "active",
+        "control": "worker",
+        "auth": "verified",
+        "effect": "pending",
+        "step": 2
+      },
+      "set": {
+        "job": "active",
+        "step": 3,
+        "effect": "none",
+        "control": "read"
+      },
+      "flow": "U05",
+      "detail": "최종 동작 확인, 이후 목표 조회만. 효과 확인과 목표 완료는 별개."
+    },
+    {
+      "id": "error_effect_absent",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "RESULT",
+      "when": {
+        "job": "active",
+        "control": "worker",
+        "auth": "verified",
+        "effect": "pending",
+        "step": [
+          0,
+          1,
+          2
+        ]
+      },
+      "set": {
+        "job": "stopping",
+        "effect": "absent",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "허용한 동작의 오류 및 효과 부재가 신뢰된 관측으로 확인된 경우. 원인/증거 기록, 다음 동작 차단. 재실행/재개 없음."
+    },
+    {
+      "id": "goal_proven",
+      "actor": "TRUSTED_OBSERVATION",
+      "handler": "RESULT",
+      "when": {
+        "job": "active",
+        "control": "read",
+        "auth": "verified",
+        "effect": "none",
+        "step": 3
+      },
+      "set": {
+        "job": "done",
+        "control": "none"
+      },
+      "flow": "U07",
+      "detail": "플랫폼별 목표 증거 확인. 모의 접수와 실제/공개 구분."
+    },
+    {
+      "id": "error_detected",
+      "actor": "SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "job": "active"
+      },
+      "set": {
+        "job": "stopping",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "동작·검증 실패, 응답 유실, 인증/권한 상실, 예기치 못한 상태 등 오류를 정규화. 원인과 증거는 결과 메타데이터. admission과 동일 논리 경계에서 후속 동작 차단; 이미 허용된 효과는 보존.",
+      "external_guard": "실제 실행 오류/필수 조건 상실 또는 안전하게 계속할 수 없다는 검증 결과가 신뢰된 시스템 경로에서 발생. 사용자 임의 중단 요청은 이벤트로 받지 않음."
+    },
+    {
+      "id": "finish_stop_pending",
+      "actor": "SYSTEM",
+      "handler": "CO",
+      "when": {
+        "job": "stopping",
+        "effect": "pending"
+      },
+      "set": {
+        "job": "stopped",
+        "effect": "unknown",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "정해진 종료 조건에서 미확인 효과를 남기고 종료."
+    },
+    {
+      "id": "finish_stop_other",
+      "actor": "SYSTEM",
+      "handler": "CO",
+      "when": {
+        "job": "stopping",
+        "effect": [
+          "none",
+          "absent",
+          "unknown"
+        ]
+      },
+      "set": {
+        "job": "stopped",
+        "control": "none"
+      },
+      "flow": "U06",
+      "detail": "이미 알려진/미확인 결과 유지. 중단 중 발생한 추가 사유에 따라 분기하지 않음."
+    },
+    {
+      "id": "prestart_policy_block",
+      "actor": "AUTHORIZED_POLICY",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "policy": "allowed"
+      },
+      "set": {
+        "policy": "blocked",
+        "auth": "unverified",
+        "control": "none",
+        "draft": "none",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U06",
+      "detail": "작업 전 차단: 외부 동작 금지, 원본 보존."
+    },
+    {
+      "id": "prestart_policy_allow",
+      "actor": "AUTHORIZED_POLICY",
+      "handler": "CO",
+      "when": {
+        "job": "none",
+        "policy": "blocked"
+      },
+      "set": {
+        "policy": "allowed"
+      },
+      "flow": "U06",
+      "detail": "권한 확인; 자동 승인/인증 복구 없음."
+    },
+    {
+      "id": "prestart_auth_lost",
+      "actor": "SYSTEM",
+      "handler": "EXEC",
+      "when": {
+        "job": "none",
+        "auth": "verified"
+      },
+      "set": {
+        "auth": "unverified",
+        "control": "none",
+        "target": "unset",
+        "plan": "none",
+        "approval": "none"
+      },
+      "flow": "U02",
+      "detail": "계정/세션 확인이 더 이상 현재가 아니면 대상·계획·승인 초기화. 사용자 재인증."
+    }
+  ],
+  "user_projection": {
+    "prestart": "원본/대상 선택 → 플랫폼 내용 확인 → 직접 인증 → 실행 범위 승인. 미지원/기존 대상/차단은 조건에서 표시. 화면 수 고정 아님.",
+    "active": "등록 작업 진행; 현재 처리 단계 및 결과 확인 표시. 화면 종료/재접속은 작업에 영향 없음. 중간 사용자 수정·중단·재개 버튼 없음.",
+    "terminal": "done 또는 stopped. 목표 달성 확인/미달/미확인과 확인된 부분 결과·오류 사유·근거·다음 행동 제공. 작업 재개 없음."
+  },
+  "idempotency_contract": {
+    "level": "logical invariant only",
+    "request": "동일 사용자·동일 작업 요청 키는 같은 요청/같은 결과를 참조한다. 같은 키에 다른 내용은 충돌로 거부. 네트워크 재전송이나 중복 클릭 때문에 새 키를 발급하지 않는다.",
+    "effect": "같은 논리적 대상/동작의 안정 식별자를 사용한다. 이미 허용되었거나 효과 미확인·확인된 동작을 새로운 키로 무조건 다시 실행하지 않는다. 요청 키만으로 실제 외부 효과를 보장하지 않으므로 지원 플랫폼의 대상/기존 결과 확인을 유지한다.",
+    "defer": "키 형식/발급/유일성 범위의 상세, DB/API/트랜잭션, 재시도 정책 및 실제 외부 효과 검증은 하위 설계. 이 단계에서 새 멱등성 엔진 또는 별도 시험 환경을 만들지 않음."
+  },
+  "design_authority": {
+    "date": "2026-11-24",
+    "R01": [
+      "사람이 플랫폼에서 하는 일을 대신 해주는 거고 추가적으로 한다면 등록 전 원본 정보 검사와 플랫폼에 대한 정보를 알아서 등록하는데에 피하거나 필수적인 사항들을 고려한다는 거야",
+      "그리고 미리 플랫폼 절차도 알고 있으니 어려울게 없지",
+      "그럼 수정하고 세부 설계 진행하면 될 것 같은데"
+    ],
+    "scope": "승인된 목적/논리 구조를 유지하고 사전 확보 플랫폼 정보 기반 등록 대행으로 명시. 상세 설계 진행 허용. 제품 구현 착수/실서비스/기존 TASK 변경은 아님."
+  },
+  "platform_contract": {
+    "principle": "지원 플랫폼은 사전에 조사·검증하여 버전 관리한 등록 프로필(필수/조건부/선택 필드, 제약/주의·금지, 인증·대상, 정해진 절차와 완료 증거)을 제공한다. 원본 검사·변환 및 등록 실행은 같은 프로필을 사용한다.",
+    "prepare": "원본의 누락/충돌/권리 및 플랫폼 조건을 검사하고, 확인할 필수 정보만 질문. AI는 비정형 추출·문구 후보; 검증과 지원 경로·절차·효과 판정은 정의된 규칙.",
+    "plan": "계정/대상 확인 뒤 확인된 draft의 데이터를 고정 프로필의 단계에 결합하는 결정적 인스턴스. 매 요청 임의 절차 생성, 무지원 사이트 동적 적응, 자유 브라우저 탐색 없음.",
+    "execution": "정의된 절차의 각 단계의 조건과 결과를 검사하여 수행. 새로운 판단/오류/규칙 불일치/필수 조건 상실이면 중단해 현재 결과 제공. 세부 engine/locator 선택은 구현자 위임.",
+    "scope": "Kmong 우선 synthetic receipt; Soomgo existing provider service settings synthetic candidate; actual object/permission unknown. No live access.",
+    "abstract_step_note": "기존 0/1/2/3은 크몽형 유한 예시일 뿐 공통 고정 단계 수가 아니다. 실제 상세 설계의 profile.operation_sequence 및 length에 따름. 숨고에 사진을 강제하지 않음."
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "results": [
+    {
+      "N": 4,
+      "states": 53,
+      "edges": 134,
+      "unused": [],
+      "violations": [],
+      "no_outcome": 0,
+      "normal_path": [
+        "source_select",
+        "select_supported",
+        "prepare_ready",
+        "auth_open",
+        "auth_finish",
+        "target_new",
+        "make_review",
+        "accept",
+        "worker",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "goal_proven"
+      ],
+      "unknown_stop_path": [
+        "source_select",
+        "select_supported",
+        "prepare_ready",
+        "auth_open",
+        "auth_finish",
+        "target_new",
+        "make_review",
+        "accept",
+        "worker",
+        "admit",
+        "error_detected",
+        "finish_stop_pending"
+      ]
+    },
+    {
+      "N": 5,
+      "states": 61,
+      "edges": 142,
+      "unused": [],
+      "violations": [],
+      "no_outcome": 0,
+      "normal_path": [
+        "source_select",
+        "select_supported",
+        "prepare_ready",
+        "auth_open",
+        "auth_finish",
+        "target_new",
+        "make_review",
+        "accept",
+        "worker",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "admit",
+        "operation_proven",
+        "goal_proven"
+      ],
+      "unknown_stop_path": [
+        "source_select",
+        "select_supported",
+        "prepare_ready",
+        "auth_open",
+        "auth_finish",
+        "target_new",
+        "make_review",
+        "accept",
+        "worker",
+        "admit",
+        "error_detected",
+        "finish_stop_pending"
+      ]
+    }
+  ],
+  "mutations": [
+    {
+      "name": "user cancel",
+      "detected": true
+    },
+    {
+      "name": "remove review reset",
+      "detected": true
+    },
+    {
+      "name": "lost pending effect",
+      "detected": true
+    },
+    {
+      "name": "reopen stopped",
+      "detected": true
+    },
+    {
+      "name": "unreviewed start",
+      "detected": true
+    },
+    {
+      "name": "duplicate attempt",
+      "detected": true
+    }
+  ],
+  "scope": "finite abstract model, trusted event assumptions; product not run"
+}

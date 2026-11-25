@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "id": "TASK-054",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R05",
+  "suggested_owner": null,
+  "due": null,
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-25",
+  "title": "크몽 등록 adapter 및 독립 mock 구현",
+  "question": "크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+  "goal": "크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지",
+  "inputs": [
+    "docs/human/phase-intents/PHASE-20261125-01.md",
+    "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+    "product/lesson-registration/WORKSPACE.json",
+    "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
+    "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+    "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json"
+  ],
+  "scope": [
+    "크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지",
+    "담당 경로의 상세 설계·PLAN·코드·독립 테스트; 공통 계약 및 다른 담당 경로 무단 변경 금지",
+    "mock-only; 실제 플랫폼 실행/자격증명 금지"
+  ],
+  "outputs": [
+    "product/lesson-registration/tests/modules/kmong/PLAN.md",
+    "product/lesson-registration/src/lesson_registration/platforms/kmong/",
+    "product/lesson-registration/fixtures/platforms/kmong/",
+    "product/lesson-registration/tests/modules/kmong/"
+  ],
+  "acceptance": [
+    "r05-kmong-AC1: K1~K7 승인값·이미지·조건부 필드 일치, 등록된 operation만",
+    "r05-kmong-AC2: 제출 1회와 독립 receipt/이미지 digest 대조, 오류·unknown 중복 차단",
+    "r05-kmong-AC3: 자체 mock 페이지 및 gateway 주입 시험; 실제 제출 금지"
+  ],
+  "verification": [
+    "uv run --locked --python 3.12 python dev.py test r05-kmong",
+    "실제 구현의 정상/오류/unknown 시험 및 입력·기대·관측·commit 기록; bootstrap replay는 제품 통과 아님",
+    "제품 시험 참조: AT-04, T5-13, DV-03, DV-04"
+  ],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    },
+    {
+      "path": "product/lesson-registration/WORKSPACE.json"
+    },
+    {
+      "path": "docs/design/lesson-registration/MANIFEST.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261125-01.md",
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    ],
+    "design_refs": [
+      "CS-01",
+      "CS-05",
+      "CS-06"
+    ],
+    "requirement_refs": [],
+    "product_requirement_refs": [
+      "REQ-02",
+      "REQ-05",
+      "REQ-06",
+      "REQ-07",
+      "REQ-08"
+    ],
+    "evaluation_refs": [],
+    "planned_product_test_refs": [
+      "AT-04",
+      "T5-13",
+      "DV-03",
+      "DV-04"
+    ]
+  },
+  "validation_plan": {
+    "question": "크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+    "observables": [
+      "K1~K7 승인값·이미지·조건부 필드 일치, 등록된 operation만",
+      "제출 1회와 독립 receipt/이미지 digest 대조, 오류·unknown 중복 차단",
+      "자체 mock 페이지 및 gateway 주입 시험; 실제 제출 금지"
+    ],
+    "success_condition": "패키지별 실제 구현 및 수용 조건 증거, 공통 계약 정합성, 재현 명령",
+    "unknown_condition": "실제 구현/모델/환경/시험 결과 없음 또는 근거 불충분"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "intent_ref": "docs/human/task-intents/TASK-054.md",
+  "assignment_status": "R05 2026-11-25 범위 수신 확인 및 구현 가능성·공수·PLAN 작성 예정 보고; 실제 착수/PLAN commit·제품 결과 미확인",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+  "assignment_mode": "assigned",
+  "work_branch": "r05/product-kmong",
+  "workspace_path": "product/lesson-registration/src/lesson_registration/platforms/kmong/",
+  "package_id": "r05-kmong",
+  "owned_paths": [
+    "product/lesson-registration/src/lesson_registration/platforms/kmong/",
+    "product/lesson-registration/fixtures/platforms/kmong/",
+    "product/lesson-registration/tests/modules/kmong/"
+  ],
+  "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+  "plan_path": "product/lesson-registration/tests/modules/kmong/PLAN.md",
+  "priority_note": "독립 mock/fake gateway 진행 가능; runtime 공통 계약 우선; WBS 미확정"
+}

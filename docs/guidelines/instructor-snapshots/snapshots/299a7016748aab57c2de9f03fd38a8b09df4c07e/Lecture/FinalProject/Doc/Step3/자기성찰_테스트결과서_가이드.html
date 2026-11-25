@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자기 성찰 로직 테스트 결과서 작성 가이드</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ink:#161a33; --muted:#5b6175; --soft:#8a8fa3; --line:#e7e4f0;
+  --p:#6d3fe0; --p2:#8b5cf6; --pl:#f4f0ff; --pll:#faf8ff;
+  --g:#14915a; --gl:#e8f7ef; --r:#d63c3c; --rl:#fdeeee; --o:#e08a1e; --ol:#fff5e6;
+  --b:#2563eb; --z:1;
+  --sans:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Noto Sans CJK KR","Noto Sans KR","Malgun Gothic",sans-serif;
+  --mono:"JetBrains Mono","D2Coding","SF Mono",Menlo,Consolas,"Noto Sans Mono CJK KR",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:#e9e8ef;-webkit-print-color-adjust:exact;print-color-adjust:exact;word-break:keep-all}
+.deck{display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0}
+.slide{width:960px;height:540px;position:relative;overflow:hidden;background:#fff;padding:32px 48px 0;box-shadow:0 6px 24px rgba(22,26,51,.12);zoom:var(--z)}
+.kicker{font-size:11px;font-weight:700;color:var(--p);letter-spacing:.14em}
+h2{font-size:25px;line-height:1.25;margin:6px 0 4px;font-weight:800;letter-spacing:-.02em}
+.lead{font-size:12.5px;color:var(--muted);margin:0 0 14px;line-height:1.5}
+.foot{position:absolute;left:48px;right:48px;bottom:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--soft)}
+.ref{position:absolute;left:48px;right:48px;bottom:38px;font-size:10px;color:var(--muted);line-height:1.5}
+.ref b{color:var(--b);font-weight:600}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.card h4{margin:0 0 7px;font-size:13px;font-weight:800}
+.tip{background:var(--pl);border-left:4px solid var(--p2);border-radius:8px;padding:9px 14px;font-size:12px;line-height:1.55}
+.tip .tag{display:inline-block;background:#fff;color:var(--p);font-weight:800;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-right:6px}
+.warn{background:var(--ol);border-left-color:var(--o)}
+.warn .tag{color:var(--o)}
+ul.dot{margin:0;padding:0;list-style:none}
+ul.dot li{position:relative;padding-left:14px;font-size:12px;line-height:1.55;margin:3px 0}
+ul.dot li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--p2)}
+ul.dot.chk li{padding-left:0}ul.dot.chk li::before{display:none}
+ul.dot.g li::before{background:var(--g)} ul.dot.r li::before{background:var(--r)}
+table.t{width:100%;border-collapse:collapse;font-size:11.5px}
+table.t th{background:#f3f2f8;text-align:left;padding:6px 10px;font-weight:700;color:#2b2f48}
+table.t td{padding:5px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+.mono,code{font-family:var(--mono);font-size:.94em}
+code{background:#f3f2f8;border-radius:4px;padding:0 4px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--pl);color:var(--p)}
+.pill.g{background:var(--gl);color:var(--g)}.pill.r{background:var(--rl);color:var(--r)}.pill.o{background:var(--ol);color:var(--o)}
+.num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--p);color:#fff;font-size:11px;font-weight:800;flex:none}
+.small{font-size:11px;color:var(--muted)}
+.muted{color:var(--muted)}
+.hl{background:linear-gradient(transparent 58%,#e6dcff 58%);font-weight:700}
+pre.code{margin:0;background:#171a2e;color:#e6e6f0;border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:10.4px;line-height:1.55;white-space:pre;overflow:hidden}
+pre.code .c{color:#8a90b0}.code .k{color:#c3a6ff}.code .s{color:#9ee6b8}.code .f{color:#ffd28a}
+/* cover */
+.cover{background:linear-gradient(135deg,#1b2038 0%,#2a2350 55%,#4a2a86 100%);color:#fff;padding:52px 64px}
+.cover .kicker{color:#c8b6ff}
+.cover h1{font-size:40px;line-height:1.28;margin:58px 0 18px;font-weight:800;letter-spacing:-.02em}
+.cover .sub{font-size:16px;line-height:1.7;color:#e6e1fa}
+.cover .meta{position:absolute;left:64px;bottom:44px;font-size:11.5px;line-height:1.7;color:#cfc8ea}
+.cover .pg{position:absolute;right:48px;bottom:20px;font-size:10px;color:#a9a2c8}
+/* section slide */
+.sec{background:linear-gradient(135deg,#1b2038 0%,#2e2556 60%,#4a2a86 100%);color:#fff;padding:0 64px;display:flex;flex-direction:column;justify-content:center}
+.sec .kicker{color:#c8b6ff}
+.sec h2{font-size:32px;color:#fff;margin:12px 0 10px}
+.sec p{color:#ddd6f6;font-size:14px;line-height:1.7;margin:0}
+.sec .foot{color:#a9a2c8}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tl .card{padding:11px 12px}
+.tl .when{font-size:10.5px;font-weight:700;color:var(--soft)}
+.tl .what{font-size:13.5px;font-weight:800;margin:4px 0 3px}
+.tl .card.on{border:2px solid var(--p2);background:var(--pll)}
+.tl .card.on .when{color:var(--p)}
+/* trace */
+table.trace td{font-size:11px;padding:4px 9px}
+table.trace td.n{font-family:var(--mono);font-weight:700;color:var(--p)}
+table.trace tr.bad td{background:#fff8f0}
+table.trace tr.end td{background:var(--gl)}
+
+/* ===== slideshow mode ===== */
+body.show{background:#0f1020;overflow:hidden}
+body.show .deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:0;gap:0}
+body.show .slide{display:none;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+body.show .slide.active{display:block;animation:fadein .25s ease}
+body.show .slide.sec.active{display:flex}
+@keyframes fadein{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+.nav{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:rgba(22,24,44,.88);color:#e6e1fa;border-radius:999px;padding:6px 10px;font:600 12px var(--sans);z-index:10;transition:opacity .3s;backdrop-filter:blur(6px)}
+body.show .nav{display:flex}
+body.show.idle .nav{opacity:0}
+.nav button{all:unset;cursor:pointer;padding:4px 9px;border-radius:999px;font-size:13px;line-height:1}
+.nav button:hover{background:rgba(255,255,255,.14)}
+.nav .cnt{min-width:58px;text-align:center;font-variant-numeric:tabular-nums}
+.bar{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,#8b5cf6,#c3a6ff);z-index:10;display:none;transition:width .25s}
+body.show .bar{display:block}
+.help{position:fixed;inset:0;background:rgba(10,10,25,.72);display:none;align-items:center;justify-content:center;z-index:20}
+.help.on{display:flex}
+.help .box{background:#fff;color:var(--ink);border-radius:14px;padding:22px 26px;font:13px/1.9 var(--sans);min-width:320px}
+.help kbd{font-family:var(--mono);background:#f3f2f8;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:11.5px}
+.scrollbtn{position:fixed;right:16px;top:14px;z-index:10;all:unset;cursor:pointer;background:#2a2350;color:#fff;font:600 12px var(--sans);padding:7px 12px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+body.show .scrollbtn{display:none}
+
+@media print{
+  .nav,.bar,.help,.scrollbtn{display:none!important}
+  body.show{overflow:visible}
+  body.show .deck{position:static;display:block}
+  body.show .slide{display:block!important;animation:none}
+  body.show .slide.sec{display:flex!important}
+  body{background:none}
+  .deck{padding:0;gap:0;display:block}
+  .slide{box-shadow:none;zoom:1;page-break-after:always;break-after:page}
+  @page{size:960px 540px;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+<!-- 01 COVER -->
+<section class="slide cover">
+  <div class="kicker">최종 프로젝트 · STEP3 · 12/04 산출물</div>
+  <h1>자기 성찰 로직<br>테스트 결과서</h1>
+  <div class="sub">초기 응답 → 오류 탐지 → 보정 → 최종 판정을<br>숫자와 실행 기록으로 보이는 방법</div>
+  <div class="meta">설명 20분 + 팀 적용 15분 · 문서 형식 기준: 주요 산출물 문서 06번 · 사례는 교육용 가상 예시<br>AI 애플리케이션 개발 과정 · 최종 프로젝트 STEP3 자료</div>
+  <div class="pg">01 / 22</div>
+</section>
+
+<!-- 02 AGENDA -->
+<section class="slide">
+  <div class="kicker">00 · 오늘의 흐름</div>
+  <h2>시험을 설계하고 → 두 번 돌리고 → 숫자로 말한다</h2>
+  <p class="lead">첨삭 비유로 용어를 맞추고, 지난주 설계서의 검증 루프를 실제로 시험하는 순서대로 여덟 칸을 채웁니다.</p>
+  <div class="grid g4" style="margin-top:6px">
+    <div class="card"><span class="pill">03~07장</span><h4 style="margin-top:8px">① 무엇을 증명하나</h4><ul class="dot"><li>문서의 자리 · 평가 포인트</li><li>첨삭 비유 · 용어 정리</li><li>자기 성찰 ≠ 재시도 ≠ 복구</li></ul></div>
+    <div class="card"><span class="pill">08~12장</span><h4 style="margin-top:8px">② 시험 설계</h4><ul class="dot"><li>1칸 루프의 모양과 상한</li><li>2칸 합격 기준 먼저 쓰기</li><li>평가 코드 · 시험 데이터</li></ul></div>
+    <div class="card"><span class="pill">13~20장</span><h4 style="margin-top:8px">③ 돌리고 기록하기</h4><ul class="dot"><li>보정 끄고 한 번, 켜고 한 번</li><li>추적 증빙 · 종료 · 비용</li><li>실행 기록 · 흔한 실수</li></ul></div>
+    <div class="card"><span class="pill g">21~22장</span><h4 style="margin-top:8px">④ 팀 적용 15분</h4><ul class="dot g"><li>다른 주제로 옮긴 예시</li><li>제출 전 체크리스트</li><li>기록만 보고 결론 맞히기</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px;background:var(--pll)">
+    <h4>끝나고 나면 할 수 있는 것</h4>
+    <div class="grid g3" style="gap:10px">
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5"><span class="num">1</span><span>시험 <b>전에</b> 합격 기준과 시험 입력을 정한다</span></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5"><span class="num">2</span><span>보정 <b>전 · 후</b>를 같은 입력으로 비교해 효과를 보인다</span></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5"><span class="num">3</span><span>통과 · 이관 · 비용을 <b>분모를 빼지 않고</b> 숫자로 적는다</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>02 / 22</span></div>
+</section>
+
+<!-- 03 WHERE -->
+<section class="slide">
+  <div class="kicker">01 · 이 문서의 자리</div>
+  <h2>“보정 루프가 실제로 답을 나아지게 했는가”를 시험으로 보이는 문서</h2>
+  <p class="lead">설계서가 루프를 그렸다면, 이 결과서는 그 루프를 돌려 본 결과를 적습니다.</p>
+  <div class="tl">
+    <div class="card"><div class="when">STEP3 · 11/27</div><div class="what">상태 전이 그래프 설계서</div><div class="small">검증 노드와 반복 상한</div></div>
+    <div class="card on"><div class="when">STEP3 · 12/04 ← 지금</div><div class="what">자기 성찰 테스트 결과서</div><div class="small">초기 · 비판 · 보정 · 최종</div></div>
+    <div class="card"><div class="when">STEP4 · 12/11</div><div class="what">협업 아키텍처</div><div class="small">평가자와 작성자를 역할로 분리</div></div>
+    <div class="card"><div class="when">STEP4 · 12/18</div><div class="what">Auto-Healing 결과서</div><div class="small">장애 복구 측정 (별도 주제)</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h4>평가에서 보는 것</h4><ul class="dot"><li>오류를 탐지하면 보정 · 재시도 루프가 도는가</li><li>초기 응답과 최종 답의 인과관계가 기록에 보이는가</li><li>반복 종료 조건과 토큰 비용 통제가 있는가</li></ul></div>
+    <div class="card"><h4>구분해 두기</h4><ul class="dot"><li><b>자기 성찰</b>: 답의 품질을 평가하고 고친다</li><li><b>Auto-Healing</b>: 시스템 장애를 감지해 복구한다</li><li>두 결과를 한 표에 섞어 세지 않는다</li></ul></div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">연결</span>설계서의 <code>validate</code> 노드와 <code>retry_count &lt; 2</code> 전이가 이번 시험의 대상입니다. 설계서 전이 하나 = 결과서 시험 하나.</div>
+  <div class="ref">근거: <b>최종 프로젝트 가이드 7쪽</b>(자기 성찰 산출물 · 평가 포인트) · <b>Auto-Healing 가이드 2쪽</b>(세 개념의 차이) · 문서 형식은 <b>주요 산출물 문서 06</b> · 모든 ID · 수치는 교육용 가상 샘플</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>03 / 22</span></div>
+</section>
+
+<!-- 04 ANALOGY -->
+<section class="slide">
+  <div class="kicker">02 · 첨삭으로 이해하기</div>
+  <h2>초안 → 빨간펜 → 고쳐 쓰기 → 채점</h2>
+  <p class="lead">자기 성찰 루프는 글쓰기 첨삭과 같습니다. 결과서는 “첨삭을 했더니 점수가 올랐다”를 <b>증거와 함께</b> 보여 주는 성적표입니다.</p>
+  <div class="grid g4">
+    <div class="card"><span class="pill">① 초안</span><h4 style="margin-top:8px">초기 응답</h4><div class="small" style="line-height:1.55">학생이 처음 쓴 글<br>→ 에이전트가 <b>보정 없이</b> 처음 낸 답</div></div>
+    <div class="card"><span class="pill o">② 빨간펜</span><h4 style="margin-top:8px">평가 · 오류 탐지</h4><div class="small" style="line-height:1.55">“3문단 근거가 없음”<br>→ <code>missing_evidence</code> 같은 <b>이름 붙은 피드백</b></div></div>
+    <div class="card"><span class="pill">③ 고쳐 쓰기</span><h4 style="margin-top:8px">보정</h4><div class="small" style="line-height:1.55">지적받은 곳만 고침<br>→ 로그 재조회 · 승인 단계 추가</div></div>
+    <div class="card"><span class="pill g">④ 채점</span><h4 style="margin-top:8px">최종 판정</h4><div class="small" style="line-height:1.55">같은 채점표로 다시 채점<br>→ 통과 / 상한 도달 → 사람 이관</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card" style="border-color:#f3c7c7;background:#fffafa">
+      <h4 style="color:var(--r)">이런 첨삭은 믿을 수 없다</h4>
+      <ul class="dot r"><li>초안은 버리고 <b>고친 글만</b> 제출 → 나아졌는지 모름</li><li>빨간펜이 “좋네요”만 씀 → 무엇을 잡았는지 모름</li><li>점수가 안 나오면 <b>채점 기준을 낮춤</b></li><li>못 고친 학생은 명단에서 뺌</li></ul>
+    </div>
+    <div class="card" style="border-color:#bfe6d2;background:#f8fdfa">
+      <h4 style="color:var(--g)">결과서가 보여야 하는 것</h4>
+      <ul class="dot g"><li>같은 글의 <b>초안과 최종본</b>을 나란히</li><li>빨간펜이 <b>무엇을 왜</b> 지적했는지</li><li>채점 기준은 <b>첨삭 전에</b> 확정</li><li>전체 · 통과 · 이관 수를 <b>모두</b> 적기</li></ul>
+    </div>
+  </div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>04 / 22</span></div>
+</section>
+
+<!-- 05 TERMS -->
+<section class="slide">
+  <div class="kicker">03 · 용어 정리</div>
+  <h2>결과서에 나오는 말을 먼저 맞춘다</h2>
+  <p class="lead">같은 단어를 칸마다 같은 뜻으로 써야 읽는 사람이 칸을 오가며 확인할 수 있습니다.</p>
+  <table class="t">
+    <tr><th style="width:150px">용어</th><th style="width:330px">뜻</th><th>이번 예시에서</th></tr>
+    <tr><td><b>TC (시험 번호)</b></td><td>시험 입력 하나에 붙인 고유 번호. 3 · 4 · 6 · 7칸에서 같은 번호</td><td><code>SC-01</code> ~ <code>SC-04</code></td></tr>
+    <tr><td><b>초기 응답</b></td><td>보정을 끈 상태로 한 번만 돌린 결과</td><td>“네트워크 장애로 단정”</td></tr>
+    <tr><td><b>평가 (critique)</b></td><td>답을 기준에 대보고 떨어진 기준의 <b>이름</b>을 남기는 단계</td><td><code>validate</code> 노드, <code>missing_evidence</code></td></tr>
+    <tr><td><b>보정 (revise)</b></td><td>피드백을 받아 답을 고치고 <b>같은 기준으로</b> 다시 평가</td><td>로그 재조회 후 재진단</td></tr>
+    <tr><td><b>상한</b></td><td>보정 반복의 최대 횟수. 코드 상수로 고정</td><td><code>MAX_RETRY = 2</code></td></tr>
+    <tr><td><b>종료 사유</b></td><td>루프가 끝난 이유: 통과 · 상한 도달 · 치명 오류</td><td><code>final_status=pass</code></td></tr>
+    <tr><td><b>초기 / 최종 합격률</b></td><td>보정 전 · 후에 기준을 통과한 비율 (분모는 전체)</td><td>12/20 → 18/20</td></tr>
+    <tr><td><b>추적 증빙</b></td><td>숫자가 실제 실행에서 나왔음을 보이는 ID와 로그</td><td><code>trace_id</code>, <code>run_id</code></td></tr>
+  </table>
+  <div class="tip" style="margin-top:12px"><span class="tag">주의</span>“PASS”는 두 가지로 쓰입니다. <b>에이전트 답이 기준을 통과</b>(pass)했는지와 <b>시험이 기대대로 동작</b>(PASS)했는지는 다릅니다. 사람 이관으로 끝나도 기대가 이관이었다면 시험은 PASS입니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>05 / 22</span></div>
+</section>
+
+<!-- 06 THREE CONCEPTS -->
+<section class="slide">
+  <div class="kicker">04 · 헷갈리는 세 가지</div>
+  <h2>재시도 · 자기 성찰 · Auto-Healing은 고치는 대상이 다르다</h2>
+  <p class="lead">세 가지 모두 “다시 한다”처럼 보이지만, 무엇이 잘못됐고 무엇을 고치는지가 다릅니다. 이 결과서는 가운데 열만 다룹니다.</p>
+  <table class="t">
+    <tr><th style="width:110px"></th><th>재시도 (retry)</th><th style="background:#ebe4ff">자기 성찰 (self-correction)</th><th>Auto-Healing</th></tr>
+    <tr><td><b>무엇이 잘못</b></td><td>호출이 일시적으로 실패 (타임아웃)</td><td style="background:var(--pll)">답의 <b>내용 · 형식</b>이 기준 미달</td><td>서비스 · 프로세스가 <b>고장</b></td></tr>
+    <tr><td><b>무엇을 고치나</b></td><td>같은 호출을 그대로 한 번 더</td><td style="background:var(--pll)">피드백을 반영해 <b>답을 다시 생성</b></td><td>재시작 · 경로 전환 등 <b>시스템 조치</b></td></tr>
+    <tr><td><b>판정 기준</b></td><td>응답이 왔는가</td><td style="background:var(--pll)">합격 기준(근거 · 스키마 · 승인)</td><td>헬스체크 정상 회복</td></tr>
+    <tr><td><b>측정 지표</b></td><td>재시도 성공률</td><td style="background:var(--pll)">초기 → 최종 합격률 · 평균 반복 · 토큰</td><td>복구율 · 감지 · 복구 시간</td></tr>
+    <tr><td><b>보고서</b></td><td>API 설계서 규칙</td><td style="background:var(--pll)"><b>이 결과서 (12/04)</b></td><td>Auto-Healing 결과서 (12/18)</td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="tip"><span class="tag">한 줄로</span>재시도는 <b>전화를 다시 거는 것</b>, 자기 성찰은 <b>답안을 고쳐 쓰는 것</b>, Auto-Healing은 <b>고장 난 전화기를 고치는 것</b>입니다.</div>
+    <div class="tip warn"><span class="tag">주의</span>타임아웃 재시도로 통과한 건을 “자기 성찰 효과”로 세면 합격률이 부풀려집니다. 카운터와 표를 따로 둡니다.</div>
+  </div>
+  <div class="ref">참고: <b>Auto-Healing 가이드 2~3쪽</b>(세 개념의 차이 · 재시도 ≠ Auto-Healing)</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>06 / 22</span></div>
+</section>
+
+<!-- 07 EIGHT -->
+<section class="slide">
+  <div class="kicker">05 · 여덟 칸</div>
+  <h2>문서는 여덟 칸을 순서대로 채운다</h2>
+  <p class="lead">칸마다 팀 시험에서 나온 사실을 한 줄 이상 적습니다. 오른쪽 열은 지난주 설계서의 어느 칸에서 이어지는지입니다.</p>
+  <table class="t">
+    <tr><th style="width:40px">칸</th><th style="width:160px">이름</th><th style="width:330px">무엇을 쓰나</th><th>쉽게 말하면</th><th style="width:150px">설계서에서 이어짐</th></tr>
+    <tr><td><b>1</b></td><td>목적 · 범위 및 로직</td><td>무엇을 평가하고 언제 보정하는가 (루프 형태와 상한)</td><td>시험 범위 공지</td><td class="small">2 · 8칸 verify 전이</td></tr>
+    <tr><td><b>2</b></td><td>환경 · 조건 · 합격 기준</td><td>환경 · 지표 · 비용 기록 방법 · 시험 데이터 구성</td><td>채점표</td><td class="small">3칸 출력 스키마</td></tr>
+    <tr><td><b>3</b></td><td>시나리오별 비교</td><td>시나리오마다 초기 응답 · 오류 탐지 · 보정 · 최종 결과</td><td>초안 ↔ 최종본</td><td class="small">8칸 전이표의 각 행</td></tr>
+    <tr><td><b>4</b></td><td>추적 증빙</td><td>추적 ID · 노드 · 피드백 · 재시도 횟수 · 최종 상태</td><td>채점 근거</td><td class="small">4칸 기록 형식</td></tr>
+    <tr><td><b>5</b></td><td>종료 · 비용 · 성능</td><td>종료 사유 · 초기 / 최종 합격 · 평균 반복 · 토큰 · 시간</td><td>성적 통계</td><td class="small">5 · 9칸 상한 · 종료</td></tr>
+    <tr><td><b>6</b></td><td>테스트 실행 기록</td><td>입력 상황 · 기대 동작 · 관찰 결과 · 판정</td><td>시험지 채점</td><td class="small">8칸 전이표</td></tr>
+    <tr><td><b>7</b></td><td>실행 추적 샘플</td><td>한 번의 실행을 시간 순서 로그로 보임</td><td>풀이 과정</td><td class="small">7칸 State 필드</td></tr>
+    <tr><td><b>8</b></td><td>결과 요약</td><td>통과 건수 · 실행 일시 · 로그 링크 · 재현 절차</td><td>총평</td><td class="small">—</td></tr>
+  </table>
+  <div class="tip" style="margin-top:10px"><span class="tag">팁</span>3칸은 시나리오 비교, 6칸은 실행 기록입니다. <b>같은 TC 번호</b>로 이어 쓰면 읽는 사람이 칸을 오가며 확인할 수 있습니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>07 / 22</span></div>
+</section>
+
+<!-- 08 SECTION -->
+<section class="slide sec">
+  <div class="kicker">PART 2 · 시험 설계</div>
+  <h2>1칸 · 2칸 — 무엇을 시험하고, 무엇이 합격인가</h2>
+  <p>시험을 돌리기 <b>전에</b> 쓰는 칸입니다. 루프의 모양, 상한, 합격 기준, 시험 데이터를 먼저 고정합니다.<br>예시는 지난주와 같은 <b>DiagnosisAgent</b>(1팀 예시 · 가상)입니다.</p>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>08 / 22</span></div>
+</section>
+
+<!-- 09 LOOP -->
+<section class="slide">
+  <div class="kicker">06 · 1칸 목적 · 범위 및 로직</div>
+  <h2>어떤 루프를 시험하는지 한 장으로 먼저 적는다</h2>
+  <p class="lead">예시: DiagnosisAgent의 초기 원인 분석을 평가 노드가 검증하고, 근거 부족 · 잘못된 Tool 선택이면 <b>최대 2회</b> 다시 만드는 Self-Correction Loop를 시험합니다.</p>
+  <div style="display:grid;grid-template-columns:560px 1fr;gap:16px;align-items:start">
+    <svg viewBox="0 0 560 210" width="560" height="210" style="display:block">
+      <defs>
+        <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4b5070"/></marker>
+        <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e08a1e"/></marker>
+        <marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d63c3c"/></marker>
+        <marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14915a"/></marker>
+      </defs>
+      <g font-size="10.5" style="font-family:var(--sans)">
+        <path d="M150,40 H200" stroke="#4b5070" stroke-width="1.4" fill="none" marker-end="url(#m1)"/>
+        <path d="M350,40 H400" stroke="#14915a" stroke-width="1.4" fill="none" marker-end="url(#m4)"/><text x="362" y="16" fill="#14915a">통과</text>
+        <path d="M245,58 V96 H150 V138" stroke="#e08a1e" stroke-width="1.4" fill="none" marker-end="url(#m2)"/><text x="60" y="92" fill="#c27414">미달 + 구체적 피드백</text>
+        <path d="M225,156 H300 V60" stroke="#e08a1e" stroke-width="1.4" stroke-dasharray="5 4" fill="none" marker-end="url(#m2)"/><text x="306" y="110" fill="#c27414">수정본을 같은 기준으로</text><text x="306" y="124" fill="#c27414">다시 평가</text>
+        <path d="M330,58 V80 H475 V138" stroke="#d63c3c" stroke-width="1.4" fill="none" marker-end="url(#m3)"/><text x="400" y="74" fill="#d63c3c">상한(2회) 도달</text>
+      </g>
+      <g font-size="12" text-anchor="middle" style="font-family:var(--sans);font-weight:700" fill="#161a33">
+        <rect x="10" y="22" width="140" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="80" y="45">초기 응답 (생성)</text>
+        <rect x="200" y="22" width="150" height="36" rx="8" fill="#fff5e6" stroke="#e08a1e" stroke-width="1.5"/><text x="275" y="45">평가 · 오류 탐지</text>
+        <rect x="400" y="22" width="150" height="36" rx="8" fill="#e8f7ef" stroke="#14915a" stroke-width="1.5"/><text x="475" y="45">통과 · 종료</text>
+        <rect x="75" y="138" width="150" height="36" rx="8" fill="#f4f0ff" stroke="#8b5cf6" stroke-width="1.5"/><text x="150" y="161">보정 (수정)</text>
+        <rect x="395" y="138" width="160" height="36" rx="8" fill="#fdeeee" stroke="#d63c3c" stroke-width="1.5"/><text x="475" y="161">상한 도달 · 사람 이관</text>
+      </g>
+      <text x="10" y="200" font-size="10" fill="#8a8fa3" style="font-family:var(--sans)">설계서 그래프의 diagnose → validate → (retry) diagnose 고리가 이 그림입니다.</text>
+    </svg>
+    <div class="card"><h4>시험할 것 (예시)</h4><ul class="dot"><li>근거 부족 · 잘못된 Tool 선택을 <b>탐지</b>하는가</li><li>보정 뒤 <b>같은 기준</b>으로 다시 평가하는가</li><li>최대 2회에서 <b>반드시 멈추는가</b></li><li>통과 못 한 결과를 <b>성공처럼 내보내지 않는가</b></li><li>이미 맞는 답을 <b>괜히 고치지 않는가</b></li></ul></div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">핵심</span>끝까지 통과하지 못하면 실패(사람 이관)로 끝냅니다. <b>통과하지 못한 결과를 성공처럼 내보내지 않는다</b>는 것이 이 시험의 핵심 기준입니다.</div>
+  <div class="ref">참고: <b>Auto-Healing 가이드 11쪽</b>(생성과 평가를 분리한 루프) · <b>상태 전이 그래프 설계서 가이드</b>(전이 완전성 · validate 노드)</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>09 / 22</span></div>
+</section>
+
+<!-- 10 CRITERIA -->
+<section class="slide">
+  <div class="kicker">07 · 2칸 환경 · 조건 · 합격 기준</div>
+  <h2>합격 기준은 시험을 돌리기 전에 쓴다</h2>
+  <p class="lead">채점표를 먼저 정해야 점수에 의미가 생깁니다. 결과를 보고 기준을 바꾸면 그건 “탐색”이지 “시험”이 아닙니다.</p>
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:14px">
+    <div>
+      <table class="t">
+        <tr><th style="width:70px">항목</th><th>예시</th></tr>
+        <tr><td><b>환경</b></td><td>LangGraph / 모의 장애 로그 20건 / 고정 프롬프트 v1.2</td></tr>
+        <tr><td><b>지표</b></td><td>근거 포함률 ≥ 90% · 최종 스키마 적합률 100% · 최대 2회 반복</td></tr>
+        <tr><td><b>비용</b></td><td>시나리오별 입력 · 출력 토큰과 총 호출 횟수 기록</td></tr>
+        <tr><td><b>데이터</b></td><td>정상 5 · API 타임아웃 5 · 프로세스 다운 5 · 근거 누락 5 (가상)</td></tr>
+      </table>
+      <div class="card" style="margin-top:10px;padding:10px 12px">
+        <h4>흐린 기준 → 시험할 수 있는 기준</h4>
+        <table class="t" style="font-size:11px">
+          <tr><td style="color:var(--r);width:44%">“답이 정확해야 한다”</td><td style="color:var(--g)">근거 로그 ID가 1개 이상 있다</td></tr>
+          <tr><td style="color:var(--r)">“형식이 맞아야 한다”</td><td style="color:var(--g)">필수 필드 4개가 모두 있다</td></tr>
+          <tr><td style="color:var(--r)">“위험하지 않아야 한다”</td><td style="color:var(--g)">restart 권고면 needs_approval=true</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="background:var(--pll)">
+      <h4>평가 루프 규칙 4가지</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:11.8px;line-height:1.5">
+        <div style="display:flex;gap:8px"><span class="num">1</span><span><b>기준</b>: 평균 점수 하나가 아니라, <b>어떤 기준에서</b> 떨어졌는지 이름이 남게</span></div>
+        <div style="display:flex;gap:8px"><span class="num">2</span><span><b>검사</b>: 스키마 · 근거 유무 · 금지 표현은 <b>코드가 먼저</b>, LLM 평가는 그다음</span></div>
+        <div style="display:flex;gap:8px"><span class="num">3</span><span><b>피드백</b>: 어디가 왜 틀렸는지 구체적으로 (“다시 해 봐”는 피드백이 아님)</span></div>
+        <div style="display:flex;gap:8px"><span class="num">4</span><span><b>상한</b>: 반복 횟수를 <b>코드의 상수</b>로 제한</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">팁</span>결과를 본 뒤 합격선이나 프롬프트를 바꾸면 <b>탐색용</b>으로 표시하고, 최종 비교에는 따로 준비한 입력을 씁니다 (12장).</div>
+  <div class="ref">참고: <b>Auto-Healing 가이드 12쪽</b>(루프의 네 가지 규칙) · <b>평가 가이드 6쪽</b>(바꾼 것과 고정한 것)</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>10 / 22</span></div>
+</section>
+
+<!-- 11 CODE -->
+<section class="slide">
+  <div class="kicker">08 · 평가를 코드로</div>
+  <h2>기준 이름이 남는 평가 함수와 상한이 있는 루프</h2>
+  <p class="lead">규칙 1 · 2 · 4를 그대로 옮긴 예시입니다. 평가 함수는 <b>떨어진 기준의 이름 목록</b>을 돌려주고, 빈 목록이면 통과입니다. (표준 라이브러리만 사용)</p>
+  <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<pre class="code" style="font-size:9.8px;line-height:1.46"><span class="k">REQUIRED</span> = {<span class="s">"cause_candidates"</span>, <span class="s">"evidence_ids"</span>, <span class="s">"recommended_action"</span>, <span class="s">"needs_approval"</span>}
+<span class="k">RISKY</span> = {<span class="s">"restart_request"</span>, <span class="s">"rollback"</span>}
+<span class="k">MAX_RETRY</span> = <span class="f">2</span>                     <span class="c"># 규칙 4: 상한은 코드 상수</span>
+
+<span class="k">def</span> <span class="f">critique</span>(out: dict) -> list[str]:      <span class="c"># 규칙 1 · 2</span>
+    fails = []
+    <span class="k">if</span> REQUIRED - out.keys(): fails.append(<span class="s">"schema_missing"</span>)
+    <span class="k">if not</span> out.get(<span class="s">"evidence_ids"</span>): fails.append(<span class="s">"missing_evidence"</span>)
+    <span class="k">if</span> out.get(<span class="s">"recommended_action"</span>) <span class="k">in</span> RISKY <span class="k">and not</span> out.get(<span class="s">"needs_approval"</span>):
+        fails.append(<span class="s">"approval_required"</span>)
+    <span class="k">return</span> fails                         <span class="c"># [] = 통과</span>
+
+<span class="k">def</span> <span class="f">run</span>(case, generate, revise):
+    out = generate(case)
+    log = [(<span class="s">"initial"</span>, critique(out))]      <span class="c"># 초기 응답도 기록</span>
+    retry = <span class="f">0</span>
+    <span class="k">while</span> (fails := critique(out)) <span class="k">and</span> retry &lt; MAX_RETRY:
+        out = revise(out, fails)             <span class="c"># 규칙 3: 이름 붙은 피드백</span>
+        retry += <span class="f">1</span>
+        log.append((<span class="s">f"revise_{retry}"</span>, critique(out)))
+    status = <span class="s">"pass"</span> <span class="k">if not</span> critique(out) <span class="k">else</span> <span class="s">"handoff"</span>
+    <span class="k">return</span> status, retry, log</pre>
+    <div>
+      <div class="small" style="font-weight:700;margin-bottom:5px">가짜 생성기로 돌려 본 결과 (실행 확인)</div>
+<pre class="code" style="font-size:9.6px;line-height:1.55"><span class="c"># SC-01 근거 누락 → 1회 보정 후 통과</span>
+(<span class="s">'pass'</span>, <span class="f">1</span>, [(<span class="s">'initial'</span>, [<span class="s">'missing_evidence'</span>]),
+            (<span class="s">'revise_1'</span>, [])])
+<span class="c"># SC-03 고쳐지지 않음 → 상한에서 멈춤</span>
+(<span class="s">'handoff'</span>, <span class="f">2</span>, [... <span class="s">'revise_2'</span>, [<span class="s">'missing_evidence'</span>]])
+<span class="c"># SC-04 정상 입력 → 고치지 않음</span>
+(<span class="s">'pass'</span>, <span class="f">0</span>, [(<span class="s">'initial'</span>, [])])</pre>
+      <div class="tip" style="margin-top:10px;font-size:11.2px"><span class="tag">왜 코드 먼저</span>근거 ID 유무 같은 건 코드가 100% 정확합니다. LLM 평가는 “원인 설명이 근거와 맞는가”처럼 <b>코드로 못 보는 것</b>에만 씁니다.</div>
+      <div class="small" style="margin-top:8px;line-height:1.5"><code>log</code>가 그대로 3칸(초기 → 탐지 → 보정 → 최종)과 4칸(retry_count · final_status)의 재료가 됩니다.</div>
+    </div>
+  </div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>11 / 22</span></div>
+</section>
+
+<!-- 12 DATA -->
+<section class="slide">
+  <div class="kicker">09 · 시험 데이터 고르기</div>
+  <h2>쉬운 문제 · 고칠 수 있는 문제 · 못 고치는 문제를 섞는다</h2>
+  <p class="lead">통과하는 입력만 넣으면 루프가 일을 했는지 알 수 없습니다. 루프의 세 가지 출구가 모두 한 번 이상 나오도록 입력을 고릅니다.</p>
+  <div class="grid g3">
+    <div class="card" style="border-color:#bfe6d2"><span class="pill g">정상 입력</span><h4 style="margin-top:8px">이미 맞는 답</h4><div class="small" style="line-height:1.55">초기 응답이 바로 통과해야 함<br>→ <b>불필요한 수정</b>을 안 하는지 확인<br>예: SC-04</div></div>
+    <div class="card" style="border-color:#f5d9b0"><span class="pill o">탐지 후 보정</span><h4 style="margin-top:8px">고칠 수 있는 오류</h4><div class="small" style="line-height:1.55">근거 누락 · 승인 조건 누락<br>→ 탐지하고 <b>1~2회 안에</b> 통과하는지<br>예: SC-01, SC-02</div></div>
+    <div class="card" style="border-color:#f3c7c7"><span class="pill r">상한 도달</span><h4 style="margin-top:8px">못 고치는 오류</h4><div class="small" style="line-height:1.55">정보가 원래 부족한 입력<br>→ 2회에서 <b>멈추고 이관</b>하는지<br>예: SC-03</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <h4>데이터 20건 나누기 (가상)</h4>
+      <div style="display:flex;height:22px;border-radius:6px;overflow:hidden;font-size:10.5px;font-weight:700;color:#fff;text-align:center;line-height:22px">
+        <div style="flex:5;background:#14915a">정상 5</div><div style="flex:5;background:#8b5cf6">API 타임아웃 5</div><div style="flex:5;background:#6d3fe0">프로세스 다운 5</div><div style="flex:5;background:#e08a1e">근거 누락 5</div>
+      </div>
+      <div class="small" style="margin-top:8px;line-height:1.55">유형별로 같은 수를 넣으면 “어느 유형에서 루프가 약한지”를 따로 셀 수 있습니다.</div>
+    </div>
+    <div class="card">
+      <h4>탐색용과 최종 비교용을 나눈다</h4>
+      <table class="t" style="font-size:11px">
+        <tr><th></th><th>탐색용</th><th>최종 비교용</th></tr>
+        <tr><td><b>용도</b></td><td>프롬프트 · 기준 다듬기</td><td>결과서 숫자</td></tr>
+        <tr><td><b>규칙</b></td><td>마음껏 보고 바꿈</td><td>한 번만 돌림, 수정 금지</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">비유</span>연습 문제로 공부하고 <b>시험 문제는 따로</b> 봅니다. 연습 문제 점수를 시험 점수라고 적으면 안 됩니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>12 / 22</span></div>
+</section>
+
+<!-- 13 SECTION -->
+<section class="slide sec">
+  <div class="kicker">PART 3 · 돌리고 기록하기</div>
+  <h2>3 ~ 8칸 — 두 번 돌리고, 같은 번호로 적는다</h2>
+  <p>같은 입력을 <b>보정 끄고 한 번, 켜고 한 번</b> 돌립니다. 그 차이가 이 문서가 증명하려는 “효과”입니다.<br>모든 숫자 옆에는 그 숫자가 나온 <b>실행 기록</b>이 있어야 합니다.</p>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>13 / 22</span></div>
+</section>
+
+<!-- 14 SCENARIOS -->
+<section class="slide">
+  <div class="kicker">10 · 3칸 시나리오별 비교</div>
+  <h2>초기 → 비판 → 보정 → 최종을 한 줄로 이어 쓴다</h2>
+  <p class="lead">정상, 근거 누락, 승인 누락처럼 서로 다른 경우를 고르고, 사람 이관으로 끝나는 시나리오를 하나 이상 넣습니다.</p>
+  <table class="t">
+    <tr><th style="width:60px">TC</th><th>초기 응답</th><th>자기 평가 · 오류 탐지</th><th>보정 · 재시도</th><th>최종 결과</th></tr>
+    <tr><td><b>SC-01</b></td><td>네트워크 장애 단정</td><td><code>missing_evidence</code> 근거 로그 없음</td><td>로그 재조회 1회</td><td>API 타임아웃 근거 제시 / <span class="pill g">통과</span></td></tr>
+    <tr><td><b>SC-02</b></td><td>restart 권고</td><td><code>approval_required</code> 승인 조건 누락</td><td>승인 단계 추가 1회</td><td>승인 대기 / <span class="pill g">통과</span></td></tr>
+    <tr><td><b>SC-03</b></td><td>정상 상태 오판</td><td>헬스체크 불일치</td><td>지표 재조회 2회 (상한)</td><td>판정 불가 → <span class="pill r">사람 이관</span></td></tr>
+    <tr style="background:var(--pll)"><td><b>SC-04</b></td><td>API 타임아웃 + 근거 포함</td><td>미달 없음</td><td>보정 0회</td><td>그대로 / <span class="pill g">통과</span> <span class="pill">추가</span></td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h4>한 줄을 읽는 법</h4><div class="small" style="line-height:1.6">왼쪽에서 오른쪽으로 <b>원인 → 결과</b>가 이어져야 합니다. “근거 로그 없음을 잡았고 → 로그를 다시 조회했고 → 그래서 근거가 생겼다”처럼 읽히면 좋은 행입니다.</div></div>
+    <div class="tip"><span class="tag">팁</span>“초기 응답”은 보정 없이 <b>한 번만</b> 돌린 결과입니다. SC-04처럼 고칠 게 없는 입력도 넣어야 루프가 괜히 답을 망치지 않는지 보입니다.</div>
+  </div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>14 / 22</span></div>
+</section>
+
+<!-- 15 ABLATION -->
+<section class="slide">
+  <div class="kicker">11 · 보정 전후 비교</div>
+  <h2>같은 입력을 두 번: 루프를 끄고 한 번, 켜고 한 번</h2>
+  <p class="lead">루프가 “돌았다”는 로그로 보이지만, “나아졌다”는 <b>루프가 없을 때와 비교</b>해야만 보입니다. 바꾸는 것은 루프 하나, 나머지는 고정합니다.</p>
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:14px">
+    <div>
+      <table class="t">
+        <tr><th>TC</th><th>A. 보정 끔 (<code>MAX_RETRY=0</code>)</th><th>B. 보정 켬 (<code>MAX_RETRY=2</code>)</th><th>차이</th></tr>
+        <tr><td><b>SC-01</b></td><td><span class="pill r">미달</span> 근거 없음</td><td><span class="pill g">통과</span> 1회 보정</td><td>개선</td></tr>
+        <tr><td><b>SC-02</b></td><td><span class="pill r">미달</span> 승인 누락</td><td><span class="pill g">통과</span> 1회 보정</td><td>개선</td></tr>
+        <tr><td><b>SC-03</b></td><td><span class="pill r">미달</span> 오판 그대로 출력</td><td><span class="pill o">이관</span> 2회 후</td><td>안전해짐</td></tr>
+        <tr><td><b>SC-04</b></td><td><span class="pill g">통과</span></td><td><span class="pill g">통과</span> 0회</td><td>변화 없음 ✓</td></tr>
+      </table>
+      <div class="card" style="margin-top:10px;padding:10px 12px">
+        <h4>고정해야 하는 것</h4>
+        <div class="grid g4" style="gap:6px;font-size:11px"><span class="pill">같은 입력 20건</span><span class="pill">같은 프롬프트 v1.2</span><span class="pill">같은 모델 · 온도</span><span class="pill">같은 평가 함수</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="background:var(--pll)">
+        <h4>SC-03이 왜 “좋아진 것”인가</h4>
+        <div class="small" style="line-height:1.6">A에서는 틀린 진단이 <b>그대로 RecoveryAgent에 넘어갑니다</b>. B에서는 통과하지 못했으니 사람에게 넘겼습니다. 정답을 못 냈어도 <b>틀린 답을 성공처럼 내보내지 않은 것</b>이 개선입니다.</div>
+      </div>
+      <div class="tip warn" style="margin-top:10px"><span class="tag">주의</span>B의 숫자만 적으면 루프 덕분인지 원래 잘하던 것인지 구분할 수 없습니다. 5칸의 “초기 합격”이 곧 A의 결과입니다.</div>
+      <div class="small" style="margin-top:8px">LLM은 같은 입력에도 답이 흔들릴 수 있으니, 여유가 있으면 2~3번 돌려 범위를 적습니다.</div>
+    </div>
+  </div>
+  <div class="ref">참고: <b>평가 가이드 6쪽</b>(바꾼 것과 고정한 것) · 표의 판정은 교육용 가상 예시입니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>15 / 22</span></div>
+</section>
+
+<!-- 16 TRACE -->
+<section class="slide">
+  <div class="kicker">12 · 4 · 7칸 추적 증빙과 실행 추적</div>
+  <h2>표의 숫자가 실제 실행에서 나왔음을 기록으로 잇는다</h2>
+  <p class="lead">4칸은 “어느 실행의 어느 노드에서 무슨 피드백이 나왔나”, 7칸은 그 실행 하나를 시간 순서로 펼친 것입니다. 둘 다 <b>SC-01</b>을 가리킵니다.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div>
+<pre class="code" style="font-size:10.6px"><span class="c"># 4 추적 증빙 (SC-01, 예시)</span>
+trace_id=<span class="s">trace-sc-01</span>   run_id=<span class="s">run-001</span>
+node=<span class="f">critique</span>   feedback=<span class="s">missing_evidence</span>
+retry_count=<span class="f">1</span>   final_status=<span class="s">pass</span>
+
+<span class="c"># 7 실행 추적 샘플 (SC-01, 예시)</span>
+10:01:00 <span class="f">diagnose</span>   -> evidence_missing
+10:01:01 <span class="f">validate</span>   -> retry_count=1
+10:01:02 <span class="f">fetch_logs</span> -> success
+10:01:04 <span class="f">diagnose</span>   -> confidence=0.91
+10:01:05 <span class="f">finalize</span>   -> completed</pre>
+      <div class="small" style="margin-top:8px;line-height:1.5">노드 이름(<code>diagnose</code> · <code>validate</code>)과 필드 이름(<code>retry_count</code>)이 지난주 설계서와 <b>글자까지 같아야</b> 합니다.</div>
+    </div>
+    <div>
+      <div class="card"><h4>기록에 꼭 있어야 하는 것</h4><ul class="dot"><li>같은 실행 ID로 초기 → 평가 → 보정 → 최종을 잇는다</li><li>어느 노드에서 어떤 피드백이 나왔는가</li><li>재시도 횟수와 최종 상태</li><li>토큰 · 소요 시간 (5칸 계산 재료)</li></ul></div>
+      <div class="card" style="margin-top:10px"><h4>로그 한 줄 읽기</h4>
+        <table class="t" style="font-size:11px"><tr><td class="mono" style="width:70px">10:01:01</td><td>언제</td></tr><tr><td class="mono">validate</td><td>어느 노드에서 (설계서 8칸)</td></tr><tr><td class="mono">retry_count=1</td><td>State가 어떻게 바뀌었나 (7칸)</td></tr></table>
+      </div>
+      <div class="tip warn" style="margin-top:10px"><span class="tag">제출 시</span>추적 화면이나 실행 로그를 첨부하고, API 키 · 토큰 · 불필요한 개인정보는 지웁니다.</div>
+    </div>
+  </div>
+  <div class="ref">참고: <b>평가 가이드 9쪽</b>(증빙 묶음 폴더 예시) · <b>Auto-Healing 가이드 20쪽</b>(기록이 곧 증빙) · 추적 도구는 팀이 쓰는 것(LangSmith 등)으로 바꿔 적으세요.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>16 / 22</span></div>
+</section>
+
+<!-- 17 END COST -->
+<section class="slide">
+  <div class="kicker">13 · 5칸 종료 · 비용 · 성능</div>
+  <h2>끝난 이유와 얼마나 나아졌는지를 같은 표에 둔다</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px">
+    <div>
+      <table class="t">
+        <tr><th style="width:110px">항목</th><th>예시 결과 (가상)</th></tr>
+        <tr><td><b>반복 종료</b></td><td>검증 통과 또는 retry_count ≥ 2 또는 Tool 치명 오류</td></tr>
+        <tr><td><b>초기 합격</b></td><td>12/20 (60%)</td></tr>
+        <tr><td><b>최종 합격</b></td><td>18/20 (90%) · 2건 사람 이관</td></tr>
+        <tr><td><b>평균 반복</b></td><td>1.4회</td></tr>
+        <tr><td><b>평균 토큰 · 시간</b></td><td>1,850토큰 · 1건 평균 3.2초</td></tr>
+      </table>
+      <div class="card" style="margin-top:10px"><h4>종료 사유를 셋으로 나눈다</h4>
+        <ul class="dot"><li><span class="pill g">통과</span> 기준을 모두 만족</li><li><span class="pill o">상한 도달</span> 정해진 횟수 뒤에도 미달 → 사람 이관</li><li><span class="pill r">치명 오류</span> Tool 실패 등으로 중단</li></ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h4>분모 20건을 빼지 않고 그리기</h4>
+        <div class="small" style="margin:6px 0 4px">초기 (보정 끔)</div>
+        <div style="display:flex;height:24px;border-radius:6px;overflow:hidden;font-size:10.5px;font-weight:700;color:#fff;line-height:24px;text-align:center"><div style="flex:12;background:#14915a">통과 12</div><div style="flex:8;background:#d63c3c">미달 8</div></div>
+        <div class="small" style="margin:10px 0 4px">최종 (보정 켬)</div>
+        <div style="display:flex;height:24px;border-radius:6px;overflow:hidden;font-size:10.5px;font-weight:700;color:#fff;line-height:24px;text-align:center"><div style="flex:18;background:#14915a">통과 18</div><div style="flex:2;background:#e08a1e">이관 2</div></div>
+        <div class="small" style="margin-top:8px;line-height:1.5">미달 8건 중 6건은 보정으로 통과, 2건은 멈추고 이관. 막대 길이는 둘 다 <b>20</b>입니다.</div>
+      </div>
+      <div class="tip" style="margin-top:10px"><span class="tag">팁</span>이관 · 실패 건을 분모에서 빼지 않습니다. <b>전체 20 / 통과 18 / 이관 2</b>처럼 적고, 보정으로 늘어난 토큰과 시간도 같이 보입니다 (다음 장).</div>
+    </div>
+  </div>
+  <div class="ref">참고: <b>평가 가이드 7쪽</b>(분모에서 빼지 않기) · <b>8쪽</b>(전체 시간 · 비용, 예상과 실측 분리) · 위 숫자는 교육용 가상 예시입니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>17 / 22</span></div>
+</section>
+
+<!-- 18 COST CALC -->
+<section class="slide">
+  <div class="kicker">14 · 비용 계산 따라 하기</div>
+  <h2>좋아진 만큼 무엇을 더 냈는지도 적는다</h2>
+  <p class="lead">보정 루프는 LLM을 더 부르므로 토큰과 시간이 늘어납니다. “합격률 +30%p”만 적지 말고 그 값을 같이 보여야 팀이 상한 2회가 적절한지 판단할 수 있습니다.</p>
+  <table class="t">
+    <tr><th style="width:150px">항목 (1건 평균)</th><th>A. 보정 끔</th><th>B. 보정 켬</th><th>차이</th></tr>
+    <tr><td><b>합격률</b></td><td>60% (12/20)</td><td>90% (18/20)</td><td><b>+30%p</b></td></tr>
+    <tr><td><b>LLM 호출</b></td><td>1회</td><td>2.4회 (= 1 + 평균 반복 1.4)</td><td>+1.4회</td></tr>
+    <tr><td><b>토큰</b></td><td>1,100</td><td>1,850</td><td>+750 (+68%)</td></tr>
+    <tr><td><b>시간</b></td><td>1.9초</td><td>3.2초</td><td>+1.3초 (+68%)</td></tr>
+  </table>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card"><h4>계산 한 줄</h4><div class="small" style="line-height:1.6">늘어난 통과 = 18 − 12 = <b>6건</b><br>늘어난 토큰 = 750 × 20 = <b>15,000</b><br>→ 통과 1건 늘리는 데 약 <b>2,500토큰</b></div></div>
+    <div class="card"><h4>이 숫자로 할 수 있는 판단</h4><div class="small" style="line-height:1.6">2회째 보정에서 통과한 건이 거의 없다면 상한을 1로 줄여 비용을 아낄 수 있습니다. → 반복 횟수별 통과 수를 같이 세 두세요.</div></div>
+    <div class="tip" style="display:flex;align-items:center"><div><span class="tag">구분</span>토큰 · 시간은 <b>실측</b>과 <b>예상</b>을 나눠 적습니다. 모의 응답(mock)으로 잰 값은 mock이라고 표시합니다.</div></div>
+  </div>
+  <div class="ref">A열의 1,100토큰 · 1.9초는 계산 방법을 보이려고 넣은 가상 값입니다. 팀은 실제 측정값으로 채웁니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>18 / 22</span></div>
+</section>
+
+<!-- 19 RECORD + SUMMARY -->
+<section class="slide">
+  <div class="kicker">15 · 6 · 8칸 실행 기록과 결과 요약</div>
+  <h2>기대와 관찰을 나란히 적고 판정 이유를 남긴다</h2>
+  <p class="lead">6칸의 TC는 3칸과 <b>같은 번호, 같은 입력</b>입니다. “기대 동작”은 시험 전에, “관찰 결과”는 시험 후에 적습니다.</p>
+  <table class="t">
+    <tr><th style="width:60px">TC</th><th>입력 상황</th><th>기대 동작</th><th>관찰 결과 (예시)</th><th style="width:56px">판정</th></tr>
+    <tr><td><b>SC-01</b></td><td>근거 로그 없이 원인 단정</td><td>근거 누락 감지 후 로그 재조회</td><td>1회 재조회 후 타임아웃 근거 제시</td><td><span class="pill g">PASS</span></td></tr>
+    <tr><td><b>SC-02</b></td><td>restart 권고, 승인 필드 없음</td><td>승인 필요 탐지 후 승인 단계 추가</td><td>승인 대기 상태로 종료</td><td><span class="pill g">PASS</span></td></tr>
+    <tr><td><b>SC-03</b></td><td>헬스체크와 지표가 불일치</td><td>최대 2회 재조회 후 사람 이관</td><td>2회 후 이관, 성공으로 표시 안 함</td><td><span class="pill g">PASS</span></td></tr>
+    <tr><td><b>SC-04</b></td><td>근거 포함된 정상 진단</td><td>수정 없이 1회에 통과</td><td>보정 0회, 그대로 통과</td><td><span class="pill g">PASS</span></td></tr>
+  </table>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card"><h4>8 결과 요약 문장 틀</h4>
+      <div style="font-size:11.5px;line-height:1.6;background:#f6f5fb;border-radius:8px;padding:8px 10px">“[실행 일시]에 [N]건을 실행해 [M]건 PASS, [K]건 사람 이관. 로그는 [링크], 재현은 [명령 또는 절차].”</div>
+      <div class="small" style="margin-top:6px">틀은 <b>실제 실행 뒤에만</b> 채웁니다.</div></div>
+    <div class="tip warn" style="display:flex;align-items:center"><div><span class="tag">찾아보기</span>원본 예시 문서는 3칸과 6칸이 <b>같은 SC 번호로 다른 시험</b>을 적고 있었습니다(예: 6칸 SC-03은 “도구 응답 오류”). 이 자료에서는 번호와 입력을 맞췄습니다. 실패한 시험도 판정 이유와 함께 남기세요.</div></div>
+  </div>
+  <div class="ref">참고: <b>평가 가이드 2쪽</b>(무엇을 확인했고 어디까지 말할 수 있나) · 모의 응답으로 시험했다면 mock 표시를 남깁니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>19 / 22</span></div>
+</section>
+
+<!-- 20 MISTAKES -->
+<section class="slide">
+  <div class="kicker">16 · 흔한 실수</div>
+  <h2>루프가 “돌았다”와 “나아졌다”는 다른 말이다</h2>
+  <table class="t" style="margin-top:10px">
+    <tr><th style="width:330px">흔한 실수</th><th>이렇게 고친다</th><th style="width:70px">관련 칸</th></tr>
+    <tr><td>보정 후 결과만 있고 초기 응답이 없다</td><td>같은 입력의 초기 응답과 최종 응답을 나란히 기록</td><td>3 · 5</td></tr>
+    <tr><td>평가를 같은 모델이 “괜찮다”고만 한다</td><td>기준 이름 · 코드 검사 · 구체적 피드백을 남긴다</td><td>2 · 4</td></tr>
+    <tr><td>반복 상한이 없거나 문서에만 있다</td><td>코드 상수로 제한하고 상한 도달 시험을 포함</td><td>1 · 6</td></tr>
+    <tr><td>못 고친 건을 빼고 합격률을 계산</td><td>전체 · 통과 · 이관 · 실패를 모두 적는다</td><td>5</td></tr>
+    <tr><td>토큰 · 시간 증가를 적지 않는다</td><td>보정 전후의 비용 · 지연을 함께 비교</td><td>5</td></tr>
+    <tr><td>합격선을 결과 본 뒤에 맞춘다</td><td>시험 전에 기준을 쓰고, 바꾸면 별도 결과로 표시</td><td>2</td></tr>
+    <tr><td>타임아웃 재시도 성공을 자기 성찰 효과로 센다</td><td>재시도 카운터와 보정 카운터를 따로 둔다</td><td>4 · 5</td></tr>
+    <tr><td>칸마다 TC 번호가 다른 시험을 가리킨다</td><td>3 · 4 · 6 · 7칸에서 같은 번호 = 같은 입력</td><td>3 · 6</td></tr>
+    <tr><td>추론 원문을 로그에 통째로 올린다</td><td>단계 · 도구 · 결과 요약만 기록, 비밀 값은 제거</td><td>4 · 7</td></tr>
+  </table>
+  <div class="ref">참고: <b>Auto-Healing 가이드 3쪽</b>(재시도 ≠ Auto-Healing) · <b>상태 전이 그래프 설계서 가이드</b>(종료 조건과 흔한 실수)</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>20 / 22</span></div>
+</section>
+
+<!-- 21 OTHER TOPIC -->
+<section class="slide">
+  <div class="kicker">17 · 다른 주제로 옮겨 보기</div>
+  <h2>가상 “주문 문의 응대 에이전트”로 같은 칸을 채우면</h2>
+  <p class="lead">지난주 설계서에서 쓴 가상 예시의 <code>check</code> 노드를 시험합니다. 주제가 달라도 칸과 규칙은 같고, 기준 이름과 숫자만 바뀝니다.</p>
+  <div style="display:grid;grid-template-columns:1fr 1.25fr;gap:14px">
+    <div class="card"><h4>1 · 2칸</h4>
+      <table class="t" style="font-size:11px">
+        <tr><td style="width:56px"><b>루프</b></td><td><code>compose</code> → <code>check</code> → 미달이면 compose, 최대 2회</td></tr>
+        <tr><td><b>기준</b></td><td><code>no_source</code> 답변에 주문 · 배송 조회 근거 없음<br><code>wrong_intent</code> 환불 문의에 배송 안내<br><code>pii_exposed</code> 전화번호 · 주소 노출</td></tr>
+        <tr><td><b>데이터</b></td><td>배송 조회 · 주소 변경 · 환불 · 조회 실패 각 5건 (가상)</td></tr>
+      </table>
+    </div>
+    <div class="card"><h4>3 · 6칸</h4>
+      <table class="t" style="font-size:10.8px">
+        <tr><th>TC</th><th>초기 → 탐지</th><th>보정</th><th>최종 · 판정</th></tr>
+        <tr><td style="white-space:nowrap"><b>OQ-01</b></td><td>“곧 도착” → <code>no_source</code></td><td>배송 조회 1회</td><td>도착 예정일 안내 / PASS</td></tr>
+        <tr><td style="white-space:nowrap"><b>OQ-02</b></td><td>주소 전체 노출 → <code>pii_exposed</code></td><td>마스킹 1회</td><td>일부 가림 / PASS</td></tr>
+        <tr><td style="white-space:nowrap"><b>OQ-03</b></td><td>환불 요청에 배송 안내 → <code>wrong_intent</code></td><td>2회 후 상한</td><td>상담원 이관 / PASS</td></tr>
+        <tr><td style="white-space:nowrap"><b>OQ-04</b></td><td>정상 배송 문의 → 미달 없음</td><td>0회</td><td>그대로 / PASS</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px"><span class="tag">보이는 점</span>OQ-03은 에이전트 범위 밖(환불)이라 원래 이관이 정답입니다. 이런 입력은 “상한 도달” 대신 <b>처음부터 이관</b>하도록 설계서 전이를 고치는 계기가 됩니다. 결과서가 설계서를 고치게 하는 좋은 예입니다.</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>21 / 22</span></div>
+</section>
+
+<!-- 22 CHECK -->
+<section class="slide">
+  <div class="kicker">18 · 제출 전 점검 · 팀 적용 15분</div>
+  <h2>시험 하나를 끝까지 돌려 같은 번호로 이어 적는다</h2>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:14px;margin-top:10px">
+    <div class="card"><h4>제출 전 체크</h4>
+      <ul class="dot chk" style="font-size:11.8px;line-height:1.8">
+        <li>☐ 여덟 칸이 모두 있고 예시 값은 우리 값으로 바꿨다</li>
+        <li>☐ 합격 기준을 시험 전에 썼다 (바꿨다면 표시했다)</li>
+        <li>☐ 시나리오에 정상 · 탐지 후 보정 · 이관 사례가 있다</li>
+        <li>☐ 초기 응답과 최종 응답을 같은 입력으로 비교했다</li>
+        <li>☐ 종료 사유 · 전체 / 통과 / 이관 수 · 토큰 · 시간이 있다</li>
+        <li>☐ 추적 로그나 화면이 첨부되고 비밀 값은 지웠다</li>
+        <li>☐ TC 번호가 3 · 4 · 6 · 7칸에서 같다</li>
+      </ul>
+    </div>
+    <div class="card" style="background:var(--pll)"><h4>팀 적용 순서 (15분)</h4>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:12px;line-height:1.45">
+        <div style="display:flex;gap:8px"><span class="num">1</span><span>평가할 보정 루프 하나를 정한다</span></div>
+        <div style="display:flex;gap:8px"><span class="num">2</span><span>시험 입력 3~5건과 합격 기준을 쓴다</span></div>
+        <div style="display:flex;gap:8px"><span class="num">3</span><span>보정 없이 한 번, 보정을 켜고 한 번 돌린다</span></div>
+        <div style="display:flex;gap:8px"><span class="num">4</span><span>TC마다 초기 · 탐지 · 보정 · 최종을 기록한다</span></div>
+        <div style="display:flex;gap:8px"><span class="num">5</span><span>다른 팀원이 기록만 보고 같은 결론을 내는지 확인한다</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tip" style="margin-top:12px">학습용 안내입니다. 새 공식 제출물이나 마감을 추가하지 않습니다. 최종 요건은 매니저 안내와 대시보드를 따르고, 예시 값은 팀 주제에 맞게 바꿔 쓰세요.</div>
+  <div class="ref">이어서: <b>Auto-Healing 가이드 14쪽</b>(감지부터 기록까지 여섯 단계) · <b>21쪽</b>(복구율은 장애를 주입해 숫자로) · 12/18 Auto-Healing 구현 결과서</div>
+  <div class="foot"><span>자기 성찰 테스트 결과서 · 최종 프로젝트</span><span>22 / 22</span></div>
+</section>
+
+</div>
+
+<div class="bar" id="bar"></div>
+<div class="nav" id="nav">
+  <button id="bFirst" title="처음 (Home)">⏮</button>
+  <button id="bPrev" title="이전 (←)">◀</button>
+  <span class="cnt" id="cnt">1 / 22</span>
+  <button id="bNext" title="다음 (→)">▶</button>
+  <button id="bFull" title="전체 화면 (F)">⛶</button>
+  <button id="bGrid" title="스크롤 보기 (Esc)">☰</button>
+  <button id="bHelp" title="단축키 (?)">?</button>
+</div>
+<button class="scrollbtn" id="bShow">▶ 슬라이드 쇼</button>
+<div class="help" id="help"><div class="box">
+  <b style="font-size:15px">단축키</b><br>
+  <kbd>→</kbd> <kbd>Space</kbd> <kbd>PageDown</kbd> 다음 &nbsp; <kbd>←</kbd> <kbd>PageUp</kbd> 이전<br>
+  <kbd>Home</kbd> 처음 &nbsp; <kbd>End</kbd> 마지막 &nbsp; 숫자 + <kbd>Enter</kbd> 해당 장으로<br>
+  <kbd>F</kbd> 전체 화면 &nbsp; <kbd>Esc</kbd> 스크롤 보기 ↔ 슬라이드 쇼<br>
+  화면 오른쪽/왼쪽 클릭 · 스와이프로도 넘길 수 있습니다.<br>
+  <span class="small">인쇄(Ctrl/⌘+P)하면 22장이 모두 PDF로 나옵니다.</span>
+</div></div>
+<script>
+(function(){
+  var B=document.body, S=[].slice.call(document.querySelectorAll('.slide')), n=S.length, i=0, buf='', t;
+  var $=function(id){return document.getElementById(id)};
+  function fit(){
+    var z = B.classList.contains('show')
+      ? Math.min((innerWidth-32)/960,(innerHeight-32)/540)
+      : Math.min(1,(innerWidth-24)/960);
+    document.documentElement.style.setProperty('--z', z);
+  }
+  function go(k){
+    i=Math.max(0,Math.min(n-1,k));
+    S.forEach(function(s,j){s.classList.toggle('active',j===i)});
+    $('cnt').textContent=(i+1)+' / '+n;
+    $('bar').style.width=((i+1)/n*100)+'%';
+    if(B.classList.contains('show')) history.replaceState(null,'','#'+(i+1));
+  }
+  function show(on){
+    B.classList.toggle('show',on);
+    if(on){go(i)} else {history.replaceState(null,'',location.pathname); S[i].scrollIntoView({block:'center'})}
+    fit();
+  }
+  function full(){
+    if(!document.fullscreenElement){(document.documentElement.requestFullscreen||function(){}).call(document.documentElement); if(!B.classList.contains('show')) show(true);}
+    else document.exitFullscreen();
+  }
+  function poke(){B.classList.remove('idle');clearTimeout(t);t=setTimeout(function(){B.classList.add('idle')},2500)}
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k==='?'){ $('help').classList.toggle('on'); return; }
+    if($('help').classList.contains('on')&&k==='Escape'){ $('help').classList.remove('on'); return; }
+    if(k==='f'||k==='F'){ full(); return; }
+    if(k==='Escape'){ show(!B.classList.contains('show')); return; }
+    if(!B.classList.contains('show')) return;
+    if(/^[0-9]$/.test(k)){ buf+=k; return; }
+    if(k==='Enter'&&buf){ go(parseInt(buf,10)-1); buf=''; return; }
+    buf='';
+    if(['ArrowRight','ArrowDown','PageDown',' '].indexOf(k)>=0){e.preventDefault();go(i+1)}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].indexOf(k)>=0){e.preventDefault();go(i-1)}
+    else if(k==='Home') go(0); else if(k==='End') go(n-1);
+    poke();
+  });
+  document.querySelector('.deck').addEventListener('click',function(e){
+    if(!B.classList.contains('show')){ var s=e.target.closest('.slide'); if(s){ i=S.indexOf(s); } return; }
+    if(e.target.closest('a,button')) return;
+    go(e.clientX > innerWidth/3 ? i+1 : i-1);
+  });
+  var x0=null;
+  addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',function(e){ if(x0===null||!B.classList.contains('show'))return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) go(dx<0?i+1:i-1); x0=null; },{passive:true});
+  addEventListener('mousemove',function(){ if(B.classList.contains('show')) poke(); });
+  $('bFirst').onclick=function(){go(0)}; $('bPrev').onclick=function(){go(i-1)}; $('bNext').onclick=function(){go(i+1)};
+  $('bFull').onclick=full; $('bGrid').onclick=function(){show(false)}; $('bHelp').onclick=function(){$('help').classList.add('on')};
+  $('bShow').onclick=function(){show(true)};
+  $('help').onclick=function(){this.classList.remove('on')};
+  addEventListener('resize',fit);
+  addEventListener('beforeprint',function(){document.documentElement.style.setProperty('--z',1)});
+  addEventListener('afterprint',fit);
+  var h=parseInt((location.hash||'').slice(1),10);
+  i = h>0 ? h-1 : 0;
+  show(true); poke();
+})();
+</script>
+</body>
+</html>

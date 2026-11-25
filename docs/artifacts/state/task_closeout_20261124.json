@@ -1,0 +1,536 @@
+{
+  "schema_version": 1,
+  "id": "TASK-CLOSEOUT-20261124",
+  "kind": "state",
+  "status": "2026-11-24 정산 / 신규 실행 제외",
+  "owner": "R01",
+  "as_of": "2026-11-24",
+  "title": "TASK-022~042 종료·미채택·보류 및 인계 원장",
+  "authority_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "previous_closeout_ref": "docs/artifacts/state/legacy_task_closeout_20261118.json",
+  "note": "운영상 정산 분류는 원본 TASK.status 및 결과와 별개다. 022~032의 당시 상태·결과를 수정하지 않는다. 033~037은 제안 문서의 예약 ID, 038~042는 미병합 브랜치의 배정안이다. 누락 번호를 재사용하거나 정식 완료/취소 상태로 소급 생성하지 않는다.",
+  "active_tasks": [
+    "TASK-043",
+    "TASK-044",
+    "TASK-045"
+  ],
+  "delivery": {
+    "channel": "Discord",
+    "status": "전달 보고됨",
+    "reported_by": "R01",
+    "receipt_or_start_confirmed": false,
+    "note": "2026-11-24 사용자(팀장)의 전달 보고. 개별 수신·착수·실행 결과는 미확인."
+  },
+  "sources": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261123-01.md"
+    },
+    {
+      "path": "docs/artifacts/state/legacy_task_closeout_20261118.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/pull/41",
+      "state": "closed",
+      "merged": false
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/8e3a8ee1/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+      "note": "TASK-030 1차 조사 자료, TASK 결과 미기록"
+    },
+    {
+      "path": "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md",
+      "note": "TASK-031 초안, TASK 결과 미기록"
+    }
+  ],
+  "entries": [
+    {
+      "id": "TASK-022",
+      "owner": "R02",
+      "proposed_owner": null,
+      "title": "기존안 심화/신규 문제 탐색",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": true,
+      "closeout_class": "탐색 단계 종료·후속 채택",
+      "reason": "11/21 후보 비교를 위한 탐색 과제였다. 11/23 음악 레슨 등록 지원 방향을 선택했으므로 후보 탐색 자체를 반복하지 않는다. TASK-022 결과 미기록은 수행 실패 판정이 아니다.",
+      "replaced_or_handed_off_to": [
+        "TASK-028",
+        "TASK-032"
+      ],
+      "open_obligations": "기존 후보의 증거는 보존; 실제 사용자 가치와 지불 의향 검증은 후속 판단.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-022.json",
+        "blob_sha": "a255e99afb756a2f72f471ecc084741fa543da45",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-022.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-023",
+      "owner": "R03",
+      "proposed_owner": null,
+      "title": "독립 문제 탐색",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": true,
+      "closeout_class": "탐색 단계 종료·비활성",
+      "reason": "레슨 등록 방향이 선택되어 기존 중고거래 관련 후보 탐색을 현 단계 구현 업무로 이어가지 않는다. 개별 후보의 기술적 실패를 의미하지 않는다.",
+      "replaced_or_handed_off_to": [
+        "TASK-031",
+        "TASK-043"
+      ],
+      "open_obligations": "기존 후보 기록 보존; 현재 검증은 레슨 등록의 모의 시험.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-023.json",
+        "blob_sha": "0e0aa18da6e85e3996ab0eac0f58c6fd4281b2a6",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-023.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-024",
+      "owner": "R04",
+      "proposed_owner": null,
+      "title": "독립 문제 탐색",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": true,
+      "closeout_class": "탐색 단계 종료·비활성",
+      "reason": "제품 방향 결정 이후 기존 토지대장·지적도 등 독립 후보 심화는 현 단계 범위가 아니다.",
+      "replaced_or_handed_off_to": [
+        "TASK-029",
+        "TASK-044"
+      ],
+      "open_obligations": "후보 조사 기록 보존. 숨고 등록 객체 검증은 별도 목적의 후속 과제.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-024.json",
+        "blob_sha": "df5112938dc0c5e92a2d10806ba31cbf6fe0c121",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-024.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-025",
+      "owner": "R05",
+      "proposed_owner": null,
+      "title": "독립 문제 탐색",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": true,
+      "closeout_class": "탐색 단계 종료·비활성",
+      "reason": "제품 방향 결정 이후 테이블오더 등 후보 탐색은 현 단계 실행 과제가 아니다.",
+      "replaced_or_handed_off_to": [
+        "TASK-030",
+        "TASK-045"
+      ],
+      "open_obligations": "후보 기술 평가 기록 보존. 크몽 등록 PoC는 새 제품의 별도 업무.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-025.json",
+        "blob_sha": "711b3799deaeff4d716372994ae12f5eb336fade",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-025.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-026",
+      "owner": "R01",
+      "proposed_owner": null,
+      "title": "후보 검토·인계·오프라인 결정 준비",
+      "source_status": "진행 중",
+      "had_task_result": true,
+      "canonical_task_exists": true,
+      "closeout_class": "기존 결과 보존·단계 종료",
+      "reason": "11/19 후보 검토 결과는 보존한다. 11/23 제품 방향 선택 이후 11/21 회의 준비를 신규 수행하지 않는다. TASK 완료 여부나 회의의 모든 결론을 소급 확정하지 않는다.",
+      "replaced_or_handed_off_to": [
+        "TASK-032"
+      ],
+      "open_obligations": "멘토 피드백·후보 선택 당시의 근거 및 미확인 사항은 필요시 재검토.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-026.json",
+        "blob_sha": "3fcf115bcde78c20309debf63611c5e7dfb62743",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-026.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-027",
+      "owner": "R01",
+      "proposed_owner": null,
+      "title": "잠정 API/DB 및 Step1~2 제출 대응",
+      "source_status": "진행 중",
+      "had_task_result": true,
+      "canonical_task_exists": true,
+      "closeout_class": "이전 설계 보류·제출 의무 유지",
+      "reason": "기존 제품 기준 잠정 제출 문서는 현재 본 구현 설계가 아니다. 기획 방향이 바뀌어 실제 설계는 검증 후 재수립한다.",
+      "replaced_or_handed_off_to": [],
+      "open_obligations": "공식 제출·접수 확인 및 최신 기획에 따른 제출본 갱신은 R01 별도 의무. 제출 완료로 표시하지 않는다.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-027.json",
+        "blob_sha": "c81164c582b09f794b6b37a931c09bf223fcd7d8",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-027.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-028",
+      "owner": "R02",
+      "proposed_owner": null,
+      "title": "실제 Pain·타깃·우선 업무 검증",
+      "source_status": "완료",
+      "had_task_result": true,
+      "canonical_task_exists": true,
+      "closeout_class": "기존 완료·근거 재사용",
+      "reason": "기획 V1.1에 사용자·판매 조건 근거가 반영되어 기존 조사 반복은 불필요하다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-044",
+        "TASK-045"
+      ],
+      "open_obligations": "가상 fixture와 실사용 근거 구분; 실제 시간 실측·결제 및 플랫폼 허용 미검증.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-028.json",
+        "blob_sha": "ee6728a8de24d742f6f020b35d59e0586b5c35b1",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-028.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-029",
+      "owner": "R04",
+      "proposed_owner": null,
+      "title": "기존 대안·시장·가격 조사",
+      "source_status": "검토 중",
+      "had_task_result": true,
+      "canonical_task_exists": true,
+      "closeout_class": "기존 결과 보존·추가 조사 보류",
+      "reason": "5개 대안 조사 결과를 기획 V1.1에 반영했다. 현재는 숨고 PoC를 우선하며 기존 시장 조사를 전체 재수행하지 않는다.",
+      "replaced_or_handed_off_to": [
+        "TASK-044"
+      ],
+      "open_obligations": "실제 비용·도구 비교 성과·지불 의향은 추후 사용자 가치/BM 검증; 기존 추정치를 실측으로 승격하지 않는다.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-029.json",
+        "blob_sha": "b34b278de798c4820103dc2f5e0dd2f72d2d6c56",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-029.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-030",
+      "owner": "R05",
+      "proposed_owner": null,
+      "title": "세 플랫폼 기술 타당성·권한 조사",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": true,
+      "closeout_class": "부분 조사 인계·전체 범위 보류",
+      "reason": "1차 당근·크몽 조사 문서가 별도 브랜치에 존재하지만 TASK result는 미기록이다. 3개 플랫폼 8개 영역의 전체 검증 완료 전이며 현 단계는 숨고/크몽 독립 PoC로 전환했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-044",
+        "TASK-045"
+      ],
+      "open_obligations": "플랫폼별 공식 허용·등록 객체·인증·사진·실행/결과 복구·구조/비용을 해당 범위에 재사용. 탈잉 조사 및 실제 허용 검증은 보류, 실등록 승인 아님.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-030.json",
+        "blob_sha": "c10757afc61ecd36610a86262c6051dd4a7b8db9",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-030.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-031",
+      "owner": "R03",
+      "proposed_owner": null,
+      "title": "F1~F3 요구사항·시나리오·검증 기준",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": true,
+      "closeout_class": "부분 산출물 인계·전체 범위 대체",
+      "reason": "크몽·탈잉 비교 요구사항 초안이 존재하지만 TASK result는 미기록이다. 현재 R03 책임은 두 플랫폼 공통 모의 검증이며 제품 F1/F3 단독 구현은 미채택이다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-044",
+        "TASK-045"
+      ],
+      "open_obligations": "공통 요구사항과 오류/승인/미확인 규칙을 재사용; 숨고 객체와 플랫폼별 차이는 재검증.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-031.json",
+        "blob_sha": "6dd366a694116dce1e922e9f42fcaeb7622a64ea",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-031.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-032",
+      "owner": "R01",
+      "proposed_owner": null,
+      "title": "12항목 기획·가치·BM·MVP 통합",
+      "source_status": "검토 중",
+      "had_task_result": true,
+      "canonical_task_exists": true,
+      "closeout_class": "기준선 보존·후속 판단 대기",
+      "reason": "기획 V1.1을 독립 PoC 입력으로 사용한다. 본 구현 스택·실제 등록 허용·BM 최종 검증은 미결정이므로 원본을 완료로 변경하지 않는다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-044",
+        "TASK-045"
+      ],
+      "open_obligations": "11/27 PoC 근거 기반 채택·설계·MVP 범위 판단, 이후 제출본 갱신.",
+      "source": {
+        "ref": "3b456f34765391bd230cf604e72cdaef84651539",
+        "path": "docs/artifacts/tasks/TASK-032.json",
+        "blob_sha": "9c016b4b3c553714ff3620da6e8b47b246b122cb",
+        "url": "https://github.com/ik-e/chaja-you/blob/3b456f34765391bd230cf604e72cdaef84651539/docs/artifacts/tasks/TASK-032.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-033",
+      "owner": null,
+      "proposed_owner": "R01",
+      "title": "범위·인수 시험 기준선",
+      "source_status": "정식 파일 없음",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미채택 제안·방향 대체",
+      "reason": "단일 크몽 E2E와 기능별 분업 전제의 설계 제안이다. 플랫폼별 독립 검증으로 변경되어 기존 제안을 배정하지 않았다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-044",
+        "TASK-045"
+      ],
+      "open_obligations": "R01 공통 성공 기준은 현행 Phase 및 공통 시험 계약으로 이어짐.",
+      "source": {
+        "ref": "dba2f5dc97a4c8a61d523831a51f6f30b1936efb",
+        "path": "docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "blob_sha": "08302bb26f7fcb13334102921f2df7a93a36b5cd",
+        "url": "https://github.com/ik-e/chaja-you/blob/dba2f5dc97a4c8a61d523831a51f6f30b1936efb/docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "kind": "proposal_section",
+        "section_id": "TASK-033"
+      }
+    },
+    {
+      "id": "TASK-034",
+      "owner": null,
+      "proposed_owner": "R02",
+      "title": "실사용 정답 데이터·크몽 필드 매핑",
+      "source_status": "정식 파일 없음",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미채택 제안",
+      "reason": "실사용 자료를 테스트용으로 준비하는 별도 업무 대신 합성 fixture와 권한이 확인된 기존 근거 재사용을 택했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-045"
+      ],
+      "open_obligations": "R02에게 신규 실사용 자료 제출이나 별도 TASK를 요구하지 않는다. 실제 정보/이미지 권리 검증은 필요 시 별도 확인.",
+      "source": {
+        "ref": "dba2f5dc97a4c8a61d523831a51f6f30b1936efb",
+        "path": "docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "blob_sha": "08302bb26f7fcb13334102921f2df7a93a36b5cd",
+        "url": "https://github.com/ik-e/chaja-you/blob/dba2f5dc97a4c8a61d523831a51f6f30b1936efb/docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "kind": "proposal_section",
+        "section_id": "TASK-034"
+      }
+    },
+    {
+      "id": "TASK-035",
+      "owner": null,
+      "proposed_owner": "R03",
+      "title": "F1/F3 업무 계약·규칙 코드",
+      "source_status": "정식 파일 없음",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미채택 제안·역할 변경",
+      "reason": "R03이 제품 F1/F3 모듈을 소유하는 대신 독립 공통 테스트 환경을 담당한다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043"
+      ],
+      "open_obligations": "제품 F1/F3 공통 구조 선택은 독립 PoC 후 보류.",
+      "source": {
+        "ref": "dba2f5dc97a4c8a61d523831a51f6f30b1936efb",
+        "path": "docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "blob_sha": "08302bb26f7fcb13334102921f2df7a93a36b5cd",
+        "url": "https://github.com/ik-e/chaja-you/blob/dba2f5dc97a4c8a61d523831a51f6f30b1936efb/docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "kind": "proposal_section",
+        "section_id": "TASK-035"
+      }
+    },
+    {
+      "id": "TASK-036",
+      "owner": null,
+      "proposed_owner": "R04",
+      "title": "사용자 UI·동작 확인",
+      "source_status": "정식 파일 없음",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미채택 제안·역할 변경",
+      "reason": "단일 크몽 UI 개발 분업을 채택하지 않고 숨고 등록 핵심 기능을 독립 검증하도록 전환했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-044"
+      ],
+      "open_obligations": "본 제품 UI 프레임워크와 공통 화면은 아직 미선정.",
+      "source": {
+        "ref": "dba2f5dc97a4c8a61d523831a51f6f30b1936efb",
+        "path": "docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "blob_sha": "08302bb26f7fcb13334102921f2df7a93a36b5cd",
+        "url": "https://github.com/ik-e/chaja-you/blob/dba2f5dc97a4c8a61d523831a51f6f30b1936efb/docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "kind": "proposal_section",
+        "section_id": "TASK-036"
+      }
+    },
+    {
+      "id": "TASK-037",
+      "owner": null,
+      "proposed_owner": "R05",
+      "title": "모의 F2 어댑터·API 통합",
+      "source_status": "정식 파일 없음",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미채택 제안·역할 변경",
+      "reason": "공통 API/이벤트 저장 등 사전 통합 구조를 확정하지 않고 크몽 등록 핵심 PoC로 전환했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-045"
+      ],
+      "open_obligations": "공통 API·DB·배포 구조는 검증 후 선택.",
+      "source": {
+        "ref": "dba2f5dc97a4c8a61d523831a51f6f30b1936efb",
+        "path": "docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "blob_sha": "08302bb26f7fcb13334102921f2df7a93a36b5cd",
+        "url": "https://github.com/ik-e/chaja-you/blob/dba2f5dc97a4c8a61d523831a51f6f30b1936efb/docs/artifacts/design/lesson-registration-20261123/MVP-WORK-PACKAGES-20261124.md",
+        "kind": "proposal_section",
+        "section_id": "TASK-037"
+      }
+    },
+    {
+      "id": "TASK-038",
+      "owner": null,
+      "proposed_owner": "R01",
+      "title": "테스트 환경 범위·인수 기준",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미병합 배정안·대체",
+      "reason": "테스트 환경만 만드는 기존 분업안을 취소하고 독립 PoC와 공통 검증의 범위로 변경했다. PR #41은 미병합 종료.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-044",
+        "TASK-045"
+      ],
+      "open_obligations": "R01 인수·채택 판단은 현재 단계 의도에서 유지.",
+      "source": {
+        "ref": "aa9a9092da5e0c8a6ed9565e8836b060e313f094",
+        "path": "docs/artifacts/tasks/TASK-038.json",
+        "blob_sha": "2ba1b106ea9828248001c3e8bb06e6b3313117ec",
+        "url": "https://github.com/ik-e/chaja-you/blob/aa9a9092da5e0c8a6ed9565e8836b060e313f094/docs/artifacts/tasks/TASK-038.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-039",
+      "owner": null,
+      "proposed_owner": "R03",
+      "title": "모의 입력·오류 계약 및 시험",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미병합 배정안·통합 대체",
+      "reason": "별도 계약/시험 작업을 R03이 전체 모의 하네스를 소유하는 TASK-043으로 통합했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043"
+      ],
+      "open_obligations": "크몽·숨고 양쪽 mock 및 버전 공유까지 포함.",
+      "source": {
+        "ref": "aa9a9092da5e0c8a6ed9565e8836b060e313f094",
+        "path": "docs/artifacts/tasks/TASK-039.json",
+        "blob_sha": "3a4666309c274c33e3613d9a42d4ef89e7fd67f7",
+        "url": "https://github.com/ik-e/chaja-you/blob/aa9a9092da5e0c8a6ed9565e8836b060e313f094/docs/artifacts/tasks/TASK-039.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-040",
+      "owner": null,
+      "proposed_owner": "R04",
+      "title": "로컬 모의 크몽 페이지",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미병합 배정안·역할 대체",
+      "reason": "모의 페이지 책임을 R03에게 넘기고 R04는 숨고 독립 구현을 담당하게 변경했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-044"
+      ],
+      "open_obligations": "숨고 실제 등록 객체는 확인 후 mock에 반영.",
+      "source": {
+        "ref": "aa9a9092da5e0c8a6ed9565e8836b060e313f094",
+        "path": "docs/artifacts/tasks/TASK-040.json",
+        "blob_sha": "35948b17ecd0cf83bebc9a24352cf96800322878",
+        "url": "https://github.com/ik-e/chaja-you/blob/aa9a9092da5e0c8a6ed9565e8836b060e313f094/docs/artifacts/tasks/TASK-040.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-041",
+      "owner": null,
+      "proposed_owner": "R05",
+      "title": "uv·CI·테스트 환경 검증",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미병합 배정안·역할 대체",
+      "reason": "R05를 크몽 핵심 PoC에 집중시키고 공통 루트 환경 정리는 R01 기준선 관리, 하네스 재현성은 R03, 실험별 의존성은 각 담당이 관리하도록 변경했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043",
+        "TASK-045"
+      ],
+      "open_obligations": "공통 환경은 main에 반영됐으나 실제 설치·CI 결과를 별도 검증해야 함.",
+      "source": {
+        "ref": "aa9a9092da5e0c8a6ed9565e8836b060e313f094",
+        "path": "docs/artifacts/tasks/TASK-041.json",
+        "blob_sha": "52b4a524395c9a99a1b844b7d94e04f45203f9f6",
+        "url": "https://github.com/ik-e/chaja-you/blob/aa9a9092da5e0c8a6ed9565e8836b060e313f094/docs/artifacts/tasks/TASK-041.json",
+        "kind": "task_file"
+      }
+    },
+    {
+      "id": "TASK-042",
+      "owner": null,
+      "proposed_owner": "R02",
+      "title": "합성 fixture 사실성·사진 권리 확인",
+      "source_status": "할 일",
+      "had_task_result": false,
+      "canonical_task_exists": false,
+      "closeout_class": "미병합 배정안·미채택",
+      "reason": "별도 R02 업무 대신 R03이 합성 fixture를 준비하고 확인된 기존 R02 근거를 필요한 범위에서 재사용하도록 변경했다.",
+      "replaced_or_handed_off_to": [
+        "TASK-043"
+      ],
+      "open_obligations": "가상 사진·데이터와 실제 사용자/권리 정보를 구분. 권리가 불분명한 실자료 사용 금지.",
+      "source": {
+        "ref": "aa9a9092da5e0c8a6ed9565e8836b060e313f094",
+        "path": "docs/artifacts/tasks/TASK-042.json",
+        "blob_sha": "7d80d2ce05c751e382d5d72c9e9ecb05799e77f2",
+        "url": "https://github.com/ik-e/chaja-you/blob/aa9a9092da5e0c8a6ed9565e8836b060e313f094/docs/artifacts/tasks/TASK-042.json",
+        "kind": "task_file"
+      }
+    }
+  ]
+}

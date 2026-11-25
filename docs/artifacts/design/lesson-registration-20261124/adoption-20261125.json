@@ -1,0 +1,25 @@
+{
+  "id": "LR-ADOPT-20261125",
+  "date": "2026-11-25",
+  "authority": "R01",
+  "quotes": [
+    "이제 설계 부분을 메인에 반영해서 진행하면 될 것 같아",
+    "AI도 이런 사항들을 알고 작업할 수 있도록 해야 하고",
+    "그러면 너가 권장한 순서로 진행해서 팀원들이 작업할 수 있도록 환경을 조성하는 걸 마무리하면 될 것 같은데"
+  ],
+  "scope": "Adopt current logical design and trace in main; prepare and verify mock-only workspace, then activate explicitly bounded member work packages. Not live permission or product acceptance.",
+  "review_commit": "d68406b895b344819eb7ed6c3524167789bfdb84",
+  "canonical_commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+  "previous_main": "9b6ff0463722372d577747e89cb853e773c78591",
+  "current_refs": [
+    "data-schema-v4.1.json",
+    "platform-profiles-v2.json",
+    "common-integration-v1.json",
+    "trace-index-v0.9.json"
+  ],
+  "limits": [
+    "Original review and historical decision files unchanged. Team feedback not present in accessible records is not presumed resolved.",
+    "Physical implementation, actual product testing and member capacity remain separately checked.",
+    "R01 owns common contracts/integration only; not Kmong adapter."
+  ]
+}

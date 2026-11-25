@@ -1,0 +1,237 @@
+{
+  "kind": "static_and_abstract_design_validation",
+  "checks": [
+    {
+      "id": "schema IDs unique",
+      "pass": true
+    },
+    {
+      "id": "schema field names/types",
+      "pass": true
+    },
+    {
+      "id": "route IDs/method paths unique",
+      "pass": true
+    },
+    {
+      "id": "route request/response types",
+      "pass": true
+    },
+    {
+      "id": "port type signatures",
+      "pass": true
+    },
+    {
+      "id": "effective route IDs/method paths",
+      "pass": true
+    },
+    {
+      "id": "all previous review findings traced",
+      "pass": true
+    },
+    {
+      "id": "all planned tests not run",
+      "pass": true
+    },
+    {
+      "id": "plan server-review-approve chain",
+      "pass": true
+    },
+    {
+      "id": "prejob identity/target no job dependency",
+      "pass": true
+    },
+    {
+      "id": "source reuse and job discovery",
+      "pass": true
+    },
+    {
+      "id": "rebind distinct from resume",
+      "pass": true
+    },
+    {
+      "id": "eligibility axes",
+      "pass": true
+    },
+    {
+      "id": "runtime command lease and admission",
+      "pass": true
+    },
+    {
+      "id": "AI provider explicit and user confirmation",
+      "pass": true
+    },
+    {
+      "id": "WBS refs and requirement coverage",
+      "pass": true
+    },
+    {
+      "id": "work calendar exact",
+      "pass": true
+    },
+    {
+      "id": "no primary owner overlap",
+      "pass": true
+    },
+    {
+      "id": "strict task dependency dates",
+      "pass": true
+    },
+    {
+      "id": "R02 absence and handoff",
+      "pass": true
+    },
+    {
+      "id": "checkpoints on workdays and tasks",
+      "pass": true
+    },
+    {
+      "id": "progressive integration before module finish",
+      "pass": true
+    },
+    {
+      "id": "milestones and final dates",
+      "pass": true
+    },
+    {
+      "id": "mock gate retained and no live transition",
+      "pass": true
+    },
+    {
+      "id": "remote technology delegated",
+      "pass": true
+    }
+  ],
+  "passed": 25,
+  "total": 25,
+  "abstract_cases": [
+    {
+      "name": "valid stored approval",
+      "pass": true
+    },
+    {
+      "name": "approval reject storedPlan",
+      "pass": true
+    },
+    {
+      "name": "approval reject sameOwner",
+      "pass": true
+    },
+    {
+      "name": "approval reject sameDigest",
+      "pass": true
+    },
+    {
+      "name": "approval reject currentVersions",
+      "pass": true
+    },
+    {
+      "name": "approval reject currentPermission",
+      "pass": true
+    },
+    {
+      "name": "approval reject explicitConsent",
+      "pass": true
+    },
+    {
+      "name": "valid same identity rebind",
+      "pass": true
+    },
+    {
+      "name": "rebind reject sameOwner",
+      "pass": true
+    },
+    {
+      "name": "rebind reject sameAccount",
+      "pass": true
+    },
+    {
+      "name": "rebind reject samePlatform",
+      "pass": true
+    },
+    {
+      "name": "rebind reject sameEnvironment",
+      "pass": true
+    },
+    {
+      "name": "rebind reject oldFenced",
+      "pass": true
+    },
+    {
+      "name": "rebind reject revisionCurrent",
+      "pass": true
+    },
+    {
+      "name": "unknown rebind allowed only for read",
+      "pass": true
+    },
+    {
+      "name": "running cannot rebind",
+      "pass": true
+    },
+    {
+      "name": "ready mock step",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject environment",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject support",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject policy",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject information",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject auth",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject target",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject approval",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject effect",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject leaseCurrent",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject revisionCurrent",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject beforeVerified",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject stopping",
+      "pass": true
+    },
+    {
+      "name": "dispatch reject alreadyEffective",
+      "pass": true
+    },
+    {
+      "name": "unknown after rebind cannot dispatch",
+      "pass": true
+    }
+  ],
+  "abstract_passed": 31,
+  "abstract_total": 31,
+  "product_execution": "not_run",
+  "limitations": "정적 구조·일정·계약 참조와 별도 추상 predicate 예시 검증. 실제 DB/HTTP/브라우저/AI, 동시성·보안·사용자 가치·개발 공수·실서비스 검증 아님. 전체 V3 guard 구현/실행을 검증하지 않음."
+}

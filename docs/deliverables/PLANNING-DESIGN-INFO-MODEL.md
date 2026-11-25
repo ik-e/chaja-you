@@ -116,3 +116,8 @@ flowchart TD
 기존 [13개 작업 정보 영역](WORK-MODEL.md)과 공식 산출물 매핑은 유지하며, 시험 설계의 `IT-20`이 더 구체화된 것입니다. [구성요소 구조·실행·ERD](COMPONENT-DESIGN-VIEWS.md)에서 컴포넌트별 책임을 확인할 수 있습니다.
 
 참고: [NASA SE Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) · [SEBoK Verification](https://sebokwiki.org/wiki/System_Verification) · [ISO/IEC/IEEE 29148](https://www.iso.org/standard/72089.html) · [C4](https://c4model.com/) · [arc42](https://arc42.org/). 이 출처들이 팀 내부 순서·정보 ID를 공식 인증하는 것은 아닙니다.
+
+
+## 2026-11-24 보완: 설계 중 실제 검증
+
+검증 계획 작성만으로 해당 설계 수준의 정합성이 확인되지는 않는다. 영향을 받는 슬라이스에서 상위 의무 보존(정제), 관련 계약 결합(합성), 변경 후 근거 최신성 검사를 실제 실행하고 실패를 수정·재검증한다. [공통 검증 루프와 실행 방법](DESIGN-VERIFICATION-LOOP.md). 선택한 규칙 통과는 전체 단계 승인이나 제품 시험 통과가 아니다. 초안 병렬 작성과 기존 권한 기준은 유지한다.

@@ -1,0 +1,78 @@
+{
+  "normal": {
+    "state_count": 569,
+    "edge_count": 1446,
+    "post_start_states": 432,
+    "auth_states": 156,
+    "post_start_edit_edges": 0,
+    "auth_edit_edges": 0,
+    "goal_states": 2,
+    "stop_edges_checked": 507,
+    "violations": [],
+    "unused": [
+      "cancel_stopping",
+      "revoke_stopping",
+      "expire_stopping"
+    ],
+    "no_outcome_count": 0,
+    "no_outcome_example": null,
+    "normal_path": [
+      "source_provided",
+      "confirm_source",
+      "resolve_supported",
+      "open_auth",
+      "finish_auth_input",
+      "identity_same",
+      "resolve_new_slot",
+      "make_plan",
+      "approve_plan",
+      "create_job",
+      "acquire_lease",
+      "mark_ready",
+      "admit",
+      "normal_progress_0",
+      "admit",
+      "normal_progress_1",
+      "admit",
+      "submit_effect_proven",
+      "goal_proven"
+    ],
+    "limits": "Finite single-request abstraction; checks actual declared events/guards, not product execution, immutable persisted bytes, cross-job idempotency, concurrent runtime or security."
+  },
+  "mutation": {
+    "name": "allow editing after accepted planned job",
+    "detected": true,
+    "counterexample": {
+      "id": "post-start edit",
+      "path": [
+        "source_provided",
+        "confirm_source",
+        "resolve_supported",
+        "open_auth",
+        "finish_auth_input",
+        "identity_same",
+        "resolve_new_slot",
+        "make_plan",
+        "approve_plan",
+        "create_job",
+        "revise_before_start"
+      ],
+      "state": {
+        "route": "supported",
+        "policy": "mock_allowed",
+        "info": "review",
+        "auth": "same",
+        "control": "review",
+        "target": "new",
+        "plan": "stale",
+        "approval": "revoked",
+        "job": "planned",
+        "effect": "none",
+        "step": 0,
+        "goal": false,
+        "stop": "none"
+      }
+    }
+  },
+  "product_execution": "not_run"
+}

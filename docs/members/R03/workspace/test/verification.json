@@ -1,0 +1,10 @@
+{
+  "id": "R03-KMONG-MOCK-20261124",
+  "status": "partial_validation",
+  "authority": "2026-11-24 user request to implement supplied design under R03/workspace/test",
+  "input": "SPEC.md",
+  "verified": {"command": "uv run --no-project --with pytest --with pillow --with fastapi --with httpx --with python-multipart python -m pytest -q docs/members/R03/workspace/test", "passed": 19, "failed": 0, "runner": "simulator and mocked live adapter tests", "skyvern_local_mock_probe": "Synthetic local job: browser form filled, image attached, HTTP 200 receipt returned; fields and image hash matched", "skyvern_user_flow": "2026-11-24 UI-initiated local mock job: mock_submitted, Skyvern completed, HTTP 200, stored receipt fields and image hash matched approved job"},
+  "coverage": ["TC-01 receipt verification", "TC-02 missing price", "TC-03 equal package prices and no trial invention", "TC-04 upload failure", "TC-05 expired mock session", "TC-06 lost response reconciliation", "TC-07 idempotency", "TC-08 live blocked", "TC-09 stale approval", "TC-10 no receipt", "TC-11 package price mismatch", "TC-12 required fields", "TC-13 missing and invalid image", "session ownership"],
+  "unverified": ["LLM generation accuracy", "conditional live adapter behavior on real Kmong", "real platform registration", "user efficiency and model cost measurements"],
+  "limitations": ["Local development sessions only", "SQLite generic JSON record storage", "Image dimensions and all optional screen fields are not fully enforced", "No automatic retry of existing jobs", "Conditional live adapter is untested on the real platform and disabled by default"]
+}

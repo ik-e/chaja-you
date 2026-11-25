@@ -1,0 +1,261 @@
+{
+  "source_parent": "baf31ef1a835dd4f53245205a726ac3c7c088e62",
+  "normal": {
+    "state_count": 359,
+    "edge_count": 1001,
+    "counts": {
+      "stopping": 40,
+      "stopped": 37,
+      "active": 71,
+      "stop_entry": 71,
+      "stop_finalize": 40,
+      "unresolved_stop_results": 12,
+      "known_stop_results": 25
+    },
+    "unused": [],
+    "violations": [],
+    "no_outcome_count": 0,
+    "normal_path": [
+      "source_provided",
+      "confirm_source",
+      "resolve_supported",
+      "open_auth",
+      "finish_auth_input",
+      "identity_same",
+      "resolve_new_slot",
+      "make_plan",
+      "approve_plan",
+      "create_job",
+      "acquire_lease",
+      "mark_ready",
+      "admit",
+      "normal_progress_0",
+      "admit",
+      "normal_progress_1",
+      "admit",
+      "submit_effect_proven",
+      "goal_proven"
+    ],
+    "failed_path": [
+      "source_provided",
+      "confirm_source",
+      "resolve_supported",
+      "open_auth",
+      "finish_auth_input",
+      "identity_same",
+      "resolve_new_slot",
+      "make_plan",
+      "approve_plan",
+      "create_job",
+      "acquire_lease",
+      "mark_ready",
+      "admit",
+      "effect_absence_proven",
+      "definite_failure"
+    ],
+    "stop_unknown_path": [
+      "source_provided",
+      "confirm_source",
+      "resolve_supported",
+      "open_auth",
+      "finish_auth_input",
+      "identity_same",
+      "resolve_new_slot",
+      "make_plan",
+      "approve_plan",
+      "create_job",
+      "acquire_lease",
+      "mark_ready",
+      "admit",
+      "request_stop",
+      "finalize_stop_unresolved"
+    ],
+    "limitations": "Finite single-request model; result projection and reason metadata are independent, actual atomic admission, real side effects/stop, security and cross-request identity not verified."
+  },
+  "projection_cases": [
+    {
+      "name": "stop even without readback",
+      "pass": true
+    },
+    {
+      "name": "late confirmed effect does not resume",
+      "pass": true
+    },
+    {
+      "name": "separate goal proof",
+      "pass": true
+    },
+    {
+      "name": "untrusted observation ignored",
+      "pass": true
+    },
+    {
+      "name": "unauthorized read ignored",
+      "pass": true
+    },
+    {
+      "name": "wrong target ignored",
+      "pass": true
+    },
+    {
+      "name": "known effect absence",
+      "pass": true
+    },
+    {
+      "name": "late confirmation never restarts",
+      "pass": true
+    }
+  ],
+  "mutation_cases": [
+    {
+      "name": "reopen stopped",
+      "pass": true,
+      "counterexample": {
+        "id": "terminal not absorbing",
+        "state": {
+          "route": "supported",
+          "policy": "mock_allowed",
+          "info": "confirmed",
+          "auth": "same",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopped",
+          "effect": "none",
+          "step": 0,
+          "goal": false,
+          "stop": "requested"
+        },
+        "path": [
+          "source_provided",
+          "confirm_source",
+          "resolve_supported",
+          "open_auth",
+          "finish_auth_input",
+          "identity_same",
+          "resolve_new_slot",
+          "make_plan",
+          "approve_plan",
+          "create_job",
+          "request_stop",
+          "finalize_stop_known_or_unknown"
+        ]
+      }
+    },
+    {
+      "name": "wait indefinitely for pending effect",
+      "pass": true,
+      "counterexample": {
+        "id": "stopping has nonfinal or no transition",
+        "state": {
+          "route": "supported",
+          "policy": "mock_allowed",
+          "info": "confirmed",
+          "auth": "same",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopping",
+          "effect": "pending",
+          "step": 0,
+          "goal": false,
+          "stop": "requested"
+        },
+        "path": [
+          "source_provided",
+          "confirm_source",
+          "resolve_supported",
+          "open_auth",
+          "finish_auth_input",
+          "identity_same",
+          "resolve_new_slot",
+          "make_plan",
+          "approve_plan",
+          "create_job",
+          "acquire_lease",
+          "mark_ready",
+          "admit",
+          "request_stop"
+        ]
+      }
+    },
+    {
+      "name": "erase uncertain effect",
+      "pass": true,
+      "counterexample": {
+        "id": "stop finalization discards evidence",
+        "state": {
+          "route": "supported",
+          "policy": "mock_allowed",
+          "info": "confirmed",
+          "auth": "same",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopped",
+          "effect": "absent",
+          "step": 0,
+          "goal": false,
+          "stop": "requested"
+        },
+        "path": [
+          "source_provided",
+          "confirm_source",
+          "resolve_supported",
+          "open_auth",
+          "finish_auth_input",
+          "identity_same",
+          "resolve_new_slot",
+          "make_plan",
+          "approve_plan",
+          "create_job",
+          "acquire_lease",
+          "mark_ready",
+          "admit",
+          "request_stop",
+          "finalize_stop_unresolved"
+        ]
+      }
+    },
+    {
+      "name": "allow extra stop-state event",
+      "pass": true,
+      "counterexample": {
+        "id": "stopping has nonfinal or no transition",
+        "state": {
+          "route": "supported",
+          "policy": "mock_allowed",
+          "info": "confirmed",
+          "auth": "same",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopping",
+          "effect": "none",
+          "step": 0,
+          "goal": false,
+          "stop": "requested"
+        },
+        "path": [
+          "source_provided",
+          "confirm_source",
+          "resolve_supported",
+          "open_auth",
+          "finish_auth_input",
+          "identity_same",
+          "resolve_new_slot",
+          "make_plan",
+          "approve_plan",
+          "create_job",
+          "request_stop"
+        ]
+      }
+    }
+  ],
+  "product_execution": "not_run",
+  "execution_kind": "direct JavaScript finite model exploration and synthetic result projection"
+}
