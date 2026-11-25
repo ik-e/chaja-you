@@ -68,10 +68,13 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261125-10_team-integration-followup.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
     }
   ],
   "result": {
-    "summary": "S1~S6 DOM fixture/adapter 및 R03 SQLite StoreGateway 브리지 구현, main c6a23e2d/bc2e2c8. 독립 CI 6개 통과. 정적 HTML/승인값 기반 readback, unknown을 confirmed로 기록할 가능성, 직접 STORE/permit 및 비공통 digest 등 실제 수용 조건 미충족. Runtime·실제 저장 상태·독립 readback·최종 판정 검증 필요.",
+    "summary": "S1~S6 DOM fixture/adapter 및 R03 SQLite StoreGateway 브리지 구현, main c6a23e2d/bc2e2c8. 독립 CI 6개 통과. 정적 HTML/승인값 기반 readback, unknown을 confirmed로 기록할 가능성, 직접 STORE/permit 및 비공통 digest 등 실제 수용 조건 미충족. Runtime·실제 저장 상태·독립 readback·최종 판정 검증 필요. 최신 366cea92는 UI만 변경, 숨고 코드 변경 없음. 기존 기술 보고서는 현행 선택값·Evidence 계약과 대조 필요.",
     "claims": [
       {
         "id": "C52-1",
@@ -90,6 +93,14 @@
         "evidence_ids": [
           "E52-3",
           "E52-4"
+        ]
+      },
+      {
+        "id": "C52-6",
+        "text": "숨고 6개 CI 유지, 실제 상태/독립 readback/unknown/BoundGateway 미보완.",
+        "status": "코드 검토",
+        "evidence_ids": [
+          "E52-6"
         ]
       }
     ],
@@ -118,6 +129,11 @@
         "id": "E52-5",
         "label": "공통 접점 검토",
         "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      },
+      {
+        "id": "E52-6",
+        "label": "최신 검토",
+        "path": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
       }
     ],
     "verification": [

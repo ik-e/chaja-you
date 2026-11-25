@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-25",
+  "reviewed_main": "366cea92a497ff68176107766b1314ab75d5c59f",
+  "previous": "product/lesson-registration/evidence/team-checkpoint-20261125.json",
+  "authority": "docs/human/responses/HRESP-20261125-11_integration-owner-and-review.md",
+  "r02": {
+    "main": "PR49/50 merged",
+    "drafts": [
+      51,
+      52
+    ],
+    "reported": "Actual synthetic 5 cases each, 3/5 and 4/5, both price conflict errors; 44 synthetic CI",
+    "cost": "total cost unknown; R02 owns design and R01 reviews",
+    "remaining_person_days": null
+  },
+  "r03": {
+    "reported_plan": "R03 actual FastAPI viewer router, verified source lineage slot, approved asset reader and actual D01–D03 safety boundaries",
+    "old_remaining_person_days": 3,
+    "review": [
+      "HTTP/WS same-origin owner; browser WS cannot set arbitrary X-Mock-Owner header; no grant-derived owner",
+      "H6 /authentication expected_revision and generation; stable slot before target resolution",
+      "approved asset ID/digest/bytes and owner/registration/lease; actual permit consume/fence and separate read authority"
+    ],
+    "actual_new_commit": "not observed"
+  },
+  "r04": {
+    "main": "366cea92a497ff68176107766b1314ab75d5c59f",
+    "ci": "https://github.com/ik-e/chaja-you/actions/runs/45565527174/job/139039245388",
+    "web": 9,
+    "soomgo": 6,
+    "observed": "URL grant removed; dispose and 1.5–5s backoff added; H6/H7 handler code",
+    "remaining": "transport fallback fabricates 200 verified; wrong /auth/* routes; revision/auth.state/target, H7 review_digest/H8 goal_verdict, static ID, null/empty origin and module mount; soomgo actual persisted readback/unknown/BoundGateway",
+    "remaining_person_days": null
+  },
+  "r05": {
+    "input": "product/lesson-registration/evidence/r05-combination-20261125.json",
+    "remote": "c3fa0b199d5b3a0975b8b5ae9a26d97ae69862e4",
+    "kmong": "a3718a90c5179b5f72927347cf700283aa588992",
+    "reported_remote": 30,
+    "reported_combined_kmong": 37,
+    "independent_ci": {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594",
+      "run_id": 45568163241,
+      "job_id": 139047965594,
+      "tree": "10096b0fdab2513089208d967f3a15bc4921b85a",
+      "base_main": "366cea92a497ff68176107766b1314ab75d5c59f",
+      "remote": {
+        "passed": 30,
+        "seconds": 40.075,
+        "skipped": 0
+      },
+      "kmong": {
+        "passed": 37,
+        "seconds": 16.232,
+        "skipped": 0
+      },
+      "conclusion": "success"
+    },
+    "scope": "same exact tree, synthetic PREP/test asset reader/direct coordinator and viewer, actual Chromium/adapter/mock platform, no complete HTTP/UI/D01–D06/product gate",
+    "remaining": "actual HTTP/WS service identity, stable lineage, approved asset lease reader, full manifest/permit/fence/read authority",
+    "old_remaining_workdays": [
+      3,
+      3.5
+    ]
+  },
+  "product_gate": {
+    "required": 22,
+    "full_cases_registered": 0,
+    "preflight": "passed 4/14/1, not acceptance"
+  },
+  "limits": "No owner code edits, paid call, live access, deadline/budget/assignment or product gate change."
+}
