@@ -265,6 +265,10 @@ class KmongAdapter:
         self._require_draft(view, scope, draft)
         if view.one("complete") != "true":
             raise self._fail(ctx, scope, op, "VALIDATION_FAILED", "draft incomplete before submit", "absent", view)
+        mismatches = compare(expected_snapshot(scope["values"]), readback_snapshot(view), profile.VALUE_KEYS)
+        if mismatches:
+            raise self._fail(ctx, scope, op, "VALIDATION_FAILED",
+                             f"approved values changed before submit: {mismatches}", "absent", view)
         result = ctx.page.submit("submit_review")
         if result.page == "submitted" and result.status == 200 and result.one("receipt_id"):
             ev = self._evidence(ctx, scope, op, "operation", "submission_response",

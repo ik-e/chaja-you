@@ -162,6 +162,18 @@ class ConnectionBinding(MockCase):
 
 
 class SubmitOnceAndUnknown(MockCase):
+    def test_change_after_review_is_blocked_immediately_before_submit(self):
+        ctx = self.ctx()
+        operations = self.adapter.operations(ctx.accepted)
+        for operation in operations[:5]:
+            self.adapter.perform(ctx, operation)
+        draft = next(iter(self.site.drafts.values()))
+        draft['basic']['title'] = '변경된 합성 제목'
+        with self.assertRaises(KmongError) as error:
+            self.adapter.perform(ctx, operations[5])
+        self.assertEqual(error.exception.code, 'VALIDATION_FAILED')
+        self.assertEqual(self.site.submissions, 0)
+
     def test_lost_submit_response_is_unknown_then_no_resubmit_and_readback_resolves(self):
         self.site.faults["submit"] = "drop_after_commit"
         ctx = self.ctx()

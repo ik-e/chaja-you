@@ -94,3 +94,14 @@
 - Q1 ScopedPage 인터페이스를 r05-remote runtime이 그대로 구현하는 것으로 확정할지 (R05 내부 결정, R01 공유)
 - Q2 profile_ref.digest 계산 방식(정규화 규칙). 지금은 platform·object_kind·version·environment만 확인
 - Q3 일정: runtime 우선 시 크몽 adapter 마감 조정 여부
+# 2026-11-25 Runtime 연결 후속
+
+검증 결과는 Windows / Python 3.12.7 / 관리형 Chromium 143.0.7499.4에서 두 브랜치 조합본 `uv run --locked --all-groups python dev.py test r05-kmong` 37개 통과, 실패 0개다. 조합본은 별도 detached 검증 작업 공간에 각 담당 경로만 복사해 구성했으며 브랜치 간 merge를 수행하지 않았다. 실제 크몽 Adapter K1~K7, R05 Runtime, R03 Coordinator/SQLite를 연결해 같은 로그인 세션의 접수 1건과 confirmed 재조회, 응답 유실의 접수 1건 및 재dispatch 없음, K5 이후 변경의 K6 제출 전 차단을 확인했다. 독립 크몽 브랜치에서는 총 37개 중 35개 통과·2개 skip이며 실패 0개다. doctor와 `check-changes r05-kmong --base 094e4d2`, `git diff --check`도 통과했다. GitHub 신규 CI는 미실행이다.
+
+적용 main은 `094e4d2c5dd3fbb8e9c9352296f87d90cd659308`이다. `runtime_binding.mock_runtime_binding`으로 실제 Runtime의 ScopedPage와 KmongContext를 연결한다. asset provider는 승인 범위의 ID와 digest·bytes를 검사하며, R03이 승인 registration/owner/lease를 검증하는 reader를 주입해야 한다. 현재 공통 Protocol 변경은 수행하지 않았다.
+
+K6 제출 직전에도 K5와 같은 승인값 비교를 수행한다. K5 이후 초안 값이 변경되면 제출 전에 차단한다.
+
+독립 브랜치에서는 remote 구현이 없으면 실제 Runtime 연결 시험 2개가 skip된다. 두 R05 브랜치의 담당 디렉터리를 합친 별도 검증 작업 공간에서 실제 Runtime·크몽 모의 사이트·R03 Coordinator/SQLite를 연결해 해당 2개를 실행한다. PREP은 테스트 전용 합성 provider이며 실제 모델을 사용하지 않는다. 원본 업로드 후 발급된 asset_refs를 PREP 결과에 사용한다.
+
+실제 제한 Gateway API의 서명과 lease 검증은 R03 협의 사항이다. 테스트의 제한 reader는 합성 메모리 바이트를 반환하며 공통 자산 권한 검증 완료를 의미하지 않는다. D01의 전체 승인값 digest 변경, Source 계보 slot resolver, D02 Permit consume, D03 fenced read 허가 및 실제 R04 UI 연동은 후속 검증 대상이다.
