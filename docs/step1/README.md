@@ -1,43 +1,8 @@
-# Step 1 필수 제출물
+# Step 1 필수 제출물 · 현행 레슨 등록 서비스
 
-**2026-11-23 현재 R02 음악 레슨 강사 등록 지원 서비스의 기획 방향을 택해 기존 Step1 제출 경로를 개정했습니다. 새 문서는 기획·WBS의 제출 후보 초안으로, 실제 사용자·정책·기술·BM·개발 범위 검증과 공식 제출·접수는 미확인입니다.** [현재 단계 의도](../human/phase-intents/PHASE-20261123-01.md) 및 [기획 원본](../artifacts/planning/lesson-registration-20261123/README.md)을 먼저 확인합니다.
+- [기획서 및 요구사항 명세서](기획서_제출본.md) — V1.1 및 11/25 채택 mock 요구 REQ-01~11.
+- [WBS](WBS_제출본.md) — TASK-048~054 및 V0.6 일정 후보. 잔여 공수·일정·Projects/시트 캡처 미확인.
 
-Step 1의 실제 제출 대상 파일을 두는 공간입니다. 프로젝트 내부 작업 정본이나 사람의 의도 기록을 두지 않습니다.
+**과거 자료:** [기획서.md](기획서.md)·[WBS.md](WBS.md)는 이전 찾아you 생성기 출력/이력이며 현행 제출 후보가 아니다. [11/23 기획](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/기획서_제출본.md)·[11/23 WBS](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/WBS_제출본.md)는 고정 Git 이력. 기존 원본/생성기 보존.
 
-## 현재 음악 레슨 등록 기획 제출 후보 (2026-11-23)
-
-- [기획서·요구사항 명세서 — 잠정 제출본](기획서_제출본.md) · 공식 샘플의 **서비스 정의 / 기능 요구사항 / 비기능 요구사항** 순서
-- [WBS — 잠정 제출본](WBS_제출본.md) · 공식 샘플의 **간트 / 일정 관리 규칙 / 작업 계획표 / 마일스톤** 순서
-
-위 두 문서는 강사님이 제공한 **기획서 3개·WBS 4개 대항목 구조**와 11/23의 새 기획 방향을 반영한 **사람용 제출 후보 초안**입니다. 본문 내 11/23 근거와 검증 대기 사항을 구별했습니다. 기존 [기획서.md](기획서.md)와 [WBS.md](WBS.md)는 생성기에서 만든 과거 찾아you 기준 스냅샷이며 새 제출본을 덮어쓰지 않습니다. 11/19 당시의 제출 준비 문서는 [보존된 기록](../submissions/step1-step2-20261119/README.md)과 Git 이력에서 확인할 수 있습니다.
-
-- [피드백 반영·미결정 추적](../submissions/step1-step2-20261119/INSTRUCTOR-FEEDBACK-MATRIX.md)
-- [제출 전 점검표](../submissions/step1-step2-20261119/SUBMISSION-CHECKLIST.md)
-- 최종 확정에는 TASK-028~032 실제 근거·MVP 승인 및 공식 양식/가독성/제출 상태 확인이 필요합니다. 현재 제출본은 JSON 작업 원본을 참고해 다시 작성한 **별도 제출용 Markdown 초안**이며 생성기 자동 프로젝션은 아닙니다.
-
-## 필수 제출물
-
-- [기획서](기획서.md)
-- [WBS](WBS.md)
-
-[2026-11-16 공식 OUTPUT-GUIDE 확인](../guidelines/2026-11-16_OUTPUT-GUIDE_적용확인.md)에 따르면 **제공된 목차를 기본으로 각 항목을 빠짐없이 작성**해야 합니다. 단계별 실제 제공 양식의 세부 목차와 WBS 별도 제출 방식은 추가 대조가 필요합니다.
-
-현재 팀 기획서는 **서비스 정의 / 기능 요구사항 / 비기능 요구사항** 구조를 사용하고 필요한 구조·스택·표·검증 계획을 추가합니다. 미정 기술은 결정 담당과 시점을 표시합니다. WBS는 작업·담당·기간·선행·산출물·완료 기준, 주차별 계획과 실적, 공식 문서의 작성·검토·제출을 연결합니다. 샘플의 수치·날짜·결과는 팀의 실제 기록으로 바꿉니다. 미결정·미구현은 현재 상태와 예정 내용을 명시합니다.
-
-[공식 작성 안내](https://gt.isitsoft.kr/publicproj/aio-01d4-stu/src/branch/main/Lecture/FinalProject/OUTPUT-GUIDE.md)를 기준으로 작성 도구는 자유지만, 표·그림·본문이 보이고 강사·매니저가 열 수 있는 문서 형태로 제출합니다. Markdown 단독 공개 링크의 제출 인정 여부, 추가 형식과 WBS 별도 제출 방식, 확정 마감일·시각은 최신 안내·팀 대시보드에서 확인합니다. 업로드만으로 제출 완료가 아니며 대시보드에 링크 등록 후 제출완료 전환이 필요합니다.
-
-작업 정본은 `docs/artifacts/`, 사람의 의도와 판단은 `docs/human/`, 사람이 보는 검토 화면은 `docs/review/`, 전체 제출 상태는 `docs/submissions/README.md`에서 관리합니다.
-
-제출 형식·파일명 규칙·정확한 제출 시각·별도 제출 동작이 확인되면 상태 원본과 TASK-002에 갱신합니다.
-
-## 원본·프로젝션 동기화
-
-- [기획서 원본](../artifacts/planning/기획서_초안.json): 내부 본문과 제출용 본문에 조사 결과·근거 수준·미확인을 함께 반영합니다.
-- [WBS 원본](../artifacts/planning/WBS.json): W01~W34, 하위 작업, 담당, 마일스톤, 계획·실적·진척·지연 기록을 관리합니다.
-- 갱신 후 `uv run --no-project python tools/project_docs.py` 및 `uv run --no-project python tools/project_docs.py --check`로 생성·검증합니다.
-
-## 열람·제출 확인
-
-문서 준비·내부 검토·공식 제출·접수 확인은 별개입니다. 최종 링크를 강사·매니저가 열 수 있는지 확인한 뒤 공식 제출 표에 등록하고 제출완료로 전환합니다. 접수·피드백·보완은 별도로 확인합니다. 비공개 대시보드 URL이나 화면은 공개 저장소에 복사하지 않습니다.
-
-2026-11-17 피드백 반영본의 원격 링크·열람 권한과 제출·접수는 게시 및 공식 화면 확인 전까지 미확인입니다. 기존 문서의 공개 링크 접근 가능 여부가 이번 로컬 수정본의 게시·접수를 증명하지 않습니다.
+[현재 설계](../design/lesson-registration/CURRENT-DESIGN.md) · [강사 OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [제출 상태](../submissions/README.md). 현재 작성/검토 후보, 실제 제출·접수·열람/최종 형식 미확인.
