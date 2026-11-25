@@ -74,6 +74,52 @@ class PreparationTests(unittest.TestCase):
         self.assertNotIn("title", result["values"])
         self.assertTrue(any(i["field"] == "/title" and i["code"] == "rule_unverified" for i in result["issues"]))
 
+    def test_unknown_model_field_blocks_without_discarding_known_fact_or_exposing_field(self):
+        candidates = [{"field": "/title", "value": "합성 기타 레슨", "quote": "합성 기타 레슨"},
+                      {"field": "/private-model-output", "value": "합성", "quote": "합성"}]
+        result = self.provider(candidates).prepare(request("kmong", "제목은 합성 기타 레슨입니다."))
+        self.assertEqual(result["values"]["title"], "합성 기타 레슨")
+        self.assertTrue(any(i["field"] == "/" and i["code"] == "unsupported" and i["blocking"]
+                            for i in result["issues"]))
+        self.assertNotIn("private-model-output", repr(result))
+        self.assertFalse(result["ready"])
+
+    def test_numeric_evidence_with_wrong_or_missing_unit_is_not_promoted(self):
+        cases = [('/packages/0/minutes_per_session', 90, '90회'),
+                 ('/packages/0/sessions', 4, '4일'),
+                 ('/packages/0/amount_vat_included_krw', 180000, '180000분'),
+                 ('/packages/0/revision_count', 4, '수업 4회')]
+        for field, value, quote in cases:
+            with self.subTest(field=field):
+                result = self.provider([{'field': field, 'value': value, 'quote': quote}]).prepare(
+                    request('kmong', quote))
+                self.assertFalse(result['ready'])
+                self.assertFalse(any(f['path'] == field for f in result['facts']))
+                self.assertTrue(any(i['field'] == field and i['code'] == 'rule_unverified' for i in result['issues']))
+
+    def test_title_requires_explicit_adjacent_label_across_text_variants(self):
+        for text, expected in [('제목: 합성 기타 레슨', True), ('제목은 합성 기타 레슨입니다.', True),
+                               ('설명: 합성 기타 레슨', False), ('제목은 다른 내용. 합성 기타 레슨', False)]:
+            with self.subTest(text=text):
+                candidate = {'field': '/title', 'value': '합성 기타 레슨', 'quote': '합성 기타 레슨'}
+                result = self.provider([candidate]).prepare(request('kmong', text))
+                self.assertEqual('title' in result['values'], expected)
+                if not expected:
+                    self.assertTrue(any(i['field'] == '/title' and i['blocking'] for i in result['issues']))
+
+    def test_numeric_evidence_preserves_unit_and_exact_number(self):
+        candidate = {'field': '/packages/0/minutes_per_session', 'value': 90, 'quote': '190분 또는 90회'}
+        result = self.provider([candidate]).prepare(request('kmong', candidate['quote']))
+        self.assertFalse(any(f['path'] == candidate['field'] for f in result['facts']))
+        self.assertTrue(any(i['field'] == candidate['field'] and i['code'] == 'rule_unverified'
+                            for i in result['issues']))
+
+    def test_vat_exclusion_without_packages_cannot_become_ready(self):
+        result = self.provider().prepare(request('kmong', '첫 수업 180000원, 부가세 별도'))
+        self.assertFalse(result['ready'])
+        self.assertNotIn('packages', result['values'])
+        self.assertTrue(any(i['field'] == '/packages' and i['blocking'] for i in result['issues']))
+
     def test_explicit_title_label_does_not_require_extra_confirmation(self):
         candidate = {"field": "/title", "value": "합성 기타 레슨", "quote": "제목은 합성 기타 레슨입니다."}
         result = self.provider([candidate]).prepare(request("kmong", candidate["quote"]))

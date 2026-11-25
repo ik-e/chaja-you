@@ -47,6 +47,22 @@ def _vat_excluded(quote: str) -> bool:
                 or re.search(excluded + r"\s*[:：]?\s*" + tax, quote, re.IGNORECASE))
 
 
+def _numeric_unit(field: str, value: Any, quote: str) -> bool:
+    """Accept numeric evidence only when its unit occurs next to the number."""
+    key = field.rsplit("/", 1)[-1]
+    units = {"amount_vat_included_krw": "원", "minutes_per_session": "분",
+             "sessions": "회", "work_days": "일", "revision_count": "회"}
+    if key not in units:
+        return True
+    if type(value) is not int or value < 0:
+        return False
+    number = rf"(?:{re.escape(str(value))}|{re.escape(format(value, ','))})"
+    occurrence = r"(?<![\d,])" + number + r"\s*" + units[key]
+    if key == "revision_count":
+        occurrence = r"수정[^\n]{0,24}" + occurrence
+    return bool(re.search(occurrence, quote))
+
+
 def _direct_text(field: str, value: Any, quote: str, source_text: str) -> bool:
     labels = {"/title": r"제목", "/description": r"(?:소개|설명)",
               "/process": r"(?:서비스\s*제공\s*)?절차", "/preparation": r"준비\s*(?:사항|물)"}
@@ -85,6 +101,8 @@ class PreparationProvider:
 
         suggestions: dict[str, list[dict]] = {}
         nested_suggestions: dict[str, list[dict]] = {}
+        unrecognized_fields: set[str] = set()
+        unclear_units: set[str] = set()
         source_text = request["source"]["raw_text"]
         for candidate in candidates:
             if not isinstance(candidate, dict) or set(candidate) != {"field", "value", "quote"}:
@@ -105,9 +123,15 @@ class PreparationProvider:
             nested = (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
                       and re.fullmatch(r"/packages/[0-2]/(?:amount_vat_included_krw|minutes_per_session|sessions|work_days|revision_count|period)", field))
             if field not in fields and not nested:
-                raise _failure("RUNTIME_ERROR", "준비 모델의 항목을 확인해 주세요.")
+                # Do not expose arbitrary model output or discard other valid
+                # evidence. The unknown candidate still blocks readiness.
+                unrecognized_fields.add("/packages" if field.startswith("/packages/") and "/packages" in fields else "/")
+                continue
             if not quote or quote not in source_text or not _literal(value, quote):
                 # An unsupported guess is never copied to the result.
+                continue
+            if nested and not _numeric_unit(field, value, quote):
+                unclear_units.add(field)
                 continue
             (nested_suggestions if nested else suggestions).setdefault(field, []).append(candidate)
 
@@ -125,6 +149,14 @@ class PreparationProvider:
                 answers.setdefault(answer["field"], []).append(answer)
 
         result: dict[str, Any] = {"ready": False, "values": {}, "facts": [], "issues": [], "provenance": []}
+        for field in sorted(unrecognized_fields):
+            result["issues"].append({"issue_id": _id("unsupported-model", field), "field": field,
+                                     "code": "unsupported", "message": "지원하지 않는 모델 항목을 확인해 주세요.",
+                                     "blocking": True})
+        for field in sorted(unclear_units):
+            result["issues"].append({"issue_id": _id("unit", field), "field": field,
+                                     "code": "rule_unverified", "message": "원문의 숫자와 단위를 확인해 주세요.",
+                                     "blocking": True})
         for field in sorted(set(unsupported)):
             result["issues"].append({"issue_id": _id("unsupported", field), "field": field,
                                      "code": "unsupported", "message": "세부 항목 수정은 확인이 필요합니다.",

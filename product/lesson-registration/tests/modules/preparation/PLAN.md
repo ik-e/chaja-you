@@ -105,3 +105,10 @@ PYTHONPATH=.:src uv run --locked --python 3.12 python tests/modules/preparation/
 - 사례 A: 부모 패키지 3개가 있고 `/packages/0/amount_vat_included_krw`만 수정하면 나머지 2개와 수정하지 않은 필드, facts/provenance가 그대로인지 검증한다. 사례 B: 원문과 수정 금액이 충돌하면 해당 leaf `conflict`·blocking을 반환하고 R03은 `FACT_CONFLICT`로 매핑해 이전 revision을 유지한다. 부모가 없는 leaf도 조용히 일부만 저장하지 않는다.
 - timeout/동시성 권장: 30초는 현재 추출기의 시험 설정으로만 제안하고 운영값은 측정 후 정한다. R02는 timeout을 `MODEL_UNAVAILABLE`로 안전하게 전달한다. R03은 호출 시작 revision을 기준으로 종료 후 CAS해 오래된 결과를 버린다. H4 신규 요청의 model_unavailable 이슈 저장과 H5 실패 시 이전 preparation/answers 보존을 어떻게 함께 표현할지는 R03과 실제 응답·저장 예제로 확정한다. timeout이 원격 모델 작업 자체를 취소한다고 가정하지 않는다.
 - 완료 기준: 두 담당 구현을 실제로 연결한 정상 수정, 충돌, 부모 부재, timeout, 다른 revision의 선행 저장, 늦은 결과 미반영 시험과 커밋·재현 명령을 함께 기록한다. 현행 mock-only·공통 스키마를 바꾸지 않으며, 변경이 불가피할 때만 R01에 근거와 영향을 전달한다.
+
+## R01 리뷰 반영 및 자기 성찰 후보 · 2026-11-25
+
+- 지원하지 않는 모델 필드가 있으면 임의 내용을 출력하지 않고 `unsupported`로 차단하되, 정상 후보의 사실·근거는 보존한다. 원문 숫자가 같은 것만으로 금액·분·회·일을 동일시하지 않도록 숫자 바로 옆 단위를 요구한다. 단위가 없거나 다르면 원문 후보를 확정하지 않고 차단한다. 라벨 문맥과 VAT 별도/가격 대안에 대한 합성 반례를 보강했으며 모든 자연어 표현을 포괄한다고 주장하지 않는다.
+- `BoundedReflectionExtractor`는 명시 주입되는 **미채택 실험 후보**다. 근거가 있는 후보의 지원 불가 필드만 교정기에 한 번 제안하고, 원래 후보의 값·인용을 추가·삭제·변경하는 수정은 받아들이지 않는다. 원본 누락·충돌은 보정하지 않으며 결과는 기존 PREP 검증을 다시 통과해야 한다. 실제 모델/API나 앱에는 자동 연결하지 않는다.
+- 가짜 추출기·교정기 A/B에서 유효 근거 보존, 형식 교정 1회 제한, 값·인용 변경 거절, 원본 가격 충돌 보존, 모델 timeout 차단을 시험했다. 이는 합성 코드 시험이며 실제 모델 자기 성찰 A/B 결과나 DLV-06 완료가 아니다.
+- 최신 main `089b8a4` 적용 후 `uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation`에서 55개 및 bootstrap replay 통과, `dev.py check-changes r02-preparation --base 089b8a4` 통과. 실제 모델 재시험은 R01에 제안한 비용·사례 검토 전 실행하지 않았다.
