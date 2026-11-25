@@ -74,3 +74,7 @@ R03 후속: [R01 결정](../../../docs/human/responses/HRESP-20261125-04_r03-app
 [승인](../../../docs/human/responses/HRESP-20261125-05_common-detail-direction.md) · [후보](../contracts/DETAIL-CANDIDATE.json) · [인증 세션 보안](../contracts/SESSION-SECURITY.md). 기존 R03/R05 협의 대기 대신 R01이 reference와 실패 시험을 먼저 제공. 명령: `uv run --locked --python 3.12 python -m unittest discover -s tests/contract -p test_detail_candidate.py -v` (PYTHONPATH=.:src), 제품 lock의 all-groups 환경에서 `python evidence/probe_physical.py`. 실행 결과는 정확한 commit CI로 확인; 이전 채팅 13/13은 재현 근거 부재로 검증값 사용 금지. 기존 replay sentinel 유지, 계산값은 후보 test에서 실제 생성. 독립 모델·loopback probe와 실제 제품 22개/운영 보안은 분리. 담당자 차이 확인 후 현행 interfaces.py·manifest/slot/fixture 변경 여부를 확정.
 
 후속: [공동 개발 기준](../contracts/CURRENT-BASELINE.md) 및 [R01 전달](../../../docs/human/responses/HRESP-20261125-08_common-baseline-release.md). 81ade0f 후보의 4개 CI 통과; R04 추가 구현이 반영된 최신 main과 함께 다시 검증. 실제 owner conformance 및 22개 gate 미확인. [OpenAI 실험 환경](OPENAI-EXPERIMENT.md)은 기관 Member 접근/예산/정책 확인 전 실제 호출 금지.
+
+## 11/25 팀 후속 및 점진 통합 준비
+
+[팀 고정 검토](team-checkpoint-20261125.json) · [제품 gate 실행 체계](PRODUCT-GATE.md). R02 실험 설계/수행 자율, R01 검토만; 실제 모델 오류 및 후속 비용 계획 확인. R03 합성 API 실행기 main 반영, R04 실제 UI/숨고 결과 검토 및 WBS 갱신, R05 고정 CI 15/32 통과. `evidence/product_gate.py`는 22 gate pin과 결과를 구분하고 합성 HTTP/CLI preflight를 수행한다. 완전한 gate case는 아직 0개. 관련 provider/보안/상태가 실제 연결된 이후 검증 case를 등록. 기본 CI에 실제 모델/플랫폼 호출 없음. R02/R04 잔여 공수, R05 갱신 공수·가용성 확인 전 일정 확정 금지.

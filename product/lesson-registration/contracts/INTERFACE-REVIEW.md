@@ -72,3 +72,16 @@ R01이 [구체안](DETAIL-CANDIDATE.json)과 [세션 보안](SESSION-SECURITY.md
 | Chromium 회귀 | 응답 유실 시 POST 재전송 관측, route.fetch(max_redirects=0,max_retries=0) 변경 | R01 고정 commit 독립 Chromium 시험으로 단일 접수·재dispatch 없음·unknown 유지 확인. redirect/retry 경로(307/308 등), context/service worker 및 actual dispatch 경합 추가 검증 필요; route fetch만으로 exactly-once 주장 금지. |
 
 기존 논리 pin, 22 gate, 업무 분담 유지. 사용자 확인한 전달 이후 실제 담당 합의·수정·CI는 별도 기록한다. R01은 담당 브랜치/구현을 직접 수정하지 않는다.
+
+## R02·R04 후속 통합 검토 (2026-11-25)
+
+[팀 고정 근거](../evidence/team-checkpoint-20261125.json) · [R04 검토](../evidence/r04-progress-20261125.json). R02의 PR51/52 draft는 별도 리뷰, 실제 모델 가격 충돌 오류·실험 설계/비용/인계는 R02 책임 및 R01 검토. [R03 합성 API 실행기](../tests/modules/app/README.md)는 31fe0c5 main에 반영되어 실제 Viewer를 기다리지 않고 H1~H9 연동 가능(합성 provider). 실제 모델/Viewer/플랫폼은 별도.
+
+| 접점 | 확인 사항 및 반환 기준 |
+| --- | --- |
+| D05 R02/R03 | 부모 /packages 삭제 후 leaf만 전달하면 이전 값 유실. PR51은 부모와 leaf 동시 입력에서 형제 보존. 실제 H5에서 부모/형제 보존 및 provenance, 현재 revision/CAS, 지원 불가 시 기존 상태 보존/거부; timeout/late 결과 적용 금지. 기존 계약 내 해결 우선, 실제 사례 시험. |
+| R04 UI | 9개 CI는 Python API·마크업 검사. 실제 버튼 H1~H9 연결 및 revision/approve 상태 통제, H7 StartInput·H8 Progress/goal_verdict 적용. 고정 1.5초 간격을 지수 백오프로 주장 금지, 조회 timeout은 실제 결과 아님. 시안 예시 데이터와 실제 성공 표시 분리. |
+| R04 Viewer | grant URL 금지, exact origin+source+generation 및 one-shot input 권한은 선택 사항 아님. H6 server verified 전 성공 표시 금지, detach와 cancel 구분. 기존 CURRENT-BASELINE/D04 유지. |
+| R04 숨고 | S5 unknown을 confirmed로 기록하지 않음. 실제 저장 상태를 별도 조회하고 승인값/고정 HTML에서 성공 근거를 합성하지 않음. S4 exact approved values 비교, BoundGateway/permit, 공통 canonical, observed target와 I5 최종 판정, 잘못된 대상/유실/중복 회귀. |
+
+담당자는 기존 TASK 및 소유 경로에서 수정/시험하며 R01은 공통 경계와 통합만 변경. 12/4 및 12/8 후보와 22개 gate 유지.

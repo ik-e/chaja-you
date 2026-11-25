@@ -9,7 +9,7 @@
 
 [PHASE-20261125-01](docs/human/phase-intents/PHASE-20261125-01.md)
 
-- 실제 제품: 공통 기준선 PR #44 main 반영 및 CI 4종 통과; R03 S8 실제 HTTP/SQLite 합성 회귀 확인. R05 053·054 초기 구현·15/32 시험 담당자 보고 및 독립 CI 재현, 잔여 3~3.5근무일; 실제 WS/adapter 및 공통 보안·digest 정합성 미확인. 실제 제품 22개 gate·일정 미확정, live 금지.
+- 실제 제품: 공통 기준 및 R03 HTTP/SQLite 합성 API 실행기 main 반영. R02 실제 모델 합성 보고·PR51/52 검토, R04 UI/숨고 초기 구현·9/6 CI, R05 runtime/크몽 15/32 독립 재현. D01~D06·실제 provider/Viewer/UI 연결 미완료. 22 gate 실행 체계 준비(전체 제품 gate 0/22), 일정/실서비스 권한 미확정.
 - 이전 기획·WBS: 기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류
 - 제출 문서: 이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인
 
@@ -28,14 +28,14 @@
 
 ## 우선 작업
 
-1. TASK-048: PR #44 공통 기준선 적용, D01~D06 실제 정합성·R05 독립 CI·WBS·점진 통합.
-2. TASK-049(R02): 등록 정보 준비·AI 구조화 및 검증; 담당자 PLAN/검토 및 독립 구현.
-3. TASK-050(R03): S8 HTTP/191개 시험 확인, 잔여 3인일 보고; I2/STORE/Viewer 연결.
-4. TASK-051(R04): 등록 지원 웹 UI 구현; 담당자 PLAN/검토 및 독립 구현.
-5. TASK-052(R04): 숨고 등록 adapter 및 독립 mock 구현; 담당자 PLAN/검토 및 독립 구현.
-6. TASK-053(R05): Chromium Runtime 15개 보고, WS/one-shot grant/input fence/STORE·slot·asset 연동 및 CI.
-7. TASK-054(R05): 크몽 32개 보고, R03 digest 정렬·실제 Runtime 연결, 안정적인 slot/readback/증거 확인.
-8. 12/8 mock MVP 및 1/4 최종 목표 유지; R02 인계와 R04/R05 업무량을 확인해 세부 일정을 결정.
+1. TASK-048: 공통 D01~D06 실제 정합성·점진 통합·22개 gate preflight/등록 및 WBS 조정.
+2. TASK-049(R02): 실제 모델 합성 5×2 보고 및 44개 독립 CI, PR51/52 검토. R02 실험 설계·비용 및 R03 중첩/timeout 협의, 잔여 공수·인계 확인.
+3. TASK-050(R03): 191개 시험 및 합성 Mock API launcher main; 중첩/timeout/STORE/Viewer 연결, 잔여 3인일.
+4. TASK-051(R04): UI 시안/9개 CI; R03 launcher 이용 실제 H1~H9, revision/Viewer 및 H7/H8 정합성 보완.
+5. TASK-052(R04): 숨고 6개 CI; actual mock persisted state·unknown·BoundGateway/canonical/readback 우선 보완.
+6. TASK-053(R05): 15개 독립 CI; WS/one-shot grant/input fence/STORE·slot·asset 연동.
+7. TASK-054(R05): 32개 독립 CI; Runtime 연결 및 D01~03 안정적인 slot/digest/readback/증거 확인.
+8. 12/4 인계/vertical 및 12/8 mock MVP·1/4 최종 목표 유지; R02/R04 잔여 공수·가용성 및 R05 갱신 추정 확인.
 
 ## 결정할 항목
 

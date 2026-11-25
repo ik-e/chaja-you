@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-25",
+  "reviewed_main": "094e4d2c5dd3fbb8e9c9352296f87d90cd659308",
+  "authority": "docs/human/responses/HRESP-20261125-10_team-integration-followup.md",
+  "r02": {
+    "status": "PR49/50 merged; draft PR51/52 reviewed; owner designs experiments, R01 reviews design/cost/results",
+    "access": "R01 provided access; actual synthetic API execution reported; policy and total cost not independently confirmed; no secret recorded",
+    "implementation": {
+      "pr": 51,
+      "sha": "facb0ead824437883d00d896357e17edd2e4c38a",
+      "ci": "https://github.com/ik-e/chaja-you/actions/runs/45561308184/job/139025417560",
+      "synthetic_tests": 44,
+      "r03_tests": 191,
+      "review": "https://github.com/ik-e/chaja-you/pull/51#issuecomment-7154977594"
+    },
+    "run": {
+      "pr": 52,
+      "sha": "a387bfdf7016ac4a12b88fe0e83fc8afd027d7b2",
+      "record": "https://github.com/ik-e/chaja-you/blob/a387bfdf7016ac4a12b88fe0e83fc8afd027d7b2/docs/artifacts/runs/RUN-TASK-049-OPENAI-20261125.json",
+      "reported_cases_each": 5,
+      "reported_results": {
+        "gpt-6-luna": {
+          "pass": 3,
+          "error": 2,
+          "input_tokens": 5071,
+          "output_tokens": 2155
+        },
+        "gpt-5.6-luna": {
+          "pass": 4,
+          "error": 1,
+          "input_tokens": 5071,
+          "output_tokens": 1281
+        }
+      },
+      "limitation": "Both price_conflict errors. Last ten calls only, not total spend; actual model run not independently repeated.",
+      "review": "https://github.com/ik-e/chaja-you/pull/52#issuecomment-7154978482"
+    },
+    "remaining_person_days": null
+  },
+  "r03": {
+    "head": "4a240eeffdcd3c4b24b71411506d96f41cc03e77",
+    "merge": "31fe0c5de89b68bcdd388e6a9efa9557ef76cadd",
+    "launcher": "https://github.com/ik-e/chaja-you/blob/31fe0c5de89b68bcdd388e6a9efa9557ef76cadd/product/lesson-registration/tests/modules/app/README.md",
+    "ci": "https://github.com/ik-e/chaja-you/actions/runs/45561969250",
+    "remaining_person_days": 3,
+    "limitations": "launcher synthetic PREP/runtime, no real viewer; actual D01–D06 and nested edit/timeout pending"
+  },
+  "r04": {
+    "evidence": "product/lesson-registration/evidence/r04-progress-20261125.json",
+    "remaining_person_days": null
+  },
+  "r05": {
+    "evidence": "product/lesson-registration/evidence/r05-progress-20261125.json",
+    "remaining_workdays": [
+      3,
+      3.5
+    ],
+    "note": "old estimate retained pending owner update after R01 CI"
+  },
+  "gate": {
+    "runner": "product/lesson-registration/evidence/product_gate.py",
+    "doc": "product/lesson-registration/evidence/PRODUCT-GATE.md",
+    "commit": "696a5cc7294c7111cd74329c5b08c4b92a68f8e1",
+    "ci": "https://github.com/ik-e/chaja-you/actions/runs/45562142407",
+    "full_cases_registered": 0,
+    "required": 22,
+    "actual_model_auto_execution": false,
+    "scope": "preflight/supporting probes, no full gate pass"
+  },
+  "limits": "No owner branch edits, no additional assignment or deadline/budget approval, no live platform or additional model calls."
+}

@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 PR #44 공통 기준 main e182cf8 및 CI 4종 통과. R03 S8 191개 독립 회귀 통과·잔여 3인일 보고. R05 remote 8e506e1 15개, kmong ae582bf 32개 담당자 보고 및 독립 CI 재현, 잔여 3~3.5근무일(두 TASK 합계); D01~04/실제 연결 미완료. R02 PR #49, R04 실제 UI/adapter 보완 및 담당 잔여 공수 확인. WBS V0.6 미확정, 22개 제품 시험 미실행, live 금지.
+11/25 공통 기준 main 및 CI 통과. R02 PR49/50 병합, PR51/52 draft 44개 합성 독립 CI 및 실제 모델 5×2 담당 보고(가격 충돌 오류); R01 검토 의견 등록, 실험 설계/수행 R02. R03 191개·잔여 3인일, 합성 API launcher main 31fe0c5. R04 UI 9·숨고 6개 독립 CI, 실제 UI/unknown/readback/보안 보완. R05 15/32 독립 CI·잔여 3~3.5근무일. pinned 22 gate 실행기 및 preflight 추가, full case 0/22; WBS 미확정·live 금지.
 
 ## 결정 요청
 
@@ -40,7 +40,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 81ade0f CI 4종 성공. 최신 main의 R04 추가 구현과 함께 재검증. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정). R01 Discord 전달의 확정 경계와 D01~D06 협의/적용 기준을 CURRENT-BASELINE.md에 정리. 기관 API 권한 미확인에 맞춰 실험 환경 계획 수정.
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 81ade0f CI 4종 성공. 최신 main의 R04 추가 구현과 함께 재검증. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정). R01 Discord 전달의 확정 경계와 D01~D06 협의/적용 기준을 CURRENT-BASELINE.md에 정리. 기관 API 권한 미확인에 맞춰 실험 환경 계획 수정. 11/25 후속: R02 PR51/52 리뷰, 실제 모델 합성 시험 보고 및 R01 설계/비용 검토 역할 확인; R03 launcher main 31fe0c5 및 회귀 CI; R04 TASK051/052 결과 정리·WBS 갱신. 제품 gate 22개 pin 기반 실행기와 합성 preflight 696a5cc7 반영, 완전한 gate case 0개, 실제 전체 수용 미실행.
 
 검증과 근거
 
@@ -56,6 +56,7 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - 24a1c35 이전 reference/물리 후보 (새 후보/실제 제품 별도) · pass
 - OpenAI API 접근·비용·실제 모델 실험 · inconclusive
 - 81ade0f 보완 후보 4개 CI (실제 provider/gate 별도) · pass
+- 22개 고정 제품 gate 실행 체계 및 합성 preflight · inconclusive
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
 - [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
@@ -73,6 +74,9 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [실제 모델 실험 환경 계획](../../product/lesson-registration/evidence/OPENAI-EXPERIMENT.md)
 - [공동 기준 전달 기록](../human/responses/HRESP-20261125-08_common-baseline-release.md)
 - [공동 개발 기준선](../../product/lesson-registration/contracts/CURRENT-BASELINE.md)
+- [팀 진행 고정 검토](../../product/lesson-registration/evidence/team-checkpoint-20261125.json)
+- [제품 수용 시험 실행기](../../product/lesson-registration/evidence/PRODUCT-GATE.md)
+- [R01 후속 지시](../human/responses/HRESP-20261125-10_team-integration-followup.md)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 - [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
@@ -84,20 +88,22 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [보완 후보 물리 CI](https://github.com/ik-e/chaja-you/actions/runs/45551936592)
 - [보완 후보 bootstrap CI](https://github.com/ik-e/chaja-you/actions/runs/45551937159)
 - [보완 후보 문서 CI](https://github.com/ik-e/chaja-you/actions/runs/45551936530)
+- [preflight 독립 CI](https://github.com/ik-e/chaja-you/actions/runs/45562142407)
 
 남은 불확실성과 결정 요청
 
-- R03 S0~S7 및 174/10/2 보고(독립 재현 미확인), 초기 11인일·잔여 공수 미확인; R05 7근무일 추정, R02/R04 가용성 및 실제 준비 상태 별도 확인
+- R03 191개 독립 회귀·잔여 3인일, R05 15/32 독립 회귀·잔여 3~3.5근무일, R04 9/6 독립 회귀 확인. R02/R04 잔여 공수 및 가용성 미확인.
 - 12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정
 - 실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증
 - 초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요
 - 실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도.
-- OpenAI 공급자 방향 수용; API 계정/예산/SDK/모델 비교 및 시험 미확인; 81ade0f CI 통과; 실제 담당자 적합성 및 최신 main 추가 구현 회귀 별도.
+- R02 실제 합성 모델 5×2 관측(가격 충돌 양 모델 오류), 전체 비용·품질/선정 미확정; 담당자 실험 설계/비용 검토 대기.
 - 기관 조직 Member 권한·API 이용 정책 및 실험 비용 미확정. 다른 담당자의 기준 적용/협의 반환은 확인 전.
 - 관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.
 - R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.
 - D01~D06 R01 후보 기준으로 담당자별 실제 구현 차이·반례·공수 반환. 안정적인 slot/manifest/readback, actual dispatch fence, viewer/I2/factory 세부 서명·환경은 실제 확인 후 확정. 기존 제품 범위 및 업무 배정 유지.
 - R04 A안은 H8 기존 schema, grant URL/log 금지, polling과 goal_verdict 분리로 교정. 기존 계약 변경이 필요한 경우에만 근거·영향·시험 반환.
+- R02는 실험 설계/비용/결과 책임, R01 검토만. R03 launcher 활용, R04 051/052 보완, R05 실제 연결 후 full gate 사례 등록. 실제 모델 gate 자동 실행 금지.
 
 ### TASK-049 · 진행 중
 
@@ -128,13 +134,16 @@ PR #49 초안에서 최신 공통 기준을 반영해 모의 등록 정보 준�
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-050.json)
 
-S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.
+S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님. R01 검토 후 R03 합성 Mock API launcher/가이드 3개 파일을 31fe0c5 main에 반영, 공통 CI 통과. 잔여 3인일 보고(실제 통합 결함에 따라 재산정).
 
 검증과 근거
 
 - AC1~AC3 관련 독립 앱 회귀 및 HTTP 경계 · pass
 - 실제 UI/viewer/provider 및 22개 제품 gate · inconclusive
+- R03 launcher 반영 및 기존 공통 회귀 · pass
 - [근거](../artifacts/runs/TASK-050-s8-http-20261125.json)
+- [합성 Mock API 실행/연동 가이드](https://github.com/ik-e/chaja-you/blob/31fe0c5de89b68bcdd388e6a9efa9557ef76cadd/product/lesson-registration/tests/modules/app/README.md)
+- [launcher 반영 main 독립 회귀](https://github.com/ik-e/chaja-you/actions/runs/45561969250)
 
 남은 불확실성과 결정 요청
 
@@ -143,19 +152,62 @@ S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 
 - single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05
 - mock header identity is not production authentication
 - stdlib bounded MIME parsing and 16MiB total limit are local mock choices
+- 중첩 leaf 수정의 부모/형제 보존 및 I2 deadline/late response 처리 미해결; R02와 협의
 - 기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다.
 
 ### TASK-051 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-051.json)
 
-결과 미기록.
+5개 화면 인라인 시안·탭 전환 및 Python API client/workflow, JS 호출 함수 구현. main bc2e2c8, 독립 CI 9개 통과(7 API 단위+2 마크업 검사). 실제 승인/API 버튼 연결·상태 제어, H6 보안, H7/H8 스키마와 조회 timeout 구분, browser E2E 및 actual viewer 미완료.
+
+검증과 근거
+
+- 9개 독립 모의 회귀 · pass
+- r04-web-AC1~3 실제 UI/H7/H8/Viewer 및 상태·결과 통제 · inconclusive
+- [R01 검토 근거](../../product/lesson-registration/evidence/r04-progress-20261125.json)
+- [공통 접점 검토](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
+- [R04 고정 보고서](https://github.com/ik-e/chaja-you/blob/9eaac8ca357abd131ee404937ad4ad993fcea6dd/docs/members/R04/workspace/2026-11-25_R04_업무수행결과보고서_WebUI_숨고Adapter_구현완료.md)
+- [독립 GitHub CI](https://github.com/ik-e/chaja-you/actions/runs/45558814397/job/139017270251)
+- [고정 구현 코드](https://github.com/ik-e/chaja-you/blob/bc2e2c85f90092dc98e40ded397d221bbc5f98ca/product/lesson-registration/web/app.js)
+
+남은 불확실성과 결정 요청
+
+- preview link independently not rendered
+- 7 API unit +2 markup/string tests do not exercise real browser flow
+- no actual H1-H9/Viewer integration
+- H6 grant URL 및 wildcard, 실제 H7 expected_revision/review_digest/approved, H8 current_step/step_count/confirmed_steps/goal_verdict 정렬
+- 실제 UI 버튼과 revision 상태 전환, 조회 timeout과 goal_verdict 분리
+- 잔여 공수·가용성 미확인
+- R03 mock_server를 사용해 H1~H9 브라우저 소비 시험 및 R05 viewer owner/origin/generation/one-shot 규약 정렬. 기존 계약 변경 시만 반환.
+- 잔여 공수 및 12/8 목표 영향 보고.
 
 ### TASK-052 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-052.json)
 
-결과 미기록.
+S1~S6 DOM fixture/adapter 및 R03 SQLite StoreGateway 브리지 구현, main c6a23e2d/bc2e2c8. 독립 CI 6개 통과. 정적 HTML/승인값 기반 readback, unknown을 confirmed로 기록할 가능성, 직접 STORE/permit 및 비공통 digest 등 실제 수용 조건 미충족. Runtime·실제 저장 상태·독립 readback·최종 판정 검증 필요.
+
+검증과 근거
+
+- 6개 독립 모의 회귀 · pass
+- r04-soomgo-AC1~3 실제 승인·Gateway·독립 저장/재조회 및 unknown · inconclusive
+- [R01 검토 근거](../../product/lesson-registration/evidence/r04-progress-20261125.json)
+- [공통 접점 검토](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
+- [R04 고정 보고서](https://github.com/ik-e/chaja-you/blob/9eaac8ca357abd131ee404937ad4ad993fcea6dd/docs/members/R04/workspace/2026-11-25_R04_업무수행결과보고서_WebUI_숨고Adapter_구현완료.md)
+- [독립 GitHub CI](https://github.com/ik-e/chaja-you/actions/runs/45558814397/job/139017270251)
+- [고정 구현 코드](https://github.com/ik-e/chaja-you/blob/bc2e2c85f90092dc98e40ded397d221bbc5f98ca/product/lesson-registration/src/lesson_registration/platforms/soomgo/bridge.py)
+
+남은 불확실성과 결정 요청
+
+- 6 isolated tests passed, not proof of full AC1-3
+- actual runtime and mock site state absent
+- profile value constraints, operation/goal evidence and failure conditions need conformance
+- S5 unknown 보존, 독립 mock persisted state, observed target/asset/payload 및 common canonical
+- BoundGateway와 실제 Runtime, permit/fence 및 I5 결과 판정
+- 잔여 공수·가용성 미확인
+- R03/R05와 D01~03, 승인·등록 op·permit 및 실제 상태 readback/unknown 반례 공동 확인. 독립 시험 보완.
+- 잔여 공수 및 12/8 목표 영향 보고.
 
 ### TASK-053 · 진행 중
 

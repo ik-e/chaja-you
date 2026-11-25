@@ -58,9 +58,98 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "path": "product/lesson-registration/evidence/r04-progress-20261125.json"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-10_team-integration-followup.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "5개 화면 인라인 시안·탭 전환 및 Python API client/workflow, JS 호출 함수 구현. main bc2e2c8, 독립 CI 9개 통과(7 API 단위+2 마크업 검사). 실제 승인/API 버튼 연결·상태 제어, H6 보안, H7/H8 스키마와 조회 timeout 구분, browser E2E 및 actual viewer 미완료.",
+    "claims": [
+      {
+        "id": "C51-1",
+        "text": "초기 구현 및 9개 독립 CI 확인. 시험 범위와 제품 수용 구분.",
+        "status": "독립 재현·코드 검토",
+        "evidence_ids": [
+          "E51-1",
+          "E51-2",
+          "E51-3"
+        ]
+      },
+      {
+        "id": "C51-2",
+        "text": "UI 시안 버튼/고정 결과와 서버 동작 분리 및 공통 계약 차이 확인.",
+        "status": "정적 검토",
+        "evidence_ids": [
+          "E51-3",
+          "E51-4"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E51-1",
+        "label": "R04 고정 보고서",
+        "url": "https://github.com/ik-e/chaja-you/blob/9eaac8ca357abd131ee404937ad4ad993fcea6dd/docs/members/R04/workspace/2026-11-25_R04_업무수행결과보고서_WebUI_숨고Adapter_구현완료.md"
+      },
+      {
+        "id": "E51-2",
+        "label": "독립 GitHub CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45558814397/job/139017270251"
+      },
+      {
+        "id": "E51-3",
+        "label": "R01 검토 근거",
+        "path": "product/lesson-registration/evidence/r04-progress-20261125.json"
+      },
+      {
+        "id": "E51-4",
+        "label": "고정 구현 코드",
+        "url": "https://github.com/ik-e/chaja-you/blob/bc2e2c85f90092dc98e40ded397d221bbc5f98ca/product/lesson-registration/web/app.js"
+      },
+      {
+        "id": "E51-5",
+        "label": "공통 접점 검토",
+        "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "9개 독립 모의 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E51-2"
+        ]
+      },
+      {
+        "criterion": "r04-web-AC1~3 실제 UI/H7/H8/Viewer 및 상태·결과 통제",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E51-3",
+          "E51-4",
+          "E51-5"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "preview link independently not rendered",
+      "7 API unit +2 markup/string tests do not exercise real browser flow",
+      "no actual H1-H9/Viewer integration",
+      "H6 grant URL 및 wildcard, 실제 H7 expected_revision/review_digest/approved, H8 current_step/step_count/confirmed_steps/goal_verdict 정렬",
+      "실제 UI 버튼과 revision 상태 전환, 조회 timeout과 goal_verdict 분리",
+      "잔여 공수·가용성 미확인"
+    ],
+    "decision_requests": [
+      "R03 mock_server를 사용해 H1~H9 브라우저 소비 시험 및 R05 viewer owner/origin/generation/one-shot 규약 정렬. 기존 계약 변경 시만 반환.",
+      "잔여 공수 및 12/8 목표 영향 보고."
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
@@ -101,7 +190,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-051.md",
-  "assignment_status": "R04 배정 수신 확인 및 착수; PLAN.md 작성 완료",
+  "assignment_status": "R04 초기 구현 main 반영 및 독립 CI 9개 통과 확인; 수용 조건 보완 및 실제 연동 진행 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r04/product-web",
@@ -113,5 +202,5 @@
   ],
   "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
   "plan_path": "product/lesson-registration/tests/modules/web/PLAN.md",
-  "priority_note": "가용성 확인 후 내부 일정 확정"
+  "priority_note": "R03 Mock API 실행기로 실제 UI 흐름·revision·H7/H8 검증; Viewer 보안 계약 정렬; 초기 4 MD, 잔여 미확인"
 }
