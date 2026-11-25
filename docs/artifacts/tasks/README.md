@@ -16,8 +16,8 @@
 | [TASK-050](TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-051](TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-052](TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-053](TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-054](TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-053](TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 진행 중 |
+| [TASK-054](TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 진행 중 |
 
 ## 이전 TASK · 종료 정산/증거 보존
 

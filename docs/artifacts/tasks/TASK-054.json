@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-054",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R05",
   "suggested_owner": null,
   "due": null,
@@ -59,13 +59,97 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/r05-progress-20261125.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-09_r05-progress-followup.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성/독립 CI 미완료.",
+    "claims": [
+      {
+        "id": "C54-1",
+        "text": "32개 담당자 보고 및 ae582bf의 코드/시험 검토. 담당자 결과와 R01 독립 재현은 구별.",
+        "status": "담당자 보고·코드 확인",
+        "evidence_ids": [
+          "E54-1",
+          "E54-2"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E54-1",
+        "label": "고정 담당 PLAN/시험 기록",
+        "url": "https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md"
+      },
+      {
+        "id": "E54-2",
+        "label": "구현 commit",
+        "url": "https://github.com/ik-e/chaja-you/commit/ae582bf7ff04435f4f2876d72a916c141282d85f"
+      },
+      {
+        "id": "E54-3",
+        "label": "R01 범위·근거 및 잔여 공수",
+        "path": "product/lesson-registration/evidence/r05-progress-20261125.json"
+      },
+      {
+        "id": "E54-4",
+        "label": "공통 접점 검토",
+        "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "고정 코드·시험·담당자 보고 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E54-1",
+          "E54-2"
+        ]
+      },
+      {
+        "criterion": "32개 고정 구현의 독립 GitHub CI 재현",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E54-3"
+        ]
+      },
+      {
+        "criterion": "실제 모듈 연결·공통 계약 및 관련 제품 gate",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E54-3",
+          "E54-4"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "no Playwright runtime connection",
+      "D01 scope-bound candidate differs from current step digest",
+      "stable slot and profile digest verification pending",
+      "K6 needs current exact review recheck",
+      "readback target/asset and evidence provenance pending",
+      "R05 두 TASK 합계 잔여 3~3.5근무일 보고(별도 배분/확정 일정 없음); 실제 보완 공수 미확인"
+    ],
+    "decision_requests": [
+      "R03/R05 D01 실제 scope/manifest binding 기준 및 stable slot, profile digest·asset 순서, readback observed target/evidence 및 K6 승인값 재검사. 실제 runtime 결합과 공통 벡터 반환."
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
-      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+      "docs/human/responses/HRESP-20261125-09_r05-progress-followup.md"
     ],
     "design_refs": [
       "CS-01",
@@ -100,7 +184,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-054.md",
-  "assignment_status": "R05 2026-11-25 범위 수신 확인 및 구현 가능성·공수·PLAN 작성 예정 보고; 실제 착수/PLAN commit·제품 결과 미확인",
+  "assignment_status": "R05 PLAN·초기 구현 ae582bf 확인; 담당자 32개 시험 통과 보고, 실제 통합 및 공통 정합성 검토 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r05/product-kmong",
@@ -113,5 +197,5 @@
   ],
   "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
   "plan_path": "product/lesson-registration/tests/modules/kmong/PLAN.md",
-  "priority_note": "독립 mock/fake gateway 진행 가능; runtime 공통 계약 우선; WBS 미확정"
+  "priority_note": "독립 adapter와 R03 registry/result 정렬; 실제 runtime 연결 및 D01~03 확인, R05 합계 잔여 3~3.5근무일(053/054)"
 }
