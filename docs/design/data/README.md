@@ -7,4 +7,4 @@ DB 스키마, 엔터티 관계, 데이터 보존·마이그레이션 기준을 �
 
 ## 현행 레슨 등록 설계
 
-[현행 기준](../lesson-registration/CURRENT-DESIGN.md) · [공통 데이터 의미](../lesson-registration/03-DATA.md) · [V4.1 스키마](../lesson-registration/04-SCHEMA.md) · [플랫폼 프로필](../lesson-registration/05-PLATFORMS.md). 물리 DB 스키마는 담당 설계/공통 검토 전.
+[현행 기준](../lesson-registration/CURRENT-DESIGN.md) · [공통 데이터 의미](../lesson-registration/03-DATA.md) · [V4.1 스키마](../lesson-registration/04-SCHEMA.md) · [플랫폼 프로필](../lesson-registration/05-PLATFORMS.md). SQLite 채택 및 [현행 DB 제출 후보](../../step2/데이터베이스_스키마_설계서.md). R03 물리 DDL은 고정 브랜치 관찰, 실제 최종 통합 전. 앞의 상세 뷰는 고정 스냅샷.
