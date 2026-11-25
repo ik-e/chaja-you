@@ -20,7 +20,7 @@ permissions:
 jobs:
   bootstrap:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: product/lesson-registration
@@ -47,6 +47,9 @@ jobs:
         run: |
           uv run --locked --all-groups --python 3.12 python dev.py doctor
           uv run --locked --all-groups --python 3.12 python dev.py smoke
+      - name: Install pinned Chromium when runtime browser tests are present
+        if: hashFiles('product/lesson-registration/tests/modules/remote/test_auth_viewer.py') != ''
+        run: uv run --locked --all-groups --python 3.12 python -m playwright install --with-deps chromium
       - name: Run all isolated package and integration bootstrap tests
         run: uv run --locked --all-groups --python 3.12 python dev.py test all
       - name: Ownership checker positive and negative cases
