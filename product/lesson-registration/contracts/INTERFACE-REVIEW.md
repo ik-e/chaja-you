@@ -18,3 +18,17 @@
 - 각자의 기존 PLAN에 **공통 기준 SHA / 상대 담당자 / 유지 또는 변경이 필요한 서명·예제 / 이유 / 정상·실패·unknown 시험 / 남은 확인**만 기록한다. 공유 lock/계약 변경은 R01이 반영. 다른 담당의 코드를 수정할 필요 없다.
 - 11/27은 공통 접점 협의의 잠정 목표이며 새 마감일이 아니다. 독립 구현은 가능한 부분부터 지속한다. R02 인계 12/4, R05 7일 추정 및 다른 공수는 [WBS 후보](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)에 연결.
 - 실제 구현 및 담당자 확인 전에는 합의/제품 시험 통과로 표시하지 않는다. mock-only 유지. 실제 로그인·계정·비밀·등록 금지.
+
+## R03 PLAN 검토 (2026-11-25)
+
+근거: [R03 TASK-050 PLAN 고정 snapshot](https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md). FastAPI 및 SQLite/BEGIN IMMEDIATE 방향은 PD-02/04와 일치한다. 공통 pyproject/uv.lock의 app/verification 그룹으로 작업 가능. multipart 처리에서 추가 라이브러리가 필요하면 R03가 정확한 요구를 PLAN에 제시하고 공통 lock 변경은 R01이 검증한다. 아래는 새로운 설계 요구가 아니라 기존 채택 계약에 대한 정합성 피드백이다.
+
+| PLAN 지점 | 확인 사항 |
+| --- | --- |
+| D5 효과 중복 차단 | `(registration, operation, approval_digest)`만으로는 새 등록 ID/승인 digest 변경 시 같은 외부 효과를 차단하지 못함. 기존 CS-05의 stable logical effect key: `(environment, platform, external_account_ref, object_kind, stable slot_ref, stable logical_operation_id)`를 효과 유일성 기준으로 사용. 요청 멱등 키/승인 digest는 별도 가드. 새 등록·다른 key·revision/worker 변경·unknown에 대한 실패 시험 추가. |
+| §3.4 결과 | pinned GoalVerdict는 `confirmed / not_reached / unknown` (failed는 wire enum 아님). 확실한 미도달과 증거 부족을 구분. |
+| §3.3 accept | H7은 현재 verified ConnectionBinding/target/profile/scope/permission 및 revision/review를 원자 확인. Viewer AuthGrant는 human 인증 연결용이며 승인/worker 권위가 아님. finish 이후 viewer 입력 차단 유지. |
+| ports.py / STORE | shared `contracts/interfaces.py`를 사용. 로컬 bridge는 가능하나 별도 Protocol 정본 복제 금지. S-ACCEPT와 GatewayStore admit/record_observation/fence 및 coordinator finalize 서명·lease/permit은 R05와 대조. |
+| 일정 | 11인일 추정 및 12/8 전 vertical/safety 우선 순서는 WBS 후보에 반영. H2/H9, T5-06/T6-01 등 필수 계약/시험을 삭제·연기 승인한 것은 아님. 22개 gate 미충족이면 MVP 미완료/부분 시연으로 보고하고 R01에게 일정/범위 조정 근거 반환. |
+
+R03의 PLAN 원문과 담당 브랜치는 수정하지 않는다. R03은 위 사항을 자기 PLAN에 반영/이견 기록하고 관련 담당과 기존 계약을 맞춘다. 11인일/7근무일은 보고값이지 완료 또는 확정 일정이 아니다.

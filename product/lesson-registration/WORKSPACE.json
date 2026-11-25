@@ -227,7 +227,7 @@
         "T6-01",
         "DV-01"
       ],
-      "assignment": "assigned_pending_owner_acknowledgement",
+      "assignment": "owner_plan_submitted_implementation_not_verified",
       "test_command": "uv run --locked --python 3.12 python dev.py test r03-app",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -508,7 +508,7 @@
   "activation": [
     "R01 logical design adoption recorded in main",
     "Bootstrap Python 3.12 clean checkout passed (run 45525881756)",
-    "TASK-048~054 assigned; R05 receipt and 7-day estimate reported, other owners and actual implementation pending",
+    "TASK-048~054 assigned; R05 receipt/7-day estimate and R03 PLAN/11 person-day estimate reported; R02/R04 and actual implementation pending",
     "IB-01~05 direction approved; standard synthetic contract CI passed 10/10 and 72 payloads (45527624382).",
     "PD-01~08 direction and verified initial product lock; CI candidate run 45534844447; owner details and product tests pending."
   ],

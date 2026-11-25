@@ -7,9 +7,10 @@
   "authority": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
   "prior": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
   "notes": [
-    "R05 estimate 7 days; not deadline. R02 handoff by 12/4 preserved. Other owner capacity pending.",
+    "R05 estimate 7 days; R03 PLAN estimate 11 person-days; R02 handoff by 12/4 preserved. R02/R04 capacity and actual implementation pending. Dates not confirmed.",
     "Dependencies describe integration prerequisites, not barriers to independent development.",
-    "Do not set task due/status from this candidate."
+    "Do not set task due/status from this candidate.",
+    "R03 reports only 9 working days 11/26~12/8. 12/4 vertical and 12/8 mock MVP are at risk; prioritize vertical slice and safety, never declare MVP complete on partial tests. Any scope/gate change needs explicit R01 decision."
   ],
   "items": [
     {
@@ -38,7 +39,9 @@
       "depends_on": [
         "C01"
       ],
-      "target": "pending PLAN"
+      "target": "R03 PLAN 11 person-days; 12/8 target at risk; prioritize vertical path and core guard/readback. Remaining required H2/H9, T5-06/T6-01 are not waived.",
+      "estimated_workdays": 11,
+      "estimate_ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
     },
     {
       "id": "U01",
@@ -117,7 +120,7 @@
         "K01",
         "R02"
       ],
-      "target": "12/4 prior target, not committed"
+      "target": "12/4 prior target at risk; actual app+PREP+UI+remote+adapter readiness needed; not committed"
     },
     {
       "id": "I02",
@@ -128,7 +131,7 @@
         "I01",
         "S01"
       ],
-      "target": "12/8 goal"
+      "target": "12/8 target at risk; gate remains all 22 required tests, partial demo only if incomplete"
     }
   ],
   "milestones": [
@@ -145,5 +148,24 @@
       "description": "final target"
     }
   ],
-  "remaining": "Rebuild dates/capacity after all owner plans and physical environment/contract acceptance."
+  "remaining": "Rebuild schedule after R02/R04 PLAN and all availability, R03/R05 shared boundary review and actual readiness; R01 decide resource/schedule adjustment, not automatic gate reduction.",
+  "owner_plan_review": {
+    "as_of": "2026-11-25",
+    "R03": {
+      "ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md",
+      "status": "PLAN available; implementation completion not verified",
+      "estimated_person_days": 11,
+      "estimate_notes": "R03 estimates 9 working days from 11/26 to 12/8. Sequence proposed, not gate reduction."
+    },
+    "R05": {
+      "status": "scope and 7-day estimate reported; PLAN files not yet on assigned branches",
+      "estimated_person_days": 7
+    },
+    "R02": {
+      "status": "assigned branch PLAN not found; 12/4 handoff constraint"
+    },
+    "R04": {
+      "status": "assigned branches PLAN not found; web/soomgo capacity pending"
+    }
+  }
 }

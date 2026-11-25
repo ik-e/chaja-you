@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 논리 설계 main 채택 및 공통 Python 3.12 bootstrap CI 성공. R01 작업 우선 배정 지시로 TASK-048~054 활성화. R01 공통·통합 전담, R02 준비 AI, R03 앱, R04 UI/숨고, R05 원격/크몽. 기존 TASK-043~047은 증거/미충족 의무 보존 및 신규 실행 제외. 실제 제품 22개 시험 미실행, 팀원 수신/가용성 미확인, live 금지. IB-01~05 방향 R01 승인, 초기 공통 코드 및 표준 계약/문서 재검증 통과(계약 10/10, 합성 payload 72개). 실제 provider/공유 launch/lock 및 일정 확인은 후속.
+11/25 논리·IB-01~05·PD-01~08 방향 적용, Python 3.12 기술 후보 4/4 및 제품 lock 공통 회귀 통과. TASK-048~054 활성, R01 공통·통합 전담. R03 PLAN 11인일·R05 수신/7근무일 추정, R02/R04 PLAN 미확인. WBS V0.6 후보 및 공통 접점 검토, 12/4 vertical·12/8 mock MVP 일정 위험. 22개 실제 제품 시험 미실행, live 금지. 담당자 간 세부 계약 및 실제 구현·가용성 확인 후 일정 확정.
 
 ## 결정 요청
 
@@ -40,7 +40,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 locked bootstrap과 공통 pin·독립 smoke·ownership 검사 통과. R01 IB-01~05 방향 수용, 초기 구현 인터페이스·표준 스키마 검증·provider 주입 구성. 수정 후 CI에서 문서 재생성 및 설계 프로젝션, 기존 회귀 9개와 신규 계약 10개, 합성 입출력 72개 검사 통과. 실제 모듈 통합 및 제품 수용 시험 22개 미실행.
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행.
 
 검증과 근거
 
@@ -48,19 +48,31 @@ Python 3.12 locked bootstrap과 공통 pin·독립 smoke·ownership 검사 통�
 - 제품 수용 시험 22개 · inconclusive
 - IB-01~05 방향 승인 확인 · pass
 - 표준 계약·회귀·문서 재생성 검사 · pass
+- PD-01~08 방향 승인 · pass
+- 독립 기술 후보·제품 lock 공통 회귀 · pass
+- canonical byte vectors·공통 경계 회귀 · pass
+- owner 간 세부 계약 합의 및 WBS 확정 · inconclusive
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
 - [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
+- [R01 공통 물리 방향 승인](../human/responses/HRESP-20261125-03_common-physical-direction.md)
+- [물리 기술 CI 증거 및 범위](../../product/lesson-registration/evidence/physical-ci-20261125.json)
+- [담당자 공통 접점 및 R03 PLAN 피드백](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
+- [WBS V0.6 후보](../artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
+- [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
+- [canonical helper 및 공통 경계 회귀](https://github.com/ik-e/chaja-you/actions/runs/45534986964)
+- [제품 lock 공통 회귀 검증](https://github.com/ik-e/chaja-you/actions/runs/45535125564)
 
 남은 불확실성과 결정 요청
 
-- 담당자 실제 구현, 기술 및 공수 미확인
-- 제품 시험 및 실서비스 미실행
-- 실제 provider 서명·통신·실행 설정·공유 의존성 및 전체 lock 미확정; 담당자 검토 필요
-- 원자 저장/lease, viewer 보안, 실제 모델 및 전체 수용 시험 미검증
-- 담당자 PLAN의 실제 provider/스택 선택과 공유 launch/lock 검토; R01의 IB-01~05 방향 승인을 다시 요구하지 않음.
+- R03 PLAN/11인일·R05 7근무일 보고; R02/R04 가용성 및 모든 담당자 실제 구현/수신 상태 별도 확인
+- 12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정
+- 실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증
+- 초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요
+- 관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.
+- R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.
 
 ### TASK-049 · 할 일
 

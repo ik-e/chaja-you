@@ -64,3 +64,5 @@ R05: 053·054 수신 및 7근무일 추정, 11/27 인터페이스 협의 후보,
 담당자 공통 세부 합의는 [INTERFACE-REVIEW](../contracts/INTERFACE-REVIEW.md)를 사용한다. 서버 canonical byte primitive와 golden vectors/negative test 추가; 실제 digest 대상 선택·slot·profile readback과 팀원 동의는 별도. 독립 검증 명령: `uv run --locked --python 3.12 python dev.py test common`.
 
 후속 검증: [물리 CI](https://github.com/ik-e/chaja-you/actions/runs/45534844447) 성공 (Python 3.12.3, 26 packages, Chromium build v1200, 4/4 기술 probe). [근거](physical-ci-20261125.json). 성공 로그의 정확한 lock과 동일 dependency spec을 제품 pyproject.toml/uv.lock에 반영. Linux 기술 검증과 owner 환경/실제 제품 안전 검증은 별도. 이전 후보 환경은 이력이며 제품 실행은 제품 lock 사용. 제품 lock 표준 스키마 검사는 `uv run --locked --python 3.12 python -m unittest discover -s tests/contract/standard_schema -v` (제품 root와 src를 PYTHONPATH에 추가). 실제 제품 22개 미실행.
+
+R03 PLAN 확인: [고정 snapshot](https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md), 11인일 추정/12월 8일 일정 위험. [공통 접점 및 기존 계약 정합성 피드백](../contracts/INTERFACE-REVIEW.md#r03-plan-검토-2026-11-25), WBS 후보에 반영. R02/R04 PLAN 및 R05 실제 PLAN은 확인되지 않았으므로 일정 확정 금지.
