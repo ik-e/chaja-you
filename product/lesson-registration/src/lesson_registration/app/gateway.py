@@ -29,7 +29,7 @@ from .store import atomic
 def binding_digest(scope: dict, step: dict) -> str:
     """Digest over the exact immutable values a step is bound to (proposal; agree with R05)."""
     bound = {k: scope["values"].get(k) for k in step["bindings"]}
-    asset_digests = sorted(a["digest"] for a in scope["assets"]) if "main_images" in step["bindings"] else []
+    asset_digests = [a["digest"] for a in scope["assets"]] if "main_images" in step["bindings"] else []
     return digest({"step_id": step["step_id"], "bound": bound, "asset_digests": asset_digests,
                    "target": scope["target"], "profile_digest": scope["profile_ref"]["digest"]})
 

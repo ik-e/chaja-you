@@ -2,8 +2,8 @@
 
 Implements contracts.interfaces.Registry (resolve, get_profile).
 
-Pure local lookup; no network. ProfileRef.digest is the SHA-256 of the
-canonical pinned profile entry (value schema included), so any change to the
+Pure local lookup; no network. ProfileRef.digest is the canonical SHA-256 of the
+Profile content without its own digest (data-contract-v4), so any change to the
 pinned profile surfaces as PROFILE_CHANGED on later lookups by ref.
 """
 
@@ -25,10 +25,9 @@ def _profile_view(entry: dict) -> dict:
         "platform": entry["platform"],
         "object_kind": entry["object_kind"],
         "version": entry["version"],
-        "digest": digest(entry),
         "environment": entry["environment"],
     }
-    return {
+    view = {
         "ref": ref,
         "routes": copy.deepcopy(entry["routes"]),
         "fields": copy.deepcopy(entry["fields"]),
@@ -38,6 +37,9 @@ def _profile_view(entry: dict) -> dict:
         "value_contract_ref": entry["id"],
         "evidence_ids": copy.deepcopy(entry["evidence_ids"]),
     }
+    # data-contract-v4: profile digest covers the Profile content excluding the digest itself.
+    view["ref"]["digest"] = digest(view)
+    return view
 
 
 class Knowledge:

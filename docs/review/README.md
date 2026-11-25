@@ -26,7 +26,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | [TASK-048](../artifacts/tasks/TASK-048.json) | 공통 계약·개발 환경 유지 및 점진 통합 검증 | R01 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-049](../artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-050](../artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-050](../artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-053](../artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
@@ -80,11 +80,26 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 
 결과 미기록.
 
-### TASK-050 · 할 일
+### TASK-050 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-050.json)
 
-결과 미기록.
+S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.
+
+검증과 근거
+
+- AC1~AC3 관련 독립 앱 회귀 및 HTTP 경계 · pass
+- 실제 UI/viewer/provider 및 22개 제품 gate · inconclusive
+- [근거](../artifacts/runs/TASK-050-s8-http-20261125.json)
+
+남은 불확실성과 결정 요청
+
+- R04 actual UI, R05 viewer and real providers not connected
+- 22 product gates not executed
+- single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05
+- mock header identity is not production authentication
+- stdlib bounded MIME parsing and 16MiB total limit are local mock choices
+- 기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다.
 
 ### TASK-051 · 할 일
 

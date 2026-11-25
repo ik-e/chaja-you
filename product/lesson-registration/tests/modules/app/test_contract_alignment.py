@@ -3,18 +3,15 @@
 - Provider objects match contracts.interfaces Protocol method names/arity.
 - Coordinator accepts an explicit Providers bundle (IB-05) and maps PortFailure safely.
 - STORE capabilities expose CoordinatorStore / GatewayStore shapes (IB-03).
-- The app's built-in $defs validator agrees with standard Draft 2020-12 jsonschema (IB-02)
-  on every replay payload and on targeted invalid variants (skipped if jsonschema absent).
+- Validation itself is the shared SchemaCatalog (test_s0); no second validator to compare.
 """
 
-import copy
 import inspect
 import unittest
 
 from contracts import interfaces as I
 from contracts.interfaces import PortFailure, Providers
 
-from lesson_registration.app import contract
 from lesson_registration.app.coordinator import Coordinator
 from lesson_registration.app.errors import AppError
 from lesson_registration.app.gateway import StoreGateway
@@ -23,7 +20,7 @@ from lesson_registration.app.result import ResultEvaluator
 from lesson_registration.app.store import Store
 from lesson_registration.app.store.coordinator_store import SqliteCoordinatorStore
 
-from support import PLATFORMS, FakeRuntime, GatewayRuntime, SchemaPrep, TickClock, mock_image, replay_cases, temp_db
+from support import FakeRuntime, GatewayRuntime, SchemaPrep, TickClock, mock_image, temp_db
 
 A = "owner-a"
 
@@ -127,52 +124,6 @@ class ProvidersInjection(unittest.TestCase):
         self.assertEqual(self.co.run_job(rid), "stopped")
         res = self.co.get_registration(A, rid)["result"]
         self.assertEqual((res["goal_verdict"], res["error"]["message"]), ("not_reached", "browser closed"))
-
-
-class ValidatorMatchesStandardSchema(unittest.TestCase):
-    """IB-02: the in-app validator must not drift from Draft 2020-12 behaviour."""
-
-    @classmethod
-    def setUpClass(cls):
-        try:
-            import jsonschema  # noqa: F401
-        except ImportError:
-            raise unittest.SkipTest("jsonschema not installed (run with --with jsonschema==4.25.1)")
-        from jsonschema import Draft202012Validator, FormatChecker
-        cls.schema = contract.load("data-schema-v4.1.json")
-        cls.Validator = Draft202012Validator
-        cls.FormatChecker = FormatChecker
-
-    def standard(self, name, value) -> bool:
-        wrapper = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$defs": self.schema["$defs"],
-                   "$ref": f"#/$defs/{name}"}
-        return self.Validator(wrapper, format_checker=self.FormatChecker()).is_valid(value)
-
-    def cases(self):
-        for platform in PLATFORMS:
-            for case, row in replay_cases(platform).items():
-                for kind in ("input", "output"):
-                    name = row.get(f"{kind}_type")
-                    if not name:
-                        continue
-                    good = row[kind]
-                    yield f"{platform}/{case}/{kind}", name, good
-                    if isinstance(good, dict) and good:
-                        extra = copy.deepcopy(good)
-                        extra["unexpected_key"] = 1
-                        yield f"{platform}/{case}/{kind}+extra", name, extra
-                        first = next(iter(good))
-                        missing = copy.deepcopy(good)
-                        del missing[first]
-                        yield f"{platform}/{case}/{kind}-{first}", name, missing
-
-    def test_same_verdicts_on_replay_and_variants(self):
-        checked = 0
-        for label, name, value in self.cases():
-            with self.subTest(label):
-                self.assertEqual(contract.is_valid(name, value), self.standard(name, value))
-                checked += 1
-        self.assertGreater(checked, 40)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-050",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R03",
   "suggested_owner": null,
   "due": null,
@@ -66,7 +66,52 @@
       "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.",
+    "claims": [
+      {
+        "id": "C-T050-S8",
+        "text": "H1~H9, 요청과 독립된 실행, HTTP 응답 유실·재시작·소유권·오류 매핑을 합성 provider와 실제 loopback HTTP로 검증했다.",
+        "status": "독립 검증",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E-T050-S8",
+        "path": "docs/artifacts/runs/TASK-050-s8-http-20261125.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "AC1~AC3 관련 독립 앱 회귀 및 HTTP 경계",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      },
+      {
+        "criterion": "실제 UI/viewer/provider 및 22개 제품 gate",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E-T050-S8"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "R04 actual UI, R05 viewer and real providers not connected",
+      "22 product gates not executed",
+      "single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05",
+      "mock header identity is not production authentication",
+      "stdlib bounded MIME parsing and 16MiB total limit are local mock choices"
+    ],
+    "decision_requests": [
+      "기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다."
+    ],
+    "remaining_effort_person_days_estimate": 3
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",

@@ -1,8 +1,9 @@
 """RESULT: I5 evaluate(EvaluateInput) -> Result. Pure: no I/O, no browser commands.
 
 Fail closed: insufficient or mismatched evidence never yields ``confirmed``.
-Payload digest rule (to agree with R05): canonical SHA-256 of the accepted
-``scope.values``; asset digests must equal the accepted asset digests as a set.
+Digest rules (data-contract-v4, shared contracts/canonical.py): payload digest is the
+canonical SHA-256 of the accepted platform ``scope.values``; asset digests must equal the
+accepted asset digests in upload order.
 """
 
 from __future__ import annotations
@@ -91,7 +92,7 @@ def _goal(profile: dict, scope: dict, goal: dict | None, records: dict) -> tuple
         record is None
         or record["kind"] != "goal"
         or record.get("payload_digest") != goal["payload_digest"]
-        or sorted(record.get("asset_digests", [])) != sorted(goal["asset_digests"])
+        or record.get("asset_digests", []) != goal["asset_digests"]
         or record.get("observed_state") != goal["observed_state"]
         or record["target"] != goal["target"]
     ):
@@ -102,7 +103,7 @@ def _goal(profile: dict, scope: dict, goal: dict | None, records: dict) -> tuple
         return "not_reached", "target"
     if goal["payload_digest"] != payload_digest(scope["values"]):
         return "not_reached", "payload"
-    if goal_rule["requires_asset_digests"] and sorted(goal["asset_digests"]) != sorted(a["digest"] for a in scope["assets"]):
+    if goal_rule["requires_asset_digests"] and goal["asset_digests"] != [a["digest"] for a in scope["assets"]]:
         return "not_reached", "assets"
     if goal["observed_state"] != goal_rule["observed_state"]:
         return "not_reached", "state"

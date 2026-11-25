@@ -10,6 +10,7 @@ import unittest
 from lesson_registration.app import contract
 from lesson_registration.app.coordinator import Coordinator
 from lesson_registration.app.errors import AppError
+from lesson_registration.app.ids import digest
 from lesson_registration.app.knowledge import Knowledge
 from lesson_registration.app.store import Store
 
@@ -44,6 +45,11 @@ class KnowledgeResolve(unittest.TestCase):
             with self.subTest(bad=bad[:10]), self.assertRaises(AppError) as ctx:
                 self.know.resolve(bad)
             self.assertEqual(ctx.exception.code, "INVALID_REQUEST")
+
+    def test_profile_digest_excludes_itself(self):
+        profile = self.know.resolve("kmong")["profile"]
+        body = {**profile, "ref": {k: v for k, v in profile["ref"].items() if k != "digest"}}
+        self.assertEqual(profile["ref"]["digest"], digest(body))
 
     def test_get_by_ref_and_digest_drift(self):
         ref = self.know.resolve("kmong")["profile"]["ref"]

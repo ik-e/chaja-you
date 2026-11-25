@@ -18,7 +18,7 @@ from . import contract
 from .errors import AppError
 from .ids import bytes_digest, digest, inspect_image, new_id
 from .knowledge import Knowledge
-from .ports import Clock, ExecPort, PrepPort, SystemClock
+from .ports import Clock, ExecutionPort, PreparationPort, SystemClock
 from .result import NEXT_NOT_REACHED, NEXT_UNKNOWN, ResultEvaluator, evaluate
 from .store import Store, tx
 from .store import atomic, repo
@@ -44,8 +44,8 @@ class Coordinator:
         *,
         providers: Providers | None = None,
         knowledge: Knowledge | None = None,
-        prep: PrepPort | None = None,
-        exec_port: ExecPort | None = None,
+        prep: PreparationPort | None = None,
+        exec_port: ExecutionPort | None = None,
         result: object | None = None,
         clock: Clock | None = None,
         on_accepted: Callable[[str], None] | None = None,
@@ -401,11 +401,10 @@ class Coordinator:
             "goal": profile["goal"]["kind"],
             "notice": REVIEW_NOTICE,
         }
-        # The digest also binds the exact revision and verified connection (not shown in the view),
-        # so an approval cannot be replayed onto a re-verified session or a later revision.
-        bound = {"review": body, "revision": reg["revision"], "auth_generation": reg["auth"]["generation"],
-                 "connection_ref": reg["connection"]["connection_ref"]}
-        review = {"digest": digest(bound), **body}
+        # data-contract-v4: review digest binds the exact internal Scope (revision, verified connection,
+        # target, values, assets...). The public view shows values and labels, never the connection.
+        scope = _build_scope(reg, profile, source["asset_refs"])
+        review = {"digest": digest(scope), **body}
         contract.validate("ReviewView", review)
         return review
 
@@ -441,22 +440,11 @@ class Coordinator:
             raise AppError("INVALID_PHASE", "registration is not ready for approval", current_revision=cur)
         if start_input["review_digest"] != reg["review"]["digest"]:
             raise AppError("APPROVAL_INVALID", "approved review is not the current review", current_revision=cur)
-        prep = reg["preparation"]
-        scope = {
-            "registration_id": registration_id,
-            "source_id": reg["source_id"],
-            "revision": cur,
-            "profile_ref": profile["ref"],
-            "values": prep["values"],
-            "facts": prep["facts"],
-            "provenance": prep["provenance"],
-            "assets": reg["review"]["assets"],
-            "target": reg["target"]["trusted"]["identity"],
-            "connection": reg["connection"],
-            "procedure_ids": [s["step_id"] for s in profile["steps"]],
-            "goal_kind": profile["goal"]["kind"],
-        }
+        scope = _build_scope(reg, profile, reg["review"]["assets"])
         contract.validate("Scope", scope)
+        if digest(scope) != reg["review"]["digest"]:
+            raise AppError("APPROVAL_INVALID", "current scope no longer matches the reviewed scope",
+                           current_revision=cur)
         return self._accept(owner_ref, registration_id, start_input, scope)
 
     def _accept(self, owner_ref: str, registration_id: str, start_input: dict, scope: dict | None) -> tuple[int, dict]:
@@ -589,6 +577,8 @@ class Coordinator:
             raise AppError("RUNTIME_ERROR", "preparation module returned an invalid result")
         out = json.loads(json.dumps(out))
         out["ready"] = bool(out["ready"]) and not any(i["blocking"] for i in out["issues"])
+        if out["ready"] and not contract.profile_values_valid(profile["value_contract_ref"], out["values"]):
+            raise AppError("RUNTIME_ERROR", "preparation marked ready with values outside the profile schema")
         return out
 
     def _normalize(self, reg: dict, profile: dict, answers: list[dict], corrections: list[dict]) -> list[dict]:
@@ -784,3 +774,22 @@ def _port_error(exc: Exception, *, allowed: tuple[str, ...]) -> AppError:
     if code not in allowed:
         return AppError("RUNTIME_ERROR", message)
     return AppError(code, message)
+
+
+def _build_scope(reg: dict, profile: dict, assets: list[dict]) -> dict:
+    """The exact internal Scope a review approves and H7 accepts (Scope $def)."""
+    prep = reg["preparation"]
+    return {
+        "registration_id": reg["registration_id"],
+        "source_id": reg["source_id"],
+        "revision": reg["revision"],
+        "profile_ref": profile["ref"],
+        "values": prep["values"],
+        "facts": prep["facts"],
+        "provenance": prep["provenance"],
+        "assets": assets,
+        "target": reg["target"]["trusted"]["identity"],
+        "connection": reg["connection"],
+        "procedure_ids": [s["step_id"] for s in profile["steps"]],
+        "goal_kind": profile["goal"]["kind"],
+    }

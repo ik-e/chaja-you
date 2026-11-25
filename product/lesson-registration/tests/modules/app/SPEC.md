@@ -9,7 +9,7 @@
 
 ### 0.1 실행 환경
 
-- Python 3.12, **표준 라이브러리만** 사용(제품 `pyproject.toml`의 `dependencies = []`). HTTP 프레임워크는 S8에서 R01 결정 후 추가.
+- Python 3.12. 공통 의존성(R01 소유 lock): `jsonschema==4.25.1`(기본), `app` 그룹 `fastapi==0.128.2`·`uvicorn==0.48.0`·`websockets==16.0`, `verification` 그룹 `httpx==0.28.1`. 추가 의존성은 PLAN에 요구를 적고 R01이 lock 반영.
 - 시험: `unittest`. `dev.py test r03-app`이 `tests/modules/app`에서 `test_*.py`를 찾아 실행하고, `PYTHONPATH`에 제품 root와 `src`가 들어간다. 따라서 import는 `from lesson_registration.app import ...`.
 - 실행 명령: `cd product/lesson-registration && uv run --locked --python 3.12 python dev.py test r03-app`
 - 환경 변수 `LR_ENVIRONMENT`는 `mock`만 허용(dev.py가 강제). 앱도 `environment != "mock"` 입력을 거부한다.
@@ -19,10 +19,10 @@
 ```
 src/lesson_registration/app/
   __init__.py
-  contract.py        # 고정 계약 로드·blob 검증, $defs 검증기
+  contract.py        # 고정 계약 로드·blob 검증, 공통 SchemaCatalog(jsonschema) 위임
   errors.py          # AppError(code, message, issues, current_revision) + HTTP status 매핑
-  ids.py             # opaque id·digest·canonical JSON·UTC 시각
-  ports.py           # PrepPort(I2), ExecPort(I3/I4) Protocol + Clock
+  ids.py             # opaque id, 공통 contracts/canonical.py digest, UTC 시각, 이미지 검사
+  ports.py           # contracts/interfaces.py 타입 재노출 + Clock
   knowledge.py       # KNOW: I1 resolve, profile 조회
   store/
     __init__.py
@@ -33,7 +33,7 @@ src/lesson_registration/app/
   coordinator.py     # CO: H1~H9 유스케이스, 상태 전이
   result.py          # RESULT: I5 evaluate
   service.py         # 조립(App): store + KNOW + RESULT + 주입 포트
-  http/              # S8: 프레임워크 어댑터 (결정 후)
+  http/              # S8: FastAPI 라우트, 제한된 JSON/multipart 파싱
 tests/modules/app/
   PLAN.md  SPEC.md
   support.py         # 테스트 공용: 임시 DB, replay 기반 fake 포트, fixture 로더
@@ -48,7 +48,7 @@ tests/modules/app/
 | owner | 모든 유스케이스 첫 인자 `owner_ref: str`. 클라이언트 입력에서 owner를 받지 않는다. 타 owner 자원은 `NOT_FOUND` |
 | 입력 검증 | `$defs` 이름 단위 검증, **모르는 key 거부**. 실패 시 `INVALID_REQUEST`(형식) / `VALIDATION_FAILED`(의미) |
 | ID | `ids.new_id(prefix)` = prefix + `-` + `secrets.token_hex(12)`. path id는 opaque |
-| digest | canonical JSON(`sort_keys=True, separators=(",",":"), ensure_ascii=False`) UTF-8의 SHA-256 hex |
+| digest | 공통 `contracts/canonical.py` (`json_digest`, `asset_digest`). golden vector(`fixtures/shared/canonical-vectors.json`) 일치 시험. 대상: profile = 자기 digest 제외 Profile, review = 내부 Scope, payload = platform values, asset = 업로드 순서 raw bytes |
 | 시각 | UTC ISO-8601 `Z`. 테스트는 고정 Clock 주입 |
 | 응답 | View 타입만 반환. `connection_ref`·`account_ref`·`viewer_grant` 이외 secret·내부 binding은 절대 포함하지 않음 |
 | 트랜잭션 중 외부 호출 금지 | STORE 트랜잭션 안에서 포트(I2~I4) 호출하지 않는다(계약: "no callbacks while atomic lock") |
@@ -59,13 +59,13 @@ tests/modules/app/
 |---|---|
 | `Registry.resolve / get_profile` | `knowledge.Knowledge` |
 | `ResultPort.evaluate` | `result.ResultEvaluator` (순수 `result.evaluate` 감쌈) |
-| `PreparationPort` / `ExecutionPort` | 주입받음 (`ports.PrepPort` / `ExecPort`와 같은 메서드) |
+| `PreparationPort` / `ExecutionPort` | 공통 Protocol 그대로 주입받음 (로컬 복제 없음) |
 | `Providers(registry, preparation, execution, result)` | `Coordinator(store, providers=...)` (개별 인자도 허용, 자동 fake 없음) |
 | `PortFailure(error)` | `_port_error`: 경로별 허용 코드만 유지, 나머지는 `RUNTIME_ERROR`. PREP의 `MODEL_UNAVAILABLE`은 저장되는 준비 이슈 |
 | `CoordinatorStore.accept / fence / finalize` | `store.coordinator_store.SqliteCoordinatorStore` (accept는 잠근 행으로 모든 가드 재검사) |
 | `GatewayStore.admit / record_observation / fence` | `gateway.StoreGateway` |
 
-`check-changes --base`의 공통 기준 SHA: `75caa4e` (main 병합 기준).
+`check-changes --base`의 공통 기준 SHA: `c4742a1` (main 병합 기준, 이전 `75caa4e`). 스키마 검증은 공통 `contracts.validation.SchemaCatalog`, digest는 `contracts/canonical.py` (R01 회신 11/25).
 
 ### 0.4 오류 → HTTP status (common-integration-v1 `http.status_codes`)
 
@@ -96,11 +96,11 @@ tests/modules/app/
 def load(name: str) -> dict
     # WORKSPACE.json pins에서 path가 "/"+name으로 끝나는 항목을 찾아
     # repo root 기준 파일을 읽고 git blob sha1("blob {len}\0"+bytes) == pin.blob 확인. 불일치 → RuntimeError
-def validate(def_name: str, value: object) -> None   # 실패 시 AppError(INVALID_REQUEST, issues=[...])
+def validate(def_name: str, value: object) -> None   # SchemaCatalog.named 위임, 실패 시 AppError(INVALID_REQUEST)
+def profile_values_valid(profile_id: str, values: dict) -> bool   # SchemaCatalog.profile_values 위임
 ```
 
-- 검증기는 스키마에서 실제로 쓰는 키워드만 지원한다: `type, properties, required, additionalProperties, enum, const, $ref, oneOf, anyOf, items, minItems, maxItems, uniqueItems, minimum, maximum, minLength, maxLength, pattern, format(date-time만)`.
-- 모르는 키워드가 스키마에 나오면 시험에서 실패시켜 조용히 통과하지 않게 한다.
+- (갱신) 초기 구현의 앱 내장 검증기는 R01 권고(검증 기준 이원화 방지)에 따라 제거하고 공통 표준 검증기로 교체했다. 위반 내용·값은 오류 메시지에 노출하지 않는다.
 
 ### S0-2 errors.py
 
@@ -114,9 +114,9 @@ STATUS: dict[str, int]                 # §0.4 표
 ### S0-3 ports.py
 
 ```python
-class PrepPort(Protocol):     # I2 (R02)
+class PreparationPort(Protocol):  # I2 (R02) — contracts/interfaces.py
     def prepare(self, inp: dict) -> dict            # PrepareInput -> Preparation
-class ExecPort(Protocol):     # I3/I4 (R05)
+class ExecutionPort(Protocol):    # I3/I4 (R05) — contracts/interfaces.py
     def authenticate(self, inp: dict) -> dict       # AuthInput -> AuthOutput
     def execute(self, inp: dict) -> dict            # ExecuteInput -> ExecutionReport
 class Clock(Protocol):
@@ -229,7 +229,7 @@ class Knowledge:
 
 1. `validate`, source 소유 확인(`NOT_FOUND`)
 2. `resolve(selector)`. unsupported/blocked면 `support`만 기록한 정상 View 저장 후 201(외부 접근 없음)
-3. supported면 `PrepareInput{source, profile, answers: []}`로 `PrepPort.prepare` 호출 — **트랜잭션 밖에서**
+3. supported면 `PrepareInput{source, profile, answers: []}`로 `PreparationPort.prepare` 호출 — **트랜잭션 밖에서**. ready=true면 values가 profile value schema를 통과해야 함(아니면 RUNTIME_ERROR)
 4. PREP이 모델 불가 이슈(`model_unavailable`)를 주면 `ready=false`인 정상 View로 저장. 포트 자체가 예외로 실패하면 503 `MODEL_UNAVAILABLE`
 5. 저장: `revision=1`, `auth={"state":"none"}`, `job_state=null`, review 없음 → 201
 
@@ -284,7 +284,7 @@ class Knowledge:
 
 ### S3-2 review 생성
 
-조건: `ready=true` + auth `verified` + target `status=="new"` + support `supported`. 이때 `ReviewView{values, assets, profile_ref, target, procedure, goal, notice}`를 만들고 `digest = sha256(canonical({review: ReviewView에서 digest 제외, revision, auth_generation, connection_ref}))`. revision·인증 연결을 digest에 묶어(View에는 노출 안 함) 내용이 같아도 재인증·이후 revision에 이전 승인을 재사용할 수 없게 한다. 조건이 깨지면 review를 지운다. target이 `existing`/`ambiguous`면 review 없음.
+조건: `ready=true` + auth `verified` + target `status=="new"` + support `supported`. 이때 `ReviewView{values, assets, profile_ref, target, procedure, goal, notice}`를 만들고 `digest = json_digest(내부 Scope)` (data-contract-v4: "review digest binds internal scope"). Scope에 revision·verified connection·target·values·assets가 들어 있어 내용이 같아도 재인증·이후 revision에 이전 승인을 재사용할 수 없다. H7은 Scope를 다시 만들어 digest가 승인 digest와 같은지 확인하고, CoordinatorStore.accept가 잠근 행으로 한 번 더 확인한다. 조건이 깨지면 review를 지운다. target이 `existing`/`ambiguous`면 review 없음.
 
 ### S3-3 H7 start(owner_ref, id, StartInput) -> (status, RegistrationView)
 
@@ -354,7 +354,7 @@ finalize(conn, registration_id, result: dict) -> None     # stopping/active -> s
 
 ### S4-2 run_job(registration_id)
 
-1. `ExecPort.execute({"accepted": AcceptedScope})` 호출(트랜잭션 밖)
+1. `ExecutionPort.execute({"accepted": AcceptedScope})` 호출(트랜잭션 밖). `PortFailure(error)`는 typed 오류로 보고 fence
 2. 반환 `ExecutionReport` 검증. `error`가 있으면 `fence` → 결과 판정(S5) → `finalize`
 3. 정상 보고면 결과 판정(S5) → confirmed면 `finalize(done)`, 아니면 fence 후 `finalize(stopped)`
 4. 포트 예외(응답 유실·crash) → `fence`, 진행 중 효과는 unknown, `finalize(stopped)`. **자동 재실행하지 않음**
@@ -468,7 +468,20 @@ finalize(conn, registration_id, result: dict) -> None     # stopping/active -> s
 - 오류 status 매핑 표 전수
 - 실제 R02 PREP·R05 remote 구현이 나오면 fake 대신 주입해 같은 시험 반복
 
-**완료:** H1~H9 HTTP 시험 pass, R04 UI가 replay 서버 대신 이 서버로 동작
+**완료:** H1~H9 HTTP 시험 pass, R04 UI가 replay 서버 대신 이 서버로 동작. 현재 서버 독립 시험만 통과했으며 실제 R04 UI/viewer 연결은 미확인이다.
+
+### S8 구현 경계 (2026-11-25)
+
+- 조립: `create_app(coordinator, owner_resolver=None, dev_owner_header=False, allowed_origins=(), max_body_bytes=16777216)`. 실제/가짜 provider 모두 호출자가 명시 주입한다. 운영 인증은 구현하지 않았으며 resolver 미주입 시 401이다.
+- 개발 인증: `dev_owner_header=True`일 때만 `X-Mock-Owner`를 사용한다. peer와 Host 모두 loopback이어야 한다. 이 헤더는 합성 신원 선택이며 사용자 인증·운영 보안을 입증하지 않는다. body/query의 owner는 계약에서 거부한다.
+- UI origin은 `allowed_origins`에 정확한 origin을 명시한다. Origin이 있는 요청은 목록 밖이면 403이며 모든 응답은 `Cache-Control: no-store`다. grant나 본문을 access log에 남기지 않는다.
+- JSON은 UTF-8 object만 허용하고 중복 key·NaN·Infinity·잘못된 query를 400으로 반환한다. 출력은 공통 named schema로 검증한다.
+- multipart는 추가 shared dependency 없이 `email.parser.BytesParser`로 처리한다. 요청 전체 16MiB 임시 상한을 스트림 읽기 중 적용한다. manifest application/json, 파일명·MIME, 중복/누락/추가 part, 잘린 MIME·중첩/transfer encoding을 검사한다. 각 이미지의 기존 5MiB 제한도 유지한다. 이 구현은 제한된 mock 업로드용이며 운영 multipart 선택/성능은 별도 검토한다.
+- CO·SQLite·동기 provider는 threadpool에서 호출한다. 수락 hook은 durable commit 뒤 별도 worker pool에 제출하며 HTTP 응답/클라이언트 연결과 독립이다. 정확한 H7 재전송은 실행을 제출하지 않는다.
+- FastAPI lifespan 시작 시 recover, 종료 시 accepted worker drain. DB당 단일 프로세스·단일 app만 허용하는 실행 계약이다. 재시작 시 미완료를 stopped로 보존하고 재개하지 않는다.
+- Python thread는 멈춘 provider를 강제 종료할 수 없다. I2/I3/I4 timeout과 강제 shutdown은 R02/R05 연동에서 확정해야 하며 현재 graceful shutdown은 provider 종료를 기다린다.
+- 로컬 실행: `service.serve(coordinator, dev_owner_header=True, allowed_origins=("http://127.0.0.1:5173",))`. 127.0.0.1:0에 bind한 URL을 출력한다. DB는 `.local/` 또는 임시 경로, provider는 명시 조립한다. 공통 `dev.py serve api`는 계속 replay 서버이며 이 서버로 자동 교체되지 않는다.
+- WS viewer endpoint/message 계약은 추가하지 않았다. H6 AuthGrant 전달만 유지하며 R04/R05 협의 후 연결한다.
 
 ---
 
@@ -514,7 +527,7 @@ TASK-050 대상이 아닌 요구사항: REQ-04(원격 직접 인증, R05), REQ-0
 | 종료 연산 이름 | 계약 storage `S-FENCE`의 `finalize` 사용 | R01 (PLAN §7의 `terminal` 표기는 이것으로 통일) |
 | 포트 호출 방식 | 동기 함수 | R02·R05 |
 | STORE 노출 | `StoreGateway` 객체 주입 | R05·R01 |
-| HTTP 프레임워크 | S8 전까지 없음 | R01 |
+| HTTP 프레임워크 | R01 채택 FastAPI 및 공통 lock 적용, S8 서버 구현·독립 검증 완료 | 실제 UI/provider 연동 별도 |
 | 첨부 크기 상한 | 5MB(근거 미확인) | 프로필 규칙 |
 | 이미지 구조 검사 | PNG: 모든 chunk CRC, IHDR 첫 chunk, IEND에서 정확히 끝남(뒤에 붙은 바이트 거부). JPEG: 세그먼트 구조·SOF0/1/2·EOI 끝. 가로·세로 1~20000(임시 상한) | 프로필 규칙 |
 | 선언 MIME | multipart part의 Content-Type을 `(bytes, content_type)`로 받아 바이트 판정과 다르면 거부(파라미터·대소문자 무시) | S8 HTTP 계층 |
@@ -527,9 +540,9 @@ TASK-050 대상이 아닌 요구사항: REQ-04(원격 직접 인증, R05), REQ-0
 | progress 계산 | 단계 상태 = effect 상태(쓰기 단계) 또는 관측 verdict(read 단계), 없으면 pending. step_index = 앞에서부터 연속 confirmed 수. 멈춘 작업의 pending 현재 단계는 `error`, 멈춘 작업의 reserved는 `unknown` | R04 |
 | replay I5 비교 | goal_verdict·effects·error만 비교. evidence 목록·next_action 문구는 replay와 다름(replay는 goal 증거만 표시) | R01 |
 | StoreGateway API | 공통 `GatewayStore`에 맞춤: `admit(context, op)→Permit`, `record_observation(context, obs, evidence[])`, `fence(registration_id, error)`. 추가 helper: `acquire_context(rid)→WorkerContext`(lease를 STORE에 등록, runtime이 RT-01 안에서 호출해 불투명하게 보관), `expected_operations(context)`. goal 증거는 마지막 read 단계 observation과 함께 `record_observation`으로 기록 | R05 (lease 등록 방식·helper 2개) |
-| 스키마 검증기 | 앱 내장 검증기 유지(제품 의존성 0). IB-02 표준과 어긋나지 않음을 `test_contract_alignment`가 jsonschema 4.25.1과 같은 판정인지 비교(설치 시 실행) | R01 (제품 의존성에 jsonschema 추가 여부) |
-| payload_digest | 승인 `scope.values`의 canonical SHA-256. replay의 `bbbb…`는 자리표시값이라 그대로는 confirmed가 안 됨 | R05 |
-| binding_digest | §S4-1 규칙 | R05 |
+| 스키마 검증기 | **결정됨(R01 11/25)**: 공통 SchemaCatalog(jsonschema 4.25.1) 사용, 앱 내장 검사기 제거 | — |
+| payload_digest | **결정됨**: 공통 canonical로 `scope.values` digest, asset은 업로드 순서. replay의 `bbbb…` 자리표시값 정리는 R01 | R05 (readback normalize 매핑) |
+| binding_digest | §S4-1 임시안(공통 canonical 사용, asset 업로드 순서). 계산 대상·operation 규칙은 R05와 협의(R01 회신) | R05 |
 | 실행 중 revision | fence·finalize마다 revision +1 (UI가 오래된 응답 무시) | R04 |
 | H6 revision | open·finish·close·refresh 모두 revision +1 (replay H6-open/finish와 같음). 인증 실패·timeout은 `closed`로 저장 후 오류 반환 | R04 (UI 재조회) |
 | target_label | TrustedTarget에 없어 `"{platform} 신규 {object_kind}"`로 생성 | R05 (runtime이 label 제공 여부) |

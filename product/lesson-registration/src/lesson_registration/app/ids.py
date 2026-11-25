@@ -1,11 +1,11 @@
-"""Opaque ids, canonical JSON digests and UTC timestamps."""
+"""Opaque ids, canonical digests (shared contracts/canonical.py), UTC timestamps, image inspection."""
 
 from __future__ import annotations
 
-import hashlib
-import json
 import secrets
 from datetime import datetime, timezone
+
+from contracts.canonical import asset_digest, canonical_bytes, json_digest
 
 
 def new_id(prefix: str) -> str:
@@ -13,16 +13,18 @@ def new_id(prefix: str) -> str:
 
 
 def canonical(value: object) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    """Server canonical JSON bytes (data-contract-v4 rule, shared helper)."""
+    return canonical_bytes(value)
 
 
 def digest(value: object) -> str:
-    """SHA-256 hex of the canonical JSON form."""
-    return hashlib.sha256(canonical(value)).hexdigest()
+    """SHA-256 of the canonical JSON form (shared helper)."""
+    return json_digest(value)
 
 
 def bytes_digest(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    """Asset digest over the exact raw bytes (shared helper)."""
+    return asset_digest(bytes(data) if isinstance(data, bytearray) else data)
 
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"

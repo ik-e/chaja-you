@@ -62,7 +62,7 @@ class SqliteCoordinatorStore:
             review = reg.get("review")
             if review is None or not reg["preparation"]["ready"]:
                 raise AppError("INVALID_PHASE", "registration is not ready for approval", current_revision=cur)
-            if start["review_digest"] != review["digest"]:
+            if start["review_digest"] != review["digest"] or digest(scope) != review["digest"]:
                 raise AppError("APPROVAL_INVALID", "approved review is not the current review", current_revision=cur)
             if atomic.blocking_jobs_for_target(conn, scope["target"], registration_id):
                 raise AppError("DUPLICATE_RISK", "another registration has an unresolved or confirmed effect "

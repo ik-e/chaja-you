@@ -1,13 +1,14 @@
-"""S0: pinned contract loading, $defs validator, error mapping and port protocols."""
+"""S0: pinned contract loading, shared standard validation (IB-02), canonical digests, error mapping."""
 
 import copy
 import json
+import pathlib
 import unittest
 
 from lesson_registration.app import contract
 from lesson_registration.app.errors import STATUS, AppError
-from lesson_registration.app.ids import digest
-from lesson_registration.app.ports import Clock, ExecPort, PrepPort
+from lesson_registration.app.ids import bytes_digest, canonical, digest
+from lesson_registration.app.ports import Clock
 
 from support import PLATFORMS, FixedClock, ReplayExec, ReplayPrep, ScriptedExec, replay_cases
 
@@ -22,13 +23,10 @@ class PinnedContracts(unittest.TestCase):
         ):
             self.assertIsInstance(contract.load(name), dict, name)
 
-    def test_schema_uses_only_supported_keywords(self):
-        # Validating every replay case walks the schema; an unsupported keyword raises RuntimeError.
-        for platform in PLATFORMS:
-            for row in replay_cases(platform).values():
-                for kind in ("input", "output"):
-                    if row.get(f"{kind}_type"):
-                        contract.is_valid(row[f"{kind}_type"], row[kind])
+    def test_validation_uses_shared_standard_catalog(self):
+        from contracts.validation import SchemaCatalog
+
+        self.assertIsInstance(contract.catalog(), SchemaCatalog)
 
     def test_error_status_table_matches_contract(self):
         http = contract.load("common-integration-v1.json")["http"]
@@ -115,13 +113,31 @@ class ErrorsAndIds(unittest.TestCase):
         self.assertEqual(digest({"a": 1, "b": [1, 2]}), digest({"b": [1, 2], "a": 1}))
         self.assertRegex(digest({"x": "가"}), r"^[a-f0-9]{64}$")
 
+    def test_shared_canonical_golden_vectors(self):
+        import dev
+
+        vectors = json.loads((pathlib.Path(dev.ROOT) / "fixtures" / "shared" / "canonical-vectors.json")
+                             .read_text(encoding="utf-8"))["vectors"]
+        for v in vectors:
+            with self.subTest(v["canonical_utf8"][:20]):
+                self.assertEqual(canonical(v["value"]).decode("utf-8"), v["canonical_utf8"])
+                self.assertEqual(digest(v["value"]), v["sha256"])
+
+    def test_canonical_rejects_non_contract_values(self):
+        for bad in ({"f": 1.5}, {"big": 1 << 60}, {1: "x"}, {"s": {1, 2}}):
+            with self.subTest(bad=repr(bad)), self.assertRaises(ValueError):
+                digest(bad)
+        with self.assertRaises(ValueError):
+            bytes_digest("not bytes")
+
 
 class Ports(unittest.TestCase):
-    def test_fakes_satisfy_protocols(self):
-        self.assertIsInstance(ReplayPrep("kmong"), PrepPort)
-        self.assertIsInstance(ReplayExec("kmong"), ExecPort)
-        self.assertIsInstance(ScriptedExec(), ExecPort)
+    def test_clock(self):
         self.assertIsInstance(FixedClock(), Clock)
+        # Port shapes for fakes are checked against contracts.interfaces in test_contract_alignment.
+        for fake in (ReplayExec("kmong"), ScriptedExec()):
+            self.assertTrue(callable(fake.authenticate) and callable(fake.execute))
+        self.assertTrue(callable(ReplayPrep("kmong").prepare))
 
     def test_replay_prep_returns_valid_preparation(self):
         for platform in PLATFORMS:

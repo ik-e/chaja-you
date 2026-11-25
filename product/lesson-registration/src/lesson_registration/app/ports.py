@@ -1,34 +1,18 @@
-"""Injection points for modules owned by other packages.
+"""Port types come from the shared contract (contracts/interfaces.py); no local Protocol copies.
 
-I2 (PREP, r02-preparation) and I3/I4 (EXEC, r05-remote) are consumed here only
-through these protocols. Payloads are plain dicts shaped by data-schema-v4.1
-``$defs``; the coordinator validates every return value before use.
-Synchronous calls are the starting assumption (SPEC §10).
+Only the app-local Clock lives here.
 """
 
 from __future__ import annotations
 
 from typing import Protocol, runtime_checkable
 
+from contracts.interfaces import ExecutionPort, PortFailure, PreparationPort, Providers, Registry, ResultPort
+
 from .ids import utc_now
 
-
-@runtime_checkable
-class PrepPort(Protocol):
-    def prepare(self, inp: dict) -> dict:
-        """I2: PrepareInput -> Preparation."""
-        ...
-
-
-@runtime_checkable
-class ExecPort(Protocol):
-    def authenticate(self, inp: dict) -> dict:
-        """I3: AuthInput -> AuthOutput."""
-        ...
-
-    def execute(self, inp: dict) -> dict:
-        """I4: ExecuteInput -> ExecutionReport."""
-        ...
+__all__ = ["Clock", "ExecutionPort", "PortFailure", "PreparationPort", "Providers", "Registry", "ResultPort",
+           "SystemClock"]
 
 
 @runtime_checkable

@@ -3,7 +3,7 @@
 - 작성일: 2026-11-25 · 작성: R03
 - TASK: [TASK-050](../../../../../docs/artifacts/tasks/TASK-050.json) "공통 앱·API·저장·결과 판정 구현" · 상태: R01 배정, 착수 준비
 - Phase: [PHASE-20261125-01](../../../../../docs/human/phase-intents/PHASE-20261125-01.md) 공통 계약 기반 mock 제품 개발
-- 패키지: `r03-app` · 브랜치: `r03/product-app` · 기준 commit: `98b446c` (bootstrap), 배정 `65aed37`
+- 패키지: `r03-app` · 브랜치: `r03/product-app` · 기준 commit: `98b446c` (bootstrap), 배정 `65aed37`, **공통 기준 `c4742a1`** (main 병합, `check-changes --base`)
 - 담당 경로: `src/lesson_registration/app/`, `tests/modules/app/`
 - 근거 설계: CS-01·02·03·05·06 ([공통 설계 V1](../../../../../docs/artifacts/design/lesson-registration-20261124/COMMON-INTEGRATION-V1.md), common-integration-v1.json, data-schema-v4.1.json, platform-profiles-v2.json)
 
@@ -45,7 +45,7 @@ src/lesson_registration/app/
   knowledge/    KNOW: 버전 고정 profile registry, profile hash
   store/        STORE: 스키마·트랜잭션·원자 연산
   result/       RESULT: 판정 규칙
-  ports.py      I2/I3/I4 Protocol 정의(공통 계약 타입 그대로) + 주입 지점
+  ports.py      공통 contracts/interfaces.py 타입 재노출 + 앱 전용 Clock (Protocol 복제 없음)
 ```
 
 | 결정 | 선택 | 대안 | 근거 |
@@ -54,9 +54,10 @@ src/lesson_registration/app/
 | D2 저장소 | 표준 라이브러리 `sqlite3`, `BEGIN IMMEDIATE` 트랜잭션, 파일은 테스트 임시 경로/`.local/` | 인메모리 dict, ORM | 신규 의존성 없이 원자성·영속성 시험 가능. 공통 DB가 바뀌면 store 모듈만 교체 |
 | D3 원자 연산 | 각 연산을 단일 트랜잭션 + 조건부 UPDATE(기대 상태·revision 일치 시만)로 구현 | 앱 레벨 lock | 프로세스 재시작·다중 worker에서도 중복 방지 유지 |
 | D4 멱등성 | `(owner, registration_id, request_key)` 유일 제약. 같은 key+같은 payload digest는 기존 작업 반환, 다른 payload는 409 | key만 비교 | DV-01 "same key/conflicting payload" 요구 |
-| D5 효과 중복 차단 | Effect를 `(registration, operation, approval_digest)`로 유일화. 다른 key로 같은 의도는 거부 | key별 효과 허용 | CS-05 "다른 key로 동일 효과 재발급 차단" |
-| D6 포트 주입 | `typing.Protocol` 인터페이스, 생성자 주입. 테스트는 `dev.replay` 기반 대체 구현 | 전역 레지스트리 | 실제 R02/R05 구현으로 교체할 때 CO 수정 불필요 |
-| D7 HTTP 프레임워크 | 미정. FastAPI 후보로 R01에게 제안(§7) | 표준 `http.server` | multipart·검증·OpenAPI가 필요. 제품 `pyproject.toml`은 R01 소유 |
+| D5 효과 중복 차단 | CS-05 stable logical effect key `(environment, platform, external_account_ref, object_kind, slot_ref, logical_operation_id=step_id)`를 효과 유일성 기준으로 사용. 요청 멱등 key·승인 digest는 별도 가드(H7) | `(registration, operation, approval_digest)` (R01 검토: 새 등록·승인 변경 시 같은 외부 효과를 못 막음) | 새 등록·다른 key·revision/worker 변경·unknown 모두 같은 효과 재예약 차단 (test_s3 DUPLICATE_RISK, test_s4 DuplicateIntent·AdmissionGuards) |
+| D6 포트 주입 | 공통 `contracts/interfaces.py`의 Providers/Protocol을 그대로 사용, `Coordinator(providers=...)` 명시 주입(IB-05) | 로컬 Protocol 정본 | R01 검토: 별도 Protocol 정본 복제 금지 |
+| D7 HTTP 프레임워크 | FastAPI 0.128.2 (R01 채택·공통 `app` 그룹 반영 완료) | 표준 `http.server` | multipart·검증·OpenAPI 필요 |
+| D8 검증·digest | 공통 `contracts.validation.SchemaCatalog`(jsonschema 4.25.1)와 `contracts/canonical.py` 사용. review digest = 내부 Scope digest, profile digest = 자기 digest 제외 Profile, payload = values, asset = 업로드 순서 목록 | 앱 내장 검사기·자체 digest | R01 권고: 검증 기준 이원화 방지, data-contract-v4 canonical 규칙 |
 
 ### 3.2 데이터
 
@@ -87,7 +88,7 @@ R05 remote가 admission·fence를 호출하므로, 이 연산을 노출하는 �
 
 - EvidenceRecord를 승인 스냅샷과 대조한다: profile goal·method·target·payload·asset digest
 - 크몽·숨고 mock은 독립 readback(접수 ID·저장값 재조회)이 있어야 confirmed
-- 판정: confirmed / failed / unknown. 근거가 부족하면 unknown이며 성공으로 표시하지 않는다.
+- 판정: pinned GoalVerdict `confirmed / not_reached / unknown`. 확실한 미도달(대상·값·첨부 불일치)은 not_reached, 증거 부족·결과 미확인은 unknown이며 어느 쪽도 성공으로 표시하지 않는다.
 
 ## 4. 구현 순서
 
@@ -151,19 +152,45 @@ R03 작성자 추정이며, 가용시간 확인 후 R01과 확정한다.
 - 목표: 12/8 mock MVP, 1/4 최종(일정은 미확정).
 - 위험: 11/26~12/8은 9근무일이라 MVP 전 전체 완료가 빠듯하다. 12/8 전에는 크몽 정상 경로 + 원자 수락/중복 방지 + readback 판정(S0~S5, T5-01·T5-12·DV-01)을 우선하고, T5-06·T6-01 세부와 H2/H9 목록 기능은 MVP 이후로 미루는 순서를 제안한다.
 - WBS V0.5 기준으로 이후 W10(URL registry)·W16(최종 결함 수정)과 R02 PREP 인계 후 유지보수가 추가될 수 있다. TASK-050 범위 밖이므로 별도 배정 시 다시 산정한다.
+- R01 검토(11/25): 위 우선순위는 WBS 후보에 반영됐지만 H2/H9·T5-06·T6-01 등 필수 계약·시험의 연기를 승인한 것은 아니다. 22개 gate 미충족이면 MVP 미완료/부분 시연으로 보고한다. (H2/H9·T5-06·T6-01은 이미 구현·시험 완료)
 
-## 7. R01에게 확인·제안할 사항
+### 6.1 진행 현황과 잔여 공수 (2026-11-25 갱신)
 
-| 항목 | 내용 | 영향 |
+| 구분 | 상태 | 잔여 추정(인일) |
+|---|---|---:|
+| S0~S7 (STORE·KNOW·H1~H7 유스케이스·H8/H9·원자 연산·RESULT·첨부·두 플랫폼) | 완료, `dev.py test r03-app` 177 통과 | 0 |
+| 공통 계약 정렬 (IB-01~05, 공통 validator·canonical digest) | 완료 | 0 |
+| S8 FastAPI HTTP 계층 (multipart, 오류 매핑, worker·lifespan·recover) | 서버 구현·독립 HTTP 시험 14개 통과, 실제 UI 연결 미확인 | 0 |
+| R05 STORE·lease·operation 연동 (R05 착수 후) | 임시안 구현, 협의 대기 | 1 |
+| R04 API·viewer 연결 | 미착수 | 0.5 |
+| R02 I2 실제 bridge·timeout | 미착수 | 0.5 |
+| 22개 gate 대비 결함 수정·통합 지원 | — | 1 |
+| **잔여 합계** | 통합에서 발견되는 결함에 따라 재산정 | **약 3** |
+
+## 7. R01 결정 반영 (2026-11-25 회신)
+
+| 항목 | R01 결정 | 반영 |
 |---|---|---|
-| HTTP 프레임워크 | FastAPI(MIT, 버전 고정) 채택 제안. 제품 `pyproject.toml`·`uv.lock`은 R01 소유 | S8 착수 조건 |
-| DB | 우선 표준 `sqlite3`로 구현. 공통 DB가 정해지면 store 모듈만 교체 | 없음(국소) |
-| STORE 인터페이스 | R05 remote가 호출할 admit/observe/fence 형식과 호출 경로(직접 import vs 포트) | R05와 공동 결정 |
-| I2/I3/I4 시그니처 | 실제 provider 주입 형식(동기/비동기, 타임아웃) | R02·R05와 공동 |
-| 연산 이름 | 계약 storage `S-FENCE`의 `fence`/`finalize`를 사용(CS-05 본문의 `terminal`은 같은 의미로 해석). 다르면 알려 달라고 확인 | 문서·코드 이름 |
-| replay 사례 | unknown·응답 유실·경쟁 replay가 공통 fixture에 없음. app 쪽 시험에서 자체 대체 구현으로 만들 예정 | 공통 fixture 확장 여부 |
-| 범위 | W10·W16, PREP 유지보수의 배정 여부 | 공수 |
-| PoC 재사용 | TASK-043 PoC(`docs/members/R03/workspace/test/`)에서 상태·중복 방지 아이디어만 참고, 코드는 그대로 옮기지 않음 | 없음 |
+| HTTP 프레임워크 | FastAPI 채택, 공통 의존성(app 그룹) 반영 | S8 진행. 추가 의존성 필요 시 이 PLAN에 요구를 적고 R01이 lock 반영 |
+| jsonschema | 제품 의존성 반영, 공통 표준 검증기 사용 권장 | 앱 내장 검사기 제거, `contracts.validation.SchemaCatalog` 사용 (D8) |
+| REQ-08 | 최신 CS-05/06 적용. 중단 후 읽기 근거 추가만, 재개 없음 | 구현 그대로 (SPEC §10) |
+| 종료 연산 | `finalize` | 그대로 |
+| digest | 공통 `contracts/canonical.py`·`fixtures/shared/canonical-vectors.json` 반영. binding 대상·operation 규칙은 R05와 협의, 공통 replay 변경은 R01 | canonical 적용·golden vector 시험 추가 (D8). binding은 §7.1 |
+| 범위 | TASK-050 집중. W10·W16·PREP 유지보수는 확정 배정 아님 | §6 잔여 공수에서 제외 |
+
+### 7.1 공통 접점 협의 (INTERFACE-REVIEW 반환 형식)
+
+공통 기준 SHA: `c4742a1`. 아래 "임시안"은 r03 독립 구현이며 상대 담당과 합의 완료가 아니다.
+
+| 접점 | 상대 | 유지/변경 서명·예제 | 이유 | 정상·실패·unknown 시험 | 남은 확인 |
+|---|---|---|---|---|---|
+| CoordinatorStore | (R03 내부) | `accept(owner, registration_id, start, scope) -> RegistrationView`, `fence(registration_id, error)`, `finalize(registration_id, result) -> "done"\|"stopped"` 유지. 내부적으로 `accept_with_status`로 202/200 구분 | 공통 Protocol 그대로 | test_s3 Start·StartRace, test_s4 | 없음 |
+| GatewayStore | R05 | `admit(context, operation) -> Permit`, `record_observation(context, observation, evidence[]) -> Observation`, `fence(registration_id, error)` 유지. **추가 helper 제안**: `acquire_context(registration_id) -> WorkerContext{registration_id, lease}`(RT-01 안에서 호출해 lease를 STORE에 등록), `expected_operations(context) -> Operation[]` | STORE가 현재 worker를 알아야 admission에서 old lease를 거부할 수 있음 (CS-05). context/permit은 runtime이 불투명하게 보관 (IB-03) | 정상: test_s4 HappyPath. 실패: forged lease·미등록 step·binding 변조·효과 class 위조·중복 효과. unknown: 효과 후 응답 유실, worker crash→recover | R05: lease 등록 방식 수용 여부, helper 2개 유지 여부, timeout 수치 |
+| Operation·binding digest | R05 | 임시안: `binding_digest = json_digest({step_id, bound: step.bindings의 승인 values, asset_digests(첨부 단계, 업로드 순서), target, profile_digest})`, logical_operation_id = step_id | 공통은 "exact immutable bound values"만 고정, 계산 대상은 R05와 협의 (R01 회신) | AdmissionGuards binding 변조 거부 | R05 manifest·slot 규칙과 대조 |
+| goal readback 증거 | R05 | goal EvidenceRecord를 마지막 read 단계 observation과 함께 `record_observation`으로 기록, payload = `json_digest(scope.values)`, asset = 업로드 순서 목록 | GatewayStore에 별도 goal 메서드 없음, data-contract-v4 canonical | test_s5 EvaluateRules, test_s4 LostResponses | R05 normalize 매핑 |
+| H1~H9 API | R04 | 공통 routes 9개 그대로, 오류 status는 http.status_codes, H6 open/finish/close/refresh 모두 revision +1, 시작 후 review 생략, H9 최신순 | 공통 계약·replay와 동일 | S8 실제 loopback HTTP 시험 14개 통과 | R04 UI 재조회·목록 순서 확인 |
+| Viewer | R04·R05 | R03은 H6 응답에 AuthGrant(open/refresh)만 전달, grant는 저장하지 않음, finish 이후 human 입력 차단은 runtime 책임 | IB-04, CS-04 | test_s3 grant 비저장·세대 교체 | endpoint/message 타입은 R04·R05 결정 후 S8에 연결 |
+| I2 | R02 | `PreparationPort.prepare` 동기 호출, PortFailure `MODEL_UNAVAILABLE`→저장되는 준비 이슈, 기타 허용 코드만 전달, ready=true면 profile value schema 통과 필수, 방금 수정한 field의 blocking conflict → FACT_CONFLICT | 계약 H4/H5, 단일 검증 기준 | test_s2, test_contract_alignment | R02 timeout·실제 모델 bridge, conflict 이슈 기준 |
 
 ## 8. 로컬 환경 확인
 
@@ -176,4 +203,14 @@ uv run --locked --python 3.12 python dev.py doctor          # passed: source pin
 uv run --locked --python 3.12 python dev.py test r03-app    # independent bootstrap replay passed
 ```
 
-이 결과는 경로·fixture 연결만 확인한 것이며 기능 검증이 아니다. 변경 범위 검사: `python dev.py check-changes r03-app --base 65aed37`
+이 결과는 경로·fixture 연결만 확인한 것이며 기능 검증이 아니다. 변경 범위 검사: `python dev.py check-changes r03-app --base c4742a1` (공통 기준 갱신 시 이 SHA도 갱신)
+
+### S8 독립 검증 (2026-11-25)
+
+- 기준: `fa40128df3e652efc93948cc87a23d52b5662f2c` 위 미커밋 작업 트리. 공통 기준 `c4742a1`, 기존 공통 정렬 수정 보존.
+- `uv run --locked --group app --group verification python dev.py test r03-app`: 191개 통과(기존 177 + HTTP 14), 49.350초. 실제 127.0.0.1 임시 포트·SQLite와 명시 주입한 SchemaPrep/GatewayRuntime 사용.
+- `doctor`, common 5개, standard_schema 10개, integration 2개 통과. 제품 통합 성공을 의미하지 않는다.
+- `check-changes --base c4742a1`는 기존 daily 두 파일 때문에 실패했다. TASK 결과/프로젝션은 별도 문서 갱신이며 패키지 소유 경로 검사 밖이다. 공유 lock·다른 담당 코드 수정 없음.
+- [구조화 검증 정본](../../../../../docs/artifacts/runs/TASK-050-s8-http-20261125.json): 입력·기대/관측·명령·코드 SHA256·미확인 범위. [TASK 결과](../../../../../docs/artifacts/tasks/TASK-050.json)는 진행 중이며 완료로 표시하지 않는다.
+- 진입점: `lesson_registration.app.http.create_app(coordinator, ...)`, `lesson_registration.app.service.serve(coordinator, ...)`. 세부 인증·multipart·수명/종료 제한은 SPEC S8 참조.
+- [FastAPI lifespan 문서](https://fastapi.tiangolo.com/advanced/events/)의 시작/종료 수명 모델을 적용했다. UI/viewer·실제 provider·22개 gate는 후속 통합에서 확인한다.

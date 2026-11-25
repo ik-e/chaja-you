@@ -12,6 +12,7 @@ import unittest
 from lesson_registration.app import contract
 from lesson_registration.app.coordinator import Coordinator
 from lesson_registration.app.errors import AppError
+from lesson_registration.app.ids import digest
 from lesson_registration.app.store import Store
 
 from support import PLATFORMS, FakeRuntime, SchemaPrep, TickClock, mock_image, temp_db
@@ -249,6 +250,8 @@ class Start(Base):
         self.assertEqual(scope["review_digest"], v["review"]["digest"])
         self.assertEqual(scope["scope"]["revision"], v["revision"])
         self.assertEqual(scope["scope"]["assets"], v["review"]["assets"])
+        # data-contract-v4: the review digest is the canonical digest of the exact internal Scope
+        self.assertEqual(digest(scope["scope"]), v["review"]["digest"])
 
     def test_both_platforms_accept(self):
         for platform in PLATFORMS:
