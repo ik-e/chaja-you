@@ -56,3 +56,19 @@ R01이 [구체안](DETAIL-CANDIDATE.json)과 [세션 보안](SESSION-SECURITY.md
 ## 11/25 R01 공동 개발 기준 전달
 
 [공동 개발 기준선](CURRENT-BASELINE.md)을 먼저 적용. R04가 전달한 H8 Progress/H6 Viewer/Polling A안 중 이름 변경은 기존 schema 사용으로 교정, grant URL/log 노출 금지, polling 주기는 자율이며 조회 제한과 goal_verdict 분리. R01이 Discord에 전달했다고 확인. 상대 담당의 합의/실제 반영은 별도. D01~D06 검증 reference 기준으로 필요한 차이만 반환하며 기존 logical pin/Protocol/gate 변경 없음. R05는 이미 Playwright와 Chromium/WS 방향이 채택되어 별도 승인 불필요.
+
+## R05 구현 보고 및 공통 접점 후속 (2026-11-25)
+
+[R01 전달/처리](../../../docs/human/responses/HRESP-20261125-09_r05-progress-followup.md) · [고정 진행 근거](../evidence/r05-progress-20261125.json). remote 8e506e1 / kmong ae582bf; 담당자 보고 15/32, 잔여 합계 3~3.5근무일. R03의 현행 step digest와 정렬된 사실은 확인하되 D01~04 전체 정합성 승인으로 보지 않는다.
+
+| 접점 | 확인된 구현 차이 | 기준 및 반환 |
+| --- | --- | --- |
+| D01 R03/R05/R04 | 현행 단계별 bound digest는 K6/S5 등 빈 binding에서 전체 승인값 변경을 직접 반영하지 않음 | 기존 logical Scope/manifest pin과 D01 binding.v1 reference 비교. R03/R05가 동일 scope/manifest/operation 벡터(빈 binding 포함)와 tampered 승인값/target/profile/asset 반례 반환. 별도 wire 변경 없이 구현 가능성 우선. R01은 최종 공유 helper·golden vector 반영, 독자식 혼용 금지. |
+| D01 slot | 기본 slot_for(registration_id)로 새 등록 시 중복 방지 우회 | R03이 소유권 검증된 Source의 previous_source_id chain root와 플랫폼/object/계정에 대한 안정적 server slot을 제공하는 방향 우선 검토. 동일 계보 재등록/새 버전/새 request key에도 같은 slot; 별개 계보의 모호한 동일 대상은 신규 효과 차단. 내부 resolver 주입으로 AuthInput wire 변경 없이 가능한지 R03/R05 확인. 기존 slot 임의 변경·승인 범위 확대 금지. |
+| D02 | admit 반환 Permit 무시, acquire_context/expected_operations 임시안, 실제 dispatch fence 경합 미증명 | CO durable claim, STORE one-shot reserve/consume 및 runtime fence/enqueue 직렬화. 발급 후 fence·중복 소비·timeout/late command·orphan 및 실제 mutation count 시험. expected_operations 없는 driver fallback 금지. R03/R05 실제 내부 서명 확인 후 공통 Protocol 변경 필요 시만 반환. |
+| D03 | fence 후 observe_goal 직접 호출 및 target/evidence의 입력값 재사용 가능성 | 별도 허가된 read-only 경계, admission-linked actual observed target/asset/payload evidence; 미확인 target은 confirmed 불가. terminal 재개 금지. K6 직전 exact approved values 재확인; readback mismatch/absence/unknown 구별. |
+| D04 | attach_viewer 동일 grant 재사용 가능, receive에서 enqueue 전 검사만 | atomic single-use attach + owner/registration/generation/expiry/origin, 단일 입력 권한; finish 시 큐 폐기/실행 시점 재검증 및 drain/barrier, 이후 입력 0건. 실제 WS 경계 검증. TTL 600/900은 담당자 후보, 확정 아님. |
+| 첨부 및 page | 실제 runtime/adapter AssetSource 미연결 | R03이 승인 scope 내 asset ID/digest로만 bytes 제공하는 내부 제한 provider; R05 raw byte digest 재계산·순서 확인·권한 오류 처리, DB/전체 파일 경로/credential 노출 금지. ScopedPage는 runtime 제한 내부 helper이며 공통 BoundGateway 유지. R03/R05/R04 실제 호출 예제 후 공통 타입 변경 여부 검토. |
+| Chromium 회귀 | 응답 유실 시 POST 재전송 관측, route.fetch(max_redirects=0,max_retries=0) 변경 | R01 고정 commit 독립 Chromium 시험으로 단일 접수·재dispatch 없음·unknown 유지 확인. redirect/retry 경로(307/308 등), context/service worker 및 actual dispatch 경합 추가 검증 필요; route fetch만으로 exactly-once 주장 금지. |
+
+기존 논리 pin, 22 gate, 업무 분담 유지. 사용자 확인한 전달 이후 실제 담당 합의·수정·CI는 별도 기록한다. R01은 담당 브랜치/구현을 직접 수정하지 않는다.

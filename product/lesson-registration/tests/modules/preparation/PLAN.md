@@ -1,7 +1,7 @@
 # TASK-049 · 등록 정보 준비 모듈 계획
 
-- 담당 R02 · 2026-11-25 · 상태 상세 계획과 합성 사례 준비, 실제 모델·구현 시험 전
-- 적용한 공통 기준 `339dd8e9a0d1390f0a26aa4c26002bf368bf967e`
+- 담당 R02 · 2026-11-25 · 상태 모의 구현·합성 시험 진행, 실제 모델 시험 전
+- 최신 적용 공통 기준 `16e9d95107ef8ffac8c58e3b8fd30643044e7658`; 아래 이전 기록은 해당 시점의 이력이다.
 - 작업 브랜치 `r02/product-preparation` · 공통 계약 CS-01·CS-02, I2 `PrepareInput → Preparation`
 - 목표는 기존 레슨 자료의 사실을 출처와 함께 정리하고, 플랫폼 모의 프로필의 누락·충돌을 사용자에게 확인받는 것이다.
 
@@ -59,3 +59,31 @@ I2는 `PreparationPort.prepare(request)` 동기 함수다. 입력은 `source`, `
 - 재현: 합성 원문에 패키지 정보가 없는 상태에서 3개 패키지를 `/packages`에 답변한 뒤, `/packages/0/amount_vat_included_krw`만 수정한다.
 - 관측: R03 `Coordinator._merge_answers`는 겹치는 이전 `/packages` 답변을 제거하고 새 중첩 답변만 I2에 전달한다. `PrepareInput`에는 이전 `Preparation.values`가 없으므로 현재 원문과 남은 답변만으로 기존 두 패키지를 복원할 근거가 없다. 구현은 추측 없이 `unsupported`와 `ready=false`를 반환한다. `test_r03_nested_edit_without_parent_answer_stays_blocked`로 재현했다.
 - 확인 요청: R03에 H5 중첩 수정 시 부모 값 보존, 전체 부모 값으로 수정, 또는 공통 계약 보완 중 어떤 방식이 CS-02에 맞는지 사례·영향 범위와 함께 검토를 요청한다. R02가 R03 코드나 공통 계약을 변경하지 않았다. 원문에 가격 정보가 없는 사례에서도 수정 후 나머지 패키지 값이 유지되는지 공동 시험이 필요하다.
+
+## 후속 작업 · 패키지 후보와 모델 연결 후보
+
+- PR #48 병합 후 기준 `22cbb4f4fff546faae6c75104c782d73b2cdb158`을 반영했다. 크몽 모의 패키지의 가격·회당 시간·횟수·작업 기간·수정 횟수·기간에 대해 `/packages/0/amount_vat_included_krw` 형태의 원문 후보와 정확한 인용을 보존한다. 같은 필드의 원문 후보끼리 또는 확인된 패키지 값과 다르면 각 근거를 유지하고 충돌 이슈로 차단한다.
+- 임시 모델 연결 후보로 OpenAI Responses API 구조화 출력을 사용한 선택적 추출기를 추가했다. 모델·API 인증·timeout을 호출자가 명시해야 하고 자동 연결하지 않는다. 외부 호출을 하지 않는 모의 HTTP 시험으로 요청·정상 응답·오류·거절을 확인한다. 공통 의존성 변경은 없다. 사용을 결정하거나 실제 모델을 시험한 기록은 아직 없다.
+- 근거: [OpenAI Responses API](https://developers.openai.com/api/reference/resources/responses/methods/create) · [구조화 출력](https://developers.openai.com/api/docs/guides/structured-outputs). 모델 종류와 비용, 승인된 합성 데이터 시험 환경은 확인 중이다. 사용자 원문을 외부 모델로 보내는 운영 조건은 별도 검토한다.
+- 기존 `/packages` 전체 답변과 중첩 수정이 겹칠 때 R03이 이전 답변을 제거하는 문제는 그대로 남아 있다. VAT 포함 여부의 독립 근거, 하위 필드 확인 반영, timeout·늦은 응답 처리는 미구현이다. 크몽은 패키지 원문 대조가 완성될 때까지 준비 완료를 차단한다.
+- `uv run --locked --python 3.12 python dev.py test r02-preparation`: 28개 통과(bootstrap 1개 및 합성 provider/HTTP 시험). 실제 모델, 실플랫폼, 전체 제품 AT-01·T5-08·T6-02 시험은 미실행이다.
+
+### 실제 모델 합성 smoke 실행 조건
+
+운영사와 팀의 시험 조건이 정리된 뒤, 실행 환경에서 `OPENAI_API_KEY`와 `OPENAI_MODEL`을 설정하고 `product/lesson-registration/`에서 아래 명령을 실행한다. 비용이 발생할 수 있다. 테스트는 코드에 고정된 가상 텍스트만 전송한다. 키나 실제 강사 자료는 파일·명령 인자·로그에 넣지 않는다. 실제 시험은 아직 수행하지 않았다.
+
+```sh
+PYTHONPATH=.:src uv run --locked --python 3.12 python tests/modules/preparation/model_smoke.py
+```
+
+공통 등록 애플리케이션과의 실제 provider 조립, 다른 모델과의 비용·성능 비교, 패키지별 VAT 포함 여부 검증 및 사용자 전체 조건 승인은 이 smoke의 범위 밖이다. mock-only 조건의 명시적 합성 입력 확인은 실행자의 책임이다.
+
+## 공동 기준 적용 및 준비 흐름 보완 · 2026-11-25
+
+- PR #44가 병합된 main `16e9d95107ef8ffac8c58e3b8fd30643044e7658`을 병합했다. D05 협의는 필요하지만 기준 적용 자체를 추가 승인 대기하지 않는다. 이전 절의 'PR 열림', '모든 후보 재확인', '크몽 전체 차단'은 당시 이력이다.
+- 원문에 정확히 존재하고 값과 인용이 일치하는 자유 텍스트 네 항목(title, description, process, preparation)만 direct 사실·provenance와 함께 준비 값에 넣는다. 실제 문맥과 항목의 의미가 맞는지는 최종 검토와 실제 모델 평가가 필요하다. 원문 불일치, 문맥이 추가된 인용, 선택지·복합 데이터는 자동 확정하지 않는다. 최종 승인 단계는 그대로다.
+- 사용자가 명시적으로 VAT 포함 계약 필드를 채운 정상 3개 패키지는 더 이상 무조건 재확인하지 않는다. 가격·시간 등 추출된 원문 후보가 입력과 다르면 충돌 차단한다. 인용에 VAT 별도/불포함/제외가 명시돼 있어도 VAT 포함 입력과 충돌 처리한다. 원문만 있는 가격은 패키지나 VAT 포함 값으로 자동 생성하지 않는다. 모델이 원문이나 VAT 표현을 인용하지 못한 경우의 탐지 성능은 미검증이며 실제 모델 평가가 필요하다.
+- R03의 실제 Coordinator와 합성 I2를 연결해 원문 제목의 준비, 원문과 상충하는 수정의 `FACT_CONFLICT` 및 기존 revision 보존, 모델 실패 저장을 확인했다. 부모 패키지 답변 뒤 중첩 수정 시 다른 패키지 정보 보존 문제는 재현 상태이며 `unsupported`와 `ready=false`로 멈춘다. R03과 D05 처리 방식을 협의해야 한다.
+- R01 방향은 OpenAI API 후보 모델을 같은 합성 입력·품질 기준으로 비교하고 비용을 평가하는 것이다. R01이 실험 접근·예산을 준비 중이므로 실제 호출과 모델 선택은 아직 하지 않았다. OpenAI 응답·거절 시험은 가짜 HTTP다. 동기 호출 제한시간·늦은 revision 폐기는 R03과 실제 연결 검증 전이다.
+- `uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation`: 합성 단위·연동 시험 32개 및 별도 bootstrap replay 통과. 실제 모델/플랫폼이나 AT-01·T5-08·T6-02 전체 제품 gate 통과를 의미하지 않는다.
+- `uv run --locked --all-groups --python 3.12 python dev.py test r03-app`: R03 독립 시험 191개 및 bootstrap replay 통과. R02 실제 모델 provider의 timeout·late revision 통합 시험을 대신하지 않는다.

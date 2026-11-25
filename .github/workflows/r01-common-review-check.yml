@@ -50,8 +50,8 @@ jobs:
       - name: Existing deliverable mapping
         run: python tools/check_deliverables.py
   bootstrap-and-boundary:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: product/lesson-registration
@@ -71,7 +71,11 @@ jobs:
         run: |
           uv sync --locked --all-groups --python 3.12
           uv run --locked --python 3.12 python dev.py doctor
-          uv run --locked --all-groups --python 3.12 python dev.py test all
+      - name: Install pinned Chromium when runtime browser tests are present
+        if: hashFiles('product/lesson-registration/tests/modules/remote/test_auth_viewer.py') != ''
+        run: uv run --locked --all-groups --python 3.12 python -m playwright install --with-deps chromium
+      - name: Run all isolated package and integration tests
+        run: uv run --locked --all-groups --python 3.12 python dev.py test all
       - name: Standard JSON Schema and common implementation boundary tests
         run: uv run --locked --python 3.12 python -m unittest discover -s tests/contract/standard_schema -v
       - name: Scope
