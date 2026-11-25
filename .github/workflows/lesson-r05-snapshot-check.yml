@@ -1,0 +1,83 @@
+name: lesson-r05-snapshot-check
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lesson-r05-snapshot-check.yml'
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    name: R05 ${{ matrix.area }} frozen snapshot
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - area: remote
+            package: r05-remote
+          - area: kmong
+            package: r05-kmong
+    env:
+      LR_ENVIRONMENT: mock
+      LR_BROWSER_CHANNEL: ''
+      PYTHONPATH: .:src
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Resolve frozen report
+        id: report
+        env:
+          AREA: ${{ matrix.area }}
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          report = json.loads(Path('product/lesson-registration/evidence/r05-progress-20261125.json').read_text(encoding='utf-8'))
+          snapshot = report['snapshots'][os.environ['AREA']]
+          for key, value in [('commit', snapshot['commit']), ('base', report['shared_base'])]:
+              assert re.fullmatch(r'[0-9a-f]{40}', value), key
+              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
+                  out.write(f'{key}={value}\n')
+          print('Frozen source:', snapshot['commit'], 'reported cases:', snapshot['reported_tests'])
+          PY
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.report.outputs.commit }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Verify frozen revision, lock and ownership
+        working-directory: product/lesson-registration
+        env:
+          EXPECTED_COMMIT: ${{ steps.report.outputs.commit }}
+          BASE_COMMIT: ${{ steps.report.outputs.base }}
+          PACKAGE: ${{ matrix.package }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
+          git merge-base --is-ancestor "$BASE_COMMIT" HEAD
+          uv lock --check
+          uv sync --locked --all-groups --python 3.12
+          uv pip check --python .venv/bin/python
+          uv run --locked --all-groups --python 3.12 python dev.py doctor
+          uv run --locked --all-groups --python 3.12 python dev.py check-changes "$PACKAGE" --base "$BASE_COMMIT"
+      - name: Install pinned Chromium
+        if: matrix.area == 'remote'
+        working-directory: product/lesson-registration
+        run: uv run --locked --all-groups --python 3.12 python -m playwright install --with-deps chromium
+      - name: Reproduce isolated mock tests
+        working-directory: product/lesson-registration
+        env:
+          PACKAGE: ${{ matrix.package }}
+        run: uv run --locked --all-groups --python 3.12 python dev.py test "$PACKAGE"
+      - name: Scope
+        if: always()
+        run: echo 'Frozen package snapshot only. No platform login, paid API, actual adapter-runtime integration claim, or 22 product acceptance gates.'

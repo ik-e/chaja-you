@@ -18,13 +18,13 @@
     "R01이 PD-01~08 공통 물리 방향 수용 및 검증된 초기 공통 환경·기준선 공유와 WBS 재구성을 지시했다. 담당자별 세부 계약 및 실제 제품 검증·일정 확정은 별도."
   ],
   "priorities": [
-    "TASK-048: 공통 물리/실행 환경 및 회귀 기준 적용, 담당자 PLAN·공통 경계 확인, WBS 조정, 실제 provider 점진 통합.",
+    "TASK-048: PR #44 공통 기준선 적용, D01~D06 실제 정합성·R05 독립 CI·WBS·점진 통합.",
     "TASK-049(R02): 등록 정보 준비·AI 구조화 및 검증; 담당자 PLAN/검토 및 독립 구현.",
-    "TASK-050(R03): S0~S7 구현 보고 반영, 최신 공통 기준 병합·공통 schema 검증 및 S8 HTTP 독립 구현, R02/R04/R05 접점 확인·잔여 공수 갱신.",
+    "TASK-050(R03): S8 HTTP/191개 시험 확인, 잔여 3인일 보고; I2/STORE/Viewer 연결.",
     "TASK-051(R04): 등록 지원 웹 UI 구현; 담당자 PLAN/검토 및 독립 구현.",
     "TASK-052(R04): 숨고 등록 adapter 및 독립 mock 구현; 담당자 PLAN/검토 및 독립 구현.",
-    "TASK-053(R05): 원격 브라우저 runtime·인증·뷰어 구현; 담당자 PLAN/검토 및 독립 구현.",
-    "TASK-054(R05): 크몽 등록 adapter 및 독립 mock 구현; 담당자 PLAN/검토 및 독립 구현.",
+    "TASK-053(R05): Chromium Runtime 15개 보고, WS/one-shot grant/input fence/STORE·slot·asset 연동 및 CI.",
+    "TASK-054(R05): 크몽 32개 보고, R03 digest 정렬·실제 Runtime 연결, 안정적인 slot/readback/증거 확인.",
     "12/8 mock MVP 및 1/4 최종 목표 유지; R02 인계와 R04/R05 업무량을 확인해 세부 일정을 결정."
   ],
   "decisions_needed": [
@@ -53,7 +53,7 @@
       "evidence_needed": "운영사 허용, 실제 보안·가치·비용 및 수용 시험"
     }
   ],
-  "review_summary": "11/25 논리·IB-01~05·PD-01~08 방향 적용, 초기 제품 lock 공통 회귀 통과. TASK-048~054 활성. R03 e29fb69 S0~S7·174/10/2 시험 보고(독립 재현 미확인), FastAPI/jsonschema lock 및 표준 검증 기준 반영·S8 착수 가능. R05 수신/7근무일 추정; WBS V0.6 미확정, R03 잔여 공수 및 담당자 합의 확인 후 조정. 22개 제품 시험 미실행, live 금지.",
+  "review_summary": "11/25 PR #44 공통 기준 main e182cf8 및 CI 4종 통과. R03 S8 191개 독립 회귀 통과·잔여 3인일 보고. R05 remote 8e506e1 15개, kmong ae582bf 32개 담당자 보고·코드 검토, 잔여 3~3.5근무일(두 TASK 합계); 독립 CI·D01~04/실제 연결 미완료. R02 PR #49, R04 실제 UI/adapter 보완 및 담당 잔여 공수 확인. WBS V0.6 미확정, 22개 제품 시험 미실행, live 금지.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -72,7 +72,7 @@
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "11/25 WBS V0.6·일일 조정 · R03 잔여 3인일/R04 초기 4+3인일·client/workflow 구현 보고, 일정·캡처 미확인",
+      "status": "11/25 WBS V0.6 후보 갱신 · R03 잔여 3인일/R05 잔여 3~3.5근무일/R04 초기 4+3인일, 일정·캡처 미확인",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",
       "projection": "docs/step1/WBS_제출본.md",
@@ -80,7 +80,7 @@
       "target": "docs/step1/WBS_제출본.md",
       "revision_ref": "docs/step1/WBS_제출본.md",
       "revision_date": "2026-11-25",
-      "note": "R01 운영 방향과 최신 R03/R04 근거 반영. 초기/잔여 공수·가용성을 매일 확인하며 후보 일정만 조정. 공식 제출/접수 미확인."
+      "note": "R05 고정 보고/검토 추가. 최초·잔여 공수 및 실제 검증을 구분하며 일정 확정/공식 제출·접수 미확인."
     },
     {
       "id": "SUB-API-20261120",
@@ -478,7 +478,7 @@
   "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조); TASK-043~047 이전 단계 보존",
   "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "active_phase_intent_id": "PHASE-20261125-01",
-  "current_product_status": "IB/PD 공통 방향 및 초기 제품 lock/기술 검증·회귀 통과. R03 S0~S7·mock 시험 174/10/2 보고(재현 미확인), S8 착수 가능; R05 수신/7근무일 확인. 담당자 세부 계약·잔여 공수·제품 시험·일정 미확정. 실서비스 실행 금지.",
+  "current_product_status": "공통 기준선 PR #44 main 반영 및 CI 4종 통과; R03 S8 실제 HTTP/SQLite 합성 회귀 확인. R05 053·054 초기 구현·15/32 시험 담당자 보고, 잔여 3~3.5근무일; 실제 WS/adapter 및 공통 보안·digest 정합성·독립 CI 미확인. 실제 제품 22개 gate·일정 미확정, live 금지.",
   "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
   "legacy_submission_use": "이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인",
   "current_baseline_lifecycle": {

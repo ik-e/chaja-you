@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 논리·IB-01~05·PD-01~08 방향 적용, 초기 제품 lock 공통 회귀 통과. TASK-048~054 활성. R03 e29fb69 S0~S7·174/10/2 시험 보고(독립 재현 미확인), FastAPI/jsonschema lock 및 표준 검증 기준 반영·S8 착수 가능. R05 수신/7근무일 추정; WBS V0.6 미확정, R03 잔여 공수 및 담당자 합의 확인 후 조정. 22개 제품 시험 미실행, live 금지.
+11/25 PR #44 공통 기준 main e182cf8 및 CI 4종 통과. R03 S8 191개 독립 회귀 통과·잔여 3인일 보고. R05 remote 8e506e1 15개, kmong ae582bf 32개 담당자 보고·코드 검토, 잔여 3~3.5근무일(두 TASK 합계); 독립 CI·D01~04/실제 연결 미완료. R02 PR #49, R04 실제 UI/adapter 보완 및 담당 잔여 공수 확인. WBS V0.6 미확정, 22개 제품 시험 미실행, live 금지.
 
 ## 결정 요청
 
@@ -29,8 +29,8 @@
 | [TASK-050](../artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-053](../artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-054](../artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-053](../artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 진행 중 |
+| [TASK-054](../artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 진행 중 |
 
 담당·목표일은 제안입니다. 선행 결과를 기다리는 동안 기존 자료로 초안을 작성하고 완료 전에 결과를 반영합니다.
 
@@ -138,17 +138,59 @@ S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 
 
 결과 미기록.
 
-### TASK-053 · 할 일
+### TASK-053 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-053.json)
 
-결과 미기록.
+R05 8e506e1: Playwright Chromium Runtime I3/I4, CDP frame/input, 실제 R03 Coordinator/SQLite StoreGateway + 중립 loopback mock. Windows 관리형 Chromium 143.0.7499.4에서 15개(bootstrap 1+14) 통과 보고. 응답 유실 시 Chromium POST 재전송 발견 및 route.fetch 단일 시도 방지 시험 포함. 코드/시험 확인, WS endpoint·실제 크몽 runtime 연동·D01~04 안전 정합성 및 독립 CI 미완료.
 
-### TASK-054 · 할 일
+검증과 근거
+
+- 고정 코드·시험·담당자 보고 확인 · pass
+- 15개 고정 구현의 독립 GitHub CI 재현 · inconclusive
+- 실제 모듈 연결·공통 계약 및 관련 제품 gate · inconclusive
+- [R01 범위·근거 및 잔여 공수](../../product/lesson-registration/evidence/r05-progress-20261125.json)
+- [공통 접점 검토](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
+- [고정 담당 PLAN/시험 기록](https://github.com/ik-e/chaja-you/blob/8e506e1a7a27756909b0ca40b074bc37bc0dc58c/product/lesson-registration/tests/modules/remote/PLAN.md)
+- [구현 commit](https://github.com/ik-e/chaja-you/commit/8e506e1a7a27756909b0ca40b074bc37bc0dc58c)
+
+남은 불확실성과 결정 요청
+
+- no actual WS endpoint
+- no actual kmong adapter joined
+- grant reusable/multi-viewer
+- queued input not fenced at execution
+- permit consume/dispatch fence not proven
+- registration-derived slot
+- unadmitted readback after fence
+- R05 두 TASK 합계 잔여 3~3.5근무일 보고(별도 배분/확정 일정 없음); 실제 보완 공수 미확인
+- R03/R05 claim/permit 소비/fence 실제 dispatch race, stable lineage slot 및 승인된 AssetSource, readback 허가. R03/R04/R05 WS owner/origin/one-shot grant/queued input 차단 및 teardown 시험.
+
+### TASK-054 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-054.json)
 
-결과 미기록.
+R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성/독립 CI 미완료.
+
+검증과 근거
+
+- 고정 코드·시험·담당자 보고 확인 · pass
+- 32개 고정 구현의 독립 GitHub CI 재현 · inconclusive
+- 실제 모듈 연결·공통 계약 및 관련 제품 gate · inconclusive
+- [R01 범위·근거 및 잔여 공수](../../product/lesson-registration/evidence/r05-progress-20261125.json)
+- [공통 접점 검토](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
+- [고정 담당 PLAN/시험 기록](https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md)
+- [구현 commit](https://github.com/ik-e/chaja-you/commit/ae582bf7ff04435f4f2876d72a916c141282d85f)
+
+남은 불확실성과 결정 요청
+
+- no Playwright runtime connection
+- D01 scope-bound candidate differs from current step digest
+- stable slot and profile digest verification pending
+- K6 needs current exact review recheck
+- readback target/asset and evidence provenance pending
+- R05 두 TASK 합계 잔여 3~3.5근무일 보고(별도 배분/확정 일정 없음); 실제 보완 공수 미확인
+- R03/R05 D01 실제 scope/manifest binding 기준 및 stable slot, profile digest·asset 순서, readback observed target/evidence 및 K6 승인값 재검사. 실제 runtime 결합과 공통 벡터 반환.
 
 ## 이전 작업 정산/근거
 

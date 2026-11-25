@@ -42,11 +42,17 @@ R04 배정 업무인 Web UI(TASK-051)와 숨고 Adapter(TASK-052)의 설계·구
 - `dev.py test r04-soomgo`: 6개 테스트 전수 통과 (단위 테스트 3개 + Gateway 통합 테스트 3개)
 - `project_docs.py --check`: 27개 문서 프로젝션 최신 상태 유지
 
-(2) **로컬 브라우저 분할화면 확인 방법**  
-- 팀원 및 리뷰어는 로컬 환경에서 아래 명령어를 실행하여 분할화면 UI를 즉시 확인할 수 있습니다:
+(2) **로컬 및 원격 브라우저 확인 링크**  
+- **로컬 웹 서버 접속 (즉시 열기):**  
+  [http://localhost:8080](http://localhost:8080) (로컬 백그라운드 웹서버 구동 중)
+- **로컬 파일 직접 열기:**  
+  [product/lesson-registration/web/index.html](file:///Users/wonmin/orca/projects/Last%20Project/product/lesson-registration/web/index.html)
+- **원격 GitHub 실시간 HTML 미리보기:**  
+  [HTMLPreview로 index.html 바로 열기](https://htmlpreview.github.io/?https://github.com/ik-e/chaja-you/blob/main/product/lesson-registration/web/index.html)
+- **터미널 실행 명령어:**
   ```bash
   # Google Chrome으로 UI 실행
-  open -a "Google Chrome" "file://$(pwd)/product/lesson-registration/web/index.html"
+  open -a "Google Chrome" "http://localhost:8080"
   ```
 - 5대 화면 간 단계 이동, 구조화 필드 수정, 인증 상태 전환, 미확정(unknown) 상태 대응 팝업 등이 mock 데이터로 완전 동작합니다.
 
