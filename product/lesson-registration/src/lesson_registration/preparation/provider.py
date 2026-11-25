@@ -177,6 +177,11 @@ class PreparationProvider:
                     result["issues"].append({"issue_id": _id("invalid-mock", field), "field": field,
                                              "code": "invalid", "message": "모의 플랫폼의 선택 조건을 확인해 주세요.",
                                              "blocking": True})
+                if "/packages" not in invalid_mock_fields:
+                    # Composite price/VAT fields cannot yet be checked against source facts.
+                    result["issues"].append({"issue_id": _id("unverified", "/packages"), "field": "/packages",
+                                             "code": "rule_unverified", "message": "패키지 금액과 원문 대조가 필요합니다.",
+                                             "blocking": True})
             result["ready"] = not result["issues"]
         try:
             self.catalog.named("Preparation", result)
