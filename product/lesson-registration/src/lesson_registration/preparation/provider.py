@@ -47,6 +47,17 @@ def _vat_excluded(quote: str) -> bool:
                 or re.search(excluded + r"\s*[:：]?\s*" + tax, quote, re.IGNORECASE))
 
 
+def _direct_text(field: str, value: Any, quote: str, source_text: str) -> bool:
+    labels = {"/title": r"제목", "/description": r"(?:소개|설명)",
+              "/process": r"(?:서비스\s*제공\s*)?절차", "/preparation": r"준비\s*(?:사항|물)"}
+    if field not in labels or not isinstance(value, str):
+        return False
+    # Literal occurrence alone does not prove its role: a model can turn a
+    # description into an invented title. Require an adjacent source label.
+    pattern = labels[field] + r"(?:은|는|:|：)\s*" + re.escape(value) + r"(?:입니다)?(?:[.!?\n]|$)"
+    return value in quote and bool(re.search(pattern, source_text))
+
+
 class PreparationProvider:
     """I2 implementation for pinned mock profiles and an injected extractor."""
 
@@ -81,6 +92,16 @@ class PreparationProvider:
             field, value, quote = candidate["field"], candidate["value"], candidate["quote"]
             if not isinstance(field, str) or not isinstance(quote, str):
                 raise _failure("RUNTIME_ERROR", "준비 모델의 항목을 확인해 주세요.")
+            # Some structured-output models return a profile key without the
+            # leading JSON Pointer slash. Canonicalize only that syntax; unknown
+            # fields still fail closed below.
+            if not field.startswith("/"):
+                field = "/" + field
+            alias = re.fullmatch(r"(/packages/[0-2])/(price|amount_vat_excluded_krw)", field)
+            if alias and (alias[2] == "price" or _vat_excluded(quote)):
+                # Preserve a numeric source price as evidence only: VAT is not
+                # inferred. An explicitly excluded price triggers conflict.
+                field = alias[1] + "/amount_vat_included_krw"
             nested = (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
                       and re.fullmatch(r"/packages/[0-2]/(?:amount_vat_included_krw|minutes_per_session|sessions|work_days|revision_count|period)", field))
             if field not in fields and not nested:
@@ -91,9 +112,14 @@ class PreparationProvider:
             (nested_suggestions if nested else suggestions).setdefault(field, []).append(candidate)
 
         answers: dict[str, list[dict]] = {}
+        nested_answers: dict[str, list[dict]] = {}
         unsupported = []
         for answer in request["answers"]:
-            if answer["field"] not in fields:
+            nested = (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
+                      and re.fullmatch(r"/packages/[0-2]/(?:amount_vat_included_krw|minutes_per_session|sessions|work_days|revision_count|period)", answer["field"]))
+            if nested:
+                nested_answers.setdefault(answer["field"], []).append(answer)
+            elif answer["field"] not in fields:
                 unsupported.append(answer["field"])
             else:
                 answers.setdefault(answer["field"], []).append(answer)
@@ -141,9 +167,7 @@ class PreparationProvider:
                 # Literal free text can be presented in the final review without
                 # asking the user to approve the same content twice. Enum,
                 # numeric and composite mappings still need an explicit answer.
-                if (field in {"/title", "/description", "/process", "/preparation"}
-                        and isinstance(candidate["value"], str)
-                        and candidate["value"] == candidate["quote"]):
+                if _direct_text(field, candidate["value"], candidate["quote"], source_text):
                     result["values"][descriptor["key"]] = candidate["value"]
                     result["provenance"].append({"field": field, "kind": "direct", "fact_refs": [fact_id]})
                 else:
@@ -154,6 +178,31 @@ class PreparationProvider:
                 result["issues"].append({"issue_id": _id("missing", field), "field": field,
                                          "code": "missing", "message": descriptor["label"] + "을 확인해 주세요.",
                                          "blocking": True})
+
+        # Apply an explicit leaf answer only when the complete parent was also
+        # supplied in this request. Never reconstruct missing siblings.
+        for field, given in nested_answers.items():
+            parts = field.split("/")
+            packages = result["values"].get("packages")
+            index, key = int(parts[2]), parts[3]
+            valid_parent = (isinstance(packages, list) and index < len(packages)
+                            and isinstance(packages[index], dict) and key in packages[index])
+            values = []
+            for item in given:
+                if not any(type(item["value"]) is type(v) and item["value"] == v for v in values):
+                    values.append(item["value"])
+            if not valid_parent or len(values) != 1 or type(values[0]) is not type(packages[index][key]):
+                code = "conflict" if len(values) > 1 else "unsupported"
+                result["issues"].append({"issue_id": _id(code, field), "field": field,
+                                         "code": code, "message": "패키지의 기존 값과 수정값을 확인해 주세요.",
+                                         "blocking": True})
+                continue
+            answer = given[-1]
+            fact_id = _id("answer", field)
+            result["facts"].append({"fact_id": fact_id, "path": field, "value": answer["value"],
+                                    "origin": {"kind": "answer", "ref": answer["answer_id"], "locator": field}})
+            packages[index][key] = copy.deepcopy(answer["value"])
+            result["provenance"].append({"field": field, "kind": "user_choice", "fact_refs": [fact_id]})
 
         for field, candidates in nested_suggestions.items():
             distinct = []
@@ -184,6 +233,19 @@ class PreparationProvider:
                 result["issues"].append({"issue_id": _id("conflict" if conflict else "confirm", field),
                                          "field": field, "code": "conflict" if conflict else "rule_unverified",
                                          "message": "패키지의 원문과 입력값을 확인해 주세요.", "blocking": True})
+
+        # The model may omit a crucial source fact altogether. Independently
+        # flag obvious VAT exclusions and alternative won amounts; do not
+        # guess which package or price the phrase belongs to.
+        if isinstance(result["values"].get("packages"), list):
+            uncertain_source = (_vat_excluded(source_text) or bool(re.search(
+                r"\d[\d,]*\s*원\s*(?:또는|혹은|/)\s*\d[\d,]*\s*원", source_text)))
+            existing_price_block = any(i["blocking"] and i["field"].startswith("/packages")
+                                       for i in result["issues"])
+            if uncertain_source and not existing_price_block:
+                result["issues"].append({"issue_id": _id("unverified", "/packages"), "field": "/packages",
+                                         "code": "rule_unverified", "message": "원문의 가격 또는 VAT 조건을 확인해 주세요.",
+                                         "blocking": True})
 
         if (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
                 and result["values"].get("delivery") == "offline"

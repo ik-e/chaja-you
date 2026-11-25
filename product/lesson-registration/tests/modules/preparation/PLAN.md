@@ -87,3 +87,13 @@ PYTHONPATH=.:src uv run --locked --python 3.12 python tests/modules/preparation/
 - R01 방향은 OpenAI API 후보 모델을 같은 합성 입력·품질 기준으로 비교하고 비용을 평가하는 것이다. R01이 실험 접근·예산을 준비 중이므로 실제 호출과 모델 선택은 아직 하지 않았다. OpenAI 응답·거절 시험은 가짜 HTTP다. 동기 호출 제한시간·늦은 revision 폐기는 R03과 실제 연결 검증 전이다.
 - `uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation`: 합성 단위·연동 시험 32개 및 별도 bootstrap replay 통과. 실제 모델/플랫폼이나 AT-01·T5-08·T6-02 전체 제품 gate 통과를 의미하지 않는다.
 - `uv run --locked --all-groups --python 3.12 python dev.py test r03-app`: R03 독립 시험 191개 및 bootstrap replay 통과. R02 실제 모델 provider의 timeout·late revision 통합 시험을 대신하지 않는다.
+
+## 실제 모델 합성 실험 및 추가 안전 보완 · 2026-11-25
+
+- PR #49·#50을 main에 반영한 뒤 `094e4d2c5dd3fbb8e9c9352296f87d90cd659308`에서 후속 작업했다. 사용자 제공 키를 보호된 임시 입력으로 받아 OpenAI Responses API에 고정 합성 텍스트만 전송했다. 시험 후 임시 키 파일은 삭제했다. 실제 플랫폼·개인정보는 사용하지 않았다.
+- `model_compare.py --run`은 명시적으로만 실행하며 같은 합성 5개 사례(명시 제목, 가격 미제공, 가격 후보 충돌, VAT 별도, 숨고 정보 누락)를 두 모델에 각각 1회 보낸다. 성공·실패·오류, API 응답 토큰 수와 경과 시간을 저장한다. 하나의 소규모 관측으로 운영 모델을 확정하거나 전체 제품 품질로 일반화하지 않는다.
+- 반복 실험 중 모델이 제목 라벨이 없는 본문을 제목으로 제안하는 사례가 관측돼, 원문에 등장한다는 사실만으로 자동 반영하지 않고 인접한 명시적 항목 라벨을 요구하도록 보완했다. 별칭 가격은 근거 후보로만 취급하며, 입력한 패키지가 있을 때 원문에 VAT 별도나 복수 금액이 드러나면 모델이 누락해도 확인을 요구한다. 이 제한적 규칙이 모든 표현을 찾는다는 보장은 없다.
+- 최종 후보의 5개 사례 각 1회 관측: `gpt-6-luna` 3개 통과·2개 `RUNTIME_ERROR`, `gpt-5.6-luna` 4개 통과·1개 `RUNTIME_ERROR`. 양쪽 모두 가격 충돌 사례에서 오류가 발생해 모델 선택·AC1 완료를 보류한다. 각 모델은 입력 5,071 토큰을 썼고 출력은 각각 2,155·1,281 토큰이었다. 이는 마지막 10회 호출의 사용량이며 앞선 실험·진단이나 실제 청구액의 합계가 아니다.
+- 별도 I2 단위 시험에서는 부모 패키지 전체와 하위 수정이 **동시에 입력으로 제공되는 경우** 수정한 값만 바꾸고 형제 패키지 및 입력 원본을 보존한다. 현재 R03은 중첩 수정 시 부모 답변을 제거하므로 이 조건이 충족되지 않는다. 기존 통합 경계는 여전히 차단되고 D05 협의가 필요하다.
+- 독립 `r02-preparation` 합성 시험 44개와 bootstrap replay 및 담당 영역 변경 검사를 통과했다. 실제 모델 평가 결과는 실패를 포함하며, timeout·late revision, 완전한 가격·단위·VAT 검증, AT-01·T5-08·T6-02, 전체 제품 수용 및 12/4 인계는 미완료다.
+- 참조: [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna), [GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna), [구조화 출력](https://developers.openai.com/api/docs/guides/structured-outputs). 비용은 실제 사용량과 해당 계정의 청구 조건에 따라 달라진다.
