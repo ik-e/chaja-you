@@ -14,4 +14,4 @@
 ## 현 프로젝트 설계 검토
 
 - [레슨 등록 지원 서비스 — 사람용 검토 홈](lesson-registration/README.md) · [AI 조회 인덱스](lesson-registration/MANIFEST.json)
-- 최신 재설계 기준선의 읽기용 프로젝션이며 채택·정식 TASK 배정·실서비스 승인이 아니다.
+- 고정 설계 검토 스냅샷입니다. 현재 적용은 [논리 설계 채택 기록](../artifacts/design/lesson-registration-20261124/adoption-20261125.json), [CURRENT](../../CURRENT.md), [제품 작업 공간](../../product/lesson-registration/README.md)을 우선합니다. 실서비스 실행 승인은 아닙니다.

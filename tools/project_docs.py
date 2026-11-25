@@ -561,8 +561,49 @@ def validate(sources):
                 raise ValueError(f"{WBS}: invalid deliverable mapping {deliverable['id']}")
 
 
+def validate_lesson_design_sources():
+    """Route the versioned lesson design bundle to its own pinned-source model.
+
+    Unlike task/state envelopes, this bundle includes JSON Schema, replay
+    evidence, versioned contracts and history. Never silently skip an unknown
+    file: the adopted manifest and explicit adoption metadata cover the folder.
+    The separate design projection checker verifies rendered contents.
+    """
+    bundle = ARTIFACTS / "design/lesson-registration-20261124"
+    manifest_path = ROOT / "docs/design/lesson-registration/MANIFEST.json"
+    if not bundle.is_dir():
+        return set()
+    manifest = read_json(manifest_path.relative_to(ROOT))
+    adoption_path = bundle / "adoption-20261125.json"
+    adoption = read_json(adoption_path.relative_to(ROOT))
+    if (adoption.get("canonical_commit") != manifest.get("source_commit")
+            or adoption.get("id") != "LR-ADOPT-20261125"
+            or adoption.get("authority") != "R01"):
+        raise ValueError("lesson adoption and review snapshot differ")
+    inventory = {entry["path"]: entry["sha"] for entry in manifest["inventory"]}
+    actual = {path.relative_to(ROOT).as_posix() for path in bundle.rglob("*") if path.is_file()}
+    adoption_rel = adoption_path.relative_to(ROOT).as_posix()
+    if len(inventory) != len(manifest["inventory"]) or actual != set(inventory) | {adoption_rel}:
+        raise ValueError("lesson design source inventory differs; update design review and adoption explicitly")
+    for path, expected in inventory.items():
+        blob = subprocess.check_output(
+            ["git", "hash-object", f"--path={path}", str(ROOT / path)],
+            cwd=ROOT, text=True, encoding="ascii"
+        ).strip()
+        if blob != expected:
+            raise ValueError(f"lesson design source differs from adopted snapshot: {path}")
+        if path.endswith(".json"):
+            read_json(path)
+    prefix = bundle.relative_to(ROOT).as_posix() + "/"
+    for name in adoption.get("current_refs", []):
+        if prefix + name not in inventory:
+            raise ValueError(f"missing adopted design reference {name}")
+    return {ROOT / path for path in actual if path.endswith(".json")}
+
+
 def build():
-    paths = sorted(ARTIFACTS.rglob("*.json")) + sorted(
+    specialized = validate_lesson_design_sources()
+    paths = sorted(path for path in ARTIFACTS.rglob("*.json") if path not in specialized) + sorted(
         (ROOT / "docs/adr").glob("ADR-*.json")
     )
     sources = {
