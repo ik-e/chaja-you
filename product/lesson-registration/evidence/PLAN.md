@@ -68,3 +68,9 @@ R05: 053·054 수신 및 7근무일 추정, 11/27 인터페이스 협의 후보,
 R03 PLAN 확인: [고정 snapshot](https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md), 11인일 추정/12월 8일 일정 위험. [공통 접점 및 기존 계약 정합성 피드백](../contracts/INTERFACE-REVIEW.md#r03-plan-검토-2026-11-25), WBS 후보에 반영. R02/R04 PLAN 및 R05 실제 PLAN은 확인되지 않았으므로 일정 확정 금지.
 
 R03 후속: [R01 결정](../../../docs/human/responses/HRESP-20261125-04_r03-app-followup.md) · [진행 근거](r03-progress-20261125.json) · [공동 반환 기준](../contracts/INTERFACE-REVIEW.md#r03-진행-보고-후속-2026-11-25). S8 착수 가능, 회귀 미확인. R03/R05 digest·operation·STORE/lease 예제 합의 → R01 공통 fixture 계산값 및 실패 벡터 갱신 → 통합 회귀. Viewer/I2/factory는 담당자 반환 후 결정. 잔여 공수·전체 PLAN/가용성 확인 후 WBS 확정, 추가 TASK 자동 배정 없음.
+
+## D01~D06 세부 방향 및 보안 후보
+
+[승인](../../../docs/human/responses/HRESP-20261125-05_common-detail-direction.md) · [후보](../contracts/DETAIL-CANDIDATE.json) · [인증 세션 보안](../contracts/SESSION-SECURITY.md). 기존 R03/R05 협의 대기 대신 R01이 reference와 실패 시험을 먼저 제공. 명령: `uv run --locked --python 3.12 python -m unittest discover -s tests/contract -p test_detail_candidate.py -v` (PYTHONPATH=.:src), 제품 lock의 all-groups 환경에서 `python evidence/probe_physical.py`. 실행 결과는 정확한 commit CI로 확인; 이전 채팅 13/13은 재현 근거 부재로 검증값 사용 금지. 기존 replay sentinel 유지, 계산값은 후보 test에서 실제 생성. 독립 모델·loopback probe와 실제 제품 22개/운영 보안은 분리. 담당자 차이 확인 후 현행 interfaces.py·manifest/slot/fixture 변경 여부를 확정.
+
+후속: [공동 개발 기준](../contracts/CURRENT-BASELINE.md) 및 [R01 전달](../../../docs/human/responses/HRESP-20261125-08_common-baseline-release.md). 81ade0f 후보의 4개 CI 통과; R04 추가 구현이 반영된 최신 main과 함께 다시 검증. 실제 owner conformance 및 22개 gate 미확인. [OpenAI 실험 환경](OPENAI-EXPERIMENT.md)은 기관 Member 접근/예산/정책 확인 전 실제 호출 금지.
