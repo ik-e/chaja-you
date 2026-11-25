@@ -1,7 +1,7 @@
 {
   "id": "LR-DETAIL-CANDIDATE",
   "date": "2026-11-25",
-  "status": "direction_approved_candidate_pending_provider_conformance",
+  "status": "shared_reference_baseline_pending_provider_conformance",
   "authority": "docs/human/responses/HRESP-20261125-05_common-detail-direction.md",
   "base": "f5e685716a5ed4fb36159d215b3cc861ef3d5e79",
   "scope": "mock-only; candidate interface and reference tests, not a replacement for pinned logical schema or interfaces.py; no new work assignment",
@@ -150,14 +150,22 @@
     "physical_probe": "product/lesson-registration/evidence/probe_physical.py",
     "command": "cd product/lesson-registration && uv run --locked --python 3.12 python -m unittest discover -s tests/contract -p test_detail_candidate.py -v",
     "physical_command": "uv run --locked --all-groups --python 3.12 python evidence/probe_physical.py",
-    "result": "Prior candidate 24a1c35 CI 4 workflows passed: 19 new reference tests and 5 physical tests. Updated candidate digest and origin probe require fresh CI; actual provider conformance remains unverified.",
-    "prior_unreproduced": "Earlier chat assertion of 13/13 is not evidence; replace with actual run results.",
+    "result": "81ade0f all four workflows passed, including revised named Profile digest equality, reachable forbidden-origin positive control and all-groups bootstrap. Reference/physical only; provider implementation and 22 product acceptance tests remain pending.",
+    "prior_unreproduced": "Earlier chat assertion of 13/13 excluded from evidence; exact CI runs above are evidence.",
     "prior_ci": {
       "commit": "24a1c3579e84ae6a8e76e4b78135288babc5f51b",
       "common": "https://github.com/ik-e/chaja-you/actions/runs/45539145817",
       "physical": "https://github.com/ik-e/chaja-you/actions/runs/45539145758",
       "bootstrap": "https://github.com/ik-e/chaja-you/actions/runs/45539145744",
       "docs": "https://github.com/ik-e/chaja-you/actions/runs/45539145737"
+    },
+    "verified_candidate_ci": {
+      "commit": "81ade0f0287d5827aee6575e37d83d19d297973f",
+      "common": "https://github.com/ik-e/chaja-you/actions/runs/45551936586",
+      "physical": "https://github.com/ik-e/chaja-you/actions/runs/45551936592",
+      "bootstrap": "https://github.com/ik-e/chaja-you/actions/runs/45551937159",
+      "docs": "https://github.com/ik-e/chaja-you/actions/runs/45551936530",
+      "scope": "all four successful on 81ade0f; reference/physical/isolated tests only; latest R04 additions separately rechecked"
     }
   },
   "owner_review": {

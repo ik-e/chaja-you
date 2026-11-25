@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>레슨 멀티플랫폼 등록 지원 시스템 (R04 Web UI)</title>
+  <style>
+    :root {
+      --primary: #0066cc;
+      --primary-hover: #0052a3;
+      --success: #2e7d32;
+      --danger: #d32f2f;
+      --warning: #ed6c02;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    header { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    header h1 { font-size: 1.6rem; font-weight: 700; }
+    header p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Navigation Tabs */
+    .nav-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); }
+    .tab-btn { background: none; border: none; padding: 0.75rem 1.25rem; font-size: 0.95rem; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tab-btn:disabled { color: #ccc; cursor: not-allowed; }
+
+    /* Cards & Form */
+    .surface-pane { display: none; }
+    .surface-pane.active { display: block; }
+    .card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .card p.desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-row { display: flex; gap: 1rem; }
+    .col { flex: 1; }
+    label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+    .form-control { width: 100%; padding: 0.6rem 0.8rem; font-size: 0.95rem; border: 1px solid var(--border); border-radius: 4px; }
+    .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0,102,204,0.2); }
+
+    /* Buttons & Badges */
+    .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+    .btn { padding: 0.6rem 1.2rem; font-size: 0.95rem; font-weight: 600; border-radius: 4px; border: none; cursor: pointer; transition: background 0.15s; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: #e9ecef; color: var(--text); }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .badge { display: inline-block; padding: 0.25rem 0.6rem; font-size: 0.8rem; font-weight: 700; border-radius: 4px; }
+    .badge-warning { background: #fff3e0; color: var(--warning); }
+    .badge-success { background: #e8f5e9; color: var(--success); }
+
+    /* Viewer Wrapper */
+    .viewer-wrapper { position: relative; border: 1px solid var(--border); border-radius: 6px; height: 380px; background: #000; margin: 1rem 0; overflow: hidden; }
+    .viewer-placeholder { display: flex; align-items: center; justify-content: center; height: 100%; color: #888; text-align: center; padding: 2rem; }
+    .viewer-frame { width: 100%; height: 100%; border: none; }
+    .viewer-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; }
+
+    /* Progress & Table */
+    .progress-bar-bg { background: #e9ecef; height: 12px; border-radius: 6px; overflow: hidden; margin-top: 0.5rem; }
+    .progress-bar-fill { background: var(--primary); height: 100%; width: 0%; transition: width 0.3s; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .table th, .table td { padding: 0.75rem; border-bottom: 1px solid var(--border); text-align: left; }
+    .table th { width: 25%; color: var(--text-muted); }
+    .alert { padding: 1rem; border-radius: 4px; margin-bottom: 1rem; font-size: 0.9rem; }
+    .alert-danger { background: #ffebee; color: var(--danger); }
+    .alert-warning { background: #fff8e1; color: #f57f17; }
+    pre { background: #f1f3f5; padding: 1rem; border-radius: 4px; font-size: 0.85rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>레슨 멀티플랫폼 등록 지원 시스템</h1>
+      <p>단일 원본 레슨 입력을 바탕으로 숨고/크몽 플랫폼의 모의 등록을 안전하게 조율합니다.</p>
+    </header>
+
+    <!-- Navigation Steps -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-target="surface-source">1. 원본 입력</button>
+      <button class="tab-btn" data-target="surface-prepare">2. 질문지 준비</button>
+      <button class="tab-btn" data-target="surface-auth">3. 플랫폼 인증</button>
+      <button class="tab-btn" data-target="surface-review">4. 최종 승인</button>
+      <button class="tab-btn" data-target="surface-result">5. 결과 확인</button>
+    </nav>
+
+    <!-- 5 Surfaces Injection Point -->
+    <main id="app-main">
+      <div id="mount-source"></div>
+      <div id="mount-prepare"></div>
+      <div id="mount-auth"></div>
+      <div id="mount-review"></div>
+      <div id="mount-result"></div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

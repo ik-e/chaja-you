@@ -40,7 +40,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 재검증 대기. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정).
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 81ade0f CI 4종 성공. 최신 main의 R04 추가 구현과 함께 재검증. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정). R01 Discord 전달의 확정 경계와 D01~D06 협의/적용 기준을 CURRENT-BASELINE.md에 정리. 기관 API 권한 미확인에 맞춰 실험 환경 계획 수정.
 
 검증과 근거
 
@@ -55,6 +55,7 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - D01~D06 독립 후보 시험 및 실제 owner 구현 적합성 (구분; 결과 CI 확인) · inconclusive
 - 24a1c35 이전 reference/물리 후보 (새 후보/실제 제품 별도) · pass
 - OpenAI API 접근·비용·실제 모델 실험 · inconclusive
+- 81ade0f 보완 후보 4개 CI (실제 provider/gate 별도) · pass
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
 - [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
@@ -70,6 +71,8 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [독립 후보 재현 시험](../../product/lesson-registration/tests/contract/test_detail_candidate.py)
 - [OpenAI API 실험 방향](../human/responses/HRESP-20261125-07_openai-model-experiment-direction.md)
 - [실제 모델 실험 환경 계획](../../product/lesson-registration/evidence/OPENAI-EXPERIMENT.md)
+- [공동 기준 전달 기록](../human/responses/HRESP-20261125-08_common-baseline-release.md)
+- [공동 개발 기준선](../../product/lesson-registration/contracts/CURRENT-BASELINE.md)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 - [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
@@ -77,6 +80,10 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [제품 lock 공통 회귀 검증](https://github.com/ik-e/chaja-you/actions/runs/45535125564)
 - [이전 D01~D06 후보 공통 CI](https://github.com/ik-e/chaja-you/actions/runs/45539145817)
 - [이전 원격 세션 기술 CI](https://github.com/ik-e/chaja-you/actions/runs/45539145758)
+- [보완 후보 공통 CI](https://github.com/ik-e/chaja-you/actions/runs/45551936586)
+- [보완 후보 물리 CI](https://github.com/ik-e/chaja-you/actions/runs/45551936592)
+- [보완 후보 bootstrap CI](https://github.com/ik-e/chaja-you/actions/runs/45551937159)
+- [보완 후보 문서 CI](https://github.com/ik-e/chaja-you/actions/runs/45551936530)
 
 남은 불확실성과 결정 요청
 
@@ -85,10 +92,12 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - 실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증
 - 초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요
 - 실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도.
-- OpenAI 공급자 방향 수용; API 계정/예산/SDK/모델 비교 및 시험 미확인; 최신 후보 CI와 담당자 적합성 별도.
+- OpenAI 공급자 방향 수용; API 계정/예산/SDK/모델 비교 및 시험 미확인; 81ade0f CI 통과; 실제 담당자 적합성 및 최신 main 추가 구현 회귀 별도.
+- 기관 조직 Member 권한·API 이용 정책 및 실험 비용 미확정. 다른 담당자의 기준 적용/협의 반환은 확인 전.
 - 관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.
 - R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.
 - D01~D06 R01 후보 기준으로 담당자별 실제 구현 차이·반례·공수 반환. 안정적인 slot/manifest/readback, actual dispatch fence, viewer/I2/factory 세부 서명·환경은 실제 확인 후 확정. 기존 제품 범위 및 업무 배정 유지.
+- R04 A안은 H8 기존 schema, grant URL/log 금지, polling과 goal_verdict 분리로 교정. 기존 계약 변경이 필요한 경우에만 근거·영향·시험 반환.
 
 ### TASK-049 · 할 일
 

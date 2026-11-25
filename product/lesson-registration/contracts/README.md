@@ -1,5 +1,6 @@
-# 공통 구현 계약 · 방향 승인 / 초기 공동 개발 기준
+# 공통 구현 계약 · 방향 승인 / 공동 개발 기준
 
+- **[현재 공동 개발 기준선](CURRENT-BASELINE.md)**: 확정 경계와 담당자 협의 사항, 적용 절차.
 - [검토용 결정 및 적용 범위](IMPLEMENTATION-BINDING.json)
 - [Python 인터페이스](interfaces.py) · [표준 스키마 검사](validation.py) · [Viewer 프런트 계약](viewer.d.ts)
 - [R01 계획/검토 요청](../evidence/PLAN.md)

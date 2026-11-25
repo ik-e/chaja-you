@@ -1,0 +1,31 @@
+<!-- Auth Surface: H6, H8 -->
+<div id="surface-auth" class="surface-pane">
+  <div class="card">
+    <h2>3. 플랫폼 인증 및 원격 뷰어 (Auth)</h2>
+    <p class="desc">원격 브라우저 세션에 안전하게 로그인합니다. 인증 토큰은 화면 뷰어에만 일시 전달되며 저장되지 않습니다.</p>
+
+    <div class="auth-toolbar">
+      <button type="button" id="btn-auth-open" class="btn btn-primary">뷰어 세션 열기 (Open)</button>
+      <button type="button" id="btn-auth-refresh" class="btn btn-secondary">세션 새로고침 (Refresh)</button>
+      <button type="button" id="btn-auth-finish" class="btn btn-success" disabled>인증 완료 (Finish)</button>
+      <button type="button" id="btn-auth-close" class="btn btn-danger">취소 및 닫기 (Close)</button>
+    </div>
+
+    <!-- Viewer Mount Container -->
+    <div id="viewer-container" class="viewer-wrapper">
+      <div id="viewer-placeholder" class="viewer-placeholder">
+        <p>인증 세션을 열면 여기에 안전한 원격 브라우저 화면이 마운트됩니다.</p>
+      </div>
+      <iframe id="remote-viewer-frame" class="viewer-frame" style="display: none;" src="about:blank"></iframe>
+      <div id="viewer-overlay" class="viewer-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>인증 상태를 검증 중입니다. 잠시 기다려 주세요...</p>
+      </div>
+    </div>
+
+    <div id="auth-status-info" class="status-box">
+      <span>인증 상태: <strong id="auth-state-text">미인증</strong></span>
+      <span id="auth-account-badge" style="display: none; margin-left: 1rem;" class="badge badge-success">확인된 계정: <span id="auth-account-id">-</span></span>
+    </div>
+  </div>
+</div>

@@ -52,3 +52,7 @@ R03의 PLAN 원문과 담당 브랜치는 수정하지 않는다. R03은 위 사
 ## D01~D06 공통 세부 기준 후보
 
 R01이 [구체안](DETAIL-CANDIDATE.json)과 [세션 보안](SESSION-SECURITY.md), [reference 시험](../tests/contract/test_detail_candidate.py)을 먼저 제시한다. 담당자는 전체 재설계 대신 기존 PLAN에 기준 SHA, 실제 구현과의 차이, 반례/시험, 필요한 서명 변경만 반환. R02 D05, R03 D01/02/03/05/06, R04 D01/03/04, R05 D01/02/03/04/06. R01 공통 변경·fixture/통합 담당. 실제 provider 서명, 플랫폼 정규화·slot, actual dispatch fence, WS/격리·폐기, 설정 수치 및 제품 gate는 미확정/미검증. 현재 합성 reference는 제품 구현 아님. 실제 계정 사용 금지.
+
+## 11/25 R01 공동 개발 기준 전달
+
+[공동 개발 기준선](CURRENT-BASELINE.md)을 먼저 적용. R04가 전달한 H8 Progress/H6 Viewer/Polling A안 중 이름 변경은 기존 schema 사용으로 교정, grant URL/log 노출 금지, polling 주기는 자율이며 조회 제한과 goal_verdict 분리. R01이 Discord에 전달했다고 확인. 상대 담당의 합의/실제 반영은 별도. D01~D06 검증 reference 기준으로 필요한 차이만 반환하며 기존 logical pin/Protocol/gate 변경 없음. R05는 이미 Playwright와 Chromium/WS 방향이 채택되어 별도 승인 불필요.
