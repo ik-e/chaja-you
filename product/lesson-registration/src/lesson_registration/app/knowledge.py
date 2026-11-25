@@ -1,5 +1,7 @@
 """KNOW: I1 selector -> ResolveOutput from the pinned platform-profiles registry.
 
+Implements contracts.interfaces.Registry (resolve, get_profile).
+
 Pure local lookup; no network. ProfileRef.digest is the SHA-256 of the
 canonical pinned profile entry (value schema included), so any change to the
 pinned profile surfaces as PROFILE_CHANGED on later lookups by ref.
@@ -69,7 +71,7 @@ class Knowledge:
         contract.validate("ResolveOutput", out)
         return out
 
-    def get(self, ref: dict) -> dict:
+    def get_profile(self, ref: dict) -> dict:
         """Return the same pinned Profile for a ProfileRef; digest drift -> PROFILE_CHANGED."""
         key = (ref.get("platform"), ref.get("object_kind"), ref.get("version"))
         view = self._by_key.get(key)
@@ -78,5 +80,5 @@ class Knowledge:
         return copy.deepcopy(view)
 
     def value_schema(self, ref: dict) -> dict:
-        self.get(ref)
+        self.get_profile(ref)
         return copy.deepcopy(self._entries[(ref["platform"], ref["object_kind"], ref["version"])]["value_schema"])

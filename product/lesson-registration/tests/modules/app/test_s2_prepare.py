@@ -47,9 +47,9 @@ class KnowledgeResolve(unittest.TestCase):
 
     def test_get_by_ref_and_digest_drift(self):
         ref = self.know.resolve("kmong")["profile"]["ref"]
-        self.assertEqual(self.know.get(ref)["ref"], ref)
+        self.assertEqual(self.know.get_profile(ref)["ref"], ref)
         with self.assertRaises(AppError) as ctx:
-            self.know.get({**ref, "digest": "a" * 64})
+            self.know.get_profile({**ref, "digest": "a" * 64})
         self.assertEqual(ctx.exception.code, "PROFILE_CHANGED")
 
 

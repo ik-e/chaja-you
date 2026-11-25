@@ -53,6 +53,20 @@ tests/modules/app/
 | 응답 | View 타입만 반환. `connection_ref`·`account_ref`·`viewer_grant` 이외 secret·내부 binding은 절대 포함하지 않음 |
 | 트랜잭션 중 외부 호출 금지 | STORE 트랜잭션 안에서 포트(I2~I4) 호출하지 않는다(계약: "no callbacks while atomic lock") |
 
+### 0.3.1 승인된 공통 구현 계약과의 대응 (main `75caa4e`, IB-01~05)
+
+| 공통 계약 (`contracts/interfaces.py`) | r03-app 구현 |
+|---|---|
+| `Registry.resolve / get_profile` | `knowledge.Knowledge` |
+| `ResultPort.evaluate` | `result.ResultEvaluator` (순수 `result.evaluate` 감쌈) |
+| `PreparationPort` / `ExecutionPort` | 주입받음 (`ports.PrepPort` / `ExecPort`와 같은 메서드) |
+| `Providers(registry, preparation, execution, result)` | `Coordinator(store, providers=...)` (개별 인자도 허용, 자동 fake 없음) |
+| `PortFailure(error)` | `_port_error`: 경로별 허용 코드만 유지, 나머지는 `RUNTIME_ERROR`. PREP의 `MODEL_UNAVAILABLE`은 저장되는 준비 이슈 |
+| `CoordinatorStore.accept / fence / finalize` | `store.coordinator_store.SqliteCoordinatorStore` (accept는 잠근 행으로 모든 가드 재검사) |
+| `GatewayStore.admit / record_observation / fence` | `gateway.StoreGateway` |
+
+`check-changes --base`의 공통 기준 SHA: `75caa4e` (main 병합 기준).
+
 ### 0.4 오류 → HTTP status (common-integration-v1 `http.status_codes`)
 
 | status | code |
@@ -512,7 +526,8 @@ TASK-050 대상이 아닌 요구사항: REQ-04(원격 직접 인증, R05), REQ-0
 | H9 정렬 | 계약 "creation then registration_id"를 H2와 같은 최신순(`created_at DESC, registration_id DESC`)으로 해석. cursor는 종류(sources/registrations)·owner에 묶임 | R04 (UI 목록 순서) |
 | progress 계산 | 단계 상태 = effect 상태(쓰기 단계) 또는 관측 verdict(read 단계), 없으면 pending. step_index = 앞에서부터 연속 confirmed 수. 멈춘 작업의 pending 현재 단계는 `error`, 멈춘 작업의 reserved는 `unknown` | R04 |
 | replay I5 비교 | goal_verdict·effects·error만 비교. evidence 목록·next_action 문구는 replay와 다름(replay는 goal 증거만 표시) | R01 |
-| StoreGateway API | `acquire(rid)→ctx{lease}`, `operations(ctx)`, `admit(ctx, op)`, `observe(ctx, obs, evidence[])`, `record_goal(ctx, record)`, `fence(ctx, error)` 객체 주입 | R05·R01 |
+| StoreGateway API | 공통 `GatewayStore`에 맞춤: `admit(context, op)→Permit`, `record_observation(context, obs, evidence[])`, `fence(registration_id, error)`. 추가 helper: `acquire_context(rid)→WorkerContext`(lease를 STORE에 등록, runtime이 RT-01 안에서 호출해 불투명하게 보관), `expected_operations(context)`. goal 증거는 마지막 read 단계 observation과 함께 `record_observation`으로 기록 | R05 (lease 등록 방식·helper 2개) |
+| 스키마 검증기 | 앱 내장 검증기 유지(제품 의존성 0). IB-02 표준과 어긋나지 않음을 `test_contract_alignment`가 jsonschema 4.25.1과 같은 판정인지 비교(설치 시 실행) | R01 (제품 의존성에 jsonschema 추가 여부) |
 | payload_digest | 승인 `scope.values`의 canonical SHA-256. replay의 `bbbb…`는 자리표시값이라 그대로는 confirmed가 안 됨 | R05 |
 | binding_digest | §S4-1 규칙 | R05 |
 | 실행 중 revision | fence·finalize마다 revision +1 (UI가 오래된 응답 무시) | R04 |

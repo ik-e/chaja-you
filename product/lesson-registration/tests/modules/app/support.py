@@ -177,11 +177,11 @@ class GatewayRuntime(FakeRuntime):
         self.executions += 1
         scope = inp["accepted"]["scope"]
         rid = scope["registration_id"]
-        ctx = self.gateway.acquire(rid)
+        ctx = self.gateway.acquire_context(rid)
         self.ctx = ctx
         observations = []
         now = "2026-11-25T01:00:00Z"
-        for op in self.gateway.operations(ctx):
+        for op in self.gateway.expected_operations(ctx):
             step = op["step_id"]
             if self.on_step is not None:
                 self.on_step(step)
@@ -196,22 +196,23 @@ class GatewayRuntime(FakeRuntime):
             obs = {"operation_id": op["operation_id"], "step_id": step, "target": scope["target"],
                    "method": "runtime_observation", "verdict": "confirmed", "evidence_refs": [ev["evidence_id"]],
                    "observed_at": now}
-            self.gateway.observe(ctx, obs, [ev])
+            self.gateway.record_observation(ctx, obs, [ev])
             observations.append(obs)
         report: dict = {"observations": observations}
         if self.goal != "none":
-            profile_goal = self.gateway.knowledge.get(scope["profile_ref"])["goal"]
+            profile_goal = self.gateway.knowledge.get_profile(scope["profile_ref"])["goal"]
             pd = payload_digest(scope["values"]) if self.goal != "bad_payload" else "c" * 64
             assets = [a["digest"] for a in scope["assets"]] if self.goal != "bad_assets" else []
             goal = {"goal_kind": profile_goal["kind"], "target": scope["target"], "method": "independent_readback",
                     "observed_state": profile_goal["observed_state"], "payload_digest": pd,
                     "external_ref": f"receipt-{rid}", "asset_digests": assets, "evidence_ref": f"goal-{rid}",
                     "observed_at": now, "environment": "mock"}
-            self.gateway.record_goal(ctx, {
+            # Goal readback evidence travels with the final read-step observation (GatewayStore.record_observation).
+            self.gateway.record_observation(ctx, observations[-1], [{
                 "evidence_id": goal["evidence_ref"], "registration_id": rid, "target": scope["target"],
                 "kind": "goal", "method": "independent_readback", "observed_at": now, "environment": "mock",
                 "observed_state": goal["observed_state"], "payload_digest": pd, "asset_digests": assets,
-                "external_ref": goal["external_ref"]})
+                "external_ref": goal["external_ref"]}])
             report["goal_observation"] = goal
         if self.report_error is not None:
             report["error"] = self.report_error

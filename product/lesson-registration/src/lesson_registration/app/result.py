@@ -115,3 +115,10 @@ def _summary(record: dict) -> str:
     if record["kind"] == "operation":
         return f"단계 관측: {record.get('operation_id', '-')}"
     return "오류 관측"
+
+
+class ResultEvaluator:
+    """contracts.interfaces.ResultPort binding for the pure evaluate function."""
+
+    def evaluate(self, request: dict) -> dict:
+        return evaluate(request)

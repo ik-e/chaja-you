@@ -220,22 +220,6 @@ def observe(
                      (observation["verdict"], now, key))
 
 
-def record_goal_evidence(conn: sqlite3.Connection, registration_id: str, lease: str | None, record: dict) -> None:
-    """Goal readback evidence (RT-04). Allowed while running (lease) or as late read-only evidence."""
-    job = _job_or_raise(conn, registration_id)
-    terminal = job["state"] in ("done", "stopped")
-    if not terminal and (job["worker_lease"] is None or job["worker_lease"] != lease):
-        raise StoreRejected("PERMISSION_DENIED", "stale or foreign worker lease")
-    scope = json.loads(job["accepted_scope_json"])["scope"]
-    if record["registration_id"] != registration_id or record["target"] != scope["target"] or record["kind"] != "goal":
-        raise StoreRejected("PERMISSION_DENIED", "goal evidence does not belong to this job")
-    conn.execute(
-        "INSERT OR IGNORE INTO evidence(evidence_id, registration_id, record_json, observed_at) VALUES (?,?,?,?)",
-        (record["evidence_id"], registration_id, json.dumps(record, ensure_ascii=False, sort_keys=True),
-         record["observed_at"]),
-    )
-
-
 # ---------- S-FENCE ----------
 def fence(conn: sqlite3.Connection, registration_id: str, now: str) -> bool:
     """active -> stopping; unproven reserved effects become unknown. Returns True if it changed state."""
@@ -247,6 +231,12 @@ def fence(conn: sqlite3.Connection, registration_id: str, now: str) -> bool:
                  (registration_id,))
     _bump(conn, registration_id, "stopping", now)
     return True
+
+
+def fence_existing(conn: sqlite3.Connection, registration_id: str, now: str) -> bool:
+    """fence() for callers that only know the registration id (raises NOT_FOUND if no job)."""
+    _job_or_raise(conn, registration_id)
+    return fence(conn, registration_id, now)
 
 
 def unresolved_effects(conn: sqlite3.Connection, registration_id: str) -> list[sqlite3.Row]:

@@ -13,7 +13,7 @@ import unittest
 from lesson_registration.app import contract
 from lesson_registration.app.coordinator import Coordinator
 from lesson_registration.app.errors import AppError
-from lesson_registration.app.gateway import StoreGateway
+from lesson_registration.app.gateway import StoreGateway, WorkerContext
 from lesson_registration.app.store import Store, atomic, tx
 
 from support import PLATFORMS, GatewayRuntime, SchemaPrep, TickClock, mock_image, temp_db
@@ -95,14 +95,14 @@ class AdmissionGuards(Base):
     def setUp(self):
         super().setUp()
         self.gw = self.rt.gateway
-        self.ctx = self.gw.acquire(self.rid)
-        self.ops = {o["step_id"]: o for o in self.gw.operations(self.ctx)}
+        self.ctx = self.gw.acquire_context(self.rid)
+        self.ops = {o["step_id"]: o for o in self.gw.expected_operations(self.ctx)}
 
     def test_exclusive_lease(self):
-        self.assertCode("INVALID_PHASE", self.gw.acquire, self.rid)
+        self.assertCode("INVALID_PHASE", self.gw.acquire_context, self.rid)
 
     def test_stale_or_foreign_lease(self):
-        self.assertCode("PERMISSION_DENIED", self.gw.admit, {**self.ctx, "lease": "lease-forged"}, self.ops["K1"])
+        self.assertCode("PERMISSION_DENIED", self.gw.admit, WorkerContext(self.rid, "lease-forged"), self.ops["K1"])
         self.assertEqual(self.effects(), {})
 
     def test_unregistered_step_and_wrong_binding_and_class(self):
@@ -123,7 +123,7 @@ class AdmissionGuards(Base):
 
     def test_no_admission_after_fence_but_reads_allowed(self):
         self.gw.admit(self.ctx, self.ops["K1"])
-        self.gw.fence(self.ctx, {"code": "RUNTIME_ERROR", "message": "page changed"})
+        self.gw.fence(self.rid, {"code": "RUNTIME_ERROR", "message": "page changed"})
         self.assertEqual(self.job()["state"], "stopping")
         self.assertEqual(self.effects(), {"K1": "unknown"})
         self.assertCode("INVALID_PHASE", self.gw.admit, self.ctx, self.ops["K2"])
@@ -134,8 +134,8 @@ class AdmissionGuards(Base):
         target = json.loads(self.job()["accepted_scope_json"])["scope"]["target"]
         base = {"operation_id": self.ops["K1"]["operation_id"], "step_id": "K1", "target": target,
                 "method": "runtime_observation", "evidence_refs": [], "observed_at": "2026-11-25T01:00:00Z"}
-        self.gw.observe(self.ctx, {**base, "verdict": "confirmed"}, [])
-        self.gw.observe(self.ctx, {**base, "verdict": "unknown", "observed_at": "2026-11-25T01:00:01Z"}, [])
+        self.gw.record_observation(self.ctx, {**base, "verdict": "confirmed"}, [])
+        self.gw.record_observation(self.ctx, {**base, "verdict": "unknown", "observed_at": "2026-11-25T01:00:01Z"}, [])
         self.assertEqual(self.effects(), {"K1": "confirmed"})
 
     def test_foreign_target_observation_rejected(self):
@@ -143,7 +143,7 @@ class AdmissionGuards(Base):
         obs = {"operation_id": "x", "step_id": "K1", "target": {**target, "slot_ref": "other"},
                "method": "runtime_observation", "verdict": "confirmed", "evidence_refs": [],
                "observed_at": "2026-11-25T01:00:00Z"}
-        self.assertCode("PERMISSION_DENIED", self.gw.observe, self.ctx, obs, [])
+        self.assertCode("PERMISSION_DENIED", self.gw.record_observation, self.ctx, obs, [])
 
     def test_terminal_is_never_reopened(self):
         with Store(self.path).connect() as conn, tx(conn):
@@ -160,8 +160,8 @@ class FenceRace(Base):
             with self.subTest(round=round_):
                 self.setUp()
                 gw = self.rt.gateway
-                ctx = gw.acquire(self.rid)
-                ops = [o for o in gw.operations(ctx) if o["effect_class"] == "potential_effect"]
+                ctx = gw.acquire_context(self.rid)
+                ops = [o for o in gw.expected_operations(ctx) if o["effect_class"] == "potential_effect"]
                 start = threading.Barrier(2)
                 after_fence: list[str] = []
                 fenced = threading.Event()
@@ -178,7 +178,7 @@ class FenceRace(Base):
 
                 def stopper():
                     start.wait()
-                    gw.fence(ctx, {"code": "RUNTIME_ERROR", "message": "stop"})
+                    gw.fence(self.rid, {"code": "RUNTIME_ERROR", "message": "stop"})
                     fenced.set()
 
                 threads = [threading.Thread(target=worker), threading.Thread(target=stopper)]
@@ -228,7 +228,7 @@ class LostResponses(Base):
     def test_runtime_requested_fence_mid_run(self):
         def hook(step):
             if step == "K3":
-                self.rt.gateway.fence(self.rt.ctx, {"code": "RUNTIME_ERROR", "message": "condition lost"})
+                self.rt.gateway.fence(self.rid, {"code": "RUNTIME_ERROR", "message": "condition lost"})
         self.rt.on_step = hook
         self.rt.goal = "none"
         self.assertEqual(self.co.run_job(self.rid), "stopped")
@@ -238,8 +238,8 @@ class LostResponses(Base):
 class CrashRecovery(Base):
     def test_worker_crash_then_recover_stops_and_keeps_unknown(self):
         gw = self.rt.gateway
-        ctx = gw.acquire(self.rid)
-        op = next(o for o in gw.operations(ctx) if o["step_id"] == "K1")
+        ctx = gw.acquire_context(self.rid)
+        op = next(o for o in gw.expected_operations(ctx) if o["step_id"] == "K1")
         gw.admit(ctx, op)  # ...process dies here
         restarted = self.make_co()
         self.assertEqual(restarted.recover(), [self.rid])
@@ -259,7 +259,7 @@ class CrashRecovery(Base):
         target = json.loads(self.job()["accepted_scope_json"])["scope"]["target"]
         obs = {"operation_id": "late", "step_id": "K6", "target": target, "method": "independent_readback",
                "verdict": "confirmed", "evidence_refs": [], "observed_at": "2026-11-25T03:00:00Z"}
-        self.rt.gateway.observe({"registration_id": self.rid}, obs, [])
+        self.rt.gateway.record_observation(self.rt.ctx, obs, [])  # stale context: late read-only evidence
         self.assertEqual(self.effects()["K6"], "confirmed")
         self.assertEqual(self.job()["state"], "stopped")
 

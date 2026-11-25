@@ -12,14 +12,17 @@ import hmac
 import json
 from collections.abc import Callable
 
+from contracts.interfaces import PortFailure, Providers
+
 from . import contract
 from .errors import AppError
 from .ids import bytes_digest, digest, inspect_image, new_id
 from .knowledge import Knowledge
 from .ports import Clock, ExecPort, PrepPort, SystemClock
-from .result import NEXT_NOT_REACHED, NEXT_UNKNOWN, evaluate
+from .result import NEXT_NOT_REACHED, NEXT_UNKNOWN, ResultEvaluator, evaluate
 from .store import Store, tx
 from .store import atomic, repo
+from .store.coordinator_store import SqliteCoordinatorStore
 
 REVIEW_NOTICE = "합성 시험 전용. 실행 후 수정·재개·취소 없음."
 
@@ -29,22 +32,35 @@ MAX_ASSET_BYTES = 5 * 1024 * 1024  # provisional (SPEC §10): profile limit not 
 
 
 class Coordinator:
+    """CO. Providers follow contracts.interfaces (Registry, PreparationPort, ExecutionPort, ResultPort).
+
+    Pass ``providers=Providers(...)`` (IB-05 explicit injection), or the individual keyword
+    arguments for module-level tests. No silent fake fallback: missing PREP/EXEC are reported.
+    """
+
     def __init__(
         self,
         store: Store,
         *,
+        providers: Providers | None = None,
         knowledge: Knowledge | None = None,
         prep: PrepPort | None = None,
         exec_port: ExecPort | None = None,
+        result: object | None = None,
         clock: Clock | None = None,
         on_accepted: Callable[[str], None] | None = None,
     ) -> None:
+        if providers is not None:
+            knowledge, prep, exec_port, result = (providers.registry, providers.preparation,
+                                                  providers.execution, providers.result)
         self.store = store
         self.knowledge = knowledge or Knowledge()
         self.prep = prep
         self.exec = exec_port
+        self.result = result or ResultEvaluator()
         self.clock = clock or SystemClock()
-        self.on_accepted = on_accepted  # S4: dispatch hook, called after the accept transaction commits
+        self.on_accepted = on_accepted  # dispatch hook, called after the accept transaction commits
+        self.coord_store = SqliteCoordinatorStore(store, self.clock, self._view)
         self._cursor_key = store.cursor_secret()
 
     # ---------- H1 ----------
@@ -217,7 +233,7 @@ class Coordinator:
             if reg["support"] != "supported":
                 raise AppError("INVALID_PHASE", "unsupported target cannot be prepared",
                                current_revision=reg["revision"])
-            profile = self.knowledge.get(reg["profile"])  # PROFILE_CHANGED on drift
+            profile = self.knowledge.get_profile(reg["profile"])  # PROFILE_CHANGED on drift
             source = self.get_source(owner_ref, reg["source_id"])
             resolved_answers = self._normalize(reg, profile, edit.get("answers", []), edit.get("corrections", []))
             new["answers"] = _merge_answers(reg["answers"], resolved_answers)
@@ -273,7 +289,7 @@ class Coordinator:
         if self.exec is None:
             raise AppError("RUNTIME_ERROR", "authentication runtime not connected")
 
-        profile = self.knowledge.get(reg["profile"])
+        profile = self.knowledge.get_profile(reg["profile"])
         auth_input = {"registration_id": registration_id, "profile_ref": profile["ref"],
                       "owner_ref": owner_ref, "command": command}
         contract.validate("AuthInput", auth_input)
@@ -285,9 +301,9 @@ class Coordinator:
             out = self.exec.authenticate(json.loads(json.dumps(auth_input)))
             if not contract.is_valid("AuthOutput", out):
                 raise AppError("RUNTIME_ERROR", "runtime returned an invalid authentication result")
-        except AppError as exc:
-            failure = exc if exc.code in ("ACCOUNT_MISMATCH", "CONNECTION_MISMATCH", "PERMISSION_DENIED",
-                                          "AUTH_REQUIRED") else AppError("RUNTIME_ERROR", exc.message)
+        except (AppError, PortFailure) as exc:
+            failure = _port_error(exc, allowed=("ACCOUNT_MISMATCH", "CONNECTION_MISMATCH", "PERMISSION_DENIED",
+                                                "AUTH_REQUIRED"))
             out = None
         except Exception:
             failure = AppError("RUNTIME_ERROR", "authentication runtime failed; reload the registration")
@@ -395,69 +411,64 @@ class Coordinator:
 
     # ---------- H7 ----------
     def start(self, owner_ref: str, registration_id: str, start_input: dict) -> tuple[int, dict]:
-        """Final approval + durable acceptance. Returns (202, view) first time, (200, view) on exact replay."""
+        """Final approval + durable acceptance. Returns (202, view) first time, (200, view) on exact replay.
+
+        Pre-checks give precise errors; CoordinatorStore.accept re-checks them atomically.
+        """
         contract.validate("StartInput", start_input)
-        request_digest = digest({"path_id": registration_id, **start_input})
-        now = self.clock.now()
-        with self.store.connect() as conn, tx(conn):
-            reg = repo.get_registration(conn, owner_ref, registration_id)
-            if reg is None:
-                raise AppError("NOT_FOUND", "registration not found")
-            # Exact-key replay is decided before stale/phase checks (contract H7).
+        reg = self._load(owner_ref, registration_id)
+        with self.store.connect() as conn:
             prior = atomic.find_job_by_key(conn, owner_ref, start_input["request_key"])
-            if prior is not None:
-                if prior["request_digest"] == request_digest:
-                    return 200, self._view(reg)
-                raise AppError("IDEMPOTENCY_CONFLICT", "request_key reused with a different request",
-                               current_revision=reg["revision"])
-            cur = reg["revision"]
-            if reg["job_state"] is not None or atomic.find_job(conn, registration_id) is not None:
-                raise AppError("IDEMPOTENCY_CONFLICT", "registration already accepted under another key",
-                               current_revision=cur)
-            if start_input["expected_revision"] != cur:
-                raise AppError("STALE_REVISION", "registration changed", current_revision=cur)
-            if reg["support"] != "supported":
-                raise AppError("INVALID_PHASE", "unsupported target", current_revision=cur)
-            profile = self.knowledge.get(reg["profile"])
-            if reg["auth"]["state"] != "verified" or not reg.get("connection"):
-                raise AppError("AUTH_REQUIRED", "verified authentication required", current_revision=cur)
-            status = reg["target"]["trusted"]["status"]
-            if status == "ambiguous":
-                raise AppError("TARGET_AMBIGUOUS", "target could not be identified safely", current_revision=cur)
-            if status == "existing":
-                raise AppError("DUPLICATE_RISK", "target already exists", current_revision=cur)
-            if not reg["preparation"]["ready"] or reg.get("review") is None:
-                raise AppError("INVALID_PHASE", "registration is not ready for approval", current_revision=cur)
-            if start_input["review_digest"] != reg["review"]["digest"]:
-                raise AppError("APPROVAL_INVALID", "approved review is not the current review", current_revision=cur)
-            identity = reg["target"]["trusted"]["identity"]
-            if atomic.blocking_jobs_for_target(conn, identity, registration_id):
-                raise AppError("DUPLICATE_RISK", "another registration has an unresolved or confirmed effect "
-                               "on this target", current_revision=cur)
-            prep = reg["preparation"]
-            scope = {
-                "registration_id": registration_id,
-                "source_id": reg["source_id"],
-                "revision": cur,
-                "profile_ref": profile["ref"],
-                "values": prep["values"],
-                "facts": prep["facts"],
-                "provenance": prep["provenance"],
-                "assets": reg["review"]["assets"],
-                "target": identity,
-                "connection": reg["connection"],
-                "procedure_ids": [s["step_id"] for s in profile["steps"]],
-                "goal_kind": profile["goal"]["kind"],
-            }
-            accepted = {"scope": scope, "review_digest": reg["review"]["digest"], "accepted_at": now,
-                        "owner_ref": owner_ref, "request_key": start_input["request_key"]}
-            contract.validate("AcceptedScope", accepted)
-            atomic.accept(conn, owner_ref, registration_id, start_input["request_key"], request_digest,
-                          accepted, cur + 1, now)
-            stored = repo.get_registration(conn, owner_ref, registration_id)
+        if prior is not None:  # exact-key replay precedes stale/phase checks; accept decides atomically
+            return self._accept(owner_ref, registration_id, start_input, None)
+        cur = reg["revision"]
+        if reg["job_state"] is not None:
+            raise AppError("IDEMPOTENCY_CONFLICT", "registration already accepted under another key",
+                           current_revision=cur)
+        if start_input["expected_revision"] != cur:
+            raise AppError("STALE_REVISION", "registration changed", current_revision=cur)
+        if reg["support"] != "supported":
+            raise AppError("INVALID_PHASE", "unsupported target", current_revision=cur)
+        profile = self.knowledge.get_profile(reg["profile"])
+        if reg["auth"]["state"] != "verified" or not reg.get("connection"):
+            raise AppError("AUTH_REQUIRED", "verified authentication required", current_revision=cur)
+        status = reg["target"]["trusted"]["status"]
+        if status == "ambiguous":
+            raise AppError("TARGET_AMBIGUOUS", "target could not be identified safely", current_revision=cur)
+        if status == "existing":
+            raise AppError("DUPLICATE_RISK", "target already exists", current_revision=cur)
+        if not reg["preparation"]["ready"] or reg.get("review") is None:
+            raise AppError("INVALID_PHASE", "registration is not ready for approval", current_revision=cur)
+        if start_input["review_digest"] != reg["review"]["digest"]:
+            raise AppError("APPROVAL_INVALID", "approved review is not the current review", current_revision=cur)
+        prep = reg["preparation"]
+        scope = {
+            "registration_id": registration_id,
+            "source_id": reg["source_id"],
+            "revision": cur,
+            "profile_ref": profile["ref"],
+            "values": prep["values"],
+            "facts": prep["facts"],
+            "provenance": prep["provenance"],
+            "assets": reg["review"]["assets"],
+            "target": reg["target"]["trusted"]["identity"],
+            "connection": reg["connection"],
+            "procedure_ids": [s["step_id"] for s in profile["steps"]],
+            "goal_kind": profile["goal"]["kind"],
+        }
+        contract.validate("Scope", scope)
+        return self._accept(owner_ref, registration_id, start_input, scope)
+
+    def _accept(self, owner_ref: str, registration_id: str, start_input: dict, scope: dict | None) -> tuple[int, dict]:
+        if scope is None:
+            # Replay path: the stored scope is never rebuilt; accept returns the persisted view or a conflict.
+            scope = {"revision": -1, "connection": None, "target": None}
+        replayed, view = self.coord_store.accept_with_status(owner_ref, registration_id, start_input, scope)
+        if replayed:
+            return 200, view
         if self.on_accepted is not None:
             self.on_accepted(registration_id)  # dispatch only after commit
-        return 202, self._view(stored)
+        return 202, view
 
     # ---------- S4: execution ----------
     def run_job(self, registration_id: str) -> str:
@@ -484,6 +495,9 @@ class Coordinator:
                     raise ValueError("invalid ExecutionReport")
                 runtime_error = report.get("error")
                 goal_obs = report.get("goal_observation")
+            except PortFailure as exc:
+                runtime_error = exc.error if contract.is_valid("Error", exc.error) else {
+                    "code": "RUNTIME_ERROR", "message": "실행 모듈이 잘못된 오류를 반환했습니다."}
             except Exception:
                 runtime_error = {"code": "EFFECT_UNKNOWN", "message": "실행 응답을 받지 못했습니다. 효과를 확인할 수 없습니다."}
         return self._conclude(registration_id, accepted, goal_obs, runtime_error)
@@ -501,26 +515,31 @@ class Coordinator:
         return stopped
 
     def _conclude(self, registration_id: str, accepted: dict, goal_obs: dict | None, error: dict | None) -> str:
-        now = self.clock.now()
-        with self.store.connect() as conn, tx(conn):
+        with self.store.connect() as conn:
             job = atomic.find_job(conn, registration_id)
-            if job["state"] in ("done", "stopped"):
-                return job["state"]
-            if error is not None:
-                atomic.fence(conn, registration_id, now)
+        if job["state"] in ("done", "stopped"):
+            return job["state"]
+        if error is not None:
+            self.coord_store.fence(registration_id, error)
         # Judge only on what STORE holds (trusted), outside any transaction.
         with self.store.connect() as conn:
             observations = atomic.stored_observations(conn, registration_id)
             evidence = atomic.stored_evidence(conn, registration_id)
             effects = atomic.effects_of(conn, registration_id)
-        profile = self.knowledge.get(accepted["scope"]["profile_ref"])
+        profile = self.knowledge.get_profile(accepted["scope"]["profile_ref"])
         report = {"observations": observations}
         if goal_obs is not None:
             report["goal_observation"] = goal_obs
         if error is not None:
             report["error"] = error
         evaluate_input = {"profile": profile, "accepted": accepted, "report": report, "evidence": evidence}
-        result = evaluate(evaluate_input)
+        contract.validate("EvaluateInput", evaluate_input)
+        try:
+            result = self.result.evaluate(evaluate_input)
+            if not contract.is_valid("Result", result):
+                raise ValueError("invalid Result")
+        except Exception:
+            result = evaluate({"profile": {}, "accepted": {}, "report": {}, "evidence": []})  # fail closed
         result = _merge_unresolved(result, effects)
         if not effects and goal_obs is None and result["goal_verdict"] == "unknown":
             # Nothing was ever admitted, and every mutation needs an admission first: no effect is possible.
@@ -529,11 +548,7 @@ class Coordinator:
             result["error"] = {"code": "RUNTIME_ERROR",
                                "message": (error or {}).get("message", "등록 단계가 실행되지 않았습니다.")}
         contract.validate("Result", result)
-        with self.store.connect() as conn, tx(conn):
-            job = atomic.find_job(conn, registration_id)
-            if job["state"] in ("done", "stopped"):
-                return job["state"]
-            return atomic.finalize(conn, registration_id, result, self.clock.now())
+        return self.coord_store.finalize(registration_id, result)
 
     # ---------- H8 (basic persisted read; S5 adds progress/result) ----------
     def get_registration(self, owner_ref: str, registration_id: str) -> dict:
@@ -562,8 +577,12 @@ class Coordinator:
         contract.validate("PrepareInput", inp)
         try:
             out = self.prep.prepare(json.loads(json.dumps(inp)))
-        except AppError:
-            raise
+        except (AppError, PortFailure) as exc:
+            err = _port_error(exc, allowed=("MODEL_UNAVAILABLE", "VALIDATION_FAILED", "PROFILE_CHANGED"))
+            if err.code == "MODEL_UNAVAILABLE":
+                # contract H4: model unavailable is a persisted ready=false issue, not a rejection
+                return _blocked_preparation("model_unavailable", "준비 모델을 사용할 수 없습니다. 다시 시도하세요.")
+            raise err from None
         except Exception:
             return _blocked_preparation("model_unavailable", "준비 모듈 응답을 받지 못했습니다. 다시 시도하세요.")
         if not contract.is_valid("Preparation", out):
@@ -634,7 +653,7 @@ class Coordinator:
                 if prev != "confirmed":
                     observed[o["step_id"]] = o["verdict"]
         accepted = json.loads(job["accepted_scope_json"])
-        profile = self.knowledge.get(accepted["scope"]["profile_ref"])
+        profile = self.knowledge.get_profile(accepted["scope"]["profile_ref"])
         labels = {s["step_id"]: s["label"] for s in profile["steps"]}
         steps = []
         for step_id in accepted["scope"]["procedure_ids"]:
@@ -750,3 +769,18 @@ def _merge_unresolved(result: dict, effects: list) -> dict:
             if "error" not in result or result["error"]["code"] not in ("EFFECT_UNKNOWN",):
                 result["error"] = {"code": "EFFECT_UNKNOWN", "message": "효과 여부를 확인할 수 없는 단계가 있습니다."}
     return result
+
+
+def _port_error(exc: Exception, *, allowed: tuple[str, ...]) -> AppError:
+    """Map a provider failure (contracts PortFailure or AppError) to a safe typed AppError.
+
+    Only codes the calling route may surface are kept; anything else becomes RUNTIME_ERROR.
+    """
+    if isinstance(exc, PortFailure):
+        err = exc.error if isinstance(exc.error, dict) and contract.is_valid("Error", exc.error) else None
+        code, message = (err["code"], err["message"]) if err else ("RUNTIME_ERROR", "provider failed")
+    else:
+        code, message = exc.code, exc.message
+    if code not in allowed:
+        return AppError("RUNTIME_ERROR", message)
+    return AppError(code, message)

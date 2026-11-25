@@ -1,15 +1,21 @@
-"""StoreGateway: the STORE surface the EXEC runtime (r05-remote) calls while executing.
+"""STORE capability for the EXEC runtime (r05-remote): contracts.interfaces.GatewayStore.
 
-The runtime receives this object by injection. It never changes job state
-directly: it acquires the exclusive lease, asks for an admission before every
-operation, records actual observations/evidence, and may request an error stop
-(fence). Exact exposure (direct object vs port/transport) is to be agreed with
-R05/R01 (SPEC §10).
+IB-03: the runtime owns the opaque context and permit; adapters never see either.
+STORE still has to know which worker is current, so the runtime obtains its
+context from ``acquire_context`` (inside RT-01 with_verified_connection) and
+passes it back unchanged. The runtime never changes job state; it asks for an
+admission before each operation, records actual observations/evidence (goal
+readback evidence included) and may request an error stop.
+
+Extra helpers beyond the protocol: ``acquire_context`` (lease registration) and
+``expected_operations`` (binding digests STORE will accept). Both to be confirmed
+with R05 (SPEC §10).
 """
 
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 
 from . import contract
 from .errors import AppError
@@ -28,22 +34,39 @@ def binding_digest(scope: dict, step: dict) -> str:
                    "target": scope["target"], "profile_digest": scope["profile_ref"]["digest"]})
 
 
+@dataclass(frozen=True)
+class WorkerContext:
+    """Opaque to adapters; held by the runtime, interpreted only by STORE."""
+
+    registration_id: str
+    lease: str
+
+
+@dataclass(frozen=True)
+class Permit:
+    """One-shot admission token returned to the runtime (never user-visible)."""
+
+    registration_id: str
+    step_id: str
+    token: str
+
+
 class StoreGateway:
     def __init__(self, store: Store, knowledge: Knowledge | None = None, clock: Clock | None = None) -> None:
         self.store = store
         self.knowledge = knowledge or Knowledge()
         self.clock = clock or SystemClock()
 
-    # RT-01
-    def acquire(self, registration_id: str) -> dict:
+    # RT-01 support: register the exclusive worker lease for an accepted active job.
+    def acquire_context(self, registration_id: str) -> WorkerContext:
         lease = new_id("lease")
         with self.store.connect() as conn, tx(conn):
             self._run(atomic.acquire_lease, conn, registration_id, lease, self.clock.now())
-        return {"registration_id": registration_id, "lease": lease}
+        return WorkerContext(registration_id, lease)
 
-    # RT-02 helper: the operations the accepted scope allows, with their binding digests
-    def operations(self, ctx: dict) -> list[dict]:
-        scope, profile = self._scope_profile(ctx["registration_id"])
+    # RT-02 support: operations STORE will admit, with their binding digests.
+    def expected_operations(self, context: WorkerContext) -> list[dict]:
+        scope, profile = self._scope_profile(context.registration_id)
         return [
             {"operation_id": f"{scope['registration_id']}:{s['step_id']}", "step_id": s["step_id"],
              "action_key": s["step_id"], "effect_class": s["effect_class"],
@@ -52,39 +75,32 @@ class StoreGateway:
         ]
 
     # S-ADMIT
-    def admit(self, ctx: dict, operation: dict) -> str:
+    def admit(self, context: WorkerContext, operation: dict) -> Permit:
         contract.validate("Operation", operation)
-        scope, profile = self._scope_profile(ctx["registration_id"])
+        scope, profile = self._scope_profile(context.registration_id)
         step = next((s for s in profile["steps"] if s["step_id"] == operation["step_id"]), None)
         if step is None:
             raise AppError("PERMISSION_DENIED", "unknown step")
         with self.store.connect() as conn, tx(conn):
-            return self._run(atomic.admit, conn, ctx["registration_id"], ctx["lease"], operation,
-                             binding_digest(scope, step), step["effect_class"], self.clock.now())
+            token = self._run(atomic.admit, conn, context.registration_id, context.lease, operation,
+                              binding_digest(scope, step), step["effect_class"], self.clock.now())
+        return Permit(context.registration_id, operation["step_id"], token)
 
-    # S-OBSERVE
-    def observe(self, ctx: dict, observation: dict, evidence: list[dict]) -> None:
+    # S-OBSERVE (goal readback evidence is passed here too, with its read-step observation)
+    def record_observation(self, context: WorkerContext, observation: dict, evidence: list[dict]) -> dict:
         contract.validate("Observation", observation)
         for rec in evidence:
             contract.validate("EvidenceRecord", rec)
         with self.store.connect() as conn, tx(conn):
-            self._run(atomic.observe, conn, ctx["registration_id"], ctx.get("lease"), observation, evidence,
+            self._run(atomic.observe, conn, context.registration_id, context.lease, observation, evidence,
                       self.clock.now())
+        return observation
 
-    # RT-04 evidence
-    def record_goal(self, ctx: dict, record: dict) -> None:
-        contract.validate("EvidenceRecord", record)
-        with self.store.connect() as conn, tx(conn):
-            self._run(atomic.record_goal_evidence, conn, ctx["registration_id"], ctx.get("lease"), record)
-
-    # error stop requested by the runtime
-    def fence(self, ctx: dict, error: dict) -> None:
+    # S-FENCE requested by the runtime: stops future effects; CO commits the terminal result.
+    def fence(self, registration_id: str, error: dict) -> None:
         contract.validate("Error", error)
         with self.store.connect() as conn, tx(conn):
-            job = atomic.find_job(conn, ctx["registration_id"])
-            if job is None or job["worker_lease"] != ctx["lease"]:
-                raise AppError("PERMISSION_DENIED", "stale or foreign worker lease")
-            atomic.fence(conn, ctx["registration_id"], self.clock.now())
+            self._run(atomic.fence_existing, conn, registration_id, self.clock.now())
 
     def _scope_profile(self, registration_id: str) -> tuple[dict, dict]:
         with self.store.connect() as conn:
@@ -92,7 +108,7 @@ class StoreGateway:
         if job is None:
             raise AppError("NOT_FOUND", "no accepted job")
         scope = json.loads(job["accepted_scope_json"])["scope"]
-        return scope, self.knowledge.get(scope["profile_ref"])
+        return scope, self.knowledge.get_profile(scope["profile_ref"])
 
     @staticmethod
     def _run(fn, *args):
