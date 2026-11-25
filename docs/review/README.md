@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 공통 기준 main 및 CI 통과. R02 PR49/50 병합, PR51/52 draft 44개 합성 독립 CI 및 실제 모델 5×2 담당 보고(가격 충돌 오류); R01 검토 의견 등록, 실험 설계/수행 R02. R03 191개·잔여 3인일, 합성 API launcher main 31fe0c5. R04 UI 9·숨고 6개 독립 CI, 실제 UI/unknown/readback/보안 보완. R05 15/32 독립 CI·잔여 3~3.5근무일. pinned 22 gate 실행기 및 preflight 독립 CI 통과(4/14/1), full case 0/22; WBS 미확정·live 금지.
+11/25 최신 검토: R02 PR51/52 draft 실제 모델 초기 비교(양 모델 가격 충돌 오류), 합성 44 CI. R03 191 CI·실제 조립 계획. R04 main 366cea92 Viewer/폴링 개선, 실제 API fallback/계약·숨고 readback 보완. R05 고정 조합 tree 10096b0f Runtime 30/30·크몽 37/37 독립 CI 성공, skip 0. R03 실제 조립/R01 독립 검증 역할 분리. 22 gate 전체 0/22; WBS 갱신 공수·공식 제출/접수 미확인.
 
 ## 결정 요청
 

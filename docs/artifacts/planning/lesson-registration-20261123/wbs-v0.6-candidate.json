@@ -14,7 +14,8 @@
     "R03 e29fb69 S0~S7 and 174/10/2 mock test counts reported; S8 pending at report. Initial 11 person-days is not remaining effort; new common lock enables S8. Revised residual effort and readiness needed. W10/W16/PREP maintenance remain unassigned.",
     "11/25 R05 report: initial 7 working days retained, remaining 3–3.5 across both TASKs. R03 3 person-days reported, R04 initial 4+3 only, R02/R04 residual/availability pending. R05 actual browser/adapter integration and security fixes may change estimate. Do not infer percent completed or subtract from initial. All dates remain candidates.",
     "R01 frozen-snapshot CI: remote 15/15, kmong 32/32 passed; original owner residual estimate 3–3.5 working days retained pending revised estimate, no automatic deduction of CI time.",
-    "11/25 R01 follow-up: R02 44 synthetic CI and actual model comparison owner-reported, R04 9/6 CI; R03 launcher main; 22-gate preflight/runner prepared but full cases not registered. R02/R04 residual not reported. R03 3 MD and R05 3–3.5 workdays retained as owner estimates. No automatic schedule or gate reduction."
+    "11/25 R01 follow-up: R02 44 synthetic CI and actual model comparison owner-reported, R04 9/6 CI; R03 launcher main; 22-gate preflight/runner prepared but full cases not registered. R02/R04 residual not reported. R03 3 MD and R05 3–3.5 workdays retained as owner estimates. No automatic schedule or gate reduction.",
+    "11/25 latest R03 owns actual composition; R01 independently validates. R05 exact combination CI 30/37 with zero skips; earlier estimates 3 MD/3–3.5 workdays remain unconfirmed pending owner revisions. No deadline or gate reduction."
   ],
   "items": [
     {
@@ -23,7 +24,7 @@
       "owner": "R01",
       "work": "PD, lock, interfaces, common tests/baseline",
       "depends_on": [],
-      "target": "common baseline/lock/CI plus pinned 22-gate runner/preflight; actual conformance and full case registration pending"
+      "target": "R01 exact combination CI 30/37, product preflight; actual conformance, full gate registration and acceptance remain"
     },
     {
       "id": "P01",
@@ -43,7 +44,7 @@
       "depends_on": [
         "C01"
       ],
-      "target": "S8 HTTP and synthetic API launcher main; 191 CI; 3 MD residual reported; actual providers and nested edits/timeout",
+      "target": "R03 actual composition plan: WS owner, stable slot, approved asset/lease, STORE/permit/fence; 191 CI, earlier 3 MD",
       "estimated_workdays": 11,
       "estimate_ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
     },
@@ -55,7 +56,7 @@
       "depends_on": [
         "C01"
       ],
-      "target": "initial 4 MD; UI 9 CI, actual H1~H9/Viewer/approval and unknown state correction; residual unknown"
+      "target": "R04 366cea92 partial UI improvement 9 CI; actual H1~H9/Viewer module and fail-closed state; residual unknown"
     },
     {
       "id": "S01",
@@ -85,7 +86,7 @@
         "R00"
       ],
       "estimated_workdays": 2.5,
-      "target": "initial adapter and R03 digest alignment ae582bf reported; actual runtime connection and conformance remain"
+      "target": "actual Runtime/adapter/CO combined 37/37 independent CI; actual R03 owner/slot/approved asset and D01~03 pending"
     },
     {
       "id": "R01",
@@ -96,7 +97,7 @@
         "R00"
       ],
       "estimated_workdays": 3,
-      "target": "8e506e1 neutral mock Chromium/runtime + actual R03 STORE reported; WS/input/fence and CI remain"
+      "target": "latest Chromium/Viewer/Runtime 30/30 independent combination CI; actual App/WS integration and safety boundary pending"
     },
     {
       "id": "R02",
@@ -109,7 +110,7 @@
         "A01"
       ],
       "estimated_workdays": 1,
-      "target": "aggregate R05 remaining 3~3.5 days reported, not allocated per item; prior 12/3~4 candidate retained, no date commitment"
+      "target": "earlier R05 combined remaining 3~3.5 days; latest 30/37 reproduced, revised estimate and actual composition pending; dates unconfirmed"
     },
     {
       "id": "I01",
@@ -124,7 +125,7 @@
         "K01",
         "R02"
       ],
-      "target": "12/4 prior target at risk; actual app+PREP+UI+remote+adapter readiness needed; not committed"
+      "target": "R03 actual App composition; first vertical supporting combined Runtime/adapter/CO 37/37; actual I2/UI/slot/asset boundaries pending; 12/4 candidate"
     },
     {
       "id": "I02",
@@ -152,20 +153,20 @@
       "description": "final target"
     }
   ],
-  "remaining": "R02/R04 residual and availability; R05 revised effort after independent CI; D01–D06 real integration and all 22 gates; candidate 12/4/12/8 milestones unchanged.",
+  "remaining": "Revised owner residual/availability (R02/R04/R01 unknown; R03/R05 previous estimates); R02 actual experiment and handoff, actual composition & D01–D06, all 22 gates, official submission. Dates remain candidates.",
   "owner_plan_review": {
     "as_of": "2026-11-25",
     "R03": {
       "ref": "https://github.com/ik-e/chaja-you/blob/4a240eeffdcd3c4b24b71411506d96f41cc03e77/product/lesson-registration/tests/modules/app/PLAN.md",
-      "status": "S8 HTTP main, 191 independent CI; synthetic API launcher merged 31fe0c5; nested edit/timeout, owner integration remain",
+      "status": "191 CI; R03 actual App/WS/STORE/slot/asset composition plan reported; earlier 3 MD estimate not revised",
       "estimated_person_days": 11,
       "estimate_notes": "Initial 11 person-days; PLAN 3 remaining reported; integration defects may change, no gate reduction.",
       "remaining_person_days": 3,
-      "progress_ref": "product/lesson-registration/evidence/r03-progress-20261125.json",
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
       "launcher": "https://github.com/ik-e/chaja-you/blob/31fe0c5de89b68bcdd388e6a9efa9557ef76cadd/product/lesson-registration/tests/modules/app/README.md"
     },
     "R05": {
-      "status": "remote 8e506e1 (15), kmong ae582bf (32) owner-reported and independently reproduced in GitHub CI; actual WS/kmong-runtime and D01~04 pending",
+      "status": "c3fa0b19 remote 30/30 and a3718a90 kmong 37/37 exact combined tree independently reproduced, skip 0; actual App/D01~04 pending",
       "estimated_person_days": 7,
       "remaining_workdays_range": [
         3,
@@ -190,13 +191,14 @@
           "max": 1
         }
       ],
-      "progress_ref": "product/lesson-registration/evidence/r05-progress-20261125.json",
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
       "refs": [
-        "https://github.com/ik-e/chaja-you/blob/8e506e1a7a27756909b0ca40b074bc37bc0dc58c/product/lesson-registration/tests/modules/remote/PLAN.md",
-        "https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md"
+        "https://github.com/ik-e/chaja-you/blob/c3fa0b199d5b3a0975b8b5ae9a26d97ae69862e4/product/lesson-registration/tests/modules/remote/PLAN.md",
+        "https://github.com/ik-e/chaja-you/blob/a3718a90c5179b5f72927347cf700283aa588992/product/lesson-registration/tests/modules/kmong/PLAN.md"
       ],
-      "estimate_notes": "Owner report, aggregate across TASK-053/054; not independently allocated, security corrections may change estimate; do not subtract or promise dates. R01 independently reproduced Chromium CI; do not deduct 0.5 automatically before owner revision.",
-      "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45558575503"
+      "estimate_notes": "Owner report, aggregate across TASK-053/054; not independently allocated, security corrections may change estimate; do not subtract or promise dates. R01 independently reproduced Chromium CI; do not deduct 0.5 automatically before owner revision. 11/25 WS/runtime and kmong combination independently reproduced; earlier breakdown is historical, revised residual pending; no automatic subtraction.",
+      "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45558575503",
+      "combination_ci": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594"
     },
     "R02": {
       "status": "PR49/50 merged; PR51/52 draft, actual model 5x2 reported (both price-conflict error); 44 isolated CI tests reproduced; R01 review recorded, R02 experiment design/expense/remaining estimate pending",
@@ -204,22 +206,27 @@
         "https://github.com/ik-e/chaja-you/pull/51",
         "https://github.com/ik-e/chaja-you/pull/52"
       ],
-      "progress_ref": "product/lesson-registration/evidence/team-checkpoint-20261125.json",
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
       "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45561308184/job/139025417560",
       "remaining_person_days": null,
       "estimated_person_days": null,
       "handoff_target": "2026-12-04"
     },
     "R04": {
-      "status": "UI/soomgo main initial implementation and 9/6 isolated CI; actual API/viewer, persisted mock readback, unknown handling and shared boundary pending",
+      "status": "366cea92 UI grant/dispose/backoff improved; 9/6 CI, actual H1~H9/module and persisted readback/unknown pending",
       "estimated_person_days": 7,
       "initial_breakdown": {
         "web": 4,
         "soomgo": 3
       },
       "remaining_person_days": null,
-      "progress_ref": "product/lesson-registration/evidence/r04-progress-20261125.json",
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
       "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45558814397/job/139017270251"
+    },
+    "R01": {
+      "status": "common environment, pinned combination CI, gate preflight and review; acceptance cases and deliverable sync remaining",
+      "remaining_person_days": null,
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
     }
   }
 }

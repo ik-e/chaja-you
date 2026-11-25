@@ -9,7 +9,7 @@
 
 [PHASE-20261125-01](docs/human/phase-intents/PHASE-20261125-01.md)
 
-- 실제 제품: 공통 기준 및 R03 HTTP/SQLite 합성 API 실행기 main 반영. R02 실제 모델 합성 보고·PR51/52 검토, R04 UI/숨고 초기 구현·9/6 CI, R05 runtime/크몽 15/32 독립 재현. D01~D06·실제 provider/Viewer/UI 연결 미완료. 22 gate 실행 체계 및 preflight CI 통과(전체 제품 gate 0/22), 일정/실서비스 권한 미확정.
+- 실제 제품: 공통 환경·R03 합성 API main, R02 실제 모델 초기 비교 보고/PR51·52 검토, R04 UI 개선 9·숨고 6 CI, R05 실제 Runtime/크몽 조합 독립 CI 30/37. R03 실제 App 조립 주도, D01~D06·실제 UI/I2/숨고 연결 미완료. 22 gate preflight 통과, full 0/22. mock-only.
 - 이전 기획·WBS: 기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류
 - 제출 문서: 이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인
 
@@ -28,22 +28,21 @@
 
 ## 우선 작업
 
-1. TASK-048: 공통 D01~D06 실제 정합성·점진 통합·22개 gate preflight/등록 및 WBS 조정.
-2. TASK-049(R02): 실제 모델 합성 5×2 보고 및 44개 독립 CI, PR51/52 검토. R02 실험 설계·비용 및 R03 중첩/timeout 협의, 잔여 공수·인계 확인.
-3. TASK-050(R03): 191개 시험 및 합성 Mock API launcher main; 중첩/timeout/STORE/Viewer 연결, 잔여 3인일.
-4. TASK-051(R04): UI 시안/9개 CI; R03 launcher 이용 실제 H1~H9, revision/Viewer 및 H7/H8 정합성 보완.
-5. TASK-052(R04): 숨고 6개 CI; actual mock persisted state·unknown·BoundGateway/canonical/readback 우선 보완.
-6. TASK-053(R05): 15개 독립 CI; WS/one-shot grant/input fence/STORE·slot·asset 연동.
-7. TASK-054(R05): 32개 독립 CI; Runtime 연결 및 D01~03 안정적인 slot/digest/readback/증거 확인.
-8. 12/4 인계/vertical 및 12/8 mock MVP·1/4 최종 목표 유지; R02/R04 잔여 공수·가용성 및 R05 갱신 추정 확인.
+1. TASK-048: R03 조립 후보 인수·독립 CI, 공통 D01~D06 및 22개 gate 검증, 산출물·WBS 조정.
+2. TASK-049(R02): PR51/52 draft 실제 모델 초기 보고·44 CI; R02 실험 설계/비용 반환과 D05 H5/timeout 협의, 12/4 인계/잔여 공수 확인.
+3. TASK-050(R03): 191 CI·실제 app/WS/STORE/slot/asset 조립 계획; 중첩/timeout·permit/fence/read; 기존 3 MD 추정 갱신.
+4. TASK-051(R04): 366cea92 grant URL 제거·백오프/dispose 개선, 9 CI; 실제 module/H1~H9·서버 오류 fail-closed.
+5. TASK-052(R04): 숨고 6 CI; 실제 모의 상태·독립 readback·unknown·BoundGateway/canonical 보완.
+6. TASK-053(R05): 최신 Runtime 30/30 독립 조합 CI; 실제 owner/WS/permit/fence/slot/asset 조립.
+7. TASK-054(R05): 최신 크몽 조합 37/37 독립 CI; D01~03 및 실제 승인 asset/계보 slot/readback 연결.
+8. 12/4 인계/vertical·12/8 mock MVP·1/4 최종 목표 유지; 전원 잔여/가용성 및 공식 제출 상태 확인.
 
 ## 결정할 항목
 
 | 항목 | 처리 | 결정에 필요한 근거 |
 | --- | --- | --- |
 | 어떤 가치·가격·업무 범위에서 전용 서비스를 제공할 것인가? | R01이 12항목 통합 기획서에 수익/비용 가설과 MVP 경계를 기록 | 직접 작업 시간·대안 사용 부담·지불 의향·건당 운영비·기능 완료 조건 |
-| 어떤 PoC 코드·검증 계약을 본 구현에 재사용할까? | R01이 개정 TASK 043~045 및 설계 046~047을 검토해 채택/수정/폐기와 후속 시험·일정 결정 | 고정 커밋·모의 실행 기록·미검증 조건·설계/WBS·독립 검증 및 재사용 경계 |
-| 패키지별 실제 공수와 스택 및 통합 경계를 어떻게 확정할까? | 각 담당 PLAN과 독립 결과를 검토하고 공통 변경만 R01 결정 | 담당자 수신/가용성, 선택 기술·버전·독립 테스트, interface/provider 서명 |
+| 실제 통합 경계 및 잔여 공수·가용성을 어떻게 확정할까? | R03 실제 조립 결과와 각 담당 시험/잔여 추정 검토; 공통 변경과 전체 제품 판정만 R01 결정 | 동일 후보 actual provider/WS/STORE/Adapter, D01~D06 시험, 담당자 잔여·가용성 |
 | 실제 플랫폼 실행이 허용되고 사용자 가치가 검증되는가? | 별도 권한/보안/실측 근거와 R01 승인 전 mock-only 유지 | 운영사 허용, 실제 보안·가치·비용 및 수용 시험 |
 
 ## 현재 활성 TASK
