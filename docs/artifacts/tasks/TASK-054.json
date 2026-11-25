@@ -71,10 +71,16 @@
     },
     {
       "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/a3718a90c5179b5f72927347cf700283aa588992/product/lesson-registration/tests/modules/kmong/PLAN.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594"
     }
   ],
   "result": {
-    "summary": "R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성 미완료. GitHub Ubuntu 고정 커밋 재현 32/32 통과(10.549초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도.",
+    "summary": "R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성 미완료. GitHub Ubuntu 고정 커밋 재현 32/32 통과(10.549초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도. 최신 a3718a90 actual Runtime/adapter/CO SQLite mock site 결합 및 ApprovedAssets/K6 직전 재대조. 동일 조합 Ubuntu CI 37/37, 16.232초, skip 0. 합성 PREP/메모리 asset reader/고정 slot 기반, 실제 HTTP/UI와 D01~D03 별도.",
     "claims": [
       {
         "id": "C54-1",
@@ -91,6 +97,22 @@
         "status": "독립 재현",
         "evidence_ids": [
           "E54-5"
+        ]
+      },
+      {
+        "id": "C54-6",
+        "text": "실제 조합 37개 보고, K6 직전 값 검사.",
+        "status": "담당 보고·코드 검토",
+        "evidence_ids": [
+          "E54-6"
+        ]
+      },
+      {
+        "id": "C54-7",
+        "text": "동일 조합 37/37, 16.232초, skip 0.",
+        "status": "독립 재현",
+        "evidence_ids": [
+          "E54-7"
         ]
       }
     ],
@@ -119,6 +141,16 @@
         "id": "E54-5",
         "label": "R01 독립 고정 커밋 CI",
         "url": "https://github.com/ik-e/chaja-you/actions/runs/45558575503/job/139016494319"
+      },
+      {
+        "id": "E54-6",
+        "label": "최신 R05 PLAN",
+        "url": "https://github.com/ik-e/chaja-you/blob/a3718a90c5179b5f72927347cf700283aa588992/product/lesson-registration/tests/modules/kmong/PLAN.md"
+      },
+      {
+        "id": "E54-7",
+        "label": "최신 고정 조합 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594"
       }
     ],
     "verification": [
@@ -145,18 +177,23 @@
           "E54-3",
           "E54-4"
         ]
+      },
+      {
+        "criterion": "최신 크몽 조합 37개",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E54-7"
+        ]
       }
     ],
     "uncertainties": [
-      "no Playwright runtime connection",
-      "D01 scope-bound candidate differs from current step digest",
-      "stable slot and profile digest verification pending",
-      "K6 needs current exact review recheck",
-      "readback target/asset and evidence provenance pending",
-      "R05 두 TASK 합계 잔여 3~3.5근무일 보고(별도 배분/확정 일정 없음); 실제 보완 공수 미확인"
+      "실제 Runtime/adapter/CO SQLite 정상 및 유실 조합 독립 재현; 실제 App/HTTP/Viewer/I2 조립 미확인",
+      "테스트 asset reader/slot 대신 승인 registration/owner/lease reader와 계보 slot 필요",
+      "D01 full scope/manifest·D02 permit/fence dispatch·D03 authorized read/observed evidence 정합성 미완료",
+      "기존 합계 3~3.5근무일 추정 갱신 대기"
     ],
     "decision_requests": [
-      "R03/R05 D01 실제 scope/manifest binding 기준 및 stable slot, profile digest·asset 순서, readback observed target/evidence 및 K6 승인값 재검사. 실제 runtime 결합과 공통 벡터 반환."
+      "R03 실제 제한 reader/slot/STORE 접점 및 D01~03 공동 시험, 갱신 잔여 공수 반환"
     ]
   },
   "traceability": {
@@ -198,7 +235,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-054.md",
-  "assignment_status": "R05 PLAN·초기 구현 ae582bf 확인; 담당자 및 R01 CI 32개 시험 통과, 실제 통합 및 공통 정합성 검토 중",
+  "assignment_status": "최신 kmong a3718a90, 동일 조합 독립 CI 37/37; 실제 R03 권한/제품 수용 진행 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r05/product-kmong",

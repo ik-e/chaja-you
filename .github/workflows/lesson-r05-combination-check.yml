@@ -1,0 +1,106 @@
+name: lesson-r05-combination-check
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lesson-r05-combination-check.yml'
+      - 'product/lesson-registration/evidence/r05-combination-20261125.json'
+permissions:
+  contents: read
+jobs:
+  pinned-combination:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      LR_ENVIRONMENT: mock
+      LR_BROWSER_CHANNEL: ''
+      PYTHONPATH: .:src
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify immutable inputs and assemble only R05 paths
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib, re, subprocess
+          p = pathlib.Path('product/lesson-registration/evidence/r05-combination-20261125.json')
+          raw = p.read_text(encoding='utf-8')
+          j = json.loads(raw)
+          def git(*a):
+              return subprocess.check_output(['git', *a], text=True).strip()
+          b, m = j['owner_shared_base'], j['base_main']
+          allowed = {
+              'remote': ['product/lesson-registration/src/lesson_registration/remote', 'product/lesson-registration/tests/modules/remote'],
+              'kmong': ['product/lesson-registration/src/lesson_registration/platforms/kmong', 'product/lesson-registration/fixtures/platforms/kmong', 'product/lesson-registration/tests/modules/kmong'],
+          }
+          for v in [b, m, *(s['commit'] for s in j['snapshots'].values())]:
+              assert re.fullmatch(r'[a-f0-9]{40}', v)
+              assert git('rev-parse', v + '^{commit}') == v
+          subprocess.check_call(['git','merge-base','--is-ancestor',b,m])
+          for area, prefixes in allowed.items():
+              s = j['snapshots'][area]
+              assert s['paths'] == prefixes
+              ref = s['commit']
+              subprocess.check_call(['git','merge-base','--is-ancestor',b,ref])
+              changed = git('diff','--name-only','--no-renames',b,ref).splitlines()
+              assert changed and all(any(x.startswith(y + '/') for y in prefixes) for x in changed)
+              # Main must not have independently changed these owner paths since shared base.
+              assert not git('diff','--name-only',b,m,'--',*prefixes), area
+              print(area,ref,len(changed),'owned changed paths')
+          pathlib.Path('/tmp/r05-combination-input.json').write_text(raw,encoding='utf-8')
+          subprocess.check_call(['git','checkout','--detach',m])
+          for area,prefixes in allowed.items():
+              ref=j['snapshots'][area]['commit']
+              subprocess.check_call(['git','restore','--source='+ref,'--staged','--worktree','--',*prefixes])
+              assert not git('diff',ref,'--',*prefixes)
+          tree = git('write-tree')
+          print('Combined exact tree',tree,'main',m)
+          pathlib.Path('/tmp/r05-combination-tree.txt').write_text(tree+'\n',encoding='utf-8')
+          assert all(any(x.startswith(y+'/') for ps in allowed.values() for y in ps) for x in git('diff','--name-only','--cached',m).splitlines())
+          PY
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Verify locked environment
+        working-directory: product/lesson-registration
+        run: |
+          uv lock --check
+          uv sync --locked --all-groups --python 3.12
+          uv pip check --python .venv/bin/python
+          uv run --locked --all-groups --python 3.12 python dev.py doctor
+          uv run --locked --all-groups --python 3.12 python -m playwright install --with-deps chromium
+      - name: Reproduce both latest packages on same frozen tree
+        working-directory: product/lesson-registration
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv run --locked --all-groups --python 3.12 python dev.py test r05-remote 2>&1 | tee /tmp/r05-remote-tests.log
+          uv run --locked --all-groups --python 3.12 python dev.py test r05-kmong 2>&1 | tee /tmp/r05-kmong-tests.log
+          python - <<'PY'
+          import json, re, pathlib
+          j=json.loads(pathlib.Path('/tmp/r05-combination-input.json').read_text())
+          observed={}
+          for area, expected in [('remote',j['snapshots']['remote']['reported_tests']),('kmong',j['snapshots']['kmong']['reported_combined_tests'])]:
+              log=pathlib.Path('/tmp/r05-'+area+'-tests.log').read_text()
+              counts=re.findall(r'Ran (\d+) tests? in ([\d.]+)s',log)
+              assert len(counts)==1 and int(counts[0][0])==expected,(area,counts)
+              assert re.search(r'^OK\s*$',log,re.M) and not re.search(r'\bskipped=|\bfailures=|\berrors=',log),area
+              observed[area]={'passed':expected,'seconds':float(counts[0][1]),'skipped':0}
+          result={'inputs':j,'tree':pathlib.Path('/tmp/r05-combination-tree.txt').read_text().strip(),'observed':observed,'scope':'supporting mock combination only; full product gates not run'}
+          pathlib.Path('/tmp/r05-combination-result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps({'tree':result['tree'],'observed':observed},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r05-frozen-combination
+          path: |
+            /tmp/r05-combination-input.json
+            /tmp/r05-combination-tree.txt
+            /tmp/r05-combination-result.json
+          if-no-files-found: warn

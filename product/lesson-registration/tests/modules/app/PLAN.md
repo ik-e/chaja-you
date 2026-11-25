@@ -180,6 +180,14 @@ R03 작성자 추정이며, 가용시간 확인 후 R01과 확정한다.
 
 ### 7.1 공통 접점 협의 (INTERFACE-REVIEW 반환 형식)
 
+2026-11-25 후속: main `094e4d2` / R03 `4a240ee` 위에서 구현한
+[runtime 연결 결정 및 사용 예제](RUNTIME-INTEGRATION.md)를 적용한다.
+Source 계보 slot, 승인 바이트 reader, 로컬 HTTP/WS 세션 조립, opt-in D01 binding.v1,
+durable Permit consume을 추가했다. R05 context 전달/consume 호출 및 실제 dispatch-fence
+직렬화 wrapper를 R03에서 구현했다. R05 실제 dispatch 연결과 R04 UI 조립은 후속이며
+기존 3인일 추정은 공동 E2E 후 재산정한다. 앱 201개 전체 통과(75.271초), doctor,
+check-changes(base 094e4d2), diff 검사 통과. 상세 근거: runtime-integration-evidence.json.
+
 공통 기준 SHA: `c4742a1`. 아래 "임시안"은 r03 독립 구현이며 상대 담당과 합의 완료가 아니다.
 
 | 접점 | 상대 | 유지/변경 서명·예제 | 이유 | 정상·실패·unknown 시험 | 남은 확인 |

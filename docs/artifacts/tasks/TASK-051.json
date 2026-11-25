@@ -58,9 +58,142 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "path": "product/lesson-registration/evidence/r04-progress-20261125.json"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-10_team-integration-followup.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/366cea92a497ff68176107766b1314ab75d5c59f/product/lesson-registration/web/app.js"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45565527174/job/139039245388"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "5개 화면 인라인 시안·탭 전환 및 Python API client/workflow, JS 호출 함수 구현. main bc2e2c8, 독립 CI 9개 통과(7 API 단위+2 마크업 검사). 실제 승인/API 버튼 연결·상태 제어, H6 보안, H7/H8 스키마와 조회 timeout 구분, browser E2E 및 actual viewer 미완료. 최신 366cea92 URL Grant 제거, dispose, 지수 백오프 및 H6/H7 호출 코드. 9개 회귀 통과. 실제 transport 실패 합성 200 verified, 잘못된 /auth/*, revision/auth.state·H7/H8 키, null/empty origin, static ID/iframe fallback 및 모듈 미연결 남음.",
+    "claims": [
+      {
+        "id": "C51-1",
+        "text": "초기 구현 및 9개 독립 CI 확인. 시험 범위와 제품 수용 구분.",
+        "status": "독립 재현·코드 검토",
+        "evidence_ids": [
+          "E51-1",
+          "E51-2",
+          "E51-3"
+        ]
+      },
+      {
+        "id": "C51-2",
+        "text": "UI 시안 버튼/고정 결과와 서버 동작 분리 및 공통 계약 차이 확인.",
+        "status": "정적 검토",
+        "evidence_ids": [
+          "E51-3",
+          "E51-4"
+        ]
+      },
+      {
+        "id": "C51-6",
+        "text": "URL grant 제거, dispose, backoff 확인; 실제 서버 경로·합성 fallback 차이 존재.",
+        "status": "코드 검토",
+        "evidence_ids": [
+          "E51-6"
+        ]
+      },
+      {
+        "id": "C51-7",
+        "text": "UI 9개 회귀 통과(실제 E2E 아님).",
+        "status": "독립 재현",
+        "evidence_ids": [
+          "E51-7"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E51-1",
+        "label": "R04 고정 보고서",
+        "url": "https://github.com/ik-e/chaja-you/blob/9eaac8ca357abd131ee404937ad4ad993fcea6dd/docs/members/R04/workspace/2026-11-25_R04_업무수행결과보고서_WebUI_숨고Adapter_구현완료.md"
+      },
+      {
+        "id": "E51-2",
+        "label": "독립 GitHub CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45558814397/job/139017270251"
+      },
+      {
+        "id": "E51-3",
+        "label": "R01 검토 근거",
+        "path": "product/lesson-registration/evidence/r04-progress-20261125.json"
+      },
+      {
+        "id": "E51-4",
+        "label": "고정 구현 코드",
+        "url": "https://github.com/ik-e/chaja-you/blob/bc2e2c85f90092dc98e40ded397d221bbc5f98ca/product/lesson-registration/web/app.js"
+      },
+      {
+        "id": "E51-5",
+        "label": "공통 접점 검토",
+        "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      },
+      {
+        "id": "E51-6",
+        "label": "최신 UI 코드",
+        "url": "https://github.com/ik-e/chaja-you/blob/366cea92a497ff68176107766b1314ab75d5c59f/product/lesson-registration/web/app.js"
+      },
+      {
+        "id": "E51-7",
+        "label": "최신 main 회귀",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45565527174/job/139039245388"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "9개 독립 모의 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E51-2"
+        ]
+      },
+      {
+        "criterion": "r04-web-AC1~3 실제 UI/H7/H8/Viewer 및 상태·결과 통제",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E51-3",
+          "E51-4",
+          "E51-5"
+        ]
+      },
+      {
+        "criterion": "실제 API/Viewer 계약",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E51-6"
+        ]
+      },
+      {
+        "criterion": "UI 회귀 9개",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E51-7"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "실제 서버 실패를 200 verified로 합성하는 fallback 제거 및 시안 분리",
+      "실제 H6 /authentication, revision/generation/auth.state/target, refresh remount; H1/H4/H5 실제 ID/값; H7 review_digest·H8 goal_verdict/progress",
+      "same-origin module/canvas mount; null/empty origin 거절, 실제 grant/input fence; 조회 timeout과 결과 분리",
+      "9개 CI는 정적/API 단위, 실제 UI/Viewer E2E 및 잔여 공수 미확인"
+    ],
+    "decision_requests": [
+      "R05 실제 viewer.js/WS와 R03 router 기반 실제 H1~H9 연결, 합성 성공 fallback 제거·실패/재접속 시험",
+      "잔여 공수 및 목표 영향 반환"
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
@@ -101,7 +234,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-051.md",
-  "assignment_status": "R04 배정 수신 확인 및 착수; PLAN.md 작성 완료",
+  "assignment_status": "main 366cea92 Viewer 개선, UI 9개 독립 CI; actual API/module 및 안전성 보완 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r04/product-web",
@@ -113,5 +246,5 @@
   ],
   "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
   "plan_path": "product/lesson-registration/tests/modules/web/PLAN.md",
-  "priority_note": "가용성 확인 후 내부 일정 확정"
+  "priority_note": "R03 Mock API 실행기로 실제 UI 흐름·revision·H7/H8 검증; Viewer 보안 계약 정렬; 초기 4 MD, 잔여 미확인"
 }

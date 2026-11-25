@@ -76,3 +76,13 @@ UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serv
 [공통 물리 방향](contracts/PHYSICAL-BINDING.json) · [잠정 WBS](../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json) · [R01 PLAN](evidence/PLAN.md). 제품 pyproject.toml/uv.lock이 초기 공통 환경의 정본이다. 후보 환경은 이력 전용. R05 수신 확인 및 7근무일 추정 보고; 타 owner 공수/PLAN 별도 확인.
 
 팀원은 main에 통합된 공통 기준만 사용한다. 자신의 변경을 먼저 커밋/보존한 뒤 `git fetch origin`, `git merge origin/main`으로 공통 변경을 병합한다. 충돌 시 강제 reset/rebase하지 말고 관련 owner/R01에게 공유한다. 적용한 main SHA를 PLAN에 기록하고 갱신된 제품 lock으로 `uv sync --locked --python 3.12`, `uv run --locked --python 3.12 python dev.py doctor`, `uv run --locked --python 3.12 python dev.py test <package>`, `uv run --locked --python 3.12 python dev.py check-changes <package> --base <적용한-main-SHA>` 실행. 공동 계약 이견은 signature/예제/시험으로 반환한다. 팀원 브랜치를 강제로 갱신하지 않는다.
+
+## 실제 합성 API 및 제품 수용 검증 (11/25)
+
+R03의 [Mock API 실행기](tests/modules/app/README.md)는 main에 반영되었다. 기존 `dev.py serve api` 고정 replay와 구분한다. 아래 명령으로 실제 FastAPI/SQLite + 명시적 합성 provider를 시작한다(실제 AI/Viewer/플랫폼 없음).
+
+```sh
+uv run --locked --group app --group verification python tests/modules/app/mock_server.py --platform soomgo --origin http://localhost:8080
+```
+
+출력된 loopback URL, 정확한 UI origin, 합성 owner 헤더로 R04가 실제 HTTP 연동. [제품 수용 시험 실행기](evidence/PRODUCT-GATE.md)는 pinned 22개 gate와 합성 supporting probe를 분리. 실제 제품 전체 case 0개; preflight 통과만으로 제품 성공 아님. 담당자 진행/공수는 [팀 근거](evidence/team-checkpoint-20261125.json) 참조.
