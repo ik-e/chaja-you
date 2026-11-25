@@ -2,9 +2,13 @@
 
 R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행기는 R04(숨고), R05(크몽) 담당으로 별도 TASK 배정. 담당자 수신·착수 및 가용성 확인 전이며 일정·세부 기술은 협의한다. [활성 단계](../../docs/human/phase-intents/PHASE-20261125-01.md) · [배정 근거](../../docs/human/responses/HRESP-20261125-01_product-task-assignment.md) · [bootstrap CI](https://github.com/ik-e/chaja-you/actions/runs/45525881756).
 
-- [팀 설계 검토 홈](https://github.com/ik-e/chaja-you/blob/d68406b895b344819eb7ed6c3524167789bfdb84/docs/design/lesson-registration/README.md)
+- [현행 설계 기준](../../docs/design/lesson-registration/CURRENT-DESIGN.md) · [AI 현행 인덱스](../../docs/design/lesson-registration/CURRENT-DESIGN.json) · [채택 전 고정 검토 스냅샷](https://github.com/ik-e/chaja-you/blob/d68406b895b344819eb7ed6c3524167789bfdb84/docs/design/lesson-registration/README.md)
 - [공통 계약](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [결정 추적](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json)
-- [작업 공간 정본 후보](WORKSPACE.json) · [replay 예시](fixtures/shared/replay.json). 원본 설계 파일을 복사해 별도 정본으로 만들지 않는다.
+- [작업 공간 정본](WORKSPACE.json) · [replay 예시](fixtures/shared/replay.json). 원본 설계 파일을 복사해 별도 정본으로 만들지 않는다.
+
+## 승인된 공통 구현 계약
+
+[공통 구현 규격](contracts/README.md) · [R01 결정](../../docs/human/responses/HRESP-20261125-02_common-implementation-binding.md) · [실행 근거](https://github.com/ik-e/chaja-you/actions/runs/45527624382). 기존 논리 계약과 pin은 유지한다. 각자 main의 승인된 공통 기준선을 자신의 브랜치에 병합하고 기준 SHA를 기록한 뒤 담당 영역만 수정한다. 세부 기술/실행 환경과 공수는 담당자 검토 후 조정한다.
 
 ## 작업 공간 / 독립 검증
 

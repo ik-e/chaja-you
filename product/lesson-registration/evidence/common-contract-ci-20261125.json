@@ -1,0 +1,49 @@
+{
+  "id": "LR-COMMON-CONTRACT-CI-20261125",
+  "date": "2026-11-25",
+  "source_commit": "5876907585666c0389719d90331b2b231afea3d0",
+  "run": 45527624382,
+  "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+  "conclusion": "success",
+  "supersedes_failed_run": {
+    "run": 45527510372,
+    "url": "https://github.com/ik-e/chaja-you/actions/runs/45527510372",
+    "findings": [
+      "legacy task result format (TASK-032)",
+      "timestamp format checker not active",
+      "HTTP H6-open fixture ID mapping"
+    ]
+  },
+  "checks": {
+    "standard_contract_unittest": {
+      "pass": 10,
+      "fail": 0
+    },
+    "named_replay_payloads": 36,
+    "http_replay_payloads": 36,
+    "bootstrap_and_wiring_unittest": {
+      "pass": 9,
+      "fail": 0
+    },
+    "project_projections": {
+      "count": 27,
+      "regenerated_and_checked": true,
+      "committed_by_this_update": [
+        "docs/design/lesson-registration/README.md",
+        "docs/meetings/reviews/MEET-20261120-01.md"
+      ]
+    },
+    "design_projection": {
+      "pass": true
+    },
+    "deliverable_mapping": {
+      "pass": true
+    }
+  },
+  "limits": [
+    "Python 3.12 runner; direct jsonschema version pinned, transitive test dependencies not fully locked",
+    "Synthetic fixture and selected relations, not provider execution, authorization, database transaction or actual model validation",
+    "All 22 integrated product tests not_run"
+  ],
+  "approval": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+}

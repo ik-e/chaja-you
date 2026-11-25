@@ -1,0 +1,134 @@
+{
+  "id": "LR-IMPLEMENTATION-BINDING-01",
+  "status": "direction_approved_initial_shared_binding",
+  "base_commit": "65aed3710486a5da0e00f74d1156b80c05cb1914",
+  "source_refs": [
+    "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json"
+  ],
+  "authority": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
+  "decisions": [
+    {
+      "id": "IB-01",
+      "prior": [
+        "CS-01",
+        "CS-07",
+        "LD-03"
+      ],
+      "selection": "Python 3.12 Protocol + JSON object at in-process service boundary; provider bridges may use async or other internal transport; I4 only called by accepted worker",
+      "alternatives": [
+        "Separate microservice/RPC for each provider",
+        "Async-only port signatures",
+        "Framework model types as shared canonical schema"
+      ],
+      "reason": "Current isolated Python bootstrap passed, common types are JSON and physical separation not required. Minimal provider contracts avoid mandatory framework or distributed infrastructure.",
+      "review": "R02/R03/R05 confirm concrete provider signatures/transport; change only by shared review.",
+      "revisit_when": "Provider requires process isolation, streaming or latency constraints.",
+      "status": "direction_approved"
+    },
+    {
+      "id": "IB-02",
+      "prior": [
+        "CS-02",
+        "CS-08",
+        "LD-08"
+      ],
+      "selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; jsonschema 4.25.1 isolated verification tool; no second type schema",
+      "alternatives": [
+        "Custom schema checker",
+        "Pydantic as new source",
+        "Pre-generate model classes"
+      ],
+      "reason": "Standards-based validation avoids drift and tests all current shapes; production dependency/lock still separate.",
+      "review": "Standard validator direction accepted; product dependency group and full lock pending R03/shared review.",
+      "revisit_when": "Missing schema constraints, incompatible profile or performance need.",
+      "status": "direction_approved"
+    },
+    {
+      "id": "IB-03",
+      "prior": [
+        "CS-04",
+        "CS-05",
+        "CS-06"
+      ],
+      "selection": "Split store coordinator/gateway capabilities; runtime owns opaque context/permit; adapter gets bound gateway only; no actual permit stub",
+      "alternatives": [
+        "Expose raw driver to adapter",
+        "Shared unrestricted storage object"
+      ],
+      "reason": "Retain logical owner/atomicity and deny bypass; actual registry/lease implementation remains provider responsibility.",
+      "review": "R03/R05 confirm storage transaction signatures, fence/finalize return, adapter registry and operation binding.",
+      "revisit_when": "Real implementation cannot enforce atomic guard or adapter needs additional typed operation.",
+      "status": "direction_approved"
+    },
+    {
+      "id": "IB-04",
+      "prior": [
+        "CS-04",
+        "CS-07"
+      ],
+      "selection": "Framework-neutral viewer mount/dispose with AuthGrant and event callback; transport/client package remains open",
+      "alternatives": [
+        "Direct remote URL or browser control from UI",
+        "Choose framework-specific viewer now"
+      ],
+      "reason": "UI can design independent of remote stack, grant and detach semantics retained.",
+      "review": "R04/R05 jointly decide transport and owner/generation/origin binding.",
+      "revisit_when": "Viewer PoC demonstrates unsupported lifecycle/transport.",
+      "status": "direction_approved"
+    },
+    {
+      "id": "IB-05",
+      "prior": [
+        "CS-07",
+        "CS-08"
+      ],
+      "selection": "Explicit provider injection and exact synthetic replay; no automatic replay fallback in product, no fake workflow",
+      "alternatives": [
+        "Build replacement full mock app",
+        "Wait for all implementations"
+      ],
+      "reason": "Validate edges early while avoiding competing CO implementation. Actual stateful flow needs R03 app and genuine providers.",
+      "review": "Owner factory signatures, shared launch configuration and module-level testing strategy before actual assembly.",
+      "revisit_when": "First real provider ready.",
+      "status": "direction_approved"
+    }
+  ],
+  "scope": {
+    "python": "contracts/interfaces.py",
+    "standard_validation": "contracts/validation.py",
+    "viewer": "contracts/viewer.d.ts",
+    "composition": "src/lesson_registration/composition/wiring.py",
+    "stub": "stubs/replay_ports.py",
+    "product_execution": "not_run",
+    "adopted_logical_schema_changed": false
+  },
+  "pending": [
+    "Actual common dependency lock and provider runtime transport/async choice",
+    "Operation manifest, stable slot resolution and canonical digest byte rules require owner review",
+    "Actual runtime atomic transaction, leases, evidence and viewer security",
+    "Real app launch, product test results and calendar"
+  ],
+  "trace": {
+    "planned_checks": [
+      "T5-03",
+      "T5-13",
+      "DV-04"
+    ],
+    "selected_contract_checks": "shape and selected cross-field rejection only; not integrated product"
+  },
+  "approval": {
+    "ref": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
+    "approved_decisions": [
+      "IB-01",
+      "IB-02",
+      "IB-03",
+      "IB-04",
+      "IB-05"
+    ],
+    "reviewed_commit": "5876907585666c0389719d90331b2b231afea3d0",
+    "verification_run": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+    "limits": "Initial implementation boundary; provider details and product runtime stack pending. No live permission."
+  }
+}
