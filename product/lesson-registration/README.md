@@ -62,3 +62,9 @@ UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serv
 | [TASK-054](../../docs/artifacts/tasks/TASK-054.json) | R05 | r05-kmong | r05/product-kmong |
 
 공통 bootstrap CI는 통과했다. 실제 담당자 수신·공수·스택 및 22개 제품 시험은 미확인/미실행. TASK 결과 갱신은 제품 경로 소유권 검사와 분리한 문서 갱신으로 처리한다.
+
+## 공통 기준선 갱신 확인 (2026-11-25)
+
+[공통 물리 방향](contracts/PHYSICAL-BINDING.json) · [잠정 WBS](../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json) · [R01 PLAN](evidence/PLAN.md). 후보 환경은 제품 lock이 아니다. R05 수신 확인 및 7근무일 추정 보고; 타 owner 공수/PLAN 별도 확인.
+
+팀원은 main에 통합된 공통 기준만 사용한다. 자신의 변경을 먼저 커밋/보존한 뒤 `git fetch origin`, `git merge origin/main`으로 공통 변경을 병합한다. 충돌 시 강제 reset/rebase하지 말고 관련 owner/R01에게 공유한다. 적용한 main SHA를 PLAN에 기록하고 기존 lock으로 `uv sync --locked --python 3.12`, `uv run --locked --python 3.12 python dev.py doctor`, `uv run --locked --python 3.12 python dev.py test <package>`, `uv run --locked --python 3.12 python dev.py check-changes <package> --base <적용한-main-SHA>` 실행. 공동 계약 이견은 signature/예제/시험으로 반환한다. 팀원 브랜치를 강제로 갱신하지 않는다.

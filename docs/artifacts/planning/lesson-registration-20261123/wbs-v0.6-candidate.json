@@ -1,0 +1,147 @@
+{
+  "id": "WBS-LESSON-V0.6-CANDIDATE",
+  "status": "draft_unconfirmed",
+  "date": "2026-11-25",
+  "authority": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
+  "prior": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+  "notes": [
+    "R05 estimate 7 days; not deadline. R02 handoff by 12/4 preserved. Other owner capacity pending.",
+    "Dependencies describe integration prerequisites, not barriers to independent development.",
+    "Do not set task due/status from this candidate."
+  ],
+  "items": [
+    {
+      "id": "C01",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "PD, lock, interfaces, common tests/baseline",
+      "depends_on": [],
+      "target": "11/27 candidate; validation dependent"
+    },
+    {
+      "id": "P01",
+      "task": "TASK-049",
+      "owner": "R02",
+      "work": "Preparation/actual model",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "12/4 handoff by; workdays pending"
+    },
+    {
+      "id": "A01",
+      "task": "TASK-050",
+      "owner": "R03",
+      "work": "App/API/STORE/RESULT",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "pending PLAN"
+    },
+    {
+      "id": "U01",
+      "task": "TASK-051",
+      "owner": "R04",
+      "work": "UI and viewer",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "pending PLAN"
+    },
+    {
+      "id": "S01",
+      "task": "TASK-052",
+      "owner": "R04",
+      "work": "Soomgo adapter",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "pending PLAN; sequence with U01"
+    },
+    {
+      "id": "R00",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "Both PLAN and interfaces; runtime contract priority",
+      "depends_on": [],
+      "estimated_workdays": 0.5,
+      "target": "11/25~27"
+    },
+    {
+      "id": "K01",
+      "task": "TASK-054",
+      "owner": "R05",
+      "work": "Kmong independent mock/adapter",
+      "depends_on": [
+        "R00"
+      ],
+      "estimated_workdays": 2.5,
+      "target": "11/25~27 candidate"
+    },
+    {
+      "id": "R01",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "Runtime fake STORE and mock browser",
+      "depends_on": [
+        "R00"
+      ],
+      "estimated_workdays": 3,
+      "target": "11/30~12/2 candidate"
+    },
+    {
+      "id": "R02",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "STORE connection and integration",
+      "depends_on": [
+        "R01",
+        "K01",
+        "A01"
+      ],
+      "estimated_workdays": 1,
+      "target": "12/3 candidate; 1~2 days adjustment; 12/4 proposed buffer"
+    },
+    {
+      "id": "I01",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "Progressive kmong integration",
+      "depends_on": [
+        "C01",
+        "P01",
+        "A01",
+        "U01",
+        "K01",
+        "R02"
+      ],
+      "target": "12/4 prior target, not committed"
+    },
+    {
+      "id": "I02",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "Soomgo integration, regression and mock gate",
+      "depends_on": [
+        "I01",
+        "S01"
+      ],
+      "target": "12/8 goal"
+    }
+  ],
+  "milestones": [
+    {
+      "date": "2026-12-04",
+      "description": "R02 handoff constraint / vertical integration candidate"
+    },
+    {
+      "date": "2026-12-08",
+      "description": "mock MVP target"
+    },
+    {
+      "date": "2027-01-04",
+      "description": "final target"
+    }
+  ],
+  "remaining": "Rebuild dates/capacity after all owner plans and physical environment/contract acceptance."
+}

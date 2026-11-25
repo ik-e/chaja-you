@@ -46,3 +46,15 @@ PYTHONPATH=.:src uv run --no-project --python 3.12 --with jsonschema==4.25.1 pyt
 - R04: UI H1~H9 및 viewer mount, 숨고 adapter operation 등록.
 - R05: runtime/adapter 분리, registry manifest/target/digest/lease, viewer transport와 크몽 작업량.
 - R01: 공유 스택/락, 공통 물리 경계 확정 및 실제 provider 연결. 구체적 기술 선택은 각 담당자 근거 우선.
+
+## 2026-11-25 공통 물리 방향 및 팀 공유
+
+[승인](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [PD-01~08](../contracts/PHYSICAL-BINDING.json) · [잠정 WBS](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json).
+
+1. PD 방향 및 R05 수신/공수 기록을 현행 인덱스에 연결.
+2. [독립 후보 환경](physical-env/pyproject.toml)과 [기술 probe](probe_physical.py)에서 Python 3.12 lock, ASGI HTTP/WS, thread bridge, SQLite 경쟁, schema, Chromium loopback/CDP 검증. 통과 및 owner 검토 전 제품 pyproject/lock 유지.
+3. R03/R05 STORE, R04/R05 operation manifest, R03/R04/R05 viewer, R02/R03 I2, 각 owner factory/config 및 서버 canonical digest golden vector를 기존 계약 기준으로 합의. 독립 구현은 대기하지 않는다.
+4. 승인 lock/기술 probe 반영 후 공통 테스트·CI 회귀, 기준선 SHA와 README 절차 공유. 팀원 PLAN/가용성 취합 후 WBS 확정.
+5. 실제 provider 도착 순서로 연결; 합성/기술 probe와 22개 제품 시험 분리.
+
+R05: 053·054 수신 및 7근무일 추정, 11/27 인터페이스 협의 후보, 12/3 통합 후보. runtime 계약 우선. 실제 PLAN/착수 여부 미확인.

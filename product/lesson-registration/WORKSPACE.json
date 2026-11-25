@@ -31,9 +31,11 @@
   ],
   "stack": {
     "bootstrap": "Python stdlib only (isolated uv project, Python 3.12 target; lock permits 3.13 for compatibility check)",
-    "product_candidates": "Python/FastAPI/SQLite and browser/frontend implementation technologies remain review candidates; no product dependency choices implied",
+    "product_candidates": "PD-01~08 direction accepted; exact product dependency lock pending independent CI and owner review",
     "root_dependency_changes": false,
-    "contract_validation": "jsonschema==4.25.1 isolated verification command; no product dependency or transitive full lock approved yet"
+    "contract_validation": "jsonschema==4.25.1 isolated verification; candidate product dependency pending lock",
+    "physical_binding": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+    "physical_candidate_env": "product/lesson-registration/evidence/physical-env/pyproject.toml"
   },
   "packages": [
     {
@@ -392,7 +394,7 @@
         "DV-02",
         "DV-05"
       ],
-      "assignment": "assigned_pending_owner_acknowledgement",
+      "assignment": "owner_acknowledged_plan_reported",
       "test_command": "uv run --locked --python 3.12 python dev.py test r05-remote",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -449,7 +451,7 @@
         "DV-03",
         "DV-04"
       ],
-      "assignment": "assigned_pending_owner_acknowledgement",
+      "assignment": "owner_acknowledged_plan_reported",
       "test_command": "uv run --locked --python 3.12 python dev.py test r05-kmong",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
