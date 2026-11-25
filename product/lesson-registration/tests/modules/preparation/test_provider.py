@@ -138,6 +138,24 @@ class PreparationTests(unittest.TestCase):
         self.assertFalse(result["ready"])
         self.assertEqual((result["issues"][0]["code"], result["issues"][0]["field"]), ("invalid", "/daw"))
 
+    def test_r03_nested_edit_without_parent_answer_stays_blocked(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        with tempfile.TemporaryDirectory() as temp:
+            co = Coordinator(Store(Path(temp) / "test.sqlite3"), prep=self.provider())
+            source = co.create_source("test-owner", {"raw_text": "합성 입력"})
+            view = co.create_registration("test-owner", {"source_id": source["source_id"], "selector": "kmong"})
+            answers = [{"issue_id": issue["issue_id"], "value": values[issue["field"][1:]]}
+                       for issue in view["preparation"]["issues"]]
+            revised = co.edit_registration("test-owner", view["registration_id"],
+                                           {"expected_revision": view["revision"], "answers": answers})
+            updated = co.edit_registration("test-owner", view["registration_id"], {
+                "expected_revision": revised["revision"],
+                "corrections": [{"field": "/packages/0/amount_vat_included_krw", "value": 190000}]})
+            self.assertFalse(updated["preparation"]["ready"])
+            self.assertNotIn("packages", updated["preparation"]["values"])
+            self.assertTrue(any(i["field"] == "/packages/0/amount_vat_included_krw" and i["code"] == "unsupported"
+                                for i in updated["preparation"]["issues"]))
+
     def test_nested_answers_stop_safely(self):
         answer = {"answer_id": "a", "field": "/packages/0/amount_vat_included_krw", "value": 180000}
         result = self.provider().prepare(request("kmong", "합성 입력", [answer]))
