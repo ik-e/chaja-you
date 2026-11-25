@@ -1,0 +1,473 @@
+{
+  "source_commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+  "contract_files": [
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+      "blob": "de6c147216ee68bae75a9d18f9127c327701fa5a"
+    },
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+      "blob": "b0b2044526f63f0244d920f85b2d9676b94bbe72"
+    },
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360"
+    },
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json",
+      "blob": "987018e3e41f15521de6ba2fef33867cea81a88d"
+    }
+  ],
+  "shape_check": {
+    "kind": "existing JS subset checker, not standards-complete validator or actual runtime",
+    "count": 72,
+    "passed": 72,
+    "checks": [
+      {
+        "case": "kmong/I1/out",
+        "type": "ResolveOutput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I2/in",
+        "type": "PrepareInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I2/out",
+        "type": "Preparation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I2-missing/in",
+        "type": "PrepareInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I2-missing/out",
+        "type": "Preparation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I3/in",
+        "type": "AuthInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I3/out",
+        "type": "AuthOutput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I4/in",
+        "type": "ExecuteInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I4/out",
+        "type": "ExecutionReport",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I5/in",
+        "type": "EvaluateInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I5/out",
+        "type": "Result",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/RT-03/in",
+        "type": "Operation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/RT-03/out",
+        "type": "Observation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/RT-04/in",
+        "type": "ExecuteInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/RT-04/out",
+        "type": "GoalObservation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/VIEWER/in",
+        "type": "AuthGrant",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I5-unknown/in",
+        "type": "EvaluateInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/I5-unknown/out",
+        "type": "Result",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H1/in",
+        "type": "SourceInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H1/out",
+        "type": "SourceView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H2/out",
+        "type": "SourceList",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H3/out",
+        "type": "SourceView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H4/in",
+        "type": "RegistrationInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H4/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H5/in",
+        "type": "PreparationEdit",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H5/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H6-open/in",
+        "type": "AuthCommand",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H6-open/out",
+        "type": "AuthResponse",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H6-finish/in",
+        "type": "AuthCommand",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H6-finish/out",
+        "type": "AuthResponse",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H7/in",
+        "type": "StartInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H7/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H8/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/H9/out",
+        "type": "RegistrationList",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/platform-values",
+        "type": "PlatformValues",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "kmong/stopped",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I1/out",
+        "type": "ResolveOutput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I2/in",
+        "type": "PrepareInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I2/out",
+        "type": "Preparation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I2-missing/in",
+        "type": "PrepareInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I2-missing/out",
+        "type": "Preparation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I3/in",
+        "type": "AuthInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I3/out",
+        "type": "AuthOutput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I4/in",
+        "type": "ExecuteInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I4/out",
+        "type": "ExecutionReport",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I5/in",
+        "type": "EvaluateInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I5/out",
+        "type": "Result",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/RT-03/in",
+        "type": "Operation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/RT-03/out",
+        "type": "Observation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/RT-04/in",
+        "type": "ExecuteInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/RT-04/out",
+        "type": "GoalObservation",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/VIEWER/in",
+        "type": "AuthGrant",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I5-unknown/in",
+        "type": "EvaluateInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/I5-unknown/out",
+        "type": "Result",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H1/in",
+        "type": "SourceInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H1/out",
+        "type": "SourceView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H2/out",
+        "type": "SourceList",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H3/out",
+        "type": "SourceView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H4/in",
+        "type": "RegistrationInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H4/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H5/in",
+        "type": "PreparationEdit",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H5/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H6-open/in",
+        "type": "AuthCommand",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H6-open/out",
+        "type": "AuthResponse",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H6-finish/in",
+        "type": "AuthCommand",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H6-finish/out",
+        "type": "AuthResponse",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H7/in",
+        "type": "StartInput",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H7/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H8/out",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/H9/out",
+        "type": "RegistrationList",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/platform-values",
+        "type": "PlatformValues",
+        "pass": true,
+        "errors": []
+      },
+      {
+        "case": "soomgo/stopped",
+        "type": "RegistrationView",
+        "pass": true,
+        "errors": []
+      }
+    ]
+  },
+  "ownership": {
+    "paths": 30,
+    "collisions": 0
+  },
+  "product_tests": "not_run",
+  "notes": [
+    "Synthetic refs/digests; no live execution.",
+    "Python full checkout run not yet verified."
+  ]
+}

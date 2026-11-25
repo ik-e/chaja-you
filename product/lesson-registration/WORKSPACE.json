@@ -1,0 +1,528 @@
+{
+  "id": "LR-WORKSPACE-PREP-01",
+  "date": "2026-11-25",
+  "status": "candidate_pending_bootstrap",
+  "authority": "R01 directs R01 to focus on integration and common contracts, not Kmong runner. No new member TASK assignment or design adoption.",
+  "design_review_commit": "d68406b895b344819eb7ed6c3524167789bfdb84",
+  "canonical_commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+  "operational_main": "9b6ff0463722372d577747e89cb853e773c78591",
+  "phase": "PHASE-20261124-03",
+  "pins": [
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+      "blob": "de6c147216ee68bae75a9d18f9127c327701fa5a"
+    },
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+      "blob": "b0b2044526f63f0244d920f85b2d9676b94bbe72"
+    },
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360"
+    },
+    {
+      "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+      "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json",
+      "blob": "987018e3e41f15521de6ba2fef33867cea81a88d"
+    }
+  ],
+  "stack": {
+    "bootstrap": "Python stdlib only (isolated uv project, Python 3.12 target; lock permits 3.13 for compatibility check)",
+    "product_candidates": "Python/FastAPI/SQLite and browser/frontend implementation technologies remain review candidates; no product dependency choices implied",
+    "root_dependency_changes": false
+  },
+  "packages": [
+    {
+      "id": "common",
+      "owner": "R01",
+      "paths": [
+        "WORKSPACE.json",
+        "README.md",
+        "dev.py",
+        "pyproject.toml",
+        "uv.lock",
+        ".gitignore",
+        "contracts/",
+        "src/lesson_registration/__init__.py",
+        "src/lesson_registration/composition/",
+        "fixtures/shared/",
+        "tests/contract/",
+        "tests/integration/",
+        "stubs/",
+        "evidence/",
+        "src/lesson_registration/platforms/__init__.py",
+        "AGENTS.md",
+        "WORK-PACKAGES.md"
+      ],
+      "tests": "tests/contract",
+      "replay_cases": [
+        "I1",
+        "I2",
+        "I3",
+        "I4",
+        "I5",
+        "RT-03",
+        "RT-04"
+      ],
+      "scope": "공통 계약 핀·공통 fixture/stub·composition·통합 시험; 플랫폼 실행기 구현 제외",
+      "decisions": [
+        "CS-01",
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "test_refs": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "AT-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-03",
+        "T5-07",
+        "AT-04",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-04",
+        "DV-05"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test common",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "common-AC1",
+          "expected": "공통 계약 pin 및 경로 소유권 검증",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "common-AC2",
+          "expected": "모든 패키지 독립 smoke·fixture 검증",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "common-AC3",
+          "expected": "실제 제품 수용 시험은 별도로 판정",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "evidence/PLAN.md",
+      "branch_candidate": "r01/product-integration"
+    },
+    {
+      "id": "r02-preparation",
+      "owner": "R02",
+      "paths": [
+        "src/lesson_registration/preparation/",
+        "fixtures/source/",
+        "tests/modules/preparation/"
+      ],
+      "tests": "tests/modules/preparation",
+      "replay_cases": [
+        "I1",
+        "I2",
+        "I2-missing"
+      ],
+      "scope": "PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계 후보, 실제 모델/역량 확인",
+      "decisions": [
+        "CS-01",
+        "CS-02"
+      ],
+      "test_refs": [
+        "AT-01",
+        "T5-08",
+        "T6-02"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test r02-preparation",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "r02-preparation-AC1",
+          "expected": "I2 구현: 실제 모델로 사실·근거·질문 생성, 양 플랫폼 프로필 검증",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r02-preparation-AC2",
+          "expected": "가격/단위/VAT 누락·충돌 보존, 임의 값 생성 금지",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r02-preparation-AC3",
+          "expected": "12/4까지 재현 명령과 합성 데이터·유지보수 인계",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "tests/modules/preparation/PLAN.md",
+      "branch_candidate": "r02/product-preparation"
+    },
+    {
+      "id": "r03-app",
+      "owner": "R03",
+      "paths": [
+        "src/lesson_registration/app/",
+        "tests/modules/app/"
+      ],
+      "tests": "tests/modules/app",
+      "replay_cases": [
+        "I1",
+        "I2",
+        "I2-missing",
+        "I3",
+        "I4",
+        "I5"
+      ],
+      "scope": "H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도 브라우저·PREP 구현 제외",
+      "decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-03",
+        "CS-05",
+        "CS-06"
+      ],
+      "test_refs": [
+        "T5-01",
+        "T5-05",
+        "T5-06",
+        "T5-11",
+        "T5-12",
+        "T6-01",
+        "DV-01"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test r03-app",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "r03-app-AC1",
+          "expected": "H1~H9, I1/I5 구현 및 I2/I3/I4 주입; 소유권·revision 검사",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r03-app-AC2",
+          "expected": "영속 저장 원자 accept/admit/fence, 중복·경쟁·응답 유실 테스트",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r03-app-AC3",
+          "expected": "실제 관측 근거 없으면 성공 금지; 오류 중단 및 조회 복구",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "tests/modules/app/PLAN.md",
+      "branch_candidate": "r03/product-app"
+    },
+    {
+      "id": "r04-web",
+      "owner": "R04",
+      "paths": [
+        "web/",
+        "tests/modules/web/"
+      ],
+      "tests": "tests/modules/web",
+      "replay_cases": [
+        "I3",
+        "I5",
+        "VIEWER"
+      ],
+      "scope": "H1~H9 및 Viewer의 소비자; 화면·접속/승인/결과 UI; 서버·remote 구현 제외",
+      "decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-04",
+        "CS-06"
+      ],
+      "test_refs": [
+        "AT-02",
+        "T5-05",
+        "T6-02",
+        "DV-05"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test r04-web",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "r04-web-AC1",
+          "expected": "H1~H9 사용자 흐름과 viewer mount/dispose 연동",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r04-web-AC2",
+          "expected": "승인 전 정보 확인·수정, stale revision 처리, 승인 후 변경·취소·재개 금지",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r04-web-AC3",
+          "expected": "독립 mock API 기반 UI 시험, unknown과 confirmed 구분",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "tests/modules/web/PLAN.md",
+      "branch_candidate": "r04/product-web"
+    },
+    {
+      "id": "r04-soomgo",
+      "owner": "R04",
+      "paths": [
+        "src/lesson_registration/platforms/soomgo/",
+        "fixtures/platforms/soomgo/",
+        "tests/modules/soomgo/"
+      ],
+      "tests": "tests/modules/soomgo",
+      "replay_cases": [
+        "I4",
+        "RT-03",
+        "RT-04"
+      ],
+      "scope": "숨고 adapter 및 합성 플랫폼 페이지/fixture; 서비스 설정 관측; 원격 runtime·공통 상태 변경 금지",
+      "decisions": [
+        "CS-01",
+        "CS-05",
+        "CS-06"
+      ],
+      "test_refs": [
+        "AT-05",
+        "T5-13",
+        "DV-03",
+        "DV-04"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test r04-soomgo",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "r04-soomgo-AC1",
+          "expected": "S1~S6 등록된 operation 및 승인된 설정값 사용",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r04-soomgo-AC2",
+          "expected": "저장 1회와 독립 readback 확인, 잘못된 대상·응답 유실 실패 검사",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r04-soomgo-AC3",
+          "expected": "자체 mock 페이지/fixture 및 gateway 주입 시험; 실제 서비스 금지",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "tests/modules/soomgo/PLAN.md",
+      "branch_candidate": "r04/product-soomgo"
+    },
+    {
+      "id": "r05-remote",
+      "owner": "R05",
+      "paths": [
+        "src/lesson_registration/remote/",
+        "tests/modules/remote/"
+      ],
+      "tests": "tests/modules/remote",
+      "replay_cases": [
+        "I3",
+        "I4",
+        "RT-03",
+        "RT-04",
+        "VIEWER"
+      ],
+      "scope": "I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외",
+      "decisions": [
+        "CS-04",
+        "CS-05",
+        "CS-07"
+      ],
+      "test_refs": [
+        "AT-02",
+        "AT-03",
+        "T5-02",
+        "T5-12",
+        "DV-02",
+        "DV-05"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test r05-remote",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "r05-remote-AC1",
+          "expected": "I3/I4 facade와 RT-01~04, viewer 제공; 같은 인증 연결 인계",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r05-remote-AC2",
+          "expected": "세션·계정·lease 격리, STORE admission 및 fence 연결; raw driver 노출 금지",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r05-remote-AC3",
+          "expected": "중립 mock에서 실제 브라우저 제어·뷰어 분리·응답 유실 시험",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "tests/modules/remote/PLAN.md",
+      "branch_candidate": "r05/product-remote"
+    },
+    {
+      "id": "r05-kmong",
+      "owner": "R05",
+      "paths": [
+        "src/lesson_registration/platforms/kmong/",
+        "fixtures/platforms/kmong/",
+        "tests/modules/kmong/"
+      ],
+      "tests": "tests/modules/kmong",
+      "replay_cases": [
+        "I4",
+        "RT-03",
+        "RT-04"
+      ],
+      "scope": "크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지",
+      "decisions": [
+        "CS-01",
+        "CS-05",
+        "CS-06"
+      ],
+      "test_refs": [
+        "AT-04",
+        "T5-13",
+        "DV-03",
+        "DV-04"
+      ],
+      "assignment": "candidate_pending_bootstrap",
+      "test_command": "uv run --locked --python 3.12 python dev.py test r05-kmong",
+      "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
+      "acceptance": [
+        {
+          "id": "r05-kmong-AC1",
+          "expected": "K1~K7 승인값·이미지·조건부 필드 일치, 등록된 operation만",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r05-kmong-AC2",
+          "expected": "제출 1회와 독립 receipt/이미지 digest 대조, 오류·unknown 중복 차단",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        },
+        {
+          "id": "r05-kmong-AC3",
+          "expected": "자체 mock 페이지 및 gateway 주입 시험; 실제 제출 금지",
+          "proof": "실제 구현 시험·재현 명령·관측 근거. bootstrap 시험만으로 완료 아님"
+        }
+      ],
+      "deliverables": [
+        "담당 경로의 상세 설계 및 구현 계획",
+        "담당 구현 코드·독립 테스트·실행 방법",
+        "수용 조건별 실행 결과와 미확인 사항"
+      ],
+      "plan_path": "tests/modules/kmong/PLAN.md",
+      "branch_candidate": "r05/product-kmong"
+    }
+  ],
+  "branches": {
+    "rule": "Do not create team branches before R01 accepts review and workspace candidate. Each package uses separate checkout/branch or one member branch with explicit package scope. No edits to shared paths by non-owner; propose changes to R01. Check base using approved exact commit.",
+    "suggested_prefix": "<role>/product-<package>",
+    "existing_tasks": "043–047 unchanged; no reuse of old TASK IDs"
+  },
+  "isolation": {
+    "venv": "per checkout product/lesson-registration/.venv",
+    "test_database": "temporary directory per test, in-memory only for replay/neutral mock",
+    "ports": "loopback, default 0 (OS assigned), print actual port",
+    "browser": "fresh synthetic browser context per test; runtime owner implements and tests actual browser isolation",
+    "logs": "local .local/ or temp directory; do not commit cookies/credentials; selected sanitized evidence in owner-owned tests/evidence subdirectory",
+    "live": "no live execution; LR_ENVIRONMENT other than mock rejected in bootstrap; no external requests by provided stub servers; this is not full network sandbox enforcement"
+  },
+  "stub_contract": "Pinned replay fixtures are examples, not product state machines, trusted evidence, actual authentication, or proof of schema semantic validity. RT fixtures only represent documented boundaries, not permission bypass. Neutral mock is not platform-specific and contains no real credentials. Product implementations must replace and pass actual contract/gate tests.",
+  "activation": [
+    "R01 logical design adoption recorded in main",
+    "Bootstrap clean checkout and all package tests pass",
+    "Confirm member capacity and shared stack; activate TASKs and phase only after actual verification"
+  ],
+  "decisions": [
+    {
+      "id": "WP-D01",
+      "refs": [
+        "CS-07",
+        "CS-09"
+      ],
+      "question": "R01 responsibility",
+      "options": [
+        "R01 implements Kmong",
+        "R05 owns Kmong separately, R01 owns contracts/integration"
+      ],
+      "choice": "second",
+      "reason": "explicit R01 preference and existing R05 remote/field investigation; avoid team lead implementation bottleneck; workload of R05 still review",
+      "revisit": "capacity/PoC evidence; choose alternate non-R01 owner if overloaded"
+    },
+    {
+      "id": "WP-D02",
+      "refs": [
+        "CS-07",
+        "CS-08"
+      ],
+      "question": "local dev topology",
+      "options": [
+        "shared running server/dependency environment",
+        "separate checkout and venv, isolated temp state, injected replay"
+      ],
+      "choice": "second",
+      "reason": "parallel independent tests, no dependency on unfinished modules, no global root changes",
+      "revisit": "real product dependency and runtime evidence"
+    },
+    {
+      "id": "WP-D03",
+      "refs": [
+        "CS-01",
+        "CS-08"
+      ],
+      "question": "fixture meaning and contract ownership",
+      "options": [
+        "duplicate schema and full fake product",
+        "pin original Git blobs; exact examples plus neutral mock, no real product claims"
+      ],
+      "choice": "second",
+      "reason": "single canonical design source; distinguish wiring and product success",
+      "revisit": "accepted design delta or new provider boundary"
+    }
+  ]
+}
