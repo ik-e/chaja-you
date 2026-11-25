@@ -1,6 +1,6 @@
 # 음악 레슨 강사 등록 지원 서비스 · API 설계 문서
 
-> DLV-03 · 2026-11-25 · 기준 main f5e6857 · 채택 공통 V1/V4.1 반영 후보. R03 S8 실제 HTTP/OpenAPI 및 공식 제출·접수 미확인. [11/23 이전 후보](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step2/API_설계_문서.md).
+> DLV-03 · 2026-11-25 · 기준 main f5e6857 · 채택 공통 V1/V4.1 반영 후보. R03 S8 실제 HTTP 구현 main 반영·독립 보고 확인. 실제 provider/전체 제품 및 공식 제출·접수 미확인. [11/23 이전 후보](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step2/API_설계_문서.md).
 
 [현행 설계](../design/lesson-registration/CURRENT-DESIGN.md) · [공통 V1](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [V4.1 schema](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json) · [합성 요청/응답 원본](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/product/lesson-registration/fixtures/shared/replay.json) · [작성 가이드](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/Step2/API설계문서_작성법.html).
 
@@ -11,7 +11,7 @@
 | Base path | /v1, 배포 주소 미정, mock-only |
 | 서비스 인증 | 서버 인증 컨텍스트의 owner, client owner_ref/승인 plan/상태/credentials 신뢰 금지. 실제 제품 인증 방식 미확정 |
 | 외부 인증 | H6 직접 합성 인증; public AuthResponse grant 및 안전한 표시 정보만, 내부 ConnectionBinding 비공개 |
-| API 문서 | FastAPI /docs/OpenAPI 실출력은 S8 이후 대조 |
+| API 문서 | 현재 S8은 /docs, /redoc, /openapi.json 비활성화. 계약 schema/replay 기반 문서; 실제 배포 공개 여부 미정 |
 | 스키마 | V4.1 named schema 및 profile별 schema, unknown 필드 거절, UTC timestamp, 관계·권한 가드 |
 | 버전 | /v1이 현행, 이전 /api/v1 후보는 이력 |
 | 오류 | Error {code,message,issues?,current_revision?}; stack trace·비밀 미반환 |
@@ -375,6 +375,10 @@ EFFECT_UNKNOWN/EVIDENCE_INSUFFICIENT는 수락 후 결과에만 사용. 예상 �
 | 외부 효과 유실 | fence, known/unknown 보존; 잠재 효과 자동 재실행 금지 |
 | 종료 | CO 단일 전이, active→done 또는 active→stopping→stopped, 수락 이후 취소/수정/재개/rollback 없음 |
 | 조회 | H8/H9 persisted view, GET 외부 동작 없음, detach≠cancel |
-| 검증 | 동일 후보 22개 제품 gate 및 T5-08 실제 모델. S8 route/OpenAPI, DB 매핑, 권한·경쟁 실제 시험 이후 갱신 |
+| 검증 | 동일 후보 22개 제품 gate 및 T5-08 실제 모델. S8 route 구현 확인; 실제 provider/DB 매핑·권한·경쟁 통합 시험 이후 갱신 |
 
 현재 문서는 채택 설계의 제출용 사본이며 실제 HTTP 동작/제품·운영 보안 완료 증거가 아니다.
+
+### 최신 S8 구현 대조 (11/25, main 4992959)
+
+[HTTP 코드](https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/product/lesson-registration/src/lesson_registration/app/http/api.py) · [R03 실행 기록](https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/docs/artifacts/runs/TASK-050-s8-http-20261125.json): H1~H9 구현, 합성 provider/실제 loopback HTTP 독립 시험 191개(HTTP 14개) 통과 보고. 개발 인증 X-Mock-Owner는 명시 활성화·loopback 전용, owner_resolver 주입, exact origin allowlist, no-store. strict JSON 및 bounded multipart 총 body 16MiB는 담당자 mock 임시값(공통 운영 제한 확정 아님). /docs 및 OpenAPI 경로는 코드상 비활성화. 실제 provider·viewer·UI 및 22개 제품 gate 미실행. 경로 검사 실패는 일일 문서 경로로 기록되어 있음.

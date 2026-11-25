@@ -1,13 +1,13 @@
 # 현행 설계와 공식 제출 문서 연결 · 2026-11-25
 
-기준 main `f5e685716a5ed4fb36159d215b3cc861ef3d5e79`. [현행 설계](CURRENT-DESIGN.md) · [시스템 구조 요약](SYSTEM-OVERVIEW.md) · [구조화 매핑](../../deliverables/lesson-registration-20261125.json). 별도 설계 정본을 생성하지 않으며 현행 원본→읽기용/제출용 문서의 연결만 정리한다.
+기준 main `4992959c08a12ad81a983ea4a89fed0837c0f1f8` (논리·물리 원본은 f5e6857 기준). [현행 설계](CURRENT-DESIGN.md) · [시스템 구조 요약](SYSTEM-OVERVIEW.md) · [구조화 매핑](../../deliverables/lesson-registration-20261125.json). 별도 설계 정본을 생성하지 않으며 현행 원본→읽기용/제출용 문서의 연결만 정리한다.
 
 | 산출물 | 현재 경로 | 원본 | 상태 |
 | --- | --- | --- | --- |
 | DLV-01 기획 | [Step1](../../step1/기획서_제출본.md) | V1.1, REQ-01~11, adoption, CS/IB/PD | 채택 mock 범위 반영 |
 | DLV-02 WBS | [Step1](../../step1/WBS_제출본.md) | V0.6 후보, TASK/WORKSPACE | 잔여 공수/일정 미확정 |
-| DLV-03 API | [Step2](../../step2/API_설계_문서.md) | H1~H9/I1~I5, V4.1 | 실제 S8/OpenAPI 미확인 |
-| DLV-04 DB | [Step2](../../step2/데이터베이스_스키마_설계서.md) | V4.1, SQLite, R03 고정 SQL | 실제 최종 DDL 미확인 |
+| DLV-03 API | [Step2](../../step2/API_설계_문서.md) | H1~H9/I1~I5, V4.1 | S8 main 반영, 실제 연동 미확인 |
+| DLV-04 DB | [Step2](../../step2/데이터베이스_스키마_설계서.md) | V4.1, SQLite, R03 main 고정 SQL | 현재 DDL 확인, 최종 연동 미확인 |
 | DLV-05 상태 전이 | [Step3](../../step3/단일에이전트_상태전이그래프_설계서.md) | I2/TASK-049, 내부 graph 후보 | R02 확인 필요 |
 | DLV-06 자기 성찰 | [Step3](../../step3/자기성찰_테스트결과서.md) | graph 후보, T5-08, 실제 run | 계획, not_run |
 | DLV-07/08 | 협업 아키텍처/보안 | 현행 구조 및 PR #44 보안 후보 | 후속 제출용 갱신 |

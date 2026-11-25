@@ -1,7 +1,7 @@
 {
   "id": "LR-DLV-MAP-20261125",
   "status": "projection_draft_not_submission_approval",
-  "base_commit": "f5e685716a5ed4fb36159d215b3cc861ef3d5e79",
+  "base_commit": "4992959c08a12ad81a983ea4a89fed0837c0f1f8",
   "guide_snapshot": "299a7016748aab57c2de9f03fd38a8b09df4c07e",
   "guide_path": "docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md",
   "documents": [
@@ -24,10 +24,11 @@
       "source_refs": [
         "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",
         "product/lesson-registration/WORKSPACE.json",
-        "product/lesson-registration/evidence/r03-progress-20261125.json"
+        "product/lesson-registration/evidence/r03-progress-20261125.json",
+        "docs/artifacts/runs/TASK-050-s8-http-20261125.json"
       ],
       "top_level_sections": 4,
-      "status": "잔여 공수/일정 미확정"
+      "status": "R03 잔여 3인일 보고; 일정·전체 공수 미확정"
     },
     {
       "id": "DLV-03",
@@ -36,10 +37,12 @@
         "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
         "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
         "product/lesson-registration/contracts/interfaces.py",
-        "product/lesson-registration/fixtures/shared/replay.json"
+        "product/lesson-registration/fixtures/shared/replay.json",
+        "docs/artifacts/runs/TASK-050-s8-http-20261125.json",
+        "product/lesson-registration/src/lesson_registration/app/http/api.py"
       ],
       "top_level_sections": 6,
-      "status": "실제 S8/OpenAPI 미확인"
+      "status": "S8 main 반영·독립 run 보고; 실제 연동 미확인"
     },
     {
       "id": "DLV-04",
@@ -50,8 +53,8 @@
         "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
       ],
       "top_level_sections": 6,
-      "status": "R03 DDL 고정 관찰, 최종 통합 미확인",
-      "external_snapshot": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/src/lesson_registration/app/store/schema.sql"
+      "status": "R03 main DDL 관찰; 최종 연동 미확인",
+      "external_snapshot": "https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/product/lesson-registration/src/lesson_registration/app/store/schema.sql"
     },
     {
       "id": "DLV-05",
@@ -82,7 +85,7 @@
     "status": "not_merged_at_authoring"
   },
   "pending": [
-    "R03 actual HTTP/OpenAPI and final DDL, owner interface review of PR #44",
+    "R03 S8 actual implementation present; product integration/final DDL and owner interface review of PR #44 pending",
     "R02 actual PREP graph/model/self-correction, course-required specific technology check if necessary; actual test results",
     "WBS remaining effort/dates and actual Projects/sheet capture",
     "DLV07/08 use existing architecture/security and actual conformance; DLV09–16 need actual run/release evidence",
@@ -91,5 +94,6 @@
   "limits": [
     "No product contract/schema/profile/task assignment/WBS candidate change. No merge of PR #44. Legacy generated Step1 files kept as history.",
     "Markdown authoring only, not final rendered official submission or acceptance."
-  ]
+  ],
+  "adopted_source_base": "f5e685716a5ed4fb36159d215b3cc861ef3d5e79"
 }

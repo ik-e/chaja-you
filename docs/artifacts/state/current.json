@@ -72,7 +72,7 @@
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "11/25 WBS V0.6·TASK-048~054 반영 후보 · 잔여 공수/일정/실제 캡처 미확인",
+      "status": "11/25 WBS V0.6·TASK-048~054 반영 후보 · R03 잔여 3인일 보고, 일정/캡처 미확인",
       "submission_status": "미확인",
       "source": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",
       "projection": "docs/step1/WBS_제출본.md",
@@ -113,12 +113,12 @@
       "id": "SUB-API-20261120",
       "due": "2026-11-20",
       "title": "API 설계 문서·DB 스키마 설계서",
-      "status": "11/25 H1~H9/I1~I5·V4.1·SQLite 반영 후보 · R03 고정 DDL 관찰, HTTP/연동 미확인",
+      "status": "11/25 H1~H9/I1~I5·V4.1·SQLite 반영 · S8 main 구현·독립 보고, 실제 연동 미확인",
       "submission_status": "미확인",
       "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
       "projection": "docs/step2/README.md",
       "completion_tasks": [],
-      "note": "PR #44 세부 계약 검토 중. 최종 구현·제출/접수 미확인.",
+      "note": "S8 main 구현·독립 run 보고; PR #44 세부 계약 검토 중. 최종 연동·제출/접수 미확인.",
       "revision_date": "2026-11-25"
     },
     {

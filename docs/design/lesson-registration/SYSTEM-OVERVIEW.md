@@ -46,4 +46,4 @@ H1~H9/I1~I5, 등록 operation만, 승인 scope/current verified binding. STORE �
 
 - [기획·요구사항](../../step1/기획서_제출본.md) · [API](../../step2/API_설계_문서.md) · [DB](../../step2/데이터베이스_스키마_설계서.md)
 - [PREP 단일 에이전트 흐름 후보](../../step3/단일에이전트_상태전이그래프_설계서.md): I2 내부 판단/검증/보정 후보, R02 확인 전.
-- [검증 안내](VALIDATION.md), 실제 22개 gate 및 별도 독립 검증. R03 물리 DDL은 고정 브랜치 관찰; 실제 통합 후 갱신.
+- [검증 안내](VALIDATION.md), 실제 22개 gate 및 별도 독립 검증. R03 물리 DDL은 main 고정 커밋 관찰; 실제 통합 후 갱신.
