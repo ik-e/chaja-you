@@ -26,7 +26,7 @@ R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행
 
 ## 로컬 실행
 
-현재 준비 골격은 표준 라이브러리만 사용한다. 제품 FastAPI/DB/frontend/browser 의존성과 세부 기술은 별도 채택. 새 checkout마다 별도 .venv와 임시 실행 상태.
+현재 제품 lock은 초기 표준 라이브러리 환경이다. PD-01~08 물리 방향은 수용했으며 정확한 lock은 별도 검증 후 반영한다. 새 checkout마다 별도 .venv와 임시 실행 상태.
 
 ```sh
 cd product/lesson-registration
@@ -61,7 +61,7 @@ UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serv
 | [TASK-053](../../docs/artifacts/tasks/TASK-053.json) | R05 | r05-remote | r05/product-remote |
 | [TASK-054](../../docs/artifacts/tasks/TASK-054.json) | R05 | r05-kmong | r05/product-kmong |
 
-공통 bootstrap CI는 통과했다. 실제 담당자 수신·공수·스택 및 22개 제품 시험은 미확인/미실행. TASK 결과 갱신은 제품 경로 소유권 검사와 분리한 문서 갱신으로 처리한다.
+공통 bootstrap CI는 통과했다. R05는 수신/7근무일 추정 보고. 다른 담당자 수신·공수, 실제 스택 lock 및 22개 제품 시험은 별도 확인/미실행. TASK 결과 갱신은 제품 경로 소유권 검사와 분리한 문서 갱신으로 처리한다.
 
 ## 공통 기준선 갱신 확인 (2026-11-25)
 

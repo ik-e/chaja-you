@@ -187,8 +187,14 @@
     },
     {
       "title": "공통 물리 설계·실행환경",
-      "status": "부분 준비·후속 설계",
+      "status": "PD-01~08 방향 채택·세부 검증",
       "sources": [
+        {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+        },
+        {
+          "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+        },
         {
           "path": "product/lesson-registration/WORKSPACE.json"
         },
@@ -200,6 +206,12 @@
         },
         {
           "path": "product/lesson-registration/evidence/bootstrap-ci-20261125.json"
+        },
+        {
+          "path": "product/lesson-registration/evidence/physical-env/pyproject.toml"
+        },
+        {
+          "path": ".github/workflows/lesson-physical-probe.yml"
         }
       ],
       "views": [
@@ -210,7 +222,7 @@
           "path": "product/lesson-registration/evidence/PLAN.md"
         }
       ],
-      "note": "Python bootstrap 검증, 실제 DB/transport/launch/lock 미확정"
+      "note": "정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도"
     },
     {
       "title": "담당별 상세 설계·작업",
@@ -281,6 +293,21 @@
         }
       ],
       "note": "제품 22개 시험 실제 결과는 TASK/고정 실행 근거로 판정"
+    },
+    {
+      "title": "현행 WBS 후보",
+      "status": "미확정",
+      "sources": [
+        {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "product/lesson-registration/evidence/PLAN.md"
+        }
+      ],
+      "note": "R05 7근무일 추정·R02 12/4 인계; 전체 owner PLAN 후 확정"
     },
     {
       "title": "과거 설계·WBS",
@@ -1704,9 +1731,245 @@
     }
   },
   "pending_physical": [
-    "Actual common dependency lock and provider runtime transport/async choice",
-    "Operation manifest, stable slot resolution and canonical digest byte rules require owner review",
-    "Actual runtime atomic transaction, leases, evidence and viewer security",
-    "Real app launch, product test results and calendar"
-  ]
+    "Python 3.12 product lock: independent CI and owner review; current product env unchanged until verified",
+    "R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config",
+    "Canonical scope/slot/digest vectors and actual provider integration",
+    "Other owner PLAN/availability and WBS confirmation; actual product tests not run"
+  ],
+  "physical_direction": {
+    "source": {
+      "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+    },
+    "authority": {
+      "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+    },
+    "status": "direction_accepted_details_pending",
+    "decisions": [
+      {
+        "id": "PD-01",
+        "title": "시스템 구조",
+        "status": "direction_accepted",
+        "selection": "모듈형 모놀리스 + 격리 browser runtime; 프로세스 분리 필요성은 근거 후 판단",
+        "reason": "공통 영속 상태/단일 제품; 세션 격리와 비밀 경계 유지",
+        "prior": [
+          "CS-04",
+          "CS-07",
+          "IB-01"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-050",
+          "TASK-053"
+        ],
+        "pending": "R03/R05: lifecycle, shutdown, process isolation 조건",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/0"
+        }
+      },
+      {
+        "id": "PD-02",
+        "title": "실행 기술",
+        "status": "direction_accepted",
+        "selection": "Python 3.12, FastAPI/ASGI, SQLite, Playwright/Chromium; UI/AI 내부 기술은 owner 제안",
+        "reason": "기존 Python bootstrap, SQLite stdlib, R05 합성 PoC 및 요청; 제품 lock 미검증",
+        "prior": [
+          "CS-07",
+          "IB-01",
+          "IB-02"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-053"
+        ],
+        "pending": "R01/R03/R05: 정확한 lock, 설치 및 기술 시험; R02/R04 추가 요구",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/1"
+        }
+      },
+      {
+        "id": "PD-03",
+        "title": "공통 데이터",
+        "status": "direction_accepted",
+        "selection": "기존 named JSON Schema/profile; 서버 권위 UTF-8 sorted-key JSON·safe integer·Unicode 보존·SHA256, 배열 순서·asset raw bytes; 기존 data contract 범위",
+        "reason": "승인과 readback 비교 및 ID/시간/오류 일관성; client hash 권위 금지",
+        "prior": [
+          "CS-02",
+          "CS-05",
+          "CS-06",
+          "CS-08",
+          "IB-02",
+          "IB-03"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "관련 owner: canonical golden vectors, digest 대상 scope, slot mapping, error/time/ID semantics",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/2"
+        }
+      },
+      {
+        "id": "PD-04",
+        "title": "Worker/저장",
+        "status": "direction_accepted",
+        "selection": "CO 단일 상태 소유, accepted worker는 request/viewer와 수명 분리, SQLite 원자 accept/admit/observe/fence/finalize; runtime exclusive lease",
+        "reason": "승인 고정, 중복 차단, unknown 보존 및 오류 전용 중단; external exactly-once 주장 금지",
+        "prior": [
+          "CS-04",
+          "CS-05",
+          "CS-06",
+          "IB-03"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-050",
+          "TASK-053"
+        ],
+        "pending": "R03/R05: transaction/timeout, permit/lease generation, crash/fence race",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/3"
+        }
+      },
+      {
+        "id": "PD-05",
+        "title": "모듈 호출",
+        "status": "direction_accepted",
+        "selection": "기존 Python Protocol/JSON 및 BoundGateway; runtime owns permit/context; adapter 등록 operation만; event loop에서 blocking 금지",
+        "reason": "기존 IB 권한 분리 및 adapter 독립 구현",
+        "prior": [
+          "CS-01",
+          "CS-05",
+          "CS-07",
+          "IB-01",
+          "IB-03"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "R03/R05 STORE 호출, R04/R05 operation manifest와 fake gateway, R02/R03 I2 timeout",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/4"
+        }
+      },
+      {
+        "id": "PD-06",
+        "title": "Viewer",
+        "status": "direction_accepted",
+        "selection": "CDP screencast + WebSocket 방향 수용; R05 viewer mount/dispose, R03 서버 경계, R04 UI 소비",
+        "reason": "R05 합성 PoC 근거; UI와 CDP 분리",
+        "prior": [
+          "CS-04",
+          "CS-07",
+          "IB-04"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-050",
+          "TASK-051",
+          "TASK-053"
+        ],
+        "pending": "R03/R04/R05 endpoint/message schema, grant owner/generation/expiry/origin, input cutoff, disconnect detach, WSS 검증",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/5"
+        }
+      },
+      {
+        "id": "PD-07",
+        "title": "Composition",
+        "status": "direction_accepted",
+        "selection": "명시 provider 주입·설정·수명 관리, fake는 개발·검증에 명시 선택; 자동 replay fallback 없음",
+        "reason": "기존 wiring 재사용, 팀별 독립",
+        "prior": [
+          "CS-07",
+          "CS-08",
+          "IB-01",
+          "IB-05"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "각 owner factory signature, config/launch, port, shutdown",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/6"
+        }
+      },
+      {
+        "id": "PD-08",
+        "title": "통합 검증",
+        "status": "direction_accepted",
+        "selection": "독립 기술 검사 → 공유 계약 → 실제 provider → 크몽/숨고 통합 → 22개 동일 후보 gate",
+        "reason": "합성 smoke와 실제 수용 구분; T5-08 실제 모델 필수",
+        "prior": [
+          "CS-07",
+          "CS-08",
+          "CS-09",
+          "IB-05"
+        ],
+        "related_tasks": [
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054"
+        ],
+        "pending": "R01: Python 3.12 lock/CI, probe, owner review, 실제 제품 시험; R02 인계 12/4",
+        "source": {
+          "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+          "pointer": "/decisions/7"
+        }
+      }
+    ],
+    "environment": {
+      "status": "candidate_not_product_lock",
+      "candidate": "product/lesson-registration/evidence/physical-env/pyproject.toml",
+      "probe": "product/lesson-registration/evidence/probe_physical.py",
+      "workflow": ".github/workflows/lesson-physical-probe.yml",
+      "product_pyproject": "product/lesson-registration/pyproject.toml",
+      "product_lock": "product/lesson-registration/uv.lock",
+      "attempts": [
+        {
+          "commit": "56079752a3802287ac98e1f5c5ca56d31cb12d0d",
+          "url": "https://github.com/ik-e/chaja-you/actions/runs/45534634454",
+          "dependency_resolution": "pass",
+          "browser_install": "fail",
+          "reason": "ubuntu-latest resolved to Ubuntu 26.04, Chromium unsupported by pinned Playwright 1.57.0",
+          "probe": "not_run"
+        }
+      ],
+      "runner": "ubuntu-24.04",
+      "note": "Previous local observation claims have no reproducible run evidence in this repository and are not used for verification. Candidate versions were selected by R01 delegated implementation; product lock is unchanged until successful CI."
+    },
+    "schedule": {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+    }
+  }
 }

@@ -64,9 +64,35 @@ function generate(read,has){
  md+="## 7. 갱신\n\n```sh\nnode tools/generate_lesson_current_design.mjs\nnode tools/generate_lesson_current_design.mjs --check\n```\n\n기존 정본을 먼저 변경하고 생성기를 실행한다. 현재 Phase·TASK·승인·설계 ID·요구사항·시험 참조 및 경로/JSON Pointer를 확인한다. 고정 스냅샷은 기존 생성기로 관리하며 과거 원본을 수정하지 않는다.\n";
  return {[d+"CURRENT-DESIGN.json"]:JSON.stringify(index,null,2)+"\n",[d+"CURRENT-DESIGN.md"]:md};
 }
+function addPhysical(files, read, has) {
+ const p="product/lesson-registration/", d="docs/design/lesson-registration/";
+ const pp=p+"contracts/PHYSICAL-BINDING.json", jp=d+"CURRENT-DESIGN.json", mp=d+"CURRENT-DESIGN.md";
+ const physical=read(pp), schedule=read(physical.schedule_candidate), index=JSON.parse(files[jp]);
+ const ids=physical.decisions.map(x=>x.id), allowed=new Set([...index.logical_decisions.map(x=>x.id),...index.implementation_decisions.map(x=>x.id)]);
+ const tasks=new Set(index.active_packages.map(x=>x.id));
+ if(ids.length!==8||new Set(ids).size!==8||ids.some((x,i)=>x!=="PD-0"+(i+1))||!has(physical.authority)||!has(physical.environment.candidate)||!has(physical.environment.probe)||!has(physical.environment.workflow)||physical.decisions.some(x=>x.prior.some(id=>!allowed.has(id))||x.related_tasks.some(id=>!tasks.has(id)))||schedule.status!=="draft_unconfirmed"||schedule.items.some(x=>!tasks.has(x.task))) throw Error("Physical direction trace mismatch");
+ const source=path=>{if(!has(path))throw Error("Missing path "+path);return {path}};
+ const l=index.layers.find(x=>x.title==="공통 물리 설계·실행환경");
+ l.status="PD-01~08 방향 채택·세부 검증";
+ l.sources=[source(pp),source(physical.authority),...l.sources,source(physical.environment.candidate),source(physical.environment.workflow)];
+ l.note="정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도";
+ index.layers.splice(index.layers.length-1,0,{title:"현행 WBS 후보",status:"미확정",sources:[source(physical.schedule_candidate)],views:[source(p+"evidence/PLAN.md")],note:"R05 7근무일 추정·R02 12/4 인계; 전체 owner PLAN 후 확정"});
+ index.physical_direction={source:source(pp),authority:source(physical.authority),status:physical.status,decisions:physical.decisions.map((x,n)=>({...x,source:{path:pp,pointer:"/decisions/"+n}})),environment:physical.environment,schedule:source(physical.schedule_candidate)};
+ index.pending_physical=physical.pending;
+ const rel=path=>path.startsWith(d)?path.slice(d.length):"../../../"+path;
+ const link=x=>"["+x.path.split("/").pop()+"]("+rel(x.path)+")";
+ const row=x=>"| "+[x.title,x.status,x.sources.map(link).join(" · "),x.views.map(link).join(" · ")+" — "+x.note].join(" | ")+" |";
+ let md=files[mp].replace(/^\| 공통 물리 설계·실행환경 .*$/m,row(l)).replace(/^\| 과거 설계·WBS .*$/m,m=>row(index.layers.find(x=>x.title==="현행 WBS 후보"))+"\n"+m);
+ const table=["| ID | 채택 방향 | 담당자 확인 |","| --- | --- | --- |",...physical.decisions.map(x=>"| "+[x.id+" "+x.title,x.selection,x.pending].join(" | ")+" |")].join("\n");
+ md=md.replace("## 5. 현재 담당별 작업","### PD-01~08 · 공통 물리 방향\n\n"+link(source(pp))+" · "+link(source(physical.authority))+" · "+link(source(physical.schedule_candidate))+"\n\n"+table+"\n\n## 5. 현재 담당별 작업");
+ const before=read(p+"contracts/IMPLEMENTATION-BINDING.json").pending.map(x=>"- "+x).join("\n");
+ md=md.replace(before,physical.pending.map(x=>"- "+x).join("\n"));
+ files[jp]=JSON.stringify(index,null,2)+"\n"; files[mp]=md;
+ return files;
+}
 const read=path=>JSON.parse(readFileSync(resolve(root,path),'utf8'));
 const has=path=>existsSync(resolve(root,path));
-const files=generate(read,has);
+const files=addPhysical(generate(read,has),read,has);
 const index=JSON.parse(files['docs/design/lesson-registration/CURRENT-DESIGN.json']);
 const state=read(index.operational_state.path);
 for(const pkg of index.active_packages){

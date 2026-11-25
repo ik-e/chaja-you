@@ -1,4 +1,6 @@
 {
+  "schema_version": 1,
+  "kind": "wbs_candidate",
   "id": "WBS-LESSON-V0.6-CANDIDATE",
   "status": "draft_unconfirmed",
   "date": "2026-11-25",

@@ -188,16 +188,18 @@
     "workflow": ".github/workflows/lesson-physical-probe.yml",
     "product_pyproject": "product/lesson-registration/pyproject.toml",
     "product_lock": "product/lesson-registration/uv.lock",
-    "local_probe": {
-      "environment": "Python 3.13.5; FastAPI 0.128.2; httpx 0.28.1; SQLite 3.46.1; Playwright 1.57.0; system Chromium 144; no external network",
-      "observations": [
-        "FastAPI TestClient HTTP/WebSocket echo + asyncio.to_thread passed",
-        "SQLite 8 competing INSERT OR IGNORE under BEGIN IMMEDIATE: one winner",
-        "Chromium in-memory page, context cookie isolation, CDP frame passed",
-        "Chromium loopback navigation blocked by runner administrator policy; not passed"
-      ],
-      "limitations": "Exploratory local observations, not repository run or locked Python 3.12, not product security/atomicity/real server proof."
-    }
+    "attempts": [
+      {
+        "commit": "56079752a3802287ac98e1f5c5ca56d31cb12d0d",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45534634454",
+        "dependency_resolution": "pass",
+        "browser_install": "fail",
+        "reason": "ubuntu-latest resolved to Ubuntu 26.04, Chromium unsupported by pinned Playwright 1.57.0",
+        "probe": "not_run"
+      }
+    ],
+    "runner": "ubuntu-24.04",
+    "note": "Previous local observation claims have no reproducible run evidence in this repository and are not used for verification. Candidate versions were selected by R01 delegated implementation; product lock is unchanged until successful CI."
   },
   "owner_report": {
     "date": "2026-11-25",
