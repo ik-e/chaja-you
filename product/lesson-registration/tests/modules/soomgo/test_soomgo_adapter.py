@@ -17,11 +17,11 @@ class TestSoomgoAdapter(unittest.TestCase):
         self.adapter = SoomgoAdapter(fixture_dir=str(FIXTURES_DIR))
         self.valid_snapshot = {
             "category": "midi_mock",
-            "daw": ["logic", "ableton"],
+            "daw": ["logic"],
             "goals": ["hobby"],
-            "keyboard": "available",
-            "ages": ["twenties", "thirties"],
-            "genders": ["male", "female"],
+            "keyboard": "yes",
+            "ages": ["20s"],
+            "genders": ["female"],
             "format": ["individual"],
             "location_mode": ["studio"],
         }
@@ -91,7 +91,7 @@ class TestSoomgoAdapter(unittest.TestCase):
 
         # 4. Readback payload mismatch in S6 -> yields 'failed'
         mismatched_snapshot = dict(self.valid_snapshot)
-        mismatched_snapshot["goals"] = ["practical"]  # HTML has 'hobby'
+        mismatched_snapshot["goals"] = ["entrance"]  # HTML has 'hobby'
         s6_mismatch = self.adapter.execute_step(
             "S6",
             {
