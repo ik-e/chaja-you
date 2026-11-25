@@ -1,7 +1,7 @@
 {
   "id": "LR-DLV-MAP-20261125",
   "status": "projection_draft_not_submission_approval",
-  "base_commit": "ec8917c63eb13a3d81d3234220bb346cb666028f",
+  "base_commit": "4ab3285f3cb767fb8c36ec3b54d5c4e61e9a9fb3",
   "guide_snapshot": "299a7016748aab57c2de9f03fd38a8b09df4c07e",
   "guide_path": "docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md",
   "documents": [
@@ -32,10 +32,11 @@
         "docs/artifacts/runs/TASK-050-s8-http-20261125.json",
         "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md",
         "product/lesson-registration/tests/modules/web/PLAN.md",
-        "product/lesson-registration/tests/modules/soomgo/PLAN.md"
+        "product/lesson-registration/tests/modules/soomgo/PLAN.md",
+        "docs/members/R04/daily/2026-11-25.md"
       ],
       "top_level_sections": 4,
-      "status": "R03 잔여 3인일 보고, R04 초기 UI 4·숨고 3인일 PLAN 확인; 일일 조정·가용성/일정 미확정",
+      "status": "R03 잔여 3인일 보고, R04 초기 4+3인일 PLAN 및 UI client/workflow 코드 확인; 최신 잔여/가용성·일정 미확정",
       "title": "WBS",
       "due": "2026-11-13",
       "submission_status": "미확인"
@@ -156,9 +157,13 @@
       "source_refs": [
         "product/lesson-registration/WORKSPACE.json",
         "docs/artifacts/tasks/TASK-051.json",
-        "docs/artifacts/tasks/TASK-050.json"
+        "docs/artifacts/tasks/TASK-050.json",
+        "product/lesson-registration/web/api/client.py",
+        "product/lesson-registration/web/workflow.py",
+        "product/lesson-registration/tests/modules/web/test_api_client.py",
+        "docs/members/R04/daily/2026-11-25.md"
       ],
-      "status": "앱 HTTP 구현 및 UI PLAN 확인; 실제 통합 UI/배포 URL/접근/시연 미확인",
+      "status": "R03 HTTP 및 R04 API 클라이언트/워크플로우 코드 main 반영; R04 7개 단위 시험 통과 보고, 실제 화면·UI/runtime 통합·배포 미확인",
       "title": "대화형 AI 웹 애플리케이션",
       "due": "2026-12-24",
       "submission_status": "미확인"
