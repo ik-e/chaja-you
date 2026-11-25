@@ -16,3 +16,5 @@
 [11/24 강사 원본 가이드](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) · [OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [제출 상태](../../submissions/README.md). 제공 목차 우선. 실제 제출 형식·렌더·열람·대시보드·접수는 별도. 이전 찾아you 생성 문서와 11/23 후보는 Git 이력, [고정 설계 뷰](README.md)는 당시 스냅샷으로 유지.
 
 PR #44 검토 중인 세부 계약을 채택 원본으로 승격하지 않는다. 병합 및 실제 구현 차이 확인 후 영향받는 문서만 갱신. 현재 제출 후보의 목적은 중복 작성 없이 현행 정본을 이해하고 평가할 수 있도록 하는 것이다.
+
+**운영 방향:** [R01 11/25 핵심 Pain 우선·일일 조정](../../human/responses/HRESP-20261125-06_pain-first-rolling-plan.md). 교육 기술은 제품 가치와 연결, 부족한 요구는 추가 기능 후보로 충족. 실질 설계·구현 초기의 변화를 수용하며 일일 근거·가용성에 따라 WBS를 갱신한다. 새로운 배정·일정/기술 확정은 아니다.

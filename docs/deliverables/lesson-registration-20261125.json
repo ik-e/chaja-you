@@ -1,7 +1,7 @@
 {
   "id": "LR-DLV-MAP-20261125",
   "status": "projection_draft_not_submission_approval",
-  "base_commit": "4992959c08a12ad81a983ea4a89fed0837c0f1f8",
+  "base_commit": "117f14d4d375efd767cd7f2097f721ce255f73f1",
   "guide_snapshot": "299a7016748aab57c2de9f03fd38a8b09df4c07e",
   "guide_path": "docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md",
   "documents": [
@@ -13,7 +13,8 @@
         "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
         "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
         "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
-        "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+        "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
+        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md"
       ],
       "top_level_sections": 3,
       "status": "현행 mock 범위 반영 후보"
@@ -25,10 +26,13 @@
         "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",
         "product/lesson-registration/WORKSPACE.json",
         "product/lesson-registration/evidence/r03-progress-20261125.json",
-        "docs/artifacts/runs/TASK-050-s8-http-20261125.json"
+        "docs/artifacts/runs/TASK-050-s8-http-20261125.json",
+        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md",
+        "product/lesson-registration/tests/modules/web/PLAN.md",
+        "product/lesson-registration/tests/modules/soomgo/PLAN.md"
       ],
       "top_level_sections": 4,
-      "status": "R03 잔여 3인일 보고; 일정·전체 공수 미확정"
+      "status": "R03 잔여 3인일 보고, R04 초기 UI 4·숨고 3인일 PLAN 확인; 일일 조정·가용성/일정 미확정"
     },
     {
       "id": "DLV-03",
@@ -62,7 +66,8 @@
       "source_refs": [
         "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
         "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
-        "docs/artifacts/tasks/TASK-049.json"
+        "docs/artifacts/tasks/TASK-049.json",
+        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md"
       ],
       "top_level_sections": 9,
       "status": "PREP graph 후보, R02 확인 필요"
@@ -86,8 +91,8 @@
   },
   "pending": [
     "R03 S8 actual implementation present; product integration/final DDL and owner interface review of PR #44 pending",
-    "R02 actual PREP graph/model/self-correction, course-required specific technology check if necessary; actual test results",
-    "WBS remaining effort/dates and actual Projects/sheet capture",
+    "R02 actual PREP graph/model/self-correction; education objectives integrated with pain-first core or additional features, actual run evidence",
+    "Rolling daily progress/availability/dependency check; revise remaining effort and date candidates; actual Projects/sheet capture",
     "DLV07/08 use existing architecture/security and actual conformance; DLV09–16 need actual run/release evidence",
     "latest dashboard, official format, visual rendering, permission and receipt"
   ],
@@ -95,5 +100,6 @@
     "No product contract/schema/profile/task assignment/WBS candidate change. No merge of PR #44. Legacy generated Step1 files kept as history.",
     "Markdown authoring only, not final rendered official submission or acceptance."
   ],
-  "adopted_source_base": "f5e685716a5ed4fb36159d215b3cc861ef3d5e79"
+  "adopted_source_base": "f5e685716a5ed4fb36159d215b3cc861ef3d5e79",
+  "operating_direction_ref": "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md"
 }
