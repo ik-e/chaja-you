@@ -1,20 +1,6 @@
-# Step 2 필수 제출물 — 2026-11-23 조건부 개정 제출 후보
+# Step 2 필수 제출물 · 현행 레슨 등록 서비스
 
-> **11/23 R02 음악 레슨 등록 지원 기획 기준 · API/DB 논리 설계 후보 · 기술 채택·실제 구현 미승인 · 제출/접수 미확인.** [현재 Phase](../human/phase-intents/PHASE-20261123-01.md)와 [R01 기획 V0.1](../artifacts/planning/lesson-registration-20261123/proposal-v0.1.md)을 참고한 제출 준비용 초안이며, R05 기술/권한 및 R03 기능 요구사항 결과 뒤에 수정해야 합니다.
+- [API 설계 문서](API_설계_문서.md) — H1~H9·I1~I5, V4.1, 권한·오류·상태. 실제 S8 미확인.
+- [데이터베이스 스키마 설계서](데이터베이스_스키마_설계서.md) — SQLite 채택 및 R03 고정 DDL 관찰. 최종 연동 미확인.
 
-## 강사 작성 가이드에 따른 공식 제출 문서
-
-- [API 설계 문서](API_설계_문서.md) — 공통 정보·인증 / API 목록 / 엔드포인트별 8항목 / 검증·권한 / Tool / timeout·재시도·멱등성
-- [데이터베이스 스키마 설계서](데이터베이스_스키마_설계서.md) — ERD·관계 / 열별 타입·제약 / API·DB 매핑 / RLS·JWT·Redis / pgvector / 인덱스·검증
-
-**공통 기준:** 강사 공고 원본→필수값/가격 검증→게시처별 변환→정책·인증·승인 게이트→등록 작업·관측 증거를 추적합니다. 실제 게시·심사 접수는 기술 가능성과 별도로 운영사 허용 근거가 있어야 하며 **서버/로컬·DBMS·인증 스택은 미정**입니다.
-
-이 파일들은 사람용 **조건부 설계 제출 후보**이며 실제 승인·구현 결과가 아닙니다. 이전 찾아you API/DB 계약은 [11/19 이력](../submissions/step1-step2-20261119/README.md)과 Git 이력에 보존했습니다. 새 제품의 데이터·API에 대한 실제 결정은 R01 기획 통합 후 별도로 진행합니다.
-
-## 제출 전 확인
-
-1. [강사 피드백 대응표](../submissions/step1-step2-20261119/INSTRUCTOR-FEEDBACK-MATRIX.md)와 [제출 체크리스트](../submissions/step1-step2-20261119/SUBMISSION-CHECKLIST.md) 검토
-2. TASK-030 R05의 플랫폼별 실행 허용·인증/세션 및 TASK-031 R03의 완료·예외 계약, API/DB 교차 검토, 기술 적용/미적용 사유 및 강사·매니저 협의
-3. Word/PDF 실제 양식·렌더 및 교사 열람권한, 대시보드 링크·제출완료·접수 확인
-
-문서 생성은 실제 제출·접수 확인을 의미하지 않습니다. [전체 제출 상태](../submissions/README.md) 및 [Step1](../step1/README.md)을 참조합니다.
+[11/23 이전 API](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step2/API_설계_문서.md) · [11/23 이전 DB](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step2/데이터베이스_스키마_설계서.md)는 이력. [현행 설계](../design/lesson-registration/CURRENT-DESIGN.md). PR #44의 세부 계약은 검토 중. 구현 후 API/DB 교차 검증 및 최종 제출 형식·열람·대시보드 확인 필요. [제출 상태](../submissions/README.md).
