@@ -1,0 +1,32 @@
+<!-- Source Surface: H1, H2, H3 -->
+<div id="surface-source" class="surface-pane active">
+  <div class="card">
+    <h2>1. 원본 레슨 정보 (Source)</h2>
+    <p class="desc">강사의 원본 레슨 사실을 입력합니다. 원본 사실은 불변이며, 수정 시 새로운 불변 버전이 생성됩니다.</p>
+    
+    <div class="form-group">
+      <label for="source-title">레슨 제목</label>
+      <input type="text" id="source-title" placeholder="예: [미디/작곡] 기초부터 배우는 Logic Pro 실무 레슨" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="source-content">레슨 커리큘럼 및 상세 내용</label>
+      <textarea id="source-content" rows="6" placeholder="레슨 목표, 대상, 커리큘럼, 진행 방식 등을 입력하세요..." class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="source-subjects">대상 과목 (쉼표 구분)</label>
+      <input type="text" id="source-subjects" placeholder="MIDI, 작곡, 비트메이킹" class="form-control" />
+    </div>
+
+    <div class="actions">
+      <button type="button" id="btn-create-source" class="btn btn-primary">새 원본 생성 (H1)</button>
+      <button type="button" id="btn-load-sources" class="btn btn-secondary">기존 원본 목록 불러오기 (H2)</button>
+    </div>
+
+    <div id="source-list-container" class="list-box" style="display: none; margin-top: 1rem;">
+      <h3>기존 원본 버전 목록</h3>
+      <ul id="source-list" class="item-list"></ul>
+    </div>
+  </div>
+</div>
