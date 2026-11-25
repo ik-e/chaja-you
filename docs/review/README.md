@@ -103,7 +103,7 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-049.json)
 
-PR #49 초안에서 최신 공통 기준을 반영해 모의 등록 정보 준비, 원문 근거 처리와 가격 충돌 검증을 부분 구현하고 R03 합성 연결을 시험했다. 실제 모델·전체 제품 수용 시험은 미실행이다.
+PR #51에서 실제 OpenAI 모델의 합성 사례 비교와 안전 보완을 진행했다. 가격 충돌 오류가 남아 TASK-049 수용 기준은 미완료다.
 
 검증과 근거
 
@@ -111,18 +111,20 @@ PR #49 초안에서 최신 공통 기준을 반영해 모의 등록 정보 준�
 - r02-preparation-AC1 실제 모델 기반 추출과 두 프로필 검증 · inconclusive
 - r02-preparation-AC2 가격·단위·VAT 누락과 충돌 전체 조건 · inconclusive
 - r02-preparation-AC3 인계 및 AT-01·T5-08·T6-02 제품 시험 · inconclusive
+- 실제 모델 동일 합성 5개 사례 비교 · fail
+- [실제 모델 합성 실행 결과](../artifacts/runs/RUN-TASK-049-OPENAI-20261125.json)
 - [R02 계획과 실험·제약](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/PLAN.md)
 - [합성 준비 및 R03 연결 시험](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_provider.py)
 - [OpenAI 모의 HTTP 시험](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_openai_extractor.py)
 
 남은 불확실성과 결정 요청
 
-- 실제 OpenAI 접근 권한·예산 및 모델별 품질·비용 시험 미확인
-- 모델이 인용에서 VAT 표현이나 원문 충돌을 빠뜨리는 경우의 실제 성능 미검증
-- 중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 담당자 간 합의 및 실제 통합 시험 미완료
-- 모의 프로필은 실제 플랫폼 정책·등록 성공을 의미하지 않음
-- R03과 D05의 중첩 수정 보존 및 timeout·revision 처리 계약을 사례 기반으로 협의
-- R01의 승인된 OpenAI 합성 실험 접근 환경 및 예산 준비 후 모델 비교
+- 모델별 소규모 사례에서 가격 충돌 오류가 남아 신뢰도·모델 선정 미확정
+- 모델의 VAT·가격 표현 누락을 모든 표현에서 탐지하는지 미검증
+- 중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 R03 통합 검증 미완료
+- 실제 플랫폼과 AT-01·T5-08·T6-02 제품 수용 미검증
+- R03과 D05 중첩 수정 보존 및 timeout·revision 처리 계약 협의
+- R01과 합성 평가 실패·모델 후보·향후 예산 및 검증 범위 공유
 
 ### TASK-050 · 진행 중
 

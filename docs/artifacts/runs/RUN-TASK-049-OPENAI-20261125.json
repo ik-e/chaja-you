@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "id": "RUN-TASK-049-OPENAI-20261125",
+  "kind": "document",
+  "status": "합성 모델 실험 완료; 전체 수용 미충족",
+  "task_id": "TASK-049",
+  "owner": "R02",
+  "executed_at": "2026-11-25",
+  "execution_kind": "real_model_synthetic_only",
+  "input": {
+    "code_commit": "facb0ea",
+    "branch": "codex/task049-model-evaluation",
+    "baseline": "094e4d2c5dd3fbb8e9c9352296f87d90cd659308",
+    "models": [
+      "gpt-6-luna",
+      "gpt-5.6-luna"
+    ],
+    "cases_per_model": 5,
+    "attempts_per_case": 1,
+    "data": "고정 합성 텍스트와 모의 프로필; 실제 사용자 데이터·실플랫폼 미사용"
+  },
+  "verification": [
+    {
+      "command": "PYTHONPATH=.:src uv run --locked --all-groups --python 3.12 python tests/modules/preparation/model_compare.py --run",
+      "expected": "두 모델이 동일 합성 사례 5개를 안전하게 처리",
+      "observed": "gpt-6-luna 3/5 통과, 2 오류; gpt-5.6-luna 4/5 통과, 1 오류; 두 모델 모두 가격 충돌 오류",
+      "verdict": "fail",
+      "results": [
+        {
+          "model": "gpt-6-luna",
+          "case": "title",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1065,
+            "output_tokens": 184,
+            "total_tokens": 1249
+          },
+          "elapsed_seconds": 3.252
+        },
+        {
+          "model": "gpt-6-luna",
+          "case": "price_missing",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1070,
+            "output_tokens": 671,
+            "total_tokens": 1741
+          },
+          "elapsed_seconds": 5.697
+        },
+        {
+          "model": "gpt-6-luna",
+          "case": "price_conflict",
+          "verdict": "error",
+          "error_code": "RUNTIME_ERROR",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1073,
+            "output_tokens": 338,
+            "total_tokens": 1411
+          },
+          "elapsed_seconds": 3.633
+        },
+        {
+          "model": "gpt-6-luna",
+          "case": "vat_excluded",
+          "verdict": "error",
+          "error_code": "RUNTIME_ERROR",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1072,
+            "output_tokens": 630,
+            "total_tokens": 1702
+          },
+          "elapsed_seconds": 6.621
+        },
+        {
+          "model": "gpt-6-luna",
+          "case": "soomgo_missing",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 791,
+            "output_tokens": 332,
+            "total_tokens": 1123
+          },
+          "elapsed_seconds": 4.192
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "case": "title",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1065,
+            "output_tokens": 154,
+            "total_tokens": 1219
+          },
+          "elapsed_seconds": 3.036
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "case": "price_missing",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1070,
+            "output_tokens": 385,
+            "total_tokens": 1455
+          },
+          "elapsed_seconds": 5.237
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "case": "price_conflict",
+          "verdict": "error",
+          "error_code": "RUNTIME_ERROR",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1073,
+            "output_tokens": 339,
+            "total_tokens": 1412
+          },
+          "elapsed_seconds": 5.305
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "case": "vat_excluded",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 1072,
+            "output_tokens": 226,
+            "total_tokens": 1298
+          },
+          "elapsed_seconds": 3.5
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "case": "soomgo_missing",
+          "verdict": "pass",
+          "error_code": null,
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 791,
+            "output_tokens": 177,
+            "total_tokens": 968
+          },
+          "elapsed_seconds": 2.798
+        }
+      ]
+    },
+    {
+      "command": "uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation",
+      "observed": "합성 시험 44개와 독립 bootstrap replay 통과",
+      "verdict": "pass"
+    }
+  ],
+  "observations": [
+    "실제 모델 응답에서 원문 조각을 제목으로 오분류하는 사례가 있어 명시적 항목 라벨을 요구하도록 보완했다.",
+    "모델이 가격 또는 VAT 근거를 놓칠 수 있어 제한적 표현에 대해 별도 차단 규칙을 추가했다.",
+    "상위 패키지와 하위 답변이 함께 전달되는 직접 I2 시험에서 나머지 패키지를 보존했으나 R03은 현재 상위 답변을 제거한다."
+  ],
+  "limitations": [
+    "각 모델·사례당 1회인 소규모 관측으로 모델을 확정할 수 없다.",
+    "API 응답 토큰 사용량은 마지막 비교 10건에 한정되며 이전 진단 및 실제 청구 총액이 아니다.",
+    "timeout·늦은 revision 폐기와 중첩 수정의 R03 통합, 가격·단위·VAT 전체 표현, AT-01·T5-08·T6-02와 실제 플랫폼 동작은 미검증이다."
+  ],
+  "references": [
+    {
+      "url": "https://github.com/ik-e/chaja-you/pull/51"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+    }
+  ]
+}

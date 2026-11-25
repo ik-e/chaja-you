@@ -62,7 +62,7 @@
     }
   ],
   "result": {
-    "summary": "PR #49 초안에서 최신 공통 기준을 반영해 모의 등록 정보 준비, 원문 근거 처리와 가격 충돌 검증을 부분 구현하고 R03 합성 연결을 시험했다. 실제 모델·전체 제품 수용 시험은 미실행이다.",
+    "summary": "PR #51에서 실제 OpenAI 모델의 합성 사례 비교와 안전 보완을 진행했다. 가격 충돌 오류가 남아 TASK-049 수용 기준은 미완료다.",
     "claims": [
       {
         "id": "C49-1",
@@ -90,6 +90,14 @@
           "E49-1",
           "E49-2"
         ]
+      },
+      {
+        "id": "C49-4",
+        "text": "실제 모델 동일 합성 사례 각 5개에서 GPT-6 Luna 3개와 GPT-5.6 Luna 4개가 통과했으며 양쪽 모두 가격 충돌 사례에서 오류가 발생했다.",
+        "status": "부분 관측",
+        "evidence_ids": [
+          "E49-4"
+        ]
       }
     ],
     "evidence": [
@@ -107,6 +115,11 @@
         "id": "E49-3",
         "label": "OpenAI 모의 HTTP 시험",
         "url": "https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_openai_extractor.py"
+      },
+      {
+        "id": "E49-4",
+        "label": "실제 모델 합성 실행 결과",
+        "path": "docs/artifacts/runs/RUN-TASK-049-OPENAI-20261125.json"
       }
     ],
     "verification": [
@@ -140,17 +153,24 @@
         "evidence_ids": [
           "E49-1"
         ]
+      },
+      {
+        "criterion": "실제 모델 동일 합성 5개 사례 비교",
+        "verdict": "fail",
+        "evidence_ids": [
+          "E49-4"
+        ]
       }
     ],
     "uncertainties": [
-      "실제 OpenAI 접근 권한·예산 및 모델별 품질·비용 시험 미확인",
-      "모델이 인용에서 VAT 표현이나 원문 충돌을 빠뜨리는 경우의 실제 성능 미검증",
-      "중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 담당자 간 합의 및 실제 통합 시험 미완료",
-      "모의 프로필은 실제 플랫폼 정책·등록 성공을 의미하지 않음"
+      "모델별 소규모 사례에서 가격 충돌 오류가 남아 신뢰도·모델 선정 미확정",
+      "모델의 VAT·가격 표현 누락을 모든 표현에서 탐지하는지 미검증",
+      "중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 R03 통합 검증 미완료",
+      "실제 플랫폼과 AT-01·T5-08·T6-02 제품 수용 미검증"
     ],
     "decision_requests": [
-      "R03과 D05의 중첩 수정 보존 및 timeout·revision 처리 계약을 사례 기반으로 협의",
-      "R01의 승인된 OpenAI 합성 실험 접근 환경 및 예산 준비 후 모델 비교"
+      "R03과 D05 중첩 수정 보존 및 timeout·revision 처리 계약 협의",
+      "R01과 합성 평가 실패·모델 후보·향후 예산 및 검증 범위 공유"
     ]
   },
   "traceability": {
