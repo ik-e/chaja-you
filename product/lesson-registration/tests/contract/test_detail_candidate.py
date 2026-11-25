@@ -12,6 +12,7 @@ from contracts.canonical import asset_digest, json_digest
 from contracts.detail_candidate import (profile_digest, payload_digest, binding_digest,
     effect_key, default_manifest, operations, check_readback)
 from contracts.validation import SchemaCatalog
+from lesson_registration.app.knowledge import Knowledge
 from evidence.detail_reference import Ledger, Denied, ViewerPolicy, RevisionGate
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,6 +28,9 @@ class DigestChecks(unittest.TestCase):
             with self.subTest(platform=entry["platform"]):
                 scope = copy.deepcopy(replay[entry["platform"]]["cases"]["I4"]["input"]["accepted"]["scope"])
                 scope["profile_ref"]["digest"] = profile_digest(entry)
+                actual = Knowledge(registry=profiles).get_profile(scope["profile_ref"])
+                self.assertEqual(actual["ref"], scope["profile_ref"])
+                catalog.named("Profile", actual)
                 catalog.named("Scope", scope)
                 catalog.profile_values(entry["id"], scope["values"])
                 ops = operations(scope, entry, default_manifest(entry))

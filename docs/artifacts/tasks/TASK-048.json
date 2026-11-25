@@ -109,10 +109,16 @@
     },
     {
       "path": "product/lesson-registration/tests/contract/test_detail_candidate.py"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-07_openai-model-experiment-direction.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/OPENAI-EXPERIMENT.md"
     }
   ],
   "result": {
-    "summary": "Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인.",
+    "summary": "Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 재검증 대기. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정).",
     "claims": [
       {
         "id": "C048-1",
@@ -278,6 +284,26 @@
         "id": "E048-18",
         "label": "독립 후보 재현 시험",
         "path": "product/lesson-registration/tests/contract/test_detail_candidate.py"
+      },
+      {
+        "id": "E048-19",
+        "label": "이전 D01~D06 후보 공통 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45539145817"
+      },
+      {
+        "id": "E048-20",
+        "label": "이전 원격 세션 기술 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45539145758"
+      },
+      {
+        "id": "E048-21",
+        "label": "OpenAI API 실험 방향",
+        "path": "docs/human/responses/HRESP-20261125-07_openai-model-experiment-direction.md"
+      },
+      {
+        "id": "E048-22",
+        "label": "실제 모델 실험 환경 계획",
+        "path": "product/lesson-registration/evidence/OPENAI-EXPERIMENT.md"
       }
     ],
     "verification": [
@@ -349,6 +375,22 @@
           "E048-16",
           "E048-18"
         ]
+      },
+      {
+        "criterion": "24a1c35 이전 reference/물리 후보 (새 후보/실제 제품 별도)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-19",
+          "E048-20"
+        ]
+      },
+      {
+        "criterion": "OpenAI API 접근·비용·실제 모델 실험",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E048-21",
+          "E048-22"
+        ]
       }
     ],
     "uncertainties": [
@@ -356,7 +398,8 @@
       "12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정",
       "실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증",
       "초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요",
-      "실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도."
+      "실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도.",
+      "OpenAI 공급자 방향 수용; API 계정/예산/SDK/모델 비교 및 시험 미확인; 최신 후보 CI와 담당자 적합성 별도."
     ],
     "decision_requests": [
       "관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.",
@@ -371,7 +414,8 @@
       "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
       "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
       "docs/human/responses/HRESP-20261125-04_r03-app-followup.md",
-      "docs/human/responses/HRESP-20261125-05_common-detail-direction.md"
+      "docs/human/responses/HRESP-20261125-05_common-detail-direction.md",
+      "docs/human/responses/HRESP-20261125-07_openai-model-experiment-direction.md"
     ],
     "design_refs": [
       "CS-01",

@@ -6,9 +6,13 @@ from .canonical import json_digest, asset_digest
 TARGET_FIELDS = ("environment", "platform", "external_account_ref", "object_kind", "slot_ref")
 
 def profile_digest(entry):
-    value = deepcopy(entry)
-    value.pop("digest", None)
-    return json_digest(value)
+    # Named Profile view is the digest domain; the raw registry is separately pinned.
+    view = {
+        "ref": {k: entry[k] for k in ("platform", "object_kind", "version", "environment")},
+        **{k: deepcopy(entry[k]) for k in ("routes", "fields", "prohibitions", "steps", "goal", "evidence_ids")},
+        "value_contract_ref": entry["id"],
+    }
+    return json_digest(view)
 
 def payload_digest(values):
     return json_digest(values)

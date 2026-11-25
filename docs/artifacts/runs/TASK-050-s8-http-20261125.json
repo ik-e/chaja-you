@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "id": "RUN-TASK-050-S8-20261125",
+  "kind": "document",
+  "status": "독립 검증 완료; 제품 통합 미확인",
+  "task_id": "TASK-050",
+  "owner": "R03",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "execution_kind": "local_mock_http_verification",
+  "executed_at": "2026-11-25",
+  "input": {
+    "head": "fa40128df3e652efc93948cc87a23d52b5662f2c",
+    "worktree": "uncommitted changes on r03/product-app",
+    "common_baseline": "c4742a1",
+    "providers": "SchemaPrep and GatewayRuntime explicitly injected; synthetic fixture image; temporary SQLite; loopback ephemeral port"
+  },
+  "output": [
+    "H1-H9 FastAPI adapter",
+    "strict JSON and bounded multipart",
+    "request-independent worker and startup recovery"
+  ],
+  "verification": [
+    {
+      "command": "uv run --locked --group app --group verification python dev.py test r03-app",
+      "expected": "existing and new HTTP tests pass",
+      "observed": "Ran 191 tests in 49.350s; OK (177 previous + 14 HTTP)",
+      "verdict": "pass"
+    },
+    {
+      "command": "uv run --locked --group app --group verification python dev.py doctor",
+      "observed": "source pins, ownership, synthetic image passed",
+      "verdict": "pass"
+    },
+    {
+      "command": "uv run --locked --group app --group verification python dev.py test common",
+      "observed": "5 tests; OK",
+      "verdict": "pass"
+    },
+    {
+      "command": "uv run --locked --group app --group verification python -m unittest discover -s tests/contract/standard_schema",
+      "observed": "10 tests; 36 named and 36 HTTP fixture payloads checked; OK",
+      "verdict": "pass"
+    },
+    {
+      "command": "uv run --locked --group app --group verification python -m unittest discover -s tests/integration",
+      "observed": "2 tests; OK; bootstrap smoke is not product validation",
+      "verdict": "pass"
+    },
+    {
+      "command": "uv run --locked --group app --group verification python dev.py check-changes r03-app --base c4742a1",
+      "observed": "failed on pre-existing docs/members/R03/daily/README.md and 2026-11-25.md before this result documentation update",
+      "verdict": "fail"
+    }
+  ],
+  "requirements": [
+    "REQ-01",
+    "REQ-05",
+    "REQ-08",
+    "REQ-10"
+  ],
+  "acceptance": [
+    "r03-app-AC1",
+    "r03-app-AC2",
+    "r03-app-AC3"
+  ],
+  "observations": [
+    "kmong and soomgo H1-H9 flow confirmed with synthetic providers",
+    "lost H7 response followed by identical retry: HTTP 200 and one execution",
+    "blocked worker/slow PREP does not block GET",
+    "post-admission runtime failure: stopped/unknown; no repeat execution",
+    "startup recovery stops unfinished accepted job without dispatch",
+    "all application error status mappings and internal exception redaction passed"
+  ],
+  "limitations": [
+    "R04 actual UI, R05 viewer and real providers not connected",
+    "22 product gates not executed",
+    "single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05",
+    "mock header identity is not production authentication",
+    "stdlib bounded MIME parsing and 16MiB total limit are local mock choices"
+  ],
+  "source_sha256": {
+    "product/lesson-registration/src/lesson_registration/app/__init__.py": "1081a71c29ce4a3176cba0a56d050bd170dfc85f631ddd0d4c523eb5b255e12b",
+    "product/lesson-registration/src/lesson_registration/app/contract.py": "fd13d5577b1fbee62c1f5fcde670ad5f83dabd53e3c654ceded61e7d7042c2c6",
+    "product/lesson-registration/src/lesson_registration/app/coordinator.py": "72c3012db23893529512ecc4a549a376578f25a7064911860002072995e8a674",
+    "product/lesson-registration/src/lesson_registration/app/errors.py": "9e219a748ded2152af2a7b1a404a66d87e2943cc850f351fca86ead6d8462454",
+    "product/lesson-registration/src/lesson_registration/app/gateway.py": "74402a14f65e37d21e216e720f831d6c53d2f7a175b95700cd91e23a34f9635f",
+    "product/lesson-registration/src/lesson_registration/app/http/__init__.py": "57154d1ceccb79b8c13a4ca851b8c42b526b1e6064676bf6664179d2907d653a",
+    "product/lesson-registration/src/lesson_registration/app/http/api.py": "20f81ad622fb725366df3fa13356b46fcaf92b59539ea4fdf4687c9643c32e15",
+    "product/lesson-registration/src/lesson_registration/app/http/parsing.py": "791522a1e40e11e84cdbe8c6c7744e419da3c61d898a40b846b690bba1f97889",
+    "product/lesson-registration/src/lesson_registration/app/ids.py": "ca8bce224c26bdc1b509901da93466dc0d693e0e63ade6f1e9b0102430c8c147",
+    "product/lesson-registration/src/lesson_registration/app/knowledge.py": "a1a405b506cbd5d6e8005de4d65afea9ac82ccf6f807dd4f4fcf57274a9e357d",
+    "product/lesson-registration/src/lesson_registration/app/ports.py": "2b0cf77585d3780a0ac9c595f784a8cb8ae3d872f3fd26520e2b7192331f0041",
+    "product/lesson-registration/src/lesson_registration/app/result.py": "065d9cad5df535817ce2e1fe0404fad2e5ce066735be053575368fef9a4e2a6b",
+    "product/lesson-registration/src/lesson_registration/app/service.py": "7ceef4dd232d2292f1e23c60819d31e2a7b111063f12294e9b7938b77d1523bf",
+    "product/lesson-registration/src/lesson_registration/app/store/__init__.py": "56e403e71eea50656390722ba6910db5795638af614890f2afd556d2c97c2478",
+    "product/lesson-registration/src/lesson_registration/app/store/atomic.py": "90e74575b20b76e437763184fb7f9abefdbfb3f9c51253e7724c57bf8ac186b2",
+    "product/lesson-registration/src/lesson_registration/app/store/coordinator_store.py": "745568d7a57bea6ce79fab23f03f08eafe8392f72a44b8d929c7d68d6eb57624",
+    "product/lesson-registration/src/lesson_registration/app/store/db.py": "ffb2d541c43d3312085622112d7baea02cb61d5c1149d2407c8d68be5d5522dc",
+    "product/lesson-registration/src/lesson_registration/app/store/repo.py": "d438585f3a47db1eb9ed34668e365ac41355ec6dda1327133b346660d6bc33d3",
+    "product/lesson-registration/tests/modules/app/support.py": "4901c800fe52f3cba2d6ab1e7184f75e73492d48adc25934260e7a7e6ee07c26",
+    "product/lesson-registration/tests/modules/app/test_bootstrap.py": "1c0b43331ead1a5af54862edbfd5d4203ef7320625dbf64af472236678d87926",
+    "product/lesson-registration/tests/modules/app/test_contract_alignment.py": "403f6565ec38acc26cfd3224ec4c032bad1707fb672d35a81e284dd0337bd2d8",
+    "product/lesson-registration/tests/modules/app/test_s0_contract.py": "51e088d677ce2dd484ba737363117eca2da53fe9a2ad2bae8f1604430ccb3eff",
+    "product/lesson-registration/tests/modules/app/test_s1_source.py": "54eb33a964d7aec61ec53c3f427930bc496e0358f012765bfdeb298ee10d923f",
+    "product/lesson-registration/tests/modules/app/test_s2_prepare.py": "f4dafd013bb56cfd2c38649945803d0f2440f166ba3cf2426b2baed624ff09c9",
+    "product/lesson-registration/tests/modules/app/test_s3_auth_start.py": "805b75c5aef6c2106b4774b8902956b5cb6271b173bb12b2c117e0f30fcd0c55",
+    "product/lesson-registration/tests/modules/app/test_s4_atomic.py": "30e2efe9c861a28f3d9828a5565d6c79bec94f185eebc585239bea40f5bec49c",
+    "product/lesson-registration/tests/modules/app/test_s5_result.py": "ec207203e7f7b01cb358a52cd041fa5f6bddd7d310a1ace528788b55b43d424f",
+    "product/lesson-registration/tests/modules/app/test_s6_assets.py": "1b47f05ce2613d2791b07dc5259c826fd39b32e73795dd6bb0558287e114fda5",
+    "product/lesson-registration/tests/modules/app/test_s7_multi_platform.py": "4fbf7f7bef45aafd119ffa9c7b52dbc82b8368798462e7807a4f01bd5e492e69",
+    "product/lesson-registration/tests/modules/app/test_s8_http.py": "f75d0048da1f836d35b1008f507629e1a594f1e2e86667dcd16d2b8d911ce7e6"
+  },
+  "references": [
+    {
+      "path": "product/lesson-registration/tests/modules/app/test_s8_http.py"
+    },
+    {
+      "path": "product/lesson-registration/tests/modules/app/SPEC.md"
+    },
+    {
+      "url": "https://fastapi.tiangolo.com/advanced/events/"
+    }
+  ]
+}

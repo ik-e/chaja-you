@@ -27,8 +27,8 @@
 | [TASK-048](../artifacts/tasks/TASK-048.json) | 공통 계약·개발 환경 유지 및 점진 통합 검증 | R01 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-049](../artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-050](../artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
+| [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-053](../artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-054](../artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
 
@@ -40,7 +40,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인.
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 재검증 대기. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정).
 
 검증과 근거
 
@@ -53,6 +53,8 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - canonical byte vectors·공통 경계 회귀 · pass
 - owner 간 세부 계약 합의 및 WBS 확정 · inconclusive
 - D01~D06 독립 후보 시험 및 실제 owner 구현 적합성 (구분; 결과 CI 확인) · inconclusive
+- 24a1c35 이전 reference/물리 후보 (새 후보/실제 제품 별도) · pass
+- OpenAI API 접근·비용·실제 모델 실험 · inconclusive
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
 - [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
@@ -66,11 +68,15 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [공통 세부 계약 후보](../../product/lesson-registration/contracts/DETAIL-CANDIDATE.json)
 - [원격 인증 세션 위협/통제/운영 경계](../../product/lesson-registration/contracts/SESSION-SECURITY.md)
 - [독립 후보 재현 시험](../../product/lesson-registration/tests/contract/test_detail_candidate.py)
+- [OpenAI API 실험 방향](../human/responses/HRESP-20261125-07_openai-model-experiment-direction.md)
+- [실제 모델 실험 환경 계획](../../product/lesson-registration/evidence/OPENAI-EXPERIMENT.md)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 - [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
 - [canonical helper 및 공통 경계 회귀](https://github.com/ik-e/chaja-you/actions/runs/45534986964)
 - [제품 lock 공통 회귀 검증](https://github.com/ik-e/chaja-you/actions/runs/45535125564)
+- [이전 D01~D06 후보 공통 CI](https://github.com/ik-e/chaja-you/actions/runs/45539145817)
+- [이전 원격 세션 기술 CI](https://github.com/ik-e/chaja-you/actions/runs/45539145758)
 
 남은 불확실성과 결정 요청
 
@@ -79,6 +85,7 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - 실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증
 - 초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요
 - 실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도.
+- OpenAI 공급자 방향 수용; API 계정/예산/SDK/모델 비교 및 시험 미확인; 최신 후보 CI와 담당자 적합성 별도.
 - 관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.
 - R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.
 - D01~D06 R01 후보 기준으로 담당자별 실제 구현 차이·반례·공수 반환. 안정적인 slot/manifest/readback, actual dispatch fence, viewer/I2/factory 세부 서명·환경은 실제 확인 후 확정. 기존 제품 범위 및 업무 배정 유지.
@@ -93,34 +100,30 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-050.json)
 
-R03 e29fb69: PLAN/SPEC 및 S0~S7 앱 구현(저장소·CO·KNOW·RESULT·원자 연산·복구·첨부·플랫폼 독립성) 보고. 독립 mock 174개, 공통 계약 10개, 통합 2개 통과는 담당자 보고; 담당 경로 변경 26개 확인, 시험 독립 재현 미확인. main c4742a1 공통 lock으로 S8 착수 가능; 제품 수용 22개 미실행.
+S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.
 
 검증과 근거
 
-- 담당 경로·PLAN/SPEC·구현 존재 및 착수 · pass
-- R03 독립 시험 174/10/2 및 schema 비교 독립 재현 · inconclusive
-- S8 HTTP·실제 provider 연결·제품 수용 22개 · inconclusive
-- [R03 진행·시험 보고 및 검토 한계](../../product/lesson-registration/evidence/r03-progress-20261125.json)
-- [R01 후속 지시 및 전달](../human/responses/HRESP-20261125-04_r03-app-followup.md)
-- [고정 R03 구현 커밋](https://github.com/ik-e/chaja-you/commit/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf)
-- [고정 R03 SPEC](https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/SPEC.md)
-- [공통 제품 초기 lock](https://github.com/ik-e/chaja-you/commit/c4742a139697811264666d7bc37ad54688887b14)
+- AC1~AC3 관련 독립 앱 회귀 및 HTTP 경계 · pass
+- 실제 UI/viewer/provider 및 22개 제품 gate · inconclusive
+- [근거](../artifacts/runs/TASK-050-s8-http-20261125.json)
 
 남은 불확실성과 결정 요청
 
-- S8 multipart/추가 의존성, 최신 main 병합 후 회귀 및 공통 검증기 적용 결과 미확인
-- STORE/lease/operation manifest·digest binding·viewer·I2·factory 담당자 합의 및 실제 provider 미확인
-- 11인일은 초기 추정이며 잔여 공수 및 WBS 미확정
-- R03은 기존 PLAN/SPEC에 공통 기준 SHA, 검증/미검증, R05·R04·R02 접점 및 잔여 공수 기록. 공통 변경은 R01 검토.
-- W10/W16/PREP 인계 후 유지보수는 별도 배정 전 TASK-050에 포함하지 않음.
+- R04 actual UI, R05 viewer and real providers not connected
+- 22 product gates not executed
+- single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05
+- mock header identity is not production authentication
+- stdlib bounded MIME parsing and 16MiB total limit are local mock choices
+- 기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다.
 
-### TASK-051 · 할 일
+### TASK-051 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-051.json)
 
 결과 미기록.
 
-### TASK-052 · 할 일
+### TASK-052 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-052.json)
 

@@ -94,9 +94,11 @@ class Probe(unittest.TestCase):
                 self.end_headers()
                 self.wfile.write(b"<h1>synthetic session</h1>")
             def log_message(self,*args): pass
-        with HTTPServer(("127.0.0.1",0),Handler) as server:
+        with HTTPServer(("127.0.0.1",0),Handler) as server, HTTPServer(("127.0.0.1",0),Handler) as denied_server:
             t = threading.Thread(target=server.serve_forever,daemon=True)
+            denied_thread = threading.Thread(target=denied_server.serve_forever,daemon=True)
             t.start()
+            denied_thread.start()
             try:
                 from urllib.parse import urlsplit
                 from playwright.sync_api import Error
@@ -107,11 +109,14 @@ class Probe(unittest.TestCase):
                         a = browser.new_context(service_workers="block")
                         b = browser.new_context(service_workers="block")
                         allowed = urlsplit(base).netloc
+                        denied_url = f"http://127.0.0.1:{denied_server.server_port}/blocked"
+                        rejected = []
                         def guard(route):
                             u = urlsplit(route.request.url)
                             if u.scheme == "http" and u.netloc == allowed:
                                 route.continue_()
                             else:
+                                rejected.append(route.request.url)
                                 route.abort()
                         a.route("**/*",guard)
                         pa,pb = a.new_page(),b.new_page()
@@ -122,8 +127,11 @@ class Probe(unittest.TestCase):
                         self.assertEqual(len(a.cookies()),1)
                         self.assertEqual(b.cookies(),[])
                         self.assertIsNone(pb.evaluate("localStorage.getItem('mock-session')"))
+                        # Positive control: the denied origin is actually reachable without guard.
+                        self.assertEqual(pb.goto(denied_url,timeout=3000).status, 200)
                         with self.assertRaises(Error):
-                            pa.goto("http://127.0.0.1:1/blocked",timeout=3000)
+                            pa.goto(denied_url,timeout=3000)
+                        self.assertIn(denied_url, rejected)
                         a.close()
                         self.assertTrue(pa.is_closed())
                         fresh = browser.new_context(service_workers="block")
@@ -137,7 +145,9 @@ class Probe(unittest.TestCase):
                         browser.close()
             finally:
                 server.shutdown()
+                denied_server.shutdown()
                 t.join()
+                denied_thread.join()
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

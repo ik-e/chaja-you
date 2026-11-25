@@ -11,7 +11,7 @@
 
 - 실제 제품: IB/PD 공통 방향 및 초기 제품 lock/기술 검증·회귀 통과. R03 S0~S7·mock 시험 174/10/2 보고(재현 미확인), S8 착수 가능; R05 수신/7근무일 확인. 담당자 세부 계약·잔여 공수·제품 시험·일정 미확정. 실서비스 실행 금지.
 - 이전 기획·WBS: 기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류
-- 제출 문서: 기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)
+- 제출 문서: 이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인
 
 ## 확정한 방향
 
@@ -53,8 +53,8 @@
 | [TASK-048](docs/artifacts/tasks/TASK-048.json) | 공통 계약·개발 환경 유지 및 점진 통합 검증 | R01 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-049](docs/artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-050](docs/artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-051](docs/artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-052](docs/artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-051](docs/artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
+| [TASK-052](docs/artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-053](docs/artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-054](docs/artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
 

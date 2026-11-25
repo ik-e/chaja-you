@@ -15,7 +15,7 @@
         "PD-03",
         "PD-05"
       ],
-      "selection": "Hash full validated raw profile entry (without self digest), exact Scope, exact normalized values, raw bytes; binding.v1 binds Scope hash and immutable manifest definition. Ordered assets; no input copy to readback. Candidate one operation per step; stable logical ID independent of profile version/registration. Persist pinned manifest snapshot with accept.",
+      "selection": "ProfileRef.digest = SHA-256 of pinned named Profile view excluding ref.digest (R03 KNOW and R02 PREP mapping); raw registry/value schema remain independently pinned. Hash exact Scope, normalized platform values, raw bytes; binding.v1 binds Scope hash and immutable manifest definition. Ordered assets; no input copy to readback. Candidate one operation per step; stable logical effect ID independent of profile version/registration. Persist pinned manifest snapshot with accept.",
       "alternatives": [
         "step input only: submit steps empty",
         "scope only: no operation identity"
@@ -150,8 +150,15 @@
     "physical_probe": "product/lesson-registration/evidence/probe_physical.py",
     "command": "cd product/lesson-registration && uv run --locked --python 3.12 python -m unittest discover -s tests/contract -p test_detail_candidate.py -v",
     "physical_command": "uv run --locked --all-groups --python 3.12 python evidence/probe_physical.py",
-    "result": "not_run_at_authoring; consult exact commit CI; synthetic/reference only",
-    "prior_unreproduced": "Earlier chat assertion of 13/13 is not evidence; replace with actual run results."
+    "result": "Prior candidate 24a1c35 CI 4 workflows passed: 19 new reference tests and 5 physical tests. Updated candidate digest and origin probe require fresh CI; actual provider conformance remains unverified.",
+    "prior_unreproduced": "Earlier chat assertion of 13/13 is not evidence; replace with actual run results.",
+    "prior_ci": {
+      "commit": "24a1c3579e84ae6a8e76e4b78135288babc5f51b",
+      "common": "https://github.com/ik-e/chaja-you/actions/runs/45539145817",
+      "physical": "https://github.com/ik-e/chaja-you/actions/runs/45539145758",
+      "bootstrap": "https://github.com/ik-e/chaja-you/actions/runs/45539145744",
+      "docs": "https://github.com/ik-e/chaja-you/actions/runs/45539145737"
+    }
   },
   "owner_review": {
     "R02": [
