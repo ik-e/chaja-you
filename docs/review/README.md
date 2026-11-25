@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 PR #44 공통 기준 main e182cf8 및 CI 4종 통과. R03 S8 191개 독립 회귀 통과·잔여 3인일 보고. R05 remote 8e506e1 15개, kmong ae582bf 32개 담당자 보고·코드 검토, 잔여 3~3.5근무일(두 TASK 합계); 독립 CI·D01~04/실제 연결 미완료. R02 PR #49, R04 실제 UI/adapter 보완 및 담당 잔여 공수 확인. WBS V0.6 미확정, 22개 제품 시험 미실행, live 금지.
+11/25 PR #44 공통 기준 main e182cf8 및 CI 4종 통과. R03 S8 191개 독립 회귀 통과·잔여 3인일 보고. R05 remote 8e506e1 15개, kmong ae582bf 32개 담당자 보고 및 독립 CI 재현, 잔여 3~3.5근무일(두 TASK 합계); D01~04/실제 연결 미완료. R02 PR #49, R04 실제 UI/adapter 보완 및 담당 잔여 공수 확인. WBS V0.6 미확정, 22개 제품 시험 미실행, live 금지.
 
 ## 결정 요청
 
@@ -142,17 +142,18 @@ S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-053.json)
 
-R05 8e506e1: Playwright Chromium Runtime I3/I4, CDP frame/input, 실제 R03 Coordinator/SQLite StoreGateway + 중립 loopback mock. Windows 관리형 Chromium 143.0.7499.4에서 15개(bootstrap 1+14) 통과 보고. 응답 유실 시 Chromium POST 재전송 발견 및 route.fetch 단일 시도 방지 시험 포함. 코드/시험 확인, WS endpoint·실제 크몽 runtime 연동·D01~04 안전 정합성 및 독립 CI 미완료.
+R05 8e506e1: Playwright Chromium Runtime I3/I4, CDP frame/input, 실제 R03 Coordinator/SQLite StoreGateway + 중립 loopback mock. Windows 관리형 Chromium 143.0.7499.4에서 15개(bootstrap 1+14) 통과 보고. 응답 유실 시 Chromium POST 재전송 발견 및 route.fetch 단일 시도 방지 시험 포함. 코드/시험 확인, WS endpoint·실제 크몽 runtime 연동·D01~04 안전 정합성  미완료. GitHub Ubuntu 고정 커밋 재현 15/15 통과(22.845초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도.
 
 검증과 근거
 
 - 고정 코드·시험·담당자 보고 확인 · pass
-- 15개 고정 구현의 독립 GitHub CI 재현 · inconclusive
+- 15개 고정 구현의 독립 GitHub CI 재현 · pass
 - 실제 모듈 연결·공통 계약 및 관련 제품 gate · inconclusive
 - [R01 범위·근거 및 잔여 공수](../../product/lesson-registration/evidence/r05-progress-20261125.json)
 - [공통 접점 검토](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
 - [고정 담당 PLAN/시험 기록](https://github.com/ik-e/chaja-you/blob/8e506e1a7a27756909b0ca40b074bc37bc0dc58c/product/lesson-registration/tests/modules/remote/PLAN.md)
 - [구현 commit](https://github.com/ik-e/chaja-you/commit/8e506e1a7a27756909b0ca40b074bc37bc0dc58c)
+- [R01 독립 고정 커밋 CI](https://github.com/ik-e/chaja-you/actions/runs/45558575503/job/139016494668)
 
 남은 불확실성과 결정 요청
 
@@ -170,17 +171,18 @@ R05 8e506e1: Playwright Chromium Runtime I3/I4, CDP frame/input, 실제 R03 Coor
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-054.json)
 
-R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성/독립 CI 미완료.
+R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성 미완료. GitHub Ubuntu 고정 커밋 재현 32/32 통과(10.549초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도.
 
 검증과 근거
 
 - 고정 코드·시험·담당자 보고 확인 · pass
-- 32개 고정 구현의 독립 GitHub CI 재현 · inconclusive
+- 32개 고정 구현의 독립 GitHub CI 재현 · pass
 - 실제 모듈 연결·공통 계약 및 관련 제품 gate · inconclusive
 - [R01 범위·근거 및 잔여 공수](../../product/lesson-registration/evidence/r05-progress-20261125.json)
 - [공통 접점 검토](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
 - [고정 담당 PLAN/시험 기록](https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md)
 - [구현 commit](https://github.com/ik-e/chaja-you/commit/ae582bf7ff04435f4f2876d72a916c141282d85f)
+- [R01 독립 고정 커밋 CI](https://github.com/ik-e/chaja-you/actions/runs/45558575503/job/139016494319)
 
 남은 불확실성과 결정 요청
 

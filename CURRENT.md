@@ -9,7 +9,7 @@
 
 [PHASE-20261125-01](docs/human/phase-intents/PHASE-20261125-01.md)
 
-- 실제 제품: 공통 기준선 PR #44 main 반영 및 CI 4종 통과; R03 S8 실제 HTTP/SQLite 합성 회귀 확인. R05 053·054 초기 구현·15/32 시험 담당자 보고, 잔여 3~3.5근무일; 실제 WS/adapter 및 공통 보안·digest 정합성·독립 CI 미확인. 실제 제품 22개 gate·일정 미확정, live 금지.
+- 실제 제품: 공통 기준선 PR #44 main 반영 및 CI 4종 통과; R03 S8 실제 HTTP/SQLite 합성 회귀 확인. R05 053·054 초기 구현·15/32 시험 담당자 보고 및 독립 CI 재현, 잔여 3~3.5근무일; 실제 WS/adapter 및 공통 보안·digest 정합성 미확인. 실제 제품 22개 gate·일정 미확정, live 금지.
 - 이전 기획·WBS: 기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류
 - 제출 문서: 이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인
 
