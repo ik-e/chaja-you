@@ -32,7 +32,8 @@
   "stack": {
     "bootstrap": "Python stdlib only (isolated uv project, Python 3.12 target; lock permits 3.13 for compatibility check)",
     "product_candidates": "Python/FastAPI/SQLite and browser/frontend implementation technologies remain review candidates; no product dependency choices implied",
-    "root_dependency_changes": false
+    "root_dependency_changes": false,
+    "contract_validation": "jsonschema==4.25.1 isolated verification command; no product dependency or transitive full lock approved yet"
   },
   "packages": [
     {
@@ -481,10 +482,10 @@
     }
   ],
   "branches": {
-    "rule": "Each assigned package uses its own branch and checkout from the activation commit; no edits to shared paths by non-owner. Use the initial branch commit as check-changes --base; record task result separately from product-only branch change checks.",
+    "rule": "Each package keeps its branch and checkout. Sync the accepted common baseline from main before using new bindings; record exact synchronized common base SHA and use it as check-changes --base. Own paths only. Never overwrite team branch work; propose shared changes to R01.",
     "suggested_prefix": "<role>/product-<package>",
     "existing_tasks": "043–047 preserved inactive; new TASK-048~054 assigned",
-    "base": "activation commit containing this WORKSPACE.json; exact branch refs verified separately"
+    "base": "initial activation commit, or a later accepted shared baseline explicitly synchronized from main (record its exact SHA)"
   },
   "isolation": {
     "venv": "per checkout product/lesson-registration/.venv",
@@ -498,7 +499,8 @@
   "activation": [
     "R01 logical design adoption recorded in main",
     "Bootstrap Python 3.12 clean checkout passed (run 45525881756)",
-    "TASK-048~054 assigned; actual member receipt, availability and detailed technology pending"
+    "TASK-048~054 assigned; actual member receipt, availability and detailed technology pending",
+    "IB-01~05 direction approved; standard synthetic contract CI passed 10/10 and 72 payloads (45527624382)."
   ],
   "decisions": [
     {
@@ -552,5 +554,14 @@
     "workflow_run": "https://github.com/ik-e/chaja-you/actions/runs/45525881756",
     "conclusion": "success",
     "scope": "Python 3.12 locked bootstrap; no product execution"
+  },
+  "implementation_binding": {
+    "path": "product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json",
+    "status": "direction_approved_initial_shared_binding",
+    "authority_ref": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
+    "tested_commit": "5876907585666c0389719d90331b2b231afea3d0",
+    "verification_ref": "product/lesson-registration/evidence/common-contract-ci-20261125.json",
+    "verification_run": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+    "changes": "Logical pins unchanged; concrete provider/launch/stack review pending. Merge accepted main before using the new common implementation boundary; use the synchronized base for ownership checks."
   }
 }

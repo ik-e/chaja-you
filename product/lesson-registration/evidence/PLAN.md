@@ -6,15 +6,17 @@
 
 | 단계 | 산출물 | 상태/판정 기준 |
 | --- | --- | --- |
-| 1. 정합성 | 전용 설계 JSON 라우팅, 채택/고정 원본 일치, 기존 문서 재생성 | 별도 검증 CI로 확인; 과거 원본 보존 |
-| 2. 코드 경계 | [binding](../contracts/IMPLEMENTATION-BINDING.json), [Python Protocol](../contracts/interfaces.py), [viewer](../contracts/viewer.d.ts) | 후보; 아래 사용자/담당자 검토 후 공통으로 고정 |
-| 3. 공통 검증 | [표준 스키마 검사](../contracts/validation.py), [시험](../tests/contract/standard_schema/test_contracts.py) | Python 3.12 CI의 실제 실행 로그로 판정; replay/결함 주입만 |
-| 4. 조립 구조 | [wiring](../src/lesson_registration/composition/wiring.py), [replay provider](../stubs/replay_ports.py) | 명시 주입/교체; 실제 CO 및 원격 연결은 팀원 결과 뒤 |
+| 1. 정합성 | 전용 설계 JSON 라우팅, 채택/고정 원본 일치, 기존 문서 재생성 | 재생성/검증 CI 통과; 과거 원본 보존 |
+| 2. 코드 경계 | [binding](../contracts/IMPLEMENTATION-BINDING.json), [Python Protocol](../contracts/interfaces.py), [viewer](../contracts/viewer.d.ts) | R01 방향 승인; 초기 공유 계약, 담당자 세부 확인 |
+| 3. 공통 검증 | [표준 스키마 검사](../contracts/validation.py), [시험](../tests/contract/standard_schema/test_contracts.py) | Python 3.12 CI 10/10·72 payload 통과; replay/결함 주입만 |
+| 4. 조립 구조 | [wiring](../src/lesson_registration/composition/wiring.py), [replay provider](../stubs/replay_ports.py) | 기본 명시 주입 및 synthetic wiring 시험 통과; 실제 연결은 팀원 결과 뒤 |
 | 5. 실행 환경 | 공통 dependency lock, provider/launch config, 격리·오류 처리 | 선택 근거와 공수 확인 후 R01 결정 |
 | 6. 점진 통합 | R03 app + I2/I3/I4 fake → 실제 provider → 크몽 → 숨고 | 같은 후보 버전의 실제 관측; 22개 수용 시험은 별도 |
 | 7. 수용 | 공통 V1 gate의 전체 22개 ID | T5-08 실제 모델 포함. 실행 전 not_run, 실패/누락 구분 |
 
-## R01 검토 사항 (중요 변경만)
+## 승인된 방향과 담당자 추가 검토
+
+[사용자 승인](../../../docs/human/responses/HRESP-20261125-02_common-implementation-binding.md) · [검증 실행](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 
 | ID | 권장 | 대안/판단 근거 | 남은 검토 |
 | --- | --- | --- | --- |
@@ -24,7 +26,7 @@
 | IB-04 | framework-neutral viewer contract | UI의 runtime 기술 결합 최소화 | R04/R05 transport·grant TTL/origin·owner 결합 |
 | IB-05 | composition provider 명시 주입 | 완전한 가짜 app 작성하지 않음 | 실제 provider factory/공통 실행 명령 |
 
-결정별 근거·선행 CS·대안·재검토 조건은 [구조화 결정 후보](../contracts/IMPLEMENTATION-BINDING.json)에 기록. 공통 인터페이스 후보를 팀원에게 전달할 때는 정확한 커밋과 채택 상태를 명시한다. 기존 TASK, 논리 정본, 제품 범위 변경 없음.
+결정별 근거·선행 CS·대안·재검토 조건은 [구조화 결정](../contracts/IMPLEMENTATION-BINDING.json)에 기록. 초기 공통 인터페이스를 전달하고 정확한 통합 커밋과 채택 상태를 명시한다. 국소 구현은 담당자 자율. 기존 TASK, 논리 정본, 제품 범위 변경 없음.
 
 ## 실행
 

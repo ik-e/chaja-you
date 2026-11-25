@@ -4,3 +4,7 @@
 R01은 계약·통합만 담당, 플랫폼 구현 금지. 실제 플랫폼 로그인/등록·자격증명 금지. 합성 replay 결과는 실제 구현 통과가 아니다. 결과에는 명령, commit, 입력, 기대/관측, pass/fail/incomplete를 기록. AI는 미배정 TASK를 활성화하지 않는다.
 
 TASK 결과 정본은 담당자가 별도 문서 갱신으로 관리하며 제품 전용 branch의 check-changes 검사에는 포함하지 않는다.
+
+## 승인된 공통 구현 경계
+
+[공통 구현 계약](contracts/README.md), [구조화 결정](contracts/IMPLEMENTATION-BINDING.json), [검증 근거](evidence/common-contract-ci-20261125.json)를 확인한다. IB-01~05 방향은 R01 승인, 세부 provider/transport/launch/stack은 담당자 확인 후 공통 변경으로 조정. main의 승인된 공통 변경을 자기 브랜치에 병합하고 해당 공통 기준 SHA를 기록하여 `check-changes --base`에 사용한다. 타 담당 영역 변경 및 무단 shared dependency 추가 금지. 10개 공통 시험/72개 합성 payload는 실제 제품 통과가 아니다.

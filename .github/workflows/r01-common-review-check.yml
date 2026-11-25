@@ -2,7 +2,28 @@ name: r01-common-review-check
 on:
   workflow_dispatch:
   push:
-    branches: [r01/product-integration]
+    branches: [r01/product-integration, main]
+    paths:
+      - 'product/lesson-registration/**'
+      - 'docs/artifacts/**'
+      - 'docs/design/**'
+      - 'docs/review/**'
+      - 'docs/meetings/reviews/**'
+      - 'docs/human/**'
+      - 'CURRENT.md'
+      - 'tools/project_docs.py'
+      - 'tools/generate_lesson_design_review.mjs'
+      - '.github/workflows/r01-common-review-check.yml'
+  pull_request:
+    paths:
+      - 'product/lesson-registration/**'
+      - 'docs/artifacts/**'
+      - 'docs/design/**'
+      - 'docs/review/**'
+      - 'docs/human/**'
+      - 'tools/project_docs.py'
+      - 'tools/generate_lesson_design_review.mjs'
+      - '.github/workflows/r01-common-review-check.yml'
 permissions:
   contents: read
 jobs:
@@ -19,24 +40,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Regenerate and validate projections in isolated checkout
+      - name: Check committed projections and adopted design snapshot
         run: |
-          node tools/generate_lesson_design_review.mjs --source 197987047ea9a305072bba3fdff816c5c37b0157 --main 9b6ff0463722372d577747e89cb853e773c78591
           node tools/generate_lesson_design_review.mjs --check
-          python tools/project_docs.py
           python tools/project_docs.py --check
-      - name: Emit regenerated tracked projection changes for review (no remote write)
-        if: always()
-        run: |
-          python - <<'PY'
-          import json, subprocess, pathlib
-          for p in subprocess.check_output(['git','diff','--name-only','-z'],text=True).split('\0'):
-              if not p: continue
-              value = pathlib.Path(p).read_text(encoding='utf-8')
-              parts = [value[i:i+4000] for i in range(0,len(value),4000)]
-              for i, part in enumerate(parts):
-                  print('PROJECTION_PART '+json.dumps({'path':p,'part':i,'total':len(parts),'text':part},ensure_ascii=True))
-          PY
       - name: Existing deliverable mapping
         run: python tools/check_deliverables.py
   bootstrap-and-boundary:
@@ -62,7 +69,7 @@ jobs:
           uv sync --locked --python 3.12
           uv run --locked --python 3.12 python dev.py doctor
           uv run --locked --python 3.12 python dev.py test all
-      - name: Standard JSON Schema and implementation binding candidate tests
+      - name: Standard JSON Schema and common implementation boundary tests
         run: uv run --no-project --python 3.12 --with jsonschema==4.25.1 python -m unittest discover -s tests/contract/standard_schema -v
       - name: Scope
         if: always()

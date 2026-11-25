@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 논리 설계 main 채택 및 공통 Python 3.12 bootstrap CI 성공. R01 작업 우선 배정 지시로 TASK-048~054 활성화. R01 공통·통합 전담, R02 준비 AI, R03 앱, R04 UI/숨고, R05 원격/크몽. 기존 TASK-043~047은 증거/미충족 의무 보존 및 신규 실행 제외. 실제 제품 22개 시험 미실행, 팀원 수신/가용성 미확인, live 금지.
+11/25 논리 설계 main 채택 및 공통 Python 3.12 bootstrap CI 성공. R01 작업 우선 배정 지시로 TASK-048~054 활성화. R01 공통·통합 전담, R02 준비 AI, R03 앱, R04 UI/숨고, R05 원격/크몽. 기존 TASK-043~047은 증거/미충족 의무 보존 및 신규 실행 제외. 실제 제품 22개 시험 미실행, 팀원 수신/가용성 미확인, live 금지. IB-01~05 방향 R01 승인, 초기 공통 코드 및 표준 계약/문서 재검증 통과(계약 10/10, 합성 payload 72개). 실제 provider/공유 launch/lock 및 일정 확인은 후속.
 
 ## 결정 요청
 
@@ -40,19 +40,27 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 locked bootstrap 환경과 공통 pin·독립 패키지 smoke 및 ownership 양성/음성 검사 CI 성공. 모듈 실제 구현 및 22개 제품 수용 시험은 미실행. R01 공통 계약/통합 후속 진행.
+Python 3.12 locked bootstrap과 공통 pin·독립 smoke·ownership 검사 통과. R01 IB-01~05 방향 수용, 초기 구현 인터페이스·표준 스키마 검증·provider 주입 구성. 수정 후 CI에서 문서 재생성 및 설계 프로젝션, 기존 회귀 9개와 신규 계약 10개, 합성 입출력 72개 검사 통과. 실제 모듈 통합 및 제품 수용 시험 22개 미실행.
 
 검증과 근거
 
 - 고정 prep commit bootstrap · pass
 - 제품 수용 시험 22개 · inconclusive
+- IB-01~05 방향 승인 확인 · pass
+- 표준 계약·회귀·문서 재생성 검사 · pass
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
+- [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
+- [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
+- [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 
 남은 불확실성과 결정 요청
 
 - 담당자 실제 구현, 기술 및 공수 미확인
 - 제품 시험 및 실서비스 미실행
+- 실제 provider 서명·통신·실행 설정·공유 의존성 및 전체 lock 미확정; 담당자 검토 필요
+- 원자 저장/lease, viewer 보안, 실제 모델 및 전체 수용 시험 미검증
+- 담당자 PLAN의 실제 provider/스택 선택과 공유 launch/lock 검토; R01의 IB-01~05 방향 승인을 다시 요구하지 않음.
 
 ### TASK-049 · 할 일
 

@@ -1,13 +1,13 @@
 {
   "id": "LR-IMPLEMENTATION-BINDING-01",
-  "status": "candidate_for_R01_and_provider_review",
+  "status": "direction_approved_initial_shared_binding",
   "base_commit": "65aed3710486a5da0e00f74d1156b80c05cb1914",
   "source_refs": [
     "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
     "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
     "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json"
   ],
-  "authority": "TASK-048; user authorized proceeding and requested review of important decisions",
+  "authority": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
   "decisions": [
     {
       "id": "IB-01",
@@ -23,8 +23,9 @@
         "Framework model types as shared canonical schema"
       ],
       "reason": "Current isolated Python bootstrap passed, common types are JSON and physical separation not required. Minimal provider contracts avoid mandatory framework or distributed infrastructure.",
-      "review": "R02/R03/R05 agree on callable signatures and transport; do not freeze before review.",
-      "revisit_when": "Provider requires process isolation, streaming or latency constraints."
+      "review": "R02/R03/R05 confirm concrete provider signatures/transport; change only by shared review.",
+      "revisit_when": "Provider requires process isolation, streaming or latency constraints.",
+      "status": "direction_approved"
     },
     {
       "id": "IB-02",
@@ -40,8 +41,9 @@
         "Pre-generate model classes"
       ],
       "reason": "Standards-based validation avoids drift and tests all current shapes; production dependency/lock still separate.",
-      "review": "R01/R03 approve dependency strategy and shared lock only after actual CI result.",
-      "revisit_when": "Missing schema constraints, incompatible profile or performance need."
+      "review": "Standard validator direction accepted; product dependency group and full lock pending R03/shared review.",
+      "revisit_when": "Missing schema constraints, incompatible profile or performance need.",
+      "status": "direction_approved"
     },
     {
       "id": "IB-03",
@@ -57,7 +59,8 @@
       ],
       "reason": "Retain logical owner/atomicity and deny bypass; actual registry/lease implementation remains provider responsibility.",
       "review": "R03/R05 confirm storage transaction signatures, fence/finalize return, adapter registry and operation binding.",
-      "revisit_when": "Real implementation cannot enforce atomic guard or adapter needs additional typed operation."
+      "revisit_when": "Real implementation cannot enforce atomic guard or adapter needs additional typed operation.",
+      "status": "direction_approved"
     },
     {
       "id": "IB-04",
@@ -72,7 +75,8 @@
       ],
       "reason": "UI can design independent of remote stack, grant and detach semantics retained.",
       "review": "R04/R05 jointly decide transport and owner/generation/origin binding.",
-      "revisit_when": "Viewer PoC demonstrates unsupported lifecycle/transport."
+      "revisit_when": "Viewer PoC demonstrates unsupported lifecycle/transport.",
+      "status": "direction_approved"
     },
     {
       "id": "IB-05",
@@ -87,7 +91,8 @@
       ],
       "reason": "Validate edges early while avoiding competing CO implementation. Actual stateful flow needs R03 app and genuine providers.",
       "review": "Owner factory signatures, shared launch configuration and module-level testing strategy before actual assembly.",
-      "revisit_when": "First real provider ready."
+      "revisit_when": "First real provider ready.",
+      "status": "direction_approved"
     }
   ],
   "scope": {
@@ -112,5 +117,18 @@
       "DV-04"
     ],
     "selected_contract_checks": "shape and selected cross-field rejection only; not integrated product"
+  },
+  "approval": {
+    "ref": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
+    "approved_decisions": [
+      "IB-01",
+      "IB-02",
+      "IB-03",
+      "IB-04",
+      "IB-05"
+    ],
+    "reviewed_commit": "5876907585666c0389719d90331b2b231afea3d0",
+    "verification_run": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
+    "limits": "Initial implementation boundary; provider details and product runtime stack pending. No live permission."
   }
 }

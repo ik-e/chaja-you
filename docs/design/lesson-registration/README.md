@@ -6,6 +6,10 @@
 
 운영 정본: [현재 단계](https://github.com/ik-e/chaja-you/blob/9b6ff0463722372d577747e89cb853e773c78591/docs/human/phase-intents/PHASE-20261124-03.md) · [작업 검토](https://github.com/ik-e/chaja-you/blob/9b6ff0463722372d577747e89cb853e773c78591/docs/review/README.md). 설계 정본: [재설계 기준선](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/README.md).
 
+## 현재 적용 상태 확인
+
+이 문서는 고정된 설계 검토 스냅샷이다. 채택 및 배정 이후의 권한·작업·담당·일정은 [설계 채택 기록](../../artifacts/design/lesson-registration-20261124/adoption-20261125.json), [CURRENT](../../../CURRENT.md), [제품 WORKSPACE](../../../product/lesson-registration/WORKSPACE.json)를 우선한다. 아래 당시 후보 상태 및 이전 일정은 역사적 기록이다.
+
 ## 1. 목표와 범위
 
 확인된 원본과 사용자 인증/승인을 기반으로 등록 가능한 플랫폼에 최초 등록을 수행하고 근거와 다음 행동을 제공하여 강사의 직접 재가공·조작·재확인 부담을 줄인다. 가치 실측 전.
