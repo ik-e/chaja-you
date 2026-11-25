@@ -48,3 +48,7 @@ R03의 PLAN 원문과 담당 브랜치는 수정하지 않는다. R03은 위 사
 | WBS | TASK-050 유지. W10/W16/PREP 추가 배정 미확정; 초기 11인일 대비 잔여 공수·readiness 반환. 22개 gate 유지. |
 
 합의·제품 회귀 전 세부 계약 채택 또는 제품 완료로 기록하지 않는다. R01은 공통 변경/fixture 담당이며 R03 브랜치와 구현 파일을 직접 수정하지 않는다.
+
+## D01~D06 공통 세부 기준 후보
+
+R01이 [구체안](DETAIL-CANDIDATE.json)과 [세션 보안](SESSION-SECURITY.md), [reference 시험](../tests/contract/test_detail_candidate.py)을 먼저 제시한다. 담당자는 전체 재설계 대신 기존 PLAN에 기준 SHA, 실제 구현과의 차이, 반례/시험, 필요한 서명 변경만 반환. R02 D05, R03 D01/02/03/05/06, R04 D01/03/04, R05 D01/02/03/04/06. R01 공통 변경·fixture/통합 담당. 실제 provider 서명, 플랫폼 정규화·slot, actual dispatch fence, WS/격리·폐기, 설정 수치 및 제품 gate는 미확정/미검증. 현재 합성 reference는 제품 구현 아님. 실제 계정 사용 금지.

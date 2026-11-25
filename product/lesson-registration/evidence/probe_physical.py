@@ -85,5 +85,59 @@ class Probe(unittest.TestCase):
                 server.shutdown()
                 t.join()
 
+    def test_mock_auth_context_storage_and_teardown(self):
+        # Synthetic origin only; route guard is not an OS/network sandbox.
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header("Content-Type","text/html")
+                self.end_headers()
+                self.wfile.write(b"<h1>synthetic session</h1>")
+            def log_message(self,*args): pass
+        with HTTPServer(("127.0.0.1",0),Handler) as server:
+            t = threading.Thread(target=server.serve_forever,daemon=True)
+            t.start()
+            try:
+                from urllib.parse import urlsplit
+                from playwright.sync_api import Error
+                with sync_playwright() as p:
+                    browser = p.chromium.launch(headless=True)
+                    try:
+                        base = f"http://127.0.0.1:{server.server_port}"
+                        a = browser.new_context(service_workers="block")
+                        b = browser.new_context(service_workers="block")
+                        allowed = urlsplit(base).netloc
+                        def guard(route):
+                            u = urlsplit(route.request.url)
+                            if u.scheme == "http" and u.netloc == allowed:
+                                route.continue_()
+                            else:
+                                route.abort()
+                        a.route("**/*",guard)
+                        pa,pb = a.new_page(),b.new_page()
+                        pa.goto(base,timeout=10000)
+                        pb.goto(base,timeout=10000)
+                        a.add_cookies([{"name":"mock-auth","value":"synthetic-only","url":base,"httpOnly":True}])
+                        pa.evaluate("localStorage.setItem('mock-session','synthetic-only')")
+                        self.assertEqual(len(a.cookies()),1)
+                        self.assertEqual(b.cookies(),[])
+                        self.assertIsNone(pb.evaluate("localStorage.getItem('mock-session')"))
+                        with self.assertRaises(Error):
+                            pa.goto("http://127.0.0.1:1/blocked",timeout=3000)
+                        a.close()
+                        self.assertTrue(pa.is_closed())
+                        fresh = browser.new_context(service_workers="block")
+                        pc = fresh.new_page()
+                        pc.goto(base,timeout=10000)
+                        self.assertEqual(fresh.cookies(),[])
+                        self.assertIsNone(pc.evaluate("localStorage.getItem('mock-session')"))
+                        fresh.close()
+                        b.close()
+                    finally:
+                        browser.close()
+            finally:
+                server.shutdown()
+                t.join()
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

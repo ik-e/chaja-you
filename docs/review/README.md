@@ -40,7 +40,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인).
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인.
 
 검증과 근거
 
@@ -52,6 +52,7 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - 독립 기술 후보·제품 lock 공통 회귀 · pass
 - canonical byte vectors·공통 경계 회귀 · pass
 - owner 간 세부 계약 합의 및 WBS 확정 · inconclusive
+- D01~D06 독립 후보 시험 및 실제 owner 구현 적합성 (구분; 결과 CI 확인) · inconclusive
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
 - [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
@@ -61,6 +62,10 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [WBS V0.6 후보](../artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)
 - [R01 후속 전달 및 기준](../human/responses/HRESP-20261125-04_r03-app-followup.md)
 - [R03 진행 보고 및 근거](../../product/lesson-registration/evidence/r03-progress-20261125.json)
+- [R01 D01~D06 방향 및 보안 검증 지시](../human/responses/HRESP-20261125-05_common-detail-direction.md)
+- [공통 세부 계약 후보](../../product/lesson-registration/contracts/DETAIL-CANDIDATE.json)
+- [원격 인증 세션 위협/통제/운영 경계](../../product/lesson-registration/contracts/SESSION-SECURITY.md)
+- [독립 후보 재현 시험](../../product/lesson-registration/tests/contract/test_detail_candidate.py)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 - [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
@@ -73,9 +78,10 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - 12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정
 - 실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증
 - 초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요
+- 실제 세션의 WS/서비스 identity·process/network 격리·민감정보 로그/폐기·외부 효과 fence 및 실제 provider 연결은 candidate/reference로 증명하지 않음; production gate 별도.
 - 관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.
 - R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.
-- R01: digest 대상/operation·slot 협의 뒤 계산값 기반 공통 replay 보완. acquire_context·expected_operations는 공동 검토 전 미채택. Viewer/I2/factory 및 multipart 의존성은 담당자 반환 후 결정.
+- D01~D06 R01 후보 기준으로 담당자별 실제 구현 차이·반례·공수 반환. 안정적인 slot/manifest/readback, actual dispatch fence, viewer/I2/factory 세부 서명·환경은 실제 확인 후 확정. 기존 제품 범위 및 업무 배정 유지.
 
 ### TASK-049 · 할 일
 

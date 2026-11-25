@@ -13,3 +13,7 @@
 ## 서버 스키마 검증 기준 (IB-02 후속)
 
 [후속 결정](../../../docs/human/responses/HRESP-20261125-04_r03-app-followup.md)에 따라 서버의 pinned named/profile schema 단일 판정 기준은 `validation.py`의 `SchemaCatalog` 및 제품 lock의 jsonschema 4.25.1이다. 포트 경계에서 `CheckedPorts` 또는 동일 공통 catalog를 호출하는 bridge를 사용한다. 오류 매핑·업무 관계·권한 검사는 각 담당 모듈이 추가. 별도 schema 엔진을 제품 권위로 유지하려면 차이 시험 및 R01 검토 필요. 프런트 자체 UX 검사는 서버 판정을 대체하지 않는다. 의존성이 없으면 검사를 skip/fallback하지 않는다. pinned logical schema는 변경하지 않는다.
+
+## D01~D06 세부 방향 후보 (R01 수용)
+
+[구조화 후보](DETAIL-CANDIDATE.json) · [원격 인증 보안 경계](SESSION-SECURITY.md) · [후보 digest/manifest 함수](detail_candidate.py) · [독립 reference](../evidence/detail_reference.py) · [시험](../tests/contract/test_detail_candidate.py). 기존 인터페이스/논리 pin은 그대로이며 후보 코드를 제품 provider로 자동 사용하지 않는다. 독립 시험 및 담당자 차이 확인 후 공통 세부 서명을 확정한다. Mock-only; 실제 사용자 인증 세션 사용 금지.

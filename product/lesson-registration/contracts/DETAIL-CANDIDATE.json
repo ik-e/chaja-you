@@ -1,0 +1,173 @@
+{
+  "id": "LR-DETAIL-CANDIDATE",
+  "date": "2026-11-25",
+  "status": "direction_approved_candidate_pending_provider_conformance",
+  "authority": "docs/human/responses/HRESP-20261125-05_common-detail-direction.md",
+  "base": "f5e685716a5ed4fb36159d215b3cc861ef3d5e79",
+  "scope": "mock-only; candidate interface and reference tests, not a replacement for pinned logical schema or interfaces.py; no new work assignment",
+  "decisions": [
+    {
+      "id": "D01",
+      "title": "Digest / manifest / stable target",
+      "prior": [
+        "CS-05",
+        "CS-06",
+        "PD-03",
+        "PD-05"
+      ],
+      "selection": "Hash full validated raw profile entry (without self digest), exact Scope, exact normalized values, raw bytes; binding.v1 binds Scope hash and immutable manifest definition. Ordered assets; no input copy to readback. Candidate one operation per step; stable logical ID independent of profile version/registration. Persist pinned manifest snapshot with accept.",
+      "alternatives": [
+        "step input only: submit steps empty",
+        "scope only: no operation identity"
+      ],
+      "pending": [
+        "per-platform step subdivision/effect unit; stable slot lineage and cross-source ambiguity",
+        "actual readback normalization and AssetRef mapping, explicit unordered field rules if warranted"
+      ],
+      "tests": [
+        "AT-03",
+        "T5-12",
+        "AT-04",
+        "AT-05",
+        "DV-03"
+      ]
+    },
+    {
+      "id": "D02",
+      "title": "Claim / lease / permit / fence",
+      "prior": [
+        "CS-04",
+        "CS-05",
+        "IB-03",
+        "PD-04",
+        "PD-05"
+      ],
+      "selection": "CO atomic claim before I4 dispatch. Pass opaque internal claim capability through bridge, never serialize to I4 JSON/public. Runtime verifies exact live connection/generation/account and binds same claim. STORE checks state, owner, operation and stable effect; durable one-shot reserve/consume. No post-fence consume. After consume treat as potentially in-flight; serialize runtime command initiation with local fence gate, no await between gate decision and enqueue. DB and external side effect not atomic, no exactly-once claim. No takeover/resume; lost worker fences and stops.",
+      "alternatives": [
+        "runtime-only claim: duplicate CO entry",
+        "distributed queue/lease: unproven need"
+      ],
+      "pending": [
+        "actual R03/R05 internal signature and concurrency test; process shutdown and live connection validity; actual dispatch fence race"
+      ],
+      "tests": [
+        "AT-03",
+        "T5-12",
+        "DV-01",
+        "DV-02"
+      ]
+    },
+    {
+      "id": "D03",
+      "title": "Admission-linked evidence / snapshot finalize",
+      "prior": [
+        "CS-05",
+        "CS-06",
+        "PD-04"
+      ],
+      "selection": "Persist immutable observations tied to admitted operation, worker/target and trusted evidence; duplicate identical ID idempotent, conflicting ID rejected. Result compare evidence version (CAS) and exact required steps/goal/unknown; stopped never reopens. Ordinary observation after terminal forbidden; optional separate scoped late read with its own authorization, never rebind/resubmit. No late-read implementation until proof.",
+      "alternatives": [
+        "allow terminal lease bypass: evidence forgery",
+        "trust execution response: lost-response or mismatch"
+      ],
+      "pending": [
+        "trusted actual readback/evidence source; atomic terminal result/revision, late-read integration"
+      ],
+      "tests": [
+        "AT-04",
+        "AT-05",
+        "DV-01",
+        "DV-03"
+      ]
+    },
+    {
+      "id": "D04",
+      "title": "Viewer / session security",
+      "prior": [
+        "CS-04",
+        "IB-04",
+        "PD-06"
+      ],
+      "selection": "Same-origin service owner + single-use attach grant bound to owner/registration/generation/expiry. Exclusive input; grant rotate on refresh/reconnect; finish revokes input before verification; detach never cancels accepted worker. See SESSION-SECURITY.md. No URL/query grants, exported cookies/storage_state, frames/input logs.",
+      "alternatives": [
+        "VNC/noVNC: broader desktop exposure",
+        "WebRTC: additional complexity"
+      ],
+      "pending": [
+        "actual WS/WSS edge/auth/origin, IME, concurrent input cutoff, browser process/network sandbox, cleanup/retention, production identity"
+      ],
+      "tests": [
+        "AT-02",
+        "T5-02",
+        "DV-02",
+        "DV-05"
+      ]
+    },
+    {
+      "id": "D05",
+      "title": "PREP deadline / revision",
+      "prior": [
+        "CS-02",
+        "IB-01",
+        "IB-02"
+      ],
+      "selection": "Keep PrepareInput/Preparation sync Protocol; execute outside DB/ASGI loop, bounded call and generation/revision CAS. Late timeout output discarded; model unavailable => blocking issue, malformed schema => safe runtime error. Provider hard cancellation not assumed.",
+      "pending": [
+        "actual model time/limits, R02/R03 bridge and errors"
+      ],
+      "tests": [
+        "AT-01",
+        "T5-08",
+        "T6-02"
+      ]
+    },
+    {
+      "id": "D06",
+      "title": "Composition / managed lifetime",
+      "prior": [
+        "CS-07",
+        "IB-05",
+        "PD-01",
+        "PD-04",
+        "PD-05"
+      ],
+      "selection": "Explicit factories/injection; single app process initial mock, managed worker and runtime-owned async bridge. Startup fence orphaned accepted jobs, no replay. Shutdown admission stop, fence, bounded drain, close browser contexts and resources. Separate test identity and product identity.",
+      "pending": [
+        "actual factory and launch, async bridge, shutdown; production authentication and operational isolation"
+      ],
+      "tests": [
+        "T5-03",
+        "T5-05",
+        "DV-01",
+        "DV-05"
+      ]
+    }
+  ],
+  "verification": {
+    "reference": "product/lesson-registration/evidence/detail_reference.py",
+    "helpers": "product/lesson-registration/contracts/detail_candidate.py",
+    "tests": "product/lesson-registration/tests/contract/test_detail_candidate.py",
+    "physical_probe": "product/lesson-registration/evidence/probe_physical.py",
+    "command": "cd product/lesson-registration && uv run --locked --python 3.12 python -m unittest discover -s tests/contract -p test_detail_candidate.py -v",
+    "physical_command": "uv run --locked --all-groups --python 3.12 python evidence/probe_physical.py",
+    "result": "not_run_at_authoring; consult exact commit CI; synthetic/reference only",
+    "prior_unreproduced": "Earlier chat assertion of 13/13 is not evidence; replace with actual run results."
+  },
+  "owner_review": {
+    "R02": [
+      "D05 model/revision/deadline"
+    ],
+    "R03": [
+      "D01 D02 D03 D05 D06 app/store/HTTP/auth composition"
+    ],
+    "R04": [
+      "D01 D03 D04 soomgo manifest/readback and viewer consumer"
+    ],
+    "R05": [
+      "D01 D02 D03 D04 D06 runtime/adapter/session security"
+    ],
+    "R01": [
+      "common candidates/tests and evidence; final contract change after owner conformance"
+    ]
+  }
+}
