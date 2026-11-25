@@ -1,20 +1,28 @@
 # 현행 설계와 공식 제출 문서 연결 · 2026-11-25
 
-기준 main `4992959c08a12ad81a983ea4a89fed0837c0f1f8` (논리·물리 원본은 f5e6857 기준). [현행 설계](CURRENT-DESIGN.md) · [시스템 구조 요약](SYSTEM-OVERVIEW.md) · [구조화 매핑](../../deliverables/lesson-registration-20261125.json). 별도 설계 정본을 생성하지 않으며 현행 원본→읽기용/제출용 문서의 연결만 정리한다.
+기준 main `4ab3285f3cb767fb8c36ec3b54d5c4e61e9a9fb3`. [현행 설계](CURRENT-DESIGN.md) · [시스템 구조 요약](SYSTEM-OVERVIEW.md) · [구조화 매핑](../../deliverables/lesson-registration-20261125.json) · [16개 공식 산출물 레지스트리](../../deliverables/registry.json). 별도 설계 정본이 아니라 현행 원본→제출용 뷰/실제 산출물의 연결. 문서별 원본·상태는 구조화 매핑에서 확인한다.
 
-| 산출물 | 현재 경로 | 원본 | 상태 |
+| 산출물 | 가이드 마감 | 현재 경로 | 준비 상태 |
 | --- | --- | --- | --- |
-| DLV-01 기획 | [Step1](../../step1/기획서_제출본.md) | V1.1, REQ-01~11, adoption, CS/IB/PD | 채택 mock 범위 반영 |
-| DLV-02 WBS | [Step1](../../step1/WBS_제출본.md) | V0.6 후보, TASK/WORKSPACE | 잔여 공수/일정 미확정 |
-| DLV-03 API | [Step2](../../step2/API_설계_문서.md) | H1~H9/I1~I5, V4.1 | S8 main 반영, 실제 연동 미확인 |
-| DLV-04 DB | [Step2](../../step2/데이터베이스_스키마_설계서.md) | V4.1, SQLite, R03 main 고정 SQL | 현재 DDL 확인, 최종 연동 미확인 |
-| DLV-05 상태 전이 | [Step3](../../step3/단일에이전트_상태전이그래프_설계서.md) | I2/TASK-049, 내부 graph 후보 | R02 확인 필요 |
-| DLV-06 자기 성찰 | [Step3](../../step3/자기성찰_테스트결과서.md) | graph 후보, T5-08, 실제 run | 계획, not_run |
-| DLV-07/08 | 협업 아키텍처/보안 | 현행 구조 및 PR #44 보안 후보 | 후속 제출용 갱신 |
-| DLV-09~16 | 결과/릴리스/발표 | 실제 run/배포/발표 증거 | 후속 |
+| DLV-01 기획서(요구사항 명세 포함) | 2026-11-13 | [보기](../../step1/기획서_제출본.md) | 현행 mock 범위 반영 후보 |
+| DLV-02 WBS | 2026-11-13 | [보기](../../step1/WBS_제출본.md) | R03 잔여 3인일 보고, R04 초기 4+3인일 PLAN 및 UI client/workflow 코드 확인; 최신 잔여/가용성·일정 미확정 |
+| DLV-03 API 설계 문서 | 2026-11-20 | [보기](../../step2/API_설계_문서.md) | S8 main 반영·독립 run 보고; 실제 연동 미확인 |
+| DLV-04 데이터베이스 스키마 설계서 | 2026-11-20 | [보기](../../step2/데이터베이스_스키마_설계서.md) | R03 main DDL 관찰; 최종 연동 미확인 |
+| DLV-05 단일 에이전트 상태 전이 그래프 설계서 | 2026-11-27 | [보기](../../step3/단일에이전트_상태전이그래프_설계서.md) | PREP graph 후보, R02 확인 필요 |
+| DLV-06 자기 성찰 로직 테스트 결과서 | 2026-12-04 | [보기](../../step3/자기성찰_테스트결과서.md) | 실제 모델/자기 성찰 시험 not_run |
+| DLV-07 멀티 에이전트 협업 아키텍처 설계서 | 2026-12-11 | [보기](../../step4/멀티에이전트_협업_아키텍처_설계서.md) | 현행 협업 구조 및 추가 AI 역할 후보; 실제 멀티 에이전트 미검증; 공식 양식 최종 대조 전 |
+| DLV-08 AI 보안 가드레일 설계 문서 | 2026-12-18 | [보기](../../step4/AI_보안_가드레일_설계_문서.md) | mock 안전 경계 및 PR44 보안 후보 초안; 제품/운영 보안 미검증 |
+| DLV-09 Auto-Healing 구현 결과서 | 2026-12-18 | [보기](../../step4/Auto-Healing_구현_결과서.md) | 시험 계획만, 실제 Auto-Healing 측정 not_run |
+| DLV-10 대화형 AI 웹 애플리케이션 | 2026-12-24 | 미작성 | R03 HTTP 및 R04 API 클라이언트/워크플로우 코드 main 반영; R04 7개 단위 시험 통과 보고, 실제 화면·UI/runtime 통합·배포 미확인 |
+| DLV-11 통합 테스트 결과서 | 2026-12-31 | 미작성 | 22개 수용 gate 실행/통합 로그/결함 재시험 대기 |
+| DLV-12 배포 아키텍처 설계도 | 2026-12-31 | 미작성 | 물리 방향 있음; 실제 배포 환경/네트워크/CI/CD·보안 확인 후 설계도 |
+| DLV-13 중간 발표 PT 자료 | 2026-12-08 | 미작성 | 12/8 발표용 핵심 문제/설계 근거 준비; 실제 시연 범위·성과 및 PT 제작 대기 |
+| DLV-14 최종 발표 PT 자료 | 2027-01-04 | 미작성 | 최종 평가/시연/발표 PT 대기 |
+| DLV-15 프로젝트 개발 소스코드 | 2027-01-04 | 미작성 | 제품 소스 개발 중; 최종 제출 commit/재현/접근 확인 대기 |
+| DLV-16 시연영상 | 2027-01-04 | 미작성 | 실제 통합 시연·영상 제작/열람 확인 대기 |
 
-[11/24 강사 원본 가이드](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) · [OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [제출 상태](../../submissions/README.md). 제공 목차 우선. 실제 제출 형식·렌더·열람·대시보드·접수는 별도. 이전 찾아you 생성 문서와 11/23 후보는 Git 이력, [고정 설계 뷰](README.md)는 당시 스냅샷으로 유지.
+**공식 제출·접수:** 16개 모두 실제 대시보드 확인 전 미확인. [11/24 강사 원본 가이드](https://github.com/ik-e/chaja-you/blob/ec8917c63eb13a3d81d3234220bb346cb666028f/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) · [OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/ec8917c63eb13a3d81d3234220bb346cb666028f/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [제출 상태](../../submissions/README.md). 제공 목차·별도 WBS 캡처·가독성/열람권한·대시보드·접수 확인은 별도. 이후 실제 실행 결과가 필요한 산출물은 근거가 생긴 뒤 작성한다.
 
-PR #44 검토 중인 세부 계약을 채택 원본으로 승격하지 않는다. 병합 및 실제 구현 차이 확인 후 영향받는 문서만 갱신. 현재 제출 후보의 목적은 중복 작성 없이 현행 정본을 이해하고 평가할 수 있도록 하는 것이다.
+**현행과 과거:** [Step1](../../step1/README.md) · [Step2](../../step2/README.md) · [Step3](../../step3/README.md) · [Step4](../../step4/README.md). 이전 찾아you 생성 문서/11/23 후보는 이력, [고정 설계 뷰](README.md)는 당시 스냅샷. PR #44는 담당자 검토 중이며 세부 서명을 채택 원본으로 승격하지 않는다. 실제 통합/운영 보안·교육 기술 효과는 후보 시험과 구분한다.
 
-**운영 방향:** [R01 11/25 핵심 Pain 우선·일일 조정](../../human/responses/HRESP-20261125-06_pain-first-rolling-plan.md). 교육 기술은 제품 가치와 연결, 부족한 요구는 추가 기능 후보로 충족. 실질 설계·구현 초기의 변화를 수용하며 일일 근거·가용성에 따라 WBS를 갱신한다. 새로운 배정·일정/기술 확정은 아니다.
+**갱신 원칙:** [R01 핵심 Pain 우선·일일 조정](../../human/responses/HRESP-20261125-06_pain-first-rolling-plan.md). 제품 문제 해결 우선, 교육 요구를 가치에 기여하는 기술/추가 기능으로 충족. 매일 진행·잔여 공수·가용성·막힘 확인, 영향 문서만 동기화. 정본과 제출 준비 상태를 동시에 수정하되 과거 파일 보존. 제품 범위/공통 안전 계약/배정은 별도 판단 없이 변경하지 않는다.
