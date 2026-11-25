@@ -1,0 +1,175 @@
+{
+  "source_commit": "d2ab91a513026ee71f9cf3d5d8799be020ed3c4c",
+  "source_blobs": {
+    "core-contract-v0.3.json": "be77eba784c90b89b510a20d9d7af7f355db4992",
+    "data-api-v0.3.json": "14438ccb80be4fb8a03094c5aa60cbacde53129f",
+    "implementation-v0.4.json": "f7b49262a4d470f6a2764e0fd2c559e6358cc416",
+    "physical-v0.4.json": "d6bffc13289c569ec0fe4e3877d7b5b8c22abba1",
+    "contract-v0.5.json": "b773142f11580c098a5e90a99d4f633083b116ad",
+    "wbs-v0.5.json": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+    "trace-index-v0.6.json": "95ace6473f1e23974c08f960619c1b42db839522"
+  },
+  "normal": {
+    "checks": [
+      {
+        "id": "RESUME-01 initial and recovery distinct",
+        "pass": true
+      },
+      {
+        "id": "RESUME-02 no unguarded interrupted-to-ready edge",
+        "pass": true
+      },
+      {
+        "id": "ARCH-02 mapped calls reachable and no gateway callback",
+        "pass": true
+      },
+      {
+        "id": "WIRE-04 multipart typed metadata and server ownership",
+        "pass": true
+      },
+      {
+        "id": "WIRE-05 read query and no body",
+        "pass": true
+      },
+      {
+        "id": "GATE-01 complete declared scope and trace",
+        "pass": true
+      },
+      {
+        "id": "FIXTURE-01 known facts and uncertainty preserved",
+        "pass": true
+      },
+      {
+        "id": "ACTION-01 deny unresolved or unbound arguments",
+        "pass": true
+      }
+    ],
+    "passed": 8,
+    "total": 8,
+    "gate_cases": [
+      {
+        "id": "complete synthetic evidence",
+        "expected": "pass",
+        "actual": "pass",
+        "pass": true
+      },
+      {
+        "id": "missing test",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "explicit fail",
+        "expected": "fail",
+        "actual": "fail",
+        "pass": true
+      },
+      {
+        "id": "stale build",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "stale contract",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "stale fixture",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "wrong environment",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "static checks are not product evidence",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "manual AI fallback",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "contradictory fail dominates",
+        "expected": "fail",
+        "actual": "fail",
+        "pass": true
+      },
+      {
+        "id": "missing run reference",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      },
+      {
+        "id": "unknown",
+        "expected": "incomplete",
+        "actual": "incomplete",
+        "pass": true
+      }
+    ],
+    "gate_passed": 12,
+    "gate_total": 12,
+    "actual_mvp_verdict": "incomplete",
+    "product_execution": "not_run"
+  },
+  "reg": {
+    "cases": [
+      {
+        "name": "implicit resume restored",
+        "target": "RESUME-01",
+        "pass": true
+      },
+      {
+        "name": "explicit guard removed",
+        "target": "RESUME-02",
+        "pass": true
+      },
+      {
+        "name": "gateway callback restored",
+        "target": "ARCH-02",
+        "pass": true
+      },
+      {
+        "name": "client supplied upload digest",
+        "target": "WIRE-04",
+        "pass": true
+      },
+      {
+        "name": "GET body enabled",
+        "target": "WIRE-05",
+        "pass": true
+      },
+      {
+        "name": "AI required test removed",
+        "target": "GATE-01",
+        "pass": true
+      },
+      {
+        "name": "fixture price corrupted",
+        "target": "FIXTURE-01",
+        "pass": true
+      },
+      {
+        "name": "unresolved action allowed",
+        "target": "ACTION-01",
+        "pass": true
+      }
+    ],
+    "passed": 8,
+    "total": 8
+  },
+  "execution": "direct pure JavaScript against pinned GitHub JSON; synthetic gate fixtures, not product evidence"
+}

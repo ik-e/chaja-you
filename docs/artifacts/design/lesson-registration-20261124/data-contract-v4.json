@@ -1,0 +1,572 @@
+{
+  "id": "LR-DATA-04",
+  "date": "2026-11-25",
+  "status": "delegated_detailed_contract_mock_baseline_design_checked",
+  "authority": "R01: 그러면 기존 조사 자료를 근거로 상세 계약을 결정하고 권장대로 진행해 단 나를 설득할 수 있어야 해",
+  "basis": {
+    "commit": "b5317a5a3ca8081117b512a394831c112a1c1d15",
+    "refs": [
+      {
+        "path": "interface-schema-v3.json",
+        "blob": "ea45fc389d1c9159bfd2e53f6a0d16aa4734eb89"
+      },
+      {
+        "path": "interface-contract-v3.json",
+        "blob": "e6b73da91c0856e815601739301a53adcc321e70"
+      },
+      {
+        "path": "logical-data-contract-decision-v1.json",
+        "blob": "7141bcc48dabc36e42736035f4a6fcc2b8526f34"
+      },
+      {
+        "path": "detail-design-v0.2.json",
+        "blob": "ee0490e7bad742cb4e9cf3f593da1bc1421c16c2"
+      },
+      {
+        "path": "detail-gate-v1.json",
+        "blob": "55c66d285183fb4a8a12041b883c12e7775d12f7"
+      }
+    ],
+    "approved": "LR-LOGICAL-DATA-01"
+  },
+  "precedence": "V4 common and profile contract supersedes conflicting V2/V3 detailed schema/ports/profile fields only. Upper purpose/LD-01~08, existing error-only stop, mock-only, team T1~T6 and phase unchanged. V3 wire paths candidate, retain nine, not implementation authorization.",
+  "source_evidence": [
+    {
+      "id": "S03",
+      "title": "R02 강사 요구·최신 조건",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+      "limit": "사용자 진술·회상·최신 확인값, 실측 없음",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+      "blob": "c1aba280833039a5787b4460d948de231b44e135"
+    },
+    {
+      "id": "S04",
+      "title": "R03 개인 PoC 명세",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/SPEC.md",
+      "limit": "크몽형 모의 실험, 고정 fixture",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R03/workspace/test/SPEC.md",
+      "blob": "7ef82683df7826330ec00a1348b56c7b48973c0f"
+    },
+    {
+      "id": "S07",
+      "title": "R03 검증 기록",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "docs/members/R03/workspace/test/verification.json",
+      "limit": "19 pass 자기 보고, 모의 Skyvern 입력·첨부·영수증; 독립 재실행 아님",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/docs/members/R03/workspace/test/verification.json",
+      "blob": "5a343dd028889970e2cd64dbf0f2bab4e27a5fb9"
+    },
+    {
+      "id": "S08",
+      "title": "R04 숨고 업무 흐름",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수등록_교육신청_사용자흐름_서비스절차_설계분석보고서.md",
+      "limit": "기존 고수 계정 관측 및 제안, 신규 가입·공개 추론 분리",
+      "url": "https://github.com/ik-e/chaja-you/blob/926b5de7678f8984be035409d386c6347d749f56/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EB%93%B1%EB%A1%9D_%EA%B5%90%EC%9C%A1%EC%8B%A0%EC%B2%AD_%EC%82%AC%EC%9A%A9%EC%9E%90%ED%9D%90%EB%A6%84_%EC%84%9C%EB%B9%84%EC%8A%A4%EC%A0%88%EC%B0%A8_%EC%84%A4%EA%B3%84%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C.md",
+      "blob": "0de56aa480c4d207a09f4f9f560d707f8004a979"
+    },
+    {
+      "id": "S09",
+      "title": "R04 화면 보고서",
+      "commit": "926b5de7678f8984be035409d386c6347d749f56",
+      "path": "docs/members/R04/workspace/2026-11-24_숨고_고수전환_및_등록절차_화면스크린샷_상세보고서.md",
+      "limit": "STEP 06~12, 15, 16 보고서 관측; 스크린샷 원본 개별 검증 안 함",
+      "url": "https://github.com/ik-e/chaja-you/blob/926b5de7678f8984be035409d386c6347d749f56/docs/members/R04/workspace/2026-11-24_%EC%88%A8%EA%B3%A0_%EA%B3%A0%EC%88%98%EC%A0%84%ED%99%98_%EB%B0%8F_%EB%93%B1%EB%A1%9D%EC%A0%88%EC%B0%A8_%ED%99%94%EB%A9%B4%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_%EC%83%81%EC%84%B8%EB%B3%B4%EA%B3%A0%EC%84%9C.md",
+      "blob": "4062a83b314fd6db11d4572edfefc8873a367287"
+    },
+    {
+      "id": "S10",
+      "title": "R05 입력 뼈대",
+      "commit": "c5cef60dceb98390b008e7345fc5c0492695e8e3",
+      "path": "docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md",
+      "limit": "수동 작성 화면·임시저장 보고, 플랫폼별 제약 후보; 실제 자동화 아님",
+      "url": "https://github.com/ik-e/chaja-you/blob/c5cef60dceb98390b008e7345fc5c0492695e8e3/docs/members/R05/workspace/2026-11-24_platform-input-skeleton.md",
+      "blob": "ba0a1f1d6243876929efd4b8aad6cd602570d47a"
+    },
+    {
+      "id": "S11",
+      "title": "R05 기술·권한 조사",
+      "commit": "c5cef60dceb98390b008e7345fc5c0492695e8e3",
+      "path": "docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+      "limit": "공식/관찰/추정 구분, 운영사 허용 미확인",
+      "url": "https://github.com/ik-e/chaja-you/blob/c5cef60dceb98390b008e7345fc5c0492695e8e3/docs/members/R05/workspace/2026-11-23_lesson-technical-feasibility.md",
+      "blob": "48428cf787b919f44245d584729ffdc62b6a1857"
+    },
+    {
+      "id": "S12",
+      "title": "R03 공통 시험 계약",
+      "commit": "b220a6e6777928ab81c8a0852608b83f3838ff47",
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md",
+      "limit": "T1~T6, 변경하지 않음; release 미확인",
+      "url": "https://github.com/ik-e/chaja-you/blob/b220a6e6777928ab81c8a0852608b83f3838ff47/prototype/lesson-registration/test-harness/CONTRACT.md",
+      "blob": "f93daf71aebc1a4272739956c7753968e7655d5b"
+    }
+  ],
+  "decisions": [
+    [
+      "DC1",
+      "원본의 불변 원문·자료, 등록 요청 내 fact/근거",
+      "R02 최신 조건과 공개 공고 버전 차이, AI의 실제 비용/통보기한 오류(S03)",
+      "원본을 매번 재작성하거나 모든 플랫폼 필드 원본화",
+      "원문 보존·fact+source/answer locator·필드 매핑; 확인은 최종 승인에 통합. 가격/회차/분/기간/VAT 독립."
+    ],
+    [
+      "DC2",
+      "프로필에 실제 입력값 스키마·제약·절차·완료 조건",
+      "크몽과 숨고 입력 목적/형식 차이(S04,S09,S10)",
+      "공통 enum과 공통 판매 상품 필드로 통일",
+      "공통 ID 개방, 등록된 profile로 지원·타입 검증. 구체적인 mock 옵션은 가설. 신규 플랫폼 등록으로 확장."
+    ],
+    [
+      "DC3",
+      "크몽 패키지의 누락 화면 항목 및 모집 형태·지역·이미지 목록",
+      "S04 401~426, S10 24~37",
+      "V3 시간·금액만, 단일 이미지·자유 지역",
+      "필수 화면 항목을 계약에 포함. 정확 옵션·단일 mode는 별도 확인. 실제 사용자 가격을 fixture로 덮지 않음."
+    ],
+    [
+      "DC4",
+      "숨고 서비스 설정과 고수 프로필/견적 분리",
+      "S08,S09 130~157,S10 93~123",
+      "숨고를 크몽 상품 등록과 같은 데이터로 강제",
+      "MIDI 선택형 프로필 후보, 가격/사진 강제 없음. 신규 고수 등록/실제 목표 미확정 보존."
+    ],
+    [
+      "DC5",
+      "인증 결과의 내부 연결 바인딩을 승인 범위에 포함",
+      "LD-06, V3 P1 결함, S11 세션 안전성",
+      "외부 계정 ID만 비교 또는 별도 인증 관리 서비스",
+      "연결 참조+확인 세대+account. 실제 세션 비밀은 EXEC 내부. 승인 검증/worker lease 분리."
+    ],
+    [
+      "DC6",
+      "관측 대상·방법·근거 연결과 프로필별 완료 조건",
+      "S04 L26~28,S07,S09,S11, V3 P2",
+      "클릭 완료=성공 또는 모든 프로필 독립 재조회 강제",
+      "두 mock은 독립 readback; 확장 profile은 신뢰 가능한 응답도 가능. 제출/저장/게시 구분."
+    ],
+    [
+      "DC7",
+      "준비 완료는 검증의 계산값, 검사 책임 명시",
+      "LD-05/08,S03 사실 충돌,V3 P4",
+      "ready 임의 저장 또는 JSON shape만 검증",
+      "필수/규칙/근거/원본값 체크, blocking issue. UI에는 계산한 ready 반환. 관계/실행 검사 별도 업무 코드."
+    ],
+    [
+      "DC8",
+      "기존 API 경계 유지, 세부 기술·미확인 항목만 보류",
+      "독립 T1~T6 계약 S12, phase",
+      "팀원 작업 변경 및 전면 구현 기술 확정",
+      "공통 상세 의미와 mock contract 현재 결정; 통합/실제 규칙 근거에 따라 profile만 조정."
+    ]
+  ],
+  "logical_records": [
+    [
+      "Source",
+      "source_id",
+      "SourceInput/SourceView; immutable source, raw_text, asset_refs, previous_source_id?, created_at",
+      "PREP creates; CO owner-scoped reuse; no independent confirmation endpoint"
+    ],
+    [
+      "Profile",
+      "profile ref",
+      "Profile + registry value_schema/value_defs + rule/step/goal content",
+      "KNOW creates versioned profiles; PREP/EXEC/RESULT same immutable content"
+    ],
+    [
+      "Registration",
+      "registration_id",
+      "Preparation, AuthOutput/ConnectionBinding, Scope/AcceptedScope, progress, ExecutionReport, Result",
+      "CO owns lifecycle; PREP prepares, EXEC verifies/runs, RESULT evaluates; no new entity count"
+    ]
+  ],
+  "fact_paths": [
+    [
+      "lesson.package",
+      "SourcePackage",
+      "S03 107~115",
+      "one fact per actual package; VAT basis unknown until explicit confirmation"
+    ],
+    [
+      "lesson.subjects",
+      "string[]",
+      "S03/S04/S09",
+      "source category intent, not platform option ID"
+    ],
+    [
+      "lesson.description",
+      "string",
+      "S03",
+      "lesson scope not invented"
+    ],
+    [
+      "lesson.included",
+      "string[]",
+      "S03 116",
+      "in-session recording/basic mix/mastering"
+    ],
+    [
+      "lesson.additional_fees",
+      "string",
+      "S03 117",
+      "separate production/release consultation; no free assumption"
+    ],
+    [
+      "lesson.reschedule",
+      "string",
+      "S03 118",
+      "no fixed notice period"
+    ],
+    [
+      "lesson.cancel_no_show",
+      "string",
+      "S03 119",
+      "same-day cancellation/no-show counts"
+    ],
+    [
+      "lesson.first_visit",
+      "string",
+      "S03 120",
+      "free consultation/test recording, not priced trial"
+    ],
+    [
+      "lesson.delivery",
+      "string",
+      "S03 121",
+      "studio face-to-face, no travel/online inference"
+    ],
+    [
+      "lesson.group_size",
+      "integer positive",
+      "S03 121",
+      "one-to-one"
+    ],
+    [
+      "lesson.location",
+      "string or structured region",
+      "S03/S04/S09",
+      "explicit public region/address approval"
+    ],
+    [
+      "lesson.preparation",
+      "string",
+      "S03 122",
+      "no mandatory materials; optional reference"
+    ],
+    [
+      "lesson.curriculum",
+      "string",
+      "S03 115",
+      "tailored not invented 4-class schedule"
+    ],
+    [
+      "lesson.media",
+      "asset ref or refs",
+      "S04/S10",
+      "rights + exact bytes/digest"
+    ],
+    [
+      "lesson.package_options",
+      "object",
+      "S04 421~426",
+      "platform-specific package title/description/work days/revision count user choice or source"
+    ],
+    [
+      "lesson.daw_tools",
+      "string[]",
+      "S09",
+      "user-authorized support filters"
+    ],
+    [
+      "lesson.goals",
+      "string[]",
+      "S09",
+      "user-authorized support filters"
+    ],
+    [
+      "lesson.skill",
+      "string",
+      "S09",
+      "user-authorized support filter"
+    ],
+    [
+      "lesson.age",
+      "string[]",
+      "S09",
+      "user-authorized support filters"
+    ],
+    [
+      "lesson.gender",
+      "string[]",
+      "S09",
+      "user-authorized support filters"
+    ]
+  ],
+  "boundaries": [
+    [
+      "B01",
+      "KNOW→CO/PREP/EXEC/RESULT",
+      "ProfileRef / Profile",
+      "resolve registered profile incl value contract, evidence and goal; pin profile; unregistered/mismatched/unknown live deny"
+    ],
+    [
+      "B02",
+      "CO→PREP→CO",
+      "PrepareInput → Preparation",
+      "facts with source/answer evidence; validate platform values, blocking issues and exact commercial values; ready computed"
+    ],
+    [
+      "B03",
+      "CO→EXEC→CO",
+      "AuthInput → AuthOutput",
+      "verified branch must include target+ConnectionBinding, same account and generation; keep internal only"
+    ],
+    [
+      "B04",
+      "CO→EXEC",
+      "ExecuteInput(AcceptedScope)",
+      "immutable scope incl connection, profile, values, provenance, source/target and approval digest; runtime resolves pinned verified connection and acquires exclusive worker lease; lease generation is separate from verified auth generation"
+    ],
+    [
+      "B05",
+      "EXEC→RESULT",
+      "ExecutionReport + trusted EvidenceRecord[]",
+      "each observation/evidence binds registration, target, method, operation; goal fields observed not copied from approved input; profile requires proof"
+    ],
+    [
+      "B06",
+      "RESULT→CO",
+      "Result",
+      "goal verdict, effects/evidence, error, next_action; CO controls job terminal state, result does not reopen job"
+    ]
+  ],
+  "semantic_checks": [
+    [
+      "V01",
+      "CO/PREP",
+      "validate source raw or asset; owner; source immutability, rights flagged; no unsupported type/secret. Each current Fact origin kind=source locates immutable source or answer locates accepted answer; references checked by PREP. Source text interpretation not fully machine-provable."
+    ],
+    [
+      "V02",
+      "KNOW",
+      "match exact profile identity including platform/object/version/digest/environment; registry selector allowlist; compose profile value schema, check fields/bindings/goal references, duplicate IDs. Unknown profile deny; no arbitrary URL fetch."
+    ],
+    [
+      "V03",
+      "PREP",
+      "profile-specific values validation. Mock K conditional region and approved disclosure, category/path and dropdown fixture membership; exact tiers and distinct options, image rights/metadata/approved assets; no foreign fields; S no image/price, allowed options only."
+    ],
+    [
+      "V04",
+      "PREP",
+      "all values map to existing fact refs via JSON Pointer paths, all fact origins verified; unresolved required issues or invalid rule => ready false. Required missing/unknown/conflict never guessed; free text semantics checked from source and final review, cannot prove meaning using a schema. User answers only current issue scope; optional unsupported values omitted."
+    ],
+    [
+      "V05",
+      "PREP",
+      "for each Kmong /packages/i, linked SourcePackage with vat_basis=included must match minutes, sessions, period and total amount (direct or explicitly user-decided VAT-inclusive replacement fact); preserve original fact and decision; unknown VAT blocks. Work_days/revision_count/title/description require explicit source/answer option facts; do not infer from number of sessions. User-selected tier must map actual package. R03 equal 300k fixture is independent synthetic regression only."
+    ],
+    [
+      "V06",
+      "CO/EXEC",
+      "review/start checks current revision, pinned scope and exact connection_ref/verified_generation/account+target, profile, permission, stable effect key. Start atomic immutable accept/idempotency ledger. EXEC checks current authorized connection and exclusive worker lease; same account alone insufficient. No public runtime handle/token. Worker lease generation may change independently of verified auth binding."
+    ],
+    [
+      "V07",
+      "EXEC",
+      "each potentially mutating operation uses stable logical operation ID+target tuple+binding, admitted durably before dispatch; no duplicate/unknown retry. Read step is scoped. Any unexpected error/condition loss after start => stopping→stopped, pending becomes unknown if absence not proven; no user cancel/resume/rollback."
+    ],
+    [
+      "V08",
+      "RESULT",
+      "goal observation must match trusted evidence record and exact approved target/profile goal/method/state, observed canonical payload digest (from actual readback, not approved-input copy), asset digests if required; all required steps and effects verified; no unknown effect for done. If insufficient evidence => unknown, not_reached only known no goal-capable effect or authoritative absence. Preserve error/unknown and late proof, not reopen."
+    ],
+    [
+      "V09",
+      "CO",
+      "state and response invariants: prestart ready is derived, unsupported/blocked never ready; review only ready+verified+new; terminal result required and done confirmed; stopped never resumes. Owner-only data/public evidence redaction. GET no external mutation."
+    ]
+  ],
+  "wire_compatibility": {
+    "routes": [
+      {
+        "id": "H1",
+        "method": "POST",
+        "path": "/v1/sources",
+        "input": "SourceInput",
+        "output": "SourceView",
+        "flow": "F1",
+        "purpose": "create immutable snapshot/upload materials",
+        "success": [
+          201
+        ]
+      },
+      {
+        "id": "H2",
+        "method": "GET",
+        "path": "/v1/sources",
+        "input": "ListQuery",
+        "output": "SourceList",
+        "flow": "F1",
+        "purpose": "reuse list",
+        "success": [
+          200
+        ]
+      },
+      {
+        "id": "H3",
+        "method": "GET",
+        "path": "/v1/sources/{id}",
+        "input": null,
+        "output": "SourceView",
+        "flow": "F1",
+        "purpose": "view chosen source",
+        "success": [
+          200
+        ]
+      },
+      {
+        "id": "H4",
+        "method": "POST",
+        "path": "/v1/registrations",
+        "input": "RegistrationInput",
+        "output": "RegistrationView",
+        "flow": "F1/F2",
+        "purpose": "resolve and prepare; no separate draft resource",
+        "success": [
+          201
+        ]
+      },
+      {
+        "id": "H5",
+        "method": "PATCH",
+        "path": "/v1/registrations/{id}",
+        "input": "PreparationEdit",
+        "output": "RegistrationView",
+        "flow": "F2",
+        "purpose": "answer necessary questions or revise before acceptance",
+        "success": [
+          200
+        ]
+      },
+      {
+        "id": "H6",
+        "method": "POST",
+        "path": "/v1/registrations/{id}/authentication",
+        "input": "AuthCommand",
+        "output": "AuthResponse",
+        "flow": "F3",
+        "purpose": "auth lifecycle and target check; viewer transport not business API",
+        "success": [
+          200
+        ]
+      },
+      {
+        "id": "H7",
+        "method": "POST",
+        "path": "/v1/registrations/{id}/start",
+        "input": "StartInput",
+        "output": "RegistrationView",
+        "flow": "F4/F5",
+        "purpose": "atomic approval/accept; returns tracked request/job, async execution is product behavior",
+        "success": [
+          202,
+          200
+        ]
+      },
+      {
+        "id": "H8",
+        "method": "GET",
+        "path": "/v1/registrations/{id}",
+        "input": null,
+        "output": "RegistrationView",
+        "flow": "F6",
+        "purpose": "stored prep/progress/result; read-only",
+        "success": [
+          200
+        ]
+      },
+      {
+        "id": "H9",
+        "method": "GET",
+        "path": "/v1/registrations",
+        "input": "ListQuery",
+        "output": "RegistrationList",
+        "flow": "F6",
+        "purpose": "return to existing request/result list",
+        "success": [
+          200
+        ]
+      }
+    ],
+    "ports": [
+      {
+        "id": "I1",
+        "caller": "CO",
+        "provider": "KNOW",
+        "input": "selector:string",
+        "output": "ResolveOutput",
+        "error": "unsupported/blocked is a value, not runtime error"
+      },
+      {
+        "id": "I2",
+        "caller": "CO",
+        "provider": "PREP",
+        "input": "PrepareInput",
+        "output": "Preparation",
+        "error": "blocking issues or typed model/runtime error before accept; no fabricated fields"
+      },
+      {
+        "id": "I3",
+        "caller": "CO",
+        "provider": "EXEC",
+        "input": "AuthInput",
+        "output": "AuthOutput",
+        "error": "prestart error only, revoke invalid viewer grant; no target proof on unknown account"
+      },
+      {
+        "id": "I4",
+        "caller": "CO",
+        "provider": "EXEC",
+        "input": "ExecuteInput",
+        "output": "ExecutionReport",
+        "error": "error stop; durable checkpoints via shared infrastructure; report after operations and goal observation",
+        "note": "accepted.scope.connection carries pinned connection; no independent execution connection argument"
+      },
+      {
+        "id": "I5",
+        "caller": "CO",
+        "provider": "RESULT",
+        "input": "EvaluateInput",
+        "output": "Result",
+        "error": "missing required evidence not success; CO closes state; no browser mutation",
+        "note": "trusted stored EvidenceRecord[] provided to evaluator; no client evidence"
+      }
+    ],
+    "notes": "Retain V3 candidate paths and input/output type names from common schema V4. CO maps AuthOutput to AuthResponse without internal connection/target identity or secret; viewer grant only auth open/refresh. Review digest binds internal scope, public ReviewView shows actual values and target label, no internal connection. Schema root must not be used as validation; select named definition. All existing semantic S01~S12 stay except V4 explicitly replaces field shapes, price/VAT meaning, platform enums, and connection/evidence boundaries."
+  },
+  "canonical": {
+    "rule": "Use server canonical UTF-8 sorted-key JSON, integer safe range, order arrays, preserve Unicode, SHA256. Profile content excludes self digest; scope digest exact internal Scope; payload digest exact platform values excluding transport-only source/approval/connection refs; when platform observations normalize to canonical values, profile defines same mapping; asset digest list in upload order. Test vectors and implementation must match; no client-supplied hash authority."
+  },
+  "verification_status": {
+    "static": "subset_reference_shape_checked",
+    "semantic": "31_of_31_selected_synthetic_contract_cases_pass",
+    "product": "not_run",
+    "deferred": [
+      "actual Kmong dropdown/category/region IDs, single package toggle, live policies/receipt",
+      "Soomgo real initial object, new account workflow, category-requiredness/cardinality and save proof",
+      "actual independent T1~T6 release/adapter implementation, runtime DB/HTTP/concurrency/permission/lease enforcement",
+      "actual user efficiency, physical stack and final integration"
+    ],
+    "evidence_ref": "data-contract-validation-v4.json",
+    "limits": [
+      "Subset JS shape checker, not standard JSON Schema engine.",
+      "Semantic sample checks use synthetic fixtures, trusted origin/evidence lists and expected payload digest supplied by test. Not actual extraction/provenance proof, digest generation, registry selection, database concurrency, runtime permission/session enforcement or real browser execution.",
+      "Third platform synthetic sample demonstrates shape/profile extension only, not actual adapter support.",
+      "Logical model remains abstract, N=6/7 also examined; actual runtime tests not run."
+    ]
+  },
+  "non_changes": "No new task, no main/PHASE changes, no live access. Mock rule set explicitly synthetic, exact adapter operations and transport delegated after independent results."
+}

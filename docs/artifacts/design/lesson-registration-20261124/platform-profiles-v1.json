@@ -1,0 +1,270 @@
+{
+  "id": "LR-PROFILES-01",
+  "environment": "mock",
+  "status": "synthetic_contract_candidate",
+  "sources": [
+    {
+      "path": "DETAIL-PLATFORM-FLOWS-V0.2.md",
+      "blob": "fd74c0a035cb429388826028a803e75f64231b9d"
+    },
+    {
+      "path": "DETAIL-DATA-V0.2.md",
+      "blob": "679930d761a91ac161eb5be8960c0913fe34710d"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "kmong.service_listing.mock.v1",
+      "platform": "kmong",
+      "target_kind": "service_listing",
+      "route": "kmong",
+      "live_allowed": false,
+      "fields": [
+        [
+          "title",
+          "string",
+          "required",
+          "lesson.subjects,description",
+          "10~30 chars (mock rule)"
+        ],
+        [
+          "category",
+          "enum",
+          "required",
+          "lesson.subjects",
+          "mock enum music"
+        ],
+        [
+          "description",
+          "string",
+          "required",
+          "lesson.description",
+          "min 100 chars mock"
+        ],
+        [
+          "delivery",
+          "enum",
+          "required",
+          "lesson.delivery_mode",
+          "in_person/online/hybrid"
+        ],
+        [
+          "region",
+          "string",
+          "conditional",
+          "lesson.location",
+          "required when in_person/hybrid"
+        ],
+        [
+          "packages",
+          "Package[]",
+          "required",
+          "packages",
+          "1..3 confirmed packages; exact amounts/minutes/sessions/period"
+        ],
+        [
+          "vat_included",
+          "boolean",
+          "required",
+          "platform_specific_inputs",
+          "ask if absent; false is valid"
+        ],
+        [
+          "process",
+          "string",
+          "required",
+          "lesson.curriculum",
+          "min 50 chars mock"
+        ],
+        [
+          "preparation",
+          "string",
+          "required",
+          "lesson.preparation",
+          "min 50 chars mock; no invented material"
+        ],
+        [
+          "main_image",
+          "AssetRef",
+          "required",
+          "media_refs",
+          "one approved PNG/JPEG, mock dimensions 652x488"
+        ]
+      ],
+      "steps": [
+        [
+          "K1",
+          "open_new_form",
+          "read_or_effect",
+          "account+target",
+          "form_target_verified"
+        ],
+        [
+          "K2",
+          "fill_listing",
+          "mutation",
+          "title,category,description,delivery,region,packages,vat_included,process,preparation",
+          "fields_match"
+        ],
+        [
+          "K3",
+          "attach_image",
+          "mutation",
+          "main_image",
+          "asset_matches"
+        ],
+        [
+          "K4",
+          "verify_before_submit",
+          "read",
+          "all approved fields+asset",
+          "full_draft_matches"
+        ],
+        [
+          "K5",
+          "submit_once",
+          "mutation",
+          "target+approval",
+          "submission_observation"
+        ]
+      ],
+      "goal": {
+        "kind": "mock_listing_receipt",
+        "required": [
+          "target_ref",
+          "receipt_id",
+          "payload_digest",
+          "asset_digest"
+        ],
+        "method": "independent readback of same target receipt and approved payload; not actual publication"
+      },
+      "unknown_live": [
+        "package toggle/real allowed options",
+        "VAT and actual duration/period fields",
+        "image dimensions and all current rules",
+        "actual submit/permission"
+      ]
+    },
+    {
+      "id": "soomgo.service_configuration.mock.v1",
+      "platform": "soomgo",
+      "target_kind": "service_configuration",
+      "route": "soomgo",
+      "live_allowed": false,
+      "fields": [
+        [
+          "category",
+          "enum",
+          "required",
+          "lesson.subjects",
+          "mock enum midi"
+        ],
+        [
+          "daw",
+          "enum[]",
+          "required",
+          "lesson.daw_tools",
+          "mock allowed logic,cubase,ableton,fl,garageband,consult"
+        ],
+        [
+          "goals",
+          "enum[]",
+          "required",
+          "lesson.goals",
+          "mock allowed hobby,entrance,production"
+        ],
+        [
+          "keyboard",
+          "enum",
+          "required",
+          "lesson.skill",
+          "mock allowed yes,chords,no"
+        ],
+        [
+          "ages",
+          "enum[]",
+          "required",
+          "lesson.age",
+          "mock allowed under10,teens,20s,30s,40s,50plus"
+        ],
+        [
+          "genders",
+          "enum[]",
+          "required",
+          "lesson.gender",
+          "mock allowed male,female; do not infer"
+        ],
+        [
+          "format",
+          "enum[]",
+          "required",
+          "lesson.delivery_mode,group_size",
+          "mock allowed individual,group,online,academy"
+        ],
+        [
+          "location_mode",
+          "enum[]",
+          "required",
+          "lesson.location",
+          "mock allowed studio,travel,online,any"
+        ]
+      ],
+      "steps": [
+        [
+          "S1",
+          "open_service_form",
+          "read_or_effect",
+          "account+target",
+          "category_form_verified"
+        ],
+        [
+          "S2",
+          "fill_service_settings",
+          "mutation",
+          "category,daw,goals,keyboard,ages,genders,format,location_mode",
+          "fields_match"
+        ],
+        [
+          "S3",
+          "verify_before_save",
+          "read",
+          "all approved fields",
+          "full_draft_matches"
+        ],
+        [
+          "S4",
+          "save_once",
+          "mutation",
+          "target+approval",
+          "save_observation"
+        ]
+      ],
+      "goal": {
+        "kind": "mock_service_configuration_saved",
+        "required": [
+          "target_ref",
+          "configuration_id",
+          "payload_digest"
+        ],
+        "method": "independent readback of category and approved choices; not actual publication"
+      },
+      "unknown_live": [
+        "new provider eligibility",
+        "actual service object/save/publication",
+        "category-specific actual fields and options",
+        "authorization"
+      ]
+    }
+  ],
+  "common": {
+    "prohibited": [
+      "arbitrary origin/navigation",
+      "unapproved value change",
+      "identity or settlement automation",
+      "payment",
+      "quote/message dispatch",
+      "unapproved profile mutation"
+    ],
+    "rule": "All fields and procedure are synthetic contract, not current live platform claims. read_or_effect treated as mutation for admission until proven read-only; no raw driver outside EXEC. read steps also require authorized target/current conditions. Exact registry action and binding required. Missing required or unknown rule blocks acceptance."
+  }
+}

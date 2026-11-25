@@ -1,0 +1,314 @@
+{
+  "source_blob": "798f488c1be7589b67f103d691c60554bfebd794",
+  "source_parent": "e8b59cbe2249e83835586963e60df2b53d67615a",
+  "execution": "direct JavaScript finite-model exploration and defect injection",
+  "normal": {
+    "states": 62,
+    "edges": 203,
+    "counts": {
+      "active": 8,
+      "stopping": 10,
+      "done": 1,
+      "stopped": 10
+    },
+    "unused": [],
+    "violations": [],
+    "no_outcome": 0,
+    "normal_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "progress_0",
+      "admit",
+      "progress_1",
+      "admit",
+      "final_effect_proven",
+      "goal_proven"
+    ],
+    "unknown_stop_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "error_detected",
+      "finish_stop_pending"
+    ],
+    "known_absent_stop_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "error_effect_absent",
+      "finish_stop_other"
+    ],
+    "limits": "Finite declared logical model only; error source, evidence, external effects, key storage and execution environment not tested."
+  },
+  "mutations": [
+    {
+      "name": "add user stop",
+      "detected": true,
+      "counterexample": {
+        "id": "user changes accepted job",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "manual_stop"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopping",
+          "effect": "none",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "allow nonerror stop",
+      "detected": true,
+      "counterexample": {
+        "id": "nonerror stop",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "unexpected_stop"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopping",
+          "effect": "none",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "resume stopped job",
+      "detected": true,
+      "counterexample": {
+        "id": "terminal reopened",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "error_detected",
+          "finish_stop_other"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopped",
+          "effect": "none",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "discard pending effect",
+      "detected": true,
+      "counterexample": {
+        "id": "stop lost history",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "acquire_worker",
+          "admit",
+          "error_detected",
+          "finish_stop_pending"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopped",
+          "effect": "absent",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "remove stop finalization",
+      "detected": true,
+      "counterexample": {
+        "id": "stop finalization incomplete",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "acquire_worker",
+          "admit",
+          "error_detected"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopping",
+          "effect": "pending",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "remove draft guard and change draft",
+      "detected": true,
+      "counterexample": {
+        "id": "unsafe admission",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "acquire_worker",
+          "bad_draft",
+          "admit"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "review",
+          "auth": "verified",
+          "control": "worker",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "active",
+          "effect": "pending",
+          "step": 0
+        }
+      }
+    }
+  ],
+  "product_execution": "not_run",
+  "idempotency": "logical contract only; no key implementation or runtime test"
+}

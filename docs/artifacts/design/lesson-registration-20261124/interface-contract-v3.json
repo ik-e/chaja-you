@@ -1,0 +1,330 @@
+{
+  "id": "LR-INTERFACE-03",
+  "basis": [
+    {
+      "path": "detail-contract-v2.json",
+      "blob": "3502a35177b66e710b324445713a4c76360c5637"
+    },
+    {
+      "path": "detail-decisions-v2.json",
+      "blob": "3c04b85cb9ee45d8aa21b9cfdea0713fe8dc3014"
+    },
+    {
+      "path": "logical-behavior-v5.json",
+      "blob": "2c13b86a44b10f7877678509819e97d1d1b72c17"
+    },
+    {
+      "path": "platform-profiles-v1.json",
+      "blob": "829a9b793b8f8039dc280dfc251f9f9cd8ea786b"
+    },
+    {
+      "path": "detail-gate-v1.json",
+      "blob": "55c66d285183fb4a8a12041b883c12e7775d12f7"
+    }
+  ],
+  "status": "candidate_for_review_and_integration",
+  "authority": "LR-DETAIL-DECISIONS-02; 2026-11-24 user: 너가 권장한대로 설계를 하는데 설계 결정사항들에 대해서 나를 설득해봐",
+  "schema": "interface-schema-v3.json",
+  "decisions": [
+    {
+      "id": "C01",
+      "choice": "공통 업무 데이터 3개 구조와 타입이 명시된 하위 값; 별도 테이블 수 미정",
+      "why": "원본/프로필만 재사용, 등록 요청이 준비·승인·실행·결과 단위. 물리 분리 강제 근거 없음.",
+      "alternative": "각 단계별 엔터티/API, 또는 구조 없는 JSON",
+      "timing": "병렬 구현 전에 의미/타입 필요, DB는 통합 기술 결정 뒤"
+    },
+    {
+      "id": "C02",
+      "choice": "공통 봉투는 닫힌 스키마, 실제 등록값은 플랫폼 프로필 타입과 별도 조건 검사",
+      "why": "오류/타입/상태/필드를 일치시키되 크몽 가격·이미지와 숨고 문항의 차이 보존. 누락/null/false/0 구분.",
+      "alternative": "모든 플랫폼 동일 필드 또는 자유형 JSON",
+      "timing": "준비-실행-판정 연결에 선행"
+    },
+    {
+      "id": "C03",
+      "choice": "9개 업무 API 유지, 인증은 등록 요청의 open/finish/close/refresh 명령. 준비/인증 확인은 설정된 시간 내 응답, 실패는 실행 수락 전 안내; 실행만 비동기 job, GET 조회",
+      "why": "장시간 브라우저 업무에서 연결 종료와 작업 분리 필요. 준비 단계에 별도 비동기 작업/상태/폴링 시스템은 현 근거로 필요 없음. 초과 시간은 명확한 실패/재시도 가능.",
+      "alternative": "모든 요청 동기 실행 또는 모두 job/별도 인증 resource",
+      "timing": "UI-서버 동작 합의 선행; 실제 timeout 수치는 측정 후"
+    },
+    {
+      "id": "C04",
+      "choice": "서버가 승인 범위 digest와 revision을 생성하고 start에서 원자 수락; 일반적인 요청 키·대상/동작 키",
+      "why": "중복 클릭/응답 유실, 오래된 화면, 다른 요청 키로 기존 효과 재발급 방지. 새 idempotency subsystem 불필요.",
+      "alternative": "클라이언트 임의 계획/키만 믿기 또는 단계별 사용자 승인",
+      "timing": "저장/실행 경계를 독립 구현 전 정의"
+    },
+    {
+      "id": "C05",
+      "choice": "준비/인증/실행/판정의 5개 업무 포트, 실행기는 의미 있는 단계 내 실제 mutation 경계에서만 durable admission; 판정은 프로필 증거",
+      "why": "UI 조작 호출 자체가 성공을 증명하지 않음. 단계 묶음은 화면 표시 목적, 개별 효과 경계가 다르면 안전 검사를 생략할 수 없음. 모든 클릭 로그는 불필요.",
+      "alternative": "AI 임의 실행, 모든 DOM 클릭 독립 업무 단계, 결과 무조건 재조회",
+      "timing": "adapter/공통 실행 경계 필요, 실제 DOM 세부·toolkit은 위임"
+    },
+    {
+      "id": "C06",
+      "choice": "웹 UI + 하나의 논리 앱 + 공통 영속 저장소 + 격리된 원격 브라우저 실행 영역, 추가 microservice/메시지 브로커 없음; 같은 프로세스/별도 실행자 여부는 후속",
+      "why": "소규모 팀/단일 등록 흐름, 공유 상태/승인/중단 원자성. 원격 브라우저 격리와 작업 수명은 별도 보장. 분산 서비스의 계약/배포 비용 불필요.",
+      "alternative": "책임별 독립 서비스 또는 브라우저/앱 완전 혼합",
+      "timing": "통합 배치 경계만 필요. DB/framework/worker/transport는 11/27 독립 결과 판단"
+    },
+    {
+      "id": "C07",
+      "choice": "지원 프로필과 실제 플랫폼 규칙의 검증 수준을 명시; 현재 두 mock value schema는 통합 설계 fixture, 실제 업체 필드나 팀원 독립 계약 강제 아님",
+      "why": "조사 보고가 실제 지원·권한·저장 증거를 대체할 수 없음. 숨고 실제 목표 미확정.",
+      "alternative": "미확인 live 규칙을 고정하거나 모든 설계 보류",
+      "timing": "모의 인터페이스 검증 가능, 실제 지원은 별도 gate"
+    }
+  ],
+  "routes": [
+    {
+      "id": "H1",
+      "method": "POST",
+      "path": "/v1/sources",
+      "input": "SourceInput",
+      "output": "SourceView",
+      "flow": "F1",
+      "purpose": "create immutable snapshot/upload materials",
+      "success": [
+        201
+      ]
+    },
+    {
+      "id": "H2",
+      "method": "GET",
+      "path": "/v1/sources",
+      "input": "ListQuery",
+      "output": "SourceList",
+      "flow": "F1",
+      "purpose": "reuse list",
+      "success": [
+        200
+      ]
+    },
+    {
+      "id": "H3",
+      "method": "GET",
+      "path": "/v1/sources/{id}",
+      "input": null,
+      "output": "SourceView",
+      "flow": "F1",
+      "purpose": "view chosen source",
+      "success": [
+        200
+      ]
+    },
+    {
+      "id": "H4",
+      "method": "POST",
+      "path": "/v1/registrations",
+      "input": "RegistrationInput",
+      "output": "RegistrationView",
+      "flow": "F1/F2",
+      "purpose": "resolve and prepare; no separate draft resource",
+      "success": [
+        201
+      ]
+    },
+    {
+      "id": "H5",
+      "method": "PATCH",
+      "path": "/v1/registrations/{id}",
+      "input": "PreparationEdit",
+      "output": "RegistrationView",
+      "flow": "F2",
+      "purpose": "answer necessary questions or revise before acceptance",
+      "success": [
+        200
+      ]
+    },
+    {
+      "id": "H6",
+      "method": "POST",
+      "path": "/v1/registrations/{id}/authentication",
+      "input": "AuthCommand",
+      "output": "AuthResponse",
+      "flow": "F3",
+      "purpose": "auth lifecycle and target check; viewer transport not business API",
+      "success": [
+        200
+      ]
+    },
+    {
+      "id": "H7",
+      "method": "POST",
+      "path": "/v1/registrations/{id}/start",
+      "input": "StartInput",
+      "output": "RegistrationView",
+      "flow": "F4/F5",
+      "purpose": "atomic approval/accept; returns tracked request/job, async execution is product behavior",
+      "success": [
+        202,
+        200
+      ]
+    },
+    {
+      "id": "H8",
+      "method": "GET",
+      "path": "/v1/registrations/{id}",
+      "input": null,
+      "output": "RegistrationView",
+      "flow": "F6",
+      "purpose": "stored prep/progress/result; read-only",
+      "success": [
+        200
+      ]
+    },
+    {
+      "id": "H9",
+      "method": "GET",
+      "path": "/v1/registrations",
+      "input": "ListQuery",
+      "output": "RegistrationList",
+      "flow": "F6",
+      "purpose": "return to existing request/result list",
+      "success": [
+        200
+      ]
+    }
+  ],
+  "ports": [
+    {
+      "id": "I1",
+      "caller": "CO",
+      "provider": "KNOW",
+      "input": "selector:string",
+      "output": "ResolveOutput",
+      "error": "unsupported/blocked is a value, not runtime error"
+    },
+    {
+      "id": "I2",
+      "caller": "CO",
+      "provider": "PREP",
+      "input": "PrepareInput",
+      "output": "Preparation",
+      "error": "blocking issues or typed model/runtime error before accept; no fabricated fields"
+    },
+    {
+      "id": "I3",
+      "caller": "CO",
+      "provider": "EXEC",
+      "input": "AuthInput",
+      "output": "AuthOutput",
+      "error": "prestart error only, revoke invalid viewer grant; no target proof on unknown account"
+    },
+    {
+      "id": "I4",
+      "caller": "CO",
+      "provider": "EXEC",
+      "input": "ExecuteInput",
+      "output": "ExecutionReport",
+      "error": "error stop; durable checkpoints via shared infrastructure; report after operations and goal observation"
+    },
+    {
+      "id": "I5",
+      "caller": "CO",
+      "provider": "RESULT",
+      "input": "EvaluateInput",
+      "output": "Result",
+      "error": "missing required evidence not success; CO closes state; no browser mutation"
+    }
+  ],
+  "semantic_rules": [
+    [
+      "S01",
+      "Source",
+      "raw_text or at least one valid asset; source is immutable snapshot. Asset part_name unique and exact multipart manifest; reject unmatched bytes, unsafe type or no explicit rights for use. Store original rights flag, block readiness when false; source reuse owner only."
+    ],
+    [
+      "S02",
+      "Preparation",
+      "supported profile only; missing/invalid/unverified/rights unknown issues marked blocking. ready iff required profile fields valid, no blocking issues and all proposed semantic facts have actual source/answer evidence; wording proposal may be reviewed, no invented facts. Source/answers scoped to registration. Validate exact conditional/optional rules; preserve units and zero/false. Unsupported is normal prestart result."
+    ],
+    [
+      "S03",
+      "Profile values",
+      "KmongValues/SoomgoValues are synthetic fixture schemas: in_person/hybrid requires region; main_image rights true, 652x488 mock fixture; region absent permitted online; exact package amounts/period/units preserved, VAT boolean false valid. Soomgo arrays nonempty unique mock enum, no main_image. Real rules and actual object not decided."
+    ],
+    [
+      "S04",
+      "Auth",
+      "open only prestart ready and current revision; finish/close/refresh expected generation matches current auth grant/session; close prestart only (including verified connection), refresh only human input phase; actual user secrets stay in remote runtime. finish fences human input, bounded identity + target lookup, returns verified target or error; on timeout close/fence and prestart retry. H8/H9 never return grants. Viewer close alone not job stop. H6 grant only open/refresh."
+    ],
+    [
+      "S05",
+      "Review/start",
+      "review present only ready+verified+new+allowed; show actual values/assets/target/goal/steps and no rollback/cancel notice. Server canonical digest includes immutable scope. Start checks owner, current registration revision, reviewed digest, source/profile/target/account/policy/connection and effect ledger. H7 first successful acceptance durably creates active job + scope + key in one transaction, before runner dispatch. Return 202; replay first lookup key scoped owner+start, same registration ID+payload returns 200 current persisted view; different payload -> 409 even terminal/expired. User mutation after start denied; results read only."
+    ],
+    [
+      "S06",
+      "Identity",
+      "stable effect key is typed tuple environment+platform+external_account_ref+object_kind+slot_ref+logical_operation_id, not request ID/title or arbitrary client value. Server resolves stable slot using existing intent and platform evidence; same intent retains slot across attempts/requests. If uncertain, target ambiguous and block start; distinct actual lesson intent may have distinct slot. Existing result returned only if owner authorized. No external exactly-once claim."
+    ],
+    [
+      "S07",
+      "Execution",
+      "server validates active/current scope+permission+same account+lease generation+revision+allowed bound action+before-state and prior effect key before admitting each potentially mutating logical operation; durable admission/unique key before sending browser command. Read-only operations also scoped; uncertain classification potential_effect. Step groups may contain multiple operations; adapter declares each potential effect and stable operation ID, not each click log. No raw browser access bypass; stop fences future admissions. After admitted crash/response loss, preserve unknown, never replay uncertain command. Technical transport retry only if cannot repeat external mutation; not user resume."
+    ],
+    [
+      "S08",
+      "Result",
+      "goal confirmed only matching approved scope's target, goal_kind, canonical payload digest and required evidence (Kmong also approved asset digest); both current mock profiles require trusted independent readback. Profile may later allow trusted response proof without readback. Error => stopping -> stopped with known/absent/unknown effects and goal verdict. Goal not_reached only authoritative absence or known no goal-capable effect dispatched under profile; else unknown. done requires goal confirmed and no unresolved effects; no user resume/cancel/edit. Late trusted read-only observations append evidence without reopening lifecycle. No real receipt/publication claim."
+    ],
+    [
+      "S09",
+      "Isolation",
+      "server only mock, supported origins allowlist at runtime. Owner derives from service identity; no raw credentials/OTP/cookies/driver handles to app logs/LLM/public response. Any external permission/auth loss after acceptance system error. GET uses persisted data only."
+    ],
+    [
+      "S10",
+      "Review digest",
+      "server-only canonical UTF-8 JSON, keys sorted by Unicode code units, no whitespace, arrays in declared order, numbers integer safe range, strings Unicode preserved (no silent normalization), exact allowed fields only, SHA256. Revision/source/profile/values/provenance/asset digest/target/procedure/goal included; exclude mutable display labels, viewer grants/session secrets/time. Server generates and client echoes digest; no client hash authority. Profile hash uses same canonical rules on versioned content; key replay digest includes route registration id and StartInput excluding request_key. Canonical implementation/test vector shared at integration."
+    ],
+    [
+      "S11",
+      "Prestart edit",
+      "H5 needs at least one of source_id/selector/answers, unique current issue IDs; cannot patch values/approval directly. Source/selector change clears incompatible answers and review; answers update preparation; auth human/verifying must close first. Verified connection invalidated on material change. H1/H4 resource creation no external mutation, duplicate resources alone safe; no start until semantic target guard."
+    ],
+    [
+      "S12",
+      "Response invariants",
+      "job_state null means prestart; supported requires profile_ref, unsupported/blocked cannot ready/start. accepted jobs carry frozen scope/progress. terminal done/stopped requires result; active/stopping may have progress but not terminal result. Done confirmed; stopped can have unknown or not_reached (or later trusted confirmed), remains stopped. Error envelope status defined; no secrets. Public evidence summaries redacted, references correspond to stored trusted records."
+    ]
+  ],
+  "integration": {
+    "components": [
+      [
+        "UI",
+        "owner-scoped source/registration views and auth viewer, explicit final start, polling; no execution control"
+      ],
+      [
+        "APP",
+        "CO/PREP/KNOW/RESULT and EXEC orchestration; owns typed APIs and durable job/effect transitions, one logical app not mandatory service per role"
+      ],
+      [
+        "STORE",
+        "persistent source/profile refs/registration/support keys/evidence; atomic accept/admit/fence, owner isolation; physical schema delegated"
+      ],
+      [
+        "REMOTE",
+        "server browser session with exclusive human-auth/read/worker control, restricted registered operations and mock network; technology delegated"
+      ]
+    ],
+    "flow": [
+      "UI H1-H5 -> CO -> KNOW/PREP -> STORE",
+      "UI H6 -> CO -> EXEC -> REMOTE; fence human and verify target; store review",
+      "UI H7 -> CO atomic accept in STORE -> runner acquires worker control -> registered operations with durable admission and typed observations",
+      "EXEC obtains profile-required goal observation -> RESULT evaluates -> CO persists terminal result -> UI H8/H9 reads"
+    ],
+    "workspace_proposal": "Separate product root and shared schema/fixture contract, adapter modules kmong/soomgo, common app+UI+runtime+test entrypoints. Exact language, folder/package naming, dependencies, DB and remote implementation not fixed until 11/27. Independent prototype/lesson-registration worktree contracts unchanged. Do not merge whole independent branches; integrate verified functions/adapters via shared contracts.",
+    "pending_gate": {
+      "evidence": "R03/R04/R05 independent branches all at 3b456f34765391bd230cf604e72cdaef84651539 as queried; common harness contract says release not completed. No implementation winner or dependency choice supported.",
+      "choose_after": "11/27 R01 compare common harness release and actual results, decide shared language/framework/DB/runtime and minimal product workspace; align WBS and actual fixtures then."
+    }
+  },
+  "limits": [
+    "No actual browser/mock harness/DB/HTTP server executed. Schema and mock tests are design artifacts, not production behavior proof.",
+    "Actual browser operation definitions, platform DOM/field conditions, real Soomgo object and live permission remain unverified.",
+    "Exact shared package/framework/database/runtime, real transport and timeout limits deferred. No team assignment change."
+  ]
+}

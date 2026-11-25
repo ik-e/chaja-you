@@ -1,0 +1,3797 @@
+{
+  "schema_version": 1,
+  "id": "LESSON-DESIGN-TRACE-V0.6",
+  "kind": "design_trace_reference_index",
+  "status": "integration_review_candidate",
+  "owner": "R01",
+  "updated_at": "2026-11-24",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "model_ref": "docs/deliverables/planning-design-info-model.json",
+  "base_commit": "d1de8ca54c17881380f1729c5d01363f7d910f30",
+  "purpose": "기존 정보 모델 IT-00–IT-27에 V0.1–V0.5를 연결. 원본을 중복 관리하지 않고 현재 적용·역사·부분 교정·검증 계획·결정 상태·공식 산출물 참조를 제공.",
+  "scope": "설계 정보 추적 및 검토용. 현재 PHASE mock-only, TASK-043–045, 원격 브라우저 방향 및 기술 위임, 12/8·1/4 목표 유지. 제품/구현/운영/제출 승인을 부여하지 않음.",
+  "sources": {
+    "model": {
+      "path": "docs/deliverables/planning-design-info-model.json",
+      "blob_sha": "abcf59b611d3eccde0292f48af1c43fb76d65eb2",
+      "commit": "9b6ff0463722372d577747e89cb853e773c78591"
+    },
+    "registry": {
+      "path": "docs/deliverables/registry.json",
+      "blob_sha": "1ea2b888740fbc95c7d97d39657db554b6705b32",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "plan": {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+      "blob_sha": "a81b521898cc516cd88b8b53ec39dbf008b164eb",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "phase": {
+      "path": "docs/human/phase-intents/PHASE-20261124-02.md",
+      "blob_sha": "6b790bf85ed6295cb096e56560ddc86d34031087",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "harness": {
+      "path": "prototype/lesson-registration/test-harness/CONTRACT.md",
+      "blob_sha": "f93daf71aebc1a4272739956c7753968e7655d5b",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v01req": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/requirements-v0.1.json",
+      "blob_sha": "bdb3588eb75c239244a4dc57c8c378e3518024ad",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v01domain": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json",
+      "blob_sha": "07c95483b78a2dc30175d0b3edcc0123b085bfba",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v01system": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/system-contracts-v0.1.json",
+      "blob_sha": "fb2cab908fdd3432c13d0eb2a6f2335f7ed60ffd",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v01verify": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/verification-decisions-v0.1.json",
+      "blob_sha": "f2c0940ed7e10ca410e14896f789fc6752702488",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v02": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-design-v0.2.json",
+      "blob_sha": "ee0490e7bad742cb4e9cf3f593da1bc1421c16c2",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v03core": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json",
+      "blob_sha": "be77eba784c90b89b510a20d9d7af7f355db4992",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
+    },
+    "v03api": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json",
+      "blob_sha": "14438ccb80be4fb8a03094c5aa60cbacde53129f",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
+    },
+    "v03review": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/review-v0.3.json",
+      "blob_sha": "7961bce5e04b3377559dca93ee98df8c0dc2febf",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v04direction": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json",
+      "blob_sha": "54beb7c357e580b087442bb8f00e40ab2a3567af",
+      "commit": "d1de8ca54c17881380f1729c5d01363f7d910f30"
+    },
+    "v04implementation": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+      "blob_sha": "f7b49262a4d470f6a2764e0fd2c559e6358cc416",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
+    },
+    "v04physical": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/physical-v0.4.json",
+      "blob_sha": "d6bffc13289c569ec0fe4e3877d7b5b8c22abba1",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
+    },
+    "v05contract": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
+      "blob_sha": "b773142f11580c098a5e90a99d4f633083b116ad",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
+    },
+    "v05wbs": {
+      "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+      "blob_sha": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+      "commit": "3a1a81869a7602910310b024782a8668c3d46ef3"
+    }
+  },
+  "precedence": [
+    "현재 PHASE가 실행 허용 경계. DIR-01–04는 사용자 방향 결정만 반영.",
+    "V0.5 명시 교정 > 해당 V0.4 계약 > 해당 V0.3 계약 > 해당 V0.2 상세 > V0.1 논리 초안. V0.5가 명시 교정하지 않은 V0.3 안전 불변식과 V0.4 요구사항·컴포넌트 유지.",
+    "원본/외부 관측·개인 PoC·시험 계획은 각각 별도. 과거 기록의 상태/근거를 현재 성공으로 승격하지 않음.",
+    "생성된 trace는 조회/검사용 view. 원본 변경은 기존 파일에서만 하고 source blob/관계/검증/영향을 함께 갱신. 새로운 중복 요구사항 정본을 만들지 않음."
+  ],
+  "legacy": {
+    "files": [
+      "v01req",
+      "v01domain",
+      "v01system",
+      "v01verify"
+    ],
+    "historical": [
+      "LR-STRATEGY",
+      "LR-STATE",
+      "LR-DATA",
+      "LR-SECURITY",
+      "LR-AI",
+      "LR-C-01",
+      "LR-C-02",
+      "LR-C-03",
+      "LR-C-04",
+      "LR-C-05",
+      "LR-C-06",
+      "LR-OP-01",
+      "LR-OP-02",
+      "LR-OP-03",
+      "LR-OP-04",
+      "LR-OP-05",
+      "LR-OP-06",
+      "LR-OP-07",
+      "LR-UI-01",
+      "LR-UI-02",
+      "LR-UI-03",
+      "LR-UI-04",
+      "LR-D01",
+      "LR-D02",
+      "LR-D03",
+      "LR-D04",
+      "LR-D05",
+      "LR-D06"
+    ],
+    "overlays": [
+      "LR-DOMAIN",
+      "LR-BOUNDARY",
+      "LR-VALUE",
+      "LR-SCOPE",
+      "LR-UC-01",
+      "LR-UC-02",
+      "LR-UC-03",
+      "FR-01",
+      "FR-02",
+      "FR-03",
+      "FR-04",
+      "FR-05",
+      "FR-06",
+      "LR-NFR-01",
+      "LR-NFR-02",
+      "LR-NFR-03",
+      "LR-NFR-04",
+      "LR-NFR-05"
+    ],
+    "test_policy": "기존 LR-T 시험은 계획으로 유지; 과거 검증 대상과 현재 컴포넌트 연결을 구분. 다중 L값은 생성된 validator view에서 가장 상세한 L로 정규화하고 원본 값 보존."
+  },
+  "runtime_units": [
+    {
+      "id": "RU-WEB",
+      "key": "web",
+      "responsibility": "사용자 웹 상호작용",
+      "data_ownership": "사용자 입력 및 표시 상태; 업무 정본 없음"
+    },
+    {
+      "id": "RU-APP",
+      "key": "app",
+      "responsibility": "원본·등록 조정·API·결과",
+      "data_ownership": "업무 정본은 store에 버전 저장; API 및 서비스 권한 판단"
+    },
+    {
+      "id": "RU-REMOTE",
+      "key": "remote_runtime",
+      "responsibility": "세션·제어 게이트웨이·플랫폼 adapter",
+      "data_ownership": "격리된 임시 실행 맥락, durable 업무 상태는 store; 원격 기술 위임"
+    },
+    {
+      "id": "RU-STORE",
+      "key": "store",
+      "responsibility": "영속 데이터 및 원자 상태",
+      "data_ownership": "원본/승인/작업/시도/증거/결과 정본; 비밀값 제외"
+    },
+    {
+      "id": "RU-TEST",
+      "key": "test",
+      "responsibility": "합성 사이트와 공통 검증",
+      "data_ownership": "합성 fixture와 시험 기록; 제품 운영 단위 아님"
+    }
+  ],
+  "requirements": {
+    "quality": [
+      "REQ-10",
+      "REQ-11"
+    ],
+    "use_cases": {
+      "REQ-01": "LR-UC-01",
+      "REQ-02": "LR-UC-01",
+      "REQ-03": "LR-UC-01",
+      "REQ-04": "LR-UC-01",
+      "REQ-05": "LR-UC-01",
+      "REQ-06": "LR-UC-01",
+      "REQ-07": "LR-UC-01",
+      "REQ-08": "LR-UC-02",
+      "REQ-09": "LR-UC-03"
+    },
+    "quality_baseline": {
+      "REQ-10": [
+        "LR-NFR-02",
+        "LR-NFR-04",
+        "LR-NFR-05"
+      ],
+      "REQ-11": [
+        "LR-NFR-01",
+        "LR-NFR-03",
+        "LR-VALUE"
+      ]
+    }
+  },
+  "route_groups": [
+    {
+      "id": "HTTP-01",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-01",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-01"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-02",
+      "source": "v04physical",
+      "selector": "api/routes:HTTP-02",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-10"
+      ],
+      "inheritance_note": "V0.8 typed request_wire in V0.4 physical + V0.3 data API/V0.5 wire; same endpoint and owner boundary."
+    },
+    {
+      "id": "HTTP-03",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-03",
+      "provider": "C4-04",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-09",
+        "REQ-10"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-04",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-04",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-03"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-05",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-05",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-06",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-06",
+      "provider": "C4-06",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-07",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-07",
+      "provider": "C4-06",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-08",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-08",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-09",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-09",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-10",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-10",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-11",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-11",
+      "provider": "C4-09",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-08"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-12",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-12",
+      "provider": "C4-09",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-13",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-13",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-14",
+      "source": "v04physical",
+      "selector": "api/routes:HTTP-14",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-05"
+      ],
+      "inheritance_note": "V0.5 route_inheritance도 함께 적용. 본 참조는 기존 wire 경로 유지이며 상세 schema 교정은 해당 명세 참조."
+    },
+    {
+      "id": "HTTP-15",
+      "source": "v04physical",
+      "selector": "api/routes:HTTP-15",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-10"
+      ],
+      "inheritance_note": "V0.5 route_inheritance도 함께 적용. 본 참조는 기존 wire 경로 유지이며 상세 schema 교정은 해당 명세 참조."
+    },
+    {
+      "id": "HTTP-16",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-16",
+      "provider": "C4-06",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10",
+        "REQ-08"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-17",
+      "source": "v04physical",
+      "selector": "api/routes:HTTP-17",
+      "provider": "C4-09",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-08"
+      ],
+      "inheritance_note": "V0.8 typed request_wire in V0.4 physical + V0.3 data API/V0.5 wire; same endpoint and owner boundary."
+    },
+    {
+      "id": "HTTP-18",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-18",
+      "provider": "C4-06",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-19",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-19",
+      "provider": "C4-07",
+      "consumer": "C4-05",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-20",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-20",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-21",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-21",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-05"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-22",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-22",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-09"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-23",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-23",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-09"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-24",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-24",
+      "provider": "C4-05",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-25",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-25",
+      "provider": "C4-09",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-08"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-26",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-26",
+      "provider": "C4-06",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-08"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-27",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-27",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-28",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-28",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-10"
+      ],
+      "inheritance_note": null
+    },
+    {
+      "id": "HTTP-29",
+      "source": "v05contract",
+      "selector": "api/routes:HTTP-29",
+      "provider": "C4-03",
+      "consumer": "C4-02",
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-08"
+      ],
+      "inheritance_note": null
+    }
+  ],
+  "port_groups": [
+    {
+      "id": "PORT5-01",
+      "provider": "C4-04",
+      "consumers": [
+        "C4-02",
+        "C4-03"
+      ],
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-09",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "PORT5-02",
+      "provider": "C4-03",
+      "consumers": [
+        "C4-02"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03"
+      ]
+    },
+    {
+      "id": "PORT5-03",
+      "provider": "C4-06",
+      "consumers": [
+        "C4-02",
+        "C4-05"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ]
+    },
+    {
+      "id": "PORT5-04",
+      "provider": "C4-08",
+      "consumers": [
+        "C4-05"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ]
+    },
+    {
+      "id": "PORT5-05",
+      "provider": "C4-08",
+      "consumers": [
+        "C4-07"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07"
+      ]
+    },
+    {
+      "id": "PORT5-06",
+      "provider": "C4-07",
+      "consumers": [
+        "C4-05"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "PORT5-07",
+      "provider": "C4-08",
+      "consumers": [
+        "C4-07"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07"
+      ]
+    },
+    {
+      "id": "PORT5-08",
+      "provider": "C4-07",
+      "consumers": [
+        "C4-09"
+      ],
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "PORT5-09",
+      "provider": "C4-07",
+      "consumers": [
+        "C4-05"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "PORT5-10",
+      "provider": "C4-06",
+      "consumers": [
+        "C4-02",
+        "C4-05",
+        "C4-07"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "PORT5-11",
+      "provider": "C4-06",
+      "consumers": [
+        "C4-07"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ]
+    },
+    {
+      "id": "PORT5-12",
+      "provider": "C4-06",
+      "consumers": [
+        "C4-07"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "UI-01",
+      "title": "원본 목록·입력·확인",
+      "actions": "원본/자료 저장, AI 제안, 사용자 확인",
+      "api_refs": [
+        "HTTP-01",
+        "HTTP-02",
+        "HTTP-22",
+        "HTTP-23",
+        "HTTP-27",
+        "HTTP-28"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03"
+      ],
+      "states": [
+        "empty",
+        "loading",
+        "needs_action",
+        "confirmed"
+      ],
+      "feedback": "원본 snapshot/질문/미확인 구분",
+      "source_refs": [
+        "v04physical:ui/UI-01",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    },
+    {
+      "id": "UI-02",
+      "title": "플랫폼·URL 지정",
+      "actions": "지원 registry 조회, 등록 대상 지정",
+      "api_refs": [
+        "HTTP-03"
+      ],
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-09"
+      ],
+      "states": [
+        "supported",
+        "unsupported",
+        "invalid_url",
+        "blocked"
+      ],
+      "feedback": "지원과 실행 가능 분리",
+      "source_refs": [
+        "v04physical:ui/UI-02",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    },
+    {
+      "id": "UI-03",
+      "title": "플랫폼 초안 검토",
+      "actions": "매핑/질문·원본 대조·수정",
+      "api_refs": [
+        "HTTP-04",
+        "HTTP-05",
+        "HTTP-28",
+        "HTTP-29"
+      ],
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-05"
+      ],
+      "states": [
+        "loading",
+        "needs_action",
+        "draft_ready",
+        "stale"
+      ],
+      "feedback": "정보 확인과 실행 승인 구분",
+      "source_refs": [
+        "v04physical:ui/UI-03",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    },
+    {
+      "id": "UI-04",
+      "title": "원격 인증",
+      "actions": "연결·뷰어·직접 인증·식별 확인",
+      "api_refs": [
+        "HTTP-06",
+        "HTTP-07",
+        "HTTP-08",
+        "HTTP-18",
+        "HTTP-26"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "states": [
+        "human_auth",
+        "system_read",
+        "human_review",
+        "expired",
+        "blocked"
+      ],
+      "feedback": "사용자 직접 인증 및 계정 확인, 자동 실행 아님",
+      "source_refs": [
+        "v04physical:ui/UI-04",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    },
+    {
+      "id": "UI-05",
+      "title": "실행 계획·승인",
+      "actions": "서버 plan 생성/조회, 명시 승인, job 생성",
+      "api_refs": [
+        "HTTP-08",
+        "HTTP-09",
+        "HTTP-10",
+        "HTTP-20",
+        "HTTP-21"
+      ],
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "states": [
+        "review",
+        "stale",
+        "blocked",
+        "ready"
+      ],
+      "feedback": "계정·대상·동작·값·버전 지문 표시",
+      "source_refs": [
+        "v04physical:ui/UI-05",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    },
+    {
+      "id": "UI-06",
+      "title": "작업 목록·진행·개입",
+      "actions": "작업/세션 조회·취소·철회·새 연결·재연결",
+      "api_refs": [
+        "HTTP-06",
+        "HTTP-07",
+        "HTTP-11",
+        "HTTP-14",
+        "HTTP-15",
+        "HTTP-18",
+        "HTTP-24",
+        "HTTP-25",
+        "HTTP-26"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-08"
+      ],
+      "states": [
+        "planned",
+        "blocked",
+        "needs_action",
+        "ready",
+        "running",
+        "stopping",
+        "unknown",
+        "failed"
+      ],
+      "feedback": "재접속, 중단, 인증 만료, 미확인과 다음 조치 표시",
+      "source_refs": [
+        "v04physical:ui/UI-06",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    },
+    {
+      "id": "UI-07",
+      "title": "결과·복구·재사용",
+      "actions": "결과/관측 조회·재확인·명시 재개·세션 종료·원본 재사용",
+      "api_refs": [
+        "HTTP-11",
+        "HTTP-12",
+        "HTTP-13",
+        "HTTP-16",
+        "HTTP-17",
+        "HTTP-22",
+        "HTTP-23",
+        "HTTP-25"
+      ],
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-09",
+        "REQ-11"
+      ],
+      "states": [
+        "mock_completed",
+        "target_confirmed_reserved",
+        "cancelled",
+        "unknown",
+        "failed"
+      ],
+      "feedback": "외부 객체 관측/등록 결과/부분 효과 분리. live 완료 예약 상태 표시 금지.",
+      "source_refs": [
+        "v04physical:ui/UI-07",
+        "v05contract:ui_flow"
+      ],
+      "status": "mapping_proposed"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T5-01",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-05"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-09",
+        "HTTP-20",
+        "HTTP-21",
+        "HTTP-10"
+      ],
+      "port_refs": [
+        "PORT5-04",
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W03",
+        "W06",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-02",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-06",
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-06",
+        "HTTP-07",
+        "HTTP-08"
+      ],
+      "port_refs": [
+        "PORT5-03",
+        "PORT5-12"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-03",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-07",
+        "C4-08",
+        "C4-11"
+      ],
+      "api_refs": [
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-04",
+        "PORT5-06",
+        "PORT5-07",
+        "PORT5-11"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W06",
+        "W08",
+        "W16",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-04",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-07",
+        "HTTP-12",
+        "HTTP-13",
+        "HTTP-24"
+      ],
+      "port_refs": [
+        "PORT5-03",
+        "PORT5-08",
+        "PORT5-09",
+        "PORT5-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W11",
+        "W14",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-05",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-01",
+        "C4-02",
+        "C4-06",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-11",
+        "HTTP-25",
+        "HTTP-26"
+      ],
+      "port_refs": [
+        "PORT5-03"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W05",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-06",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-04",
+        "C4-05",
+        "C4-08",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-04",
+        "HTTP-10",
+        "HTTP-22",
+        "HTTP-23"
+      ],
+      "port_refs": [
+        "PORT5-01",
+        "PORT5-02",
+        "PORT5-04"
+      ],
+      "work_refs": [
+        "W03",
+        "W05",
+        "W06",
+        "W08",
+        "W09",
+        "W14"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-07",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-05",
+        "REQ-09",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-04",
+        "C4-05",
+        "C4-07"
+      ],
+      "api_refs": [
+        "HTTP-03",
+        "HTTP-08",
+        "HTTP-09",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-01",
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W03",
+        "W10",
+        "W14",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-08",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-11"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-10",
+        "C4-11"
+      ],
+      "api_refs": [
+        "HTTP-01",
+        "HTTP-04",
+        "HTTP-27",
+        "HTTP-28"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W02",
+        "W19",
+        "W03",
+        "W07",
+        "W15",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-09",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-07",
+        "C4-08",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-17",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-06",
+        "PORT5-07",
+        "PORT5-08"
+      ],
+      "work_refs": [
+        "W06",
+        "W08",
+        "W09",
+        "W13",
+        "W14",
+        "W17"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-10",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-11"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-08",
+        "C4-11"
+      ],
+      "api_refs": [
+        "HTTP-09",
+        "HTTP-10",
+        "HTTP-19",
+        "HTTP-20"
+      ],
+      "port_refs": [
+        "PORT5-03",
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-11",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-05"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-03",
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-01",
+        "HTTP-04",
+        "HTTP-20",
+        "HTTP-22",
+        "HTTP-23",
+        "HTTP-29"
+      ],
+      "port_refs": [
+        "PORT5-02",
+        "PORT5-04"
+      ],
+      "work_refs": [
+        "W03",
+        "W05",
+        "W19",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-12",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-14",
+        "HTTP-15",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-06",
+        "PORT5-09",
+        "PORT5-11"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W11",
+        "W14",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T5-13",
+      "source": "v05contract",
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "component_refs": [
+        "C4-04",
+        "C4-08",
+        "C4-09",
+        "C4-11"
+      ],
+      "api_refs": [
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-17"
+      ],
+      "port_refs": [
+        "PORT5-04",
+        "PORT5-07",
+        "PORT5-08"
+      ],
+      "work_refs": [
+        "W06",
+        "W08",
+        "W09",
+        "W14"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T01",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-06",
+        "C4-07"
+      ],
+      "api_refs": [
+        "HTTP-07",
+        "HTTP-09",
+        "HTTP-24"
+      ],
+      "port_refs": [
+        "PORT5-03",
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W04",
+        "W07",
+        "W11"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T02",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-08"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-08",
+        "HTTP-10",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W03",
+        "W07",
+        "W11"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T03",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-07",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-14",
+        "HTTP-15",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-06",
+        "PORT5-09"
+      ],
+      "work_refs": [
+        "W03",
+        "W11",
+        "W14"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T04",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08"
+      ],
+      "component_refs": [
+        "C4-04",
+        "C4-07",
+        "C4-08",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-05",
+        "PORT5-07"
+      ],
+      "work_refs": [
+        "W06",
+        "W08",
+        "W11"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T05",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-06",
+        "C4-07"
+      ],
+      "api_refs": [
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-09",
+        "PORT5-11"
+      ],
+      "work_refs": [
+        "W04",
+        "W11"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T06",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-12",
+        "HTTP-13",
+        "HTTP-14",
+        "HTTP-24"
+      ],
+      "port_refs": [
+        "PORT5-03",
+        "PORT5-08",
+        "PORT5-09"
+      ],
+      "work_refs": [
+        "W04",
+        "W11",
+        "W14"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T07",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08"
+      ],
+      "component_refs": [
+        "C4-08",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-11",
+        "HTTP-17"
+      ],
+      "port_refs": [
+        "PORT5-08"
+      ],
+      "work_refs": [
+        "W06",
+        "W08",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T08",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-04"
+      ],
+      "api_refs": [
+        "HTTP-04",
+        "HTTP-27",
+        "HTTP-28"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W19",
+        "W03",
+        "W07"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T09",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-09",
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-25"
+      ],
+      "port_refs": [
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W03",
+        "W07",
+        "W16"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T10",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-06",
+        "C4-07"
+      ],
+      "api_refs": [
+        "HTTP-06",
+        "HTTP-07",
+        "HTTP-16",
+        "HTTP-18"
+      ],
+      "port_refs": [
+        "PORT5-10",
+        "PORT5-11"
+      ],
+      "work_refs": [
+        "W04",
+        "W11"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T11",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-07",
+        "C4-08"
+      ],
+      "api_refs": [
+        "HTTP-28",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-02",
+        "PORT5-07"
+      ],
+      "work_refs": [
+        "W19",
+        "W06",
+        "W11"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T12",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-11"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-09",
+        "C4-11"
+      ],
+      "api_refs": [],
+      "port_refs": [],
+      "work_refs": [
+        "W15",
+        "W17"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "V3-T13",
+      "source": "v03review",
+      "requirement_refs": [
+        "REQ-11"
+      ],
+      "component_refs": [
+        "C4-11"
+      ],
+      "api_refs": [],
+      "port_refs": [],
+      "work_refs": [
+        "W01",
+        "W16"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-01",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-01",
+        "HTTP-04",
+        "HTTP-27",
+        "HTTP-28"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W02",
+        "W19",
+        "W03",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-02",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-06",
+        "C4-07"
+      ],
+      "api_refs": [
+        "HTTP-06",
+        "HTTP-07",
+        "HTTP-16",
+        "HTTP-18"
+      ],
+      "port_refs": [
+        "PORT5-03",
+        "PORT5-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W07",
+        "W11",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-03",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-05"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-07",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-08",
+        "HTTP-09",
+        "HTTP-19",
+        "HTTP-20"
+      ],
+      "port_refs": [
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W03",
+        "W07",
+        "W11",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-04",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-06"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-08",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-17"
+      ],
+      "port_refs": [
+        "PORT5-04",
+        "PORT5-07",
+        "PORT5-08"
+      ],
+      "work_refs": [
+        "W06",
+        "W07",
+        "W09",
+        "W18"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-05",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-07",
+        "REQ-09"
+      ],
+      "component_refs": [
+        "C4-04",
+        "C4-08",
+        "C4-09"
+      ],
+      "api_refs": [
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-17"
+      ],
+      "port_refs": [
+        "PORT5-04",
+        "PORT5-08"
+      ],
+      "work_refs": [
+        "W08",
+        "W09",
+        "W12"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-06",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-05"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-07",
+        "C4-09",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-12",
+        "HTTP-13",
+        "HTTP-14",
+        "HTTP-15",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-06",
+        "PORT5-08",
+        "PORT5-09"
+      ],
+      "work_refs": [
+        "W03",
+        "W07",
+        "W11",
+        "W18",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-07",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-09",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-04",
+        "C4-05",
+        "C4-07"
+      ],
+      "api_refs": [
+        "HTTP-03",
+        "HTTP-08",
+        "HTTP-19"
+      ],
+      "port_refs": [
+        "PORT5-01",
+        "PORT5-06"
+      ],
+      "work_refs": [
+        "W10",
+        "W14",
+        "W12"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-08",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-14",
+        "HTTP-15",
+        "HTTP-19",
+        "HTTP-24"
+      ],
+      "port_refs": [
+        "PORT5-06",
+        "PORT5-09",
+        "PORT5-11"
+      ],
+      "work_refs": [
+        "W11",
+        "W14",
+        "W16"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-09",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-11"
+      ],
+      "component_refs": [
+        "C4-03",
+        "C4-09",
+        "C4-11"
+      ],
+      "api_refs": [],
+      "port_refs": [],
+      "work_refs": [
+        "W15",
+        "W17"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "AT-10",
+      "source": "v05wbs",
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-09"
+      ],
+      "component_refs": [
+        "C4-04",
+        "C4-05",
+        "C4-08",
+        "C4-09",
+        "C4-11"
+      ],
+      "api_refs": [
+        "HTTP-03",
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-17"
+      ],
+      "port_refs": [
+        "PORT5-01",
+        "PORT5-07",
+        "PORT5-08"
+      ],
+      "work_refs": [
+        "W14",
+        "W17",
+        "W12"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T6-01",
+      "source": "index",
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-10"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-03",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-02"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W03",
+        "W05",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    },
+    {
+      "id": "T6-02",
+      "source": "index",
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-05"
+      ],
+      "component_refs": [
+        "C4-02",
+        "C4-03",
+        "C4-05",
+        "C4-10"
+      ],
+      "api_refs": [
+        "HTTP-05",
+        "HTTP-09",
+        "HTTP-29"
+      ],
+      "port_refs": [
+        "PORT5-02"
+      ],
+      "work_refs": [
+        "W03",
+        "W05",
+        "W07",
+        "W09"
+      ],
+      "other_refs": []
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-01",
+      "source": "v03review:decisions/DEC-01",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-02",
+        "DEC-04"
+      ],
+      "current_state": "scope_direction_set_detail_open",
+      "updates": [
+        "DIR-03",
+        "DIR-04",
+        "B4-06"
+      ],
+      "design_prerequisites": [
+        "DEC-02",
+        "DEC-04"
+      ],
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "work_refs": [
+        "W01",
+        "W09",
+        "W13"
+      ],
+      "remaining": "크몽 우선·숨고 확장 방향 확정; 실제 지원 목록 및 숨고 완료 객체 미확정",
+      "review_trigger": "공통 mock, 실제 목표·권한·가치",
+      "owner": "R01",
+      "authority_ref": null,
+      "gate_dependencies": [
+        "DEC-02",
+        "DEC-04"
+      ]
+    },
+    {
+      "id": "DEC-02",
+      "source": "v03review:decisions/DEC-02",
+      "previous_status": "partial",
+      "previous_final_dependencies": [],
+      "current_state": "mock_goal_proposed_live_unverified",
+      "updates": [
+        "DIR-03",
+        "DIR-04",
+        "R5-09"
+      ],
+      "design_prerequisites": [],
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08"
+      ],
+      "work_refs": [
+        "W01",
+        "W08",
+        "W09",
+        "W13"
+      ],
+      "remaining": "모의 목표 후보, 실제 등록 객체·공개 효과·완료 증거 확인 필요",
+      "review_trigger": "실제 등록 객체와 증거",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-03",
+      "source": "v03review:decisions/DEC-03",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-04",
+        "DEC-05"
+      ],
+      "current_state": "direction_adopted",
+      "updates": [
+        "DIR-01"
+      ],
+      "design_prerequisites": [],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W07"
+      ],
+      "remaining": "목표 원격 브라우저 채택. 운영 허용은 독립 live gate; mock 설계는 막지 않음",
+      "review_trigger": "원격 합성 PoC 및 로컬/혼합 비교",
+      "owner": "R01",
+      "authority_ref": "v04direction:decisions/DIR-01",
+      "gate_dependencies": [
+        "DEC-04",
+        "DEC-05"
+      ]
+    },
+    {
+      "id": "DEC-04",
+      "source": "v03review:decisions/DEC-04",
+      "previous_status": "external_unverified",
+      "previous_final_dependencies": [],
+      "current_state": "external_gate_open",
+      "updates": [
+        "B4-05",
+        "R5-09"
+      ],
+      "design_prerequisites": [],
+      "requirement_refs": [
+        "REQ-02",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W13",
+        "W14",
+        "W17"
+      ],
+      "remaining": "운영사 정책/허용 미확인. 실제 실행 금지",
+      "review_trigger": "공식 정책·운영사 허용",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-05",
+      "source": "v03review:decisions/DEC-05",
+      "previous_status": "contract_proposed",
+      "previous_final_dependencies": [],
+      "current_state": "contract_proposed",
+      "updates": [
+        "R5-01",
+        "R5-02",
+        "R5-03",
+        "R5-04"
+      ],
+      "design_prerequisites": [
+        "DEC-03"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W07"
+      ],
+      "remaining": "공통 승인·계정·가드 보완; 구현 검증 필요",
+      "review_trigger": "합성 wrong-account/중복/철회 검증",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-06",
+      "source": "v03review:decisions/DEC-06",
+      "previous_status": "contract_proposed",
+      "previous_final_dependencies": [],
+      "current_state": "contract_proposed",
+      "updates": [
+        "DIR-04",
+        "R5-08"
+      ],
+      "design_prerequisites": [],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-03",
+        "REQ-05"
+      ],
+      "work_refs": [
+        "W19",
+        "W03"
+      ],
+      "remaining": "AI 제안/결정적 코드 경계, 모델/비용/품질 미검증",
+      "review_trigger": "정확성·예외·비용 시험",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-07",
+      "source": "v03review:decisions/DEC-07",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-03",
+        "DEC-06"
+      ],
+      "current_state": "delegated",
+      "updates": [
+        "DIR-02"
+      ],
+      "design_prerequisites": [
+        "DEC-03",
+        "DEC-06"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "work_refs": [
+        "W04",
+        "W06",
+        "W08"
+      ],
+      "remaining": "엔진 선택 구현자 위임; 공통 계약 충족 필요",
+      "review_trigger": "동일 fixture로 엔진 비교",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-08",
+      "source": "v03review:decisions/DEC-08",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-03",
+        "DEC-05"
+      ],
+      "current_state": "contract_proposed_detail_delegated",
+      "updates": [
+        "DIR-02",
+        "R5-04"
+      ],
+      "design_prerequisites": [
+        "DEC-03",
+        "DEC-05"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W11"
+      ],
+      "remaining": "재인증 계약 후보; TTL·실제 수명/격리 기술 위임 및 시험",
+      "review_trigger": "격리·수명·폐기·비용",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-09",
+      "source": "v03review:decisions/DEC-09",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-01"
+      ],
+      "current_state": "proposed_sequential",
+      "updates": [
+        "B4-02",
+        "R5-06"
+      ],
+      "design_prerequisites": [],
+      "requirement_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-09"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W09"
+      ],
+      "remaining": "순차 독립 job 제안; 동시 실행 후속",
+      "review_trigger": "사용자 요구·운영 자원",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-10",
+      "source": "v03review:decisions/DEC-10",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-03",
+        "DEC-06",
+        "DEC-09",
+        "DEC-15"
+      ],
+      "current_state": "logical_units_proposed_physical_delegated",
+      "updates": [
+        "DIR-02",
+        "B4-02",
+        "R5-10"
+      ],
+      "design_prerequisites": [
+        "DEC-03",
+        "DEC-05",
+        "DEC-06",
+        "DEC-09",
+        "DEC-15"
+      ],
+      "requirement_refs": [
+        "REQ-04",
+        "REQ-05",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04"
+      ],
+      "remaining": "논리 단위 후보; 원격 물리 방식 위임, 공유 경계 합의",
+      "review_trigger": "게이트웨이 강제·복구·공수",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-11",
+      "source": "v03review:decisions/DEC-11",
+      "previous_status": "deferred",
+      "previous_final_dependencies": [
+        "DEC-10",
+        "DEC-14"
+      ],
+      "current_state": "relational_contract_proposed",
+      "updates": [
+        "B4-04",
+        "R5-10"
+      ],
+      "design_prerequisites": [
+        "DEC-10",
+        "DEC-14"
+      ],
+      "requirement_refs": [
+        "REQ-01",
+        "REQ-05",
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W16"
+      ],
+      "remaining": "논리/물리 후보 작성; DB 제품/migration/원자 시험",
+      "review_trigger": "원자성·유일성·보존",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-12",
+      "source": "v03review:decisions/DEC-12",
+      "previous_status": "deferred",
+      "previous_final_dependencies": [
+        "DEC-10",
+        "DEC-11"
+      ],
+      "current_state": "common_contract_proposed_remote_delegated",
+      "updates": [
+        "DIR-02",
+        "B4-04",
+        "R5-10",
+        "R5-11"
+      ],
+      "design_prerequisites": [
+        "DEC-10",
+        "DEC-11"
+      ],
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-04",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W16"
+      ],
+      "remaining": "공통 계약 후보, 세부 스택·배포는 선택/합의 전",
+      "review_trigger": "공수·환경·보안",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-13",
+      "source": "v03review:decisions/DEC-13",
+      "previous_status": "open",
+      "previous_final_dependencies": [],
+      "current_state": "measurement_gate_open",
+      "updates": [
+        "R5-08",
+        "R5-09"
+      ],
+      "design_prerequisites": [],
+      "requirement_refs": [
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W15",
+        "W17"
+      ],
+      "remaining": "시간/비용/성공 기준 실측 전. 20–30분 희망치",
+      "review_trigger": "동일 목표 A/B/C 실측",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-14",
+      "source": "v03review:decisions/DEC-14",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-03",
+        "DEC-08"
+      ],
+      "current_state": "contract_proposed_policy_open",
+      "updates": [
+        "R5-03",
+        "R5-04",
+        "R5-09"
+      ],
+      "design_prerequisites": [
+        "DEC-03",
+        "DEC-08"
+      ],
+      "requirement_refs": [
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W04",
+        "W11",
+        "W13"
+      ],
+      "remaining": "로그 최소화 계약, 실제 보존/삭제/법적 정책 미확정",
+      "review_trigger": "처리 위치·법·삭제 검증",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-15",
+      "source": "v03review:decisions/DEC-15",
+      "previous_status": "partial",
+      "previous_final_dependencies": [
+        "DEC-03",
+        "DEC-05"
+      ],
+      "current_state": "contract_proposed",
+      "updates": [
+        "R5-03",
+        "R5-04",
+        "R5-05"
+      ],
+      "design_prerequisites": [
+        "DEC-03",
+        "DEC-05"
+      ],
+      "requirement_refs": [
+        "REQ-08",
+        "REQ-10"
+      ],
+      "work_refs": [
+        "W03",
+        "W04",
+        "W11"
+      ],
+      "remaining": "상태/재연결·unknown 계약, 실제 race/crash/알림 검증 필요",
+      "review_trigger": "crash·lease·중단 검증",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-16",
+      "source": "v03review:decisions/DEC-16",
+      "previous_status": "open",
+      "previous_final_dependencies": [
+        "DEC-06",
+        "DEC-07",
+        "DEC-10"
+      ],
+      "current_state": "review_pending",
+      "updates": [
+        "DIR-02",
+        "R5-10",
+        "R5-11"
+      ],
+      "design_prerequisites": [
+        "DEC-06",
+        "DEC-07",
+        "DEC-10"
+      ],
+      "requirement_refs": [
+        "REQ-03",
+        "REQ-04",
+        "REQ-06",
+        "REQ-07"
+      ],
+      "work_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W06",
+        "W08"
+      ],
+      "remaining": "R03/R05 PoC는 재사용 후보, 공통 시험·코드 검토 후",
+      "review_trigger": "공통 harness·코드 검토",
+      "owner": "R01",
+      "authority_ref": null
+    },
+    {
+      "id": "DEC-17",
+      "source": "v03review:decisions/DEC-17",
+      "previous_status": "deferred",
+      "previous_final_dependencies": [
+        "DEC-01",
+        "DEC-02",
+        "DEC-04",
+        "DEC-13"
+      ],
+      "current_state": "deferred",
+      "updates": [],
+      "design_prerequisites": [
+        "DEC-01",
+        "DEC-02",
+        "DEC-04",
+        "DEC-13"
+      ],
+      "requirement_refs": [
+        "REQ-11"
+      ],
+      "work_refs": [
+        "W13",
+        "W15"
+      ],
+      "remaining": "이행/환불/사업화 후속. 구현 범위에 추가하지 않음",
+      "review_trigger": "허용 범위·가치·원가",
+      "owner": "R01",
+      "authority_ref": null
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "DLV-01",
+      "status": "design_sources_ready",
+      "record_refs": [
+        "LR-PURPOSE",
+        "LR-ACTOR",
+        "LR-PAIN",
+        "LR-VALUE",
+        "LR-SCOPE",
+        "LR-ASIS",
+        "LR-ALT",
+        "REQ-01",
+        "REQ-02",
+        "REQ-03",
+        "REQ-04",
+        "REQ-05",
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "REQ-09",
+        "REQ-10",
+        "REQ-11"
+      ],
+      "sections": [
+        "사용자/문제/대안: 기획 V1.1",
+        "요구사항·수용 조건: V0.4, V0.5 보완"
+      ],
+      "remaining": "기존 기획과 최신 방향/요구 범위 정합성 검토; 공식 목차/제출 상태 별도",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-02",
+      "status": "draft_ready",
+      "record_refs": [
+        "W01",
+        "W02",
+        "W19",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W18",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "W15",
+        "W16",
+        "W17"
+      ],
+      "sections": [
+        "작업 분해·책임 후보·근무일·선행·완료 기준: V0.5 WBS"
+      ],
+      "remaining": "공수·책임 확정 전",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-03",
+      "status": "design_sources_ready",
+      "record_refs": [
+        "HTTP-01",
+        "HTTP-02",
+        "HTTP-03",
+        "HTTP-04",
+        "HTTP-05",
+        "HTTP-06",
+        "HTTP-07",
+        "HTTP-08",
+        "HTTP-09",
+        "HTTP-10",
+        "HTTP-11",
+        "HTTP-12",
+        "HTTP-13",
+        "HTTP-14",
+        "HTTP-15",
+        "HTTP-16",
+        "HTTP-17",
+        "HTTP-18",
+        "HTTP-19",
+        "HTTP-20",
+        "HTTP-21",
+        "HTTP-22",
+        "HTTP-23",
+        "HTTP-24",
+        "HTTP-25",
+        "HTTP-26",
+        "HTTP-27",
+        "HTTP-28",
+        "HTTP-29",
+        "PORT5-01",
+        "PORT5-02",
+        "PORT5-03",
+        "PORT5-04",
+        "PORT5-05",
+        "PORT5-06",
+        "PORT5-07",
+        "PORT5-08",
+        "PORT5-09",
+        "PORT5-10",
+        "PORT5-11",
+        "PORT5-12"
+      ],
+      "sections": [
+        "경로·입출력·타입·오류·인증: V0.3 타입, V0.4 계승, V0.5 교정",
+        "공통 포트 및 UI 연계"
+      ],
+      "remaining": "최종 wire/DDL 구현 및 계약 시험 별도",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-04",
+      "status": "design_sources_ready",
+      "record_refs": [
+        "DATA-CURRENT"
+      ],
+      "sections": [
+        "V0.4 관계형 설계 + V0.5 저장 교정",
+        "키·무결성·권한·보존"
+      ],
+      "remaining": "물리 DDL/migration 및 실제 트랜잭션 검증 미실행",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-05",
+      "status": "applicability_review",
+      "record_refs": [
+        "STATE-CURRENT",
+        "AI-CURRENT"
+      ],
+      "sections": [
+        "작업/효과/세션 상태 전이·가드",
+        "AI 제안과 결정 코드 분리"
+      ],
+      "remaining": "공통 job 상태와 교육기관 단일 에이전트 상태 산출물의 의미 차이 확인",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-06",
+      "status": "execution_required",
+      "record_refs": [
+        "T5-08",
+        "V3-T11"
+      ],
+      "sections": [
+        "AI 제안 오류/실패 처리의 관련 시험 계획"
+      ],
+      "remaining": "자기 성찰 로직 채택/요건 및 실제 테스트 결과 미확인; 설계가 결과를 대체하지 않음",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-07",
+      "status": "applicability_review",
+      "record_refs": [
+        "STRATEGY-CURRENT",
+        "AI-CURRENT",
+        "C4-01",
+        "C4-02",
+        "C4-03",
+        "C4-04",
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-08",
+        "C4-09",
+        "C4-10",
+        "C4-11"
+      ],
+      "sections": [
+        "상위 전략·모듈 역할·호출 관계"
+      ],
+      "remaining": "멀티 에이전트 필수 여부/해당성 확인; 모듈을 에이전트라고 포장하지 않음",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-08",
+      "status": "design_sources_ready",
+      "record_refs": [
+        "SECURITY-CURRENT",
+        "STATE-CURRENT",
+        "AI-CURRENT",
+        "REQ-05",
+        "REQ-10",
+        "T5-12",
+        "V3-T03",
+        "V3-T05"
+      ],
+      "sections": [
+        "권한·승인·격리·효과·오류·가드"
+      ],
+      "remaining": "실제 보안/경쟁/운영 검증 필요",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-09",
+      "status": "execution_required",
+      "record_refs": [
+        "STATE-CURRENT",
+        "T5-04",
+        "V3-T06",
+        "AT-08"
+      ],
+      "sections": [
+        "장애 복구·재연결·unknown 안전 계약"
+      ],
+      "remaining": "Auto-Healing 적용 범위 확인 및 실제 구현/시험 결과 필요",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-10",
+      "status": "implementation_required",
+      "record_refs": [
+        "UI-01",
+        "UI-02",
+        "UI-03",
+        "UI-04",
+        "UI-05",
+        "UI-06",
+        "UI-07"
+      ],
+      "sections": [
+        "사용자 화면·원본/URL/인증/승인/진행/결과"
+      ],
+      "remaining": "웹 구현 및 실행 증거 필요",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-11",
+      "status": "execution_required",
+      "record_refs": [
+        "T5-01",
+        "T5-02",
+        "T5-03",
+        "T5-04",
+        "T5-05",
+        "T5-06",
+        "T5-07",
+        "T5-08",
+        "T5-09",
+        "T5-10",
+        "T5-11",
+        "T5-12",
+        "T5-13",
+        "V3-T01",
+        "V3-T02",
+        "V3-T03",
+        "V3-T04",
+        "V3-T05",
+        "V3-T06",
+        "V3-T07",
+        "V3-T08",
+        "V3-T09",
+        "V3-T10",
+        "V3-T11",
+        "V3-T12",
+        "V3-T13",
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-05",
+        "AT-06",
+        "AT-07",
+        "AT-08",
+        "AT-09",
+        "AT-10",
+        "T6-01",
+        "T6-02"
+      ],
+      "sections": [
+        "통합/수용/보안/가치 시험 계획"
+      ],
+      "remaining": "Run/Eval의 실제 결과 필요; 현재 계획만",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-12",
+      "status": "design_sources_ready",
+      "record_refs": [
+        "DEPLOYMENT-CURRENT",
+        "RU-WEB",
+        "RU-APP",
+        "RU-REMOTE",
+        "RU-STORE",
+        "RU-TEST"
+      ],
+      "sections": [
+        "실행 단위·경계·격리·배포 후보"
+      ],
+      "remaining": "실제 환경·비용·네트워크·운영 허용 검증 필요",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-13",
+      "status": "presentation_pending",
+      "record_refs": [
+        "LR-PAIN",
+        "LR-VALUE",
+        "STRATEGY-CURRENT",
+        "DIR-03",
+        "W09"
+      ],
+      "sections": [
+        "문제·가치·MVP·진행상태"
+      ],
+      "remaining": "발표 구성 및 실측/진척 확인 후 작성",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-14",
+      "status": "presentation_pending",
+      "record_refs": [
+        "LR-VALUE",
+        "DIR-04",
+        "W17",
+        "AT-10"
+      ],
+      "sections": [
+        "최종 목표·지원 범위·결과·미달"
+      ],
+      "remaining": "실제 최종 시험 결과 필요",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-15",
+      "status": "implementation_required",
+      "record_refs": [
+        "W19",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W08",
+        "W16"
+      ],
+      "sections": [
+        "본 구현 작업과 공통 계약"
+      ],
+      "remaining": "코드 산출/통합/실제 검증 미실행",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    },
+    {
+      "id": "DLV-16",
+      "status": "execution_required",
+      "record_refs": [
+        "W09",
+        "W17",
+        "AT-04",
+        "AT-05",
+        "AT-10"
+      ],
+      "sections": [
+        "시연 목표·시나리오"
+      ],
+      "remaining": "실제 시연 녹화 및 결과 필요",
+      "submission_status": "not_asserted",
+      "outline_status": "official_registry_check_required"
+    }
+  ],
+  "detail_sections": [
+    {
+      "source": "v02",
+      "file": "DETAIL-DATA-V0.2.md",
+      "record_refs": [
+        "DATA-CURRENT",
+        "AI-CURRENT"
+      ],
+      "policy": "업무 데이터/사실/변환 참조. E08–E15 및 상태·승인·증거 충돌은 V0.3/V0.5 우선.",
+      "tables": [
+        {
+          "title": "D-A. 요구에서 상세 계약으로",
+          "row_ids": [
+            "DD-01",
+            "DD-02",
+            "DD-03",
+            "DD-04"
+          ]
+        },
+        {
+          "title": "D-B. 공통 사실 사전",
+          "row_ids": [
+            "F01",
+            "F02",
+            "F03",
+            "F04",
+            "F05",
+            "F06",
+            "F07",
+            "F08",
+            "F09",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15"
+          ]
+        },
+        {
+          "title": "D-C. 논리 엔터티 필드와 무결성",
+          "row_ids": [
+            "E01",
+            "E02",
+            "E03",
+            "E04",
+            "E05",
+            "E06",
+            "E07",
+            "E08",
+            "E09",
+            "E10",
+            "E11",
+            "E12",
+            "E13",
+            "E14",
+            "E15"
+          ]
+        },
+        {
+          "title": "D-D. 검증 및 변환 규칙",
+          "row_ids": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "v02",
+      "file": "DETAIL-PLATFORM-FLOWS-V0.2.md",
+      "record_refs": [
+        "LR-DOMAIN",
+        "REQ-06",
+        "REQ-07",
+        "REQ-09",
+        "DATA-CURRENT"
+      ],
+      "policy": "조사 필드·경로 후보와 근거 보존. 실제 저장/공개/권한 미확인, 모의 목표 V0.3–V0.5 우선.",
+      "tables": [
+        {
+          "title": "P-A. 대상 및 목표",
+          "row_ids": [
+            "P-K",
+            "P-S",
+            "P-T"
+          ]
+        },
+        {
+          "title": "P-B. 크몽 필드 매핑 후보",
+          "row_ids": [
+            "K01",
+            "K02",
+            "K03",
+            "K04",
+            "K05",
+            "K06",
+            "K07",
+            "K08",
+            "K09",
+            "K10"
+          ]
+        },
+        {
+          "title": "P-C. 크몽 실행 및 증거 체크포인트",
+          "row_ids": [
+            "KF01",
+            "KF02",
+            "KF03",
+            "KF04",
+            "KF05",
+            "KF06"
+          ]
+        },
+        {
+          "title": "P-D. 숨고 필드 매핑 후보",
+          "row_ids": [
+            "Sg01",
+            "Sg02",
+            "Sg03",
+            "Sg04",
+            "Sg05",
+            "Sg06",
+            "Sg07",
+            "Sg08",
+            "Sg09"
+          ]
+        },
+        {
+          "title": "P-E. 숨고 실행 및 증거 체크포인트",
+          "row_ids": [
+            "SF01",
+            "SF02",
+            "SF03",
+            "SF04",
+            "SF05",
+            "SF06"
+          ]
+        },
+        {
+          "title": "P-F. 탈잉 확장 및 차이 보존",
+          "row_ids": [
+            "Tg01",
+            "Tg02",
+            "Tg03",
+            "Tg04"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "v02",
+      "file": "DETAIL-SYSTEM-V0.2.md",
+      "record_refs": [
+        "STATE-CURRENT",
+        "DATA-CURRENT",
+        "SECURITY-CURRENT",
+        "DEPLOYMENT-CURRENT",
+        "C4-01",
+        "C4-02",
+        "C4-03",
+        "C4-04",
+        "C4-05",
+        "C4-06",
+        "C4-07",
+        "C4-08",
+        "C4-09",
+        "C4-10",
+        "C4-11"
+      ],
+      "policy": "U/A/C/ST/RB/SEC의 개별 계약은 최신 API/포트/상태/화면/데이터로 교정된 부분이 우선. 과거 구현 지시로 사용 금지.",
+      "tables": [
+        {
+          "title": "S-A. 논리 모듈 상세",
+          "row_ids": [
+            "C01a",
+            "C02a",
+            "C03a",
+            "C04a",
+            "C04b",
+            "C05a",
+            "C06a",
+            "C07a"
+          ]
+        },
+        {
+          "title": "S-B. 우리 서비스 사용자 흐름 (TO-BE, 화면 후보)",
+          "row_ids": [
+            "U01",
+            "U02",
+            "U03",
+            "U04",
+            "U05",
+            "U06",
+            "U07",
+            "U08"
+          ]
+        },
+        {
+          "title": "S-C. 논리 API → HTTP 후보 (구현 지시 아님)",
+          "row_ids": [
+            "A01",
+            "A02",
+            "A03",
+            "A04",
+            "A05",
+            "A06",
+            "A07",
+            "A08",
+            "A09",
+            "A10",
+            "A11"
+          ]
+        },
+        {
+          "title": "S-D. 작업/관측/오류 상태 계약 보완",
+          "row_ids": [
+            "ST01",
+            "ST02",
+            "ST03",
+            "ST04",
+            "ST05",
+            "ST06",
+            "ST07",
+            "ST08"
+          ]
+        },
+        {
+          "title": "S-E. 원격 브라우저 후보 세션·제어권 수명주기",
+          "row_ids": [
+            "RB01",
+            "RB02",
+            "RB03",
+            "RB04",
+            "RB05",
+            "RB06",
+            "RB07",
+            "RB08"
+          ]
+        },
+        {
+          "title": "S-F. 보안·배치 후보와 기술 판단",
+          "row_ids": [
+            "SEC01",
+            "SEC02",
+            "SEC03",
+            "SEC04",
+            "SEC05",
+            "SEC06",
+            "SEC07",
+            "SEC08"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "v02",
+      "file": "DETAIL-VERIFICATION-V0.2.md",
+      "record_refs": [
+        "LR-VALUE",
+        "LR-FEAS",
+        "REQ-11",
+        "W01",
+        "W09",
+        "V3-T01",
+        "V3-T02",
+        "V3-T03",
+        "V3-T04",
+        "V3-T05",
+        "V3-T06",
+        "V3-T07",
+        "V3-T08",
+        "V3-T09",
+        "V3-T10",
+        "V3-T11",
+        "V3-T12",
+        "V3-T13"
+      ],
+      "policy": "EV 출처와 VT 시험 계획 보존, G/W는 과거 게이트·재사용 후보. 현재 V0.5 WBS 및 시험과 공통 PHASE 유지.",
+      "tables": [
+        {
+          "title": "V-A. 근거의 채택과 잔여 불일치",
+          "row_ids": [
+            "EV01",
+            "EV02",
+            "EV03",
+            "EV04",
+            "EV05",
+            "EV06"
+          ]
+        },
+        {
+          "title": "V-B. 검증 추적 매트릭스",
+          "row_ids": [
+            "VT01",
+            "VT02",
+            "VT03",
+            "VT04",
+            "VT05",
+            "VT06",
+            "VT07",
+            "VT08",
+            "VT09",
+            "VT10",
+            "VT11"
+          ]
+        },
+        {
+          "title": "V-C. 설계·채택 게이트",
+          "row_ids": [
+            "G1",
+            "G2",
+            "G3",
+            "G4",
+            "G5",
+            "G6"
+          ]
+        },
+        {
+          "title": "V-D. 팀원 산출물 재사용 계획 (배정 아님)",
+          "row_ids": [
+            "W01",
+            "W02",
+            "W03",
+            "W04",
+            "W05"
+          ]
+        }
+      ]
+    }
+  ],
+  "review_policy": {
+    "new_authority_required": [
+      "제품 범위/완료 기준 변경",
+      "실서비스 실행 단계 해제",
+      "공유 계약 충돌 해결",
+      "운영 조건 확정"
+    ],
+    "after_change": "원본 변경→source blob 확인→유효 레코드/관계 갱신→영향 후보 산출→담당 검토→정적 검사→사람용 뷰 재생성. 영향 후보는 자동 승인/무효화 또는 업무 배정이 아니다."
+  },
+  "rule_links": [
+    {
+      "id": "V3-R01",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-05",
+        "STATE-CURRENT",
+        "DATA-CURRENT",
+        "HTTP-09",
+        "HTTP-20",
+        "HTTP-24"
+      ]
+    },
+    {
+      "id": "V3-R02",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-05",
+        "DATA-CURRENT",
+        "HTTP-08",
+        "HTTP-10"
+      ]
+    },
+    {
+      "id": "V3-R03",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-05",
+        "DATA-CURRENT",
+        "HTTP-19"
+      ]
+    },
+    {
+      "id": "V3-R04",
+      "source": "v03core",
+      "record_refs": [
+        "STATE-CURRENT",
+        "SECURITY-CURRENT",
+        "PORT5-06",
+        "PORT5-07"
+      ]
+    },
+    {
+      "id": "V3-R05",
+      "source": "v03core",
+      "record_refs": [
+        "STATE-CURRENT",
+        "SECURITY-CURRENT",
+        "PORT5-06",
+        "PORT5-09",
+        "PORT5-11"
+      ]
+    },
+    {
+      "id": "V3-R06",
+      "source": "v03core",
+      "record_refs": [
+        "STATE-CURRENT",
+        "REQ-08",
+        "HTTP-12",
+        "HTTP-13",
+        "HTTP-24"
+      ]
+    },
+    {
+      "id": "V3-R07",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-06",
+        "REQ-07",
+        "REQ-08",
+        "STATE-CURRENT",
+        "HTTP-17"
+      ]
+    },
+    {
+      "id": "V3-R08",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-01",
+        "REQ-03",
+        "DATA-CURRENT",
+        "AI-CURRENT"
+      ]
+    },
+    {
+      "id": "V3-R09",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-02",
+        "REQ-03",
+        "REQ-09",
+        "DATA-CURRENT"
+      ]
+    },
+    {
+      "id": "V3-R10",
+      "source": "v03core",
+      "record_refs": [
+        "SECURITY-CURRENT",
+        "HTTP-09",
+        "HTTP-19",
+        "HTTP-25"
+      ]
+    },
+    {
+      "id": "V3-R11",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-04",
+        "REQ-10",
+        "SECURITY-CURRENT",
+        "DEPLOYMENT-CURRENT"
+      ]
+    },
+    {
+      "id": "V3-R12",
+      "source": "v03core",
+      "record_refs": [
+        "AI-CURRENT",
+        "REQ-03",
+        "PORT5-02"
+      ]
+    },
+    {
+      "id": "V3-R13",
+      "source": "v03core",
+      "record_refs": [
+        "LR-VALUE",
+        "REQ-11",
+        "AT-09"
+      ]
+    },
+    {
+      "id": "V3-R14",
+      "source": "v03core",
+      "record_refs": [
+        "REQ-11",
+        "W01",
+        "V3-T13"
+      ]
+    },
+    {
+      "id": "R5-01",
+      "source": "v05contract",
+      "record_refs": [
+        "REQ-05",
+        "HTTP-20",
+        "HTTP-21",
+        "HTTP-09",
+        "DATA-CURRENT"
+      ]
+    },
+    {
+      "id": "R5-02",
+      "source": "v05contract",
+      "record_refs": [
+        "DATA-CURRENT",
+        "PORT5-12",
+        "HTTP-07",
+        "HTTP-08"
+      ]
+    },
+    {
+      "id": "R5-03",
+      "source": "v05contract",
+      "record_refs": [
+        "STATE-CURRENT",
+        "SECURITY-CURRENT",
+        "PORT5-06",
+        "PORT5-11"
+      ]
+    },
+    {
+      "id": "R5-04",
+      "source": "v05contract",
+      "record_refs": [
+        "STATE-CURRENT",
+        "HTTP-24",
+        "HTTP-12",
+        "HTTP-13"
+      ]
+    },
+    {
+      "id": "R5-05",
+      "source": "v05contract",
+      "record_refs": [
+        "UI-06",
+        "UI-07",
+        "HTTP-25"
+      ]
+    },
+    {
+      "id": "R5-06",
+      "source": "v05contract",
+      "record_refs": [
+        "REQ-01",
+        "REQ-09",
+        "DATA-CURRENT",
+        "UI-01",
+        "UI-07"
+      ]
+    },
+    {
+      "id": "R5-07",
+      "source": "v05contract",
+      "record_refs": [
+        "REQ-02",
+        "REQ-05",
+        "HTTP-03",
+        "SECURITY-CURRENT"
+      ]
+    },
+    {
+      "id": "R5-08",
+      "source": "v05contract",
+      "record_refs": [
+        "REQ-03",
+        "AI-CURRENT",
+        "HTTP-28",
+        "T5-08"
+      ]
+    },
+    {
+      "id": "R5-09",
+      "source": "v05contract",
+      "record_refs": [
+        "DIR-03",
+        "DIR-04",
+        "REQ-06",
+        "REQ-07",
+        "W13",
+        "W17"
+      ]
+    },
+    {
+      "id": "R5-10",
+      "source": "v05contract",
+      "record_refs": [
+        "STRATEGY-CURRENT",
+        "DEPLOYMENT-CURRENT",
+        "W01"
+      ]
+    },
+    {
+      "id": "R5-11",
+      "source": "v05contract",
+      "record_refs": [
+        "W01",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "T5-10"
+      ]
+    }
+  ],
+  "requirement_evolution": [
+    {
+      "id": "REQ-01",
+      "prior_refs": [
+        "FR-01",
+        "V3-R08"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-02",
+      "prior_refs": [
+        "DIR-04",
+        "V3-R02",
+        "V3-R09"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-03",
+      "prior_refs": [
+        "FR-02",
+        "V3-R08",
+        "V3-R09",
+        "V3-R12"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-04",
+      "prior_refs": [
+        "DIR-01",
+        "DIR-02",
+        "V3-R01",
+        "V3-R05",
+        "V3-R11"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-05",
+      "prior_refs": [
+        "FR-03",
+        "V3-R01",
+        "V3-R02",
+        "V3-R03",
+        "V3-R04",
+        "V3-R05"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-06",
+      "prior_refs": [
+        "DIR-03",
+        "FR-04",
+        "V3-R07"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-07",
+      "prior_refs": [
+        "DIR-03",
+        "FR-04",
+        "V3-R07"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-08",
+      "prior_refs": [
+        "FR-05",
+        "FR-06",
+        "V3-R06",
+        "V3-R07"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-09",
+      "prior_refs": [
+        "DIR-04",
+        "V3-R09"
+      ],
+      "quality_refs": []
+    },
+    {
+      "id": "REQ-10",
+      "prior_refs": [
+        "V3-R05",
+        "V3-R11"
+      ],
+      "quality_refs": [
+        "LR-NFR-02",
+        "LR-NFR-04",
+        "LR-NFR-05"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "prior_refs": [
+        "V3-R13",
+        "V3-R14"
+      ],
+      "quality_refs": [
+        "LR-NFR-01",
+        "LR-NFR-03",
+        "LR-VALUE"
+      ]
+    }
+  ],
+  "known_gaps": [
+    {
+      "code": "GAP-01",
+      "subject": "L1",
+      "detail": "기획 근거는 소수 경험/회상 및 대안 조사. 동일 업무 직접/범용 AI/전용 제품 비교와 가치 실측 미수행.",
+      "work_refs": [
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "code": "GAP-02",
+      "subject": "L2/L6",
+      "detail": "V0.5의 사용자 방향/공통 계약은 검토 후보. 숨고 실제 등록 객체 및 실제 플랫폼 허용 미확인. 최종 지원 목록 미확정.",
+      "work_refs": [
+        "W01",
+        "W13",
+        "W14"
+      ]
+    },
+    {
+      "code": "GAP-03",
+      "subject": "L5",
+      "detail": "V0.8 typed multipart/GET wire and logical port dependencies 보완. 실행 DDL, 실제 serializer/adapter conformance, UI 접근성, 배포 공수 및 플랫폼별 구체 동작 조건은 구현/실험 필요.",
+      "work_refs": [
+        "W01",
+        "W03",
+        "W05",
+        "W16"
+      ]
+    },
+    {
+      "code": "GAP-04",
+      "subject": "L6",
+      "detail": "V0.8 MVP 필수 gate와 AI 합성 fixture 보완. 나머지 플랫폼 fixture/경쟁·격리·정량 판정·환경은 W01/W04/W06/W08/W11에서 구현·실행. 제품 시험 미실행.",
+      "work_refs": [
+        "W01",
+        "W07",
+        "W11",
+        "W14"
+      ]
+    },
+    {
+      "code": "GAP-05",
+      "subject": "L7",
+      "detail": "공식 DLV 목차·해당성·제출 상태는 별도. 가이드가 요구하는 에이전트/자기성찰/Auto-Healing의 실제 적용 여부 판단. WBS는 후보, 인력/공수 확인 전.",
+      "work_refs": [
+        "W01",
+        "W17"
+      ]
+    },
+    {
+      "code": "GAP-06",
+      "subject": "L6/L7",
+      "detail": "기존 V0.1 레코드와 후속 교정은 역사/현재 범위로 분리; 일부 V0.2 표 행은 그룹 참조이며 개별 행의 현재 적용성 자동 판정 금지. 후속 변경 시 정확한 행/조항 리뷰.",
+      "work_refs": [
+        "W01"
+      ]
+    }
+  ],
+  "additional_test_plans": [
+    {
+      "id": "T6-01",
+      "title": "자료 업로드 및 권리·소유자 경계",
+      "scenario": "권리 확인된 합성 이미지 1건과 권리 미확인·잘못된 형식·크기·다른 소유자의 참조를 입력",
+      "expected": "허용 자료만 원본 해시·권리·owner에 결합해 버전 저장. 부적합 자료는 거부하고 등록 동작 0. 재조회로 동일 자료 확인.",
+      "execution": "not_run",
+      "basis": [
+        "HTTP-02",
+        "REQ-01",
+        "REQ-10",
+        "V3-R08",
+        "LR-T07"
+      ],
+      "verdict": "필드/권리/owner/해시 일치 및 거부 관측 시 pass; 무단 저장/등록 시 fail; 필수 관측 부족 시 unknown"
+    },
+    {
+      "id": "T6-02",
+      "title": "초안 수정과 불변 버전·재승인",
+      "scenario": "승인 이전 유효 문구 수정, 사실과 모순된 변경, 기존 승인 후 관련 초안 버전 변경, 타 소유자 초안 수정 및 stale revision",
+      "expected": "유효한 수정만 새 draft version으로 저장하고 기존 snapshot 유지. 사실 변경은 원본 재확인으로 연결. 이전 승인과 일치하지 않으면 신규 실행 차단, 타 소유자/stale 요청 거부.",
+      "execution": "not_run",
+      "basis": [
+        "HTTP-05",
+        "REQ-03",
+        "REQ-05",
+        "R5-01",
+        "T5-01"
+      ],
+      "verdict": "새 버전 및 차단 관측 일치 시 pass; 원본/승인 덮어쓰기 또는 무단 실행 시 fail; 필수 관측 부족 시 unknown"
+    }
+  ],
+  "validation_revision": "0.8",
+  "validation_notes": [
+    "이전 직접 검증 참조 미연결 HTTP-02/05는 보완 시험 계획 T6-01/02로 추가. 원본 제품 시험 실행이나 새로운 TASK 승인 아님.",
+    "W12는 AT-05/07/10, W18은 AT-04/06과 회귀/검수 관점 연결. 작업이 새로 배정되었다는 뜻 아님.",
+    "검증기 enum은 모델 record_contract.envelope 기준. 선행 작업/컴포넌트 의존이 없는 빈 배열은 유효한 명시 값.",
+    "V0.8: V0.7 IR-01~03/05 설계 정합성 보완; V3-J20 explicit resume, 2개 inherited typed route, MVP-GATE-01. 모든 시험 계획 not_run; 기존 원본은 Git 이력 보존.",
+    "공통 설계 체계의 executed_verification 정책 연결. 기존 IT/관계 유지. stage-verification-manifest.json은 별도 실행 규칙 선택."
+  ]
+}

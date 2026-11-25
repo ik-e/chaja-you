@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "baseline": [],
+    "verify_generation": true,
+    "asset_rights": true,
+    "review_scope": true,
+    "gate_replacements": true,
+    "no_old_resume_gate": true
+  },
+  "prior_validation": "detail-validation-v1.json (historical source digest)",
+  "scope": "additional direct contract review; not runtime or schema validator",
+  "product_execution": "not_run"
+}

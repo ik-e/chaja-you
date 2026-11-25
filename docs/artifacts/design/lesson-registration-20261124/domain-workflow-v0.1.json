@@ -1,0 +1,830 @@
+{
+  "schema_version": 1,
+  "kind": "lesson_design_draft",
+  "version": "0.1",
+  "status": "R01 검토용 설계 초안·채택 아님",
+  "owner": "R01",
+  "base_commit": "3465df351c0dc1af85c6b44600cdc5738a792617",
+  "date": "2026-11-24",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md",
+  "model_ref": "docs/deliverables/planning-design-info-model.json",
+  "source_refs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+    "docs/human/phase-intents/PHASE-20261124-02.md"
+  ],
+  "scope": "기술 독립 논리 설계. 실제 서비스/제품 구조 미채택. 팀원 TASK 변경 없음.",
+  "id": "LESSON-DOMAIN-WORKFLOW-V0.1",
+  "records": [
+    {
+      "id": "LR-DOMAIN",
+      "type_id": "IT-11",
+      "title": "도메인 불변식",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "fields": {
+        "terms": [
+          "Instructor",
+          "LessonSourceVersion",
+          "Fact",
+          "MediaAssetVersion",
+          "PlatformRuleSnapshot",
+          "ExecutionPermission",
+          "RegistrationDraftVersion",
+          "Approval",
+          "RegistrationIntent",
+          "RegistrationJob",
+          "ExecutionAttempt",
+          "ObservationEvidence",
+          "RegistrationResult"
+        ],
+        "entities_and_relations": [
+          "Instructor 1:N LessonSourceVersion",
+          "LessonSourceVersion 1:N Fact",
+          "LessonSourceVersion N:M MediaAssetVersion",
+          "RegistrationDraftVersion N:1 LessonSourceVersion + N:1 PlatformRuleSnapshot",
+          "RegistrationDraftVersion N:M MediaAssetVersion",
+          "RegistrationDraftVersion 1:N Approval",
+          "RegistrationIntent 1:N RegistrationJob (기존 효과/미확인 검사 전 추가 실행 금지)",
+          "RegistrationJob N:1 Approval + N:1 ExecutionPermission",
+          "RegistrationJob 1:N ExecutionAttempt",
+          "RegistrationJob 1:N ObservationEvidence",
+          "ExecutionAttempt 0:N ObservationEvidence",
+          "RegistrationJob 1:N RegistrationResult"
+        ],
+        "invariants": [
+          "I-01 값·단위·출처·확인 상태 유지. 누락/충돌 임의 확정 금지",
+          "I-02 승인은 사용자·source/draft/rule/media 버전·대상/목표·환경·actions에 결합. 변경/철회 시 신규 동작에 재사용 금지",
+          "I-03 부작용 직전 승인·권한·환경·대상 검사; 현재 live 차단; 사용자 승인≠운영사 허용",
+          "I-04 작업 생성·클릭·송신은 목표 완료가 아님. 대상·환경·목표에 해당하는 관측 근거 필요",
+          "I-05 효과 가능·증거 부족/상충이면 unknown; 같은 의도의 부작용 반복 차단. 취소/새 ID로 우회 금지",
+          "I-06 기존 효과 확인 시 상태만 갱신; 효과 부재 또는 안전한 다음 단계 확인 + 현재 승인·허용 + 명시 재개 후 별도 실행",
+          "I-07 플랫폼·객체·의도별 승인/실행/결과 독립; 타 작업 상태 덮어쓰기 금지",
+          "I-08 외부 자격증명·세션·무허용 자료 금지. 시도/관측/판정 이력을 혼합하거나 근거 없이 덮어쓰지 않음",
+          "I-09 크몽 상품 심사 접수 후보 유지; 숨고 실제 객체/완료 미확인; 모의와 실제 목표 분리"
+        ],
+        "event_triggers": [
+          "원본/규칙/자료/초안 변경",
+          "명시 승인/철회",
+          "시도/관측/유실",
+          "결과 재확인"
+        ],
+        "exception_rules": [
+          "unknown을 실패로 강등하여 재시도 금지",
+          "실제 목표 미확인 시 완료 주장 금지"
+        ],
+        "requirement_refs": [
+          "FR-01",
+          "FR-02",
+          "FR-03",
+          "FR-04",
+          "FR-05",
+          "FR-06"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-STATE",
+      "type_id": "IT-14",
+      "title": "상태 및 전이",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "fields": {
+        "steps_and_order": "원본/초안→승인→가드→시도→관측→결과/재확인",
+        "states": [
+          "draft/draft: 작성 중",
+          "draft/needs_confirmation: 필수 정보/규칙/권리 확인 필요",
+          "draft/ready_for_review: 검토 가능",
+          "draft/approved_for_scope: 정확한 스냅샷·동작 범위 승인",
+          "draft/superseded: 새 버전으로 대체, 이전 증거 보존",
+          "job/planned: 작업 의도 생성",
+          "job/blocked: 허용/단계 불충족",
+          "job/ready: 동작 가드 충족",
+          "job/running: 동작 시도/관측",
+          "job/needs_action: 사용자 확인·승인 등 필요",
+          "job/failed: 실패 확인, 해당 동작의 미확인 효과 없음",
+          "job/unknown: 효과 가능·결과 미확인; 반복 차단",
+          "job/mock_completed: 모의 목표 확인; 실제 완료 아님",
+          "job/target_confirmed: 향후 실제 목표 증거 확인; 현 단계 금지",
+          "job/cancelled: 추가 조작 중단; 미확인 효과는 unknown 유지",
+          "observation/none: 관측 없음",
+          "observation/input_verified: 필드/첨부 확인",
+          "observation/submit_attempted: 제출 시도; 접수 아님",
+          "observation/receipt_confirmed: 접수 증거",
+          "observation/under_review: 심사 중",
+          "observation/rejected: 반려",
+          "observation/published: 공개 증거",
+          "observation/platform_specific: 객체별 관측 단계; 미확인 가능"
+        ],
+        "transitions": [
+          "J01 planned → blocked: 현재 live/허용 미확인",
+          "J02 planned → needs_action: 승인/사실/자료/규칙 누락",
+          "J03 planned, needs_action, blocked → ready: 유효 승인·허용·대상·환경 일치 및 미확인/중복 위험 없음; live 차단",
+          "J04 ready → running: 직전 가드 및 동일 의도 기존 효과 확인",
+          "J05 ready, running → needs_action: 추가 확인 필요, 이전 효과 불명확하지 않음",
+          "J06 running → ready: 중간 동작 관측 확인, 목표 미달, 다음 동작 가드 별도",
+          "J07 running → failed: 실패 관측·해당 동작 효과 없음 확인",
+          "J08 running → unknown: 효과 가능, 증거 부족/상충",
+          "J09 running, unknown → mock_completed: mock 대상/목표 관측 증거",
+          "J10 running, unknown → target_confirmed: 향후 live 운영사 허용/R01 승인 및 실제 목표 증거; 현 단계 금지",
+          "J11 unknown → unknown: 안전 조회/사용자 증거 불충분",
+          "J12 unknown, failed → needs_action: 효과 없음 또는 안전한 다음 단계의 증거 확보",
+          "J13 planned, ready, needs_action, blocked → cancelled: 미확인 효과 없음, 중단 요청",
+          "J14 running → unknown: 취소/철회 중 이미 시도한 효과 확인 불가"
+        ],
+        "guards": [
+          "I-01 값·단위·출처·확인 상태 유지. 누락/충돌 임의 확정 금지",
+          "I-02 승인은 사용자·source/draft/rule/media 버전·대상/목표·환경·actions에 결합. 변경/철회 시 신규 동작에 재사용 금지",
+          "I-03 부작용 직전 승인·권한·환경·대상 검사; 현재 live 차단; 사용자 승인≠운영사 허용",
+          "I-04 작업 생성·클릭·송신은 목표 완료가 아님. 대상·환경·목표에 해당하는 관측 근거 필요",
+          "I-05 효과 가능·증거 부족/상충이면 unknown; 같은 의도의 부작용 반복 차단. 취소/새 ID로 우회 금지",
+          "I-06 기존 효과 확인 시 상태만 갱신; 효과 부재 또는 안전한 다음 단계 확인 + 현재 승인·허용 + 명시 재개 후 별도 실행",
+          "I-07 플랫폼·객체·의도별 승인/실행/결과 독립; 타 작업 상태 덮어쓰기 금지",
+          "I-08 외부 자격증명·세션·무허용 자료 금지. 시도/관측/판정 이력을 혼합하거나 근거 없이 덮어쓰지 않음",
+          "I-09 크몽 상품 심사 접수 후보 유지; 숨고 실제 객체/완료 미확인; 모의와 실제 목표 분리"
+        ],
+        "side_effects": [
+          "J01 실행 0",
+          "J02 확인 요청, 실행 0",
+          "J03 스냅샷 연결",
+          "J04 시도 기록 후 승인 동작 1개",
+          "J05 추가 조작 차단",
+          "J06 근거 기록",
+          "J07 오류·마지막 단계 보존",
+          "J08 retry_blocked=true",
+          "J09 모의 성공만 표시",
+          "J10 접수/공개 구분",
+          "J11 차단 유지",
+          "J12 명시 재개 및 승인/허용 재검사",
+          "J13 이전 기록 보존",
+          "J14 추가 조작 중지·차단 유지"
+        ],
+        "failure_retry": "unknown 직접 ready 금지; 안전한 재확인 및 별도 재개; 취소/철회로 미확인 효과를 제거하지 않음.",
+        "terminal_states": [
+          "mock_completed",
+          "target_confirmed (향후 조건부)",
+          "cancelled (미확인 효과 없음)"
+        ],
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    },
+    {
+      "id": "LR-DATA",
+      "type_id": "IT-15",
+      "title": "논리 데이터",
+      "status": "proposed",
+      "evidence_level": "sourced",
+      "fields": {
+        "entities": [
+          "Instructor: 소유·승인 주체; 외부 계정 비밀번호 아님",
+          "LessonSourceVersion: 원문·조건·출처·확인 시점·버전",
+          "Fact: 항목·값·단위·출처·확인 상태; 패키지별 분/월 횟수/월 총액; 누락/충돌 구분",
+          "MediaAssetVersion: 합성/실자료·권리·참조·확인 범위; 저장 위치 미정",
+          "PlatformRuleSnapshot: 필수 필드·단위·제약·목표 증거·출처·확인 상태; 허용과 별개",
+          "ExecutionPermission: 환경·대상·허용 동작·근거·상태; mock/live 분리",
+          "RegistrationDraftVersion: 원본/규칙/자료 버전, 대상/목표, 매핑 값·fact_ref·규칙·이슈",
+          "Approval: 사용자·원본/초안/규칙/자료 버전·대상/목표·환경·actions·승인/철회",
+          "RegistrationIntent: 동일 사용자·대상·목표 등록 의도; unknown 회피 신규 ID 금지",
+          "RegistrationJob: 의도/승인/허용 참조·환경·작업 상태·마지막 관측",
+          "ExecutionAttempt: 작업·동작·승인/허용 스냅샷·시각/순서·오류",
+          "ObservationEvidence: 작업/시도·대상·환경·관측 시각/항목·출처·근거·확인 수준",
+          "RegistrationResult: 목표/관측 단계·판정·근거·차단 사유·다음 조치; 판정 이력"
+        ],
+        "identifiers": [
+          "Instructor: instructor_ref",
+          "LessonSourceVersion: source_ref+source_version",
+          "Fact: fact_ref",
+          "MediaAssetVersion: asset_ref+asset_version",
+          "PlatformRuleSnapshot: platform+object_kind+rule_version",
+          "ExecutionPermission: permission_ref+revision",
+          "RegistrationDraftVersion: draft_ref+draft_version",
+          "Approval: approval_ref",
+          "RegistrationIntent: intent_ref",
+          "RegistrationJob: job_ref",
+          "ExecutionAttempt: attempt_ref",
+          "ObservationEvidence: evidence_ref",
+          "RegistrationResult: job_ref+result_revision"
+        ],
+        "relationships": [
+          "Instructor 1:N LessonSourceVersion",
+          "LessonSourceVersion 1:N Fact",
+          "LessonSourceVersion N:M MediaAssetVersion",
+          "RegistrationDraftVersion N:1 LessonSourceVersion + N:1 PlatformRuleSnapshot",
+          "RegistrationDraftVersion N:M MediaAssetVersion",
+          "RegistrationDraftVersion 1:N Approval",
+          "RegistrationIntent 1:N RegistrationJob (기존 효과/미확인 검사 전 추가 실행 금지)",
+          "RegistrationJob N:1 Approval + N:1 ExecutionPermission",
+          "RegistrationJob 1:N ExecutionAttempt",
+          "RegistrationJob 1:N ObservationEvidence",
+          "ExecutionAttempt 0:N ObservationEvidence",
+          "RegistrationJob 1:N RegistrationResult"
+        ],
+        "integrity": [
+          "I-01 값·단위·출처·확인 상태 유지. 누락/충돌 임의 확정 금지",
+          "I-02 승인은 사용자·source/draft/rule/media 버전·대상/목표·환경·actions에 결합. 변경/철회 시 신규 동작에 재사용 금지",
+          "I-03 부작용 직전 승인·권한·환경·대상 검사; 현재 live 차단; 사용자 승인≠운영사 허용",
+          "I-04 작업 생성·클릭·송신은 목표 완료가 아님. 대상·환경·목표에 해당하는 관측 근거 필요",
+          "I-05 효과 가능·증거 부족/상충이면 unknown; 같은 의도의 부작용 반복 차단. 취소/새 ID로 우회 금지",
+          "I-06 기존 효과 확인 시 상태만 갱신; 효과 부재 또는 안전한 다음 단계 확인 + 현재 승인·허용 + 명시 재개 후 별도 실행",
+          "I-07 플랫폼·객체·의도별 승인/실행/결과 독립; 타 작업 상태 덮어쓰기 금지",
+          "I-08 외부 자격증명·세션·무허용 자료 금지. 시도/관측/판정 이력을 혼합하거나 근거 없이 덮어쓰지 않음",
+          "I-09 크몽 상품 심사 접수 후보 유지; 숨고 실제 객체/완료 미확인; 모의와 실제 목표 분리"
+        ],
+        "ownership": "사용자 소유 자료/승인과 플랫폼 규칙/권한·시도/관측·판정을 구분",
+        "retention": [
+          "합성 자료만",
+          "외부 자격증명 수집 금지",
+          "물리 저장 위치·보존/삭제 기간 미정"
+        ],
+        "source_of_truth": {
+          "facts": "사용자 확인 및 원본 버전",
+          "rules": "규칙 스냅샷",
+          "approval": "명시 승인",
+          "result": "관측 근거"
+        },
+        "canonical_contract_ref": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json"
+      },
+      "source_refs": [
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+        "docs/human/phase-intents/PHASE-20261124-02.md"
+      ],
+      "phase_intent_ref": "docs/human/phase-intents/PHASE-20261124-02.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "FR-01",
+      "to": "LR-DOMAIN",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-01",
+      "to": "LR-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-DOMAIN",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-02",
+      "to": "LR-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-DOMAIN",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-DOMAIN",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-DOMAIN",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-DOMAIN",
+      "relation": "derived_from"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-DATA",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-03",
+      "to": "LR-STATE",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-04",
+      "to": "LR-STATE",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-05",
+      "to": "LR-STATE",
+      "relation": "satisfies"
+    },
+    {
+      "from": "FR-06",
+      "to": "LR-STATE",
+      "relation": "satisfies"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-DATA",
+      "relation": "constrains"
+    },
+    {
+      "from": "LR-DOMAIN",
+      "to": "LR-STATE",
+      "relation": "constrains"
+    }
+  ],
+  "contract": {
+    "invariants": [
+      {
+        "id": "I-01",
+        "rule": "값·단위·출처·확인 상태 유지. 누락/충돌 임의 확정 금지",
+        "requirement_refs": [
+          "FR-01",
+          "FR-02"
+        ]
+      },
+      {
+        "id": "I-02",
+        "rule": "승인은 사용자·source/draft/rule/media 버전·대상/목표·환경·actions에 결합. 변경/철회 시 신규 동작에 재사용 금지",
+        "requirement_refs": [
+          "FR-03"
+        ]
+      },
+      {
+        "id": "I-03",
+        "rule": "부작용 직전 승인·권한·환경·대상 검사; 현재 live 차단; 사용자 승인≠운영사 허용",
+        "requirement_refs": [
+          "FR-03",
+          "FR-04"
+        ]
+      },
+      {
+        "id": "I-04",
+        "rule": "작업 생성·클릭·송신은 목표 완료가 아님. 대상·환경·목표에 해당하는 관측 근거 필요",
+        "requirement_refs": [
+          "FR-05"
+        ]
+      },
+      {
+        "id": "I-05",
+        "rule": "효과 가능·증거 부족/상충이면 unknown; 같은 의도의 부작용 반복 차단. 취소/새 ID로 우회 금지",
+        "requirement_refs": [
+          "FR-05",
+          "FR-06"
+        ]
+      },
+      {
+        "id": "I-06",
+        "rule": "기존 효과 확인 시 상태만 갱신; 효과 부재 또는 안전한 다음 단계 확인 + 현재 승인·허용 + 명시 재개 후 별도 실행",
+        "requirement_refs": [
+          "FR-06"
+        ]
+      },
+      {
+        "id": "I-07",
+        "rule": "플랫폼·객체·의도별 승인/실행/결과 독립; 타 작업 상태 덮어쓰기 금지",
+        "requirement_refs": [
+          "FR-05",
+          "FR-06"
+        ]
+      },
+      {
+        "id": "I-08",
+        "rule": "외부 자격증명·세션·무허용 자료 금지. 시도/관측/판정 이력을 혼합하거나 근거 없이 덮어쓰지 않음",
+        "requirement_refs": [
+          "FR-03",
+          "FR-05",
+          "FR-06"
+        ]
+      },
+      {
+        "id": "I-09",
+        "rule": "크몽 상품 심사 접수 후보 유지; 숨고 실제 객체/완료 미확인; 모의와 실제 목표 분리",
+        "requirement_refs": [
+          "FR-02",
+          "FR-04",
+          "FR-05"
+        ]
+      }
+    ],
+    "entities": [
+      {
+        "id": "Instructor",
+        "key": "instructor_ref",
+        "meaning": "소유·승인 주체; 외부 계정 비밀번호 아님"
+      },
+      {
+        "id": "LessonSourceVersion",
+        "key": "source_ref+source_version",
+        "meaning": "원문·조건·출처·확인 시점·버전"
+      },
+      {
+        "id": "Fact",
+        "key": "fact_ref",
+        "meaning": "항목·값·단위·출처·확인 상태; 패키지별 분/월 횟수/월 총액; 누락/충돌 구분"
+      },
+      {
+        "id": "MediaAssetVersion",
+        "key": "asset_ref+asset_version",
+        "meaning": "합성/실자료·권리·참조·확인 범위; 저장 위치 미정"
+      },
+      {
+        "id": "PlatformRuleSnapshot",
+        "key": "platform+object_kind+rule_version",
+        "meaning": "필수 필드·단위·제약·목표 증거·출처·확인 상태; 허용과 별개"
+      },
+      {
+        "id": "ExecutionPermission",
+        "key": "permission_ref+revision",
+        "meaning": "환경·대상·허용 동작·근거·상태; mock/live 분리"
+      },
+      {
+        "id": "RegistrationDraftVersion",
+        "key": "draft_ref+draft_version",
+        "meaning": "원본/규칙/자료 버전, 대상/목표, 매핑 값·fact_ref·규칙·이슈"
+      },
+      {
+        "id": "Approval",
+        "key": "approval_ref",
+        "meaning": "사용자·원본/초안/규칙/자료 버전·대상/목표·환경·actions·승인/철회"
+      },
+      {
+        "id": "RegistrationIntent",
+        "key": "intent_ref",
+        "meaning": "동일 사용자·대상·목표 등록 의도; unknown 회피 신규 ID 금지"
+      },
+      {
+        "id": "RegistrationJob",
+        "key": "job_ref",
+        "meaning": "의도/승인/허용 참조·환경·작업 상태·마지막 관측"
+      },
+      {
+        "id": "ExecutionAttempt",
+        "key": "attempt_ref",
+        "meaning": "작업·동작·승인/허용 스냅샷·시각/순서·오류"
+      },
+      {
+        "id": "ObservationEvidence",
+        "key": "evidence_ref",
+        "meaning": "작업/시도·대상·환경·관측 시각/항목·출처·근거·확인 수준"
+      },
+      {
+        "id": "RegistrationResult",
+        "key": "job_ref+result_revision",
+        "meaning": "목표/관측 단계·판정·근거·차단 사유·다음 조치; 판정 이력"
+      }
+    ],
+    "relationships": [
+      "Instructor 1:N LessonSourceVersion",
+      "LessonSourceVersion 1:N Fact",
+      "LessonSourceVersion N:M MediaAssetVersion",
+      "RegistrationDraftVersion N:1 LessonSourceVersion + N:1 PlatformRuleSnapshot",
+      "RegistrationDraftVersion N:M MediaAssetVersion",
+      "RegistrationDraftVersion 1:N Approval",
+      "RegistrationIntent 1:N RegistrationJob (기존 효과/미확인 검사 전 추가 실행 금지)",
+      "RegistrationJob N:1 Approval + N:1 ExecutionPermission",
+      "RegistrationJob 1:N ExecutionAttempt",
+      "RegistrationJob 1:N ObservationEvidence",
+      "ExecutionAttempt 0:N ObservationEvidence",
+      "RegistrationJob 1:N RegistrationResult"
+    ],
+    "draft_states": [
+      {
+        "id": "draft",
+        "meaning": "작성 중"
+      },
+      {
+        "id": "needs_confirmation",
+        "meaning": "필수 정보/규칙/권리 확인 필요"
+      },
+      {
+        "id": "ready_for_review",
+        "meaning": "검토 가능"
+      },
+      {
+        "id": "approved_for_scope",
+        "meaning": "정확한 스냅샷·동작 범위 승인"
+      },
+      {
+        "id": "superseded",
+        "meaning": "새 버전으로 대체, 이전 증거 보존"
+      }
+    ],
+    "job_states": [
+      {
+        "id": "planned",
+        "meaning": "작업 의도 생성"
+      },
+      {
+        "id": "blocked",
+        "meaning": "허용/단계 불충족"
+      },
+      {
+        "id": "ready",
+        "meaning": "동작 가드 충족"
+      },
+      {
+        "id": "running",
+        "meaning": "동작 시도/관측"
+      },
+      {
+        "id": "needs_action",
+        "meaning": "사용자 확인·승인 등 필요"
+      },
+      {
+        "id": "failed",
+        "meaning": "실패 확인, 해당 동작의 미확인 효과 없음"
+      },
+      {
+        "id": "unknown",
+        "meaning": "효과 가능·결과 미확인; 반복 차단"
+      },
+      {
+        "id": "mock_completed",
+        "meaning": "모의 목표 확인; 실제 완료 아님"
+      },
+      {
+        "id": "target_confirmed",
+        "meaning": "향후 실제 목표 증거 확인; 현 단계 금지"
+      },
+      {
+        "id": "cancelled",
+        "meaning": "추가 조작 중단; 미확인 효과는 unknown 유지"
+      }
+    ],
+    "observed_stages": [
+      {
+        "id": "none",
+        "meaning": "관측 없음"
+      },
+      {
+        "id": "input_verified",
+        "meaning": "필드/첨부 확인"
+      },
+      {
+        "id": "submit_attempted",
+        "meaning": "제출 시도; 접수 아님"
+      },
+      {
+        "id": "receipt_confirmed",
+        "meaning": "접수 증거"
+      },
+      {
+        "id": "under_review",
+        "meaning": "심사 중"
+      },
+      {
+        "id": "rejected",
+        "meaning": "반려"
+      },
+      {
+        "id": "published",
+        "meaning": "공개 증거"
+      },
+      {
+        "id": "platform_specific",
+        "meaning": "객체별 관측 단계; 미확인 가능"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "J01",
+        "from": [
+          "planned"
+        ],
+        "to": "blocked",
+        "guard": "현재 live/허용 미확인",
+        "effect": "실행 0",
+        "invariant_refs": [
+          "I-03"
+        ]
+      },
+      {
+        "id": "J02",
+        "from": [
+          "planned"
+        ],
+        "to": "needs_action",
+        "guard": "승인/사실/자료/규칙 누락",
+        "effect": "확인 요청, 실행 0",
+        "invariant_refs": [
+          "I-01",
+          "I-02"
+        ]
+      },
+      {
+        "id": "J03",
+        "from": [
+          "planned",
+          "needs_action",
+          "blocked"
+        ],
+        "to": "ready",
+        "guard": "유효 승인·허용·대상·환경 일치 및 미확인/중복 위험 없음; live 차단",
+        "effect": "스냅샷 연결",
+        "invariant_refs": [
+          "I-02",
+          "I-03",
+          "I-05"
+        ]
+      },
+      {
+        "id": "J04",
+        "from": [
+          "ready"
+        ],
+        "to": "running",
+        "guard": "직전 가드 및 동일 의도 기존 효과 확인",
+        "effect": "시도 기록 후 승인 동작 1개",
+        "invariant_refs": [
+          "I-03",
+          "I-05"
+        ]
+      },
+      {
+        "id": "J05",
+        "from": [
+          "ready",
+          "running"
+        ],
+        "to": "needs_action",
+        "guard": "추가 확인 필요, 이전 효과 불명확하지 않음",
+        "effect": "추가 조작 차단",
+        "invariant_refs": [
+          "I-02",
+          "I-03"
+        ]
+      },
+      {
+        "id": "J06",
+        "from": [
+          "running"
+        ],
+        "to": "ready",
+        "guard": "중간 동작 관측 확인, 목표 미달, 다음 동작 가드 별도",
+        "effect": "근거 기록",
+        "invariant_refs": [
+          "I-03",
+          "I-04"
+        ]
+      },
+      {
+        "id": "J07",
+        "from": [
+          "running"
+        ],
+        "to": "failed",
+        "guard": "실패 관측·해당 동작 효과 없음 확인",
+        "effect": "오류·마지막 단계 보존",
+        "invariant_refs": [
+          "I-04",
+          "I-06"
+        ]
+      },
+      {
+        "id": "J08",
+        "from": [
+          "running"
+        ],
+        "to": "unknown",
+        "guard": "효과 가능, 증거 부족/상충",
+        "effect": "retry_blocked=true",
+        "invariant_refs": [
+          "I-04",
+          "I-05"
+        ]
+      },
+      {
+        "id": "J09",
+        "from": [
+          "running",
+          "unknown"
+        ],
+        "to": "mock_completed",
+        "guard": "mock 대상/목표 관측 증거",
+        "effect": "모의 성공만 표시",
+        "invariant_refs": [
+          "I-04",
+          "I-05"
+        ]
+      },
+      {
+        "id": "J10",
+        "from": [
+          "running",
+          "unknown"
+        ],
+        "to": "target_confirmed",
+        "guard": "향후 live 운영사 허용/R01 승인 및 실제 목표 증거; 현 단계 금지",
+        "effect": "접수/공개 구분",
+        "invariant_refs": [
+          "I-03",
+          "I-04"
+        ]
+      },
+      {
+        "id": "J11",
+        "from": [
+          "unknown"
+        ],
+        "to": "unknown",
+        "guard": "안전 조회/사용자 증거 불충분",
+        "effect": "차단 유지",
+        "invariant_refs": [
+          "I-05"
+        ]
+      },
+      {
+        "id": "J12",
+        "from": [
+          "unknown",
+          "failed"
+        ],
+        "to": "needs_action",
+        "guard": "효과 없음 또는 안전한 다음 단계의 증거 확보",
+        "effect": "명시 재개 및 승인/허용 재검사",
+        "invariant_refs": [
+          "I-05",
+          "I-06"
+        ]
+      },
+      {
+        "id": "J13",
+        "from": [
+          "planned",
+          "ready",
+          "needs_action",
+          "blocked"
+        ],
+        "to": "cancelled",
+        "guard": "미확인 효과 없음, 중단 요청",
+        "effect": "이전 기록 보존",
+        "invariant_refs": [
+          "I-05",
+          "I-08"
+        ]
+      },
+      {
+        "id": "J14",
+        "from": [
+          "running"
+        ],
+        "to": "unknown",
+        "guard": "취소/철회 중 이미 시도한 효과 확인 불가",
+        "effect": "추가 조작 중지·차단 유지",
+        "invariant_refs": [
+          "I-02",
+          "I-05"
+        ]
+      }
+    ],
+    "platform_profiles": [
+      {
+        "platform": "kmong",
+        "object_kind": "레슨 서비스 상품",
+        "live_target": "심사 접수 확인",
+        "live_status": "미확인·현 단계 차단"
+      },
+      {
+        "platform": "soomgo",
+        "object_kind": null,
+        "live_target": null,
+        "live_status": "미확인·현 단계 차단; R04 객체 확인 전 가설, 종료 마켓/견적 혼동 금지"
+      },
+      {
+        "platform": "taling",
+        "object_kind": "클래스(비교 후보)",
+        "live_target": "심사 접수 후보",
+        "live_status": "미확인·이번 PoC 제외"
+      }
+    ],
+    "harness_mapping": {
+      "note": "공통 시험 결과와 제품 논리 의미 연결 가설; R03 계약 변경 아님",
+      "mock_success": "mock_completed",
+      "needs_confirmation": "needs_action",
+      "unknown": "unknown",
+      "failed": "failed",
+      "blocked": "blocked"
+    }
+  }
+}

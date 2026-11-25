@@ -1,0 +1,238 @@
+{
+  "source_commit": "3884fa3175a4c9a647fba8a0aeb35f1fc177a0a2",
+  "source_blob": "d41ab7d96db14c99c730a346efbdd719e2ab2be8",
+  "normal": {
+    "states": 100,
+    "edges": 295,
+    "counts": {
+      "active": 16,
+      "waiting": 20,
+      "stopping": 13,
+      "done": 1,
+      "failed": 7,
+      "stopped": 10
+    },
+    "unused": [],
+    "violations": [],
+    "no_outcome": 0,
+    "normal_path": [
+      "provide_or_revise_source",
+      "confirm_source",
+      "select_supported",
+      "prepare_draft",
+      "confirm_draft",
+      "open_auth",
+      "finish_auth_input",
+      "identity_verified",
+      "preflight_read",
+      "target_new",
+      "make_plan",
+      "approve_plan",
+      "accept_job",
+      "acquire_worker",
+      "admit",
+      "progress_0",
+      "admit",
+      "progress_1",
+      "admit",
+      "final_effect_proven",
+      "goal_proven"
+    ],
+    "limits": "Finite reachability, not guaranteed progress or actual runtime. Current permission, trusted observation, safe next step, identity and atomicity are abstract event preconditions."
+  },
+  "mutations": [
+    {
+      "name": "reuse approval after re-auth",
+      "detected": true,
+      "counterexample": {
+        "id": "reauth retains old binding",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "open_auth"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "unverified",
+          "control": "human",
+          "target": "unset",
+          "plan": "none",
+          "approval": "current",
+          "job": "none",
+          "effect": "none",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "run without confirmed draft",
+      "detected": true,
+      "counterexample": {
+        "id": "unsafe admission",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "acquire_worker",
+          "bad_draft",
+          "admit"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "review",
+          "auth": "verified",
+          "control": "worker",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "active",
+          "effect": "pending",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "reopen stopped",
+      "detected": true,
+      "counterexample": {
+        "id": "terminal reopened",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "request_stop",
+          "finish_stop_other"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopped",
+          "effect": "none",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "retry unknown",
+      "detected": true,
+      "counterexample": {
+        "id": "unsafe admission",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "acquire_worker",
+          "admit",
+          "bad_effect",
+          "admit"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "worker",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "active",
+          "effect": "pending",
+          "step": 0
+        }
+      }
+    },
+    {
+      "name": "stop waits forever",
+      "detected": true,
+      "counterexample": {
+        "id": "stop not bounded",
+        "path": [
+          "provide_or_revise_source",
+          "confirm_source",
+          "select_supported",
+          "prepare_draft",
+          "confirm_draft",
+          "open_auth",
+          "finish_auth_input",
+          "identity_verified",
+          "preflight_read",
+          "target_new",
+          "make_plan",
+          "approve_plan",
+          "accept_job",
+          "acquire_worker",
+          "admit",
+          "request_stop"
+        ],
+        "state": {
+          "route": "supported",
+          "policy": "allowed",
+          "source": "confirmed",
+          "draft": "confirmed",
+          "auth": "verified",
+          "control": "none",
+          "target": "new",
+          "plan": "current",
+          "approval": "current",
+          "job": "stopping",
+          "effect": "pending",
+          "step": 0
+        }
+      }
+    }
+  ],
+  "product_execution": "not_run"
+}

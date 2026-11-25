@@ -1,0 +1,439 @@
+{
+  "id": "LR-DETAIL-02",
+  "revision": "2026-11-24-minimal",
+  "status": "design_baseline_candidate_after_delegated_review",
+  "authority_ref": "LR-DETAIL-DECISIONS-02",
+  "phase": {
+    "id": "PHASE-20261124-02",
+    "main": "9b6ff0463722372d577747e89cb853e773c78591",
+    "blob": "6b790bf85ed6295cb096e56560ddc86d34031087",
+    "scope": "mock_only; independent TASK-043~045 unchanged; product implementation not authorized by this document"
+  },
+  "precedence": "D1~D5 update logical V4 where conflicting: no separate forced source/draft confirmation, no independent plan/approval resource, user checks final mapped values once. All invariants and four accepted-job states remain. V1/legacy schemas/ports/routes historical only; do not mix. Product acceptance gate mapped separately.",
+  "business_flow": [
+    [
+      "F1",
+      "사용자 원본 제공/재사용, 대상 지정",
+      "CO",
+      "Source + target selector",
+      "지원 프로필 또는 미지원 안내"
+    ],
+    [
+      "F2",
+      "원본과 플랫폼 요구사항 검사",
+      "PREP",
+      "Source + Profile + user answers",
+      "Preparation {values, issues, provenance}; 필요한 질문만; 준비 완료 시 인증 가능"
+    ],
+    [
+      "F3",
+      "직접 인증 및 대상 확인",
+      "EXEC",
+      "Registration + profile + auth grant",
+      "Verified account/target or typed reason; user auth input fenced before readback"
+    ],
+    [
+      "F4",
+      "최종 확인 및 시작",
+      "CO",
+      "Preparation + verified account/target + pinned profile",
+      "Server-generated Review + explicit Start; accepted frozen scope and job identity"
+    ],
+    [
+      "F5",
+      "알려진 절차 수행",
+      "EXEC",
+      "Accepted frozen scope + runtime connection",
+      "Ordered meaningful step observations or system error; not dynamic procedure generation"
+    ],
+    [
+      "F6",
+      "결과 판정 및 제공",
+      "RESULT/CO",
+      "Profile goal conditions + observations",
+      "Goal verdict, confirmed work, error and next action; no rerun/resume"
+    ]
+  ],
+  "records": [
+    {
+      "id": "Source",
+      "key": "source_id (immutable version identifier)",
+      "owner": "PREP",
+      "attributes": [
+        "owner_id",
+        "previous_source_id?",
+        "raw_text",
+        "asset_refs[]",
+        "created_at"
+      ],
+      "need": "원본 보존/재사용; 수정은 새 snapshot. 첨부 asset은 owner-scoped bytes+digest+rights, 내부 저장 방식 위임."
+    },
+    {
+      "id": "Profile",
+      "key": "profile_ref (platform + kind + immutable version/digest)",
+      "owner": "KNOW",
+      "attributes": [
+        "supported_routes",
+        "environment",
+        "field_rules",
+        "prohibitions",
+        "auth_and_target_requirements",
+        "ordered_steps",
+        "goal_spec",
+        "source_refs",
+        "verified_scope"
+      ],
+      "need": "준비/실행/판정 동일 기준. JSON/code/DB 물리 선택 자유. Unknown live rule not approved."
+    },
+    {
+      "id": "Registration",
+      "key": "registration_id (also job_id after accept)",
+      "owner": "CO",
+      "attributes": [
+        "owner_id",
+        "source_id",
+        "profile_ref",
+        "revision",
+        "preparation",
+        "connection_ref?",
+        "verified_target?",
+        "review?",
+        "accepted_scope?",
+        "job_state?",
+        "progress",
+        "result?"
+      ],
+      "need": "사용자 준비부터 조회까지 하나의 업무 식별자; 내부 정보 구분은 필요하지만 독립 엔터티 강제 없음.",
+      "nested": {
+        "preparation": "PREP: values, issues, provenance, answer_refs; current source/profile version only",
+        "verified_target": "EXEC observation; owner-authorized account ref, object_kind, stable logical slot, environment, existing/ambiguous/clear status, evidence ref",
+        "review": "CO: immutable review digest binding registration revision, values, provenance, assets digests, profile, account/target, ordered procedure ref, goal and environment; preview only, start commits approval",
+        "accepted_scope": "CO: review contents + approver/approval time + idempotency key; immutable; no separate plan/approval API",
+        "progress": "EXEC: job_state active/stopping/done/stopped, current meaningful step, operation records, timestamps; revision for concurrency",
+        "result": "RESULT: goal_verdict confirmed/not_reached/unknown; confirmed steps/effects, unknowns, error code, evidence, next action, mock label"
+      }
+    }
+  ],
+  "logical_information": [
+    "Source",
+    "Profile",
+    "Registration.preparation",
+    "Registration.accepted_scope + progress",
+    "Registration.result"
+  ],
+  "support_data": [
+    [
+      "Asset",
+      "owner-scoped content ref, digest, metadata, explicit rights; no separate management feature"
+    ],
+    [
+      "Connection",
+      "opaque runtime handle, owner/registration/profile scope, generation, verified account, control; no credentials in app store/LLM/logs"
+    ],
+    [
+      "Request key",
+      "unique owner+start operation+key, request digest and registration ID; use ordinary durable unique key and transaction"
+    ],
+    [
+      "Operation/evidence",
+      "meaningful platform operation identity and prior admission/outcome evidence; can be nested records or normalized storage; no separate engine or all-click logging"
+    ]
+  ],
+  "rules": [
+    [
+      "R1",
+      "source immutable; user text and explicit answers provenance; AI suggestions not verified facts. Required missing/conflict/rights unknown/invalid values block ready. Optional unknown omitted if profile permits. User final approval confirms presented values, not hidden assumptions."
+    ],
+    [
+      "R2",
+      "profile ref pinned from preparation through execution/result; pre-start revision or reauth invalidates prior review; newer incompatible profile requires re-prepare or error stop if accepted."
+    ],
+    [
+      "R3",
+      "source/target/profile selection and answers editable only pre-accept, no edits during active auth input; abandoning pre-start auth fences old viewer. Different platform => independent registration with same source."
+    ],
+    [
+      "R4",
+      "one explicit start after user reviews all actual registration fields, assets, account/target, goal, procedure summary and no rollback notice. Approval and accept atomic against revision+digest; no separate plan management."
+    ],
+    [
+      "R5",
+      "same start key+same canonical payload returns existing registration even after expiry/terminal; different payload conflict. Server-generated registration ID and semantic effect identity stable. New key cannot bypass target/operation guard. Owner isolated; existing target proof returned only to authorized owner. Genuine distinct new lesson intent requires distinct valid slot, not random key to retry uncertain effect."
+    ],
+    [
+      "R6",
+      "on every external potentially mutating meaningful operation, validate active job, pinned scope, current permission/identity/lease, target and allowed operation, effect ledger; persist admission before dispatch. read and mutation both scoped. No unproved pending/unknown retry. Effect classification uncertain => treat as potentially mutating. Record minimum evidence not passwords/OTP/cookies/screens containing secrets."
+    ],
+    [
+      "R7",
+      "normal proof => done; genuine system error including permission/auth loss or incomplete required evidence => stopping then stopped. User can query only; no user cancel, resume, rebind, rollback or edit after start. Viewer disconnect not error by itself. Finalize with known/unknown without waiting indefinitely; late trusted observations only add result evidence."
+    ],
+    [
+      "R8",
+      "profile-specific goal proof only; if sufficient response no redundant read; current mock profiles require independent readback. Receipt not publication. Environment enforced server-side mock only."
+    ],
+    [
+      "R9",
+      "prepare and start are separate user actions; page may display preparation preview before auth but no separate mandatory approval. Final review includes actual values/asset references not only a digest. Current source and preparation issues visible."
+    ],
+    [
+      "R10",
+      "atomicity and isolation are required contract properties, not claims of runtime proof; concrete DB/queue/browser/transport chosen by implementation. No live external access/actual account data."
+    ]
+  ],
+  "ports": [
+    {
+      "id": "I1",
+      "caller": "CO",
+      "provider": "KNOW",
+      "method": "resolve(selector) / profile(ref)",
+      "input": "platform/allowed URL or immutable ref",
+      "output": "supported Profile or reason",
+      "need": "FR-02/04, R2"
+    },
+    {
+      "id": "I2",
+      "caller": "CO",
+      "provider": "PREP",
+      "method": "prepare(source, profile, answers)",
+      "input": "source snapshot, pinned profile, explicit facts/answers",
+      "output": "Preparation(values, provenance, issues)",
+      "need": "FR-01/02, R1"
+    },
+    {
+      "id": "I3",
+      "caller": "CO",
+      "provider": "EXEC",
+      "method": "authenticate/verify_target",
+      "input": "owner, registration, profile, generation",
+      "output": "auth viewer grant or verified account/target observation or reason",
+      "need": "FR-03, R3"
+    },
+    {
+      "id": "I4",
+      "caller": "CO",
+      "provider": "EXEC",
+      "method": "execute(accepted_scope)",
+      "input": "immutable scope incl profile ref, values, verified connection and target",
+      "output": "ordered operation observations or error",
+      "need": "FR-04, R6/7"
+    },
+    {
+      "id": "I5",
+      "caller": "CO",
+      "provider": "RESULT",
+      "method": "evaluate(profile, scope, observations)",
+      "input": "goal spec, trusted observed effects and evidence",
+      "output": "Result incl next action; request authorized readback via EXEC only when profile requires",
+      "need": "FR-05, R8"
+    }
+  ],
+  "shared_boundaries": "CO passes same immutable Profile (or ref + resolved content) to PREP/EXEC/RESULT, no mandatory each-role registry service. EXEC is sole browser access; persistence and browser runtime are infrastructure interfaces with contract constraints, not added business roles. Result evaluator may be pure function in runner; no separate service required. CO owns lifecycle and acceptance.",
+  "wire": {
+    "conventions": "Authenticated owner from service context; all timestamps UTC; IDs opaque; revision nonnegative integer; JSON except source multipart; closed request shapes, reject unknown keys/invalid enum; response no secrets. Error {code,message,issues?,current_revision?}. HTTP 400 invalid syntax, 401 login, 404 not owned/not found, 409 stale/conflict/phase/duplicate, 422 unresolved input, 503 runtime/model unavailable. User errors before accept do not create job; after accept execution errors stored as result.",
+    "types": {
+      "SourceInput": {
+        "required": [
+          "raw_text"
+        ],
+        "optional": [
+          "previous_source_id",
+          "reuse_asset_ids",
+          "new_assets"
+        ],
+        "note": "multipart metadata JSON + named uploaded bytes; explicit rights for each referenced asset; source ID denotes immutable snapshot; preserve raw user assertions, no LLM confirmation"
+      },
+      "RegistrationInput": {
+        "required": [
+          "source_id",
+          "selector"
+        ],
+        "optional": [],
+        "note": "known platform/allowed URL only; create independent prestart registration; unsupported does not start a job"
+      },
+      "PreparationEdit": {
+        "required": [
+          "expected_revision"
+        ],
+        "optional": [
+          "source_id",
+          "selector",
+          "answers"
+        ],
+        "note": "at least one change; answers keyed by issue/field; server revalidates; no direct patch of stored approval or arbitrary steps; accepted forbidden; auth input active requires close first"
+      },
+      "AuthCommand": {
+        "required": [
+          "expected_revision",
+          "action"
+        ],
+        "optional": [
+          "generation"
+        ],
+        "note": "action open|finish|close|refresh; generation required for finish/close/refresh; open only ready prestart, finish revokes human input and verifies stable account/target, close abandons only prestart, refresh issues short-lived viewer grant only in current auth phase; no secret in request"
+      },
+      "StartInput": {
+        "required": [
+          "expected_revision",
+          "review_digest",
+          "approved",
+          "request_key"
+        ],
+        "optional": [],
+        "note": "approved must true, digest of server generated review, stable key reused for retransmission; same key replay checked before mutable current conditions"
+      },
+      "ListQuery": {
+        "required": [],
+        "optional": [
+          "cursor",
+          "limit"
+        ],
+        "note": "owner-scoped, bounded pagination"
+      },
+      "SourceView": {
+        "required": [
+          "source_id",
+          "raw_text",
+          "asset_refs",
+          "created_at"
+        ],
+        "optional": [
+          "previous_source_id"
+        ],
+        "note": "asset metadata/digest/rights and owner-authorized preview ref; preview transport delegated"
+      },
+      "RegistrationView": {
+        "required": [
+          "registration_id",
+          "source_id",
+          "revision",
+          "preparation",
+          "auth",
+          "job_state"
+        ],
+        "optional": [
+          "profile_ref",
+          "target",
+          "review",
+          "progress",
+          "result"
+        ],
+        "note": "job_state null before accept, otherwise active/stopping/done/stopped; preparation {values,issues,provenance,ready}; auth {state,generation?,account_label?,viewer_grant?}; viewer grant only when explicitly issued by auth command; review includes digest, actual values/assets, verified account/target, profile, ordered procedure summary, goal, environment; no browser secrets; result includes goal verdict, steps/effect, error/evidence, next action, environment"
+      },
+      "RegistrationList": {
+        "required": [
+          "items"
+        ],
+        "optional": [
+          "next_cursor"
+        ],
+        "note": "owner-scoped summaries {registration_id, source_id, profile_ref?, job_state, result_summary?}"
+      },
+      "SourceList": {
+        "required": [
+          "items"
+        ],
+        "optional": [
+          "next_cursor"
+        ],
+        "note": "source summaries {source_id, excerpt, created_at}"
+      }
+    },
+    "routes": [
+      [
+        "H1",
+        "POST",
+        "/v1/sources",
+        "SourceInput",
+        "SourceView",
+        "F1",
+        "create immutable snapshot/upload materials"
+      ],
+      [
+        "H2",
+        "GET",
+        "/v1/sources",
+        "ListQuery",
+        "SourceList",
+        "F1",
+        "reuse list"
+      ],
+      [
+        "H3",
+        "GET",
+        "/v1/sources/{id}",
+        "none",
+        "SourceView",
+        "F1",
+        "view chosen source"
+      ],
+      [
+        "H4",
+        "POST",
+        "/v1/registrations",
+        "RegistrationInput",
+        "RegistrationView",
+        "F1/F2",
+        "resolve and prepare; no separate draft resource"
+      ],
+      [
+        "H5",
+        "PATCH",
+        "/v1/registrations/{id}",
+        "PreparationEdit",
+        "RegistrationView",
+        "F2",
+        "answer necessary questions or revise before acceptance"
+      ],
+      [
+        "H6",
+        "POST",
+        "/v1/registrations/{id}/authentication",
+        "AuthCommand",
+        "RegistrationView",
+        "F3",
+        "auth lifecycle and target check; viewer transport not business API"
+      ],
+      [
+        "H7",
+        "POST",
+        "/v1/registrations/{id}/start",
+        "StartInput",
+        "RegistrationView",
+        "F4/F5",
+        "atomic approval/accept; returns tracked request/job, async execution is product behavior"
+      ],
+      [
+        "H8",
+        "GET",
+        "/v1/registrations/{id}",
+        "none",
+        "RegistrationView",
+        "F6",
+        "stored prep/progress/result; read-only"
+      ],
+      [
+        "H9",
+        "GET",
+        "/v1/registrations",
+        "ListQuery",
+        "RegistrationList",
+        "F6",
+        "return to existing request/result list"
+      ]
+    ],
+    "status_notes": "H1/H4 create 201; H7 accept 202 with registration_id; same key replay 200 or 202 with current persisted view of same registration. H5/H6 200; no-op rejected. H8 never triggers external reads. POST auth finish may take bounded time or return verifying, subsequent GET observes result; no separate mandatory workflow state for auth. Review digest canonical JSON of exact scope; format/hash canonicalizer agreed during integration (not client-computed)."
+  },
+  "profiles": {
+    "ref": "platform-profiles-v1.json",
+    "blob": "829a9b793b8f8039dc280dfc251f9f9cd8ea786b",
+    "note": "Existing synthetic profile candidate retained, not live or final adapter action spec. Steps may be grouped by business operation, actual atomically admitted mutations within each step require typed definitions; exact step bindings and mock fixtures depend on TASK-043~045. No fixed step count."
+  },
+  "deferred": [
+    "exact storage normalization, indexes/DDL, DB engine, HTTP framework, runtime implementation, packaging and infrastructure: choose after 11/27 evidence; enforce common contract",
+    "executable JSON Schema/OpenAPI and concrete mock field/action bindings/fixtures: finish at integration boundary with actual R03/R04/R05 mock contracts, not invent real rules",
+    "Soomgo actual object, live permissions/conditions, live technical tests and measured value",
+    "formal product test execution/merge/assignment separate"
+  ],
+  "review_boundary": "D1~D5 and derived I/O/behavior are design agreement; wire shape is delegated candidate and may be refined when actual independent implementation evidence arrives, without changing approved behavior. No team work or product scope change."
+}
