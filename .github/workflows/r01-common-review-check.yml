@@ -21,10 +21,10 @@ jobs:
           node-version: '22'
       - name: Regenerate and validate projections in isolated checkout
         run: |
-          python tools/project_docs.py
-          python tools/project_docs.py --check
           node tools/generate_lesson_design_review.mjs --source 197987047ea9a305072bba3fdff816c5c37b0157 --main 9b6ff0463722372d577747e89cb853e773c78591
           node tools/generate_lesson_design_review.mjs --check
+          python tools/project_docs.py
+          python tools/project_docs.py --check
       - name: Emit regenerated tracked projection changes for review (no remote write)
         if: always()
         run: |

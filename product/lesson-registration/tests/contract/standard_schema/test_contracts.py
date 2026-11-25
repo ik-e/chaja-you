@@ -43,7 +43,7 @@ class StandardContract(unittest.TestCase):
         for platform, f in self.fixtures.items():
             _, _, bound = self.make(platform)
             for row in f["http"]:
-                route = routes[row["id"]]
+                route = routes[row["id"].split("-")[0]]
                 with self.subTest(platform=platform, route=row["id"]):
                     if route["input"] is not None:
                         # GET query is normalized before validation; fixture None is empty query.

@@ -7,6 +7,8 @@ Schema inputs are pinned by the caller; no network resolution.
 from __future__ import annotations
 from copy import deepcopy
 from typing import Any
+from datetime import datetime
+import re
 from .interfaces import PortFailure, Providers
 
 
@@ -20,6 +22,18 @@ class SchemaCatalog:
         from referencing import Registry
         self.cls = Draft202012Validator
         self.format_checker = FormatChecker()
+        # Optional jsonschema format extras are not guaranteed installed.
+        @self.format_checker.checks("date-time")
+        def check_datetime(value):
+            if not isinstance(value, str):
+                return True
+            # Project wire timestamps require an explicit offset.
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:[Zz]|[+-]\d{2}:\d{2})", value):
+                return False
+            try:
+                return datetime.fromisoformat(value.upper().replace("Z", "+00:00")).utcoffset() is not None
+            except ValueError:
+                return False
         self.registry = Registry()
         self.schema = deepcopy(schema)
         self.profiles = deepcopy(profiles)

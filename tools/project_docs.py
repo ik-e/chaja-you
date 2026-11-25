@@ -401,6 +401,44 @@ def validate_result(record, label):
             raise ValueError(f"{label}: invalid verification or evidence references")
 
 
+def validate_historical_task_result(path, record):
+    """Check the exact inactive TASK-032 archived blob in its legacy format."""
+    if record["id"] != "TASK-032":
+        return False
+    state = read_json(STATE)
+    if record["id"] in state.get("active_task_ids", []):
+        return False
+    closeout = read_json(state["task_closeout_ref"])
+    entries = [item for item in closeout["entries"] if item["id"] == record["id"]]
+    if len(entries) != 1:
+        raise ValueError("TASK-032 missing unique closeout")
+    source = entries[0]["source"]
+    actual = subprocess.check_output(
+        ["git", "hash-object", f"--path={path}", str(ROOT / path)],
+        cwd=ROOT, text=True, encoding="ascii"
+    ).strip()
+    if source["path"] != path or source["blob_sha"] != actual or record["status"] != "검토 중":
+        raise ValueError("TASK-032 historical record changed; explicit migration required")
+    result = record["result"]
+    require(result, ["summary", "evidence", "verification", "uncertainties", "decision_requests"], path)
+    evidence_ids = {item["id"] for item in result["evidence"]}
+    if len(evidence_ids) != len(result["evidence"]):
+        raise ValueError("duplicate historical evidence")
+    for evidence in result["evidence"]:
+        if not (evidence.get("path") or evidence.get("url")):
+            raise ValueError("missing historical evidence reference")
+        if evidence.get("path") and not (ROOT / evidence["path"]).is_file():
+            raise ValueError(f"missing historical evidence file {evidence['path']}")
+    for check in result["verification"]:
+        if check["verdict"] not in ("pass", "fail", "pending", "inconclusive"):
+            raise ValueError("invalid historical verdict")
+        if not set(check.get("evidence_ids", [])) <= evidence_ids:
+            raise ValueError("unknown historical evidence")
+        if check["verdict"] == "pending" and not check.get("reason"):
+            raise ValueError("unexplained historical pending verdict")
+    return True
+
+
 def validate(sources):
     ids = set()
     for path, record in sources.items():
@@ -458,7 +496,7 @@ def validate(sources):
                     raise ValueError(
                         f"{path}: completed task needs verification and evidence"
                     )
-            if record["result"] is not None:
+            if record["result"] is not None and not validate_historical_task_result(path, record):
                 validate_result(record["result"], path)
         if record["kind"] == "run":
             require(
