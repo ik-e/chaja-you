@@ -25,7 +25,7 @@
 | 작업 | 할 일 | 담당 | 내부 목표일 | 선행 작업 | 구분 | 상태 |
 | --- | --- | --- | --- | --- | --- | --- |
 | [TASK-048](../artifacts/tasks/TASK-048.json) | 공통 계약·개발 환경 유지 및 점진 통합 검증 | R01 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-049](../artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-049](../artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-050](../artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
@@ -99,11 +99,30 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - D01~D06 R01 후보 기준으로 담당자별 실제 구현 차이·반례·공수 반환. 안정적인 slot/manifest/readback, actual dispatch fence, viewer/I2/factory 세부 서명·환경은 실제 확인 후 확정. 기존 제품 범위 및 업무 배정 유지.
 - R04 A안은 H8 기존 schema, grant URL/log 금지, polling과 goal_verdict 분리로 교정. 기존 계약 변경이 필요한 경우에만 근거·영향·시험 반환.
 
-### TASK-049 · 할 일
+### TASK-049 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-049.json)
 
-결과 미기록.
+PR #49 초안에서 최신 공통 기준을 반영해 모의 등록 정보 준비, 원문 근거 처리와 가격 충돌 검증을 부분 구현하고 R03 합성 연결을 시험했다. 실제 모델·전체 제품 수용 시험은 미실행이다.
+
+검증과 근거
+
+- 담당 합성 시험과 bootstrap replay · pass
+- r02-preparation-AC1 실제 모델 기반 추출과 두 프로필 검증 · inconclusive
+- r02-preparation-AC2 가격·단위·VAT 누락과 충돌 전체 조건 · inconclusive
+- r02-preparation-AC3 인계 및 AT-01·T5-08·T6-02 제품 시험 · inconclusive
+- [R02 계획과 실험·제약](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/PLAN.md)
+- [합성 준비 및 R03 연결 시험](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_provider.py)
+- [OpenAI 모의 HTTP 시험](https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_openai_extractor.py)
+
+남은 불확실성과 결정 요청
+
+- 실제 OpenAI 접근 권한·예산 및 모델별 품질·비용 시험 미확인
+- 모델이 인용에서 VAT 표현이나 원문 충돌을 빠뜨리는 경우의 실제 성능 미검증
+- 중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 담당자 간 합의 및 실제 통합 시험 미완료
+- 모의 프로필은 실제 플랫폼 정책·등록 성공을 의미하지 않음
+- R03과 D05의 중첩 수정 보존 및 timeout·revision 처리 계약을 사례 기반으로 협의
+- R01의 승인된 OpenAI 합성 실험 접근 환경 및 예산 준비 후 모델 비교
 
 ### TASK-050 · 진행 중
 
