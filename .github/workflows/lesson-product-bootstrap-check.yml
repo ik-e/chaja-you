@@ -1,0 +1,71 @@
+name: lesson-product-bootstrap-check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [r01/product-prep-20261125, main]
+    paths:
+      - 'product/lesson-registration/**'
+      - 'docs/artifacts/design/lesson-registration-20261124/**'
+      - '.github/workflows/lesson-product-bootstrap-check.yml'
+  pull_request:
+    paths:
+      - 'product/lesson-registration/**'
+      - 'docs/artifacts/design/lesson-registration-20261124/**'
+      - '.github/workflows/lesson-product-bootstrap-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: product/lesson-registration
+    env:
+      LR_ENVIRONMENT: mock
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Verify locked environment
+        run: |
+          git rev-parse HEAD
+          uv --version
+          uv lock --check
+          uv sync --locked --python 3.12
+          uv run --locked --python 3.12 python --version
+          uv pip check --python .venv/bin/python
+      - name: Doctor and loopback smoke
+        run: |
+          uv run --locked --python 3.12 python dev.py doctor
+          uv run --locked --python 3.12 python dev.py smoke
+      - name: Run all isolated package and integration bootstrap tests
+        run: uv run --locked --python 3.12 python dev.py test all
+      - name: Ownership checker positive and negative cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git rev-parse HEAD)"
+          for p in common r02-preparation r03-app r04-web r04-soomgo r05-remote r05-kmong; do
+            uv run --locked --python 3.12 python dev.py check-changes "$p" --base "$base"
+          done
+          f="web/bootstrap-ownership-probe.tmp"
+          trap 'rm -f "$f"' EXIT
+          printf 'synthetic probe\n' > "$f"
+          uv run --locked --python 3.12 python dev.py check-changes r04-web --base "$base"
+          if uv run --locked --python 3.12 python dev.py check-changes r05-remote --base "$base"; then
+            echo 'Ownership checker incorrectly accepted another package'
+            exit 1
+          fi
+          rm "$f"
+          echo 'Ownership checker positive/negative cases passed'
+      - name: Scope
+        run: echo 'Bootstrap only; no real browser, model, platform or 22 product acceptance tests executed.'
