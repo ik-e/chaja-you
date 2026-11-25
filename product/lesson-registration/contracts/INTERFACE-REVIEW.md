@@ -32,3 +32,19 @@
 | 일정 | 11인일 추정 및 12/8 전 vertical/safety 우선 순서는 WBS 후보에 반영. H2/H9, T5-06/T6-01 등 필수 계약/시험을 삭제·연기 승인한 것은 아님. 22개 gate 미충족이면 MVP 미완료/부분 시연으로 보고하고 R01에게 일정/범위 조정 근거 반환. |
 
 R03의 PLAN 원문과 담당 브랜치는 수정하지 않는다. R03은 위 사항을 자기 PLAN에 반영/이견 기록하고 관련 담당과 기존 계약을 맞춘다. 11인일/7근무일은 보고값이지 완료 또는 확정 일정이 아니다.
+
+## R03 진행 보고 후속 (2026-11-25)
+
+[고정 구현](https://github.com/ik-e/chaja-you/commit/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf) · [보고/검토 근거](../evidence/r03-progress-20261125.json) · [R01 후속 결정](../../../docs/human/responses/HRESP-20261125-04_r03-app-followup.md). S0~S7 및 174/10/2 통과는 보고값이며 최신 기준 독립 재현 및 제품 gate 미확인. 이미 구현한 사항 유지, 남은 차이만 검토.
+
+| 항목 | 적용/반환 기준 |
+| --- | --- |
+| S8 | main app/verification 그룹으로 HTTP 구현 착수. multipart 추가 dependency가 필요하면 버전·필요성·시험 제안. |
+| Schema | 공통 SchemaCatalog/jsonschema 4.25.1 사용 기본. replay 일치만으로 동등성 주장 금지. 시간대 없는 timestamp, numeric edge, profile values/unknown field 및 오류 매핑 확인. |
+| REQ-08 / finalize | 현행 CS-05/06 및 A2 우선, 과거 원본 보존. stopped 이후 읽기 근거 추가만, 재개/재실행 없음. 기존 CoordinatorStore.finalize 사용. |
+| Digest/fixture | 공통 canonical helper·golden vectors 사용; actual normalized readback에서 payload digest 계산. binding의 step/registered operation/asset/target/profile·첨부 순서·slot 공동 예제 확정 후 R01이 계산값 기반 fixture 및 회귀 갱신. 기존 replay placeholder는 합성 전용. |
+| STORE/lease | acquire_context/expected_operations는 기존 Protocol에 미채택. R05와 verified binding, lease 등록·폐기, permit, 등록 operation ID/action_key/effect_class/binding, 관측-admission/evidence 연결, stale/foreign lease, worker/fence 경쟁·응답 유실 예제 및 시험 확인. 종료 후 읽기 근거 추가에 임의 관측 주입 금지. |
+| Viewer/I2/launch | R03·R04·R05 viewer endpoint/messages, finish 입력 차단, detach; R02·R03 I2 timeout/오류; owner factory/lifespan/worker/launch 확인. |
+| WBS | TASK-050 유지. W10/W16/PREP 추가 배정 미확정; 초기 11인일 대비 잔여 공수·readiness 반환. 22개 gate 유지. |
+
+합의·제품 회귀 전 세부 계약 채택 또는 제품 완료로 기록하지 않는다. R01은 공통 변경/fixture 담당이며 R03 브랜치와 구현 파일을 직접 수정하지 않는다.

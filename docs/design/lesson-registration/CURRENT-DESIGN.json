@@ -1234,15 +1234,15 @@
         "REQ-10",
         "REQ-11"
       ],
-      "selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; jsonschema 4.25.1 isolated verification tool; no second type schema",
+      "selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; product server uses common contracts/validation.py (jsonschema 4.25.1 pinned in product lock); no second authoritative schema engine. Module error mapping and business guards remain local.",
       "alternatives": [
         "Custom schema checker",
         "Pydantic as new source",
         "Pre-generate model classes"
       ],
-      "reason": "Standards-based validation avoids drift and tests all current shapes; production dependency/lock still separate.",
+      "reason": "Standards-based validation avoids drift; replay agreement is not general equivalence. Product lock supplied by PD-02; standard server validator reuse is default.",
       "revisit_when": "Missing schema constraints, incompatible profile or performance need.",
-      "pending_review": "Standard validator direction accepted; product dependency group and full lock pending R03/shared review.",
+      "pending_review": "R03 and other server providers confirm shared validator integration; any alternative engine needs evidence, divergence tests and R01 review. See HRESP-20261125-04. Frontend UX checks are not server authority.",
       "related_tasks": [
         "TASK-048",
         "TASK-049",
@@ -1270,7 +1270,7 @@
           "test_datetime_and_digest_negative"
         ],
         "kind": "selected_synthetic_checks",
-        "limit": "선정 합성 payload 검사. 프런트에 Python 엔진 강제 아님; 전체 제품 dependency lock 미확정"
+        "limit": "선정 합성 payload 검사. 당시 제품 lock 별도였으며 현재 PD-02 초기 lock 제공; 실제 provider 적용 미검증. 프런트에 Python 엔진 강제 아님."
       }
     },
     {

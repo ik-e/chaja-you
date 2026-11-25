@@ -77,17 +77,17 @@
 
 ### IB-02 · 공통 스키마 검사
 
-**선택:** Use pinned named Draft 2020-12 schema with explicit profile schema; jsonschema 4.25.1 isolated verification tool; no second type schema
+**선택:** Use pinned named Draft 2020-12 schema with explicit profile schema; product server uses common contracts/validation.py (jsonschema 4.25.1 pinned in product lock); no second authoritative schema engine. Module error mapping and business guards remain local.
 
-**근거:** Standards-based validation avoids drift and tests all current shapes; production dependency/lock still separate.
+**근거:** Standards-based validation avoids drift; replay agreement is not general equivalence. Product lock supplied by PD-02; standard server validator reuse is default.
 
 **대안:** Custom schema checker / Pydantic as new source / Pre-generate model classes
 
 - [결정 원본](../../../product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json) `/decisions/1` · [승인 근거](../../human/responses/HRESP-20261125-02_common-implementation-binding.md) · 선행: CS-02, CS-08, LD-08
 - 영향 검토: [TASK-048](../../artifacts/tasks/TASK-048.json) · [TASK-049](../../artifacts/tasks/TASK-049.json) · [TASK-050](../../artifacts/tasks/TASK-050.json) · [TASK-051](../../artifacts/tasks/TASK-051.json) · [TASK-052](../../artifacts/tasks/TASK-052.json) · [TASK-053](../../artifacts/tasks/TASK-053.json) · [TASK-054](../../artifacts/tasks/TASK-054.json) · 관련 계획 제품 시험: T5-03, T5-13, DV-04
 - 확인된 근거: `test_all_named_replay_shapes`, `test_http_named_shapes`, `test_platform_specific_values`, `test_datetime_and_digest_negative` · [검증 기록](../../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
-- 검증 한계: 선정 합성 payload 검사. 프런트에 Python 엔진 강제 아님; 전체 제품 dependency lock 미확정
-- 남은 검토: Standard validator direction accepted; product dependency group and full lock pending R03/shared review.
+- 검증 한계: 선정 합성 payload 검사. 당시 제품 lock 별도였으며 현재 PD-02 초기 lock 제공; 실제 provider 적용 미검증. 프런트에 Python 엔진 강제 아님.
+- 남은 검토: R03 and other server providers confirm shared validator integration; any alternative engine needs evidence, divergence tests and R01 review. See HRESP-20261125-04. Frontend UX checks are not server authority.
 - 재검토 조건: Missing schema constraints, incompatible profile or performance need.
 
 ### IB-03 · Storage·Runtime·Adapter 권한 경계

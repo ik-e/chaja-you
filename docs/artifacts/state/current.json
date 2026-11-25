@@ -20,7 +20,7 @@
   "priorities": [
     "TASK-048: 공통 물리/실행 환경 및 회귀 기준 적용, 담당자 PLAN·공통 경계 확인, WBS 조정, 실제 provider 점진 통합.",
     "TASK-049(R02): 등록 정보 준비·AI 구조화 및 검증; 담당자 PLAN/검토 및 독립 구현.",
-    "TASK-050(R03): 공통 앱·API·저장·결과 판정 구현; 담당자 PLAN/검토 및 독립 구현.",
+    "TASK-050(R03): S0~S7 구현 보고 반영, 최신 공통 기준 병합·공통 schema 검증 및 S8 HTTP 독립 구현, R02/R04/R05 접점 확인·잔여 공수 갱신.",
     "TASK-051(R04): 등록 지원 웹 UI 구현; 담당자 PLAN/검토 및 독립 구현.",
     "TASK-052(R04): 숨고 등록 adapter 및 독립 mock 구현; 담당자 PLAN/검토 및 독립 구현.",
     "TASK-053(R05): 원격 브라우저 runtime·인증·뷰어 구현; 담당자 PLAN/검토 및 독립 구현.",
@@ -53,7 +53,7 @@
       "evidence_needed": "운영사 허용, 실제 보안·가치·비용 및 수용 시험"
     }
   ],
-  "review_summary": "11/25 논리·IB-01~05·PD-01~08 방향 적용, Python 3.12 기술 후보 4/4 및 제품 lock 공통 회귀 통과. TASK-048~054 활성, R01 공통·통합 전담. R03 PLAN 11인일·R05 수신/7근무일 추정, R02/R04 PLAN 미확인. WBS V0.6 후보 및 공통 접점 검토, 12/4 vertical·12/8 mock MVP 일정 위험. 22개 실제 제품 시험 미실행, live 금지. 담당자 간 세부 계약 및 실제 구현·가용성 확인 후 일정 확정.",
+  "review_summary": "11/25 논리·IB-01~05·PD-01~08 방향 적용, 초기 제품 lock 공통 회귀 통과. TASK-048~054 활성. R03 e29fb69 S0~S7·174/10/2 시험 보고(독립 재현 미확인), FastAPI/jsonschema lock 및 표준 검증 기준 반영·S8 착수 가능. R05 수신/7근무일 추정; WBS V0.6 미확정, R03 잔여 공수 및 담당자 합의 확인 후 조정. 22개 제품 시험 미실행, live 금지.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -312,6 +312,12 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-04_r03-app-followup.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/r03-progress-20261125.json"
     }
   ],
   "submission_plan": {
@@ -425,7 +431,7 @@
   "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조); TASK-043~047 이전 단계 보존",
   "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "active_phase_intent_id": "PHASE-20261125-01",
-  "current_product_status": "IB/PD 공통 방향 및 초기 제품 lock/기술 검증·회귀 통과. R03 PLAN/11인일·R05 수신/7근무일 확인; 타 담당 가용성·실제 제품 시험·일정 미확정. 실서비스 실행 금지.",
+  "current_product_status": "IB/PD 공통 방향 및 초기 제품 lock/기술 검증·회귀 통과. R03 S0~S7·mock 시험 174/10/2 보고(재현 미확인), S8 착수 가능; R05 수신/7근무일 확인. 담당자 세부 계약·잔여 공수·제품 시험·일정 미확정. 실서비스 실행 금지.",
   "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
   "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
   "current_baseline_lifecycle": {

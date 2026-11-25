@@ -10,7 +10,8 @@
     "R05 estimate 7 days; R03 PLAN estimate 11 person-days; R02 handoff by 12/4 preserved. R02/R04 capacity and actual implementation pending. Dates not confirmed.",
     "Dependencies describe integration prerequisites, not barriers to independent development.",
     "Do not set task due/status from this candidate.",
-    "R03 reports only 9 working days 11/26~12/8. 12/4 vertical and 12/8 mock MVP are at risk; prioritize vertical slice and safety, never declare MVP complete on partial tests. Any scope/gate change needs explicit R01 decision."
+    "R03 reports only 9 working days 11/26~12/8. 12/4 vertical and 12/8 mock MVP are at risk; prioritize vertical slice and safety, never declare MVP complete on partial tests. Any scope/gate change needs explicit R01 decision.",
+    "R03 e29fb69 S0~S7 and 174/10/2 mock test counts reported; S8 pending at report. Initial 11 person-days is not remaining effort; new common lock enables S8. Revised residual effort and readiness needed. W10/W16/PREP maintenance remain unassigned."
   ],
   "items": [
     {
@@ -39,7 +40,7 @@
       "depends_on": [
         "C01"
       ],
-      "target": "R03 PLAN 11 person-days; 12/8 target at risk; prioritize vertical path and core guard/readback. Remaining required H2/H9, T5-06/T6-01 are not waived.",
+      "target": "S0-S7 reported; S8 HTTP, common validator/canonical alignment and provider integration pending; update remaining effort before confirming schedule. All required H2/H9, T5-06/T6-01 and 22-test gate retained.",
       "estimated_workdays": 11,
       "estimate_ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
     },
@@ -153,9 +154,11 @@
     "as_of": "2026-11-25",
     "R03": {
       "ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md",
-      "status": "PLAN available; implementation completion not verified",
+      "status": "S0-S7 reported; owned code paths verified, tests not independently rerun; S8 and latest-main regression pending",
       "estimated_person_days": 11,
-      "estimate_notes": "R03 estimates 9 working days from 11/26 to 12/8. Sequence proposed, not gate reduction."
+      "estimate_notes": "R03 estimates 9 working days from 11/26 to 12/8. Sequence proposed, not gate reduction. Initial estimate; remaining effort update requested, no new due date.",
+      "remaining_person_days": null,
+      "progress_ref": "product/lesson-registration/evidence/r03-progress-20261125.json"
     },
     "R05": {
       "status": "scope and 7-day estimate reported; PLAN files not yet on assigned branches",
