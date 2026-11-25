@@ -11,7 +11,7 @@
 
 ## 현재 확인할 내용
 
-11/25 논리·IB-01~05·PD-01~08 방향 적용, Python 3.12 기술 후보 4/4 및 제품 lock 공통 회귀 통과. TASK-048~054 활성, R01 공통·통합 전담. R03 PLAN 11인일·R05 수신/7근무일 추정, R02/R04 PLAN 미확인. WBS V0.6 후보 및 공통 접점 검토, 12/4 vertical·12/8 mock MVP 일정 위험. 22개 실제 제품 시험 미실행, live 금지. 담당자 간 세부 계약 및 실제 구현·가용성 확인 후 일정 확정.
+11/25 논리·IB-01~05·PD-01~08 방향 적용, 초기 제품 lock 공통 회귀 통과. TASK-048~054 활성. R03 e29fb69 S0~S7·174/10/2 시험 보고(독립 재현 미확인), FastAPI/jsonschema lock 및 표준 검증 기준 반영·S8 착수 가능. R05 수신/7근무일 추정; WBS V0.6 미확정, R03 잔여 공수 및 담당자 합의 확인 후 조정. 22개 제품 시험 미실행, live 금지.
 
 ## 결정 요청
 
@@ -40,7 +40,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행.
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인).
 
 검증과 근거
 
@@ -59,6 +59,8 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [물리 기술 CI 증거 및 범위](../../product/lesson-registration/evidence/physical-ci-20261125.json)
 - [담당자 공통 접점 및 R03 PLAN 피드백](../../product/lesson-registration/contracts/INTERFACE-REVIEW.md)
 - [WBS V0.6 후보](../artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)
+- [R01 후속 전달 및 기준](../human/responses/HRESP-20261125-04_r03-app-followup.md)
+- [R03 진행 보고 및 근거](../../product/lesson-registration/evidence/r03-progress-20261125.json)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 - [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
@@ -67,12 +69,13 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 
 남은 불확실성과 결정 요청
 
-- R03 PLAN/11인일·R05 7근무일 보고; R02/R04 가용성 및 모든 담당자 실제 구현/수신 상태 별도 확인
+- R03 S0~S7 및 174/10/2 보고(독립 재현 미확인), 초기 11인일·잔여 공수 미확인; R05 7근무일 추정, R02/R04 가용성 및 실제 준비 상태 별도 확인
 - 12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정
 - 실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증
 - 초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요
 - 관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.
 - R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인.
+- R01: digest 대상/operation·slot 협의 뒤 계산값 기반 공통 replay 보완. acquire_context·expected_operations는 공동 검토 전 미채택. Viewer/I2/factory 및 multipart 의존성은 담당자 반환 후 결정.
 
 ### TASK-049 · 할 일
 
