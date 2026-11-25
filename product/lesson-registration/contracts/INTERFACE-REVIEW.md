@@ -85,3 +85,7 @@ R01이 [구체안](DETAIL-CANDIDATE.json)과 [세션 보안](SESSION-SECURITY.md
 | R04 숨고 | S5 unknown을 confirmed로 기록하지 않음. 실제 저장 상태를 별도 조회하고 승인값/고정 HTML에서 성공 근거를 합성하지 않음. S4 exact approved values 비교, BoundGateway/permit, 공통 canonical, observed target와 I5 최종 판정, 잘못된 대상/유실/중복 회귀. |
 
 담당자는 기존 TASK 및 소유 경로에서 수정/시험하며 R01은 공통 경계와 통합만 변경. 12/4 및 12/8 후보와 22개 gate 유지.
+
+## 11/25 최신 구현 검토 및 실제 조립 인수
+
+[고정 근거](../evidence/team-integration-checkpoint-20261125.json) · [인수 기준](../evidence/INTEGRATION-INTAKE.md). R03 실제 App/STORE 조립 주도, R04/R05/R02 담당 유지. 최신 R05 동일 조합 30/37 독립 CI 통과. D01~D04 실제 owner/lease/slot/permit/fence/read 권위, H6 /authentication 및 실제 module/canvas 연동 미완료. HTTP/WS owner를 일치시키고 브라우저 WS에서 임의 header를 가정하지 않으며 grant/body는 owner 권위가 아니다. stable slot은 H6 대상 확인부터, 승인 asset 현재 registration/owner/lease. R04 actual API fallback 200 verified 제거, null/empty origin 불허, H7/H8 현행 키, 숨고 독립 readback 및 unknown 보존. D05 H5 중첩/timeout은 R02/R03 공동 시험. 기존 논리 pin/22개 gate/mock-only 유지.

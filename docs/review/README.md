@@ -39,7 +39,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-048.json)
 
-Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 81ade0f CI 4종 성공. 최신 main의 R04 추가 구현과 함께 재검증. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정). R01 Discord 전달의 확정 경계와 D01~D06 협의/적용 기준을 CURRENT-BASELINE.md에 정리. 기관 API 권한 미확인에 맞춰 실험 환경 계획 수정. 11/25 후속: R02 PR51/52 리뷰, 실제 모델 합성 시험 보고 및 R01 설계/비용 검토 역할 확인; R03 launcher main 31fe0c5 및 회귀 CI; R04 TASK051/052 결과 정리·WBS 갱신. 제품 gate 22개 pin 기반 실행기와 합성 preflight 696a5cc7 반영, 완전한 gate case 0개, 실제 전체 수용 미실행. 실제 preflight 45562142407 통과: runner 4, 실제 loopback HTTP 14, 양 플랫폼 launcher 1개(subtest 2), incomplete release 거부 확인. 22/22 not_run 유지. 11/25 R03 실제 조립 책임·R01 검증 분리, 최신 R02/R04/R05 검토. 동일 고정 조합 tree 10096b0f의 Runtime 30/30, 크몽 37/37 독립 CI 성공. 전체 gate 0/22, 실제 app/UI/보안 경계 별도.
+Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행. R03 S0~S7·174/10/2 보고와 공통 schema 검증기 적용 방향·후속 협의 기록 반영(시험 재현 미확인). R01 D01~D06 세부 방향 수용 및 공통 reference·실패 시험·원격 인증 세션 보안 후보 제시. 후보 시험 결과는 정확한 커밋 CI에서 확인하며 실제 제품/운영 보안 적합성은 미확인. 이전 후보 24a1c35 CI 4종 통과(신규 reference 19개, physical 5개); 최신 main에 동기화하며 Profile digest·origin positive control·bootstrap 그룹 보완. 81ade0f CI 4종 성공. 최신 main의 R04 추가 구현과 함께 재검증. OpenAI API 실험 방향 및 환경 구성 계획 기록(계정/비용 미설정). R01 Discord 전달의 확정 경계와 D01~D06 협의/적용 기준을 CURRENT-BASELINE.md에 정리. 기관 API 권한 미확인에 맞춰 실험 환경 계획 수정. 11/25 후속: R02 PR51/52 리뷰, 실제 모델 합성 시험 보고 및 R01 설계/비용 검토 역할 확인; R03 launcher main 31fe0c5 및 회귀 CI; R04 TASK051/052 결과 정리·WBS 갱신. 제품 gate 22개 pin 기반 실행기와 합성 preflight 696a5cc7 반영, 완전한 gate case 0개, 실제 전체 수용 미실행. 실제 preflight 45562142407 통과: runner 4, 실제 loopback HTTP 14, 양 플랫폼 launcher 1개(subtest 2), incomplete release 거부 확인. 22/22 not_run 유지. 11/25 R03 실제 조립 책임·R01 검증 분리, 최신 R02/R04/R05 검토. 동일 고정 조합 tree 10096b0f의 Runtime 30/30, 크몽 37/37 독립 CI 성공. 전체 gate 0/22, 실제 app/UI/보안 경계 별도. R01 실제 조립 후보 인수 기준과 22개 pinned scenario/필수 관측 준비 목록 작성, DLV05 main PREP 흐름과 자기 성찰 후보 분리·산출물 맵 동기화. 전체 gate 등록 0/22, T5-08 명시 승인 모델 시험 연결 미구현.
 
 검증과 근거
 
@@ -57,6 +57,8 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - 81ade0f 보완 후보 4개 CI (실제 provider/gate 별도) · pass
 - 22개 고정 제품 gate 실행 체계 및 합성 preflight · pass
 - 최신 R05 조합 CI · pass
+- 전체 제품 gate 사례 등록 및 실제 실행 · inconclusive
+- DLV05 현행 PREP 코드 대조 및 자기 성찰 후보 분리 · pass
 - [검증 범위 기록](../../product/lesson-registration/evidence/bootstrap-ci-20261125.json)
 - [R01 공통 설계 방향 승인](../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - [공통 계약 CI 검증 기록](../../product/lesson-registration/evidence/common-contract-ci-20261125.json)
@@ -79,6 +81,9 @@ Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합�
 - [R01 후속 지시](../human/responses/HRESP-20261125-10_team-integration-followup.md)
 - [실제 preflight 고정 검증 기록](../../product/lesson-registration/evidence/product-gate-preflight-20261125.json)
 - [최신 체크포인트](../../product/lesson-registration/evidence/team-integration-checkpoint-20261125.json)
+- [통합 인수 기준](../../product/lesson-registration/evidence/INTEGRATION-INTAKE.md)
+- [22개 gate 준비 목록](../../product/lesson-registration/evidence/product-gate-readiness-20261125.json)
+- [11/27 PREP 상태 전이 설계](../step3/단일에이전트_상태전이그래프_설계서.md)
 - [GitHub Actions 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45525881756)
 - [수정 후 실제 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382)
 - [물리 기술 검증 실제 실행](https://github.com/ik-e/chaja-you/actions/runs/45534844447)
