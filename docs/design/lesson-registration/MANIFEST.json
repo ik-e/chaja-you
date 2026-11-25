@@ -1,0 +1,1121 @@
+{
+  "id": "LR-DESIGN-REVIEW-PROJECTION-01",
+  "source_commit": "197987047ea9a305072bba3fdff816c5c37b0157",
+  "operational_main_commit": "9b6ff0463722372d577747e89cb853e773c78591",
+  "source_directory": "docs/artifacts/design/lesson-registration-20261124/",
+  "precedence": [
+    "Current phase/permission and human top decisions first; A2 overrides legacy cancel/resume/rollback",
+    "V4.1 schema delta and common-integration-v1 wire/ports/constraints current; V4 remaining data and profile V2 current; old contracts historical except explicitly retained requirements",
+    "V0.6 trace historical; original status preserved; current status is projection, not actual product verification",
+    "운영 단계는 main PHASE-20261124-03 우선. 기존 TASK/권한 변경 없음."
+  ],
+  "documents": [
+    {
+      "path": "docs/design/lesson-registration/01-GOALS.md",
+      "title": "목표·요구사항·상위 결정",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json",
+          "blob": "54beb7c357e580b087442bb8f00e40ab2a3567af",
+          "pointers": [
+            "/id",
+            "/version",
+            "/date",
+            "/authority",
+            "/status",
+            "/source",
+            "/baseline",
+            "/evidence",
+            "/decisions",
+            "/proposed_acceptance",
+            "/next_design",
+            "/unchanged"
+          ],
+          "leaf_count": 84
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/top-design-v1.json",
+          "blob": "1ed54afd5b541fa3a9d4030267ba65c54729ff2b",
+          "pointers": [
+            "/id",
+            "/status",
+            "/authority",
+            "/sources",
+            "/goal",
+            "/objects",
+            "/roles",
+            "/shared",
+            "/flow",
+            "/invariants",
+            "/milestones"
+          ],
+          "leaf_count": 67
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/top-design-amendment-v1.json",
+          "blob": "ad4f09689896206163dfce72d972281b10075891",
+          "pointers": [
+            "/id",
+            "/base",
+            "/authority",
+            "/decisions",
+            "/unchanged"
+          ],
+          "leaf_count": 16
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+          "blob": "f7b49262a4d470f6a2764e0fd2c559e6358cc416",
+          "pointers": [
+            "/requirements"
+          ],
+          "leaf_count": 114
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/02-LOGIC.md",
+      "title": "논리 설계 및 상태 모델",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/detail-decisions-v2.json",
+          "blob": "3c04b85cb9ee45d8aa21b9cfdea0713fe8dc3014",
+          "pointers": [
+            "/id",
+            "/authority",
+            "/basis",
+            "/rules",
+            "/decisions"
+          ],
+          "leaf_count": 74
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v5.json",
+          "blob": "2c13b86a44b10f7877678509819e97d1d1b72c17",
+          "pointers": [
+            "/id",
+            "/authority",
+            "/scope",
+            "/initial",
+            "/domains",
+            "/rules",
+            "/notes"
+          ],
+          "leaf_count": 277
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/03-DATA.md",
+      "title": "상위 데이터와 상세 공통 계약",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json",
+          "blob": "7141bcc48dabc36e42736035f4a6fcc2b8526f34",
+          "pointers": [
+            "/id",
+            "/version",
+            "/date",
+            "/status",
+            "/authority",
+            "/basis",
+            "/principles",
+            "/ownership",
+            "/acceptance",
+            "/closure",
+            "/remaining",
+            "/non_changes"
+          ],
+          "leaf_count": 92
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json",
+          "blob": "edd84980d5df53c8df0800dd28f7878396ad4397",
+          "pointers": [
+            "/id",
+            "/date",
+            "/status",
+            "/authority",
+            "/basis",
+            "/precedence",
+            "/source_evidence",
+            "/decisions",
+            "/logical_records",
+            "/fact_paths",
+            "/boundaries",
+            "/semantic_checks",
+            "/wire_compatibility",
+            "/canonical",
+            "/verification_status",
+            "/non_changes"
+          ],
+          "leaf_count": 376
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/04-SCHEMA.md",
+      "title": "공통 타입과 스키마 V4.1",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+          "blob": "de6c147216ee68bae75a9d18f9127c327701fa5a",
+          "pointers": [
+            "/$schema",
+            "/$id",
+            "/title",
+            "/description",
+            "/$defs"
+          ],
+          "leaf_count": 844
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/05-PLATFORMS.md",
+      "title": "플랫폼 프로필 V2",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+          "blob": "b0b2044526f63f0244d920f85b2d9676b94bbe72",
+          "pointers": [
+            "/id",
+            "/scope",
+            "/sources",
+            "/profiles",
+            "/registry_rule"
+          ],
+          "leaf_count": 507
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/06-API-PORTS.md",
+      "title": "HTTP API·업무 포트·오류",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+          "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+          "pointers": [
+            "/id",
+            "/version",
+            "/date",
+            "/status",
+            "/authority",
+            "/basis",
+            "/schema_delta",
+            "/routes",
+            "/ports",
+            "/http"
+          ],
+          "leaf_count": 246
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/07-EXECUTION.md",
+      "title": "실행·저장·인증·뷰어·UI",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+          "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+          "pointers": [
+            "/state",
+            "/storage",
+            "/runtime",
+            "/ui"
+          ],
+          "leaf_count": 73
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/08-INTEGRATION.md",
+      "title": "통합 구조·작업 공간·책임 후보",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+          "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+          "pointers": [
+            "/integration",
+            "/closure"
+          ],
+          "leaf_count": 101
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/09-TESTS.md",
+      "title": "수용 시험·검증·미확인 사항",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+          "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+          "pointers": [
+            "/gate"
+          ],
+          "leaf_count": 459
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-validation-v1.json",
+          "blob": "f13c2a658e285408a5d9138c86724057a16e9102",
+          "pointers": [
+            "/source_commit",
+            "/inputs",
+            "/checks",
+            "/regression",
+            "/shapes",
+            "/gate_cases",
+            "/pass",
+            "/mutations",
+            "/limits"
+          ],
+          "leaf_count": 321
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/data-contract-validation-v4.json",
+          "blob": "0710bcf3676e23712e5d02d749e74d8cf47f9a6e",
+          "pointers": [
+            "/source_commit",
+            "/source_blobs",
+            "/audit",
+            "/profileAudits",
+            "/cases",
+            "/logic",
+            "/limitations"
+          ],
+          "leaf_count": 212
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/logical-validation-v5.json",
+          "blob": "230505b72eb301175b09c5d1262ca828544e5b71",
+          "pointers": [
+            "/results",
+            "/mutations",
+            "/scope"
+          ],
+          "leaf_count": 83
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/10-DECISIONS.md",
+      "title": "결정·근거·대안·영향 추적",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+          "blob": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+          "pointers": [
+            "/decisions"
+          ],
+          "leaf_count": 395
+        },
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json",
+          "blob": "987018e3e41f15521de6ba2fef33867cea81a88d",
+          "pointers": [
+            "/id",
+            "/status",
+            "/base_trace",
+            "/model_ref",
+            "/date",
+            "/purpose",
+            "/sources",
+            "/precedence",
+            "/inventory",
+            "/legacy_detail_refs",
+            "/current_trace",
+            "/requirements",
+            "/actual_evidence",
+            "/update_rule",
+            "/limits"
+          ],
+          "leaf_count": 2037
+        }
+      ]
+    },
+    {
+      "path": "docs/design/lesson-registration/11-WBS.md",
+      "title": "WBS 및 통합 일정 이력",
+      "bindings": [
+        {
+          "source": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+          "blob": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+          "pointers": [
+            "/id",
+            "/status",
+            "/date",
+            "/availability",
+            "/tasks",
+            "/milestones",
+            "/tests",
+            "/assumptions",
+            "/calendar",
+            "/schedule_revision",
+            "/change_log",
+            "/base",
+            "/integration_checkpoints",
+            "/mvp_gate",
+            "/revision"
+          ],
+          "leaf_count": 781
+        }
+      ]
+    }
+  ],
+  "inventory": [
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "sha": "9df34e576f8a7c63c7ee84d01893a77631ce0360",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/06-API-PORTS.md",
+        "docs/design/lesson-registration/07-EXECUTION.md",
+        "docs/design/lesson-registration/08-INTEGRATION.md",
+        "docs/design/lesson-registration/09-TESTS.md",
+        "docs/design/lesson-registration/10-DECISIONS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/COMMON-INTEGRATION-V1.md",
+      "sha": "462a5ee7f49ef58d97792c7a5048deee7e5c461d",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/COMMON-INTEGRATION-V1.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/common-integration-validation-v1.json",
+      "sha": "f13c2a658e285408a5d9138c86724057a16e9102",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/common-integration-validation-v1.json",
+      "status": "bounded_evidence",
+      "views": [
+        "docs/design/lesson-registration/09-TESTS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
+      "sha": "b773142f11580c098a5e90a99d4f633083b116ad",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/contract-v0.5.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/CONTRACT-V0.5.md",
+      "sha": "2fb5e0d2f111aec2c84d96bb6a8690c149875997",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/CONTRACT-V0.5.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/CONTRACTS-V0.3.md",
+      "sha": "4ad7e8451e58a0e9bc5c2537c786d5094abf7369",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/CONTRACTS-V0.3.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json",
+      "sha": "be77eba784c90b89b510a20d9d7af7f355db4992",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/core-contract-v0.3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json",
+      "sha": "14438ccb80be4fb8a03094c5aa60cbacde53129f",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/data-api-v0.3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DATA-API-V0.3.md",
+      "sha": "397e8528a1c295beffd9e836fb0386bdc9c1ceda",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DATA-API-V0.3.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json",
+      "sha": "edd84980d5df53c8df0800dd28f7878396ad4397",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/03-DATA.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DATA-CONTRACT-V4.md",
+      "sha": "bc90038195a75adbbfddb7e24542a984527a1d0c",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DATA-CONTRACT-V4.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-contract-validation-v4.json",
+      "sha": "0710bcf3676e23712e5d02d749e74d8cf47f9a6e",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/data-contract-validation-v4.json",
+      "status": "bounded_evidence",
+      "views": [
+        "docs/design/lesson-registration/09-TESTS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+      "sha": "de6c147216ee68bae75a9d18f9127c327701fa5a",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/04-SCHEMA.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.json",
+      "sha": "772b29eed0ac4dbf60229f833a0064cb8ad65c14",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/data-schema-v4.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DECISION-TRACE-V0.9.md",
+      "sha": "c05a0b4655f93a8b6aef790908ac2542b0ae6ed3",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DECISION-TRACE-V0.9.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DESIGN-STATUS-V0.8.md",
+      "sha": "e9242e37d9ee4756d74b6385b42c064e5415163a",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DESIGN-STATUS-V0.8.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-contract-v1.json",
+      "sha": "cdfce1fcfbd443da1d3e16ea030d844132df5cc3",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-contract-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-contract-v2.json",
+      "sha": "3502a35177b66e710b324445713a4c76360c5637",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-contract-v2.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-DATA-V0.2.md",
+      "sha": "679930d761a91ac161eb5be8960c0913fe34710d",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DETAIL-DATA-V0.2.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-decisions-v2.json",
+      "sha": "3c04b85cb9ee45d8aa21b9cfdea0713fe8dc3014",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-decisions-v2.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/02-LOGIC.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-design-v0.2.json",
+      "sha": "ee0490e7bad742cb4e9cf3f593da1bc1421c16c2",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-design-v0.2.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-DESIGN-V1.md",
+      "sha": "cca8edf6882bc00a5f05c391a365ea051622d8b5",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DETAIL-DESIGN-V1.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-DESIGN-V2.md",
+      "sha": "8e076c5a0d45e92b5cdb50f2680b088bb2ed5ab1",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DETAIL-DESIGN-V2.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-gate-v1.json",
+      "sha": "55c66d285183fb4a8a12041b883c12e7775d12f7",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-gate-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-PLATFORM-FLOWS-V0.2.md",
+      "sha": "fd74c0a035cb429388826028a803e75f64231b9d",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DETAIL-PLATFORM-FLOWS-V0.2.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-review-v1.json",
+      "sha": "c107546f2a046a5c7bbce25e5e0f7fdf5e882a50",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-review-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-SYSTEM-V0.2.md",
+      "sha": "b39f503507ac85c5593c63a85f21e449b5e5b3bb",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DETAIL-SYSTEM-V0.2.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/detail-validation-v1.json",
+      "sha": "60a2cb82020716544ddcdd900fbc3a5606bdaa62",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/detail-validation-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DETAIL-VERIFICATION-V0.2.md",
+      "sha": "ace2c733bd7d86c5f30cd2787df193b60bc000fc",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DETAIL-VERIFICATION-V0.2.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json",
+      "sha": "54beb7c357e580b087442bb8f00e40ab2a3567af",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/direction-v0.4.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/01-GOALS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DIRECTION-V0.4.md",
+      "sha": "c83c9232de1441eff5915793654f5203e0d250ad",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DIRECTION-V0.4.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json",
+      "sha": "07c95483b78a2dc30175d0b3edcc0123b085bfba",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/domain-workflow-v0.1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/DOMAIN-WORKFLOW-V0.1.md",
+      "sha": "c6d17ac1d8ce67c800fd7319a5b99938e4047bc4",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/DOMAIN-WORKFLOW-V0.1.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+      "sha": "f7b49262a4d470f6a2764e0fd2c559e6358cc416",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/implementation-v0.4.json",
+      "status": "requirements_retained_other_sections_historical",
+      "views": [
+        "docs/design/lesson-registration/01-GOALS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/IMPLEMENTATION-V0.4.md",
+      "sha": "00dc411d83b46ec91b431acaf23a82a79207c63d",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/IMPLEMENTATION-V0.4.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/interface-contract-v3.json",
+      "sha": "e6b73da91c0856e815601739301a53adcc321e70",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/interface-contract-v3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/interface-review-evidence-v3.json",
+      "sha": "5c1d8d800a3f7a05fc93789938f6856519370dad",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/interface-review-evidence-v3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/interface-schema-v3.json",
+      "sha": "ea45fc389d1c9159bfd2e53f6a0d16aa4734eb89",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/interface-schema-v3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v1.json",
+      "sha": "6deb9117de09125e562d6a5a104354bc099a4668",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-behavior-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v2.json",
+      "sha": "d41ab7d96db14c99c730a346efbdd719e2ab2be8",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-behavior-v2.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v3.json",
+      "sha": "798f488c1be7589b67f103d691c60554bfebd794",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-behavior-v3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v4.json",
+      "sha": "80bcaca22e8915f4f8def196e5c829a20ea98c4e",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-behavior-v4.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-behavior-v5.json",
+      "sha": "2c13b86a44b10f7877678509819e97d1d1b72c17",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-behavior-v5.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/02-LOGIC.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json",
+      "sha": "7141bcc48dabc36e42736035f4a6fcc2b8526f34",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/03-DATA.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/LOGICAL-DESIGN-V3.md",
+      "sha": "f40faf82ebc9674fda53a05a0fc495e413744664",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/LOGICAL-DESIGN-V3.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-validation-v2.json",
+      "sha": "93f4026729f49e2a84620efd88cc6736cafd1bf0",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-validation-v2.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-validation-v3.json",
+      "sha": "2d045d577aa2009221f5191dea22e263af304451",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-validation-v3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/logical-validation-v5.json",
+      "sha": "230505b72eb301175b09c5d1262ca828544e5b71",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/logical-validation-v5.json",
+      "status": "bounded_evidence",
+      "views": [
+        "docs/design/lesson-registration/09-TESTS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/physical-v0.4.json",
+      "sha": "d6bffc13289c569ec0fe4e3877d7b5b8c22abba1",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/physical-v0.4.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/PHYSICAL-V0.4.md",
+      "sha": "03a90e23d5d8c7d3a68f5a040c7ccfc04b878223",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/PHYSICAL-V0.4.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
+      "sha": "c90e1ee86ddc0d99f9b5a1c551fe6c60f989c7d5",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/PLATFORM-INDEPENDENT-WORK.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v1.json",
+      "sha": "829a9b793b8f8039dc280dfc251f9f9cd8ea786b",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/platform-profiles-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+      "sha": "b0b2044526f63f0244d920f85b2d9676b94bbe72",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/05-PLATFORMS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/README.md",
+      "sha": "a8d8e49c2f06a442886409abd2ef09dad0ece76c",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/README.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/requirements-v0.1.json",
+      "sha": "bdb3588eb75c239244a4dc57c8c378e3518024ad",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/requirements-v0.1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/REQUIREMENTS-V0.1.md",
+      "sha": "5cfd403fb37a95fa2d897343ca38fbbd894f12f3",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/REQUIREMENTS-V0.1.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/REVIEW-DECISIONS-V0.3.md",
+      "sha": "5377729e7d6c698bb1fd12a870c4b8c2f45b8d20",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/REVIEW-DECISIONS-V0.3.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/review-v0.3.json",
+      "sha": "7961bce5e04b3377559dca93ee98df8c0dc2febf",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/review-v0.3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/run-closure-v0.8.mjs",
+      "sha": "20bb242e315af2e581faac9a1fb9d8cd42d51c37",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/run-closure-v0.8.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/run-constraints-v0.7.mjs",
+      "sha": "9f1f10cc210ae92ee76ce2002d9bec856ee49a10",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/run-constraints-v0.7.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/scope-lock-validation-v1.json",
+      "sha": "252d582eee169520f9c3cc9b98b419391c9dea47",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/scope-lock-validation-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/stage-verification-adapter.mjs",
+      "sha": "f8258fa4c589c18a2111631c18905a1d586e8074",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/stage-verification-adapter.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/stage-verification-manifest.json",
+      "sha": "1e04c28892d1fb70ca601b9291c69dc71241b9db",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/stage-verification-manifest.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/stage-verification-replay.json",
+      "sha": "d155c3a21aef747b83b520bb325026564696d641",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/stage-verification-replay.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/stop-validation-v1.json",
+      "sha": "8e3aefde2df48284d48ce6c3d75a99bf60c84cc3",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/stop-validation-v1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/system-contracts-v0.1.json",
+      "sha": "fb2cab908fdd3432c13d0eb2a6f2335f7ed60ffd",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/system-contracts-v0.1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/SYSTEM-CONTRACTS-V0.1.md",
+      "sha": "7ce2bf0cd59bcadee290b61455b8b08889b44a9b",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/SYSTEM-CONTRACTS-V0.1.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/top-design-amendment-v1.json",
+      "sha": "ad4f09689896206163dfce72d972281b10075891",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/top-design-amendment-v1.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/01-GOALS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/top-design-v1.json",
+      "sha": "1ed54afd5b541fa3a9d4030267ba65c54729ff2b",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/top-design-v1.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/01-GOALS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.6.json",
+      "sha": "57bf34466c96c7f86c3e1a630eedbd3c29647e41",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/trace-index-v0.6.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json",
+      "sha": "987018e3e41f15521de6ba2fef33867cea81a88d",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json",
+      "status": "current_or_explicitly_retained",
+      "views": [
+        "docs/design/lesson-registration/10-DECISIONS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-closure-v0.8.mjs",
+      "sha": "ec9e1b21c139b8f9115b1661596d0f385cba1b12",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-closure-v0.8.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-common-integration-v1.mjs",
+      "sha": "6a78a7c1faf63b7792c555dacbc01d6ecec3b71e",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-common-integration-v1.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-constraints-v0.7.mjs",
+      "sha": "ae25460cf51e1882b3c0058870eefefc232b72a1",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-constraints-v0.7.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-data-contract-v4.mjs",
+      "sha": "2484c5df659962145af1ee2d94dd36d1f41e5f6f",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-data-contract-v4.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-detail-v1.mjs",
+      "sha": "24b842f2134af07f59ae31694743237777bc8072",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-detail-v1.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-interface-review-v3.mjs",
+      "sha": "1d49665ea105450c87b97a6a7cd6f72aec869321",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-interface-review-v3.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-logical-v2.mjs",
+      "sha": "c9faf54aff0c8fb59df2d9c365af2ee8d1c8ef3c",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-logical-v2.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-logical-v3.mjs",
+      "sha": "9c397d63ba819107386f32913007a2d52b7bcca4",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-logical-v3.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-logical-v5.mjs",
+      "sha": "660dd54af6cf7d2db72da25d724b728b00f1c550",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-logical-v5.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-scope-lock-v1.mjs",
+      "sha": "ba22f009bf79312fb2b7ac293af0c00a35bee102",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-scope-lock-v1.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-stop-v1.mjs",
+      "sha": "ad6dc895e6a1c74a8a7a7cdbc494e6c2ca81815a",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-stop-v1.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-trace-v0.6.mjs",
+      "sha": "70accc9e97f0d23d400989e0805f59b7f918b167",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-trace-v0.6.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-v0.3.mjs",
+      "sha": "4e56aac0af74aab97e16074a7a60b86e327088f8",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-v0.3.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-v0.4.mjs",
+      "sha": "b9ff5a48c7eeb5bfb4486b3244ce72a38f5524e1",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-v0.4.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validate-v0.5.mjs",
+      "sha": "2f9e9ac7ddd7cc873a44ed00ba9e7f681e7f1795",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validate-v0.5.mjs",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validation-closure-v0.8.json",
+      "sha": "d63c95b927f4f12b04316d7afabab4f5ff4e2a3f",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validation-closure-v0.8.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validation-constraints-v0.7.json",
+      "sha": "f6805cbb31175efa236e6ebd0eb1dc31d04886cf",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validation-constraints-v0.7.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validation-v0.3.json",
+      "sha": "49dcb520b1b12ea04ecc685a60f4e5468b09d80f",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validation-v0.3.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validation-v0.4.json",
+      "sha": "2b8ac02ff7f419477ef3ed741b49d6d13ffadf16",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validation-v0.4.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/validation-v0.5.json",
+      "sha": "0fb00c7dae0e11128ec60cab3306fb0e4149a6ed",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/validation-v0.5.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/verification-decisions-v0.1.json",
+      "sha": "f2c0940ed7e10ca410e14896f789fc6752702488",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/verification-decisions-v0.1.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/VERIFICATION-DECISIONS-V0.1.md",
+      "sha": "47aaf4b0c41a612ecc6ecb935cfda7d1eb06b0b7",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/VERIFICATION-DECISIONS-V0.1.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/VERIFICATION-REVIEW-V0.7.md",
+      "sha": "e757469b2f5442966f7bff3e311b08b4981bb453",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/VERIFICATION-REVIEW-V0.7.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.4.json",
+      "sha": "93b54cea907e2fbbfe05a7ff5f54c380c9c655a6",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/wbs-v0.4.json",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/WBS-V0.4.md",
+      "sha": "d86fa25df4410801cda3da5b131f952e5a68cdec",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/WBS-V0.4.md",
+      "status": "history_or_supporting",
+      "views": []
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+      "sha": "5203828cc220187ec53d1602579b9e12ab1cf5d0",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/wbs-v0.5.json",
+      "status": "historical_candidate",
+      "views": [
+        "docs/design/lesson-registration/11-WBS.md"
+      ]
+    },
+    {
+      "path": "docs/artifacts/design/lesson-registration-20261124/WBS-V0.5.md",
+      "sha": "22ac43f46f2696d9e98e5b3ed10497cc1c96f5f8",
+      "url": "https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/WBS-V0.5.md",
+      "status": "history_or_supporting",
+      "views": []
+    }
+  ],
+  "coverage": {
+    "inventory_files": 98,
+    "projected_json_sources": 16,
+    "fully_projected_json_sources": 15,
+    "selected_leaf_values": 7159,
+    "schema_definitions": 67,
+    "logical_rules": 24,
+    "profiles": 2,
+    "ports": 5,
+    "http_routes": 9,
+    "common_decisions": 9,
+    "trace_inventory_records": 88,
+    "required_product_tests": 22,
+    "product_execution": "not_run"
+  },
+  "review_protocol": {
+    "reference": "source_commit + source path + JSON Pointer or design ID",
+    "outcomes": [
+      "동의",
+      "변경 제안",
+      "문제 발견",
+      "추가 검증 필요"
+    ],
+    "decision": "R01 판단; 의견만으로 정본/업무/승인 변경 금지"
+  },
+  "validation": {
+    "source_keys_complete_except_explicit_subset": true,
+    "duplicate_sections": false,
+    "gate_ids_exact_match": true,
+    "limits": "읽기 뷰 완전성 검사. 실제 제품·설계 의미 검증 재실행 아님."
+  }
+}

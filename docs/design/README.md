@@ -10,3 +10,8 @@
 - [아키텍처](architecture/README.md) · [API](api/README.md) · [데이터](data/README.md) · [설계 결정](decisions/README.md)
 - 프로젝트 팀 규칙: [팀 헌장](../charter/팀_헌장.md)
 - 문서 연결·갱신 규칙: [문서 관리 규칙](../문서_관리_규칙.md)
+
+## 현 프로젝트 설계 검토
+
+- [레슨 등록 지원 서비스 — 사람용 검토 홈](lesson-registration/README.md) · [AI 조회 인덱스](lesson-registration/MANIFEST.json)
+- 최신 재설계 기준선의 읽기용 프로젝션이며 채택·정식 TASK 배정·실서비스 승인이 아니다.
