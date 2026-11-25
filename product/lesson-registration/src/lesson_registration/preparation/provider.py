@@ -39,6 +39,14 @@ def _literal(value: Any, quote: str) -> bool:
     return False
 
 
+def _vat_excluded(quote: str) -> bool:
+    """Recognize explicit exclusions in evidence, never infer inclusion."""
+    tax = r"(?:vat|부가\s*가치세|부가세)"
+    excluded = r"(?:별도|불포함|미포함|제외)"
+    return bool(re.search(tax + r"\s*[:：]?\s*" + excluded, quote, re.IGNORECASE)
+                or re.search(excluded + r"\s*[:：]?\s*" + tax, quote, re.IGNORECASE))
+
+
 class PreparationProvider:
     """I2 implementation for pinned mock profiles and an injected extractor."""
 
@@ -168,6 +176,10 @@ class PreparationProvider:
                     has_parent_value = True
             conflict = len(distinct) > 1 or (has_parent_value and any(
                 type(value) is not type(parent_value) or value != parent_value for value in distinct))
+            # A VAT-exclusive amount cannot be treated as the same numeric
+            # VAT-inclusive price merely because the digits match.
+            if parts[3] == "amount_vat_included_krw" and has_parent_value:
+                conflict = conflict or any(_vat_excluded(candidate["quote"]) for candidate in candidates)
             if conflict or not has_parent_value:
                 result["issues"].append({"issue_id": _id("conflict" if conflict else "confirm", field),
                                          "field": field, "code": "conflict" if conflict else "rule_unverified",

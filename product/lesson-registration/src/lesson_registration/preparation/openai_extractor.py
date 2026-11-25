@@ -55,6 +55,7 @@ class OpenAIResponsesExtractor:
                   "Each quote must be an exact "
                   "non-empty substring of source_text and the value must appear in that quote. "
                   "For integers use digits with no commas. Omit guesses, booleans, arrays and objects. "
+                  "For a price, include the exact nearby VAT inclusion or exclusion wording in the quote if present. "
                   "Do not infer prices, VAT, schedules, fields or offers that are not explicitly present.")
         payload = {"model": self._model, "store": False, "max_output_tokens": 1200,
                    "input": [{"role": "system", "content": prompt},

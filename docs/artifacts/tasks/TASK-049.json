@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-049",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R02",
   "suggested_owner": null,
   "due": null,
@@ -61,7 +61,98 @@
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "최신 공통 기준을 반영해 모의 등록 정보 준비, 원문 근거 처리와 가격 충돌 검증을 부분 구현하고 R03 합성 연결을 시험했다. 실제 모델·전체 제품 수용 시험은 미실행이다.",
+    "claims": [
+      {
+        "id": "C49-1",
+        "text": "원문과 정확히 일치하는 일부 자유 텍스트를 근거와 함께 준비해 별도 항목 확인을 줄이고 최종 검토를 유지한다.",
+        "status": "부분 구현",
+        "evidence_ids": [
+          "E49-1",
+          "E49-2"
+        ]
+      },
+      {
+        "id": "C49-2",
+        "text": "모의 패키지의 사용자 VAT 포함 입력과 원문 가격 불일치, 인용된 VAT 별도 표현을 차단한다. 모델의 원문 추출 누락에 대한 실제 성능은 미검증이다.",
+        "status": "부분 검증",
+        "evidence_ids": [
+          "E49-1",
+          "E49-2"
+        ]
+      },
+      {
+        "id": "C49-3",
+        "text": "R03 중첩 가격 수정 시 상위 답변 제거로 나머지 패키지를 복원할 근거가 없는 사례를 재현했으며 안전하게 차단한다.",
+        "status": "관측",
+        "evidence_ids": [
+          "E49-1",
+          "E49-2"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E49-1",
+        "label": "R02 계획과 실험·제약",
+        "path": "product/lesson-registration/tests/modules/preparation/PLAN.md"
+      },
+      {
+        "id": "E49-2",
+        "label": "합성 준비 및 R03 연결 시험",
+        "path": "product/lesson-registration/tests/modules/preparation/test_provider.py"
+      },
+      {
+        "id": "E49-3",
+        "label": "OpenAI 모의 HTTP 시험",
+        "path": "product/lesson-registration/tests/modules/preparation/test_openai_extractor.py"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "담당 합성 시험과 bootstrap replay",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E49-1",
+          "E49-2",
+          "E49-3"
+        ]
+      },
+      {
+        "criterion": "r02-preparation-AC1 실제 모델 기반 추출과 두 프로필 검증",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E49-1"
+        ]
+      },
+      {
+        "criterion": "r02-preparation-AC2 가격·단위·VAT 누락과 충돌 전체 조건",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E49-1",
+          "E49-2"
+        ]
+      },
+      {
+        "criterion": "r02-preparation-AC3 인계 및 AT-01·T5-08·T6-02 제품 시험",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E49-1"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "실제 OpenAI 접근 권한·예산 및 모델별 품질·비용 시험 미확인",
+      "모델이 인용에서 VAT 표현이나 원문 충돌을 빠뜨리는 경우의 실제 성능 미검증",
+      "중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 담당자 간 합의 및 실제 통합 시험 미완료",
+      "모의 프로필은 실제 플랫폼 정책·등록 성공을 의미하지 않음"
+    ],
+    "decision_requests": [
+      "R03과 D05의 중첩 수정 보존 및 timeout·revision 처리 계약을 사례 기반으로 협의",
+      "R01의 승인된 OpenAI 합성 실험 접근 환경 및 예산 준비 후 모델 비교"
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
@@ -96,7 +187,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-049.md",
-  "assignment_status": "R01 배정; 담당자 전달·수신·착수 미확인",
+  "assignment_status": "R02 2026-11-25 착수; 담당 영역 합성 구현·검증 진행, 실제 모델 및 통합 수용 검증 미완료",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r02/product-preparation",

@@ -160,6 +160,19 @@ class PreparationTests(unittest.TestCase):
         self.assertNotIn("packages", result["values"])
         self.assertTrue(any(i["field"] == candidate["field"] and i["code"] == "rule_unverified" for i in result["issues"]))
 
+    def test_vat_excluded_source_conflicts_with_vat_inclusive_answer(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        values["packages"][0]["amount_vat_included_krw"] = 180000
+        answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
+                   for key, value in values.items()]
+        field = "/packages/0/amount_vat_included_krw"
+        for quote in ("180,000원 VAT 별도", "180,000원 부가세 불포함", "180,000원 별도 부가가치세"):
+            with self.subTest(quote=quote):
+                result = self.provider([{"field": field, "value": 180000, "quote": quote}]).prepare(
+                    request("kmong", quote, answers))
+                self.assertFalse(result["ready"])
+                self.assertTrue(any(i["field"] == field and i["code"] == "conflict" for i in result["issues"]))
+
     def test_two_nested_source_prices_block_and_preserve_evidence(self):
         field = "/packages/0/amount_vat_included_krw"
         candidates = [{"field": field, "value": 180000, "quote": "180,000원"},
