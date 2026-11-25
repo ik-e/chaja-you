@@ -228,7 +228,7 @@ class Knowledge:
 | `source_id`/`selector` 변경 | 같은 요청에 answers·corrections 금지(`INVALID_REQUEST`). 호환 안 되는 facts·answers·binding 삭제, 다시 resolve·prepare |
 | 같은 source_id 재지정 | 일시적 모델 실패 후 명시적 재준비 허용 |
 | `answers[]` | `issue_id`가 **현재** 이슈여야 함. 서버가 issue→field를 찾아 `ResolvedAnswer{answer_id,field,value,origin_issue_id}`로 정규화 |
-| `corrections[]` | `field`가 프로필 필드의 유효한 JSON Pointer여야 함. 원본 공유 사실을 바꾸려 하면 `FACT_CONFLICT`(새 Source 필요) |
+| `corrections[]` | `field`가 프로필 필드의 유효한 JSON Pointer(`/` + 프로필 field key로 시작)여야 함. `origin_issue_id` 없는 ResolvedAnswer로 PREP에 전달. PREP이 **방금 수정한 field**에 blocking `conflict` 이슈를 돌려주면 저장하지 않고 `FACT_CONFLICT`(새 Source 필요) |
 | 같은 field 중복·충돌 | `INVALID_REQUEST` |
 
 - 정규화된 answers로 `prepare` 재호출 → ready 재계산
@@ -270,7 +270,7 @@ class Knowledge:
 
 ### S3-2 review 생성
 
-조건: `ready=true` + auth `verified` + target `status=="new"` + support `supported`. 이때 `ReviewView{values, assets, profile_ref, target, procedure, goal, notice}`를 만들고 `digest = sha256(canonical(ReviewView에서 digest 제외))`. 조건이 깨지면 review를 지운다. target이 `existing`/`ambiguous`면 review 없음.
+조건: `ready=true` + auth `verified` + target `status=="new"` + support `supported`. 이때 `ReviewView{values, assets, profile_ref, target, procedure, goal, notice}`를 만들고 `digest = sha256(canonical({review: ReviewView에서 digest 제외, revision, auth_generation, connection_ref}))`. revision·인증 연결을 digest에 묶어(View에는 노출 안 함) 내용이 같아도 재인증·이후 revision에 이전 승인을 재사용할 수 없게 한다. 조건이 깨지면 review를 지운다. target이 `existing`/`ambiguous`면 review 없음.
 
 ### S3-3 H7 start(owner_ref, id, StartInput) -> (status, RegistrationView)
 
@@ -330,7 +330,11 @@ finalize(conn, registration_id, result: dict) -> None     # stopping/active -> s
 | fence | job `active` | `stopping`. 이후 admit 전부 거부. 증명되지 않은 `reserved` 효과는 `unknown` |
 | finalize | `stopping` 또는 (done 조건 충족한) `active` | `done`은 goal confirmed + 미해결 효과 없음일 때만. 그 외 `stopped`. 종료 상태는 다시 열지 않음 |
 
-- `effect_key = (environment, platform, external_account_ref, object_kind, slot_ref, logical_operation_id)` 를 canonical 문자열로 만들어 PK로 쓴다. 요청 key·버전·worker가 바뀌어도 같은 효과는 같은 key.
+- `effect_key = (environment, platform, external_account_ref, object_kind, slot_ref, logical_operation_id)` 를 canonical 문자열로 만들어 PK로 쓴다. 요청 key·버전·worker가 바뀌어도 같은 효과는 같은 key. **logical_operation_id = 프로필 `step_id`** — runtime이 `operation_id`만 바꿔 같은 효과를 다시 예약하지 못하게 한다.
+- read 단계(`effect_class=read`)는 effect를 예약하지 않고 permit만 준다. fence 이후(stopping)에도 read는 허용(늦은 확인 조회).
+- `binding_digest = sha256(canonical({step_id, bound: 승인 values 중 step.bindings, asset_digests(main_images 단계), target, profile_digest}))` — gateway.`operations(ctx)`가 계산해 runtime에 준다(R05와 합의 필요).
+- 판정은 runtime 보고서가 아니라 **STORE에 기록된** observation·evidence만으로 한다. goal_observation은 같은 내용의 goal EvidenceRecord가 STORE에 있을 때만 신뢰.
+- 한 번도 admit되지 않고 끝난 작업은(모든 변경은 admit이 먼저이므로) 효과가 없었다고 보고 `not_reached`.
 - fence와 admit은 같은 job 행 잠금(`BEGIN IMMEDIATE`)으로 직렬화된다.
 - R05 remote가 admit/observe/fence를 호출해야 하므로, `StoreGateway` 객체(ctx를 받아 위 함수 호출)로 노출한다. 실제 노출 형식은 R05·R01과 합의(PLAN §7).
 
@@ -470,6 +474,25 @@ finalize(conn, registration_id, result: dict) -> None     # stopping/active -> s
 
 각 단계가 끝나면 PLAN §5.3 규칙대로 명령·commit·입력·기대·관측·pass/fail/incomplete를 기록한다. bootstrap replay 통과는 제품 통과가 아니다.
 
+### 9.1 요구사항 연결 (TASK-050 `product_requirement_refs`)
+
+요구사항 정의는 `implementation-v0.4.json`의 REQ-01~11 수용 기준을 따른다. 같은 요구사항이라도 r03-app이 맡는 부분만 적고, 나머지 담당은 오른쪽 열에 남긴다. 결과를 기록할 때는 아래 "검증" 열의 시험 이름과 REQ ID를 함께 적는다.
+
+| REQ | 요구사항(수용 기준 요약) | r03-app이 맡는 부분 | 단계 | 검증 | r03-app 밖 |
+|---|---|---|---|---|---|
+| REQ-01 | 원본·필수 정보·자료 준비: 사용자 확인 사실·이미지와 출처·버전, 누락/충돌 질문, 합성 가격 값을 바꾸지 않음 | 불변 Source 버전·첨부 바이트 hash 저장, PREP 이슈를 View로 노출, H5에서 질문→field→ResolvedAnswer 정규화, 원본 사실 수정은 새 Source로만 | S1, S2, S6 | test_s1_source(버전·불변), test_s2_prepare(I2-missing ready=false·가격 미생성, 답변 정규화), test_s6_assets | 사실 추출·질문 생성(R02 PREP) |
+| REQ-02 | 등록 대상 식별: 지원 대상 registry 연결, 미지원·잘못된 대상 차단, 임의 URL 요청 금지 | KNOW(I1) 로컬 registry 조회, unsupported/blocked를 정상 View로 저장하고 외부 접근 0, 형식 오류 selector 거부 | S2 | test_s2_prepare(unsupported selector → PREP 호출 0, 형식 오류 → INVALID_REQUEST) | URL 입력 해석(WBS W10, TASK-050 범위 밖) |
+| REQ-03 | 플랫폼별 변환·검토: 사실/단위 유지, LLM 제안과 확인값 구분, 필수 규칙·권리 검사, 확인 필요 항목 노출 | Preparation(values·facts·provenance·issues)을 검증 후 그대로 저장·노출, 승인 범위를 ReviewView+digest로 고정, rights_confirmed=false 첨부 거부 | S2, S3, S6 | test_s2_prepare(Preparation 검증·blocking issue 유지), test_s3_auth_start(review digest), test_s6_assets(권리 없음 거부) | 변환·LLM 제안 생성(R02), 화면 표시(R04) |
+| REQ-05 | 실행 대상·승인·권한: 계정·대상·버전·동작·환경 승인, 가드 미충족이면 동작 0, 동일 효과 차단 | H7 선행 검사(revision·review digest·verified·target new·profile), accept 원자 기록, admit의 등록 operation·binding_digest·lease 검사, effect_key 유일성, environment=mock만 허용 | S3, S4 | test_s3_auth_start(T5-01: 위조·오래된 digest 효과 0, 경쟁 시 1건만 수락), test_s4_atomic(T5-12: 미등록 action·old lease 거부, 같은 효과 재예약 거부) | 실제 인증·runtime 실행(R05) |
+| REQ-06 | 크몽 최초 등록: 필드·이미지·가격 입력, 모의 심사 접수 후 독립 receipt 재조회 일치 | 크몽 프로필로 전 흐름 연결, RESULT가 independent_readback·payload digest·이미지 digest가 승인 범위와 같을 때만 confirmed | S2~S5 | test_s5_result(I5 confirmed, 가격·이미지 digest 불일치 → confirmed 아님), kmong replay 기반 흐름 시험 | 크몽 adapter·mock 페이지(R05 r05-kmong) |
+| REQ-07 | 숨고 최초 등록 확장: 서비스 카테고리·문항 설정 저장 후 재조회 일치 | 숨고 프로필로 같은 흐름 지원, 같은 원본의 크몽·숨고 등록 독립성 | S2~S5, S7 | soomgo replay 기반 흐름 시험, test_s7_multi_platform(T5-06) | 숨고 adapter·mock 페이지(R04 r04-soomgo) |
+| REQ-08 | 결과·부분 효과·실패: 완료/실패/차단/확인 필요/미확인 표시, 증거·다음 조치, 응답 유실 후 중복 없음, 접수와 공개 분리 | GoalVerdict(confirmed/not_reached/unknown)와 EffectSummary·next_action 저장, 응답 유실 시 unknown 보존·자동 재실행 0, recover()의 fence+stopped, H8/H9 무변경 조회 | S4, S5 | test_s4_atomic(DV-01: 효과 전·후 응답 유실, crash 복구), test_s5_result(증거 부족 → unknown, H8 GET 무변경) | 결과 화면(R04) |
+| REQ-10 | 격리·개인정보·안전한 운영: owner 격리, mock/live 차단, 로그인 입력·비밀 미기록, 승인 자료만, 세션 만료·폐기 | 모든 조회·변경에 owner 검사(타 owner 404), owner를 클라이언트 입력에서 받지 않음, View에 connection_ref·account_ref·자격증명 미노출, environment≠mock 거부, cursor owner 바인딩 | S1~S5, S8 | test_s1_source(타 owner·변조 cursor), test_s3_auth_start(View에 내부 binding 없음), test_s5_result(T5-05 비소유자 404), test_s0_contract(environment=live 거부) | 세션 폐기·브라우저 격리(R05), 배포 보안(R01) |
+
+TASK-050 대상이 아닌 요구사항: REQ-04(원격 직접 인증, R05), REQ-09(플랫폼 확장 구조, W10), REQ-11(재현성·가치 평가, R01 통합). r03-app은 이들의 계약을 지키지만 완료 근거를 따로 만들지 않는다.
+
+**계약 우선순위 주의:** REQ-08 수용 기준에 "읽기 재확인 + 명시 재개"가 있지만, 더 최신인 공통 설계 V1(CS-05)은 수락 후 사용자 취소·재개·rollback을 두지 않는다. 이 문서는 CS-05를 따른다. 즉 stopped 이후 읽기 전용 근거 추가만 허용하고 작업을 다시 열지 않는다(§10).
+
 ## 10. 미결정·가정
 
 | 항목 | 이 문서의 가정 | 확인 대상 |
@@ -479,5 +502,21 @@ finalize(conn, registration_id, result: dict) -> None     # stopping/active -> s
 | STORE 노출 | `StoreGateway` 객체 주입 | R05·R01 |
 | HTTP 프레임워크 | S8 전까지 없음 | R01 |
 | 첨부 크기 상한 | 5MB(근거 미확인) | 프로필 규칙 |
+| 이미지 구조 검사 | PNG: 모든 chunk CRC, IHDR 첫 chunk, IEND에서 정확히 끝남(뒤에 붙은 바이트 거부). JPEG: 세그먼트 구조·SOF0/1/2·EOI 끝. 가로·세로 1~20000(임시 상한) | 프로필 규칙 |
+| 선언 MIME | multipart part의 Content-Type을 `(bytes, content_type)`로 받아 바이트 판정과 다르면 거부(파라미터·대소문자 무시) | S8 HTTP 계층 |
 | 개발용 owner 인증 | 테스트 헤더 | R01·R04 |
 | 준비·인증 시간 제한 | 수치 미정(계약: 구현 실험 후) | 측정 후 |
+| 공유 사실 판정 | CO는 의미를 판단하지 않음. replay의 모든 field가 `direct` 출처라 CO가 판정하면 수정이 불가능해짐 → PREP의 `conflict` 이슈로만 `FACT_CONFLICT` | R02 (PREP이 conflict 이슈를 내는 기준) |
+| PREP 실패 | 포트 예외 → `model_unavailable` blocking 이슈로 정상 저장(201), 형식 위반 출력 → 503 `RUNTIME_ERROR`·저장 안 함 | R02 |
+| profile digest | 고정 profile 항목 전체(value_schema 포함)의 canonical SHA-256. replay의 `aaaa…`는 자리표시값 | R01 |
+| H9 정렬 | 계약 "creation then registration_id"를 H2와 같은 최신순(`created_at DESC, registration_id DESC`)으로 해석. cursor는 종류(sources/registrations)·owner에 묶임 | R04 (UI 목록 순서) |
+| progress 계산 | 단계 상태 = effect 상태(쓰기 단계) 또는 관측 verdict(read 단계), 없으면 pending. step_index = 앞에서부터 연속 confirmed 수. 멈춘 작업의 pending 현재 단계는 `error`, 멈춘 작업의 reserved는 `unknown` | R04 |
+| replay I5 비교 | goal_verdict·effects·error만 비교. evidence 목록·next_action 문구는 replay와 다름(replay는 goal 증거만 표시) | R01 |
+| StoreGateway API | `acquire(rid)→ctx{lease}`, `operations(ctx)`, `admit(ctx, op)`, `observe(ctx, obs, evidence[])`, `record_goal(ctx, record)`, `fence(ctx, error)` 객체 주입 | R05·R01 |
+| payload_digest | 승인 `scope.values`의 canonical SHA-256. replay의 `bbbb…`는 자리표시값이라 그대로는 confirmed가 안 됨 | R05 |
+| binding_digest | §S4-1 규칙 | R05 |
+| 실행 중 revision | fence·finalize마다 revision +1 (UI가 오래된 응답 무시) | R04 |
+| H6 revision | open·finish·close·refresh 모두 revision +1 (replay H6-open/finish와 같음). 인증 실패·timeout은 `closed`로 저장 후 오류 반환 | R04 (UI 재조회) |
+| target_label | TrustedTarget에 없어 `"{platform} 신규 {object_kind}"`로 생성 | R05 (runtime이 label 제공 여부) |
+| 시작 후 review | 시작 후 View에서 review 생략(replay H7과 같음), AcceptedScope에 보존 | — |
+| REQ-08 "명시 재개" | 공통 설계 V1 CS-05(재개 없음)를 따름. stopped 이후는 읽기 근거 추가만 | R01 (요구사항 문구 갱신 여부) |
