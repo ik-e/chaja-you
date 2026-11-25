@@ -13,6 +13,7 @@ on:
       - 'CURRENT.md'
       - 'tools/project_docs.py'
       - 'tools/generate_lesson_design_review.mjs'
+      - 'tools/generate_lesson_current_design.mjs'
       - '.github/workflows/r01-common-review-check.yml'
   pull_request:
     paths:
@@ -23,6 +24,7 @@ on:
       - 'docs/human/**'
       - 'tools/project_docs.py'
       - 'tools/generate_lesson_design_review.mjs'
+      - 'tools/generate_lesson_current_design.mjs'
       - '.github/workflows/r01-common-review-check.yml'
 permissions:
   contents: read
@@ -43,6 +45,7 @@ jobs:
       - name: Check committed projections and adopted design snapshot
         run: |
           node tools/generate_lesson_design_review.mjs --check
+          node tools/generate_lesson_current_design.mjs --check
           python tools/project_docs.py --check
       - name: Existing deliverable mapping
         run: python tools/check_deliverables.py

@@ -1,10 +1,12 @@
-# 레슨 등록 지원 서비스 · 팀 설계 검토 홈
+# 레슨 등록 지원 서비스 · 채택 전 고정 설계 검토 스냅샷
 
 > 정본에서 생성한 읽기 전용 검토 뷰. 기준 커밋 `197987047ea9a305072bba3fdff816c5c37b0157`. 설계 채택/구현/실서비스 승인 아님.
 
 [검토 홈](README.md) · [AI 인덱스](MANIFEST.json) · [전체 이력](12-HISTORY.md)
 
-운영 정본: [현재 단계](https://github.com/ik-e/chaja-you/blob/9b6ff0463722372d577747e89cb853e773c78591/docs/human/phase-intents/PHASE-20261124-03.md) · [작업 검토](https://github.com/ik-e/chaja-you/blob/9b6ff0463722372d577747e89cb853e773c78591/docs/review/README.md). 설계 정본: [재설계 기준선](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/README.md).
+[현행 설계 기준](CURRENT-DESIGN.md) · [현행 AI 인덱스](CURRENT-DESIGN.json)
+
+당시 운영 정본: [현재 단계](https://github.com/ik-e/chaja-you/blob/9b6ff0463722372d577747e89cb853e773c78591/docs/human/phase-intents/PHASE-20261124-03.md) · [작업 검토](https://github.com/ik-e/chaja-you/blob/9b6ff0463722372d577747e89cb853e773c78591/docs/review/README.md). 설계 정본: [재설계 기준선](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/README.md).
 
 ## 현재 적용 상태 확인
 
@@ -94,7 +96,7 @@ flowchart LR
 
 [전체 원본 98개](12-HISTORY.md) · [AI 인덱스](MANIFEST.json). AI는 고정 commit/blob/JSON Pointer를 사용하여 원본을 조회하고 사람용 Markdown을 별도 정본으로 취급하지 않는다.
 
-## 6. 팀원 검토 요청 (담당 후보, 배정 아님)
+## 6. 당시 팀원 검토 요청 (이력: 담당 후보, 배정 전)
 
 | 팀원 | 중점 영역 |
 | --- | --- |
