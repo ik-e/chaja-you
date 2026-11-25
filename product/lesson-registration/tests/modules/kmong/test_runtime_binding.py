@@ -48,16 +48,22 @@ class RealRuntime(unittest.TestCase):
         from lesson_registration.app.coordinator import Coordinator
         from lesson_registration.app.gateway import StoreGateway
         from lesson_registration.app.store import Store
+        from lesson_registration.app.runtime_support import RuntimeSupport
+        from lesson_registration.app.knowledge import Knowledge
         self.site = s.mock_kmong.MockKmong().start()
         self.addCleanup(self.site.stop)
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         store = Store(Path(self.temp.name) / 'app.sqlite3')
+        self.store = store
         self.host = BrowserHost()
         self.addCleanup(self.host.close)
-        binding = mock_runtime_binding(self.site.base_url, lambda accepted: lambda _: s.SHARED_IMAGE.read_bytes())
-        self.rt = RemoteRuntime([binding], StoreGateway(store), host=self.host,
-                                slot_resolver=lambda rid, owner, profile: 'mock-stable-source-slot')
+        support = RuntimeSupport(store, Knowledge())
+        binding = mock_runtime_binding(self.site.base_url,
+            approved_reader_for_worker=lambda context: lambda asset_id: support.read_approved_asset(context, asset_id),
+            binding_version='binding.v1')
+        self.gateway = StoreGateway(store, binding_version='binding.v1')
+        self.rt = RemoteRuntime([binding], self.gateway, host=self.host, slot_resolver=support.slot_resolver)
         self.addCleanup(self.rt.close)
         self.co = Coordinator(store, prep=ReplayPrep(), exec_port=self.rt)
 
@@ -98,6 +104,10 @@ class RealRuntime(unittest.TestCase):
         self.assertEqual(self.site.submissions, 1)
         self.assertEqual(len(self.site.sessions), 1)
         self.assertEqual(self.co.get_registration(owner, rid)['result']['goal_verdict'], 'confirmed')
+        with self.store.connect() as connection:
+            row = connection.execute('SELECT COUNT(*) AS total, SUM(consumed) AS used FROM dispatch_permits '
+                                     'WHERE registration_id=?', (rid,)).fetchone()
+        self.assertEqual((row['total'], row['used']), (7, 7))
 
     def test_lost_response_has_one_submission_and_no_redispatch(self):
         _, rid = self.accept()
@@ -106,3 +116,12 @@ class RealRuntime(unittest.TestCase):
         self.assertEqual(self.site.submissions, 1)
         self.assertEqual(self.co.run_job(rid), state)
         self.assertEqual(self.site.submissions, 1)
+
+    def test_worker_reader_authorization_failure_stops_before_upload(self):
+        from unittest.mock import patch
+        owner, rid = self.accept()
+        with patch('lesson_registration.app.runtime_support.RuntimeSupport.read_approved_asset',
+                   side_effect=PermissionError('synthetic lease revoked')):
+            self.assertEqual(self.co.run_job(rid), 'stopped')
+        self.assertEqual(self.site.submissions, 0)
+        self.assertEqual(self.co.get_registration(owner, rid)['result']['error']['code'], 'PERMISSION_DENIED')

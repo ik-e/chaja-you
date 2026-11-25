@@ -105,3 +105,12 @@ K6 제출 직전에도 K5와 같은 승인값 비교를 수행한다. K5 이후 
 독립 브랜치에서는 remote 구현이 없으면 실제 Runtime 연결 시험 2개가 skip된다. 두 R05 브랜치의 담당 디렉터리를 합친 별도 검증 작업 공간에서 실제 Runtime·크몽 모의 사이트·R03 Coordinator/SQLite를 연결해 해당 2개를 실행한다. PREP은 테스트 전용 합성 provider이며 실제 모델을 사용하지 않는다. 원본 업로드 후 발급된 asset_refs를 PREP 결과에 사용한다.
 
 실제 제한 Gateway API의 서명과 lease 검증은 R03 협의 사항이다. 테스트의 제한 reader는 합성 메모리 바이트를 반환하며 공통 자산 권한 검증 완료를 의미하지 않는다. D01의 전체 승인값 digest 변경, Source 계보 slot resolver, D02 Permit consume, D03 fenced read 허가 및 실제 R04 UI 연동은 후속 검증 대상이다.
+# 2026-11-25 R03 089b8a4 연결 검증
+
+main `089b8a4`를 병합했다. 기존 legacy 기본값은 유지하고 명시적인 `KmongAdapter(binding_version='binding.v1')`를 추가했다. 새 모드의 모든 단계 digest가 R03 scope_binding_digest 및 공통 reference와 같음을 시험했다. 빈 binding 단계 K6에서도 전체 승인값 변경이 digest에 반영된다.
+
+`mock_runtime_binding(..., approved_reader_for_worker=factory, binding_version='binding.v1')`는 remote의 내부 worker factory를 사용한다. factory에는 실제 worker context가 전달되며 매 asset read는 R03 RuntimeSupport가 active/lease/owner/승인 목록/권리/원본 바이트를 검사한다. 기존 scope-only reader는 독립 legacy 시험용으로 유지한다. 둘 중 하나만 주입하도록 검사한다.
+
+main `089b8a4`의 별도 조합 검증 작업 공간에 두 R05 담당 경로를 구성해 `uv run --locked --all-groups python dev.py test r05-kmong` 40개 통과, 실패·skip 0개(36.228초). 실제 Runtime·R03 STORE·RuntimeSupport의 Source slot과 이미지 reader를 사용했다. 동일 브라우저의 접수 1건/confirmed, 응답 유실 후 1건/재실행 차단, reader 권한 오류 시 제출 0건을 검증했다. 성공 실행 Permit 7개 전부 소비 검사를 추가한 해당 시험도 재실행해 통과했다. PREP은 합성 provider다.
+
+독립 크몽 브랜치는 40개 중 37개 통과·3개 skip, 실패 0개(18.420초). skip은 remote 구현이 필요한 실제 Runtime 연결 3개다. doctor·check-changes r05-kmong --base 089b8a4·diff 검사 통과. GitHub 신규 CI와 R04 전체 UI E2E는 미확인이다. 새 구현은 로컬 변경 상태다.

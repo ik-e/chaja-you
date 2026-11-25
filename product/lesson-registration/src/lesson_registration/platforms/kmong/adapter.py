@@ -113,6 +113,11 @@ def compare(expected: dict, observed: dict, keys) -> list[str]:
 class KmongAdapter:
     profile_id = profile.PROFILE_ID
 
+    def __init__(self, *, binding_version="legacy"):
+        if binding_version not in ("legacy", "binding.v1"):
+            raise ValueError("unknown binding version")
+        self.binding_version = binding_version
+
     # ---------- PlatformAdapter (contracts.interfaces) ----------
     def run(self, gateway) -> dict:
         """Drive the registered operations through the runtime's BoundGateway, in order, once each.
@@ -134,7 +139,7 @@ class KmongAdapter:
     # ---------- RT-02 ----------
     def operations(self, accepted: dict) -> list[dict]:
         self._check_scope(accepted)
-        return ops_mod.list_operations(accepted)
+        return ops_mod.list_operations(accepted, binding_version=self.binding_version)
 
     def validate(self, accepted: dict) -> list[dict]:
         scope = accepted["scope"]
@@ -144,7 +149,7 @@ class KmongAdapter:
     def perform(self, ctx: KmongContext, operation: dict) -> StepOutcome:
         scope = ctx.accepted["scope"]
         self._check_scope(ctx.accepted)
-        registered = {o["operation_id"]: o for o in ops_mod.list_operations(ctx.accepted)}
+        registered = {o["operation_id"]: o for o in self.operations(ctx.accepted)}
         if registered.get(operation.get("operation_id")) != operation:
             raise KmongError("INVALID_REQUEST", "operation is not registered for this accepted scope", "absent")
         issues = self.validate(ctx.accepted)
@@ -174,7 +179,7 @@ class KmongAdapter:
         """Read-only independent readback by slot; safe after fence (no effects)."""
         scope = ctx.accepted["scope"]
         self._check_scope(ctx.accepted)
-        op = next(o for o in ops_mod.list_operations(ctx.accepted) if o["step_id"] == "K7")
+        op = next(o for o in self.operations(ctx.accepted) if o["step_id"] == "K7")
         try:
             view = ctx.page.goto(self._receipt_path(scope))
         except NavigationUnknown as e:

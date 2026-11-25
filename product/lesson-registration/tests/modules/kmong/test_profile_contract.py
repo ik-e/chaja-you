@@ -8,6 +8,27 @@ from lesson_registration.platforms.kmong.operations import list_operations
 
 
 class ProfileMirror(unittest.TestCase):
+    def test_binding_v1_matches_r03_and_common_reference_for_every_step(self):
+        from lesson_registration.app.gateway import scope_binding_digest
+        from contracts.detail_candidate import binding_digest
+        accepted = s.base_accepted()
+        operations = KmongAdapter(binding_version='binding.v1').operations(accepted)
+        for operation, step in zip(operations, self.pin['steps']):
+            definition = {'logical_operation_id': step['step_id'], 'step_id': step['step_id'],
+                          'action_key': step['step_id'], 'effect_class': step['effect_class'],
+                          'bindings': step['bindings']}
+            self.assertEqual(operation['binding_digest'], scope_binding_digest(accepted['scope'], step))
+            self.assertEqual(operation['binding_digest'], binding_digest(accepted['scope'], definition))
+
+    def test_binding_v1_empty_binding_detects_approved_value_change(self):
+        accepted = s.base_accepted()
+        changed = copy.deepcopy(accepted)
+        changed['scope']['values']['title'] = '변경된 합성 제목'
+        adapter = KmongAdapter(binding_version='binding.v1')
+        before = {op['step_id']: op['binding_digest'] for op in adapter.operations(accepted)}
+        after = {op['step_id']: op['binding_digest'] for op in adapter.operations(changed)}
+        self.assertNotEqual(before['K6'], after['K6'])
+
     @classmethod
     def setUpClass(cls):
         cls.pin = s.kmong_profile()

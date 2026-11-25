@@ -30,14 +30,19 @@ class ApprovedAssets:
         return data
 
 
-def mock_runtime_binding(origin, approved_reader_for_scope):
+def mock_runtime_binding(origin, approved_reader_for_scope=None, *, approved_reader_for_worker=None,
+                         binding_version="legacy"):
     """Build a PlatformBinding when the remote package is present.
 
-    ``approved_reader_for_scope(accepted) -> read(asset_id)`` is an internal
-    injection point awaiting the R03 approved asset API. It must authorize each
-    read against the current registration, owner and lease.
+    Production mock composition uses
+    ``approved_reader_for_worker(store_context) -> read(asset_id)`` so R03 can
+    authorize each read against the current registration, owner and lease.
+    ``approved_reader_for_scope`` remains available for isolated legacy fixtures.
+    Both STORE and this binding must explicitly select the same binding_version.
     """
     from lesson_registration.remote import Identity, PlatformBinding
+    if (approved_reader_for_scope is None) == (approved_reader_for_worker is None):
+        raise ValueError('exactly one restricted asset reader factory is required')
 
     def identify(page):
         view = page.goto('/home')
@@ -56,9 +61,17 @@ def mock_runtime_binding(origin, approved_reader_for_scope):
         return 'ambiguous', 'target not resolved'
 
     def make_context(accepted, page, now):
+        if approved_reader_for_scope is None:
+            raise ValueError('worker-bound reader requires runtime worker context')
         assets = ApprovedAssets(accepted['scope']['assets'], approved_reader_for_scope(accepted))
         return KmongContext(accepted, page, assets, now)
 
-    return PlatformBinding(PROFILE_ID, origin, '/login', identify, resolve_target, KmongAdapter(), make_context,
+    def make_worker_context(accepted, page, now, store_context):
+        assets = ApprovedAssets(accepted['scope']['assets'], approved_reader_for_worker(store_context))
+        return KmongContext(accepted, page, assets, now)
+
+    return PlatformBinding(PROFILE_ID, origin, '/login', identify, resolve_target,
+                           KmongAdapter(binding_version=binding_version), make_context,
                            unknown_exc=NavigationUnknown, structure_exc=PageStructureError,
-                           view_factory=PageView)
+                           view_factory=PageView,
+                           make_worker_context=make_worker_context if approved_reader_for_worker else None)
