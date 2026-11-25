@@ -65,7 +65,21 @@
     "full_cases_registered": 0,
     "required": 22,
     "actual_model_auto_execution": false,
-    "scope": "preflight/supporting probes, no full gate pass"
+    "scope": "preflight/supporting probes, no full gate pass",
+    "preflight_verdict": "pass",
+    "evidence": "product/lesson-registration/evidence/product-gate-preflight-20261125.json",
+    "tests": {
+      "runner": 4,
+      "http": 14,
+      "launcher_test": 1,
+      "launcher_profiles": 2
+    },
+    "product_gate_counts": {
+      "pass": 0,
+      "fail": 0,
+      "incomplete": 0,
+      "not_run": 22
+    }
   },
   "limits": "No owner branch edits, no additional assignment or deadline/budget approval, no live platform or additional model calls."
 }

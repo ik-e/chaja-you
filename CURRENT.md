@@ -9,7 +9,7 @@
 
 [PHASE-20261125-01](docs/human/phase-intents/PHASE-20261125-01.md)
 
-- 실제 제품: 공통 기준 및 R03 HTTP/SQLite 합성 API 실행기 main 반영. R02 실제 모델 합성 보고·PR51/52 검토, R04 UI/숨고 초기 구현·9/6 CI, R05 runtime/크몽 15/32 독립 재현. D01~D06·실제 provider/Viewer/UI 연결 미완료. 22 gate 실행 체계 준비(전체 제품 gate 0/22), 일정/실서비스 권한 미확정.
+- 실제 제품: 공통 기준 및 R03 HTTP/SQLite 합성 API 실행기 main 반영. R02 실제 모델 합성 보고·PR51/52 검토, R04 UI/숨고 초기 구현·9/6 CI, R05 runtime/크몽 15/32 독립 재현. D01~D06·실제 provider/Viewer/UI 연결 미완료. 22 gate 실행 체계 및 preflight CI 통과(전체 제품 gate 0/22), 일정/실서비스 권한 미확정.
 - 이전 기획·WBS: 기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류
 - 제출 문서: 이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인
 
