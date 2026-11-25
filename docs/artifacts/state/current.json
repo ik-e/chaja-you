@@ -14,10 +14,11 @@
     "R01이 채택한 레슨 등록 논리 설계(V4.1/V2/공통 V1/추적 V0.9)를 main 기준으로 사용한다.",
     "R01은 공통 계약·개발환경·통합만 담당하고 크몽 실행기를 맡지 않는다.",
     "R01 지시에 따라 준비된 일곱 작업 패키지를 TASK-048~054로 배정한다. 실제 제품 시험·실서비스 허용 및 담당자 수신/공수는 별도 확인한다.",
-    "R01이 IB-01~05 공통 구현 방향을 수용했다. 초기 공통 구현 경계는 공동 개발에 사용하되 담당자 확인이 필요한 세부 서명·실행 기술·공수 및 실제 제품 검증은 별도로 결정한다."
+    "R01이 IB-01~05 공통 구현 방향을 수용했다. 초기 공통 구현 경계는 공동 개발에 사용하되 담당자 확인이 필요한 세부 서명·실행 기술·공수 및 실제 제품 검증은 별도로 결정한다.",
+    "R01이 PD-01~08 공통 물리 방향 수용 및 검증된 초기 공통 환경·기준선 공유와 WBS 재구성을 지시했다. 담당자별 세부 계약 및 실제 제품 검증·일정 확정은 별도."
   ],
   "priorities": [
-    "TASK-048: 승인된 공통 구현 경계 통합, 담당자 PLAN 검토, 실제 provider 연결 및 점진 수용 검증.",
+    "TASK-048: 공통 물리/실행 환경 및 회귀 기준 적용, 담당자 PLAN·공통 경계 확인, WBS 조정, 실제 provider 점진 통합.",
     "TASK-049(R02): 등록 정보 준비·AI 구조화 및 검증; 담당자 PLAN/검토 및 독립 구현.",
     "TASK-050(R03): 공통 앱·API·저장·결과 판정 구현; 담당자 PLAN/검토 및 독립 구현.",
     "TASK-051(R04): 등록 지원 웹 UI 구현; 담당자 PLAN/검토 및 독립 구현.",
@@ -52,7 +53,7 @@
       "evidence_needed": "운영사 허용, 실제 보안·가치·비용 및 수용 시험"
     }
   ],
-  "review_summary": "11/25 논리 설계 main 채택 및 공통 Python 3.12 bootstrap CI 성공. R01 작업 우선 배정 지시로 TASK-048~054 활성화. R01 공통·통합 전담, R02 준비 AI, R03 앱, R04 UI/숨고, R05 원격/크몽. 기존 TASK-043~047은 증거/미충족 의무 보존 및 신규 실행 제외. 실제 제품 22개 시험 미실행, 팀원 수신/가용성 미확인, live 금지. IB-01~05 방향 R01 승인, 초기 공통 코드 및 표준 계약/문서 재검증 통과(계약 10/10, 합성 payload 72개). 실제 provider/공유 launch/lock 및 일정 확인은 후속.",
+  "review_summary": "11/25 논리·IB-01~05·PD-01~08 방향 적용, Python 3.12 기술 후보 4/4 및 제품 lock 공통 회귀 통과. TASK-048~054 활성, R01 공통·통합 전담. R03 PLAN 11인일·R05 수신/7근무일 추정, R02/R04 PLAN 미확인. WBS V0.6 후보 및 공통 접점 검토, 12/4 vertical·12/8 mock MVP 일정 위험. 22개 실제 제품 시험 미실행, live 금지. 담당자 간 세부 계약 및 실제 구현·가용성 확인 후 일정 확정.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -293,6 +294,24 @@
     },
     {
       "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+    },
+    {
+      "path": "product/lesson-registration/evidence/physical-ci-20261125.json"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md"
     }
   ],
   "submission_plan": {
@@ -381,6 +400,12 @@
       "authority": "human",
       "source_ref": "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
       "source_id": "HRESP-20261125-02"
+    },
+    {
+      "text": "R01이 PD-01~08 공통 물리 방향 수용 및 검증된 초기 공통 환경·기준선 공유와 WBS 재구성을 지시했다. 담당자별 세부 계약 및 실제 제품 검증·일정 확정은 별도.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
+      "source_id": "HRESP-20261125-03"
     }
   ],
   "human_input": {
@@ -400,7 +425,7 @@
   "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조); TASK-043~047 이전 단계 보존",
   "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "active_phase_intent_id": "PHASE-20261125-01",
-  "current_product_status": "공통 개발환경 bootstrap CI 통과. TASK-048~054 배정, 팀원 수신·착수 및 실제 제품 시험 미확인. 실서비스 실행 금지.",
+  "current_product_status": "IB/PD 공통 방향 및 초기 제품 lock/기술 검증·회귀 통과. R03 PLAN/11인일·R05 수신/7근무일 확인; 타 담당 가용성·실제 제품 시험·일정 미확정. 실서비스 실행 금지.",
   "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
   "legacy_submission_use": "기존 기획서·WBS·설계는 교육기관 기한 대응용 잠정 제출 기준만 유지 (확정 제품/실제 구현 아님)",
   "current_baseline_lifecycle": {

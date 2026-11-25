@@ -76,10 +76,25 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+    },
+    {
+      "path": "product/lesson-registration/contracts/PHYSICAL-BINDING.json"
+    },
+    {
+      "path": "product/lesson-registration/evidence/physical-ci-20261125.json"
+    },
+    {
+      "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
     }
   ],
   "result": {
-    "summary": "Python 3.12 locked bootstrap과 공통 pin·독립 smoke·ownership 검사 통과. R01 IB-01~05 방향 수용, 초기 구현 인터페이스·표준 스키마 검증·provider 주입 구성. 수정 후 CI에서 문서 재생성 및 설계 프로젝션, 기존 회귀 9개와 신규 계약 10개, 합성 입출력 72개 검사 통과. 실제 모듈 통합 및 제품 수용 시험 22개 미실행.",
+    "summary": "Python 3.12 bootstrap·공통 pin/ownership·IB-01~05 표준 계약 10개·합성 payload 72개·기존 회귀/문서 검증 통과. R01 PD-01~08 방향 수용; 독립 Ubuntu 24.04/Python 3.12.3 기술 CI 4/4 성공, 동일 26패키지 lock을 제품 경로에 반영. canonical byte helper/3개 golden vectors 및 4개 테스트 회귀 통과. R03 PLAN 11인일 및 R05 7근무일 추정·WBS 후보·공통 접점 검토 반영. 실제 모듈 통합 및 제품 22개 시험 미실행.",
     "claims": [
       {
         "id": "C048-1",
@@ -104,6 +119,34 @@
         "evidence_ids": [
           "E048-4",
           "E048-5"
+        ]
+      },
+      {
+        "id": "C048-4",
+        "text": "R01 PD-01~08 공통 물리 방향 수용",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-6"
+        ]
+      },
+      {
+        "id": "C048-5",
+        "text": "독립 기술 후보 4/4 통과, 정확한 제품 lock 기반 공통 회귀 통과",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-7",
+          "E048-8",
+          "E048-12"
+        ]
+      },
+      {
+        "id": "C048-6",
+        "text": "서버 canonical byte helper/테스트, 공통 인터페이스 협의 항목 및 WBS 후보",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-9",
+          "E048-10",
+          "E048-11"
         ]
       }
     ],
@@ -132,6 +175,41 @@
         "id": "E048-5",
         "label": "수정 후 실제 CI",
         "url": "https://github.com/ik-e/chaja-you/actions/runs/45527624382"
+      },
+      {
+        "id": "E048-6",
+        "label": "R01 공통 물리 방향 승인",
+        "path": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
+      },
+      {
+        "id": "E048-7",
+        "label": "물리 기술 CI 증거 및 범위",
+        "path": "product/lesson-registration/evidence/physical-ci-20261125.json"
+      },
+      {
+        "id": "E048-8",
+        "label": "물리 기술 검증 실제 실행",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45534844447"
+      },
+      {
+        "id": "E048-9",
+        "label": "canonical helper 및 공통 경계 회귀",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45534986964"
+      },
+      {
+        "id": "E048-10",
+        "label": "담당자 공통 접점 및 R03 PLAN 피드백",
+        "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      },
+      {
+        "id": "E048-11",
+        "label": "WBS V0.6 후보",
+        "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
+      },
+      {
+        "id": "E048-12",
+        "label": "제품 lock 공통 회귀 검증",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45535125564"
       }
     ],
     "verification": [
@@ -164,23 +242,56 @@
           "E048-4",
           "E048-5"
         ]
+      },
+      {
+        "criterion": "PD-01~08 방향 승인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-6"
+        ]
+      },
+      {
+        "criterion": "독립 기술 후보·제품 lock 공통 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-7",
+          "E048-8",
+          "E048-12"
+        ]
+      },
+      {
+        "criterion": "canonical byte vectors·공통 경계 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-9"
+        ]
+      },
+      {
+        "criterion": "owner 간 세부 계약 합의 및 WBS 확정",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E048-10",
+          "E048-11"
+        ]
       }
     ],
     "uncertainties": [
-      "담당자 실제 구현, 기술 및 공수 미확인",
-      "제품 시험 및 실서비스 미실행",
-      "실제 provider 서명·통신·실행 설정·공유 의존성 및 전체 lock 미확정; 담당자 검토 필요",
-      "원자 저장/lease, viewer 보안, 실제 모델 및 전체 수용 시험 미검증"
+      "R03 PLAN/11인일·R05 7근무일 보고; R02/R04 가용성 및 모든 담당자 실제 구현/수신 상태 별도 확인",
+      "12/4 vertical 및 12/8 mock MVP 일정 위험; WBS 미확정",
+      "실제 제품/실서비스 미실행, 원자 저장/lease·viewer 보안·실제 모델·22개 gate 미검증",
+      "초기 제품 lock은 Linux Python 3.12 기술 근거; 담당자별 OS·추가 UI/AI/multipart 의존성·provider 서명/launch 검토 필요"
     ],
     "decision_requests": [
-      "담당자 PLAN의 실제 provider/스택 선택과 공유 launch/lock 검토; R01의 IB-01~05 방향 승인을 다시 요구하지 않음."
+      "관련 owner가 기존 IB/PD/공통 논리 계약을 기준으로 STORE·Gateway·Viewer·I2·Digest/slot·factory 협의. 이미 수용한 방향 재승인 불필요.",
+      "R02/R04 PLAN 및 가용성 확인 후 R01 WBS 조정. 필수 제품 gate 변경은 별도 명시 승인."
     ]
   },
   "traceability": {
     "intent_refs": [
       "docs/human/phase-intents/PHASE-20261125-01.md",
       "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
-      "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md"
+      "docs/human/responses/HRESP-20261125-02_common-implementation-binding.md",
+      "docs/human/responses/HRESP-20261125-03_common-physical-direction.md"
     ],
     "design_refs": [
       "CS-01",
@@ -191,7 +302,15 @@
       "IB-02",
       "IB-03",
       "IB-04",
-      "IB-05"
+      "IB-05",
+      "PD-01",
+      "PD-02",
+      "PD-03",
+      "PD-04",
+      "PD-05",
+      "PD-06",
+      "PD-07",
+      "PD-08"
     ],
     "requirement_refs": [],
     "product_requirement_refs": [
