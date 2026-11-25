@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-25",
+  "base_main": "366cea92a497ff68176107766b1314ab75d5c59f",
+  "owner_shared_base": "094e4d2c5dd3fbb8e9c9352296f87d90cd659308",
+  "snapshots": {
+    "remote": {
+      "commit": "c3fa0b199d5b3a0975b8b5ae9a26d97ae69862e4",
+      "reported_tests": 30,
+      "paths": [
+        "product/lesson-registration/src/lesson_registration/remote",
+        "product/lesson-registration/tests/modules/remote"
+      ]
+    },
+    "kmong": {
+      "commit": "a3718a90c5179b5f72927347cf700283aa588992",
+      "reported_combined_tests": 37,
+      "reported_isolated_pass": 35,
+      "reported_isolated_skip": 2,
+      "paths": [
+        "product/lesson-registration/src/lesson_registration/platforms/kmong",
+        "product/lesson-registration/fixtures/platforms/kmong",
+        "product/lesson-registration/tests/modules/kmong"
+      ]
+    }
+  },
+  "source": "R05 latest PLAN records; R03 reports combined runtime/adapter/Coordinator SQLite success",
+  "independent_ci": {
+    "status": "pending",
+    "workflow": ".github/workflows/lesson-r05-combination-check.yml"
+  },
+  "scope": "Pinned main + exact owner path trees. No owner branch merge, paid model or live account. Synthetic PREP and test asset reader, direct coordinator/viewer channel; not complete HTTP/UI nor D01–D06 or 22 gate.",
+  "limits": [
+    "R03 integration implementation pending; D01 full scope digest, D02 consume/fence, D03 authorized read, stable source slot, approved asset owner/lease, real UI H6/Viewer remain",
+    "No automatic conclusion from earlier independent 15/32 CI"
+  ]
+}
