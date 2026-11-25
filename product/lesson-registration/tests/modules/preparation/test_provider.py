@@ -89,8 +89,9 @@ class PreparationTests(unittest.TestCase):
         answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
                    for key, value in values.items()]
         result = self.provider().prepare(request("kmong", "합성 입력", answers))
-        self.assertTrue(result["ready"])
+        self.assertFalse(result["ready"])
         self.assertEqual(result["values"], values)
+        self.assertTrue(any(i["field"] == "/packages" and i["code"] == "rule_unverified" for i in result["issues"]))
         contract.catalog().profile_values("kmong.service_listing.mock.v2", result["values"])
 
     def test_kmong_mock_rules_block_unknown_minutes_and_repeated_tier(self):
