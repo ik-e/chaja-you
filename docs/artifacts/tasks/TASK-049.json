@@ -68,7 +68,7 @@
     }
   ],
   "result": {
-    "summary": "PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 draft의 실제 합성 모델 초기 비교 각 5사례(3/5·4/5, 양 모델 가격 충돌 오류), 44개 합성 회귀 독립 CI 확인. R01 리뷰 등록. API 접근 전달·실제 호출 담당 보고, 모델 선정·총비용·중첩 수정/timeout·인계·전체 gate 미확정. 후속 PR51에서 합성 61개 통과, R03 D05 구현 예정 응답과 R01 실험·비용 제안 반영; 실제 결합·추가 유료 시험은 미실행. R03 현행 조합 D05 probe는 5건 중 1통과·4미충족으로 공동 보완 중.",
+    "summary": "PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 main 반영, 실제 합성 모델 초기 비교 각 5사례(3/5·4/5, 양 모델 가격 충돌 오류), 44개 합성 회귀 독립 CI 확인. R01 리뷰 등록. API 접근 전달·실제 호출 담당 보고, 모델 선정·총비용·중첩 수정/timeout·인계·전체 gate 미확정. 후속 PR51에서 합성 61개 통과, R03 D05 구현 예정 응답과 R01 실험·비용 제안 반영; 실제 결합·추가 유료 시험은 미실행. R03 현행 조합 D05 probe는 5건 중 1통과·4미충족으로 공동 보완 중.",
     "claims": [
       {
         "id": "C49-1",
@@ -283,7 +283,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-049.md",
-  "assignment_status": "PR49/50 main, PR51/52 draft 실제 모델 초기 비교 및 44개 독립 합성 회귀; 전체 평가/통합 진행 중",
+  "assignment_status": "PR49/50 main, PR51/52 main 반영 및 실제 모델 초기 비교 및 44개 독립 합성 회귀; 전체 평가/통합 진행 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r02/product-preparation",
