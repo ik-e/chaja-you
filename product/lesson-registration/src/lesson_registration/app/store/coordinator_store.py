@@ -13,6 +13,7 @@ from ..ids import digest
 from ..ports import Clock
 from . import atomic, repo
 from .db import Store, tx
+from .execution_gate import execution_gate
 
 
 def request_digest(registration_id: str, start: dict) -> str:
@@ -75,7 +76,7 @@ class SqliteCoordinatorStore:
 
     # CoordinatorStore.fence
     def fence(self, registration_id: str, error: dict) -> None:
-        with self.store.connect() as conn, tx(conn):
+        with execution_gate(self.store.path, registration_id), self.store.connect() as conn, tx(conn):
             try:
                 atomic.fence_existing(conn, registration_id, self.clock.now())
             except atomic.StoreRejected as exc:
@@ -83,7 +84,7 @@ class SqliteCoordinatorStore:
 
     # CoordinatorStore.finalize -> "done" | "stopped"; a terminal state is returned unchanged, never reopened.
     def finalize(self, registration_id: str, result: dict) -> str:
-        with self.store.connect() as conn, tx(conn):
+        with execution_gate(self.store.path, registration_id), self.store.connect() as conn, tx(conn):
             job = atomic.find_job(conn, registration_id)
             if job is None:
                 raise AppError("NOT_FOUND", "no accepted job")

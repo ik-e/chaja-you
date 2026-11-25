@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-25",
+  "tested_commit": "696a5cc7294c7111cd74329c5b08c4b92a68f8e1",
+  "run_id": 45562142407,
+  "job_id": 139028150937,
+  "url": "https://github.com/ik-e/chaja-you/actions/runs/45562142407/job/139028150937",
+  "environment": "Ubuntu 24.04, Python 3.12 locked all groups, synthetic only",
+  "runner_unit_tests": 4,
+  "runner_unit_verdict": "pass",
+  "probe_results": [
+    {
+      "id": "http_s8",
+      "scope": "supporting_synthetic_only",
+      "source": "tests/modules/app/test_s8_http.py",
+      "source_sha256": "f75d0048da1f836d35b1008f507629e1a594f1e2e86667dcd16d2b8d911ce7e6",
+      "test": "test_s8_http.HttpTests",
+      "gates": [
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "AT-04",
+        "AT-05",
+        "T5-05",
+        "DV-01",
+        "DV-03",
+        "DV-05"
+      ],
+      "returncode": 0,
+      "tests": 14,
+      "verdict": "pass",
+      "log_sha256": "d6dc3d6545b6c8d078b19e4d013ae2aa28c253eca8478b9596b170145aa02dd3",
+      "seconds": 9.707
+    },
+    {
+      "id": "mock_launcher",
+      "scope": "supporting_synthetic_only",
+      "source": "tests/integration/test_mock_api_launcher.py",
+      "source_sha256": "2118eeb910133d13164ca471bb40b73d20e3076c6b58bb5860109e457c0bbe54",
+      "test": "test_mock_api_launcher.MockLauncherTests",
+      "gates": [
+        "T5-11",
+        "T6-01",
+        "T5-03",
+        "T5-05"
+      ],
+      "returncode": 0,
+      "tests": 1,
+      "verdict": "pass",
+      "log_sha256": "05ee592686ec2292a05b3265d35f8cbcaa597cfd544f670876bd0ff14ce356b7",
+      "seconds": 1.75
+    }
+  ],
+  "product_gate_counts": {
+    "pass": 0,
+    "fail": 0,
+    "incomplete": 0,
+    "not_run": 22
+  },
+  "complete": false,
+  "release_gate_refusal": "--mode acceptance --require-complete returned 1 as expected; CI step passed",
+  "limits": "HTTP probes use synthetic PREP/Runtime, launcher test covers two profiles on local HTTP; no actual model or real platform calls; all complete gate cases not_run. R01 must implement/review full cases, actual model path not auto-executable."
+}

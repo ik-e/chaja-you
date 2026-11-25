@@ -64,10 +64,16 @@
     },
     {
       "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "path": "product/lesson-registration/evidence/team-checkpoint-20261125.json"
+    },
+    {
+      "path": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
     }
   ],
   "result": {
-    "summary": "S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님.",
+    "summary": "S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 앱 시험 191개(HTTP 14개 포함) 통과. 실제 UI/viewer/provider 연동 및 22개 제품 gate는 미확인이므로 TASK 완료 아님. R01 검토 후 R03 합성 Mock API launcher/가이드 3개 파일을 31fe0c5 main에 반영, 공통 CI 통과. 잔여 3인일 보고(실제 통합 결함에 따라 재산정). R03 실제 조립 계획 확인: viewer_router와 HTTP/WS owner, H6 stable lineage slot, 승인 asset 제한 reader, D01~D03 permit/fence/read. R01은 검증 담당. 신규 구현 커밋 미확인.",
     "claims": [
       {
         "id": "C-T050-S8",
@@ -76,12 +82,44 @@
         "evidence_ids": [
           "E-T050-S8"
         ]
+      },
+      {
+        "id": "C-T050-LAUNCH",
+        "text": "R03의 합성 API CLI 및 안내 main 반영; 통합 대상의 준비 환경 제공. 기존 provider는 합성.",
+        "status": "코드 확인·회귀 통과",
+        "evidence_ids": [
+          "E-T050-LAUNCH",
+          "E-T050-CI"
+        ]
+      },
+      {
+        "id": "C50-NEXT",
+        "text": "R03 주도 조립 및 공통 접점 검토.",
+        "status": "계획 검토",
+        "evidence_ids": [
+          "E50-NEXT"
+        ]
       }
     ],
     "evidence": [
       {
         "id": "E-T050-S8",
         "path": "docs/artifacts/runs/TASK-050-s8-http-20261125.json"
+      },
+      {
+        "id": "E-T050-LAUNCH",
+        "label": "합성 Mock API 실행/연동 가이드",
+        "url": "https://github.com/ik-e/chaja-you/blob/31fe0c5de89b68bcdd388e6a9efa9557ef76cadd/product/lesson-registration/tests/modules/app/README.md"
+      },
+      {
+        "id": "E-T050-CI",
+        "label": "launcher 반영 main 독립 회귀",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45561969250"
+      },
+      {
+        "id": "E50-NEXT",
+        "label": "R03 통합 계획 검토",
+        "path": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
       }
     ],
     "verification": [
@@ -98,6 +136,21 @@
         "evidence_ids": [
           "E-T050-S8"
         ]
+      },
+      {
+        "criterion": "R03 launcher 반영 및 기존 공통 회귀",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E-T050-LAUNCH",
+          "E-T050-CI"
+        ]
+      },
+      {
+        "criterion": "실제 조립 완료",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E50-NEXT"
+        ]
       }
     ],
     "uncertainties": [
@@ -105,7 +158,9 @@
       "22 product gates not executed",
       "single process/app per DB; graceful shutdown waits for provider completion; provider timeouts pending R02/R05",
       "mock header identity is not production authentication",
-      "stdlib bounded MIME parsing and 16MiB total limit are local mock choices"
+      "stdlib bounded MIME parsing and 16MiB total limit are local mock choices",
+      "중첩 leaf 수정의 부모/형제 보존 및 I2 deadline/late response 처리 미해결; R02와 협의",
+      "브라우저 WS 임의 header 불가; same-origin service owner와 WS 활성화, H6 대상 확인 전 slot, 승인 asset 현재 registration/owner/lease. 실제 App/UI/통합 미확인."
     ],
     "decision_requests": [
       "기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다."
@@ -158,7 +213,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-050.md",
-  "assignment_status": "R03 2026-11-25 PLAN 제출 및 자체 bootstrap 보고 확인; 실제 제품 구현/완료 미확인",
+  "assignment_status": "191개 독립 시험 및 합성 launcher main; 실제 App/WS/STORE/slot/asset 조립 계획 보고",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r03/product-app",

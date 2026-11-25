@@ -1,0 +1,58 @@
+name: lesson-product-gate-preflight
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, r01/product-integration]
+    paths:
+      - 'product/lesson-registration/evidence/product_gate.py'
+      - 'product/lesson-registration/tests/integration/test_product_gate_runner.py'
+      - 'product/lesson-registration/tests/integration/test_mock_api_launcher.py'
+      - '.github/workflows/lesson-product-gate-preflight.yml'
+  pull_request:
+    paths:
+      - 'product/lesson-registration/evidence/product_gate.py'
+      - 'product/lesson-registration/tests/integration/test_product_gate_runner.py'
+      - 'product/lesson-registration/tests/integration/test_mock_api_launcher.py'
+      - '.github/workflows/lesson-product-gate-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: product/lesson-registration
+    env:
+      LR_ENVIRONMENT: mock
+      PYTHONPATH: .:src
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.0'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Locked environment
+        run: |
+          uv sync --locked --all-groups --python 3.12
+          uv run --locked --all-groups --python 3.12 python dev.py doctor
+      - name: Validate runner
+        run: uv run --locked --all-groups --python 3.12 python -m unittest discover -s tests/integration -p test_product_gate_runner.py -v
+      - name: Run supporting probes and preserve gate inventory
+        run: uv run --locked --all-groups --python 3.12 python evidence/product_gate.py --mode probe --output "$RUNNER_TEMP/lesson-product-gate.json"
+      - name: Confirm incomplete product cannot pass release gate
+        run: |
+          set +e
+          uv run --locked --all-groups --python 3.12 python evidence/product_gate.py --mode acceptance --require-complete
+          code=$?
+          test "$code" -eq 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lesson-product-gate-report
+          path: ${{ runner.temp }}/lesson-product-gate.json
+          if-no-files-found: warn
