@@ -74,7 +74,7 @@
     }
   ],
   "result": {
-    "summary": "R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성/독립 CI 미완료.",
+    "summary": "R05 ae582bf: K1~K7 크몽 합성 사이트와 adapter, R03 StoreGateway registry/binding digest 및 result evaluator 정렬, BoundGateway run 추가. 32개 독립 시험 통과 보고. 코드/시험 확인, 실제 Playwright runtime·STORE 결합 및 D01~03 정합성 미완료. GitHub Ubuntu 고정 커밋 재현 32/32 통과(10.549초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도.",
     "claims": [
       {
         "id": "C54-1",
@@ -83,6 +83,14 @@
         "evidence_ids": [
           "E54-1",
           "E54-2"
+        ]
+      },
+      {
+        "id": "C54-2",
+        "text": "고정 커밋 ae582bf의 32개 시험 및 환경·소유권 검사를 독립 GitHub CI에서 재현.",
+        "status": "독립 재현",
+        "evidence_ids": [
+          "E54-5"
         ]
       }
     ],
@@ -106,6 +114,11 @@
         "id": "E54-4",
         "label": "공통 접점 검토",
         "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+      },
+      {
+        "id": "E54-5",
+        "label": "R01 독립 고정 커밋 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45558575503/job/139016494319"
       }
     ],
     "verification": [
@@ -119,9 +132,10 @@
       },
       {
         "criterion": "32개 고정 구현의 독립 GitHub CI 재현",
-        "verdict": "inconclusive",
+        "verdict": "pass",
         "evidence_ids": [
-          "E54-3"
+          "E54-3",
+          "E54-5"
         ]
       },
       {
@@ -184,7 +198,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-054.md",
-  "assignment_status": "R05 PLAN·초기 구현 ae582bf 확인; 담당자 32개 시험 통과 보고, 실제 통합 및 공통 정합성 검토 중",
+  "assignment_status": "R05 PLAN·초기 구현 ae582bf 확인; 담당자 및 R01 CI 32개 시험 통과, 실제 통합 및 공통 정합성 검토 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r05/product-kmong",

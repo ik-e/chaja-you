@@ -3,7 +3,7 @@
   "reviewed_main": "24049b12335418cee9223bf44340c7fac73e62f6",
   "shared_base": "bc2e2c85f90092dc98e40ded397d221bbc5f98ca",
   "authority": "docs/human/responses/HRESP-20261125-09_r05-progress-followup.md",
-  "scope": "mock-only; frozen owner reports, source review; independent Actions results pending; no live credentials, no product gate completion",
+  "scope": "mock-only; frozen owner reports, source review and independent GitHub Actions reproduction; no live credentials, no product gate completion",
   "snapshots": {
     "remote": {
       "task": "TASK-053",
@@ -80,12 +80,34 @@
     "note": "Owner report, aggregate across TASK-053/054; not independently allocated, security corrections may change estimate; do not subtract or promise dates."
   },
   "review": {
-    "status": "reviewed_owner_report_not_independently_reproduced",
+    "status": "frozen_snapshots_independently_reproduced_integration_pending",
     "discord": "R01 reports feedback delivered; acceptance of detailed implementation not yet evidenced",
     "actions": [
       "R03/R05 D01–D03 contract returns; R04/R05/R03 D04",
       "R01 independent frozen snapshot CI; preserve existing 22 gates",
       "update WBS and tasks; no owner branch changes"
     ]
+  },
+  "independent_ci": {
+    "workflow_commit": "137ac2cf507bc180b09b604ebcefbe89dbaa91ea",
+    "run_id": 45558575503,
+    "url": "https://github.com/ik-e/chaja-you/actions/runs/45558575503",
+    "runner": "Ubuntu 24.04 / Python 3.12.3 / locked all groups",
+    "remote": {
+      "commit": "8e506e1a7a27756909b0ca40b074bc37bc0dc58c",
+      "job_id": 139016494668,
+      "tests": 15,
+      "seconds": 22.845,
+      "chromium": "143.0.7499.4 (build v1200)",
+      "verdict": "pass"
+    },
+    "kmong": {
+      "commit": "ae582bf7ff04435f4f2876d72a916c141282d85f",
+      "job_id": 139016494319,
+      "tests": 32,
+      "seconds": 10.549,
+      "verdict": "pass"
+    },
+    "scope": "Exact frozen branch revisions; lock, doctor, ownership checks and isolated mock tests passed; no product integration, live platform or security conformance claim."
   }
 }

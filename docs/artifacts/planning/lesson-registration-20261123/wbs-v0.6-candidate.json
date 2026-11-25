@@ -12,7 +12,8 @@
     "Do not set task due/status from this candidate.",
     "R03 reports only 9 working days 11/26~12/8. 12/4 vertical and 12/8 mock MVP are at risk; prioritize vertical slice and safety, never declare MVP complete on partial tests. Any scope/gate change needs explicit R01 decision.",
     "R03 e29fb69 S0~S7 and 174/10/2 mock test counts reported; S8 pending at report. Initial 11 person-days is not remaining effort; new common lock enables S8. Revised residual effort and readiness needed. W10/W16/PREP maintenance remain unassigned.",
-    "11/25 R05 report: initial 7 working days retained, remaining 3–3.5 across both TASKs. R03 3 person-days reported, R04 initial 4+3 only, R02/R04 residual/availability pending. R05 actual browser/adapter integration and security fixes may change estimate. Do not infer percent completed or subtract from initial. All dates remain candidates."
+    "11/25 R05 report: initial 7 working days retained, remaining 3–3.5 across both TASKs. R03 3 person-days reported, R04 initial 4+3 only, R02/R04 residual/availability pending. R05 actual browser/adapter integration and security fixes may change estimate. Do not infer percent completed or subtract from initial. All dates remain candidates.",
+    "R01 frozen-snapshot CI: remote 15/15, kmong 32/32 passed; original owner residual estimate 3–3.5 working days retained pending revised estimate, no automatic deduction of CI time."
   ],
   "items": [
     {
@@ -162,7 +163,7 @@
       "progress_ref": "product/lesson-registration/evidence/r03-progress-20261125.json"
     },
     "R05": {
-      "status": "remote 8e506e1 (15), kmong ae582bf (32) owner-reported, source checked; actual WS/kmong-runtime and D01~04 pending; independent CI pending",
+      "status": "remote 8e506e1 (15), kmong ae582bf (32) owner-reported and independently reproduced in GitHub CI; actual WS/kmong-runtime and D01~04 pending",
       "estimated_person_days": 7,
       "remaining_workdays_range": [
         3,
@@ -192,7 +193,8 @@
         "https://github.com/ik-e/chaja-you/blob/8e506e1a7a27756909b0ca40b074bc37bc0dc58c/product/lesson-registration/tests/modules/remote/PLAN.md",
         "https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md"
       ],
-      "estimate_notes": "Owner report, aggregate across TASK-053/054; not independently allocated, security corrections may change estimate; do not subtract or promise dates."
+      "estimate_notes": "Owner report, aggregate across TASK-053/054; not independently allocated, security corrections may change estimate; do not subtract or promise dates.",
+      "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45558575503"
     },
     "R02": {
       "status": "PLAN and mock implementation main; PR #49 28 owner-branch tests, actual model/VAT/nested edits pending; 12/4 handoff constraint",
