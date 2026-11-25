@@ -1,5 +1,7 @@
 # 2026-11-23 음악 레슨 등록 서비스 · Step1/2 제출 후보 개정 기록
 
+> **이력 문서(11/23 당시 판정)**. 현재 기준은 [현행 설계·제출 문서 연결](../design/lesson-registration/CURRENT-DOCUMENTS.md). 아래의 당시 제출 경로 링크는 해당 시점에 고정하며 현재 제출 후보·실제 구현 상태로 해석하지 않는다.
+
 - **근거 단계:** [PHASE-20261123-01](../human/phase-intents/PHASE-20261123-01.md)
 - **기획 원본:** [R01 12항목 V0.1](../artifacts/planning/lesson-registration-20261123/proposal-v0.1.json) · [담당 계약](../artifacts/planning/lesson-registration-20261123/README.md)
 - **상태 원본:** [STATE-001](../artifacts/state/current.json)
@@ -10,10 +12,10 @@
 
 | ID | 개정 문서(제출 경로) | 원본 가이드의 유지 항목 | 현재 결과 | 실제 완료 전 선행 |
 | --- | --- | --- | --- | --- |
-| DLV-01 | [Step1 기획서](../step1/기획서_제출본.md) | 서비스 정의 / 기능 요구사항 / 비기능 요구사항 | R02 기존 근거·12항목 기획·FR/NFR 반영한 초안 | TASK-028~031 근거, R01 최종 기획·MVP/가치 판단 |
-| DLV-02 | [Step1 WBS](../step1/WBS_제출본.md) | 간트 계획·실적 / 일정 규칙 / 작업 계획표 / 마일스톤 | TASK-028~032 + 조건부 후속 구조·게이트 초안 | 제품·담당·공수 재계획, Projects/시트 **실제 화면 캡처** |
-| DLV-03 | [Step2 API](../step2/API_설계_문서.md) | 공통·인증 / 목록 / 8항목 상세 / 검증·권한 / Tool / 실행 규칙 | 공고/플랫폼 미리보기/등록 작업/상태 API 후보 4종 | 플랫폼 허용·인증 결론, FR 완료 기준, 실제 스택 결정 |
-| DLV-04 | [Step2 DB](../step2/데이터베이스_스키마_설계서.md) | ERD/관계 / 타입·제약 / API 매핑 / RLS·JWT·Redis / pgvector / 인덱스·시험 | 강사·공고·이미지·규칙·등록작업·이벤트·증거 도메인 후보 | DBMS·권한·보관 정책, 적용/비적용 강사 확인 |
+| DLV-01 | [Step1 기획서](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/기획서_제출본.md) | 서비스 정의 / 기능 요구사항 / 비기능 요구사항 | R02 기존 근거·12항목 기획·FR/NFR 반영한 초안 | TASK-028~031 근거, R01 최종 기획·MVP/가치 판단 |
+| DLV-02 | [Step1 WBS](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/WBS_제출본.md) | 간트 계획·실적 / 일정 규칙 / 작업 계획표 / 마일스톤 | TASK-028~032 + 조건부 후속 구조·게이트 초안 | 제품·담당·공수 재계획, Projects/시트 **실제 화면 캡처** |
+| DLV-03 | [Step2 API](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step2/API_설계_문서.md) | 공통·인증 / 목록 / 8항목 상세 / 검증·권한 / Tool / 실행 규칙 | 공고/플랫폼 미리보기/등록 작업/상태 API 후보 4종 | 플랫폼 허용·인증 결론, FR 완료 기준, 실제 스택 결정 |
+| DLV-04 | [Step2 DB](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step2/데이터베이스_스키마_설계서.md) | ERD/관계 / 타입·제약 / API 매핑 / RLS·JWT·Redis / pgvector / 인덱스·시험 | 강사·공고·이미지·규칙·등록작업·이벤트·증거 도메인 후보 | DBMS·권한·보관 정책, 적용/비적용 강사 확인 |
 
 ## 실제 제출 전 체크
 
