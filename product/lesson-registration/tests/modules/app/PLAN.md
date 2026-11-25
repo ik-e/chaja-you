@@ -79,7 +79,7 @@ src/lesson_registration/app/
 | `admit` | Job `active`, operation이 승인 범위·등록 목록에 있음, 같은 효과 미예약, fence 없음 | Effect 예약 |
 | `observe` | 예약된 Effect | 관측·증거 기록(`stopped` 이후도 근거 추가 가능, 상태 불변) |
 | `fence` | Job `active` | `stopping`, 이후 admit 거부 |
-| `terminal` | 진행 중 효과 정리 | `done` 또는 `stopped` 확정 |
+| `finalize` | 진행 중 효과 정리 | `done` 또는 `stopped` 확정 |
 
 R05 remote가 admission·fence를 호출하므로, 이 연산을 노출하는 인터페이스 형식은 R05·R01과 맞춘다(§7).
 
@@ -99,7 +99,7 @@ R05 remote가 admission·fence를 호출하므로, 이 연산을 노출하는 �
 | S1 | STORE 스키마, Source/Registration 저장, 소유권 | T5-11 일부 |
 | S2 | KNOW(I1)·CO 준비 흐름(H1~H5), revision 검사 | H1~H5 정상·누락 |
 | S3 | 인증(H6)·승인·accept(H7) | T5-01 |
-| S4 | admit/observe/fence/terminal, 중복·경쟁·응답 유실 | T5-12, DV-01 |
+| S4 | admit/observe/fence/finalize, 중복·경쟁·응답 유실 | T5-12, DV-01 |
 | S5 | RESULT(I5), H8/H9 조회 | AC3, T5-05 |
 | S6 | 첨부 검증(MIME·크기·hash·multipart) | T6-01 |
 | S7 | 한 원본·두 플랫폼 독립성 | T5-06 |
@@ -160,7 +160,7 @@ R03 작성자 추정이며, 가용시간 확인 후 R01과 확정한다.
 | DB | 우선 표준 `sqlite3`로 구현. 공통 DB가 정해지면 store 모듈만 교체 | 없음(국소) |
 | STORE 인터페이스 | R05 remote가 호출할 admit/observe/fence 형식과 호출 경로(직접 import vs 포트) | R05와 공동 결정 |
 | I2/I3/I4 시그니처 | 실제 provider 주입 형식(동기/비동기, 타임아웃) | R02·R05와 공동 |
-| 연산 이름 | 계약 JSON의 `finalize`와 CS-05의 `terminal` 중 정본 | 문서·코드 이름 |
+| 연산 이름 | 계약 storage `S-FENCE`의 `fence`/`finalize`를 사용(CS-05 본문의 `terminal`은 같은 의미로 해석). 다르면 알려 달라고 확인 | 문서·코드 이름 |
 | replay 사례 | unknown·응답 유실·경쟁 replay가 공통 fixture에 없음. app 쪽 시험에서 자체 대체 구현으로 만들 예정 | 공통 fixture 확장 여부 |
 | 범위 | W10·W16, PREP 유지보수의 배정 여부 | 공수 |
 | PoC 재사용 | TASK-043 PoC(`docs/members/R03/workspace/test/`)에서 상태·중복 방지 아이디어만 참고, 코드는 그대로 옮기지 않음 | 없음 |
