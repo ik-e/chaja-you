@@ -9,7 +9,7 @@
 
 **주의: 이 문서는 이전 찾아you 제품 기준안이며 현재 레슨 등록 서비스의 기획·구현 기준이 아닙니다. 이전 목표·MVP의 구현을 보류하고 제출용 잠정 기준 및 과거 이력으로만 보존합니다. 현재 제품 기획 방향과 미확정 범위는 CURRENT를 따릅니다.**
 
-[현재 단계 의도](docs/human/phase-intents/PHASE-20261124-03.md) · [실제 운영 상태](CURRENT.md)
+[현재 단계 의도](docs/human/phase-intents/PHASE-20261125-01.md) · [실제 운영 상태](CURRENT.md)
 
 ## 목적
 

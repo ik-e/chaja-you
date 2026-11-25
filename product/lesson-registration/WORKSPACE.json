@@ -1,12 +1,12 @@
 {
   "id": "LR-WORKSPACE-PREP-01",
   "date": "2026-11-25",
-  "status": "candidate_pending_bootstrap",
-  "authority": "R01 directs R01 to focus on integration and common contracts, not Kmong runner. No new member TASK assignment or design adoption.",
+  "status": "assigned_mock_development",
+  "authority": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "design_review_commit": "d68406b895b344819eb7ed6c3524167789bfdb84",
   "canonical_commit": "197987047ea9a305072bba3fdff816c5c37b0157",
-  "operational_main": "9b6ff0463722372d577747e89cb853e773c78591",
-  "phase": "PHASE-20261124-03",
+  "operational_main": "a6d072361b272dd6854f1840ba83d7f3abb26c08",
+  "phase": "PHASE-20261125-01",
   "pins": [
     {
       "commit": "197987047ea9a305072bba3fdff816c5c37b0157",
@@ -98,7 +98,7 @@
         "DV-04",
         "DV-05"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test common",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -124,7 +124,10 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "evidence/PLAN.md",
-      "branch_candidate": "r01/product-integration"
+      "branch_candidate": "r01/product-integration",
+      "task_ref": "docs/artifacts/tasks/TASK-048.json",
+      "intent_ref": "docs/human/task-intents/TASK-048.md",
+      "work_branch": "r01/product-integration"
     },
     {
       "id": "r02-preparation",
@@ -150,7 +153,7 @@
         "T5-08",
         "T6-02"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test r02-preparation",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -176,7 +179,10 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "tests/modules/preparation/PLAN.md",
-      "branch_candidate": "r02/product-preparation"
+      "branch_candidate": "r02/product-preparation",
+      "task_ref": "docs/artifacts/tasks/TASK-049.json",
+      "intent_ref": "docs/human/task-intents/TASK-049.md",
+      "work_branch": "r02/product-preparation"
     },
     {
       "id": "r03-app",
@@ -211,7 +217,7 @@
         "T6-01",
         "DV-01"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test r03-app",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -237,7 +243,10 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "tests/modules/app/PLAN.md",
-      "branch_candidate": "r03/product-app"
+      "branch_candidate": "r03/product-app",
+      "task_ref": "docs/artifacts/tasks/TASK-050.json",
+      "intent_ref": "docs/human/task-intents/TASK-050.md",
+      "work_branch": "r03/product-app"
     },
     {
       "id": "r04-web",
@@ -265,7 +274,7 @@
         "T6-02",
         "DV-05"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test r04-web",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -291,7 +300,10 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "tests/modules/web/PLAN.md",
-      "branch_candidate": "r04/product-web"
+      "branch_candidate": "r04/product-web",
+      "task_ref": "docs/artifacts/tasks/TASK-051.json",
+      "intent_ref": "docs/human/task-intents/TASK-051.md",
+      "work_branch": "r04/product-web"
     },
     {
       "id": "r04-soomgo",
@@ -319,7 +331,7 @@
         "DV-03",
         "DV-04"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test r04-soomgo",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -345,7 +357,10 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "tests/modules/soomgo/PLAN.md",
-      "branch_candidate": "r04/product-soomgo"
+      "branch_candidate": "r04/product-soomgo",
+      "task_ref": "docs/artifacts/tasks/TASK-052.json",
+      "intent_ref": "docs/human/task-intents/TASK-052.md",
+      "work_branch": "r04/product-soomgo"
     },
     {
       "id": "r05-remote",
@@ -376,7 +391,7 @@
         "DV-02",
         "DV-05"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test r05-remote",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -402,7 +417,10 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "tests/modules/remote/PLAN.md",
-      "branch_candidate": "r05/product-remote"
+      "branch_candidate": "r05/product-remote",
+      "task_ref": "docs/artifacts/tasks/TASK-053.json",
+      "intent_ref": "docs/human/task-intents/TASK-053.md",
+      "work_branch": "r05/product-remote"
     },
     {
       "id": "r05-kmong",
@@ -430,7 +448,7 @@
         "DV-03",
         "DV-04"
       ],
-      "assignment": "candidate_pending_bootstrap",
+      "assignment": "assigned_pending_owner_acknowledgement",
       "test_command": "uv run --locked --python 3.12 python dev.py test r05-kmong",
       "completion": "모든 acceptance 충족 및 근거 기록; 미실행·실패는 완료 아님",
       "acceptance": [
@@ -456,13 +474,17 @@
         "수용 조건별 실행 결과와 미확인 사항"
       ],
       "plan_path": "tests/modules/kmong/PLAN.md",
-      "branch_candidate": "r05/product-kmong"
+      "branch_candidate": "r05/product-kmong",
+      "task_ref": "docs/artifacts/tasks/TASK-054.json",
+      "intent_ref": "docs/human/task-intents/TASK-054.md",
+      "work_branch": "r05/product-kmong"
     }
   ],
   "branches": {
-    "rule": "Do not create team branches before R01 accepts review and workspace candidate. Each package uses separate checkout/branch or one member branch with explicit package scope. No edits to shared paths by non-owner; propose changes to R01. Check base using approved exact commit.",
+    "rule": "Each assigned package uses its own branch and checkout from the activation commit; no edits to shared paths by non-owner. Use the initial branch commit as check-changes --base; record task result separately from product-only branch change checks.",
     "suggested_prefix": "<role>/product-<package>",
-    "existing_tasks": "043–047 unchanged; no reuse of old TASK IDs"
+    "existing_tasks": "043–047 preserved inactive; new TASK-048~054 assigned",
+    "base": "activation commit containing this WORKSPACE.json; exact branch refs verified separately"
   },
   "isolation": {
     "venv": "per checkout product/lesson-registration/.venv",
@@ -475,8 +497,8 @@
   "stub_contract": "Pinned replay fixtures are examples, not product state machines, trusted evidence, actual authentication, or proof of schema semantic validity. RT fixtures only represent documented boundaries, not permission bypass. Neutral mock is not platform-specific and contains no real credentials. Product implementations must replace and pass actual contract/gate tests.",
   "activation": [
     "R01 logical design adoption recorded in main",
-    "Bootstrap clean checkout and all package tests pass",
-    "Confirm member capacity and shared stack; activate TASKs and phase only after actual verification"
+    "Bootstrap Python 3.12 clean checkout passed (run 45525881756)",
+    "TASK-048~054 assigned; actual member receipt, availability and detailed technology pending"
   ],
   "decisions": [
     {
@@ -524,5 +546,11 @@
       "reason": "single canonical design source; distinguish wiring and product success",
       "revisit": "accepted design delta or new provider boundary"
     }
-  ]
+  ],
+  "bootstrap_verified": {
+    "commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+    "workflow_run": "https://github.com/ik-e/chaja-you/actions/runs/45525881756",
+    "conclusion": "success",
+    "scope": "Python 3.12 locked bootstrap; no product execution"
+  }
 }

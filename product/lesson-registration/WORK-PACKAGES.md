@@ -1,6 +1,6 @@
-# 작업 패키지 (착수 준비 후보)
+# 작업 패키지 (배정 완료 · 수신/착수 미확인)
 
-## common — R01
+## common — R01 · [TASK-048](../../docs/artifacts/tasks/TASK-048.json)
 
 공통 계약 핀·공통 fixture/stub·composition·통합 시험; 플랫폼 실행기 구현 제외
 
@@ -14,7 +14,7 @@
 
 산출물: 담당 경로의 상세 설계 및 구현 계획; 담당 구현 코드·독립 테스트·실행 방법; 수용 조건별 실행 결과와 미확인 사항
 
-## r02-preparation — R02
+## r02-preparation — R02 · [TASK-049](../../docs/artifacts/tasks/TASK-049.json)
 
 PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계 후보, 실제 모델/역량 확인
 
@@ -28,7 +28,7 @@ PrepareInput→Preparation; AI 후보·근거·누락/충돌 검사; 12/4 인계
 
 산출물: 담당 경로의 상세 설계 및 구현 계획; 담당 구현 코드·독립 테스트·실행 방법; 수용 조건별 실행 결과와 미확인 사항
 
-## r03-app — R03
+## r03-app — R03 · [TASK-050](../../docs/artifacts/tasks/TASK-050.json)
 
 H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도 브라우저·PREP 구현 제외
 
@@ -42,7 +42,7 @@ H1~H9·CO·KNOW·STORE·RESULT; 원자 수락/admit/observe/fence와 API; 별도
 
 산출물: 담당 경로의 상세 설계 및 구현 계획; 담당 구현 코드·독립 테스트·실행 방법; 수용 조건별 실행 결과와 미확인 사항
 
-## r04-web — R04
+## r04-web — R04 · [TASK-051](../../docs/artifacts/tasks/TASK-051.json)
 
 H1~H9 및 Viewer의 소비자; 화면·접속/승인/결과 UI; 서버·remote 구현 제외
 
@@ -56,7 +56,7 @@ H1~H9 및 Viewer의 소비자; 화면·접속/승인/결과 UI; 서버·remote �
 
 산출물: 담당 경로의 상세 설계 및 구현 계획; 담당 구현 코드·독립 테스트·실행 방법; 수용 조건별 실행 결과와 미확인 사항
 
-## r04-soomgo — R04
+## r04-soomgo — R04 · [TASK-052](../../docs/artifacts/tasks/TASK-052.json)
 
 숨고 adapter 및 합성 플랫폼 페이지/fixture; 서비스 설정 관측; 원격 runtime·공통 상태 변경 금지
 
@@ -70,7 +70,7 @@ H1~H9 및 Viewer의 소비자; 화면·접속/승인/결과 UI; 서버·remote �
 
 산출물: 담당 경로의 상세 설계 및 구현 계획; 담당 구현 코드·독립 테스트·실행 방법; 수용 조건별 실행 결과와 미확인 사항
 
-## r05-remote — R05
+## r05-remote — R05 · [TASK-053](../../docs/artifacts/tasks/TASK-053.json)
 
 I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외
 
@@ -84,7 +84,7 @@ I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 
 
 산출물: 담당 경로의 상세 설계 및 구현 계획; 담당 구현 코드·독립 테스트·실행 방법; 수용 조건별 실행 결과와 미확인 사항
 
-## r05-kmong — R05
+## r05-kmong — R05 · [TASK-054](../../docs/artifacts/tasks/TASK-054.json)
 
 크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지
 

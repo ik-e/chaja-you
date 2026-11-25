@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "id": "TASK-048",
+  "kind": "task",
+  "status": "진행 중",
+  "owner": "R01",
+  "suggested_owner": null,
+  "due": null,
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-25",
+  "title": "공통 계약·개발 환경 유지 및 점진 통합 검증",
+  "question": "공통 계약 핀·공통 fixture/stub·composition·통합 시험; 플랫폼 실행기 구현 제외 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+  "goal": "공통 계약 핀·공통 fixture/stub·composition·통합 시험; 플랫폼 실행기 구현 제외",
+  "inputs": [
+    "docs/human/phase-intents/PHASE-20261125-01.md",
+    "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+    "product/lesson-registration/WORKSPACE.json",
+    "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
+    "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/design/lesson-registration-20261124/platform-profiles-v2.json",
+    "docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json"
+  ],
+  "scope": [
+    "공통 계약 핀·공통 fixture/stub·composition·통합 시험; 플랫폼 실행기 구현 제외",
+    "담당 경로의 상세 설계·PLAN·코드·독립 테스트; 공통 계약 및 다른 담당 경로 무단 변경 금지",
+    "mock-only; 실제 플랫폼 실행/자격증명 금지"
+  ],
+  "outputs": [
+    "product/lesson-registration/evidence/PLAN.md",
+    "product/lesson-registration/contracts/",
+    "product/lesson-registration/src/lesson_registration/composition/",
+    "product/lesson-registration/fixtures/shared/",
+    "product/lesson-registration/tests/contract/",
+    "product/lesson-registration/tests/integration/",
+    "product/lesson-registration/stubs/",
+    "product/lesson-registration/evidence/"
+  ],
+  "acceptance": [
+    "common-AC1: 공통 계약 pin 및 경로 소유권 검증",
+    "common-AC2: 모든 패키지 독립 smoke·fixture 검증",
+    "common-AC3: 실제 제품 수용 시험은 별도로 판정"
+  ],
+  "verification": [
+    "uv run --locked --python 3.12 python dev.py test common",
+    "실제 구현의 정상/오류/unknown 시험 및 입력·기대·관측·commit 기록; bootstrap replay는 제품 통과 아님",
+    "제품 시험 참조: AT-01, T5-08, T5-11, T6-01, T6-02, AT-02, AT-03, T5-01, T5-02, T5-12, T5-03, T5-07, AT-04, AT-05, T5-06, T5-13, T5-05, DV-01, DV-02, DV-03, DV-04, DV-05"
+  ],
+  "references": [
+    {
+      "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    },
+    {
+      "path": "product/lesson-registration/WORKSPACE.json"
+    },
+    {
+      "path": "docs/design/lesson-registration/MANIFEST.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    }
+  ],
+  "result": {
+    "summary": "Python 3.12 locked bootstrap 환경과 공통 pin·독립 패키지 smoke 및 ownership 양성/음성 검사 CI 성공. 모듈 실제 구현 및 22개 제품 수용 시험은 미실행. R01 공통 계약/통합 후속 진행.",
+    "claims": [
+      {
+        "id": "C048-1",
+        "text": "공통 개발환경 bootstrap CI 성공",
+        "status": "확인",
+        "evidence_ids": [
+          "E048-1"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E048-1",
+        "label": "GitHub Actions 실제 실행",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+      },
+      {
+        "id": "E048-2",
+        "label": "검증 범위 기록",
+        "path": "product/lesson-registration/evidence/bootstrap-ci-20261125.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "고정 prep commit bootstrap",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E048-1",
+          "E048-2"
+        ]
+      },
+      {
+        "criterion": "제품 수용 시험 22개",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E048-2"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "담당자 실제 구현, 기술 및 공수 미확인",
+      "제품 시험 및 실서비스 미실행"
+    ],
+    "decision_requests": []
+  },
+  "traceability": {
+    "intent_refs": [
+      "docs/human/phase-intents/PHASE-20261125-01.md",
+      "docs/human/responses/HRESP-20261125-01_product-task-assignment.md"
+    ],
+    "design_refs": [
+      "CS-01",
+      "CS-07",
+      "CS-08",
+      "CS-09"
+    ],
+    "requirement_refs": [],
+    "product_requirement_refs": [
+      "REQ-09",
+      "REQ-10",
+      "REQ-11"
+    ],
+    "evaluation_refs": [],
+    "planned_product_test_refs": [
+      "AT-01",
+      "T5-08",
+      "T5-11",
+      "T6-01",
+      "T6-02",
+      "AT-02",
+      "AT-03",
+      "T5-01",
+      "T5-02",
+      "T5-12",
+      "T5-03",
+      "T5-07",
+      "AT-04",
+      "AT-05",
+      "T5-06",
+      "T5-13",
+      "T5-05",
+      "DV-01",
+      "DV-02",
+      "DV-03",
+      "DV-04",
+      "DV-05"
+    ]
+  },
+  "validation_plan": {
+    "question": "공통 계약 핀·공통 fixture/stub·composition·통합 시험; 플랫폼 실행기 구현 제외 — 공통 계약에 맞춰 어떤 상세 설계와 독립 검증으로 구현할 것인가?",
+    "observables": [
+      "공통 계약 pin 및 경로 소유권 검증",
+      "모든 패키지 독립 smoke·fixture 검증",
+      "실제 제품 수용 시험은 별도로 판정"
+    ],
+    "success_condition": "패키지별 실제 구현 및 수용 조건 증거, 공통 계약 정합성, 재현 명령",
+    "unknown_condition": "실제 구현/모델/환경/시험 결과 없음 또는 근거 불충분"
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "intent_ref": "docs/human/task-intents/TASK-048.md",
+  "assignment_status": "R01 자기 주도형 자동 등록",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
+  "assignment_mode": "self_directed",
+  "work_branch": "r01/product-integration",
+  "workspace_path": "product/lesson-registration/",
+  "package_id": "common",
+  "owned_paths": [
+    "product/lesson-registration/WORKSPACE.json",
+    "product/lesson-registration/README.md",
+    "product/lesson-registration/dev.py",
+    "product/lesson-registration/pyproject.toml",
+    "product/lesson-registration/uv.lock",
+    "product/lesson-registration/.gitignore",
+    "product/lesson-registration/contracts/",
+    "product/lesson-registration/src/lesson_registration/__init__.py",
+    "product/lesson-registration/src/lesson_registration/composition/",
+    "product/lesson-registration/fixtures/shared/",
+    "product/lesson-registration/tests/contract/",
+    "product/lesson-registration/tests/integration/",
+    "product/lesson-registration/stubs/",
+    "product/lesson-registration/evidence/",
+    "product/lesson-registration/src/lesson_registration/platforms/__init__.py",
+    "product/lesson-registration/AGENTS.md",
+    "product/lesson-registration/WORK-PACKAGES.md"
+  ],
+  "bootstrap_commit": "98b446cb70eeaf95d02d69f36821b04d4d583913",
+  "plan_path": "product/lesson-registration/evidence/PLAN.md",
+  "priority_note": "가용성 확인 후 내부 일정 확정",
+  "completion_dependencies": [
+    "TASK-049",
+    "TASK-050",
+    "TASK-051",
+    "TASK-052",
+    "TASK-053",
+    "TASK-054"
+  ]
+}

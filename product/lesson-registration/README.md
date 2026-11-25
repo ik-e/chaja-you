@@ -1,6 +1,6 @@
-# 제품 착수 준비 후보 (배정 아님)
+# 제품 작업 공간 · TASK 배정 완료
 
-R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행기는 R04(숨고), R05(크몽) 후보이며 R05의 runtime과 크몽, R04의 UI와 숨고는 각각 별도 패키지이다. 공수/가용성 및 검토 완료 전 신규 TASK, phase, main 변경 없음. 기존 PHASE-20261124-03 유지.
+R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행기는 R04(숨고), R05(크몽) 담당으로 별도 TASK 배정. 담당자 수신·착수 및 가용성 확인 전이며 일정·세부 기술은 협의한다. [활성 단계](../../docs/human/phase-intents/PHASE-20261125-01.md) · [배정 근거](../../docs/human/responses/HRESP-20261125-01_product-task-assignment.md) · [bootstrap CI](https://github.com/ik-e/chaja-you/actions/runs/45525881756).
 
 - [팀 설계 검토 홈](https://github.com/ik-e/chaja-you/blob/d68406b895b344819eb7ed6c3524167789bfdb84/docs/design/lesson-registration/README.md)
 - [공통 계약](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [결정 추적](https://github.com/ik-e/chaja-you/blob/197987047ea9a305072bba3fdff816c5c37b0157/docs/artifacts/design/lesson-registration-20261124/trace-index-v0.9.json)
@@ -18,7 +18,7 @@ R01은 공통 계약·개발 환경·통합만 담당한다. 플랫폼별 실행
 | r05-remote | R05 | `src/lesson_registration/remote/`, `tests/modules/remote/` | I3/I4 facade·runtime gateway·viewer client·STORE 호출; 실제 플랫폼별 업무 규칙 제외; CS-04, CS-05, CS-07; AT-02, AT-03, T5-02, T5-12, DV-02, DV-05 | `uv run --locked --python 3.12 python dev.py test r05-remote` |
 | r05-kmong | R05 | `src/lesson_registration/platforms/kmong/`, `fixtures/platforms/kmong/`, `tests/modules/kmong/` | 크몽 adapter 및 합성 플랫폼 페이지/fixture; 접수 readback; runtime·공통 상태 변경 금지; CS-01, CS-05, CS-06; AT-04, T5-13, DV-03, DV-04 | `uv run --locked --python 3.12 python dev.py test r05-kmong` |
 
-공통 파일은 R01 소유; 플랫폼 상위 `__init__.py` 포함. 각 팀원은 자기 디렉터리만 수정. 공통 계약/의존성 변경은 R01에게 제안. 실제 브랜치 생성과 정식 배정은 승인 후. R01에게 크몽 구현을 자동 인계하지 않는다.
+공통 파일은 R01 소유; 플랫폼 상위 `__init__.py` 포함. 각 팀원은 자기 디렉터리만 수정. 공통 계약/의존성 변경은 R01에게 제안. 정식 TASK를 확인하고 자기 작업 브랜치에서 진행한다. 브랜치는 활성화 커밋을 기준으로 생성한다. R01에게 크몽 구현을 자동 인계하지 않는다.
 
 ## 로컬 실행
 
@@ -36,7 +36,7 @@ UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serv
 
 원격 팀: `uv run --locked --python 3.12 python dev.py serve mock --port 0` 출력 URL의 `/mock`에서 합성 sign-in, 합성 값 저장, 독립 receipt 확인. 실제 플랫폼 모의 페이지가 아니며 원격 실행기 보안도 입증하지 않는다. 플랫폼 담당자는 자기 플랫폼 mock 및 fixture를 직접 구체화한다. R02·R03·플랫폼 팀의 공통 의존성 대체는 `dev.replay(platform, case, value)`를 사용하고, 정상·누락·unknown의 실제 구현 시험을 추가한다.
 
-`python dev.py check-changes <package> --base <승인된-제품-기준-commit>`는 해당 패키지 소유 경로만 변경했는지 검사한다. R04/R05는 패키지별 분리 브랜치가 기본 후보. R01은 통합 브랜치에서 각 모듈의 변경을 검토. 승인 전에 이 검사 결과를 권한 부여로 해석하지 않는다.
+`python dev.py check-changes <package> --base <승인된-제품-기준-commit>`는 해당 패키지 소유 경로만 변경했는지 검사한다. R04/R05는 패키지별 분리 브랜치가 기본 후보. R01은 통합 브랜치에서 각 모듈의 변경을 검토. TASK 배정 범위 내에서만 실행하며 결과는 구현 근거와 구별한다.
 
 ## 격리와 검증의 한계
 
@@ -45,10 +45,16 @@ UI 팀: 별도 터미널에서 `uv run --locked --python 3.12 python dev.py serv
 - 기존 22개 제품 수용 시험은 미실행. bootstrap 시험은 경로/fixture/replay의 연결 확인일 뿐. 실제 기능 담당자가 자신의 단위/계약 시험을 추가하고, R01은 독립 구현이 연결된 동일 후보로 통합 검증한다.
 - 검토 결과 문제가 있으면 accepted schema/profile/ports를 수정하고 pin, fixture, 시험을 함께 갱신한다. 변경 대상 추적은 기존 IT-19 및 V0.9 인덱스 참조.
 
-## 정식 배정 전
+## 배정 현황
 
-- Review feedback disposition and R01 acceptance of exact design commit
-- Re-pin if accepted contract changes; update trace and fixtures
-- Review R04/R05 capacity and R02 handoff; one owner per package, no Kmong ownership for R01
-- Independent clean-checkout Python 3.12 run doctor, smoke, package tests and change ownership checker; approve stack and actual module transport/provider signatures
-- Confirm new phase and TASKs only after R01 decision; 22 product tests remain not_run
+| TASK | 담당 | 패키지 | 브랜치 |
+| --- | --- | --- | --- |
+| [TASK-048](../../docs/artifacts/tasks/TASK-048.json) | R01 | common | r01/product-integration |
+| [TASK-049](../../docs/artifacts/tasks/TASK-049.json) | R02 | r02-preparation | r02/product-preparation |
+| [TASK-050](../../docs/artifacts/tasks/TASK-050.json) | R03 | r03-app | r03/product-app |
+| [TASK-051](../../docs/artifacts/tasks/TASK-051.json) | R04 | r04-web | r04/product-web |
+| [TASK-052](../../docs/artifacts/tasks/TASK-052.json) | R04 | r04-soomgo | r04/product-soomgo |
+| [TASK-053](../../docs/artifacts/tasks/TASK-053.json) | R05 | r05-remote | r05/product-remote |
+| [TASK-054](../../docs/artifacts/tasks/TASK-054.json) | R05 | r05-kmong | r05/product-kmong |
+
+공통 bootstrap CI는 통과했다. 실제 담당자 수신·공수·스택 및 22개 제품 시험은 미확인/미실행. TASK 결과 갱신은 제품 경로 소유권 검사와 분리한 문서 갱신으로 처리한다.

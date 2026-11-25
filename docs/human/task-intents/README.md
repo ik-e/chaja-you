@@ -23,3 +23,13 @@
 
 - [TASK-006 · R05 최소 구현 구조·통합 순서](TASK-006.md)
 - [TASK-007 · R01 MVP 범위 수렴](TASK-007.md)
+
+## 제품 개발 활성 TASK
+
+- [TASK-048 · 공통 계약·개발 환경 유지 및 점진 통합 검증](TASK-048.md)
+- [TASK-049 · 등록 정보 준비·AI 구조화 및 검증](TASK-049.md)
+- [TASK-050 · 공통 앱·API·저장·결과 판정 구현](TASK-050.md)
+- [TASK-051 · 등록 지원 웹 UI 구현](TASK-051.md)
+- [TASK-052 · 숨고 등록 adapter 및 독립 mock 구현](TASK-052.md)
+- [TASK-053 · 원격 브라우저 runtime·인증·뷰어 구현](TASK-053.md)
+- [TASK-054 · 크몽 등록 adapter 및 독립 mock 구현](TASK-054.md)
