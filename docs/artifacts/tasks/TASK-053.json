@@ -70,10 +70,16 @@
     },
     {
       "path": "product/lesson-registration/contracts/INTERFACE-REVIEW.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/blob/c3fa0b199d5b3a0975b8b5ae9a26d97ae69862e4/product/lesson-registration/tests/modules/remote/PLAN.md"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594"
     }
   ],
   "result": {
-    "summary": "R05 8e506e1: Playwright Chromium Runtime I3/I4, CDP frame/input, 실제 R03 Coordinator/SQLite StoreGateway + 중립 loopback mock. Windows 관리형 Chromium 143.0.7499.4에서 15개(bootstrap 1+14) 통과 보고. 응답 유실 시 Chromium POST 재전송 발견 및 route.fetch 단일 시도 방지 시험 포함. 코드/시험 확인, WS endpoint·실제 크몽 runtime 연동·D01~04 안전 정합성  미완료. GitHub Ubuntu 고정 커밋 재현 15/15 통과(22.845초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도.",
+    "summary": "R05 8e506e1: Playwright Chromium Runtime I3/I4, CDP frame/input, 실제 R03 Coordinator/SQLite StoreGateway + 중립 loopback mock. Windows 관리형 Chromium 143.0.7499.4에서 15개(bootstrap 1+14) 통과 보고. 응답 유실 시 Chromium POST 재전송 발견 및 route.fetch 단일 시도 방지 시험 포함. 코드/시험 확인, WS endpoint·실제 크몽 runtime 연동·D01~04 안전 정합성  미완료. GitHub Ubuntu 고정 커밋 재현 15/15 통과(22.845초), lock/doctor/ownership 확인. 실제 통합·공통 안전 조건·제품 gate는 별도. 최신 a7af111/2baeb2b5/c3fa0b19 WS/module/canvas, one-shot grant·만료·동시 attach/finish 입력 차단 및 POST 307/308 재전송 차단. 동일 조합 Ubuntu CI 30/30, 40.075초, skip 0. 실제 App/HTTP/UI/D01~D04 전체 검증 아님.",
     "claims": [
       {
         "id": "C53-1",
@@ -90,6 +96,22 @@
         "status": "독립 재현",
         "evidence_ids": [
           "E53-5"
+        ]
+      },
+      {
+        "id": "C53-6",
+        "text": "30개 보고 및 307/308 차단, unknown 보존.",
+        "status": "담당 보고·코드 검토",
+        "evidence_ids": [
+          "E53-6"
+        ]
+      },
+      {
+        "id": "C53-7",
+        "text": "동일 조합 30/30, 40.075초, skip 0.",
+        "status": "독립 재현",
+        "evidence_ids": [
+          "E53-7"
         ]
       }
     ],
@@ -118,6 +140,16 @@
         "id": "E53-5",
         "label": "R01 독립 고정 커밋 CI",
         "url": "https://github.com/ik-e/chaja-you/actions/runs/45558575503/job/139016494668"
+      },
+      {
+        "id": "E53-6",
+        "label": "최신 R05 PLAN",
+        "url": "https://github.com/ik-e/chaja-you/blob/c3fa0b199d5b3a0975b8b5ae9a26d97ae69862e4/product/lesson-registration/tests/modules/remote/PLAN.md"
+      },
+      {
+        "id": "E53-7",
+        "label": "최신 고정 조합 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594"
       }
     ],
     "verification": [
@@ -144,20 +176,23 @@
           "E53-3",
           "E53-4"
         ]
+      },
+      {
+        "criterion": "최신 Runtime 30개",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E53-7"
+        ]
       }
     ],
     "uncertainties": [
-      "no actual WS endpoint",
-      "no actual kmong adapter joined",
-      "grant reusable/multi-viewer",
-      "queued input not fenced at execution",
-      "permit consume/dispatch fence not proven",
-      "registration-derived slot",
-      "unadmitted readback after fence",
-      "R05 두 TASK 합계 잔여 3~3.5근무일 보고(별도 배분/확정 일정 없음); 실제 보완 공수 미확인"
+      "실제 R03 HTTP/WS 동일 owner와 R04 원래 버튼/module 연동 미확인",
+      "stable source slot·D01 full scope digest·D02 consume/fence dispatch race·D03 authorized read·승인 asset 실제 owner/lease reader 미완료",
+      "307/308은 안전 중단, 운영 exactly-once 보장 아님",
+      "기존 합계 3~3.5근무일 추정 갱신 대기"
     ],
     "decision_requests": [
-      "R03/R05 claim/permit 소비/fence 실제 dispatch race, stable lineage slot 및 승인된 AssetSource, readback 허가. R03/R04/R05 WS owner/origin/one-shot grant/queued input 차단 및 teardown 시험."
+      "R03 실제 조립 및 R04 module 연결, stable slot/asset/permit/fence/read 공동 검증; 갱신 잔여 공수 반환"
     ]
   },
   "traceability": {
@@ -200,7 +235,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-053.md",
-  "assignment_status": "R05 PLAN·초기 구현 8e506e1 확인; 담당자 및 R01 CI 15개 시험 통과, 실제 통합 및 공통 정합성 검토 중",
+  "assignment_status": "최신 remote c3fa0b19, 동일 조합 독립 CI 30/30; 실제 서비스/UI 및 D01~D04 진행 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r05/product-remote",

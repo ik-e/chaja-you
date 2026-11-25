@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "R03-RUNTIME-INTEGRATION-20261125",
+  "kind": "run",
+  "status": "partial",
+  "task": "TASK-050",
+  "base_commit": "4a240ee",
+  "inputs": {"remote_commit": "a7af111", "kmong_commit": "a3718a9", "environment": "mock"},
+  "outputs": ["runtime_support.py", "http/viewer_composition.py", "gateway.py", "store/schema.sql"],
+  "verification": [
+    {"command": "uv run --locked --group app --group verification python dev.py test r03-app", "observed": "201 tests passed, 75.271 seconds; includes dispatch/fence ordering and corrected explicit WS test origin"},
+    {"command": "python dev.py doctor", "observed": "passed"},
+    {"command": "git diff --check", "observed": "passed"},
+    {"command": "python dev.py check-changes r03-app --base 094e4d2", "observed": "passed"}
+  ],
+  "unverified": ["R05 real router/browser integration", "runtime context injection into asset factory", "actual R05 browser dispatch through new wrapper", "R05 c3fa0b1 307/308 tests not rerun", "R04 UI and 22 product gates"],
+  "handoff": "RUNTIME-INTEGRATION.md",
+  "canonical_run_pending": "Owner task/run canonical update required after combined E2E; this package record is local verification evidence."
+}

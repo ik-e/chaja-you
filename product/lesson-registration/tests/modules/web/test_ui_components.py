@@ -61,6 +61,12 @@ class TestWebComponents(unittest.TestCase):
         self.assertIn("no-store", app_js)
         self.assertIn("X-Mock-Owner", app_js)
         self.assertIn("/v1/registrations/", app_js)
+        # R05 security requirements
+        self.assertNotIn("?grant=", app_js, "Grant must never be passed in URL query parameter")
+        self.assertIn("expectedViewerOrigin", app_js, "Must validate postMessage origin")
+        self.assertIn("contentWindow", app_js, "Must validate event.source to viewer frame")
+        self.assertIn("auth/finish", app_js, "Must verify H6 finish with server")
+        self.assertIn("disposeViewer", app_js, "Must dispose viewer on navigation/detach")
 
 
 if __name__ == "__main__":
