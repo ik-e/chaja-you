@@ -8,6 +8,7 @@ from pathlib import Path
 from contracts.interfaces import PortFailure
 from lesson_registration.app import contract
 from lesson_registration.app.coordinator import Coordinator
+from lesson_registration.app.errors import AppError
 from lesson_registration.app.knowledge import Knowledge
 from lesson_registration.app.store import Store
 from lesson_registration.preparation.provider import PreparationProvider
@@ -47,10 +48,17 @@ class PreparationTests(unittest.TestCase):
                 self.assertTrue(any(issue["code"] == "missing" and issue["blocking"]
                                     for issue in result["issues"]))
 
-    def test_source_candidate_is_retained_but_needs_confirmation(self):
+    def test_verbatim_source_text_is_retained_for_final_review(self):
         result = self.provider([{"field": "/title", "value": "합성 기타 레슨", "quote": "합성 기타 레슨"}]).prepare(
             request("kmong", "제목은 합성 기타 레슨입니다."))
         self.assertEqual(result["facts"][0]["origin"]["locator"], "합성 기타 레슨")
+        self.assertEqual(result["values"]["title"], "합성 기타 레슨")
+        self.assertTrue(any(p["field"] == "/title" and p["kind"] == "direct" for p in result["provenance"]))
+        self.assertFalse(any(i["field"] == "/title" for i in result["issues"]))
+
+    def test_source_excerpt_with_extra_context_requires_confirmation(self):
+        candidate = {"field": "/title", "value": "합성 기타 레슨", "quote": "제목은 합성 기타 레슨입니다"}
+        result = self.provider([candidate]).prepare(request("kmong", "제목은 합성 기타 레슨입니다"))
         self.assertNotIn("title", result["values"])
         self.assertTrue(any(i["field"] == "/title" and i["code"] == "rule_unverified" for i in result["issues"]))
 
@@ -89,9 +97,9 @@ class PreparationTests(unittest.TestCase):
         answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
                    for key, value in values.items()]
         result = self.provider().prepare(request("kmong", "합성 입력", answers))
-        self.assertFalse(result["ready"])
+        self.assertTrue(result["ready"])
         self.assertEqual(result["values"], values)
-        self.assertTrue(any(i["field"] == "/packages" and i["code"] == "rule_unverified" for i in result["issues"]))
+        self.assertEqual(result["issues"], [])
         contract.catalog().profile_values("kmong.service_listing.mock.v2", result["values"])
 
     def test_kmong_mock_rules_block_unknown_minutes_and_repeated_tier(self):
@@ -121,6 +129,58 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual({f["value"] for f in result["facts"]}, {180000, 210000})
         self.assertTrue(any(i["field"] == "/packages" and i["code"] == "conflict" for i in result["issues"]))
         self.assertNotIn("packages", result["values"])
+
+    def test_nested_price_conflict_is_grounded_and_keeps_both_values(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        values["packages"][0]["amount_vat_included_krw"] = 210000
+        answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
+                   for key, value in values.items()]
+        candidate = {"field": "/packages/0/amount_vat_included_krw", "value": 180000, "quote": "180,000원"}
+        result = self.provider([candidate]).prepare(request("kmong", "첫 번째 패키지 180,000원", answers))
+        self.assertFalse(result["ready"])
+        self.assertEqual(result["values"]["packages"][0]["amount_vat_included_krw"], 210000)
+        self.assertTrue(any(f["path"] == candidate["field"] and f["value"] == 180000 for f in result["facts"]))
+        self.assertTrue(any(i["field"] == candidate["field"] and i["code"] == "conflict" for i in result["issues"]))
+
+    def test_matching_price_with_explicit_vat_inclusive_answer_is_ready(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        values["packages"][0]["amount_vat_included_krw"] = 180000
+        answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
+                   for key, value in values.items()]
+        candidate = {"field": "/packages/0/amount_vat_included_krw", "value": 180000, "quote": "180,000원"}
+        result = self.provider([candidate]).prepare(request("kmong", "첫 패키지 180,000원", answers))
+        self.assertTrue(result["ready"])
+        self.assertFalse(any(i["field"] == candidate["field"] and i["code"] == "conflict" for i in result["issues"]))
+        self.assertEqual(result["issues"], [])
+
+    def test_nested_price_with_no_parent_requests_confirmation(self):
+        candidate = {"field": "/packages/0/amount_vat_included_krw", "value": 180000, "quote": "180,000원"}
+        result = self.provider([candidate]).prepare(request("kmong", "첫 번째 패키지 180,000원"))
+        self.assertFalse(result["ready"])
+        self.assertNotIn("packages", result["values"])
+        self.assertTrue(any(i["field"] == candidate["field"] and i["code"] == "rule_unverified" for i in result["issues"]))
+
+    def test_vat_excluded_source_conflicts_with_vat_inclusive_answer(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        values["packages"][0]["amount_vat_included_krw"] = 180000
+        answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
+                   for key, value in values.items()]
+        field = "/packages/0/amount_vat_included_krw"
+        for quote in ("180,000원 VAT 별도", "180,000원 부가세 불포함", "180,000원 별도 부가가치세"):
+            with self.subTest(quote=quote):
+                result = self.provider([{"field": field, "value": 180000, "quote": quote}]).prepare(
+                    request("kmong", quote, answers))
+                self.assertFalse(result["ready"])
+                self.assertTrue(any(i["field"] == field and i["code"] == "conflict" for i in result["issues"]))
+
+    def test_two_nested_source_prices_block_and_preserve_evidence(self):
+        field = "/packages/0/amount_vat_included_krw"
+        candidates = [{"field": field, "value": 180000, "quote": "180,000원"},
+                      {"field": field, "value": 210000, "quote": "210,000원"}]
+        result = self.provider(candidates).prepare(request("kmong", "첫 패키지 180,000원 또는 210,000원"))
+        self.assertEqual({f["value"] for f in result["facts"]}, {180000, 210000})
+        self.assertTrue(any(i["field"] == field and i["code"] == "conflict" for i in result["issues"]))
+        self.assertFalse(result["ready"])
 
     def test_missing_vat_does_not_create_packages(self):
         result = self.provider().prepare(request("kmong", "합성 레슨 4회 총액 180,000원"))
@@ -161,6 +221,27 @@ class PreparationTests(unittest.TestCase):
         result = self.provider().prepare(request("kmong", "합성 입력", [answer]))
         self.assertFalse(result["ready"])
         self.assertTrue(any(i["field"] == answer["field"] and i["code"] == "unsupported" for i in result["issues"]))
+
+    def test_r03_direct_title_and_fact_conflict_preserve_previous_revision(self):
+        candidate = {"field": "/title", "value": "합성 기타 레슨", "quote": "합성 기타 레슨"}
+        with tempfile.TemporaryDirectory() as temp:
+            co = Coordinator(Store(Path(temp) / "test.sqlite3"), prep=self.provider([candidate]))
+            source = co.create_source("test-owner", {"raw_text": "제목은 합성 기타 레슨입니다."})
+            view = co.create_registration("test-owner", {"source_id": source["source_id"], "selector": "kmong"})
+            self.assertEqual(view["preparation"]["values"]["title"], "합성 기타 레슨")
+            self.assertFalse(any(i["field"] == "/title" for i in view["preparation"]["issues"]))
+            with self.assertRaises(AppError) as error:
+                co.edit_registration("test-owner", view["registration_id"], {
+                    "expected_revision": view["revision"],
+                    "corrections": [{"field": "/title", "value": "서로 다른 제목"}]})
+            self.assertEqual(error.exception.code, "FACT_CONFLICT")
+            self.assertEqual(co.get_registration("test-owner", view["registration_id"])["revision"], view["revision"])
+
+    def test_model_enum_candidate_does_not_bypass_selection(self):
+        candidate = {"field": "/delivery", "value": "offline", "quote": "offline"}
+        result = self.provider([candidate]).prepare(request("kmong", "합성 레슨 offline"))
+        self.assertNotIn("delivery", result["values"])
+        self.assertTrue(any(i["field"] == "/delivery" and i["code"] == "rule_unverified" for i in result["issues"]))
 
     def test_model_unavailable_is_safe_typed_failure(self):
         with self.assertRaises(PortFailure) as error:
