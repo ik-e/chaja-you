@@ -96,6 +96,51 @@ class EndToEnd(Flow):
         self.assertEqual(self.driver.calls.count("K6"), 1)
 
 
+class PostRedirects(Flow):
+    def assert_redirect_blocked(self, status, phase, *, other_origin=False):
+        rid = self.accept()
+        session = self.rt.sessions[rid]
+        self.site.faults.update(submit_redirect=str(status), redirect_phase=phase)
+        if other_origin:
+            other = s.NeutralSite().start()
+            self.addCleanup(other.stop)
+            self.site.faults['redirect_target'] = other.origin + '/unexpected-effect'
+        state = self.co.run_job(rid)
+        blocked = [event for event in session.audit if event['event'] == 'redirect_blocked']
+        self.assertEqual([(event['method'], event['status']) for event in blocked], [('POST', status)])
+        self.assertEqual(state, 'stopped')
+        self.assertEqual(self.effects(rid)['K6'], 'unknown')
+        self.assertEqual(self.result(rid)['result']['goal_verdict'], 'unknown')
+        self.assertEqual(self.driver.calls.count('K6'), 1)
+        self.assertEqual(len(self.site.submit_requests), 1, 'redirect must not dispatch another POST')
+        self.assertEqual(self.site.submit_requests[0]['method'], 'POST')
+        self.assertTrue(self.site.submit_requests[0]['path'].endswith('/submit'))
+        self.assertEqual(self.site.submissions, 1 if phase == 'after_commit' else 0)
+        self.assertEqual(self.co.run_job(rid), state)
+        self.assertEqual(len(self.site.submit_requests), 1)
+        self.assertEqual(self.site.submissions, 1 if phase == 'after_commit' else 0)
+        if other_origin:
+            self.assertEqual(other.hits, 0)
+
+    def test_307_before_commit_does_not_forward_post(self):
+        self.assert_redirect_blocked(307, 'before_commit')
+
+    def test_308_before_commit_does_not_forward_post(self):
+        self.assert_redirect_blocked(308, 'before_commit')
+
+    def test_307_after_commit_has_one_receipt_and_no_forwarded_post(self):
+        self.assert_redirect_blocked(307, 'after_commit')
+
+    def test_308_after_commit_has_one_receipt_and_no_forwarded_post(self):
+        self.assert_redirect_blocked(308, 'after_commit')
+
+    def test_307_external_redirect_has_no_destination_request(self):
+        self.assert_redirect_blocked(307, 'after_commit', other_origin=True)
+
+    def test_308_external_redirect_has_no_destination_request(self):
+        self.assert_redirect_blocked(308, 'after_commit', other_origin=True)
+
+
 class Denials(Flow):
     def test_stale_connection_denied_with_zero_mutation(self):
         rid = self.accept()

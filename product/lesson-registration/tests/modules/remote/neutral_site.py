@@ -37,6 +37,7 @@ class NeutralSite:
         self.posts: list[tuple] = []
         self.logins = 0
         self.submissions = 0
+        self.submit_requests: list[dict] = []
         self.hits = 0
         self.faults: dict[str, str] = {}
         self.extra_html = extra_html
@@ -161,7 +162,7 @@ class NeutralSite:
                     site.works[wid] = {"id": wid, "account": acct, "slot": f.get("slot_ref", ""), "payload": "", "files": [], "marks": []}
                     site.posts.append(("start", acct))
                     return self.respond(303, "", location=f"/work/{wid}")
-                m = re.fullmatch(r"/work/(w-[0-9a-f]+)(?:/(values|files|mark|submit))?", path)
+                m = re.fullmatch(r"/work/(w-[0-9a-f]+)(?:/(values|files|mark|submit|submit-final))?", path)
                 if not m or site.works.get(m.group(1), {}).get("account") != acct:
                     return self.respond(404, site.page("not_found", "", acct))
                 w, step = site.works[m.group(1)], m.group(2)
@@ -178,18 +179,26 @@ class NeutralSite:
                     return self.respond(405, site.page("not_allowed", "", acct))
                 f, files = self.form()
                 site.posts.append((step, acct))
+                if step in ('submit', 'submit-final'):
+                    site.submit_requests.append({'path': path, 'method': method})
+                    redirect = site.faults.get('submit_redirect') if step == 'submit' else None
+                    destination = site.faults.get('redirect_target', f'/work/{w["id"]}/submit-final')
+                    if redirect and site.faults.get('redirect_phase') == 'before_commit':
+                        return self.respond(int(redirect), '', location=destination)
                 if step == "values":
                     w["payload"] = f.get("payload", "").replace("\r\n", "\n")
                 elif step == "files":
                     w["files"] = files
                 elif step == "mark":
                     w["marks"].append(f.get("step", ""))
-                elif step == "submit":
+                elif step in ("submit", "submit-final"):
                     rid = "r-" + secrets.token_hex(6)
                     site.receipts.setdefault((acct, w["slot"]), []).append(
                         {"id": rid, "slot": w["slot"], "payload": w["payload"],
                          "digests": [hashlib.sha256(d).hexdigest() for d in w["files"]]})
                     site.submissions += 1
+                    if redirect:
+                        return self.respond(int(redirect), '', location=destination)
                     if site.faults.get("submit") == "drop_after_commit":
                         self.close_connection = True
                         return

@@ -339,15 +339,23 @@ class RemoteRuntime:
             if req.method in ("GET", "HEAD"):
                 await route.continue_()
                 return
-            # State-changing requests go out exactly once. Chromium's network stack silently
+            # Send each intercepted state-changing request with retries disabled. Chromium silently
             # re-sends a POST whose connection closed without a response (observed: one click,
             # two submissions). A single-attempt fetch without redirects keeps a lost response
-            # unknown instead of duplicating the effect; the browser still follows the redirect.
+            # unknown. Method-preserving redirects must also be blocked before browser fulfillment.
             try:
                 resp = await route.fetch(max_redirects=0, max_retries=0, timeout=s.binding_timeout_ms)
             except Exception:
                 s.audit.append({"event": "request_unanswered", "method": req.method, "at": self.clock.now()})
                 await route.abort("failed")
+                return
+            # A method-preserving redirect would make Chromium issue a second POST
+            # even though route.fetch itself did not follow it. The first endpoint
+            # may already have committed, so the redirected effect needs a new decision.
+            if resp.status in (307, 308):
+                s.audit.append({"event": "redirect_blocked", "method": req.method,
+                                "status": resp.status, "at": self.clock.now()})
+                await route.abort("blockedbyclient")
                 return
             await route.fulfill(response=resp)
         await s.context.route("**/*", guard)

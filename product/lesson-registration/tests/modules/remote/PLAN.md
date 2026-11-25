@@ -1,5 +1,17 @@
 # r05-remote PLAN · TASK-053 원격 브라우저 runtime·인증·뷰어
 
+## 2026-11-25 POST 307·308 재전송 회귀
+
+기준 커밋은 `2baeb2b5d42432f8b0bd6218c02d9d6d6965b9f8`이다. NeutralSite에 접수 전/후 307·308과 후속 제출 endpoint를 추가했다. 중복 차단을 하지 않는 모의 사이트에서 요청 경로별 POST 횟수와 실제 접수 건수를 관측한다. 요청 본문·쿠키·Grant는 새 관측 목록에 저장하지 않는다.
+
+변경 전 Chromium에서 접수를 저장한 원래 endpoint가 307을 반환하면 `route.fetch(max_redirects=0,max_retries=0)` 뒤 `route.fulfill(response=resp)`를 받은 브라우저가 이동 endpoint로 다시 POST했다. 최초 요청 1건과 이동 요청 1건으로 실제 접수 2건, K6 confirmed를 재현했다. 따라서 fetch 내부 redirect 제한만으로 브라우저의 후속 POST를 막을 수 없다.
+
+R05 국소 보완으로 변경 요청의 응답이 307·308이면 브라우저에 전달하기 전에 abort한다. 리다이렉트가 원래 요청의 미처리를 보장하지 않으므로 접수 전/후 모두 unknown으로 보존한다. 첫 endpoint에서 실제 접수된 경우 1건, 접수 전 응답이면 0건이다. 자동 이동이나 재실행은 하지 않는다. 307·308을 요구하는 실제 사용자 인증/업무 흐름은 현재 이 정책으로 중단될 수 있으며, 지원 필요 시 새 승인·실행 경계와 함께 담당자 협의 대상이다.
+
+추가한 `PostRedirects` 6개는 307/308 각각의 접수 전 이동·접수 후 이동·다른 origin 이동이다. 변경 후 최초 POST 1건, 후속 POST 0건, 다른 origin 요청 0건, K6와 최종 결과 unknown, 동일 job 재호출 시 접수 증가 없음, 안전한 redirect_blocked 감사 이벤트를 확인했다. 기존 303 후 GET 전환과 정상 등록·응답 유실 시험도 회귀에 포함했다.
+
+Windows / Python 3.12.7 / Playwright 1.57.0 / 관리형 Chromium 143.0.7499.4에서 전체 `uv run --locked --all-groups python dev.py test r05-remote` 30개 통과, 실패·skip 0개(57.203초). 감사 이벤트 검증을 보강한 뒤 `python -m unittest -v test_execution.PostRedirects` 6개도 통과(19.291초)했다. lock·doctor·담당 경로·diff 검사도 통과했다. 이번 변경의 커밋·push 및 GitHub CI는 별도다.
+
 ## 2026-11-25 CI 확인 및 Viewer 예외 시험 보강
 
 기존 push 커밋은 remote `a7af1114b43638e298d71d4fbcaf40bf4c0e09c7`, kmong `a3718a90c5179b5f72927347cf700283aa588992`이다. GitHub REST API에서 각 SHA의 Actions runs와 check-runs를 조회한 결과 모두 0건이었다. 제품 workflow의 push 대상은 main 및 R01 준비 브랜치이며 pull_request/workflow_dispatch도 지원한다. R05 브랜치 push만으로 실행되지 않는다. snapshot workflow는 과거 고정 커밋을 검증하므로 새 R05 커밋 검증과 구분한다. CI 설정은 수정하지 않았다.

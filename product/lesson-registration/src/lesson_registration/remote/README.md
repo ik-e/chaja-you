@@ -2,6 +2,8 @@
 
 원격 브라우저 runtime (mock 전용). EXEC provider로 I3 `authenticate`, I4 `execute`를 제공합니다.
 
+변경 요청의 307·308 응답은 브라우저에 전달하기 전에 차단한다. 첫 요청이 이미 처리됐을 가능성이 있어 자동 후속 POST를 허용하지 않으며 결과를 unknown으로 보존한다. 접수 전 리다이렉트에서도 작업은 중단된다. 지원이 필요한 리다이렉트 흐름은 별도 실행 경계 협의 대상이다. 관련 관측과 회귀 시험은 PLAN의 POST 307·308 절에 기록했다.
+
 | 파일 | 역할 |
 |---|---|
 | `runtime.py` | `RemoteRuntime`: 세션(등록별 BrowserContext), grant·세대, I3/I4, 뷰어 attach, 유휴 정리 |
