@@ -27,6 +27,7 @@ class ViewerConnection:
         self._rt, self.session, self.grant_hash, self._sink = runtime, session, grant_hash, sink
         self.closed = False
         self._lock = threading.Lock()
+        self._pending = 0
 
     # server -> client
     def send(self, message: dict) -> None:
@@ -47,11 +48,27 @@ class ViewerConnection:
             s.audit.append({"event": "input_rejected", "at": self._rt.clock.now()})
             self.send({"t": "input_rejected", "state": s.state})
             return False
+        with self._lock:
+            if self.closed or self._pending >= 32:
+                return False
+            self._pending += 1
         s.touch()
         kind = action[0]
         s.audit.append({"event": "input", "kind": kind, "at": self._rt.clock.now()})
-        self._rt.host.spawn(_apply_input(s.page_handle, action))
+        self._rt.host.spawn(self._apply_when_current(action))
         return True
+
+    async def _apply_when_current(self, action):
+        s = self.session
+        try:
+            async with s.input_lock:
+                if (self.closed or s.state != "human" or s.grant_hash != self.grant_hash
+                        or s.grant_expires_at <= time.monotonic()):
+                    return
+                await _apply_input(s.page_handle, action)
+        finally:
+            with self._lock:
+                self._pending -= 1
 
     def dispose(self) -> None:
         with self._lock:

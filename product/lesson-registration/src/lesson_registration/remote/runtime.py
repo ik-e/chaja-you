@@ -13,6 +13,7 @@ the human types into the remote page through the viewer and the runtime never re
 from __future__ import annotations
 
 import copy
+import asyncio
 import hashlib
 import secrets
 import threading
@@ -59,6 +60,8 @@ class RemoteSession:
     state: str = "human"
     grant_hash: str | None = None
     grant_expires_at: float = 0.0
+    grant_attached: bool = False
+    input_lock: Any = None
     context: Any = None
     page_handle: Any = None
     cdp: Any = None
@@ -100,7 +103,8 @@ class RemoteRuntime:
 
     def __init__(self, bindings: list[PlatformBinding], store, *, host: BrowserHost | None = None,
                  clock=None, grant_ttl_sec: int = 600, idle_ttl_sec: int = 900,
-                 validate: Callable[[str, dict], None] | None = None):
+                 validate: Callable[[str, dict], None] | None = None, slot_resolver=None,
+                 late_read_authorizer=None):
         self.bindings = {b.profile_id: b for b in bindings}
         self.store = store
         self._own_host = host is None
@@ -108,6 +112,8 @@ class RemoteRuntime:
         self.clock = clock or UtcClock()
         self.grant_ttl_sec, self.idle_ttl_sec = grant_ttl_sec, idle_ttl_sec
         self.validate = validate or _default_validate
+        self.slot_resolver = slot_resolver
+        self.late_read_authorizer = late_read_authorizer
         self.sessions: dict[str, RemoteSession] = {}
         self.generations: dict[str, int] = {}
         self.gateway = ExecutionGateway(self, store)
@@ -176,6 +182,7 @@ class RemoteRuntime:
         s.grant_hash = None
         s.broadcast({"t": "status", "state": "verifying"})
         try:
+            self.host.run(self._drain_input(s))
             try:   # let an in-flight human navigation (sign-in redirect) settle before reading
                 self.host.run(s.page_handle.wait_for_load_state("networkidle", timeout=5000))
             except Exception:
@@ -186,7 +193,8 @@ class RemoteRuntime:
             identity = {"environment": "mock", "platform": binding.profile_id.split(".")[0],
                         "external_account_ref": ident.account_ref,
                         "object_kind": binding.profile_id.split(".")[1],
-                        "slot_ref": binding.slot_for(s.registration_id)}
+                        "slot_ref": (self.slot_resolver(s.registration_id, s.owner_ref, binding.profile_id)
+                                     if self.slot_resolver else binding.slot_for(s.registration_id))}
             status, _note = binding.resolve_target(s.scoped_page, identity)
             if status not in ("new", "existing", "ambiguous"):
                 raise _err("RUNTIME_ERROR", "target status not resolved")
@@ -236,7 +244,8 @@ class RemoteRuntime:
             out = {"observations": copy.deepcopy(ctx.recorded)}
             goal = report.get("goal_observation")
             error = ctx.error or report.get("error")
-            if error and error.get("code") == "EFFECT_UNKNOWN" and goal is None:
+            if (error and error.get("code") == "EFFECT_UNKNOWN" and goal is None
+                    and self.late_read_authorizer is not None):
                 try:                       # RT-04 late read: resolve unknown without any new effect
                     goal = self.gateway.observe_goal(ctx)
                     out["observations"] = copy.deepcopy(ctx.recorded)
@@ -255,7 +264,7 @@ class RemoteRuntime:
                 self.sessions.pop(s.registration_id, None)
 
     # ================= viewer =================
-    def attach_viewer(self, viewer_grant: str, owner_ref: str, sink) -> ViewerConnection:
+    def attach_viewer(self, viewer_grant: str, owner_ref: str, sink, *, generation=None) -> ViewerConnection:
         gh = _hash(viewer_grant) if isinstance(viewer_grant, str) else ""
         with self._lock:
             s = next((x for x in self.sessions.values() if x.grant_hash and secrets.compare_digest(x.grant_hash, gh)), None)
@@ -263,6 +272,9 @@ class RemoteRuntime:
                 raise _err("PERMISSION_DENIED", "viewer grant is invalid or expired")
             if s.owner_ref != owner_ref:
                 raise _err("PERMISSION_DENIED", "viewer grant belongs to another owner")
+            if s.grant_attached or (generation is not None and generation != s.generation):
+                raise _err("PERMISSION_DENIED", "viewer grant already used or stale")
+            s.grant_attached = True
             conn = ViewerConnection(self, s, gh, sink)
             s.viewers.add(conn)
             s.touch()
@@ -294,15 +306,21 @@ class RemoteRuntime:
             self.host.close()
 
     # ================= browser plumbing =================
+    async def _drain_input(self, session):
+        async with session.input_lock:
+            pass
+
     def _issue_grant(self, s: RemoteSession) -> dict:
         token = secrets.token_urlsafe(32)
         s.grant_hash = _hash(token)
+        s.grant_attached = False
         s.grant_expires_at = time.monotonic() + self.grant_ttl_sec
         expires = (datetime.now(timezone.utc) + timedelta(seconds=self.grant_ttl_sec)).strftime("%Y-%m-%dT%H:%M:%SZ")
         s.touch()
         return {"generation": s.generation, "viewer_grant": token, "expires_at": expires}
 
     async def _start_browser(self, s: RemoteSession) -> None:
+        s.input_lock = asyncio.Lock()
         b = s.binding
         s.context = await self.host.new_context(viewport=b.viewport, accept_downloads=False)
         origin = origin_of(b.origin)

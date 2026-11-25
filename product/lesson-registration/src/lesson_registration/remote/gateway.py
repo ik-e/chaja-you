@@ -79,7 +79,10 @@ class ExecutionGateway:
     def list_operations(self, ctx: ExecContext) -> list[dict]:
         if ctx.ops is None:
             mine = ctx.session.binding.driver.operations(ctx.accepted)
-            theirs = self._store.expected_operations(ctx.store_ctx) if hasattr(self._store, "expected_operations") else mine
+            if not hasattr(self._store, "expected_operations"):
+                self._fence(ctx, _error("PERMISSION_DENIED", "STORE operation registry is required"))
+                raise PortFailure(ctx.error)
+            theirs = self._store.expected_operations(ctx.store_ctx)
             if mine != theirs:
                 self._fence(ctx, _error("PROFILE_CHANGED", "driver operation registry differs from STORE"))
                 raise PortFailure(ctx.error)
@@ -115,6 +118,10 @@ class ExecutionGateway:
 
     # ---------- RT-04 ----------
     def observe_goal(self, ctx: ExecContext) -> dict:
+        if ctx.fenced:
+            authorize = self._rt.late_read_authorizer
+            if authorize is None or not authorize(ctx.store_ctx):
+                raise PortFailure(_error("PERMISSION_DENIED", "fenced readback requires separate authorization"))
         goal = ctx.last_goal
         if goal is None or goal.verdict != "confirmed":
             try:

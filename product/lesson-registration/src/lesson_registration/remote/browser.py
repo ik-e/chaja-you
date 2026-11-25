@@ -66,6 +66,11 @@ class BrowserHost:
                 await self._browser.close()
             if self._pw is not None:
                 await self._pw.stop()
+            pending = [task for task in asyncio.all_tasks() if task is not asyncio.current_task()]
+            for task in pending:
+                task.cancel()
+            if pending:
+                await asyncio.gather(*pending, return_exceptions=True)
         try:
             if self._loop.is_running() and (self._browser is not None or self._pw is not None):
                 asyncio.run_coroutine_threadsafe(_stop(), self._loop).result(self.timeout_sec)

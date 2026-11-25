@@ -92,3 +92,27 @@
 - Q5 (R03) slot_ref 출처: 계약은 "server source lineage" 기준인데 AuthInput에는 registration_id만 있음. 현재 `slot-{registration_id}`. 같은 원본으로 두 번 등록하는 경우를 막으려면 CO가 source 기반 slot을 넘겨줘야 함
 - Q6 (R03) 실행 중 첨부 바이트 제공 방법: driver가 이미지 bytes를 digest로 받을 AssetSource 필요(크몽 K3)
 - Q7 (R01·R04) ScopedPage 인터페이스·예외 타입을 공통 계약으로 둘지: 현재 `remote/page.py`에 정의하고 driver별 예외 클래스를 주입받는 방식
+# 2026-11-25 Viewer WebSocket 및 입력 gate 후속
+
+목적은 사용자의 직접 인증 이후 서버가 같은 세션으로 승인된 모의 작업을 수행하도록 연결하는 것이다. 적용 main은 `094e4d2c5dd3fbb8e9c9352296f87d90cd659308`이다.
+
+이번 구현은 `viewer.js`의 mount/dispose, R03 주입용 `viewer_router`, single-use Grant attach, finish 입력 barrier와 대기 입력 재검증, Source slot resolver 주입점이다. 전송 경로와 수치 상한은 R05 세부 제안이며 R03·R04가 실제 조립부에 반영하기 전 상태다. 공통 의존성과 다른 담당 경로는 수정하지 않았다.
+
+Windows / Python 3.12.7 / Playwright 1.57.0 / 관리형 Chromium 143.0.7499.4에서 다음을 실행했다.
+
+```powershell
+uv run --locked --all-groups python dev.py test r05-remote
+uv run --locked --all-groups python dev.py doctor
+uv run --locked --all-groups python dev.py check-changes r05-remote --base 094e4d2
+git diff --check
+```
+
+결과는 19개 통과, 실패 0개다. doctor·소유 경로·diff 검사도 통과했다. main의 R04 UI 원본을 테스트 서버로 제공하고 실제 viewer-container에 시험 코드가 mount를 호출했다. 실제 WS 프레임 수신, DOM 입력으로 가상 로그인, finish 이후 입력 0건, 반복 dispose, URL/storage Grant 미노출을 확인했다. 다른 owner/origin/query 거절, Grant 재사용·잘못된 generation 거절, finish 전 대기 입력 폐기를 확인했다. R04 기존 버튼/H6 호출을 연결한 전체 제품 E2E는 미실행이다. Uvicorn의 기본 WS 구현에서 승인된 라이브러리의 deprecation warning이 출력되지만 시험 실패는 없다.
+
+브라우저 종료 시 남은 route task 정리를 추가했다. 일부 모의 연결 폐기에서는 서버 측 ConnectionAbortedError가 출력될 수 있으며 실제 제품 서버 통합 시 로그/teardown도 추가 확인한다.
+
+R03과 남은 항목은 endpoint의 서비스 owner 인증 주입, Source 계보 기반 안정 slot resolver, 승인 asset reader의 registration/owner/lease 권한, D01 전체 Scope digest, D02 Permit consume와 Fence 실제 dispatch 원자 경계다. 현행 STORE는 Permit을 반환하지만 consume API가 없어 D02 완료를 주장하지 않는다. expected_operations가 없는 STORE를 driver registry로 대신 승인하던 fallback은 제거했다. Fence 이후 readback은 별도 late_read_authorizer가 허가할 때만 수행하며 기본은 unknown을 보존한다. 허가의 계약/관측 저장 경계는 R03과 확인한다.
+
+R04는 정적 JS import와 mount/dispose 호출, H6 finish/refresh/close 연결, 서버 응답 기반 인증 상태 표시를 반영해야 한다. postMessage iframe 방식 대신 module/canvas 연결안을 제안한다. 실제 UI 수정은 R04 담당이다.
+
+현재 변경은 로컬에서 검증했으며 새 커밋의 GitHub CI는 미실행이다. 다음 단계는 담당자 조립부 반영 후 공동 E2E와 공통 D01~D04 대조다. 기존 3~3.5근무일 추정에서 실제 남은 공수는 이 협의 후 다시 산정한다.
