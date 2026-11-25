@@ -1,5 +1,23 @@
 # r05-remote PLAN · TASK-053 원격 브라우저 runtime·인증·뷰어
 
+## 2026-11-25 CI 확인 및 Viewer 예외 시험 보강
+
+기존 push 커밋은 remote `a7af1114b43638e298d71d4fbcaf40bf4c0e09c7`, kmong `a3718a90c5179b5f72927347cf700283aa588992`이다. GitHub REST API에서 각 SHA의 Actions runs와 check-runs를 조회한 결과 모두 0건이었다. 제품 workflow의 push 대상은 main 및 R01 준비 브랜치이며 pull_request/workflow_dispatch도 지원한다. R05 브랜치 push만으로 실행되지 않는다. snapshot workflow는 과거 고정 커밋을 검증하므로 새 R05 커밋 검증과 구분한다. CI 설정은 수정하지 않았다.
+
+확인 시점 최신 main `366cea92a497ff68176107766b1314ab75d5c59f`의 product bootstrap 실행 [45565527074](https://github.com/ik-e/chaja-you/actions/runs/45565527074)은 success다. 두 R05 push 커밋이 main의 ancestor가 아님을 확인했다. 해당 main 성공을 R05 커밋의 CI 통과로 기록하지 않는다.
+
+`test_transport.py`에 다음 5개를 추가했다.
+
+- 만료 Grant로 WS attach 시 화면/상태를 전달하지 않고 연결 거절
+- attach 이후 Grant 만료 시 입력 거절과 입력 내용 비기록
+- 두 동시 attach 경쟁에서 성공 1개·거절 1개, 활성 Viewer 1개
+- WS detach는 브라우저 context를 유지하되 같은 Grant 재접속 거절, H6 refresh 후 새 generation으로 재접속
+- Chromium에서 연결 중 즉시 dispose와 반복 dispose, 3회 refresh/mount/dispose 후 canvas·Viewer 잔존 0개 및 원래 context 유지
+
+브라우저 시험용 서버 시작 코드를 재사용하도록 정리했다. 제품 코드 변경은 없다. 원래 R04 UI 버튼 바인딩을 자동 연결하는 시험으로 확대하지 않았다.
+
+Windows / Python 3.12.7 / Playwright 1.57.0 / 관리형 Chromium 143.0.7499.4에서 `uv run --locked --all-groups python dev.py test r05-remote` 결과 24개 통과, 실패·skip 0개다. 이전 19개와 신규 5개를 함께 실행했다. lock/doctor/소유 경로 및 diff 검사도 통과했다. 새 시험 변경의 커밋·push 및 GitHub 실행은 별도다.
+
 - 담당: R05 (임다혁) · 브랜치: `r05/product-remote` · 기준 커밋: `65aed37` (활성화 커밋)
 - 독립 실행: `uv run --locked --python 3.12 python dev.py test r05-remote`
 - 고정 설계: `common-integration-v1.json` (state, storage S-ACCEPT~S-FENCE, runtime RT-01~04, VIEWER), `data-schema-v4.1.json` (AuthInput/AuthOutput/AuthGrant, ExecuteInput/ExecutionReport, Operation/Observation), 06-API-PORTS I3·I4·H6
