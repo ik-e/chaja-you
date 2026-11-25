@@ -60,3 +60,5 @@ PYTHONPATH=.:src uv run --no-project --python 3.12 --with jsonschema==4.25.1 pyt
 R05: 053·054 수신 및 7근무일 추정, 11/27 인터페이스 협의 후보, 12/3 통합 후보. runtime 계약 우선. 실제 PLAN/착수 여부 미확인.
 
 첫 후보 CI: [45534634454](https://github.com/ik-e/chaja-you/actions/runs/45534634454)에서 Python 3.12 의존성 해석/설치 통과, Ubuntu 26.04의 Chromium 미지원으로 브라우저 설치 실패·기술 probe 미실행. 지원 runner Ubuntu 24.04를 지정하여 재검증한다. 이전 로컬 관측 서술은 재현 근거 미확보로 검증에 사용하지 않는다.
+
+담당자 공통 세부 합의는 [INTERFACE-REVIEW](../contracts/INTERFACE-REVIEW.md)를 사용한다. 서버 canonical byte primitive와 golden vectors/negative test 추가; 실제 digest 대상 선택·slot·profile readback과 팀원 동의는 별도. 독립 검증 명령: `uv run --locked --python 3.12 python dev.py test common`.

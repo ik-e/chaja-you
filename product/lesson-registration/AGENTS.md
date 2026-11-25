@@ -13,3 +13,5 @@ TASK 결과 정본은 담당자가 별도 문서 갱신으로 관리하며 제�
 
 ## 공통 물리 방향 및 갱신
 [PD-01~08](contracts/PHYSICAL-BINDING.json)과 [README의 기준선 갱신 절차](README.md#공통-기준선-갱신-확인-2026-11-25)를 확인한다. 방향 채택과 정확한 lock/세부 계약/제품 검증은 구분한다. owner 합의 전 기존 Protocol과 pinned schema를 유지하며 독립 fake로 진행. 적용한 main SHA 및 자신의 검증 결과를 PLAN에 기록한다.
+
+세부 공동 경계는 [INTERFACE-REVIEW](contracts/INTERFACE-REVIEW.md)에 따라 관련 담당자와 자신의 PLAN에서 확인한다. server digest primitive 및 golden vectors를 공유하며 scope/slot/readback은 구현·검증 책임에 맞춰 결정한다.
