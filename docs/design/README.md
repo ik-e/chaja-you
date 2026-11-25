@@ -21,3 +21,5 @@
 [AI 설계 정본 공간](../artifacts/design/README.md) · [ADR](../adr/README.md) · [문서 관리 규칙](../문서_관리_규칙.md) · [팀 헌장](../charter/팀_헌장.md)
 
 현행 인덱스는 정본을 수정한 뒤 `node tools/generate_lesson_current_design.mjs`로 재생성하고 `--check`로 검사한다. 채택 전 스냅샷과 원본의 과거 상태는 보존한다. 실서비스 권한은 별도 승인이다.
+
+- [현행 기준선 적용 규칙](lesson-registration/BASELINE-POLICY.md) · [독립 검증 실행](lesson-registration/VALIDATION.md)
