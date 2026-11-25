@@ -6,7 +6,8 @@ import unittest
 import support as s
 from lesson_registration.platforms.kmong import KmongAdapter, KmongContext, KmongError
 from lesson_registration.platforms.kmong.adapter import expected_snapshot
-from lesson_registration.platforms.kmong.operations import canonical, sha256
+from lesson_registration.app.result import evaluate as r03_evaluate
+from lesson_registration.app.result import payload_digest as r03_payload_digest
 
 
 class MockCase(unittest.TestCase):
@@ -53,12 +54,44 @@ class NormalPath(MockCase):
         receipt = self.site.receipts[("mock-account-kmong", "mock-slot-kmong")][0]
         self.assertEqual(goal["external_ref"], receipt["id"])
         self.assertEqual(goal["asset_digests"], [a["digest"] for a in scope["values"]["main_images"]])
-        self.assertEqual(goal["payload_digest"], sha256(canonical(expected_snapshot(scope["values"]))))
+        self.assertEqual(goal["payload_digest"], r03_payload_digest(scope["values"]))   # R03 evaluator rule
         stored = dict(receipt["values"], main_images=receipt["image_digests"])
         self.assertEqual(stored, expected_snapshot(scope["values"]))   # platform side holds exactly approved values
         k6 = next(o for o in report["observations"] if o["step_id"] == "K6")
         self.assertEqual(k6["method"], "submission_response")
         self.assertEqual(goal["method"], "independent_readback")
+
+    def test_r03_result_evaluator_confirms_goal(self):
+        ctx = self.ctx()
+        _, store, report = self.run_flow(ctx)
+        result = r03_evaluate({"profile": s.kmong_profile(), "accepted": ctx.accepted, "report": report,
+                               "evidence": store.evidence})
+        self.assertEqual(result["goal_verdict"], "confirmed", result.get("error"))
+
+    def test_r03_result_evaluator_rejects_tampered_readback(self):
+        self.site.faults["tamper_readback"] = "title"
+        ctx = self.ctx()
+        _, store, report = self.run_flow(ctx)
+        goal = self.adapter.observe_goal(ctx)
+        report = dict(report, goal_observation=goal.goal_observation) if goal.goal_observation else report
+        result = r03_evaluate({"profile": s.kmong_profile(), "accepted": ctx.accepted, "report": report,
+                               "evidence": store.evidence + goal.evidence})
+        self.assertNotEqual(result["goal_verdict"], "confirmed")
+        self.assertEqual(goal.observation["verdict"], "confirmed")       # a receipt exists ...
+        self.assertEqual(goal.verdict, "not_reached")                   # ... but it is not the approved one
+
+    def test_platform_adapter_run_over_bound_gateway(self):
+        ctx = self.ctx()
+        store = s.FakeStore()
+        report = self.adapter.run(s.BoundFake(s.FakeGateway(self.adapter, ctx, store)))
+        self.assertEqual(self.checker.check(report, "ExecutionReport"), [])
+        self.assertNotIn("error", report)
+        self.assertEqual([o["step_id"] for o in report["observations"]], [f"K{i}" for i in range(1, 8)])
+        self.assertEqual(self.site.submissions, 1)
+        self.site.faults["submit"] = "drop_after_commit"
+        other = self.adapter.run(s.BoundFake(s.FakeGateway(self.adapter, ctx, store)))
+        self.assertEqual(other["error"]["code"], "DUPLICATE_RISK")   # same effect ledger: K1 not re-admitted
+        self.assertEqual(self.site.submissions, 1)
 
     def test_online_three_images_no_region(self):
         assets = s.default_assets()
@@ -153,6 +186,8 @@ class SubmitOnceAndUnknown(MockCase):
         goal = self.adapter.observe_goal(ctx)
         self.assertEqual(goal.verdict, "confirmed")
         self.assertEqual(self.checker.check(goal.goal_observation, "GoalObservation"), [])
+        self.assertEqual(self.checker.check(goal.observation, "Observation"), [])   # stored with the goal evidence
+        self.assertEqual((goal.observation["step_id"], goal.observation["verdict"]), ("K7", "confirmed"))
         self.assertEqual(self.site.submissions, 1)
 
     def test_server_error_before_commit_is_unknown_until_readback_says_absent(self):

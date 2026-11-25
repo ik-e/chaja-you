@@ -370,3 +370,32 @@ def data_schema() -> SchemaChecker:
 
 def kmong_profile() -> dict:
     return next(p for p in dev.pinned("platform-profiles-v2.json")["profiles"] if p["id"] == "kmong.service_listing.mock.v2")
+
+
+class BoundFake:
+    """contracts.interfaces.BoundGateway over FakeGateway: Observation dicts out, PortFailure on error."""
+
+    def __init__(self, gateway: FakeGateway):
+        self.gw = gateway
+
+    def list_operations(self):
+        return [dict(o) for o in self.gw.registry]
+
+    def perform(self, operation):
+        from contracts.interfaces import PortFailure
+        try:
+            return self.gw.perform(operation).observation
+        except KmongError as e:
+            raise PortFailure(e.to_error()) from e
+        except Denied as e:
+            raise PortFailure({"code": e.code, "message": "admission denied"}) from e
+
+    def observe_goal(self):
+        from contracts.interfaces import PortFailure
+        goal = self.gw.adapter.observe_goal(self.gw.ctx)
+        if goal.observation:
+            self.gw.store.observations.append(goal.observation)
+            self.gw.store.evidence += goal.evidence
+        if goal.verdict != "confirmed":
+            raise PortFailure({"code": "EVIDENCE_INSUFFICIENT", "message": f"goal {goal.verdict}: {goal.reason}"})
+        return goal.goal_observation

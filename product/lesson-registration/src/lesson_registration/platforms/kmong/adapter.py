@@ -14,6 +14,8 @@ import secrets
 from dataclasses import dataclass, field
 from urllib.parse import quote
 
+from contracts.canonical import json_digest
+
 from . import operations as ops_mod
 from . import profile
 from .errors import KmongError
@@ -31,6 +33,8 @@ class GoalReadback:
     goal_observation: dict | None
     reason: str
     mismatches: list = field(default_factory=list)
+    observation: dict | None = None   # K7 read observation the goal evidence travels with (S-OBSERVE)
+    evidence: list = field(default_factory=list)
 
 
 @dataclass
@@ -82,6 +86,25 @@ def readback_snapshot(view: PageView) -> dict:
         raise PageStructureError(f"readback malformed: {e}") from e
 
 
+def readback_values(observed: dict, scope: dict) -> dict:
+    """Rebuild the accepted ``values`` shape from what the page showed (RT-04: actual readback).
+
+    Only presentation is normalized (package tier order follows the accepted order, image refs are
+    looked up by observed digest). Any value the page did not show identically yields a different
+    payload digest, so the digest can equal digest(scope.values) only when the readback matches.
+    """
+    out = {k: observed[k] for k in TEXT_KEYS}
+    out["category_path"] = observed["category_path"]
+    if observed["region"] is not None:
+        out["region"] = observed["region"]
+    by_tier = {p["tier"]: p for p in observed["packages"] or []}
+    order = [p["tier"] for p in scope["values"].get("packages") or []]
+    out["packages"] = [by_tier[t] for t in order if t in by_tier] + [p for t, p in by_tier.items() if t not in order]
+    refs = {a["digest"]: a for a in scope["assets"]}
+    out["main_images"] = [refs.get(d, {"digest": d}) for d in observed["main_images"]]
+    return out
+
+
 def compare(expected: dict, observed: dict, keys) -> list[str]:
     snap_keys = {"region": "region", "main_images": "main_images"}
     return [k for k in keys if expected.get(snap_keys.get(k, k)) != observed.get(snap_keys.get(k, k))]
@@ -89,6 +112,24 @@ def compare(expected: dict, observed: dict, keys) -> list[str]:
 
 class KmongAdapter:
     profile_id = profile.PROFILE_ID
+
+    # ---------- PlatformAdapter (contracts.interfaces) ----------
+    def run(self, gateway) -> dict:
+        """Drive the registered operations through the runtime's BoundGateway, in order, once each.
+
+        The gateway does admission/observation/fence; this loop never retries and stops at the
+        first error. Returns an ExecutionReport-shaped dict.
+        """
+        from contracts.interfaces import PortFailure
+
+        report: dict = {"observations": []}
+        try:
+            for op in gateway.list_operations():
+                report["observations"].append(gateway.perform(op))
+            report["goal_observation"] = gateway.observe_goal()
+        except PortFailure as e:
+            report["error"] = e.error
+        return report
 
     # ---------- RT-02 ----------
     def operations(self, accepted: dict) -> list[dict]:
@@ -108,10 +149,16 @@ class KmongAdapter:
             raise KmongError("INVALID_REQUEST", "operation is not registered for this accepted scope", "absent")
         issues = self.validate(ctx.accepted)
         if issues:
-            raise KmongError("VALIDATION_FAILED", "accepted values violate the kmong mock profile", "absent", issues=issues)
+            obs = self._observation(ctx, scope, operation, "runtime_observation", "absent", [])
+            raise KmongError("VALIDATION_FAILED", "accepted values violate the kmong mock profile", "absent",
+                             issues=issues, observation=obs)
         handler = getattr(self, "_" + operation["step_id"].lower())
         try:
             return handler(ctx, scope, operation)
+        except KmongError as e:
+            if e.observation is None:   # every admitted operation reports an observation (S-OBSERVE)
+                e.observation = self._observation(ctx, scope, operation, "runtime_observation", e.verdict, e.evidence)
+            raise
         except NavigationUnknown as e:
             verdict = "unknown" if operation["effect_class"] == "potential_effect" else "absent"
             code = "EFFECT_UNKNOWN" if verdict == "unknown" else "RUNTIME_ERROR"
@@ -127,11 +174,16 @@ class KmongAdapter:
         """Read-only independent readback by slot; safe after fence (no effects)."""
         scope = ctx.accepted["scope"]
         self._check_scope(ctx.accepted)
+        op = next(o for o in ops_mod.list_operations(ctx.accepted) if o["step_id"] == "K7")
         try:
             view = ctx.page.goto(self._receipt_path(scope))
         except NavigationUnknown as e:
-            return GoalReadback("unknown", None, f"readback not observed: {e}")
-        return self._judge_receipt(ctx, scope, view)[0]
+            obs = self._observation(ctx, scope, op, "independent_readback", "unknown", [])
+            return GoalReadback("unknown", None, f"readback not observed: {e}", observation=obs)
+        goal, ev = self._judge_receipt(ctx, scope, view, op)
+        goal.observation = self._observation(ctx, scope, op, "independent_readback", self._k7_verdict(goal), [ev])
+        goal.evidence = [ev]
+        return goal
 
     # ---------- steps ----------
     def _k1(self, ctx, scope, op):
@@ -227,10 +279,9 @@ class KmongAdapter:
     def _k7(self, ctx, scope, op):
         view = ctx.page.goto(self._receipt_path(scope))
         goal, ev = self._judge_receipt(ctx, scope, view, op)
-        verdict = {"confirmed": "confirmed", "not_reached": "absent"}.get(goal.verdict, "unknown")
-        if goal.reason == "mismatch":
-            verdict = "confirmed"   # a receipt exists; it just does not match the approved values
+        verdict = self._k7_verdict(goal)
         obs = self._observation(ctx, scope, op, "independent_readback", verdict, [ev])
+        goal.observation, goal.evidence = obs, [ev]
         if goal.verdict != "confirmed":
             code = "DUPLICATE_RISK" if goal.reason == "multiple_receipts" else "EVIDENCE_INSUFFICIENT"
             raise KmongError(code, f"goal not confirmed: {goal.reason} {goal.mismatches}", verdict,
@@ -238,6 +289,12 @@ class KmongAdapter:
         return StepOutcome(obs, [ev], goal)
 
     # ---------- helpers ----------
+    @staticmethod
+    def _k7_verdict(goal: GoalReadback) -> str:
+        if goal.reason in ("mismatch", "multiple_receipts"):
+            return "confirmed"   # a receipt exists; it just is not the approved single listing
+        return {"confirmed": "confirmed", "not_reached": "absent"}.get(goal.verdict, "unknown")
+
     def _judge_receipt(self, ctx, scope, view, op=None):
         if view.page == "receipt_absent":
             ev = self._evidence(ctx, scope, op, "goal", "independent_readback", state="absent")
@@ -246,7 +303,7 @@ class KmongAdapter:
             ev = self._evidence(ctx, scope, op, "goal", "independent_readback", state="unreadable")
             return GoalReadback("unknown", None, f"unexpected page {view.page}"), ev
         observed = readback_snapshot(view)
-        payload_digest = ops_mod.sha256(ops_mod.canonical(observed))
+        payload_digest = json_digest(readback_values(observed, scope))
         ev = self._evidence(ctx, scope, op, "goal", "independent_readback", state=view.one("state"),
                             payload_digest=payload_digest, assets=observed["main_images"],
                             external_ref=view.one("receipt_id"))

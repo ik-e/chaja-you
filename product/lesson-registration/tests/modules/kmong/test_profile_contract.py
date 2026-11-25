@@ -142,14 +142,25 @@ class OperationRegistry(unittest.TestCase):
         b["scope"]["revision"] = 4
         b["scope"]["values"]["title"] = "합성 음악 레슨 안내 제목 수정"
         oa, ob = list_operations(a), list_operations(b)
-        self.assertEqual([o["operation_id"] for o in oa], [o["operation_id"] for o in ob])  # same effect identity
-        self.assertNotEqual(oa[1]["binding_digest"], ob[1]["binding_digest"])               # K2 bound to values
+        self.assertEqual([o["operation_id"] for o in oa], [o["operation_id"] for o in ob])
+        self.assertNotEqual(oa[1]["binding_digest"], ob[1]["binding_digest"])   # K2 bound to title
+        self.assertEqual(oa[0]["binding_digest"], ob[0]["binding_digest"])      # K1 binds no values
         c = copy.deepcopy(a)
         c["scope"]["target"]["slot_ref"] = "mock-slot-other"
-        self.assertNotEqual(oa[5]["operation_id"], list_operations(c)[5]["operation_id"])
+        self.assertNotEqual(oa[5]["binding_digest"], list_operations(c)[5]["binding_digest"])  # target bound
         d = copy.deepcopy(a)
-        d["scope"]["values"]["packages"].reverse()
-        self.assertEqual(oa[3]["binding_digest"], list_operations(d)[3]["binding_digest"])  # tier order normalized
+        d["scope"]["profile_ref"]["digest"] = "b" * 64
+        self.assertNotEqual(oa[5]["binding_digest"], list_operations(d)[5]["binding_digest"])  # profile digest bound
+
+    def test_matches_r03_store_gateway_registry(self):
+        """STORE admits only operations whose digest it recomputes itself (app/gateway.py)."""
+        from lesson_registration.app.gateway import binding_digest as store_binding_digest
+        acc = s.base_accepted()
+        scope, pin = acc["scope"], s.kmong_profile()
+        expected = [{"operation_id": f"{scope['registration_id']}:{st['step_id']}", "step_id": st["step_id"],
+                     "action_key": st["step_id"], "effect_class": st["effect_class"],
+                     "binding_digest": store_binding_digest(scope, st)} for st in pin["steps"]]
+        self.assertEqual(KmongAdapter().operations(acc), expected)
 
     def test_scope_pin_mismatch_refused(self):
         a = s.base_accepted()

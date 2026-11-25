@@ -27,14 +27,14 @@
 |---|---|---|
 | K-D01 | adapter는 raw driver 대신 **좁은 페이지 인터페이스**(`ScopedPage`: goto·fill·attach·submit·view)만 받는다. 실제 구현은 r05-remote가 브라우저로, 시험은 stdlib HTML 폼 클라이언트로 제공 | RT-01 "no raw driver or credential to adapter". 대안(Playwright Page 직접 전달)은 계약 위반 |
 | K-D02 | 이동 경로는 adapter registry의 고정 경로만 사용, origin은 runtime이 고정 | prohibitions "arbitrary origin/navigation" |
-| K-D03 | operation_id = 대상(slot)·단계·action의 안정 해시, binding_digest = 단계가 묶는 값의 정규 JSON sha256 | RT-02 "stable logical operations", effect key가 버전·요청이 바뀌어도 같아야 함 |
+| K-D03 | (2차 변경) R03 StoreGateway와 동일: operation_id `{registration_id}:{step_id}`, action_key = step_id, binding_digest = `json_digest({step_id, bound, asset_digests(main_images 바인딩 시 scope assets), target, profile_digest})`. 효과 기준은 STORE가 (target, step_id)로 관리 | R03 연동 기준(11/25). 1차는 profile ID가 id에 섞여 버전 변경 시 효과 우회 위험이 있었음 |
 | K-D04 | `perform`은 실행 전 operation이 registry와 일치하는지, binding_digest가 scope에서 다시 계산한 값과 같은지 확인. 다르면 실행하지 않고 오류 | RT-03 "never caller free arguments" |
 | K-D05 | 시작 전 값 검증을 K1 이전에 수행. 오프라인이면 지역 필수, 온라인이면 지역 없어야 함 | 효과 발생 전에 실패해야 중복·잔여 draft 위험이 없음 |
 | K-D06 | 이미지는 runtime의 자산 저장소에서 바이트를 받아 **digest를 재계산**한 뒤 첨부 | 첨부 자료 digest 일치(K3) |
 | K-D07 | K6 응답 유실·시간 초과는 `unknown` + `EFFECT_UNKNOWN`. 응답만으로 성공 판정하지 않음 | profile K6 "응답 단독 성공 판정 금지" |
 | K-D08 | K6 직전에 같은 slot의 기존 receipt를 읽기로 확인하고 있으면 `DUPLICATE_RISK`로 중단 | gateway admission과 별도의 adapter 방어선 |
 | K-D09 | K7은 receipt ID가 아닌 **slot 기준 경로**로 조회 | K6 응답이 유실돼도 독립 확인 가능해야 함 |
-| K-D10 | payload_digest는 재조회한 값을 정규화해 계산하고, scope 값의 digest와 비교 | RT-04 "actual normalized readback, no copy from input" |
+| K-D10 | (2차 변경) 재조회 화면 값을 accepted `values` 형태로 다시 조립(패키지 순서·이미지 참조만 정규화)해 `json_digest`로 payload_digest 계산. R03 결과 판정(`digest(scope.values)`)과 같을 때만 일치 | RT-04 "actual normalized readback, no copy from input" + R03 evaluator 규칙 |
 | K-D11 | mock 사이트는 중복 접수를 스스로 막지 **않는다**(접수 횟수만 기록) | 중복 차단이 adapter·gateway에서 실제로 동작하는지 검증하기 위함 |
 | K-D12 | mock 사이트·fixture는 표준 라이브러리만 사용 | 공통 환경 `dependencies = []`, 의존성 변경은 R01 승인 필요 |
 
@@ -82,6 +82,12 @@
 
 - 회귀 민감도 확인: adapter의 안전 장치 5개(제출 전 재조회, registry 정확 일치, 응답만으로 성공 금지, 재조회 대조, unknown 보존)를 하나씩 제거하면 각각 시험이 실패함을 확인
 - 미완료: r05-remote 실제 브라우저 runtime과의 연동 시험, R03 STORE 실제 admission/fence 연결, 제품 시험 AT-04·T5-13·DV-03·DV-04 (통합 단계)
+
+### 2026-11-25 · 2차 (R03 STORE 기준 정렬)
+
+- 기준: main `22cbb4f` 병합 후. `uv run --locked --python 3.12 python dev.py test r05-kmong` → **32 tests OK**, `check-changes r05-kmong --base 22cbb4f` 통과
+- 변경: K-D03·K-D10 정렬, 실행 밖 재조회도 K7 observation 반환, 모든 adapter 오류에 observation 첨부, `PlatformAdapter.run(BoundGateway)` 추가
+- 추가 시험: R03 `StoreGateway` binding digest·operation 목록과 완전 일치, R03 결과 판정기로 정상 흐름 `confirmed`·재조회 변조 시 비확인, BoundGateway 경유 실행과 같은 effect ledger 재실행 차단(DUPLICATE_RISK)
 
 ## 7. 미정 사항 (R01 확인 중)
 
