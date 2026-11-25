@@ -1,3 +1,3 @@
-{"ts": 1795498120.325, "event": "browser_started", "version": "153.0.8010.12"}
-{"ts": 1795498133.336, "event": "session_created", "session": "656479423f0fce4b"}
-{"ts": 1795498135.36, "event": "session_closed", "session": "656479423f0fce4b", "reason": "idle_timeout"}
+{"ts": 1795500654.097, "event": "browser_started", "version": "153.0.8010.12"}
+{"ts": 1795500668.487, "event": "session_created", "session": "de5dcd3ae0a5cd0d", "auto_job": false}
+{"ts": 1795500671.159, "event": "session_closed", "session": "de5dcd3ae0a5cd0d", "reason": "idle_timeout"}

@@ -29,9 +29,9 @@
       "submitted": true,
       "lesson_id": 1,
       "message": null,
-      "evidence": "result_0990cbb3e1490433_lesson1.png"
+      "evidence": "result_d949ae579a405e66_lesson1.png"
     },
-    "elapsed_sec": 1.94,
+    "elapsed_sec": 2.22,
     "saved_lesson": {
       "id": 1,
       "owner": "tutor_a",
@@ -99,18 +99,28 @@
     "after_4_5s": 404
   },
   {
+    "test": "T12 로그인만 하면 서버가 자동으로 이어서 등록",
+    "verdict": "pass",
+    "result_state": "mock_success",
+    "lessons_added": 1,
+    "manual_handoff_calls": 0,
+    "viewers_during_job": 0
+  },
+  {
     "test": "T11 비밀번호·쿠키·세션 토큰·입력 길이 미노출",
     "verdict": "pass",
     "files_checked": [
       "T01_viewer_remote_login_page.png",
       "T02_viewer_after_remote_login.png",
+      "T12_viewer_auto_started.png",
       "control_server.log.jsonl",
       "control_server.stdout.log",
       "control_server_ttl.log.jsonl",
       "control_server_ttl.stdout.log",
       "mock_site.stdout.log",
-      "result_0990cbb3e1490433_lesson1.png",
-      "result_0990cbb3e1490433_lesson2.png",
+      "result_28c8535ebe5d298e_lesson3.png",
+      "result_d949ae579a405e66_lesson1.png",
+      "result_d949ae579a405e66_lesson2.png",
       "results.json"
     ],
     "hits": {},

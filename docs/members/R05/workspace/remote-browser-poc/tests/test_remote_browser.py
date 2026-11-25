@@ -326,6 +326,34 @@ def test_10_idle_timeout(servers):
     assert ok
 
 
+def test_12_auto_start_after_login(servers, pw, state):
+    """레슨 내용을 미리 맡긴 세션: 사용자는 로그인만 하고 페이지를 닫는다. 서버가 자동으로 등록한다."""
+    before = len(stats()["lessons"])
+    img = png_bytes()
+    job = {"title": "로그인만 하면 자동 등록", "description": "자동 시작 시험", "price": 30000,
+           "image_name": "auto.png", "image_b64": base64.b64encode(img).decode()}
+    r = httpx.post(f"{CTL}/api/sessions", json={"auto_job": job}).json()
+    sid, token = r["session_id"], r["token"]
+    browser, page = open_viewer(pw, sid, token)
+    login_through_viewer(page, "tutor_b", PW_B)
+    page.wait_for_function("document.getElementById('state').textContent.includes('서버')", timeout=15000)
+    page.screenshot(path=str(EVIDENCE / "T12_viewer_auto_started.png"))
+    browser.close()                                           # 로그인 직후 사용자가 떠남
+    done = wait_status(sid, token, lambda s: s["job"] and s["job"]["state"] == "done", timeout=40)
+    s = stats()
+    lesson = next((l for l in s["lessons"] if l["id"] == done["job"]["lesson_id"]), None)
+    log = (EVIDENCE / "control_server.log.jsonl").read_text(encoding="utf-8")
+    handoff_calls = [l for l in log.splitlines() if f'"session": "{sid}"' in l and '"event": "handoff"' in l]
+    ok = (done["job"]["result_state"] == "mock_success" and lesson and lesson["owner"] == "tutor_b"
+          and lesson["image_sha256"] == hashlib.sha256(img).hexdigest() and len(s["lessons"]) == before + 1
+          and not handoff_calls and f'"event": "auto_handoff", "session": "{sid}"' in log)
+    record("T12 로그인만 하면 서버가 자동으로 이어서 등록", "pass" if ok else "fail",
+           result_state=done["job"]["result_state"], lessons_added=len(s["lessons"]) - before,
+           manual_handoff_calls=len(handoff_calls), viewers_during_job=done["viewers"])
+    api(sid, token, "DELETE")
+    assert ok
+
+
 def test_11_no_sensitive_data_exposed(servers, state):
     secrets_to_find = [PW_A, PW_B, "mock_sid"]
     hits = {}

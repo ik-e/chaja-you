@@ -3,17 +3,18 @@ platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/p
 rootdir: /home/claude/remote-browser-poc
 plugins: platformdirs-4.13.5, anyio-4.15.1, asyncio-1.5.0
 asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
-collecting ... collected 10 items
+collecting ... collected 11 items
 
-tests/test_remote_browser.py::test_01_remote_view PASSED                 [ 10%]
-tests/test_remote_browser.py::test_02_user_logs_in_through_remote_browser PASSED [ 20%]
-tests/test_remote_browser.py::test_03_disconnect_then_server_continues PASSED [ 30%]
-tests/test_remote_browser.py::test_05_control_lock_and_auto_return PASSED [ 40%]
-tests/test_remote_browser.py::test_06_return_control_with_cancel PASSED  [ 50%]
-tests/test_remote_browser.py::test_07_session_isolation PASSED           [ 60%]
-tests/test_remote_browser.py::test_08_image_failure_not_reported_as_success PASSED [ 70%]
-tests/test_remote_browser.py::test_09_end_session PASSED                 [ 80%]
-tests/test_remote_browser.py::test_10_idle_timeout PASSED                [ 90%]
+tests/test_remote_browser.py::test_01_remote_view PASSED                 [  9%]
+tests/test_remote_browser.py::test_02_user_logs_in_through_remote_browser PASSED [ 18%]
+tests/test_remote_browser.py::test_03_disconnect_then_server_continues PASSED [ 27%]
+tests/test_remote_browser.py::test_05_control_lock_and_auto_return PASSED [ 36%]
+tests/test_remote_browser.py::test_06_return_control_with_cancel PASSED  [ 45%]
+tests/test_remote_browser.py::test_07_session_isolation PASSED           [ 54%]
+tests/test_remote_browser.py::test_08_image_failure_not_reported_as_success PASSED [ 63%]
+tests/test_remote_browser.py::test_09_end_session PASSED                 [ 72%]
+tests/test_remote_browser.py::test_10_idle_timeout PASSED                [ 81%]
+tests/test_remote_browser.py::test_12_auto_start_after_login PASSED      [ 90%]
 tests/test_remote_browser.py::test_11_no_sensitive_data_exposed PASSED   [100%]
 
-============================= 10 passed in 19.34s ==============================
+============================= 11 passed in 25.93s ==============================

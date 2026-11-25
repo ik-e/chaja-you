@@ -28,6 +28,7 @@ from pydantic import BaseModel, Field
 MOCK_BASE = os.environ.get("MOCK_BASE", "http://127.0.0.1:8001")
 VIEWPORT = {"width": 1280, "height": 800}
 CHROME_CHANNEL = os.environ.get("CHROME_CHANNEL", "chrome") or None  # 비우면 Playwright 번들 Chromium
+AUTO_TRIGGER_PATH = os.environ.get("AUTO_TRIGGER_PATH", "/dashboard")  # 이 경로에 도달하면 로그인된 것으로 본다
 IDLE_TTL_SEC = float(os.environ.get("SESSION_IDLE_TTL_SEC", "900"))
 JOB_STEP_TIMEOUT_MS = int(os.environ.get("JOB_STEP_TIMEOUT_MS", "15000"))
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,6 +86,7 @@ class RemoteSession:
     last_activity: float = field(default_factory=time.time)
     frames_sent: int = 0
     closed: bool = False
+    auto_job: Any = None              # 로그인 감지 후 자동 실행할 등록 내용(LessonJob)
 
     def touch(self) -> None:
         self.last_activity = time.time()
@@ -116,18 +118,19 @@ class Manager:
         if self._pw:
             await self._pw.stop()
 
-    async def create(self) -> RemoteSession:
+    async def create(self, auto_job: Any = None) -> RemoteSession:
         assert self.browser
         # 세션마다 새 BrowserContext: 쿠키·저장소가 다른 세션과 공유되지 않는다.
         context = await self.browser.new_context(viewport=VIEWPORT, locale="ko-KR")
         page = await context.new_page()
-        s = RemoteSession(id=secrets.token_hex(8), token=secrets.token_urlsafe(24), context=context, page=page)
+        s = RemoteSession(id=secrets.token_hex(8), token=secrets.token_urlsafe(24), context=context, page=page,
+                          auto_job=auto_job)
         self.sessions[s.id] = s
-        # 페이지 이동 시 뷰어 상태줄(현재 경로·제어 주체)을 갱신한다.
-        page.on("framenavigated", lambda f: asyncio.ensure_future(push_status(s)) if f == page.main_frame and not s.closed else None)
+        # 페이지 이동 시 뷰어 상태줄을 갱신하고, 로그인이 감지되면 맡겨 둔 작업을 자동 시작한다.
+        page.on("framenavigated", lambda f: asyncio.ensure_future(on_navigated(s)) if f == page.main_frame and not s.closed else None)
         await self._start_screencast(s)
         await page.goto(f"{MOCK_BASE}/login")
-        audit("session_created", session=s.id)
+        audit("session_created", session=s.id, auto_job=auto_job is not None)
         return s
 
     async def _start_screencast(self, s: RemoteSession) -> None:
@@ -196,6 +199,27 @@ async def broadcast(s: RemoteSession, msg: dict[str, Any]) -> None:
 
 async def push_status(s: RemoteSession) -> None:
     await broadcast(s, {"type": "status", **s.public()})
+
+
+async def on_navigated(s: RemoteSession) -> None:
+    await push_status(s)
+    if s.closed or s.auto_job is None or s.control != "user":
+        return
+    if s.job_task is not None and not s.job_task.done():
+        return
+    path = s.page.url.split("?", 1)[0].replace(MOCK_BASE, "")
+    if path == AUTO_TRIGGER_PATH:
+        job, s.auto_job = s.auto_job, None   # 한 번만 실행
+        audit("auto_handoff", session=s.id)
+        await start_job(s, job)
+
+
+async def start_job(s: RemoteSession, body: Any) -> None:
+    s.control, s.job = "server", Job()
+    s.touch()
+    await push_status(s)
+    # 작업은 뷰어 WebSocket과 무관한 서버 태스크로 실행된다.
+    s.job_task = asyncio.create_task(run_registration(s, body))
 
 
 # ---------------------------------------------------------------------------
@@ -330,9 +354,13 @@ async def _shutdown() -> None:
     await MANAGER.stop()
 
 
+class CreateSession(BaseModel):
+    auto_job: LessonJob | None = None
+
+
 @app.post("/api/sessions")
-async def create_session():
-    s = await MANAGER.create()
+async def create_session(body: CreateSession | None = None):
+    s = await MANAGER.create(auto_job=body.auto_job if body else None)
     return {"session_id": s.id, "token": s.token, "viewer_path": f"/view/{s.id}#t={s.token}"}
 
 
@@ -346,12 +374,9 @@ async def handoff(sid: str, body: LessonJob, x_session_token: str | None = Heade
     s = MANAGER.get(sid, x_session_token)
     if s.control != "user" or (s.job_task and not s.job_task.done()):
         raise HTTPException(status_code=409, detail="job already running")
-    s.control, s.job = "server", Job()
-    s.touch()
+    s.auto_job = None
     audit("handoff", session=sid, viewers=len(s.viewers))
-    await push_status(s)
-    # 작업은 뷰어 WebSocket과 무관한 서버 태스크로 실행된다.
-    s.job_task = asyncio.create_task(run_registration(s, body))
+    await start_job(s, body)
     return s.public()
 
 

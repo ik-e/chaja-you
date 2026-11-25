@@ -1,15 +1,65 @@
 <!doctype html>
 <html lang="ko">
-<head><meta charset="utf-8"><title>원격 브라우저 PoC</title></head>
-<body style="font-family:sans-serif;padding:24px">
+<head>
+<meta charset="utf-8">
+<title>원격 브라우저 PoC</title>
+<style>
+  body { font-family: sans-serif; padding: 24px; max-width: 760px; }
+  label { display: block; margin: 10px 0; }
+  input, textarea { font-size: 15px; width: 100%; box-sizing: border-box; }
+  #share { display: none; margin-top: 20px; padding: 16px; background: #eef1ff; border-radius: 8px; }
+  #link { width: 100%; font-family: monospace; }
+  button { padding: 8px 14px; font-size: 15px; }
+</style>
+</head>
+<body>
 <h2>원격 브라우저 PoC</h2>
-<p>새 세션을 만들면 서버의 브라우저 화면이 열립니다. 모의 사이트에 가상 계정으로 직접 로그인한 뒤, 등록 작업을 서버에 맡겨 보세요.</p>
-<button id="new">새 세션 만들기</button>
+<p>등록할 레슨 내용을 미리 넣고 세션을 만드세요. 원격 화면에서 로그인만 하면 서버가 이어서 자동으로 등록합니다.
+내용을 비워 두면 로그인 후 직접 "등록 작업을 서버에 맡기기"를 누르는 방식으로 동작합니다.</p>
+
+<form id="f">
+  <label>제목 <input name="title" maxlength="30" value="신대방삼거리 1대1 보컬 레슨"></label>
+  <label>설명 <textarea name="description" rows="3">스케일부터 고음까지 단계별로 연습합니다.</textarea></label>
+  <label>가격(원) <input name="price" type="number" min="0" value="50000"></label>
+  <label>대표 이미지 (PNG/JPG) <input name="image" type="file" accept="image/png,image/jpeg"></label>
+  <button id="new" type="submit">세션 만들기</button>
+</form>
+
+<div id="share">
+  <p><strong>원격 화면 링크</strong> — 이 링크를 연 사람이 로그인할 수 있습니다. 믿을 수 있는 사람에게만 보내세요.</p>
+  <input id="link" readonly>
+  <p><button id="copy" type="button">링크 복사</button> <button id="open" type="button">이 화면에서 열기</button></p>
+</div>
+
 <script>
-document.getElementById('new').onclick = async () => {
-  const r = await fetch('/api/sessions', { method: 'POST' });
+async function toB64(file) {
+  const buf = new Uint8Array(await file.arrayBuffer());
+  let bin = ''; buf.forEach((b) => { bin += String.fromCharCode(b); });
+  return btoa(bin);
+}
+document.getElementById('f').onsubmit = async (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const file = f.get('image');
+  let body = {};
+  if (file && file.size) {
+    body = { auto_job: {
+      title: f.get('title'), description: f.get('description'), price: Number(f.get('price')),
+      image_name: file.name, image_b64: await toB64(file),
+    } };
+  }
+  const r = await fetch('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  if (!r.ok) { alert('세션 만들기 실패: ' + r.status); return; }
   const s = await r.json();
-  location.href = s.viewer_path;
+  const url = location.origin + s.viewer_path;
+  document.getElementById('link').value = url;
+  document.getElementById('share').style.display = 'block';
+  document.getElementById('copy').onclick = () => {
+    // 같은 네트워크의 http 주소에서는 clipboard API가 막힐 수 있어 선택 복사로 대체한다.
+    const el = document.getElementById('link'); el.select();
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(() => document.execCommand('copy'));
+  };
+  document.getElementById('open').onclick = () => { location.href = url; };
 };
 </script>
 </body>
