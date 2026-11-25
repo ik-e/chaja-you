@@ -27,8 +27,8 @@
 | [TASK-048](../artifacts/tasks/TASK-048.json) | 공통 계약·개발 환경 유지 및 점진 통합 검증 | R01 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-049](../artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-050](../artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-051](../artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
+| [TASK-052](../artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-053](../artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
 | [TASK-054](../artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
 
@@ -104,13 +104,13 @@ S0~S7 및 공통 validator/digest 정렬 이후 S8 HTTP 서버를 구현했다. 
 - stdlib bounded MIME parsing and 16MiB total limit are local mock choices
 - 기존 INTERFACE-REVIEW의 R02 timeout, R03/R05 STORE lease/operation, R03/R04/R05 viewer endpoint와 인증 경계를 담당자 협의 후 확정한다.
 
-### TASK-051 · 할 일
+### TASK-051 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-051.json)
 
 결과 미기록.
 
-### TASK-052 · 할 일
+### TASK-052 · 진행 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-052.json)
 

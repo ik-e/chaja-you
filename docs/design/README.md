@@ -4,6 +4,7 @@
 
 - [현행 설계 기준 · 사람용](lesson-registration/CURRENT-DESIGN.md)
 - [현행 설계 인덱스 · AI용](lesson-registration/CURRENT-DESIGN.json)
+- [시스템 설계 요약](lesson-registration/SYSTEM-OVERVIEW.md) · [정본-제출 문서 연결](lesson-registration/CURRENT-DOCUMENTS.md)
 
 현재 Phase, 논리 설계 채택, 공통 구현 방향 IB-01~05, 작업 패키지와 검증 근거를 연결한다. 인덱스는 읽기용이며 새 정본/승인이 아니다.
 
