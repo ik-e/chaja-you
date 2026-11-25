@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>숨고 고수 - 레슨 서비스 설정 (합성 Mock Fixture)</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; padding: 20px; line-height: 1.5; }
+    .form-group { margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+    label { font-weight: bold; display: block; margin-bottom: 0.5rem; }
+    .checkbox-group, .radio-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-submit { background-color: #00c7ae; color: white; border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>숨고 고수 서비스 설정 등록</h1>
+  <form id="soomgo-service-form" action="/mock/soomgo/service_config" method="POST">
+    <!-- S1 & S2: Category -->
+    <div class="form-group" id="group-category">
+      <label for="category">제공 서비스 카테고리</label>
+      <input type="text" id="category" name="category" value="midi_mock" readonly data-category-id="cat-midi-01" />
+    </div>
+
+    <!-- S3: Questions Form -->
+    <!-- 1. DAW 필터 -->
+    <div class="form-group" id="group-daw">
+      <label>DAW 요청 필터 (다중 선택 가능)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="daw" value="consult" /> 상담 후 결정</label>
+        <label><input type="checkbox" name="daw" value="logic" /> Logic Pro</label>
+        <label><input type="checkbox" name="daw" value="cubase" /> Cubase</label>
+        <label><input type="checkbox" name="daw" value="ableton" /> Ableton Live</label>
+        <label><input type="checkbox" name="daw" value="fl" /> FL Studio</label>
+        <label><input type="checkbox" name="daw" value="garageband" /> GarageBand</label>
+      </div>
+    </div>
+
+    <!-- 2. Goals (레슨 목적) -->
+    <div class="form-group" id="group-goals">
+      <label>레슨 목적</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="goals" value="hobby" /> 취미</label>
+        <label><input type="checkbox" name="goals" value="entrance" /> 입시 준비</label>
+        <label><input type="checkbox" name="goals" value="production" /> 음원 제작/실무</label>
+      </div>
+    </div>
+
+    <!-- 3. Keyboard (건반 가능 범위) -->
+    <div class="form-group" id="group-keyboard">
+      <label>건반 연주 가능 수준</label>
+      <div class="radio-group">
+        <label><input type="radio" name="keyboard" value="yes" /> 가능</label>
+        <label><input type="radio" name="keyboard" value="chords" /> 코드만</label>
+        <label><input type="radio" name="keyboard" value="no" /> 불가</label>
+      </div>
+    </div>
+
+    <!-- 4. Ages (레슨생 연령대) -->
+    <div class="form-group" id="group-ages">
+      <label>희망 레슨생 연령대</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="ages" value="under10" /> 10대 미만</label>
+        <label><input type="checkbox" name="ages" value="teens" /> 10대</label>
+        <label><input type="checkbox" name="ages" value="20s" /> 20대</label>
+        <label><input type="checkbox" name="ages" value="30s" /> 30대</label>
+        <label><input type="checkbox" name="ages" value="40s" /> 40대</label>
+        <label><input type="checkbox" name="ages" value="50plus" /> 50대 이상</label>
+      </div>
+    </div>
+
+    <!-- 5. Genders (레슨생 성별) -->
+    <div class="form-group" id="group-genders">
+      <label>희망 레슨생 성별</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="genders" value="male" /> 남성</label>
+        <label><input type="checkbox" name="genders" value="female" /> 여성</label>
+      </div>
+    </div>
+
+    <!-- 6. Format (레슨 형태) -->
+    <div class="form-group" id="group-format">
+      <label>레슨 형태</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="format" value="individual" /> 1:1 개인 레슨</label>
+        <label><input type="checkbox" name="format" value="group" /> 소규모 그룹 레슨</label>
+        <label><input type="checkbox" name="format" value="online" /> 온라인 화상 레슨</label>
+        <label><input type="checkbox" name="format" value="academy" /> 학원 출강 레슨</label>
+      </div>
+    </div>
+
+    <!-- 7. Location Mode (진행 방식) -->
+    <div class="form-group" id="group-location-mode">
+      <label>진행 장소 및 방식</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="location_mode" value="any" /> 협의 후 결정</label>
+        <label><input type="checkbox" name="location_mode" value="studio" /> 고수 작업실/스튜디오</label>
+        <label><input type="checkbox" name="location_mode" value="travel" /> 고객 방문 레슨</label>
+        <label><input type="checkbox" name="location_mode" value="online" /> 비대면 온라인</label>
+      </div>
+    </div>
+
+    <!-- S5: Single Save Execution Button -->
+    <div class="form-group">
+      <button type="submit" id="btn-save-service" class="btn-submit">서비스 설정 저장하기</button>
+    </div>
+  </form>
+</body>
+</html>
