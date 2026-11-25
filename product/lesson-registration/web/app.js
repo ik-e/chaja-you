@@ -27,7 +27,43 @@ class LessonApp {
 
   async init() {
     this.bindNavigation();
+    this.bindActionButtons();
     this.setupViewerPostMessageListener();
+  }
+
+  bindActionButtons() {
+    document.getElementById("btn-next-source-to-prep")?.addEventListener("click", () => {
+      this.switchStage(STAGES.PREPARE);
+    });
+
+    document.getElementById("btn-next-to-auth")?.addEventListener("click", () => {
+      this.switchStage(STAGES.AUTH);
+    });
+
+    document.getElementById("btn-next-to-review")?.addEventListener("click", () => {
+      this.switchStage(STAGES.REVIEW);
+    });
+
+    document.getElementById("btn-auth-open")?.addEventListener("click", () => {
+      this.mountViewer("mock-grant-soomgo-token-12345");
+    });
+
+    document.getElementById("btn-auth-finish")?.addEventListener("click", () => {
+      this.disposeViewer();
+      document.getElementById("auth-state-text").innerText = "인증 완료 (Verified)";
+    });
+
+    document.getElementById("btn-auth-close")?.addEventListener("click", () => {
+      this.disposeViewer();
+    });
+
+    document.getElementById("btn-submit-start")?.addEventListener("click", () => {
+      this.switchStage(STAGES.RESULT);
+    });
+
+    document.getElementById("btn-reset-workflow")?.addEventListener("click", () => {
+      this.switchStage(STAGES.SOURCE);
+    });
   }
 
   // 1. Navigation & Stage Transitions

@@ -1,7 +1,7 @@
 """Conservative I2 preparation over injected extraction candidates.
 
-The extractor is deliberately injected. It returns literal source candidates,
-not trusted platform values. Confirmations are required for every suggestion.
+The extractor is deliberately injected. Its candidates are untrusted: only
+verbatim free text may pass without a separate answer, subject to final review.
 """
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ from typing import Any, Protocol
 from contracts.canonical import json_digest
 from contracts.interfaces import PortFailure
 from contracts.validation import ContractViolation, SchemaCatalog
+
+from .openai_extractor import ExtractorResponseError
 
 
 class Extractor(Protocol):
@@ -37,6 +39,14 @@ def _literal(value: Any, quote: str) -> bool:
     return False
 
 
+def _vat_excluded(quote: str) -> bool:
+    """Recognize explicit exclusions in evidence, never infer inclusion."""
+    tax = r"(?:vat|부가\s*가치세|부가세)"
+    excluded = r"(?:별도|불포함|미포함|제외)"
+    return bool(re.search(tax + r"\s*[:：]?\s*" + excluded, quote, re.IGNORECASE)
+                or re.search(excluded + r"\s*[:：]?\s*" + tax, quote, re.IGNORECASE))
+
+
 class PreparationProvider:
     """I2 implementation for pinned mock profiles and an injected extractor."""
 
@@ -55,23 +65,30 @@ class PreparationProvider:
             candidates = self.extractor.extract(
                 request["source"]["raw_text"], copy.deepcopy(request["profile"]["fields"])
             )
+        except ExtractorResponseError:
+            raise _failure("RUNTIME_ERROR", "준비 모델 응답을 확인해 주세요.") from None
         except Exception:
             raise _failure("MODEL_UNAVAILABLE", "준비 모델을 사용할 수 없습니다.") from None
         if not isinstance(candidates, list):
             raise _failure("RUNTIME_ERROR", "준비 모델 응답 형식을 확인해 주세요.")
 
         suggestions: dict[str, list[dict]] = {}
+        nested_suggestions: dict[str, list[dict]] = {}
         source_text = request["source"]["raw_text"]
         for candidate in candidates:
             if not isinstance(candidate, dict) or set(candidate) != {"field", "value", "quote"}:
                 raise _failure("RUNTIME_ERROR", "준비 모델 응답 형식을 확인해 주세요.")
             field, value, quote = candidate["field"], candidate["value"], candidate["quote"]
-            if not isinstance(field, str) or field not in fields or not isinstance(quote, str):
+            if not isinstance(field, str) or not isinstance(quote, str):
+                raise _failure("RUNTIME_ERROR", "준비 모델의 항목을 확인해 주세요.")
+            nested = (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
+                      and re.fullmatch(r"/packages/[0-2]/(?:amount_vat_included_krw|minutes_per_session|sessions|work_days|revision_count|period)", field))
+            if field not in fields and not nested:
                 raise _failure("RUNTIME_ERROR", "준비 모델의 항목을 확인해 주세요.")
             if not quote or quote not in source_text or not _literal(value, quote):
                 # An unsupported guess is never copied to the result.
                 continue
-            suggestions.setdefault(field, []).append(candidate)
+            (nested_suggestions if nested else suggestions).setdefault(field, []).append(candidate)
 
         answers: dict[str, list[dict]] = {}
         unsupported = []
@@ -121,13 +138,52 @@ class PreparationProvider:
                 result["facts"].append({"fact_id": fact_id, "path": field, "value": candidate["value"],
                                         "origin": {"kind": "source", "ref": request["source"]["source_id"],
                                                    "locator": candidate["quote"]}})
-                result["issues"].append({"issue_id": _id("confirm", field), "field": field,
-                                         "code": "rule_unverified", "message": "원문에서 찾은 값을 확인해 주세요.",
-                                         "blocking": True})
+                # Literal free text can be presented in the final review without
+                # asking the user to approve the same content twice. Enum,
+                # numeric and composite mappings still need an explicit answer.
+                if (field in {"/title", "/description", "/process", "/preparation"}
+                        and isinstance(candidate["value"], str)
+                        and candidate["value"] == candidate["quote"]):
+                    result["values"][descriptor["key"]] = candidate["value"]
+                    result["provenance"].append({"field": field, "kind": "direct", "fact_refs": [fact_id]})
+                else:
+                    result["issues"].append({"issue_id": _id("confirm", field), "field": field,
+                                             "code": "rule_unverified", "message": "원문에서 찾은 값을 확인해 주세요.",
+                                             "blocking": True})
             elif descriptor["requirement"] == "required":
                 result["issues"].append({"issue_id": _id("missing", field), "field": field,
                                          "code": "missing", "message": descriptor["label"] + "을 확인해 주세요.",
                                          "blocking": True})
+
+        for field, candidates in nested_suggestions.items():
+            distinct = []
+            for index, candidate in enumerate(candidates):
+                if not any(candidate["value"] == value and type(candidate["value"]) is type(value)
+                           for value in distinct):
+                    distinct.append(candidate["value"])
+                result["facts"].append({"fact_id": _id("nested-source", field + ":" + str(index)),
+                                        "path": field, "value": candidate["value"],
+                                        "origin": {"kind": "source", "ref": request["source"]["source_id"],
+                                                   "locator": candidate["quote"]}})
+            parts = field.split("/")
+            packages = result["values"].get("packages")
+            parent_value = None
+            has_parent_value = False
+            if isinstance(packages, list) and int(parts[2]) < len(packages):
+                package = packages[int(parts[2])]
+                if isinstance(package, dict) and parts[3] in package:
+                    parent_value = package[parts[3]]
+                    has_parent_value = True
+            conflict = len(distinct) > 1 or (has_parent_value and any(
+                type(value) is not type(parent_value) or value != parent_value for value in distinct))
+            # A VAT-exclusive amount cannot be treated as the same numeric
+            # VAT-inclusive price merely because the digits match.
+            if parts[3] == "amount_vat_included_krw" and has_parent_value:
+                conflict = conflict or any(_vat_excluded(candidate["quote"]) for candidate in candidates)
+            if conflict or not has_parent_value:
+                result["issues"].append({"issue_id": _id("conflict" if conflict else "confirm", field),
+                                         "field": field, "code": "conflict" if conflict else "rule_unverified",
+                                         "message": "패키지의 원문과 입력값을 확인해 주세요.", "blocking": True})
 
         if (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
                 and result["values"].get("delivery") == "offline"
@@ -177,11 +233,9 @@ class PreparationProvider:
                     result["issues"].append({"issue_id": _id("invalid-mock", field), "field": field,
                                              "code": "invalid", "message": "모의 플랫폼의 선택 조건을 확인해 주세요.",
                                              "blocking": True})
-                if "/packages" not in invalid_mock_fields:
-                    # Composite price/VAT fields cannot yet be checked against source facts.
-                    result["issues"].append({"issue_id": _id("unverified", "/packages"), "field": "/packages",
-                                             "code": "rule_unverified", "message": "패키지 금액과 원문 대조가 필요합니다.",
-                                             "blocking": True})
+                # A complete user answer explicitly uses the VAT-inclusive
+                # contract fields. Source-only prices are never promoted into
+                # a package and source/answer conflicts remain blocking above.
             result["ready"] = not result["issues"]
         try:
             self.catalog.named("Preparation", result)

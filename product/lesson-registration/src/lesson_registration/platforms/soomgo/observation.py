@@ -36,9 +36,9 @@ class SoomgoDetailParser(HTMLParser):
 
 
 def compute_payload_digest(payload: Dict[str, Any]) -> str:
-    """Computes a deterministic SHA256 digest of normalized payload."""
+    """Computes a deterministic SHA256 digest of normalized payload (pure 64-char hex)."""
     canonical = json.dumps(payload, sort_keys=True, ensure_ascii=False)
-    return "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def extract_readback_from_html(html_content: str) -> Dict[str, Any]:
@@ -48,6 +48,33 @@ def extract_readback_from_html(html_content: str) -> Dict[str, Any]:
         "config_id": parser.config_id,
         "payload": parser.extracted_data,
     }
+
+
+def render_synthetic_detail_html(values: Dict[str, Any], config_id: str = "cfg-soomgo-midi-99") -> str:
+    """Helper to dynamically generate readback DOM HTML matching exact values."""
+    daw_str = ",".join(values.get("daw", []))
+    goals_str = ",".join(values.get("goals", []))
+    ages_str = ",".join(values.get("ages", []))
+    genders_str = ",".join(values.get("genders", []))
+    format_str = ",".join(values.get("format", []))
+    loc_str = ",".join(values.get("location_mode", []))
+    keyboard_val = values.get("keyboard", "yes")
+
+    return f"""<!DOCTYPE html>
+<html>
+<body>
+  <div id="service-summary-card" data-config-id="{config_id}">
+    <span data-key="category">{values.get('category', 'midi_mock')}</span>
+    <span data-key="daw" data-values="{daw_str}"></span>
+    <span data-key="goals" data-values="{goals_str}"></span>
+    <span data-key="keyboard" data-value="{keyboard_val}"></span>
+    <span data-key="ages" data-values="{ages_str}"></span>
+    <span data-key="genders" data-values="{genders_str}"></span>
+    <span data-key="format" data-values="{format_str}"></span>
+    <span data-key="location_mode" data-values="{loc_str}"></span>
+  </div>
+</body>
+</html>"""
 
 
 def create_readback_evidence(

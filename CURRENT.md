@@ -9,7 +9,7 @@
 
 [PHASE-20261125-01](docs/human/phase-intents/PHASE-20261125-01.md)
 
-- 실제 제품: IB/PD 공통 방향 및 초기 제품 lock/기술 검증·회귀 통과. R03 S0~S7·mock 시험 174/10/2 보고(재현 미확인), S8 착수 가능; R05 수신/7근무일 확인. 담당자 세부 계약·잔여 공수·제품 시험·일정 미확정. 실서비스 실행 금지.
+- 실제 제품: 공통 기준선 PR #44 main 반영 및 CI 4종 통과; R03 S8 실제 HTTP/SQLite 합성 회귀 확인. R05 053·054 초기 구현·15/32 시험 담당자 보고 및 독립 CI 재현, 잔여 3~3.5근무일; 실제 WS/adapter 및 공통 보안·digest 정합성 미확인. 실제 제품 22개 gate·일정 미확정, live 금지.
 - 이전 기획·WBS: 기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류
 - 제출 문서: 이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인
 
@@ -28,13 +28,13 @@
 
 ## 우선 작업
 
-1. TASK-048: 공통 물리/실행 환경 및 회귀 기준 적용, 담당자 PLAN·공통 경계 확인, WBS 조정, 실제 provider 점진 통합.
+1. TASK-048: PR #44 공통 기준선 적용, D01~D06 실제 정합성·R05 독립 CI·WBS·점진 통합.
 2. TASK-049(R02): 등록 정보 준비·AI 구조화 및 검증; 담당자 PLAN/검토 및 독립 구현.
-3. TASK-050(R03): S0~S7 구현 보고 반영, 최신 공통 기준 병합·공통 schema 검증 및 S8 HTTP 독립 구현, R02/R04/R05 접점 확인·잔여 공수 갱신.
+3. TASK-050(R03): S8 HTTP/191개 시험 확인, 잔여 3인일 보고; I2/STORE/Viewer 연결.
 4. TASK-051(R04): 등록 지원 웹 UI 구현; 담당자 PLAN/검토 및 독립 구현.
 5. TASK-052(R04): 숨고 등록 adapter 및 독립 mock 구현; 담당자 PLAN/검토 및 독립 구현.
-6. TASK-053(R05): 원격 브라우저 runtime·인증·뷰어 구현; 담당자 PLAN/검토 및 독립 구현.
-7. TASK-054(R05): 크몽 등록 adapter 및 독립 mock 구현; 담당자 PLAN/검토 및 독립 구현.
+6. TASK-053(R05): Chromium Runtime 15개 보고, WS/one-shot grant/input fence/STORE·slot·asset 연동 및 CI.
+7. TASK-054(R05): 크몽 32개 보고, R03 digest 정렬·실제 Runtime 연결, 안정적인 slot/readback/증거 확인.
 8. 12/8 mock MVP 및 1/4 최종 목표 유지; R02 인계와 R04/R05 업무량을 확인해 세부 일정을 결정.
 
 ## 결정할 항목
@@ -51,12 +51,12 @@
 | 작업 | 할 일 | 담당 | 내부 목표일 | 선행 작업 | 구분 | 상태 |
 | --- | --- | --- | --- | --- | --- | --- |
 | [TASK-048](docs/artifacts/tasks/TASK-048.json) | 공통 계약·개발 환경 유지 및 점진 통합 검증 | R01 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-049](docs/artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-049](docs/artifacts/tasks/TASK-049.json) | 등록 정보 준비·AI 구조화 및 검증 | R02 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-050](docs/artifacts/tasks/TASK-050.json) | 공통 앱·API·저장·결과 판정 구현 | R03 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-051](docs/artifacts/tasks/TASK-051.json) | 등록 지원 웹 UI 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
 | [TASK-052](docs/artifacts/tasks/TASK-052.json) | 숨고 등록 adapter 및 독립 mock 구현 | R04 | 미정 | 없음 | 보완 | 진행 중 |
-| [TASK-053](docs/artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
-| [TASK-054](docs/artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 할 일 |
+| [TASK-053](docs/artifacts/tasks/TASK-053.json) | 원격 브라우저 runtime·인증·뷰어 구현 | R05 | 미정 | 없음 | 보완 | 진행 중 |
+| [TASK-054](docs/artifacts/tasks/TASK-054.json) | 크몽 등록 adapter 및 독립 mock 구현 | R05 | 미정 | 없음 | 보완 | 진행 중 |
 
 ## 이전 TASK · 정산 이력
 

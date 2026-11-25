@@ -39,7 +39,7 @@
         "category": "midi_mock",
         "daw": ["logic", "ableton"],
         "goals": ["hobby"],
-        "keyboard": "available",
+        "keyboard": "yes",
         "ages": ["twenties", "thirties"],
         "genders": ["male", "female"],
         "format": ["individual"],

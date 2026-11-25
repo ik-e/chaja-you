@@ -43,8 +43,8 @@ def validate_soomgo_bindings(values: Dict[str, Any]) -> None:
     if values["category"] != "midi_mock":
         raise ValueError(f"잘못된 카테고리: {values['category']} (midi_mock 필수)")
 
-    if values["keyboard"] not in ("available", "chords_only", "unavailable"):
-        raise ValueError(f"잘못된 keyboard 값: {values['keyboard']}")
+    if values["keyboard"] not in ("yes", "chords", "no"):
+        raise ValueError(f"잘못된 keyboard 값: {values['keyboard']} (yes, chords, no 중 하나)")
 
     array_fields = ["daw", "goals", "ages", "genders", "format", "location_mode"]
     for field in array_fields:
