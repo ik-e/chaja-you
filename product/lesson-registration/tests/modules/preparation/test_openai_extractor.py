@@ -52,7 +52,7 @@ class ResponsesExtractorTests(unittest.TestCase):
         result = PreparationProvider(contract.catalog(), extractor).prepare(request())
         self.assertFalse(result["ready"])
         self.assertEqual(result["facts"][0]["value"], "합성 기타 레슨")
-        self.assertNotIn("title", result["values"])
+        self.assertEqual(result["values"]["title"], "합성 기타 레슨")
         req, timeout = calls[0]
         payload = json.loads(req.data)
         self.assertEqual(req.full_url, "https://api.openai.com/v1/responses")

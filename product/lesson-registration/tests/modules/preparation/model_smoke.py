@@ -27,10 +27,10 @@ def main() -> int:
         return 1
     title = [fact for fact in result["facts"]
              if fact["path"] == "/title" and fact["value"] == "합성 기타 레슨"]
-    if not title or result["ready"] or "title" in result["values"]:
-        print("모델 시험 미충족: 합성 제목 후보·검토 차단을 확인하지 못했습니다.")
+    if not title or result["ready"] or result["values"].get("title") != "합성 기타 레슨":
+        print("모델 시험 미충족: 합성 제목과 원문 근거를 확인하지 못했습니다.")
         return 1
-    print("모델 시험 통과: 합성 제목·원문 근거를 후보로 추출하고 확인 전 제출을 차단했습니다.")
+    print("모델 시험 통과: 합성 제목·원문 근거를 준비하고 누락 항목으로 완료를 차단했습니다.")
     return 0
 
 

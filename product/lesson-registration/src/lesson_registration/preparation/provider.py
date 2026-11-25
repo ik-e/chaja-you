@@ -1,7 +1,7 @@
 """Conservative I2 preparation over injected extraction candidates.
 
-The extractor is deliberately injected. It returns literal source candidates,
-not trusted platform values. Confirmations are required for every suggestion.
+The extractor is deliberately injected. Its candidates are untrusted: only
+verbatim free text may pass without a separate answer, subject to final review.
 """
 from __future__ import annotations
 
@@ -130,9 +130,18 @@ class PreparationProvider:
                 result["facts"].append({"fact_id": fact_id, "path": field, "value": candidate["value"],
                                         "origin": {"kind": "source", "ref": request["source"]["source_id"],
                                                    "locator": candidate["quote"]}})
-                result["issues"].append({"issue_id": _id("confirm", field), "field": field,
-                                         "code": "rule_unverified", "message": "원문에서 찾은 값을 확인해 주세요.",
-                                         "blocking": True})
+                # Literal free text can be presented in the final review without
+                # asking the user to approve the same content twice. Enum,
+                # numeric and composite mappings still need an explicit answer.
+                if (field in {"/title", "/description", "/process", "/preparation"}
+                        and isinstance(candidate["value"], str)
+                        and candidate["value"] == candidate["quote"]):
+                    result["values"][descriptor["key"]] = candidate["value"]
+                    result["provenance"].append({"field": field, "kind": "direct", "fact_refs": [fact_id]})
+                else:
+                    result["issues"].append({"issue_id": _id("confirm", field), "field": field,
+                                             "code": "rule_unverified", "message": "원문에서 찾은 값을 확인해 주세요.",
+                                             "blocking": True})
             elif descriptor["requirement"] == "required":
                 result["issues"].append({"issue_id": _id("missing", field), "field": field,
                                          "code": "missing", "message": descriptor["label"] + "을 확인해 주세요.",
@@ -212,11 +221,9 @@ class PreparationProvider:
                     result["issues"].append({"issue_id": _id("invalid-mock", field), "field": field,
                                              "code": "invalid", "message": "모의 플랫폼의 선택 조건을 확인해 주세요.",
                                              "blocking": True})
-                if "/packages" not in invalid_mock_fields:
-                    # Composite price/VAT fields cannot yet be checked against source facts.
-                    result["issues"].append({"issue_id": _id("unverified", "/packages"), "field": "/packages",
-                                             "code": "rule_unverified", "message": "패키지 금액과 원문 대조가 필요합니다.",
-                                             "blocking": True})
+                # A complete user answer explicitly uses the VAT-inclusive
+                # contract fields. Source-only prices are never promoted into
+                # a package and source/answer conflicts remain blocking above.
             result["ready"] = not result["issues"]
         try:
             self.catalog.named("Preparation", result)
