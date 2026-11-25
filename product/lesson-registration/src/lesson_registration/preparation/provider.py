@@ -14,6 +14,8 @@ from contracts.canonical import json_digest
 from contracts.interfaces import PortFailure
 from contracts.validation import ContractViolation, SchemaCatalog
 
+from .openai_extractor import ExtractorResponseError
+
 
 class Extractor(Protocol):
     def extract(self, source_text: str, fields: list[dict]) -> list[dict]: ...
@@ -55,23 +57,30 @@ class PreparationProvider:
             candidates = self.extractor.extract(
                 request["source"]["raw_text"], copy.deepcopy(request["profile"]["fields"])
             )
+        except ExtractorResponseError:
+            raise _failure("RUNTIME_ERROR", "준비 모델 응답을 확인해 주세요.") from None
         except Exception:
             raise _failure("MODEL_UNAVAILABLE", "준비 모델을 사용할 수 없습니다.") from None
         if not isinstance(candidates, list):
             raise _failure("RUNTIME_ERROR", "준비 모델 응답 형식을 확인해 주세요.")
 
         suggestions: dict[str, list[dict]] = {}
+        nested_suggestions: dict[str, list[dict]] = {}
         source_text = request["source"]["raw_text"]
         for candidate in candidates:
             if not isinstance(candidate, dict) or set(candidate) != {"field", "value", "quote"}:
                 raise _failure("RUNTIME_ERROR", "준비 모델 응답 형식을 확인해 주세요.")
             field, value, quote = candidate["field"], candidate["value"], candidate["quote"]
-            if not isinstance(field, str) or field not in fields or not isinstance(quote, str):
+            if not isinstance(field, str) or not isinstance(quote, str):
+                raise _failure("RUNTIME_ERROR", "준비 모델의 항목을 확인해 주세요.")
+            nested = (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
+                      and re.fullmatch(r"/packages/[0-2]/(?:amount_vat_included_krw|minutes_per_session|sessions|work_days|revision_count|period)", field))
+            if field not in fields and not nested:
                 raise _failure("RUNTIME_ERROR", "준비 모델의 항목을 확인해 주세요.")
             if not quote or quote not in source_text or not _literal(value, quote):
                 # An unsupported guess is never copied to the result.
                 continue
-            suggestions.setdefault(field, []).append(candidate)
+            (nested_suggestions if nested else suggestions).setdefault(field, []).append(candidate)
 
         answers: dict[str, list[dict]] = {}
         unsupported = []
@@ -128,6 +137,32 @@ class PreparationProvider:
                 result["issues"].append({"issue_id": _id("missing", field), "field": field,
                                          "code": "missing", "message": descriptor["label"] + "을 확인해 주세요.",
                                          "blocking": True})
+
+        for field, candidates in nested_suggestions.items():
+            distinct = []
+            for index, candidate in enumerate(candidates):
+                if not any(candidate["value"] == value and type(candidate["value"]) is type(value)
+                           for value in distinct):
+                    distinct.append(candidate["value"])
+                result["facts"].append({"fact_id": _id("nested-source", field + ":" + str(index)),
+                                        "path": field, "value": candidate["value"],
+                                        "origin": {"kind": "source", "ref": request["source"]["source_id"],
+                                                   "locator": candidate["quote"]}})
+            parts = field.split("/")
+            packages = result["values"].get("packages")
+            parent_value = None
+            has_parent_value = False
+            if isinstance(packages, list) and int(parts[2]) < len(packages):
+                package = packages[int(parts[2])]
+                if isinstance(package, dict) and parts[3] in package:
+                    parent_value = package[parts[3]]
+                    has_parent_value = True
+            conflict = len(distinct) > 1 or (has_parent_value and any(
+                type(value) is not type(parent_value) or value != parent_value for value in distinct))
+            if conflict or not has_parent_value:
+                result["issues"].append({"issue_id": _id("conflict" if conflict else "confirm", field),
+                                         "field": field, "code": "conflict" if conflict else "rule_unverified",
+                                         "message": "패키지의 원문과 입력값을 확인해 주세요.", "blocking": True})
 
         if (request["profile"]["value_contract_ref"] == "kmong.service_listing.mock.v2"
                 and result["values"].get("delivery") == "offline"

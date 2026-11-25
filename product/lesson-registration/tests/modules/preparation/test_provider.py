@@ -122,6 +122,45 @@ class PreparationTests(unittest.TestCase):
         self.assertTrue(any(i["field"] == "/packages" and i["code"] == "conflict" for i in result["issues"]))
         self.assertNotIn("packages", result["values"])
 
+    def test_nested_price_conflict_is_grounded_and_keeps_both_values(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        values["packages"][0]["amount_vat_included_krw"] = 210000
+        answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
+                   for key, value in values.items()]
+        candidate = {"field": "/packages/0/amount_vat_included_krw", "value": 180000, "quote": "180,000원"}
+        result = self.provider([candidate]).prepare(request("kmong", "첫 번째 패키지 180,000원", answers))
+        self.assertFalse(result["ready"])
+        self.assertEqual(result["values"]["packages"][0]["amount_vat_included_krw"], 210000)
+        self.assertTrue(any(f["path"] == candidate["field"] and f["value"] == 180000 for f in result["facts"]))
+        self.assertTrue(any(i["field"] == candidate["field"] and i["code"] == "conflict" for i in result["issues"]))
+
+    def test_matching_price_still_waits_for_vat_verification(self):
+        values = copy.deepcopy(dev.fixtures()["kmong"]["cases"]["I2"]["output"]["values"])
+        values["packages"][0]["amount_vat_included_krw"] = 180000
+        answers = [{"answer_id": "answer-" + key, "field": "/" + key, "value": value}
+                   for key, value in values.items()]
+        candidate = {"field": "/packages/0/amount_vat_included_krw", "value": 180000, "quote": "180,000원"}
+        result = self.provider([candidate]).prepare(request("kmong", "첫 패키지 180,000원", answers))
+        self.assertFalse(result["ready"])
+        self.assertFalse(any(i["field"] == candidate["field"] and i["code"] == "conflict" for i in result["issues"]))
+        self.assertTrue(any(i["field"] == "/packages" and i["code"] == "rule_unverified" for i in result["issues"]))
+
+    def test_nested_price_with_no_parent_requests_confirmation(self):
+        candidate = {"field": "/packages/0/amount_vat_included_krw", "value": 180000, "quote": "180,000원"}
+        result = self.provider([candidate]).prepare(request("kmong", "첫 번째 패키지 180,000원"))
+        self.assertFalse(result["ready"])
+        self.assertNotIn("packages", result["values"])
+        self.assertTrue(any(i["field"] == candidate["field"] and i["code"] == "rule_unverified" for i in result["issues"]))
+
+    def test_two_nested_source_prices_block_and_preserve_evidence(self):
+        field = "/packages/0/amount_vat_included_krw"
+        candidates = [{"field": field, "value": 180000, "quote": "180,000원"},
+                      {"field": field, "value": 210000, "quote": "210,000원"}]
+        result = self.provider(candidates).prepare(request("kmong", "첫 패키지 180,000원 또는 210,000원"))
+        self.assertEqual({f["value"] for f in result["facts"]}, {180000, 210000})
+        self.assertTrue(any(i["field"] == field and i["code"] == "conflict" for i in result["issues"]))
+        self.assertFalse(result["ready"])
+
     def test_missing_vat_does_not_create_packages(self):
         result = self.provider().prepare(request("kmong", "합성 레슨 4회 총액 180,000원"))
         self.assertFalse(result["ready"])
