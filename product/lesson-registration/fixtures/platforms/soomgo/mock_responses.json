@@ -1,0 +1,62 @@
+{
+  "platform": "soomgo",
+  "version": "mock.v2",
+  "responses": {
+    "S1_check_category": {
+      "status": 200,
+      "data": {
+        "active_account": true,
+        "existing_services": [],
+        "target_category_available": true
+      }
+    },
+    "S2_select_category": {
+      "status": 200,
+      "data": {
+        "category": "midi_mock",
+        "form_url": "/mock/soomgo/service_config"
+      }
+    },
+    "S3_configure_questions": {
+      "status": 200,
+      "data": {
+        "fields_set": 8,
+        "valid": true
+      }
+    },
+    "S5_execute_single_save": {
+      "status": 200,
+      "data": {
+        "saved": true,
+        "config_id": "cfg-soomgo-midi-99",
+        "redirect_url": "/mock/soomgo/service_detail"
+      }
+    },
+    "S6_independent_readback": {
+      "status": 200,
+      "data": {
+        "config_id": "cfg-soomgo-midi-99",
+        "category": "midi_mock",
+        "daw": ["logic", "ableton"],
+        "goals": ["hobby"],
+        "keyboard": "available",
+        "ages": ["twenties", "thirties"],
+        "genders": ["male", "female"],
+        "format": ["individual"],
+        "location_mode": ["studio"]
+      }
+    },
+    "error_cases": {
+      "save_failed": {
+        "status": 500,
+        "error": "SAVE_ERROR",
+        "message": "플랫폼 모의 저장소 연결에 실패했습니다."
+      },
+      "target_mismatch": {
+        "status": 400,
+        "error": "TARGET_MISMATCH",
+        "message": "지정된 카테고리 슬롯이 일치하지 않습니다."
+      }
+    }
+  }
+}
