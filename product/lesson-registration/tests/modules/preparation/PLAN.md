@@ -97,3 +97,11 @@ PYTHONPATH=.:src uv run --locked --python 3.12 python tests/modules/preparation/
 - 별도 I2 단위 시험에서는 부모 패키지 전체와 하위 수정이 **동시에 입력으로 제공되는 경우** 수정한 값만 바꾸고 형제 패키지 및 입력 원본을 보존한다. 현재 R03은 중첩 수정 시 부모 답변을 제거하므로 이 조건이 충족되지 않는다. 기존 통합 경계는 여전히 차단되고 D05 협의가 필요하다.
 - 독립 `r02-preparation` 합성 시험 44개와 bootstrap replay 및 담당 영역 변경 검사를 통과했다. 실제 모델 평가 결과는 실패를 포함하며, timeout·late revision, 완전한 가격·단위·VAT 검증, AT-01·T5-08·T6-02, 전체 제품 수용 및 12/4 인계는 미완료다.
 - 참조: [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna), [GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna), [구조화 출력](https://developers.openai.com/api/docs/guides/structured-outputs). 비용은 실제 사용량과 해당 계정의 청구 조건에 따라 달라진다.
+
+## D05 R03 협의 제안 · 2026-11-25
+
+- 목표: H5 부분 수정에도 삭제 의도가 없는 패키지와 기존 facts/provenance를 보존하고 원본 충돌·오류 시 기존 revision을 잃지 않는다. 제안이며 R03 합의·실제 결합 전이다.
+- 권장: 기존 I2 계약을 유지하고 R03이 기존 `/packages` 부모 답변과 새 leaf 답변을 함께 I2에 전달한다. R02는 복사한 부모에 leaf만 적용하고 전체 결과를 반환한다. `/packages`가 없는 leaf는 추측하지 않고 `unsupported` blocking으로 반환한다. R03은 지원 불가한 부분 수정 또는 패키지 누락을 기존 revision/preparation/answers를 유지하며 거부하는 방식을 검토한다. 변경이 어렵다면 H5에서 기존 부모를 정확히 보존한 전체 `/packages` 답변으로 정규화하는 대안을 비교한다.
+- 사례 A: 부모 패키지 3개가 있고 `/packages/0/amount_vat_included_krw`만 수정하면 나머지 2개와 수정하지 않은 필드, facts/provenance가 그대로인지 검증한다. 사례 B: 원문과 수정 금액이 충돌하면 해당 leaf `conflict`·blocking을 반환하고 R03은 `FACT_CONFLICT`로 매핑해 이전 revision을 유지한다. 부모가 없는 leaf도 조용히 일부만 저장하지 않는다.
+- timeout/동시성 권장: 30초는 현재 추출기의 시험 설정으로만 제안하고 운영값은 측정 후 정한다. R02는 timeout을 `MODEL_UNAVAILABLE`로 안전하게 전달한다. R03은 호출 시작 revision을 기준으로 종료 후 CAS해 오래된 결과를 버린다. H4 신규 요청의 model_unavailable 이슈 저장과 H5 실패 시 이전 preparation/answers 보존을 어떻게 함께 표현할지는 R03과 실제 응답·저장 예제로 확정한다. timeout이 원격 모델 작업 자체를 취소한다고 가정하지 않는다.
+- 완료 기준: 두 담당 구현을 실제로 연결한 정상 수정, 충돌, 부모 부재, timeout, 다른 revision의 선행 저장, 늦은 결과 미반영 시험과 커밋·재현 명령을 함께 기록한다. 현행 mock-only·공통 스키마를 바꾸지 않으며, 변경이 불가피할 때만 R01에 근거와 영향을 전달한다.
