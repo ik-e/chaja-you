@@ -34,14 +34,14 @@
         "CS-08",
         "LD-08"
       ],
-      "selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; jsonschema 4.25.1 isolated verification tool; no second type schema",
+      "selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; product server uses common contracts/validation.py (jsonschema 4.25.1 pinned in product lock); no second authoritative schema engine. Module error mapping and business guards remain local.",
       "alternatives": [
         "Custom schema checker",
         "Pydantic as new source",
         "Pre-generate model classes"
       ],
-      "reason": "Standards-based validation avoids drift and tests all current shapes; production dependency/lock still separate.",
-      "review": "Standard validator direction accepted; product dependency group and full lock pending R03/shared review.",
+      "reason": "Standards-based validation avoids drift; replay agreement is not general equivalence. Product lock supplied by PD-02; standard server validator reuse is default.",
+      "review": "R03 and other server providers confirm shared validator integration; any alternative engine needs evidence, divergence tests and R01 review. See HRESP-20261125-04. Frontend UX checks are not server authority.",
       "revisit_when": "Missing schema constraints, incompatible profile or performance need.",
       "status": "direction_approved"
     },
@@ -105,8 +105,8 @@
     "adopted_logical_schema_changed": false
   },
   "pending": [
-    "Actual common dependency lock and provider runtime transport/async choice",
-    "Operation manifest, stable slot resolution and canonical digest byte rules require owner review",
+    "Owner-specific runtime transport/async and dependency additions; initial product lock supplied by PD-02",
+    "Operation manifest, stable slot resolution and exact binding digest targets require owner review; canonical byte rules supplied by PD-03",
     "Actual runtime atomic transaction, leases, evidence and viewer security",
     "Real app launch, product test results and calendar"
   ],
@@ -130,5 +130,10 @@
     "reviewed_commit": "5876907585666c0389719d90331b2b231afea3d0",
     "verification_run": "https://github.com/ik-e/chaja-you/actions/runs/45527624382",
     "limits": "Initial implementation boundary; provider details and product runtime stack pending. No live permission."
+  },
+  "followup": {
+    "ref": "docs/human/responses/HRESP-20261125-04_r03-app-followup.md",
+    "decision": "IB-02 product application clarified after initial approval; original approval/evidence remains bound to its reviewed commit.",
+    "prior_selection": "Use pinned named Draft 2020-12 schema with explicit profile schema; jsonschema 4.25.1 isolated verification tool; no second type schema"
   }
 }
