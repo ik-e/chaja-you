@@ -225,7 +225,7 @@ class Coordinator:
                 if target_changed or reg["profile"] != profile["ref"]:
                     new["answers"] = []
                 new["support"], new["profile"] = "supported", profile["ref"]
-                new["preparation"] = self._prepare(source, profile, new["answers"])
+                new["preparation"] = self._prepare(source, profile, new["answers"], keep_revision=reg["revision"])
             else:
                 new["support"], new["profile"], new["answers"] = resolved["status"], None, []
                 new["preparation"] = _blocked_preparation("unsupported", resolved["reason"])
@@ -237,7 +237,7 @@ class Coordinator:
             source = self.get_source(owner_ref, reg["source_id"])
             resolved_answers = self._normalize(reg, profile, edit.get("answers", []), edit.get("corrections", []))
             new["answers"] = _merge_answers(reg["answers"], resolved_answers)
-            new["preparation"] = self._prepare(source, profile, new["answers"])
+            new["preparation"] = self._prepare(source, profile, new["answers"], keep_revision=reg["revision"])
             corrected = {a["field"] for a in resolved_answers if "origin_issue_id" not in a}
             if any(
                 i["code"] == "conflict" and i["blocking"] and i["field"] in corrected
@@ -246,6 +246,8 @@ class Coordinator:
                 # PREP judged the correction to contradict a shared source fact: needs a new Source.
                 raise AppError("FACT_CONFLICT", "source facts change only through a new Source version",
                                current_revision=reg["revision"])
+            _check_partial_result(reg, new["answers"], {a["field"] for a in resolved_answers},
+                                  new["preparation"])
 
         material = any(
             new[k] != reg[k] for k in ("source_id", "selector", "support", "profile", "answers", "preparation")
@@ -557,28 +559,40 @@ class Coordinator:
         if expected_revision != reg["revision"]:
             raise AppError("STALE_REVISION", "registration changed", current_revision=reg["revision"])
 
-    def _prepare(self, source: dict, profile: dict, answers: list[dict]) -> dict:
-        """Call I2 outside any transaction. Port failure -> persisted model_unavailable issue."""
+    def _prepare(self, source: dict, profile: dict, answers: list[dict], *,
+                 keep_revision: int | None = None) -> dict:
+        """Call I2 outside any transaction.
+
+        Port failure -> persisted model_unavailable issue (H4). With ``keep_revision`` (H5) the
+        failure is raised as MODEL_UNAVAILABLE instead, so the previous revision stays untouched.
+        """
         if self.prep is None:
             return _blocked_preparation("model_unavailable", "준비 모듈이 연결되지 않았습니다.")
         inp = {"source": source, "profile": profile, "answers": answers}
         contract.validate("PrepareInput", inp)
+        unavailable = None
         try:
             out = self.prep.prepare(json.loads(json.dumps(inp)))
         except (AppError, PortFailure) as exc:
             err = _port_error(exc, allowed=("MODEL_UNAVAILABLE", "VALIDATION_FAILED", "PROFILE_CHANGED"))
-            if err.code == "MODEL_UNAVAILABLE":
-                # contract H4: model unavailable is a persisted ready=false issue, not a rejection
-                return _blocked_preparation("model_unavailable", "준비 모델을 사용할 수 없습니다. 다시 시도하세요.")
-            raise err from None
+            if err.code != "MODEL_UNAVAILABLE":
+                raise err from None
+            unavailable = "준비 모델을 사용할 수 없습니다. 다시 시도하세요."
         except Exception:
-            return _blocked_preparation("model_unavailable", "준비 모듈 응답을 받지 못했습니다. 다시 시도하세요.")
+            unavailable = "준비 모듈 응답을 받지 못했습니다. 다시 시도하세요."
+        if unavailable is not None:
+            if keep_revision is not None:
+                raise AppError("MODEL_UNAVAILABLE", unavailable, current_revision=keep_revision) from None
+            # contract H4: model unavailable is a persisted ready=false issue, not a rejection
+            return _blocked_preparation("model_unavailable", unavailable)
         if not contract.is_valid("Preparation", out):
-            raise AppError("RUNTIME_ERROR", "preparation module returned an invalid result")
+            raise AppError("RUNTIME_ERROR", "preparation module returned an invalid result",
+                           current_revision=keep_revision)
         out = json.loads(json.dumps(out))
         out["ready"] = bool(out["ready"]) and not any(i["blocking"] for i in out["issues"])
         if out["ready"] and not contract.profile_values_valid(profile["value_contract_ref"], out["values"]):
-            raise AppError("RUNTIME_ERROR", "preparation marked ready with values outside the profile schema")
+            raise AppError("RUNTIME_ERROR", "preparation marked ready with values outside the profile schema",
+                           current_revision=keep_revision)
         return out
 
     def _normalize(self, reg: dict, profile: dict, answers: list[dict], corrections: list[dict]) -> list[dict]:
@@ -726,14 +740,53 @@ def _pointer_overlaps(a: str, b: str) -> bool:
     return a.startswith(b.rstrip("/") + "/") or b.startswith(a.rstrip("/") + "/")
 
 
+def _is_descendant(child: str, parent: str) -> bool:
+    return child.startswith(parent.rstrip("/") + "/")
+
+
 def _merge_answers(existing: list[dict], incoming: list[dict]) -> list[dict]:
-    """Latest answer per field wins; answers nested under a replaced field are dropped."""
+    """D05: latest answer per field wins and answers nested under a replaced field are dropped.
+
+    Ancestor answers stay: a leaf correction such as /packages/0/amount is sent to I2 together
+    with the kept /packages parent so PREP can return the full list.
+    """
     fields = [i["field"] for i in incoming]
     kept = [
         e for e in existing
-        if e["field"] not in fields and not any(_pointer_overlaps(e["field"], f) for f in fields)
+        if e["field"] not in fields and not any(_is_descendant(e["field"], f) for f in fields)
     ]
     return kept + incoming
+
+
+def _resolve_pointer(doc, pointer: str):
+    node = doc
+    for part in pointer[1:].split("/"):
+        if isinstance(node, list):
+            if not part.isdigit() or int(part) >= len(node):
+                return None
+            node = node[int(part)]
+        elif isinstance(node, dict) and part in node:
+            node = node[part]
+        else:
+            return None
+    return node
+
+
+def _check_partial_result(reg: dict, answers: list[dict], corrected: set[str], preparation: dict) -> None:
+    """D05: reject (nothing stored) a partial edit PREP could not apply or that lost list elements."""
+    for i in preparation["issues"]:
+        if i["code"] == "unsupported" and i["blocking"] and any(
+            i["field"] == f or _pointer_overlaps(i["field"], f) for f in corrected
+        ):
+            raise AppError("VALIDATION_FAILED", f"{i['field']} cannot be corrected without its parent answer",
+                           current_revision=reg["revision"])
+    for a in answers:
+        if not isinstance(a["value"], list) or not any(_is_descendant(f, a["field"]) for f in corrected):
+            continue
+        got = _resolve_pointer(preparation["values"], a["field"])
+        if not isinstance(got, list) or len(got) != len(a["value"]):
+            raise AppError("RUNTIME_ERROR", f"preparation dropped elements of {a['field']}",
+                           current_revision=reg["revision"])
 
 
 def _merge_unresolved(result: dict, effects: list) -> dict:

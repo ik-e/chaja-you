@@ -249,6 +249,20 @@ class Knowledge:
 - 실제로 바뀐 게 있을 때만 `revision += 1`, 기존 review·binding 무효화
 - 프로필 digest가 바뀌었으면 `PROFILE_CHANGED`
 
+**D05 부분 수정·실패 시 상태 보존 (R03 결정, 2026-11-25)**
+
+| 경우 | 처리 |
+|---|---|
+| 기존 답변 병합 | 같은 field 또는 **상위** field의 새 답변만 기존 답변을 대체한다. 기존 **상위** 답변(예: `/packages`)은 유지하고 하위 수정(예: `/packages/0/amount_vat_included_krw`)과 함께 I2에 보낸다. 상위 답변을 다시 보내면 그 아래 기존 하위 답변은 버린다 |
+| 수정 field나 그 상위/하위에 blocking `unsupported` | 422 `VALIDATION_FAILED`, 저장 안 함. 누락 값을 R03이 추측·복원하지 않는다 |
+| 유지한 상위 list 답변보다 결과 원소 수가 다름 | 503 `RUNTIME_ERROR`, 저장 안 함 |
+| 수정 field에 blocking `conflict` | 422 `FACT_CONFLICT`, 저장 안 함 |
+| H5 중 I2 포트 실패(timeout 포함) | 503 `MODEL_UNAVAILABLE` + current_revision, 저장 안 함. H4는 기존대로 `model_unavailable` 이슈를 저장(201). PREP 미연결(`prep=None`)은 설정 상태로 보고 기존처럼 이슈 저장 |
+| I2 호출 중 다른 revision이 먼저 저장됨 | I2는 트랜잭션 밖에서 호출하고 시작 revision CAS로 저장 → 409 `STALE_REVISION`, 늦은 결과 폐기 |
+| timeout 값 | R02 provider 내부에서 관리. R03은 별도 타이머를 두지 않음 |
+
+모든 거부는 이전 revision·answers·preparation을 바꾸지 않는다. 시험: `test_d05_partial_edit.py`(9개). R02 브랜치 `codex/task049-model-evaluation@842372c` provider와 결합해 3개 패키지 중 첫 가격 수정 시 나머지 보존을 로컬 확인했다. 해당 브랜치의 `test_r03_nested_edit_without_parent_answer_stays_blocked`는 예전 유실 동작(packages 없음)을 기대하므로 R02 기대값 갱신이 필요하다.
+
 **시험(test_s2_prepare.py)**
 - kmong·soomgo 각각: I1 replay와 같은 Profile 해석
 - unsupported selector → 201, `support="unsupported"`, PREP 호출 0회
@@ -534,7 +548,7 @@ TASK-050 대상이 아닌 요구사항: REQ-04(원격 직접 인증, R05), REQ-0
 | 개발용 owner 인증 | 테스트 헤더 | R01·R04 |
 | 준비·인증 시간 제한 | 수치 미정(계약: 구현 실험 후) | 측정 후 |
 | 공유 사실 판정 | CO는 의미를 판단하지 않음. replay의 모든 field가 `direct` 출처라 CO가 판정하면 수정이 불가능해짐 → PREP의 `conflict` 이슈로만 `FACT_CONFLICT` | R02 (PREP이 conflict 이슈를 내는 기준) |
-| PREP 실패 | 포트 예외 → `model_unavailable` blocking 이슈로 정상 저장(201), 형식 위반 출력 → 503 `RUNTIME_ERROR`·저장 안 함 | R02 |
+| PREP 실패 | H4: 포트 예외 → `model_unavailable` blocking 이슈로 정상 저장(201). H5: 503 `MODEL_UNAVAILABLE`·저장 안 함(D05). 형식 위반 출력 → 503 `RUNTIME_ERROR`·저장 안 함 | R02 |
 | profile digest | 고정 profile 항목 전체(value_schema 포함)의 canonical SHA-256. replay의 `aaaa…`는 자리표시값 | R01 |
 | H9 정렬 | 계약 "creation then registration_id"를 H2와 같은 최신순(`created_at DESC, registration_id DESC`)으로 해석. cursor는 종류(sources/registrations)·owner에 묶임 | R04 (UI 목록 순서) |
 | progress 계산 | 단계 상태 = effect 상태(쓰기 단계) 또는 관측 verdict(read 단계), 없으면 pending. step_index = 앞에서부터 연속 confirmed 수. 멈춘 작업의 pending 현재 단계는 `error`, 멈춘 작업의 reserved는 `unknown` | R04 |
