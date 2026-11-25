@@ -37,3 +37,39 @@ class ModelComparisonTests(unittest.TestCase):
         self.assertFalse(model_compare.passed("price_missing", result))
         result = {"ready": False, "values": {"category": "fabricated"}, "issues": [], "facts": []}
         self.assertFalse(model_compare.passed("soomgo_missing", result))
+
+    def test_fixture_digest_change_blocks_before_network(self):
+        with patch.object(model_compare, 'FIXTURE_SHA256', 'not-the-fixture-digest'), \
+             patch.object(model_compare, 'urlopen', side_effect=AssertionError('network called')):
+            with self.assertRaises(ValueError):
+                model_compare.cases()
+
+    def test_approved_plan_caps_at_40_calls_without_live_network(self):
+        fake_result = {'verdict': 'pass', 'http_status': 200, 'usage': {'input_tokens': 1, 'output_tokens': 1}}
+        with patch.object(model_compare.sys, 'argv', ['model_compare.py', '--run']), \
+             patch.dict(model_compare.os.environ, {'OPENAI_API_KEY': 'fake-test-key'}), \
+             patch.object(model_compare, 'run_case', return_value=fake_result) as fake_run, \
+             patch('sys.stdout', new_callable=io.StringIO) as output:
+            self.assertEqual(model_compare.main(), 0)
+        self.assertEqual(fake_run.call_count, 40)
+        self.assertNotIn('fake-test-key', output.getvalue())
+
+    def test_estimate_limit_stops_before_next_call(self):
+        expensive = {'verdict': 'pass', 'http_status': 200,
+                     'usage': {'input_tokens': 1_000_000, 'output_tokens': 1_000_000}}
+        with patch.object(model_compare.sys, 'argv', ['model_compare.py', '--run']), \
+             patch.dict(model_compare.os.environ, {'OPENAI_API_KEY': 'fake-test-key'}), \
+             patch.object(model_compare, 'run_case', return_value=expensive) as fake_run, \
+             patch('sys.stdout', new_callable=io.StringIO) as output:
+            self.assertEqual(model_compare.main(), 1)
+        self.assertEqual(fake_run.call_count, 1)
+        self.assertIn('estimated_budget', output.getvalue())
+
+    def test_missing_usage_stops_before_next_call(self):
+        with patch.object(model_compare.sys, 'argv', ['model_compare.py', '--run']), \
+             patch.dict(model_compare.os.environ, {'OPENAI_API_KEY': 'fake-test-key'}), \
+             patch.object(model_compare, 'run_case', return_value={'verdict': 'error', 'http_status': 200, 'usage': None}) as fake_run, \
+             patch('sys.stdout', new_callable=io.StringIO) as output:
+            self.assertEqual(model_compare.main(), 1)
+        self.assertEqual(fake_run.call_count, 1)
+        self.assertIn('usage_unavailable', output.getvalue())

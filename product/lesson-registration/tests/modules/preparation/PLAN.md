@@ -112,3 +112,9 @@ PYTHONPATH=.:src uv run --locked --python 3.12 python tests/modules/preparation/
 - `BoundedReflectionExtractor`는 명시 주입되는 **미채택 실험 후보**다. 근거가 있는 후보의 지원 불가 필드만 교정기에 한 번 제안하고, 원래 후보의 값·인용을 추가·삭제·변경하는 수정은 받아들이지 않는다. 원본 누락·충돌은 보정하지 않으며 결과는 기존 PREP 검증을 다시 통과해야 한다. 실제 모델/API나 앱에는 자동 연결하지 않는다.
 - 가짜 추출기·교정기 A/B에서 유효 근거 보존, 형식 교정 1회 제한, 값·인용 변경 거절, 원본 가격 충돌 보존, 모델 timeout 차단을 시험했다. 이는 합성 코드 시험이며 실제 모델 자기 성찰 A/B 결과나 DLV-06 완료가 아니다.
 - 최신 main `089b8a4` 적용 후 `uv run --locked --all-groups --python 3.12 python dev.py test r02-preparation`에서 55개 및 bootstrap replay 통과, `dev.py check-changes r02-preparation --base 089b8a4` 통과. 실제 모델 재시험은 R01에 제안한 비용·사례 검토 전 실행하지 않았다.
+
+## 후속 실험 자료와 deadline 후보
+
+- [실험·비용 제안 원본](https://github.com/ik-e/chaja-you/blob/codex/task049-model-run-record/docs/artifacts/planning/R02-TASK-049-EXPERIMENT-20261125.json)에 고정 합성 사례 10개, 2모델×2회(최대 40호출), 정답·안전 기준, 추정 비용과 중단 조건을 제시했다. 입력·사례는 `fixtures/source/model-evaluation-cases.json`에 고정하고 SHA-256을 확인한다. 시험 도구의 $0.20은 **제안된 추정액 중단 기준**이며 실제 청구의 하드 상한이나 승인된 예산이 아니다. 추가 실제 호출은 검토 대기 중이다.
+- `DeadlineExtractor`는 명시 주입용 후보로, 설정한 시간이 지나면 `TimeoutError`를 반환해 PREP의 `MODEL_UNAVAILABLE`로 연결한다. 느린 원격 호출을 취소한다고 가정하지 않고, wrapper당 미완료 worker를 하나로 제한하며 늦은 결과는 다음 호출에 재사용하지 않는다. 가짜 지연/후속 호출 테스트는 통과했다. 앱 조립과 H4/H5 저장·revision CAS는 R03과 공동 시험 전이다. 운영 timeout은 미확정이다.
+- R03은 부모·leaf 동시 전달, unsupported 시 기존 상태 보존, H4 실패 이슈 저장 및 H5 실패 상태 보존을 제안하고 담당 구현을 준비 중이다. `FACT_CONFLICT` HTTP 409라는 전달 내용은 현재 고정 계약·R03 구현의 422와 달라 422 유지안을 전달했다. 실제 구현·공동 시험 전 완료로 보지 않는다.
