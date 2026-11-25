@@ -1,4 +1,11 @@
 -- r03-app STORE schema (SQLite). Sources/assets are immutable: no UPDATE/DELETE paths exist.
+CREATE TABLE IF NOT EXISTS dispatch_permits (
+    token TEXT PRIMARY KEY,
+    registration_id TEXT NOT NULL,
+    lease TEXT NOT NULL,
+    operation_json TEXT NOT NULL,
+    consumed INTEGER NOT NULL DEFAULT 0
+);
 CREATE TABLE IF NOT EXISTS meta (
     key   TEXT PRIMARY KEY,
     value TEXT NOT NULL

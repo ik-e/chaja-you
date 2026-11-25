@@ -59,10 +59,16 @@
     },
     {
       "url": "https://github.com/ik-e/chaja-you/actions/runs/45525881756"
+    },
+    {
+      "path": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+    },
+    {
+      "url": "https://github.com/ik-e/chaja-you/actions/runs/45561308184"
     }
   ],
   "result": {
-    "summary": "PR #51에서 실제 OpenAI 모델의 합성 사례 비교와 안전 보완을 진행했다. 가격 충돌 오류가 남아 TASK-049 수용 기준은 미완료다.",
+    "summary": "PR49/50 main 반영, 합성 32개 및 R03 191개 독립 CI 통과. PR51/52 draft의 실제 합성 모델 초기 비교 각 5사례(3/5·4/5, 양 모델 가격 충돌 오류), 44개 합성 회귀 독립 CI 확인. R01 리뷰 등록. API 접근 전달·실제 호출 담당 보고, 모델 선정·총비용·중첩 수정/timeout·인계·전체 gate 미확정.",
     "claims": [
       {
         "id": "C49-1",
@@ -92,6 +98,22 @@
         ]
       },
       {
+        "id": "C49-6",
+        "text": "실제 모델 비교는 담당 보고, 전체 비용과 모델 선정 미확정.",
+        "status": "담당 보고·검토",
+        "evidence_ids": [
+          "E49-6"
+        ]
+      },
+      {
+        "id": "C49-7",
+        "text": "44개 합성 및 R03 191개 시험 독립 재현.",
+        "status": "독립 재현",
+        "evidence_ids": [
+          "E49-7"
+        ]
+      },
+      {
         "id": "C49-4",
         "text": "실제 모델 동일 합성 사례 각 5개에서 GPT-6 Luna 3개와 GPT-5.6 Luna 4개가 통과했으며 양쪽 모두 가격 충돌 사례에서 오류가 발생했다.",
         "status": "부분 관측",
@@ -115,6 +137,16 @@
         "id": "E49-3",
         "label": "OpenAI 모의 HTTP 시험",
         "url": "https://github.com/ik-e/chaja-you/blob/r02/product-preparation/product/lesson-registration/tests/modules/preparation/test_openai_extractor.py"
+      },
+      {
+        "id": "E49-6",
+        "label": "최신 팀 검토",
+        "path": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+      },
+      {
+        "id": "E49-7",
+        "label": "PR51 합성 회귀 CI",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45561308184"
       },
       {
         "id": "E49-4",
@@ -155,6 +187,20 @@
         ]
       },
       {
+        "criterion": "실제 모델 전체 수용",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E49-6"
+        ]
+      },
+      {
+        "criterion": "PR51 합성 44개",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E49-7"
+        ]
+      },
+      {
         "criterion": "실제 모델 동일 합성 5개 사례 비교",
         "verdict": "fail",
         "evidence_ids": [
@@ -163,14 +209,14 @@
       }
     ],
     "uncertainties": [
-      "모델별 소규모 사례에서 가격 충돌 오류가 남아 신뢰도·모델 선정 미확정",
-      "모델의 VAT·가격 표현 누락을 모든 표현에서 탐지하는지 미검증",
-      "중첩 수정의 부모·형제 보존, timeout과 늦은 결과 폐기 R03 통합 검증 미완료",
-      "실제 플랫폼과 AT-01·T5-08·T6-02 제품 수용 미검증"
+      "실제 합성 모델 호출 보고 확인, 모델 선정·총비용·허용 범위/추가 실험 설계 미확정",
+      "양 모델 가격 충돌 오류 및 실제 의미·단위/VAT 누락 탐지 성능 미확인",
+      "H5 부모·형제 보존, timeout/late revision 실제 연결 필요",
+      "자기 성찰 루프 및 전체 gate 미실행, 잔여/인계 미확인"
     ],
     "decision_requests": [
-      "R03과 D05 중첩 수정 보존 및 timeout·revision 처리 계약 협의",
-      "R01과 합성 평가 실패·모델 후보·향후 예산 및 검증 범위 공유"
+      "R02가 실험 설계·예상 비용·품질 기준·잔여 공수/12/4 인계를 제안하고 R01은 검토만",
+      "R03과 중첩 수정/timeout·revision 공동 시험, PR51/52 준비 시 병합 요청"
     ]
   },
   "traceability": {
@@ -207,7 +253,7 @@
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
   "intent_ref": "docs/human/task-intents/TASK-049.md",
-  "assignment_status": "R02 2026-11-25 착수; 담당 영역 합성 구현·검증 진행, 실제 모델 및 통합 수용 검증 미완료",
+  "assignment_status": "PR49/50 main, PR51/52 draft 실제 모델 초기 비교 및 44개 독립 합성 회귀; 전체 평가/통합 진행 중",
   "registration_authority_ref": "docs/human/responses/HRESP-20261125-01_product-task-assignment.md",
   "assignment_mode": "assigned",
   "work_branch": "r02/product-preparation",
