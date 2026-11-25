@@ -4,20 +4,25 @@ on:
   push:
     branches: [r01/product-integration, main]
     paths:
-      - 'product/lesson-registration/evidence/physical-env/**'
+      - 'product/lesson-registration/pyproject.toml'
+      - 'product/lesson-registration/uv.lock'
       - 'product/lesson-registration/evidence/probe_physical.py'
       - '.github/workflows/lesson-physical-probe.yml'
   pull_request:
     paths:
-      - 'product/lesson-registration/evidence/physical-env/**'
+      - 'product/lesson-registration/pyproject.toml'
+      - 'product/lesson-registration/uv.lock'
       - 'product/lesson-registration/evidence/probe_physical.py'
       - '.github/workflows/lesson-physical-probe.yml'
 permissions:
   contents: read
 jobs:
-  physical-candidate:
+  physical-product-lock:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: product/lesson-registration
     env:
       LR_ENVIRONMENT: mock
     steps:
@@ -27,37 +32,16 @@ jobs:
           version: '0.10.0'
           python-version: '3.12'
           enable-cache: false
-      - name: Resolve candidate in temporary project
-        shell: bash
+      - name: Verify exact product lock
         run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/lr-physical"
-          cp product/lesson-registration/evidence/physical-env/pyproject.toml "$RUNNER_TEMP/lr-physical/pyproject.toml"
-          cd "$RUNNER_TEMP/lr-physical"
-          uv lock --python 3.12
+          git rev-parse HEAD
           uv lock --check
           uv sync --locked --all-groups --python 3.12
           uv run --locked --all-groups --python 3.12 python --version
           uv pip check --python .venv/bin/python
-          echo LR_LOCK_BEGIN
-          cat uv.lock
-          echo LR_LOCK_END
       - name: Install pinned Playwright browser
-        run: |
-          cd "$RUNNER_TEMP/lr-physical"
-          uv run --locked --all-groups python -m playwright install --with-deps chromium
+        run: uv run --locked --all-groups --python 3.12 python -m playwright install --with-deps chromium
       - name: Independent physical probe
-        run: |
-          cd "$RUNNER_TEMP/lr-physical"
-          uv run --locked --all-groups python "$GITHUB_WORKSPACE/product/lesson-registration/evidence/probe_physical.py"
-      - name: Store candidate lock
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lr-physical-candidate-lock
-          path: |
-            ${{ runner.temp }}/lr-physical/pyproject.toml
-            ${{ runner.temp }}/lr-physical/uv.lock
-          if-no-files-found: warn
+        run: uv run --locked --all-groups --python 3.12 python evidence/probe_physical.py
       - name: Scope
-        run: echo 'Technology candidate only; no product acceptance, live website or production credential use.'
+        run: echo 'Technology probe only; no product acceptance, live website or production credential use.'

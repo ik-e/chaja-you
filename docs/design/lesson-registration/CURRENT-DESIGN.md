@@ -142,13 +142,13 @@
 | ID | 채택 방향 | 담당자 확인 |
 | --- | --- | --- |
 | PD-01 시스템 구조 | 모듈형 모놀리스 + 격리 browser runtime; 프로세스 분리 필요성은 근거 후 판단 | R03/R05: lifecycle, shutdown, process isolation 조건 |
-| PD-02 실행 기술 | Python 3.12, FastAPI/ASGI, SQLite, Playwright/Chromium; UI/AI 내부 기술은 owner 제안 | R01/R03/R05: 정확한 lock, 설치 및 기술 시험; R02/R04 추가 요구 |
-| PD-03 공통 데이터 | 기존 named JSON Schema/profile; 서버 권위 UTF-8 sorted-key JSON·safe integer·Unicode 보존·SHA256, 배열 순서·asset raw bytes; 기존 data contract 범위 | 관련 owner: canonical golden vectors, digest 대상 scope, slot mapping, error/time/ID semantics |
+| PD-02 실행 기술 | Python 3.12, FastAPI/ASGI, SQLite, Playwright/Chromium; UI/AI 내부 기술은 owner 제안 | R01/R03/R05: product regression and owner OS/local install confirmation; R02/R04 additional needs |
+| PD-03 공통 데이터 | 기존 named JSON Schema/profile; 서버 권위 UTF-8 sorted-key JSON·safe integer·Unicode 보존·SHA256, 배열 순서·asset raw bytes; 기존 data contract 범위 | R02/R03/R04/R05: supplied server byte helper/golden vectors; exact digest target scope, slot mapping, error/time/ID semantics |
 | PD-04 Worker/저장 | CO 단일 상태 소유, accepted worker는 request/viewer와 수명 분리, SQLite 원자 accept/admit/observe/fence/finalize; runtime exclusive lease | R03/R05: transaction/timeout, permit/lease generation, crash/fence race |
 | PD-05 모듈 호출 | 기존 Python Protocol/JSON 및 BoundGateway; runtime owns permit/context; adapter 등록 operation만; event loop에서 blocking 금지 | R03/R05 STORE 호출, R04/R05 operation manifest와 fake gateway, R02/R03 I2 timeout |
 | PD-06 Viewer | CDP screencast + WebSocket 방향 수용; R05 viewer mount/dispose, R03 서버 경계, R04 UI 소비 | R03/R04/R05 endpoint/message schema, grant owner/generation/expiry/origin, input cutoff, disconnect detach, WSS 검증 |
 | PD-07 Composition | 명시 provider 주입·설정·수명 관리, fake는 개발·검증에 명시 선택; 자동 replay fallback 없음 | 각 owner factory signature, config/launch, port, shutdown |
-| PD-08 통합 검증 | 독립 기술 검사 → 공유 계약 → 실제 provider → 크몽/숨고 통합 → 22개 동일 후보 gate | R01: Python 3.12 lock/CI, probe, owner review, 실제 제품 시험; R02 인계 12/4 |
+| PD-08 통합 검증 | 독립 기술 검사 → 공유 계약 → 실제 provider → 크몽/숨고 통합 → 22개 동일 후보 gate | R01: shared product-lock regression, owner PLAN and actual provider/product gate; R02 handoff 12/4 |
 
 ## 5. 현재 담당별 작업
 
@@ -169,9 +169,9 @@
 - [공통 CI](https://github.com/ik-e/chaja-you/actions/runs/45527624382) · 계약 10개, 합성 포트 36개, HTTP 36개, 회귀 9개, 문서 27개. 고정 후보에 대한 검사다.
 - 제품 gate 22개: [수용 기준](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) `/gate` · [실제 결과 원본](../../artifacts/tasks/TASK-048.json). 합성/제품 시험 구분, T5-08 실제 모델 필수.
 
-- Python 3.12 product lock: independent CI and owner review; current product env unchanged until verified
-- R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config
-- Canonical scope/slot/digest vectors and actual provider integration
+- Owner-specific environment confirmation, remaining UI/AI dependencies and product provider transport/async choices
+- R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config: contracts/INTERFACE-REVIEW.md
+- Canonical helper and golden vectors supplied; actual scope/slot/profile readback mapping and provider integration require owner confirmation
 - Other owner PLAN/availability and WBS confirmation; actual product tests not run
 
 ## 7. 갱신

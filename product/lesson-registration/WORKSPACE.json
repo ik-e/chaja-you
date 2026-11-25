@@ -30,12 +30,19 @@
     }
   ],
   "stack": {
-    "bootstrap": "Python stdlib only (isolated uv project, Python 3.12 target; lock permits 3.13 for compatibility check)",
-    "product_candidates": "PD-01~08 direction accepted; exact product dependency lock pending independent CI and owner review",
+    "bootstrap": "Python 3.12 target; base jsonschema; optional app/remote/verification dependency groups",
+    "product_candidates": "PD-01~08 direction accepted; initial product lock based on successful Python 3.12 technology candidate CI; exact lock authoritative in product pyproject.toml/uv.lock.",
     "root_dependency_changes": false,
-    "contract_validation": "jsonschema==4.25.1 isolated verification; candidate product dependency pending lock",
+    "contract_validation": "jsonschema==4.25.1 locked product base dependency",
     "physical_binding": "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
-    "physical_candidate_env": "product/lesson-registration/evidence/physical-env/pyproject.toml"
+    "physical_candidate_env": "product/lesson-registration/evidence/physical-env/pyproject.toml",
+    "physical_evidence": "product/lesson-registration/evidence/physical-ci-20261125.json",
+    "dependency_groups": {
+      "base": "all packages (jsonschema)",
+      "app": "R03 FastAPI/uvicorn/websockets",
+      "remote": "R05 Playwright; R04/R05 browser tests when needed",
+      "verification": "httpx for ASGI tests; all-groups for full local regression"
+    }
   },
   "packages": [
     {
@@ -501,8 +508,9 @@
   "activation": [
     "R01 logical design adoption recorded in main",
     "Bootstrap Python 3.12 clean checkout passed (run 45525881756)",
-    "TASK-048~054 assigned; actual member receipt, availability and detailed technology pending",
-    "IB-01~05 direction approved; standard synthetic contract CI passed 10/10 and 72 payloads (45527624382)."
+    "TASK-048~054 assigned; R05 receipt and 7-day estimate reported, other owners and actual implementation pending",
+    "IB-01~05 direction approved; standard synthetic contract CI passed 10/10 and 72 payloads (45527624382).",
+    "PD-01~08 direction and verified initial product lock; CI candidate run 45534844447; owner details and product tests pending."
   ],
   "decisions": [
     {

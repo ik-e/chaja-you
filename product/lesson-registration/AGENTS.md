@@ -15,3 +15,5 @@ TASK 결과 정본은 담당자가 별도 문서 갱신으로 관리하며 제�
 [PD-01~08](contracts/PHYSICAL-BINDING.json)과 [README의 기준선 갱신 절차](README.md#공통-기준선-갱신-확인-2026-11-25)를 확인한다. 방향 채택과 정확한 lock/세부 계약/제품 검증은 구분한다. owner 합의 전 기존 Protocol과 pinned schema를 유지하며 독립 fake로 진행. 적용한 main SHA 및 자신의 검증 결과를 PLAN에 기록한다.
 
 세부 공동 경계는 [INTERFACE-REVIEW](contracts/INTERFACE-REVIEW.md)에 따라 관련 담당자와 자신의 PLAN에서 확인한다. server digest primitive 및 golden vectors를 공유하며 scope/slot/readback은 구현·검증 책임에 맞춰 결정한다.
+
+공통 초기 product lock은 [물리 기술 CI](evidence/physical-ci-20261125.json) 기반이다. 실제 실행은 제품 README의 해당 dependency group 설치/시험 명령 사용. 최초 적용 SHA와 독립 시험 결과를 PLAN에 남긴다. 후보 pyproject는 역사 기록이며 현재 제품 lock을 바꾸지 않는다.

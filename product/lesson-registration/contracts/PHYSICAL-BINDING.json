@@ -33,7 +33,7 @@
       "title": "실행 기술",
       "status": "direction_accepted",
       "selection": "Python 3.12, FastAPI/ASGI, SQLite, Playwright/Chromium; UI/AI 내부 기술은 owner 제안",
-      "reason": "기존 Python bootstrap, SQLite stdlib, R05 합성 PoC 및 요청; 제품 lock 미검증",
+      "reason": "Python bootstrap, SQLite stdlib, R05 PoC and independent Python 3.12 candidate CI successful; exact initial lock supplied; actual product and owner environment verification separate.",
       "prior": [
         "CS-07",
         "IB-01",
@@ -46,7 +46,7 @@
         "TASK-051",
         "TASK-053"
       ],
-      "pending": "R01/R03/R05: 정확한 lock, 설치 및 기술 시험; R02/R04 추가 요구"
+      "pending": "R01/R03/R05: product regression and owner OS/local install confirmation; R02/R04 additional needs"
     },
     {
       "id": "PD-03",
@@ -71,7 +71,7 @@
         "TASK-053",
         "TASK-054"
       ],
-      "pending": "관련 owner: canonical golden vectors, digest 대상 scope, slot mapping, error/time/ID semantics"
+      "pending": "R02/R03/R04/R05: supplied server byte helper/golden vectors; exact digest target scope, slot mapping, error/time/ID semantics"
     },
     {
       "id": "PD-04",
@@ -178,11 +178,11 @@
         "TASK-053",
         "TASK-054"
       ],
-      "pending": "R01: Python 3.12 lock/CI, probe, owner review, 실제 제품 시험; R02 인계 12/4"
+      "pending": "R01: shared product-lock regression, owner PLAN and actual provider/product gate; R02 handoff 12/4"
     }
   ],
   "environment": {
-    "status": "candidate_not_product_lock",
+    "status": "initial_product_lock_from_verified_candidate",
     "candidate": "product/lesson-registration/evidence/physical-env/pyproject.toml",
     "probe": "product/lesson-registration/evidence/probe_physical.py",
     "workflow": ".github/workflows/lesson-physical-probe.yml",
@@ -196,10 +196,29 @@
         "browser_install": "fail",
         "reason": "ubuntu-latest resolved to Ubuntu 26.04, Chromium unsupported by pinned Playwright 1.57.0",
         "probe": "not_run"
+      },
+      {
+        "commit": "bb267b40d943581d3e90f6ce26ad4e1ca6755d2c",
+        "url": "https://github.com/ik-e/chaja-you/actions/runs/45534844447",
+        "dependency_resolution": "pass",
+        "browser_install": "pass",
+        "probe": "4/4 pass",
+        "runner": "ubuntu-24.04"
       }
     ],
     "runner": "ubuntu-24.04",
-    "note": "Previous local observation claims have no reproducible run evidence in this repository and are not used for verification. Candidate versions were selected by R01 delegated implementation; product lock is unchanged until successful CI."
+    "note": "The same dependency specification and exact resolved candidate lock are installed as the initial shared product lock. Linux Python 3.12 technology probe passed; product regression on promotion commit and owner-specific local/actual implementation verification remain separate.",
+    "evidence": "product/lesson-registration/evidence/physical-ci-20261125.json",
+    "versions": {
+      "jsonschema": "4.25.1",
+      "fastapi": "0.128.2",
+      "uvicorn": "0.48.0",
+      "websockets": "16.0",
+      "playwright": "1.57.0",
+      "httpx": "0.28.1"
+    },
+    "browser": "Chromium 143.0.7499.4 / Playwright build v1200",
+    "candidate_history": "Candidate specification retained as history of initial dependency selection; current product pyproject.toml/uv.lock are authoritative."
   },
   "owner_report": {
     "date": "2026-11-25",
@@ -215,9 +234,9 @@
     "plan_candidate": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
   },
   "pending": [
-    "Python 3.12 product lock: independent CI and owner review; current product env unchanged until verified",
-    "R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config",
-    "Canonical scope/slot/digest vectors and actual provider integration",
+    "Owner-specific environment confirmation, remaining UI/AI dependencies and product provider transport/async choices",
+    "R03/R05 STORE, R04/R05 gateway, R03/R04/R05 viewer, R02/R03 I2, each owner factory/config: contracts/INTERFACE-REVIEW.md",
+    "Canonical helper and golden vectors supplied; actual scope/slot/profile readback mapping and provider integration require owner confirmation",
     "Other owner PLAN/availability and WBS confirmation; actual product tests not run"
   ],
   "schedule_candidate": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",

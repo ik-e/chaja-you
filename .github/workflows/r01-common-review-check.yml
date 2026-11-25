@@ -69,11 +69,11 @@ jobs:
           enable-cache: false
       - name: Existing locked bootstrap regression
         run: |
-          uv sync --locked --python 3.12
+          uv sync --locked --all-groups --python 3.12
           uv run --locked --python 3.12 python dev.py doctor
-          uv run --locked --python 3.12 python dev.py test all
+          uv run --locked --all-groups --python 3.12 python dev.py test all
       - name: Standard JSON Schema and common implementation boundary tests
-        run: uv run --no-project --python 3.12 --with jsonschema==4.25.1 python -m unittest discover -s tests/contract/standard_schema -v
+        run: uv run --locked --python 3.12 python -m unittest discover -s tests/contract/standard_schema -v
       - name: Scope
         if: always()
         run: echo 'Candidate contract and synthetic replay checks only. Integrated product acceptance not executed.'

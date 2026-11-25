@@ -37,7 +37,7 @@ uv run --locked --python 3.12 python dev.py test all
 PYTHONPATH=.:src uv run --no-project --python 3.12 --with jsonschema==4.25.1 python -m unittest discover -s tests/contract/standard_schema -v
 ```
 
-마지막 명령은 표준 스키마 도구의 독립 검증용이다(직접 버전 고정, 전이 의존성 전체 lock 미고정). 아직 제품 pyproject/uv.lock 변경 없음. 명령은 POSIX runner 기준. Windows에서는 PYTHONPATH에 제품 root와 src를 설정하고 동일 명령 실행. 모든 replay 값·digest는 합성 예시이며 실제 인증, 원격 권한, 입출력 출처 또는 product proof가 아니다.
+마지막 명령은 표준 스키마 도구의 독립 검증용이다(직접 버전 고정, 전이 의존성 전체 lock 미고정). 초기 공통 제품 pyproject/uv.lock은 후속 물리 CI를 근거로 반영(아래 갱신 기록). 명령은 POSIX runner 기준. Windows에서는 PYTHONPATH에 제품 root와 src를 설정하고 동일 명령 실행. 모든 replay 값·digest는 합성 예시이며 실제 인증, 원격 권한, 입출력 출처 또는 product proof가 아니다.
 
 ## 구현자가 반환할 공통 검토 사항
 
@@ -52,7 +52,7 @@ PYTHONPATH=.:src uv run --no-project --python 3.12 --with jsonschema==4.25.1 pyt
 [승인](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [PD-01~08](../contracts/PHYSICAL-BINDING.json) · [잠정 WBS](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json).
 
 1. PD 방향 및 R05 수신/공수 기록을 현행 인덱스에 연결.
-2. [독립 후보 환경](physical-env/pyproject.toml)과 [기술 probe](probe_physical.py)에서 Python 3.12 lock, ASGI HTTP/WS, thread bridge, SQLite 경쟁, schema, Chromium loopback/CDP 검증. 통과 및 owner 검토 전 제품 pyproject/lock 유지.
+2. [독립 후보 환경](physical-env/pyproject.toml)과 [기술 probe](probe_physical.py)에서 Python 3.12 lock, ASGI HTTP/WS, thread bridge, SQLite 경쟁, schema, Chromium loopback/CDP 검증. 통과한 후보의 정확한 lock을 제품 경로에 반영하고 별도 회귀 검증.
 3. R03/R05 STORE, R04/R05 operation manifest, R03/R04/R05 viewer, R02/R03 I2, 각 owner factory/config 및 서버 canonical digest golden vector를 기존 계약 기준으로 합의. 독립 구현은 대기하지 않는다.
 4. 승인 lock/기술 probe 반영 후 공통 테스트·CI 회귀, 기준선 SHA와 README 절차 공유. 팀원 PLAN/가용성 취합 후 WBS 확정.
 5. 실제 provider 도착 순서로 연결; 합성/기술 probe와 22개 제품 시험 분리.
@@ -62,3 +62,5 @@ R05: 053·054 수신 및 7근무일 추정, 11/27 인터페이스 협의 후보,
 첫 후보 CI: [45534634454](https://github.com/ik-e/chaja-you/actions/runs/45534634454)에서 Python 3.12 의존성 해석/설치 통과, Ubuntu 26.04의 Chromium 미지원으로 브라우저 설치 실패·기술 probe 미실행. 지원 runner Ubuntu 24.04를 지정하여 재검증한다. 이전 로컬 관측 서술은 재현 근거 미확보로 검증에 사용하지 않는다.
 
 담당자 공통 세부 합의는 [INTERFACE-REVIEW](../contracts/INTERFACE-REVIEW.md)를 사용한다. 서버 canonical byte primitive와 golden vectors/negative test 추가; 실제 digest 대상 선택·slot·profile readback과 팀원 동의는 별도. 독립 검증 명령: `uv run --locked --python 3.12 python dev.py test common`.
+
+후속 검증: [물리 CI](https://github.com/ik-e/chaja-you/actions/runs/45534844447) 성공 (Python 3.12.3, 26 packages, Chromium build v1200, 4/4 기술 probe). [근거](physical-ci-20261125.json). 성공 로그의 정확한 lock과 동일 dependency spec을 제품 pyproject.toml/uv.lock에 반영. Linux 기술 검증과 owner 환경/실제 제품 안전 검증은 별도. 이전 후보 환경은 이력이며 제품 실행은 제품 lock 사용. 제품 lock 표준 스키마 검사는 `uv run --locked --python 3.12 python -m unittest discover -s tests/contract/standard_schema -v` (제품 root와 src를 PYTHONPATH에 추가). 실제 제품 22개 미실행.
