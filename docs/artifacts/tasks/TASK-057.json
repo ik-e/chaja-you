@@ -60,8 +60,8 @@
     }
   ],
   "result": {
-    "summary": "기획 V1.2의 피처 34개와 7개 플랫폼의 42개 업무를 검토했다. 기존 스토리 42개에 후속 후보 5개를 더했다. 크몽·탈잉·숨고·프람피 상세와 뮬 목록·공지의 데이터·업무·스토리 연결 21개를 원본에 추가했다. 게시 제한의 기존 근거도 유지했다. R01 통합 검토 대기. 뮬 도배 제재 공지 본문의 관찰 근거를 추가했다. 뮬 글 작성 양식에서 필수 표시와 별도 수강료·첨부 입력을 확인했다. 뮬 기존 레슨 글 상세에서 지역·주소·본문 사진을 확인했다. 힙합플레이야 홍보 목록 및 기존 상세 자료를 연결했다. 힙합플레이야 작성 화면을 추가 확인했다. 힙합플레이야 글 옵션 5개를 화면에서 확인했다.",
-    "artifact_commit": "2fa3dc1c7c24c0d85688590196ef1276d33da028",
+    "summary": "기획 V1.2의 피처 34개와 7개 플랫폼의 42개 업무를 검토했다. 기존 스토리 42개에 후속 후보 5개를 더했다. 크몽·탈잉·숨고·프람피 상세와 뮬 목록·공지의 데이터·업무·스토리 연결 23개를 원본에 추가했다. 게시 제한의 기존 근거도 유지했다. R01 통합 검토 대기. 뮬 도배 제재 공지 본문의 관찰 근거를 추가했다. 뮬 글 작성 양식에서 필수 표시와 별도 수강료·첨부 입력을 확인했다. 뮬 기존 레슨 글 상세에서 지역·주소·본문 사진을 확인했다. 힙합플레이야 홍보 목록 및 기존 상세 자료를 연결했다. 힙합플레이야 작성 화면을 추가 확인했다. 힙합플레이야 글 옵션 5개를 화면에서 확인했다. 힙합LE 레슨 목록·쓰기 화면을 확인해 7개 플랫폼의 후속 조사 문서를 연결했다.",
+    "artifact_commit": "1cca191cf7d13a864a70c953dd98c83a7d4b0390",
     "artifact_path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
     "claims": [
       {
@@ -161,6 +161,14 @@
         "evidence_ids": [
           "R05-057-DETAIL-PL06"
         ]
+      },
+      {
+        "id": "R05-057-C12",
+        "text": "힙합LE 레슨 쓰기 화면 진입 및 별도 가격 입력, 목록에서 가격 표시가 있는 행과 없는 행을 관찰했다. 가격 필수 여부와 단위·등록 결과는 미확인이다.",
+        "status": "확인",
+        "evidence_ids": [
+          "R05-057-DETAIL-PL07"
+        ]
       }
     ],
     "evidence": [
@@ -168,7 +176,7 @@
         "id": "R05-057-DOC",
         "label": "독립 조사 원본",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
-        "commit": "2fa3dc1c7c24c0d85688590196ef1276d33da028"
+        "commit": "1cca191cf7d13a864a70c953dd98c83a7d4b0390"
       },
       {
         "id": "R05-057-HLE-JOIN",
@@ -245,6 +253,12 @@
         "label": "힙합플레이야 홍보 게시판 DB 조사",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphopplaya-db-research.json",
         "commit": "2fa3dc1c7c24c0d85688590196ef1276d33da028"
+      },
+      {
+        "id": "R05-057-DETAIL-PL07",
+        "label": "힙합LE 거래·장터 레슨 DB 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json",
+        "commit": "1cca191cf7d13a864a70c953dd98c83a7d4b0390"
       }
     ],
     "verification": [
@@ -263,7 +277,7 @@
         ]
       },
       {
-        "criterion": "A3 상세 조사 링크 21개의 필드·근거·기존 업무·스토리 ID 검사 통과.",
+        "criterion": "A3 상세 조사 링크 23개의 필드·근거·기존 업무·스토리 ID 검사 통과.",
         "verdict": "pass",
         "evidence_ids": [
           "R05-057-DOC",
@@ -272,7 +286,8 @@
           "R05-057-DETAIL-PL03",
           "R05-057-DETAIL-PL04",
           "R05-057-DETAIL-PL05",
-          "R05-057-DETAIL-PL06"
+          "R05-057-DETAIL-PL06",
+          "R05-057-DETAIL-PL07"
         ]
       },
       {
