@@ -289,6 +289,11 @@
       "entry_gate": "모든 적용 검토 완료 및 범위에 영향을 미치는 미결정 해소, R01 승인된 행동 집합 고정 전 신규 DB 설계 진입 보류. 7개 플랫폼 사실/데이터 조사는 병행. 기존 잠정 제출본과 mock 구현 변경 없음.",
       "validation_result": "현재 63개 초기 후보에 대한 정적 연결 검사만 수행; USV-01~07 의미·범위 검토 미완료. R04 및 후속 조사 반영 필요.",
       "independent_contract": "기존 A1~A5와 팀원별 독립 조사 양식, 범위, 소유권 및 실행 권한 변경 없음."
+    },
+    "story_review_input": {
+      "task_ref": "TASK-059",
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json",
+      "usage": "독립 사용자 행동·누락·분기·충돌 검토 근거로 통합. 기존 세 조사와 병행, R01 최종 완전성·범위 판단; 추가 조사 전수 완료를 강제하지 않음."
     }
   },
   "acceptance": [
@@ -298,5 +303,14 @@
     "A4: 각 사실/추론/미확인 구분, 확인일/출처/위치 및 재확인 방법. 실제 외부 실행 없음. 미확인 항목의 존재는 조사 제출을 막지 않으나 확인된 것처럼 표시하거나 DB 설계를 확정하지 않음.",
     "A5: 지정 JSON 원본의 필수 구조, 담당별 독립 ID/참조 일치, 각 TASK result에 산출물 경로/commit과 자체 점검 결과·미확인·결정 요청 기록. 최종 검토는 R01."
   ],
-  "completion_policy": "오늘 목표는 조사·스토리 후보 제출과 R01의 통합/설계 가능한 범위 확정이다. 결과 없는 템플릿은 완료 아님. DB 상세 설계에 필요한 정보가 부족하면 확인된 설계와 열린 제약·결정 요청을 분리하며 확정 판정 금지."
+  "completion_policy": "오늘 목표는 조사·스토리 후보 제출과 R01의 통합/설계 가능한 범위 확정이다. 결과 없는 템플릿은 완료 아님. DB 상세 설계에 필요한 정보가 부족하면 확인된 설계와 열린 제약·결정 요청을 분리하며 확정 판정 금지.",
+  "story_only_assignment": {
+    "owner": "R03",
+    "task_ref": "TASK-059",
+    "authority_ref": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md",
+    "output": "R03/user-stories.json",
+    "scope": "user_story 명세 전체 검토 대상, 오늘 오후 독립 도출 후 기존 후보와 누락·충돌 비교, S1~S4 별도 적용",
+    "exclude": "별도 7개 플랫폼 전수 조사 및 DB/API/상세 UI/신규 구현; 실제 외부 실행 금지",
+    "handoff": "오늘 확보한 결과/근거 및 미검토·미확인/결정 요청 인계. R01 통합 병행. 기존 participants R02/R04/R05 A1~A5 및 권한 불변."
+  }
 }

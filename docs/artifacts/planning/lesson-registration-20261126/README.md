@@ -9,7 +9,8 @@
 | R02 | [TASK-055](../../tasks/TASK-055.json) | [R02/independent-result.json](R02/independent-result.json) |
 | R04 | [TASK-056](../../tasks/TASK-056.json) | [R04/independent-result.json](R04/independent-result.json) |
 | R05 | [TASK-057](../../tasks/TASK-057.json) | [R05/independent-result.json](R05/independent-result.json) |
-| R01 | [TASK-058](../../tasks/TASK-058.json) | integrated/ (통합 및 DB 설계, 생성 예정) |
+| R01 | [TASK-058](../../tasks/TASK-058.json) | integrated/ (통합 및 DB 설계) |
+| R03 | [TASK-059](../../tasks/TASK-059.json) | [R03/user-stories.json](R03/user-stories.json) · 오후 사용자 스토리 검토 |
 
 R02·R04·R05는 각각 **두 작업을 전부** 수행한다. 플랫폼을 나누지 않는다. 기존 결과는 재사용하되 각자 검토하고 같은 근거를 독립 실증으로 세지 않는다. 자신의 원본과 TASK result만 수정하고 타인의 원본/공통 계약·기획을 덮어쓰지 않는다. 오늘 목표는 11/26. 완료·확정은 실제 결과와 R01 판단에 따른다.
 
@@ -42,8 +43,12 @@ R02·R04·R05는 각각 **두 작업을 전부** 수행한다. 플랫폼을 나�
 
 [work-contract.json](work-contract.json)의 record_fields 및 acceptance A1~A5가 상세 기준이다. 각 담당은 초기 원본에 실제 결과를 채우고 TASK result에 경로·commit·자체 검토·미확인·결정 요청을 기록한다. 양식만 있거나 성공을 주장할 근거가 없으면 완료 아님. 7개 플랫폼과 전체 F/E 검토 자체를 누락하지 않는다.
 
-R01은 세 독립 결과를 비교·병합해 사용자 행동 범위를 확정하고, 플랫폼 객체·데이터·상태·제약을 논리 데이터 모델과 ERD/스키마로 연결한다. 7개 표현 가능성, 기존 DB/API/구현 영향, 이후 API·프로토콜 입력을 검증하고 남은 불확실성을 명시한다. UI 상세, API 엔드포인트, 기술 스택·신규 구현은 이번 독립 조사 범위가 아니다.
+R01은 기존 세 독립 조사 결과 및 R03의 사용자 스토리 검토를 비교·병합해 사용자 행동 범위를 확정하고, 플랫폼 객체·데이터·상태·제약을 논리 데이터 모델과 ERD/스키마로 연결한다. 7개 표현 가능성, 기존 DB/API/구현 영향, 이후 API·프로토콜 입력을 검증하고 남은 불확실성을 명시한다. UI 상세, API 엔드포인트, 기술 스택·신규 구현은 이번 독립 조사 범위가 아니다.
 
 ## 강사 1차 의견의 실제 설계 연결 (11/26)
 
 [API/DB 설계 입력 8개](instructor-api-db-design-inputs.json) 및 [TASK-058](../../tasks/TASK-058.json) I7에 연결. R01이 사용자 스토리·범위 결정 후 소유권·상태 정본·증빙·보존/삭제 및 PostgreSQL 목표/이관 검증 계획을 정리하고 후속 API 인증·오류·timeout·버전 입력을 남긴다. 조사 담당의 독립 작업 양식과 범위는 유지. 이전 구현 TASK 보류와 mock-only 유지. PostgreSQL 실행/마이그레이션·구현 재개는 별도 판단.
+
+## R03 오후 추가 배정
+
+[TASK-059](../../tasks/TASK-059.json) · [R01 추가 지시](../../../human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md) · [독립 사용자 스토리 원본](R03/user-stories.json). A 사용자 스토리 범위 중심으로 F01~F29 및 조건부 E01~E05를 독립 도출하고 기존 후보와 대조한다. 별도 B 플랫폼 전수 조사·DB/API 설계·신규 구현은 제외. TASK-059의 S1~S4에 따라 오늘 1차 인계, 미검토 범위와 근거를 기록한다. R02·R04·R05의 A1~A5는 변경하지 않는다.

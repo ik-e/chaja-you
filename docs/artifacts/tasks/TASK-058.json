@@ -28,13 +28,16 @@
     "docs/design/lesson-registration/CURRENT-DESIGN.md",
     "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
     "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
-    "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md"
+    "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+    "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json",
+    "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
   ],
   "scope": [
     "팀원 원본 보존, 의미 동일 행동 병합/차이와 누락 추적, 출처 독립성 및 조건 비교, 기획안 모순·범위 결정 요청 처리. 조사 결과와 사용자 행동 간 양방향 교차 검토. R01 승인 범위의 사용자 스토리 ID를 확정한 뒤 데이터 의미·관계·제약·상태·수명주기 도출. 기존 DB/코드와의 차이·영향·이관 후보 확인. 7개 플랫폼의 필수/고유 정보·업무 표현 가능성과 새 플랫폼 추가 영향 검증. API·프로토콜에 필요한 actor/event/data/state/error/authorization trace를 남기되 엔드포인트와 기술은 후속.",
     "기존 설계 및 코드 영향 비교; 원본/시험 결과 보존",
     "사용자 스토리 결정 후 DB 확정; API 엔드포인트 및 상세 구현은 후속 단계",
-    "권한·증거 부족한 항목은 미확정; 실제 외부 실행 금지"
+    "권한·증거 부족한 항목은 미확정; 실제 외부 실행 금지",
+    "TASK-059 R03의 독립 사용자 스토리·누락/분기 검토도 통합 근거로 사용한다. 오후 1차 인계이므로 선행 통합 착수를 차단하지 않고 미검토 범위를 표시해 최종 판단한다."
   ],
   "outputs": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
@@ -44,7 +47,7 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-DESIGN.md"
   ],
   "acceptance": [
-    "I1: 세 담당 결과의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적",
+    "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
     "I2: 기본/조건부/제외/미결정 범위와 R01 판단·근거 기록",
     "I3: PL01~PL07의 공통/고유 객체·정보·관계·상태·제약과 불확실성 비교",
     "I4: 확정 사용자 행동에 필요한 논리 데이터·식별자·관계·수명주기·권한·승인·감사·보존·제약을 DB/ERD에 표현",
@@ -77,6 +80,12 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
     }
   ],
   "result": null,
@@ -84,7 +93,8 @@
     "intent_refs": [
       "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
       "docs/human/phase-intents/PHASE-20261126-01.md",
-      "docs/human/INTENT.md"
+      "docs/human/INTENT.md",
+      "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
     ],
     "design_refs": [],
     "requirement_refs": [],
@@ -118,5 +128,8 @@
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"
   ],
-  "priority_note": "초안 준비는 병행; 선행 결과 검토 후 범위/DB 확정; 강사 API/DB 피드백 설계 입력 및 PostgreSQL 목표 반영, 구현 재개 별도"
+  "priority_note": "초안 준비는 병행; 선행 결과 검토 후 범위/DB 확정; 강사 API/DB 피드백 설계 입력 및 PostgreSQL 목표 반영, 구현 재개 별도",
+  "supporting_task_refs": [
+    "TASK-059"
+  ]
 }

@@ -67,6 +67,9 @@
         },
         {
           "path": "docs/artifacts/tasks/TASK-058.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-059.json"
         }
       ],
       "views": [
@@ -2066,6 +2069,17 @@
       },
       "intent_ref": {
         "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+      }
+    },
+    {
+      "id": "TASK-059",
+      "owner": "R03",
+      "title": "사용자 스토리 독립 도출 및 누락 검토 (R03)",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-059.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
       }
     }
   ]
