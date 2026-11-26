@@ -1,0 +1,1282 @@
+{
+  "schema_version": 1,
+  "id": "INTG-20261126-STORY-REVIEW-V1.1",
+  "kind": "document",
+  "status": "R01 최종 검토 후보 · 미승인",
+  "owner": "R01",
+  "task_ref": "TASK-058",
+  "title": "사용자 스토리·플랫폼 업무·오류/반복 통합 검토",
+  "date": "2026-11-26",
+  "source_refs": {
+    "r02": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "fff4bd74ab7e555d74df4c2e4fe79147a6a4f147"
+    },
+    "r03": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "d4b6b0386329c0b81ed13cae6f92552392cb51be"
+    },
+    "r04": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "0858225470be2ee69ef4312077b87cea35baec3b"
+    },
+    "r05": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "98271e64f02a035b9c1175d33b9a5691cc632481"
+    },
+    "taling": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "80a3812d22ea83a4e6b0f8428f4316650cadef95"
+    },
+    "soomgo": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/soomgo-user-confirmation.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "e2f534cea3b469c7b9b181ef1b4907cd90542ec3"
+    },
+    "r04flow": {
+      "path": "docs/members/R04/workspace/2026-11-25_R04_마이AI오피스_서비스절차_사용자흐름_설계보고서.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "4045c7cad53aa52a776544db892b670d7c2ba937"
+    },
+    "r04scope": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_기능범위정의_기능명세서.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b"
+    },
+    "proposal": {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+    }
+  },
+  "baseline": {
+    "main": "1917288563cb633892452bcd3f415d274a5d735b",
+    "branch": "8cf0c12676125e82a266745ea856cabb2a57b644"
+  },
+  "scope_change": {
+    "story_id": "IS-062",
+    "previous": "excluded",
+    "recommendation": "base",
+    "reason": "지속 가능한 원본 저장·재사용에 필요한 최초 owner 관계 생성과 별도 가입 UI를 분리. 승인 전."
+  },
+  "scope_policy": {
+    "mvp": "최소 2개 플랫폼 신규·추가 등록, 대표 기존 수정, 통합 결과/수동 상태 확인 및 필수 안전·원본·owner 관리. 크몽 mock은 기술 검증. 실제 플랫폼·공수·일정 별도 승인.",
+    "conditional": "자동 모니터링 및 탈잉 최초 일정/숨고 대표 서비스 별도 채택 전 미제공",
+    "excluded": "외부 임시저장/조회, 접수 취소, 외부 삭제/원복, 독립 계정 삭제/작업 공간 UI, 견적·상담·수업운영; 개인정보 권리 의무 유지"
+  },
+  "identity_requirements": [
+    {
+      "object": "서비스 사용자",
+      "identity": "검증 인증 주체↔내부 owner",
+      "behavior": "최초 생성/기존 관계 재사용, 동일 owner 재접속",
+      "guard": "타인 자료 접근 및 중복 생성 차단"
+    },
+    {
+      "object": "원본 레슨",
+      "identity": "owner 안의 독립 원본",
+      "behavior": "복수 원본 생성·조회·수정·삭제",
+      "guard": "제목/표시명으로 동일 원본 확정 금지"
+    },
+    {
+      "object": "원본 버전",
+      "identity": "원본과 저장 revision",
+      "behavior": "새 버전 저장, 승인본 불변",
+      "guard": "동시 수정/늦은 응답 차단"
+    },
+    {
+      "object": "외부 계정",
+      "identity": "플랫폼·확인된 계정 참조",
+      "behavior": "공식 직접 인증 및 권한 확인",
+      "guard": "서비스 owner와 외부 계정은 별개"
+    },
+    {
+      "object": "등록 객체",
+      "identity": "플랫폼·계정·정확 외부 객체",
+      "behavior": "원본과 관리 관계, 중복 연결 금지",
+      "guard": "프로필 공유/상품/클래스/공고 구분"
+    },
+    {
+      "object": "업무·관측",
+      "identity": "원본 버전·대상·업무·양 승인·결과",
+      "behavior": "이전 효과 확인, 결과·증거·시각 저장",
+      "guard": "업무 완료/외부 상태/모집 가능 구분"
+    }
+  ],
+  "journeys": [
+    {
+      "id": "J01",
+      "title": "최초 이용·재접속",
+      "story": "강사는 자신을 식별하고 자신의 레슨 정보를 계속 관리하고 싶다.",
+      "normal": "최초 owner 관계 생성 또는 기존 관계 재사용, 동일 owner 인증 후 본인 원본·이력만 제공.",
+      "error": "인증 실패·만료·생성 불명·타인 접근 차단. 동일 owner 재인증 후 저장 자료만 복구, 보류 업무 재검증. 중복 생성 금지.",
+      "scope": "base",
+      "story_refs": [
+        "IS-121",
+        "IS-062",
+        "IS-051",
+        "IS-052",
+        "IS-099",
+        "IS-053",
+        "IS-066",
+        "IS-080",
+        "IS-125",
+        "IS-019"
+      ]
+    },
+    {
+      "id": "J02",
+      "title": "원본 레슨 생성·저장",
+      "story": "강사는 레슨 소개·사진·수업 조건을 한 번 저장하고 싶다.",
+      "normal": "자료 수신→구조화→강사 검토·정정→원본·저장 버전 식별 및 저장 결과 확인.",
+      "error": "누락·추출 오류·첨부 권리/형식 오류 보완. 실패/불명/충돌 시 기존 저장본 보존, 이전 효과 확인 전 중복 저장 금지.",
+      "scope": "base",
+      "story_refs": [
+        "IS-001",
+        "IS-064",
+        "IS-055",
+        "IS-065",
+        "IS-003",
+        "IS-115",
+        "IS-005",
+        "IS-113",
+        "IS-103",
+        "IS-120",
+        "IS-105",
+        "IS-123",
+        "IS-004",
+        "IS-067"
+      ]
+    },
+    {
+      "id": "J03",
+      "title": "저장 원본 조회·수정",
+      "story": "강사는 여러 레슨 중 하나를 선택하고 실제 조건이 바뀌면 수정하고 싶다.",
+      "normal": "본인 원본 목록·선택 버전·첨부·연결 등록물 조회. 수정은 새 버전, 기존 외부 게시/승인본 자동 변경 없음.",
+      "error": "빈 목록/실패 구분. 타 owner·버전 충돌 차단. 영향받는 미실행 업무만 보류·새 준비/승인.",
+      "scope": "base",
+      "story_refs": [
+        "IS-066",
+        "IS-002",
+        "IS-067",
+        "IS-102",
+        "IS-004",
+        "IS-005",
+        "IS-113",
+        "IS-019",
+        "IS-125",
+        "IS-082",
+        "IS-099"
+      ]
+    },
+    {
+      "id": "J04",
+      "title": "플랫폼 및 업무 선택·입력안 준비",
+      "story": "강사는 원본을 여러 플랫폼의 실제 입력 양식에 맞게 준비하고 싶다.",
+      "normal": "지원 업무와 제약을 안내하고 선택 플랫폼별 변환·검증·보완 및 실제 조건을 표시.",
+      "error": "미지원·권한 불명 실행 금지. 필요한 사실만 요청; 유효 대안 없음은 제외/보류. 변환 실패·늦은 결과는 이전 초안 보존·오래된 결과 미적용.",
+      "scope": "base",
+      "story_refs": [
+        "IS-006",
+        "IS-007",
+        "IS-068",
+        "IS-008",
+        "IS-009",
+        "IS-010",
+        "IS-043",
+        "IS-044",
+        "IS-054",
+        "IS-057",
+        "IS-059",
+        "IS-077",
+        "IS-100",
+        "IS-101",
+        "IS-105",
+        "IS-108",
+        "IS-114",
+        "IS-119",
+        "IS-123",
+        "IS-037",
+        "IS-039",
+        "IS-040",
+        "IS-090",
+        "IS-091",
+        "IS-092",
+        "IS-093",
+        "IS-094",
+        "IS-095"
+      ]
+    },
+    {
+      "id": "J05",
+      "title": "외부 인증·작업 대상 확인",
+      "story": "강사는 자신의 플랫폼 계정과 정확한 레슨 객체에 업무를 수행하고 싶다.",
+      "normal": "공식 로그인/필요 본인 인증 직접 수행. 계정·권한·대상·기존 등록/이전 효과 확인 및 기존 객체 선택.",
+      "error": "실패·만료·권한 부족·잘못된 대상·중복/효과 불명 차단. 재인증·재선택·제외. 외부 가입·정산·약관 동의는 사용자 직접.",
+      "scope": "base",
+      "story_refs": [
+        "IS-109",
+        "IS-011",
+        "IS-012",
+        "IS-013",
+        "IS-014",
+        "IS-060",
+        "IS-078",
+        "IS-079",
+        "IS-089",
+        "IS-097",
+        "IS-098",
+        "IS-106",
+        "IS-110",
+        "IS-111",
+        "IS-116",
+        "IS-117",
+        "IS-122",
+        "IS-127",
+        "IS-039",
+        "IS-096"
+      ]
+    },
+    {
+      "id": "J06",
+      "title": "최종 정보·실행 승인",
+      "story": "강사는 실제 입력 정보와 업무 범위를 확인하고 승인하고 싶다.",
+      "normal": "입력안·수정 차이·실행 범위 검토 후 내용 및 실행 범위 승인 기록, 현재 조건과 일치 확인.",
+      "error": "거절·철회·중요 조건 변경 시 새 쓰기 차단, 새 검토/승인 필요. 기발생 외부 효과 원복 보장 없음.",
+      "scope": "base",
+      "story_refs": [
+        "IS-015",
+        "IS-016",
+        "IS-017",
+        "IS-018",
+        "IS-019",
+        "IS-056",
+        "IS-069",
+        "IS-082",
+        "IS-083",
+        "IS-087",
+        "IS-088",
+        "IS-118"
+      ]
+    },
+    {
+      "id": "J07",
+      "title": "최초·추가 플랫폼 등록",
+      "story": "강사는 한 원본으로 최초 등록하고 다른 플랫폼에도 등록하고 싶다.",
+      "normal": "각 플랫폼의 승인된 신규 업무 실행, 정확 객체 및 저장/접수/게시 효과 확인. 저장 원본 재사용.",
+      "error": "같은 계정·대상 기존 등록/이전 효과 불명 차단. 응답 유실은 미확인 및 독립 재조회. 다른 플랫폼 등록은 차단 이유 아님.",
+      "scope": "base",
+      "story_refs": [
+        "IS-002",
+        "IS-007",
+        "IS-020",
+        "IS-023",
+        "IS-026",
+        "IS-045",
+        "IS-046",
+        "IS-029",
+        "IS-106",
+        "IS-104",
+        "IS-126",
+        "IS-127"
+      ]
+    },
+    {
+      "id": "J08",
+      "title": "기존 등록물 연결·수정",
+      "story": "강사는 직접 등록했던 레슨을 연결하고 원하는 정보만 수정하고 싶다.",
+      "normal": "정확 객체의 내부 관리 연결, 현재값·변경 범위 확인 및 승인된 변경값 적용 후 동일 객체에서 확인.",
+      "error": "중복 연결·소유 불명·수정 불가·외부 변경 차단. 공유 필드 영향 표시; 저장·재심사·공개 별개.",
+      "scope": "base",
+      "story_refs": [
+        "IS-110",
+        "IS-089",
+        "IS-014",
+        "IS-015",
+        "IS-118",
+        "IS-116",
+        "IS-117",
+        "IS-054",
+        "IS-056",
+        "IS-016",
+        "IS-017",
+        "IS-021",
+        "IS-023",
+        "IS-104",
+        "IS-019",
+        "IS-035"
+      ]
+    },
+    {
+      "id": "J09",
+      "title": "허용 공고 갱신",
+      "story": "강사는 지원되는 기존 공고를 다시 노출하고 싶다.",
+      "normal": "동일 객체의 갱신 허용·시기·효과 기준 확인 및 승인 후 수행·독립 관측.",
+      "error": "미지원·권한/간격/이전 효과 불명 보류. 삭제 후 재등록·무조건 반복 금지. 첫 MVP 필수 아님.",
+      "scope": "base_not_first_mvp",
+      "story_refs": [
+        "IS-006",
+        "IS-014",
+        "IS-022",
+        "IS-016",
+        "IS-017",
+        "IS-023",
+        "IS-026",
+        "IS-108",
+        "IS-104"
+      ]
+    },
+    {
+      "id": "J10",
+      "title": "결과·등록 상태·이력 확인",
+      "story": "강사는 각 플랫폼의 실제 결과와 근거를 한곳에서 확인하고 싶다.",
+      "normal": "완료/실패/미실행/미확인, 증거·시각 및 확인된 링크 제공. 접수/심사/공개/모집 가능 구분.",
+      "error": "부분 성공 시 성공 대상 제외. 응답 유실·관측 불일치 미확인. 미관측 URL·상태·사유 생성 금지.",
+      "scope": "base",
+      "story_refs": [
+        "IS-023",
+        "IS-024",
+        "IS-045",
+        "IS-046",
+        "IS-029",
+        "IS-080",
+        "IS-081",
+        "IS-104",
+        "IS-124",
+        "IS-026",
+        "IS-127"
+      ]
+    },
+    {
+      "id": "J11",
+      "title": "수동 상태 조회·반려 대응",
+      "story": "강사는 최신 상태를 확인하고 오류 또는 반려를 해결하고 싶다.",
+      "normal": "허용 읽기 경로로 요청 시 최신 관측. 확인된 사유 및 대응 후보; 허용 재심사는 새 수정·승인 요청.",
+      "error": "조회 실패와 마지막 상태 구분. 사유 불명 표시. 이전 효과 미확인 재실행 금지; 실패/미실행 확정 및 새 조건/승인 후만.",
+      "scope": "base",
+      "story_refs": [
+        "IS-025",
+        "IS-027",
+        "IS-047",
+        "IS-048",
+        "IS-084",
+        "IS-085",
+        "IS-028",
+        "IS-074",
+        "IS-112",
+        "IS-026",
+        "IS-104",
+        "IS-126",
+        "IS-041",
+        "IS-059"
+      ]
+    },
+    {
+      "id": "J12",
+      "title": "업무 보류·종료·재처리",
+      "story": "강사는 진행할 수 없는 업무를 안전하게 보류하고 필요한 경우 새로 요청하고 싶다.",
+      "normal": "오류/철회/보류 시 추가 접근·쓰기 차단, 기존 효과 및 이력 보존, 현재 조건으로 새 요청 검토.",
+      "error": "외부 취소·원복·실행 스택 복구 없음. 성공/효과 불명 재실행 금지. 완료·실패·만료·철회 시 업무 세션 폐기, 불명 시 접근 차단 유지.",
+      "scope": "base",
+      "story_refs": [
+        "IS-049",
+        "IS-050",
+        "IS-125",
+        "IS-126",
+        "IS-087",
+        "IS-088",
+        "IS-111",
+        "IS-127",
+        "IS-023",
+        "IS-026",
+        "IS-104",
+        "IS-053",
+        "IS-019"
+      ]
+    },
+    {
+      "id": "J13",
+      "title": "원본 삭제·관리 연결 해제",
+      "story": "강사는 불필요한 원본을 지우거나 특정 등록물의 관리 연결을 끊고 싶다.",
+      "normal": "소유권·진행 업무·보존 의무 확인 후 내부 삭제/연결 해제를 각각 처리하고 결과 표시.",
+      "error": "진행/미확인 업무 충돌 시 보류 및 효과 확인. 삭제/해제 불명은 완료 아님. 외부 게시·다른 연결 자동 변경 없음. 권리 요청 의무 유지.",
+      "scope": "base",
+      "story_refs": [
+        "IS-034",
+        "IS-035",
+        "IS-065",
+        "IS-099",
+        "IS-110",
+        "IS-111",
+        "IS-125",
+        "IS-127",
+        "IS-066",
+        "IS-048",
+        "IS-080"
+      ]
+    },
+    {
+      "id": "J14",
+      "title": "조건부 자동 모니터링",
+      "story": "강사는 별도 채택된 경우만 정해진 범위에서 자동 상태 알림을 받고 싶다.",
+      "normal": "허용 읽기 방식·대상·기간·주기·채널 및 별도 승인 후 조회/알림.",
+      "error": "미채택/미허용 미제공. 철회·만료·종료 시 접근 차단 및 폐기. 알림/조회 실패와 종료 불명 구분.",
+      "scope": "conditional",
+      "story_refs": [
+        "IS-030",
+        "IS-031",
+        "IS-032",
+        "IS-033",
+        "IS-061",
+        "IS-070",
+        "IS-071",
+        "IS-072",
+        "IS-073",
+        "IS-086",
+        "IS-128",
+        "IS-129",
+        "IS-130",
+        "IS-131",
+        "IS-132",
+        "IS-133",
+        "IS-134",
+        "IS-135",
+        "IS-136",
+        "IS-137",
+        "IS-138",
+        "IS-139",
+        "IS-140",
+        "IS-141",
+        "IS-142"
+      ]
+    },
+    {
+      "id": "J15",
+      "title": "플랫폼 특화 조건부 업무",
+      "story": "강사는 별도 채택된 경우에 최초 모집 일정·대표 서비스를 설정하고 싶다.",
+      "normal": "탈잉 심사 승인 후 최초 일정/장소, 숨고 대표 서비스 관계의 정확 대상·권한·영향/승인 확인 후 수행 및 독립 관측.",
+      "error": "별도 채택·권한·완료 증거 확보 전 미제공. 전체 일정 운영·고객 관리·다른 서비스 변경 제외.",
+      "scope": "conditional",
+      "story_refs": [
+        "IS-038",
+        "IS-058",
+        "IS-041",
+        "IS-014",
+        "IS-015",
+        "IS-016",
+        "IS-017",
+        "IS-023",
+        "IS-104"
+      ]
+    }
+  ],
+  "platform_impacts": [
+    {
+      "platform_id": "PL01",
+      "finding": "모집 형태와 제공 방식 분리. 패키지 제목/설명·단일 STANDARD 후보. 작업기간·수정횟수 의미와 실제 접수/공개 매핑 불명.",
+      "story_refs": [
+        "IS-008",
+        "IS-009",
+        "IS-077",
+        "IS-092",
+        "IS-106",
+        "IS-016",
+        "IS-020",
+        "IS-023",
+        "IS-104"
+      ],
+      "source_refs": [
+        "r02",
+        "r05"
+      ]
+    },
+    {
+      "platform_id": "PL02",
+      "finding": "90분 정수 시간 제약: 실제 제공할 60/120분·가격 선택 또는 보류. 시간당×회당×회차 총액. 심사 후 회당 시간 비활성, 최초 일정 별도. 미승인 자동 등록 제한, 개별 대행 허용 미확인.",
+      "story_refs": [
+        "IS-010",
+        "IS-044",
+        "IS-058",
+        "IS-093",
+        "IS-094",
+        "IS-015",
+        "IS-016",
+        "IS-020",
+        "IS-021",
+        "IS-041",
+        "IS-074",
+        "IS-108"
+      ],
+      "source_refs": [
+        "taling",
+        "r02",
+        "r05"
+      ]
+    },
+    {
+      "platform_id": "PL03",
+      "finding": "활동명 30자·한 줄 소개 80자, 질문 5개/답변 500자, 제공 서비스별 복수 매칭·사진/유튜브 URL. 공개/요청 수신은 사용자 경험; 저장 실증 아님. 견적 제외.",
+      "story_refs": [
+        "IS-008",
+        "IS-009",
+        "IS-014",
+        "IS-015",
+        "IS-038",
+        "IS-039",
+        "IS-055",
+        "IS-095",
+        "IS-096",
+        "IS-020",
+        "IS-021",
+        "IS-024"
+      ],
+      "source_refs": [
+        "soomgo",
+        "r02",
+        "r04",
+        "r05"
+      ]
+    },
+    {
+      "platform_id": "PL04",
+      "finding": "전문가 프로필/분야 후보. 문의·견적 제외. 최종 저장·분야 연결 미확인.",
+      "story_refs": [
+        "IS-006",
+        "IS-039",
+        "IS-096",
+        "IS-108"
+      ],
+      "source_refs": [
+        "r04",
+        "r05"
+      ]
+    },
+    {
+      "platform_id": "PL05",
+      "finding": "개인레슨 게시물 및 동일 공고 최신글 올리기 후보. 등록·갱신 자격/간격·효과 미확인.",
+      "story_refs": [
+        "IS-020",
+        "IS-022",
+        "IS-040",
+        "IS-104",
+        "IS-108"
+      ],
+      "source_refs": [
+        "r04",
+        "r05"
+      ]
+    },
+    {
+      "platform_id": "PL06",
+      "finding": "홍보 게시물 후보. 현행 입력/게시 한도 및 저장 결과 미확인.",
+      "story_refs": [
+        "IS-008",
+        "IS-020",
+        "IS-024",
+        "IS-108"
+      ],
+      "source_refs": [
+        "r04",
+        "r05"
+      ]
+    },
+    {
+      "platform_id": "PL07",
+      "finding": "레슨 장터 게시물 후보. 공지상 게시 간격 2일 진술, 기산점·실제 집행·작성 자격·저장 결과 미확인. 고정 규칙 채택 금지.",
+      "story_refs": [
+        "IS-008",
+        "IS-020",
+        "IS-024",
+        "IS-106",
+        "IS-108"
+      ],
+      "source_refs": [
+        "r04",
+        "r05"
+      ]
+    }
+  ],
+  "platform_scope_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json"
+  },
+  "error_review": [
+    {
+      "id": "ERR-01",
+      "name": "입력 누락·형식 오류",
+      "handling": "입력 보존, 문제 항목만 정정 또는 보류",
+      "story_refs": [
+        "IS-001",
+        "IS-009",
+        "IS-105",
+        "IS-114",
+        "IS-123"
+      ],
+      "loop": "L1",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-02",
+      "name": "첨부 오류/권리 불명",
+      "handling": "해당 파일 제외·권리 확인, 외부 전송 차단",
+      "story_refs": [
+        "IS-055",
+        "IS-064",
+        "IS-065",
+        "IS-114"
+      ],
+      "loop": "L1",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-03",
+      "name": "서비스 저장 실패",
+      "handling": "기존 저장본 보존; 미저장/현재 revision 확인 후 재요청",
+      "story_refs": [
+        "IS-005",
+        "IS-103",
+        "IS-113",
+        "IS-120"
+      ],
+      "loop": "L1",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-04",
+      "name": "서비스 인증 만료",
+      "handling": "새 접근·쓰기 차단, 동일 owner 재인증·보류 업무 재검증",
+      "story_refs": [
+        "IS-051",
+        "IS-052",
+        "IS-053",
+        "IS-099",
+        "IS-019",
+        "IS-125",
+        "IS-127"
+      ],
+      "loop": "L3",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-05",
+      "name": "미지원·미확인 업무",
+      "handling": "실행 차단·재선택/직접 참고/종료",
+      "story_refs": [
+        "IS-006",
+        "IS-037",
+        "IS-059",
+        "IS-108"
+      ],
+      "loop": "L2",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-06",
+      "name": "필수 정보 부족",
+      "handling": "필요 사실만 요청, 임의 생성 금지",
+      "story_refs": [
+        "IS-009",
+        "IS-043",
+        "IS-105",
+        "IS-114"
+      ],
+      "loop": "L2",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-07",
+      "name": "플랫폼 제약 충돌",
+      "handling": "실제 대안 선택·재검증, 임의 변경 금지",
+      "story_refs": [
+        "IS-010",
+        "IS-054",
+        "IS-119",
+        "IS-077",
+        "IS-093"
+      ],
+      "loop": "L2",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-08",
+      "name": "유효 대안 없음",
+      "handling": "해당 대상 제외·보류, 다른 대상 독립 검증",
+      "story_refs": [
+        "IS-044",
+        "IS-037"
+      ],
+      "loop": "L2",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-09",
+      "name": "외부 인증 실패·만료·취소",
+      "handling": "공식 직접 재인증/건너뛰기/종료·세션 폐기",
+      "story_refs": [
+        "IS-011",
+        "IS-012",
+        "IS-078",
+        "IS-079",
+        "IS-098",
+        "IS-127"
+      ],
+      "loop": "L3",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-10",
+      "name": "계정 불일치·권한 부족",
+      "handling": "접근/쓰기 차단, 정확 계정·권한 재검증",
+      "story_refs": [
+        "IS-013",
+        "IS-060",
+        "IS-099",
+        "IS-116",
+        "IS-122"
+      ],
+      "loop": "L3",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-11",
+      "name": "대상 불명·중복",
+      "handling": "대상 재선택, 신규는 미등록/이전 효과 없음 확인 후만",
+      "story_refs": [
+        "IS-014",
+        "IS-089",
+        "IS-106",
+        "IS-116",
+        "IS-117"
+      ],
+      "loop": "L4",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-12",
+      "name": "외부 정보 변경",
+      "handling": "최신 값·변경 차이 확인 및 승인 무효화",
+      "story_refs": [
+        "IS-015",
+        "IS-019",
+        "IS-056",
+        "IS-082",
+        "IS-083"
+      ],
+      "loop": "L5",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-13",
+      "name": "승인 거절",
+      "handling": "쓰기 없음, 수정·재검토 또는 종료",
+      "story_refs": [
+        "IS-018",
+        "IS-069",
+        "IS-082",
+        "IS-083"
+      ],
+      "loop": "L5",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-14",
+      "name": "승인 이후 변경",
+      "handling": "쓰기 보류, 현재 조건 및 양 승인 재검증",
+      "story_refs": [
+        "IS-019",
+        "IS-087",
+        "IS-088",
+        "IS-125"
+      ],
+      "loop": "L5",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-15",
+      "name": "실행 중 오류",
+      "handling": "영향 대상 추가 쓰기 차단·기존 효과 보존",
+      "story_refs": [
+        "IS-045",
+        "IS-049",
+        "IS-023",
+        "IS-026",
+        "IS-127"
+      ],
+      "loop": "L6",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-16",
+      "name": "실행 결과 미확인",
+      "handling": "독립 관측, 지속 불명은 재실행 금지",
+      "story_refs": [
+        "IS-026",
+        "IS-104",
+        "IS-126"
+      ],
+      "loop": "L6",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-17",
+      "name": "부분 성공",
+      "handling": "성공/실패/미실행/불명 분리, 성공 대상 제외",
+      "story_refs": [
+        "IS-046",
+        "IS-029",
+        "IS-126",
+        "IS-104"
+      ],
+      "loop": "L6",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-18",
+      "name": "심사 반려",
+      "handling": "확인 사유 또는 불명, 보완 및 새 승인·허용 재접수",
+      "story_refs": [
+        "IS-084",
+        "IS-085",
+        "IS-028",
+        "IS-074",
+        "IS-112"
+      ],
+      "loop": "L7",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-19",
+      "name": "상태 조회 실패",
+      "handling": "조회 불가와 마지막 관측·시각 구분",
+      "story_refs": [
+        "IS-025",
+        "IS-027",
+        "IS-047",
+        "IS-104"
+      ],
+      "loop": "L8",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-20",
+      "name": "동시 업무/중복 실행",
+      "handling": "동일 대상·이전 효과 확인, 충돌/불명 차단",
+      "story_refs": [
+        "IS-106",
+        "IS-019",
+        "IS-026",
+        "IS-125",
+        "IS-126"
+      ],
+      "loop": "L6",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-21",
+      "name": "자동 조회 권한 철회/만료",
+      "handling": "조건부 새 접근 차단 및 폐기/해제 확인",
+      "story_refs": [
+        "IS-033",
+        "IS-072",
+        "IS-073",
+        "IS-138",
+        "IS-139",
+        "IS-140"
+      ],
+      "loop": "L9",
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "ERR-22",
+      "name": "진행 중 원본 수정·삭제",
+      "handling": "새 revision·승인본 불변, 미실행 업무 보류. 삭제는 진행/보존 검토 후.",
+      "story_refs": [
+        "IS-004",
+        "IS-005",
+        "IS-019",
+        "IS-034",
+        "IS-035",
+        "IS-125"
+      ],
+      "loop": "L5",
+      "source_ref": "r04flow"
+    }
+  ],
+  "additional_errors": [
+    {
+      "id": "X01",
+      "name": "첫 owner 생성 불명/중복",
+      "handling": "기존 관계 확인 전 재생성·자료 반환 금지",
+      "story_refs": [
+        "IS-062",
+        "IS-051",
+        "IS-052",
+        "IS-099"
+      ]
+    },
+    {
+      "id": "X02",
+      "name": "동시 원본 수정 충돌",
+      "handling": "기존 저장본 보존, 최신 revision 재조회/새 수정",
+      "story_refs": [
+        "IS-004",
+        "IS-005",
+        "IS-067",
+        "IS-103",
+        "IS-120"
+      ]
+    },
+    {
+      "id": "X03",
+      "name": "변환 응답 지연",
+      "handling": "현재 revision 불일치 적용 차단, 재준비/보류",
+      "story_refs": [
+        "IS-100",
+        "IS-101",
+        "IS-057",
+        "IS-019"
+      ]
+    },
+    {
+      "id": "X04",
+      "name": "삭제/연결 해제 불명",
+      "handling": "정확 관계·보존 확인, 관측 전 완료 표시 금지",
+      "story_refs": [
+        "IS-034",
+        "IS-035",
+        "IS-110",
+        "IS-048"
+      ]
+    },
+    {
+      "id": "X05",
+      "name": "인증 세션 폐기 불명",
+      "handling": "새 접근 차단 유지, 운영자 확인, 자동 재사용 금지",
+      "story_refs": [
+        "IS-053",
+        "IS-111",
+        "IS-127",
+        "IS-139",
+        "IS-140"
+      ]
+    },
+    {
+      "id": "X06",
+      "name": "다른 owner 대상 접근",
+      "handling": "존재 여부 포함 타인 자료 반환/쓰기 금지",
+      "story_refs": [
+        "IS-051",
+        "IS-099",
+        "IS-013",
+        "IS-122"
+      ]
+    }
+  ],
+  "repeat_review": [
+    {
+      "id": "L1",
+      "name": "입력 검증",
+      "process": "정정·권리 자료 대체 후 재검증",
+      "exit": "통과 또는 보류·취소",
+      "story_refs": [
+        "IS-001",
+        "IS-009",
+        "IS-055",
+        "IS-123",
+        "IS-114"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L2",
+      "name": "보완·재검증",
+      "process": "사실 보완/실제 대안 선택",
+      "exit": "해결 또는 대상 제외·보류",
+      "story_refs": [
+        "IS-008",
+        "IS-009",
+        "IS-010",
+        "IS-044",
+        "IS-057",
+        "IS-119"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L3",
+      "name": "재인증",
+      "process": "동일 owner/공식 외부 인증",
+      "exit": "확인 또는 종료/제외, 자동 반복 없음",
+      "story_refs": [
+        "IS-051",
+        "IS-052",
+        "IS-011",
+        "IS-012",
+        "IS-078",
+        "IS-079",
+        "IS-098"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L4",
+      "name": "대상 재지정",
+      "process": "후보 재조회·확정",
+      "exit": "정확 대상 또는 보류; 신규 전환은 미등록·이전 효과 확인 후 새 요청",
+      "story_refs": [
+        "IS-089",
+        "IS-014",
+        "IS-106",
+        "IS-116",
+        "IS-117",
+        "IS-020"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L5",
+      "name": "재검증·재승인",
+      "process": "최신 revision/외부 값 비교·양 승인",
+      "exit": "조건 일치 또는 거절/보류",
+      "story_refs": [
+        "IS-019",
+        "IS-056",
+        "IS-082",
+        "IS-083",
+        "IS-016",
+        "IS-017",
+        "IS-125"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L6",
+      "name": "외부 효과 재조회",
+      "process": "독립 관측·결과 분리",
+      "exit": "효과 확인 또는 불명 보류; 미실행 확정 전 재실행 금지",
+      "story_refs": [
+        "IS-026",
+        "IS-104",
+        "IS-023",
+        "IS-126"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L7",
+      "name": "반려 대응",
+      "process": "사유→보완→새 승인·허용 재접수",
+      "exit": "접수/심사/공개 구분 또는 포기",
+      "story_refs": [
+        "IS-084",
+        "IS-028",
+        "IS-074",
+        "IS-016",
+        "IS-017",
+        "IS-023",
+        "IS-125"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L8",
+      "name": "수동 상태 갱신",
+      "process": "사용자 새 요청·허용 조회",
+      "exit": "최신 상태 또는 조회 불가; 무한 반복 없음",
+      "story_refs": [
+        "IS-025",
+        "IS-027",
+        "IS-047",
+        "IS-104"
+      ],
+      "source_ref": "r04flow"
+    },
+    {
+      "id": "L9",
+      "name": "자동 모니터링",
+      "process": "조건부 허용 조회·알림",
+      "exit": "철회·만료·종료 즉시 접근 차단",
+      "story_refs": [
+        "IS-030",
+        "IS-032",
+        "IS-033",
+        "IS-072",
+        "IS-138",
+        "IS-139",
+        "IS-140"
+      ],
+      "source_ref": "r04flow"
+    }
+  ],
+  "r04_additional_candidate_review": [
+    {
+      "id": "A01",
+      "scope": "기본",
+      "reason": "최초 owner 관계·인증·종료. 별도 가입 화면 강제 아님",
+      "story_refs": [
+        "IS-062",
+        "IS-051",
+        "IS-052",
+        "IS-053",
+        "IS-121"
+      ]
+    },
+    {
+      "id": "A02",
+      "scope": "조건부/제외",
+      "reason": "알림 채널은 조건부, 별도 프로필 설정 첫 MVP 미추천",
+      "story_refs": [
+        "IS-142",
+        "IS-071"
+      ]
+    },
+    {
+      "id": "A03",
+      "scope": "기본/후속",
+      "reason": "원본 삭제·권리 요청, 독립 계정 삭제 화면 별도",
+      "story_refs": [
+        "IS-034",
+        "IS-063",
+        "IS-099"
+      ]
+    },
+    {
+      "id": "A04",
+      "scope": "기본",
+      "reason": "관리 연결 해제, 외부 삭제 아님",
+      "story_refs": [
+        "IS-035",
+        "IS-110"
+      ]
+    },
+    {
+      "id": "A05",
+      "scope": "기본/조건부",
+      "reason": "작업용 세션 폐기 확인 기본, 지속 조회 별도",
+      "story_refs": [
+        "IS-127",
+        "IS-139"
+      ]
+    },
+    {
+      "id": "A06",
+      "scope": "기본",
+      "reason": "업무 이력·증거 열람",
+      "story_refs": [
+        "IS-080",
+        "IS-081"
+      ]
+    },
+    {
+      "id": "A07",
+      "scope": "조건부/제외",
+      "reason": "상태·조건부 알림, 독립 알림센터 UI 미확정",
+      "story_refs": [
+        "IS-047",
+        "IS-032",
+        "IS-137"
+      ]
+    },
+    {
+      "id": "A08",
+      "scope": "기본/제외",
+      "reason": "지원·제약 안내, 별도 FAQ/문의 UI 미추천",
+      "story_refs": [
+        "IS-006",
+        "IS-108"
+      ]
+    },
+    {
+      "id": "A09",
+      "scope": "기본",
+      "reason": "내부 초안 보존, 외부 임시저장 제외",
+      "story_refs": [
+        "IS-005",
+        "IS-103",
+        "IS-075",
+        "IS-076"
+      ]
+    },
+    {
+      "id": "A10",
+      "scope": "기본",
+      "reason": "첨부 삭제, 외부 변경 분리",
+      "story_refs": [
+        "IS-065"
+      ]
+    },
+    {
+      "id": "A11",
+      "scope": "내부/후속",
+      "reason": "규칙 유지 의무, 운영자 UI 후속",
+      "story_refs": [
+        "IS-006",
+        "IS-108"
+      ]
+    },
+    {
+      "id": "A12",
+      "scope": "내부/후속",
+      "reason": "감사 기록 유지, 운영자 UI 후속",
+      "story_refs": [
+        "IS-080",
+        "IS-081",
+        "IS-127"
+      ]
+    }
+  ],
+  "decision_refs": [
+    "SD-01",
+    "SD-02",
+    "SD-03",
+    "SD-04",
+    "SD-05",
+    "SD-06",
+    "SD-07",
+    "SD-08",
+    "SD-09",
+    "SD-10",
+    "SD-11",
+    "SD-12",
+    "SD-13",
+    "SD-14"
+  ],
+  "verification": {
+    "source_stories": 244,
+    "source_events": 93,
+    "user_stories": 141,
+    "scope_counts": {
+      "base": 109,
+      "conditional": 27,
+      "excluded": 5
+    },
+    "branch_count": 681,
+    "feature_count": 34,
+    "system_responsibilities": 40,
+    "journeys": 15,
+    "r03_scenarios": 30,
+    "r04_errors": 22,
+    "additional_errors": 6,
+    "repeat_paths": 9,
+    "r04_extra_candidates": 12,
+    "platform_operations": 44,
+    "invalid_refs": [],
+    "uncovered_nonexcluded": [],
+    "approved_scope": 0,
+    "approved_platform_operations": 0,
+    "independent_completion": 0,
+    "structural": "pass_session_reference_checks",
+    "semantic": "inconclusive_full_state_space",
+    "official_python_ci": "not_run",
+    "runtime": "not_run",
+    "db_entry": "blocked_pending_scope_approval"
+  },
+  "limits": [
+    "R02 조사 진행 중; R03/R04/R05 승인 아님.",
+    "최신 조사 출처 및 스토리 영향 대조. 이전 platform-comparison.json의 전체 필드 의미/제약 재정규화는 DB 전 단계 후속.",
+    "공식 Python/CI 및 project_docs.py 생성 미실행: 컨테이너 GitHub DNS 접근 불가.",
+    "모든 외부 대행 허용 및 실제 효과 미확인. mock-only 유지."
+  ]
+}
