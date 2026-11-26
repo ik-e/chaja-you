@@ -6513,7 +6513,7 @@
       "observed_requirement": "제목·본문·게시 시각 관측. 작성 양식 미확인 과거 공지에 신규 가입자의 글쓰기 대기가 15일과 7일로 다르게 적혀 있다. 일반 이용규칙에 등급별 하루 5개/10개와 다음 글까지 5분이 적혀 있고 후속 운영 공지는 도배를 제한한다. 현재 홍보 게시판 적용 여부는 미확인이다.",
       "detail_research": {
         "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphopplaya-db-research.json",
-        "status": "홍보 목록·작성 화면·기존 공개 상세 연결",
+        "status": "홍보 목록·작성 화면·글 옵션·기존 공개 상세 연결",
         "links": [
           {
             "detail_link_id": "R05-DETAIL-PL06-1",
@@ -6573,13 +6573,14 @@
               "R05-PL06-CREATE"
             ],
             "evidence_ids": [
-              "HP05"
+              "HP05",
+              "HP06"
             ],
-            "notes": "기존 공개 글의 자유 서술 본문과 작성 폼을 대조할 근거. 실제 저장·필수값 검증은 미확인."
+            "notes": "기존 공개 글의 자유 서술 본문과 작성 폼을 대조할 근거. 실제 저장·필수값 검증은 미확인. 펼친 옵션의 체크박스 5개 표시 확인. 선택 후 하위 필드·효과는 미확인."
           }
         ],
         "checks": {
-          "field_existence": "글 제목·본문·카테고리·글 옵션 표시 확인.",
+          "field_existence": "제목·본문·카테고리·글 옵션 5개 체크박스 표시 확인.",
           "required_condition": "작성 화면 진입 사례 확보. 현재 가입 대기 및 실제 필수 검증 미확인.",
           "save_or_reflection": "기존 공개 상세 관찰과 작성 화면의 임시저장·등록 버튼 표시를 확인했다. 실제 저장·수정 결과는 미확인.",
           "delegation_permission": "미확인."
