@@ -639,6 +639,161 @@ def validate_lesson_design_sources():
     return {ROOT / path for path in actual if path.endswith(".json")}
 
 
+
+def render_user_story_v22(record, source, output):
+    """Render the structured review candidate; no product authority."""
+    screens = record["screens"]
+    stories = record["stories"]
+    sections = record["screen_sections"]
+    actions = record["actions"]
+    paths = {item["id"]: item for item in record["common_path_summaries"]}
+    graph = record["screen_graph"]
+    if set(screens) != {n["id"] for n in graph["nodes"]}:
+        raise ValueError(f"{source}: screen graph mismatch")
+    seen = []
+    ops = []
+    for aid, item in actions.items():
+        if item["id"] != aid or item["screen_id"] not in screens:
+            raise ValueError(f"{source}: invalid action {aid}")
+        section = sections[item["section_id"]]
+        if section["screen_id"] != item["screen_id"] or aid not in section["action_ids"]:
+            raise ValueError(f"{source}: invalid section relation {aid}")
+        if not set(item["transition"]["screen_ids"]) <= set(screens):
+            raise ValueError(f"{source}: invalid transition {aid}")
+        seen.extend(item["legacy_step_refs"])
+        if item.get("operation_ref"):
+            ops.append(item["operation_ref"])
+    if len(seen) != len(set(seen)) or set(seen) != set(record["legacy_coverage"]["expected_step_ids"]):
+        raise ValueError(f"{source}: legacy step coverage mismatch")
+    if len(ops) != len(set(ops)):
+        raise ValueError(f"{source}: duplicate platform operation")
+    scope = read_json(record["legacy_coverage"]["scope_source"])
+    if set(ops) != {op["id"] for op in scope["operation_rows"]}:
+        raise ValueError(f"{source}: platform operation coverage mismatch")
+    legacy = read_json(record["legacy_coverage"]["legacy_action_source"])
+    legacy_ids = {item["id"] for item in legacy["user_stories"]}
+    mapped = set()
+    for item in actions.values():
+        mapped.update(item["legacy_story_refs"])
+        mapped.update(item["related_legacy_story_refs"])
+    excluded = set(record["legacy_coverage"]["excluded_story_refs"])
+    deferred = set(record["legacy_coverage"]["deferred_error_story_refs"])
+    if excluded != {item["id"] for item in legacy["user_stories"] if item["scope_candidate"] == "excluded"}:
+        raise ValueError(f"{source}: exclusion mismatch")
+    if mapped | excluded | deferred != legacy_ids or mapped & (excluded | deferred) or excluded & deferred:
+        raise ValueError(f"{source}: legacy story partition mismatch")
+    blocks = record["document_blocks"]
+    action_blocks = [b["id"] for b in blocks if b["type"] == "action"]
+    if len(action_blocks) != len(set(action_blocks)) or set(action_blocks) != set(actions):
+        raise ValueError(f"{source}: action projection mismatch")
+    for sid, item in stories.items():
+        if any(sections[s]["story_id"] != sid for s in item["section_ids"]):
+            raise ValueError(f"{source}: invalid story section {sid}")
+    for edge in graph["edges"]:
+        if edge["from"] not in screens or edge["to"] not in screens:
+            raise ValueError(f"{source}: invalid screen graph edge")
+    def screen_graph():
+        labels = {n["id"]: n["label"] for n in graph["nodes"]}
+        defined = set()
+        def node(n):
+            if n not in defined:
+                defined.add(n)
+                return f'{n}["{labels[n]}"]'
+            return n
+        lines = ["```mermaid", "flowchart TD"]
+        for e in graph["edges"]:
+            label = e["label"]
+            arrow = (f"-. {label} .->" if label else "-.->") if e["conditional"] else ("-->" + (f"|{label}|" if label else ""))
+            lines.append(f"  {node(e['from'])} {arrow} {node(e['to'])}")
+        return lines + ["```"]
+    def block(b):
+        typ = b["type"]
+        if typ == "text":
+            return [b["text"]]
+        if typ == "screen_graph":
+            return screen_graph()
+        if typ == "screen_row":
+            x = screens[b["id"]]
+            return ["| " + " | ".join(x[k] for k in ("id", "name", "purpose", "entry", "exit")) + " |"]
+        if typ == "path_row":
+            x = paths[b["id"]]
+            return ["| " + " | ".join(x[k] for k in ("name", "user_sequence", "omittable")) + " |"]
+        if typ == "story":
+            x = stories[b["id"]]
+            return [f"## 📌 유저스토리{x['number']} : {x['title']}"]
+        if typ == "section":
+            x = sections[b["id"]]
+            return [f"{x['number']}. **{x['screen_id']} · {x['name']}**"]
+        if typ == "section_field":
+            x = sections[b["id"]]
+            field = b["field"]
+            return [f"   - {'진입' if field == 'entry' else '기본 표시'}: {x[field]}"]
+        if typ == "action":
+            x = actions[b["id"]]
+            return [" " * x["indent"] + f"- `{x['id']}` [{x['display_class']}] {x['description']} → **{x['destination_text']}**{x['legacy_tag_text']}"]
+        raise ValueError(f"{source}: unexpected block {typ}")
+    projections = record["projection_paths"]
+    def base(title):
+        return [
+            "# " + title, "",
+            f"<!-- Generated by tools/project_docs.py. Source: {source} -->",
+            local_link(source, "작업 원본 JSON", output) + f" · 기준 migration blob `{record['source_snapshot']['blob']}` · R01 검토 후보(미승인). 변경은 JSON 원본에 반영 후 기존 생성기로 재생성한다.",
+            "",
+        ]
+    if output == projections["story"]:
+        lines = base("찾아you — User Story V2.2 (팀 검토용)")
+        lines.extend([local_link(projections["flows"], "화면 및 업무별 흐름도", output), ""])
+        body = [line for b in blocks for line in block(b)][1:]
+        lines.append(rebase("\n".join(body).strip(), source, output))
+        return "\n".join(lines).rstrip() + "\n"
+    if output != projections["flows"]:
+        raise ValueError(f"{source}: invalid projection destination")
+    lines = base("찾아you — 화면 연결 및 사용자 흐름 V2.2")
+    lines.extend([local_link(projections["story"], "전체 사용자 스토리", output), "",
+        "정상 이용의 대표 경로를 보여주는 검토용 시각화. 모든 예외와 상태 전이의 완전성 또는 실제 플랫폼 허용을 입증하지 않는다. 각 노드의 행동 ID는 정본의 action을 지칭한다. 인증 재사용은 별도 채택 전 후보, 외부 접근/실행은 mock-only.",
+        "", "## 전체 화면 연결", "", *screen_graph(), "", "## 화면별 제공 정보", "",
+        "| 화면 | 제공 목적 | 진입 | 종료/이동 |", "| --- | --- | --- | --- |"])
+    for x in screens.values():
+        lines.append(f"| {x['id']} {x['name']} | {x['purpose']} | {x['entry']} | {x['exit']} |")
+    lines.extend(["", "## 업무별 사용자 흐름", ""])
+    def escape_mermaid(s):
+        return s.replace('"', "&quot;").replace("|", "&#124;")
+    roles = {
+        "user": "#DBEAFE,stroke:#3B82F6,color:#172554",
+        "auto": "#DCFCE7,stroke:#16A34A,color:#14532D",
+        "conditional": "#FEF3C7,stroke:#D97706,color:#78350F",
+        "decision": "#FEF3C7,stroke:#D97706,color:#78350F",
+    }
+    for q in record["journeys"]:
+        nodes = {n["id"]: n for n in q["nodes"]}
+        if len(nodes) != len(q["nodes"]):
+            raise ValueError(f"{source}: duplicate journey node")
+        lines.extend([f"### {q['id']} · {q['title']}", "", q["description"], "", "```mermaid", "flowchart TD"])
+        for n in q["nodes"]:
+            if not set(n["action_refs"]) <= set(actions) or n["role"] not in roles:
+                raise ValueError(f"{source}: invalid journey action or role")
+            label = escape_mermaid(n["label"] + "<br/>" + " · ".join(n["action_refs"]))
+            shape = ('{"' + label + '"}') if n["role"] == "decision" else ('["' + label + '"]')
+            lines.append(f"  {n['id']}{shape}")
+        for e in q["edges"]:
+            if e["from"] not in nodes or e["to"] not in nodes:
+                raise ValueError(f"{source}: invalid journey edge")
+            arrow = "-->" + (f"|{escape_mermaid(e['label'])}|" if e["label"] else "")
+            lines.append(f"  {e['from']} {arrow} {e['to']}")
+        for role, style in roles.items():
+            lines.append(f"  classDef {role} fill:{style}")
+        for role in roles:
+            ids = [n["id"] for n in q["nodes"] if n["role"] == role]
+            if ids:
+                lines.append(f"  class {','.join(ids)} {role}")
+        lines.extend(["```", ""])
+    lines.extend(["## 검토 기준", "",
+        "- 파란색: 사용자 행동. 초록색: 서비스 자동 처리·표시. 노란색: 조건 판단 또는 조건부 행동.",
+        "- 모든 실제 버튼/필드의 원자적 분해나 오류/예외 분기는 아직 확정되지 않았다. 이 그림만으로 구현·DB 상세·외부 실행을 시작하지 않는다.",
+        "- 통합 승인에 표시된 대상과 실제 실행 대상이 다르면 새 확인이 필요하다. 미확인 외부 효과는 재실행하지 않는다.", ""])
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def build():
     specialized = validate_lesson_design_sources()
     paths = sorted(path for path in ARTIFACTS.rglob("*.json") if path not in specialized) + sorted(
@@ -1131,6 +1286,18 @@ def build():
                 )
                 lines.append("")
             outputs[output] = "\n".join(lines).rstrip() + "\n"
+    story_source = "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json"
+    if story_source in sources:
+        story_record = sources[story_source]
+        expected = {
+            "story": "docs/review/lesson-registration/USER-STORY-V2.2.md",
+            "flows": "docs/review/lesson-registration/USER-STORY-FLOWS-V2.2.md",
+        }
+        if story_record["projection_paths"] != expected:
+            raise ValueError(f"{story_source}: unexpected projection path")
+        for path in expected.values():
+            outputs[path] = render_user_story_v22(story_record, story_source, path)
+
     return outputs
 
 
