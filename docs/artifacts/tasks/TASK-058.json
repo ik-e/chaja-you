@@ -45,7 +45,11 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-DESIGN.md",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/branch-refinement-20261126.json"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -90,10 +94,25 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md"
     }
   ],
   "result": {
-    "summary": "R01 전용 브랜치에서 R02·R04·R05 원본 118개 행동 및 37개 이벤트를 107개 통합 행동 후보(기존 63 ID 유지), 34개 피처, 447개 분기 후보로 연결했다. 플랫폼 7개·42개 업무·260개 필드 레코드(중복 포함) 및 24개 의미 그룹 비교를 보존한다. 107개 개별 의미·가치 검토, R03 작업 공간의 미제출 보완 초안 121개 행동 대조(동일 후보 64·부분 33·누락 후보 20·대행 제외 4), 10개 보완 주제, 11개 플랫폼 차이 및 14개 범위 결정 추천을 별도 원장에 기록했다. 참조 검사 통과; R03 정식 인계·의미 완전성/분기/범위 승인 미완료. 승인 범위 0, 신규 DB 및 실제 실행 미착수.",
+    "summary": "main 29446f4 기준 팀원 4명 원본 244개 행동 및 93개 이벤트를 검토하여 141개 통합 행동, 681개 분기 후보, 34개 피처 및 6개 지원 처리 책임을 정리했다. R03 대표 시나리오 30개 정상·오류 기대 동작 교차 검토, 141개 범위 추천(기본108/조건부27/제외6), 14개 결정 추천, 사람용 USER-STORIES-REVIEW.md 작성. 정적 참조 검사 수행; 의미 완전성/실제 권한·효과 및 공식 검증은 미확정. R01 승인 0건, main 미병합, DB 미착수.",
     "claims": [
       {
         "id": "C058-01",
@@ -143,6 +162,25 @@
         "evidence_ids": [
           "E058-04"
         ]
+      },
+      {
+        "id": "C058-07",
+        "text": "최신 R02/R03/R04/R05 원본 244개 행동 대응, 141개 통합 후보와 681개 분기, 시스템 책임 40개 및 R03 대표 시나리오 30개 정상·오류 기대 동작 검토를 기록했다.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-05",
+          "E058-06",
+          "E058-07"
+        ]
+      },
+      {
+        "id": "C058-08",
+        "text": "141개 범위 추천 및 14개 결정, 사람용 문서를 동기화했다. 기본108/조건부27/제외6 추천, 승인 0건.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-08",
+          "E058-09"
+        ]
       }
     ],
     "evidence": [
@@ -173,6 +211,41 @@
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json",
         "commit": "864d068bc6d4f4b54ac63199bdfbf9e776b08dfb",
         "blob": "76bae7062d2d4245edac9747e949e30c42a59d59"
+      },
+      {
+        "id": "E058-05",
+        "label": "최신 244개 원본·141개 행동·681개 분기",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
+        "commit": "6cce5d6716888e12cd9ec089c727af95f8046889",
+        "blob": "3eda5129e96b048b4daad085e0d6c69df53a19c3"
+      },
+      {
+        "id": "E058-06",
+        "label": "R03 56개 시스템 이벤트 대조",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json",
+        "commit": "8f6503498a352e0fa561091968b7ae4424555b80",
+        "blob": "ef72131ef4771296b16299104e707ddc189d4210"
+      },
+      {
+        "id": "E058-07",
+        "label": "R03 30개 시나리오 교차 검토",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json",
+        "commit": "5b07a0ac379a9b3167c1de6b50c2e4496a588432",
+        "blob": "0a9050fe245c1fe5ef8568136ecae731be8d0359"
+      },
+      {
+        "id": "E058-08",
+        "label": "141개 범위 추천 원장",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
+        "commit": "e70514e6cfb0e2d45e94b77cc3424a5aebb29ff6",
+        "blob": "5ef392c53d838417c5c6a7e1e6ba2288e65ac970"
+      },
+      {
+        "id": "E058-09",
+        "label": "사용자 스토리 최종 확인용 문서",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md",
+        "commit": "5b1ebe1995b0ea60cb5f163274e995b8f3e06715",
+        "blob": "1c19c4e5c00215c59dcca887bd6ff29f21a977b2"
       }
     ],
     "verification": [
@@ -193,19 +266,29 @@
         ]
       },
       {
-        "criterion": "I1 및 USV-01~05 · 사용자 행동의 완전성·의미/원자성/분기·사용자/시스템 역할 검토",
-        "verdict": "inconclusive",
+        "criterion": "최신 원본 244개·141 행동·681 분기 및 30 시나리오/141 범위 추천 참조 검사",
+        "verdict": "pass",
         "evidence_ids": [
-          "E058-01",
-          "E058-04"
+          "E058-05",
+          "E058-07",
+          "E058-08"
         ]
       },
       {
-        "criterion": "I2 및 USV-06~07 · 사용자 가치·범위·MVP 판단과 R01 승인",
+        "criterion": "I1/USV-01~05 · 의미 완전성 및 실제 상태 전이",
         "verdict": "inconclusive",
         "evidence_ids": [
-          "E058-03",
-          "E058-04"
+          "E058-05",
+          "E058-06",
+          "E058-07"
+        ]
+      },
+      {
+        "criterion": "I2/USV-06~07 · 제품 범위 및 사용자 승인",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-08",
+          "E058-09"
         ]
       },
       {
@@ -232,15 +315,14 @@
       }
     ],
     "uncertainties": [
-      "R03의 main 163a4895 작업 공간 보완 초안은 참고 대조했다. 지정 R03/user-stories.json은 고정 시점 빈 양식이며 TASK-059 정식 인계 및 향후 변경 대조 필요. R02 추가 조사와 R04/R05 미확인 사항은 남음.",
-      "107개 의미 검토와 6개 대표 안전 조건은 기록했으나 447개 분기 전체 직접 전이의 의미 폐쇄, R03 56개 이벤트 전수 대조, 사용자 행동 의미 완전성 및 정규화는 후속 검토 필요.",
-      "플랫폼 직접 경로/필수 표시와 실제 검증·공개·대행 허용은 구분. 실제 외부 작업 및 제3자 대행 허용 독립 실증 없음.",
-      "DB 진입 게이트 유지. 신규 DB/ERD/스키마·API·이관/실행 시험은 미수행; 제출용 잠정안과 기존 구현 보존.",
-      "R01 전용 브랜치 작업이며 main 및 다른 owner 원본에 반영하지 않음. 이 세션의 구조 검사는 수행했으나 전체 Python/CI 검증은 미실행."
+      "실제 플랫폼 정책·대행 권한·저장/공개 효과 및 R02 후속 조사 미확인; 기존 플랫폼 데이터 비교 원장 최신화는 후속.",
+      "30개 대표 시나리오는 요구 기대 동작 검토이며 전체 외부 상태 공간/직접 전이 실행 증명 아님.",
+      "공식 Python 검증 및 CI 미실행; 이 세션 정적 검사만 수행.",
+      "R01 승인 전 DB/ERD/API 상세 착수 금지; main 및 팀원 원본 변경 없음."
     ],
     "decision_requests": [
-      "semantic-review-20261126.json의 G-01~08 우선 보완 후보 및 G-09 조건부/G-10 제외 범위를 검토. SD-01~14는 추천이며 제품/MVP·실제 실행 권한·설계 채택을 구분.",
-      "R03 정식 인계와 후속 조사 변경분을 대조하고 필요한 분기·시스템 이벤트 검토 및 범위 승인 후 승인된 행동 집합을 고정. USV-07 통과 전 신규 DB 설계 금지."
+      "USER-STORIES-REVIEW.md의 기본/조건부/제외 범위, 14개 결정 및 141개 행동·오류 처리 확인 후 승인 또는 변경 지정.",
+      "범위에 영향 주는 미확인 사항은 별도 해소 및 USV-07 확인 후 DB 설계 진입."
     ]
   },
   "traceability": {
@@ -277,7 +359,7 @@
   "intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
   "registration_authority_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
   "assignment_mode": "self_directed",
-  "assignment_status": "R01 107개 의미 검토·R03 작업 공간 초안 121개 대조 완료 · 정식 인계/범위 결정/DB 진입 대기",
+  "assignment_status": "사용자 스토리 통합 추천안 및 사람용 검토 문서 작성 · R01 확인 대기 · DB 미착수",
   "workspace_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/",
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"
