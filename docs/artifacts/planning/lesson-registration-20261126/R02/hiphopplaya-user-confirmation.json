@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-HIPHOPPLAYA-CONFIRMATION",
+  "kind": "document",
+  "status": "관찰 범위 조사 완료 · 미확인 잔여",
+  "owner": "R02",
+  "task_ref": "TASK-055",
+  "updated_at": "2026-11-26",
+  "inputs": [
+    "현재 대화 사용자 경험",
+    "Chrome 네이티브 UI의 개별 화면",
+    "공식 공지·도움말"
+  ],
+  "authorization_boundary": {
+    "user_request": "브라우저 직접 조사 및 검증 후 GitHub 게시",
+    "actual_actions": "개별 화면·작성 양식·공지 확인, 미디어 파일 선택창은 취소. 텍스트·개인정보 입력·파일 업로드·글/임시저장·삭제·재등록 없음",
+    "project_scope": "사용자 요청의 개별 조사이며 제품 지원·운영사 대행 허용 확정 아님. 기존 실행 금지 범위는 제품 실증에서 유지"
+  },
+  "output": {
+    "fields": [
+      {
+        "label": "제목",
+        "format": "text",
+        "required": "unknown",
+        "constraints": {
+          "visible_input": true,
+          "length_limit": "미확인"
+        },
+        "evidence_ids": [
+          "HP-SCREEN"
+        ],
+        "field_id": "HP-F01"
+      },
+      {
+        "label": "본문",
+        "format": "rich_text",
+        "required": "unknown",
+        "constraints": {
+          "freeform": true,
+          "tools": [
+            "첨부",
+            "이모지",
+            "서식",
+            "강조",
+            "정렬",
+            "리스트",
+            "표",
+            "기타"
+          ],
+          "length_limit": "미확인"
+        },
+        "evidence_ids": [
+          "HP-SCREEN"
+        ],
+        "field_id": "HP-F02"
+      },
+      {
+        "label": "카테고리",
+        "format": "radio_enum",
+        "required": "unknown",
+        "constraints": {
+          "values": [
+            "음악홍보",
+            "구인",
+            "홍보"
+          ],
+          "required": "미시험"
+        },
+        "evidence_ids": [
+          "HP-SCREEN"
+        ],
+        "field_id": "HP-F03"
+      },
+      {
+        "label": "첨부 미디어",
+        "format": "multiple_media",
+        "required": "unknown",
+        "constraints": {
+          "current_control": "사진/동영상/오디오 첨부; 파일 선택창까지 확인 후 취소",
+          "official_examples": [
+            "MP4",
+            "MP3",
+            "WebP",
+            "이미지·동영상·오디오"
+          ],
+          "notice_max_mb": 300,
+          "notice_max_video_seconds": 60,
+          "limits_variable": true,
+          "count_limit": "미확인",
+          "actual_upload": "미시험"
+        },
+        "evidence_ids": [
+          "HP-SCREEN",
+          "HP-EDITOR"
+        ],
+        "field_id": "HP-F04"
+      },
+      {
+        "label": "외부 이미지·동영상 붙여넣기",
+        "format": "pasted_media",
+        "required": "unknown",
+        "constraints": {
+          "official_behavior": "외부 파일을 서버에 저장·변환",
+          "animated_gif_webp": "자동 동영상 변환 안내",
+          "user_behavior": "본문 복사 시 이미지도 함께 들어감"
+        },
+        "evidence_ids": [
+          "HP-EDITOR",
+          "HP-IMAGE"
+        ],
+        "field_id": "HP-F05"
+      },
+      {
+        "label": "임시저장·연습장 불러오기",
+        "format": "draft_actions",
+        "required": "unknown",
+        "constraints": {
+          "controls": [
+            "임시저장",
+            "현재 내용 임시저장",
+            "연습장 글 가져오기"
+          ],
+          "official_autosave": "기기 전환 이어쓰기 안내",
+          "actual_save_restore": "미시험"
+        },
+        "evidence_ids": [
+          "HP-SCREEN",
+          "HP-EDITOR"
+        ],
+        "field_id": "HP-F06"
+      },
+      {
+        "label": "글 등록",
+        "format": "submit_action",
+        "required": "unknown",
+        "constraints": {
+          "button": "글 등록",
+          "validation_result": "미시험"
+        },
+        "evidence_ids": [
+          "HP-SCREEN"
+        ],
+        "field_id": "HP-F07"
+      }
+    ],
+    "user_experience": [
+      {
+        "id": "HP-U01",
+        "topic": "publication",
+        "statement": "등록·수정 후 바로 공개된다고 답함. 이번 실제 등록·수정 미시험",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U02",
+        "topic": "prepare",
+        "statement": "기존 모집 글 복사. 최초 복사·등록 약5분 회상",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U03",
+        "topic": "repeat",
+        "statement": "기존 글을 삭제하지 않고 같은 모집 내용의 새 글을 매일 등록",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U04",
+        "topic": "repeat_minutes",
+        "statement": "접속부터 새 글 등록 완료까지 약5~10분 회상. 실측 아님",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U05",
+        "topic": "pain",
+        "statement": "로그인·본문 복사/붙여넣기·업로드 대기가 번거로움. 첨부파일이 많으면 더 오래 기다렸음",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U06",
+        "topic": "media_reuse",
+        "statement": "본문 복사 시 이미지까지 함께 들어가며 매번 파일을 직접 다시 고르지 않음",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U07",
+        "topic": "errors",
+        "statement": "업로드 실패·이미지 누락 경험 없음",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U08",
+        "topic": "moderation",
+        "statement": "중복 등록 경고·운영진 삭제/수정 요구 경험 없음. 공식 허용 근거 아님",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U09",
+        "topic": "skip",
+        "statement": "깜빡하거나 번거로워 등록을 건너뛴 날 있음",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U10",
+        "topic": "effect",
+        "statement": "건너뛴 날 조회수·문의 차이는 느끼지 못함. 효과 없음의 실증 아님",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      },
+      {
+        "id": "HP-U11",
+        "topic": "other",
+        "statement": "추가 등록·관리 불편 없음",
+        "evidence_ids": [
+          "HP-USER"
+        ]
+      }
+    ],
+    "policies": [
+      {
+        "id": "HP-P01",
+        "finding": "홍보 게시판은 음악·힙합·스트리트 문화 관련 레슨·학원·공연·파티 홍보를 허용한다고 공지한다.",
+        "evidence_ids": [
+          "HP-NOTICE"
+        ]
+      },
+      {
+        "id": "HP-P02",
+        "finding": "공식 에디터 공지는 자동저장·기기 전환, 다중 미디어 첨부·압축·변환 및 붙여넣은 외부 미디어의 서버 저장을 설명한다. 300MB·60초 안내는 현재 업로드 실증이 아니며 변경 가능성이 명시되어 있다.",
+        "evidence_ids": [
+          "HP-EDITOR"
+        ]
+      },
+      {
+        "id": "HP-P03",
+        "finding": "읽은 홍보 공지·에디터 안내에서 같은 글 매일 재등록·끌어올리기·대행·자동화 허용을 확인하지 못했다. 사용자 무제재 경험과 공식 허용을 구분한다.",
+        "evidence_ids": [
+          "HP-NOTICE",
+          "HP-EDITOR"
+        ]
+      },
+      {
+        "id": "HP-P04",
+        "finding": "과거 동영상 매뉴얼의 Flash 삽입 설명은 현재 에디터 안내와 달라 현재 규격 근거로 채택하지 않는다.",
+        "evidence_ids": [
+          "HP-LEGACY",
+          "HP-EDITOR"
+        ]
+      }
+    ],
+    "unknowns": [
+      "제목·본문 길이 및 전체 필수조건",
+      "현재 서버 미디어 용량·개수·길이 집행",
+      "임시저장·자동저장·이어쓰기 실제 결과",
+      "본인 글 수정·삭제 절차·완료 증거",
+      "매일 동일글 재등록 공식 간격·횟수·중복 정책",
+      "등록·수정·갱신·수집 대행 및 자동화 허용",
+      "업로드 대기 구간별 실측 및 문의 효과"
+    ],
+    "scope_note": "복사·첨부 포함 새 글 생성과 기존 글 수정/끌어올리기를 구분. 글을 볼 수 있다는 사실만으로 대행 허용을 주장하지 않음"
+  },
+  "evidence": [
+    {
+      "id": "HP-SCREEN",
+      "type": "native_browser",
+      "url": "https://hiphopplaya.com/g2/bbs/write.php?bo_table=advertise",
+      "location": "홍보 글쓰기: 제목·본문·카테고리·도구·등록",
+      "observed_at": "2026-11-26",
+      "limitation": "브라우저 전용 연결 불가 후 Chrome 네이티브 UI로 관찰. 로그인 요구가 표시된 뒤 후속 화면에서 인증된 작성 양식 확인. 자격증명 값 미기록. 파일 선택창 취소, 입력·저장·업로드 없음"
+    },
+    {
+      "id": "HP-NOTICE",
+      "type": "official_notice",
+      "url": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=notice&wr_id=2098",
+      "location": "홍보 게시판 이용 안내: 2015-03-21",
+      "observed_at": "2026-11-26",
+      "limitation": "개별 문서 관찰. 저장·서버 경계값 시험 아님"
+    },
+    {
+      "id": "HP-EDITOR",
+      "type": "official_notice",
+      "url": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=notice&wr_id=4537",
+      "location": "새로운 에디터 도입 안내: 2024-08-28 갱신",
+      "observed_at": "2026-11-26",
+      "limitation": "웹 조회로 본문 확인. 용량은 운영 상황에 따라 변경 가능하다고 명시"
+    },
+    {
+      "id": "HP-IMAGE",
+      "type": "official_manual",
+      "url": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=site_manual&wr_id=2&scrap_mode=yes",
+      "location": "사진 첨부 매뉴얼: 외부 이미지 복사·붙여넣기",
+      "observed_at": "2026-11-26",
+      "limitation": "Chrome 직접 조회. 과거 매뉴얼 UI와 현재 에디터가 다를 수 있음"
+    },
+    {
+      "id": "HP-LEGACY",
+      "type": "official_manual",
+      "url": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=site_manual&wr_id=5&scrap_mode=yes",
+      "location": "일반 동영상 매뉴얼",
+      "observed_at": "2026-11-26",
+      "limitation": "Flash·HTML 소스 삽입을 설명하는 과거 도움말. 현재 규격으로 사용하지 않음"
+    },
+    {
+      "id": "HP-USER",
+      "type": "user_recollection",
+      "location": "2026-11-26 현재 대화 순차 문답",
+      "observed_at": "2026-11-26",
+      "limitation": "단일 사용자 회상. 시간 실측·공식 허용·일반 정책 아님"
+    }
+  ],
+  "verification": [
+    {
+      "criterion": "화면·정책·경험·불확실성 구분",
+      "verdict": "pass",
+      "detail": "필드·경험·정책별 근거 참조. 과거 문서와 현행 안내 불일치 보존"
+    },
+    {
+      "criterion": "실제 외부 결과 검증",
+      "verdict": "inconclusive",
+      "detail": "글 제출·미디어 업로드·갱신·삭제 실행 없음. 지원 UI와 실행 성공을 구분"
+    },
+    {
+      "criterion": "원본·근거·연결·공개 범위 검사",
+      "verdict": "pass",
+      "detail": "JSON 파싱, 근거 ID와 상세 포인터 및 전체 story/field/operation/object 참조 검사 통과. 개인정보 패턴·계정값·로컬 파일명 미포함 검사 및 내용 검토"
+    },
+    {
+      "criterion": "생성 문서 최신성",
+      "verdict": "pass",
+      "detail": "project_docs.py --check: 45 projections current. git diff --check 통과"
+    }
+  ]
+}

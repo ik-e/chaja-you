@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-HIPHOPLE-CONFIRMATION",
+  "kind": "document",
+  "status": "관찰 범위 조사 완료 · 미확인 잔여",
+  "owner": "R02",
+  "task_ref": "TASK-055",
+  "updated_at": "2026-11-26",
+  "inputs": [
+    "현재 대화 사용자 경험",
+    "Chrome 네이티브 UI의 개별 화면",
+    "공식 공지·도움말"
+  ],
+  "authorization_boundary": {
+    "user_request": "브라우저 직접 조사 및 검증 후 GitHub 게시",
+    "actual_actions": "개별 화면·작성 양식·공지 확인, 미디어 파일 선택창은 취소. 텍스트·개인정보 입력·파일 업로드·글/임시저장·삭제·재등록 없음",
+    "project_scope": "사용자 요청의 개별 조사이며 제품 지원·운영사 대행 허용 확정 아님. 기존 실행 금지 범위는 제품 실증에서 유지"
+  },
+  "output": {
+    "fields": [
+      {
+        "label": "레슨 분류",
+        "format": "category",
+        "required": "unknown",
+        "constraints": {
+          "public_path": "/market/category/27718911",
+          "input_options": "작성 양식 미확인"
+        },
+        "evidence_ids": [
+          "LE-SCREEN"
+        ],
+        "field_id": "LE-F01"
+      },
+      {
+        "label": "제목",
+        "format": "visible_text",
+        "required": "unknown",
+        "constraints": {
+          "visible_in_list": true,
+          "input_required_limit": "미확인"
+        },
+        "evidence_ids": [
+          "LE-SCREEN"
+        ],
+        "field_id": "LE-F02"
+      },
+      {
+        "label": "썸네일",
+        "format": "visible_image",
+        "required": "unknown",
+        "constraints": {
+          "visible_in_list": true,
+          "upload_formats_size": "미확인"
+        },
+        "evidence_ids": [
+          "LE-SCREEN"
+        ],
+        "field_id": "LE-F03"
+      },
+      {
+        "label": "가격",
+        "format": "visible_text",
+        "required": "unknown",
+        "constraints": {
+          "some_posts_display": true,
+          "unit_and_input_constraints": "미확인; 표기 형식이 숫자·쉼표·원 등 상이"
+        },
+        "evidence_ids": [
+          "LE-SCREEN"
+        ],
+        "field_id": "LE-F04"
+      },
+      {
+        "label": "작성자·게시일",
+        "format": "visible_metadata",
+        "required": "unknown",
+        "constraints": {
+          "visible_in_list": true,
+          "identifier": "게시글 URL의 문서 식별자 관찰; 개인 값 미보존"
+        },
+        "evidence_ids": [
+          "LE-SCREEN"
+        ],
+        "field_id": "LE-F05"
+      },
+      {
+        "label": "본문",
+        "format": "freeform_user_report",
+        "required": "unknown",
+        "constraints": {
+          "user_copied_existing_post": true,
+          "current_editor_and_limits": "미확인"
+        },
+        "evidence_ids": [
+          "LE-USER"
+        ],
+        "field_id": "LE-F06"
+      }
+    ],
+    "user_experience": [
+      {
+        "id": "LE-U01",
+        "topic": "publication",
+        "statement": "등록 후 바로 공개. 수정도 즉시 공개라고 처음 답했지만 이후 수정 경험 없다고 명확히 하여 등록 경험만 확정",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U02",
+        "topic": "prepare",
+        "statement": "기존 모집 글 복사. 힙플과 비슷하다고 답해 최초 복사·등록 약5분 정도로 해석; 직접 독립 측정 아님",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U03",
+        "topic": "repeat",
+        "statement": "등록만 하고 끌어올리기·재등록 경험 없음",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U04",
+        "topic": "errors",
+        "statement": "이미지 업로드·본문 표시 문제로 재작업한 경험 없음",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U05",
+        "topic": "modify",
+        "statement": "등록 후 본문·수업료 수정 경험 없음",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U06",
+        "topic": "moderation",
+        "statement": "운영진의 삭제·수정 요구·제재 경험 없음",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U07",
+        "topic": "extra_prepare",
+        "statement": "기존 모집 글 외 별도 준비 내용 없음",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      },
+      {
+        "id": "LE-U08",
+        "topic": "other",
+        "statement": "추가 등록·관리 불편 없음",
+        "evidence_ids": [
+          "LE-USER"
+        ]
+      }
+    ],
+    "policies": [
+      {
+        "id": "LE-P01",
+        "finding": "공식 거래·장터 공지는 개인레슨 등 음악 관련 거래 게시물을 허용한다고 설명한다.",
+        "evidence_ids": [
+          "LE-INTERVAL"
+        ]
+      },
+      {
+        "id": "LE-P02",
+        "finding": "본문은 2025-05-10부터 게재 간격을3일에서2일로 바꿨다고 안내하고 유사 내용·동일 계정의 제한일이 있다고 명시한다. 같은 페이지 하단에는3일 내1회 문구가 남아 있다.",
+        "evidence_ids": [
+          "LE-INTERVAL"
+        ],
+        "interpretation": "신규 갱신 안내와 남은 하단 문구의 불일치. 2일을 우선 참고하되 현행 서버 집행·정확한 계산은 미확인. 즉시 반복 재등록 허용으로 해석하지 않음"
+      },
+      {
+        "id": "LE-P03",
+        "finding": "하단 이용약관 링크가 개인정보처리방침으로 연결된다. 이 문서의 회사 개인정보 수집 설명을 이용자의 자동 수집·등록 대행 허용으로 해석하지 않는다.",
+        "evidence_ids": [
+          "LE-PRIVACY"
+        ]
+      },
+      {
+        "id": "LE-P04",
+        "finding": "2026-10-01 징계·이용규칙 공지는 존재하지만 이번 접근성 본문에서 상세 내용을 확인하지 못했다.",
+        "evidence_ids": [
+          "LE-DISCIPLINE"
+        ]
+      }
+    ],
+    "unknowns": [
+      "로그인 이후 글쓰기·수정 양식 및 전체 필수값",
+      "제목·본문·가격·첨부 형식·용량·개수 제약",
+      "갱신/삭제/수정 기능의 실제 존재 및 완료 결과",
+      "2일 공지와3일 하단 문구 중 실제 서버 집행 및 시점 계산",
+      "운영사 대행·자동화·재등록 허용",
+      "최신 징계 공지의 상세 본문",
+      "등록 소요시간 실측 및 반복 관리 가치"
+    ],
+    "scope_note": "복사·첨부 포함 새 글 생성과 기존 글 수정/끌어올리기를 구분. 글을 볼 수 있다는 사실만으로 대행 허용을 주장하지 않음"
+  },
+  "evidence": [
+    {
+      "id": "LE-SCREEN",
+      "type": "native_browser",
+      "url": "https://hiphople.com/market/category/27718911",
+      "location": "거래·장터의 레슨 분류: 제목·작성자·날짜·가격·썸네일",
+      "observed_at": "2026-11-26",
+      "limitation": "27718925는 레슨 분류가 아니었음. 실제 레슨 링크 27718911로 이동. 비로그인 화면에서 글쓰기 버튼 찾지 못함. 단순 기능 부재로 해석하지 않음"
+    },
+    {
+      "id": "LE-INTERVAL",
+      "type": "official_notice",
+      "url": "https://hiphople.com/market/28806084",
+      "location": "공지/정정: 글 게재 기한 2일 변경",
+      "observed_at": "2026-11-26",
+      "limitation": "본문2025-05-10 변경 안내와 페이지 하단3일 문구가 함께 존재. 서버 제한 미시험"
+    },
+    {
+      "id": "LE-PRIVACY",
+      "type": "official_policy",
+      "url": "https://hiphople.com/privacy",
+      "location": "하단 이용약관 링크의 실제 도착 문서: 개인정보처리방침",
+      "observed_at": "2026-11-26",
+      "limitation": "제3자 자동화·대행 허용의 근거가 아님"
+    },
+    {
+      "id": "LE-DISCIPLINE",
+      "type": "official_notice",
+      "url": "https://hiphople.com/notice/33720326",
+      "location": "회원 징계(2026.10.01) & 이용규칙",
+      "observed_at": "2026-11-26",
+      "limitation": "공식 공지 존재 확인. 본문이 텍스트 접근성에서 노출되지 않아 세부 제재 내용을 확정하지 않음"
+    },
+    {
+      "id": "LE-USER",
+      "type": "user_recollection",
+      "location": "2026-11-26 현재 대화 순차 문답",
+      "observed_at": "2026-11-26",
+      "limitation": "단일 사용자 회상. 시간 실측·공식 허용·일반 정책 아님"
+    }
+  ],
+  "verification": [
+    {
+      "criterion": "화면·정책·경험·불확실성 구분",
+      "verdict": "pass",
+      "detail": "필드·경험·정책별 근거 참조. 과거 문서와 현행 안내 불일치 보존"
+    },
+    {
+      "criterion": "실제 외부 결과 검증",
+      "verdict": "inconclusive",
+      "detail": "글 제출·미디어 업로드·갱신·삭제 실행 없음. 지원 UI와 실행 성공을 구분"
+    },
+    {
+      "criterion": "원본·근거·연결·공개 범위 검사",
+      "verdict": "pass",
+      "detail": "JSON 파싱, 근거 ID와 상세 포인터 및 전체 story/field/operation/object 참조 검사 통과. 개인정보 패턴·계정값·로컬 파일명 미포함 검사 및 내용 검토"
+    },
+    {
+      "criterion": "생성 문서 최신성",
+      "verdict": "pass",
+      "detail": "project_docs.py --check: 45 projections current. git diff --check 통과"
+    }
+  ]
+}

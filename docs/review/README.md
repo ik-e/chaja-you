@@ -37,7 +37,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-055.json)
 
-진행 중 · 크몽·탈잉·프람피·뮬 상세 연결, 숨고 부분 조사 확보. 나머지 2개 플랫폼 및 전체 검토 잔여
+진행 중 · 7개 플랫폼 1차 근거 확보, 힙합플레이야·힙합LE 문답/관찰 보완. 상세 미확인 및 전체 계약 검토 잔여
 
 검증과 근거
 
@@ -49,6 +49,8 @@
 - [근거](../artifacts/planning/lesson-registration-20261126/R02/independent-result.json)
 - [근거](../artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json)
 - [근거](../artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json)
+- [근거](../artifacts/planning/lesson-registration-20261126/R02/hiphopplaya-user-confirmation.json)
+- [근거](../artifacts/planning/lesson-registration-20261126/R02/hiphople-user-confirmation.json)
 
 남은 불확실성과 결정 요청
 
@@ -64,6 +66,9 @@
 - 뮬 최신글 올리기 간격·비용·실제 성공 조건
 - 뮬 이모지 규정 집행 및 장터 규정 레슨 적용 범위
 - 뮬 갱신 약5분 회상과 기존2~3분 근거의 조건 차이
+- 힙합LE 현재 작성 양식·첨부 제약 및2일/3일 안내 충돌
+- 힙합플레이야 매일 동일글 재등록의 공식 허용·간격·횟수
+- 두 플랫폼 대행·자동화 허용 및 실제 외부 실행 결과
 - 심사 취소·재개 지원 범위
 - 대행 허용 확인 방법
 
