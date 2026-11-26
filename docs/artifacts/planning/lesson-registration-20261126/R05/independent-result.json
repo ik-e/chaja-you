@@ -70,7 +70,8 @@
       "status": "covered",
       "story_refs": [
         "R05-US-006",
-        "R05-US-039"
+        "R05-US-039",
+        "R05-US-046"
       ],
       "system_event_refs": [],
       "reason": null
@@ -92,7 +93,9 @@
       "status": "covered",
       "story_refs": [
         "R05-US-008",
-        "R05-US-040"
+        "R05-US-040",
+        "R05-US-043",
+        "R05-US-045"
       ],
       "system_event_refs": [
         "R05-SE-1"
@@ -105,7 +108,9 @@
       "status": "covered",
       "story_refs": [
         "R05-US-003",
-        "R05-US-040"
+        "R05-US-040",
+        "R05-US-043",
+        "R05-US-044"
       ],
       "system_event_refs": [
         "R05-SE-1"
@@ -117,7 +122,8 @@
       "scope": "base",
       "status": "covered",
       "story_refs": [
-        "R05-US-009"
+        "R05-US-009",
+        "R05-US-046"
       ],
       "system_event_refs": [],
       "reason": null
@@ -163,7 +169,8 @@
       "scope": "base",
       "status": "covered",
       "story_refs": [
-        "R05-US-014"
+        "R05-US-014",
+        "R05-US-047"
       ],
       "system_event_refs": [
         "R05-SE-2"
@@ -189,7 +196,8 @@
       "status": "covered",
       "story_refs": [
         "R05-US-016",
-        "R05-US-018"
+        "R05-US-018",
+        "R05-US-044"
       ],
       "system_event_refs": [
         "R05-SE-3"
@@ -238,7 +246,8 @@
       "scope": "base",
       "status": "covered",
       "story_refs": [
-        "R05-US-021"
+        "R05-US-021",
+        "R05-US-045"
       ],
       "system_event_refs": [
         "R05-SE-4"
@@ -301,7 +310,8 @@
       "status": "covered",
       "story_refs": [
         "R05-US-024",
-        "R05-US-029"
+        "R05-US-029",
+        "R05-US-047"
       ],
       "system_event_refs": [
         "R05-SE-5"
@@ -1603,6 +1613,178 @@
         "R05-EV-01"
       ],
       "decision_request": "서비스 자체 사용자 식별 및 소유 확인 범위를 별도 확정"
+    },
+    {
+      "story_id": "R05-US-043",
+      "actor": "강사",
+      "action": "강사가 오프라인 레슨과 패키지별 입력안을 검토한다.",
+      "goal": "플랫폼별 작업 전제·예외 확인",
+      "trigger": "크몽 보컬 레슨이 오프라인이며 패키지 설정을 사용하려 한다.",
+      "preconditions": [
+        "크몽 보컬 레슨이 오프라인이며 패키지 설정을 사용하려 한다."
+      ],
+      "inputs": [
+        "위치·대표 이미지·패키지별 금액, 작업 기간, 시간 및 횟수"
+      ],
+      "observable_result": "공통 속성과 패키지별 반복 속성이 구분된다.",
+      "failure_or_branch": "온라인 또는 패키지 끄기에서 요구하는 정보는 별도 확인한다.",
+      "related_story_ids": [
+        "R05-US-008",
+        "R05-US-016"
+      ],
+      "feature_refs": [
+        "F08",
+        "F09"
+      ],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R05-EV-DETAIL-PL01"
+      ],
+      "detail_evidence_ids": [
+        "K17"
+      ],
+      "decision_request": "플랫폼별 필드 및 예외의 공통 서비스 반영 범위를 R01 통합 검토에서 결정한다."
+    },
+    {
+      "story_id": "R05-US-044",
+      "actor": "강사",
+      "action": "강사가 심사 제출 전에 클래스 회차와 계산된 수강료를 확인한다.",
+      "goal": "플랫폼별 작업 전제·예외 확인",
+      "trigger": "탈잉에서 회차가 설정된 오프라인 클래스를 심사에 제출하려 한다.",
+      "preconditions": [
+        "탈잉에서 회차가 설정된 오프라인 클래스를 심사에 제출하려 한다."
+      ],
+      "inputs": [
+        "시간당 가격·회당 시간·회차별 커리큘럼"
+      ],
+      "observable_result": "표시된 총 회차와 최종 수강료를 대조한다.",
+      "failure_or_branch": "회차의 심사 후 변경 제한 안내를 확인한다. 일정·장소는 오픈 상태에서 확인한다.",
+      "related_story_ids": [
+        "R05-US-010",
+        "R05-US-016",
+        "R05-US-041"
+      ],
+      "feature_refs": [
+        "F09",
+        "F16"
+      ],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R05-EV-DETAIL-PL02"
+      ],
+      "detail_evidence_ids": [
+        "T04",
+        "T05"
+      ],
+      "decision_request": "플랫폼별 필드 및 예외의 공통 서비스 반영 범위를 R01 통합 검토에서 결정한다."
+    },
+    {
+      "story_id": "R05-US-045",
+      "actor": "강사",
+      "action": "강사가 등록된 보컬 레슨에서 자신이 제공할 수 있는 요청 조건을 검토한다.",
+      "goal": "플랫폼별 작업 전제·예외 확인",
+      "trigger": "숨고 제공 서비스에 보컬 레슨이 등록되어 있다.",
+      "preconditions": [
+        "숨고 제공 서비스에 보컬 레슨이 등록되어 있다."
+      ],
+      "inputs": [
+        "레슨 목적·형태·진행 방식 등 매칭 질문과 선택지"
+      ],
+      "observable_result": "등록 여부와 세부 설정 상태를 각각 확인할 수 있다.",
+      "failure_or_branch": "미선택 상태에서 저장이 비활성으로 표시된다. 최소 선택 수와 저장 결과는 미확인이다.",
+      "related_story_ids": [
+        "R05-US-008",
+        "R05-US-021",
+        "R05-US-038"
+      ],
+      "feature_refs": [
+        "F08",
+        "F20"
+      ],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R05-EV-DETAIL-PL03"
+      ],
+      "detail_evidence_ids": [
+        "S04",
+        "S05",
+        "S06"
+      ],
+      "decision_request": "플랫폼별 필드 및 예외의 공통 서비스 반영 범위를 R01 통합 검토에서 결정한다."
+    },
+    {
+      "story_id": "R05-US-046",
+      "actor": "강사",
+      "action": "강사가 프람피 프로필 등록의 현재 단계와 진행에 필요한 정보를 확인한다.",
+      "goal": "플랫폼별 작업 전제·예외 확인",
+      "trigger": "사진·소개·경력의 단계별 등록 화면을 열었다.",
+      "preconditions": [
+        "사진·소개·경력의 단계별 등록 화면을 열었다."
+      ],
+      "inputs": [
+        "본인 사진, 소개 조건, 학력·경력 항목"
+      ],
+      "observable_result": "현재 단계 및 다음 단계에 필요한 항목을 확인한다.",
+      "failure_or_branch": "사진·소개 전환 조건과 최종 등록 상태는 별개다. 실제 대행은 허용 근거가 필요하다.",
+      "related_story_ids": [
+        "R05-US-006",
+        "R05-US-009",
+        "R05-US-039"
+      ],
+      "feature_refs": [
+        "F06",
+        "F10"
+      ],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R05-EV-DETAIL-PL04"
+      ],
+      "detail_evidence_ids": [
+        "P03",
+        "P04",
+        "P05",
+        "P06"
+      ],
+      "decision_request": "플랫폼별 필드 및 예외의 공통 서비스 반영 범위를 R01 통합 검토에서 결정한다."
+    },
+    {
+      "story_id": "R05-US-047",
+      "actor": "강사",
+      "action": "강사가 지역과 카테고리로 찾은 기존 레슨 글을 확인한다.",
+      "goal": "플랫폼별 작업 전제·예외 확인",
+      "trigger": "뮬 개인레슨 게시판에서 관리할 기존 글을 조회하려 한다.",
+      "preconditions": [
+        "뮬 개인레슨 게시판에서 관리할 기존 글을 조회하려 한다."
+      ],
+      "inputs": [
+        "카테고리·지역·주소·검색어"
+      ],
+      "observable_result": "목록의 번호, 분류, 작성일을 확인한다.",
+      "failure_or_branch": "목록에서 동명이거나 식별이 불분명하면 상세 근거를 확인한다. 최신글 기능 실행 결과는 미확인이다.",
+      "related_story_ids": [
+        "R05-US-014",
+        "R05-US-022",
+        "R05-US-024"
+      ],
+      "feature_refs": [
+        "F14",
+        "F25"
+      ],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R05-EV-DETAIL-PL05"
+      ],
+      "detail_evidence_ids": [
+        "M01",
+        "M02",
+        "M03"
+      ],
+      "decision_request": "플랫폼별 필드 및 예외의 공통 서비스 반영 범위를 R01 통합 검토에서 결정한다."
     }
   ],
   "supporting_system_events": [
@@ -2382,7 +2564,14 @@
         "R05-US-016",
         "R05-US-020",
         "R05-US-023",
-        "R05-US-028"
+        "R05-US-028",
+        "R05-US-008",
+        "R05-US-009",
+        "R05-US-010",
+        "R05-US-021",
+        "R05-US-024",
+        "R05-US-025",
+        "R05-US-043"
       ],
       "unknowns": [
         {
@@ -2996,7 +3185,16 @@
         "R05-US-023",
         "R05-US-028",
         "R05-US-036",
-        "R05-US-041"
+        "R05-US-041",
+        "R05-US-008",
+        "R05-US-009",
+        "R05-US-014",
+        "R05-US-016",
+        "R05-US-020",
+        "R05-US-021",
+        "R05-US-024",
+        "R05-US-025",
+        "R05-US-044"
       ],
       "unknowns": [
         {
@@ -3504,7 +3702,13 @@
       "story_candidates": [
         "R05-US-014",
         "R05-US-023",
-        "R05-US-038"
+        "R05-US-038",
+        "R05-US-008",
+        "R05-US-010",
+        "R05-US-013",
+        "R05-US-021",
+        "R05-US-024",
+        "R05-US-045"
       ],
       "unknowns": [
         {
@@ -3881,7 +4085,9 @@
       ],
       "story_candidates": [
         "R05-US-006",
-        "R05-US-039"
+        "R05-US-039",
+        "R05-US-009",
+        "R05-US-046"
       ],
       "unknowns": [
         {
@@ -4273,7 +4479,11 @@
       ],
       "story_candidates": [
         "R05-US-022",
-        "R05-US-026"
+        "R05-US-026",
+        "R05-US-014",
+        "R05-US-024",
+        "R05-US-025",
+        "R05-US-047"
       ],
       "unknowns": [
         {
@@ -5460,6 +5670,51 @@
       "checked_at": "2026-11-26",
       "location": "게시판 운영방침 변경 안내, 글 도배에 관한 규칙",
       "scope": "반복적인 연속 게시를 제한한다. 현재 홍보 게시판 전용 가입 대기나 게시 간격의 수치는 확인되지 않았다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL01",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/kmong-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, workflow, authenticated_observations",
+      "scope": "follow-up 상세 원본의 근거 ID로 연결한다. 각 관찰·공식 안내·사용자 보고·모의 구현의 구분은 상세 원본에서 유지한다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL02",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/taling-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, workflow, authenticated_observations",
+      "scope": "follow-up 상세 원본의 근거 ID로 연결한다. 각 관찰·공식 안내·사용자 보고·모의 구현의 구분은 상세 원본에서 유지한다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL03",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/soomgo-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, workflow, authenticated_observations",
+      "scope": "follow-up 상세 원본의 근거 ID로 연결한다. 각 관찰·공식 안내·사용자 보고·모의 구현의 구분은 상세 원본에서 유지한다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL04",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/prompie-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, workflow, authenticated_observations",
+      "scope": "follow-up 상세 원본의 근거 ID로 연결한다. 각 관찰·공식 안내·사용자 보고·모의 구현의 구분은 상세 원본에서 유지한다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL05",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/mule-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, workflow, authenticated_observations",
+      "scope": "follow-up 상세 원본의 근거 ID로 연결한다. 각 관찰·공식 안내·사용자 보고·모의 구현의 구분은 상세 원본에서 유지한다."
     }
   ],
   "cross_links": [
@@ -5471,7 +5726,14 @@
         "R05-US-016",
         "R05-US-020",
         "R05-US-023",
-        "R05-US-028"
+        "R05-US-028",
+        "R05-US-008",
+        "R05-US-009",
+        "R05-US-010",
+        "R05-US-021",
+        "R05-US-024",
+        "R05-US-025",
+        "R05-US-043"
       ],
       "object_refs": [
         "R05-PL01-O1",
@@ -5492,9 +5754,149 @@
       ],
       "evidence_refs": [
         "R05-EV-02",
-        "R05-EV-10"
+        "R05-EV-10",
+        "R05-EV-DETAIL-PL01"
       ],
-      "observed_requirement": "상품 범주·승인 분리. 접수 식별값 미확인"
+      "observed_requirement": "상품 범주·승인 분리. 접수 식별값 미확인",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/kmong-db-research.json",
+        "status": "상세 관찰 자료 연결",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL01-1",
+            "field_ids": [
+              "PL01-F01",
+              "PL01-F02",
+              "PL01-F03",
+              "PL01-F13",
+              "PL01-F14",
+              "PL01-F15",
+              "PL01-F22",
+              "PL01-F23",
+              "PL01-F24",
+              "PL01-F29",
+              "PL01-F30",
+              "PL01-F31",
+              "PL01-F32"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-009",
+              "R05-US-016",
+              "R05-US-020",
+              "R05-US-021"
+            ],
+            "operation_ids": [
+              "R05-PL01-CREATE",
+              "R05-PL01-UPDATE"
+            ],
+            "evidence_ids": [
+              "K01",
+              "K02",
+              "K04",
+              "K05",
+              "K06",
+              "K07",
+              "K08",
+              "K09",
+              "K17"
+            ],
+            "notes": "기본·상세 입력과 미디어는 보컬 임시저장 편집 표본"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL01-2",
+            "field_ids": [
+              "PL01-F04",
+              "PL01-F05",
+              "PL01-F06",
+              "PL01-F07",
+              "PL01-F08",
+              "PL01-F09",
+              "PL01-F10",
+              "PL01-F11",
+              "PL01-F12"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-016",
+              "R05-US-020",
+              "R05-US-043"
+            ],
+            "operation_ids": [
+              "R05-PL01-CREATE",
+              "R05-PL01-UPDATE"
+            ],
+            "evidence_ids": [
+              "K01",
+              "K07",
+              "K17"
+            ],
+            "notes": "패키지 켜짐·오프라인에 한정"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL01-3",
+            "field_ids": [
+              "PL01-F16",
+              "PL01-F17",
+              "PL01-F18",
+              "PL01-F19",
+              "PL01-F20",
+              "PL01-F21"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-023",
+              "R05-US-024",
+              "R05-US-025",
+              "R05-US-028"
+            ],
+            "operation_ids": [
+              "R05-PL01-READ",
+              "R05-PL01-STATUS",
+              "R05-PL01-RESPOND"
+            ],
+            "evidence_ids": [
+              "K01",
+              "K03",
+              "K05",
+              "K07",
+              "K15",
+              "K16"
+            ],
+            "notes": "목록 승인 전과 임시저장 동시 표시"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL01-4",
+            "field_ids": [
+              "PL01-F25",
+              "PL01-F26",
+              "PL01-F27",
+              "PL01-F28"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-010",
+              "R05-US-016",
+              "R05-US-020",
+              "R05-US-043"
+            ],
+            "operation_ids": [
+              "R05-PL01-CREATE",
+              "R05-PL01-UPDATE"
+            ],
+            "evidence_ids": [
+              "K17"
+            ],
+            "notes": "오프라인 세부 위치 및 역할별 첨부 규격"
+          }
+        ],
+        "checks": {
+          "field_existence": "보컬 임시저장 편집 필드·관리 목록·공개 상세를 관찰했다.",
+          "required_condition": "설명·절차·준비사항·메인 이미지 등 표본의 필수 표시를 확인했다. 온라인 및 패키지 끄기는 미확인.",
+          "save_or_reflection": "기존 임시저장 표시와 공개 상품 사례는 확인했다. 실제 접수 응답·저장 검증은 미확인.",
+          "delegation_permission": "제3자 입력·제출·조회 허용은 미확인."
+        }
+      }
     },
     {
       "cross_link_id": "R05-LINK-2",
@@ -5504,7 +5906,16 @@
         "R05-US-023",
         "R05-US-028",
         "R05-US-036",
-        "R05-US-041"
+        "R05-US-041",
+        "R05-US-008",
+        "R05-US-009",
+        "R05-US-014",
+        "R05-US-016",
+        "R05-US-020",
+        "R05-US-021",
+        "R05-US-024",
+        "R05-US-025",
+        "R05-US-044"
       ],
       "object_refs": [
         "R05-PL02-O1",
@@ -5528,9 +5939,123 @@
         "R05-EV-03",
         "R05-EV-04",
         "R05-EV-05",
-        "R05-EV-06"
+        "R05-EV-06",
+        "R05-EV-DETAIL-PL02"
       ],
-      "observed_requirement": "가격 단위·회당 시간·일정 상태 근거 확보. 정확한 접수 식별 미확인"
+      "observed_requirement": "가격 단위·회당 시간·일정 상태 근거 확보. 정확한 접수 식별 미확인",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/taling-db-research.json",
+        "status": "상세 관찰 자료 연결",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL02-1",
+            "field_ids": [
+              "PL02-F01",
+              "PL02-F02",
+              "PL02-F03",
+              "PL02-F04",
+              "PL02-F05",
+              "PL02-F06"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-023",
+              "R05-US-024",
+              "R05-US-025",
+              "R05-US-028"
+            ],
+            "operation_ids": [
+              "R05-PL02-READ",
+              "R05-PL02-STATUS",
+              "R05-PL02-RESPOND"
+            ],
+            "evidence_ids": [
+              "T01",
+              "T04"
+            ],
+            "notes": "운영 중과 모든 클래스 목록 구분"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL02-2",
+            "field_ids": [
+              "PL02-F07",
+              "PL02-F08",
+              "PL02-F09",
+              "PL02-F10",
+              "PL02-F11",
+              "PL02-F12"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-009",
+              "R05-US-016",
+              "R05-US-020",
+              "R05-US-021"
+            ],
+            "operation_ids": [
+              "R05-PL02-CREATE",
+              "R05-PL02-UPDATE"
+            ],
+            "evidence_ids": [
+              "T04"
+            ],
+            "notes": "기존 임시저장 상세의 학습 대상·소개"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL02-3",
+            "field_ids": [
+              "PL02-F13",
+              "PL02-F14",
+              "PL02-F15",
+              "PL02-F16",
+              "PL02-F17",
+              "PL02-F18"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-010",
+              "R05-US-016",
+              "R05-US-044"
+            ],
+            "operation_ids": [
+              "R05-PL02-CREATE",
+              "R05-PL02-UPDATE"
+            ],
+            "evidence_ids": [
+              "T04",
+              "T05"
+            ],
+            "notes": "회차별 커리큘럼과 최종 수강료 산식"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL02-4",
+            "field_ids": [
+              "PL02-F19",
+              "PL02-F20",
+              "PL02-F21",
+              "PL02-F22"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-021"
+            ],
+            "operation_ids": [
+              "R05-PL02-CREATE",
+              "R05-PL02-UPDATE"
+            ],
+            "evidence_ids": [
+              "T04"
+            ],
+            "notes": "기타 설정 및 공지사항"
+          }
+        ],
+        "checks": {
+          "field_existence": "임시저장 편집의 기본·회차·수강료와 일정 탭 접근 안내를 관찰했다.",
+          "required_condition": "카테고리·회차·인원 등 필수 표시. 그룹·온라인 분기 및 검증 결과 미확인.",
+          "save_or_reflection": "임시저장 표시 확인. 일정·장소는 오픈 상태에서 사용 가능. 심사 접수·일정 결과 미확인.",
+          "delegation_permission": "제3자 대행 허용 미확인."
+        }
+      }
     },
     {
       "cross_link_id": "R05-LINK-3",
@@ -5538,7 +6063,13 @@
       "story_refs": [
         "R05-US-014",
         "R05-US-023",
-        "R05-US-038"
+        "R05-US-038",
+        "R05-US-008",
+        "R05-US-010",
+        "R05-US-013",
+        "R05-US-021",
+        "R05-US-024",
+        "R05-US-045"
       ],
       "object_refs": [
         "R05-PL03-O1",
@@ -5560,16 +6091,113 @@
       "evidence_refs": [
         "R05-EV-07",
         "R05-EV-08",
-        "R05-EV-17"
+        "R05-EV-17",
+        "R05-EV-DETAIL-PL03"
       ],
-      "observed_requirement": "프로필과 대표·제공 서비스 구분. 공개 반영 시점 미확인"
+      "observed_requirement": "프로필과 대표·제공 서비스 구분. 공개 반영 시점 미확인",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/soomgo-db-research.json",
+        "status": "상세 관찰 자료 연결",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL03-1",
+            "field_ids": [
+              "PL03-F01",
+              "PL03-F02",
+              "PL03-F03",
+              "PL03-F04",
+              "PL03-F05",
+              "PL03-F06",
+              "PL03-F07",
+              "PL03-F08",
+              "PL03-F09",
+              "PL03-F10",
+              "PL03-F11",
+              "PL03-F12"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-013",
+              "R05-US-014",
+              "R05-US-038"
+            ],
+            "operation_ids": [
+              "R05-PL03-READ",
+              "R05-PL03-UPDATE",
+              "R05-PL03-STATUS"
+            ],
+            "evidence_ids": [
+              "S01",
+              "S04",
+              "S06"
+            ],
+            "notes": "관리 홈과 프로필 미리보기의 범위"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL03-2",
+            "field_ids": [
+              "PL03-F13",
+              "PL03-F14",
+              "PL03-F15"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-024",
+              "R05-US-038",
+              "R05-US-045"
+            ],
+            "operation_ids": [
+              "R05-PL03-READ",
+              "R05-PL03-STATUS"
+            ],
+            "evidence_ids": [
+              "S04",
+              "S06"
+            ],
+            "notes": "연결된 서비스·관리 설정 상태·추천 구분"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL03-3",
+            "field_ids": [
+              "PL03-F16",
+              "PL03-F17",
+              "PL03-F18",
+              "PL03-F19",
+              "PL03-F20",
+              "PL03-F21"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-010",
+              "R05-US-021",
+              "R05-US-045"
+            ],
+            "operation_ids": [
+              "R05-PL03-UPDATE",
+              "R05-PL03-STATUS"
+            ],
+            "evidence_ids": [
+              "S05"
+            ],
+            "notes": "보컬 레슨 매칭 질문 6개"
+          }
+        ],
+        "checks": {
+          "field_existence": "프로필·제공 서비스·대표·매칭 질문·미리보기 화면을 관찰했다.",
+          "required_condition": "미선택 시 저장 비활성. 질문별 필수 충족·최소 선택 수는 미확인.",
+          "save_or_reflection": "기존 등록 목록과 고객용 미리보기에 같은 서비스명이 표시된다. 저장 응답·실제 검색 노출·요청 수신 미확인.",
+          "delegation_permission": "제3자 대행 허용 미확인."
+        }
+      }
     },
     {
       "cross_link_id": "R05-LINK-4",
       "platform_id": "PL04",
       "story_refs": [
         "R05-US-006",
-        "R05-US-039"
+        "R05-US-039",
+        "R05-US-009",
+        "R05-US-046"
       ],
       "object_refs": [
         "R05-PL04-O1",
@@ -5588,16 +6216,81 @@
         "R05-PL04-RESPOND"
       ],
       "evidence_refs": [
-        "R05-EV-09"
+        "R05-EV-09",
+        "R05-EV-DETAIL-PL04"
       ],
-      "observed_requirement": "분야·지역 안내 확인. 계정별 저장 결과 미확인"
+      "observed_requirement": "분야·지역 안내 확인. 계정별 저장 결과 미확인",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/prompie-db-research.json",
+        "status": "상세 관찰 자료 연결",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL04-1",
+            "field_ids": [
+              "PL04-F01",
+              "PL04-F02",
+              "PL04-F03"
+            ],
+            "story_ids": [
+              "R05-US-006",
+              "R05-US-009",
+              "R05-US-039",
+              "R05-US-046"
+            ],
+            "operation_ids": [
+              "R05-PL04-CREATE",
+              "R05-PL04-STATUS"
+            ],
+            "evidence_ids": [
+              "P01",
+              "P03",
+              "P04",
+              "P05",
+              "P06"
+            ],
+            "notes": "프로필 사진 및 소개 단계의 표시·전환 보고"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL04-2",
+            "field_ids": [
+              "PL04-F04",
+              "PL04-F05",
+              "PL04-F06",
+              "PL04-F07"
+            ],
+            "story_ids": [
+              "R05-US-006",
+              "R05-US-009",
+              "R05-US-039",
+              "R05-US-046"
+            ],
+            "operation_ids": [
+              "R05-PL04-CREATE"
+            ],
+            "evidence_ids": [
+              "P06"
+            ],
+            "notes": "경력 유형별 입력 및 필수 표시"
+          }
+        ],
+        "checks": {
+          "field_existence": "사진·소개·경력 등록 UI를 관찰했다.",
+          "required_condition": "고등학교 학력 필수 표시. 사진 업로드와 소개 50자 전환 조건은 사용자 보고. 실제 검증 규칙 미확인.",
+          "save_or_reflection": "3단계까지 화면을 확인했다. 최종 등록·저장·공개와 분야·지역 설정 결과 미확인.",
+          "delegation_permission": "프로필 등록 화면 진입과 별개로 제3자 대행 허용 미확인."
+        }
+      }
     },
     {
       "cross_link_id": "R05-LINK-5",
       "platform_id": "PL05",
       "story_refs": [
         "R05-US-022",
-        "R05-US-026"
+        "R05-US-026",
+        "R05-US-014",
+        "R05-US-024",
+        "R05-US-025",
+        "R05-US-047"
       ],
       "object_refs": [
         "R05-PL05-O1",
@@ -5618,9 +6311,89 @@
         "R05-EV-10",
         "R05-EV-11",
         "R05-EV-15",
-        "R05-EV-24"
+        "R05-EV-24",
+        "R05-EV-DETAIL-PL05"
       ],
-      "observed_requirement": "동일 공고 갱신을 뒷받침할 ID·시각 확인 필요 개인레슨 공지의 공개 검색 발췌에서 같은 글 반복 게시 대신 최신글 올리기를 안내한다. 신규 가입자의 로그인·글쓰기 대기, 인증 조건과 갱신 간격 수치는 미확인이다."
+      "observed_requirement": "동일 공고 갱신을 뒷받침할 ID·시각 확인 필요 개인레슨 공지의 공개 검색 발췌에서 같은 글 반복 게시 대신 최신글 올리기를 안내한다. 신규 가입자의 로그인·글쓰기 대기, 인증 조건과 갱신 간격 수치는 미확인이다.",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/mule-db-research.json",
+        "status": "목록·공지 관찰 추가",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL05-1",
+            "field_ids": [
+              "PL05-F01",
+              "PL05-F02",
+              "PL05-F03",
+              "PL05-F04",
+              "PL05-F05",
+              "PL05-F06",
+              "PL05-F07"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-024",
+              "R05-US-025",
+              "R05-US-047"
+            ],
+            "operation_ids": [
+              "R05-PL05-READ",
+              "R05-PL05-STATUS"
+            ],
+            "evidence_ids": [
+              "M01"
+            ],
+            "notes": "목록의 지역·분류·번호·표시 날짜"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL05-2",
+            "field_ids": [
+              "PL05-F08",
+              "PL05-F09"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-047"
+            ],
+            "operation_ids": [
+              "R05-PL05-READ"
+            ],
+            "evidence_ids": [
+              "M01"
+            ],
+            "notes": "검색 양식 조건"
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL05-3",
+            "field_ids": [
+              "PL05-F10",
+              "PL05-F11",
+              "PL05-F12"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-022",
+              "R05-US-024",
+              "R05-US-047"
+            ],
+            "operation_ids": [
+              "R05-PL05-READ",
+              "R05-PL05-RENEW"
+            ],
+            "evidence_ids": [
+              "M02",
+              "M03"
+            ],
+            "notes": "공지 상세 주소·시각과 반복 게시·문자 제한. 갱신 완료·간격은 미관측."
+          }
+        ],
+        "checks": {
+          "field_existence": "개인레슨 목록 및 검색 필터·글쓰기 버튼을 관찰했다.",
+          "required_condition": "작성 양식과 게시 권한·인증·대기 요건 미확인.",
+          "save_or_reflection": "목록·공지 상세만 확인. 공식 공지에서 반복 게시 대신 최신글 올리기 및 문자 제한을 관찰했다. 작성·갱신 결과 미확인.",
+          "delegation_permission": "제3자 대행 허용 미확인."
+        }
+      }
     },
     {
       "cross_link_id": "R05-LINK-6",
@@ -5762,7 +6535,7 @@
       "evidence_refs": [
         "R05-EV-01"
       ],
-      "detail": "F01~F29 및 E01~E05, 스토리 42개와 시스템 이벤트 7개의 참조를 대조."
+      "detail": "기본·조건부 피처 34개와 기존 후보 42개를 유지하고 후속 예외 행동 후보 5개를 연결했다."
     },
     {
       "criterion": "A2",
@@ -5804,9 +6577,14 @@
         "R05-EV-15",
         "R05-EV-12",
         "R05-EV-13",
-        "R05-EV-14"
+        "R05-EV-14",
+        "R05-EV-DETAIL-PL01",
+        "R05-EV-DETAIL-PL02",
+        "R05-EV-DETAIL-PL03",
+        "R05-EV-DETAIL-PL04",
+        "R05-EV-DETAIL-PL05"
       ],
-      "detail": "7개 플랫폼별 업무·데이터와 스토리 간 연결 확인."
+      "detail": "크몽·탈잉·숨고·프람피의 상세 조사와 뮬 목록·공지 관찰에서 상세 필드·근거·기존 업무·스토리 ID를 대조했다."
     },
     {
       "criterion": "A4",
