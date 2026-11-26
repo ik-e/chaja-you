@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R05-PL07-DB-DETAIL",
+  "kind": "document",
+  "status": "R05 후속 조사 · 레슨 목록 및 작성 진입 관찰",
+  "owner": "R05",
+  "task_ref": "TASK-057",
+  "platform_id": "PL07",
+  "platform": "힙합LE",
+  "checked_at": "2026-11-26",
+  "scope": "사용자 제공 PC 레슨 목록 및 쓰기 화면과, 기존 공개 상세·공식 안내를 대조했다. 입력 검증 및 저장·수정 결과는 미관측이다.",
+  "evidence": [
+    {
+      "id": "LE01",
+      "claim_status": "observed",
+      "source": "R05 제공 힙합LE PC 거래·장터 레슨 녹화(원본 비공개)",
+      "location": "00:00–00:11 레슨 목록·고정 공지·내가 쓴 글·쓰기",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "LE02",
+      "claim_status": "observed",
+      "source": "R05 제공 힙합LE PC 거래·장터 레슨 녹화(원본 비공개)",
+      "location": "00:11–00:15 쓰기 진입·게시글 설정·카테고리·제목·가격·편집기 상단",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "LE03",
+      "claim_status": "observed",
+      "source": "https://hiphople.com/market/33775811",
+      "location": "기존 공개 상세의 레슨 분류·가격·본문 및 하단 안내의 3일 문구",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "LE04",
+      "claim_status": "documented",
+      "source": "https://hiphople.com/join",
+      "location": "가입 안내의 로그인·글쓰기 제한",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "LE05",
+      "claim_status": "documented",
+      "source": "https://hiphople.com/notice/27728856",
+      "location": "거래·장터의 제한일 및 타인 계정 대리 사용 제한",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "LE06",
+      "claim_status": "unknown",
+      "source": "https://hiphople.com/market/28806084",
+      "location": "고정 공지 제목은 2일로 안내한다. 앞선 공개 조회에서 본문 접근이 제한됐다.",
+      "checked_at": "2026-11-26"
+    }
+  ],
+  "fields": [
+    {
+      "field_id": "PL07-F01",
+      "label": "목록 제목·작성자 표시·날짜",
+      "object": "거래·장터 레슨 게시물",
+      "format": "문자열·날짜",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "레슨 항목마다 표시된다. 계정 정보와 실제 표시명은 보관하지 않는다.",
+      "evidence_refs": [
+        "LE01"
+      ]
+    },
+    {
+      "field_id": "PL07-F02",
+      "label": "레슨 분류·카테고리",
+      "object": "거래·장터 레슨 게시물",
+      "format": "분류 필터 및 단일 선택",
+      "direction": [
+        "입력",
+        "노출"
+      ],
+      "visibility": "board_and_authenticated_editor",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "목록과 폼에서 레슨을 관찰했다. 레슨 목록에서 진입한 표본의 작성 폼에 레슨이 표시됐다. 필수 검증은 미확인.",
+      "evidence_refs": [
+        "LE01",
+        "LE02"
+      ]
+    },
+    {
+      "field_id": "PL07-F03",
+      "label": "썸네일",
+      "object": "거래·장터 레슨 게시물",
+      "format": "이미지 영역",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "이미지와 빈 이미지 영역이 모두 보인다. 본문 첨부와 썸네일의 매핑은 미확인.",
+      "evidence_refs": [
+        "LE01"
+      ]
+    },
+    {
+      "field_id": "PL07-F04",
+      "label": "가격",
+      "object": "거래·장터 레슨 게시물",
+      "format": "추가 입력칸·목록/상세 가격 표시",
+      "direction": [
+        "입력",
+        "노출"
+      ],
+      "visibility": "board_and_authenticated_editor",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "폼에 별도 가격 입력칸이 있고 값 비어 있음. 목록에 가격 표시가 있는 행과 없는 행을 모두 관찰했다. 가격 단위·유효 범위·필수 여부와 미표시 원인은 미확인.",
+      "evidence_refs": [
+        "LE01",
+        "LE02",
+        "LE03"
+      ]
+    },
+    {
+      "field_id": "PL07-F05",
+      "label": "제목",
+      "object": "거래·장터 레슨 게시물",
+      "format": "문자열",
+      "direction": [
+        "입력",
+        "노출"
+      ],
+      "visibility": "board_and_authenticated_editor",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "빈 작성 화면에 제목 입력칸이 보인다. 길이 제한, 필수 검사와 결과는 미확인.",
+      "evidence_refs": [
+        "LE02",
+        "LE03"
+      ]
+    },
+    {
+      "field_id": "PL07-F06",
+      "label": "엮인글 허용·알림·공개",
+      "object": "거래·장터 레슨 게시물",
+      "format": "게시글 설정 UI",
+      "direction": [
+        "입력"
+      ],
+      "visibility": "authenticated_editor",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "세 라벨을 확인했다. 공개가 강조된다. 설정별 실제 동작과 전체 계정의 기본값은 미확인.",
+      "evidence_refs": [
+        "LE02"
+      ]
+    },
+    {
+      "field_id": "PL07-F07",
+      "label": "본문",
+      "object": "거래·장터 레슨 게시물",
+      "format": "서식 편집기",
+      "direction": [
+        "입력",
+        "노출"
+      ],
+      "visibility": "board_and_authenticated_editor",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "편집기 도구 상단과 기존 공개 상세의 본문을 대조했다. 첨부 한도·등록 버튼·저장 형식은 녹화에 확인되지 않는다.",
+      "evidence_refs": [
+        "LE02",
+        "LE03"
+      ]
+    },
+    {
+      "field_id": "PL07-F08",
+      "label": "공개 상세 주소",
+      "object": "거래·장터 레슨 게시물",
+      "format": "URL",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "화면 표시만 관찰. 별도 필수 검사 결과 미확인.",
+      "notes": "기존 상세 주소 경로의 숫자 값은 식별 후보. 작성·수정 후 유지와 고유 범위는 미확인.",
+      "evidence_refs": [
+        "LE03"
+      ]
+    }
+  ],
+  "authenticated_observations": [
+    {
+      "screen": "거래·장터 레슨 목록",
+      "observed": [
+        "레슨 분류와 글 제목·날짜·썸네일 영역을 확인했다.",
+        "가격 표시가 있는 행과 없는 행이 있다.",
+        "하단에 내가 쓴 글과 쓰기 버튼이 보인다.",
+        "게시 간격을 2일로 변경했다는 공지 제목이 고정돼 있다."
+      ],
+      "limits": "공지 본문의 적용 범위와 내가 쓴 글 목록은 미확인.",
+      "evidence_refs": [
+        "LE01",
+        "LE06"
+      ]
+    },
+    {
+      "screen": "레슨 쓰기",
+      "observed": [
+        "쓰기 화면으로 진입했다.",
+        "카테고리 레슨, 제목, 추가 입력 항목 가격, 게시글 설정, 본문 편집기 상단을 관찰했다.",
+        "필수항목 범례가 보이지만 가격에 개별 필수 표시를 확인하지 못했다."
+      ],
+      "limits": "실제 필수 검증과 등록·수정 결과는 미확인.",
+      "evidence_refs": [
+        "LE02"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "거래·장터",
+      "to": "레슨 분류 게시물",
+      "cardinality_candidate": "목록에 여러 레슨 게시물이 표시된다.",
+      "identity": "공개 상세 URL의 숫자 경로를 관찰했다. 작성 결과의 식별자 또는 관리 관계는 미확인.",
+      "evidence_refs": [
+        "LE01",
+        "LE03"
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "operation": "레슨 게시물 목록·상세 읽기",
+      "state_before_after": "레슨 목록을 확인했고 기존 공개 상세가 있다.",
+      "completion_evidence": "목록과 상세에 별도 가격 표시가 있는 사례를 확보했다.",
+      "evidence_refs": [
+        "LE01",
+        "LE03"
+      ]
+    },
+    {
+      "operation": "쓰기 화면 진입",
+      "state_before_after": "목록의 쓰기를 열면 레슨 카테고리와 빈 제목·가격 입력이 표시된다.",
+      "completion_evidence": "작성 화면은 관찰했다. 실제 게시 가능 여부·저장 성공·공개 반영은 미관측.",
+      "evidence_refs": [
+        "LE01",
+        "LE02"
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "scope": "신규 가입 대기·글쓰기·대행",
+      "condition": "공식 가입 안내와 계정별 기존 사용자 보고 간 차이가 있다. 이번 녹화에서 작성 화면 진입을 확인했다. 게시 가능 시점과 제3자 대행 허용은 미확인. 이용규칙은 타인 계정 사용과 대리 사용을 제한한다.",
+      "evidence_refs": [
+        "LE02",
+        "LE04",
+        "LE05"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "item": "현행 게시 간격과 가입 제한 해제 시점",
+      "reason": "고정 공지 제목 2일과 상세 하단 3일의 표시가 다르다. 화면 진입 시점은 계정의 최초 허용 시점을 입증하지 않는다.",
+      "recheck": "현행 공지 본문과 운영사 안내를 확인한다.",
+      "evidence_refs": [
+        "LE01",
+        "LE03",
+        "LE04",
+        "LE06"
+      ]
+    },
+    {
+      "item": "가격 필수·입력 형식·단위, 첨부 한도, 저장·수정·등록 결과",
+      "reason": "작성 화면 상단과 기존 상세만 관찰했다.",
+      "recheck": "공식 도움말이나 기존 작성자의 하단 화면·관리 이력으로 확인한다. 별도 승인 전 저장·등록 검증은 제외한다.",
+      "evidence_refs": [
+        "LE02",
+        "LE03"
+      ]
+    }
+  ],
+  "design_inputs": [
+    "가격 입력과 목록·상세 표시를 연결하되 미표시를 0 또는 선택 항목으로 해석하지 않는다.",
+    "게시글 공개 설정의 표시와 실제 공개 상태를 별도 근거로 관리한다."
+  ]
+}

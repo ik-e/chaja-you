@@ -5406,7 +5406,10 @@
       "story_candidates": [
         "R05-US-014",
         "R05-US-023",
-        "R05-US-040"
+        "R05-US-040",
+        "R05-US-008",
+        "R05-US-016",
+        "R05-US-020"
       ],
       "unknowns": [
         {
@@ -5734,6 +5737,15 @@
       "checked_at": "2026-11-26",
       "location": "fields, authenticated_observations, permissions",
       "scope": "홍보 게시판 목록과 기존 공개 상세의 근거를 연결한다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL07",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, authenticated_observations, permissions",
+      "scope": "목록·쓰기·기존 상세 및 운영 안내 근거를 연결한다."
     }
   ],
   "cross_links": [
@@ -6593,7 +6605,10 @@
       "story_refs": [
         "R05-US-014",
         "R05-US-023",
-        "R05-US-040"
+        "R05-US-040",
+        "R05-US-008",
+        "R05-US-016",
+        "R05-US-020"
       ],
       "object_refs": [
         "R05-PL07-O1",
@@ -6619,9 +6634,69 @@
         "R05-EV-20",
         "R05-EV-21",
         "R05-EV-22",
-        "R05-EV-23"
+        "R05-EV-23",
+        "R05-EV-DETAIL-PL07"
       ],
-      "observed_requirement": "별도 공개 가격 및 분류 관측. 가격 단위와 작성 필수 여부 미확인 신규 계정 대기와 게시 간격을 별도 조건으로 기록. 타인 계정 사용 제한 확인."
+      "observed_requirement": "별도 공개 가격 및 분류 관측. 가격 단위와 작성 필수 여부 미확인 신규 계정 대기와 게시 간격을 별도 조건으로 기록. 타인 계정 사용 제한 확인.",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json",
+        "status": "레슨 목록·쓰기 화면 및 기존 공개 상세 연결",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL07-1",
+            "field_ids": [
+              "PL07-F01",
+              "PL07-F02",
+              "PL07-F03",
+              "PL07-F04",
+              "PL07-F08"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-023",
+              "R05-US-040"
+            ],
+            "operation_ids": [
+              "R05-PL07-READ",
+              "R05-PL07-STATUS"
+            ],
+            "evidence_ids": [
+              "LE01",
+              "LE03"
+            ],
+            "notes": "레슨 목록 및 기존 공개 상세의 가격·식별 단서."
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL07-2",
+            "field_ids": [
+              "PL07-F02",
+              "PL07-F04",
+              "PL07-F05",
+              "PL07-F06",
+              "PL07-F07"
+            ],
+            "story_ids": [
+              "R05-US-008",
+              "R05-US-016",
+              "R05-US-020",
+              "R05-US-040"
+            ],
+            "operation_ids": [
+              "R05-PL07-CREATE"
+            ],
+            "evidence_ids": [
+              "LE02"
+            ],
+            "notes": "쓰기 진입과 별도 가격 입력을 관찰했다. 필수 검사 및 저장 결과는 미확인."
+          }
+        ],
+        "checks": {
+          "field_existence": "분류·제목·별도 가격·게시글 설정·편집기를 관찰했다.",
+          "required_condition": "쓰기 화면 접근 표본 확보. 가격 등 필수 검증·가입 제한은 미확인.",
+          "save_or_reflection": "기존 목록과 상세 노출 확인. 저장·수정·게시 결과 미확인.",
+          "delegation_permission": "타인 계정 대리 사용 제한. 외부 서비스 위임 허용은 미확인."
+        }
+      }
     }
   ],
   "uncertainties": [
