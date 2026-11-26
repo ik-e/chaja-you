@@ -60,7 +60,7 @@
     }
   ],
   "result": {
-    "summary": "F01~F29 및 조건부 E01~E05에서 사용자 스토리 42개와 연결된 시스템 이벤트 7개를 정리했다. 7개 플랫폼별 6개 업무를 기록했다. 원본 커밋 8c6888027289d45d99adf6e2fb3cff587ebe7081. R01의 범위·DB 통합 검토를 요청한다.",
+    "summary": "F01~F29 및 조건부 E01~E05에서 사용자 스토리 42개와 연결된 시스템 이벤트 7개를 정리했다. 7개 플랫폼별 6개 업무를 기록했다. 원본 커밋 8c6888027289d45d99adf6e2fb3cff587ebe7081. R01의 범위·DB 통합 검토를 요청한다. 힙합LE 가입 대기, 게시 간격 안내 불일치 및 타인 계정 사용 제한의 근거를 보완했다.",
     "artifact_commit": "8c6888027289d45d99adf6e2fb3cff587ebe7081",
     "artifact_path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
     "claims": [
@@ -79,6 +79,16 @@
         "evidence_ids": [
           "R05-057-DOC"
         ]
+      },
+      {
+        "id": "R05-057-C3",
+        "text": "힙합LE 공식 가입 안내는 5일 제한과 6일째 이용을 명시하고 이용규칙은 타인 계정 및 대리 사용을 제한한다. 공개 레슨 게시물과 고정 공지의 간격 문구는 서로 다르다.",
+        "status": "확인",
+        "evidence_ids": [
+          "R05-057-HLE-JOIN",
+          "R05-057-HLE-RULE",
+          "R05-057-HLE-MARKET"
+        ]
       }
     ],
     "evidence": [
@@ -87,6 +97,21 @@
         "label": "독립 조사 원본",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
         "commit": "8c6888027289d45d99adf6e2fb3cff587ebe7081"
+      },
+      {
+        "id": "R05-057-HLE-JOIN",
+        "label": "힙합LE 공식 가입 안내",
+        "url": "https://hiphople.com/join"
+      },
+      {
+        "id": "R05-057-HLE-RULE",
+        "label": "힙합LE 이용규칙",
+        "url": "https://hiphople.com/notice/27728856"
+      },
+      {
+        "id": "R05-057-HLE-MARKET",
+        "label": "거래·장터 레슨 게시물 하단 안내와 공지 제목",
+        "url": "https://hiphople.com/market/33775811"
       }
     ],
     "verification": [
@@ -128,7 +153,7 @@
     ],
     "uncertainties": [
       "운영사별 제3자 접근·대행 권한과 실제 작성·접수·수정 결과는 미확인.",
-      "뮬 게시판 403 및 힙합LE 변경이력 429로 현재 양식·빈도 제한은 미확인."
+      "뮬은 게시판 접근 제한으로 미확인이다. 힙합LE 신규 가입 제한의 실제 해제 시각, 거래·장터의 현행 게시 간격, 작성·수정 양식 및 완료 표시는 미확인이다."
     ],
     "decision_requests": [
       "탈잉의 승인 후 일정 등록·심사 취소를 어디까지 서비스가 지원할지 결정",
