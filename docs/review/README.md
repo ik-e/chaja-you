@@ -37,7 +37,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-055.json)
 
-진행 중 · 크몽·탈잉·프람피 상세 조사 연결 보완, 숨고 부분 조사 확보 및 나머지 플랫폼 후속 조사 필요
+진행 중 · 크몽·탈잉·프람피·뮬 상세 연결, 숨고 부분 조사 확보. 나머지 2개 플랫폼 및 전체 검토 잔여
 
 검증과 근거
 
@@ -48,6 +48,7 @@
 - A5 · inconclusive
 - [근거](../artifacts/planning/lesson-registration-20261126/R02/independent-result.json)
 - [근거](../artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json)
+- [근거](../artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json)
 
 남은 불확실성과 결정 요청
 
@@ -60,6 +61,9 @@
 - 프람피 신규 가입 전체 필수 조건·실제 저장·삭제·갱신 결과
 - 프람피 설명 분량 안내와 HTML 속성 불일치
 - 프람피 운영사 대행·자동화 업무별 허용
+- 뮬 최신글 올리기 간격·비용·실제 성공 조건
+- 뮬 이모지 규정 집행 및 장터 규정 레슨 적용 범위
+- 뮬 갱신 약5분 회상과 기존2~3분 근거의 조건 차이
 - 심사 취소·재개 지원 범위
 - 대행 허용 확인 방법
 

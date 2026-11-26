@@ -1,0 +1,680 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-MULE-CONFIRMATION",
+  "kind": "document",
+  "status": "관찰 범위 조사 완료 · 미확인 잔여",
+  "owner": "R02",
+  "task_ref": "TASK-055",
+  "updated_at": "2026-11-26",
+  "inputs": [
+    "현재 대화의 사용자 문답·공개 글 예시",
+    "뮬 개별 작성·수정 화면 및 공식 문서"
+  ],
+  "authorization_boundary": {
+    "user_request": "브라우저로 확인 가능한 항목 직접 조사·검증 후 GitHub 게시 요청",
+    "project_scope": "기존 실행 제한 유지. 개별 화면 조회는 제품 지원·운영사 대행 허용의 확정이 아님",
+    "actions_performed": [
+      "새 글·수정 양식 열람",
+      "미디어 삽입 창 열람",
+      "공식 약관·공지·광고안내 확인"
+    ],
+    "actions_not_performed": [
+      "입력·업로드·저장·약관 동의",
+      "최신글로 올리기·삭제 실행",
+      "프리미엄 등록·결제·포인트 사용",
+      "고객 연락·개인정보 수집"
+    ]
+  },
+  "output": {
+    "summary": "제목·본문이 중심인 개인레슨 게시글에 구분·지역·주소·수강료·외부 링크 등 구조화 항목이 함께 있다. 최초 본문 변환 약10분보다 매일 글을 찾아 최신글로 올리는 약5분 회상·누락 경험이 반복 관리 부담의 근거다. 문의 증가 효과는 확인하지 못했다.",
+    "fields": [
+      {
+        "field_id": "MU-F01",
+        "label": "구분",
+        "format": "enum",
+        "required": true,
+        "constraints": {
+          "values": [
+            "기타레슨",
+            "베이스레슨",
+            "드럼레슨",
+            "이론/작편곡",
+            "보컬레슨",
+            "음향/믹싱/미디",
+            "건반/피아노",
+            "교환레슨",
+            "그외"
+          ],
+          "required_basis": "별표·필수선택 안내"
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F02",
+        "label": "지역",
+        "format": "enum",
+        "required": "unknown",
+        "constraints": {
+          "default": "무관",
+          "values": [
+            "무관",
+            "서울",
+            "광주",
+            "대구",
+            "대전",
+            "부산",
+            "울산",
+            "인천",
+            "경기",
+            "강원",
+            "경남",
+            "경북",
+            "전남",
+            "전북",
+            "충남",
+            "충북",
+            "제주"
+          ]
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F03",
+        "label": "주소",
+        "format": "address",
+        "required": "unknown",
+        "constraints": {
+          "control": "주소검색",
+          "placeholder": "등록 시 지도에 표시",
+          "public_post": "지역과 주소가 별도 노출됨",
+          "detail_options": "미확인"
+        },
+        "screen_location": "글 작성하기·공개 글",
+        "evidence_ids": [
+          "MU-FORM",
+          "MU-POST"
+        ]
+      },
+      {
+        "field_id": "MU-F04",
+        "label": "홈페이지",
+        "format": "url",
+        "required": "unknown",
+        "constraints": {
+          "guidance": "http://를 포함한 전체 경로",
+          "html_maxlength": null,
+          "server_limit": "미확인"
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F05",
+        "label": "전화번호",
+        "format": "tel",
+        "required": "unknown",
+        "constraints": {
+          "guidance": "전용 입력란에 등록하면 검색엔진 검색 방지·암호화한다는 사이트 안내",
+          "public_control": "연락처 보기",
+          "actual_protection": "암호화 방식·검색엔진 비노출 효과 미검증",
+          "html_maxlength": null
+        },
+        "screen_location": "글 작성하기·공개 글",
+        "evidence_ids": [
+          "MU-FORM",
+          "MU-POST"
+        ]
+      },
+      {
+        "field_id": "MU-F06",
+        "label": "팩스",
+        "format": "tel",
+        "required": "unknown",
+        "constraints": {
+          "html_maxlength": null,
+          "server_limit": "미확인"
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F07",
+        "label": "수강료",
+        "format": "number_krw",
+        "required": "unknown",
+        "constraints": {
+          "html_min": 0,
+          "html_step": 1000,
+          "html_max": null,
+          "semantic_unit": "수업 1회·시간당·월 기준 중 어느 단위인지 전용 필드에는 명시 미확인",
+          "body_relation": "예시 본문에는 복수 시간·금액 조건이 자유 텍스트로 존재"
+        },
+        "screen_location": "글 작성하기·공개 글",
+        "evidence_ids": [
+          "MU-FORM",
+          "MU-POST"
+        ]
+      },
+      {
+        "field_id": "MU-F08",
+        "label": "메인사진",
+        "format": "image",
+        "required": "unknown",
+        "constraints": {
+          "control": "파일 선택",
+          "guidance": "프리미엄·메인화면에만 노출, 본문이미지는 에디터에 삽입",
+          "limits": "미확인"
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F09",
+        "label": "사운드클라우드",
+        "format": "url",
+        "required": "unknown",
+        "constraints": {
+          "placeholder": "https://soundcloud.com/xxx/xyz 형태의 전체 경로",
+          "html_maxlength": null
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F10",
+        "label": "제목",
+        "format": "text",
+        "required": true,
+        "constraints": {
+          "required_basis": "별표 표시",
+          "html_required": false,
+          "html_maxlength": null,
+          "server_length_limit": "미확인"
+        },
+        "screen_location": "글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F11",
+        "label": "본문",
+        "format": "rich_text",
+        "required": "unknown",
+        "constraints": {
+          "structure": "자유형식; 소개·경력·수업방식·복수 시간/가격·미디어 등을 작성 가능",
+          "tools": [
+            "사진",
+            "동영상",
+            "링크",
+            "표",
+            "목록",
+            "정렬",
+            "색·크기·강조",
+            "실행취소·재실행"
+          ],
+          "contenteditable": true,
+          "length_limit": "미확인"
+        },
+        "screen_location": "글 작성하기·공개 글",
+        "evidence_ids": [
+          "MU-FORM",
+          "MU-POST"
+        ]
+      },
+      {
+        "field_id": "MU-F12",
+        "label": "본문 이미지",
+        "format": "image",
+        "required": "unknown",
+        "constraints": {
+          "max_mb_guidance": 30,
+          "count_dimensions_formats": "미확인"
+        },
+        "screen_location": "에디터 > 그림 삽입",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F13",
+        "label": "본문 동영상",
+        "format": "external_video_url",
+        "required": "unknown",
+        "constraints": {
+          "displayed_providers": [
+            "YouTube",
+            "Instagram",
+            "Vimeo"
+          ],
+          "file_upload": "해당 창은 URL 입력 방식",
+          "length_size_limits": "미확인"
+        },
+        "screen_location": "에디터 > 동영상 삽입",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F14",
+        "label": "약관동의",
+        "format": "consent",
+        "required": true,
+        "constraints": {
+          "new_post": "별표·약관 전문·동의 문구 표시",
+          "final_action": "저장 버튼",
+          "interaction": "동의 선택·제출 미실행",
+          "edit_requirement": "기존 수정에서 새 동의가 필요한지는 미확인"
+        },
+        "screen_location": "새 글 작성하기",
+        "evidence_ids": [
+          "MU-FORM"
+        ]
+      },
+      {
+        "field_id": "MU-F15",
+        "label": "게시글 식별·시간·통계",
+        "format": "visible_metadata",
+        "required": false,
+        "constraints": {
+          "observed": [
+            "공개 글 식별자·주소복사",
+            "작성자",
+            "작성일",
+            "마지막 수정일",
+            "조회·댓글·추천 수"
+          ],
+          "renew_effect": "끌어올리기 전후 식별자·작성일·정렬 상태 변화 미시험"
+        },
+        "screen_location": "공개 글",
+        "evidence_ids": [
+          "MU-POST"
+        ]
+      },
+      {
+        "field_id": "MU-F16",
+        "label": "최신글로 올리기·프리미엄 등록",
+        "format": "actions",
+        "required": false,
+        "constraints": {
+          "location": "자기 글 하단 프리미엄 기능",
+          "observed": [
+            "최신글로 올리기",
+            "프리미엄 등록"
+          ],
+          "cooldown_cost_duration": "미확인",
+          "action_execution": "클릭하지 않음"
+        },
+        "screen_location": "공개 글 하단",
+        "evidence_ids": [
+          "MU-POST"
+        ]
+      },
+      {
+        "field_id": "MU-F17",
+        "label": "수정·삭제",
+        "format": "actions",
+        "required": false,
+        "constraints": {
+          "observed": [
+            "수정",
+            "삭제"
+          ],
+          "edit_form": "기존 항목·본문이 들어 있는 수정 양식·저장 버튼 확인",
+          "delete_result_recovery": "미확인"
+        },
+        "screen_location": "공개 글 하단·수정 양식",
+        "evidence_ids": [
+          "MU-POST",
+          "MU-FORM"
+        ]
+      }
+    ],
+    "user_experience": [
+      {
+        "id": "MU-U01",
+        "topic": "publication",
+        "statement": "등록·수정 후 바로 공개됐음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U02",
+        "topic": "body_preparation",
+        "statement": "본문 작성이 가장 오래 걸렸으며 기존 모집 글을 복사해 뮬에 맞게 조금 다듬었음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U03",
+        "topic": "body_minutes",
+        "statement": "본문 다듬기 약10분 회상; 전체 등록 시간·실측값 아님",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U04",
+        "topic": "modification_frequency",
+        "statement": "등록 후 본문은 거의 수정하지 않았음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U05",
+        "topic": "renew_usage",
+        "statement": "최신글로 올리기를 매일 사용하는 편이었음. 깜빡하거나 번거로워 건너뛴 날도 있었음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U06",
+        "topic": "renew_steps",
+        "statement": "로그인 → 마이뮬 → 내글보기 → 본인 모집 글 조회 → 글 맨 아래 최신글로 올리기 선택 과정이 번거로웠음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U07",
+        "topic": "renew_minutes",
+        "statement": "접속부터 최신글 올리기 완료까지 약5분으로 회상. 버튼 한 번 처리시간이 아님",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U08",
+        "topic": "renew_errors",
+        "statement": "최신글 올리기 제한 안내나 실패 경험 없음. 기능에 제한이 없다는 뜻은 아님",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U09",
+        "topic": "skipped_effect",
+        "statement": "건너뛴 날의 노출·문의 차이는 확인하지 못했음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U10",
+        "topic": "media",
+        "statement": "사진·동영상을 수정하거나 표시 문제로 다시 작업한 경험 없음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U11",
+        "topic": "moderation",
+        "statement": "운영진의 글 삭제·수정 요구 경험 없음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U12",
+        "topic": "delete",
+        "statement": "직접 글 삭제 경험 없음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U13",
+        "topic": "lost_draft",
+        "statement": "저장 전 내용 유실 경험 없음. 자동저장·복구 기능 증거 아님",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U14",
+        "topic": "premium",
+        "statement": "유료 프리미엄 등록 한 번 경험. 홍보가 잘되기를 기대했음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U15",
+        "topic": "premium_effect",
+        "statement": "조회수는 늘었다고 회상하나 문의 증가를 크게 체감하지 못했음. 비교 기간·수치·인과 효과 미검증",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "id": "MU-U16",
+        "topic": "other_pain",
+        "statement": "이외 등록·관리 불편은 없었음",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      }
+    ],
+    "policies": [
+      {
+        "id": "MU-P01",
+        "finding": "개인레슨 공지는 같은 글을 반복해서 새로 올리지 말고 최신글로 올리기 기능을 사용하도록 안내한다.",
+        "evidence_ids": [
+          "MU-NOTICE"
+        ],
+        "limitation": "갱신 간격·횟수·비용·사용 가능 시점은 이 공지에서 확인하지 못함"
+      },
+      {
+        "id": "MU-P02",
+        "finding": "개인레슨 공지는 키보드로 입력 불가한 종류의 특수문자·이모지·이모티콘을 삭제 대상으로 안내한다.",
+        "evidence_ids": [
+          "MU-NOTICE"
+        ],
+        "conflict": "사용자 예시 글 본문에는 이모지가 표시되며 사용자도 삭제 요구 경험이 없다고 답함. 공지와 실제 노출의 차이를 보존; 허용 또는 정책 폐지로 해석하지 않음"
+      },
+      {
+        "id": "MU-P03",
+        "finding": "공식 약관 제20조는 사이트 내 무단 정보 수집을 금지하고, 하단 안내는 동의 없는 크롤링·스크래핑 등 자동수집을 허용하지 않는다고 명시한다.",
+        "evidence_ids": [
+          "MU-TERMS",
+          "MU-FOOTER"
+        ],
+        "implication": "브라우저에서 보인다는 사실과 등록·수정·갱신 대행 허용은 별개. 운영사 업무별 허용 근거 확보 전 자동화 실행 확정 불가"
+      },
+      {
+        "id": "MU-P04",
+        "finding": "공식 약관 제13·14조는 정책·법률 위반 게시물에 대한 중단·삭제 가능성과 게시자의 권리·책임을 설명한다.",
+        "evidence_ids": [
+          "MU-TERMS"
+        ],
+        "limitation": "실제 삭제·이의제기·복원 절차는 미확인"
+      },
+      {
+        "id": "MU-P05",
+        "finding": "새 글 작성 양식에 게시판 자료실 통합약관과 악기장터 약관·삭제사유가 함께 표시된다. 통합약관에는 업로드 권리·책임과 보존 무보장이 있다.",
+        "evidence_ids": [
+          "MU-FORM"
+        ],
+        "scope_caution": "악기장터의 대리 매물 금지·24시간 삭제 제한·판매완료 수정 제한을 개인레슨 규정으로 자동 적용하지 않음. 해당 레슨 적용 범위는 미확인"
+      },
+      {
+        "id": "MU-P06",
+        "finding": "글 하단에 프리미엄 등록 기능이 있으나 공식 광고안내 페이지에는 문의 경로만 표시되고 가격·기간을 확보하지 못했다.",
+        "evidence_ids": [
+          "MU-POST",
+          "MU-COMMERCIAL"
+        ],
+        "limitation": "유료 등록·포인트 소비·갱신을 실행하지 않음. 프리미엄이 효과를 보장한다는 근거 없음"
+      },
+      {
+        "id": "MU-P07",
+        "finding": "즉시 공개는 사용자의 경험이며 현재 읽은 약관·공지에서 모든 글의 즉시 공개나 사전 심사 부재를 보장하는 규정은 확보하지 못했다.",
+        "evidence_ids": [
+          "MU-USER",
+          "MU-TERMS",
+          "MU-NOTICE"
+        ]
+      }
+    ],
+    "design_implications": [
+      {
+        "type": "inference",
+        "text": "본문 자유형식과 별도 가격·지역 값을 함께 관리해야 한다. 본문에 여러 수업 조건이 있다는 사실을 별도 패키지 객체 지원으로 해석하지 않음",
+        "evidence_ids": [
+          "MU-FORM",
+          "MU-POST"
+        ]
+      },
+      {
+        "type": "inference",
+        "text": "기존 글 수정과 최신글 올리기는 목적과 외부 효과가 다른 업무다. 끌어올리기를 삭제·재등록으로 대체하지 않는 설계 근거",
+        "evidence_ids": [
+          "MU-POST",
+          "MU-NOTICE"
+        ]
+      },
+      {
+        "type": "user_pain_evidence",
+        "text": "매일 로그인 후 자기 글을 찾아 하단 기능까지 이동하는 과정이 반복 부담. 일부 누락 경험이 있으나 상시 감시·자동 실행의 범위 채택 및 문의 효과는 별도 판단",
+        "evidence_ids": [
+          "MU-USER"
+        ]
+      },
+      {
+        "type": "conflicting_baseline",
+        "text": "기획안의 약2~3분과 이번 약5분은 조건·측정 범위가 일치하는지 미확인. 기존 기획 문서나 사람 입력을 덮어쓰지 않고 추가 회상으로 병기",
+        "evidence_ids": [
+          "MU-BASELINE",
+          "MU-USER"
+        ]
+      }
+    ],
+    "unknowns": [
+      "신규 가입·글쓰기 인증·회원등급 조건",
+      "제목·본문·URL 서버 길이 제한과 오류 문구",
+      "메인사진 제약·본문 이미지 전체 형식·개수·해상도 제한",
+      "수강료 서버 경계값과 정확한 단위·필수 여부",
+      "최신글 올리기 간격·횟수·비용·전후 식별자/작성일/조회수 유지·성공 표시",
+      "프리미엄 가격·기간·결제 조건·자동 연장·해지와 갱신 관계",
+      "삭제·운영중지·복원·제재 대응의 실제 절차",
+      "레슨 본문 이모지 규정의 실제 적용 범위",
+      "악기장터 대리 게시 금지 등의 개인레슨 적용 범위",
+      "대행·자동화에 대한 운영사 업무별 허용",
+      "5분 회상의 재현성 및 기존 2~3분 기획 근거와의 조건 차이",
+      "갱신·프리미엄의 문의/성사 효과와 실제 절감 가능 시간"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "MU-FORM",
+      "type": "readonly_browser",
+      "date": "2026-11-26",
+      "url": "https://www.mule.co.kr/bbs/info/lesson?v=w&",
+      "location": "개인레슨 글 작성하기·그림 삽입·동영상 삽입·기존 글 수정 양식",
+      "limitation": "기존 로그인 세션에서 개별 양식을 열람. 입력·저장·약관 동의·업로드 없음; HTML 속성은 서버 검증이 아님"
+    },
+    {
+      "id": "MU-POST",
+      "type": "readonly_browser",
+      "date": "2026-11-26",
+      "location": "사용자가 현재 대화에서 제공한 공개 레슨 글",
+      "limitation": "제목·지역·주소·연락처 보호 표시·수강료·본문·통계·수정일·관리 버튼 확인. 식별 가능한 게시글 URL·작성자·연락처·주소·원문 값은 공개 저장소에서 생략"
+    },
+    {
+      "id": "MU-USER",
+      "type": "user_recollection",
+      "date": "2026-11-26",
+      "location": "현재 대화의 뮬 순차 문답",
+      "limitation": "한 사용자의 과거 경험 및 시간·효과 회상. 실측이나 전체 사용자 대표 통계가 아님"
+    },
+    {
+      "id": "MU-NOTICE",
+      "type": "official_notice",
+      "date": "2026-11-26",
+      "url": "https://www.mule.co.kr/bbs/info/lesson?idx=53701953&v=v",
+      "location": "개인레슨 게시판 공지사항, 작성 2019-10-30·표시된 마지막 수정 2023-05-11",
+      "limitation": "현재 게시 중인 공식 공지. 실제 제재 집행·적용 조건을 실험하지 않음"
+    },
+    {
+      "id": "MU-TERMS",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://www.mule.co.kr/page/policy",
+      "location": "이용약관 제13·14·20조, 부칙 2026-04-01 개정 표시"
+    },
+    {
+      "id": "MU-FOOTER",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://www.mule.co.kr/page/introduce",
+      "location": "사이트소개 하단의 자동수집 금지 안내"
+    },
+    {
+      "id": "MU-COMMERCIAL",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://www.mule.co.kr/page/commercial",
+      "location": "광고안내",
+      "limitation": "문의 경로만 확인. 프리미엄 가격·기간·갱신 비용 상세 없음"
+    },
+    {
+      "id": "MU-BASELINE",
+      "type": "existing_proposal",
+      "date": "2026-11-26",
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.md",
+      "location": "기존 사용자 근거 표의 공고 갱신 약2~3분",
+      "limitation": "기존 기획 기록; 이번 약5분 회상과 측정 범위·조건 일치 미확인"
+    }
+  ],
+  "verification": [
+    {
+      "criterion": "직접 화면·공식 정책·회상·추론 구분",
+      "verdict": "pass",
+      "detail": "항목별 근거 ID·위치 및 미확인 명시; 저장 성공·허용 확정으로 확대하지 않음"
+    },
+    {
+      "criterion": "반복 부담 및 효과의 근거 범위",
+      "verdict": "pass",
+      "detail": "명목상 매일 사용하나 건너뛴 날 있음, 약5분은 접속 포함 회상. 효과 미확인·프리미엄 조회 증가 회상과 문의 체감 차이 보존"
+    },
+    {
+      "criterion": "정책 충돌 및 적용 범위",
+      "verdict": "pass",
+      "detail": "이모지 공지와 노출 충돌, 장터 규정과 레슨 범위 구분, 자동수집 금지 반영"
+    },
+    {
+      "criterion": "모든 동작·제약 실증",
+      "verdict": "inconclusive",
+      "detail": "갱신·결제·삭제·서버 경계값 미시험. 미확인 목록 보존"
+    },
+    {
+      "criterion": "JSON·ID·상세 포인터·공개 범위 검사",
+      "verdict": "pass",
+      "detail": "근거 참조 및17개 상세 포인터 통과. 전화번호·이메일·개인 게시물 식별자·주소·비공개 링크 미포함 검사와 내용 검토"
+    },
+    {
+      "criterion": "생성 문서·공통 참조 정합성",
+      "verdict": "pass",
+      "detail": "project_docs.py --check 45 projections current, 전체 스토리/필드/업무/객체 참조 검사 및 git diff --check 통과"
+    }
+  ]
+}

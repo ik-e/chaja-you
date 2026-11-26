@@ -60,11 +60,12 @@
     }
   ],
   "result": {
-    "summary": "진행 중 · 크몽·탈잉·프람피 상세 조사 연결 보완, 숨고 부분 조사 확보 및 나머지 플랫폼 후속 조사 필요",
+    "summary": "진행 중 · 크몽·탈잉·프람피·뮬 상세 연결, 숨고 부분 조사 확보. 나머지 2개 플랫폼 및 전체 검토 잔여",
     "artifact_refs": [
       "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
       "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json",
-      "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json"
+      "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json",
+      "docs/artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json"
     ],
     "uncertainties": [
       "촬영 화면의 조건은 해당 레슨 카테고리·당시 UI 범위",
@@ -75,13 +76,16 @@
       "대행·자동화 운영사 허용 범위",
       "프람피 신규 가입 전체 필수 조건·실제 저장·삭제·갱신 결과",
       "프람피 설명 분량 안내와 HTML 속성 불일치",
-      "프람피 운영사 대행·자동화 업무별 허용"
+      "프람피 운영사 대행·자동화 업무별 허용",
+      "뮬 최신글 올리기 간격·비용·실제 성공 조건",
+      "뮬 이모지 규정 집행 및 장터 규정 레슨 적용 범위",
+      "뮬 갱신 약5분 회상과 기존2~3분 근거의 조건 차이"
     ],
     "decision_requests": [
       "심사 취소·재개 지원 범위",
       "대행 허용 확인 방법"
     ],
-    "basis_commit": "1917288",
+    "basis_commit": "6d41317",
     "evidence": [
       {
         "id": "E-R02-055",
@@ -90,12 +94,16 @@
       {
         "id": "E-R02-055-PROMPIE",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json"
+      },
+      {
+        "id": "E-R02-055-MULE",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json"
       }
     ],
     "claims": [
       {
         "id": "C-R02-055",
-        "text": "진행 중 · 크몽·탈잉·프람피 상세 조사 연결 보완, 숨고 부분 조사 확보 및 나머지 플랫폼 후속 조사 필요",
+        "text": "진행 중 · 크몽·탈잉·프람피·뮬 상세 연결, 숨고 부분 조사 확보. 나머지 2개 플랫폼 및 전체 검토 잔여",
         "status": "진행 중",
         "evidence_ids": [
           "E-R02-055"
@@ -108,6 +116,14 @@
         "evidence_ids": [
           "E-R02-055-PROMPIE"
         ]
+      },
+      {
+        "id": "C-R02-055-MULE",
+        "text": "뮬 17개 필드 묶음·16개 사용자 경험·7개 정책 확인과 갱신 스토리 연결. 갱신 조건·자동화 허용·효과 미확인",
+        "status": "관찰 범위 확인",
+        "evidence_ids": [
+          "E-R02-055-MULE"
+        ]
       }
     ],
     "verification": [
@@ -117,34 +133,38 @@
         "reason": "전체 피처 연결은 있으나 전 스토리 세부 분기·완전성 검토 잔여",
         "evidence_ids": [
           "E-R02-055",
-          "E-R02-055-PROMPIE"
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE"
         ]
       },
       {
         "criterion": "A2",
         "verdict": "inconclusive",
-        "reason": "크몽·탈잉·프람피 상세 연결 보완. 숨고 기존 부분 조사와 나머지 3개 플랫폼의 세부 업무·필드 미확인 잔여",
+        "reason": "크몽·탈잉·프람피·뮬 상세 연결 보완. 숨고 부분 조사 및 나머지 2개 플랫폼 상세 검토 잔여",
         "evidence_ids": [
           "E-R02-055",
-          "E-R02-055-PROMPIE"
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE"
         ]
       },
       {
         "criterion": "A3",
         "verdict": "inconclusive",
-        "reason": "프람피 관리 단위·시간/가격 후보 2개와 필드·업무 연결 추가. 나머지 플랫폼 및 전체 스토리의 양방향 연결 잔여",
+        "reason": "뮬 갱신 스토리와 17개 필드 묶음·6개 업무 연결. 전체 플랫폼 양방향 검토 잔여",
         "evidence_ids": [
           "E-R02-055",
-          "E-R02-055-PROMPIE"
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE"
         ]
       },
       {
         "criterion": "A4",
         "verdict": "inconclusive",
-        "reason": "프람피는 항목별 화면·회상·공식 정책·추론·미확인을 구분. 전체 조사 원본의 일관성 검토는 잔여",
+        "reason": "뮬 화면·회상·공식 정책·추론 및 시간/이모지 차이를 구분. 전체 조사 정합성 검토 잔여",
         "evidence_ids": [
           "E-R02-055",
-          "E-R02-055-PROMPIE"
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE"
         ]
       },
       {
@@ -153,7 +173,8 @@
         "reason": "JSON·ID 참조 검사 수행. 전체 계약 수용 및 R01 검토 대기",
         "evidence_ids": [
           "E-R02-055",
-          "E-R02-055-PROMPIE"
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE"
         ]
       }
     ]
