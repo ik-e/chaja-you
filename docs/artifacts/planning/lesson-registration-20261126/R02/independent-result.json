@@ -1895,7 +1895,8 @@
             "R02-EV-ADD-PL01"
           ]
         }
-      ]
+      ],
+      "user_confirmation_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json"
     },
     {
       "platform_id": "PL02",
@@ -3570,6 +3571,13 @@
       "type": "official_public_document",
       "finding": "안내상 가입 후 5일 로그인·글쓰기 제한, 6일째 이용 가능. 현행 계정 적용은 재확인 필요. 거래·장터 레슨 게시물 사례 존재. 작성·수정 필드 미확인",
       "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-KMONG-USER-20261126",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json",
+      "type": "user_statement_and_provided_screenshots",
+      "observed_at": "2026-11-26",
+      "limitation": "해당 카테고리와 확인 시점 한정"
     }
   ],
   "cross_links": [],
