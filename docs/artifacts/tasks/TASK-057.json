@@ -60,8 +60,8 @@
     }
   ],
   "result": {
-    "summary": "F01~F29 및 조건부 E01~E05에서 사용자 스토리 42개와 연결된 시스템 이벤트 7개를 정리했다. 7개 플랫폼별 6개 업무를 기록했다. 원본 커밋 8c6888027289d45d99adf6e2fb3cff587ebe7081. R01의 범위·DB 통합 검토를 요청한다. 힙합LE 가입 대기, 게시 간격 안내 불일치 및 타인 계정 사용 제한의 근거를 보완했다. 뮬 개인레슨과 힙합플레이야 홍보의 가입·게시 제한 근거를 보완했다.",
-    "artifact_commit": "8c6888027289d45d99adf6e2fb3cff587ebe7081",
+    "summary": "기획 V1.2의 피처 34개와 7개 플랫폼의 42개 업무를 검토했다. 기존 스토리 42개에 후속 후보 5개를 더했다. 크몽·탈잉·숨고·프람피 상세와 뮬 목록·공지의 데이터·업무·스토리 연결 16개를 원본에 추가했다. 게시 제한의 기존 근거도 유지했다. R01 통합 검토 대기.",
+    "artifact_commit": "3b24d98dd0cb06246dcaa4e4937433d046dcabb6",
     "artifact_path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
     "claims": [
       {
@@ -107,6 +107,27 @@
           "R05-057-LIMIT-26",
           "R05-057-LIMIT-27"
         ]
+      },
+      {
+        "id": "R05-057-C6",
+        "text": "다섯 조사 문서의 데이터 필드·근거 ID에서 기존 업무와 스토리로 연결되는 참조 16개와 스토리 후보 5개를 추가했다. 필드 존재, 필수 조건, 저장·반영 결과, 대행 허용을 구분했다.",
+        "status": "확인",
+        "evidence_ids": [
+          "R05-057-DOC",
+          "R05-057-DETAIL-PL01",
+          "R05-057-DETAIL-PL02",
+          "R05-057-DETAIL-PL03",
+          "R05-057-DETAIL-PL04",
+          "R05-057-DETAIL-PL05"
+        ]
+      },
+      {
+        "id": "R05-057-C7",
+        "text": "뮬 사용자가 제공한 공식 공지 본문에서 반복 게시 대신 최신글 올리기 이용과 특수문자·이모지·이모티콘 제한을 확인했다. 현행 간격과 신규 가입자의 작성 권한은 미확인이다.",
+        "status": "확인",
+        "evidence_ids": [
+          "R05-057-DETAIL-PL05"
+        ]
       }
     ],
     "evidence": [
@@ -114,7 +135,7 @@
         "id": "R05-057-DOC",
         "label": "독립 조사 원본",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
-        "commit": "8c6888027289d45d99adf6e2fb3cff587ebe7081"
+        "commit": "3b24d98dd0cb06246dcaa4e4937433d046dcabb6"
       },
       {
         "id": "R05-057-HLE-JOIN",
@@ -150,11 +171,41 @@
         "id": "R05-057-LIMIT-27",
         "label": "게시판 운영방침 변경 안내, 글 도배에 관한 규칙",
         "url": "https://hiphopplaya.com/g2/bbs/board.php?alim_click=yes&bo_table=notice&wr_id=3825"
+      },
+      {
+        "id": "R05-057-DETAIL-PL01",
+        "label": "크몽 DB 상세 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/kmong-db-research.json",
+        "commit": "7ef509e3eab6c15371bd5fd80af81949e107bf47"
+      },
+      {
+        "id": "R05-057-DETAIL-PL02",
+        "label": "탈잉 DB 상세 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/taling-db-research.json",
+        "commit": "a44253587bd63d97abcd57400d0c2ca80dc64a60"
+      },
+      {
+        "id": "R05-057-DETAIL-PL03",
+        "label": "숨고 DB 상세 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/soomgo-db-research.json",
+        "commit": "5092c3a8cac8e24217a16679bf96194736a43dbe"
+      },
+      {
+        "id": "R05-057-DETAIL-PL04",
+        "label": "프람피 DB 상세 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/prompie-db-research.json",
+        "commit": "21f0c46ebaf2b849b4e22dbfd3523ea175295f37"
+      },
+      {
+        "id": "R05-057-DETAIL-PL05",
+        "label": "뮬 DB 상세 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/mule-db-research.json",
+        "commit": "3b24d98dd0cb06246dcaa4e4937433d046dcabb6"
       }
     ],
     "verification": [
       {
-        "criterion": "A1 F01~F29 및 E01~E05, 스토리 42개와 시스템 이벤트 7개의 참조를 대조.",
+        "criterion": "A1 피처 검토 유지 및 스토리 47개(후속 후보 5개 포함) 대조.",
         "verdict": "pass",
         "evidence_ids": [
           "R05-057-DOC"
@@ -168,10 +219,15 @@
         ]
       },
       {
-        "criterion": "A3 7개 플랫폼별 업무·데이터와 스토리 간 연결 확인.",
+        "criterion": "A3 상세 조사 링크 16개의 필드·근거·기존 업무·스토리 ID 검사 통과.",
         "verdict": "pass",
         "evidence_ids": [
-          "R05-057-DOC"
+          "R05-057-DOC",
+          "R05-057-DETAIL-PL01",
+          "R05-057-DETAIL-PL02",
+          "R05-057-DETAIL-PL03",
+          "R05-057-DETAIL-PL04",
+          "R05-057-DETAIL-PL05"
         ]
       },
       {
@@ -191,9 +247,11 @@
     ],
     "uncertainties": [
       "운영사별 제3자 접근·대행 권한과 실제 작성·접수·수정 결과는 미확인.",
-      "뮬은 게시판 접근 제한으로 미확인이다. 힙합LE 신규 가입 제한의 실제 해제 시각, 거래·장터의 현행 게시 간격, 작성·수정 양식 및 완료 표시는 미확인이다.",
+      "뮬은 사용자 제공 목록과 공식 공지 녹화로 보완했다. 작성 화면과 최신글 올리기의 현행 간격·결과는 미확인이다. 힙합LE 신규 가입 제한의 실제 해제 시각, 거래·장터의 현행 게시 간격, 작성·수정 양식 및 완료 표시는 미확인이다.",
       "개인레슨 공지 본문 접근 제한으로 가입 후 대기 기간, 정확한 작성 권한·갱신 간격·완료 증거 확인 필요.",
-      "현행 홍보 게시판 신규 가입 후 로그인·글쓰기 제한과 게시 횟수·간격, 작성자 권한 및 작성 양식 확인 필요."
+      "현행 홍보 게시판 신규 가입 후 로그인·글쓰기 제한과 게시 횟수·간격, 작성자 권한 및 작성 양식 확인 필요.",
+      "크몽 실제 접수·판매 중 수정과 탈잉 실제 접수·오픈 전환·일정 등록 증거 미확인.",
+      "숨고 질문별 최소 선택 수·저장과 요청 수신 결과, 프람피 최종 등록·공개·분야 및 지역 연결은 미확인."
     ],
     "decision_requests": [
       "탈잉의 승인 후 일정 등록·심사 취소를 어디까지 서비스가 지원할지 결정",
