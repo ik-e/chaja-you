@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R05-PL03-DB-DETAIL",
+  "kind": "document",
+  "status": "R05 후속 조사 · 고수 프로필 관리 홈 관찰",
+  "owner": "R05",
+  "task_ref": "TASK-057",
+  "platform_id": "PL03",
+  "platform": "숨고",
+  "checked_at": "2026-11-26",
+  "scope": "사용자가 제공한 로그인 후 PC 고수 프로필 관리 홈 영상을 검토했다. 실제 입력 양식, 공개 화면 및 작업 반환은 별도 증거가 필요하다.",
+  "evidence": [
+    {
+      "id": "S01",
+      "claim_status": "observed",
+      "source": "R05 제공 숨고 PC 고수 프로필 관리 홈 영상(원본 비공개)",
+      "location": "00:00–00:19 프로필 상단, 완성도, 서비스 범위, 전문성·인증·결제 항목",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "S02",
+      "claim_status": "documented",
+      "source": "https://help.soomgo.com/hc/ko/articles/360045393371",
+      "location": "제공 서비스 수정·추가·삭제, 서비스 최대 개수",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "S03",
+      "claim_status": "documented",
+      "source": "https://help.soomgo.com/hc/ko/articles/360036037131",
+      "location": "대표 서비스 등록 조건·수정 정책",
+      "checked_at": "2026-11-26"
+    }
+  ],
+  "fields": [
+    {
+      "field_id": "PL03-F01",
+      "label": "프로필 이미지",
+      "object": "고수 프로필",
+      "format": "이미지 표시",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "프로필 기본 정보 항목. 파일 규격과 공개 조건은 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F02",
+      "label": "한 줄 소개",
+      "object": "고수 프로필",
+      "format": "텍스트",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "관리 화면 상단에 소개가 표시된다. 입력 필수 표시나 글자 수 제한은 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F03",
+      "label": "활동 지역",
+      "object": "고수 프로필",
+      "format": "지역 표시",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "활동 가능 범위와 별도 행이다. 계정의 실제 주소는 기록하지 않는다.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F04",
+      "label": "활동 가능 범위",
+      "object": "고수 프로필",
+      "format": "거리 표시(km)",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "10km 이동 가능 표본. 입력 선택지와 범위 계산은 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F05",
+      "label": "대표 서비스",
+      "object": "고수 프로필",
+      "format": "제공 서비스 선택",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "보컬 레슨이 표시된 사례. 대표 없음 가능 여부와 서비스별 선택 조건은 별도 확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F06",
+      "label": "제공 서비스",
+      "object": "고수 프로필",
+      "format": "서비스명·추가 개수 요약",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "보컬 레슨 외 1개가 표시된다. 두 번째 서비스명과 개별 상태·식별자는 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F07",
+      "label": "서비스 상세 설명",
+      "object": "고수 프로필",
+      "format": "관리 항목",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "프로필 관리 항목으로 표시된다. 어떤 객체의 저장 값인지와 필수 표시·입력 구조는 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F08",
+      "label": "경력·학력, 사진 및 동영상, 포트폴리오, 질문답변",
+      "object": "고수 프로필",
+      "format": "관리 항목",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "전문성 관련 별도 항목으로 표시된다. 저장 양식과 공개 범위는 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F09",
+      "label": "프로필 완성도",
+      "object": "고수 프로필",
+      "format": "퍼센트·항목별 표시",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "관리 화면의 진행 표시. 심사 승인 또는 검색 노출의 근거로 해석하지 않는다.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F10",
+      "label": "리뷰 평점·리뷰수·고용수",
+      "object": "고수 프로필",
+      "format": "집계 수치",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "관리 화면 상단에 표시된다. 직접 입력 여부와 계산 규칙은 미확인.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F11",
+      "label": "본인인증·사업자등록증·공식 자격증 및 기타 서류",
+      "object": "고수 프로필",
+      "format": "인증·증빙 메뉴",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "메뉴 항목만 관찰했다. 계정별 검증 결과나 증빙 자료는 기록하지 않는다.",
+      "evidence_refs": [
+        "S01"
+      ]
+    },
+    {
+      "field_id": "PL03-F12",
+      "label": "결제 수단·숨고페이 정산정보·세금 계산서 발행",
+      "object": "고수 프로필",
+      "format": "결제·정산 메뉴",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "관리 홈 표시. 입력 필수 또는 공개 여부는 별도 확인.",
+      "notes": "메뉴 항목만 관찰했다. 가격 패키지나 서비스 저장 결과와 연결되는 근거는 없다.",
+      "evidence_refs": [
+        "S01"
+      ]
+    }
+  ],
+  "authenticated_observations": [
+    {
+      "screen": "고수 프로필 관리 홈",
+      "observed": [
+        "활동 지역, 활동 가능 범위, 대표 서비스, 제공 서비스가 별도 행으로 표시된다.",
+        "대표 서비스에 보컬 레슨, 제공 서비스에 보컬 레슨 외 1개가 표시된다.",
+        "프로필 상단에 내 소개 편집·미리보기 및 활동 집계가 표시된다.",
+        "증빙·결제·정산 관리 영역이 별도로 보인다."
+      ],
+      "limits": "제공 서비스 목록, 기존 레슨의 설정, 미리보기 화면, 저장 결과와 외부 식별자는 녹화에서 확인되지 않았다.",
+      "evidence_refs": [
+        "S01"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "고수 프로필",
+      "to": "제공 서비스",
+      "cardinality_candidate": "프로필 1건에 복수 제공 서비스. 영상에서 2개를 가리키는 요약, 도움말은 최대 20개를 안내.",
+      "identity": "개별 서비스 등록 식별자와 프로필 외부 식별자는 미확인.",
+      "evidence_refs": [
+        "S01",
+        "S02"
+      ]
+    },
+    {
+      "from": "고수 프로필",
+      "to": "대표 서비스",
+      "cardinality_candidate": "등록된 제공 서비스 중 대표 항목을 선택한다. 필수인증 서비스가 포함된 경우 후보 제한이 있다.",
+      "identity": "대표 서비스 이름은 표시값이며 내부 키는 미확인.",
+      "evidence_refs": [
+        "S01",
+        "S03"
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "operation": "제공 서비스 관리 및 결과 확인",
+      "state_before_after": "관리 홈에서 등록된 서비스 요약을 확인한다. 공식 문서는 제공 서비스 추가와 해당 서비스 요청 수신의 관계를 안내한다.",
+      "completion_evidence": "목록과 서비스별 설정 상태가 다음 확인 대상이다. 프로필 완성도·서비스 요약으로 고객 공개나 검색 노출을 판정하지 않는다.",
+      "evidence_refs": [
+        "S01",
+        "S02"
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "scope": "고수 모드 프로필 관리",
+      "condition": "영상에서 로그인 후 관리 홈을 확인했다. 음악 레슨 서비스 등록의 계정별 인증·검수 요건과 제3자 대행 허용은 미확인이다.",
+      "evidence_refs": [
+        "S01",
+        "S02",
+        "S03"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "item": "기존 보컬 레슨과 다른 서비스 이름, 서비스 상태와 식별자, 세부 설정의 입력·필수 표시",
+      "reason": "현재 영상에는 제공 서비스 요약만 보인다.",
+      "recheck": "기존 제공 서비스 목록과 기존 보컬 레슨의 읽기 전용 세부 화면을 확인한다."
+    },
+    {
+      "item": "공개 프로필 표시와 저장·반영 확인 방법",
+      "reason": "미리보기 버튼은 관찰했으나 고객 화면이나 변경 결과는 관찰하지 않았다.",
+      "recheck": "개인정보를 가린 기존 미리보기와 상태 표시를 대조한다."
+    }
+  ],
+  "design_inputs": [
+    "활동 지역과 이동 가능 범위를 별도 속성으로 검토한다.",
+    "프로필과 제공 서비스를 연결하고, 대표 서비스는 제공 서비스 가운데 선택한 참조로 검토한다.",
+    "관리 화면의 진행 상태와 공개 노출을 각각 관측한다."
+  ]
+}
