@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R03-STORY-REVIEW",
+  "kind": "document",
+  "status": "작성 전 · 빈 양식 (조사 결과 아님)",
+  "owner": "R03",
+  "title": "사용자 스토리 독립 도출 및 누락 검토 (R03)",
+  "task_ref": "TASK-059",
+  "work_contract_ref": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
+  "proposal_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+  "proposal_blob_sha": "d3cac078a8e0d1898e0e249e670327497c657b07",
+  "source_baseline": {
+    "commit": "51989df3d7ababce04aa819252e3be83a47b0167",
+    "scope": "작업 배정 시점; 후속 팀원 자료의 실제 참조 commit/blob을 evidence에 기록"
+  },
+  "feature_coverage": [
+    {
+      "feature_id": "F01",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F02",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F03",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F04",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F05",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F06",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F07",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F08",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F09",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F10",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F11",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F12",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F13",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F14",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F15",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F16",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F17",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F18",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F19",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F20",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F21",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F22",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F23",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F24",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F25",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F26",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F27",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F28",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "F29",
+      "scope": "base",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "E01",
+      "scope": "conditional",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "E02",
+      "scope": "conditional",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "E03",
+      "scope": "conditional",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "E04",
+      "scope": "conditional",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    },
+    {
+      "feature_id": "E05",
+      "scope": "conditional",
+      "status": "not_reviewed",
+      "story_refs": [],
+      "system_event_refs": [],
+      "reason": "미작성"
+    }
+  ],
+  "user_stories": [],
+  "supporting_system_events": [],
+  "evidence": [],
+  "comparison_findings": [],
+  "uncertainties": [],
+  "decision_requests": [],
+  "self_check": [
+    {
+      "criterion": "S1",
+      "verdict": "inconclusive",
+      "evidence_refs": [],
+      "note": "작성 전"
+    },
+    {
+      "criterion": "S2",
+      "verdict": "inconclusive",
+      "evidence_refs": [],
+      "note": "작성 전"
+    },
+    {
+      "criterion": "S3",
+      "verdict": "inconclusive",
+      "evidence_refs": [],
+      "note": "작성 전"
+    },
+    {
+      "criterion": "S4",
+      "verdict": "inconclusive",
+      "evidence_refs": [],
+      "note": "작성 전"
+    }
+  ],
+  "handoff": {
+    "reviewed_scope": [],
+    "unreviewed_scope": [
+      "F01~F29",
+      "E01~E05"
+    ],
+    "note": "독립 도출 후 기존 팀원 원본·통합 후보와 대조. 오늘 1차 인계, 수량/구조 검증만으로 완전성 확정 금지."
+  }
+}
