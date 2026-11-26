@@ -16,11 +16,13 @@
     "R01 지시에 따라 준비된 일곱 작업 패키지를 TASK-048~054로 배정한다. 실제 제품 시험·실서비스 허용 및 담당자 수신/공수는 별도 확인한다.",
     "R01이 IB-01~05 공통 구현 방향을 수용했다. 초기 공통 구현 경계는 공동 개발에 사용하되 담당자 확인이 필요한 세부 서명·실행 기술·공수 및 실제 제품 검증은 별도로 결정한다.",
     "R01이 PD-01~08 공통 물리 방향 수용 및 검증된 초기 공통 환경·기준선 공유와 WBS 재구성을 지시했다. 담당자별 세부 계약 및 실제 제품 검증·일정 확정은 별도.",
-    "R01 11/26: V1.2를 후속 설계 기준으로 사용하되 가설·조건부 확장·MVP·실제 지원/실행은 별도 판단. R02·R04·R05 각각 전체 사용자 스토리와 7개 플랫폼 독립 조사; R01 통합·서비스 범위 결정·DB 설계. INTENT-DESIGN-003 우선."
+    "R01 11/26: V1.2를 후속 설계 기준으로 사용하되 가설·조건부 확장·MVP·실제 지원/실행은 별도 판단. R02·R04·R05 각각 전체 사용자 스토리와 7개 플랫폼 독립 조사; R01 통합·서비스 범위 결정·DB 설계. INTENT-DESIGN-003 우선.",
+    "R01 11/26 오후: R03 TASK-059 사용자 스토리 독립 도출·누락 검토 추가 배정. 기존 3인 전체 플랫폼 조사와 R01 통합 책임·mock-only·이전 구현 보류 유지; 오후 1차 인계, 수신/착수 미확인."
   ],
   "priorities": [
     "TASK-055 R02 / TASK-056 R04 / TASK-057 R05: 각각 전체 F01~F29, E01~E05 조건부 및 PL01~PL07 전부 독립 조사. 공통 계약·독립 원본·근거/미확인 준수.",
-    "TASK-058 R01: 세 결과 비교·통합, 사용자 스토리 및 서비스 범위 결정 후 논리 DB·ERD·스키마 설계; 7개 수용 가능성, 기존 DB/API/코드 영향 및 API·프로토콜 입력 확인.",
+    "TASK-059 R03: 오후 사용자 스토리 독립 도출 및 정상·오류·예외·반복 분기·누락 검토. 별도 플랫폼 전수 조사 제외; 오늘 1차 인계, 미검토 근거 표시.",
+    "TASK-058 R01: 기존 세 결과와 R03 스토리 검토 비교·통합, 사용자 스토리 및 서비스 범위 결정 후 논리 DB·ERD·스키마 설계; 7개 수용 가능성, 기존 DB/API/코드 영향 및 API·프로토콜 입력 확인.",
     "기존 TASK-048~054 신규 구현 일시 보류, 상태·증거·미충족 의무 보존; 새 설계에 따라 영향/재개 판단. 12/8 mock MVP·1/4 최종 목표는 재평가 전 유지. 실제 플랫폼 로그인/등록/자동화 및 인증정보 수집 금지."
   ],
   "decisions_needed": [
@@ -43,7 +45,7 @@
       "evidence_needed": "운영사 허용, 실제 보안·가치·비용 및 수용 시험"
     }
   ],
-  "review_summary": "11/26 R01이 V1.2 기반 독립 사용자 스토리·7개 플랫폼 조사를 요청. TASK-055~058 배정 준비; 실제 조사 결과·수신·착수·서비스 범위 및 DB 확정은 미확인. 이전 11/25 구현·시험 결과는 해당 TASK/근거 원본 보존.",
+  "review_summary": "11/26 V1.2 기반 TASK-055~059 활성. R02 크몽 보완·추가 조사, R04/R05 조사 원본 main 반영(검토 중; 최종 수용·서비스 범위 확정 아님), R01 통합 초안은 승인 전. R03 오후 사용자 스토리 작업 배정 완료, 수신·착수 미확인. AI 병합 판단 오류 및 최소 영향 처리: [OPS-20261126-MERGE-01](../artifacts/state/merge-review-20261126.json). 담당자 원본·TASK·브랜치 유지, 기존 구현 보류·mock-only 유지.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -382,6 +384,12 @@
     },
     {
       "path": "docs/artifacts/tasks/TASK-058.json"
+    },
+    {
+      "path": "docs/artifacts/state/merge-review-20261126.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261126-04_merge-judgment-correction.md"
     }
   ],
   "submission_plan": {
@@ -482,6 +490,12 @@
       "authority": "human",
       "source_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
       "source_id": "HRESP-20261126-01"
+    },
+    {
+      "text": "R01 11/26 오후: R03 TASK-059 사용자 스토리 독립 도출·누락 검토 추가 배정. 기존 3인 전체 플랫폼 조사와 R01 통합 책임·mock-only·이전 구현 보류 유지; 오후 1차 인계, 수신/착수 미확인.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md",
+      "source_id": "HRESP-20261126-03"
     }
   ],
   "human_input": {
@@ -493,7 +507,8 @@
     "TASK-055",
     "TASK-056",
     "TASK-057",
-    "TASK-058"
+    "TASK-058",
+    "TASK-059"
   ],
   "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조); TASK-043~047 이전 단계 보존",
   "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",

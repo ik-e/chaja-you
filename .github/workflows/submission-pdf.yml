@@ -1,0 +1,40 @@
+name: submission-pdf
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/render_submission_pdfs.py'
+      - '.github/workflows/submission-pdf.yml'
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify canonical projections
+        run: |
+          python3 tools/project_docs.py --check
+          node docs/step2/submission-v1/check_examples.mjs
+      - name: Install distribution renderer packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc weasyprint graphviz fonts-noto-cjk poppler-utils python3-bs4 python3-pil
+      - name: Render and check four submission PDFs
+        run: /usr/bin/python3 tools/render_submission_pdfs.py
+      - name: Upload PDF set
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-pdf
+          path: submission-pdf/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload all page renders and contact sheets
+        uses: actions/upload-artifact@v4
+        with:
+          name: submission-preview
+          path: submission-preview/*.png
+          if-no-files-found: error
+          retention-days: 7
