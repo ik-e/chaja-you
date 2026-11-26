@@ -271,7 +271,25 @@
       "platform→field/object coverage and unresolved gaps",
       "existing design impact and API/protocol handoff",
       "instructor feedback A1~A4/D1~D4 trace; PostgreSQL target, SQLite migration/ownership/state/evidence verification design, future API inputs"
-    ]
+    ],
+    "user_story_scope_gate": {
+      "contract_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json#validation_contract",
+      "criteria_ids": [
+        "USV-01",
+        "USV-02",
+        "USV-03",
+        "USV-04",
+        "USV-05",
+        "USV-06",
+        "USV-07"
+      ],
+      "purpose": "R01 통합 검토에서 개별 SVO 사용자 행동의 완전성과 서비스 기능 범위를 확정한다.",
+      "method": "개별 SVO 행동 전수 도출 → 원자성/중복 정리 → 피처/생애주기/플랫폼/분기 검증 → 범위 검토와 R01 결정 → 사용자 흐름 → DB/API. 수량/ID coverage는 완전성 증명이 아니다.",
+      "trace": "개별 행동↔F01~F29/E01~E05 및 시스템 이벤트의 양방향 추적; 직접 피처가 없는 지원 행동은 기획 절/근거와 관련 피처를 명시하고 별도 범위 판정. 직접 연결과 관련 후보 구분.",
+      "entry_gate": "모든 적용 검토 완료 및 범위에 영향을 미치는 미결정 해소, R01 승인된 행동 집합 고정 전 신규 DB 설계 진입 보류. 7개 플랫폼 사실/데이터 조사는 병행. 기존 잠정 제출본과 mock 구현 변경 없음.",
+      "validation_result": "현재 63개 초기 후보에 대한 정적 연결 검사만 수행; USV-01~07 의미·범위 검토 미완료. R04 및 후속 조사 반영 필요.",
+      "independent_contract": "기존 A1~A5와 팀원별 독립 조사 양식, 범위, 소유권 및 실행 권한 변경 없음."
+    }
   },
   "acceptance": [
     "A1: 전체 F01~F29 검토 및 E01~E05 별도 조건부 검토. 정상/오류/예외/반복에서 가능한 단일 사용자 행동을 명세하고 관계·조건·입출력·관찰 결과·범위 후보/근거 표시. 미검토·내부 행동만 있는 항목도 사유 표시.",
