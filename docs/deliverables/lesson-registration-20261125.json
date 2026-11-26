@@ -20,13 +20,14 @@
         "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
         "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
         "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 3,
-      "status": "11/26 V1.2 기획 본문 재구성 및 1차 의견 보완; 2차 검토 후보, 범위/가치/실서비스 미확정",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "title": "기획서(요구사항 명세 포함)",
       "due": "2026-11-13",
-      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-02",
@@ -48,13 +49,14 @@
         "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.8-candidate.json",
         "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
         "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 4,
-      "status": "11/26 V0.8 실제 설계 TASK 및 관측 진척, 기존 일정 재산정/교육 계획; 2차 검토 후보",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "title": "WBS",
       "due": "2026-11-13",
-      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-03",
@@ -73,13 +75,14 @@
         "docs/step2/api-feedback-examples-20261126.json",
         "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
         "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 6,
-      "status": "11/26 V1.2 피처→API 후속 입력, 이전 V4.1 사례·1차 의견 보완; 새 계약/시험 전",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "title": "API 설계 문서",
       "due": "2026-11-20",
-      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-04",
@@ -94,14 +97,15 @@
         "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
         "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
         "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 6,
-      "status": "11/26 V1.2 논리 데이터 검토 입력·PostgreSQL 목표와 기존 SQLite 이관/1차 의견 보완; 최종 ERD/DDL/시험 전",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "external_snapshot": "https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/product/lesson-registration/src/lesson_registration/app/store/schema.sql",
       "title": "데이터베이스 스키마 설계서",
       "due": "2026-11-20",
-      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-05",

@@ -1,0 +1,407 @@
+{
+  "version": "submission-v1.0",
+  "status": "synthetic_contract_examples_not_runtime",
+  "note": "IDs/digests placeholders; confirmed and unknown are alternative outcomes. Actual API/DB not executed.",
+  "cases": [
+    {
+      "id": "price_conflict",
+      "method": "POST",
+      "path": "/v2/requests",
+      "status": 201,
+      "response_schema": "WorkRequest",
+      "response": {
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "lesson_id": "00000000-0000-4000-8000-000000000011",
+        "version_id": "00000000-0000-4000-8000-000000000021",
+        "profile_id": "00000000-0000-4000-8000-000000000041",
+        "operation": "create",
+        "revision": 1,
+        "draft_status": "blocked",
+        "preparation": {
+          "ready": false,
+          "values": {},
+          "facts": [
+            {
+              "fact_id": "price-a",
+              "path": "price",
+              "value": 250000,
+              "origin": {
+                "kind": "source",
+                "ref": "00000000-0000-4000-8000-000000000021",
+                "locator": "원문 첫 가격"
+              }
+            },
+            {
+              "fact_id": "price-b",
+              "path": "price",
+              "value": 300000,
+              "origin": {
+                "kind": "source",
+                "ref": "00000000-0000-4000-8000-000000000021",
+                "locator": "원문 두 번째 가격"
+              }
+            }
+          ],
+          "issues": [
+            {
+              "issue_id": "price-conflict",
+              "field": "/amount_vat_included_krw",
+              "code": "conflict",
+              "message": "25만원과 30만원 중 실제 VAT 포함 가격을 확인해 주세요.",
+              "blocking": true
+            }
+          ],
+          "provenance": []
+        },
+        "auth": {
+          "state": "none",
+          "generation": null,
+          "account_id": null,
+          "account_label": null
+        },
+        "object_id": null,
+        "review": null,
+        "job_id": null,
+        "job_state": null
+      },
+      "request": {
+        "lesson_id": "00000000-0000-4000-8000-000000000011",
+        "version_id": "00000000-0000-4000-8000-000000000021",
+        "profile_id": "00000000-0000-4000-8000-000000000041",
+        "operation": "create",
+        "object_id": null
+      },
+      "request_schema": "NewRequest"
+    },
+    {
+      "id": "model_blocked",
+      "method": "POST",
+      "path": "/v2/requests",
+      "status": 201,
+      "response_schema": "WorkRequest",
+      "response": {
+        "request_id": "00000000-0000-4000-8000-000000000062",
+        "lesson_id": "00000000-0000-4000-8000-000000000011",
+        "version_id": "00000000-0000-4000-8000-000000000021",
+        "profile_id": "00000000-0000-4000-8000-000000000041",
+        "operation": "create",
+        "revision": 1,
+        "draft_status": "blocked",
+        "preparation": {
+          "ready": false,
+          "values": {},
+          "facts": [],
+          "issues": [
+            {
+              "issue_id": "model-timeout",
+              "field": "/preparation",
+              "code": "model_unavailable",
+              "message": "30초 내 응답을 받지 못했습니다.",
+              "blocking": true
+            }
+          ],
+          "provenance": []
+        },
+        "auth": {
+          "state": "none",
+          "generation": null,
+          "account_id": null,
+          "account_label": null
+        },
+        "object_id": null,
+        "review": null,
+        "job_id": null,
+        "job_state": null
+      }
+    },
+    {
+      "id": "ready_review",
+      "method": "GET",
+      "path": "/v2/requests/{request_id}",
+      "status": 200,
+      "response_schema": "WorkRequest",
+      "response": {
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "lesson_id": "00000000-0000-4000-8000-000000000011",
+        "version_id": "00000000-0000-4000-8000-000000000021",
+        "profile_id": "00000000-0000-4000-8000-000000000041",
+        "operation": "create",
+        "revision": 3,
+        "draft_status": "ready",
+        "preparation": {
+          "ready": true,
+          "values": {
+            "amount_vat_included_krw": 250000,
+            "minutes_per_session": 90,
+            "sessions": 4
+          },
+          "facts": [
+            {
+              "fact_id": "price-confirmed",
+              "path": "price",
+              "value": 250000,
+              "origin": {
+                "kind": "answer",
+                "ref": "answer-price",
+                "locator": "강사 확인"
+              }
+            }
+          ],
+          "issues": [],
+          "provenance": [
+            {
+              "field": "/amount_vat_included_krw",
+              "kind": "user_choice",
+              "fact_refs": [
+                "price-confirmed"
+              ]
+            }
+          ]
+        },
+        "auth": {
+          "state": "verified",
+          "generation": 1,
+          "account_id": "00000000-0000-4000-8000-000000000051",
+          "account_label": "합성 계정 A"
+        },
+        "object_id": null,
+        "review": {
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "values": {
+            "amount_vat_included_krw": 250000,
+            "minutes_per_session": 90,
+            "sessions": 4
+          },
+          "asset_digests": [
+            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ],
+          "platform_id": "PL01",
+          "object_kind": "service_listing",
+          "operation": "create",
+          "account_id": "00000000-0000-4000-8000-000000000051",
+          "object_id": null,
+          "target_slot": "lesson11-slot1",
+          "before": null,
+          "notice": "모의 등록만 허용"
+        },
+        "job_id": null,
+        "job_state": null
+      }
+    },
+    {
+      "id": "start_accepted",
+      "method": "POST",
+      "path": "/v2/requests/{request_id}/start",
+      "status": 202,
+      "response_schema": "Job",
+      "response": {
+        "job_id": "00000000-0000-4000-8000-000000000081",
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "state": "active",
+        "progress": {
+          "step_index": 0,
+          "step_count": 7,
+          "confirmed_steps": [],
+          "current_step": "K1"
+        },
+        "result": null
+      },
+      "request": {
+        "expected_revision": 3,
+        "review_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "approved": true,
+        "request_key": "synthetic-start-1"
+      },
+      "request_schema": "Start"
+    },
+    {
+      "id": "same_start_replay",
+      "method": "POST",
+      "path": "/v2/requests/{request_id}/start",
+      "status": 200,
+      "response_schema": "Job",
+      "response": {
+        "job_id": "00000000-0000-4000-8000-000000000081",
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "state": "active",
+        "progress": {
+          "step_index": 0,
+          "step_count": 7,
+          "confirmed_steps": [],
+          "current_step": "K1"
+        },
+        "result": null
+      },
+      "request": {
+        "expected_revision": 3,
+        "review_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "approved": true,
+        "request_key": "synthetic-start-1"
+      },
+      "request_schema": "Start"
+    },
+    {
+      "id": "confirmed",
+      "method": "GET",
+      "path": "/v2/jobs/{job_id}",
+      "status": 200,
+      "response_schema": "Job",
+      "response": {
+        "job_id": "00000000-0000-4000-8000-000000000081",
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "state": "done",
+        "progress": {
+          "step_index": 7,
+          "step_count": 7,
+          "confirmed_steps": [
+            "K1",
+            "K2",
+            "K3",
+            "K4",
+            "K5",
+            "K6",
+            "K7"
+          ],
+          "current_step": null
+        },
+        "result": {
+          "goal_verdict": "confirmed",
+          "environment": "mock",
+          "effects": [
+            {
+              "effect_id": "00000000-0000-4000-8000-000000000091",
+              "operation_id": "K6",
+              "state": "confirmed",
+              "evidence_ids": [
+                "00000000-0000-4000-8000-000000000111"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "evidence_id": "00000000-0000-4000-8000-000000000111",
+              "observation_id": "00000000-0000-4000-8000-000000000101",
+              "kind": "goal",
+              "method": "independent_readback",
+              "outcome": "observed",
+              "observed_at": "2026-11-26T00:00:00Z",
+              "summary": "합성 receipt 대상/값/첨부 일치"
+            }
+          ],
+          "next_action": "모의 접수 확인; 심사 승인/공개 아님",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "unknown",
+      "method": "GET",
+      "path": "/v2/jobs/{job_id}",
+      "status": 200,
+      "response_schema": "Job",
+      "response": {
+        "job_id": "00000000-0000-4000-8000-000000000081",
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "state": "stopped",
+        "progress": {
+          "step_index": 5,
+          "step_count": 7,
+          "confirmed_steps": [
+            "K1",
+            "K2",
+            "K3",
+            "K4",
+            "K5"
+          ],
+          "current_step": "K6"
+        },
+        "result": {
+          "goal_verdict": "unknown",
+          "environment": "mock",
+          "effects": [
+            {
+              "effect_id": "00000000-0000-4000-8000-000000000091",
+              "operation_id": "K6",
+              "state": "unknown",
+              "evidence_ids": [
+                "00000000-0000-4000-8000-000000000111"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "evidence_id": "00000000-0000-4000-8000-000000000111",
+              "observation_id": "00000000-0000-4000-8000-000000000101",
+              "kind": "error",
+              "method": "independent_readback",
+              "outcome": "unavailable",
+              "observed_at": "2026-11-26T00:00:00Z",
+              "summary": "응답 유실 후 독립 조회 불가"
+            }
+          ],
+          "next_action": "확인 필요; 자동 재등록 없음",
+          "error": {
+            "code": "EFFECT_UNKNOWN",
+            "message": "접수 여부 확인 불가"
+          }
+        }
+      }
+    },
+    {
+      "id": "unauthenticated",
+      "method": "GET",
+      "path": "/v2/lessons/{lesson_id}",
+      "status": 401,
+      "response_schema": "Error",
+      "response": {
+        "code": "UNAUTHENTICATED",
+        "message": "서비스 로그인이 필요합니다."
+      }
+    },
+    {
+      "id": "foreign_owner",
+      "method": "GET",
+      "path": "/v2/jobs/{job_id}",
+      "status": 404,
+      "response_schema": "Error",
+      "response": {
+        "code": "NOT_FOUND",
+        "message": "작업을 찾을 수 없습니다."
+      }
+    },
+    {
+      "id": "model_storage_failed",
+      "method": "POST",
+      "path": "/v2/requests",
+      "status": 503,
+      "response_schema": "Error",
+      "response": {
+        "code": "RUNTIME_ERROR",
+        "message": "차단 초안을 저장하지 못했습니다."
+      }
+    },
+    {
+      "id": "fact_conflict",
+      "method": "PATCH",
+      "path": "/v2/requests/{request_id}",
+      "status": 422,
+      "response_schema": "Error",
+      "response": {
+        "code": "FACT_CONFLICT",
+        "message": "원본과 상충합니다."
+      }
+    },
+    {
+      "id": "stale_revision",
+      "method": "PATCH",
+      "path": "/v2/requests/{request_id}",
+      "status": 409,
+      "response_schema": "Error",
+      "response": {
+        "code": "STALE_REVISION",
+        "message": "다른 수정이 반영되었습니다.",
+        "current_revision": 4
+      }
+    }
+  ]
+}

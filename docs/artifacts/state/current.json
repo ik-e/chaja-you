@@ -49,40 +49,40 @@
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "11/25 V1.1·채택 mock 요구사항 반영 개정 문서 · 검토/최종 형식 미확인",
+      "status": "11/26 V1.2 및 S1.0 잠정 설계 프로젝션; 2차 검토 준비",
       "submission_status": "미확인",
-      "source": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json",
       "projection": "docs/step1/기획서_제출본.md",
       "completion_tasks": [],
       "revision_ref": "docs/step1/기획서_제출본.md",
-      "revision_date": "2026-11-25",
-      "note": "11/23 후보는 Git 이력. 실제 가치·제품 검증·공식 제출/접수는 별도."
+      "revision_date": "2026-11-26",
+      "note": "원본→제출용 프로젝션; 실제 TASK/제품 설계 변경 아님. 공식 제출·접수 미확인."
     },
     {
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "11/25 V0.6 후보 · R03 실제 조립 계획, R04 9/6 CI, R05 최신 30/37 독립 조합 CI; 갱신 잔여/일정·캡처 미확인",
+      "status": "11/26 S1.0 잠정 일정·실적·인수·교육 마일스톤; 캡처/2차 검토 전",
       "submission_status": "미확인",
-      "source": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json",
       "projection": "docs/step1/WBS_제출본.md",
       "completion_tasks": [],
       "target": "docs/step1/WBS_제출본.md",
       "revision_ref": "docs/step1/WBS_제출본.md",
-      "revision_date": "2026-11-25",
-      "note": "기존 최초/잔여 추정 보존. 담당자 갱신·가용성/공식 제출·캡처 미확인."
+      "revision_date": "2026-11-26",
+      "note": "원본→제출용 프로젝션; 실제 TASK/제품 설계 변경 아님. 공식 제출·접수 미확인."
     },
     {
       "id": "SUB-API-20261120",
       "due": "2026-11-20",
       "title": "API 설계 문서·DB 스키마 설계서",
-      "status": "11/25 S8/launcher 독립 시험 통과 · R03 실제 WS/STORE/slot/asset 조립 계획, 전체 연동 미확인",
+      "status": "11/26 S1.0 PostgreSQL·API 구체 잠정 설계; 실제 시험/2차 검토 전",
       "submission_status": "미확인",
-      "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json",
       "projection": "docs/step2/README.md",
       "completion_tasks": [],
-      "note": "PR #44 병합 완료; 세부 계약의 실제 조립/검증 및 공식 제출·접수 미확인.",
-      "revision_date": "2026-11-25"
+      "note": "원본→제출용 프로젝션; 실제 TASK/제품 설계 변경 아님. 공식 제출·접수 미확인.",
+      "revision_date": "2026-11-26"
     },
     {
       "id": "SUB-DLV05-20261127",
