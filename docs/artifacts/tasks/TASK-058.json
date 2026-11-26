@@ -54,7 +54,10 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/README.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/COMMON-NORMAL-FLOWS.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/PLATFORM-NORMAL-FLOWS.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -132,7 +135,7 @@
     }
   ],
   "result": {
-    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합.",
+    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음.",
     "claims": [
       {
         "id": "C058-01",
@@ -242,6 +245,16 @@
           "E058-14",
           "E058-09"
         ]
+      },
+      {
+        "id": "C058-13",
+        "text": "멘토 참고 자료 및 사용자 요청에 따라 V1.3 보존, V2.0 정상 흐름 우선 후보 작성. 24개 공통 시나리오/204단계, 플랫폼 332단계, 총 536개 고유 단계 ID, 44개 업무 대응, 125개 기존 행동 참조·14개 오류 상세 이월·5개 제외 유지. R02-US-036 별도 미결정 후보. 정적 참조 확인이며 실제 동작·의미 완전성·범위 승인 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-15",
+          "E058-16",
+          "E058-17"
+        ]
       }
     ],
     "evidence": [
@@ -332,6 +345,21 @@
         "id": "E058-14",
         "label": "144개 SVO 카테고리별 공동 검토 프로젝션",
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
+      },
+      {
+        "id": "E058-15",
+        "label": "V2.0 정상 흐름 검토 및 144개 기존 행동 추적",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/README.md"
+      },
+      {
+        "id": "E058-16",
+        "label": "V2.0 공통 정상 이용 흐름",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/COMMON-NORMAL-FLOWS.md"
+      },
+      {
+        "id": "E058-17",
+        "label": "V2.0 7개 플랫폼별 정상 이용 흐름",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/PLATFORM-NORMAL-FLOWS.md"
       }
     ],
     "verification": [
