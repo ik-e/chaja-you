@@ -4,7 +4,7 @@
   "kind": "document",
   "owner": "R01",
   "task_ref": "TASK-058",
-  "status": "사용자 스토리 최종 검토 v1.1 · 업무 44개 후보 · 권한/실제 완료 미확정",
+  "status": "7개 플랫폼 설계 포함 확정 · 업무 44개 범위/완료 기준 추천 · 개별 실행 미승인",
   "title": "플랫폼별 사용자 스토리와 제공 업무·완료 기준",
   "date": "2026-11-26",
   "source_refs": {
@@ -51,17 +51,47 @@
     "latest_review": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json",
       "relation": "same_revision"
+    },
+    "r05_example": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R05/vocal-lesson-input-examples.md",
+      "commit": "ae4c496ef91cce698db710080ba7d7483ccc4718",
+      "blob": "d159a171fd26f56289ba5bc52a58357f181f98e1"
+    },
+    "r04_function": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_기능명세서.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "afba519a3419343117161c159b24e5c9cb93e75e"
+    },
+    "r04_menu": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_메뉴구조도.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "fef2311854361f543b104f3e10f130e1ccb4ac76"
+    },
+    "r04_screen": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_메뉴화면구성.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "9da9422719c6d83767fc774f00172e5dadf24585"
+    },
+    "r04_ia": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_화면목록_IA.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "e1cd1def6731996d0291c6d02cb1658b0018cff0"
+    },
+    "r04_catalog": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_화면목록_screenCatalog.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "b7e2bfc3631fff556e8876a5b5988a4e15ba7070"
     }
   },
   "scope_policy": {
-    "core": "기본 제품 구현/검증 우선 후보, 실제 외부 제공은 플랫폼별 허용·실현 가능·완료 근거 확보와 승인 이후만",
-    "extension": "확장 구현/검증 후보, 이번 MVP 필수 아님; 별도 채택 및 근거 확보 전 미제공",
-    "hold": "해당 업무 추천 미제공; 공통 안내 행동만 제공, 실제 확인 후 변경 검토",
-    "local": "외부 수행/조회 대신 서비스 내부에서 확보된 입력·오류·지원 제한 안내만 제공",
-    "conditional": "명시된 특수 업무 별도 채택·대상·권한·가치·완료 근거 확인 전 미제공"
+    "core": "우선 구현/검증 후보. 설계 포함; 실제 외부 제공은 업무별 검증 및 승인 이후만.",
+    "extension": "후순위 구현/검증 후보. 설계에 반드시 포함; 첫 MVP 필수 아님. 실제 제공은 검증/승인 뒤.",
+    "hold": "설계 대상 업무의 현재 지원 보류/미추천. 미지원/미확인 표현·차단·안내를 설계에 포함; 실제 확인 후 변경 검토.",
+    "local": "설계 포함. 외부 수행/조회 대신 내부 준비·오류·제한 안내.",
+    "conditional": "설계 포함. 별도 채택·대상·권한·가치·완료 근거 확인 전 미제공."
   },
-  "execution_gate": "모든 외부 쓰기 및 실제 외부 업무 현재 mock-only. 권한, 정책, 인증 계정, 정확 대상, 최신 revision, 양 승인, 이전 효과, 완료 증거 기준 각각 충족 필요. 조사 채널 7개와 실제 지원 채널 혼동 금지.",
-  "mvp_recommendation": "단일 크몽 mock 기술 검증; 제품 MVP 최소 2개 채널 신규/추가 등록 및 대표 기존 수정·결과 확인. 크몽/숨고 우선 검토, 탈잉 오프라인 클래스도 기본 제품 후보. 실제 2개 선정 및 일정을 확정한 것은 아님.",
+  "execution_gate": "7개 모두 설계 대상으로 포함하되 실제 외부 쓰기 및 업무는 mock-only. 권한, 정책, 인증 계정, 정확 대상, 최신 revision, 양 승인, 이전 효과, 독립 완료 기준 각각 충족 필요.",
+  "mvp_recommendation": "7개 플랫폼 전체 설계. 단일 크몽 mock 기술 검증 및 최소 2개 첫 제품 가치 검증은 구현/검증 순서 추천. 모든 플랫폼의 실제 업무 범위와 구현 순서·일정은 별도 검토.",
   "common_completion": "서비스 업무 완료=요청한 구체 효과를 정확 객체·승인값·관측 근거로 확인한 때. 플랫폼 native 상태와 실제 모집 가능 독립 표시. 제출/저장 버튼·화면 존재, 미리보기, 과거 글 관측만으로 성공 금지. 실제 완료 근거 미확보 시 미확인.",
   "operation_rows": [
     {
@@ -81,11 +111,11 @@
         "IS-017",
         "IS-023"
       ],
-      "service_actions": "계정·중복 확인 → 승인된 모집 형태/제공 방식·상품 제목/설명·가격 패키지 제목/설명·옵션·이미지·요청사항 입력 및 검증 → 심사 요청 → 정확 상품/접수 상태 재조회",
+      "service_actions": "계정·기존 객체/효과 확인 → 모집 형태/제공 방식, 제목·설명·패키지 제목/설명·가격·시간·횟수·작업기간·수정횟수·장소 및 첨부를 승인 입력안에 맞춰 검증·입력 → 사용자 직접 필요한 동의/인증 확인 → 심사 요청 → 정확 상품/접수 상태 재조회",
       "completion_criterion": "동일 계정의 신규 상품 식별과 심사 접수/심사 진행 상태, 승인 입력안과 일치하는 저장값 확인",
       "user_goal_criterion": "심사 승인 및 실제 판매 가능 상태 별도 확인",
       "not_provided": "전문가 가입·인증·약관 동의·정산 설정 직접 수행; 심사 승인 대행·판매 보장·임시저장만으로 성공 금지",
-      "unverified": "상품 접수 ID·관리번호/공개 URL 대응, 작업 기간·수정 횟수 의미 및 실제 저장 검증 미확인",
+      "unverified": "기존 보컬 편집의 필수 표시·카운터 관찰. 단일 STANDARD 적용·실제 저장 및 최종 결제액, 작업 기간·수정 횟수의 공식 의미, 상세주소 공개/협의 조건, 접수 ID·공개 URL 대응 미확인",
       "source_claims": [
         {
           "source": "r02",
@@ -129,11 +159,19 @@
           "unknown_reason": "신규 저장·제출 직후 화면, 실제 접수 ID 미확인"
         }
       ],
-      "confirmation_source_refs": [],
+      "confirmation_source_refs": [
+        "r05_example"
+      ],
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 크몽 신규 레슨 상품의 심사 접수를 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL01-READ",
@@ -142,7 +180,7 @@
       "operation": "READ",
       "object": "레슨 서비스 상품",
       "scope": "core",
-      "story": "강사가 크몽 기존 레슨 상품을 조회하고 관리 대상으로 선택한다.",
+      "story": "강사가 크몽 기존 레슨 상품을 조회한다.",
       "common_story_refs": [
         "IS-089",
         "IS-014",
@@ -201,7 +239,14 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 크몽 기존 레슨 상품을 조회한다.",
+        "강사가 크몽 기존 레슨 상품을 관리 대상으로 선택한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL01-UPDATE",
@@ -273,7 +318,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 기존 크몽 상품의 허용된 모집 정보를 수정하도록 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL01-RENEW",
@@ -339,7 +390,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 크몽의 공고 갱신 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL01-STATUS",
@@ -407,7 +464,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 크몽 상품의 최신 상태 확인을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL01-RESPOND",
@@ -478,7 +541,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 크몽의 반려 또는 등록 오류에 대한 대응을 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-CREATE",
@@ -499,11 +568,11 @@
         "IS-017",
         "IS-023"
       ],
-      "service_actions": "튜터 계정 및 오프라인 클래스 확인 → 클래스명·대상·소개·회차별 커리큘럼·참여인원·시간당 단가/회당 시간/횟수·첨부 준비 → 직접 정산/필수 동의 선행 확인 → 승인 클래스 입력 및 심사 접수 → 동일 클래스 재조회",
+      "service_actions": "튜터 계정 및 오프라인 클래스 확인 → 실제 수업 시간·횟수·총액 및 회차별 구성·장소 공개 범위 확인, 계산 결과/편집 가능 항목 검증 → 직접 정산/필수 동의 선행 확인 → 승인 클래스 입력 및 심사 접수 → 동일 클래스 재조회",
       "completion_criterion": "동일 계정 신규 클래스 식별, 저장값 및 심사 접수/진행 확인",
       "user_goal_criterion": "심사 승인과 최초 일정/장소 등록 후 실제 신청 가능 별도 확인; 최초 오픈 일정 조건부",
       "not_provided": "온라인 클래스 동작 미확인으로 최초 지원 대상 아님; 정산·증빙·약관 대행 금지; 임의 시간 환산 금지",
-      "unverified": "실제 접수 ID·일정 필드/저장 효과 및 회사 승인 없는 자동 등록 제한에 대한 개별 대행 허용 미확인",
+      "unverified": "120분×6회·시간당 12,500원=150,000원은 기존 편집 화면 표시 사례. 실제 접수 ID·모집 오픈과 일정 등록 선후 관계·장소 노출 및 개별 대행 허용 미확인",
       "source_claims": [
         {
           "source": "r02",
@@ -551,12 +620,19 @@
         }
       ],
       "confirmation_source_refs": [
-        "taling"
+        "taling",
+        "r05_example"
       ],
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 탈잉 신규 오프라인 클래스의 심사 접수를 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-READ",
@@ -565,7 +641,7 @@
       "operation": "READ",
       "object": "튜터 프로필과 연결된 오프라인 클래스",
       "scope": "core",
-      "story": "강사가 탈잉의 기존 오프라인 클래스를 조회하고 관리 대상으로 선택한다.",
+      "story": "강사가 탈잉의 기존 오프라인 클래스를 조회한다.",
       "common_story_refs": [
         "IS-089",
         "IS-014",
@@ -626,7 +702,14 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 탈잉의 기존 오프라인 클래스를 조회한다.",
+        "강사가 탈잉의 기존 오프라인 클래스를 관리 대상으로 선택한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-UPDATE",
@@ -701,7 +784,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 탈잉 클래스의 수정 가능한 모집 정보 변경을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-RENEW",
@@ -769,7 +858,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 탈잉의 공고 갱신 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-STATUS",
@@ -841,7 +936,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 탈잉 클래스의 최신 심사 및 모집 상태 확인을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-RESPOND",
@@ -913,7 +1014,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 탈잉 클래스의 반려 또는 등록 오류 대응을 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-CREATE",
@@ -989,7 +1096,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 숨고 고수 프로필에 음악 레슨 제공 서비스 추가를 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-READ",
@@ -998,7 +1111,7 @@
       "operation": "READ",
       "object": "고수 프로필 및 연결 제공 서비스",
       "scope": "core",
-      "story": "강사가 숨고 고수 프로필과 레슨 제공 서비스를 조회하고 관리 대상으로 선택한다.",
+      "story": "강사가 숨고 고수 프로필과 레슨 제공 서비스를 조회한다.",
       "common_story_refs": [
         "IS-089",
         "IS-014",
@@ -1065,7 +1178,14 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 숨고 고수 프로필과 레슨 제공 서비스를 조회한다.",
+        "강사가 숨고 고수 프로필과 레슨 제공 서비스를 관리 대상으로 선택한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-UPDATE",
@@ -1143,7 +1263,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 숨고 프로필 또는 선택 레슨 제공 서비스의 모집 정보를 수정하도록 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-RENEW",
@@ -1211,7 +1337,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 숨고의 공고 갱신 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-STATUS",
@@ -1283,7 +1415,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 숨고 레슨 제공 서비스의 등록 및 공개 상태 확인을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-RESPOND",
@@ -1354,7 +1492,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "우선 구현/검증 후보",
+      "user_actions": [
+        "강사가 숨고 서비스 등록·설정 오류 대응을 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL04-CREATE",
@@ -1425,7 +1569,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 프람피 전문가 프로필의 레슨 분야 등록을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL04-READ",
@@ -1491,7 +1641,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 프람피 기존 프로필 조회 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL04-UPDATE",
@@ -1557,7 +1713,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 프람피 프로필 수정 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL04-RENEW",
@@ -1623,7 +1785,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 프람피 공고 갱신 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL04-STATUS",
@@ -1690,7 +1858,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 프람피 상태 조회 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL04-RESPOND",
@@ -1757,7 +1931,13 @@
       "failure_policy": "확인 가능한 내부 정보만 안내, 외부 실패 원인 추정·자동 재시도 금지",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "내부 안내만",
+      "user_actions": [
+        "강사가 프람피의 지원 제한과 입력 준비 오류 안내를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL05-CREATE",
@@ -1777,11 +1957,11 @@
         "IS-017",
         "IS-023"
       ],
-      "service_actions": "게시 자격/약관 직접 확인→승인 제목·본문·분류·수강료·자료 입력 및 게시→동일 게시물 재조회",
+      "service_actions": "게시 자격·약관 사용자 직접 확인 → 승인 분류·제목·본문 및 실제 총액·장소 공개 범위·메인/본문 사진 용도 확인 → 별도 수강료는 단위/공개 의미 확인 후에만 입력 → 승인 정보 입력·게시 → 동일 게시물 독립 재조회",
       "completion_criterion": "신규 게시물 정확 식별 및 승인 내용·게시 상태 재조회 확인",
       "user_goal_criterion": "실제 공개 목록/상세 노출 별도",
       "not_provided": "가입·약관 동의·중복 게시·삭제 재등록 금지",
-      "unverified": "저장/게시 응답·게시 자격·번호 매핑 미확인",
+      "unverified": "구분·제목·약관 동의 필수 표시, 별도 원 단위 수강료/사진 경로 관찰. 별도 수강료 회당/총액 기준·노출, 사진·주소 공개, 작성 자격 및 실제 저장/게시·번호 매핑 미확인",
       "source_claims": [
         {
           "source": "r02",
@@ -1827,11 +2007,19 @@
           "unknown_reason": "저장, 게시 완료, 신규 가입자의 작성 자격 및 서버 검증 미확인"
         }
       ],
-      "confirmation_source_refs": [],
+      "confirmation_source_refs": [
+        "r05_example"
+      ],
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 뮬 개인레슨 게시물 등록을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL05-READ",
@@ -1840,7 +2028,7 @@
       "operation": "READ",
       "object": "개인레슨 게시물",
       "scope": "extension",
-      "story": "강사가 뮬의 기존 레슨 게시물을 조회하고 관리 대상으로 선택한다.",
+      "story": "강사가 뮬의 기존 레슨 게시물을 조회한다.",
       "common_story_refs": [
         "IS-089",
         "IS-014",
@@ -1900,7 +2088,14 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 뮬의 기존 레슨 게시물을 조회한다.",
+        "강사가 뮬의 기존 레슨 게시물을 관리 대상으로 선택한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL05-UPDATE",
@@ -1966,7 +2161,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 뮬 기존 게시물 수정 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL05-RENEW",
@@ -2038,7 +2239,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 뮬 기존 공고의 허용된 최신글 올리기를 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL05-STATUS",
@@ -2106,7 +2313,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 뮬 공고의 최신 게시 상태 확인을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL05-RESPOND",
@@ -2174,7 +2387,13 @@
       "failure_policy": "확인 가능한 내부 정보만 안내, 외부 실패 원인 추정·자동 재시도 금지",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "내부 안내만",
+      "user_actions": [
+        "강사가 뮬 등록 또는 갱신의 제한과 오류 대응을 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL06-CREATE",
@@ -2247,7 +2466,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 힙합플레이야 레슨 홍보 게시물 등록을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL06-READ",
@@ -2256,7 +2481,7 @@
       "operation": "READ",
       "object": "홍보 게시물",
       "scope": "extension",
-      "story": "강사가 힙합플레이야 기존 홍보 게시물을 조회하고 관리 대상으로 선택한다.",
+      "story": "강사가 힙합플레이야 기존 홍보 게시물을 조회한다.",
       "common_story_refs": [
         "IS-089",
         "IS-014",
@@ -2315,7 +2540,14 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 힙합플레이야 기존 홍보 게시물을 조회한다.",
+        "강사가 힙합플레이야 기존 홍보 게시물을 관리 대상으로 선택한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL06-UPDATE",
@@ -2381,7 +2613,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 힙합플레이야 게시물 수정 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL06-RENEW",
@@ -2450,7 +2688,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 힙합플레이야 공고 갱신 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL06-STATUS",
@@ -2518,7 +2762,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 힙합플레이야 홍보 글의 최신 공개 상태 확인을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL06-RESPOND",
@@ -2584,7 +2834,13 @@
       "failure_policy": "확인 가능한 내부 정보만 안내, 외부 실패 원인 추정·자동 재시도 금지",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "내부 안내만",
+      "user_actions": [
+        "강사가 힙합플레이야 게시 제한 및 오류 안내를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL07-CREATE",
@@ -2660,7 +2916,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 응답 유실·관측 불일치 시 효과 미확인으로 기록하고 재실행 금지; 실제 실패/부분 성공과 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 힙합LE 레슨 장터 게시물 등록을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL07-READ",
@@ -2669,7 +2931,7 @@
       "operation": "READ",
       "object": "레슨 장터 게시물",
       "scope": "extension",
-      "story": "강사가 힙합LE 기존 레슨 글을 조회하고 관리 대상으로 선택한다.",
+      "story": "강사가 힙합LE 기존 레슨 글을 조회한다.",
       "common_story_refs": [
         "IS-089",
         "IS-014",
@@ -2728,7 +2990,14 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 힙합LE 기존 레슨 글을 조회한다.",
+        "강사가 힙합LE 기존 레슨 글을 관리 대상으로 선택한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL07-UPDATE",
@@ -2799,7 +3068,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 힙합LE 게시물 수정 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL07-RENEW",
@@ -2871,7 +3146,13 @@
       "failure_policy": "지원 불가 또는 미확인으로 안내; 외부 작업 요청 거절",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "현재 업무 지원 보류/미추천",
+      "user_actions": [
+        "강사가 힙합LE 공고 갱신 지원 여부를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL07-STATUS",
@@ -2939,7 +3220,13 @@
       "failure_policy": "권한/대상/입력/승인 불충족이면 실행 전 차단. 조회 실패 시 마지막 관측과 현재 확인 불가를 구분.",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "후순위 구현/검증 후보",
+      "user_actions": [
+        "강사가 힙합LE 레슨 글의 최신 공개 상태 확인을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL07-RESPOND",
@@ -3005,7 +3292,13 @@
       "failure_policy": "확인 가능한 내부 정보만 안내, 외부 실패 원인 추정·자동 재시도 금지",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "내부 안내만",
+      "user_actions": [
+        "강사가 힙합LE 게시 제한 및 오류 안내를 확인한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL02-FIRST-OPEN-SCHEDULE",
@@ -3035,7 +3328,13 @@
       "failure_policy": "별도 채택 전 미제공; 권한·대상·효과 불명 시 차단 및 재실행 금지",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "별도 조건부 채택",
+      "user_actions": [
+        "강사가 탈잉 클래스의 최초 모집 오픈에 필요한 일정 등록을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     },
     {
       "id": "PS-PL03-REPRESENTATIVE-SERVICE",
@@ -3112,7 +3411,13 @@
       "failure_policy": "별도 채택 전 미제공; 대상/관계/권한/결과 미확인 시 추가 쓰기 차단",
       "permission": "unknown",
       "completion_evidence_state": "not_independently_verified",
-      "execution": "blocked_mock_only"
+      "execution": "blocked_mock_only",
+      "design_included": true,
+      "implementation_priority": "별도 조건부 채택",
+      "user_actions": [
+        "강사가 숨고의 대표 제공 서비스 변경을 요청한다."
+      ],
+      "scope_decision": "recommended_pending_individual_approval"
     }
   ],
   "verification": {
@@ -3132,6 +3437,31 @@
     "reference_errors": [],
     "structural_verdict": "pass",
     "semantic_verdict": "review_candidate",
-    "runtime_verdict": "not_run"
+    "runtime_verdict": "not_run",
+    "design_platform_count": 7,
+    "design_operation_count": 44,
+    "design_scope_authority": "R01 user instruction"
+  },
+  "design_scope": {
+    "status": "사용자 지시로 7개 플랫폼 설계 포함 확정. 개별 사용자 행동/업무 채택 및 실제 실행 별도 승인.",
+    "authority": "R01 사용자 지시: MVP의 구현 순서는 있더라도 설계 상에는 7개 플랫폼이 모두 포함되도록 한다.",
+    "platform_ids": [
+      "PL01",
+      "PL02",
+      "PL03",
+      "PL04",
+      "PL05",
+      "PL06",
+      "PL07"
+    ],
+    "requirements": [
+      "7개 모두의 실제 관리 객체·계정·소유권·관계·식별",
+      "플랫폼별 입력 및 반환 데이터, 필드·단위·제약·변환 규칙",
+      "업무별 사용자 SVO·시스템 동작·정상/오류/반복·완료 기준",
+      "native 상태와 독립 관측 증거, 권한·지원 불가·미확인 상태의 표현",
+      "7개 모두 지원할 수 있는 공통/고유 데이터 구조 및 업무 계약. 미확인 사실은 보존하고 실제 실행 차단"
+    ],
+    "implementation_priority": "MVP 구현/검증 순서는 설계 포함 여부와 분리. 기존 제품 MVP 최소 2개는 첫 가치 검증 추천이며 7개 설계 범위를 축소하지 않음. 실제 순서·일정·개별 지원 업무는 별도 검토.",
+    "approval": "7개 플랫폼 설계 포함 확정; 141개 행동 및 44개 업무별 최종 승인 0개; mock-only"
   }
 }

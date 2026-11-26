@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "INTG-20261126-STORY-REVIEW-V1.1",
   "kind": "document",
-  "status": "R01 최종 검토 후보 · 미승인",
+  "status": "R01 사용자 스토리 최종 검토안 v1.2 · 7개 설계 범위 확정 · 개별 스토리/업무 범위 승인 전",
   "owner": "R01",
   "task_ref": "TASK-058",
   "title": "사용자 스토리·플랫폼 업무·오류/반복 통합 검토",
@@ -51,6 +51,36 @@
       "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
       "commit": "1917288563cb633892452bcd3f415d274a5d735b",
       "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+    },
+    "r05_example": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R05/vocal-lesson-input-examples.md",
+      "commit": "ae4c496ef91cce698db710080ba7d7483ccc4718",
+      "blob": "d159a171fd26f56289ba5bc52a58357f181f98e1"
+    },
+    "r04_function": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_기능명세서.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "afba519a3419343117161c159b24e5c9cb93e75e"
+    },
+    "r04_menu": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_메뉴구조도.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "fef2311854361f543b104f3e10f130e1ccb4ac76"
+    },
+    "r04_screen": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_메뉴화면구성.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "9da9422719c6d83767fc774f00172e5dadf24585"
+    },
+    "r04_ia": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_화면목록_IA.md",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "e1cd1def6731996d0291c6d02cb1658b0018cff0"
+    },
+    "r04_catalog": {
+      "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_화면목록_screenCatalog.json",
+      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+      "blob": "b7e2bfc3631fff556e8876a5b5988a4e15ba7070"
     }
   },
   "baseline": {
@@ -64,9 +94,10 @@
     "reason": "지속 가능한 원본 저장·재사용에 필요한 최초 owner 관계 생성과 별도 가입 UI를 분리. 승인 전."
   },
   "scope_policy": {
-    "mvp": "최소 2개 플랫폼 신규·추가 등록, 대표 기존 수정, 통합 결과/수동 상태 확인 및 필수 안전·원본·owner 관리. 크몽 mock은 기술 검증. 실제 플랫폼·공수·일정 별도 승인.",
+    "mvp": "기존 첫 가치 검증 추천 최소 2개 플랫폼은 순차 구현 기준 후보에 한함. 설계는 7개 모두; 실제 구현 순서/일정/허용/범위 별도 승인.",
     "conditional": "자동 모니터링 및 탈잉 최초 일정/숨고 대표 서비스 별도 채택 전 미제공",
-    "excluded": "외부 임시저장/조회, 접수 취소, 외부 삭제/원복, 독립 계정 삭제/작업 공간 UI, 견적·상담·수업운영; 개인정보 권리 의무 유지"
+    "excluded": "외부 임시저장/조회, 접수 취소, 외부 삭제/원복, 독립 계정 삭제/작업 공간 UI, 견적·상담·수업운영; 개인정보 권리 의무 유지",
+    "design": "7개 플랫폼 전부 설계에 포함. MVP 구현 우선순위와 개별 업무 지원 여부는 분리."
   },
   "identity_requirements": [
     {
@@ -110,7 +141,7 @@
     {
       "id": "J01",
       "title": "최초 이용·재접속",
-      "story": "강사는 자신을 식별하고 자신의 레슨 정보를 계속 관리하고 싶다.",
+      "story": "강사가 서비스에 진입한다.",
       "normal": "최초 owner 관계 생성 또는 기존 관계 재사용, 동일 owner 인증 후 본인 원본·이력만 제공.",
       "error": "인증 실패·만료·생성 불명·타인 접근 차단. 동일 owner 재인증 후 저장 자료만 복구, 보류 업무 재검증. 중복 생성 금지.",
       "scope": "base",
@@ -125,12 +156,92 @@
         "IS-080",
         "IS-125",
         "IS-019"
-      ]
+      ],
+      "primary_story_ref": "IS-121",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "진입한다",
+        "object": "서비스",
+        "object_phrase": "서비스"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-121",
+          "action": "강사가 서비스에 진입한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "진입한다",
+            "object": "서비스",
+            "object_phrase": "서비스"
+          }
+        },
+        {
+          "story_id": "IS-051",
+          "action": "강사가 서비스 이용 인증을 수행한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "수행한다",
+            "object": "서비스 이용 인증",
+            "object_phrase": "서비스 이용 인증을/를"
+          }
+        },
+        {
+          "story_id": "IS-062",
+          "action": "강사가 서비스 계정 등록을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "서비스 계정 등록",
+            "object_phrase": "서비스 계정 등록을"
+          }
+        },
+        {
+          "story_id": "IS-066",
+          "action": "강사가 저장된 원본 레슨 목록을 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "저장된 원본 레슨 목록",
+            "object_phrase": "저장된 원본 레슨 목록을"
+          }
+        },
+        {
+          "story_id": "IS-080",
+          "action": "강사가 업무 실행 이력을 열람한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "열람한다",
+            "object": "업무 실행 이력",
+            "object_phrase": "업무 실행 이력을"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P01~P03의 공통 선행 조건: 동일 사용자 원본·업무 관리 및 재사용의 소유자 식별",
+        "basis": "기획 §8.1·§9.5·§9.6, 강사 A2/D1",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P01",
+          "P02",
+          "P03"
+        ],
+        "feature_refs": [
+          "F02",
+          "F23",
+          "F25",
+          "F18"
+        ]
+      }
     },
     {
       "id": "J02",
       "title": "원본 레슨 생성·저장",
-      "story": "강사는 레슨 소개·사진·수업 조건을 한 번 저장하고 싶다.",
+      "story": "강사가 원본 레슨 정보의 저장을 요청한다.",
       "normal": "자료 수신→구조화→강사 검토·정정→원본·저장 버전 식별 및 저장 결과 확인.",
       "error": "누락·추출 오류·첨부 권리/형식 오류 보완. 실패/불명/충돌 시 기존 저장본 보존, 이전 효과 확인 전 중복 저장 금지.",
       "scope": "base",
@@ -149,12 +260,114 @@
         "IS-123",
         "IS-004",
         "IS-067"
-      ]
+      ],
+      "primary_story_ref": "IS-005",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "원본 레슨 정보의 저장",
+        "object_phrase": "원본 레슨 정보의 저장을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-001",
+          "action": "강사가 원본 레슨 텍스트를 입력한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "입력한다",
+            "object": "원본 레슨 텍스트",
+            "object_phrase": "원본 레슨 텍스트를"
+          }
+        },
+        {
+          "story_id": "IS-064",
+          "action": "강사가 원본 레슨 첨부 파일을 업로드한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "업로드한다",
+            "object": "원본 레슨 첨부 파일",
+            "object_phrase": "원본 레슨 첨부 파일을"
+          }
+        },
+        {
+          "story_id": "IS-055",
+          "action": "강사가 첨부 자료의 사용 권한을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "첨부 자료의 사용 권한",
+            "object_phrase": "첨부 자료의 사용 권한을"
+          }
+        },
+        {
+          "story_id": "IS-003",
+          "action": "강사가 구조화된 레슨 사실을 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "구조화된 레슨 사실",
+            "object_phrase": "구조화된 레슨 사실을"
+          }
+        },
+        {
+          "story_id": "IS-115",
+          "action": "강사가 잘못 추출된 레슨 사실을 정정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "정정한다",
+            "object": "잘못 추출된 레슨 사실",
+            "object_phrase": "잘못 추출된 레슨 사실"
+          }
+        },
+        {
+          "story_id": "IS-005",
+          "action": "강사가 원본 레슨 정보의 저장을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "원본 레슨 정보의 저장",
+            "object_phrase": "원본 레슨 정보의 저장을"
+          }
+        },
+        {
+          "story_id": "IS-113",
+          "action": "강사가 원본 저장 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "원본 저장 결과",
+            "object_phrase": "원본 저장 결과"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P01 반복 작성 감소: 한 번 관리하는 검토된 원본 확보",
+        "basis": "기획 §3·§5.1·§6.1",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P01"
+        ],
+        "feature_refs": [
+          "F01",
+          "F09",
+          "F04",
+          "F03",
+          "F10",
+          "F05",
+          "F08",
+          "F02"
+        ]
+      }
     },
     {
       "id": "J03",
       "title": "저장 원본 조회·수정",
-      "story": "강사는 여러 레슨 중 하나를 선택하고 실제 조건이 바뀌면 수정하고 싶다.",
+      "story": "강사가 저장된 원본 레슨을 선택한다.",
       "normal": "본인 원본 목록·선택 버전·첨부·연결 등록물 조회. 수정은 새 버전, 기존 외부 게시/승인본 자동 변경 없음.",
       "error": "빈 목록/실패 구분. 타 owner·버전 충돌 차단. 영향받는 미실행 업무만 보류·새 준비/승인.",
       "scope": "base",
@@ -170,12 +383,103 @@
         "IS-125",
         "IS-082",
         "IS-099"
-      ]
+      ],
+      "primary_story_ref": "IS-002",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "선택한다",
+        "object": "저장된 원본 레슨",
+        "object_phrase": "저장된 원본 레슨을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-066",
+          "action": "강사가 저장된 원본 레슨 목록을 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "저장된 원본 레슨 목록",
+            "object_phrase": "저장된 원본 레슨 목록을"
+          }
+        },
+        {
+          "story_id": "IS-002",
+          "action": "강사가 저장된 원본 레슨을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "저장된 원본 레슨",
+            "object_phrase": "저장된 원본 레슨을"
+          }
+        },
+        {
+          "story_id": "IS-067",
+          "action": "강사가 선택한 원본 레슨의 내용을 열람한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "열람한다",
+            "object": "선택한 원본 레슨의 내용",
+            "object_phrase": "선택한 원본 레슨의 내용을"
+          }
+        },
+        {
+          "story_id": "IS-004",
+          "action": "강사가 원본 레슨 정보를 수정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "수정한다",
+            "object": "원본 레슨 정보",
+            "object_phrase": "원본 레슨 정보를"
+          }
+        },
+        {
+          "story_id": "IS-005",
+          "action": "강사가 원본 레슨 정보의 저장을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "원본 레슨 정보의 저장",
+            "object_phrase": "원본 레슨 정보의 저장을"
+          }
+        },
+        {
+          "story_id": "IS-113",
+          "action": "강사가 원본 저장 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "원본 저장 결과",
+            "object_phrase": "원본 저장 결과"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P01 원본 재사용 및 정보 변경 관리",
+        "basis": "기획 §5.1·§8.2·§9.1",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P01",
+          "P02",
+          "P03"
+        ],
+        "feature_refs": [
+          "F02",
+          "F04",
+          "F05",
+          "F18",
+          "F16"
+        ]
+      }
     },
     {
       "id": "J04",
       "title": "플랫폼 및 업무 선택·입력안 준비",
-      "story": "강사는 원본을 여러 플랫폼의 실제 입력 양식에 맞게 준비하고 싶다.",
+      "story": "강사가 플랫폼별 변환 입력안을 검토한다.",
       "normal": "지원 업무와 제약을 안내하고 선택 플랫폼별 변환·검증·보완 및 실제 조건을 표시.",
       "error": "미지원·권한 불명 실행 금지. 필요한 사실만 요청; 유효 대안 없음은 제외/보류. 변환 실패·늦은 결과는 이전 초안 보존·오래된 결과 미적용.",
       "scope": "base",
@@ -208,12 +512,139 @@
         "IS-093",
         "IS-094",
         "IS-095"
-      ]
+      ],
+      "primary_story_ref": "IS-008",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "검토한다",
+        "object": "플랫폼별 변환 입력안",
+        "object_phrase": "플랫폼별 변환 입력안을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-006",
+          "action": "강사가 플랫폼별 지원 업무와 제약 안내를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 지원 업무와 제약 안내",
+            "object_phrase": "플랫폼별 지원 업무와 제약 안내를"
+          }
+        },
+        {
+          "story_id": "IS-007",
+          "action": "강사가 작업 대상 플랫폼을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "작업 대상 플랫폼",
+            "object_phrase": "작업 대상 플랫폼을"
+          }
+        },
+        {
+          "story_id": "IS-068",
+          "action": "강사가 수행할 업무 종류를 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "수행할 업무 종류",
+            "object_phrase": "수행할 업무 종류를"
+          }
+        },
+        {
+          "story_id": "IS-008",
+          "action": "강사가 플랫폼별 변환 입력안을 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "플랫폼별 변환 입력안",
+            "object_phrase": "플랫폼별 변환 입력안을"
+          }
+        },
+        {
+          "story_id": "IS-105",
+          "action": "강사가 플랫폼별 부족 정보 안내를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 부족 정보 안내",
+            "object_phrase": "플랫폼별 부족 정보 안내를"
+          }
+        },
+        {
+          "story_id": "IS-009",
+          "action": "강사가 누락된 레슨 정보를 입력한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "입력한다",
+            "object": "누락된 레슨 정보",
+            "object_phrase": "누락된 레슨 정보를"
+          }
+        },
+        {
+          "story_id": "IS-010",
+          "action": "강사가 플랫폼 제약 충돌의 대안을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "플랫폼 제약 충돌의 대안",
+            "object_phrase": "플랫폼 제약 충돌의 대안을"
+          }
+        },
+        {
+          "story_id": "IS-054",
+          "action": "강사가 플랫폼별 적용 조건을 수정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "수정한다",
+            "object": "플랫폼별 적용 조건",
+            "object_phrase": "플랫폼별 적용 조건을"
+          }
+        },
+        {
+          "story_id": "IS-123",
+          "action": "강사가 유효하지 않은 입력 정보를 정정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "정정한다",
+            "object": "유효하지 않은 플랫폼별 입력 정보",
+            "object_phrase": "유효하지 않은 플랫폼별 입력 정보"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P01 플랫폼별 반복 변환·검수 감소 및 사실 보존",
+        "basis": "기획 §5.2~5.3·§6.1",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P02",
+          "P01",
+          "P03"
+        ],
+        "feature_refs": [
+          "F06",
+          "F07",
+          "F08",
+          "F09",
+          "F10",
+          "F11",
+          "F15",
+          "F18",
+          "F29",
+          "F16",
+          "F20"
+        ]
+      }
     },
     {
       "id": "J05",
       "title": "외부 인증·작업 대상 확인",
-      "story": "강사는 자신의 플랫폼 계정과 정확한 레슨 객체에 업무를 수행하고 싶다.",
+      "story": "강사가 업무에 사용할 외부 계정을 확인한다.",
       "normal": "공식 로그인/필요 본인 인증 직접 수행. 계정·권한·대상·기존 등록/이전 효과 확인 및 기존 객체 선택.",
       "error": "실패·만료·권한 부족·잘못된 대상·중복/효과 불명 차단. 재인증·재선택·제외. 외부 가입·정산·약관 동의는 사용자 직접.",
       "scope": "base",
@@ -238,12 +669,117 @@
         "IS-127",
         "IS-039",
         "IS-096"
-      ]
+      ],
+      "primary_story_ref": "IS-013",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "확인한다",
+        "object": "업무에 사용할 외부 계정",
+        "object_phrase": "업무에 사용할 외부 계정을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-109",
+          "action": "강사가 대상 외부 플랫폼에 직접 로그인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "로그인한다",
+            "object": "대상 외부 플랫폼",
+            "object_phrase": "대상 외부 플랫폼"
+          }
+        },
+        {
+          "story_id": "IS-011",
+          "action": "강사가 필요한 외부 플랫폼 본인 인증을 수행한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "수행한다",
+            "object": "필요한 외부 플랫폼 본인 인증",
+            "object_phrase": "필요한 외부 플랫폼 본인 인증을"
+          }
+        },
+        {
+          "story_id": "IS-013",
+          "action": "강사가 업무에 사용할 외부 계정을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "업무에 사용할 외부 계정",
+            "object_phrase": "업무에 사용할 외부 계정을"
+          }
+        },
+        {
+          "story_id": "IS-089",
+          "action": "강사가 외부 플랫폼의 기존 객체 목록을 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "외부 플랫폼의 기존 객체 목록",
+            "object_phrase": "외부 플랫폼의 기존 객체 목록을"
+          }
+        },
+        {
+          "story_id": "IS-106",
+          "action": "강사가 기존 등록 여부의 확인 결과를 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "기존 등록 여부의 확인 결과",
+            "object_phrase": "기존 등록 여부의 확인 결과를"
+          }
+        },
+        {
+          "story_id": "IS-014",
+          "action": "강사가 관리할 기존 외부 객체를 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "관리할 기존 외부 객체",
+            "object_phrase": "관리할 기존 외부 객체를"
+          }
+        },
+        {
+          "story_id": "IS-117",
+          "action": "강사가 선택한 기존 외부 객체의 작업 대상을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "선택한 기존 외부 객체의 작업 대상",
+            "object_phrase": "선택한 기존 외부 객체의 작업 대상"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P02 정확한 외부 계정·대상 작업, 오류·중복 예방",
+        "basis": "기획 §5.4·§9.2·§9.4",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P02",
+          "P03",
+          "P01"
+        ],
+        "feature_refs": [
+          "F12",
+          "F13",
+          "F14",
+          "F07",
+          "F18",
+          "F25",
+          "F27",
+          "F17",
+          "F06"
+        ]
+      }
     },
     {
       "id": "J06",
       "title": "최종 정보·실행 승인",
-      "story": "강사는 실제 입력 정보와 업무 범위를 확인하고 승인하고 싶다.",
+      "story": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
       "normal": "입력안·수정 차이·실행 범위 검토 후 내용 및 실행 범위 승인 기록, 현재 조건과 일치 확인.",
       "error": "거절·철회·중요 조건 변경 시 새 쓰기 차단, 새 검토/승인 필요. 기발생 외부 효과 원복 보장 없음.",
       "scope": "base",
@@ -260,12 +796,91 @@
         "IS-087",
         "IS-088",
         "IS-118"
-      ]
+      ],
+      "primary_story_ref": "IS-016",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "승인한다",
+        "object": "플랫폼별 최종 입력 내용",
+        "object_phrase": "플랫폼별 최종 입력 내용을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-082",
+          "action": "강사가 플랫폼별 최종 입력안을 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "플랫폼별 최종 입력안",
+            "object_phrase": "플랫폼별 최종 입력안을"
+          }
+        },
+        {
+          "story_id": "IS-015",
+          "action": "강사가 게시 정보의 변경 전후 차이를 비교한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "비교한다",
+            "object": "게시 정보의 변경 전후 차이",
+            "object_phrase": "게시 정보의 변경 전후 차이를"
+          }
+        },
+        {
+          "story_id": "IS-083",
+          "action": "강사가 업무 실행 범위를 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "업무 실행 범위",
+            "object_phrase": "업무 실행 범위를"
+          }
+        },
+        {
+          "story_id": "IS-016",
+          "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "플랫폼별 최종 입력 내용",
+            "object_phrase": "플랫폼별 최종 입력 내용을"
+          }
+        },
+        {
+          "story_id": "IS-017",
+          "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "외부 업무의 실행 범위",
+            "object_phrase": "외부 업무의 실행 범위를"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P02 사용자 의도와 실제 입력·업무 범위의 일치",
+        "basis": "기획 §5.5·§9.2",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P02"
+        ],
+        "feature_refs": [
+          "F15",
+          "F16",
+          "F17",
+          "F18",
+          "F20"
+        ]
+      }
     },
     {
       "id": "J07",
       "title": "최초·추가 플랫폼 등록",
-      "story": "강사는 한 원본으로 최초 등록하고 다른 플랫폼에도 등록하고 싶다.",
+      "story": "강사가 승인된 레슨의 신규 등록을 요청한다.",
       "normal": "각 플랫폼의 승인된 신규 업무 실행, 정확 객체 및 저장/접수/게시 효과 확인. 저장 원본 재사용.",
       "error": "같은 계정·대상 기존 등록/이전 효과 불명 차단. 응답 유실은 미확인 및 독립 재조회. 다른 플랫폼 등록은 차단 이유 아님.",
       "scope": "base",
@@ -281,13 +896,126 @@
         "IS-106",
         "IS-104",
         "IS-126",
-        "IS-127"
-      ]
+        "IS-127",
+        "IS-016",
+        "IS-017"
+      ],
+      "primary_story_ref": "IS-020",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "승인된 레슨의 신규 등록",
+        "object_phrase": "승인된 레슨의 신규 등록을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-002",
+          "action": "강사가 저장된 원본 레슨을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "저장된 원본 레슨",
+            "object_phrase": "저장된 원본 레슨을"
+          }
+        },
+        {
+          "story_id": "IS-007",
+          "action": "강사가 작업 대상 플랫폼을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "작업 대상 플랫폼",
+            "object_phrase": "작업 대상 플랫폼을"
+          }
+        },
+        {
+          "story_id": "IS-106",
+          "action": "강사가 기존 등록 여부의 확인 결과를 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "기존 등록 여부의 확인 결과",
+            "object_phrase": "기존 등록 여부의 확인 결과를"
+          }
+        },
+        {
+          "story_id": "IS-016",
+          "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "플랫폼별 최종 입력 내용",
+            "object_phrase": "플랫폼별 최종 입력 내용을"
+          }
+        },
+        {
+          "story_id": "IS-017",
+          "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "외부 업무의 실행 범위",
+            "object_phrase": "외부 업무의 실행 범위를"
+          }
+        },
+        {
+          "story_id": "IS-020",
+          "action": "강사가 승인된 레슨의 신규 등록을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "승인된 레슨의 신규 등록",
+            "object_phrase": "승인된 레슨의 신규 등록을"
+          }
+        },
+        {
+          "story_id": "IS-023",
+          "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 업무 실행 결과",
+            "object_phrase": "플랫폼별 업무 실행 결과를"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P01/P02 동일 원본으로 여러 플랫폼 최초·추가 등록 부담 감소",
+        "basis": "기획 §5.6·§8.1~8.2·§6.1",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P01",
+          "P02",
+          "P03"
+        ],
+        "feature_refs": [
+          "F02",
+          "F07",
+          "F19",
+          "F22",
+          "F24",
+          "F27",
+          "F29",
+          "F25",
+          "F14",
+          "F18",
+          "F28",
+          "F12",
+          "F13",
+          "F16",
+          "F17"
+        ]
+      }
     },
     {
       "id": "J08",
       "title": "기존 등록물 연결·수정",
-      "story": "강사는 직접 등록했던 레슨을 연결하고 원하는 정보만 수정하고 싶다.",
+      "story": "강사가 기존 외부 객체의 정보 수정을 요청한다.",
       "normal": "정확 객체의 내부 관리 연결, 현재값·변경 범위 확인 및 승인된 변경값 적용 후 동일 객체에서 확인.",
       "error": "중복 연결·소유 불명·수정 불가·외부 변경 차단. 공유 필드 영향 표시; 저장·재심사·공개 별개.",
       "scope": "base",
@@ -308,12 +1036,151 @@
         "IS-104",
         "IS-019",
         "IS-035"
-      ]
+      ],
+      "primary_story_ref": "IS-021",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "기존 외부 객체의 정보 수정",
+        "object_phrase": "기존 외부 객체의 정보 수정을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-089",
+          "action": "강사가 외부 플랫폼의 기존 객체 목록을 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "외부 플랫폼의 기존 객체 목록",
+            "object_phrase": "외부 플랫폼의 기존 객체 목록을"
+          }
+        },
+        {
+          "story_id": "IS-014",
+          "action": "강사가 관리할 기존 외부 객체를 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "관리할 기존 외부 객체",
+            "object_phrase": "관리할 기존 외부 객체를"
+          }
+        },
+        {
+          "story_id": "IS-117",
+          "action": "강사가 선택한 기존 외부 객체의 작업 대상을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "선택한 기존 외부 객체의 작업 대상",
+            "object_phrase": "선택한 기존 외부 객체의 작업 대상"
+          }
+        },
+        {
+          "story_id": "IS-110",
+          "action": "강사가 직접 등록했던 기존 게시물의 관리 연결을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "직접 등록했던 기존 게시물의 관리 연결",
+            "object_phrase": "직접 등록했던 기존 게시물의 관리 연결"
+          }
+        },
+        {
+          "story_id": "IS-015",
+          "action": "강사가 게시 정보의 변경 전후 차이를 비교한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "비교한다",
+            "object": "게시 정보의 변경 전후 차이",
+            "object_phrase": "게시 정보의 변경 전후 차이를"
+          }
+        },
+        {
+          "story_id": "IS-118",
+          "action": "강사가 기존 게시물의 변경 범위를 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "기존 게시물의 변경 범위",
+            "object_phrase": "기존 게시물의 변경 범위"
+          }
+        },
+        {
+          "story_id": "IS-016",
+          "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "플랫폼별 최종 입력 내용",
+            "object_phrase": "플랫폼별 최종 입력 내용을"
+          }
+        },
+        {
+          "story_id": "IS-017",
+          "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "외부 업무의 실행 범위",
+            "object_phrase": "외부 업무의 실행 범위를"
+          }
+        },
+        {
+          "story_id": "IS-021",
+          "action": "강사가 기존 외부 객체의 정보 수정을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "기존 외부 객체의 정보 수정",
+            "object_phrase": "기존 외부 객체의 정보 수정을"
+          }
+        },
+        {
+          "story_id": "IS-023",
+          "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 업무 실행 결과",
+            "object_phrase": "플랫폼별 업무 실행 결과를"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P02 이미 등록한 정보의 반복 수정·대상 관리 부담 감소",
+        "basis": "기획 §5.4~5.6·§8.3",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P02",
+          "P03",
+          "P01"
+        ],
+        "feature_refs": [
+          "F14",
+          "F25",
+          "F15",
+          "F17",
+          "F20",
+          "F18",
+          "F08",
+          "F10",
+          "F16",
+          "F22",
+          "F24",
+          "F27",
+          "F28"
+        ]
+      }
     },
     {
       "id": "J09",
       "title": "허용 공고 갱신",
-      "story": "강사는 지원되는 기존 공고를 다시 노출하고 싶다.",
+      "story": "강사가 기존 모집 공고의 갱신을 요청한다.",
       "normal": "동일 객체의 갱신 허용·시기·효과 기준 확인 및 승인 후 수행·독립 관측.",
       "error": "미지원·권한/간격/이전 효과 불명 보류. 삭제 후 재등록·무조건 반복 금지. 첫 MVP 필수 아님.",
       "scope": "base_not_first_mvp",
@@ -327,12 +1194,107 @@
         "IS-026",
         "IS-108",
         "IS-104"
-      ]
+      ],
+      "primary_story_ref": "IS-022",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "기존 모집 공고의 갱신",
+        "object_phrase": "기존 모집 공고의 갱신을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-006",
+          "action": "강사가 플랫폼별 지원 업무와 제약 안내를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 지원 업무와 제약 안내",
+            "object_phrase": "플랫폼별 지원 업무와 제약 안내를"
+          }
+        },
+        {
+          "story_id": "IS-014",
+          "action": "강사가 관리할 기존 외부 객체를 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "관리할 기존 외부 객체",
+            "object_phrase": "관리할 기존 외부 객체를"
+          }
+        },
+        {
+          "story_id": "IS-016",
+          "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "플랫폼별 최종 입력 내용",
+            "object_phrase": "플랫폼별 최종 입력 내용을"
+          }
+        },
+        {
+          "story_id": "IS-017",
+          "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "외부 업무의 실행 범위",
+            "object_phrase": "외부 업무의 실행 범위를"
+          }
+        },
+        {
+          "story_id": "IS-022",
+          "action": "강사가 기존 모집 공고의 갱신을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "기존 모집 공고의 갱신",
+            "object_phrase": "기존 모집 공고의 갱신을"
+          }
+        },
+        {
+          "story_id": "IS-023",
+          "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 업무 실행 결과",
+            "object_phrase": "플랫폼별 업무 실행 결과를"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P02 허용된 공고 갱신 반복 업무 부담 감소",
+        "basis": "기획 §5.6·§8.4",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P02",
+          "P03"
+        ],
+        "feature_refs": [
+          "F06",
+          "F14",
+          "F21",
+          "F16",
+          "F17",
+          "F22",
+          "F24",
+          "F27",
+          "F29",
+          "F28"
+        ]
+      }
     },
     {
       "id": "J10",
       "title": "결과·등록 상태·이력 확인",
-      "story": "강사는 각 플랫폼의 실제 결과와 근거를 한곳에서 확인하고 싶다.",
+      "story": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
       "normal": "완료/실패/미실행/미확인, 증거·시각 및 확인된 링크 제공. 접수/심사/공개/모집 가능 구분.",
       "error": "부분 성공 시 성공 대상 제외. 응답 유실·관측 불일치 미확인. 미관측 URL·상태·사유 생성 금지.",
       "scope": "base",
@@ -348,12 +1310,116 @@
         "IS-124",
         "IS-026",
         "IS-127"
-      ]
+      ],
+      "primary_story_ref": "IS-023",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "확인한다",
+        "object": "플랫폼별 업무 실행 결과",
+        "object_phrase": "플랫폼별 업무 실행 결과를"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-023",
+          "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 업무 실행 결과",
+            "object_phrase": "플랫폼별 업무 실행 결과를"
+          }
+        },
+        {
+          "story_id": "IS-024",
+          "action": "강사가 플랫폼별 마지막 관측 상태를 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "플랫폼별 마지막 관측 상태",
+            "object_phrase": "플랫폼별 마지막 관측 상태를"
+          }
+        },
+        {
+          "story_id": "IS-080",
+          "action": "강사가 업무 실행 이력을 열람한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "열람한다",
+            "object": "업무 실행 이력",
+            "object_phrase": "업무 실행 이력을"
+          }
+        },
+        {
+          "story_id": "IS-081",
+          "action": "강사가 업무 실행 결과의 증거를 열람한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "열람한다",
+            "object": "업무 실행 결과의 증거",
+            "object_phrase": "업무 실행 결과의 증거를"
+          }
+        },
+        {
+          "story_id": "IS-124",
+          "action": "강사가 외부 게시물 링크를 연다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "연다",
+            "object": "확인된 외부 게시물 링크",
+            "object_phrase": "확인된 외부 게시물 링크"
+          }
+        },
+        {
+          "story_id": "IS-046",
+          "action": "강사가 복수 플랫폼 업무의 부분 성공 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "복수 플랫폼 업무의 부분 성공 결과",
+            "object_phrase": "복수 플랫폼 업무의 부분 성공 결과를"
+          }
+        },
+        {
+          "story_id": "IS-029",
+          "action": "강사가 부분 성공에서 미완료 대상을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "부분 성공에서 미완료 대상",
+            "object_phrase": "부분 성공에서 미완료 대상을"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P03 분산된 업무 결과 및 등록 상태 확인 부담 감소",
+        "basis": "기획 §5.7·§6.1",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P03",
+          "P02"
+        ],
+        "feature_refs": [
+          "F22",
+          "F24",
+          "F25",
+          "F29",
+          "F23",
+          "F27",
+          "F28",
+          "F12",
+          "F13"
+        ]
+      }
     },
     {
       "id": "J11",
       "title": "수동 상태 조회·반려 대응",
-      "story": "강사는 최신 상태를 확인하고 오류 또는 반려를 해결하고 싶다.",
+      "story": "강사가 선택한 플랫폼의 상태 갱신을 요청한다.",
       "normal": "허용 읽기 경로로 요청 시 최신 관측. 확인된 사유 및 대응 후보; 허용 재심사는 새 수정·승인 요청.",
       "error": "조회 실패와 마지막 상태 구분. 사유 불명 표시. 이전 효과 미확인 재실행 금지; 실패/미실행 확정 및 새 조건/승인 후만.",
       "scope": "base",
@@ -371,13 +1437,153 @@
         "IS-104",
         "IS-126",
         "IS-041",
-        "IS-059"
-      ]
+        "IS-059",
+        "IS-016",
+        "IS-017"
+      ],
+      "primary_story_ref": "IS-025",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "선택한 플랫폼의 상태 갱신",
+        "object_phrase": "선택한 플랫폼의 상태 갱신을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-025",
+          "action": "강사가 선택한 플랫폼의 상태 갱신을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "선택한 플랫폼의 상태 갱신",
+            "object_phrase": "선택한 플랫폼의 상태 갱신을"
+          }
+        },
+        {
+          "story_id": "IS-047",
+          "action": "강사가 상태 갱신 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "상태 갱신 결과",
+            "object_phrase": "상태 갱신 결과를"
+          }
+        },
+        {
+          "story_id": "IS-027",
+          "action": "강사가 조회 실패 이후 마지막 확인 시점을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "조회 실패 이후 마지막 확인 시점",
+            "object_phrase": "조회 실패 이후 마지막 확인 시점을"
+          }
+        },
+        {
+          "story_id": "IS-084",
+          "action": "강사가 외부 플랫폼의 반려 사유를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "외부 플랫폼의 반려 사유",
+            "object_phrase": "외부 플랫폼의 반려 사유를"
+          }
+        },
+        {
+          "story_id": "IS-085",
+          "action": "강사가 반려 대응의 수정 제안을 검토한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "검토한다",
+            "object": "반려 대응의 수정 제안",
+            "object_phrase": "반려 대응의 수정 제안을"
+          }
+        },
+        {
+          "story_id": "IS-028",
+          "action": "강사가 반려된 레슨 입력안을 보완한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "보완한다",
+            "object": "반려된 레슨 입력안",
+            "object_phrase": "반려된 레슨 입력안을"
+          }
+        },
+        {
+          "story_id": "IS-016",
+          "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "플랫폼별 최종 입력 내용",
+            "object_phrase": "플랫폼별 최종 입력 내용을"
+          }
+        },
+        {
+          "story_id": "IS-017",
+          "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "외부 업무의 실행 범위",
+            "object_phrase": "외부 업무의 실행 범위를"
+          }
+        },
+        {
+          "story_id": "IS-074",
+          "action": "강사가 보완한 레슨의 재심사 접수를 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "보완한 레슨의 재심사 접수",
+            "object_phrase": "보완한 레슨의 재심사 접수를"
+          }
+        },
+        {
+          "story_id": "IS-112",
+          "action": "강사가 필요한 후속 대응 방안을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "필요한 후속 대응 방안",
+            "object_phrase": "필요한 후속 대응 방안"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P03 상태 확인과 실제 반려·오류 대응 부담 감소",
+        "basis": "기획 §5.8·§8.5·§8.7",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P03",
+          "P02"
+        ],
+        "feature_refs": [
+          "F26",
+          "F28",
+          "F29",
+          "F10",
+          "F08",
+          "F20",
+          "F22",
+          "F27",
+          "F07",
+          "F18",
+          "F06",
+          "F16",
+          "F17"
+        ]
+      }
     },
     {
       "id": "J12",
       "title": "업무 보류·종료·재처리",
-      "story": "강사는 진행할 수 없는 업무를 안전하게 보류하고 필요한 경우 새로 요청하고 싶다.",
+      "story": "강사가 해당 업무의 진행을 보류한다.",
       "normal": "오류/철회/보류 시 추가 접근·쓰기 차단, 기존 효과 및 이력 보존, 현재 조건으로 새 요청 검토.",
       "error": "외부 취소·원복·실행 스택 복구 없음. 성공/효과 불명 재실행 금지. 완료·실패·만료·철회 시 업무 세션 폐기, 불명 시 접근 차단 유지.",
       "scope": "base",
@@ -395,12 +1601,119 @@
         "IS-104",
         "IS-053",
         "IS-019"
-      ]
+      ],
+      "primary_story_ref": "IS-125",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "보류한다",
+        "object": "미완료 업무의 진행",
+        "object_phrase": "미완료 업무의 진행"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-125",
+          "action": "강사가 해당 업무의 진행을 보류한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "보류한다",
+            "object": "미완료 업무의 진행",
+            "object_phrase": "미완료 업무의 진행"
+          }
+        },
+        {
+          "story_id": "IS-049",
+          "action": "강사가 진행 중인 업무의 중단을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "진행 중인 업무의 중단",
+            "object_phrase": "진행 중인 업무의 중단을"
+          }
+        },
+        {
+          "story_id": "IS-023",
+          "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 업무 실행 결과",
+            "object_phrase": "플랫폼별 업무 실행 결과를"
+          }
+        },
+        {
+          "story_id": "IS-026",
+          "action": "강사가 미확인 외부 효과의 확인을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "미확인 외부 효과의 확인",
+            "object_phrase": "미확인 외부 효과의 확인을"
+          }
+        },
+        {
+          "story_id": "IS-127",
+          "action": "강사가 업무용 인증 세션의 폐기 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "업무용 인증 세션의 폐기 결과",
+            "object_phrase": "업무용 인증 세션의 폐기 결과"
+          }
+        },
+        {
+          "story_id": "IS-050",
+          "action": "강사가 중단된 업무의 재개를 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "중단된 업무의 재개",
+            "object_phrase": "중단된 업무의 재개를"
+          }
+        },
+        {
+          "story_id": "IS-126",
+          "action": "강사가 실패한 업무의 재처리를 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "실패한 업무의 재처리",
+            "object_phrase": "실패한 업무의 재처리"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P02/P03 이미 발생한 효과를 보존하고 안전하게 재처리",
+        "basis": "기획 §8.7·§9.2~9.4",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P03",
+          "P02",
+          "P01"
+        ],
+        "feature_refs": [
+          "F07",
+          "F18",
+          "F29",
+          "F16",
+          "F17",
+          "F12",
+          "F13",
+          "F27",
+          "F22",
+          "F24",
+          "F28"
+        ]
+      }
     },
     {
       "id": "J13",
       "title": "원본 삭제·관리 연결 해제",
-      "story": "강사는 불필요한 원본을 지우거나 특정 등록물의 관리 연결을 끊고 싶다.",
+      "story": "강사가 보관된 원본 레슨의 삭제를 요청한다.",
       "normal": "소유권·진행 업무·보존 의무 확인 후 내부 삭제/연결 해제를 각각 처리하고 결과 표시.",
       "error": "진행/미확인 업무 충돌 시 보류 및 효과 확인. 삭제/해제 불명은 완료 아님. 외부 게시·다른 연결 자동 변경 없음. 권리 요청 의무 유지.",
       "scope": "base",
@@ -416,12 +1729,89 @@
         "IS-066",
         "IS-048",
         "IS-080"
-      ]
+      ],
+      "primary_story_ref": "IS-034",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "보관된 원본 레슨의 삭제",
+        "object_phrase": "보관된 원본 레슨의 삭제를"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-034",
+          "action": "강사가 보관된 원본 레슨의 삭제를 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "보관된 원본 레슨의 삭제",
+            "object_phrase": "보관된 원본 레슨의 삭제를"
+          }
+        },
+        {
+          "story_id": "IS-035",
+          "action": "강사가 외부 게시물의 관리 연결 해제를 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "외부 게시물의 관리 연결 해제",
+            "object_phrase": "외부 게시물의 관리 연결 해제를"
+          }
+        },
+        {
+          "story_id": "IS-066",
+          "action": "강사가 저장된 원본 레슨 목록을 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "저장된 원본 레슨 목록",
+            "object_phrase": "저장된 원본 레슨 목록을"
+          }
+        },
+        {
+          "story_id": "IS-048",
+          "action": "강사가 업무 실패·반려·불일치의 대응 안내를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "업무 실패·반려·불일치의 대응 안내",
+            "object_phrase": "업무 실패·반려·불일치의 대응 안내를"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "개인정보 보호·정확한 관리 관계 정리: 원본 삭제와 외부 게시 삭제 분리",
+        "basis": "기획 §9.5~9.6",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P01",
+          "P02",
+          "P03"
+        ],
+        "feature_refs": [
+          "F01",
+          "F04",
+          "F14",
+          "F25",
+          "F12",
+          "F13",
+          "F18",
+          "F27",
+          "F02",
+          "F29",
+          "F23"
+        ]
+      }
     },
     {
       "id": "J14",
       "title": "조건부 자동 모니터링",
-      "story": "강사는 별도 채택된 경우만 정해진 범위에서 자동 상태 알림을 받고 싶다.",
+      "story": "강사가 자동 모니터링 대상을 설정한다.",
       "normal": "허용 읽기 방식·대상·기간·주기·채널 및 별도 승인 후 조회/알림.",
       "error": "미채택/미허용 미제공. 철회·만료·종료 시 접근 차단 및 폐기. 알림/조회 실패와 종료 불명 구분.",
       "scope": "conditional",
@@ -451,12 +1841,181 @@
         "IS-140",
         "IS-141",
         "IS-142"
-      ]
+      ],
+      "primary_story_ref": "IS-030",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "설정한다",
+        "object": "자동 모니터링 대상",
+        "object_phrase": "자동 모니터링 대상을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-030",
+          "action": "강사가 자동 모니터링 대상을 설정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "설정한다",
+            "object": "자동 모니터링 대상",
+            "object_phrase": "자동 모니터링 대상을"
+          }
+        },
+        {
+          "story_id": "IS-128",
+          "action": "강사가 자동 모니터링의 조회 범위를 지정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "지정한다",
+            "object": "자동 모니터링의 조회 범위",
+            "object_phrase": "자동 모니터링의 조회 범위"
+          }
+        },
+        {
+          "story_id": "IS-129",
+          "action": "강사가 자동 모니터링의 조회 방식을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "자동 모니터링의 조회 방식",
+            "object_phrase": "자동 모니터링의 조회 방식"
+          }
+        },
+        {
+          "story_id": "IS-070",
+          "action": "강사가 자동 모니터링의 유지 기간을 설정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "설정한다",
+            "object": "자동 모니터링의 유지 기간",
+            "object_phrase": "자동 모니터링의 유지 기간을"
+          }
+        },
+        {
+          "story_id": "IS-141",
+          "action": "강사가 자동 조회 주기를 설정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "설정한다",
+            "object": "자동 조회 주기",
+            "object_phrase": "자동 조회 주기"
+          }
+        },
+        {
+          "story_id": "IS-142",
+          "action": "강사가 알림 수신 채널을 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "알림 수신 채널",
+            "object_phrase": "알림 수신 채널"
+          }
+        },
+        {
+          "story_id": "IS-071",
+          "action": "강사가 자동 모니터링의 알림 조건을 설정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "설정한다",
+            "object": "자동 모니터링의 알림 조건",
+            "object_phrase": "자동 모니터링의 알림 조건을"
+          }
+        },
+        {
+          "story_id": "IS-130",
+          "action": "강사가 자동 모니터링 설정 내용을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "자동 모니터링 설정 내용",
+            "object_phrase": "자동 모니터링 설정 내용"
+          }
+        },
+        {
+          "story_id": "IS-031",
+          "action": "강사가 조회용 인증 유지를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "조회용 인증 유지",
+            "object_phrase": "조회용 인증 유지을/를"
+          }
+        },
+        {
+          "story_id": "IS-131",
+          "action": "강사가 자동 모니터링의 시작을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "자동 모니터링의 시작",
+            "object_phrase": "자동 모니터링의 시작"
+          }
+        },
+        {
+          "story_id": "IS-134",
+          "action": "강사가 자동 모니터링의 운영 상태를 조회한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "조회한다",
+            "object": "자동 모니터링의 운영 상태",
+            "object_phrase": "자동 모니터링의 운영 상태"
+          }
+        },
+        {
+          "story_id": "IS-032",
+          "action": "강사가 자동 모니터링의 상태 변화 알림을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "자동 모니터링의 상태 변화 알림",
+            "object_phrase": "자동 모니터링의 상태 변화 알림을"
+          }
+        },
+        {
+          "story_id": "IS-033",
+          "action": "강사가 자동 모니터링 중단을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "자동 모니터링 중단",
+            "object_phrase": "자동 모니터링 중단을"
+          }
+        },
+        {
+          "story_id": "IS-138",
+          "action": "강사가 자동 모니터링 종료 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "자동 모니터링 종료 결과",
+            "object_phrase": "자동 모니터링 종료 결과"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P03 상태 자동 확인 부담 감소, 별도 채택 및 권한 검증 전 미제공",
+        "basis": "기획 §5.9·§8.6·§11.2",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P03"
+        ],
+        "feature_refs": [
+          "E01",
+          "E02",
+          "E04",
+          "E05",
+          "E03"
+        ]
+      }
     },
     {
       "id": "J15",
       "title": "플랫폼 특화 조건부 업무",
-      "story": "강사는 별도 채택된 경우에 최초 모집 일정·대표 서비스를 설정하고 싶다.",
+      "story": "강사가 탈잉의 모집 오픈에 필요한 일정 등록을 요청한다.",
       "normal": "탈잉 심사 승인 후 최초 일정/장소, 숨고 대표 서비스 관계의 정확 대상·권한·영향/승인 확인 후 수행 및 독립 관측.",
       "error": "별도 채택·권한·완료 증거 확보 전 미제공. 전체 일정 운영·고객 관리·다른 서비스 변경 제외.",
       "scope": "conditional",
@@ -470,13 +2029,119 @@
         "IS-017",
         "IS-023",
         "IS-104"
-      ]
+      ],
+      "primary_story_ref": "IS-058",
+      "primary_svo": {
+        "subject": "강사",
+        "verb": "요청한다",
+        "object": "탈잉의 모집 오픈에 필요한 일정 등록",
+        "object_phrase": "탈잉의 모집 오픈에 필요한 일정 등록을"
+      },
+      "normal_user_actions": [
+        {
+          "story_id": "IS-058",
+          "action": "강사가 탈잉의 모집 오픈에 필요한 일정 등록을 요청한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "요청한다",
+            "object": "탈잉의 모집 오픈에 필요한 일정 등록",
+            "object_phrase": "탈잉의 모집 오픈에 필요한 일정 등록을"
+          }
+        },
+        {
+          "story_id": "IS-038",
+          "action": "강사가 숨고 프로필의 대표 서비스를 지정한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "지정한다",
+            "object": "숨고 프로필의 대표 서비스",
+            "object_phrase": "숨고 프로필의 대표 서비스를"
+          }
+        },
+        {
+          "story_id": "IS-041",
+          "action": "강사가 심사 승인 후 남은 모집 준비를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "심사 승인 후 남은 모집 준비",
+            "object_phrase": "심사 승인 후 남은 모집 준비를"
+          }
+        },
+        {
+          "story_id": "IS-014",
+          "action": "강사가 관리할 기존 외부 객체를 선택한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "선택한다",
+            "object": "관리할 기존 외부 객체",
+            "object_phrase": "관리할 기존 외부 객체를"
+          }
+        },
+        {
+          "story_id": "IS-016",
+          "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "플랫폼별 최종 입력 내용",
+            "object_phrase": "플랫폼별 최종 입력 내용을"
+          }
+        },
+        {
+          "story_id": "IS-017",
+          "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "승인한다",
+            "object": "외부 업무의 실행 범위",
+            "object_phrase": "외부 업무의 실행 범위를"
+          }
+        },
+        {
+          "story_id": "IS-023",
+          "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "플랫폼별 업무 실행 결과",
+            "object_phrase": "플랫폼별 업무 실행 결과를"
+          }
+        }
+      ],
+      "normal_user_action_note": "대표 정상 경로에 등장하는 단일 행동들. 최초/재방문·신규/수정·조건 충족 여부에 따라 필요한 행동만 선택하며, 표 순서는 강제 UI/실행 순서가 아니다.",
+      "why": {
+        "motivation": "P02 플랫폼 고유 모집 조건 처리, 별도 채택/권한·완료 근거 확인 필요",
+        "basis": "기획 §5.6·§5.8·§10.2",
+        "proposal_ref": {
+          "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+        },
+        "pain_refs": [
+          "P01",
+          "P02",
+          "P03"
+        ],
+        "feature_refs": [
+          "F11",
+          "F15",
+          "F29",
+          "F14",
+          "F16",
+          "F17",
+          "F22",
+          "F24",
+          "F27",
+          "F28"
+        ]
+      }
     }
   ],
   "platform_impacts": [
     {
       "platform_id": "PL01",
-      "finding": "모집 형태와 제공 방식 분리. 패키지 제목/설명·단일 STANDARD 후보. 작업기간·수정횟수 의미와 실제 접수/공개 매핑 불명.",
+      "finding": "모집 형태와 제공 방식 분리. 패키지 제목/설명·단일 STANDARD 후보. 작업기간·수정횟수 의미와 실제 접수/공개 매핑 불명. 패키지 제목 20자·설명 60자 카운터, 작업기간·수정횟수 필수 표시, 이미지 규격은 해당 보컬 화면 관찰. 단일 STANDARD·VAT·공개 주소·저장/결제 미확인.",
       "story_refs": [
         "IS-008",
         "IS-009",
@@ -486,16 +2151,20 @@
         "IS-016",
         "IS-020",
         "IS-023",
-        "IS-104"
+        "IS-104",
+        "IS-055",
+        "IS-091",
+        "IS-105"
       ],
       "source_refs": [
         "r02",
-        "r05"
+        "r05",
+        "r05_example"
       ]
     },
     {
       "platform_id": "PL02",
-      "finding": "90분 정수 시간 제약: 실제 제공할 60/120분·가격 선택 또는 보류. 시간당×회당×회차 총액. 심사 후 회당 시간 비활성, 최초 일정 별도. 미승인 자동 등록 제한, 개별 대행 허용 미확인.",
+      "finding": "90분 정수 시간 제약: 실제 제공할 60/120분·가격 선택 또는 보류. 시간당×회당×회차 총액. 심사 후 회당 시간 비활성, 최초 일정 별도. 미승인 자동 등록 제한, 개별 대행 허용 미확인. 동일 원본 120분×6회·시간당 12,500원=150,000원 화면 표시 확인. 실제 회차별 구성·일정·장소 및 공개 범위 강사 확인, 오픈/일정의 선후 관계 미확인.",
       "story_refs": [
         "IS-010",
         "IS-044",
@@ -508,12 +2177,17 @@
         "IS-021",
         "IS-041",
         "IS-074",
-        "IS-108"
+        "IS-108",
+        "IS-009",
+        "IS-055",
+        "IS-091",
+        "IS-105"
       ],
       "source_refs": [
         "taling",
         "r02",
-        "r05"
+        "r05",
+        "r05_example"
       ]
     },
     {
@@ -556,17 +2230,26 @@
     },
     {
       "platform_id": "PL05",
-      "finding": "개인레슨 게시물 및 동일 공고 최신글 올리기 후보. 등록·갱신 자격/간격·효과 미확인.",
+      "finding": "개인레슨 게시물 및 동일 공고 최신글 올리기 후보. 등록·갱신 자격/간격·효과 미확인. 별도 수강료는 원 단위 쉼표 없는 입력 안내, 회당/총액 의미·공개 불명 시 보류. 본문 총액 명시, 주소·메인/본문 사진 용도 강사 확인, 약관 직접 동의.",
       "story_refs": [
         "IS-020",
         "IS-022",
         "IS-040",
         "IS-104",
-        "IS-108"
+        "IS-108",
+        "IS-008",
+        "IS-009",
+        "IS-055",
+        "IS-064",
+        "IS-091",
+        "IS-105",
+        "IS-016",
+        "IS-017"
       ],
       "source_refs": [
         "r04",
-        "r05"
+        "r05",
+        "r05_example"
       ]
     },
     {
@@ -1271,12 +2954,628 @@
     "semantic": "inconclusive_full_state_space",
     "official_python_ci": "not_run",
     "runtime": "not_run",
-    "db_entry": "blocked_pending_scope_approval"
+    "db_entry": "blocked_pending_scope_approval",
+    "design_platforms": 7,
+    "design_operations": 44,
+    "explicit_svo_scenarios": 15,
+    "r04_screen_candidates": 37,
+    "latest_field_source_records": 318,
+    "approved_design_platforms": 7
   },
   "limits": [
-    "R02 조사 진행 중; R03/R04/R05 승인 아님.",
-    "최신 조사 출처 및 스토리 영향 대조. 이전 platform-comparison.json의 전체 필드 의미/제약 재정규화는 DB 전 단계 후속.",
-    "공식 Python/CI 및 project_docs.py 생성 미실행: 컨테이너 GitHub DNS 접근 불가.",
-    "모든 외부 대행 허용 및 실제 효과 미확인. mock-only 유지."
-  ]
+    "7개 설계 대상 포함은 사용자 지시로 확정; 개별 사용자 행동/업무 범위 승인 0개, 실제 제공 및 일정 미확정.",
+    "R05 개인 브랜치 입력 예시를 불변 근거로 반영; 팀원 원본/브랜치 병합 없음.",
+    "최신 출처 필드 인덱스 318개 반영. 의미·제약·관계 전체 정규화 및 DB 상세는 후속.",
+    "R04 화면 37개 검토용; 별도 UI/운영자 기능 또는 6개 신규 행동 후보는 미채택.",
+    "실제 대행 권한·완료 실증 0개, 공식 Python/CI 및 project_docs.py 미실행. 전체 의미 검증 미완료."
+  ],
+  "presentation_contract": {
+    "rule": "사용자 스토리는 행위자(S)·목적어(O)·단일 행위(V)를 명시한 실제 행동. 희망사항·동기는 별도 기획 근거.",
+    "scenario": "J는 개별 SVO의 묶음이며 독립 원자 행동 아님. J마다 대표 SVO 및 해당 정상/오류/예외/반복의 세부 행동을 보여 준다.",
+    "why": "기획안 문제/Pain→피처(F/E)→행동→시스템 결과/기대 가치의 연결. 신규 희망사항을 범위 근거로 자동 채택하지 않음.",
+    "system": "시스템 수행은 사용자 행동과 별도 기록."
+  },
+  "design_scope": {
+    "status": "사용자 지시로 7개 플랫폼 설계 포함 확정. 개별 사용자 행동/업무 채택 및 실제 실행 별도 승인.",
+    "authority": "R01 사용자 지시: MVP의 구현 순서는 있더라도 설계 상에는 7개 플랫폼이 모두 포함되도록 한다.",
+    "platform_ids": [
+      "PL01",
+      "PL02",
+      "PL03",
+      "PL04",
+      "PL05",
+      "PL06",
+      "PL07"
+    ],
+    "requirements": [
+      "7개 모두의 실제 관리 객체·계정·소유권·관계·식별",
+      "플랫폼별 입력 및 반환 데이터, 필드·단위·제약·변환 규칙",
+      "업무별 사용자 SVO·시스템 동작·정상/오류/반복·완료 기준",
+      "native 상태와 독립 관측 증거, 권한·지원 불가·미확인 상태의 표현",
+      "7개 모두 지원할 수 있는 공통/고유 데이터 구조 및 업무 계약. 미확인 사실은 보존하고 실제 실행 차단"
+    ],
+    "implementation_priority": "MVP 구현/검증 순서는 설계 포함 여부와 분리. 기존 제품 MVP 최소 2개는 첫 가치 검증 추천이며 7개 설계 범위를 축소하지 않음. 실제 순서·일정·개별 지원 업무는 별도 검토.",
+    "approval": "7개 플랫폼 설계 포함 확정; 141개 행동 및 44개 업무별 최종 승인 0개; mock-only"
+  },
+  "input_case": {
+    "source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R05/vocal-lesson-input-examples.md",
+      "commit": "ae4c496ef91cce698db710080ba7d7483ccc4718",
+      "blob": "d159a171fd26f56289ba5bc52a58357f181f98e1"
+    },
+    "case": "1:1 대면 보컬, 회당 120분, 6회 총 150,000원(강사 확인 전 입력 예시)",
+    "platforms": [
+      "PL01",
+      "PL02",
+      "PL05"
+    ],
+    "common_actions": [
+      "IS-008",
+      "IS-009",
+      "IS-016",
+      "IS-017",
+      "IS-105"
+    ],
+    "evidence_boundary": "기존 화면 및 입력안 예시. 신규 입력·저장·심사·게시·결제 및 자동 대행 실증 없음."
+  },
+  "r04_ui_review": {
+    "source_refs": [
+      "r04_function",
+      "r04_menu",
+      "r04_screen",
+      "r04_ia",
+      "r04_catalog"
+    ],
+    "screen_count": 37,
+    "disposition": "화면 37개 제안과 기존 SVO 연결 및 차이 기록. 화면 개수·메뉴·API를 승인하지 않음.",
+    "screens": [
+      {
+        "screen_id": "SCR-001",
+        "name": "홈 대시보드",
+        "journey_ref": "J10",
+        "story_refs": [
+          "IS-023",
+          "IS-024",
+          "IS-046",
+          "IS-080"
+        ],
+        "r01_review": "기본 행동에 연결; 대시보드 UI 미확정",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-010",
+        "name": "레슨 목록",
+        "journey_ref": "J03",
+        "story_refs": [
+          "IS-066",
+          "IS-002"
+        ],
+        "r01_review": "원본 목록 기본; 검색/필터는 UI 후보",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-011",
+        "name": "레슨 작성",
+        "journey_ref": "J02",
+        "story_refs": [
+          "IS-001",
+          "IS-064",
+          "IS-055",
+          "IS-003",
+          "IS-005"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-012",
+        "name": "레슨 상세·수정",
+        "journey_ref": "J03",
+        "story_refs": [
+          "IS-067",
+          "IS-004",
+          "IS-005",
+          "IS-065"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-013",
+        "name": "버전 이력",
+        "journey_ref": "J03",
+        "story_refs": [
+          "IS-067",
+          "IS-004",
+          "IS-005"
+        ],
+        "r01_review": "저장 revision 기본. 별도 버전 이력 조회는 추가 행동 후보(후속 승인 필요)",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-014",
+        "name": "레슨 삭제 확인",
+        "journey_ref": "J13",
+        "story_refs": [
+          "IS-034"
+        ],
+        "r01_review": "내부 삭제 기본; 외부 게시물 자동 삭제 금지",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-020",
+        "name": "작업 시작",
+        "journey_ref": "J04",
+        "story_refs": [
+          "IS-002",
+          "IS-006",
+          "IS-007",
+          "IS-068"
+        ],
+        "r01_review": "기본; 7개 플랫폼 설계 포함",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-021",
+        "name": "플랫폼 지원 범위",
+        "journey_ref": "J04",
+        "story_refs": [
+          "IS-006",
+          "IS-108",
+          "IS-059"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-022",
+        "name": "정보 준비·보완",
+        "journey_ref": "J04",
+        "story_refs": [
+          "IS-008",
+          "IS-009",
+          "IS-105",
+          "IS-114",
+          "IS-123"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-023",
+        "name": "제약 충돌 선택",
+        "journey_ref": "J04",
+        "story_refs": [
+          "IS-010",
+          "IS-044",
+          "IS-119"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-024",
+        "name": "플랫폼 인증",
+        "journey_ref": "J05",
+        "story_refs": [
+          "IS-109",
+          "IS-011",
+          "IS-012",
+          "IS-013",
+          "IS-078",
+          "IS-079",
+          "IS-098"
+        ],
+        "r01_review": "직접 인증·계정 확인 기본; 인증 구현/UI 미정",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-025",
+        "name": "대상 게시물 확인",
+        "journey_ref": "J05",
+        "story_refs": [
+          "IS-089",
+          "IS-014",
+          "IS-106",
+          "IS-116",
+          "IS-117"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-026",
+        "name": "변경 비교",
+        "journey_ref": "J08",
+        "story_refs": [
+          "IS-015",
+          "IS-056",
+          "IS-118"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-027",
+        "name": "최종 검토·승인",
+        "journey_ref": "J06",
+        "story_refs": [
+          "IS-082",
+          "IS-083",
+          "IS-016",
+          "IS-017",
+          "IS-018",
+          "IS-069",
+          "IS-019"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-028",
+        "name": "실행 진행",
+        "journey_ref": "J07",
+        "story_refs": [
+          "IS-020",
+          "IS-021",
+          "IS-022",
+          "IS-049",
+          "IS-125"
+        ],
+        "r01_review": "업무 요청/진행 표시; 실제 상태 기계·화면 미정",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-029",
+        "name": "작업 결과",
+        "journey_ref": "J10",
+        "story_refs": [
+          "IS-023",
+          "IS-045",
+          "IS-046",
+          "IS-026",
+          "IS-029",
+          "IS-104"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-02A",
+        "name": "승인 철회 확인",
+        "journey_ref": "J06",
+        "story_refs": [
+          "IS-087",
+          "IS-088"
+        ],
+        "r01_review": "승인 철회 기본; 실행 이후 원복 아님",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-030",
+        "name": "통합 현황",
+        "journey_ref": "J10",
+        "story_refs": [
+          "IS-024",
+          "IS-023",
+          "IS-047"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-031",
+        "name": "게시물 상세",
+        "journey_ref": "J10",
+        "story_refs": [
+          "IS-024",
+          "IS-081",
+          "IS-124"
+        ],
+        "r01_review": "기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-032",
+        "name": "상태 갱신 요청",
+        "journey_ref": "J11",
+        "story_refs": [
+          "IS-025",
+          "IS-027",
+          "IS-047"
+        ],
+        "r01_review": "R04 확장 제안; R01은 사용자 요청 상태 조회를 첫 가치 검증 후보로 추천",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-033",
+        "name": "반려·오류 대응",
+        "journey_ref": "J11",
+        "story_refs": [
+          "IS-048",
+          "IS-084",
+          "IS-085",
+          "IS-028",
+          "IS-074",
+          "IS-112"
+        ],
+        "r01_review": "기본; 허용된 재심사는 새 승인",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-034",
+        "name": "연동 해제 확인",
+        "journey_ref": "J13",
+        "story_refs": [
+          "IS-035",
+          "IS-110"
+        ],
+        "r01_review": "관리 연결 해제 기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-040",
+        "name": "작업 이력",
+        "journey_ref": "J10",
+        "story_refs": [
+          "IS-080"
+        ],
+        "r01_review": "업무 이력 기본; 필터 UI 후보",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-041",
+        "name": "이력 상세",
+        "journey_ref": "J10",
+        "story_refs": [
+          "IS-080",
+          "IS-081"
+        ],
+        "r01_review": "이력·증거 기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-050",
+        "name": "알림 목록",
+        "journey_ref": "J14",
+        "story_refs": [
+          "IS-032",
+          "IS-137",
+          "IS-047"
+        ],
+        "r01_review": "수동 조회 결과와 조건부 알림 구분; 읽음 처리/독립 알림센터 UI 미채택 후보",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-060",
+        "name": "모니터링 설정",
+        "journey_ref": "J14",
+        "story_refs": [
+          "IS-030",
+          "IS-128",
+          "IS-129",
+          "IS-070",
+          "IS-071",
+          "IS-141",
+          "IS-142",
+          "IS-130",
+          "IS-131",
+          "IS-134"
+        ],
+        "r01_review": "조건부",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-061",
+        "name": "인증 유지 위험 고지·동의",
+        "journey_ref": "J14",
+        "story_refs": [
+          "IS-086",
+          "IS-031",
+          "IS-061"
+        ],
+        "r01_review": "조건부",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-062",
+        "name": "모니터링 중단·세션 폐기",
+        "journey_ref": "J14",
+        "story_refs": [
+          "IS-033",
+          "IS-072",
+          "IS-073",
+          "IS-138",
+          "IS-139",
+          "IS-140"
+        ],
+        "r01_review": "조건부",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-070",
+        "name": "로그인",
+        "journey_ref": "J01",
+        "story_refs": [
+          "IS-121",
+          "IS-051",
+          "IS-052"
+        ],
+        "r01_review": "자체 서비스 사용자 식별 기본; 구체 화면/수단 미정",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-071",
+        "name": "회원가입·약관 동의",
+        "journey_ref": "J01",
+        "story_refs": [
+          "IS-062",
+          "IS-051"
+        ],
+        "r01_review": "최초 owner 식별 기본; 별도 가입/동의 화면 방식 미정",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-072",
+        "name": "내 정보",
+        "journey_ref": "J14",
+        "story_refs": [
+          "IS-142",
+          "IS-071"
+        ],
+        "r01_review": "별도 내 정보 수정 UI/행동 추가 제안; 첫 MVP 미추천, 알림 수신 조건부",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-073",
+        "name": "개인정보·데이터 관리",
+        "journey_ref": "J13",
+        "story_refs": [
+          "IS-034",
+          "IS-063",
+          "IS-099"
+        ],
+        "r01_review": "원본 삭제·권리 처리 기본; 독립 계정 삭제 UI 미채택",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-074",
+        "name": "플랫폼 연결 상태",
+        "journey_ref": "J12",
+        "story_refs": [
+          "IS-127",
+          "IS-111",
+          "IS-139"
+        ],
+        "r01_review": "업무 세션 폐기 확인 기본, 지속 연결은 조건부",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-080",
+        "name": "플랫폼 이용 안내",
+        "journey_ref": "J04",
+        "story_refs": [
+          "IS-006",
+          "IS-108",
+          "IS-059"
+        ],
+        "r01_review": "지원·제약 안내 기본",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-081",
+        "name": "FAQ·문의",
+        "journey_ref": "J04",
+        "story_refs": [
+          "IS-006",
+          "IS-108"
+        ],
+        "r01_review": "독립 FAQ·문의는 추가 행동 후보, 미채택",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-090",
+        "name": "플랫폼 규칙 관리",
+        "journey_ref": null,
+        "story_refs": [],
+        "r01_review": "운영자 규칙 관리 별도 설계 대상; 강사 SVO 아님",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      },
+      {
+        "screen_id": "SCR-091",
+        "name": "운영 이력·감사",
+        "journey_ref": null,
+        "story_refs": [],
+        "r01_review": "운영자 감사 별도 설계 대상; 강사 SVO 아님",
+        "source_ref": "r04_catalog",
+        "ui_approval": "not_approved"
+      }
+    ],
+    "pending_distinct_actions": [
+      {
+        "source": "SCR-013",
+        "action": "강사가 원본 레슨의 버전 이력을 조회한다.",
+        "disposition": "추가 후보; 현재 버전 조회·보존과 별도 사용자 기능 필요성 검토"
+      },
+      {
+        "source": "SCR-050",
+        "action": "강사가 알림의 읽음 상태를 변경한다.",
+        "disposition": "조건부 알림센터 UI의 추가 후보; 미채택"
+      },
+      {
+        "source": "SCR-072",
+        "action": "강사가 서비스 내 사용자 정보를 수정한다.",
+        "disposition": "추가 후보; owner 식별에 필요한 최소 사용자 정보와 별도 기능"
+      },
+      {
+        "source": "SCR-081",
+        "action": "강사가 서비스 이용 문의를 제출한다.",
+        "disposition": "독립 도움말/문의 기능 후보, 미채택"
+      },
+      {
+        "source": "SCR-090",
+        "action": "운영자가 플랫폼별 업무 규칙을 수정한다.",
+        "disposition": "내부 운영 설계 후보; 강사 범위와 분리"
+      },
+      {
+        "source": "SCR-091",
+        "action": "운영자가 업무 감사 이력을 조회한다.",
+        "disposition": "내부 운영 설계 후보; 강사 범위와 분리"
+      }
+    ]
+  },
+  "latest_member_review": {
+    "main_snapshot": "1917288563cb633892452bcd3f415d274a5d735b",
+    "branch_review": {
+      "r04": "akaraywon = main",
+      "r03": "r03/product-app main 포함, 추가 diff 없음",
+      "r05": "codex/r05-task-057-research main 포함, Imdahyeok 추가 사례만 별도 고정. 독립 원본 및 7개 상세 조사 blob은 main과 동일.",
+      "r02": "main 최신 탈잉/숨고 보완 반영; 당시 codex/r02-daily-20261126 ref는 조회되지 않음."
+    },
+    "latest_field_index": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json",
+      "common": 194,
+      "detail": 124,
+      "total": 318,
+      "limits": "최신 출처 레코드 인덱스, 의미·제약 정규화 미완료"
+    },
+    "r04": "오류 22/반복 9/추가 기능 12 기존 대조 유지, 37개 화면 후보 연결",
+    "r05": "추가 보컬 입력 예시 반영"
+  }
 }

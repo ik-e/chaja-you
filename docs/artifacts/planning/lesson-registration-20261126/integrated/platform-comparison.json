@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "PLATFORM-COMPARISON-20261126-R01-V1",
   "kind": "document",
-  "status": "7개 플랫폼 교차 비교 1차 · DB/지원/실행 미확정",
+  "status": "7개 플랫폼 설계 대상 확정; 기존 비교 스냅샷 + 최신 공통 필드 인덱스/입력 사례 보완",
   "owner": "R01",
   "task_ref": "TASK-058",
   "title": "7개 플랫폼 업무·데이터 의미·관계 및 제약 비교",
@@ -84,6 +84,12 @@
       "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
       "blob": "6373776ee162b06a9fb6dc205a3a5db7c876cf4e",
       "url": "https://github.com/ik-e/chaja-you/blob/3f4924c5fc1153a641987eaf1b5e2bdc937b569f/docs/artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json"
+    },
+    "r05_example": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R05/vocal-lesson-input-examples.md",
+      "commit": "ae4c496ef91cce698db710080ba7d7483ccc4718",
+      "blob": "d159a171fd26f56289ba5bc52a58357f181f98e1",
+      "status": "개인 브랜치의 추가 입력안 사례; 기존 조사 원본과 별개. 실제 저장·게시·대행 실증 아님"
     }
   },
   "method": "팀원별 공통 원본을 그대로 참조하고 R05 상세 조사 7개 및 R02 크몽 문답의 조건을 비교. 260개는 중복 포함 소스 필드 레코드 수. 공통 의미 후보 그룹을 붙이되 입력/노출/반환, 대상 객체, 제약, 근거 상태를 합치지 않는다. 같은 화면·문서의 재사용은 독립 검증 아님. 직접 지원 경로와 대행 허용·완료 결과 분리.",
@@ -15475,5 +15481,4839 @@
       "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json"
     }
   ],
-  "source_revision_note": "통합 스토리의 고위험 분기 보완 후 동일 107개 ID 및 원본 매핑을 재확인하고 불변 commit/blob으로 고정. 플랫폼 필드/업무/스토리 연결은 변경하지 않음."
+  "source_revision_note": "통합 스토리의 고위험 분기 보완 후 동일 107개 ID 및 원본 매핑을 재확인하고 불변 commit/blob으로 고정. 플랫폼 필드/업무/스토리 연결은 변경하지 않음.",
+  "latest_field_source_index": {
+    "status": "최신 팀원 공통 원본의 필드 식별 전수 갱신. 1차 의미 그룹/업무 정규화의 기존 스냅샷 보존; 이번 단계는 상세 DB 스키마 확정 아님.",
+    "main_snapshot": "1917288563cb633892452bcd3f415d274a5d735b",
+    "source_refs": {
+      "r02": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+        "blob": "fff4bd74ab7e555d74df4c2e4fe79147a6a4f147"
+      },
+      "r04": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+        "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+        "blob": "0858225470be2ee69ef4312077b87cea35baec3b"
+      },
+      "r05": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+        "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+        "blob": "98271e64f02a035b9c1175d33b9a5691cc632481"
+      }
+    },
+    "source_counts": {
+      "r02": 74,
+      "r04": 93,
+      "r05": 27
+    },
+    "common_field_count": 194,
+    "detail_field_count": 124,
+    "total_records_including_duplicates": 318,
+    "fields": [
+      {
+        "key": "r02:R02-PL01-FIELD01",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-FIELD01",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "전문가 소개",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL01"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-FIELD01"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-FIELD02",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-FIELD02",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "보유 기술",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL01"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-FIELD02"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-FIELD03",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-FIELD03",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "경력·학력·자격",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL01"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-FIELD03"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-FIELD04",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-FIELD04",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "포트폴리오",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL01"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-FIELD04"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-01",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-01",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "제목",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-01"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-02",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-02",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "카테고리",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-02"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-03",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-03",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "서비스 설명",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-03"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-04",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-04",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "모집 형태",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-04"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-05",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-05",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "메인 이미지",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-05"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-06",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-06",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "상세 이미지",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-06"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-07",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-07",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "동영상",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-07"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-08",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-08",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "서비스 제공 절차",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-08"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-09",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-09",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "의뢰인 준비사항",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-09"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-10",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-10",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "지역",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-10"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-11",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-11",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "가격",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-11"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-12",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-12",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "작업 기간",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-12"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-13",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-13",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "수정 횟수",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-13"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-14",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-14",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "1회당 레슨시간",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-14"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-15",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-15",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "레슨 횟수",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-15"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-16",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-16",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "기본 포함 항목",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-16"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-17",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-17",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "검색 키워드",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-17"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-18",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-18",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "자주 묻는 질문",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-18"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-19",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-19",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "작업 전 요청사항",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-19"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-20",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-20",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "대상자",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-20"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-21",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-21",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "서비스 내용",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-21"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-22",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-22",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "준비물",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-22"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-23",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-23",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "커리큘럼",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-23"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-24",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-24",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "가능일",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-24"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-25",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-25",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "빠른 작업",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-25"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-26",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-26",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "추가 수정",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-26"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-27",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-27",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "레슨 시간 추가",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-27"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-28",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-28",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "레슨 횟수 추가",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-28"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-29",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-29",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "준비물 제공 비용 추가",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-29"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-30",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-30",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "강의실 제공 추가",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-30"
+        }
+      },
+      {
+        "key": "r02:R02-PL01-CONF-31",
+        "platform_id": "PL01",
+        "source": "r02",
+        "field_id": "R02-PL01-CONF-31",
+        "object_ref": "R02-PL01-OBJ1",
+        "label": "맞춤 옵션",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-KMONG-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL01-CONF-31"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-FIELD01",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-FIELD01",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "카테고리",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-FIELD01"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-FIELD02",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-FIELD02",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스명",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-FIELD02"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-FIELD03",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-FIELD03",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 썸네일",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-FIELD03"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-FIELD04",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-FIELD04",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 대상",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-FIELD04"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-01",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-01",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "운영 방식",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-01"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-02",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-02",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "카테고리",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-02"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-03",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-03",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스명",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-03"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-04",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-04",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 썸네일",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-04"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-05",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-05",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 대상",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-05"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-06",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-06",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 요약",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-06"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-07",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-07",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 상세 소개",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-07"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-08",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-08",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "회차",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-08"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-09",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-09",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "회차별 커리큘럼 소개",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-09"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-10",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-10",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "참여인원",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-10"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-11",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-11",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "수강료",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-11"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-12",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-12",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "승인 메시지",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-12"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-13",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-13",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "태그",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-13"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-14",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-14",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "영상",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-14"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-15",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-15",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "클래스 공지사항",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-15"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-16",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-16",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "정산 설정",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-16"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-17",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-17",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "튜터명",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-17"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-18",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-18",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "튜터 소개",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-18"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-19",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-19",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "프로필 이미지",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-19"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-20",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-20",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "이력",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-20"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-21",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-21",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "장소",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-21"
+        }
+      },
+      {
+        "key": "r02:R02-PL02-CONF-22",
+        "platform_id": "PL02",
+        "source": "r02",
+        "field_id": "R02-PL02-CONF-22",
+        "object_ref": "R02-PL02-OBJ1",
+        "label": "튜터 채널",
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-TALING-USER-20261126"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL02-CONF-22"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD01",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD01",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "활동명",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD01"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD02",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD02",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "한줄소개",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD02"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD03",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD03",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "이벤트",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD03"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD04",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD04",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "프로필 사진",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD04"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD05",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD05",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "경력",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD05"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD06",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD06",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "학력",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD06"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD07",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD07",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "고수 서비스 상세설명",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD07"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD08",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD08",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "사진 및 동영상",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD08"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD09",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD09",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "질문답변",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD09"
+        }
+      },
+      {
+        "key": "r02:R02-PL03-FIELD10",
+        "platform_id": "PL03",
+        "source": "r02",
+        "field_id": "R02-PL03-FIELD10",
+        "object_ref": "R02-PL03-OBJ1",
+        "label": "포트폴리오",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL03-FIELD10"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-FIELD01",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-FIELD01",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "카테고리 선택",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL04"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL04-FIELD01"
+        }
+      },
+      {
+        "key": "r02:R02-PL06-FIELD01",
+        "platform_id": "PL06",
+        "source": "r02",
+        "field_id": "R02-PL06-FIELD01",
+        "object_ref": "R02-PL06-OBJ1",
+        "label": "게시물 제목",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL06-FIELD01"
+        }
+      },
+      {
+        "key": "r02:R02-PL06-FIELD02",
+        "platform_id": "PL06",
+        "source": "r02",
+        "field_id": "R02-PL06-FIELD02",
+        "object_ref": "R02-PL06-OBJ1",
+        "label": "게시물 본문",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-ADD-PL06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R02-PL06-FIELD02"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F01",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F01",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "서비스 제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F02",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F02",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "카테고리",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F03",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F03",
+        "object_ref": "R04-PL01-OBJ2",
+        "label": "패키지별 가격",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F09",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F09",
+        "object_ref": "R04-PL01-OBJ2",
+        "label": "패키지별 옵션 (작업 기간·수정 횟수 등)",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F04",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F04",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "서비스 설명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F05",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F05",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "메인 이미지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F06",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F06",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "의뢰인 준비사항",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F07",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F07",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "상품 고유 ID",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F07"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F10",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F10",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "상품 상세 링크",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F10"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F08",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F08",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "심사 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL01-F11",
+        "platform_id": "PL01",
+        "source": "r04",
+        "field_id": "R04-PL01-F11",
+        "object_ref": "R04-PL01-OBJ1",
+        "label": "판매 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL01-F11"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F01",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F01",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "수업 제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F02",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F02",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "수업 형태",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F08",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F08",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "수업 인원",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F03",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F03",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "시간당 수업료",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02",
+          "R04-EV-PROPOSAL"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F09",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F09",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "회차",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02",
+          "R04-EV-PROPOSAL"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F04",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F04",
+        "object_ref": "R04-PL02-OBJ2",
+        "label": "단계별 커리큘럼",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F05",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F05",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "커버 사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F10",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F10",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "수업 사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F10"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F06",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F06",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "클래스 식별 번호",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F11",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F11",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "클래스 URL",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F11"
+        }
+      },
+      {
+        "key": "r04:R04-PL02-F07",
+        "platform_id": "PL02",
+        "source": "r04",
+        "field_id": "R04-PL02-F07",
+        "object_ref": "R04-PL02-OBJ1",
+        "label": "클래스 검수 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL02-F07"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F01",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F01",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "한 줄 소개",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-07",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F02",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F02",
+        "object_ref": "R04-PL03-OBJ2",
+        "label": "제공 서비스",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06",
+          "R04-EV-SHOT-08",
+          "R04-EV-SHOT-11",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F03",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F03",
+        "object_ref": "R04-PL03-OBJ2",
+        "label": "서비스 세부 항목 (제공 가능 항목 선택)",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-11",
+          "R04-EV-SOOMGO-SHOTS"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F04",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F04",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "서비스 상세 설명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F05",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F05",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "프로필 이미지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F06",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F06",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "활동 지역",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F07",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F07",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "고수 프로필 URL",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "reported",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-SHOTS",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F07"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F08",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F08",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "프로필 공개 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F09",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F09",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "숨고 활동명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-07"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F10",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F10",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "연락 가능 시간",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-07"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F10"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F11",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F11",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "직원수",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-07"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F11"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F12",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F12",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "외부 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-07"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F12"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F13",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F13",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "대표 서비스",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F13"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F14",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F14",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "활동 가능 범위",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F14"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F15",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F15",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "프로필 완성도",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F15"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F16",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F16",
+        "object_ref": "R04-PL03-OBJ2",
+        "label": "서비스 세부 항목 설정 상태",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-08"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F16"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F17",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F17",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "경력",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F17"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F18",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F18",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "학력",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F18"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F19",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F19",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "사진 및 동영상",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F19"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F20",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F20",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "포트폴리오",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F20"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F21",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F21",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "질문답변",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F21"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F22",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F22",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "본인인증",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F22"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F23",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F23",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "사업자등록증",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F23"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F24",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F24",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "공식 자격증 및 기타 서류",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F24"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F25",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F25",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "결제 수단",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F25"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F26",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F26",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "숨고페이 정산정보",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F26"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F27",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F27",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "세금 계산서 발행",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F27"
+        }
+      },
+      {
+        "key": "r04:R04-PL03-F28",
+        "platform_id": "PL03",
+        "source": "r04",
+        "field_id": "R04-PL03-F28",
+        "object_ref": "R04-PL03-OBJ1",
+        "label": "리뷰",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-SHOT-06",
+          "R04-EV-SHOT-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL03-F28"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F01",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F01",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "전문가명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F07",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F07",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "한줄소개",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F07"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F02",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F02",
+        "object_ref": "R04-PL04-OBJ2",
+        "label": "전문 분야 (레슨)",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F03",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F03",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "소개글",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F08",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F08",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "경력사항",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F04",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F04",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "활동 지역",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F09",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F09",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "레슨 방식",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F05",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F05",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "전문가 프로필 URL",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL04-F06",
+        "platform_id": "PL04",
+        "source": "r04",
+        "field_id": "R04-PL04-F06",
+        "object_ref": "R04-PL04-OBJ1",
+        "label": "전문가 활동 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL04-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F01",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F01",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F02",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F02",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "과목 분류",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F08",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F08",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "지역",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F03",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F03",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "본문 내용",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F04",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F04",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "첨부 이미지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F05",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F05",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "연락처 정보",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F06",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F06",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "게시글 번호",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F09",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F09",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "게시글 URL",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F07",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F07",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "게시 일시",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F07"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F10",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F10",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "갱신 일시",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F10"
+        }
+      },
+      {
+        "key": "r04:R04-PL05-F11",
+        "platform_id": "PL05",
+        "source": "r04",
+        "field_id": "R04-PL05-F11",
+        "object_ref": "R04-PL05-OBJ1",
+        "label": "노출 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL05-F11"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F01",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F01",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "제목",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F02",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F02",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "본문 내용",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F07",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F07",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "외부 미디어 링크 (사운드클라우드·유튜브)",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F07"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F03",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F03",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "포스터 이미지 첨부",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F04",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F04",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "오픈채팅 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F08",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F08",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "연락처",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F05",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F05",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "게시물 ID",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F09",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F09",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "게시물 URL",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F06",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F06",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "작성 일시",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL06-F10",
+        "platform_id": "PL06",
+        "source": "r04",
+        "field_id": "R04-PL06-F10",
+        "object_ref": "R04-PL06-OBJ1",
+        "label": "게시 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL06-F10"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F01",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F01",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "제목",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F01"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F08",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F08",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "말머리",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F08"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F02",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F02",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "본문",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F02"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F03",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F03",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "첨부 이미지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F03"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F09",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F09",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "미디어 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F09"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F04",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F04",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "연락처",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F04"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F10",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F10",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "오픈채팅 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F10"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F05",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F05",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "게시물 ID",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F05"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F11",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F11",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "게시물 URL",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F11"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F06",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F06",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "등록 일시",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F06"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F12",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F12",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "갱신 일시",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F12"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F13",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F13",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "노출 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F13"
+        }
+      },
+      {
+        "key": "r04:R04-PL07-F07",
+        "platform_id": "PL07",
+        "source": "r04",
+        "field_id": "R04-PL07-F07",
+        "object_ref": "R04-PL07-OBJ1",
+        "label": "가격",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R04-PL07-F07"
+        }
+      },
+      {
+        "key": "r05:R05-PL01-F1",
+        "platform_id": "PL01",
+        "source": "r05",
+        "field_id": "R05-PL01-F1",
+        "object_ref": "R05-PL01-O1",
+        "label": "제목",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL01-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL01-F2",
+        "platform_id": "PL01",
+        "source": "r05",
+        "field_id": "R05-PL01-F2",
+        "object_ref": "R05-PL01-O1",
+        "label": "카테고리",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL01-F2"
+        }
+      },
+      {
+        "key": "r05:R05-PL01-F3",
+        "platform_id": "PL01",
+        "source": "r05",
+        "field_id": "R05-PL01-F3",
+        "object_ref": "R05-PL01-O1",
+        "label": "서비스 설명",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL01-F3"
+        }
+      },
+      {
+        "key": "r05:R05-PL01-F4",
+        "platform_id": "PL01",
+        "source": "r05",
+        "field_id": "R05-PL01-F4",
+        "object_ref": "R05-PL01-O2",
+        "label": "패키지 설정",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL01-F4"
+        }
+      },
+      {
+        "key": "r05:R05-PL01-F5",
+        "platform_id": "PL01",
+        "source": "r05",
+        "field_id": "R05-PL01-F5",
+        "object_ref": "R05-PL01-O1",
+        "label": "반려 사유",
+        "direction": [
+          "return"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL01-F5"
+        }
+      },
+      {
+        "key": "r05:R05-PL01-F6",
+        "platform_id": "PL01",
+        "source": "r05",
+        "field_id": "R05-PL01-F6",
+        "object_ref": "R05-PL01-O1",
+        "label": "기본 금액",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-02"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL01-F6"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F1",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F1",
+        "object_ref": "R05-PL02-O1",
+        "label": "클래스명",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F2",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F2",
+        "object_ref": "R05-PL02-O1",
+        "label": "클래스 썸네일",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-03"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F2"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F3",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F3",
+        "object_ref": "R05-PL02-O1",
+        "label": "시간당 가격",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-04"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F3"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F4",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F4",
+        "object_ref": "R05-PL02-O1",
+        "label": "1회당 클래스 시간",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-04"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F4"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F5",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F5",
+        "object_ref": "R05-PL02-O1",
+        "label": "총 클래스 횟수",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-04"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F5"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F6",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F6",
+        "object_ref": "R05-PL02-O1",
+        "label": "반려 사유",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-05"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F6"
+        }
+      },
+      {
+        "key": "r05:R05-PL02-F7",
+        "platform_id": "PL02",
+        "source": "r05",
+        "field_id": "R05-PL02-F7",
+        "object_ref": "R05-PL02-O2",
+        "label": "일정",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-06"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL02-F7"
+        }
+      },
+      {
+        "key": "r05:R05-PL03-F1",
+        "platform_id": "PL03",
+        "source": "r05",
+        "field_id": "R05-PL03-F1",
+        "object_ref": "R05-PL03-O1",
+        "label": "한 줄 소개",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "reported",
+        "evidence_refs": [
+          "R05-EV-08"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL03-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL03-F2",
+        "platform_id": "PL03",
+        "source": "r05",
+        "field_id": "R05-PL03-F2",
+        "object_ref": "R05-PL03-O1",
+        "label": "숨고 활동명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "reported",
+        "evidence_refs": [
+          "R05-EV-08"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL03-F2"
+        }
+      },
+      {
+        "key": "r05:R05-PL03-F3",
+        "platform_id": "PL03",
+        "source": "r05",
+        "field_id": "R05-PL03-F3",
+        "object_ref": "R05-PL03-O2",
+        "label": "제공 서비스",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-07"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL03-F3"
+        }
+      },
+      {
+        "key": "r05:R05-PL03-F4",
+        "platform_id": "PL03",
+        "source": "r05",
+        "field_id": "R05-PL03-F4",
+        "object_ref": "R05-PL03-O1",
+        "label": "대표 서비스",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-17"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL03-F4"
+        }
+      },
+      {
+        "key": "r05:R05-PL03-F5",
+        "platform_id": "PL03",
+        "source": "r05",
+        "field_id": "R05-PL03-F5",
+        "object_ref": "R05-PL03-O2",
+        "label": "항목 미설정",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "reported",
+        "evidence_refs": [
+          "R05-EV-08"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL03-F5"
+        }
+      },
+      {
+        "key": "r05:R05-PL04-F1",
+        "platform_id": "PL04",
+        "source": "r05",
+        "field_id": "R05-PL04-F1",
+        "object_ref": "R05-PL04-O2",
+        "label": "분야",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-09"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL04-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL04-F2",
+        "platform_id": "PL04",
+        "source": "r05",
+        "field_id": "R05-PL04-F2",
+        "object_ref": "R05-PL04-O1",
+        "label": "지역",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "documented",
+        "evidence_refs": [
+          "R05-EV-09"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL04-F2"
+        }
+      },
+      {
+        "key": "r05:R05-PL05-F1",
+        "platform_id": "PL05",
+        "source": "r05",
+        "field_id": "R05-PL05-F1",
+        "object_ref": "R05-PL05-O1",
+        "label": "미확인(공고 본문)",
+        "direction": [
+          "input"
+        ],
+        "claim_status": "unknown",
+        "evidence_refs": [
+          "R05-EV-10",
+          "R05-EV-11",
+          "R05-EV-15"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL05-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL06-F1",
+        "platform_id": "PL06",
+        "source": "r05",
+        "field_id": "R05-PL06-F1",
+        "object_ref": "R05-PL06-O1",
+        "label": "제목 영역(별도 라벨 없음)",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R05-EV-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL06-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL06-F2",
+        "platform_id": "PL06",
+        "source": "r05",
+        "field_id": "R05-PL06-F2",
+        "object_ref": "R05-PL06-O1",
+        "label": "본문 영역(별도 라벨 없음)",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R05-EV-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL06-F2"
+        }
+      },
+      {
+        "key": "r05:R05-PL06-F3",
+        "platform_id": "PL06",
+        "source": "r05",
+        "field_id": "R05-PL06-F3",
+        "object_ref": "R05-PL06-O1",
+        "label": "게시 시각(표시값)",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R05-EV-12"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL06-F3"
+        }
+      },
+      {
+        "key": "r05:R05-PL07-F1",
+        "platform_id": "PL07",
+        "source": "r05",
+        "field_id": "R05-PL07-F1",
+        "object_ref": "R05-PL07-O1",
+        "label": "가격",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R05-EV-13"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL07-F1"
+        }
+      },
+      {
+        "key": "r05:R05-PL07-F2",
+        "platform_id": "PL07",
+        "source": "r05",
+        "field_id": "R05-PL07-F2",
+        "object_ref": "R05-PL07-O2",
+        "label": "레슨",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R05-EV-13"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL07-F2"
+        }
+      },
+      {
+        "key": "r05:R05-PL07-F3",
+        "platform_id": "PL07",
+        "source": "r05",
+        "field_id": "R05-PL07-F3",
+        "object_ref": "R05-PL07-O1",
+        "label": "본문 영역(별도 라벨 없음)",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "observed",
+        "evidence_refs": [
+          "R05-EV-13"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "field_id": "R05-PL07-F3"
+        }
+      }
+    ],
+    "retained_detail_refs": [
+      {
+        "key": "r05_detail_pl01:PL01-F01",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F01",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F02",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F02",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F03",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F03",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F04",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F04",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F05",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F05",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F06",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F06",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F07",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F07",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F08",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F08",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F09",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F09",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F10",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F10",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F11",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F11",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F12",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F12",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F13",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F13",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F14",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F14",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F15",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F15",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F16",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F16",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F17",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F17",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F18",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F18",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F19",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F19",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F20",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F20",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F21",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F21",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F22",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F22",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F23",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F23",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F24",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F24",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F25",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F25",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F26",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F26",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F27",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F27",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F28",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F28",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F29",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F29",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F30",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F30",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F31",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F31",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl01:PL01-F32",
+        "source": "r05_detail_pl01",
+        "field_id": "PL01-F32",
+        "platform_id": "PL01"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F01",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F01",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F02",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F02",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F03",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F03",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F04",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F04",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F05",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F05",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F06",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F06",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F07",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F07",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F08",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F08",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F09",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F09",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F10",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F10",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F11",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F11",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F12",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F12",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F13",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F13",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F14",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F14",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F15",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F15",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F16",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F16",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F17",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F17",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F18",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F18",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F19",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F19",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F20",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F20",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F21",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F21",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl02:PL02-F22",
+        "source": "r05_detail_pl02",
+        "field_id": "PL02-F22",
+        "platform_id": "PL02"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F01",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F01",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F02",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F02",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F03",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F03",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F04",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F04",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F05",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F05",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F06",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F06",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F07",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F07",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F08",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F08",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F09",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F09",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F10",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F10",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F11",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F11",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F12",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F12",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F13",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F13",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F14",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F14",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F15",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F15",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F16",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F16",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F17",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F17",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F18",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F18",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F19",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F19",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F20",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F20",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl03:PL03-F21",
+        "source": "r05_detail_pl03",
+        "field_id": "PL03-F21",
+        "platform_id": "PL03"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F01",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F01",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F02",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F02",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F03",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F03",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F04",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F04",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F05",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F05",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F06",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F06",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl04:PL04-F07",
+        "source": "r05_detail_pl04",
+        "field_id": "PL04-F07",
+        "platform_id": "PL04"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F01",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F01",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F02",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F02",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F03",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F03",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F04",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F04",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F05",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F05",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F06",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F06",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F07",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F07",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F08",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F08",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F09",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F09",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F10",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F10",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F11",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F11",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F12",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F12",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F13",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F13",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F14",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F14",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F15",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F15",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F16",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F16",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F17",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F17",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F18",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F18",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F19",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F19",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F20",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F20",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F21",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F21",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F22",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F22",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl05:PL05-F23",
+        "source": "r05_detail_pl05",
+        "field_id": "PL05-F23",
+        "platform_id": "PL05"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F01",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F01",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F02",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F02",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F03",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F03",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F04",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F04",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F05",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F05",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F06",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F06",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F07",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F07",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F08",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F08",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F09",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F09",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F10",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F10",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl06:PL06-F11",
+        "source": "r05_detail_pl06",
+        "field_id": "PL06-F11",
+        "platform_id": "PL06"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F01",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F01",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F02",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F02",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F03",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F03",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F04",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F04",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F05",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F05",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F06",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F06",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F07",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F07",
+        "platform_id": "PL07"
+      },
+      {
+        "key": "r05_detail_pl07:PL07-F08",
+        "source": "r05_detail_pl07",
+        "field_id": "PL07-F08",
+        "platform_id": "PL07"
+      }
+    ],
+    "added_common_keys": [
+      "r02:R02-PL02-CONF-01",
+      "r02:R02-PL02-CONF-02",
+      "r02:R02-PL02-CONF-03",
+      "r02:R02-PL02-CONF-04",
+      "r02:R02-PL02-CONF-05",
+      "r02:R02-PL02-CONF-06",
+      "r02:R02-PL02-CONF-07",
+      "r02:R02-PL02-CONF-08",
+      "r02:R02-PL02-CONF-09",
+      "r02:R02-PL02-CONF-10",
+      "r02:R02-PL02-CONF-11",
+      "r02:R02-PL02-CONF-12",
+      "r02:R02-PL02-CONF-13",
+      "r02:R02-PL02-CONF-14",
+      "r02:R02-PL02-CONF-15",
+      "r02:R02-PL02-CONF-16",
+      "r02:R02-PL02-CONF-17",
+      "r02:R02-PL02-CONF-18",
+      "r02:R02-PL02-CONF-19",
+      "r02:R02-PL02-CONF-20",
+      "r02:R02-PL02-CONF-21",
+      "r02:R02-PL02-CONF-22",
+      "r04:R04-PL01-F09",
+      "r04:R04-PL01-F10",
+      "r04:R04-PL01-F11",
+      "r04:R04-PL02-F08",
+      "r04:R04-PL02-F09",
+      "r04:R04-PL02-F10",
+      "r04:R04-PL02-F11",
+      "r04:R04-PL03-F17",
+      "r04:R04-PL03-F18",
+      "r04:R04-PL03-F19",
+      "r04:R04-PL03-F20",
+      "r04:R04-PL03-F21",
+      "r04:R04-PL03-F22",
+      "r04:R04-PL03-F23",
+      "r04:R04-PL03-F24",
+      "r04:R04-PL03-F25",
+      "r04:R04-PL03-F26",
+      "r04:R04-PL03-F27",
+      "r04:R04-PL03-F28",
+      "r04:R04-PL04-F07",
+      "r04:R04-PL04-F08",
+      "r04:R04-PL04-F09",
+      "r04:R04-PL05-F08",
+      "r04:R04-PL05-F09",
+      "r04:R04-PL05-F10",
+      "r04:R04-PL05-F11",
+      "r04:R04-PL06-F07",
+      "r04:R04-PL06-F08",
+      "r04:R04-PL06-F09",
+      "r04:R04-PL06-F10",
+      "r04:R04-PL07-F08",
+      "r04:R04-PL07-F09",
+      "r04:R04-PL07-F10",
+      "r04:R04-PL07-F11",
+      "r04:R04-PL07-F12",
+      "r04:R04-PL07-F13"
+    ],
+    "historical_common_keys_absent": [],
+    "review_limit": "필드 목록과 출처 갱신 완료; 의미·제약·데이터 관계 전체 정규화 미실시"
+  },
+  "design_scope": {
+    "platform_ids": [
+      "PL01",
+      "PL02",
+      "PL03",
+      "PL04",
+      "PL05",
+      "PL06",
+      "PL07"
+    ],
+    "authority": "R01 사용자 지시: MVP 구현 순서와 무관하게 설계에 7개 플랫폼 모두 포함",
+    "design_inclusion": "required_all_seven",
+    "implementation_priority": "separate_not_scope",
+    "actual_external_execution": "blocked_mock_only",
+    "approval": "설계 대상 7개 포함 확정; 개별 업무/스토리의 범위 최종 승인 0"
+  },
+  "vocal_example_review": {
+    "source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R05/vocal-lesson-input-examples.md",
+      "commit": "ae4c496ef91cce698db710080ba7d7483ccc4718",
+      "blob": "d159a171fd26f56289ba5bc52a58357f181f98e1",
+      "status": "개인 브랜치의 추가 입력안 사례; 기존 조사 원본과 별개. 실제 저장·게시·대행 실증 아님"
+    },
+    "example": {
+      "duration_minutes": 120,
+      "lesson_count": 6,
+      "total_krw": 150000,
+      "attendance": "1:1 대면",
+      "condition": "강사 재확인 필요; 가상의 검토 예시"
+    },
+    "platform_cases": [
+      {
+        "platform_id": "PL01",
+        "name": "크몽",
+        "story_refs": [
+          "IS-008",
+          "IS-009",
+          "IS-092",
+          "IS-105",
+          "IS-091",
+          "IS-055",
+          "IS-016"
+        ],
+        "evidence": "패키지 사용 화면에서 제목·설명·금액·회당 시간·횟수·작업 기간·수정 횟수 필수 표시; 제목 20자·설명 60자 카운터. 메인 이미지 1~4장, 652×488, PNG/JPG 안내. 모집 형태와 제공 방식 분리.",
+        "handling": "6회만 판매 시 단일 STANDARD 후보; 6회 총액 150,000원(VAT 포함 여부 강사 확인). 작업 기간·수정 횟수 공식 의미와 실제 운영 조건 미확인 시 보완/보류. 주소 공개 범위·상호협의 및 이미지 권리 확인. 저장/구매자 결제 검증 아님."
+      },
+      {
+        "platform_id": "PL02",
+        "name": "탈잉",
+        "story_refs": [
+          "IS-008",
+          "IS-009",
+          "IS-010",
+          "IS-093",
+          "IS-094",
+          "IS-058",
+          "IS-041",
+          "IS-105"
+        ],
+        "evidence": "기존 오프라인 편집에서 시간당 12,500원 × 2시간 × 6회 = 150,000원 표시; 심사 이후 회차 변경 제한 안내; 일정·장소 탭은 오픈 상태 접근 안내.",
+        "handling": "120분·6회·총액·회차별 작성 초안 및 실제 일정/장소를 강사 확인 후 계산/검증. 실제 90분 등 충돌은 강사가 실제 제공할 대안 선택 또는 보류. 최초 일정/장소와 오픈 선후 관계·공개 범위 미확인."
+      },
+      {
+        "platform_id": "PL05",
+        "name": "뮬",
+        "story_refs": [
+          "IS-008",
+          "IS-009",
+          "IS-040",
+          "IS-091",
+          "IS-055",
+          "IS-064",
+          "IS-105",
+          "IS-016",
+          "IS-017"
+        ],
+        "evidence": "개인레슨 양식 구분·제목·약관 동의 필수 표시, 별도 수강료 원 단위 쉼표 없는 입력 안내. 메인사진·본문 사진 입력 경로 구분.",
+        "handling": "본문에 강사가 확인한 6회 총 15만 원 명시; 별도 수강료의 회당/총액 의미와 공개 방식 확인 전 입력 보류. 실제 주소 공개 범위 및 사진 사용 권리/용도 확인. 약관은 강사가 직접 결정·동의, 대행 금지. 저장·노출 및 게시 권한 미확인."
+      }
+    ],
+    "limitations": "실제 제출·저장·게시 및 제3자 대행 미실증"
+  }
 }
