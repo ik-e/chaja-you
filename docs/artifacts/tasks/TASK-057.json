@@ -60,8 +60,8 @@
     }
   ],
   "result": {
-    "summary": "기획 V1.2의 피처 34개와 7개 플랫폼의 42개 업무를 검토했다. 기존 스토리 42개에 후속 후보 5개를 더했다. 크몽·탈잉·숨고·프람피 상세와 뮬 목록·공지의 데이터·업무·스토리 연결 18개를 원본에 추가했다. 게시 제한의 기존 근거도 유지했다. R01 통합 검토 대기. 뮬 도배 제재 공지 본문의 관찰 근거를 추가했다. 뮬 글 작성 양식에서 필수 표시와 별도 수강료·첨부 입력을 확인했다. 뮬 기존 레슨 글 상세에서 지역·주소·본문 사진을 확인했다.",
-    "artifact_commit": "371e52da933e65b4c92f89404345669398b5ace7",
+    "summary": "기획 V1.2의 피처 34개와 7개 플랫폼의 42개 업무를 검토했다. 기존 스토리 42개에 후속 후보 5개를 더했다. 크몽·탈잉·숨고·프람피 상세와 뮬 목록·공지의 데이터·업무·스토리 연결 20개를 원본에 추가했다. 게시 제한의 기존 근거도 유지했다. R01 통합 검토 대기. 뮬 도배 제재 공지 본문의 관찰 근거를 추가했다. 뮬 글 작성 양식에서 필수 표시와 별도 수강료·첨부 입력을 확인했다. 뮬 기존 레슨 글 상세에서 지역·주소·본문 사진을 확인했다. 힙합플레이야 홍보 목록 및 기존 상세 자료를 연결했다.",
+    "artifact_commit": "b31ef79e82040a56d6b25f0af7ae2ea3dc07c7aa",
     "artifact_path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
     "claims": [
       {
@@ -153,6 +153,14 @@
         "evidence_ids": [
           "R05-057-DETAIL-PL05"
         ]
+      },
+      {
+        "id": "R05-057-C11",
+        "text": "힙합플레이야 홍보 목록의 분류, 제목, 작성자 표시, 날짜·시각, 검색 및 글쓰기 버튼을 관찰했다. 현재 글쓰기 자격과 작성 양식은 미확인이다.",
+        "status": "확인",
+        "evidence_ids": [
+          "R05-057-DETAIL-PL06"
+        ]
       }
     ],
     "evidence": [
@@ -160,7 +168,7 @@
         "id": "R05-057-DOC",
         "label": "독립 조사 원본",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
-        "commit": "371e52da933e65b4c92f89404345669398b5ace7"
+        "commit": "b31ef79e82040a56d6b25f0af7ae2ea3dc07c7aa"
       },
       {
         "id": "R05-057-HLE-JOIN",
@@ -231,6 +239,12 @@
         "id": "R05-057-MULE-DUPLICATE",
         "label": "뮬 개인레슨 도배 관련 공식 공지",
         "url": "https://www.mule.co.kr/m/lesson/65292157"
+      },
+      {
+        "id": "R05-057-DETAIL-PL06",
+        "label": "힙합플레이야 홍보 게시판 DB 조사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphopplaya-db-research.json",
+        "commit": "b31ef79e82040a56d6b25f0af7ae2ea3dc07c7aa"
       }
     ],
     "verification": [
@@ -249,7 +263,7 @@
         ]
       },
       {
-        "criterion": "A3 상세 조사 링크 18개의 필드·근거·기존 업무·스토리 ID 검사 통과.",
+        "criterion": "A3 상세 조사 링크 20개의 필드·근거·기존 업무·스토리 ID 검사 통과.",
         "verdict": "pass",
         "evidence_ids": [
           "R05-057-DOC",
@@ -257,7 +271,8 @@
           "R05-057-DETAIL-PL02",
           "R05-057-DETAIL-PL03",
           "R05-057-DETAIL-PL04",
-          "R05-057-DETAIL-PL05"
+          "R05-057-DETAIL-PL05",
+          "R05-057-DETAIL-PL06"
         ]
       },
       {
