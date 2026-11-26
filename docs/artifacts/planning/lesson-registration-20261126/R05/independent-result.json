@@ -5722,6 +5722,15 @@
       "checked_at": "2026-11-26",
       "location": "fields, workflow, authenticated_observations",
       "scope": "follow-up 상세 원본의 근거 ID로 연결한다. 각 관찰·공식 안내·사용자 보고·모의 구현의 구분은 상세 원본에서 유지한다."
+    },
+    {
+      "evidence_id": "R05-EV-DETAIL-PL06",
+      "claim_status": "documented",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphopplaya-db-research.json",
+      "source_date": "2026-11-26",
+      "checked_at": "2026-11-26",
+      "location": "fields, authenticated_observations, permissions",
+      "scope": "홍보 게시판 목록과 기존 공개 상세의 근거를 연결한다."
     }
   ],
   "cross_links": [
@@ -6492,9 +6501,62 @@
         "R05-EV-12",
         "R05-EV-25",
         "R05-EV-26",
-        "R05-EV-27"
+        "R05-EV-27",
+        "R05-EV-DETAIL-PL06"
       ],
-      "observed_requirement": "제목·본문·게시 시각 관측. 작성 양식 미확인 과거 공지에 신규 가입자의 글쓰기 대기가 15일과 7일로 다르게 적혀 있다. 일반 이용규칙에 등급별 하루 5개/10개와 다음 글까지 5분이 적혀 있고 후속 운영 공지는 도배를 제한한다. 현재 홍보 게시판 적용 여부는 미확인이다."
+      "observed_requirement": "제목·본문·게시 시각 관측. 작성 양식 미확인 과거 공지에 신규 가입자의 글쓰기 대기가 15일과 7일로 다르게 적혀 있다. 일반 이용규칙에 등급별 하루 5개/10개와 다음 글까지 5분이 적혀 있고 후속 운영 공지는 도배를 제한한다. 현재 홍보 게시판 적용 여부는 미확인이다.",
+      "detail_research": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphopplaya-db-research.json",
+        "status": "홍보 목록 관찰 및 기존 공개 상세 연결",
+        "links": [
+          {
+            "detail_link_id": "R05-DETAIL-PL06-1",
+            "field_ids": [
+              "PL06-F01",
+              "PL06-F02",
+              "PL06-F03",
+              "PL06-F04",
+              "PL06-F05"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-023"
+            ],
+            "operation_ids": [
+              "R05-PL06-READ",
+              "R05-PL06-STATUS"
+            ],
+            "evidence_ids": [
+              "HP01"
+            ],
+            "notes": "목록 표시, 분류·검색·글쓰기 진입 관찰."
+          },
+          {
+            "detail_link_id": "R05-DETAIL-PL06-2",
+            "field_ids": [
+              "PL06-F06",
+              "PL06-F07"
+            ],
+            "story_ids": [
+              "R05-US-014",
+              "R05-US-040"
+            ],
+            "operation_ids": [
+              "R05-PL06-READ"
+            ],
+            "evidence_ids": [
+              "HP02"
+            ],
+            "notes": "기존 공개 상세의 주소와 자유 서술 본문."
+          }
+        ],
+        "checks": {
+          "field_existence": "목록과 기존 공개 상세를 확인했다. 작성 폼은 미확인.",
+          "required_condition": "필수 표시와 현재 계정 제한 미확인.",
+          "save_or_reflection": "기존 노출 확인. 저장·수정 결과 미확인.",
+          "delegation_permission": "미확인."
+        }
+      }
     },
     {
       "cross_link_id": "R05-LINK-7",

@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R05-PL06-DB-DETAIL",
+  "kind": "document",
+  "status": "R05 후속 조사 · 홍보 게시판 목록 관찰",
+  "owner": "R05",
+  "task_ref": "TASK-057",
+  "platform_id": "PL06",
+  "platform": "힙합플레이야",
+  "checked_at": "2026-11-26",
+  "scope": "R05 제공 홍보 게시판 목록 녹화와 기존 공개 상세·공식 공지 근거를 대조했다. 글쓰기 화면이나 저장 결과는 관찰하지 않았다.",
+  "evidence": [
+    {
+      "id": "HP01",
+      "claim_status": "observed",
+      "source": "R05 제공 힙합플레이야 PC 홍보 목록 녹화(원본 비공개)",
+      "location": "00:00–00:05 상단 분류와 목록, 하단 글쓰기·페이지·검색",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "HP02",
+      "claim_status": "observed",
+      "source": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=advertise&wr_id=174753",
+      "location": "기존 독립 조사 공개 레슨 글의 제목·게시 시각·본문",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "HP03",
+      "claim_status": "documented",
+      "source": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=notice&wr_id=1705",
+      "location": "과거 일반 게시판 공지의 가입 대기 15일, 등급별 일일 한도 및 작성 간격",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "HP04",
+      "claim_status": "documented",
+      "source": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=notice&wr_id=2131",
+      "location": "과거 운영 공지의 가입 대기 7일",
+      "checked_at": "2026-11-26"
+    }
+  ],
+  "fields": [
+    {
+      "field_id": "PL06-F01",
+      "label": "목록 제목",
+      "object": "홍보 게시물 또는 목록",
+      "format": "문자열",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "말줄임 표시가 있는 링크. 작성 필수 여부나 길이 제한은 미확인.",
+      "evidence_refs": [
+        "HP01"
+      ]
+    },
+    {
+      "field_id": "PL06-F02",
+      "label": "작성자",
+      "object": "홍보 게시물 또는 목록",
+      "format": "표시명",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "목록에 표시명 열이 보인다. 실제 이름·계정 정보는 기록하지 않는다.",
+      "evidence_refs": [
+        "HP01"
+      ]
+    },
+    {
+      "field_id": "PL06-F03",
+      "label": "목록 날짜·시각",
+      "object": "홍보 게시물 또는 목록",
+      "format": "날짜 또는 시각 표시",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "일부 행은 날짜, 일부는 시각을 표시한다. 표시 전환 규칙과 수정일은 미확인.",
+      "evidence_refs": [
+        "HP01"
+      ]
+    },
+    {
+      "field_id": "PL06-F04",
+      "label": "게시물 분류와 카테고리 필터",
+      "object": "홍보 게시물 또는 목록",
+      "format": "분류 표시·필터",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "행에 홍보가 표시된다. 필터는 전체·음악홍보·구인·홍보를 표시한다.",
+      "evidence_refs": [
+        "HP01"
+      ]
+    },
+    {
+      "field_id": "PL06-F05",
+      "label": "페이지·검색",
+      "object": "홍보 게시물 또는 목록",
+      "format": "페이지 이동·검색 입력",
+      "direction": [
+        "입력",
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "하단에 페이지 버튼과 검색 입력창이 보인다. 검색 기준과 반환값은 미확인.",
+      "evidence_refs": [
+        "HP01"
+      ]
+    },
+    {
+      "field_id": "PL06-F06",
+      "label": "공개 상세 주소",
+      "object": "홍보 게시물 또는 목록",
+      "format": "URL",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "기존 공개 표본의 주소에 bo_table 및 wr_id가 보인다. 게시판 범위 밖의 고유성과 수정 시 유지 여부는 미확인.",
+      "evidence_refs": [
+        "HP02"
+      ]
+    },
+    {
+      "field_id": "PL06-F07",
+      "label": "공개 게시물 본문",
+      "object": "홍보 게시물 또는 목록",
+      "format": "서술 본문·링크",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "board_ui",
+      "required_or_condition": "게시 양식의 실제 필수 여부 미확인.",
+      "notes": "기존 레슨 글 사례에서 수강료·지역·레슨 조건과 포트폴리오 링크가 본문에 적혔다. 별도 입력 필드를 확인하지 않았다.",
+      "evidence_refs": [
+        "HP02"
+      ]
+    }
+  ],
+  "authenticated_observations": [
+    {
+      "screen": "홍보 게시판 목록",
+      "observed": [
+        "제목·분류·작성자·날짜 또는 시각이 표시된다.",
+        "하단에 페이지 이동, 검색 입력, 글쓰기 버튼이 보인다."
+      ],
+      "limits": "글쓰기 버튼 표시만 확인했다. 실제 작성 권한, 양식, 저장 결과는 미관측이다.",
+      "evidence_refs": [
+        "HP01"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "홍보 게시판",
+      "to": "홍보 게시물",
+      "cardinality_candidate": "한 게시판에 여러 글이 분류와 함께 표시된다.",
+      "identity": "기존 상세 URL의 게시판 값과 글 번호 후보를 보관할 수 있다. 내부 키 범위·이동 시 유지 여부는 미확인.",
+      "evidence_refs": [
+        "HP01",
+        "HP02"
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "operation": "게시물 조회",
+      "state_before_after": "홍보 목록에 게시물 표시. 기존 공개 상세 사례가 있다.",
+      "completion_evidence": "목록 표시와 기존 공개 상세로 읽기 근거를 확보했다. 새 게시 성공을 관측하지 않았다.",
+      "evidence_refs": [
+        "HP01",
+        "HP02"
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "scope": "신규 계정 글쓰기·외부 대행",
+      "condition": "과거 공지의 15일과 7일이 다르다. 현재 홍보 게시판 적용 여부, 계정별 글쓰기 권한 및 제3자 대행 허용은 미확인.",
+      "evidence_refs": [
+        "HP01",
+        "HP03",
+        "HP04"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "item": "현재 가입 대기·게시 간격, 작성 양식의 필수·첨부, 저장·수정 결과",
+      "reason": "이번 녹화는 목록까지만 확인했다. 과거 일반 공지와 현재 적용 여부를 구분할 필요가 있다.",
+      "recheck": "현재 권한 안내, 상태를 바꾸지 않고 열 수 있는 작성 양식 또는 운영사 공지를 확인한다.",
+      "evidence_refs": [
+        "HP01",
+        "HP03",
+        "HP04"
+      ]
+    }
+  ],
+  "design_inputs": [
+    "게시판·표시 분류·상품성 레슨 정보의 본문 여부를 각각 근거에 연결한다.",
+    "글쓰기 버튼 표시는 게시 권한이나 등록 완료의 증거로 사용하지 않는다."
+  ]
+}
