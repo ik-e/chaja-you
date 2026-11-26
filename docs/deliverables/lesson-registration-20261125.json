@@ -14,13 +14,14 @@
         "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
         "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
         "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
-        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md"
+        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json"
       ],
       "top_level_sections": 3,
-      "status": "현행 mock 범위 반영 후보",
+      "status": "11/26 강사 1차 의견 반영 개정 후보 · 크몽 우선 시연 제안, 시험/정책/가치 실증 전",
       "title": "기획서(요구사항 명세 포함)",
       "due": "2026-11-13",
-      "submission_status": "미확인"
+      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
     },
     {
       "id": "DLV-02",
@@ -34,13 +35,15 @@
         "product/lesson-registration/tests/modules/web/PLAN.md",
         "product/lesson-registration/tests/modules/soomgo/PLAN.md",
         "docs/members/R04/daily/2026-11-25.md",
-        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
       ],
       "top_level_sections": 4,
-      "status": "11/25 V0.6 후보 · R03 실제 조립 계획, R04 9/6 CI, R05 최신 30/37 독립 조합 CI; 갱신 잔여/일정·캡처 미확인",
+      "status": "11/26 V0.7 개정 후보 · 계획/실적/잔여, 인수 및 교육 작업 창 구분; 팀 확인·캡처 전",
       "title": "WBS",
       "due": "2026-11-13",
-      "submission_status": "미확인"
+      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
     },
     {
       "id": "DLV-03",

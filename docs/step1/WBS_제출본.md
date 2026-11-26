@@ -1,87 +1,118 @@
 # 음악 레슨 강사 등록 지원 서비스 · WBS
 
-> DLV-02 · 2026-11-25 · 기준 main f5e6857. [WBS V0.6 후보](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)와 [TASK/WORKSPACE](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/product/lesson-registration/WORKSPACE.json) 반영. 배정 확정, 일정/잔여 공수 미확정, 공식 제출·접수 미확인. [11/23 이전 후보](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/WBS_제출본.md).
+> DLV-02 · 2026-11-26 · 기준 main d0ef345 · 강사 1차 의견 반영 개정 후보. [편집 원본 WBS V0.7](../artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json) · [이전 V0.6](../artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json) · [작업 공간](../../product/lesson-registration/WORKSPACE.json) · [피드백 대응](../artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json). 배정 유지, 일정 창과 문서 담당/검토 제안은 팀 확인 전. PDF·2차 피드백·공식 제출 미완료.
 
 ## 1. 간트 차트 및 계획·실적
 
 ```mermaid
 gantt
- title 모의 MVP 후보 일정
+ title 레슨 등록 지원 WBS (확인된 실적과 후보 일정)
  dateFormat YYYY-MM-DD
  axisFormat %m/%d
- section 공통
- 공통 접점 검토 후보 :a1, 2026-11-25, 2026-11-27
- section 개발·통합 (잠정)
- R05 PLAN·크몽 :a2, 2026-11-25, 2026-11-27
- R05 runtime :a3, 2026-11-30, 2026-12-03
- R02 인계·크몽 통합 목표 :milestone, a4, 2026-12-04, 0d
- MVP·중간 발표 :milestone, a5, 2026-12-08, 0d
- section 공식 문서
- 상태 전이 :milestone, a6, 2026-11-27, 0d
- 자기 성찰 :milestone, a7, 2026-12-04, 0d
- 협업 아키텍처 :milestone, a8, 2026-12-11, 0d
- 보안·Auto-Healing :milestone, a9, 2026-12-18, 0d
- 웹 앱 :milestone, a10, 2026-12-24, 0d
- 통합·배포 :milestone, a11, 2026-12-31, 0d
- 최종 발표 :milestone, a12, 2027-01-04, 0d
+ excludes weekends
+ section 확인된 11/25 근거 (부분)
+ 공통/독립 CI·preflight :done, e1, 2026-11-25, 1d
+ section 11/26 이후 잠정 구현·인수
+ 합성 provider UI/HTTP 접점 :p1, 2026-11-26, 2026-11-30
+ 상태전이 초안·검토 :p2, 2026-11-26, 2026-11-27
+ PREP·App·UI·Runtime·크몽 인수 준비 :p3, 2026-11-26, 2026-12-03
+ PREP 인계·크몽 수직 통합 :milestone, m1, 2026-12-04, 0d
+ 자기성찰 실험·검토·결과서 :p4, 2026-11-30, 2026-12-04
+ 숨고 통합·동일후보 제품 시험 :p5, 2026-12-04, 2026-12-08
+ 첫 시연(크몽 우선 제안) :milestone, m2, 2026-12-08, 0d
+ section 교육 마일스톤 작업 (후보)
+ 협업 구조 구현·시험·보완 :p6, 2026-12-09, 2026-12-11
+ 보안·복구 구현·시험·보완 :p7, 2026-12-14, 2026-12-18
+ 대화형 웹 구현·시험·보완 :p8, 2026-12-21, 2026-12-24
+ 통합/배포 검증·보완 :p9, 2026-12-28, 2026-12-31
+ 최종 발표·소스·영상 :milestone, m3, 2027-01-04, 0d
 ```
 
-담당자별 잔여 기간·가용성은 일일 확인 사항이므로 확정되지 않은 기간의 임의 막대를 넣지 않았다. 공통 논리·물리 방향, lock, 독립 기술 검증은 main 반영. R03 S8/H1~H9 구현 main 반영, 담당자 run 기준 191개(HTTP 14개 포함) 통과·경로 검사 실패 1건(일일 문서 경로); 잔여 3인일 추정, 실제 provider/제품 통합 미확인. R05 7근무일 초기 추정, R02 12/4 인계 목표, R04 UI·숨고 PLAN main 반영(초기 4+3인일 추정), 실제 잔여 공수·가용성 미확인. 12/4 vertical 및 12/8 MVP 목표는 일정 위험 상태.
+간트에서 **완료 막대는 11/25에 관측한 부분 근거**만 의미한다. 미래 막대는 인수·검토·통합 목표 창이며 확정 공수/가용성 또는 교육 마감 변경이 아니다. 기존 11/13·11/20 마감은 4절에 보존. 12/4와 12/8은 일정 위험 상태.
+
+| 담당 | 확인된 부분 실적(11/25) | 초기/잔여 추정(일) | 다음 확인 |
+| --- | --- | --- | --- |
+| R01 | 공통 계약·독립 조합 CI·제품 preflight | 잔여 미확인 | 11/26~27 실제 후보 및 gate 등록 |
+| R02 | 합성 PREP 44 독립 CI; 실제 모델 각 5건 보고(3/5, 4/5), 둘 다 가격 충돌 오류; 실제 모델 독립 재현 아님 | 잔여 미확인 | 11/27 I2/실험·비용, 12/3 사전 인수 |
+| R03 | App/HTTP 등 191 CI, 합성 provider launcher | 최초 11인일, 이전 잔여 3인일(재확인) | 11/27 실제 App/WS/STORE/asset/slot 및 잔여 |
+| R04 | UI 9, 숨고 6 독립 CI; 실제 화면·서버/독립 조회 연결 미완료 | 최초 UI 4+숨고 3인일, 잔여 미확인 | 11/27 양 작업 잔여·UI/adapter 접점 |
+| R05 | Runtime 30/30·크몽 37/37 독립 조합 CI, 실제 App/권한·asset 연결 미확인 | 최초 7근무일, 이전 잔여 3~3.5근무일(두 TASK 합계, 최신 재추정 필요) | 11/27 잔여/실제 연결 |
+| 제품 | preflight 통과 / 전체 수용 시험 0/22(not_run) | 전체 제품 공수 미확인 | 12/4 동일 후보 인수, 12/8 시연 및 gate 판정 별도 |
+
+근거: [팀 통합 체크포인트](../../product/lesson-registration/evidence/team-integration-checkpoint-20261125.json) · [R05 조합 CI](https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594) · [제품 수용 시험](../../product/lesson-registration/evidence/PRODUCT-GATE.md). 실제 실적 및 추정의 관측 기준일을 유지하며 이후 owner 보고로만 갱신한다.
 
 ## 2. 일정 관리 규칙
 
-- 실제 담당은 TASK-048~054 및 WORKSPACE의 단일 책임자. 독립 구현은 접점 검토와 병행 가능하며 표의 선행은 실제 통합 의존성이다.
-- PLAN·코드·시험 및 실행 근거로 실적 판단. 담당 보고와 독립 재현, 제품 완료, 제출·접수 구별.
-- 최초 공수와 잔여 공수 분리. 11/25를 실질 설계·구현 착수로 보고 초기 변경을 허용한다. 매일 PLAN/코드/검증·남은 공수·알려진 가용성/부재·막힘·다음 목표를 확인하고 필요한 일정/선행관계/자원 조정 후보만 갱신한다. 커밋 부재만으로 부재 판단 또는 개인 사유 기록 금지. 배정·범위·공식 마감·안전 조건 영향은 R01 판단 후 반영. [R01 운영 방향](../human/responses/HRESP-20261125-06_pain-first-rolling-plan.md).
-- 22개 제품 gate 미충족 시 부분 시연·일정 조정 판단을 R01에 요청, 안전 시험 삭제 금지. W10/W16/PREP 인계 후 유지보수는 아직 추가 배정 아님.
+- 기존 TASK-048~054와 작업 공간의 단일 owner 및 코드 경계를 유지한다. 아래 문서 및 인수 검토 담당은 기존 역할에 따른 **일정 후보**이며 신규 TASK 배정, 제품/공통 계약 변경이 아니다. 독립 개발은 가능하며 선행 조건은 실제 통합 인수에 적용한다.
+- 11/25 실질 설계·구현 착수. 매일 PLAN·코드·실행 근거·잔여 공수·가용성·막힘·다음 목표를 확인한다. 담당자 확인 없는 잔여 차감/완료일 약속 금지. R01 중요 범위·배정·공식 마감 변경 결정.
+- 12/8 우선 시연은 크몽형 원본부터 독립 접수 결과 재조회까지 제안. 숨고형 후속 연결은 전체 제품 요구에서 제외하지 않는다. 모의 접수/실제 접수/심사 승인/공개를 구별한다. 동일 후보 22/22 제품 수용 시험을 통과해야 전체 완료.
+- [기획서](기획서_제출본.md)의 핵심 사용자 가치 및 [판단 우선순위](../human/INTENT.md#intent-design-003--사용자-문제와-가치-중심의-기획설계-판단-우선순위)에 따라 사용자 스토리→DB→API 영향 검토, 기술 도입은 핵심 기능·가치에 기여할 때. [R01 일일 조정](../human/responses/HRESP-20261125-06_pain-first-rolling-plan.md).
+- 교육 마감, 개정 문서 준비/검토, PDF 업로드·접수는 별도 상태로 관리한다. 간트/표 원본 편집 가능 링크는 위 JSON, 제출용 PDF·간트 캡처 및 열람 링크는 2차 피드백 반영 후 확인(현재 미완료).
 
 ## 3. 작업 계획표
 
-| 후보 ID / TASK | 담당 | 작업 | 통합 선행 | 잠정 목표/공수 | 완료 근거 |
+### 3.1 제품 구현과 점진 통합
+
+| ID / TASK | 담당 | 작업 | 통합 선행 | 목표 창(잠정) | 확인 실적 및 완료 근거 |
 | --- | --- | --- | --- | --- | --- |
-| C01 / TASK-048 | R01 | 공통 계약·lock·통합 | 없음 | 11/27 후보 | 공통 pin/ownership·CI·정합성 |
-| P01 / TASK-049 | R02 | PREP 실제 모델·근거·검증·인계 | C01 | 12/4 목표, 공수 미확인 | I2, AT-01/T5-08/T6-02 |
-| A01 / TASK-050 | R03 | App/KNOW/STORE/RESULT | C01 | 초기 11인일, 최신 보고 잔여 3인일(미확정) | H1~H9·S8·실제 저장/권한/판정 |
-| U01 / TASK-051 | R04 | UI 및 viewer | C01 | PLAN 4인일 추정, 잔여/가용성 미확인 | 정상/오류·권한·detach |
-| S01 / TASK-052 | R04 | 숨고 mock/adapter | C01 | PLAN 3인일 추정, UI 우선 및 stub 병행 후보 | S1~S6, AT-05 |
-| R00 / TASK-053 | R05 | PLAN·runtime 접점 | 없음 | 11/25~27, 0.5일 | 권한·viewer·lease 검토 |
-| K01 / TASK-054 | R05 | 크몽 독립 mock/adapter | R00 | 11/25~27, 2.5일 후보 | K1~K7, AT-04 |
-| R01 / TASK-053 | R05 | runtime/fake STORE | R00 | 11/30~12/2, 3일 후보 | 격리·실행·관측·실패 |
-| R02 / TASK-053 | R05 | 실제 STORE 연결 | R01,K01,A01 | 12/3, 1일 후보·12/4 버퍼 | 실제 binding·권한·원자성 |
-| I01 / TASK-048 | R01 | 크몽 vertical 통합 | C01,P01,A01,U01,K01,R02 | 12/4 위험 | 실제 provider 동일 후보 |
-| I02 / TASK-048 | R01 | 숨고 통합·회귀 | I01,S01 | 12/8 위험 | 22개 gate 전체 |
+| C01 / TASK-048 | R01 | 공통 계약/lock/통합 | — | 11/26~27 확인 | 조합 CI와 preflight 있음; 전체 gate 미실행 |
+| P01 / TASK-049 | R02 | PREP 실제 모델·검증 | C01 | 11/26~12/3 후보 | 44 독립 CI; PR51/52 draft, 실제 모델 3/5·4/5 보고(가격 충돌 실패); 잔여 미확인 |
+| A01 / TASK-050 | R03 | App/저장/결과 조립 | C01 | 11/26~12/3 인수 후보 | 191 CI; 합성 launcher; 이전 잔여 3인일, 갱신 필요 |
+| U01 / TASK-051 | R04 | UI 및 viewer 실제 연동 | C01 | 11/26~12/3 인수 후보 | UI 9 CI; 최초 4인일, 잔여 미확인 |
+| S01 / TASK-052 | R04 | 숨고 adapter 및 독립 상태 조회 | C01 | 11/27~12/8 후보 | 숨고 6 CI; 최초 3인일, 잔여 미확인 |
+| R00/R01/R02 / TASK-053 | R05 | Runtime/Viewer/STORE 연결 | C01,A01 | 11/26~12/3 인수 후보 | Runtime 30/30 독립 조합 CI, 실제 App/권한 연결 남음 |
+| K01 / TASK-054 | R05 | 크몽 adapter/실제 모의 통합 | R00,A01 | 11/26~12/3 인수 후보 | 크몽 37/37 독립 조합 CI; R05 2 TASK 합계 이전 잔여 3~3.5근무일 |
+| I01 / TASK-048 | R01(통합 검토), R03(조립) | 크몽 수직 통합 | C01,P-HAND,A01,U01,K01,R02 | 12/4 목표(위험) | 실제 I2·UI·저장·runtime/adapter 및 독립 접수 확인 |
+| I02 / TASK-048 | R01(통합 검토), R04/R03/R05(연결) | 숨고 후속 통합·회귀 | I01,S01 | 12/8 목표(위험) | 두 플랫폼 별도 상태/증거, 교차 회귀; 전체 gate 유지 |
 
-WBS 내부 ID R01/R02는 담당자명과 별개. [R03 보고 근거](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/product/lesson-registration/evidence/r03-progress-20261125.json).
+WBS 내부 ID R01/R02는 사람 역할과 별개. R05 잔여 3~3.5일은 합산 보고값이다. 실제 가용성에 따라 목표 창을 다시 검토한다.
 
-## 4. 마일스톤
+### 3.2 모듈별 인수 조건과 확인일
 
-| 날짜(가이드/후보) | 산출물 |
-| --- | --- |
-| 11/13 | 기획서·WBS, 개정 후보 |
-| 11/20 | API·DB 설계서, 개정 후보 |
-| 11/27 | 단일 에이전트 상태 전이 그래프, 공통 접점 후보 |
-| 12/4 | 자기 성찰 테스트 결과서, PREP 인계·vertical 목표 |
-| 12/8 | 중간 발표·모의 MVP 목표 |
-| 12/11 | 협업 아키텍처 |
-| 12/18 | 보안 가드레일·Auto-Healing |
-| 12/24 | 대화형 웹 앱 |
-| 12/31 | 통합 테스트·배포 아키텍처 |
-| 2027/1/4 | 최종 발표·코드·시연영상 |
+| 확인일(후보) | 전달→인수 | 입력·출력 및 인수 경계 | 확인 조건 |
+| --- | --- | --- | --- |
+| 11/27 | R02→R03 | I2: SourceView/Profile/ResolvedAnswer → Preparation/typed Error, missing/conflict/ready, H5 revision/timeout | 계약·합성 사례 확인, 실제 모델 대기 |
+| 11/27 | R04↔R03 | H1~H9: revision·review digest·result/status, 오류 응답·owner | 합성 launcher로 요청/응답 확인 |
+| 11/27 | R05↔R03·R04 | I3 인증 binding·generation/lease, 동일 origin viewer mount/dispose; I4 permit/fence/approved asset | 모의 브라우저 및 인터페이스 확인 |
+| 11/30~12/3 | R03→R05·R04 | 실제 App/STORE: 안정 slot·owner·asset bytes/digest·permit/fence·readback → 저장된 증거/조회 | 실제 구성 인수와 오류·타 owner 차단; 합성은 별도 |
+| 12/3 사전, 12/4 목표 | R02→R03 | 실제 PREP/모델 구성·실행법·정확한 값/질문/오류·실험 비용 | R03 재현, R01 검토; 미인수 항목 명시 |
+| 12/4 목표 | R03/R04/R05→R01 | 크몽 UI→I2→승인→실제 runtime/adapter+mock→독립 receipt→저장 결과 조회 | 같은 후보 고정, 실패/unknown/중복 방지 관측 |
+| 12/8 목표 | R04/R03/R05→R01 | 숨고 category/question 저장 및 독립 readback, 두 대상 독립 승인·결과 | 후속 통합·회귀, 전체 gate와 시연 별도 |
 
-[11/24 보존 가이드](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) 및 V0.6 후보 기준. 최신 대시보드 마감/접수와 WBS 별도 Projects/시트 캡처 확인 필요. 이 Markdown/Gantt는 실제 캡처를 대체하지 않는다.
+**선행 검증 분리:** 합성 응답으로 H1~H9 화면·HTTP 계약·에러/조회부터 확인한다. 실제 모델 I2, 실제 저장·권한·세션·asset·adapter 접수/독립 조회는 해당 모듈 인수 후 검증하며 합성 성공으로 대체하지 않는다.
 
-**추가 최신 진행 근거 (main 4992959):** [R03 S8 run](https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/docs/artifacts/runs/TASK-050-s8-http-20261125.json) · [TASK-050](https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/docs/artifacts/tasks/TASK-050.json). V0.6 일정 원본은 수정하지 않으며 최신 잔여 공수 보고를 다음 일정 조정의 입력으로 구분한다. 독립 run은 당시 worktree에서 합성 provider로 실행, 실제 22개 제품 시험은 미실행.
+**12/4 지연 시 12/8 시연 분기:** (1) 실제 PREP/저장/UI/runtime/크몽 연결이 맞으면 원본~독립 receipt까지, (2) 실제 모델 미인수면 합성 PREP라고 표시한 연결 시연 및 준비/충돌 시나리오 별도 제시, (3) 연결/권한/증거가 불완전하면 확인된 모듈/준비만 부분 시연하고 접수·제품 완료를 주장하지 않음. 숨고는 후속 연결·회귀, 전체 22개 gate 유지. 안전 조건 미충족 시 해당 동작 중단.
 
-**R04 최신 계획 근거 (main 117f14d):** [UI PLAN](https://github.com/ik-e/chaja-you/blob/117f14d4d375efd767cd7f2097f721ce255f73f1/product/lesson-registration/tests/modules/web/PLAN.md) · [숨고 PLAN](https://github.com/ik-e/chaja-you/blob/117f14d4d375efd767cd7f2097f721ce255f73f1/product/lesson-registration/tests/modules/soomgo/PLAN.md). TASK-051/052 진행 중·배정 수신 확인. 초기 4/3 MD는 합산 후보 7 MD이지 잔여 공수나 확정 일자가 아니다. 실제 진행·가용성 및 R02/R05 계획을 일일 확인한다. WBS V0.6 원본의 일정은 이 작업에서 확정하지 않는다.
+### 3.3 교육 제출물·검증 작업(담당/검토 및 일정 후보)
 
-**R04 추가 진행 근거 (main 4ab3285):** [API client](https://github.com/ik-e/chaja-you/blob/4ab3285f3cb767fb8c36ec3b54d5c4e61e9a9fb3/product/lesson-registration/web/api/client.py) · [workflow](https://github.com/ik-e/chaja-you/blob/4ab3285f3cb767fb8c36ec3b54d5c4e61e9a9fb3/product/lesson-registration/web/workflow.py) · [단위 시험](https://github.com/ik-e/chaja-you/blob/4ab3285f3cb767fb8c36ec3b54d5c4e61e9a9fb3/product/lesson-registration/tests/modules/web/test_api_client.py) · [일일 보고](https://github.com/ik-e/chaja-you/blob/4ab3285f3cb767fb8c36ec3b54d5c4e61e9a9fb3/docs/members/R04/daily/2026-11-25.md). API client/workflow 구현 및 7개 단위 시험 통과는 담당자 보고. 실제 화면·viewer·provider 통합과 숨고 adapter 구현 완료/잔여 공수는 미확인. 계획표의 추정 공수를 임의 차감하지 않는다.
+| ID | 작성/통합 책임 | 검토/지원 | 작업 기간(후보) | 작업·완료 기준 |
+| --- | --- | --- | --- | --- |
+| DOC-05 | R01 | R02 기술 대조, R03 상태 경계 검토 | 11/26~11/27 | 11/26 대표 정상/충돌/누락/모델 실패 흐름·AI/코드·종료 정리 및 현행 코드 대조; 11/27 R02/R03 검토, R01 문서/제출 링크·열람 확인. 실행 결과를 설계 승인으로 대체하지 않음 |
+| I-STUB | R03 | R04/R05; R01 인수 검토 | 11/26~11/30 | 합성 PREP/runtime 표기, H1~H9 요청/응답, revision 및 오류/owner/조회 확인; 실제 모델·런타임 통과로 계산하지 않음 |
+| P-HAND | R02 | R03 인수, R01 검토 | 11/30~12/04 | I2 입력(SourceView/Profile/ResolvedAnswer)과 출력(Preparation facts/values/provenance/issues/ready)·오류·timeout/revision, 실행법/고정 fixture/모델 비용·반례, 인수자가 재현 및 미확인 목록 수령. 12/3 사전 인수 확인, 12/4 최종 인계 목표 |
+| DOC-06 | R01 | R02 실험·결과, R03 인수 검토 | 11/30~12/04 | 현행 1회 생성/검증과 추가 보정 후보를 동일 합성 자료로 비교; 가격 충돌은 질문으로 종료, 원본 임의 변경 0; 실제 실행·비용·미실행을 구분하고 12/4 검토/링크 확인 |
+| GATE-ALL | R01 | R02~R05 각 모듈 증빙, R03 조립 | 12/04~12/08 | 고정 commit/계약/fixture/environment에서 실제 모델(T5-08 별도 승인 실행), UI·저장·두 mock 플랫폼, 정상/오류/권한/독립 조회를 전부 시험. 22/22 pass만 제품 완료; 미실행/실패/부분 시연 별도 |
+| DOC-07 | R01 | R02/R03 기술 검토 | 12/09~12/11 | 12/9 작업 분해·데이터 계약 및 적용 결정, 12/10 구현/동일 자료 비교 시험, 12/11 보완·검토/문서. 다중 모듈을 다중 AI로 과장 금지; 추가 모델 효과 별도 검증 |
+| DOC-08-09 | R01 | R03/R04/R05 기존 owner 영역 | 12/14~12/18 | 12/14~15 권한·출처·오류 처리 구현/보완, 12/16~17 응답 유실·권한·이미지·중복/재조회 시험(DV-01/02/03, AT-03), 12/18 수정·재시험·문서. 외부 효과 재실행/자동 재개 금지 유지 |
+| DOC-10 | R04 | R03 API, R05 viewer, R01 제출 검토 | 12/21~12/24 | 12/21~22 질문·정정·승인·상태 UI 연동/보완, 12/23 정상·예외·권한/접근성 시험, 12/24 수정·시연/링크 확인 |
+| DOC-11-12 | R01 | R03/R04/R05 각 영역 | 12/28~12/31 | 12/28~29 고정 후보 통합/배포 설계, 12/30 회귀·보안·재현 시험, 12/31 보완·재시험·문서/링크. 실제 배포와 설계 구분 |
+| FINAL | R01 | 전원 | 12/31~01/04 | 검증된 범위로 발표·영상·재현 가능한 고정 코드 및 제출 링크 확인; 미검증은 표시 |
 
-**R05 최신 진행 근거 (11/25):** [Runtime PLAN·시험 8e506e1](https://github.com/ik-e/chaja-you/blob/8e506e1a7a27756909b0ca40b074bc37bc0dc58c/product/lesson-registration/tests/modules/remote/PLAN.md) · [크몽 PLAN·시험 ae582bf](https://github.com/ik-e/chaja-you/blob/ae582bf7ff04435f4f2876d72a916c141282d85f/product/lesson-registration/tests/modules/kmong/PLAN.md) · [R01 고정 검토](https://github.com/ik-e/chaja-you/blob/main/product/lesson-registration/evidence/r05-progress-20261125.json). 기존 7근무일은 초기 추정, **잔여 3~3.5근무일(두 TASK 합계)** 보고: Viewer WS 1일, 크몽/runtime 1일, CI 0.5일, R03 협의 0.5~1일. R05 Windows Chromium 15개 및 크몽 32개 담당자 보고·코드 확인, 독립 CI 및 D01~04 정합성/실제 모듈 연결 미완료. [갱신 V0.6 후보](../artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json). 기존 간트는 잠정 일정 이력이며 확정 날짜로 변경하지 않음. 12/4·12/8 목표와 22개 gate 유지.
+**동일 후보 전체 시험:** R03 실제 조립 후보에 R02 실제 모델과 R04 UI/숨고·R05 runtime/크몽 연결. R01 검토 후 고정 commit, contract/fixture, 환경에서 22개 gate 실행. 각 owner는 입력·관측 상태·효과 수·독립 증빙을 제공하고 R01은 fail/incomplete/not_run/pass 구분. 12/8 부분 시연의 관측 범위와 제품 완료를 별도 기록. R02 실제 모델(T5-08)은 승인된 합성 시험만 별도 실행. [실행기 및 검토 규칙](../../product/lesson-registration/evidence/PRODUCT-GATE.md).
 
-**R05 독립 검증 추가 (11/25):** [고정 커밋 CI](https://github.com/ik-e/chaja-you/actions/runs/45558575503)에서 Runtime 15/15(Chromium 143.0.7499.4), 크몽 32/32 통과. 최초/잔여 공수 추정과 실제 통합 및 D01~04 보완은 별도 유지; 제품 22개 gate 미실행.
+## 4. 마일스톤 및 제출 상태
 
-**팀 후속 검토 (11/25):** [고정 검토·실제 근거](../../product/lesson-registration/evidence/team-checkpoint-20261125.json) · [R02 PR51](https://github.com/ik-e/chaja-you/pull/51)·[PR52](https://github.com/ik-e/chaja-you/pull/52) draft, 44개 합성 CI 및 실제 5×2 사례 보고(양 모델 가격 충돌 오류). R03 합성 API 실행기 main 31fe0c5, 잔여 3 MD 보고. R04 UI/숨고 9/6 독립 CI, 실제 연동/정합성 보완 필요, 초기 4+3 MD 보존·잔여 미확인. R05 15/32 CI 재현 및 잔여 3~3.5일 보고 유지(갱신 대기). [제품 gate 실행 체계](../../product/lesson-registration/evidence/PRODUCT-GATE.md) 준비, 전체 case 0/22. 목표 날짜/공식 제출 여부/가용성은 미확정.
+| 교육 마감/목표 | 산출물 | 개정·검토 상태 |
+| --- | --- | --- |
+| 11/13 (기존) | 기획서·WBS | 11/26 1차 의견 보완 후보; 2차 요청·PDF·접수 전 |
+| 11/20 (기존) | API·DB | 현행 후보, 사용자 스토리와 대조 및 검토 필요 |
+| 11/27 | DLV-05 단일 에이전트 상태 전이 | 11/26~27 초안·기술 검토·링크 확인 |
+| 12/4 | DLV-06 자기 성찰, PREP 인계·크몽 통합 목표 | 11/30~12/4 시험/결과·인계, 일정 위험 |
+| 12/8 | 중간 발표·모의 MVP | 크몽 우선 시연 제안, 숨고 후속; 전체 gate 별도 |
+| 12/11 | 협업 아키텍처 | 12/9~11 구현/검증/보완 |
+| 12/18 | 보안·Auto-Healing | 12/14~18 구현/응답 유실·중복 방지 시험/보완 |
+| 12/24 | 대화형 웹 앱 | 12/21~24 연동/시험/보완 |
+| 12/31 | 통합 테스트·배포 설계 | 12/28~31 통합/회귀/배포 설계·검토 |
+| 2027/1/4 | 최종 발표·소스·시연영상 | 검증된 범위와 재현 가능한 제출 링크 확인 |
 
-**공통 preflight 검증:** [독립 CI](https://github.com/ik-e/chaja-you/actions/runs/45562142407/job/139028150937)에서 runner 4, 합성 HTTP 14, launcher 1개(두 플랫폼) 통과. 제품 gate 22개 전체 미실행 및 release gate 차단 확인. [근거](../../product/lesson-registration/evidence/product-gate-preflight-20261125.json).
-
-**11/25 최신 통합 검토:** [고정 근거](../../product/lesson-registration/evidence/team-integration-checkpoint-20261125.json) · [독립 조합 CI](https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594). R03 실제 App/STORE 조립 책임, R01 동일 후보 검증 및 산출물 책임. Runtime 30/30·크몽 37/37, skip 0. R02 실험 설계·비용/인계, R04 실제 UI/숨고, R03/R05 권한 경계 및 전원 잔여·가용성 갱신 필요. 전체 gate 0/22. 기존 잔여 추정·목표 일정 및 공식 제출 상태는 확정하지 않음.
+[강사 OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [공식 문서 상태](../design/lesson-registration/CURRENT-DOCUMENTS.md). 1차 개정의 내용 보완은 2차 의견/공식 접수와 다르다.

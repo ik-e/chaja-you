@@ -4,8 +4,8 @@
 
 | 산출물 | 가이드 마감 | 현재 경로 | 준비 상태 |
 | --- | --- | --- | --- |
-| DLV-01 기획서(요구사항 명세 포함) | 2026-11-13 | [보기](../../step1/기획서_제출본.md) | 현행 mock 범위 반영 후보 |
-| DLV-02 WBS | 2026-11-13 | [보기](../../step1/WBS_제출본.md) | 11/25 V0.6 후보 · R03 실제 조립 계획, R04 9/6 CI, R05 최신 30/37 독립 조합 CI; 갱신 잔여/일정·캡처 미확인 |
+| DLV-01 기획서(요구사항 명세 포함) | 2026-11-13 | [보기](../../step1/기획서_제출본.md) | 11/26 1차 의견 보완 후보; 크몽 우선 시연 제안·정책/가치 시험 전 |
+| DLV-02 WBS | 2026-11-13 | [보기](../../step1/WBS_제출본.md) | 11/26 V0.7 개정 후보 · 인수/검토·교육 일정 창, 확인 실적/잔여 분리; 팀 확인/캡처 전 |
 | DLV-03 API 설계 문서 | 2026-11-20 | [보기](../../step2/API_설계_문서.md) | 11/25 S8/launcher 독립 시험 통과 · R03 실제 WS/STORE/slot/asset 조립 계획, 전체 연동 미확인 |
 | DLV-04 데이터베이스 스키마 설계서 | 2026-11-20 | [보기](../../step2/데이터베이스_스키마_설계서.md) | R03 SQLite DDL main; 실제 stable slot/asset/permit/lease 조립 대기 |
 | DLV-05 단일 에이전트 상태 전이 그래프 설계서 | 2026-11-27 | [보기](../../step3/단일에이전트_상태전이그래프_설계서.md) | 11/25 9항목 현행 PREP 코드 대조 · 추가 보정 후보와 분리, R02 확인·공식 제출 미확인 |
@@ -21,7 +21,7 @@
 | DLV-15 프로젝트 개발 소스코드 | 2027-01-04 | 미작성 | 제품 소스 개발 중; 최종 제출 commit/재현/접근 확인 대기 |
 | DLV-16 시연영상 | 2027-01-04 | 미작성 | 실제 통합 시연·영상 제작/열람 확인 대기 |
 
-**공식 제출·접수:** 16개 모두 실제 대시보드 확인 전 미확인. [11/24 강사 원본 가이드](https://github.com/ik-e/chaja-you/blob/ec8917c63eb13a3d81d3234220bb346cb666028f/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) · [OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/ec8917c63eb13a3d81d3234220bb346cb666028f/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [제출 상태](../../submissions/README.md). 제공 목차·별도 WBS 캡처·가독성/열람권한·대시보드·접수 확인은 별도. 이후 실제 실행 결과가 필요한 산출물은 근거가 생긴 뒤 작성한다.
+**공식 제출·접수:** 11/26 대시보드에서 DLV-01/02 강사 1차 의견 확인(상태 작성중, GitHub 링크); [보완 기록](../../artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json). 2차 의견 및 최종 PDF 접수 전; 나머지는 실제 대시보드 접수 확인 필요. [11/24 강사 원본 가이드](https://github.com/ik-e/chaja-you/blob/ec8917c63eb13a3d81d3234220bb346cb666028f/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/Doc/README.md) · [OUTPUT-GUIDE](https://github.com/ik-e/chaja-you/blob/ec8917c63eb13a3d81d3234220bb346cb666028f/docs/guidelines/instructor-snapshots/snapshots/299a7016748aab57c2de9f03fd38a8b09df4c07e/Lecture/FinalProject/OUTPUT-GUIDE.md) · [제출 상태](../../submissions/README.md). 제공 목차·별도 WBS 캡처·가독성/열람권한·대시보드·접수 확인은 별도. 이후 실제 실행 결과가 필요한 산출물은 근거가 생긴 뒤 작성한다.
 
 **현행과 과거:** [Step1](../../step1/README.md) · [Step2](../../step2/README.md) · [Step3](../../step3/README.md) · [Step4](../../step4/README.md). 이전 찾아you 생성 문서/11/23 후보는 이력, [고정 설계 뷰](README.md)는 당시 스냅샷. PR #44는 main에 병합됐다. 세부 후보의 실제 구현 정합성 및 최종 서명은 별도 검토한다. 실제 통합/운영 보안·교육 기술 효과는 후보 시험과 구분한다.
 
