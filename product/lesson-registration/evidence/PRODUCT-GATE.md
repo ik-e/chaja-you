@@ -24,3 +24,7 @@ uv run --locked --all-groups --python 3.12 python evidence/product_gate.py --mod
 4. 동일 후보에서 각 gate의 전체 시나리오를 구현·실행. 오류/응답 유실/경합/외부 효과·UI 및 두 플랫폼 교차 시험을 포함. 기존 22개 모두 충족 전 완료 금지.
 
 공통 실행기는 업무 배분이나 제품 스펙을 변경하지 않는다.
+
+## 최신 통합 후보 인수
+
+[인수 기준](INTEGRATION-INTAKE.md) · [22개 수용 시험 준비 목록](product-gate-readiness-20261125.json). R03 실제 서비스 조립 결과를 R01이 고정 독립 검증한다. 최신 Runtime 30/30·크몽 37/37의 [조합 CI](https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594)는 supporting only. 전체 case 0/22. T5-08 별도 승인 실제 모델 실행/동일 후보 결과 연결 기능은 R02 실험 설계 검토 후 구현해야 하며 현재 자동 호출 차단 유지.

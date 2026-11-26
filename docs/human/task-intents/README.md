@@ -24,7 +24,13 @@
 - [TASK-006 · R05 최소 구현 구조·통합 순서](TASK-006.md)
 - [TASK-007 · R01 MVP 범위 수렴](TASK-007.md)
 
-## 제품 개발 활성 TASK
+## 현재 사용자 스토리·플랫폼 조사 및 DB 설계 TASK
+
+- [TASK-055 · R02 독립 조사](../phase-intents/PHASE-20261126-01.md) · [TASK-056 · R04 독립 조사](../phase-intents/PHASE-20261126-01.md) · [TASK-057 · R05 독립 조사](../phase-intents/PHASE-20261126-01.md) · [TASK-058 · R01 통합/DB 설계](../phase-intents/PHASE-20261126-01.md)
+
+공통 의도는 현재 Phase에 기록하며 담당별 TASK는 동일 공통 작업 계약을 참조한다. [작업 공간](../../artifacts/planning/lesson-registration-20261126/README.md)
+
+## 이전 제품 개발 TASK (신규 구현 보류·원본 보존)
 
 - [TASK-048 · 공통 계약·개발 환경 유지 및 점진 통합 검증](TASK-048.md)
 - [TASK-049 · 등록 정보 준비·AI 구조화 및 검증](TASK-049.md)

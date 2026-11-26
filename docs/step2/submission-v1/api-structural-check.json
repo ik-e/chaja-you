@@ -1,0 +1,54 @@
+{
+  "status": "limited_in_memory_structural_check",
+  "checks": [
+    {
+      "id": "price_conflict",
+      "pass": true
+    },
+    {
+      "id": "model_blocked",
+      "pass": true
+    },
+    {
+      "id": "ready_review",
+      "pass": true
+    },
+    {
+      "id": "start_accepted",
+      "pass": true
+    },
+    {
+      "id": "same_start_replay",
+      "pass": true
+    },
+    {
+      "id": "confirmed",
+      "pass": true
+    },
+    {
+      "id": "unknown",
+      "pass": true
+    },
+    {
+      "id": "unauthenticated",
+      "pass": true
+    },
+    {
+      "id": "foreign_owner",
+      "pass": true
+    },
+    {
+      "id": "model_storage_failed",
+      "pass": true
+    },
+    {
+      "id": "fact_conflict",
+      "pass": true
+    },
+    {
+      "id": "stale_revision",
+      "pass": true
+    }
+  ],
+  "limitations": "실제 PostgreSQL, HTTP, 전체 OpenAPI validator 및 제품 gate 미실행"
+}

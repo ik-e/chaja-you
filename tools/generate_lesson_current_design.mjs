@@ -3,6 +3,7 @@
 import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {normalizeMarkdownRanges} from './check_markdown_ranges.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 function generate(read,has){
  const b="docs/artifacts/design/lesson-registration-20261124/",p="product/lesson-registration/",d="docs/design/lesson-registration/";
@@ -90,14 +91,54 @@ function addPhysical(files, read, has) {
  files[jp]=JSON.stringify(index,null,2)+"\n"; files[mp]=md;
  return files;
 }
+function applyOperationalPhase(files, state, baselinePhase, activeDesignTasks) {
+ const d="docs/design/lesson-registration/", jp=d+"CURRENT-DESIGN.json", mp=d+"CURRENT-DESIGN.md";
+ const index=JSON.parse(files[jp]);
+ if(state.active_phase_intent_ref===baselinePhase) return files;
+ index.baseline_phase=index.phase;
+ index.phase={path:state.active_phase_intent_ref};
+ index.previous_packages=index.active_packages;
+ index.active_packages=[];
+ index.active_design_tasks=activeDesignTasks;
+ index.trace_semantics.related_tasks="Historical navigation via prior implementation decisions, not current assignment, acceptance or satisfaction.";
+ index.precedence.push("Active design phase takes precedence. The previous implementation workspace is preserved and deferred; no new execution authority.");
+ const l=index.layers.find(x=>x.title==="담당별 상세 설계·작업");
+ l.title="이전 구현 패키지";l.status="보류·근거 보존";l.note="현재 활성 배정이 아님. 재개는 R01 판단.";
+ index.layers.unshift({title:"현재 설계 단계",status:"적용 중",sources:[{path:state.active_phase_intent_ref},...activeDesignTasks.map(x=>x.task_ref)],views:[{path:"CURRENT.md"}],note:"실제 실행 범위와 활성 TASK는 CURRENT 및 해당 Phase를 따른다."});
+ const rel=path=>{const a=d.split("/").filter(Boolean),b=path.split("/");let i=0;while(i<a.length&&a[i]===b[i])i++;return "../".repeat(a.length-i)+b.slice(i).join("/")};
+ const link=(path,label)=>"["+label+"]("+rel(path)+")";
+ const tbl=["| TASK | 담당 | 작업 |","| --- | --- | --- |",...activeDesignTasks.map(t=>"| "+[link(t.task_ref.path,t.id),t.owner,t.title].map(x=>String(x??"").replace(/\|/g,"\\|").replace(/\n/g," ")).join(" | ")+" |")].join("\n");
+ let md=files[mp];
+ md=md.replace("## 1. 현행 적용 우선순위","## 현재 단계 및 활성 작업\n\n"+link(state.active_phase_intent_ref,state.active_phase_intent_id)+" · "+link("CURRENT.md","실제 작업 상태")+"\n\n"+tbl+"\n\n이전 구현 기준선은 참고·이력 및 영향 검토용으로 보존하며 현재 실행 배정으로 사용하지 않는다. 아래 요구사항/결정/시험/패키지의 연결은 기존 기준선에 대한 추적이다.\n\n## 1. 이전 구현 기준선의 적용 기록");
+ md=md.replace("## 5. 현재 담당별 작업","## 5. 이전 구현 패키지 (보류)").replace(/^\| 담당별 상세 설계·작업 .*$/m,line=>line.replace("담당별 상세 설계·작업","이전 구현 패키지").replace("TASK 배정","보류·근거 보존").replace("담당자 PLAN/수신/착수 및 일정 별도 확인","현재 활성 배정이 아님. 재개는 R01 판단."));
+ files[jp]=JSON.stringify(index,null,2)+"\n";files[mp]=md;return files;
+}
+
 const read=path=>JSON.parse(readFileSync(resolve(root,path),'utf8'));
 const has=path=>existsSync(resolve(root,path));
-const files=addPhysical(generate(read,has),read,has);
+const statePath="docs/artifacts/state/current.json", state=read(statePath);
+const workspace=read("product/lesson-registration/WORKSPACE.json");
+const baselinePhase="docs/human/phase-intents/"+workspace.phase+".md";
+const packageIds=workspace.packages.map(x=>x.task_ref.split("/").pop().replace(".json",""));
+const prior=state.active_phase_intent_ref!==baselinePhase;
+if(!has(state.active_phase_intent_ref)||state.active_phase_intent_id!==state.active_phase_intent_ref.split("/").pop().replace(".md",""))throw Error("Current phase pointer mismatch");
+if(prior&&(state.current_baseline_lifecycle?.phase_ref!==baselinePhase||!packageIds.every(id=>state.previous_phase_task_ids?.includes(id))||packageIds.some(id=>state.active_task_ids.includes(id))))throw Error("Phase/workspace historical boundary mismatch");
+const activeDesignTasks=prior?state.active_task_ids.map(id=>{
+ const path="docs/artifacts/tasks/"+id+".json", task=read(path);
+ if(task.id!==id||task.phase_intent_ref!==state.active_phase_intent_ref||!task.owner||!has(task.intent_ref))throw Error("Active task/phase mismatch "+id);
+ return {id,owner:task.owner,title:task.title??task.question,task_ref:{path},intent_ref:{path:task.intent_ref}};
+}):[];
+if(new Set(state.active_task_ids).size!==state.active_task_ids.length)throw Error("Duplicate active tasks");
+const baselineRead=path=>path===statePath&&prior?{...state,active_phase_intent_ref:baselinePhase,active_phase_intent_id:workspace.phase,active_task_ids:packageIds}:read(path);
+const files=applyOperationalPhase(addPhysical(generate(baselineRead,has),read,has),state,baselinePhase,activeDesignTasks);
+const markdownPath="docs/design/lesson-registration/CURRENT-DESIGN.md";
+const normalized=normalizeMarkdownRanges(files[markdownPath]);
+if(normalized.remaining.length)throw Error("Unescaped tilde in generated current design");
+files[markdownPath]=normalized.output;
 const index=JSON.parse(files['docs/design/lesson-registration/CURRENT-DESIGN.json']);
-const state=read(index.operational_state.path);
-for(const pkg of index.active_packages){
+for(const pkg of (index.previous_packages??index.active_packages)){
  const task=read(pkg.task_ref.path);
- if(task.id!==pkg.id||task.owner!==pkg.owner||task.package_id!==pkg.package||task.work_branch!==pkg.branch||task.phase_intent_ref!==state.active_phase_intent_ref||task.intent_ref!==pkg.intent_ref.path)throw Error('Task/workspace mismatch '+pkg.id);
+ if(task.id!==pkg.id||task.owner!==pkg.owner||task.package_id!==pkg.package||task.work_branch!==pkg.branch||task.phase_intent_ref!==(index.baseline_phase??index.phase).path||task.intent_ref!==pkg.intent_ref.path)throw Error('Task/workspace mismatch '+pkg.id);
  const planned=task.traceability.planned_product_test_refs;
  if(planned.length!==pkg.planned_product_tests.length||new Set(planned).size!==planned.length||!planned.every(id=>pkg.planned_product_tests.includes(id)))throw Error('Task test mismatch '+pkg.id);
 }

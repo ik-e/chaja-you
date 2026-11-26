@@ -78,3 +78,7 @@ R03 후속: [R01 결정](../../../docs/human/responses/HRESP-20261125-04_r03-app
 ## 11/25 팀 후속 및 점진 통합 준비
 
 [팀 고정 검토](team-checkpoint-20261125.json) · [제품 gate 실행 체계](PRODUCT-GATE.md). R02 실험 설계/수행 자율, R01 검토만; 실제 모델 오류 및 후속 비용 계획 확인. R03 합성 API 실행기 main 반영, R04 실제 UI/숨고 결과 검토 및 WBS 갱신, R05 고정 CI 15/32 통과. `evidence/product_gate.py`는 22 gate pin과 결과를 구분하고 합성 HTTP/CLI preflight를 수행한다. 완전한 gate case는 아직 0개. 관련 provider/보안/상태가 실제 연결된 이후 검증 case를 등록. 기본 CI에 실제 모델/플랫폼 호출 없음. R02/R04 잔여 공수, R05 갱신 공수·가용성 확인 전 일정 확정 금지.
+
+## 11/25 최신 통합 인수
+
+[팀 최신 체크포인트](team-integration-checkpoint-20261125.json) · [통합 인수 기준](INTEGRATION-INTAKE.md) · [22개 준비 목록](product-gate-readiness-20261125.json). Runtime 30/30·크몽 37/37 동일 고정 조합 독립 CI 통과(skip 0), 전체 제품 0/22. R03 실제 조립, R01 독립 검증·공통 변경 검토·수용 시험 등록 및 판정. R02 실제 실험 설계/비용 검토, R04 실제 UI/숨고 동작 보완. 모든 잔여 공수/가용성 갱신과 공식 제출 확인은 별도.
