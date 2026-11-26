@@ -12564,7 +12564,11 @@
     "unmapped_prior_story_refs": []
   },
   "verification": {
-    "normal_content_roundtrip": "pending_projection_comparison",
+    "normal_content_roundtrip": {
+      "v22_story": true,
+      "v22_flows": true,
+      "v23_render": "connector_js_mirror; official Python check not run"
+    },
     "legacy_refs": {
       "count": 536,
       "missing": 0,
@@ -12612,7 +12616,12 @@
       "semantic_verdict": "inconclusive",
       "actions_with_error_refs": 155,
       "error_journeys": 4,
-      "domain_priority_review": "candidate_corrected_internal_save_and_external_effect"
+      "domain_priority_review": "candidate_corrected_internal_save_and_external_effect",
+      "projection_baseline_roundtrip": {
+        "story": true,
+        "flows": true
+      },
+      "projection_render_method": "connector_js_mirror_of_python_template; full Python check not run"
     }
   },
   "version": "2.3",

@@ -135,31 +135,63 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-058.json)
 
-R01 전용 브랜치에서 R02·R04·R05 원본 118개 행동 및 37개 이벤트를 107개 통합 행동 후보(기존 63 ID 유지), 34개 피처, 447개 분기 후보로 연결했다. 플랫폼 7개·42개 업무·260개 필드 레코드(중복 포함) 및 24개 의미 그룹 비교를 보존한다. 107개 개별 의미·가치 검토, R03 작업 공간의 미제출 보완 초안 121개 행동 대조(동일 후보 64·부분 33·누락 후보 20·대행 제외 4), 10개 보완 주제, 11개 플랫폼 차이 및 14개 범위 결정 추천을 별도 원장에 기록했다. 참조 검사 통과; R03 정식 인계·의미 완전성/분기/범위 승인 미완료. 승인 범위 0, 신규 DB 및 실제 실행 미착수.
+정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음. | 멘토 참고 형식 팀 검토본 USER-STORY.md: 21개 이용 상황, 기존 536개 ID 1회씩 대조, 정상 우선·오류 후속. | V2.2 정상 전수 검토(147 행동/24 경로) 보존. V2.3 정상 수정 필요 8 행동/6 경로 보완 후보, 155 화면 행동 모두 32개 오류 대응 연결, 536 단계/44 업무/693 분기 원문·후속 ID 보존. 일반 조건 195개 중 191개 구체화 후보 및 제외 4개 유지, 14개 이월 오류 연결. 8 정상·4 오류 흐름도, 기존 V2.2 2개 프로젝션 JS 재구성 일치. 개별 승인/실제 권한·효과/의미 완전성/공식 Python 미확정. main 병합 및 DB/API 확정 없음.
 
 검증과 근거
 
 - 구조 참조 검사 · 118 원본/37 이벤트/34 피처/107 행동/447 분기/260 필드/42 업무/107 범위 추천 연결 · pass
 - 검토 원장 참조 검사 · 107 행동/121 R03 초안/34 피처/18 발견/17 결정/11 차이/14 범위 요청 · pass
-- I1 및 USV-01~05 · 사용자 행동의 완전성·의미/원자성/분기·사용자/시스템 역할 검토 · inconclusive
-- I2 및 USV-06~07 · 사용자 가치·범위·MVP 판단과 R01 승인 · inconclusive
+- 최신 원본 244개·141 행동·681 분기 및 30 시나리오/141 범위 추천 참조 검사 · pass
+- I1/USV-01~05 · 의미 완전성 및 실제 상태 전이 · inconclusive
+- I2/USV-06~07 · 제품 범위 및 사용자 승인 · inconclusive
 - I3 · 7개 플랫폼 교차 비교, 사실·제약·실제 권한/완료의 근거 · inconclusive
 - I4~I6 · 승인 범위 기반 DB/ERD/스키마, 데이터 표현/기존 설계 영향 및 API 입력 · inconclusive
 - I7 · 강사 피드백 8개 실제 설계/시험 추적 · inconclusive
+- 최신 이용 시나리오·오류/반복·플랫폼 업무·행동 범위 정적 참조 검사 · pass
+- 7개 플랫폼 및 44 업무 설계 포함, 141개 SVO/15 시나리오/37 화면 참조 · pass
+- 정책 위험 44업무 연결 및 144개 SVO/693개 분기·신규 원본 행동·15개 시나리오 참조 검사 · pass
+- 카테고리 검토 문서의 정본 144개 행동 일대일 대응 및 기본110/조건부29/제외5 수량 확인 · pass
+- V2.3 구조: 기존 행동/단계/693 분기 원문·후속 ID·191 일반 조건 구체화 후보·제외 4·155 행동↔32 오류·팀원 및 플랫폼 참조 검사(JS) · pass
+- V2.2 두 기존 프로젝션 JS 재구성 일치 및 V2.3 세 프로젝션 템플릿 생성 · pass
+- V2.3 의미 완전성·원자적 상태 전이·공식 전체 Python/CI·실제 UI·외부 정책/효과 및 가치 · inconclusive
 - [통합 사용자 스토리·원본 추적·분기 검토](../artifacts/planning/lesson-registration-20261126/integrated/user-stories.json)
 - [7개 플랫폼 업무·필드·관계 및 제약 비교](../artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json)
 - [행동별 범위 추천·결정 요청·강사 피드백 연결](../artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json)
 - [107개 의미 검토·R03 121개 미제출 초안 대조·범위 결정 추천 원장](../artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json)
+- [최신 244개 원본·141개 행동·681개 분기](../artifacts/planning/lesson-registration-20261126/integrated/user-stories.json)
+- [R03 56개 시스템 이벤트 대조](../artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json)
+- [R03 30개 시나리오 교차 검토](../artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json)
+- [141개 범위 추천 원장](../artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json)
+- [사용자 스토리 최종 확인용 문서](../artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md)
+- [통합 사용자 스토리 최종 검토](../artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json)
+- [플랫폼별 업무 및 완료 기준](../artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json)
+- [정책 위험 원장 및 후속 설계 요구](../artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json)
+- [사람 검토용 정책 위험 기록](../artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md)
+- [144개 SVO 카테고리별 공동 검토 프로젝션](../artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md)
+- [V2.0 정상 흐름 검토 및 144개 기존 행동 추적](../artifacts/planning/lesson-registration-20261126/integrated/v2.0/README.md)
+- [V2.0 공통 정상 이용 흐름](../artifacts/planning/lesson-registration-20261126/integrated/v2.0/COMMON-NORMAL-FLOWS.md)
+- [V2.0 7개 플랫폼별 정상 이용 흐름](../artifacts/planning/lesson-registration-20261126/integrated/v2.0/PLATFORM-NORMAL-FLOWS.md)
+- [멘토 참고 자료 형식 사용자 스토리 V2.0 팀 검토안](../artifacts/planning/lesson-registration-20261126/integrated/v2.0/USER-STORY.md)
+- [V2.2 작업용 정상 사용자 스토리](../artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json)
+- [V2.2 정상 흐름 전수 검토 원장](../artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json)
+- [V2.3 작업용 정상·오류 연계 후보](../artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json)
+- [V2.3 전수 분기·오류 및 원본 추적](../artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json)
+- [V2.3 화면별 사용자 스토리](lesson-registration/USER-STORY-V2.3.md)
+- [V2.3 정상 흐름도](lesson-registration/USER-STORY-FLOWS-V2.3.md)
+- [V2.3 오류 흐름·플랫폼 완료 경계·결정 검토](lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md)
 
 남은 불확실성과 결정 요청
 
-- R03의 main 163a4895 작업 공간 보완 초안은 참고 대조했다. 지정 R03/user-stories.json은 고정 시점 빈 양식이며 TASK-059 정식 인계 및 향후 변경 대조 필요. R02 추가 조사와 R04/R05 미확인 사항은 남음.
-- 107개 의미 검토와 6개 대표 안전 조건은 기록했으나 447개 분기 전체 직접 전이의 의미 폐쇄, R03 56개 이벤트 전수 대조, 사용자 행동 의미 완전성 및 정규화는 후속 검토 필요.
-- 플랫폼 직접 경로/필수 표시와 실제 검증·공개·대행 허용은 구분. 실제 외부 작업 및 제3자 대행 허용 독립 실증 없음.
-- DB 진입 게이트 유지. 신규 DB/ERD/스키마·API·이관/실행 시험은 미수행; 제출용 잠정안과 기존 구현 보존.
-- R01 전용 브랜치 작업이며 main 및 다른 owner 원본에 반영하지 않음. 이 세션의 구조 검사는 수행했으나 전체 Python/CI 검증은 미실행.
-- semantic-review-20261126.json의 G-01~08 우선 보완 후보 및 G-09 조건부/G-10 제외 범위를 검토. SD-01~14는 추천이며 제품/MVP·실제 실행 권한·설계 채택을 구분.
-- R03 정식 인계와 후속 조사 변경분을 대조하고 필요한 분기·시스템 이벤트 검토 및 범위 승인 후 승인된 행동 집합을 고정. USV-07 통과 전 신규 DB 설계 금지.
+- 7개 플랫폼 설계 포함 확정, 144개 행동 및 44개 업무 개별 승인 0; 실제 외부 대행 허용 및 완료 실증 0. mock-only.
+- R02 최신 프람피·뮬 사용자 화면/회상·공식 정책 근거 반영, R02 추가 3개 원본 행동 대응. 실제 저장/갱신/공개·법률 판단 미확인.
+- 기존 141개 후보 보존. IS-143 기본 추천 및 IS-144/145 별도 조건부. 사용자 직접 수행 결과 기록의 가치/범위/보호 조건 미승인.
+- 최신 필드 인덱스 363개 출처 레코드(중복 포함), 의미·제약/관계 전수 정규화 미실시.
+- 7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료.
+- 최신 main b08650b의 R02 힙합플레이야·힙합LE 추가 조사 및 저녁 점검은 현재 V1.3 통합 정본에 미반영. 이번 작업은 기존 정본의 공동 검토용 프로젝션 작성에 한정.
+- V2.3 구체화 후보는 의미 승인 아님. 기준 main 868719ff의 조사 결과 참조 및 원본 보존; 미병합 팀원 변경 및 최신 실제 허용·효과 확인 별도. 컨테이너 DNS 제한으로 공식 전체 생성기 --check/CI 미실행, JS 구조 및 프로젝션 대조만 수행.
+- 144개 SVO·44개 업무 범위와 신규 직접 결과 기록 후보·정책 위험 대응을 검토/승인. 7개 설계 대상 확정 유지.
+- 정책 근거/법률 적용 및 업무 단계별 허용·효과 실증은 별도. 승인 및 범위 영향 미확인 사항 처리 후 DB/ERD/API 상세 설계.
+- V2.3 정상·오류 검토 후보, 단일 사용자 승인 조작, 인증 유지 및 기존 SD-01~14 결정 검토. 개별 범위 승인과 실제 허용/효과 검증 전 DB/API 확정 및 main 병합 보류.
 
 ### TASK-059 · 할 일
 

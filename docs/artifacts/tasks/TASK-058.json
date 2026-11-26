@@ -13,7 +13,7 @@
   ],
   "submission_ids": [],
   "required_for_submission": false,
-  "updated_at": "2026-11-26",
+  "updated_at": "2026-11-27",
   "title": "통합 사용자 스토리·서비스 범위 확정 및 DB 설계",
   "question": "독립 조사와 사용자 행동을 통합하여 어떤 서비스 범위·논리 데이터 모델·ERD·스키마를 근거 있게 확정할 수 있는가?",
   "goal": "상위 기획 의도에 맞는 서비스 범위 확정과 7개 플랫폼 확장 가능한 DB 설계, 이후 API·프로토콜 설계 입력 제공",
@@ -58,7 +58,14 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/README.md",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/COMMON-NORMAL-FLOWS.md",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/PLATFORM-NORMAL-FLOWS.md",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/USER-STORY.md"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/USER-STORY.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json",
+    "docs/review/lesson-registration/USER-STORY-V2.3.md",
+    "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md",
+    "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -133,10 +140,31 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-V2.3.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
     }
   ],
   "result": {
-    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음. | 멘토 참고 형식 팀 검토본 USER-STORY.md: 21개 이용 상황, 기존 536개 ID 1회씩 대조, 정상 우선·오류 후속.",
+    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음. | 멘토 참고 형식 팀 검토본 USER-STORY.md: 21개 이용 상황, 기존 536개 ID 1회씩 대조, 정상 우선·오류 후속. | V2.2 정상 전수 검토(147 행동/24 경로) 보존. V2.3 정상 수정 필요 8 행동/6 경로 보완 후보, 155 화면 행동 모두 32개 오류 대응 연결, 536 단계/44 업무/693 분기 원문·후속 ID 보존. 일반 조건 195개 중 191개 구체화 후보 및 제외 4개 유지, 14개 이월 오류 연결. 8 정상·4 오류 흐름도, 기존 V2.2 2개 프로젝션 JS 재구성 일치. 개별 승인/실제 권한·효과/의미 완전성/공식 Python 미확정. main 병합 및 DB/API 확정 없음.",
     "claims": [
       {
         "id": "C058-01",
@@ -267,6 +295,28 @@
           "E058-16",
           "E058-17"
         ]
+      },
+      {
+        "id": "C058-15",
+        "text": "V2.3 155개 화면 행동 및 8개 정상 흐름, 기존 147 행동/536 단계/44 플랫폼 업무 보존. V2.2 수정 필요 8 행동/6 경로 보완 후보 및 4개 외부 직접 선행 행동·기존 글 연결·갱신·직접 작성 준비 분리.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-19",
+          "E058-20",
+          "E058-21",
+          "E058-23",
+          "E058-24"
+        ]
+      },
+      {
+        "id": "C058-16",
+        "text": "693개 기존 분기 조건·후속 ID 전수 보존, 일반 조건 195개 중 191개 구체화 후보/제외 4개 유지, 155개 화면 행동↔32개 오류 대응, 14개 이월/42개 시스템 책임/30개 대표 시나리오/248개 팀원 원본/44개 업무 관련 후보 연결. 의미 동등성과 실제 상태 머신·외부 효과는 미검증.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-21",
+          "E058-22",
+          "E058-25"
+        ]
       }
     ],
     "evidence": [
@@ -377,6 +427,43 @@
         "id": "E058-18",
         "label": "멘토 참고 자료 형식 사용자 스토리 V2.0 팀 검토안",
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/USER-STORY.md"
+      },
+      {
+        "id": "E058-19",
+        "label": "V2.2 작업용 정상 사용자 스토리",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json"
+      },
+      {
+        "id": "E058-20",
+        "label": "V2.2 정상 흐름 전수 검토 원장",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json"
+      },
+      {
+        "id": "E058-21",
+        "label": "V2.3 작업용 정상·오류 연계 후보",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json",
+        "blob": "bc6dad39b639c3eb908702ee104baedce3415aa9"
+      },
+      {
+        "id": "E058-22",
+        "label": "V2.3 전수 분기·오류 및 원본 추적",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json",
+        "blob": "029a983aa0bda441068924ddf951ec7db46586d5"
+      },
+      {
+        "id": "E058-23",
+        "label": "V2.3 화면별 사용자 스토리",
+        "path": "docs/review/lesson-registration/USER-STORY-V2.3.md"
+      },
+      {
+        "id": "E058-24",
+        "label": "V2.3 정상 흐름도",
+        "path": "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md"
+      },
+      {
+        "id": "E058-25",
+        "label": "V2.3 오류 흐름·플랫폼 완료 경계·결정 검토",
+        "path": "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
       }
     ],
     "verification": [
@@ -478,6 +565,34 @@
           "E058-14",
           "E058-09"
         ]
+      },
+      {
+        "criterion": "V2.3 구조: 기존 행동/단계/693 분기 원문·후속 ID·191 일반 조건 구체화 후보·제외 4·155 행동↔32 오류·팀원 및 플랫폼 참조 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-19",
+          "E058-21",
+          "E058-22"
+        ]
+      },
+      {
+        "criterion": "V2.2 두 기존 프로젝션 JS 재구성 일치 및 V2.3 세 프로젝션 템플릿 생성",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-19",
+          "E058-21",
+          "E058-23",
+          "E058-24",
+          "E058-25"
+        ]
+      },
+      {
+        "criterion": "V2.3 의미 완전성·원자적 상태 전이·공식 전체 Python/CI·실제 UI·외부 정책/효과 및 가치",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-22",
+          "E058-25"
+        ]
       }
     ],
     "uncertainties": [
@@ -486,11 +601,13 @@
       "기존 141개 후보 보존. IS-143 기본 추천 및 IS-144/145 별도 조건부. 사용자 직접 수행 결과 기록의 가치/범위/보호 조건 미승인.",
       "최신 필드 인덱스 363개 출처 레코드(중복 포함), 의미·제약/관계 전수 정규화 미실시.",
       "7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료.",
-      "최신 main b08650b의 R02 힙합플레이야·힙합LE 추가 조사 및 저녁 점검은 현재 V1.3 통합 정본에 미반영. 이번 작업은 기존 정본의 공동 검토용 프로젝션 작성에 한정."
+      "최신 main b08650b의 R02 힙합플레이야·힙합LE 추가 조사 및 저녁 점검은 현재 V1.3 통합 정본에 미반영. 이번 작업은 기존 정본의 공동 검토용 프로젝션 작성에 한정.",
+      "V2.3 구체화 후보는 의미 승인 아님. 기준 main 868719ff의 조사 결과 참조 및 원본 보존; 미병합 팀원 변경 및 최신 실제 허용·효과 확인 별도. 컨테이너 DNS 제한으로 공식 전체 생성기 --check/CI 미실행, JS 구조 및 프로젝션 대조만 수행."
     ],
     "decision_requests": [
       "144개 SVO·44개 업무 범위와 신규 직접 결과 기록 후보·정책 위험 대응을 검토/승인. 7개 설계 대상 확정 유지.",
-      "정책 근거/법률 적용 및 업무 단계별 허용·효과 실증은 별도. 승인 및 범위 영향 미확인 사항 처리 후 DB/ERD/API 상세 설계."
+      "정책 근거/법률 적용 및 업무 단계별 허용·효과 실증은 별도. 승인 및 범위 영향 미확인 사항 처리 후 DB/ERD/API 상세 설계.",
+      "V2.3 정상·오류 검토 후보, 단일 사용자 승인 조작, 인증 유지 및 기존 SD-01~14 결정 검토. 개별 범위 승인과 실제 허용/효과 검증 전 DB/API 확정 및 main 병합 보류."
     ]
   },
   "traceability": {
@@ -527,7 +644,7 @@
   "intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
   "registration_authority_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
   "assignment_mode": "self_directed",
-  "assignment_status": "사용자 스토리 통합 추천안 및 사람용 검토 문서 작성 · R01 확인 대기 · DB 미착수",
+  "assignment_status": "V2.3 정상·오류 사용자 스토리 및 사람용 검토 자료 작성 · R01 범위/정책 확인과 의미·실증 검증 대기 · DB 미착수",
   "workspace_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/",
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"

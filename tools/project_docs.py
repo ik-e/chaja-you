@@ -646,6 +646,7 @@ def render_user_story_v22(record, source, output):
     stories = record["stories"]
     sections = record["screen_sections"]
     actions = record["actions"]
+    audit = read_json(record["error_review_ref"]) if record.get("error_review_ref") else None
     paths = {item["id"]: item for item in record["common_path_summaries"]}
     graph = record["screen_graph"]
     if set(screens) != {n["id"] for n in graph["nodes"]}:
@@ -730,7 +731,10 @@ def render_user_story_v22(record, source, output):
             return [f"   - {'진입' if field == 'entry' else '기본 표시'}: {x[field]}"]
         if typ == "action":
             x = actions[b["id"]]
-            return [" " * x["indent"] + f"- `{x['id']}` [{x['display_class']}] {x['description']} → **{x['destination_text']}**{x['legacy_tag_text']}"]
+            lines = [" " * x["indent"] + f"- `{x['id']}` [{x['display_class']}] {x['description']} → **{x['destination_text']}**{x['legacy_tag_text']}"]
+            if audit:
+                lines.append(" " * (x["indent"] + 2) + "- 오류·예외: " + ", ".join(audit["action_error_refs"][x["id"]]))
+            return lines
         raise ValueError(f"{source}: unexpected block {typ}")
     projections = record["projection_paths"]
     def base(title):
@@ -741,15 +745,20 @@ def render_user_story_v22(record, source, output):
             "",
         ]
     if output == projections["story"]:
-        lines = base("찾아you — User Story V2.2 (팀 검토용)")
+        lines = base(f"찾아you — User Story V{record.get('version', '2.2')} (팀 검토용)")
         lines.extend([local_link(projections["flows"], "화면 및 업무별 흐름도", output), ""])
+        if audit:
+            lines.extend([local_link(audit["projection_path"], "오류·예외 대응 및 최종 검토 항목", output), ""])
         body = [line for b in blocks for line in block(b)][1:]
         lines.append(rebase("\n".join(body).strip(), source, output))
         return "\n".join(lines).rstrip() + "\n"
     if output != projections["flows"]:
         raise ValueError(f"{source}: invalid projection destination")
-    lines = base("찾아you — 화면 연결 및 사용자 흐름 V2.2")
-    lines.extend([local_link(projections["story"], "전체 사용자 스토리", output), "",
+    lines = base(f"찾아you — 화면 연결 및 사용자 흐름 V{record.get('version', '2.2')}")
+    lines.extend([local_link(projections["story"], "전체 사용자 스토리", output), ""])
+    if audit:
+        lines.extend([local_link(audit["projection_path"], "오류·예외 흐름 및 검토", output), ""])
+    lines.extend([
         "정상 이용의 대표 경로를 보여주는 검토용 시각화. 모든 예외와 상태 전이의 완전성 또는 실제 플랫폼 허용을 입증하지 않는다. 각 노드의 행동 ID는 정본의 action을 지칭한다. 인증 재사용은 별도 채택 전 후보, 외부 접근/실행은 mock-only.",
         "", "## 전체 화면 연결", "", *screen_graph(), "", "## 화면별 제공 정보", "",
         "| 화면 | 제공 목적 | 진입 | 종료/이동 |", "| --- | --- | --- | --- |"])
@@ -791,6 +800,140 @@ def render_user_story_v22(record, source, output):
         "- 파란색: 사용자 행동. 초록색: 서비스 자동 처리·표시. 노란색: 조건 판단 또는 조건부 행동.",
         "- 모든 실제 버튼/필드의 원자적 분해나 오류/예외 분기는 아직 확정되지 않았다. 이 그림만으로 구현·DB 상세·외부 실행을 시작하지 않는다.",
         "- 통합 승인에 표시된 대상과 실제 실행 대상이 다르면 새 확인이 필요하다. 미확인 외부 효과는 재실행하지 않는다.", ""])
+    return "\n".join(lines).rstrip() + "\n"
+
+
+
+def render_story_review_v23(record, source, audit, audit_path, output):
+    """Validate traceability and render a review candidate, not an execution approval."""
+    actions, cases, stat = record["actions"], audit["error_cases"], audit["verification"]
+    context_ids = {x["id"] for x in audit["context_guards"]}
+    prior = read_json(record["source_snapshot"]["path"])
+    legacy = read_json(record["legacy_coverage"]["legacy_action_source"])
+    scope = read_json(record["legacy_coverage"]["scope_source"])
+    base_dir = source.rsplit("/v2.3/", 1)[0]
+    decisions_path = base_dir + "/scope-decisions.json"
+    decisions = read_json(decisions_path)["decision_requests"]
+    normal = read_json(base_dir + "/v2.2/normal-review-20261127.json")
+    if record["version"] != "2.3" or record["error_review_ref"] != audit_path:
+        raise ValueError(f"{source}: invalid review version/ref")
+    source_ref = next(x for x in audit["source_refs"] if x["path"] == source)
+    actual_blob = subprocess.check_output(
+        ["git", "hash-object", f"--path={source}", str(ROOT / source)], cwd=ROOT, text=True, encoding="ascii"
+    ).strip()
+    if source_ref["blob"] != actual_blob or not set(prior["actions"]) <= set(actions):
+        raise ValueError(f"{source}: source blob or prior action mismatch")
+    for e in cases.values():
+        if not set(e["action_refs"]) <= set(actions) or e["context_ref"] not in context_ids:
+            raise ValueError(f"{source}: invalid error relation {e['id']}")
+    if set(audit["action_error_refs"]) != set(actions):
+        raise ValueError(f"{source}: action-error coverage mismatch")
+    for aid, refs in audit["action_error_refs"].items():
+        expected = {k for k, v in cases.items() if aid in v["action_refs"]}
+        if not refs or len(refs) != len(set(refs)) or set(refs) != expected:
+            raise ValueError(f"{source}: invalid reverse error relation {aid}")
+    original = {b["branch_id"]: (st, b) for st in legacy["user_stories"] for b in st["branch_review"]}
+    branches = audit["branch_reviews"]
+    if len(branches) != len(original) or {b["branch_id"] for b in branches} != set(original):
+        raise ValueError(f"{source}: branch trace mismatch")
+    pattern = re.compile("해당 행동의 거절·중단|필요 조건 또는 관측 근거 불충분|조건 미충족 또는 결과 확인 불가|사용자가 같은 행동을 다시 선택")
+    count = specific = excluded = 0
+    for b in branches:
+        st, old_b = original[b["branch_id"]]
+        if (b["story_id"] != st["id"] or b["type"] != old_b["scenario_type"] or b["original_condition"] != old_b["condition"]
+                or b["original_next_story_ids"] != old_b.get("next_story_ids", [])):
+            raise ValueError(f"{source}: branch original not preserved {b['branch_id']}")
+        if not all(b[k] for k in ("trigger", "guard", "response", "outcome")) or not set(b["error_case_refs"]) <= set(cases) or b["primary_error_ref"] not in b["error_case_refs"]:
+            raise ValueError(f"{source}: invalid branch review {b['branch_id']}")
+        if pattern.search(b["original_condition"]):
+            count += 1
+            if st["scope_candidate"] == "excluded":
+                excluded += 1
+                if b["disposition"] != "excluded_preserved":
+                    raise ValueError(f"{source}: excluded branch promoted")
+            else:
+                specific += 1
+                if b["disposition"] != "context_specific_candidate" or b["trigger"] == b["original_condition"]:
+                    raise ValueError(f"{source}: generic branch not contextualized")
+    if (count, specific, excluded) != (stat["generic_original_conditions"], stat["generic_specific_candidates"], stat["generic_excluded"]):
+        raise ValueError(f"{source}: generic branch counts")
+    def exact(rows, key, expected):
+        ids = [x[key] for x in rows]
+        if len(ids) != len(set(ids)) or set(ids) != set(expected):
+            raise ValueError(f"{source}: coverage mismatch {key}")
+    exact(audit["normal_action_reviews"], "action_id", actions)
+    exact(audit["legacy_story_reviews"], "story_id", (x["id"] for x in legacy["user_stories"]))
+    exact(audit["legacy_deferred"], "story_id", record["legacy_coverage"]["deferred_error_story_refs"])
+    exact(audit["normal_path_reviews"], "id", (x["id"] for x in normal["normal_path_reviews"]))
+    exact(audit["platform_operation_reviews"], "operation_ref", (x["id"] for x in scope["operation_rows"]))
+    ops = {x["id"]: x for x in scope["operation_rows"]}
+    for x in audit["platform_operation_reviews"]:
+        op = ops[x["operation_ref"]]
+        if (actions[x["action_id"]]["operation_ref"] != x["operation_ref"] or x["object"] != op["object"] or x["scope"] != op["scope"]
+                or x["completion_criterion"] != op["completion_criterion"] or x["permission"] != "unknown" or x["completion_observed"]):
+            raise ValueError(f"{source}: platform completion/authority mismatch")
+    team = [(x["source_path"], x["source_story_id"]) for x in audit["team_source_reviews"]]
+    if len(team) != len(set(team)) or set(team) != {(x["source_path"], x["source_story_id"]) for x in normal["source_story_reviews"]}:
+        raise ValueError(f"{source}: team source coverage mismatch")
+    final = read_json(base_dir + "/user-story-final-review-20261126.json")
+    scenario = read_json(base_dir + "/scenario-review-20261126.json")
+    exact(audit["prior_error_repeat_reviews"], "id", (x["id"] for x in final["error_review"] + final["additional_errors"] + final["repeat_review"]))
+    exact(audit["system_responsibility_reviews"], "id", (x["id"] for x in legacy["system_event_candidates"] + legacy["supporting_event_candidates"]))
+    exact(audit["scenario_reviews"], "id", (x["id"] for x in scenario["scenarios"]))
+    for group in ("legacy_deferred", "legacy_story_reviews", "prior_error_repeat_reviews", "system_responsibility_reviews", "scenario_reviews", "team_source_reviews", "platform_operation_reviews"):
+        for x in audit[group]:
+            if not set(x.get("action_refs", [])) <= set(actions) or not set(x.get("error_case_refs", [])) <= set(cases):
+                raise ValueError(f"{source}: invalid related candidate {group}")
+    for j in audit["error_journeys"]:
+        nodes = {n[0] for n in j["nodes"]}
+        if len(nodes) != len(j["nodes"]) or not set(j["case_refs"]) <= set(cases) or any(x not in nodes or y not in nodes for x, y, _ in j["edges"]):
+            raise ValueError(f"{source}: invalid error journey {j['id']}")
+    if any(stat[k] for k in ("scope_approved", "external_permission_verified", "external_completion_verified")):
+        raise ValueError(f"{source}: unexpected authority promotion")
+    for k, n in (("actions",len(actions)),("actions_with_error_refs",len(audit["action_error_refs"])),("errors",len(cases)),("branches",len(branches)),("error_journeys",len(audit["error_journeys"])),("team_rows",len(team)),("platform_ops",len(ops)),("deferred",len(audit["legacy_deferred"]))):
+        if stat[k] != n:
+            raise ValueError(f"{source}: review count {k}")
+    lines = header("찾아you — V2.3 오류·예외 및 검토 결정", [source, audit_path, decisions_path], output)
+    lines.extend([local_link(record["projection_paths"]["story"], "화면별 사용자 스토리", output) + " · " + local_link(record["projection_paths"]["flows"], "정상 흐름도", output), "",
+        "**검토 후보 · 범위 미승인 · mock-only.** 오류 대응을 정의하고 참조를 확인했으나 실제 상태 전이·사용성·외부 효과의 의미 완전성은 미확정이다.", "",
+        "## 1. 전수 검토 범위", ""])
+    lines.extend(table(["항목", "결과"], [
+        ("기존 화면 행동 보존", stat["old_actions_retained"]), ("현재 화면 행동 / 오류 대응 연결", f"{stat['actions']} / {stat['actions_with_error_refs']}"),
+        ("기존 단계 ID", stat["legacy_steps"]), ("정상 흐름도 / 오류 흐름도", f"{stat['journeys']} / {stat['error_journeys']}"),
+        ("정상 수정 필요 행동 / 경로 보완", f"{stat['normal_revisions']} / {stat['normal_path_revisions']}"), ("오류·예외 대응 유형", stat["errors"]),
+        ("기존 분기 원문 및 후속 ID", stat["branches"]), ("일반 조건 / 구체화 후보 / 제외 유지", f"{stat['generic_original_conditions']} / {stat['generic_specific_candidates']} / {stat['generic_excluded']}"),
+        ("이월 오류 행동", stat["deferred"]), ("이전 오류·반복 검토", stat["prior_error_repeat"]),
+        ("시스템 책임 / 대표 시나리오", f"{stat['system_responsibilities']} / {stat['scenarios']}"), ("팀원 원본 행동 / 플랫폼 업무", f"{stat['team_rows']} / {stat['platform_ops']}"),
+        ("개별 범위 승인 / 실제 외부 허용 / 실제 완료 확인", "0 / 0 / 0"), ("V2.2 기존 두 프로젝션 재구성", "일치 (JS)"), ("전체 공식 Python/CI", "미실행 (컨테이너 DNS 제한)")]))
+    lines.extend(["## 2. 이전 정상 검토의 보완과 미확정", ""])
+    lines.extend(table(["ID", "검토 사항", "처리 후보", "판정"], [(x["id"], x["title"], x["resolution"], x["disposition"]) for x in audit["findings"]]))
+    lines.extend(["## 3. 오류 발생 후 사용자·서비스 흐름", ""])
+    for j in audit["error_journeys"]:
+        lines.extend([f"### {j['id']} · {j['title']}", "", "오류 연결: " + ", ".join(j["case_refs"]), "", "```mermaid", "flowchart TD"])
+        for nid, label in j["nodes"]:
+            label = label.replace('"', "&quot;").replace("|", "&#124;")
+            lines.append(f'  {nid}["{label}"]')
+        for frm, to, label in j["edges"]:
+            label = label.replace("|", "&#124;")
+            arrow = "-->" + (f"|{label}|" if label else "")
+            lines.append(f"  {frm} {arrow} {to}")
+        lines.extend(["```", ""])
+    lines.extend(["## 4. 화면별 오류·예외 대응 상세", ""])
+    for e in cases.values():
+        lines.extend([f"### {e['id']} · {e['title']}", "", f"- 발생 조건: {e['condition']}", f"- 서비스 자동 처리: {e['system_response']}",
+            f"- 필요한 사용자 행동: {e['user_response']}", f"- 복귀/종료: {e['destination']}", f"- 완료 조건: {e['completion']}",
+            f"- 효과·재시도 제한: {e['effect']} / {e['retry_guard']}", f"- 관련 행동: {', '.join(e['action_refs'])} · {e['context_ref']}", ""])
+    lines.extend(["## 5. 업무 간 유지되는 식별·상태 가드", ""])
+    lines.extend(table(["ID", "컨텍스트", "식별/유지 정보", "제한"], [(c["id"], c["name"], c["identity"], c["guard"]) for c in audit["context_guards"]]))
+    lines.extend(["## 6. 플랫폼별 완료 및 오류 경계", ""])
+    lines.extend(table(["업무", "정확 대상", "완료 기준 후보", "오류 대응", "실제 검증"], [(x["operation_ref"] + " " + x["platform"], x["object"], x["completion_criterion"], ", ".join(x["error_case_refs"]), "허용/효과 미확인") for x in audit["platform_operation_reviews"]]))
+    lines.extend(["## 7. 이월 오류 행동 대응", ""])
+    lines.extend(table(["기존 ID", "행동", "연결된 대응"], [(x["story_id"], x["action"], ", ".join(x["error_case_refs"])) for x in audit["legacy_deferred"]]))
+    lines.extend(["## 8. R01이 확인할 범위 및 정책 후보", "", "아래 14개 결정은 기존 범위 원장에서 가져온 미승인 후보이다. V2.3의 단일 명시 승인 동작 등 구체화는 새 범위 승인이 아니다. 범위 결정·외부 정책/권한·가치 검증 전 DB/API 확정 금지.", ""])
+    lines.extend(table(["ID", "결정 주제", "기존 추천안"], [(d["id"], d["topic"], d["recommendation"]) for d in decisions]))
+    lines.extend(["## 9. 남은 확인과 원본 추적", "", *["- " + x for x in audit["limits"]],
+        "- 기존 693개 분기의 원문, 후속 ID, 행동별 구체 조건·가드·대응 후보는 작업 원본 review.json에서 확인한다. 관련 대응 연결을 실제 분기의 의미 동등성 통과로 취급하지 않는다.",
+        "- 팀원 조사 기준 main: " + chr(96) + audit["source_main"] + chr(96) + ". 별도 브랜치의 최신 미병합 변경은 이 검토 기준에 포함된 것으로 단정하지 않는다.", ""])
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -1297,6 +1440,21 @@ def build():
             raise ValueError(f"{story_source}: unexpected projection path")
         for path in expected.values():
             outputs[path] = render_user_story_v22(story_record, story_source, path)
+
+    story_v23 = "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json"
+    if story_v23 in sources:
+        record = sources[story_v23]
+        expected = {"story": "docs/review/lesson-registration/USER-STORY-V2.3.md", "flows": "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md"}
+        audit_path = "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json"
+        output = "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
+        if record["projection_paths"] != expected or record["error_review_ref"] != audit_path:
+            raise ValueError(f"{story_v23}: unexpected review projection path")
+        audit = sources[audit_path]
+        if audit["projection_path"] != output:
+            raise ValueError(f"{audit_path}: unexpected error projection path")
+        outputs[output] = render_story_review_v23(record, story_v23, audit, audit_path, output)
+        for path in expected.values():
+            outputs[path] = render_user_story_v22(record, story_v23, path)
 
     return outputs
 
