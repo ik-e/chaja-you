@@ -50,7 +50,7 @@
 | [TASK-055](docs/artifacts/tasks/TASK-055.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R02) | R02 | 2026-11-26 | 없음 | 보완 | 진행 중 |
 | [TASK-056](docs/artifacts/tasks/TASK-056.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R04) | R04 | 2026-11-26 | 없음 | 보완 | 검토 중 |
 | [TASK-057](docs/artifacts/tasks/TASK-057.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R05) | R05 | 2026-11-26 | 없음 | 보완 | 검토 중 |
-| [TASK-058](docs/artifacts/tasks/TASK-058.json) | 통합 사용자 스토리·서비스 범위 확정 및 DB 설계 | R01 | 2026-11-26 | TASK-055, TASK-056, TASK-057 | 보완 | 할 일 |
+| [TASK-058](docs/artifacts/tasks/TASK-058.json) | 통합 사용자 스토리·서비스 범위 확정 및 DB 설계 | R01 | 2026-11-26 | TASK-055, TASK-056, TASK-057 | 보완 | 진행 중 |
 | [TASK-059](docs/artifacts/tasks/TASK-059.json) | 사용자 스토리 독립 도출 및 누락 검토 (R03) | R03 | 2026-11-26 | 없음 | 보완 | 할 일 |
 
 ## 이전 TASK · 정산 이력
