@@ -51,7 +51,9 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/branch-refinement-20261126.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -117,10 +119,16 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
     }
   ],
   "result": {
-    "summary": "R01 사용자 지시로 7개 플랫폼 모두 설계 포함 확정, 구현 순서/업무별 승인 분리. 141개 SVO·15개 이용 시나리오의 행동/동기/시스템 처리 분리. 44개 플랫폼 업무 설계 포함, 개별 승인 0. R05 개인 브랜치의 보컬 레슨 3개 플랫폼 예시 및 R04 37개 화면 후보 대조, 318개 최신 출처 필드 레코드 인덱스 반영. 정적 참조 검사만; 공식 검증/실행/DB 미착수/main 미병합.",
+    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합.",
     "claims": [
       {
         "id": "C058-01",
@@ -210,6 +218,17 @@
           "E058-11",
           "E058-02"
         ]
+      },
+      {
+        "id": "C058-11",
+        "text": "단계별 수행 주체·외부 효과·정책 권한, 사용자 직접 결과와 독립 관측의 구분, 신규 SVO 3개 및 시스템 책임 2개 후보, R02 최신 프람피/뮬 조사 반영. 7개 설계 포함 및 mock-only 유지.",
+        "status": "확인",
+        "evidence_ids": [
+          "E058-12",
+          "E058-13",
+          "E058-10",
+          "E058-11"
+        ]
       }
     ],
     "evidence": [
@@ -285,6 +304,16 @@
         "id": "E058-11",
         "label": "플랫폼별 업무 및 완료 기준",
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json"
+      },
+      {
+        "id": "E058-12",
+        "label": "정책 위험 원장 및 후속 설계 요구",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json"
+      },
+      {
+        "id": "E058-13",
+        "label": "사람 검토용 정책 위험 기록",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
       }
     ],
     "verification": [
@@ -369,18 +398,27 @@
           "E058-10",
           "E058-11"
         ]
+      },
+      {
+        "criterion": "정책 위험 44업무 연결 및 144개 SVO/693개 분기·신규 원본 행동·15개 시나리오 참조 검사",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-12",
+          "E058-10",
+          "E058-11"
+        ]
       }
     ],
     "uncertainties": [
-      "7개 설계 대상 포함은 사용자 지시로 확정; 개별 사용자 행동/업무 범위 승인 0개, 실제 제공 및 일정 미확정.",
-      "R05 개인 브랜치 입력 예시를 불변 근거로 반영; 팀원 원본/브랜치 병합 없음.",
-      "최신 출처 필드 인덱스 318개 반영. 의미·제약·관계 전체 정규화 및 DB 상세는 후속.",
-      "R04 화면 37개 검토용; 별도 UI/운영자 기능 또는 6개 신규 행동 후보는 미채택.",
-      "실제 대행 권한·완료 실증 0개, 공식 Python/CI 및 project_docs.py 미실행. 전체 의미 검증 미완료."
+      "7개 플랫폼 설계 포함 확정, 144개 행동 및 44개 업무 개별 승인 0; 실제 외부 대행 허용 및 완료 실증 0. mock-only.",
+      "R02 최신 프람피·뮬 사용자 화면/회상·공식 정책 근거 반영, R02 추가 3개 원본 행동 대응. 실제 저장/갱신/공개·법률 판단 미확인.",
+      "기존 141개 후보 보존. IS-143 기본 추천 및 IS-144/145 별도 조건부. 사용자 직접 수행 결과 기록의 가치/범위/보호 조건 미승인.",
+      "최신 필드 인덱스 363개 출처 레코드(중복 포함), 의미·제약/관계 전수 정규화 미실시.",
+      "7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료."
     ],
     "decision_requests": [
-      "7개 설계 대상 포함은 확정. USER-STORIES-REVIEW.md의 개별 SVO/이용 시나리오·44개 업무 및 오류/반복·14개 범위 추천 검토·승인 또는 변경.",
-      "개별 범위 승인과 영향 미확인 사항 처리 후 7개 플랫폼 DB 설계. 실제 구현 순서 및 일정은 별도."
+      "144개 SVO·44개 업무 범위와 신규 직접 결과 기록 후보·정책 위험 대응을 검토/승인. 7개 설계 대상 확정 유지.",
+      "정책 근거/법률 적용 및 업무 단계별 허용·효과 실증은 별도. 승인 및 범위 영향 미확인 사항 처리 후 DB/ERD/API 상세 설계."
     ]
   },
   "traceability": {

@@ -2,16 +2,15 @@
   "schema_version": 1,
   "id": "PLATFORM-COMPARISON-20261126-R01-V1",
   "kind": "document",
-  "status": "7개 플랫폼 설계 대상 확정; 기존 비교 스냅샷 + 최신 공통 필드 인덱스/입력 사례 보완",
+  "status": "v1.3 · 최신 R02 프람피·뮬 필드 출처 및 정책 설계 입력 반영; 의미·관계 전수 정규화 후속",
   "owner": "R01",
   "task_ref": "TASK-058",
   "title": "7개 플랫폼 업무·데이터 의미·관계 및 제약 비교",
   "source_refs": {
     "r02": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-      "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
-      "blob": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
-      "url": "https://github.com/ik-e/chaja-you/blob/3f4924c5fc1153a641987eaf1b5e2bdc937b569f/docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+      "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+      "blob": "8d40ce71243e045cf7ba856be49383119c473903"
     },
     "r04": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
@@ -90,6 +89,21 @@
       "commit": "ae4c496ef91cce698db710080ba7d7483ccc4718",
       "blob": "d159a171fd26f56289ba5bc52a58357f181f98e1",
       "status": "개인 브랜치의 추가 입력안 사례; 기존 조사 원본과 별개. 실제 저장·게시·대행 실증 아님"
+    },
+    "prompie": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json",
+      "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+      "blob": "9014959f21a63e115f38fdba84f093d0c09b9571"
+    },
+    "mule": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json",
+      "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+      "blob": "ebcedfce1d18c631ffca98055bb38ed5fe53b66c"
+    },
+    "policy_risk": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+      "id": "POLICY-RISK-20261126-R01",
+      "relation": "same_revision"
     }
   },
   "method": "팀원별 공통 원본을 그대로 참조하고 R05 상세 조사 7개 및 R02 크몽 문답의 조건을 비교. 260개는 중복 포함 소스 필드 레코드 수. 공통 의미 후보 그룹을 붙이되 입력/노출/반환, 대상 객체, 제약, 근거 상태를 합치지 않는다. 같은 화면·문서의 재사용은 독립 검증 아님. 직접 지원 경로와 대행 허용·완료 결과 분리.",
@@ -15484,12 +15498,12 @@
   "source_revision_note": "통합 스토리의 고위험 분기 보완 후 동일 107개 ID 및 원본 매핑을 재확인하고 불변 commit/blob으로 고정. 플랫폼 필드/업무/스토리 연결은 변경하지 않음.",
   "latest_field_source_index": {
     "status": "최신 팀원 공통 원본의 필드 식별 전수 갱신. 1차 의미 그룹/업무 정규화의 기존 스냅샷 보존; 이번 단계는 상세 DB 스키마 확정 아님.",
-    "main_snapshot": "1917288563cb633892452bcd3f415d274a5d735b",
+    "main_snapshot": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
     "source_refs": {
       "r02": {
         "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-        "commit": "1917288563cb633892452bcd3f415d274a5d735b",
-        "blob": "fff4bd74ab7e555d74df4c2e4fe79147a6a4f147"
+        "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+        "blob": "8d40ce71243e045cf7ba856be49383119c473903"
       },
       "r04": {
         "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
@@ -15503,13 +15517,13 @@
       }
     },
     "source_counts": {
-      "r02": 74,
+      "r02": 119,
       "r04": 93,
       "r05": 27
     },
-    "common_field_count": 194,
+    "common_field_count": 239,
     "detail_field_count": 124,
-    "total_records_including_duplicates": 318,
+    "total_records_including_duplicates": 363,
     "fields": [
       {
         "key": "r02:R02-PL01-FIELD01",
@@ -15527,7 +15541,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-FIELD01"
         }
       },
@@ -15547,7 +15561,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-FIELD02"
         }
       },
@@ -15567,7 +15581,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-FIELD03"
         }
       },
@@ -15587,7 +15601,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-FIELD04"
         }
       },
@@ -15607,7 +15621,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-01"
         }
       },
@@ -15627,7 +15641,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-02"
         }
       },
@@ -15647,7 +15661,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-03"
         }
       },
@@ -15667,7 +15681,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-04"
         }
       },
@@ -15687,7 +15701,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-05"
         }
       },
@@ -15707,7 +15721,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-06"
         }
       },
@@ -15727,7 +15741,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-07"
         }
       },
@@ -15747,7 +15761,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-08"
         }
       },
@@ -15767,7 +15781,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-09"
         }
       },
@@ -15787,7 +15801,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-10"
         }
       },
@@ -15807,7 +15821,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-11"
         }
       },
@@ -15827,7 +15841,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-12"
         }
       },
@@ -15847,7 +15861,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-13"
         }
       },
@@ -15867,7 +15881,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-14"
         }
       },
@@ -15887,7 +15901,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-15"
         }
       },
@@ -15907,7 +15921,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-16"
         }
       },
@@ -15927,7 +15941,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-17"
         }
       },
@@ -15947,7 +15961,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-18"
         }
       },
@@ -15967,7 +15981,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-19"
         }
       },
@@ -15987,7 +16001,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-20"
         }
       },
@@ -16007,7 +16021,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-21"
         }
       },
@@ -16027,7 +16041,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-22"
         }
       },
@@ -16047,7 +16061,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-23"
         }
       },
@@ -16067,7 +16081,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-24"
         }
       },
@@ -16087,7 +16101,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-25"
         }
       },
@@ -16107,7 +16121,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-26"
         }
       },
@@ -16127,7 +16141,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-27"
         }
       },
@@ -16147,7 +16161,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-28"
         }
       },
@@ -16167,7 +16181,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-29"
         }
       },
@@ -16187,7 +16201,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-30"
         }
       },
@@ -16207,7 +16221,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL01-CONF-31"
         }
       },
@@ -16227,7 +16241,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-FIELD01"
         }
       },
@@ -16247,7 +16261,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-FIELD02"
         }
       },
@@ -16267,7 +16281,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-FIELD03"
         }
       },
@@ -16287,7 +16301,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-FIELD04"
         }
       },
@@ -16304,7 +16318,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-01"
         }
       },
@@ -16321,7 +16335,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-02"
         }
       },
@@ -16338,7 +16352,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-03"
         }
       },
@@ -16355,7 +16369,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-04"
         }
       },
@@ -16372,7 +16386,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-05"
         }
       },
@@ -16389,7 +16403,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-06"
         }
       },
@@ -16406,7 +16420,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-07"
         }
       },
@@ -16423,7 +16437,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-08"
         }
       },
@@ -16440,7 +16454,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-09"
         }
       },
@@ -16457,7 +16471,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-10"
         }
       },
@@ -16474,7 +16488,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-11"
         }
       },
@@ -16491,7 +16505,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-12"
         }
       },
@@ -16508,7 +16522,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-13"
         }
       },
@@ -16525,7 +16539,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-14"
         }
       },
@@ -16542,7 +16556,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-15"
         }
       },
@@ -16559,7 +16573,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-16"
         }
       },
@@ -16576,7 +16590,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-17"
         }
       },
@@ -16593,7 +16607,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-18"
         }
       },
@@ -16610,7 +16624,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-19"
         }
       },
@@ -16627,7 +16641,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-20"
         }
       },
@@ -16644,7 +16658,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-21"
         }
       },
@@ -16661,7 +16675,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL02-CONF-22"
         }
       },
@@ -16681,7 +16695,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD01"
         }
       },
@@ -16701,7 +16715,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD02"
         }
       },
@@ -16721,7 +16735,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD03"
         }
       },
@@ -16741,7 +16755,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD04"
         }
       },
@@ -16761,7 +16775,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD05"
         }
       },
@@ -16781,7 +16795,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD06"
         }
       },
@@ -16801,7 +16815,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD07"
         }
       },
@@ -16821,7 +16835,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD08"
         }
       },
@@ -16841,7 +16855,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD09"
         }
       },
@@ -16861,7 +16875,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL03-FIELD10"
         }
       },
@@ -16881,8 +16895,954 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL04-FIELD01"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-01",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-01",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "프로필 제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-01"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-02",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-02",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "전문가 활동명(비즈니스명)",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-02"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-03",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-03",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "프로필 사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-03"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-04",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-04",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "주소·공개 표시",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-04"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-05",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-05",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "제안이력 가격 공개여부",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-05"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-06",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-06",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "본인인증 연령대 공개",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-06"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-07",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-07",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "진행방식",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-07"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-08",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-08",
+        "object_ref": "R02-PL04-OBJ5",
+        "label": "포트폴리오 목록",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-08"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-09",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-09",
+        "object_ref": "R02-PL04-OBJ5",
+        "label": "포트폴리오 이미지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-09"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-10",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-10",
+        "object_ref": "R02-PL04-OBJ5",
+        "label": "포트폴리오 영상",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-10"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-11",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-11",
+        "object_ref": "R02-PL04-OBJ5",
+        "label": "포트폴리오 영상 설명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-11"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-12",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-12",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "전문가 소개",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-12"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-13",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-13",
+        "object_ref": "R02-PL04-OBJ7",
+        "label": "이력 분류",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-13"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-14",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-14",
+        "object_ref": "R02-PL04-OBJ7",
+        "label": "대학교 학력",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-14"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-15",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-15",
+        "object_ref": "R02-PL04-OBJ7",
+        "label": "교육 이수 이력",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-15"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-16",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-16",
+        "object_ref": "R02-PL04-OBJ2",
+        "label": "제공 레슨 분야",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-16"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-17",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-17",
+        "object_ref": "R02-PL04-OBJ2",
+        "label": "분야별 서비스 소개",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-17"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-18",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-18",
+        "object_ref": "R02-PL04-OBJ3",
+        "label": "커리큘럼 기본정보",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-18"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-19",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-19",
+        "object_ref": "R02-PL04-OBJ3",
+        "label": "커리큘럼 모집 형태",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-19"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-20",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-20",
+        "object_ref": "R02-PL04-OBJ4",
+        "label": "1회당 수업시간",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-20"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-21",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-21",
+        "object_ref": "R02-PL04-OBJ4",
+        "label": "1회당 레슨비용",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-21"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-22",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-22",
+        "object_ref": "R02-PL04-OBJ3",
+        "label": "커리큘럼 레슨 설명",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-22"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-23",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-23",
+        "object_ref": "R02-PL04-OBJ3",
+        "label": "레슨 계획 단계",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-23"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-24",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-24",
+        "object_ref": "R02-PL04-OBJ4",
+        "label": "레슨 비용의 커리큘럼별 시간·가격 묶음",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-24"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-25",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-25",
+        "object_ref": "R02-PL04-OBJ4",
+        "label": "레슨 비용 참고 사항",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-25"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-26",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-26",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "웹사이트·외부 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-26"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-27",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-27",
+        "object_ref": "R02-PL04-OBJ1",
+        "label": "리뷰 요청 주소",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-27"
+        }
+      },
+      {
+        "key": "r02:R02-PL04-CONF-28",
+        "platform_id": "PL04",
+        "source": "r02",
+        "field_id": "R02-PL04-CONF-28",
+        "object_ref": "R02-PL04-OBJ6",
+        "label": "FAQ",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-PP-SCREEN"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL04-CONF-28"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-01",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-01",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "구분",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-01"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-02",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-02",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "지역",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-02"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-03",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-03",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "주소",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM",
+          "R02-EV-MU-POST"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-03"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-04",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-04",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "홈페이지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-04"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-05",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-05",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "전화번호",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM",
+          "R02-EV-MU-POST"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-05"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-06",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-06",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "팩스",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-06"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-07",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-07",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "수강료",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM",
+          "R02-EV-MU-POST"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-07"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-08",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-08",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "메인사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-08"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-09",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-09",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "사운드클라우드",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-09"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-10",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-10",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-10"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-11",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-11",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "본문",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM",
+          "R02-EV-MU-POST"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-11"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-12",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-12",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "본문 이미지",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-12"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-13",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-13",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "본문 동영상",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-13"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-14",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-14",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "약관동의",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-14"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-15",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-15",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "게시글 식별·시간·통계",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-POST"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-15"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-16",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-16",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "최신글로 올리기·프리미엄 등록",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-POST"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-16"
+        }
+      },
+      {
+        "key": "r02:R02-PL05-CONF-17",
+        "platform_id": "PL05",
+        "source": "r02",
+        "field_id": "R02-PL05-CONF-17",
+        "object_ref": "R02-PL05-OBJ1",
+        "label": "수정·삭제",
+        "direction": [
+          "visible"
+        ],
+        "claim_status": "source_specific_not_normalized",
+        "evidence_refs": [
+          "R02-EV-MU-POST",
+          "R02-EV-MU-FORM"
+        ],
+        "source_record_pointer": {
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+          "field_id": "R02-PL05-CONF-17"
         }
       },
       {
@@ -16901,7 +17861,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL06-FIELD01"
         }
       },
@@ -16921,7 +17881,7 @@
         ],
         "source_record_pointer": {
           "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-          "commit": "1917288563cb633892452bcd3f415d274a5d735b",
+          "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
           "field_id": "R02-PL06-FIELD02"
         }
       },
@@ -20229,7 +21189,52 @@
       "r04:R04-PL07-F10",
       "r04:R04-PL07-F11",
       "r04:R04-PL07-F12",
-      "r04:R04-PL07-F13"
+      "r04:R04-PL07-F13",
+      "r02:R02-PL04-CONF-01",
+      "r02:R02-PL04-CONF-02",
+      "r02:R02-PL04-CONF-03",
+      "r02:R02-PL04-CONF-04",
+      "r02:R02-PL04-CONF-05",
+      "r02:R02-PL04-CONF-06",
+      "r02:R02-PL04-CONF-07",
+      "r02:R02-PL04-CONF-08",
+      "r02:R02-PL04-CONF-09",
+      "r02:R02-PL04-CONF-10",
+      "r02:R02-PL04-CONF-11",
+      "r02:R02-PL04-CONF-12",
+      "r02:R02-PL04-CONF-13",
+      "r02:R02-PL04-CONF-14",
+      "r02:R02-PL04-CONF-15",
+      "r02:R02-PL04-CONF-16",
+      "r02:R02-PL04-CONF-17",
+      "r02:R02-PL04-CONF-18",
+      "r02:R02-PL04-CONF-19",
+      "r02:R02-PL04-CONF-20",
+      "r02:R02-PL04-CONF-21",
+      "r02:R02-PL04-CONF-22",
+      "r02:R02-PL04-CONF-23",
+      "r02:R02-PL04-CONF-24",
+      "r02:R02-PL04-CONF-25",
+      "r02:R02-PL04-CONF-26",
+      "r02:R02-PL04-CONF-27",
+      "r02:R02-PL04-CONF-28",
+      "r02:R02-PL05-CONF-01",
+      "r02:R02-PL05-CONF-02",
+      "r02:R02-PL05-CONF-03",
+      "r02:R02-PL05-CONF-04",
+      "r02:R02-PL05-CONF-05",
+      "r02:R02-PL05-CONF-06",
+      "r02:R02-PL05-CONF-07",
+      "r02:R02-PL05-CONF-08",
+      "r02:R02-PL05-CONF-09",
+      "r02:R02-PL05-CONF-10",
+      "r02:R02-PL05-CONF-11",
+      "r02:R02-PL05-CONF-12",
+      "r02:R02-PL05-CONF-13",
+      "r02:R02-PL05-CONF-14",
+      "r02:R02-PL05-CONF-15",
+      "r02:R02-PL05-CONF-16",
+      "r02:R02-PL05-CONF-17"
     ],
     "historical_common_keys_absent": [],
     "review_limit": "필드 목록과 출처 갱신 완료; 의미·제약·데이터 관계 전체 정규화 미실시"
@@ -20315,5 +21320,139 @@
       }
     ],
     "limitations": "실제 제출·저장·게시 및 제3자 대행 미실증"
+  },
+  "policy_design_requirements": {
+    "source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+      "id": "POLICY-RISK-20261126-R01",
+      "relation": "same_revision"
+    },
+    "requirements": [
+      {
+        "id": "PRD-01",
+        "title": "정책 근거 및 버전",
+        "requirement": "정책 문서·조항·적용 범위·확인일·버전·검토자·운영사 회신/근거·재검토 조건 및 상충 여부를 추적. 원본과 해석 분리.",
+        "risk_refs": [
+          "RISK-01",
+          "RISK-02",
+          "RISK-05",
+          "RISK-08"
+        ],
+        "logical_data": "정책 근거 → 적용 플랫폼/업무/행위/접근 방식; 과거 버전·승인 스냅샷 보존",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      },
+      {
+        "id": "PRD-02",
+        "title": "단계별 수행 주체와 외부 효과",
+        "requirement": "계획/실제 행위자, 접근 방식, 대상, 외부 요청·읽기/쓰기·자동저장/부수 효과, 수행 방식과 이유 기록. 사용자 클릭으로 앞선 자동화 숨기지 않음.",
+        "risk_refs": [
+          "RISK-01",
+          "RISK-03",
+          "RISK-04",
+          "RISK-07"
+        ],
+        "logical_data": "업무/승인 → 단계 계획/실행 관측; 실제 actor·mode·effect와 근거",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      },
+      {
+        "id": "PRD-03",
+        "title": "실행 허용 판단",
+        "requirement": "제품 범위·현재 Phase·운영사 허용·법률/정보처리 검토·사용자 권한 및 승인·대상·revision·이전 효과를 독립 확인. 불명/금지/만료/조건 불충족 fail closed. 입력 전 자동 저장 검증.",
+        "risk_refs": [
+          "RISK-02",
+          "RISK-03",
+          "RISK-05",
+          "RISK-08"
+        ],
+        "logical_data": "정책 판단 → 업무/단계/접근 방식 및 승인; 판정·사유·버전·조건·시점",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      },
+      {
+        "id": "PRD-04",
+        "title": "직접 수행 경로 및 결과 증거",
+        "requirement": "외부 대행 불가 시 독립적으로 허용된 내부 입력안만 보여 줌. 직접 외부 업무는 서비스가 아닌 사용자. 사용자 보고/제공 증거를 별도 기록하는 기능은 신규 후보; 검증 완료와 구분.",
+        "risk_refs": [
+          "RISK-01",
+          "RISK-04",
+          "RISK-06",
+          "RISK-07"
+        ],
+        "logical_data": "원본/업무 → 수행 방식/직접 수행 결과 주장 및 증빙/출처·시점·확인 수준",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      },
+      {
+        "id": "PRD-05",
+        "title": "정보 보호·세션 수명주기",
+        "requirement": "처리 목적·근거·최소 항목·공개/내부·권리·보유/파기·위탁/국외이전 적용 검토. 사용자 직접 인증, 비밀번호/코드/민감 증빙·세션 비밀 로그 금지; 작업 세션 폐기 확인.",
+        "risk_refs": [
+          "RISK-03",
+          "RISK-06",
+          "RISK-08"
+        ],
+        "logical_data": "owner/원본/첨부/업무 → 처리 목적·권한·보존/파기·폐기 상태; 비밀 자체 제외",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      },
+      {
+        "id": "PRD-06",
+        "title": "정책 변경·결과 불명·재처리",
+        "requirement": "정책 변경/철회/만료/불일치 시 신규 접근·쓰기 중지, 기존 효과 보존 및 별도 상태 표시. 이전 효과 확인 불가 시 재실행 금지. 승인·정책 최신성 재검증.",
+        "risk_refs": [
+          "RISK-05",
+          "RISK-07",
+          "RISK-08"
+        ],
+        "logical_data": "업무/단계 → 정책 평가 이력·차단 사유·외부 효과 상태·재검토/세션 정리",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      },
+      {
+        "id": "PRD-07",
+        "title": "검증 및 가치 평가",
+        "requirement": "정책상 안전 처리의 모의 테스트, 허용된 경로만 실제 업무 검증, 수행 방식별 시간·오류·완료 확인 수준 및 가치 분리. 내부 준비 완료를 등록 성공으로 산정 금지.",
+        "risk_refs": [
+          "RISK-01",
+          "RISK-02",
+          "RISK-04",
+          "RISK-07"
+        ],
+        "logical_data": "시나리오/단계 → 관측·검증 결과·판정 및 가치 평가 구분",
+        "downstream": [
+          "논리 DB/관계 요구",
+          "API/권한·상태 계약",
+          "업무 실행 가드 및 모의 검증"
+        ],
+        "status": "design_input_candidate_not_physical_schema"
+      }
+    ],
+    "scope": "logical_design_inputs_only"
   }
 }

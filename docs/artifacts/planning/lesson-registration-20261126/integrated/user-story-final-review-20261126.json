@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "INTG-20261126-STORY-REVIEW-V1.1",
   "kind": "document",
-  "status": "R01 사용자 스토리 최종 검토안 v1.2 · 7개 설계 범위 확정 · 개별 스토리/업무 범위 승인 전",
+  "status": "v1.3 · 정책 위험·최신 조사 반영 및 사용자 스토리 재검토 · 개별 범위 승인 전",
   "owner": "R01",
   "task_ref": "TASK-058",
   "title": "사용자 스토리·플랫폼 업무·오류/반복 통합 검토",
@@ -10,8 +10,8 @@
   "source_refs": {
     "r02": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-      "commit": "1917288563cb633892452bcd3f415d274a5d735b",
-      "blob": "fff4bd74ab7e555d74df4c2e4fe79147a6a4f147"
+      "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+      "blob": "8d40ce71243e045cf7ba856be49383119c473903"
     },
     "r03": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json",
@@ -81,6 +81,21 @@
       "path": "docs/members/R04/workspace/2026-11-26_R04_레슨등록지원_화면목록_screenCatalog.json",
       "commit": "1917288563cb633892452bcd3f415d274a5d735b",
       "blob": "b7e2bfc3631fff556e8876a5b5988a4e15ba7070"
+    },
+    "prompie": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json",
+      "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+      "blob": "9014959f21a63e115f38fdba84f093d0c09b9571"
+    },
+    "mule": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json",
+      "commit": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
+      "blob": "ebcedfce1d18c631ffca98055bb38ed5fe53b66c"
+    },
+    "policy_risk": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+      "id": "POLICY-RISK-20261126-R01",
+      "relation": "same_revision"
     }
   },
   "baseline": {
@@ -97,7 +112,8 @@
     "mvp": "기존 첫 가치 검증 추천 최소 2개 플랫폼은 순차 구현 기준 후보에 한함. 설계는 7개 모두; 실제 구현 순서/일정/허용/범위 별도 승인.",
     "conditional": "자동 모니터링 및 탈잉 최초 일정/숨고 대표 서비스 별도 채택 전 미제공",
     "excluded": "외부 임시저장/조회, 접수 취소, 외부 삭제/원복, 독립 계정 삭제/작업 공간 UI, 견적·상담·수업운영; 개인정보 권리 의무 유지",
-    "design": "7개 플랫폼 전부 설계에 포함. MVP 구현 우선순위와 개별 업무 지원 여부는 분리."
+    "design": "7개 플랫폼 전부 설계에 포함. MVP 구현 우선순위와 개별 업무 지원 여부는 분리.",
+    "policy": "실제 외부 접근/읽기/입력/첨부/자동저장/제출/결과 조회·모니터링 단계별 허용 판단. 내부 준비와 직접 수행 분리. IS-143 기본 추천, IS-144/145 별도 조건부. 현재 외부 실행 모두 차단."
   },
   "identity_requirements": [
     {
@@ -236,6 +252,11 @@
           "F25",
           "F18"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -243,7 +264,7 @@
       "title": "원본 레슨 생성·저장",
       "story": "강사가 원본 레슨 정보의 저장을 요청한다.",
       "normal": "자료 수신→구조화→강사 검토·정정→원본·저장 버전 식별 및 저장 결과 확인.",
-      "error": "누락·추출 오류·첨부 권리/형식 오류 보완. 실패/불명/충돌 시 기존 저장본 보존, 이전 효과 확인 전 중복 저장 금지.",
+      "error": "누락·추출 오류·첨부 권리/형식 오류 보완. 실패/불명/충돌 시 기존 저장본 보존, 이전 효과 확인 전 중복 저장 금지. 최소 자료·처리 목적/근거·권리·보존/파기 조건 확인.",
       "scope": "base",
       "story_refs": [
         "IS-001",
@@ -362,6 +383,11 @@
           "F08",
           "F02"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -474,14 +500,19 @@
           "F18",
           "F16"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
       "id": "J04",
       "title": "플랫폼 및 업무 선택·입력안 준비",
       "story": "강사가 플랫폼별 변환 입력안을 검토한다.",
-      "normal": "지원 업무와 제약을 안내하고 선택 플랫폼별 변환·검증·보완 및 실제 조건을 표시.",
-      "error": "미지원·권한 불명 실행 금지. 필요한 사실만 요청; 유효 대안 없음은 제외/보류. 변환 실패·늦은 결과는 이전 초안 보존·오래된 결과 미적용.",
+      "normal": "지원 업무와 제약을 안내하고 선택 플랫폼별 변환·검증·보완 및 실제 조건을 표시. 업무별 가능한 수행 방식과 단계별 제한을 제공; 내부 준비/직접 수행/외부 대행 구분.",
+      "error": "미지원·권한 불명 실행 금지. 필요한 사실만 요청; 유효 대안 없음은 제외/보류. 변환 실패·늦은 결과는 이전 초안 보존·오래된 결과 미적용. 금지/미확인/정책 변경·부수 효과 불명 시 외부 접근 및 입력 차단.",
       "scope": "base",
       "story_refs": [
         "IS-006",
@@ -511,7 +542,8 @@
         "IS-092",
         "IS-093",
         "IS-094",
-        "IS-095"
+        "IS-095",
+        "IS-143"
       ],
       "primary_story_ref": "IS-008",
       "primary_svo": {
@@ -529,6 +561,16 @@
             "verb": "확인한다",
             "object": "플랫폼별 지원 업무와 제약 안내",
             "object_phrase": "플랫폼별 지원 업무와 제약 안내를"
+          }
+        },
+        {
+          "story_id": "IS-143",
+          "action": "강사가 업무별 수행 방식 및 제한을 확인한다.",
+          "svo": {
+            "subject": "강사",
+            "verb": "확인한다",
+            "object": "업무별 수행 방식 및 제한",
+            "object_phrase": "업무별 수행 방식 및 제한을"
           }
         },
         {
@@ -639,6 +681,11 @@
           "F16",
           "F20"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -646,7 +693,7 @@
       "title": "외부 인증·작업 대상 확인",
       "story": "강사가 업무에 사용할 외부 계정을 확인한다.",
       "normal": "공식 로그인/필요 본인 인증 직접 수행. 계정·권한·대상·기존 등록/이전 효과 확인 및 기존 객체 선택.",
-      "error": "실패·만료·권한 부족·잘못된 대상·중복/효과 불명 차단. 재인증·재선택·제외. 외부 가입·정산·약관 동의는 사용자 직접.",
+      "error": "실패·만료·권한 부족·잘못된 대상·중복/효과 불명 차단. 재인증·재선택·제외. 외부 가입·정산·약관 동의는 사용자 직접. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base",
       "story_refs": [
         "IS-109",
@@ -774,6 +821,11 @@
           "F17",
           "F06"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -781,7 +833,7 @@
       "title": "최종 정보·실행 승인",
       "story": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
       "normal": "입력안·수정 차이·실행 범위 검토 후 내용 및 실행 범위 승인 기록, 현재 조건과 일치 확인.",
-      "error": "거절·철회·중요 조건 변경 시 새 쓰기 차단, 새 검토/승인 필요. 기발생 외부 효과 원복 보장 없음.",
+      "error": "거절·철회·중요 조건 변경 시 새 쓰기 차단, 새 검토/승인 필요. 기발생 외부 효과 원복 보장 없음. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base",
       "story_refs": [
         "IS-015",
@@ -875,6 +927,11 @@
           "F18",
           "F20"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -882,7 +939,7 @@
       "title": "최초·추가 플랫폼 등록",
       "story": "강사가 승인된 레슨의 신규 등록을 요청한다.",
       "normal": "각 플랫폼의 승인된 신규 업무 실행, 정확 객체 및 저장/접수/게시 효과 확인. 저장 원본 재사용.",
-      "error": "같은 계정·대상 기존 등록/이전 효과 불명 차단. 응답 유실은 미확인 및 독립 재조회. 다른 플랫폼 등록은 차단 이유 아님.",
+      "error": "같은 계정·대상 기존 등록/이전 효과 불명 차단. 응답 유실은 미확인 및 독립 재조회. 다른 플랫폼 등록은 차단 이유 아님. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base",
       "story_refs": [
         "IS-002",
@@ -1010,6 +1067,11 @@
           "F16",
           "F17"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -1017,7 +1079,7 @@
       "title": "기존 등록물 연결·수정",
       "story": "강사가 기존 외부 객체의 정보 수정을 요청한다.",
       "normal": "정확 객체의 내부 관리 연결, 현재값·변경 범위 확인 및 승인된 변경값 적용 후 동일 객체에서 확인.",
-      "error": "중복 연결·소유 불명·수정 불가·외부 변경 차단. 공유 필드 영향 표시; 저장·재심사·공개 별개.",
+      "error": "중복 연결·소유 불명·수정 불가·외부 변경 차단. 공유 필드 영향 표시; 저장·재심사·공개 별개. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base",
       "story_refs": [
         "IS-110",
@@ -1175,6 +1237,11 @@
           "F27",
           "F28"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -1182,7 +1249,7 @@
       "title": "허용 공고 갱신",
       "story": "강사가 기존 모집 공고의 갱신을 요청한다.",
       "normal": "동일 객체의 갱신 허용·시기·효과 기준 확인 및 승인 후 수행·독립 관측.",
-      "error": "미지원·권한/간격/이전 효과 불명 보류. 삭제 후 재등록·무조건 반복 금지. 첫 MVP 필수 아님.",
+      "error": "미지원·권한/간격/이전 효과 불명 보류. 삭제 후 재등록·무조건 반복 금지. 첫 MVP 필수 아님. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base_not_first_mvp",
       "story_refs": [
         "IS-006",
@@ -1289,14 +1356,19 @@
           "F29",
           "F28"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
       "id": "J10",
       "title": "결과·등록 상태·이력 확인",
       "story": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
-      "normal": "완료/실패/미실행/미확인, 증거·시각 및 확인된 링크 제공. 접수/심사/공개/모집 가능 구분.",
-      "error": "부분 성공 시 성공 대상 제외. 응답 유실·관측 불일치 미확인. 미관측 URL·상태·사유 생성 금지.",
+      "normal": "완료/실패/미실행/미확인, 증거·시각 및 확인된 링크 제공. 접수/심사/공개/모집 가능 구분. 내부 준비·사용자 직접 보고/제공 자료·독립 관측의 확인 수준을 구분한다. 직접 수행 결과/자료의 기록은 별도 채택 후보.",
+      "error": "부분 성공 시 성공 대상 제외. 응답 유실·관측 불일치 미확인. 미관측 URL·상태·사유 생성 금지. 사용자 자기보고나 자료만으로 서비스 대행 성공 및 독립 완료를 표시하지 않음.",
       "scope": "base",
       "story_refs": [
         "IS-023",
@@ -1309,7 +1381,9 @@
         "IS-104",
         "IS-124",
         "IS-026",
-        "IS-127"
+        "IS-127",
+        "IS-144",
+        "IS-145"
       ],
       "primary_story_ref": "IS-023",
       "primary_svo": {
@@ -1414,6 +1488,11 @@
           "F12",
           "F13"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -1421,7 +1500,7 @@
       "title": "수동 상태 조회·반려 대응",
       "story": "강사가 선택한 플랫폼의 상태 갱신을 요청한다.",
       "normal": "허용 읽기 경로로 요청 시 최신 관측. 확인된 사유 및 대응 후보; 허용 재심사는 새 수정·승인 요청.",
-      "error": "조회 실패와 마지막 상태 구분. 사유 불명 표시. 이전 효과 미확인 재실행 금지; 실패/미실행 확정 및 새 조건/승인 후만.",
+      "error": "조회 실패와 마지막 상태 구분. 사유 불명 표시. 이전 효과 미확인 재실행 금지; 실패/미실행 확정 및 새 조건/승인 후만. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base",
       "story_refs": [
         "IS-025",
@@ -1578,6 +1657,11 @@
           "F16",
           "F17"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -1585,7 +1669,7 @@
       "title": "업무 보류·종료·재처리",
       "story": "강사가 해당 업무의 진행을 보류한다.",
       "normal": "오류/철회/보류 시 추가 접근·쓰기 차단, 기존 효과 및 이력 보존, 현재 조건으로 새 요청 검토.",
-      "error": "외부 취소·원복·실행 스택 복구 없음. 성공/효과 불명 재실행 금지. 완료·실패·만료·철회 시 업무 세션 폐기, 불명 시 접근 차단 유지.",
+      "error": "외부 취소·원복·실행 스택 복구 없음. 성공/효과 불명 재실행 금지. 완료·실패·만료·철회 시 업무 세션 폐기, 불명 시 접근 차단 유지. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "base",
       "story_refs": [
         "IS-049",
@@ -1708,6 +1792,11 @@
           "F24",
           "F28"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -1715,7 +1804,7 @@
       "title": "원본 삭제·관리 연결 해제",
       "story": "강사가 보관된 원본 레슨의 삭제를 요청한다.",
       "normal": "소유권·진행 업무·보존 의무 확인 후 내부 삭제/연결 해제를 각각 처리하고 결과 표시.",
-      "error": "진행/미확인 업무 충돌 시 보류 및 효과 확인. 삭제/해제 불명은 완료 아님. 외부 게시·다른 연결 자동 변경 없음. 권리 요청 의무 유지.",
+      "error": "진행/미확인 업무 충돌 시 보류 및 효과 확인. 삭제/해제 불명은 완료 아님. 외부 게시·다른 연결 자동 변경 없음. 권리 요청 의무 유지. 최소 자료·처리 목적/근거·권리·보존/파기 조건 확인.",
       "scope": "base",
       "story_refs": [
         "IS-034",
@@ -1806,6 +1895,11 @@
           "F29",
           "F23"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -1813,7 +1907,7 @@
       "title": "조건부 자동 모니터링",
       "story": "강사가 자동 모니터링 대상을 설정한다.",
       "normal": "허용 읽기 방식·대상·기간·주기·채널 및 별도 승인 후 조회/알림.",
-      "error": "미채택/미허용 미제공. 철회·만료·종료 시 접근 차단 및 폐기. 알림/조회 실패와 종료 불명 구분.",
+      "error": "미채택/미허용 미제공. 철회·만료·종료 시 접근 차단 및 폐기. 알림/조회 실패와 종료 불명 구분. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "conditional",
       "story_refs": [
         "IS-030",
@@ -2010,6 +2104,11 @@
           "E05",
           "E03"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     },
     {
@@ -2017,7 +2116,7 @@
       "title": "플랫폼 특화 조건부 업무",
       "story": "강사가 탈잉의 모집 오픈에 필요한 일정 등록을 요청한다.",
       "normal": "탈잉 심사 승인 후 최초 일정/장소, 숨고 대표 서비스 관계의 정확 대상·권한·영향/승인 확인 후 수행 및 독립 관측.",
-      "error": "별도 채택·권한·완료 증거 확보 전 미제공. 전체 일정 운영·고객 관리·다른 서비스 변경 제외.",
+      "error": "별도 채택·권한·완료 증거 확보 전 미제공. 전체 일정 운영·고객 관리·다른 서비스 변경 제외. 업무 단계별 정책·접근 방식·외부 효과·권한/승인 변경 또는 불명 시 추가 외부 접근/쓰기 차단.",
       "scope": "conditional",
       "story_refs": [
         "IS-038",
@@ -2135,6 +2234,11 @@
           "F27",
           "F28"
         ]
+      },
+      "policy_risk_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+        "id": "POLICY-RISK-20261126-R01",
+        "relation": "same_revision"
       }
     }
   ],
@@ -2216,21 +2320,27 @@
     },
     {
       "platform_id": "PL04",
-      "finding": "전문가 프로필/분야 후보. 문의·견적 제외. 최종 저장·분야 연결 미확인.",
+      "finding": "R02 최신 조사: 전문가 프로필 보기·기본/하위 항목 편집 및 저장 UI·분야/커리큘럼 관리 경로 관찰; 즉시 반영은 사용자 회상. 사용자 조회·수정·상태 업무 후순위 후보로 변경. 계정 공유·무단 자동수집 제한, 개별 대행 허용 및 실제 효과 미확인.",
       "story_refs": [
         "IS-006",
         "IS-039",
         "IS-096",
-        "IS-108"
+        "IS-108",
+        "IS-014",
+        "IS-092",
+        "IS-093",
+        "IS-021",
+        "IS-025"
       ],
       "source_refs": [
         "r04",
-        "r05"
+        "r05",
+        "prompie"
       ]
     },
     {
       "platform_id": "PL05",
-      "finding": "개인레슨 게시물 및 동일 공고 최신글 올리기 후보. 등록·갱신 자격/간격·효과 미확인. 별도 수강료는 원 단위 쉼표 없는 입력 안내, 회당/총액 의미·공개 불명 시 보류. 본문 총액 명시, 주소·메인/본문 사진 용도 강사 확인, 약관 직접 동의.",
+      "finding": "개인레슨 게시물 및 동일 공고 최신글 올리기 후보. 등록·갱신 자격/간격·효과 미확인. 별도 수강료는 원 단위 쉼표 없는 입력 안내, 회당/총액 의미·공개 불명 시 보류. 본문 총액 명시, 주소·메인/본문 사진 용도 강사 확인, 약관 직접 동의. R02 최신 조사: 자기 글 수정 양식 및 마이뮬>내글보기>최신글로 올리기 사용자 경로 확인. 수정 후순위 후보. 실제 저장·갱신 효과/간격/비용 미실증. 무단 자동수집 제한 및 이모지 공지/실제 노출 차이, 악기장터 규칙 적용 불명.",
       "story_refs": [
         "IS-020",
         "IS-022",
@@ -2244,12 +2354,16 @@
         "IS-091",
         "IS-105",
         "IS-016",
-        "IS-017"
+        "IS-017",
+        "IS-021",
+        "IS-014",
+        "IS-015"
       ],
       "source_refs": [
         "r04",
         "r05",
-        "r05_example"
+        "r05_example",
+        "mule"
       ]
     },
     {
@@ -2927,17 +3041,17 @@
     "SD-14"
   ],
   "verification": {
-    "source_stories": 244,
+    "source_stories": 247,
     "source_events": 93,
-    "user_stories": 141,
+    "user_stories": 144,
     "scope_counts": {
-      "base": 109,
-      "conditional": 27,
+      "base": 110,
+      "conditional": 29,
       "excluded": 5
     },
-    "branch_count": 681,
+    "branch_count": 693,
     "feature_count": 34,
-    "system_responsibilities": 40,
+    "system_responsibilities": 42,
     "journeys": 15,
     "r03_scenarios": 30,
     "r04_errors": 22,
@@ -2959,15 +3073,21 @@
     "design_operations": 44,
     "explicit_svo_scenarios": 15,
     "r04_screen_candidates": 37,
-    "latest_field_source_records": 318,
-    "approved_design_platforms": 7
+    "latest_field_source_records": 363,
+    "approved_design_platforms": 7,
+    "policy_risks": 8,
+    "policy_bindings": 44,
+    "policy_design_requirements": 7,
+    "policy_acceptance_cases": 16,
+    "policy_runtime": "not_run",
+    "approved_external_stages": 0
   },
   "limits": [
-    "7개 설계 대상 포함은 사용자 지시로 확정; 개별 사용자 행동/업무 범위 승인 0개, 실제 제공 및 일정 미확정.",
-    "R05 개인 브랜치 입력 예시를 불변 근거로 반영; 팀원 원본/브랜치 병합 없음.",
-    "최신 출처 필드 인덱스 318개 반영. 의미·제약·관계 전체 정규화 및 DB 상세는 후속.",
-    "R04 화면 37개 검토용; 별도 UI/운영자 기능 또는 6개 신규 행동 후보는 미채택.",
-    "실제 대행 권한·완료 실증 0개, 공식 Python/CI 및 project_docs.py 미실행. 전체 의미 검증 미완료."
+    "7개 플랫폼 설계 포함 확정, 144개 행동 및 44개 업무 개별 승인 0; 실제 외부 대행 허용 및 완료 실증 0. mock-only.",
+    "R02 최신 프람피·뮬 사용자 화면/회상·공식 정책 근거 반영, R02 추가 3개 원본 행동 대응. 실제 저장/갱신/공개·법률 판단 미확인.",
+    "기존 141개 후보 보존. IS-143 기본 추천 및 IS-144/145 별도 조건부. 사용자 직접 수행 결과 기록의 가치/범위/보호 조건 미승인.",
+    "최신 필드 인덱스 363개 출처 레코드(중복 포함), 의미·제약/관계 전수 정규화 미실시.",
+    "7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료."
   ],
   "presentation_contract": {
     "rule": "사용자 스토리는 행위자(S)·목적어(O)·단일 행위(V)를 명시한 실제 행동. 희망사항·동기는 별도 기획 근거.",
@@ -3561,7 +3681,7 @@
     ]
   },
   "latest_member_review": {
-    "main_snapshot": "1917288563cb633892452bcd3f415d274a5d735b",
+    "main_snapshot": "f3022c2e045c4fdf12c01e5ac37dba6b2b961244",
     "branch_review": {
       "r04": "akaraywon = main",
       "r03": "r03/product-app main 포함, 추가 diff 없음",
@@ -3570,12 +3690,125 @@
     },
     "latest_field_index": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json",
-      "common": 194,
+      "common": 239,
       "detail": 124,
-      "total": 318,
-      "limits": "최신 출처 레코드 인덱스, 의미·제약 정규화 미완료"
+      "total": 363,
+      "limits": "최신 필드 출처 인덱스, 중복 포함. 의미/제약 정규화 미완료"
     },
     "r04": "오류 22/반복 9/추가 기능 12 기존 대조 유지, 37개 화면 후보 연결",
-    "r05": "추가 보컬 입력 예시 반영"
+    "r05": "추가 보컬 입력 예시 반영",
+    "r02": "최신 프람피·뮬 상세 조사 및 R02-US-033~035 기존 후보 대응"
+  },
+  "policy_risk_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+    "id": "POLICY-RISK-20261126-R01",
+    "relation": "same_revision"
+  },
+  "policy_review": {
+    "risk_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+      "id": "POLICY-RISK-20261126-R01",
+      "relation": "same_revision"
+    },
+    "new_story_refs": [
+      "IS-143",
+      "IS-144",
+      "IS-145"
+    ],
+    "system_event_refs": [
+      "SE-S07",
+      "SE-S08"
+    ],
+    "design_requirements": [
+      "PRD-01",
+      "PRD-02",
+      "PRD-03",
+      "PRD-04",
+      "PRD-05",
+      "PRD-06",
+      "PRD-07"
+    ],
+    "acceptance_cases": [
+      "PG-T01",
+      "PG-T02",
+      "PG-T03",
+      "PG-T04",
+      "PG-T05",
+      "PG-T06",
+      "PG-T07",
+      "PG-T08",
+      "PG-T09",
+      "PG-T10",
+      "PG-T11",
+      "PG-T12",
+      "PG-T13",
+      "PG-T14",
+      "PG-T15",
+      "PG-T16"
+    ],
+    "scope_changes": {
+      "PS-PL04-READ": {
+        "story": "강사가 프람피 기존 전문가 프로필의 정보를 조회한다.",
+        "object": "전문가 프로필·레슨 분야·소개·커리큘럼 등 하위 항목",
+        "service_actions": "본인 전문가 프로필 보기 및 현재 항목 확인 경로가 관찰됨. 허용된 조회/정확 프로필·하위 객체 식별 및 소유 확인 후 정보 조회 후보.",
+        "completion_criterion": "정확 계정·프로필·하위 객체 식별 근거와 현재 내용·관측 시각 확인. 식별/조회 실패는 미확인.",
+        "unverified": "관리 화면 열람은 R02 관찰; 안정된 ID/URL·공개/관리값 대응, 자동 조회 권한 미확인.",
+        "common_story_refs": [
+          "IS-089",
+          "IS-014",
+          "IS-117",
+          "IS-024"
+        ]
+      },
+      "PS-PL04-UPDATE": {
+        "story": "강사가 프람피 전문가 프로필의 수정 가능한 정보를 변경하도록 요청한다.",
+        "object": "전문가 프로필 기본 정보·분야별 소개·커리큘럼·하위 항목",
+        "service_actions": "정확 프로필·편집할 하위 항목 선택, 공유 필드 영향 및 변경 가능 조건 확인 → 승인된 정보 입력·저장 → 동일 대상의 변경값 독립 확인.",
+        "completion_criterion": "정확 프로필 및 선택한 하위 객체의 승인 변경값 저장 및 관측 확인; 공개 반영 별도.",
+        "unverified": "편집·저장 UI 관찰, 즉시 반영은 사용자 회상. 실제 저장·공개·서버 제약 및 대행 권한 미검증.",
+        "common_story_refs": [
+          "IS-014",
+          "IS-015",
+          "IS-118",
+          "IS-021",
+          "IS-016",
+          "IS-017",
+          "IS-023",
+          "IS-092",
+          "IS-093"
+        ]
+      },
+      "PS-PL04-STATUS": {
+        "story": "강사가 프람피 전문가 프로필의 최신 등록 상태 확인을 요청한다.",
+        "object": "프로필 및 분야 등록/공개 상태",
+        "service_actions": "정확 프로필 및 레슨 분야의 관리 화면 관측과 공개 정보 관측을 분리; 현재 확인값·시각 표시.",
+        "completion_criterion": "정확 대상의 최신 관측 상태 및 시각 반환, 또는 조회 불가와 마지막 관측 반환. 공개/모집 가능은 별도 확인.",
+        "unverified": "내 프로필 보기 관찰 및 즉시 공개 사용자 회상. 실제 등록/공개·식별자·요청 수신 및 대행 미실증.",
+        "common_story_refs": [
+          "IS-024",
+          "IS-025",
+          "IS-047",
+          "IS-027",
+          "IS-104"
+        ]
+      },
+      "PS-PL05-UPDATE": {
+        "story": "강사가 뮬 기존 개인레슨 게시물의 정보 수정을 요청한다.",
+        "object": "동일 기존 개인레슨 게시물",
+        "service_actions": "자기 글 하단 수정·기존 내용의 편집 양식 관찰. 정확 대상과 수정 가능 범위·게시 규정·변경 전후·양 승인 확인 → 허용 변경값 저장 → 같은 글의 변경값 및 게시 상태 독립 관측.",
+        "completion_criterion": "같은 게시물 식별 및 승인 변경값의 저장 확인, 공개 노출 별도; 새 글 생성으로 대체하지 않음.",
+        "unverified": "수정 UI 관찰, 즉시 공개 사용자 회상. 실제 저장·노출·ID 유지·수정 범위 및 대행 허용 미검증.",
+        "common_story_refs": [
+          "IS-014",
+          "IS-015",
+          "IS-118",
+          "IS-021",
+          "IS-016",
+          "IS-017",
+          "IS-023"
+        ]
+      }
+    },
+    "extra_conditions": "정책별 차단·부수효과 불명·사용자 직접 결과의 근거 등 16개 설계 기대 검증을 별도 관리; 기존 R04 오류 22+6 및 반복 9 유지."
   }
 }
