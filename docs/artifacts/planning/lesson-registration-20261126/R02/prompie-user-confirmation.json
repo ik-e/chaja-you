@@ -1,0 +1,905 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-PROMPIE-CONFIRMATION",
+  "kind": "document",
+  "status": "관찰 범위 조사 완료 · 미확인 잔여",
+  "owner": "R02",
+  "task_ref": "TASK-055",
+  "updated_at": "2026-11-26",
+  "inputs": [
+    "현재 대화의 사용자 문답·제공 화면",
+    "프람피 개별 화면 및 공식 문서 읽기 전용 관찰"
+  ],
+  "authorization_boundary": {
+    "user_request": "사용자가 브라우저에서 확인 가능한 항목을 직접 조사하고 결과를 검증해 GitHub에 게시하도록 요청",
+    "project_scope": "기존 TASK의 mock-only·외부 효과 금지 유지. 이번 사용자 요청은 개별 관찰 범위의 지시이며 제품 자동화·플랫폼 허용 확정 아님",
+    "actions_performed": [
+      "기존 로그인 세션의 화면 조회",
+      "편집·추가 양식 열람",
+      "공식 약관·FAQ 확인"
+    ],
+    "actions_not_performed": [
+      "입력값 변경",
+      "파일 업로드",
+      "저장·삭제·등록 제출",
+      "제안·채팅 발송",
+      "인증자료 취급",
+      "결제·약관 동의"
+    ]
+  },
+  "output": {
+    "summary": "프로필 및 분야별 소개·커리큘럼·비용·포트폴리오·FAQ가 분리된 구조. 사용자 경험의 주된 부담은 최초 소개글 변환(각 약 10분)이고 등록 후 수정은 드물다. 견적·채팅 재사용은 범위 밖 맥락이며 공식 템플릿 대안이 존재한다.",
+    "fields": [
+      {
+        "field_id": "PP-F01",
+        "label": "프로필 제목",
+        "format": "text",
+        "required": true,
+        "constraints": {
+          "max_chars": 30
+        },
+        "screen_location": "기본 정보 > 제목 변경",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F02",
+        "label": "전문가 활동명(비즈니스명)",
+        "format": "text",
+        "required": true,
+        "constraints": {
+          "max_chars": 20
+        },
+        "screen_location": "기본 정보 > 활동명 변경",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F03",
+        "label": "프로필 사진",
+        "format": "image",
+        "required": "unknown",
+        "constraints": {
+          "control": "파일 선택",
+          "file_limits": "해당 화면에서 구체 제한 미확인"
+        },
+        "screen_location": "기본 정보 > 프로필 사진 수정",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F04",
+        "label": "주소·공개 표시",
+        "format": "address",
+        "required": "unknown",
+        "constraints": {
+          "observed": "주소와 전체 주소 표시 안내, 수정 링크",
+          "input_and_visibility_options": "미확인"
+        },
+        "screen_location": "기본 정보·위치 및 이동",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F05",
+        "label": "제안이력 가격 공개여부",
+        "format": "boolean",
+        "required": "unknown",
+        "constraints": {
+          "options": [
+            "공개",
+            "비공개"
+          ]
+        },
+        "screen_location": "기본 정보 > 제안이력 가격정보",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F06",
+        "label": "본인인증 연령대 공개",
+        "format": "visibility_setting",
+        "required": "unknown",
+        "constraints": {
+          "observed": "연령대 공개 표시와 수정 링크",
+          "alternative_options": "미관찰"
+        },
+        "screen_location": "기본 정보",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F07",
+        "label": "진행방식",
+        "format": "multiselect",
+        "required": "unknown",
+        "constraints": {
+          "values": [
+            "의뢰인 위치로 이동",
+            "전문가 위치로 방문",
+            "온라인 및 화상수업"
+          ]
+        },
+        "screen_location": "위치 및 이동",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F08",
+        "label": "포트폴리오 목록",
+        "format": "repeated_media",
+        "required": "unknown",
+        "constraints": {
+          "max_count": 20,
+          "actions": [
+            "이미지 업로드",
+            "영상 업로드",
+            "항목 삭제"
+          ]
+        },
+        "screen_location": "포트폴리오",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F09",
+        "label": "포트폴리오 이미지",
+        "format": "image",
+        "required": "unknown",
+        "constraints": {
+          "max_mb": 8,
+          "min_width_px": 300,
+          "min_height_px": 300,
+          "displayed_formats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "gif",
+            "등"
+          ]
+        },
+        "screen_location": "포트폴리오 > 이미지 업로드",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "안내의 등은 전체 허용 형식을 확정하는 근거가 아님"
+      },
+      {
+        "field_id": "PP-F10",
+        "label": "포트폴리오 영상",
+        "format": "youtube_url",
+        "required": "unknown",
+        "constraints": {
+          "max_chars_attribute": 200,
+          "one_at_a_time": true,
+          "provider": "YouTube"
+        },
+        "screen_location": "포트폴리오 > 영상 업로드",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F11",
+        "label": "포트폴리오 영상 설명",
+        "format": "text",
+        "required": false,
+        "constraints": {
+          "max_chars": 50
+        },
+        "screen_location": "포트폴리오 > 영상 업로드",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F12",
+        "label": "전문가 소개",
+        "format": "long_text",
+        "required": "unknown",
+        "constraints": {
+          "displayed_max_chars": 10000
+        },
+        "screen_location": "소개",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "기존 글의 내용은 보존하지 않음"
+      },
+      {
+        "field_id": "PP-F13",
+        "label": "이력 분류",
+        "format": "repeated_records",
+        "required": "unknown",
+        "constraints": {
+          "sections": [
+            "대학교 학력",
+            "고등학교 학력",
+            "교육 이수 이력",
+            "경력 및 레슨지도 이력"
+          ],
+          "career_max_count": 10
+        },
+        "screen_location": "이력",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "경력 10개가 있는 상태에서 추가를 열자 10개 이상 입력 불가 안내. 생성·삭제 없음. 실제 10개 상한으로 해석; 다른 이력 종류 상한은 미확인"
+      },
+      {
+        "field_id": "PP-F14",
+        "label": "대학교 학력",
+        "format": "education",
+        "required": "unknown",
+        "constraints": {
+          "school_max_chars": 50,
+          "major_max_chars": 50,
+          "dates": "입학·졸업 연월",
+          "open_end": "졸업일 없음 체크",
+          "optional_description_max_chars": 200,
+          "public_image_max_mb": 8
+        },
+        "screen_location": "이력 > 대학교 추가",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "양식 내 학력 필수 표시를 전체 전문가 가입 필수로 일반화하지 않음. 필수 검증 미시험"
+      },
+      {
+        "field_id": "PP-F15",
+        "label": "교육 이수 이력",
+        "format": "education",
+        "required": "unknown",
+        "constraints": {
+          "title_max_chars": 50,
+          "dates": "시작·종료 연월",
+          "optional_description_max_chars": 200,
+          "public_image_max_mb": 8
+        },
+        "screen_location": "이력 > 교육 이수 추가",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F16",
+        "label": "제공 레슨 분야",
+        "format": "service_selection",
+        "required": "unknown",
+        "constraints": {
+          "observed": "현재 서비스·카테고리 선택·서비스 선택·저장하기",
+          "cardinality": "복수 분야 가능 여부와 정확한 상한은 미시험"
+        },
+        "screen_location": "제공 레슨 분야",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F17",
+        "label": "분야별 서비스 소개",
+        "format": "long_text",
+        "required": true,
+        "constraints": {
+          "placeholder_min_chars": 50,
+          "placeholder_max_chars": 10000,
+          "html_maxlength": null
+        },
+        "screen_location": "레슨 소개",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "분야 선택에 종속된 소개와 커리큘럼 목록을 관찰"
+      },
+      {
+        "field_id": "PP-F18",
+        "label": "커리큘럼 기본정보",
+        "format": "text_fields",
+        "required": true,
+        "constraints": {
+          "fields": [
+            "제목",
+            "수강목적",
+            "수강생 수준",
+            "레슨 장소",
+            "기간/횟수"
+          ],
+          "each_max_chars": 20
+        },
+        "screen_location": "레슨 소개 > 커리큘럼 수정",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F19",
+        "label": "커리큘럼 모집 형태",
+        "format": "enum",
+        "required": "unknown",
+        "constraints": {
+          "values": [
+            "개인레슨",
+            "소그룹(2~4명)",
+            "대그룹(5명 이상)"
+          ]
+        },
+        "screen_location": "레슨 소개 > 커리큘럼 수정",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F20",
+        "label": "1회당 수업시간",
+        "format": "enum_minutes",
+        "required": "unknown",
+        "constraints": {
+          "values": [
+            15,
+            30,
+            45,
+            60,
+            90,
+            120,
+            150,
+            180,
+            240,
+            300
+          ]
+        },
+        "screen_location": "커리큘럼 수정·레슨 비용",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F21",
+        "label": "1회당 레슨비용",
+        "format": "krw",
+        "required": true,
+        "constraints": {
+          "input_maxlength_attribute": 10,
+          "amount_range": "미확인",
+          "derived_display": "시간당 환산 금액"
+        },
+        "screen_location": "커리큘럼 수정·레슨 비용",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "문자 수 속성을 금액 상한으로 해석하지 않음"
+      },
+      {
+        "field_id": "PP-F22",
+        "label": "커리큘럼 레슨 설명",
+        "format": "long_text",
+        "required": true,
+        "constraints": {
+          "displayed_max_chars": 10000,
+          "html_maxlength": 11000
+        },
+        "screen_location": "커리큘럼 수정",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "안내와 HTML 속성이 다름. 실제 서버 허용 분량 미확인; 보수적으로 표시 안내를 사용하도록 설계 검토"
+      },
+      {
+        "field_id": "PP-F23",
+        "label": "레슨 계획 단계",
+        "format": "repeated_step",
+        "required": "unknown",
+        "constraints": {
+          "observed_step_count": 3,
+          "step_title_max_chars": 50,
+          "step_description_max_chars": 1000,
+          "max_count": "미확인"
+        },
+        "screen_location": "커리큘럼 수정",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음",
+        "note": "현재 3개가 있다는 사실을 전체 최대 개수로 해석하지 않음"
+      },
+      {
+        "field_id": "PP-F24",
+        "label": "레슨 비용의 커리큘럼별 시간·가격 묶음",
+        "format": "repeated_price",
+        "required": "unknown",
+        "constraints": {
+          "observed_controls": [
+            "수정",
+            "삭제",
+            "새 커리큘럼 추가",
+            "시간·비용 행 추가/제거 아이콘"
+          ],
+          "guidance": "같은 커리큘럼도 1회 수업시간이 다르면 비용 추가 입력"
+        },
+        "screen_location": "레슨 비용",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F25",
+        "label": "레슨 비용 참고 사항",
+        "format": "long_text",
+        "required": "unknown",
+        "constraints": {
+          "observed": "참고 사항과 수정 버튼",
+          "length_limit": "미확인"
+        },
+        "screen_location": "레슨 비용",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F26",
+        "label": "웹사이트·외부 링크",
+        "format": "urls",
+        "required": false,
+        "constraints": {
+          "field_count": 5,
+          "each_max_chars": 200,
+          "placeholders": [
+            "웹사이트",
+            "Facebook",
+            "네이버 블로그",
+            "Instagram",
+            "기타 URL"
+          ]
+        },
+        "screen_location": "링크 및 리뷰",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F27",
+        "label": "리뷰 요청 주소",
+        "format": "generated_link",
+        "required": "unknown",
+        "constraints": {
+          "observed": "의뢰인에게 주소를 보내 리뷰 받기 안내",
+          "share_action": "미실행"
+        },
+        "screen_location": "링크 및 리뷰",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      },
+      {
+        "field_id": "PP-F28",
+        "label": "FAQ",
+        "format": "fixed_question_answers",
+        "required": false,
+        "constraints": {
+          "observed_question_count": 16,
+          "question_topics": [
+            "장단점",
+            "경력 설명",
+            "가장 큰 성취",
+            "성격",
+            "가르친 학생 유형",
+            "인상 깊은 수강생",
+            "보람을 느끼는 학생",
+            "레슨 경력 기간",
+            "수업 전 준비",
+            "수강생에게 바라는 점",
+            "비용 산정",
+            "카드 결제",
+            "레슨 장소",
+            "온라인 수업 방식",
+            "자격 증빙 확인",
+            "수강 증빙 발급"
+          ],
+          "opened_answer": "장단점",
+          "opened_answer_min_chars_guidance": 15,
+          "opened_answer_max_chars": 1000,
+          "other_answer_limits": "나머지 답변은 편집을 열지 않아 미확인",
+          "actions": [
+            "항목별 수정",
+            "저장",
+            "삭제"
+          ]
+        },
+        "screen_location": "FAQ",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ],
+        "verification_level": "화면 안내 또는 DOM 필드 속성 관찰; 저장·서버 경계값 시험 없음"
+      }
+    ],
+    "user_experience": [
+      {
+        "id": "PP-U01",
+        "topic": "publication",
+        "statement": "등록·수정 후 바로 공개됐음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U02",
+        "topic": "service_addition",
+        "statement": "레슨 분야 추가 후 관련 요청을 받기까지 별도 승인·대기 없었음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U03",
+        "topic": "preparation",
+        "statement": "전문가 소개·레슨 소개를 기존 모집 글에서 복사해 프람피 항목에 맞춰 다듬었음. 따로 준비할 내용 없었음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U04",
+        "topic": "timing",
+        "statement": "전문가 소개 약 10분·레슨 소개 약 10분. 실측 없는 회상 추정이며 전체 등록시간으로 합산·일반화하지 않음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U05",
+        "topic": "proposal_reuse",
+        "statement": "이전 견적서를 복사했다는 초기 설명을 고객 이름만 고치고 나머지 상담 안내·경험 질문은 동일하게 보냈다고 구체화. 건당 수정·보내기 약 5분 회상",
+        "evidence_ids": [
+          "PP-USER",
+          "PP-SHOT"
+        ]
+      },
+      {
+        "id": "PP-U06",
+        "topic": "proposal_scope",
+        "statement": "제공 이미지는 채팅 예시. 구조화 견적·제안서 작성 시간과 채팅 시간의 정확한 경계는 미확인. 견적·상담은 현행 TASK 제외 범위의 맥락 정보",
+        "evidence_ids": [
+          "PP-USER",
+          "PP-SHOT"
+        ]
+      },
+      {
+        "id": "PP-U07",
+        "topic": "modification",
+        "statement": "처음 등록 후 전문가 소개·레슨 소개는 거의 수정하지 않음. 수업료·시간 변경 경험 없음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U08",
+        "topic": "price_match",
+        "statement": "표시한 수업시간·수업료가 실제 안내 조건과 같았음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U09",
+        "topic": "input_errors",
+        "statement": "글자수 제한·입력 오류 때문에 다시 고친 경험 없음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U10",
+        "topic": "media_errors",
+        "statement": "사진·영상 등록 전 수정이나 업로드 실패 경험 없음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U11",
+        "topic": "visibility",
+        "statement": "공개 화면에서 누락·다르게 표시된 경험 없음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U12",
+        "topic": "lost_draft",
+        "statement": "저장하지 않고 이탈한 뒤 내용 유실을 겪은 경험 없음. 자동저장 기능 존재를 뜻하지 않음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U13",
+        "topic": "hide_delete",
+        "statement": "프로필 숨김·레슨 분야 삭제 경험 없음. 기능 부재로 해석하지 않음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U14",
+        "topic": "identity",
+        "statement": "본인인증·자격·경력 증빙을 요구받았는지 기억이 나지 않음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U15",
+        "topic": "permission",
+        "statement": "대행 등록·자동화 허용 여부를 문의하거나 확인한 적 없음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "id": "PP-U16",
+        "topic": "additional_pain",
+        "statement": "추가 불편·반복 작업 경험 없음",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      }
+    ],
+    "policies": [
+      {
+        "id": "PP-P01",
+        "finding": "약관 제22조는 무단 전자적·자동화 정보 수집과 계정의 제3자 양도·판매·공유를 금지한다. 등록 대행이나 자동 입력을 명시적으로 허용하는 근거는 확보하지 못했다.",
+        "evidence_ids": [
+          "PP-TERMS"
+        ],
+        "interpretation": "읽기 전용 개별 조사나 사용자 지시를 운영사 자동화 허가로 간주하지 않음. 실제 제품 실행 전 업무별 서면 허용 확인 필요"
+      },
+      {
+        "id": "PP-P02",
+        "finding": "약관 제5~7조는 회원 유형에 따라 실명확인·본인인증을 요청할 수 있고 회원정보 변경 시 갱신할 의무를 설명한다.",
+        "evidence_ids": [
+          "PP-TERMS"
+        ],
+        "limitation": "최초 전문가 등록 전체에서 필수인지, 어느 시점에 차단되는지는 미확인"
+      },
+      {
+        "id": "PP-P03",
+        "finding": "공식 FAQ는 휴대폰 본인인증이 어려운 경우 운영팀의 수동 확인 대안을 안내한다.",
+        "evidence_ids": [
+          "PP-ID"
+        ],
+        "limitation": "사용자의 인증 수행 경험은 불확실. 인증자료 수집·제출 없음"
+      },
+      {
+        "id": "PP-P04",
+        "finding": "안전이용정책은 전문가의 직접 동의를 전제로 일부 인적 정보 공개와 의뢰인 요청 시 학력·경력 자료를 확인시킬 의무를 설명한다.",
+        "evidence_ids": [
+          "PP-SAFETY"
+        ],
+        "limitation": "신규 가입 증빙 업로드 필수로 일반화하지 않음. 법률 예외 안내의 법적 정확성·현재 적용 여부는 본 조사 판단 범위 밖"
+      },
+      {
+        "id": "PP-P05",
+        "finding": "공식 이용안내는 등록 분야의 의뢰 수신, 제안 발송, 작업 완료·리뷰의 흐름을 설명한다. 요청 열람은 무료이며 제안 발송에 프람을 사용한다.",
+        "evidence_ids": [
+          "PP-FLOW",
+          "PP-TERMS"
+        ],
+        "scope": "견적·상담·결제 자동화는 이번 제품 범위 밖"
+      },
+      {
+        "id": "PP-P06",
+        "finding": "공식 알림 FAQ는 지역 기반 알림(최대 25km), 온라인 가능 조건에서 지역과 무관한 알림, 분야별 대시보드 요청 표시를 설명한다.",
+        "evidence_ids": [
+          "PP-ALERT"
+        ],
+        "limitation": "도움말 설명이며 오늘 실제 알림 수신 실험·현재 알고리즘 검증 아님"
+      },
+      {
+        "id": "PP-P07",
+        "finding": "공식 FAQ는 서비스 분야별 제안서 템플릿 저장과 작성 시 불러오기·수정을 지원한다고 설명한다. 설정의 템플릿 목록·추가 링크도 관찰했다.",
+        "evidence_ids": [
+          "PP-TEMPLATE",
+          "PP-SCREEN"
+        ],
+        "scope": "기존 대안 기록. 신규 템플릿 저장·발송하지 않았고 사용자의 이 기능 사용 경험은 묻지 않음"
+      },
+      {
+        "id": "PP-P08",
+        "finding": "확인한 약관·FAQ에서 모든 프로필에 적용되는 사전 심사 기간이나 즉시 공개 보장 규정을 확보하지 못했다.",
+        "evidence_ids": [
+          "PP-TERMS",
+          "PP-FLOW"
+        ],
+        "limitation": "즉시 공개·분야 추가 대기 없음은 사용자 경험으로만 기록. 약관은 일부 기능에 별도 승인 절차 가능성을 남김"
+      }
+    ],
+    "design_implications": [
+      {
+        "type": "inference",
+        "text": "공통 전문가 프로필, 제공 분야, 분야별 소개, 커리큘럼, 시간·가격 옵션, 단계, 미디어, FAQ를 구분해 매핑할 필요가 있다. 내부 DB 구조를 추정하는 주장은 아님",
+        "evidence_ids": [
+          "PP-SCREEN"
+        ]
+      },
+      {
+        "type": "inference",
+        "text": "60분 고정 환산을 강제할 근거가 없다. 프람피는 90분 선택을 제공하며 시간당 금액은 1회 가격에서 계산하는 파생값",
+        "evidence_ids": [
+          "PP-SCREEN",
+          "PP-USER"
+        ]
+      },
+      {
+        "type": "inference",
+        "text": "유실·오류·변경의 높은 반복 부담은 이 사용자 경험으로 지지되지 않는다. 최초 작성 보조의 가치와 반복 관리 가치는 별도 검증 필요",
+        "evidence_ids": [
+          "PP-USER"
+        ]
+      },
+      {
+        "type": "scope_boundary",
+        "text": "고객 이름만 바꾸는 상담 문구 재사용을 고객별 커리큘럼·가격 재작성 부담으로 확대해석하지 않음",
+        "evidence_ids": [
+          "PP-USER",
+          "PP-SHOT"
+        ]
+      }
+    ],
+    "unknowns": [
+      "최초 가입의 전체 필수값·본인인증 시점·증빙 업로드 조건",
+      "전문가 프로필 숨김·삭제, 분야 제거의 실제 결과 및 재개·재심사·갱신 절차",
+      "등록·수정 즉시 공개의 일반 정책 보장과 시스템 상태 전이: 실제 저장 실험 없음",
+      "자동저장·이탈 복원·중복 처리·저장 실패 대응",
+      "주소 편집 선택지·이동 반경 조건·전체 주소 공개 세부 설정",
+      "고등학교 입력 상세·경력 항목 필드 상세(현재 10개 상한 안내 때문에 추가 화면 진입 불가)",
+      "프로필 사진 크기·형식 제한, 전체 미디어 형식 목록",
+      "커리큘럼 개수·단계 수·분야 개수 상한과 가격 최소·최대·서버 검증",
+      "FAQ 나머지 15개 답변 분량 제한; 커리큘럼 설명 10000 안내와 HTML11000 차이",
+      "운영사의 대행·자동화 업무별 허용 범위",
+      "사용자 회상 시간의 재현성 및 제품으로 절감 가능한 실제 시간"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "PP-SCREEN",
+      "type": "readonly_browser",
+      "date": "2026-11-26",
+      "url": "https://prompie.com/partners/profile/me/",
+      "location": "기본 정보·위치 및 이동·포트폴리오·소개·이력·레슨 비용·제공 레슨 분야·레슨 소개·링크 및 리뷰·FAQ",
+      "scope": "사용자가 요청한 기존 로그인 세션의 개별 화면 관찰. 최초 가입 전체 흐름은 미관찰. 개인 값·고객 기록은 보존하지 않음"
+    },
+    {
+      "id": "PP-USER",
+      "type": "user_recollection",
+      "date": "2026-11-26",
+      "location": "현재 대화의 프람피 순차 문답",
+      "scope": "단일 사용자의 과거 경험·시간 회상. 실측·모집단 일반화 아님"
+    },
+    {
+      "id": "PP-SHOT",
+      "type": "user_provided_screenshot",
+      "date": "2026-11-26",
+      "location": "16:27:56 대화 화면",
+      "scope": "인사·상담 안내·경험 질문 문구 재사용 예시. 고객 이름·대화 원문·이미지는 공개 저장소에 복사하지 않음. 구조화 제안서 발송 화면이라는 증거는 아님"
+    },
+    {
+      "id": "PP-TERMS",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://athenaslab.notion.site/db941e6390c642a7bbf82c35e4b690b0",
+      "entry_url": "https://prompie.com/terms/",
+      "location": "현재 유효 표시; 제5~7·11·22조"
+    },
+    {
+      "id": "PP-SAFETY",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://prompie.com/safety/",
+      "location": "신뢰도 향상을 위한 공개 사항·전문가 의무"
+    },
+    {
+      "id": "PP-FLOW",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://athenaslab.notion.site/55af21b8e0d943fc8d4d1686627ed247",
+      "entry_url": "https://prompie.com/s/abmwqhg9/",
+      "location": "전문가: 프람피는 어떻게 이용하나요?"
+    },
+    {
+      "id": "PP-ID",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://athenaslab.notion.site/e46c70d0729d425aafb477dc9c3594b5",
+      "location": "다른 본인인증 방법은 없나요?"
+    },
+    {
+      "id": "PP-ALERT",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://athenaslab.notion.site/cad51577293448509ef10146eb3df055",
+      "location": "의뢰 알림은 어떤 기준으로 오는 건가요?"
+    },
+    {
+      "id": "PP-TEMPLATE",
+      "type": "official_document",
+      "date": "2026-11-26",
+      "url": "https://athenaslab.notion.site/70c3075cdd2d4e18b90f060550393bf2",
+      "location": "제안서는 매번 새로 작성해야하나요?; 설정의 제안서 템플릿 목록 화면도 관찰"
+    }
+  ],
+  "verification": [
+    {
+      "criterion": "화면·회상·공식 정책·추론 구분",
+      "verdict": "pass",
+      "detail": "필드별 화면 위치와 PP 근거 ID, 정책의 직접 근거 및 제한 기재"
+    },
+    {
+      "criterion": "사용자 정정 반영",
+      "verdict": "pass",
+      "detail": "고객 요청별 내용 변경이라는 초기 설명을 이름만 변경하는 상담 문구 재사용으로 정정. 시간은 실측 아닌 회상"
+    },
+    {
+      "criterion": "허용·지원·완료 상태 구분",
+      "verdict": "pass",
+      "detail": "UI 저장 버튼 존재와 실제 저장·공개 결과 미시험 구분. 대행 허용 미확인 및 약관 제한 명시"
+    },
+    {
+      "criterion": "공개 저장소 개인정보 제외",
+      "verdict": "pass",
+      "detail": "연락처·주소 값·고객 이름·계정별 상세 URL·원본 스크린샷·대화 원문 미포함"
+    },
+    {
+      "criterion": "정책 및 전체 제한 확정",
+      "verdict": "inconclusive",
+      "detail": "운영사 별도 회신 없음. 알려진 불일치·미확인 항목을 보존"
+    },
+    {
+      "criterion": "JSON 및 참조 정합성",
+      "verdict": "pass",
+      "detail": "세 JSON 원본 파싱, 근거 ID·스토리/업무/필드/객체 참조, 28개 상세 JSON 포인터, TASK 산출물 연결 검사 통과"
+    },
+    {
+      "criterion": "생성 문서 최신성",
+      "verdict": "pass",
+      "detail": "tools/project_docs.py 생성 후 --check: 45 projections current. Python3.9 Path.write_text newline 호환 처리는 실행 중에만 적용; 저장소 도구 수정 없음"
+    },
+    {
+      "criterion": "공개 전 내용 검사",
+      "verdict": "pass",
+      "detail": "새 원본의 전화번호·이메일·계정별 링크·첨부 원본 경로 패턴 검사 및 내용 검토, git diff --check 통과"
+    }
+  ]
+}

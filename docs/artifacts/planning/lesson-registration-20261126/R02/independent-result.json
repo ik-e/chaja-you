@@ -123,7 +123,8 @@
       "story_refs": [
         "R02-US-008",
         "R02-US-009",
-        "R02-US-032"
+        "R02-US-032",
+        "R02-US-034"
       ],
       "system_event_refs": [],
       "reason": null
@@ -155,7 +156,8 @@
       "scope": "base",
       "status": "draft",
       "story_refs": [
-        "R02-US-012"
+        "R02-US-012",
+        "R02-US-033"
       ],
       "system_event_refs": [
         "R02-EVT-006"
@@ -1436,6 +1438,77 @@
         "R02-EV-KMONG-USER-20261126"
       ],
       "decision_request": null
+    },
+    {
+      "story_id": "R02-US-033",
+      "actor": "강사",
+      "action": "강사가 편집할 전문가 프로필의 분야별 소개 또는 커리큘럼을 선택한다",
+      "goal": "게시글 한 개로 환원되지 않는 관리 대상 식별",
+      "trigger": "기존 등록 정보를 수정할 때",
+      "preconditions": [
+        "지원 및 운영사 업무별 허용 확인 필요"
+      ],
+      "inputs": [
+        "프로필·분야·커리큘럼 관계"
+      ],
+      "observable_result": "선택한 실제 편집 단위",
+      "failure_or_branch": {
+        "condition": "실제 조건·대상 확인이 불가하면 임의 변경 없이 보완 또는 보류",
+        "next_story_ids": [
+          "R02-US-007",
+          "R02-US-009"
+        ]
+      },
+      "related_story_ids": [
+        "R02-US-012",
+        "R02-US-013"
+      ],
+      "feature_refs": [
+        "F14"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "decision_request": "필요한 관리 단위·가격 표현은 범위 및 데이터 설계에서 R01 검토"
+    },
+    {
+      "story_id": "R02-US-034",
+      "actor": "강사",
+      "action": "강사가 플랫폼에 등록할 수업시간과 1회 비용을 확인한다",
+      "goal": "시간·가격 단위와 파생값 구분",
+      "trigger": "가격 정보를 변환한 뒤",
+      "preconditions": [
+        "지원 및 운영사 업무별 허용 확인 필요"
+      ],
+      "inputs": [
+        "실제 수업시간",
+        "1회 비용"
+      ],
+      "observable_result": "수업시간·1회 비용·시간당 환산값의 대응",
+      "failure_or_branch": {
+        "condition": "실제 조건·대상 확인이 불가하면 임의 변경 없이 보완 또는 보류",
+        "next_story_ids": [
+          "R02-US-007",
+          "R02-US-009"
+        ]
+      },
+      "related_story_ids": [
+        "R02-US-012",
+        "R02-US-013"
+      ],
+      "feature_refs": [
+        "F11"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "decision_request": "필요한 관리 단위·가격 표현은 범위 및 데이터 설계에서 R01 검토"
     }
   ],
   "supporting_system_events": [
@@ -4145,20 +4218,88 @@
     {
       "platform_id": "PL04",
       "name": "프람피",
-      "web_path_status": "unconfirmed",
+      "web_path_status": "observed_readonly_existing_session",
       "evidence_refs": [
-        "R02-EV-PL04"
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER",
+        "R02-EV-PP-TERMS"
       ],
       "objects": [
         {
           "object_id": "R02-PL04-OBJ1",
-          "name": "전문가 분야 등록",
-          "business_meaning": "모집 정보 관리 대상 후보",
+          "name": "전문가 프로필",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
           "owner": "전문가 계정",
-          "identifier": "실제 식별 및 유일성 미확인",
-          "lifecycle": "등록·관리 절차 후속 확인",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "object_id": "R02-PL04-OBJ2",
+          "name": "제공 레슨 분야·분야별 소개",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
+          "owner": "전문가 계정",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "object_id": "R02-PL04-OBJ3",
+          "name": "커리큘럼·레슨 계획",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
+          "owner": "전문가 계정",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "object_id": "R02-PL04-OBJ4",
+          "name": "시간별 1회 비용",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
+          "owner": "전문가 계정",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "object_id": "R02-PL04-OBJ5",
+          "name": "포트폴리오 항목",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
+          "owner": "전문가 계정",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "object_id": "R02-PL04-OBJ6",
+          "name": "프로필 FAQ 답변",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
+          "owner": "전문가 계정",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "object_id": "R02-PL04-OBJ7",
+          "name": "학력·교육·경력 이력",
+          "business_meaning": "관찰된 편집 단위; 외부 서비스 내부 DB 테이블 주장 아님",
+          "owner": "전문가 계정",
+          "identifier": "화면 경로·부모 맥락으로 구분. 계정별 실제 ID·URL 값은 공개하지 않음",
+          "lifecycle": "개별 편집·저장 UI 관찰; 실제 저장·삭제 상태 전이 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
           ]
         }
       ],
@@ -4166,74 +4307,228 @@
         {
           "operation_id": "R02-PL04-CREATE",
           "operation_type": "CREATE",
-          "availability": "unknown",
+          "availability": "supported",
           "target_object_refs": [
-            "R02-PL04-OBJ1"
+            "R02-PL04-OBJ1",
+            "R02-PL04-OBJ2",
+            "R02-PL04-OBJ3",
+            "R02-PL04-OBJ4",
+            "R02-PL04-OBJ5",
+            "R02-PL04-OBJ6",
+            "R02-PL04-OBJ7"
           ],
-          "actual_user_steps": [],
-          "preconditions": [],
-          "input_field_refs": [],
+          "actual_user_steps": [
+            "기존 전문가 프로필에서 분야·포트폴리오·커리큘럼·이력 추가 화면 열기",
+            "내용 작성·저장 UI 존재"
+          ],
+          "preconditions": [
+            "전문가 계정 접근",
+            "업무별 운영사 허용 별도 확인"
+          ],
+          "input_field_refs": [
+            "R02-PL04-CONF-01",
+            "R02-PL04-CONF-02",
+            "R02-PL04-CONF-03",
+            "R02-PL04-CONF-04",
+            "R02-PL04-CONF-05",
+            "R02-PL04-CONF-06",
+            "R02-PL04-CONF-07",
+            "R02-PL04-CONF-08",
+            "R02-PL04-CONF-09",
+            "R02-PL04-CONF-10",
+            "R02-PL04-CONF-11",
+            "R02-PL04-CONF-12",
+            "R02-PL04-CONF-13",
+            "R02-PL04-CONF-14",
+            "R02-PL04-CONF-15",
+            "R02-PL04-CONF-16",
+            "R02-PL04-CONF-17",
+            "R02-PL04-CONF-18",
+            "R02-PL04-CONF-19",
+            "R02-PL04-CONF-20",
+            "R02-PL04-CONF-21",
+            "R02-PL04-CONF-22",
+            "R02-PL04-CONF-23",
+            "R02-PL04-CONF-24",
+            "R02-PL04-CONF-25",
+            "R02-PL04-CONF-26",
+            "R02-PL04-CONF-27",
+            "R02-PL04-CONF-28"
+          ],
           "return_field_refs": [],
           "visible_field_refs": [],
           "state_before": null,
           "state_after": null,
-          "completion_evidence": [],
-          "error_and_unknown_conditions": [],
-          "retry_or_duplicate_risk": null,
-          "external_effect": null,
+          "completion_evidence": [
+            "읽기·편집 양식 표시 직접 관찰",
+            "등록·수정·분야 추가 즉시 반영은 사용자 회상. 이번 세션 저장·공개 결과 검증 없음"
+          ],
+          "error_and_unknown_conditions": [
+            "경력 10개 상한 안내 관찰",
+            "커리큘럼 설명 안내10000·HTML11000 불일치",
+            "최초 가입·인증 필수 조건 미확인",
+            "프로필 숨김·삭제·재개 결과 미확인"
+          ],
+          "retry_or_duplicate_risk": "저장 결과가 불명확할 때 재실행 전 기존 항목·공개 결과 확인 필요. 실제 중복·자동저장 동작 미확인",
+          "external_effect": "이번 조사에서 읽기 외 저장·삭제·전송 없음",
           "policy_status": "unknown",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN",
+            "R02-EV-PP-USER"
           ],
-          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+          "unknown_reason": null,
+          "support_level": "화면 및 사용자 과거 경험. 실제 저장·신규 제출·상태 전이 시험 아님"
         },
         {
           "operation_id": "R02-PL04-READ",
           "operation_type": "READ",
-          "availability": "unknown",
+          "availability": "supported",
           "target_object_refs": [
-            "R02-PL04-OBJ1"
+            "R02-PL04-OBJ1",
+            "R02-PL04-OBJ2",
+            "R02-PL04-OBJ3",
+            "R02-PL04-OBJ4",
+            "R02-PL04-OBJ5",
+            "R02-PL04-OBJ6",
+            "R02-PL04-OBJ7"
           ],
-          "actual_user_steps": [],
-          "preconditions": [],
+          "actual_user_steps": [
+            "내 프로필 보기",
+            "항목별 내용·현재 설정 확인"
+          ],
+          "preconditions": [
+            "전문가 계정 접근",
+            "업무별 운영사 허용 별도 확인"
+          ],
           "input_field_refs": [],
           "return_field_refs": [],
-          "visible_field_refs": [],
+          "visible_field_refs": [
+            "R02-PL04-CONF-01",
+            "R02-PL04-CONF-02",
+            "R02-PL04-CONF-03",
+            "R02-PL04-CONF-04",
+            "R02-PL04-CONF-05",
+            "R02-PL04-CONF-06",
+            "R02-PL04-CONF-07",
+            "R02-PL04-CONF-08",
+            "R02-PL04-CONF-09",
+            "R02-PL04-CONF-10",
+            "R02-PL04-CONF-11",
+            "R02-PL04-CONF-12",
+            "R02-PL04-CONF-13",
+            "R02-PL04-CONF-14",
+            "R02-PL04-CONF-15",
+            "R02-PL04-CONF-16",
+            "R02-PL04-CONF-17",
+            "R02-PL04-CONF-18",
+            "R02-PL04-CONF-19",
+            "R02-PL04-CONF-20",
+            "R02-PL04-CONF-21",
+            "R02-PL04-CONF-22",
+            "R02-PL04-CONF-23",
+            "R02-PL04-CONF-24",
+            "R02-PL04-CONF-25",
+            "R02-PL04-CONF-26",
+            "R02-PL04-CONF-27",
+            "R02-PL04-CONF-28"
+          ],
           "state_before": null,
           "state_after": null,
-          "completion_evidence": [],
-          "error_and_unknown_conditions": [],
-          "retry_or_duplicate_risk": null,
-          "external_effect": null,
+          "completion_evidence": [
+            "읽기·편집 양식 표시 직접 관찰",
+            "등록·수정·분야 추가 즉시 반영은 사용자 회상. 이번 세션 저장·공개 결과 검증 없음"
+          ],
+          "error_and_unknown_conditions": [
+            "경력 10개 상한 안내 관찰",
+            "커리큘럼 설명 안내10000·HTML11000 불일치",
+            "최초 가입·인증 필수 조건 미확인",
+            "프로필 숨김·삭제·재개 결과 미확인"
+          ],
+          "retry_or_duplicate_risk": "저장 결과가 불명확할 때 재실행 전 기존 항목·공개 결과 확인 필요. 실제 중복·자동저장 동작 미확인",
+          "external_effect": "이번 조사에서 읽기 외 저장·삭제·전송 없음",
           "policy_status": "unknown",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN",
+            "R02-EV-PP-USER"
           ],
-          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+          "unknown_reason": null,
+          "support_level": "화면 및 사용자 과거 경험. 실제 저장·신규 제출·상태 전이 시험 아님"
         },
         {
           "operation_id": "R02-PL04-UPDATE",
           "operation_type": "UPDATE",
-          "availability": "unknown",
+          "availability": "supported",
           "target_object_refs": [
-            "R02-PL04-OBJ1"
+            "R02-PL04-OBJ1",
+            "R02-PL04-OBJ2",
+            "R02-PL04-OBJ3",
+            "R02-PL04-OBJ4",
+            "R02-PL04-OBJ5",
+            "R02-PL04-OBJ6",
+            "R02-PL04-OBJ7"
           ],
-          "actual_user_steps": [],
-          "preconditions": [],
-          "input_field_refs": [],
+          "actual_user_steps": [
+            "기본 정보 또는 하위 항목 선택",
+            "수정 양식 열기",
+            "저장 UI 존재"
+          ],
+          "preconditions": [
+            "전문가 계정 접근",
+            "업무별 운영사 허용 별도 확인"
+          ],
+          "input_field_refs": [
+            "R02-PL04-CONF-01",
+            "R02-PL04-CONF-02",
+            "R02-PL04-CONF-03",
+            "R02-PL04-CONF-04",
+            "R02-PL04-CONF-05",
+            "R02-PL04-CONF-06",
+            "R02-PL04-CONF-07",
+            "R02-PL04-CONF-08",
+            "R02-PL04-CONF-09",
+            "R02-PL04-CONF-10",
+            "R02-PL04-CONF-11",
+            "R02-PL04-CONF-12",
+            "R02-PL04-CONF-13",
+            "R02-PL04-CONF-14",
+            "R02-PL04-CONF-15",
+            "R02-PL04-CONF-16",
+            "R02-PL04-CONF-17",
+            "R02-PL04-CONF-18",
+            "R02-PL04-CONF-19",
+            "R02-PL04-CONF-20",
+            "R02-PL04-CONF-21",
+            "R02-PL04-CONF-22",
+            "R02-PL04-CONF-23",
+            "R02-PL04-CONF-24",
+            "R02-PL04-CONF-25",
+            "R02-PL04-CONF-26",
+            "R02-PL04-CONF-27",
+            "R02-PL04-CONF-28"
+          ],
           "return_field_refs": [],
           "visible_field_refs": [],
           "state_before": null,
           "state_after": null,
-          "completion_evidence": [],
-          "error_and_unknown_conditions": [],
-          "retry_or_duplicate_risk": null,
-          "external_effect": null,
+          "completion_evidence": [
+            "읽기·편집 양식 표시 직접 관찰",
+            "등록·수정·분야 추가 즉시 반영은 사용자 회상. 이번 세션 저장·공개 결과 검증 없음"
+          ],
+          "error_and_unknown_conditions": [
+            "경력 10개 상한 안내 관찰",
+            "커리큘럼 설명 안내10000·HTML11000 불일치",
+            "최초 가입·인증 필수 조건 미확인",
+            "프로필 숨김·삭제·재개 결과 미확인"
+          ],
+          "retry_or_duplicate_risk": "저장 결과가 불명확할 때 재실행 전 기존 항목·공개 결과 확인 필요. 실제 중복·자동저장 동작 미확인",
+          "external_effect": "이번 조사에서 읽기 외 저장·삭제·전송 없음",
           "policy_status": "unknown",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN",
+            "R02-EV-PP-USER"
           ],
-          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+          "unknown_reason": null,
+          "support_level": "화면 및 사용자 과거 경험. 실제 저장·신규 제출·상태 전이 시험 아님"
         },
         {
           "operation_id": "R02-PL04-RENEW",
@@ -4243,7 +4538,10 @@
             "R02-PL04-OBJ1"
           ],
           "actual_user_steps": [],
-          "preconditions": [],
+          "preconditions": [
+            "전문가 계정 접근",
+            "업무별 운영사 허용 별도 확인"
+          ],
           "input_field_refs": [],
           "return_field_refs": [],
           "visible_field_refs": [],
@@ -4251,37 +4549,89 @@
           "state_after": null,
           "completion_evidence": [],
           "error_and_unknown_conditions": [],
-          "retry_or_duplicate_risk": null,
-          "external_effect": null,
+          "retry_or_duplicate_risk": "저장 결과가 불명확할 때 재실행 전 기존 항목·공개 결과 확인 필요. 실제 중복·자동저장 동작 미확인",
+          "external_effect": "이번 조사에서 읽기 외 저장·삭제·전송 없음",
           "policy_status": "unknown",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN",
+            "R02-EV-PP-USER"
           ],
-          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+          "unknown_reason": "갱신·오류/반려 대응의 구체 절차를 현재 화면·문답·공식 자료에서 확인하지 못함. 사용자에게 관련 경험이 없다는 사실은 기능 부재 근거가 아님"
         },
         {
           "operation_id": "R02-PL04-STATUS",
           "operation_type": "STATUS",
-          "availability": "unknown",
+          "availability": "supported",
           "target_object_refs": [
-            "R02-PL04-OBJ1"
+            "R02-PL04-OBJ1",
+            "R02-PL04-OBJ2",
+            "R02-PL04-OBJ3",
+            "R02-PL04-OBJ4",
+            "R02-PL04-OBJ5",
+            "R02-PL04-OBJ6",
+            "R02-PL04-OBJ7"
           ],
-          "actual_user_steps": [],
-          "preconditions": [],
+          "actual_user_steps": [
+            "내 프로필 보기에서 노출 정보 확인",
+            "등록·수정 직후 공개는 사용자 경험이며 공식 보장 미확인"
+          ],
+          "preconditions": [
+            "전문가 계정 접근",
+            "업무별 운영사 허용 별도 확인"
+          ],
           "input_field_refs": [],
           "return_field_refs": [],
-          "visible_field_refs": [],
+          "visible_field_refs": [
+            "R02-PL04-CONF-01",
+            "R02-PL04-CONF-02",
+            "R02-PL04-CONF-03",
+            "R02-PL04-CONF-04",
+            "R02-PL04-CONF-05",
+            "R02-PL04-CONF-06",
+            "R02-PL04-CONF-07",
+            "R02-PL04-CONF-08",
+            "R02-PL04-CONF-09",
+            "R02-PL04-CONF-10",
+            "R02-PL04-CONF-11",
+            "R02-PL04-CONF-12",
+            "R02-PL04-CONF-13",
+            "R02-PL04-CONF-14",
+            "R02-PL04-CONF-15",
+            "R02-PL04-CONF-16",
+            "R02-PL04-CONF-17",
+            "R02-PL04-CONF-18",
+            "R02-PL04-CONF-19",
+            "R02-PL04-CONF-20",
+            "R02-PL04-CONF-21",
+            "R02-PL04-CONF-22",
+            "R02-PL04-CONF-23",
+            "R02-PL04-CONF-24",
+            "R02-PL04-CONF-25",
+            "R02-PL04-CONF-26",
+            "R02-PL04-CONF-27",
+            "R02-PL04-CONF-28"
+          ],
           "state_before": null,
           "state_after": null,
-          "completion_evidence": [],
-          "error_and_unknown_conditions": [],
-          "retry_or_duplicate_risk": null,
-          "external_effect": null,
+          "completion_evidence": [
+            "읽기·편집 양식 표시 직접 관찰",
+            "등록·수정·분야 추가 즉시 반영은 사용자 회상. 이번 세션 저장·공개 결과 검증 없음"
+          ],
+          "error_and_unknown_conditions": [
+            "경력 10개 상한 안내 관찰",
+            "커리큘럼 설명 안내10000·HTML11000 불일치",
+            "최초 가입·인증 필수 조건 미확인",
+            "프로필 숨김·삭제·재개 결과 미확인"
+          ],
+          "retry_or_duplicate_risk": "저장 결과가 불명확할 때 재실행 전 기존 항목·공개 결과 확인 필요. 실제 중복·자동저장 동작 미확인",
+          "external_effect": "이번 조사에서 읽기 외 저장·삭제·전송 없음",
           "policy_status": "unknown",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN",
+            "R02-EV-PP-USER"
           ],
-          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+          "unknown_reason": null,
+          "support_level": "화면 및 사용자 과거 경험. 실제 저장·신규 제출·상태 전이 시험 아님"
         },
         {
           "operation_id": "R02-PL04-RESPOND",
@@ -4291,7 +4641,10 @@
             "R02-PL04-OBJ1"
           ],
           "actual_user_steps": [],
-          "preconditions": [],
+          "preconditions": [
+            "전문가 계정 접근",
+            "업무별 운영사 허용 별도 확인"
+          ],
           "input_field_refs": [],
           "return_field_refs": [],
           "visible_field_refs": [],
@@ -4299,13 +4652,14 @@
           "state_after": null,
           "completion_evidence": [],
           "error_and_unknown_conditions": [],
-          "retry_or_duplicate_risk": null,
-          "external_effect": null,
+          "retry_or_duplicate_risk": "저장 결과가 불명확할 때 재실행 전 기존 항목·공개 결과 확인 필요. 실제 중복·자동저장 동작 미확인",
+          "external_effect": "이번 조사에서 읽기 외 저장·삭제·전송 없음",
           "policy_status": "unknown",
           "evidence_refs": [
-            "R02-EV-PL04"
+            "R02-EV-PP-SCREEN",
+            "R02-EV-PP-USER"
           ],
-          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+          "unknown_reason": "갱신·오류/반려 대응의 구체 절차를 현재 화면·문답·공식 자료에서 확인하지 못함. 사용자에게 관련 경험이 없다는 사실은 기능 부재 근거가 아님"
         }
       ],
       "data_fields": [
@@ -4326,19 +4680,902 @@
           "evidence_refs": [
             "R02-EV-ADD-PL04"
           ]
+        },
+        {
+          "field_id": "R02-PL04-CONF-01",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "프로필 제목",
+          "meaning": "프로필 제목",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "text",
+          "required": true,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "max_chars": 30
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/0",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-02",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "전문가 활동명(비즈니스명)",
+          "meaning": "전문가 활동명(비즈니스명)",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "text",
+          "required": true,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "max_chars": 20
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/1",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-03",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "프로필 사진",
+          "meaning": "프로필 사진",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "image",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "control": "파일 선택",
+            "file_limits": "해당 화면에서 구체 제한 미확인"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/2",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-04",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "주소·공개 표시",
+          "meaning": "주소·공개 표시",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "address",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed": "주소와 전체 주소 표시 안내, 수정 링크",
+            "input_and_visibility_options": "미확인"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/3",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-05",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "제안이력 가격 공개여부",
+          "meaning": "제안이력 가격 공개여부",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "boolean",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "options": [
+              "공개",
+              "비공개"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/4",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-06",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "본인인증 연령대 공개",
+          "meaning": "본인인증 연령대 공개",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "visibility_setting",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed": "연령대 공개 표시와 수정 링크",
+            "alternative_options": "미관찰"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/5",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-07",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "진행방식",
+          "meaning": "진행방식",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "multiselect",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "values": [
+              "의뢰인 위치로 이동",
+              "전문가 위치로 방문",
+              "온라인 및 화상수업"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/6",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-08",
+          "object_ref": "R02-PL04-OBJ5",
+          "actual_label_or_observed_key": "포트폴리오 목록",
+          "meaning": "포트폴리오 목록",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "repeated_media",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "max_count": 20,
+            "actions": [
+              "이미지 업로드",
+              "영상 업로드",
+              "항목 삭제"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/7",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-09",
+          "object_ref": "R02-PL04-OBJ5",
+          "actual_label_or_observed_key": "포트폴리오 이미지",
+          "meaning": "포트폴리오 이미지",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "image",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "max_mb": 8,
+            "min_width_px": 300,
+            "min_height_px": 300,
+            "displayed_formats": [
+              "jpg",
+              "jpeg",
+              "png",
+              "gif",
+              "등"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/8",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-10",
+          "object_ref": "R02-PL04-OBJ5",
+          "actual_label_or_observed_key": "포트폴리오 영상",
+          "meaning": "포트폴리오 영상",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "youtube_url",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "max_chars_attribute": 200,
+            "one_at_a_time": true,
+            "provider": "YouTube"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/9",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-11",
+          "object_ref": "R02-PL04-OBJ5",
+          "actual_label_or_observed_key": "포트폴리오 영상 설명",
+          "meaning": "포트폴리오 영상 설명",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "text",
+          "required": false,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "max_chars": 50
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/10",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-12",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "전문가 소개",
+          "meaning": "전문가 소개",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "long_text",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "displayed_max_chars": 10000
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/11",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-13",
+          "object_ref": "R02-PL04-OBJ7",
+          "actual_label_or_observed_key": "이력 분류",
+          "meaning": "이력 분류",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "repeated_records",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "sections": [
+              "대학교 학력",
+              "고등학교 학력",
+              "교육 이수 이력",
+              "경력 및 레슨지도 이력"
+            ],
+            "career_max_count": 10
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/12",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-14",
+          "object_ref": "R02-PL04-OBJ7",
+          "actual_label_or_observed_key": "대학교 학력",
+          "meaning": "대학교 학력",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "education",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "school_max_chars": 50,
+            "major_max_chars": 50,
+            "dates": "입학·졸업 연월",
+            "open_end": "졸업일 없음 체크",
+            "optional_description_max_chars": 200,
+            "public_image_max_mb": 8
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/13",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-15",
+          "object_ref": "R02-PL04-OBJ7",
+          "actual_label_or_observed_key": "교육 이수 이력",
+          "meaning": "교육 이수 이력",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "education",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "title_max_chars": 50,
+            "dates": "시작·종료 연월",
+            "optional_description_max_chars": 200,
+            "public_image_max_mb": 8
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/14",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-16",
+          "object_ref": "R02-PL04-OBJ2",
+          "actual_label_or_observed_key": "제공 레슨 분야",
+          "meaning": "제공 레슨 분야",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "service_selection",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed": "현재 서비스·카테고리 선택·서비스 선택·저장하기",
+            "cardinality": "복수 분야 가능 여부와 정확한 상한은 미시험"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/15",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-17",
+          "object_ref": "R02-PL04-OBJ2",
+          "actual_label_or_observed_key": "분야별 서비스 소개",
+          "meaning": "분야별 서비스 소개",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "long_text",
+          "required": true,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "placeholder_min_chars": 50,
+            "placeholder_max_chars": 10000,
+            "html_maxlength": null
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/16",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-18",
+          "object_ref": "R02-PL04-OBJ3",
+          "actual_label_or_observed_key": "커리큘럼 기본정보",
+          "meaning": "커리큘럼 기본정보",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "text_fields",
+          "required": true,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "fields": [
+              "제목",
+              "수강목적",
+              "수강생 수준",
+              "레슨 장소",
+              "기간/횟수"
+            ],
+            "each_max_chars": 20
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/17",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-19",
+          "object_ref": "R02-PL04-OBJ3",
+          "actual_label_or_observed_key": "커리큘럼 모집 형태",
+          "meaning": "커리큘럼 모집 형태",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "enum",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "values": [
+              "개인레슨",
+              "소그룹(2~4명)",
+              "대그룹(5명 이상)"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/18",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-20",
+          "object_ref": "R02-PL04-OBJ4",
+          "actual_label_or_observed_key": "1회당 수업시간",
+          "meaning": "1회당 수업시간",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "enum_minutes",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "values": [
+              15,
+              30,
+              45,
+              60,
+              90,
+              120,
+              150,
+              180,
+              240,
+              300
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/19",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-21",
+          "object_ref": "R02-PL04-OBJ4",
+          "actual_label_or_observed_key": "1회당 레슨비용",
+          "meaning": "1회당 레슨비용",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "krw",
+          "required": true,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "input_maxlength_attribute": 10,
+            "amount_range": "미확인",
+            "derived_display": "시간당 환산 금액"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/20",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-22",
+          "object_ref": "R02-PL04-OBJ3",
+          "actual_label_or_observed_key": "커리큘럼 레슨 설명",
+          "meaning": "커리큘럼 레슨 설명",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "long_text",
+          "required": true,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "displayed_max_chars": 10000,
+            "html_maxlength": 11000
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/21",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-23",
+          "object_ref": "R02-PL04-OBJ3",
+          "actual_label_or_observed_key": "레슨 계획 단계",
+          "meaning": "레슨 계획 단계",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "repeated_step",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed_step_count": 3,
+            "step_title_max_chars": 50,
+            "step_description_max_chars": 1000,
+            "max_count": "미확인"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/22",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-24",
+          "object_ref": "R02-PL04-OBJ4",
+          "actual_label_or_observed_key": "레슨 비용의 커리큘럼별 시간·가격 묶음",
+          "meaning": "레슨 비용의 커리큘럼별 시간·가격 묶음",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "repeated_price",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed_controls": [
+              "수정",
+              "삭제",
+              "새 커리큘럼 추가",
+              "시간·비용 행 추가/제거 아이콘"
+            ],
+            "guidance": "같은 커리큘럼도 1회 수업시간이 다르면 비용 추가 입력"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/23",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-25",
+          "object_ref": "R02-PL04-OBJ4",
+          "actual_label_or_observed_key": "레슨 비용 참고 사항",
+          "meaning": "레슨 비용 참고 사항",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "long_text",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed": "참고 사항과 수정 버튼",
+            "length_limit": "미확인"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/24",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-26",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "웹사이트·외부 링크",
+          "meaning": "웹사이트·외부 링크",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "urls",
+          "required": false,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "field_count": 5,
+            "each_max_chars": 200,
+            "placeholders": [
+              "웹사이트",
+              "Facebook",
+              "네이버 블로그",
+              "Instagram",
+              "기타 URL"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/25",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-27",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "리뷰 요청 주소",
+          "meaning": "리뷰 요청 주소",
+          "direction": [
+            "visible"
+          ],
+          "observed_type_or_format": "generated_link",
+          "required": "unknown",
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed": "의뢰인에게 주소를 보내 리뷰 받기 안내",
+            "share_action": "미실행"
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/26",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
+        },
+        {
+          "field_id": "R02-PL04-CONF-28",
+          "object_ref": "R02-PL04-OBJ6",
+          "actual_label_or_observed_key": "FAQ",
+          "meaning": "FAQ",
+          "direction": [
+            "input",
+            "visible"
+          ],
+          "observed_type_or_format": "fixed_question_answers",
+          "required": false,
+          "required_scope": "현재 편집 양식의 속성·표시이며 최초 가입 전체 필수 여부와 다름",
+          "observed_constraints": {
+            "observed_question_count": 16,
+            "question_topics": [
+              "장단점",
+              "경력 설명",
+              "가장 큰 성취",
+              "성격",
+              "가르친 학생 유형",
+              "인상 깊은 수강생",
+              "보람을 느끼는 학생",
+              "레슨 경력 기간",
+              "수업 전 준비",
+              "수강생에게 바라는 점",
+              "비용 산정",
+              "카드 결제",
+              "레슨 장소",
+              "온라인 수업 방식",
+              "자격 증빙 확인",
+              "수강 증빙 발급"
+            ],
+            "opened_answer": "장단점",
+            "opened_answer_min_chars_guidance": 15,
+            "opened_answer_max_chars": 1000,
+            "other_answer_limits": "나머지 답변은 편집을 열지 않아 미확인",
+            "actions": [
+              "항목별 수정",
+              "저장",
+              "삭제"
+            ]
+          },
+          "visibility": "실제 공개 범위·반영은 사용자 회상 또는 개별 설정 범위에 한함",
+          "editable": "observed_control",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/fields/27",
+          "persistence_need_candidate": "정보 모델 검토용. 내부 DB·제품 지원 확정 아님"
         }
       ],
-      "relations": [],
-      "states": [],
-      "constraints": [],
+      "relations": [
+        {
+          "from_object_ref": "R02-PL04-OBJ1",
+          "to_object_ref": "R02-PL04-OBJ2",
+          "meaning": "프로필에서 제공 분야·소개 관리",
+          "cardinality": "화면상 반복 목록; 정확한 상한은 상세 필드 참조",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "from_object_ref": "R02-PL04-OBJ1",
+          "to_object_ref": "R02-PL04-OBJ5",
+          "meaning": "프로필의 미디어 목록",
+          "cardinality": "화면상 반복 목록; 정확한 상한은 상세 필드 참조",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "from_object_ref": "R02-PL04-OBJ1",
+          "to_object_ref": "R02-PL04-OBJ6",
+          "meaning": "프로필의 FAQ 목록",
+          "cardinality": "화면상 반복 목록; 정확한 상한은 상세 필드 참조",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "from_object_ref": "R02-PL04-OBJ1",
+          "to_object_ref": "R02-PL04-OBJ7",
+          "meaning": "프로필의 분류별 이력 목록",
+          "cardinality": "화면상 반복 목록; 정확한 상한은 상세 필드 참조",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "from_object_ref": "R02-PL04-OBJ2",
+          "to_object_ref": "R02-PL04-OBJ3",
+          "meaning": "분야 선택에 속한 커리큘럼 목록",
+          "cardinality": "1:N 관찰; 상한 미확인",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "from_object_ref": "R02-PL04-OBJ3",
+          "to_object_ref": "R02-PL04-OBJ4",
+          "meaning": "같은 커리큘럼의 시간별 1회 비용",
+          "cardinality": "1:N 안내·추가 UI 관찰; 실제 저장 미시험",
+          "evidence_refs": [
+            "R02-EV-PP-SCREEN"
+          ]
+        }
+      ],
+      "states": [
+        {
+          "name": "등록·수정 후 즉시 공개",
+          "evidence_type": "user_recollection",
+          "evidence_refs": [
+            "R02-EV-PP-USER"
+          ],
+          "limitation": "시스템의 공식 상태명 아님. 사전 심사 없음의 일반 보장 또는 현재 전이 실험 아님"
+        }
+      ],
+      "constraints": [
+        {
+          "finding": "약관 제22조는 무단 전자적·자동화 정보 수집과 계정의 제3자 양도·판매·공유를 금지한다. 등록 대행이나 자동 입력을 명시적으로 허용하는 근거는 확보하지 못했다.",
+          "evidence_refs": [
+            "R02-EV-PP-TERMS"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/0"
+        },
+        {
+          "finding": "약관 제5~7조는 회원 유형에 따라 실명확인·본인인증을 요청할 수 있고 회원정보 변경 시 갱신할 의무를 설명한다.",
+          "evidence_refs": [
+            "R02-EV-PP-TERMS"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/1"
+        },
+        {
+          "finding": "공식 FAQ는 휴대폰 본인인증이 어려운 경우 운영팀의 수동 확인 대안을 안내한다.",
+          "evidence_refs": [
+            "R02-EV-PP-ID"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/2"
+        },
+        {
+          "finding": "안전이용정책은 전문가의 직접 동의를 전제로 일부 인적 정보 공개와 의뢰인 요청 시 학력·경력 자료를 확인시킬 의무를 설명한다.",
+          "evidence_refs": [
+            "R02-EV-PP-SAFETY"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/3"
+        },
+        {
+          "finding": "공식 이용안내는 등록 분야의 의뢰 수신, 제안 발송, 작업 완료·리뷰의 흐름을 설명한다. 요청 열람은 무료이며 제안 발송에 프람을 사용한다.",
+          "evidence_refs": [
+            "R02-EV-PP-FLOW",
+            "R02-EV-PP-TERMS"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/4"
+        },
+        {
+          "finding": "공식 알림 FAQ는 지역 기반 알림(최대 25km), 온라인 가능 조건에서 지역과 무관한 알림, 분야별 대시보드 요청 표시를 설명한다.",
+          "evidence_refs": [
+            "R02-EV-PP-ALERT"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/5"
+        },
+        {
+          "finding": "공식 FAQ는 서비스 분야별 제안서 템플릿 저장과 작성 시 불러오기·수정을 지원한다고 설명한다. 설정의 템플릿 목록·추가 링크도 관찰했다.",
+          "evidence_refs": [
+            "R02-EV-PP-TEMPLATE",
+            "R02-EV-PP-SCREEN"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/6"
+        },
+        {
+          "finding": "확인한 약관·FAQ에서 모든 프로필에 적용되는 사전 심사 기간이나 즉시 공개 보장 규정을 확보하지 못했다.",
+          "evidence_refs": [
+            "R02-EV-PP-TERMS",
+            "R02-EV-PP-FLOW"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/output/policies/7"
+        }
+      ],
       "auth_permission": [
         {
           "status": "unknown",
-          "finding": "안전이용정책은 전문가의 직접 동의를 설명. 등록 대행 허용은 미확인",
+          "finding": "사용자 요청의 개별 읽기 전용 화면 관찰. 운영사의 대행·자동 등록 허용은 확보하지 못함. 약관22조 무단 자동 수집·계정 공유 금지 확인",
           "evidence_refs": [
-            "R02-EV-ADD-PL04"
+            "R02-EV-PP-TERMS",
+            "R02-EV-PP-SAFETY",
+            "R02-EV-PP-USER"
           ],
-          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+          "follow_up": "실제 제품 실행에 앞서 계정 접근·수집·입력·등록·수정 각각의 허용 범위를 운영사에 확인"
         }
       ],
       "story_candidates": [
@@ -4348,25 +5585,50 @@
         "R02-US-012",
         "R02-US-016",
         "R02-US-018",
-        "R02-US-020"
+        "R02-US-020",
+        "R02-US-033",
+        "R02-US-034"
       ],
       "unknowns": [
-        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
-        "수정·갱신·반려 대응별 절차와 완료 근거",
-        "외부 유료 대행과 자동화 허용 범위",
-        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+        "최초 가입의 전체 필수값·본인인증 시점·증빙 업로드 조건",
+        "전문가 프로필 숨김·삭제, 분야 제거의 실제 결과 및 재개·재심사·갱신 절차",
+        "등록·수정 즉시 공개의 일반 정책 보장과 시스템 상태 전이: 실제 저장 실험 없음",
+        "자동저장·이탈 복원·중복 처리·저장 실패 대응",
+        "주소 편집 선택지·이동 반경 조건·전체 주소 공개 세부 설정",
+        "고등학교 입력 상세·경력 항목 필드 상세(현재 10개 상한 안내 때문에 추가 화면 진입 불가)",
+        "프로필 사진 크기·형식 제한, 전체 미디어 형식 목록",
+        "커리큘럼 개수·단계 수·분야 개수 상한과 가격 최소·최대·서버 검증",
+        "FAQ 나머지 15개 답변 분량 제한; 커리큘럼 설명 10000 안내와 HTML11000 차이",
+        "운영사의 대행·자동화 업무별 허용 범위",
+        "사용자 회상 시간의 재현성 및 제품으로 절감 가능한 실제 시간"
       ],
       "decision_requests": [
-        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+        "프로필·분야·커리큘럼·가격 옵션의 관리 단위와 범위는 R01 검토",
+        "운영사 업무별 허용 확인 전 대행·자동화 지원 확정 금지"
       ],
       "procedure_findings": [
         {
-          "finding": "외국어·스포츠/댄스·음악 등 분야 선택 → 시작하기. 이후 실제 필드와 저장·공개 결과는 로그인 없이 미확인",
+          "finding": "사용자 요청에 따른 기존 세션 개별 관찰로 최초 공개 진입 조사 보완. 원래 자료는 과거 공개 접근 범위로 보존",
           "evidence_refs": [
-            "R02-EV-ADD-PL04"
+            "R02-EV-PP-SCREEN"
+          ]
+        },
+        {
+          "finding": "초기 소개글 변환 각 약10분·이후 수정 드묾. 자동화로 절감되는 반복 고통의 크기는 별도 실증 필요",
+          "evidence_refs": [
+            "R02-EV-PP-USER"
+          ]
+        },
+        {
+          "finding": "기존 제안 문구는 이름만 변경. 공식 템플릿 대안 존재; 견적·상담은 TASK 제외 범위",
+          "evidence_refs": [
+            "R02-EV-PP-USER",
+            "R02-EV-PP-SHOT",
+            "R02-EV-PP-TEMPLATE"
           ]
         }
-      ]
+      ],
+      "user_confirmation_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json"
     },
     {
       "platform_id": "PL05",
@@ -5161,6 +6423,87 @@
       "type": "user_screenshots_statements_and_readonly_browser",
       "observed_at": "2026-11-26",
       "limitation": "오프라인 클래스 기준. 로그인 계정별 화면 관찰 한정"
+    },
+    {
+      "evidence_id": "R02-EV-PP-SCREEN",
+      "source": "https://prompie.com/partners/profile/me/",
+      "location": "기본 정보·위치 및 이동·포트폴리오·소개·이력·레슨 비용·제공 레슨 분야·레슨 소개·링크 및 리뷰·FAQ",
+      "type": "readonly_browser",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "사용자가 요청한 기존 로그인 세션의 개별 화면 관찰. 최초 가입 전체 흐름은 미관찰. 개인 값·고객 기록은 보존하지 않음"
+    },
+    {
+      "evidence_id": "R02-EV-PP-USER",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json",
+      "location": "현재 대화의 프람피 순차 문답",
+      "type": "user_recollection",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "단일 사용자의 과거 경험·시간 회상. 실측·모집단 일반화 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-SHOT",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json",
+      "location": "16:27:56 대화 화면",
+      "type": "user_provided_screenshot",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "인사·상담 안내·경험 질문 문구 재사용 예시. 고객 이름·대화 원문·이미지는 공개 저장소에 복사하지 않음. 구조화 제안서 발송 화면이라는 증거는 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-TERMS",
+      "source": "https://athenaslab.notion.site/db941e6390c642a7bbf82c35e4b690b0",
+      "location": "현재 유효 표시; 제5~7·11·22조",
+      "type": "official_document",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "공식 문서의 설명 범위이며 실제 저장·인증·발송 시험 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-SAFETY",
+      "source": "https://prompie.com/safety/",
+      "location": "신뢰도 향상을 위한 공개 사항·전문가 의무",
+      "type": "official_document",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "공식 문서의 설명 범위이며 실제 저장·인증·발송 시험 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-FLOW",
+      "source": "https://athenaslab.notion.site/55af21b8e0d943fc8d4d1686627ed247",
+      "location": "전문가: 프람피는 어떻게 이용하나요?",
+      "type": "official_document",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "공식 문서의 설명 범위이며 실제 저장·인증·발송 시험 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-ID",
+      "source": "https://athenaslab.notion.site/e46c70d0729d425aafb477dc9c3594b5",
+      "location": "다른 본인인증 방법은 없나요?",
+      "type": "official_document",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "공식 문서의 설명 범위이며 실제 저장·인증·발송 시험 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-ALERT",
+      "source": "https://athenaslab.notion.site/cad51577293448509ef10146eb3df055",
+      "location": "의뢰 알림은 어떤 기준으로 오는 건가요?",
+      "type": "official_document",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "공식 문서의 설명 범위이며 실제 저장·인증·발송 시험 아님"
+    },
+    {
+      "evidence_id": "R02-EV-PP-TEMPLATE",
+      "source": "https://athenaslab.notion.site/70c3075cdd2d4e18b90f060550393bf2",
+      "location": "제안서는 매번 새로 작성해야하나요?; 설정의 제안서 템플릿 목록 화면도 관찰",
+      "type": "official_document",
+      "observed_at": "2026-11-26",
+      "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json#/evidence",
+      "limitation": "공식 문서의 설명 범위이며 실제 저장·인증·발송 시험 아님"
     }
   ],
   "cross_links": [
@@ -5427,6 +6770,116 @@
         "R02-EV-KMONG-USER-20261126"
       ],
       "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    },
+    {
+      "story_ref": "R02-US-033",
+      "platform_ref": "PL04",
+      "operation_refs": [
+        "R02-PL04-READ",
+        "R02-PL04-UPDATE"
+      ],
+      "field_refs": [
+        "R02-PL04-CONF-16",
+        "R02-PL04-CONF-17",
+        "R02-PL04-CONF-18"
+      ],
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "note": "화면 구조에서 도출한 후보이며 제품 실행 권한·범위 채택 아님"
+    },
+    {
+      "story_ref": "R02-US-034",
+      "platform_ref": "PL04",
+      "operation_refs": [
+        "R02-PL04-READ",
+        "R02-PL04-UPDATE"
+      ],
+      "field_refs": [
+        "R02-PL04-CONF-20",
+        "R02-PL04-CONF-21",
+        "R02-PL04-CONF-24"
+      ],
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "note": "화면 구조에서 도출한 후보이며 제품 실행 권한·범위 채택 아님"
+    },
+    {
+      "story_ref": "R02-US-001",
+      "platform_ref": "PL04",
+      "operation_refs": [
+        "R02-PL04-CREATE"
+      ],
+      "field_refs": [
+        "R02-PL04-CONF-08",
+        "R02-PL04-CONF-12",
+        "R02-PL04-CONF-17"
+      ],
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "note": "관찰된 준비·관리 구조와 연결; 실제 실행·절감 효과는 미시험"
+    },
+    {
+      "story_ref": "R02-US-016",
+      "platform_ref": "PL04",
+      "operation_refs": [
+        "R02-PL04-READ"
+      ],
+      "field_refs": [
+        "R02-PL04-CONF-01",
+        "R02-PL04-CONF-02",
+        "R02-PL04-CONF-03",
+        "R02-PL04-CONF-04",
+        "R02-PL04-CONF-05",
+        "R02-PL04-CONF-06",
+        "R02-PL04-CONF-07",
+        "R02-PL04-CONF-08",
+        "R02-PL04-CONF-09",
+        "R02-PL04-CONF-10",
+        "R02-PL04-CONF-11",
+        "R02-PL04-CONF-12",
+        "R02-PL04-CONF-13",
+        "R02-PL04-CONF-14",
+        "R02-PL04-CONF-15",
+        "R02-PL04-CONF-16",
+        "R02-PL04-CONF-17",
+        "R02-PL04-CONF-18",
+        "R02-PL04-CONF-19",
+        "R02-PL04-CONF-20",
+        "R02-PL04-CONF-21",
+        "R02-PL04-CONF-22",
+        "R02-PL04-CONF-23",
+        "R02-PL04-CONF-24",
+        "R02-PL04-CONF-25",
+        "R02-PL04-CONF-26",
+        "R02-PL04-CONF-27",
+        "R02-PL04-CONF-28"
+      ],
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "note": "관찰된 준비·관리 구조와 연결; 실제 실행·절감 효과는 미시험"
+    },
+    {
+      "story_ref": "R02-US-008",
+      "platform_ref": "PL04",
+      "operation_refs": [
+        "R02-PL04-UPDATE"
+      ],
+      "field_refs": [
+        "R02-PL04-CONF-22"
+      ],
+      "evidence_refs": [
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER"
+      ],
+      "note": "관찰된 준비·관리 구조와 연결; 실제 실행·절감 효과는 미시험"
     }
   ],
   "uncertainties": [
@@ -5434,7 +6887,8 @@
     "7개 플랫폼 조사와 양방향 연결 미수행",
     "취소·재개는 범위 미결정 후보",
     "시스템 이벤트의 상세 상태·입출력·스토리 연결은 플랫폼 조사 후 보완",
-    "공식 문서의 필드 목록과 실제 계정 편집 화면의 필수 입력·최신 제약은 다를 수 있음"
+    "공식 문서의 필드 목록과 실제 계정 편집 화면의 필수 입력·최신 제약은 다를 수 있음",
+    "프람피: 화면 관찰·사용자 경험·공식 문서 보완. 자동화 허용·저장 결과 실증 및 상세 미확인은 prompie-user-confirmation.json 참조"
   ],
   "decision_requests": [
     "취소·중단 후 재개의 필요성과 범위"
@@ -5444,7 +6898,10 @@
       "criterion": "A1",
       "verdict": "inconclusive",
       "evidence_refs": [
-        "R02-EV-KMONG-USER-20261126"
+        "R02-EV-KMONG-USER-20261126",
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER",
+        "R02-EV-PP-TERMS"
       ],
       "reason": "전체 피처 연결은 있으나 전 스토리 세부 분기·완전성 검토 잔여"
     },
@@ -5452,31 +6909,43 @@
       "criterion": "A2",
       "verdict": "inconclusive",
       "evidence_refs": [
-        "R02-EV-KMONG-USER-20261126"
+        "R02-EV-KMONG-USER-20261126",
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER",
+        "R02-EV-PP-TERMS"
       ],
-      "reason": "7개 플랫폼 중 크몽 상세 연결 보완. 나머지 플랫폼 필드·업무 미확인 잔여"
+      "reason": "크몽·탈잉·프람피 상세 연결 보완. 숨고 기존 부분 조사와 나머지 3개 플랫폼의 세부 업무·필드 미확인 잔여"
     },
     {
       "criterion": "A3",
       "verdict": "inconclusive",
       "evidence_refs": [
-        "R02-EV-KMONG-USER-20261126"
+        "R02-EV-KMONG-USER-20261126",
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER",
+        "R02-EV-PP-TERMS"
       ],
-      "reason": "크몽 새 스토리 6개 연결. 나머지 플랫폼 양방향 연결 잔여"
+      "reason": "프람피 관리 단위·시간/가격 후보 2개와 필드·업무 연결 추가. 나머지 플랫폼 및 전체 스토리의 양방향 연결 잔여"
     },
     {
       "criterion": "A4",
       "verdict": "inconclusive",
       "evidence_refs": [
-        "R02-EV-KMONG-USER-20261126"
+        "R02-EV-KMONG-USER-20261126",
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER",
+        "R02-EV-PP-TERMS"
       ],
-      "reason": "크몽 사용자 해석과 화면 조건을 상세서에서 구분. 일부 복합 근거의 항목별 세분화 잔여"
+      "reason": "프람피는 항목별 화면·회상·공식 정책·추론·미확인을 구분. 전체 조사 원본의 일관성 검토는 잔여"
     },
     {
       "criterion": "A5",
       "verdict": "inconclusive",
       "evidence_refs": [
-        "R02-EV-KMONG-USER-20261126"
+        "R02-EV-KMONG-USER-20261126",
+        "R02-EV-PP-SCREEN",
+        "R02-EV-PP-USER",
+        "R02-EV-PP-TERMS"
       ],
       "reason": "JSON·ID 참조 검사 수행. 전체 계약 수용 및 R01 검토 대기"
     }

@@ -37,7 +37,7 @@
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-055.json)
 
-진행 중 · 크몽 상세 데이터·업무·스토리 연결 보완, 나머지 플랫폼 조사 계속
+진행 중 · 크몽·탈잉·프람피 상세 조사 연결 보완, 숨고 부분 조사 확보 및 나머지 플랫폼 후속 조사 필요
 
 검증과 근거
 
@@ -47,6 +47,7 @@
 - A4 · inconclusive
 - A5 · inconclusive
 - [근거](../artifacts/planning/lesson-registration-20261126/R02/independent-result.json)
+- [근거](../artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json)
 
 남은 불확실성과 결정 요청
 
@@ -56,6 +57,9 @@
 - 맞춤 옵션·가능일·요청사항 최대 개수
 - 삭제·판매 중지·재개 및 수정 심사 중 기존 글 노출의 실제 결과
 - 대행·자동화 운영사 허용 범위
+- 프람피 신규 가입 전체 필수 조건·실제 저장·삭제·갱신 결과
+- 프람피 설명 분량 안내와 HTML 속성 불일치
+- 프람피 운영사 대행·자동화 업무별 허용
 - 심사 취소·재개 지원 범위
 - 대행 허용 확인 방법
 
