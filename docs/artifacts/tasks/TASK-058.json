@@ -53,7 +53,8 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -125,6 +126,9 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
     }
   ],
   "result": {
@@ -229,6 +233,15 @@
           "E058-10",
           "E058-11"
         ]
+      },
+      {
+        "id": "C058-12",
+        "text": "V1.3 기준 커밋의 144개 행동을 12개 카테고리와 하위 묶음으로 재배치한 수동 검토 프로젝션 추가. 정본 SVO·범위 보존, 정적 목록 대조 누락/중복/잘못된 ID 0. 별도 생성기 및 분류 정본 미도입.",
+        "status": "확인",
+        "evidence_ids": [
+          "E058-14",
+          "E058-09"
+        ]
       }
     ],
     "evidence": [
@@ -314,6 +327,11 @@
         "id": "E058-13",
         "label": "사람 검토용 정책 위험 기록",
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
+      },
+      {
+        "id": "E058-14",
+        "label": "144개 SVO 카테고리별 공동 검토 프로젝션",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
       }
     ],
     "verification": [
@@ -407,6 +425,14 @@
           "E058-10",
           "E058-11"
         ]
+      },
+      {
+        "criterion": "카테고리 검토 문서의 정본 144개 행동 일대일 대응 및 기본110/조건부29/제외5 수량 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-14",
+          "E058-09"
+        ]
       }
     ],
     "uncertainties": [
@@ -414,7 +440,8 @@
       "R02 최신 프람피·뮬 사용자 화면/회상·공식 정책 근거 반영, R02 추가 3개 원본 행동 대응. 실제 저장/갱신/공개·법률 판단 미확인.",
       "기존 141개 후보 보존. IS-143 기본 추천 및 IS-144/145 별도 조건부. 사용자 직접 수행 결과 기록의 가치/범위/보호 조건 미승인.",
       "최신 필드 인덱스 363개 출처 레코드(중복 포함), 의미·제약/관계 전수 정규화 미실시.",
-      "7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료."
+      "7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료.",
+      "최신 main b08650b의 R02 힙합플레이야·힙합LE 추가 조사 및 저녁 점검은 현재 V1.3 통합 정본에 미반영. 이번 작업은 기존 정본의 공동 검토용 프로젝션 작성에 한정."
     ],
     "decision_requests": [
       "144개 SVO·44개 업무 범위와 신규 직접 결과 기록 후보·정책 위험 대응을 검토/승인. 7개 설계 대상 확정 유지.",
