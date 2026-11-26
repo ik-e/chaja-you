@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "design_review_inputs",
+  "id": "STEP2-INSTRUCTOR-FEEDBACK-DESIGN-INPUTS-20261126",
+  "date": "2026-11-26",
+  "status": "active_design_inputs_implementation_deferred",
+  "owner": "R01",
+  "authority_ref": "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+  "active_task": "TASK-058",
+  "phase_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
+  "basis": [
+    "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "product/lesson-registration/fixtures/shared/replay.json",
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json"
+  ],
+  "goal": "제출용 1차 개정과 실제 사용자 스토리→논리 DB→물리 DB→API·프로토콜 설계를 분리하고 피드백별 완료 조건을 연결한다.",
+  "decision": {
+    "postgresql": "R01 방향: 최종 제품/통합 DB의 목표 PostgreSQL. SQLite는 기존 mock 구현 및 증거 보존. 현재 코드/lock/pins/cutover 미변경.",
+    "candidates": [
+      "동일 origin 서버 검증 앱 세션(서비스 자체 인증), CSRF/WS owner 검증; 최종 로그인 방식 별도",
+      "작업 상태 단일 저장 정본(현행 최초 등록 모델에서는 jobs.state, RegistrationView.job_state 파생), 등록·수정·갱신 cardinality 확정 후 선택",
+      "I2 30초 전체 호출 deadline 및 자동 전송 재시도 0회 초기 시험 후보, 수치 확정 전 D05 공동 확인",
+      "합성 평가 자료는 평가 종료 후 30일 이내 삭제 후보; 실사용 보존·삭제·backup 정책 별도 검증"
+    ]
+  },
+  "items": [
+    {
+      "id": "A1",
+      "stage": "API 후속 설계 입력",
+      "owner": "R01",
+      "support": "R02/R03 후속 협의",
+      "task": "TASK-058 I6",
+      "action": "승인된 스토리별 actor/input/output/상태/오류/권한을 연결. 기존 H1~H9 예시 및 V4.1 차이 기록; 새 등록·수정·갱신 객체와 계약은 후속 확정.",
+      "done": "상위 스토리→계약 응답 예시·DB 상태 대응, schema/profile 및 semantic 검사 계획. 구현 전에는 not_run."
+    },
+    {
+      "id": "A2",
+      "stage": "사용자 스토리·논리 DB 및 후속 인증",
+      "owner": "R01",
+      "task": "TASK-058 I1/I2/I4/I6",
+      "action": "서비스 진입·인증·권한/소유자·세션 종료·다른 owner 접근 거절의 스토리와 데이터 관계 검토. 로그인 방식·CSRF/WS 같은 owner 후속 후보.",
+      "done": "서비스 계정 vs 외부 계정 vs 등록 owner 분리, 서버 검증 identity, 401/404/403·목록/상세/연결/WS 시험 입력 정의."
+    },
+    {
+      "id": "A3",
+      "stage": "상태·오류 설계 및 후속 구현",
+      "owner": "R01",
+      "support": "R02/R03 D05 재개 후 협의",
+      "task": "TASK-058 I4/I6",
+      "action": "준비 차단 초안/요청 실패/늦은 결과/기존 draft 보존/사용자 재요청 스토리 및 상태·revision 관계. 30초/재시도 0회는 후보, 기존 D05 probe 1/5 통과 참고.",
+      "done": "시간 상한, retry budget, error 분류, stale CAS·nested 답변 보존 및 DB 원자성 시험 계획; 실제 모델 비용 별도 승인."
+    },
+    {
+      "id": "A4",
+      "stage": "API 후속",
+      "owner": "R01",
+      "task": "TASK-058 I6",
+      "action": "기존 V4.1/replay pin 유지, 변경 영향 및 versioned contract/시험 commit 관리 방식 정의. 필요 시 OpenAPI 문서화.",
+      "done": "DB/스토리/계약 버전 관계 및 변경 이력, 실제 시험 커밋 연결 기준."
+    },
+    {
+      "id": "D1",
+      "stage": "논리 DB",
+      "owner": "R01",
+      "task": "TASK-058 I4/I5/I6",
+      "action": "owner/actor/계정/원본/외부 객체/작업/증거 관계와 FK/앱 권한 분리, cross-owner 차단 및 업무별 영향.",
+      "done": "스토리→관계/권한·테스트 표; 없는/타 owner ID 목록·상세·연결 및 효과 0 검증 계획."
+    },
+    {
+      "id": "D2",
+      "stage": "PostgreSQL 물리 DB 후속",
+      "owner": "R01",
+      "support": "R03 기존 STORE 담당 검토(재개 후)",
+      "task": "TASK-058 I4/I6",
+      "action": "PostgreSQL 목표 하에 확정 논리 DB를 물리 설계, 기존 SQLite와 타입/제약/트랜잭션/이관 차이 및 공수; 실제 migration은 후속 승인/재개.",
+      "done": "설계에 초기·기존 합성 DB 이관 순서, FK 위반 거부, idempotency/lease/경쟁·실패 rollback, 실제 실행 결과 남길 기준."
+    },
+    {
+      "id": "D3",
+      "stage": "논리 DB",
+      "owner": "R01",
+      "task": "TASK-058 I4/I5/I6",
+      "action": "서비스 job lifecycle·외부 object native status·goal verdict 분리, 단일 정본·state transition·projection; 하나의 객체에 복수 시점 업무를 표현 가능한지 검토.",
+      "done": "스토리별 상태와 전이·authority·파생값·제약·원자 갱신·불일치/경쟁 시험 조건; 이전 등록 0..1 job 구조 자동 채택 금지."
+    },
+    {
+      "id": "D4",
+      "stage": "논리 DB",
+      "owner": "R01",
+      "task": "TASK-058 I4/I5/I6",
+      "action": "업무 ID/operation/effect/observation/evidence/result 연결, unknown/late readback 및 원본·첨부·증거·외부 인증 데이터 수명/권한/보존/삭제·backup·tombstone 설계.",
+      "done": "confirmed/unknown 각각 추적, 비밀 배제·보존/삭제 정책 후보와 재검증, 삭제/재시도 사용자 스토리 R01 판단."
+    }
+  ],
+  "execution_boundary": "현재 활성 TASK 055~058만 설계·공개 근거 조사. TASK-048~054 보류 유지; R03 신규 배정 없음. 팀원 독립 조사 범위/형식/소유권 유지; 새 인증 방식·timeout·보존기간·상태 컬럼은 확정 아님. API 상세 및 물리 구현 재개는 범위·DB·영향 검토 후 별도 결정. 실서비스/실계정/유료 호출 금지.",
+  "next": "TASK-058은 독립 조사 비교 후 사용자 스토리·범위→DB에 반영하고 API 입력·검증 계획으로 전달. PostgreSQL 환경 구성·migration/owner/동시성·계약 검증은 재개/배정 시 기존 책임자와 조율. 11/27에 설계/잔여 일정 검토 후보; 12/8 목표 재평가. 모든 시험 결과 미실행."
+}

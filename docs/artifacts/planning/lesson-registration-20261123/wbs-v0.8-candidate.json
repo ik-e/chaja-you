@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "kind": "wbs_candidate",
+  "id": "WBS-LESSON-V0.8-CANDIDATE",
+  "status": "draft_unconfirmed",
+  "date": "2026-11-26",
+  "authority": "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+  "prior": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json",
+  "notes": [
+    "R05 estimate 7 days; R03 PLAN estimate 11 person-days; R02 handoff by 12/4 preserved. R02/R04 capacity and actual implementation pending. Dates not confirmed.",
+    "Dependencies describe integration prerequisites, not barriers to independent development.",
+    "Do not set task due/status from this candidate.",
+    "R03 reports only 9 working days 11/26~12/8. 12/4 vertical and 12/8 mock MVP are at risk; prioritize vertical slice and safety, never declare MVP complete on partial tests. Any scope/gate change needs explicit R01 decision.",
+    "R03 e29fb69 S0~S7 and 174/10/2 mock test counts reported; S8 pending at report. Initial 11 person-days is not remaining effort; new common lock enables S8. Revised residual effort and readiness needed. W10/W16/PREP maintenance remain unassigned.",
+    "11/25 R05 report: initial 7 working days retained, remaining 3–3.5 across both TASKs. R03 3 person-days reported, R04 initial 4+3 only, R02/R04 residual/availability pending. R05 actual browser/adapter integration and security fixes may change estimate. Do not infer percent completed or subtract from initial. All dates remain candidates.",
+    "R01 frozen-snapshot CI: remote 15/15, kmong 32/32 passed; original owner residual estimate 3–3.5 working days retained pending revised estimate, no automatic deduction of CI time.",
+    "11/25 R01 follow-up: R02 44 synthetic CI and actual model comparison owner-reported, R04 9/6 CI; R03 launcher main; 22-gate preflight/runner prepared but full cases not registered. R02/R04 residual not reported. R03 3 MD and R05 3–3.5 workdays retained as owner estimates. No automatic schedule or gate reduction.",
+    "11/25 latest R03 owns actual composition; R01 independently validates. R05 exact combination CI 30/37 with zero skips; earlier estimates 3 MD/3–3.5 workdays remain unconfirmed pending owner revisions. No deadline or gate reduction.",
+    "강사 피드백 대응 일정 후보. 기존 TASK 및 owner 변경 없음; 문서 책임·인수 검토·날짜 창은 팀 확인 전 제안. 12/8 크몽 우선 시연, 숨고는 후속 통합 및 전체 gate 유지. 11/13·11/20 교육 마감 보존.",
+    "11/26 현행 설계 TASK-055~058 우선, 048~054 보류. V0.7 일정·실적은 이력/재산정 입력, 기존 구현 재개·공수·공식 마감 변경 없음. PostgreSQL은 최종 목표, migration·환경·시험 미확정.",
+    "V1.2 본문 및 11/26 실제 진행 기준으로 제출용 재구성. R02 스토리 26/시스템 이벤트 14/근거 15, 7개 조사/상호 연결 미완료; R04/R05 원본 초기 양식. 실제 결과 증거와 미확인 상태 구분."
+  ],
+  "items": [
+    {
+      "id": "DES-055",
+      "task": "TASK-055",
+      "owner": "R02",
+      "work": "전체 사용자 스토리 및 7개 플랫폼 독립 조사",
+      "depends_on": [],
+      "target": "11/26 목표, 독립 결과·근거·미확인",
+      "observed": "26 stories/14 events/15 evidence; cross_links 0, A1~A5 inconclusive"
+    },
+    {
+      "id": "DES-056",
+      "task": "TASK-056",
+      "owner": "R04",
+      "work": "전체 사용자 스토리 및 7개 플랫폼 독립 조사",
+      "depends_on": [],
+      "target": "11/26 목표, 독립 결과·근거·미확인",
+      "observed": "template_only"
+    },
+    {
+      "id": "DES-057",
+      "task": "TASK-057",
+      "owner": "R05",
+      "work": "전체 사용자 스토리 및 7개 플랫폼 독립 조사",
+      "depends_on": [],
+      "target": "11/26 목표, 독립 결과·근거·미확인",
+      "observed": "template_only"
+    },
+    {
+      "id": "DES-058",
+      "task": "TASK-058",
+      "owner": "R01",
+      "work": "스토리/7개 비교 및 범위→논리 DB/ERD",
+      "depends_on": [
+        "DES-055",
+        "DES-056",
+        "DES-057"
+      ],
+      "target": "11/26 목표(근거 부족 시 미확정 구분), A1~D4 설계 입력 반영",
+      "observed": "통합 DB 원본 미작성"
+    },
+    {
+      "id": "PG-PLAN",
+      "owner": "R01",
+      "support": "R03 기존 담당 재개 후 협의",
+      "work": "PostgreSQL 물리 스키마·migration·환경·검증/공수 영향 검토",
+      "depends_on": [
+        "DES-058"
+      ],
+      "target": "11/27 검토 후보, 재개 및 일정 별도 결정"
+    },
+    {
+      "id": "API-NEXT",
+      "owner": "R01",
+      "work": "확정 DB/스토리 기반 API·인증·timeout·상태 계약 입력 및 후속 설계",
+      "depends_on": [
+        "DES-058"
+      ],
+      "target": "설계 이후, 일자/공수 미확정"
+    },
+    {
+      "id": "RESUME-PLAN",
+      "owner": "R01",
+      "work": "048~054 재개·의존성·실제 PostgreSQL 전환 및 전체 gate 재기준화 판단",
+      "depends_on": [
+        "PG-PLAN",
+        "API-NEXT"
+      ],
+      "target": "11/27 일정 재검토 후보, 구현은 승인 후"
+    },
+    {
+      "id": "C01",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "PD, lock, interfaces, common tests/baseline",
+      "depends_on": [],
+      "target": "R01 exact combination CI 30/37, product preflight; actual conformance, full gate registration and acceptance remain",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "P01",
+      "task": "TASK-049",
+      "owner": "R02",
+      "work": "Preparation/actual model",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "PR49/50 main; PR51/52 draft actual experiment report, quality/expense design and R03 H5/timeout/12/4 handoff pending",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "A01",
+      "task": "TASK-050",
+      "owner": "R03",
+      "work": "App/API/STORE/RESULT",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "R03 actual composition plan: WS owner, stable slot, approved asset/lease, STORE/permit/fence; 191 CI, earlier 3 MD",
+      "estimated_workdays": 11,
+      "estimate_ref": "https://github.com/ik-e/chaja-you/blob/e29fb6939f1ec49d9b4a89fbe2874bb6331498cf/product/lesson-registration/tests/modules/app/PLAN.md",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "U01",
+      "task": "TASK-051",
+      "owner": "R04",
+      "work": "UI and viewer",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "R04 366cea92 partial UI improvement 9 CI; actual H1~H9/Viewer module and fail-closed state; residual unknown",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "S01",
+      "task": "TASK-052",
+      "owner": "R04",
+      "work": "Soomgo adapter",
+      "depends_on": [
+        "C01"
+      ],
+      "target": "initial 3 MD; adapter/STORE bridge 6 CI, actual independent persisted state/unknown/BoundGateway correction; residual unknown",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "R00",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "Both PLAN and interfaces; runtime contract priority",
+      "depends_on": [],
+      "estimated_workdays": 0.5,
+      "target": "PLAN/initial boundary reported; detailed D01~04 conformance remains",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "K01",
+      "task": "TASK-054",
+      "owner": "R05",
+      "work": "Kmong independent mock/adapter",
+      "depends_on": [
+        "R00"
+      ],
+      "estimated_workdays": 2.5,
+      "target": "actual Runtime/adapter/CO combined 37/37 independent CI; actual R03 owner/slot/approved asset and D01~03 pending",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "R01",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "Runtime fake STORE and mock browser",
+      "depends_on": [
+        "R00"
+      ],
+      "estimated_workdays": 3,
+      "target": "latest Chromium/Viewer/Runtime 30/30 independent combination CI; actual App/WS integration and safety boundary pending",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "R02",
+      "task": "TASK-053",
+      "owner": "R05",
+      "work": "STORE connection and integration",
+      "depends_on": [
+        "R01",
+        "K01",
+        "A01"
+      ],
+      "estimated_workdays": 1,
+      "target": "earlier R05 combined remaining 3~3.5 days; latest 30/37 reproduced, revised estimate and actual composition pending; dates unconfirmed",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "I01",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "Progressive kmong integration",
+      "depends_on": [
+        "C01",
+        "P01",
+        "A01",
+        "U01",
+        "K01",
+        "R02"
+      ],
+      "target": "R03 actual App composition; first vertical supporting combined Runtime/adapter/CO 37/37; actual I2/UI/slot/asset boundaries pending; 12/4 candidate",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "I02",
+      "task": "TASK-048",
+      "owner": "R01",
+      "work": "Soomgo integration, regression and mock gate",
+      "depends_on": [
+        "I01",
+        "S01"
+      ],
+      "target": "12/8 target at risk; gate remains all 22 required tests, partial demo only if incomplete",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "DOC-05",
+      "owner": "R01",
+      "support": "R02 기술 대조, R03 상태 경계 검토",
+      "work": "DLV-05 단일 에이전트 상태 전이 설계서",
+      "depends_on": [
+        "P01"
+      ],
+      "window": [
+        "2026-11-26",
+        "2026-11-27"
+      ],
+      "done": "11/26 대표 정상/충돌/누락/모델 실패 흐름·AI/코드·종료 정리 및 현행 코드 대조; 11/27 R02/R03 검토, R01 문서/제출 링크·열람 확인. 실행 결과를 설계 승인으로 대체하지 않음",
+      "status": "11/25 초안 있음; 검토/제출 미확인",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "I-STUB",
+      "owner": "R03",
+      "support": "R04/R05; R01 인수 검토",
+      "work": "합성 provider로 HTTP/UI/저장/조회 접점 선행 통합",
+      "depends_on": [
+        "C01",
+        "A01",
+        "U01"
+      ],
+      "window": [
+        "2026-11-26",
+        "2026-11-30"
+      ],
+      "done": "합성 PREP/runtime 표기, H1~H9 요청/응답, revision 및 오류/owner/조회 확인; 실제 모델·런타임 통과로 계산하지 않음",
+      "status": "launcher 및 부분 CI 있음; 실제 UI 연결 미확인",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "P-HAND",
+      "owner": "R02",
+      "support": "R03 인수, R01 검토",
+      "work": "PREP 인계",
+      "depends_on": [
+        "P01"
+      ],
+      "window": [
+        "2026-11-30",
+        "2026-12-04"
+      ],
+      "done": "I2 입력(SourceView/Profile/ResolvedAnswer)과 출력(Preparation facts/values/provenance/issues/ready)·오류·timeout/revision, 실행법/고정 fixture/모델 비용·반례, 인수자가 재현 및 미확인 목록 수령. 12/3 사전 인수 확인, 12/4 최종 인계 목표",
+      "status": "PR51/52 draft, 잔여 미확인",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "DOC-06",
+      "owner": "R01",
+      "support": "R02 실험·결과, R03 인수 검토",
+      "work": "DLV-06 자기 성찰 로직 테스트 결과서",
+      "depends_on": [
+        "P01",
+        "DOC-05"
+      ],
+      "window": [
+        "2026-11-30",
+        "2026-12-04"
+      ],
+      "done": "현행 1회 생성/검증과 추가 보정 후보를 동일 합성 자료로 비교; 가격 충돌은 질문으로 종료, 원본 임의 변경 0; 실제 실행·비용·미실행을 구분하고 12/4 검토/링크 확인",
+      "status": "추가 자기성찰 시험 미실행; 보정 도입/비용 별도 승인",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "GATE-ALL",
+      "owner": "R01",
+      "support": "R02~R05 각 모듈 증빙, R03 조립",
+      "work": "동일 후보 22개 전체 제품 수용 시험",
+      "depends_on": [
+        "I01",
+        "I02"
+      ],
+      "window": [
+        "2026-12-04",
+        "2026-12-08"
+      ],
+      "done": "고정 commit/계약/fixture/environment에서 실제 모델(T5-08 별도 승인 실행), UI·저장·두 mock 플랫폼, 정상/오류/권한/독립 조회를 전부 시험. 22/22 pass만 제품 완료; 미실행/실패/부분 시연 별도",
+      "status": "preflight pass; full 0/22 not_run",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "DOC-07",
+      "owner": "R01",
+      "support": "R02/R03 기술 검토",
+      "work": "협업 아키텍처: 역할 분리·필요 시 AI 협업 후보 구현",
+      "depends_on": [
+        "I01",
+        "DOC-06"
+      ],
+      "window": [
+        "2026-12-09",
+        "2026-12-11"
+      ],
+      "done": "12/9 작업 분해·데이터 계약 및 적용 결정, 12/10 구현/동일 자료 비교 시험, 12/11 보완·검토/문서. 다중 모듈을 다중 AI로 과장 금지; 추가 모델 효과 별도 검증",
+      "status": "일정/추가 AI 도입 후보",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "DOC-08-09",
+      "owner": "R01",
+      "support": "R03/R04/R05 기존 owner 영역",
+      "work": "보안 가드레일 및 Auto-Healing",
+      "depends_on": [
+        "I01",
+        "GATE-ALL"
+      ],
+      "window": [
+        "2026-12-14",
+        "2026-12-18"
+      ],
+      "done": "12/14~15 권한·출처·오류 처리 구현/보완, 12/16~17 응답 유실·권한·이미지·중복/재조회 시험(DV-01/02/03, AT-03), 12/18 수정·재시험·문서. 외부 효과 재실행/자동 재개 금지 유지",
+      "status": "기존 안전 계약 유지; 전체 시험 미실행",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "DOC-10",
+      "owner": "R04",
+      "support": "R03 API, R05 viewer, R01 제출 검토",
+      "work": "대화형 웹 앱",
+      "depends_on": [
+        "I01",
+        "DOC-08-09"
+      ],
+      "window": [
+        "2026-12-21",
+        "2026-12-24"
+      ],
+      "done": "12/21~22 질문·정정·승인·상태 UI 연동/보완, 12/23 정상·예외·권한/접근성 시험, 12/24 수정·시연/링크 확인",
+      "status": "부분 UI 및 독립 시험; 실제 연동 미확인",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "DOC-11-12",
+      "owner": "R01",
+      "support": "R03/R04/R05 각 영역",
+      "work": "통합 테스트 및 배포 아키텍처",
+      "depends_on": [
+        "DOC-10",
+        "GATE-ALL"
+      ],
+      "window": [
+        "2026-12-28",
+        "2026-12-31"
+      ],
+      "done": "12/28~29 고정 후보 통합/배포 설계, 12/30 회귀·보안·재현 시험, 12/31 보완·재시험·문서/링크. 실제 배포와 설계 구분",
+      "status": "일정 후보",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    },
+    {
+      "id": "FINAL",
+      "owner": "R01",
+      "support": "전원",
+      "work": "최종 발표·소스·시연영상",
+      "depends_on": [
+        "DOC-11-12"
+      ],
+      "window": [
+        "2026-12-31",
+        "2027-01-04"
+      ],
+      "done": "검증된 범위로 발표·영상·재현 가능한 고정 코드 및 제출 링크 확인; 미검증은 표시",
+      "status": "목표 유지",
+      "schedule_status": "historical_or_review_candidate_not_active",
+      "prior_plan_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+    }
+  ],
+  "milestones": [
+    {
+      "date": "2026-11-13",
+      "description": "기획서/WBS 기존 교육 마감 (개정 별도)"
+    },
+    {
+      "date": "2026-11-20",
+      "description": "API/DB 기존 교육 마감"
+    },
+    {
+      "date": "2026-11-27",
+      "description": "DLV-05 상태 전이 설계"
+    },
+    {
+      "date": "2026-12-04",
+      "description": "DLV-06 결과서, PREP 인계, 크몽 통합 목표"
+    },
+    {
+      "date": "2026-12-08",
+      "description": "중간 시연: 크몽 우선 제안, 숨고 후속; 22 gate 별도"
+    },
+    {
+      "date": "2026-12-11",
+      "description": "협업 아키텍처: 역할 분리·필요 시 AI 협업 후보 구현"
+    },
+    {
+      "date": "2026-12-18",
+      "description": "보안 가드레일 및 Auto-Healing"
+    },
+    {
+      "date": "2026-12-24",
+      "description": "대화형 웹 앱"
+    },
+    {
+      "date": "2026-12-31",
+      "description": "통합 테스트 및 배포 아키텍처"
+    },
+    {
+      "date": "2027-01-04",
+      "description": "최종 발표·소스·시연영상"
+    }
+  ],
+  "remaining": "11/26 실제 설계와 PostgreSQL 영향·잔여 공수/가용성 확인 후 이전 V0.7 일정 재기준화. 교육 마감 11/13·11/20·11/27 및 이후 목표 유지; 제품 구현/시험·공식 제출 미완료.",
+  "owner_plan_review": {
+    "as_of": "2026-11-25",
+    "R03": {
+      "ref": "https://github.com/ik-e/chaja-you/blob/4a240eeffdcd3c4b24b71411506d96f41cc03e77/product/lesson-registration/tests/modules/app/PLAN.md",
+      "status": "191 CI; R03 actual App/WS/STORE/slot/asset composition plan reported; earlier 3 MD estimate not revised",
+      "estimated_person_days": 11,
+      "estimate_notes": "Initial 11 person-days; PLAN 3 remaining reported; integration defects may change, no gate reduction.",
+      "remaining_person_days": 3,
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+      "launcher": "https://github.com/ik-e/chaja-you/blob/31fe0c5de89b68bcdd388e6a9efa9557ef76cadd/product/lesson-registration/tests/modules/app/README.md"
+    },
+    "R05": {
+      "status": "c3fa0b19 remote 30/30 and a3718a90 kmong 37/37 exact combined tree independently reproduced, skip 0; actual App/D01~04 pending",
+      "estimated_person_days": 7,
+      "remaining_workdays_range": [
+        3,
+        3.5
+      ],
+      "remaining_breakdown": [
+        {
+          "work": "Viewer WebSocket",
+          "days": 1
+        },
+        {
+          "work": "Kmong adapter/runtime integration",
+          "days": 1
+        },
+        {
+          "work": "GitHub Chromium CI",
+          "days": 0.5
+        },
+        {
+          "work": "R03 coordination",
+          "min": 0.5,
+          "max": 1
+        }
+      ],
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+      "refs": [
+        "https://github.com/ik-e/chaja-you/blob/c3fa0b199d5b3a0975b8b5ae9a26d97ae69862e4/product/lesson-registration/tests/modules/remote/PLAN.md",
+        "https://github.com/ik-e/chaja-you/blob/a3718a90c5179b5f72927347cf700283aa588992/product/lesson-registration/tests/modules/kmong/PLAN.md"
+      ],
+      "estimate_notes": "Owner report, aggregate across TASK-053/054; not independently allocated, security corrections may change estimate; do not subtract or promise dates. R01 independently reproduced Chromium CI; do not deduct 0.5 automatically before owner revision. 11/25 WS/runtime and kmong combination independently reproduced; earlier breakdown is historical, revised residual pending; no automatic subtraction.",
+      "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45558575503",
+      "combination_ci": "https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594"
+    },
+    "R02": {
+      "status": "PR49/50 merged; PR51/52 draft, actual model 5x2 reported (both price-conflict error); 44 isolated CI tests reproduced; R01 review recorded, R02 experiment design/expense/remaining estimate pending",
+      "refs": [
+        "https://github.com/ik-e/chaja-you/pull/51",
+        "https://github.com/ik-e/chaja-you/pull/52"
+      ],
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+      "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45561308184/job/139025417560",
+      "remaining_person_days": null,
+      "estimated_person_days": null,
+      "handoff_target": "2026-12-04"
+    },
+    "R04": {
+      "status": "366cea92 UI grant/dispose/backoff improved; 9/6 CI, actual H1~H9/module and persisted readback/unknown pending",
+      "estimated_person_days": 7,
+      "initial_breakdown": {
+        "web": 4,
+        "soomgo": 3
+      },
+      "remaining_person_days": null,
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+      "independent_ci": "https://github.com/ik-e/chaja-you/actions/runs/45558814397/job/139017270251"
+    },
+    "R01": {
+      "status": "common environment, pinned combination CI, gate preflight and review; acceptance cases and deliverable sync remaining",
+      "remaining_person_days": null,
+      "progress_ref": "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+    }
+  },
+  "feedback_ref": "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+  "handoff_checkpoints": [
+    {
+      "when": "11/27",
+      "who": "R02→R03",
+      "io": "I2: SourceView/Profile/ResolvedAnswer → Preparation/typed Error, missing/conflict/ready, H5 revision/timeout",
+      "check": "계약·합성 사례 확인, 실제 모델 대기",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    },
+    {
+      "when": "11/27",
+      "who": "R04↔R03",
+      "io": "H1~H9: revision·review digest·result/status, 오류 응답·owner",
+      "check": "합성 launcher로 요청/응답 확인",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    },
+    {
+      "when": "11/27",
+      "who": "R05↔R03·R04",
+      "io": "I3 인증 binding·generation/lease, 동일 origin viewer mount/dispose; I4 permit/fence/approved asset",
+      "check": "모의 브라우저 및 인터페이스 확인",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    },
+    {
+      "when": "11/30~12/3",
+      "who": "R03→R05·R04",
+      "io": "실제 App/STORE: 안정 slot·owner·asset bytes/digest·permit/fence·readback → 저장된 증거/조회",
+      "check": "실제 구성 인수와 오류·타 owner 차단; 합성은 별도",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    },
+    {
+      "when": "12/3 사전, 12/4 목표",
+      "who": "R02→R03",
+      "io": "실제 PREP/모델 구성·실행법·정확한 값/질문/오류·실험 비용",
+      "check": "R03 재현, R01 검토; 미인수 항목 명시",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    },
+    {
+      "when": "12/4 목표",
+      "who": "R03/R04/R05→R01",
+      "io": "크몽 UI→I2→승인→실제 runtime/adapter+mock→독립 receipt→저장 결과 조회",
+      "check": "같은 후보 고정, 실패/unknown/중복 방지 관측",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    },
+    {
+      "when": "12/8 목표",
+      "who": "R04/R03/R05→R01",
+      "io": "숨고 category/question 저장 및 독립 readback, 두 대상 독립 승인·결과",
+      "check": "후속 통합·회귀, 전체 gate와 시연 별도",
+      "status": "prior_candidate_reestimate_after_scope_db"
+    }
+  ],
+  "demo_fallback": [
+    "크몽 전체 연결 충족 시 원본→접수 독립 조회까지 시연",
+    "실제 PREP 미인수 시 합성 PREP를 명시한 부분 시연, 실제 모델 결과로 계산 금지",
+    "UI/STORE/runtime/adapter 미인수 시 확인된 준비·독립 모의 결과만 각각 시연; E2E/제품 완료 미주장",
+    "숨고는 연결 확인 후 후속 시연; 22 gate를 삭제/완화하지 않음"
+  ],
+  "review": "11/27 설계·일정 검토 후보; 현재 활성 TASK-055~058만 실행, 이전 048~054 재개 별도 판단.",
+  "phase_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
+  "previous_implementation_schedule_ref": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json",
+  "previous_implementation_status": "deferred_pending_scope_db_and_rebaseline",
+  "reviewed_snapshot": "bb73955af88c4c7b41255f0d8b5c5c2de213d2cd",
+  "current_observations": {
+    "snapshot": "bb73955af88c4c7b41255f0d8b5c5c2de213d2cd",
+    "R02": {
+      "status": "in_progress",
+      "stories": 26,
+      "system_events": 14,
+      "evidence": 15,
+      "links": 0,
+      "self_check": "A1~A5 inconclusive",
+      "source_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+    },
+    "R04": {
+      "status": "template_only",
+      "source_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+    },
+    "R05": {
+      "status": "template_only",
+      "source_ref": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+    },
+    "R01": {
+      "status": "integration_db_not_yet_written",
+      "task": "TASK-058"
+    }
+  }
+}

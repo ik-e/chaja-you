@@ -1,0 +1,1565 @@
+{
+  "id": "STEP2-API-FEEDBACK-EXAMPLES-20261126",
+  "date": "2026-11-26",
+  "status": "contract_examples_not_execution",
+  "baseline": "ced14b622dca5b1c96aeb0e8cf73b5668bfba458",
+  "schema_ref": "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+  "schema_blob_sha": "de6c147216ee68bae75a9d18f9127c327701fa5a",
+  "replay_ref": "product/lesson-registration/fixtures/shared/replay.json",
+  "replay_blob_sha": "f0fa01a2694b5698d7b7789282a7eabbb792cffa",
+  "note": "V4.1 합성 읽기용 예시. H7/H8 confirmed는 고정 replay에서 추출; 자리표시자 digest는 유효 승인 아님. 나머지는 현행 계약 기반 설계 예시이며 실제 호출·시험 관측이 아니다. profile-specific validation과 semantic relation 검사는 별도. source ID는 사전 준비된 합성 원본을 가정.",
+  "cases": [
+    {
+      "id": "price_conflict",
+      "method": "POST",
+      "path": "/v1/registrations",
+      "request": {
+        "source_id": "source-price-conflict-mock",
+        "selector": "kmong"
+      },
+      "source_text": "STANDARD 월 4회 90분, VAT 포함 가격 250000원과 300000원이 상충",
+      "status": 201,
+      "response_schema": "RegistrationView",
+      "response": {
+        "registration_id": "registration-price-conflict-mock",
+        "source_id": "source-price-conflict-mock",
+        "revision": 1,
+        "support": "supported",
+        "profile_ref": {
+          "platform": "kmong",
+          "object_kind": "service_listing",
+          "version": "mock.v2",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environment": "mock"
+        },
+        "preparation": {
+          "ready": false,
+          "values": {},
+          "facts": [],
+          "issues": [
+            {
+              "issue_id": "issue-price-1",
+              "field": "/packages/0/amount_vat_included_krw",
+              "code": "conflict",
+              "message": "원본의 STANDARD 가격이 25만원과 30만원으로 서로 다릅니다. 실제 VAT 포함 가격을 확인해 주세요.",
+              "blocking": true
+            }
+          ],
+          "provenance": []
+        },
+        "auth": {
+          "state": "none"
+        },
+        "job_state": null
+      },
+      "origin": "design_example"
+    },
+    {
+      "id": "start_accepted",
+      "method": "POST",
+      "path": "/v1/registrations/registration-kmong/start",
+      "request": {
+        "expected_revision": 3,
+        "review_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "approved": true,
+        "request_key": "synthetic-start-kmong"
+      },
+      "status": 202,
+      "response_schema": "RegistrationView",
+      "response": {
+        "registration_id": "registration-kmong",
+        "source_id": "source-kmong",
+        "revision": 4,
+        "support": "supported",
+        "profile_ref": {
+          "platform": "kmong",
+          "object_kind": "service_listing",
+          "version": "mock.v2",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environment": "mock"
+        },
+        "preparation": {
+          "ready": true,
+          "values": {
+            "title": "합성 음악 레슨 안내 제목",
+            "category_path": [
+              "lesson",
+              "music",
+              "vocal_mock"
+            ],
+            "description": "합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. ",
+            "recruitment": "individual",
+            "delivery": "offline",
+            "region": {
+              "region_key": "mock_region",
+              "district_key": "mock_district",
+              "detail_address": "합성 작업실 주소",
+              "public_scope_confirmed": true
+            },
+            "main_images": [
+              {
+                "asset_id": "synthetic-image",
+                "digest": "845c28a150885b6b3c3318a0dc2ed38c49bbcdce57bc2146d2d2e459e39b19e7",
+                "mime": "image/png",
+                "bytes": 118,
+                "width": 652,
+                "height": 488,
+                "rights_confirmed": true
+              }
+            ],
+            "process": "합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. ",
+            "preparation": "필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. ",
+            "packages": [
+              {
+                "tier": "STANDARD",
+                "title": "합성 요금제 0",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 250000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 90,
+                "sessions": 4,
+                "period": "month"
+              },
+              {
+                "tier": "DELUXE",
+                "title": "합성 요금제 1",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 400000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 180,
+                "sessions": 4,
+                "period": "month"
+              },
+              {
+                "tier": "PREMIUM",
+                "title": "합성 요금제 2",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 500000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 270,
+                "sessions": 4,
+                "period": "month"
+              }
+            ]
+          },
+          "facts": [
+            {
+              "fact_id": "fact-title",
+              "path": "fixture.title",
+              "value": "합성 음악 레슨 안내 제목",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input title"
+              }
+            },
+            {
+              "fact_id": "fact-category_path",
+              "path": "fixture.category_path",
+              "value": [
+                "lesson",
+                "music",
+                "vocal_mock"
+              ],
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input category_path"
+              }
+            },
+            {
+              "fact_id": "fact-description",
+              "path": "fixture.description",
+              "value": "합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input description"
+              }
+            },
+            {
+              "fact_id": "fact-recruitment",
+              "path": "fixture.recruitment",
+              "value": "individual",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input recruitment"
+              }
+            },
+            {
+              "fact_id": "fact-delivery",
+              "path": "fixture.delivery",
+              "value": "offline",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input delivery"
+              }
+            },
+            {
+              "fact_id": "fact-region",
+              "path": "fixture.region",
+              "value": {
+                "region_key": "mock_region",
+                "district_key": "mock_district",
+                "detail_address": "합성 작업실 주소",
+                "public_scope_confirmed": true
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input region"
+              }
+            },
+            {
+              "fact_id": "fact-main_images",
+              "path": "fixture.main_images",
+              "value": [
+                {
+                  "asset_id": "synthetic-image",
+                  "digest": "845c28a150885b6b3c3318a0dc2ed38c49bbcdce57bc2146d2d2e459e39b19e7",
+                  "mime": "image/png",
+                  "bytes": 118,
+                  "width": 652,
+                  "height": 488,
+                  "rights_confirmed": true
+                }
+              ],
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input main_images"
+              }
+            },
+            {
+              "fact_id": "fact-process",
+              "path": "fixture.process",
+              "value": "합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input process"
+              }
+            },
+            {
+              "fact_id": "fact-preparation",
+              "path": "fixture.preparation",
+              "value": "필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input preparation"
+              }
+            },
+            {
+              "fact_id": "package-0",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p0",
+                "minutes_per_session": 90,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 250000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 0"
+              }
+            },
+            {
+              "fact_id": "option-0",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "STANDARD",
+                "title": "합성 요금제 0",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 0"
+              }
+            },
+            {
+              "fact_id": "package-1",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p1",
+                "minutes_per_session": 180,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 400000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 1"
+              }
+            },
+            {
+              "fact_id": "option-1",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "DELUXE",
+                "title": "합성 요금제 1",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 1"
+              }
+            },
+            {
+              "fact_id": "package-2",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p2",
+                "minutes_per_session": 270,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 500000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 2"
+              }
+            },
+            {
+              "fact_id": "option-2",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "PREMIUM",
+                "title": "합성 요금제 2",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 2"
+              }
+            }
+          ],
+          "issues": [],
+          "provenance": [
+            {
+              "field": "/title",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-title"
+              ]
+            },
+            {
+              "field": "/category_path",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-category_path"
+              ]
+            },
+            {
+              "field": "/description",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-description"
+              ]
+            },
+            {
+              "field": "/recruitment",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-recruitment"
+              ]
+            },
+            {
+              "field": "/delivery",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-delivery"
+              ]
+            },
+            {
+              "field": "/region",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-region"
+              ]
+            },
+            {
+              "field": "/main_images",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-main_images"
+              ]
+            },
+            {
+              "field": "/process",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-process"
+              ]
+            },
+            {
+              "field": "/preparation",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-preparation"
+              ]
+            },
+            {
+              "field": "/packages/0",
+              "kind": "direct",
+              "fact_refs": [
+                "package-0",
+                "option-0"
+              ]
+            },
+            {
+              "field": "/packages/1",
+              "kind": "direct",
+              "fact_refs": [
+                "package-1",
+                "option-1"
+              ]
+            },
+            {
+              "field": "/packages/2",
+              "kind": "direct",
+              "fact_refs": [
+                "package-2",
+                "option-2"
+              ]
+            }
+          ]
+        },
+        "auth": {
+          "state": "verified",
+          "generation": 1,
+          "account_label": "합성 계정"
+        },
+        "job_state": "active",
+        "target": {
+          "status": "new",
+          "account_label": "합성 계정",
+          "object_kind": "service_listing",
+          "target_label": "합성 등록 대상"
+        },
+        "progress": {
+          "step_index": 0,
+          "step_count": 7,
+          "confirmed_steps": []
+        }
+      },
+      "origin": "pinned_replay"
+    },
+    {
+      "id": "read_confirmed",
+      "method": "GET",
+      "path": "/v1/registrations/registration-kmong",
+      "request": null,
+      "status": 200,
+      "response_schema": "RegistrationView",
+      "response": {
+        "registration_id": "registration-kmong",
+        "source_id": "source-kmong",
+        "revision": 5,
+        "support": "supported",
+        "profile_ref": {
+          "platform": "kmong",
+          "object_kind": "service_listing",
+          "version": "mock.v2",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environment": "mock"
+        },
+        "preparation": {
+          "ready": true,
+          "values": {
+            "title": "합성 음악 레슨 안내 제목",
+            "category_path": [
+              "lesson",
+              "music",
+              "vocal_mock"
+            ],
+            "description": "합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. ",
+            "recruitment": "individual",
+            "delivery": "offline",
+            "region": {
+              "region_key": "mock_region",
+              "district_key": "mock_district",
+              "detail_address": "합성 작업실 주소",
+              "public_scope_confirmed": true
+            },
+            "main_images": [
+              {
+                "asset_id": "synthetic-image",
+                "digest": "845c28a150885b6b3c3318a0dc2ed38c49bbcdce57bc2146d2d2e459e39b19e7",
+                "mime": "image/png",
+                "bytes": 118,
+                "width": 652,
+                "height": 488,
+                "rights_confirmed": true
+              }
+            ],
+            "process": "합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. ",
+            "preparation": "필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. ",
+            "packages": [
+              {
+                "tier": "STANDARD",
+                "title": "합성 요금제 0",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 250000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 90,
+                "sessions": 4,
+                "period": "month"
+              },
+              {
+                "tier": "DELUXE",
+                "title": "합성 요금제 1",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 400000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 180,
+                "sessions": 4,
+                "period": "month"
+              },
+              {
+                "tier": "PREMIUM",
+                "title": "합성 요금제 2",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 500000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 270,
+                "sessions": 4,
+                "period": "month"
+              }
+            ]
+          },
+          "facts": [
+            {
+              "fact_id": "fact-title",
+              "path": "fixture.title",
+              "value": "합성 음악 레슨 안내 제목",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input title"
+              }
+            },
+            {
+              "fact_id": "fact-category_path",
+              "path": "fixture.category_path",
+              "value": [
+                "lesson",
+                "music",
+                "vocal_mock"
+              ],
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input category_path"
+              }
+            },
+            {
+              "fact_id": "fact-description",
+              "path": "fixture.description",
+              "value": "합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input description"
+              }
+            },
+            {
+              "fact_id": "fact-recruitment",
+              "path": "fixture.recruitment",
+              "value": "individual",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input recruitment"
+              }
+            },
+            {
+              "fact_id": "fact-delivery",
+              "path": "fixture.delivery",
+              "value": "offline",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input delivery"
+              }
+            },
+            {
+              "fact_id": "fact-region",
+              "path": "fixture.region",
+              "value": {
+                "region_key": "mock_region",
+                "district_key": "mock_district",
+                "detail_address": "합성 작업실 주소",
+                "public_scope_confirmed": true
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input region"
+              }
+            },
+            {
+              "fact_id": "fact-main_images",
+              "path": "fixture.main_images",
+              "value": [
+                {
+                  "asset_id": "synthetic-image",
+                  "digest": "845c28a150885b6b3c3318a0dc2ed38c49bbcdce57bc2146d2d2e459e39b19e7",
+                  "mime": "image/png",
+                  "bytes": 118,
+                  "width": 652,
+                  "height": 488,
+                  "rights_confirmed": true
+                }
+              ],
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input main_images"
+              }
+            },
+            {
+              "fact_id": "fact-process",
+              "path": "fixture.process",
+              "value": "합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input process"
+              }
+            },
+            {
+              "fact_id": "fact-preparation",
+              "path": "fixture.preparation",
+              "value": "필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input preparation"
+              }
+            },
+            {
+              "fact_id": "package-0",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p0",
+                "minutes_per_session": 90,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 250000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 0"
+              }
+            },
+            {
+              "fact_id": "option-0",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "STANDARD",
+                "title": "합성 요금제 0",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 0"
+              }
+            },
+            {
+              "fact_id": "package-1",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p1",
+                "minutes_per_session": 180,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 400000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 1"
+              }
+            },
+            {
+              "fact_id": "option-1",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "DELUXE",
+                "title": "합성 요금제 1",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 1"
+              }
+            },
+            {
+              "fact_id": "package-2",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p2",
+                "minutes_per_session": 270,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 500000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 2"
+              }
+            },
+            {
+              "fact_id": "option-2",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "PREMIUM",
+                "title": "합성 요금제 2",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 2"
+              }
+            }
+          ],
+          "issues": [],
+          "provenance": [
+            {
+              "field": "/title",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-title"
+              ]
+            },
+            {
+              "field": "/category_path",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-category_path"
+              ]
+            },
+            {
+              "field": "/description",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-description"
+              ]
+            },
+            {
+              "field": "/recruitment",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-recruitment"
+              ]
+            },
+            {
+              "field": "/delivery",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-delivery"
+              ]
+            },
+            {
+              "field": "/region",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-region"
+              ]
+            },
+            {
+              "field": "/main_images",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-main_images"
+              ]
+            },
+            {
+              "field": "/process",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-process"
+              ]
+            },
+            {
+              "field": "/preparation",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-preparation"
+              ]
+            },
+            {
+              "field": "/packages/0",
+              "kind": "direct",
+              "fact_refs": [
+                "package-0",
+                "option-0"
+              ]
+            },
+            {
+              "field": "/packages/1",
+              "kind": "direct",
+              "fact_refs": [
+                "package-1",
+                "option-1"
+              ]
+            },
+            {
+              "field": "/packages/2",
+              "kind": "direct",
+              "fact_refs": [
+                "package-2",
+                "option-2"
+              ]
+            }
+          ]
+        },
+        "auth": {
+          "state": "verified",
+          "generation": 1,
+          "account_label": "합성 계정"
+        },
+        "job_state": "done",
+        "target": {
+          "status": "new",
+          "account_label": "합성 계정",
+          "object_kind": "service_listing",
+          "target_label": "합성 등록 대상"
+        },
+        "progress": {
+          "step_index": 7,
+          "step_count": 7,
+          "confirmed_steps": [
+            {
+              "step_id": "K1",
+              "label": "신규 등록 화면 진입",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K2",
+              "label": "기본·상세·지역·절차 입력",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K3",
+              "label": "메인 이미지 첨부",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K4",
+              "label": "패키지 입력",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K5",
+              "label": "제출 전 전체 값 대조",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K6",
+              "label": "모의 심사 접수 1회",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K7",
+              "label": "독립 접수 조회",
+              "status": "confirmed"
+            }
+          ]
+        },
+        "result": {
+          "goal_verdict": "confirmed",
+          "environment": "mock",
+          "effects": [
+            {
+              "step_id": "K1",
+              "operation_id": "mock-op-K1",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K1"
+              ]
+            },
+            {
+              "step_id": "K2",
+              "operation_id": "mock-op-K2",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K2"
+              ]
+            },
+            {
+              "step_id": "K3",
+              "operation_id": "mock-op-K3",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K3"
+              ]
+            },
+            {
+              "step_id": "K4",
+              "operation_id": "mock-op-K4",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K4"
+              ]
+            },
+            {
+              "step_id": "K5",
+              "operation_id": "mock-op-K5",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K5"
+              ]
+            },
+            {
+              "step_id": "K6",
+              "operation_id": "mock-op-K6",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K6"
+              ]
+            },
+            {
+              "step_id": "K7",
+              "operation_id": "mock-op-K7",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K7"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "evidence_id": "mock-goal-kmong",
+              "kind": "goal",
+              "method": "independent_readback",
+              "target_label": "합성 등록 대상",
+              "summary": "Synthetic replay only",
+              "observed_at": "2026-11-25T00:00:00Z",
+              "environment": "mock"
+            }
+          ],
+          "next_action": "합성 결과 확인"
+        }
+      },
+      "origin": "pinned_replay"
+    },
+    {
+      "id": "read_unknown",
+      "method": "GET",
+      "path": "/v1/registrations/registration-kmong",
+      "request": null,
+      "status": 200,
+      "response_schema": "RegistrationView",
+      "response": {
+        "registration_id": "registration-kmong",
+        "source_id": "source-kmong",
+        "revision": 5,
+        "support": "supported",
+        "profile_ref": {
+          "platform": "kmong",
+          "object_kind": "service_listing",
+          "version": "mock.v2",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environment": "mock"
+        },
+        "preparation": {
+          "ready": true,
+          "values": {
+            "title": "합성 음악 레슨 안내 제목",
+            "category_path": [
+              "lesson",
+              "music",
+              "vocal_mock"
+            ],
+            "description": "합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. ",
+            "recruitment": "individual",
+            "delivery": "offline",
+            "region": {
+              "region_key": "mock_region",
+              "district_key": "mock_district",
+              "detail_address": "합성 작업실 주소",
+              "public_scope_confirmed": true
+            },
+            "main_images": [
+              {
+                "asset_id": "synthetic-image",
+                "digest": "845c28a150885b6b3c3318a0dc2ed38c49bbcdce57bc2146d2d2e459e39b19e7",
+                "mime": "image/png",
+                "bytes": 118,
+                "width": 652,
+                "height": 488,
+                "rights_confirmed": true
+              }
+            ],
+            "process": "합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. ",
+            "preparation": "필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. ",
+            "packages": [
+              {
+                "tier": "STANDARD",
+                "title": "합성 요금제 0",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 250000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 90,
+                "sessions": 4,
+                "period": "month"
+              },
+              {
+                "tier": "DELUXE",
+                "title": "합성 요금제 1",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 400000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 180,
+                "sessions": 4,
+                "period": "month"
+              },
+              {
+                "tier": "PREMIUM",
+                "title": "합성 요금제 2",
+                "description": "합성 요금제 설명",
+                "amount_vat_included_krw": 500000,
+                "work_days": 14,
+                "revision_count": 0,
+                "minutes_per_session": 270,
+                "sessions": 4,
+                "period": "month"
+              }
+            ]
+          },
+          "facts": [
+            {
+              "fact_id": "fact-title",
+              "path": "fixture.title",
+              "value": "합성 음악 레슨 안내 제목",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input title"
+              }
+            },
+            {
+              "fact_id": "fact-category_path",
+              "path": "fixture.category_path",
+              "value": [
+                "lesson",
+                "music",
+                "vocal_mock"
+              ],
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input category_path"
+              }
+            },
+            {
+              "fact_id": "fact-description",
+              "path": "fixture.description",
+              "value": "합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. 합성 테스트 수업 내용입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input description"
+              }
+            },
+            {
+              "fact_id": "fact-recruitment",
+              "path": "fixture.recruitment",
+              "value": "individual",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input recruitment"
+              }
+            },
+            {
+              "fact_id": "fact-delivery",
+              "path": "fixture.delivery",
+              "value": "offline",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input delivery"
+              }
+            },
+            {
+              "fact_id": "fact-region",
+              "path": "fixture.region",
+              "value": {
+                "region_key": "mock_region",
+                "district_key": "mock_district",
+                "detail_address": "합성 작업실 주소",
+                "public_scope_confirmed": true
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input region"
+              }
+            },
+            {
+              "fact_id": "fact-main_images",
+              "path": "fixture.main_images",
+              "value": [
+                {
+                  "asset_id": "synthetic-image",
+                  "digest": "845c28a150885b6b3c3318a0dc2ed38c49bbcdce57bc2146d2d2e459e39b19e7",
+                  "mime": "image/png",
+                  "bytes": 118,
+                  "width": 652,
+                  "height": 488,
+                  "rights_confirmed": true
+                }
+              ],
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input main_images"
+              }
+            },
+            {
+              "fact_id": "fact-process",
+              "path": "fixture.process",
+              "value": "합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. 합성 수업 절차 안내입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input process"
+              }
+            },
+            {
+              "fact_id": "fact-preparation",
+              "path": "fixture.preparation",
+              "value": "필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. 필수 준비물은 없습니다. 참고곡은 선택입니다. ",
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic input preparation"
+              }
+            },
+            {
+              "fact_id": "package-0",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p0",
+                "minutes_per_session": 90,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 250000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 0"
+              }
+            },
+            {
+              "fact_id": "option-0",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "STANDARD",
+                "title": "합성 요금제 0",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 0"
+              }
+            },
+            {
+              "fact_id": "package-1",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p1",
+                "minutes_per_session": 180,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 400000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 1"
+              }
+            },
+            {
+              "fact_id": "option-1",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "DELUXE",
+                "title": "합성 요금제 1",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 1"
+              }
+            },
+            {
+              "fact_id": "package-2",
+              "path": "lesson.package",
+              "value": {
+                "package_id": "p2",
+                "minutes_per_session": 270,
+                "sessions_per_period": 4,
+                "period": "month",
+                "total_price_krw": 500000,
+                "vat_basis": "included"
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic package 2"
+              }
+            },
+            {
+              "fact_id": "option-2",
+              "path": "lesson.package_options",
+              "value": {
+                "tier": "PREMIUM",
+                "title": "합성 요금제 2",
+                "description": "합성 요금제 설명",
+                "work_days": 14,
+                "revision_count": 0
+              },
+              "origin": {
+                "kind": "source",
+                "ref": "source-kmong",
+                "locator": "synthetic options 2"
+              }
+            }
+          ],
+          "issues": [],
+          "provenance": [
+            {
+              "field": "/title",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-title"
+              ]
+            },
+            {
+              "field": "/category_path",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-category_path"
+              ]
+            },
+            {
+              "field": "/description",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-description"
+              ]
+            },
+            {
+              "field": "/recruitment",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-recruitment"
+              ]
+            },
+            {
+              "field": "/delivery",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-delivery"
+              ]
+            },
+            {
+              "field": "/region",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-region"
+              ]
+            },
+            {
+              "field": "/main_images",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-main_images"
+              ]
+            },
+            {
+              "field": "/process",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-process"
+              ]
+            },
+            {
+              "field": "/preparation",
+              "kind": "direct",
+              "fact_refs": [
+                "fact-preparation"
+              ]
+            },
+            {
+              "field": "/packages/0",
+              "kind": "direct",
+              "fact_refs": [
+                "package-0",
+                "option-0"
+              ]
+            },
+            {
+              "field": "/packages/1",
+              "kind": "direct",
+              "fact_refs": [
+                "package-1",
+                "option-1"
+              ]
+            },
+            {
+              "field": "/packages/2",
+              "kind": "direct",
+              "fact_refs": [
+                "package-2",
+                "option-2"
+              ]
+            }
+          ]
+        },
+        "auth": {
+          "state": "verified",
+          "generation": 1,
+          "account_label": "합성 계정"
+        },
+        "job_state": "stopped",
+        "target": {
+          "status": "new",
+          "account_label": "합성 계정",
+          "object_kind": "service_listing",
+          "target_label": "합성 등록 대상"
+        },
+        "progress": {
+          "step_index": 5,
+          "step_count": 7,
+          "confirmed_steps": [
+            {
+              "step_id": "K1",
+              "label": "신규 등록 화면 진입",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K2",
+              "label": "기본·상세·지역·절차 입력",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K3",
+              "label": "메인 이미지 첨부",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K4",
+              "label": "패키지 입력",
+              "status": "confirmed"
+            },
+            {
+              "step_id": "K5",
+              "label": "제출 전 전체 값 대조",
+              "status": "confirmed"
+            }
+          ],
+          "current_step": {
+            "step_id": "K6",
+            "label": "모의 심사 접수",
+            "status": "unknown"
+          }
+        },
+        "result": {
+          "goal_verdict": "unknown",
+          "environment": "mock",
+          "effects": [
+            {
+              "step_id": "K1",
+              "operation_id": "mock-op-K1",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K1"
+              ]
+            },
+            {
+              "step_id": "K2",
+              "operation_id": "mock-op-K2",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K2"
+              ]
+            },
+            {
+              "step_id": "K3",
+              "operation_id": "mock-op-K3",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K3"
+              ]
+            },
+            {
+              "step_id": "K4",
+              "operation_id": "mock-op-K4",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K4"
+              ]
+            },
+            {
+              "step_id": "K5",
+              "operation_id": "mock-op-K5",
+              "verdict": "confirmed",
+              "evidence_refs": [
+                "mock-ev-K5"
+              ]
+            },
+            {
+              "step_id": "K6",
+              "operation_id": "mock-op-K6",
+              "verdict": "unknown",
+              "evidence_refs": []
+            }
+          ],
+          "evidence": [],
+          "error": {
+            "code": "EFFECT_UNKNOWN",
+            "message": "접수 응답 유실 후 독립 조회로 접수 여부를 확인하지 못했습니다."
+          },
+          "next_action": "결과 미확인: 자동 재등록하지 않습니다. 사용자에게 확인 필요 상태를 안내합니다."
+        }
+      },
+      "origin": "design_example",
+      "note": "응답 유실/독립 증거 부재의 예시; 실제 시험 입력·관측·근거는 별도"
+    },
+    {
+      "id": "no_identity",
+      "method": "GET",
+      "path": "/v1/sources/source-kmong",
+      "status": 401,
+      "response_schema": "Error",
+      "response": {
+        "code": "UNAUTHENTICATED",
+        "message": "인증이 필요합니다."
+      },
+      "origin": "design_example"
+    },
+    {
+      "id": "foreign_registration",
+      "method": "GET",
+      "path": "/v1/registrations/registration-kmong",
+      "status": 404,
+      "response_schema": "Error",
+      "response": {
+        "code": "NOT_FOUND",
+        "message": "등록 정보를 찾을 수 없습니다."
+      },
+      "origin": "design_example"
+    },
+    {
+      "id": "model_blocked_draft",
+      "method": "POST",
+      "path": "/v1/registrations",
+      "request": {
+        "source_id": "source-price-conflict-mock",
+        "selector": "kmong"
+      },
+      "status": 201,
+      "response_schema": "RegistrationView",
+      "response": {
+        "registration_id": "registration-model-unavailable-mock",
+        "source_id": "source-price-conflict-mock",
+        "revision": 1,
+        "support": "supported",
+        "profile_ref": {
+          "platform": "kmong",
+          "object_kind": "service_listing",
+          "version": "mock.v2",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environment": "mock"
+        },
+        "preparation": {
+          "ready": false,
+          "values": {},
+          "facts": [],
+          "issues": [
+            {
+              "issue_id": "issue-model-1",
+              "field": "/preparation",
+              "code": "model_unavailable",
+              "message": "문안 준비 모델 응답을 확인하지 못했습니다. 준비가 완료되지 않았습니다.",
+              "blocking": true
+            }
+          ],
+          "provenance": []
+        },
+        "auth": {
+          "state": "none"
+        },
+        "job_state": null
+      },
+      "origin": "design_example"
+    },
+    {
+      "id": "dependency_or_transaction_failure",
+      "method": "POST",
+      "path": "/v1/registrations",
+      "status": 503,
+      "response_schema": "Error",
+      "response": {
+        "code": "RUNTIME_ERROR",
+        "message": "등록 준비 요청을 완료하지 못했습니다."
+      },
+      "origin": "design_example",
+      "note": "저장 실패/제한 내 처리 불가. 성공한 초안으로 주장하지 않음; 조회/오류 안내 및 실제 반영 여부를 별도 검사"
+    }
+  ]
+}

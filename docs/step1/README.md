@@ -1,7 +1,7 @@
 # Step 1 필수 제출물 · 현행 레슨 등록 서비스
 
-- [기획서 및 요구사항 명세서](기획서_제출본.md) — V1.1 및 채택 mock REQ-01~11; 11/26 1차 의견 보완 후보.
-- [WBS](WBS_제출본.md) — TASK-048~054 및 [V0.7 일정 후보](../artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json). 인수 조건·교육 일정·실적/잔여 구분, 공수/일정 확인 및 캡처 대기.
+- [기획서 및 요구사항 명세서](기획서_제출본.md) — 11/26 1차 개정 후보: V1.2 후속 설계 기준, 이전 mock REQ-01~11 및 PostgreSQL 목표.
+- [WBS](WBS_제출본.md) — TASK-048~054 및 [V0.8 일정 후보](../artifacts/planning/lesson-registration-20261123/wbs-v0.8-candidate.json). 055~058 설계 우선, 기존 048~054 구현 보류. 인수 조건·교육 일정·실적/잔여 구분, 공수/일정 확인 및 캡처 대기.
 
 **과거 자료:** [기획서.md](기획서.md)·[WBS.md](WBS.md)는 이전 찾아you 생성기 출력/이력이며 현행 제출 후보가 아니다. [11/23 기획](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/기획서_제출본.md)·[11/23 WBS](https://github.com/ik-e/chaja-you/blob/f5e685716a5ed4fb36159d215b3cc861ef3d5e79/docs/step1/WBS_제출본.md)는 고정 Git 이력. 기존 원본/생성기 보존.
 

@@ -251,7 +251,7 @@
   },
   "integration": {
     "owner": "R01",
-    "rule": "팀원 원본 보존, 의미 동일 행동 병합/차이와 누락 추적, 출처 독립성 및 조건 비교, 기획안 모순·범위 결정 요청 처리. 조사 결과와 사용자 행동 간 양방향 교차 검토. R01 승인 범위의 사용자 스토리 ID를 확정한 뒤 데이터 의미·관계·제약·상태·수명주기 도출. 기존 DB/코드와의 차이·영향·이관 후보 확인. 7개 플랫폼의 필수/고유 정보·업무 표현 가능성과 새 플랫폼 추가 영향 검증. API·프로토콜에 필요한 actor/event/data/state/error/authorization trace를 남기되 엔드포인트와 기술은 후속.",
+    "rule": "팀원 원본 보존, 의미 동일 행동 병합/차이와 누락 추적, 출처 독립성 및 조건 비교, 기획안 모순·범위 결정 요청 처리. 조사 결과와 사용자 행동 간 양방향 교차 검토. R01 승인 범위의 사용자 스토리 ID를 확정한 뒤 데이터 의미·관계·제약·상태·수명주기 도출. 기존 DB/코드와의 차이·영향·이관 후보 확인. 7개 플랫폼의 필수/고유 정보·업무 표현 가능성과 새 플랫폼 추가 영향 검증. API·프로토콜에 필요한 actor/event/data/state/error/authorization trace를 남기되 엔드포인트와 기술은 후속. [instructor-api-db-design-inputs.json]을 TASK-058 I7의 추가 설계 검토 입력으로 사용. PostgreSQL은 목표이며 실제 migration과 이전 구현 재개는 별도. 독립 조사 A1~A5/양식/owner 불변.",
     "outputs": [
       "integrated/user-stories.json",
       "integrated/platform-comparison.json",
@@ -269,7 +269,8 @@
       "ERD",
       "story→data coverage",
       "platform→field/object coverage and unresolved gaps",
-      "existing design impact and API/protocol handoff"
+      "existing design impact and API/protocol handoff",
+      "instructor feedback A1~A4/D1~D4 trace; PostgreSQL target, SQLite migration/ownership/state/evidence verification design, future API inputs"
     ]
   },
   "acceptance": [

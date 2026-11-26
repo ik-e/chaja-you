@@ -15,10 +15,15 @@
         "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
         "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
         "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md",
-        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json"
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
       ],
       "top_level_sections": 3,
-      "status": "11/26 강사 1차 의견 반영 개정 후보 · 크몽 우선 시연 제안, 시험/정책/가치 실증 전",
+      "status": "11/26 V1.2 기획 본문 재구성 및 1차 의견 보완; 2차 검토 후보, 범위/가치/실서비스 미확정",
       "title": "기획서(요구사항 명세 포함)",
       "due": "2026-11-13",
       "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
@@ -37,10 +42,16 @@
         "docs/members/R04/daily/2026-11-25.md",
         "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
         "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
-        "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json"
+        "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.8-candidate.json",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
       ],
       "top_level_sections": 4,
-      "status": "11/26 V0.7 개정 후보 · 계획/실적/잔여, 인수 및 교육 작업 창 구분; 팀 확인·캡처 전",
+      "status": "11/26 V0.8 실제 설계 TASK 및 관측 진척, 기존 일정 재산정/교육 계획; 2차 검토 후보",
       "title": "WBS",
       "due": "2026-11-13",
       "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
@@ -55,13 +66,20 @@
         "product/lesson-registration/fixtures/shared/replay.json",
         "docs/artifacts/runs/TASK-050-s8-http-20261125.json",
         "product/lesson-registration/src/lesson_registration/app/http/api.py",
-        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/step2/api-feedback-examples-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
       ],
       "top_level_sections": 6,
-      "status": "11/25 S8/launcher 독립 시험 통과 · R03 실제 WS/STORE/slot/asset 조립 계획, 전체 연동 미확인",
+      "status": "11/26 V1.2 피처→API 후속 입력, 이전 V4.1 사례·1차 의견 보완; 새 계약/시험 전",
       "title": "API 설계 문서",
       "due": "2026-11-20",
-      "submission_status": "미확인"
+      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
     },
     {
       "id": "DLV-04",
@@ -70,14 +88,20 @@
         "docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json",
         "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
         "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
-        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json"
       ],
       "top_level_sections": 6,
-      "status": "R03 SQLite DDL main; 실제 stable slot/asset/permit/lease 조립 대기",
+      "status": "11/26 V1.2 논리 데이터 검토 입력·PostgreSQL 목표와 기존 SQLite 이관/1차 의견 보완; 최종 ERD/DDL/시험 전",
       "external_snapshot": "https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/product/lesson-registration/src/lesson_registration/app/store/schema.sql",
       "title": "데이터베이스 스키마 설계서",
       "due": "2026-11-20",
-      "submission_status": "미확인"
+      "submission_status": "1차 피드백 확인·개정 후보; 2차 및 PDF 공식 제출 전"
     },
     {
       "id": "DLV-05",

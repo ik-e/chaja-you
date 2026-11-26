@@ -26,7 +26,9 @@
     "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
     "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
     "docs/design/lesson-registration/CURRENT-DESIGN.md",
-    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json"
+    "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
+    "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+    "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md"
   ],
   "scope": [
     "팀원 원본 보존, 의미 동일 행동 병합/차이와 누락 추적, 출처 독립성 및 조건 비교, 기획안 모순·범위 결정 요청 처리. 조사 결과와 사용자 행동 간 양방향 교차 검토. R01 승인 범위의 사용자 스토리 ID를 확정한 뒤 데이터 의미·관계·제약·상태·수명주기 도출. 기존 DB/코드와의 차이·영향·이관 후보 확인. 7개 플랫폼의 필수/고유 정보·업무 표현 가능성과 새 플랫폼 추가 영향 검증. API·프로토콜에 필요한 actor/event/data/state/error/authorization trace를 남기되 엔드포인트와 기술은 후속.",
@@ -47,13 +49,15 @@
     "I3: PL01~PL07의 공통/고유 객체·정보·관계·상태·제약과 불확실성 비교",
     "I4: 확정 사용자 행동에 필요한 논리 데이터·식별자·관계·수명주기·권한·승인·감사·보존·제약을 DB/ERD에 표현",
     "I5: 사용자 행동→데이터 및 플랫폼 필드/객체→DB 추적, 7개 수용 가능성 및 추가 플랫폼 변경 영향 확인; 미확인 제약은 별도 명시",
-    "I6: 기존 DB/API/코드/계약 영향 및 API·프로토콜 후속 입력 정리, R01 검토 및 결정 기록"
+    "I6: 기존 DB/API/코드/계약 영향 및 API·프로토콜 후속 입력 정리, R01 검토 및 결정 기록",
+    "I7: API/DB 강사 1차 피드백 A1~A4/D1~D4를 설계 입력·스토리/DB/후속 API 근거 및 검증 계획으로 연결한다. PostgreSQL 물리 설계 목표와 기존 SQLite 이관/권한·상태·증빙·보존·시험 계획, 미확정 결정을 구분한다. 실제 구현/마이그레이션은 재개 단계에서 수행."
   ],
   "verification": [
     "전체 스토리·피처·플랫폼 coverage 및 근거 독립성 교차 점검",
     "DB entity/attribute/relationship/constraint 검증, 참조/상태/소유권/업무별 데이터 표현 확인",
     "기존 설계 차이와 API 입력/출력·오류·상태·권한 연결 검토",
-    "실제 산출물과 검토 판정 기록; 불충분한 부분은 미확정"
+    "실제 산출물과 검토 판정 기록; 불충분한 부분은 미확정",
+    "8개 피드백별 실제 설계 입력과 결과/미확정·검증 계획 추적; PostgreSQL 목표와 기존 SQLite 구현을 구별"
   ],
   "references": [
     {
@@ -67,6 +71,12 @@
     },
     {
       "path": "docs/design/lesson-registration/CURRENT-DESIGN.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md"
     }
   ],
   "result": null,
@@ -93,9 +103,10 @@
       "ERD",
       "story→data coverage",
       "platform→field/object coverage and unresolved gaps",
-      "existing design impact and API/protocol handoff"
+      "existing design impact and API/protocol handoff",
+      "A1~A4/D1~D4 feedback trace, PostgreSQL target vs existing SQLite and migration/owner/state/evidence verification plan"
     ],
-    "success_condition": "I1~I6 충족 범위에 대해 근거 있는 R01 판단과 실제 산출물 존재",
+    "success_condition": "I1~I7 충족 범위에 대해 근거 있는 R01 판단과 실제 설계 산출물 존재; 구현/마이그레이션 결과는 별도",
     "unknown_condition": "팀원 근거/플랫폼 제약/스토리 범위가 부족하여 일부 DB 설계 미확정"
   },
   "phase_intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
@@ -107,5 +118,5 @@
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"
   ],
-  "priority_note": "초안 준비는 병행; 선행 결과 검토 후 범위/DB 확정"
+  "priority_note": "초안 준비는 병행; 선행 결과 검토 후 범위/DB 확정; 강사 API/DB 피드백 설계 입력 및 PostgreSQL 목표 반영, 구현 재개 별도"
 }
