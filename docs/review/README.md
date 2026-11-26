@@ -25,7 +25,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | [TASK-055](../artifacts/tasks/TASK-055.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R02) | R02 | 2026-11-26 | 없음 | 보완 | 진행 중 |
 | [TASK-056](../artifacts/tasks/TASK-056.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R04) | R04 | 2026-11-26 | 없음 | 보완 | 검토 중 |
-| [TASK-057](../artifacts/tasks/TASK-057.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R05) | R05 | 2026-11-26 | 없음 | 보완 | 할 일 |
+| [TASK-057](../artifacts/tasks/TASK-057.json) | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R05) | R05 | 2026-11-26 | 없음 | 보완 | 검토 중 |
 | [TASK-058](../artifacts/tasks/TASK-058.json) | 통합 사용자 스토리·서비스 범위 확정 및 DB 설계 | R01 | 2026-11-26 | TASK-055, TASK-056, TASK-057 | 보완 | 할 일 |
 
 담당·목표일은 제안입니다. 선행 결과를 기다리는 동안 기존 자료로 초안을 작성하고 완료 전에 결과를 반영합니다.
@@ -86,11 +86,48 @@ R04 독립 사용자 스토리(26건), 시스템 이벤트(16건), 7개 플랫�
 - [검토요청] 자동 모니터링(E01~E05) 초기 MVP 제외 및 조건부 2단계 분류 승인 요청
 - [검토요청] 내부 감사 로그 및 이전 버전 원본의 보존 기한 정책 결정 요청
 
-### TASK-057 · 할 일
+### TASK-057 · 검토 중
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-057.json)
 
-결과 미기록.
+기획 V1.2 피처 34개, 7개 플랫폼의 42개 업무, 사용자 스토리 47개(기존 42개와 후속 후보 5개)를 검토했다. 7개 상세 조사 문서의 데이터 필드 124개와 기존 업무·사용자 스토리·근거 연결 23개를 확인했다. 업무별 화면 관찰·공식 경로 확인·미확인 수준을 갱신했다. R01 통합 검토 대기.
+
+검증과 근거
+
+- A1 기본·조건부 피처 34개와 사용자 스토리 47개(기존 42개 및 후속 후보 5개)를 대조했다. · pass
+- A2 7개 플랫폼의 42개 업무에서 화면 관찰, 공식 경로 확인, 미확인을 갱신하고 저장·등록 성공과 대행 허용을 분리했다. · pass
+- A3 7개 상세 문서의 필드 124개와 연결 23개를 집계하고 연결의 필드·업무·스토리·근거 ID를 검사했다. · pass
+- A4 사용자 제공 화면, 공식 안내, 사용자 보고와 모의 기록을 대조했다. 이번 마무리 작업에서 추가 실측을 수행하지 않았다. · pass
+- A5 독립 원본과 7개 상세 조사 문서, TASK 결과·근거를 통합 검토 대상으로 확인했다. · pass
+- [독립 조사 원본](../artifacts/planning/lesson-registration-20261126/R05/independent-result.json)
+- [크몽 DB 상세 조사](../artifacts/planning/lesson-registration-20261126/R05/kmong-db-research.json)
+- [탈잉 DB 상세 조사](../artifacts/planning/lesson-registration-20261126/R05/taling-db-research.json)
+- [숨고 DB 상세 조사](../artifacts/planning/lesson-registration-20261126/R05/soomgo-db-research.json)
+- [프람피 DB 상세 조사](../artifacts/planning/lesson-registration-20261126/R05/prompie-db-research.json)
+- [뮬 DB 상세 조사](../artifacts/planning/lesson-registration-20261126/R05/mule-db-research.json)
+- [힙합플레이야 홍보 게시판 DB 조사](../artifacts/planning/lesson-registration-20261126/R05/hiphopplaya-db-research.json)
+- [힙합LE 거래·장터 레슨 DB 조사](../artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json)
+- [힙합LE 공식 가입 안내](https://hiphople.com/join)
+- [힙합LE 이용규칙](https://hiphople.com/notice/27728856)
+- [거래·장터 레슨 게시물 하단 안내와 공지 제목](https://hiphople.com/market/33775811)
+- [개인레슨 게시판 공지사항, 검색 색인 발췌](https://www.mule.co.kr/bbs/info/lesson?idx=53701953&v=v)
+- [게시판 이용규칙, 이용안내](https://hiphopplaya.com/g2/bbs/board.php?bo_table=notice&wr_id=1705)
+- [친목 관련 공지, 올비와 뉴비](https://hiphopplaya.com/g2/bbs/board.php?bo_table=notice&wr_id=2131)
+- [게시판 운영방침 변경 안내, 글 도배에 관한 규칙](https://hiphopplaya.com/g2/bbs/board.php?alim_click=yes&bo_table=notice&wr_id=3825)
+- [뮬 개인레슨 도배 관련 공식 공지](https://www.mule.co.kr/m/lesson/65292157)
+- [힙합LE 거래·장터 고정 공지 2025-05-10 수정 본문](https://hiphople.com/market/28806084)
+
+남은 불확실성과 결정 요청
+
+- 크몽 실제 심사 접수와 판매 중 수정·공개 반영, 탈잉 실제 접수·오픈 전환·일정 결과는 미확인.
+- 숨고 설정 필수 조건·저장·요청 수신, 프람피 최종 등록·공개와 분야·지역 연결은 미확인.
+- 뮬 가입 후 글쓰기 자격·갱신 간격·저장, 힙합플레이야 현행 게시 한도·필수 검증·글 옵션 적용 결과는 미확인.
+- 힙합LE 레슨의 공지상 게시 간격은 2일. 정확한 기산점·실제 집행·가입 제한 해제 시각·가격 필수·저장 결과 미확인.
+- 플랫폼별 제3자 대행 허용은 미확인.
+- 탈잉의 승인 후 일정 등록·심사 취소를 어디까지 서비스가 지원할지 결정
+- 플랫폼 허용 미확인 채널에 제공할 직접 작성용 결과 범위를 결정
+- 원본 삭제와 연결 해제 시 진행 중 작업·감사 이력의 처리 기준 결정
+- 프람피는 프로필·분야까지만 후보로 다루고 뮬은 접근 확인 후 우선순위를 재검토
 
 ### TASK-058 · 할 일
 
