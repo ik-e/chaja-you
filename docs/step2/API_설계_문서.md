@@ -46,6 +46,43 @@
 
 ## 3. 엔드포인트별 상세 계약
 
+### 3.0 12/8 크몽형 호출 순서
+
+| 단계 | API | 입력 | 정상 응답 및 상태 |
+| --- | --- | --- | --- |
+| D01 원본·사진 저장 | POST /v2/assets; POST /v2/lessons | multipart 권리 확인; SourceInput | 201 Asset/Lesson |
+| D02 크몽형 준비·가격 확인 | GET /v2/platforms/profiles; POST /v2/requests; PATCH /v2/requests/{request_id} | NewRequest/PatchRequest | 201 WorkRequest blocked → 200 ready |
+| D03 직접 인증 | POST /v2/requests/{request_id}/authentication (open/finish) | AuthInput + generation | 200 AuthResponse |
+| D04 정보·범위 승인 | GET /v2/requests/{request_id}; POST /v2/requests/{request_id}/start | Review/Start | 200 WorkRequest; 202 Job |
+| D05 모의 접수·독립 확인 | 수락된 worker 실행; GET /v2/jobs/{job_id} | 승인 scope; job_id | 200 Job |
+| D06 재접속 저장 결과 | GET /v2/session; GET /v2/jobs/{job_id}; GET /v2/jobs | 서비스 세션; 기존 job_id | 200 Job/JobList |
+
+[OpenAPI](submission-v1/openapi.json) 및 [합성 사례](submission-v1/examples.json): D01 demo_lesson_saved; D02 demo_profile_list, price_conflict, demo_price_resolved; D03 demo_auth_open/finish; D04 ready_review/start_accepted; D05 confirmed/unknown/same_start_replay; D06 demo_session/confirmed/unknown. 실제 인증 토큰은 예시에 포함하지 않으며 모의 외부 접근만 허용한다. 
+```json
+{
+  "expected_revision": 1,
+  "corrections": [
+    {
+      "field": "/amount_vat_included_krw",
+      "value": 250000
+    }
+  ],
+  "reject": false
+}
+```
+```json
+{
+  "expected_revision": 3,
+  "review_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "approved": true,
+  "request_key": "synthetic-start-1",
+  "information_approved": true,
+  "scope_approved": true
+}
+```
+12/3 합성 PREP로 실제 앱 응답·상태·권한 검증, 12/4 PREP 교체 후 동일 후보 D01–D06 재시험. 재접속 후 검증 세션으로 같은 job_id·결과·근거 조회, 외부 효과 0.
+
+
 ### 3.1 핵심 요청·응답 필드
 
 **NewRequest**
@@ -255,7 +292,7 @@
 
 ### 3.2 대표 JSON 예시
 
-아래 값은 가상 설계 예시이며 실제 시험 결과가 아니다. 전체 사례 31개와 요청 body는 [examples.json](submission-v1/examples.json) 참조.
+아래 값은 가상 설계 예시이며 실제 시험 결과가 아니다. 전체 사례 41개와 요청 body는 [examples.json](submission-v1/examples.json) 참조.
 
 **가격 충돌 — POST /v2/requests, 201 차단 초안.** 원문 사실 두 값이 다르면 ready=false로 저장하고 확인 질문을 반환한다. 사용자가 PATCH에서 expected_revision과 확인값을 보내며, 충돌을 해소한 뒤 새 revision을 저장한다. 원본 자체의 사실을 수정해야 하는 경우 새 원본 버전을 사용한다.
 
@@ -609,6 +646,20 @@ HTTP 200은 저장 결과를 읽었다는 뜻이지 업무 성공이 아니다. 
 
 DB 복합 FK는 연결의 무결성을, 서비스는 세션에서 얻은 owner의 조회/변경 권한을 보장한다. 요청에서 owner를 받아 신뢰하지 않는다. 두 합성 사용자 목록·상세·연결·증거 주입·WS 및 start의 외부 효과 0을 실제 연결 시험한다.
 
+### 4.1 두 합성 계정 실제 HTTP 인수 시험 (12/3, R03 실행 후보·R01 검토)
+
+| 시험 ID | 입력 | 기대 결과 | 현재 |
+| --- | --- | --- | --- |
+| HTTP-01 | 세션 없음/만료 A 세션 | 401 | 미실행 |
+| HTTP-02 | B 세션으로 A 원본·요청·job ID | 404, 정보 미노출 | 미실행 |
+| HTTP-03 | B 목록 GET lessons/requests/jobs/objects 및 cursor | B 데이터만 | 미실행 |
+| HTTP-04 | B 세션으로 A 원본 연결·A 요청 start | 404, job/모의 접수 증가 0 | 미실행 |
+| HTTP-05 | A 동시 동일 start | 202/200 동일 job_id·접수 1회 | 미실행 |
+| HTTP-06 | PREP 제한/모델 오류/저장 불가 | 201 blocked 또는 503; 늦은 결과 저장 금지 | 미실행 |
+| HTTP-07 | 접수 응답 유실·독립 조회 성공/실패·재접속 | confirmed 또는 stopped/unknown; 재접수 0 | 미실행 |
+
+기존 /v1 SQLite 합성 HTTP 14건의 [11/25 실행 기록](../artifacts/runs/TASK-050-s8-http-20261125.json)은 이전 계약 근거이며 /v2 실제 HTTP 통과가 아니다. 새 시험은 실행일/commit/tree/명령/비밀 제거 요청응답/외부 효과 count를 남긴다.
+
 ## 5. Tool 정의 및 실행 계약
 
 | 내부 경계 | 입력 → 출력 | 실행 제한 |
@@ -636,10 +687,10 @@ DB 복합 FK는 연결의 무결성을, 서비스는 세션에서 얻은 owner�
 }
 ```
 
-외부 실행은 1회 dispatch, 응답 유실 시 독립 조회만 허용. 사용자 요청 ID 및 request_key/body digest로 수락 멱등성 보장. 상태 전이는 active → done 또는 active → stopping → stopped; terminal 재개 금지. 복구용 새 status 작업은 별도 읽기 전용 기록으로 남긴다.
+외부 실행은 1회 dispatch, 응답 유실 시 독립 조회만 허용. 독립 확인은 전체 15초 제한(제출 설계 선택), 자동 읽기 재시도 0회. 신뢰 증거가 없으면 stopped/unknown, EFFECT_UNKNOWN 안내 및 관측 저장, 재접수 금지. 늦은 증거는 별도 read-only status 업무로 연결한다. 12/3–4 검증으로 수치를 재평가하고 11/27 PREP 상태전이 문서에 30초 PREP·201/503·late CAS 계약을 연결한다. 사용자 요청 ID 및 request_key/body digest로 수락 멱등성 보장. 상태 전이는 active → done 또는 active → stopping → stopped; terminal 재개 금지. 복구용 새 status 작업은 별도 읽기 전용 기록으로 남긴다.
 
 ### 6.2 계약 고정·변경 이력
 
-현재 검토 기준 S1.0의 기계 판독 계약 [openapi.json](submission-v1/openapi.json), 합성 사례 [examples.json](submission-v1/examples.json), DB [001_init.sql](submission-v1/001_init.sql) 및 [002_observation.sql](submission-v1/002_observation.sql). 31개 예시의 필수 필드/타입·경로·응답 코드 및 읽기 전용/결과 불변조건 제한적 검사를 [api-structural-check.json](submission-v1/api-structural-check.json)에 기록. 실제 HTTP/DB/제품 시험 및 전체 OpenAPI validator 실행은 미실행이다. 변경은 원본에 반영 후 재프로젝션하고 Git commit으로 판을 고정한다.
+현재 검토 기준 S1.0의 기계 판독 계약 [openapi.json](submission-v1/openapi.json), 합성 사례 [examples.json](submission-v1/examples.json), DB [001_init.sql](submission-v1/001_init.sql) 및 [002_observation.sql](submission-v1/002_observation.sql). 41개 예시의 필수 필드/타입·경로·응답 코드 및 읽기 전용/결과 불변조건 제한적 검사를 [api-structural-check.json](submission-v1/api-structural-check.json)에 기록. 실제 HTTP/DB/제품 시험 및 전체 OpenAPI validator 실행은 미실행이다. 변경은 원본에 반영 후 재프로젝션하고 Git commit으로 판을 고정한다.
 
 이전 구현 기준은 [6bd597e 이전 제출용 /v1 문서](https://github.com/ik-e/chaja-you/blob/6bd597ed858cfa9f29391079e43ba9eba5fb6afa/docs/step2/API_설계_문서.md), [공통 V1](../artifacts/design/lesson-registration-20261124/common-integration-v1.json), [V4.1](../artifacts/design/lesson-registration-20261124/data-schema-v4.1.json), [기존 replay](../../product/lesson-registration/fixtures/shared/replay.json)로 보존. /v2는 원본 버전, 외부 객체, 독립 업무/job, 상태 관측·증거와 별도 미확인 해소로 확장. S1.0 보완판은 수정·갱신·조회 계약과 사례, 정보·범위 승인 및 게시 객체 결과 연결을 추가했다. 기존 /v1 독립 시험과 새 설계 검증을 혼동하지 않는다. 개발 전용 문서는 localhost/인증된 개발 환경으로 제한하며 제품 공개 금지.

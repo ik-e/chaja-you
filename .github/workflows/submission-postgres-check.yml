@@ -1,0 +1,38 @@
+name: submission-postgres-check
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/step2/submission-v1/00[1-5]*.sql'
+      - 'docs/step2/submission-v1/check_postgres.sh'
+      - '.github/workflows/submission-postgres-check.yml'
+permissions:
+  contents: read
+jobs:
+  synthetic-pg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: synthetic_only_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: synthetic_only_ci
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install client
+        run: command -v psql || (sudo apt-get update && sudo apt-get install -y postgresql-client)
+      - name: Independent synthetic SQL check
+        run: bash docs/step2/submission-v1/check_postgres.sh

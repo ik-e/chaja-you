@@ -13,7 +13,7 @@
     "docs/human/phase-intents/PHASE-20261126-01.md",
     "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md"
   ],
-  "scope": "제출 후보 문서 보완과 일정 후보 갱신; 기존 TASK/owner/계약/교육 마감 변경 없음. mock-only 유지. 12/8 크몽 우선 시연은 제안, 숨고 및 22 gate 유지. 2차 피드백 전 최종 제출 아님. API/DB 제출 후보의 피드백 8건 추가. 11/26 새 설계 단계(PHASE-20261126-01) 우선; 기존 구현 TASK 보류, PostgreSQL 목표 방향과 실제 cutover 구분. 제출 본문은 V1.2 F01~F29/E01~E05를 중심으로 재구성; 기존 최초 등록 API/DB/22 gate는 비교 및 재사용 근거. 현행 독립 조사 진행 상태 스냅샷을 WBS에 반영. S1.0 잠정 제출 설계값과 프로젝션 원본 확정, 실제 TASK 및 제품 변경 없음. S1.0 내용 재검토 보완: V1.2 관리 일정/사례, job_id/게시 객체/별도 읽기 전용 재확인, DDL 시험과 피드백 대응 정합.",
+  "scope": "제출 후보 문서 보완과 일정 후보 갱신; 기존 TASK/owner/계약/교육 마감 변경 없음. mock-only 유지. 12/8 크몽 우선 시연은 제안, 숨고 및 22 gate 유지. 2차 피드백 전 최종 제출 아님. API/DB 제출 후보의 피드백 8건 추가. 11/26 새 설계 단계(PHASE-20261126-01) 우선; 기존 구현 TASK 보류, PostgreSQL 목표 방향과 실제 cutover 구분. 제출 본문은 V1.2 F01~F29/E01~E05를 중심으로 재구성; 기존 최초 등록 API/DB/22 gate는 비교 및 재사용 근거. 현행 독립 조사 진행 상태 스냅샷을 WBS에 반영. S1.0 잠정 제출 설계값과 프로젝션 원본 확정, 실제 TASK 및 제품 변경 없음. S1.0 내용 재검토 보완: V1.2 관리 일정/사례, job_id/게시 객체/별도 읽기 전용 재확인, DDL 시험과 피드백 대응 정합. 11/26 2차 피드백 12개 요약 및 제출 프로젝션 반영. 실제 시험·공식 접수 전.",
   "items": [
     {
       "id": "P1",
@@ -176,6 +176,114 @@
       "revision": "job_id→effect/observation/evidence→result_object_id 및 별도 읽기 전용 reconciliation. 30/90일 보존, unknown 보호·삭제/백업·비밀 제외와 PG 시험.",
       "remaining": "법적·운영 정책 검토, 삭제/복원/비밀 canary 및 실제 시험",
       "status": "document_projection_prepared"
+    },
+    {
+      "id": "P2R1",
+      "deliverable": "DLV-01",
+      "summary": "첫 시연 필수 조건",
+      "section": "2.0",
+      "revision": "D01–D06 F 매핑, 재접속 포함, 12/4 축소·12/7 동결.",
+      "remaining": "실제 동일 후보 시험",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "P2R2",
+      "deliverable": "DLV-01",
+      "summary": "시연/MVP/후속",
+      "section": "2.0",
+      "revision": "크몽 1건, 두 플랫폼 MVP, 갱신 후속; WBS 일치.",
+      "remaining": "실제 범위 결정 시 동시 갱신",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "P2R3",
+      "deliverable": "DLV-01",
+      "summary": "동일 자료 시간 절감",
+      "section": "3.2",
+      "revision": "동일 D01–D06, 직접 시간/검수/재작업 미측정표.",
+      "remaining": "12/4 입력 고정 및 12/7 측정",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "W2R1",
+      "deliverable": "DLV-02",
+      "summary": "11/27 상태전이·재개",
+      "section": "2.0",
+      "revision": "재개 결정·담당 공수/가능일 확인 계획.",
+      "remaining": "11/27 DLV-05 및 R01 결정/담당 확인",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "W2R2",
+      "deliverable": "DLV-02",
+      "summary": "12/3 인수·12/4 통합",
+      "section": "1, 2.0",
+      "revision": "합성 PREP 선행, 교체·부분 판정·동결 간트.",
+      "remaining": "실제 인수/재시험",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "W2R3",
+      "deliverable": "DLV-02",
+      "summary": "시험 실행판",
+      "section": "3",
+      "revision": "이전 날짜/커밋/로그와 새 동일 후보 및 D01–D06/제품 gate 분리.",
+      "remaining": "신규 실행 기록",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "A2R1",
+      "deliverable": "DLV-03",
+      "summary": "크몽 /v2 순서",
+      "section": "3.0",
+      "revision": "호출 순서 및 schema/상태/합성 사례.",
+      "remaining": "12/3 앱 계약 인수",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "A2R2",
+      "deliverable": "DLV-03",
+      "summary": "두 가상 계정 HTTP",
+      "section": "4.1",
+      "revision": "401/404/목록/타 owner 실행 0 시험표·합성 사례.",
+      "remaining": "실제 /v2 HTTP 미실행",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "A2R3",
+      "deliverable": "DLV-03",
+      "summary": "PREP·readback 실패",
+      "section": "6.1, 4.1",
+      "revision": "PREP 30초, readback 15초, retry 0, 201/503/unknown.",
+      "remaining": "11/27 상태전이 동기화 및 12/3–4 실제 시험",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "D2R1",
+      "deliverable": "DLV-04",
+      "summary": "PG 적용·FK",
+      "section": "6.1",
+      "revision": "초기 SQL 오류 수정, 독립 PG 합성 검사, role/명령/결과 표.",
+      "remaining": "실제 SQL CI 및 실제 앱 연결",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "D2R2",
+      "deliverable": "DLV-04",
+      "summary": "동시 및 재확인",
+      "section": "3.3, 6.1",
+      "revision": "SQL UNIQUE/lease 및 005 검증, 실제 효과 count 요구.",
+      "remaining": "실제 HTTP 동시/모의 접수 1회",
+      "status": "document_projection_prepared"
+    },
+    {
+      "id": "D2R3",
+      "deliverable": "DLV-04",
+      "summary": "보존/백업 삭제",
+      "section": "5.1, 6.1",
+      "revision": "unknown 30일 검토·12/3 정책·12/30 복원 시험.",
+      "remaining": "실제 운영 정책 및 복구 검증",
+      "status": "document_projection_prepared"
     }
   ],
   "next": "팀 확인 및 2차 피드백 요청 → 의견 반영 → PDF 및 간트 캡처/편집 원본 팀 Drive → 대시보드 링크/수정일/실제 상태 업데이트",
@@ -207,6 +315,7 @@
     "d0ef345725dffd6f137406e57db3c6a41fb15354",
     "ced14b622dca5b1c96aeb0e8cf73b5668bfba458",
     "bb73955af88c4c7b41255f0d8b5c5c2de213d2cd",
-    "efda19db752e1c81f6707652e64ad1c9cdc3718d"
+    "efda19db752e1c81f6707652e64ad1c9cdc3718d",
+    "ef6ca8d1cbf3feb7a162e14be7d72dea685ebf97"
   ]
 }

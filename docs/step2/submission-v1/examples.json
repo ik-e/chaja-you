@@ -1282,6 +1282,336 @@
         }
       },
       "note": "확인 작업 자체 성공과 과거 효과 미도달은 별개. 신뢰 가능한 미도달 확증만 슬롯 해제 후보; 새 승인 필요."
+    },
+    {
+      "id": "demo_session",
+      "method": "GET",
+      "path": "/v2/session",
+      "status": 200,
+      "response_schema": "Session",
+      "response": {
+        "user_id": "00000000-0000-4000-8000-000000000001",
+        "csrf_token": "synthetic-not-valid",
+        "expires_at": "2026-11-26T09:00:00Z"
+      }
+    },
+    {
+      "id": "demo_lesson_saved",
+      "method": "POST",
+      "path": "/v2/lessons",
+      "status": 201,
+      "response_schema": "Lesson",
+      "response": {
+        "lesson_id": "00000000-0000-4000-8000-000000000011",
+        "title": "합성 기타 레슨",
+        "version_id": "00000000-0000-4000-8000-000000000021",
+        "version_no": 1,
+        "raw_text": "월 4회 90분, 25만원/30만원 상충 합성 원본",
+        "assets": [
+          {
+            "asset_id": "00000000-0000-4000-8000-000000000031",
+            "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "mime": "image/png",
+            "byte_count": 123,
+            "rights_confirmed": true
+          }
+        ],
+        "deletion_requested_at": null
+      },
+      "request": {
+        "title": "합성 기타 레슨",
+        "raw_text": "월 4회 90분, 25만원/30만원 상충 합성 원본",
+        "asset_ids": [
+          "00000000-0000-4000-8000-000000000031"
+        ]
+      },
+      "request_schema": "SourceInput"
+    },
+    {
+      "id": "demo_profile_list",
+      "method": "GET",
+      "path": "/v2/platforms/profiles",
+      "status": 200,
+      "response_schema": "ProfileList",
+      "response": {
+        "items": [
+          {
+            "profile_id": "00000000-0000-4000-8000-000000000041",
+            "platform_id": "PL01",
+            "object_kind": "service_listing",
+            "operation": "create",
+            "version": "mock-v1",
+            "policy_status": "unknown",
+            "mock_supported": true
+          }
+        ],
+        "next_cursor": null
+      }
+    },
+    {
+      "id": "demo_price_resolved",
+      "method": "PATCH",
+      "path": "/v2/requests/{request_id}",
+      "status": 200,
+      "response_schema": "WorkRequest",
+      "response": {
+        "request_id": "00000000-0000-4000-8000-000000000061",
+        "lesson_id": "00000000-0000-4000-8000-000000000011",
+        "version_id": "00000000-0000-4000-8000-000000000021",
+        "profile_id": "00000000-0000-4000-8000-000000000041",
+        "operation": "create",
+        "revision": 2,
+        "draft_status": "ready",
+        "preparation": {
+          "ready": true,
+          "values": {
+            "amount_vat_included_krw": 250000,
+            "minutes_per_session": 90,
+            "sessions": 4
+          },
+          "facts": [
+            {
+              "fact_id": "price-confirmed",
+              "path": "price",
+              "value": 250000,
+              "origin": {
+                "kind": "answer",
+                "ref": "answer-price",
+                "locator": "강사 확인"
+              }
+            }
+          ],
+          "issues": [],
+          "provenance": [
+            {
+              "field": "/amount_vat_included_krw",
+              "kind": "user_choice",
+              "fact_refs": [
+                "price-confirmed"
+              ]
+            }
+          ]
+        },
+        "auth": {
+          "state": "none",
+          "generation": null,
+          "account_id": null,
+          "account_label": null
+        },
+        "object_id": null,
+        "review": null,
+        "job_id": null,
+        "job_state": null
+      },
+      "request": {
+        "expected_revision": 1,
+        "corrections": [
+          {
+            "field": "/amount_vat_included_krw",
+            "value": 250000
+          }
+        ],
+        "reject": false
+      },
+      "request_schema": "PatchRequest"
+    },
+    {
+      "id": "demo_auth_open",
+      "method": "POST",
+      "path": "/v2/requests/{request_id}/authentication",
+      "status": 200,
+      "response_schema": "AuthResponse",
+      "response": {
+        "request": {
+          "request_id": "00000000-0000-4000-8000-000000000061",
+          "lesson_id": "00000000-0000-4000-8000-000000000011",
+          "version_id": "00000000-0000-4000-8000-000000000021",
+          "profile_id": "00000000-0000-4000-8000-000000000041",
+          "operation": "create",
+          "revision": 2,
+          "draft_status": "ready",
+          "preparation": {
+            "ready": true,
+            "values": {
+              "amount_vat_included_krw": 250000,
+              "minutes_per_session": 90,
+              "sessions": 4
+            },
+            "facts": [
+              {
+                "fact_id": "price-confirmed",
+                "path": "price",
+                "value": 250000,
+                "origin": {
+                  "kind": "answer",
+                  "ref": "answer-price",
+                  "locator": "강사 확인"
+                }
+              }
+            ],
+            "issues": [],
+            "provenance": [
+              {
+                "field": "/amount_vat_included_krw",
+                "kind": "user_choice",
+                "fact_refs": [
+                  "price-confirmed"
+                ]
+              }
+            ]
+          },
+          "auth": {
+            "state": "human",
+            "generation": 1,
+            "account_id": null,
+            "account_label": null
+          },
+          "object_id": null,
+          "review": null,
+          "job_id": null,
+          "job_state": null
+        }
+      },
+      "request": {
+        "action": "open",
+        "expected_revision": 2
+      },
+      "request_schema": "AuthInput"
+    },
+    {
+      "id": "demo_auth_finish",
+      "method": "POST",
+      "path": "/v2/requests/{request_id}/authentication",
+      "status": 200,
+      "response_schema": "AuthResponse",
+      "response": {
+        "request": {
+          "request_id": "00000000-0000-4000-8000-000000000061",
+          "lesson_id": "00000000-0000-4000-8000-000000000011",
+          "version_id": "00000000-0000-4000-8000-000000000021",
+          "profile_id": "00000000-0000-4000-8000-000000000041",
+          "operation": "create",
+          "revision": 3,
+          "draft_status": "ready",
+          "preparation": {
+            "ready": true,
+            "values": {
+              "amount_vat_included_krw": 250000,
+              "minutes_per_session": 90,
+              "sessions": 4
+            },
+            "facts": [
+              {
+                "fact_id": "price-confirmed",
+                "path": "price",
+                "value": 250000,
+                "origin": {
+                  "kind": "answer",
+                  "ref": "answer-price",
+                  "locator": "강사 확인"
+                }
+              }
+            ],
+            "issues": [],
+            "provenance": [
+              {
+                "field": "/amount_vat_included_krw",
+                "kind": "user_choice",
+                "fact_refs": [
+                  "price-confirmed"
+                ]
+              }
+            ]
+          },
+          "auth": {
+            "state": "verified",
+            "generation": 1,
+            "account_id": "00000000-0000-4000-8000-000000000051",
+            "account_label": "합성 계정 A"
+          },
+          "object_id": null,
+          "review": {
+            "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "values": {
+              "amount_vat_included_krw": 250000,
+              "minutes_per_session": 90,
+              "sessions": 4
+            },
+            "asset_digests": [
+              "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            ],
+            "platform_id": "PL01",
+            "object_kind": "service_listing",
+            "operation": "create",
+            "account_id": "00000000-0000-4000-8000-000000000051",
+            "object_id": null,
+            "target_slot": "lesson11-slot1",
+            "before": null,
+            "notice": "모의 등록만 허용"
+          },
+          "job_id": null,
+          "job_state": null
+        }
+      },
+      "request": {
+        "action": "finish",
+        "expected_revision": 2,
+        "generation": 1
+      },
+      "request_schema": "AuthInput"
+    },
+    {
+      "id": "demo_foreign_lesson",
+      "method": "GET",
+      "path": "/v2/lessons/{lesson_id}",
+      "status": 404,
+      "response_schema": "Error",
+      "response": {
+        "code": "NOT_FOUND",
+        "message": "원본을 찾을 수 없습니다."
+      }
+    },
+    {
+      "id": "demo_foreign_start",
+      "method": "POST",
+      "path": "/v2/requests/{request_id}/start",
+      "status": 404,
+      "response_schema": "Error",
+      "response": {
+        "code": "NOT_FOUND",
+        "message": "작업을 찾을 수 없습니다."
+      },
+      "request": {
+        "expected_revision": 3,
+        "review_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "approved": true,
+        "request_key": "synthetic-start-1",
+        "information_approved": true,
+        "scope_approved": true
+      },
+      "request_schema": "Start"
+    },
+    {
+      "id": "demo_expired_session",
+      "method": "GET",
+      "path": "/v2/jobs/{job_id}",
+      "status": 401,
+      "response_schema": "Error",
+      "response": {
+        "code": "UNAUTHENTICATED",
+        "message": "서비스 세션이 만료되었습니다."
+      }
+    },
+    {
+      "id": "demo_owner_list",
+      "method": "GET",
+      "path": "/v2/lessons",
+      "status": 200,
+      "response_schema": "LessonList",
+      "response": {
+        "items": [],
+        "next_cursor": null
+      }
     }
   ]
 }
