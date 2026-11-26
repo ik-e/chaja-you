@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "id": "TASK-059",
+  "kind": "task",
+  "status": "할 일",
+  "owner": "R03",
+  "suggested_owner": null,
+  "due": "2026-11-26",
+  "depends_on": [],
+  "submission_ids": [],
+  "required_for_submission": false,
+  "updated_at": "2026-11-26",
+  "title": "사용자 스토리 독립 도출 및 누락 검토 (R03)",
+  "question": "기획 V1.2의 사용자 행동을 독립적으로 분해하고 정상·오류·예외·반복 흐름에서 기존 후보에 빠진 행동과 결정 필요한 범위를 발견할 수 있는가?",
+  "goal": "R01의 사용자 스토리 통합 및 서비스 범위 판단에 독립 행동 후보와 누락/분기 검토 근거를 제공한다.",
+  "inputs": [
+    "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+    "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
+    "docs/human/phase-intents/PHASE-20261126-01.md",
+    "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md",
+    "docs/artifacts/meetings/MEET-20261125-01.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+    "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+    "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json",
+    "docs/members/R03/workspace/2026-11-23_lesson-requirements-validation.md"
+  ],
+  "scope": [
+    "오늘 오후: 독립 행동 도출 우선. F01~F29 전체와 E01~E05 조건부 별도, 진입·계정·소유권·원본·첨부·정보 확인/보완·권한/인증·대상 확인·승인·업무 요청·결과/이력·조회·실패/미확인/부분 성공·안전한 재시도·삭제/연결 해제·종료를 검토한다. 필요한 행동의 실제 범위는 후보로 남긴다.",
+    "SVO 단일 사용자 행동을 공통 record_fields로 작성하고 시스템 이벤트와 분리한다. 정상/오류/예외/반복/조건부, 후속 행동 ID 및 종료·미확인을 구분한다. 피처 직접 연결 및 지원 행동 근거와 범위 후보를 표시한다.",
+    "독립 도출 이후 기존 3인 조사·R01 통합 후보와 차이/누락/복합 행동·분기·충돌 검토. 기존 조사와 실제 플랫폼 화면 근거를 재사용할 수 있으나 별도 7개 플랫폼 전수 조사 의무 없음. R05 main 빈 양식은 결과가 아니므로 실제 조사 브랜치/commit을 확인해 출처를 고정한다.",
+    "오늘 확보 가능한 1차 결과 인계 우선. 미검토·미확인은 이유와 후속 확인 방법을 기록하고 허위 완료 금지. R01 통합은 병행하며 최종 범위 및 DB/API 판단은 R01 책임.",
+    "R03 소유 원본과 TASK result만 변경. 기존 TASK-050 포함 TASK-048~054 보류, DB/API/상세 UI/신규 구현·실제 로그인/인증정보 취급·외부 실행 금지."
+  ],
+  "outputs": [
+    "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json"
+  ],
+  "acceptance": [
+    "S1: F01~F29 전체 및 E01~E05 조건부 별도를 검토 대상으로 삼고 각 피처에 단일 SVO 행동/시스템 이벤트 또는 내부 기능·적용 없음·미검토 사유를 연결한다. 기획에서 불명확한 지원 행동은 필요 근거와 undecided로 기록한다.",
+    "S2: 사용자 행동을 정상·오류·예외·반복·조건부에서 명세하고 각 행동의 조건·대상·입력·관찰 결과·후속 행동 또는 종료/미확인, 범위 후보·근거를 기존 user_story.record_fields 형식으로 기록한다. 사용자 행동과 시스템 이벤트를 분리한다.",
+    "S3: 피처→행동/이벤트 및 행동→피처 또는 지원 근거 연결, 복합 행동·중복·분기 누락을 자체 검토한다. 독립 도출 이후 기존 팀원 및 R01 후보와 대조해 차이·누락·충돌을 별도 기록한다. 같은 원본을 독립 증거로 중복 계산하지 않는다.",
+    "S4: 지정 JSON 원본과 TASK result에 실제 검토한 범위, 원본 경로/commit, 자체 점검, 미검토·미확인 사유, 범위 결정 요청을 남긴다. 기존 조사 재사용 시 출처·확인 수준을 보존한다. 실제 외부 실행·공통 설계 확정 없음."
+  ],
+  "verification": [
+    "피처 34개 검토/미검토 표와 정방향·역방향 참조 검사",
+    "단일 SVO 행동과 시스템 이벤트 분리, 정상/오류/예외/반복/조건부·분기/종료 검토",
+    "기존 후보 비교에서 원본 story ID·commit·근거와 새 행동/차이/누락 연결",
+    "TASK-059 result에 실제 수행 범위와 미충족 기준/근거·결정 요청 기록. 최종 완전성·범위 승인은 R01."
+  ],
+  "references": [
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
+    },
+    {
+      "path": "docs/artifacts/meetings/MEET-20261125-01.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+    }
+  ],
+  "result": null,
+  "traceability": {
+    "intent_refs": [
+      "docs/human/INTENT.md",
+      "docs/human/phase-intents/PHASE-20261126-01.md",
+      "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
+    ],
+    "design_refs": [],
+    "requirement_refs": [],
+    "evaluation_refs": [],
+    "product_spec_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+    "proposal_feature_refs": [
+      "F01",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F11",
+      "F12",
+      "F13",
+      "F14",
+      "F15",
+      "F16",
+      "F17",
+      "F18",
+      "F19",
+      "F20",
+      "F21",
+      "F22",
+      "F23",
+      "F24",
+      "F25",
+      "F26",
+      "F27",
+      "F28",
+      "F29",
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05"
+    ]
+  },
+  "validation_plan": {
+    "question": "독립적인 행동 도출과 분기·누락 검토가 R01 통합에 사용할 실제 근거를 제공하는가?",
+    "observables": [
+      "S1: F01~F29 전체 및 E01~E05 조건부 별도를 검토 대상으로 삼고 각 피처에 단일 SVO 행동/시스템 이벤트 또는 내부 기능·적용 없음·미검토 사유를 연결한다. 기획에서 불명확한 지원 행동은 필요 근거와 undecided로 기록한다.",
+      "S2: 사용자 행동을 정상·오류·예외·반복·조건부에서 명세하고 각 행동의 조건·대상·입력·관찰 결과·후속 행동 또는 종료/미확인, 범위 후보·근거를 기존 user_story.record_fields 형식으로 기록한다. 사용자 행동과 시스템 이벤트를 분리한다.",
+      "S3: 피처→행동/이벤트 및 행동→피처 또는 지원 근거 연결, 복합 행동·중복·분기 누락을 자체 검토한다. 독립 도출 이후 기존 팀원 및 R01 후보와 대조해 차이·누락·충돌을 별도 기록한다. 같은 원본을 독립 증거로 중복 계산하지 않는다.",
+      "S4: 지정 JSON 원본과 TASK result에 실제 검토한 범위, 원본 경로/commit, 자체 점검, 미검토·미확인 사유, 범위 결정 요청을 남긴다. 기존 조사 재사용 시 출처·확인 수준을 보존한다. 실제 외부 실행·공통 설계 확정 없음."
+    ],
+    "success_condition": "S1~S4 실제 충족, 검토 근거/ID와 미확인 기록 존재; 1차 부분 인계는 완료 판정과 구분.",
+    "unknown_condition": "시간 또는 증거 부족으로 미검토·미확인인 피처/행동·분기는 이유와 재확인 방법을 남기고 inconclusive."
+  },
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
+  "intent_ref": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md",
+  "registration_authority_ref": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md",
+  "assignment_mode": "assigned",
+  "assignment_status": "배정 등록 · 오후 1차 인계 목표 · 수신/착수 미확인",
+  "workspace_path": "docs/artifacts/planning/lesson-registration-20261126/R03/",
+  "owned_paths": [
+    "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json"
+  ],
+  "priority_note": "오후 사용자 스토리 우선; 별도 7개 플랫폼 전수 조사 및 기존 구현 재개 제외. R01의 TASK-058을 지원."
+}
