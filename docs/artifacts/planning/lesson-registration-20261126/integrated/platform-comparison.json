@@ -39,9 +39,9 @@
     },
     "stories": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
-      "commit": "r01/task-058-story-integration-20261126",
-      "blob": "223021b45aaf031bcdfec722d24419b6926f68ed",
-      "url": "https://github.com/ik-e/chaja-you/blob/r01/task-058-story-integration-20261126/docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+      "commit": "62aa774ed08ed710e924530972f8442d37a69a84",
+      "blob": "65494b884f7e41824b86d88fdd8d758bb507f2dc",
+      "url": "https://github.com/ik-e/chaja-you/blob/62aa774ed08ed710e924530972f8442d37a69a84/docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
     },
     "r05_detail_pl01": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/R05/kmong-db-research.json",
@@ -15474,5 +15474,6 @@
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/R05/hiphople-db-research.json"
     }
-  ]
+  ],
+  "source_revision_note": "통합 스토리의 고위험 분기 보완 후 동일 107개 ID 및 원본 매핑을 재확인하고 불변 commit/blob으로 고정. 플랫폼 필드/업무/스토리 연결은 변경하지 않음."
 }
