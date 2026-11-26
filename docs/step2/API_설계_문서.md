@@ -46,6 +46,104 @@
 
 ## 3. 엔드포인트별 상세 계약
 
+### 3.0 12/8 크몽형 호출 순서
+
+| 단계 | API | 입력 | 정상 응답 및 상태 |
+| --- | --- | --- | --- |
+| D01 원본·사진 저장 | POST /v2/assets; POST /v2/lessons | multipart 권리 확인; SourceInput | 201 Asset/Lesson |
+| D02 크몽형 준비·가격 확인 | GET /v2/platforms/profiles; POST /v2/requests; PATCH /v2/requests/{request_id} | NewRequest/PatchRequest | 201 WorkRequest blocked → 200 ready |
+| D03 직접 인증 | POST /v2/requests/{request_id}/authentication (open/finish) | AuthInput + generation | 200 AuthResponse |
+| D04 정보·범위 승인 | GET /v2/requests/{request_id}; POST /v2/requests/{request_id}/start | Review/Start | 200 WorkRequest; 202 Job |
+| D05 모의 접수·독립 확인 | 수락된 worker 실행; GET /v2/jobs/{job_id} | 승인 scope; job_id | 200 Job |
+| D06 재접속 저장 결과 | GET /v2/session; GET /v2/jobs/{job_id}; GET /v2/jobs | 서비스 세션; 기존 job_id | 200 Job/JobList |
+
+[OpenAPI](submission-v1/openapi.json) 및 [합성 사례](submission-v1/examples.json): D01 demo_asset_saved, demo_lesson_saved; D02 demo_profile_list, price_conflict, demo_price_resolved, demo_missing_description, demo_invalid_amount; D03 demo_auth_open/finish; D04 ready_review/start_accepted; D05 confirmed/unknown/same_start_replay; D06 demo_session/confirmed/unknown. 실제 인증 토큰은 예시에 포함하지 않으며 모의 외부 접근만 허용한다. 
+```json
+{
+  "expected_revision": 1,
+  "corrections": [
+    {
+      "field": "/amount_vat_included_krw",
+      "value": 250000
+    }
+  ],
+  "reject": false
+}
+```
+```json
+{
+  "expected_revision": 3,
+  "review_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "approved": true,
+  "request_key": "synthetic-start-1",
+  "information_approved": true,
+  "scope_approved": true
+}
+```
+12/3 합성 PREP로 실제 앱 응답·상태·권한 검증, 12/4 PREP 교체 후 동일 후보 D01–D06 재시험. 재접속 후 검증 세션으로 같은 job_id·결과·근거 조회, 외부 효과 0.
+
+
+### 3.0.1 크몽형 합성 필수 입력 및 검증
+
+[모의 프로필](submission-v1/kmong-demo-profile.json)은 11/26 R02 사용자 화면 확인 중 해당 레슨 카테고리·단일 STANDARD·온라인 사례에 한정한다. 실제 플랫폼 전체 필수값·가격 상한·운영사 허용 검증이 아니다. 작업 기간/수정 횟수는 합성 원본에 명시한 사용자 선택값으로 사용하며 공식 의미를 추정하지 않는다.
+
+| 필드명 | 모의 입력 규칙 |
+| --- | --- |
+| title | 10–30자 |
+| category_path | ["취미 레슨","보컬·랩 레슨","랩 레슨"] |
+| description | 100–20000자 |
+| recruitment_types | 개인레슨 / 그룹교육 / 기업강의 중 1–3개 |
+| main_image_asset_ids | 1–4장, PNG/JPEG, 권리 확인·소유권·bytes/digest 검사(앱) |
+| service_procedure | 50–20000자 |
+| client_preparation | 50–20000자 |
+| regions | 1–5개, 온라인 장소 명시 |
+| package_mode | "STANDARD" |
+| package_title | 1–20자 |
+| package_description | 1–60자 |
+| amount_vat_included_krw | 5000 이상, 1000 단위 |
+| work_period_days | 1–90 |
+| revision_count | 0–15 |
+| minutes_per_session | 30–540, 15 단위 |
+| sessions | 1–50 |
+
+D02 준비 완료 values 예시(가상):
+
+```json
+{
+  "title": "초보자를 위한 랩 기초 개인레슨",
+  "category_path": [
+    "취미 레슨",
+    "보컬·랩 레슨",
+    "랩 레슨"
+  ],
+  "description": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+  "recruitment_types": [
+    "개인레슨"
+  ],
+  "main_image_asset_ids": [
+    "00000000-0000-4000-8000-000000000031"
+  ],
+  "service_procedure": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+  "client_preparation": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+  "regions": [
+    {
+      "type": "온라인",
+      "meeting_place": "온라인 화상 수업"
+    }
+  ],
+  "package_mode": "STANDARD",
+  "package_title": "랩 기초 4회",
+  "package_description": "90분 개인 온라인 레슨 총 4회",
+  "amount_vat_included_krw": 250000,
+  "work_period_days": 30,
+  "revision_count": 0,
+  "minutes_per_session": 90,
+  "sessions": 4
+}
+```
+
+모든 값은 원문 또는 사용자 확인 답변과 provenance로 연결한다. D01에서 저장한 첨부 ID·권리·digest를 연결하고, D04 승인 및 D05 독립 확인의 전체 값·첨부와 일치해야 한다. 가격만 확인하고 나머지 필수값이 부족하면 ready=true가 될 수 없다. 설명 누락과 가격 단위 위반은 각각 demo_missing_description/demo_invalid_amount의 blocked·review/job=null, 외부 효과 0이다. 실제 bytes/소유권·플랫폼 허용 시험과는 구분한다.
+
 ### 3.1 핵심 요청·응답 필드
 
 **NewRequest**
@@ -255,7 +353,7 @@
 
 ### 3.2 대표 JSON 예시
 
-아래 값은 가상 설계 예시이며 실제 시험 결과가 아니다. 전체 사례 31개와 요청 body는 [examples.json](submission-v1/examples.json) 참조.
+아래 값은 가상 설계 예시이며 실제 시험 결과가 아니다. 전체 사례 44개와 요청 body는 [examples.json](submission-v1/examples.json) 참조.
 
 **가격 충돌 — POST /v2/requests, 201 차단 초안.** 원문 사실 두 값이 다르면 ready=false로 저장하고 확인 질문을 반환한다. 사용자가 PATCH에서 expected_revision과 확인값을 보내며, 충돌을 해소한 뒤 새 revision을 저장한다. 원본 자체의 사실을 수정해야 하는 경우 새 원본 버전을 사용한다.
 
@@ -270,8 +368,200 @@
   "draft_status": "blocked",
   "preparation": {
     "ready": false,
-    "values": {},
+    "values": {
+      "title": "초보자를 위한 랩 기초 개인레슨",
+      "category_path": [
+        "취미 레슨",
+        "보컬·랩 레슨",
+        "랩 레슨"
+      ],
+      "description": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+      "recruitment_types": [
+        "개인레슨"
+      ],
+      "main_image_asset_ids": [
+        "00000000-0000-4000-8000-000000000031"
+      ],
+      "service_procedure": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+      "client_preparation": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+      "regions": [
+        {
+          "type": "온라인",
+          "meeting_place": "온라인 화상 수업"
+        }
+      ],
+      "package_mode": "STANDARD",
+      "package_title": "랩 기초 4회",
+      "package_description": "90분 개인 온라인 레슨 총 4회",
+      "work_period_days": 30,
+      "revision_count": 0,
+      "minutes_per_session": 90,
+      "sessions": 4
+    },
     "facts": [
+      {
+        "fact_id": "fact-title",
+        "path": "title",
+        "value": "초보자를 위한 랩 기초 개인레슨",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "title"
+        }
+      },
+      {
+        "fact_id": "fact-category_path",
+        "path": "category_path",
+        "value": [
+          "취미 레슨",
+          "보컬·랩 레슨",
+          "랩 레슨"
+        ],
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "category_path"
+        }
+      },
+      {
+        "fact_id": "fact-description",
+        "path": "description",
+        "value": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "description"
+        }
+      },
+      {
+        "fact_id": "fact-recruitment_types",
+        "path": "recruitment_types",
+        "value": [
+          "개인레슨"
+        ],
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "recruitment_types"
+        }
+      },
+      {
+        "fact_id": "fact-main_image_asset_ids",
+        "path": "main_image_asset_ids",
+        "value": [
+          "00000000-0000-4000-8000-000000000031"
+        ],
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "main_image_asset_ids"
+        }
+      },
+      {
+        "fact_id": "fact-service_procedure",
+        "path": "service_procedure",
+        "value": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "service_procedure"
+        }
+      },
+      {
+        "fact_id": "fact-client_preparation",
+        "path": "client_preparation",
+        "value": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "client_preparation"
+        }
+      },
+      {
+        "fact_id": "fact-regions",
+        "path": "regions",
+        "value": [
+          {
+            "type": "온라인",
+            "meeting_place": "온라인 화상 수업"
+          }
+        ],
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "regions"
+        }
+      },
+      {
+        "fact_id": "fact-package_mode",
+        "path": "package_mode",
+        "value": "STANDARD",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "package_mode"
+        }
+      },
+      {
+        "fact_id": "fact-package_title",
+        "path": "package_title",
+        "value": "랩 기초 4회",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "package_title"
+        }
+      },
+      {
+        "fact_id": "fact-package_description",
+        "path": "package_description",
+        "value": "90분 개인 온라인 레슨 총 4회",
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "package_description"
+        }
+      },
+      {
+        "fact_id": "fact-work_period_days",
+        "path": "work_period_days",
+        "value": 30,
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "work_period_days"
+        }
+      },
+      {
+        "fact_id": "fact-revision_count",
+        "path": "revision_count",
+        "value": 0,
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "revision_count"
+        }
+      },
+      {
+        "fact_id": "fact-minutes_per_session",
+        "path": "minutes_per_session",
+        "value": 90,
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "minutes_per_session"
+        }
+      },
+      {
+        "fact_id": "fact-sessions",
+        "path": "sessions",
+        "value": 4,
+        "origin": {
+          "kind": "source",
+          "ref": "00000000-0000-4000-8000-000000000021",
+          "locator": "sessions"
+        }
+      },
       {
         "fact_id": "price-a",
         "path": "price",
@@ -302,7 +592,113 @@
         "blocking": true
       }
     ],
-    "provenance": []
+    "provenance": [
+      {
+        "field": "/title",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-title"
+        ]
+      },
+      {
+        "field": "/category_path",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-category_path"
+        ]
+      },
+      {
+        "field": "/description",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-description"
+        ]
+      },
+      {
+        "field": "/recruitment_types",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-recruitment_types"
+        ]
+      },
+      {
+        "field": "/main_image_asset_ids",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-main_image_asset_ids"
+        ]
+      },
+      {
+        "field": "/service_procedure",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-service_procedure"
+        ]
+      },
+      {
+        "field": "/client_preparation",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-client_preparation"
+        ]
+      },
+      {
+        "field": "/regions",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-regions"
+        ]
+      },
+      {
+        "field": "/package_mode",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-package_mode"
+        ]
+      },
+      {
+        "field": "/package_title",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-package_title"
+        ]
+      },
+      {
+        "field": "/package_description",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-package_description"
+        ]
+      },
+      {
+        "field": "/work_period_days",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-work_period_days"
+        ]
+      },
+      {
+        "field": "/revision_count",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-revision_count"
+        ]
+      },
+      {
+        "field": "/minutes_per_session",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-minutes_per_session"
+        ]
+      },
+      {
+        "field": "/sessions",
+        "kind": "direct",
+        "fact_refs": [
+          "fact-sessions"
+        ]
+      }
+    ]
   },
   "auth": {
     "state": "none",
@@ -380,7 +776,33 @@
         "object_id": "00000000-0000-4000-8000-000000000121",
         "native_status": "mock_received",
         "snapshot": {
+          "title": "초보자를 위한 랩 기초 개인레슨",
+          "category_path": [
+            "취미 레슨",
+            "보컬·랩 레슨",
+            "랩 레슨"
+          ],
+          "description": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+          "recruitment_types": [
+            "개인레슨"
+          ],
+          "main_image_asset_ids": [
+            "00000000-0000-4000-8000-000000000031"
+          ],
+          "service_procedure": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+          "client_preparation": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+          "regions": [
+            {
+              "type": "온라인",
+              "meeting_place": "온라인 화상 수업"
+            }
+          ],
+          "package_mode": "STANDARD",
+          "package_title": "랩 기초 4회",
+          "package_description": "90분 개인 온라인 레슨 총 4회",
           "amount_vat_included_krw": 250000,
+          "work_period_days": 30,
+          "revision_count": 0,
           "minutes_per_session": 90,
           "sessions": 4,
           "asset_digests": [
@@ -474,11 +896,39 @@ HTTP 200은 저장 결과를 읽었다는 뜻이지 업무 성공이 아니다. 
 {
   "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "values": {
+    "title": "초보자를 위한 랩 기초 개인레슨",
+    "category_path": [
+      "취미 레슨",
+      "보컬·랩 레슨",
+      "랩 레슨"
+    ],
+    "description": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+    "recruitment_types": [
+      "개인레슨"
+    ],
+    "main_image_asset_ids": [
+      "00000000-0000-4000-8000-000000000031"
+    ],
+    "service_procedure": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+    "client_preparation": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+    "regions": [
+      {
+        "type": "온라인",
+        "meeting_place": "온라인 화상 수업"
+      }
+    ],
+    "package_mode": "STANDARD",
+    "package_title": "랩 기초 4회",
+    "package_description": "90분 개인 온라인 레슨 총 4회",
     "amount_vat_included_krw": 300000,
+    "work_period_days": 30,
+    "revision_count": 0,
     "minutes_per_session": 90,
     "sessions": 4
   },
-  "asset_digests": [],
+  "asset_digests": [
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  ],
   "platform_id": "PL01",
   "object_kind": "service_listing",
   "operation": "update",
@@ -486,10 +936,39 @@ HTTP 200은 저장 결과를 읽었다는 뜻이지 업무 성공이 아니다. 
   "object_id": "00000000-0000-4000-8000-000000000121",
   "target_slot": "00000000-0000-4000-8000-000000000121",
   "before": {
+    "title": "초보자를 위한 랩 기초 개인레슨",
+    "category_path": [
+      "취미 레슨",
+      "보컬·랩 레슨",
+      "랩 레슨"
+    ],
+    "description": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+    "recruitment_types": [
+      "개인레슨"
+    ],
+    "main_image_asset_ids": [
+      "00000000-0000-4000-8000-000000000031"
+    ],
+    "service_procedure": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+    "client_preparation": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+    "regions": [
+      {
+        "type": "온라인",
+        "meeting_place": "온라인 화상 수업"
+      }
+    ],
+    "package_mode": "STANDARD",
+    "package_title": "랩 기초 4회",
+    "package_description": "90분 개인 온라인 레슨 총 4회",
     "amount_vat_included_krw": 250000,
+    "work_period_days": 30,
+    "revision_count": 0,
     "minutes_per_session": 90,
     "sessions": 4,
-    "native_status": "mock_received"
+    "native_status": "mock_received",
+    "asset_digests": [
+      "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    ]
   },
   "notice": "합성 모의 업무만 허용"
 }
@@ -557,10 +1036,39 @@ HTTP 200은 저장 결과를 읽었다는 뜻이지 업무 성공이 아니다. 
   "native_status": "mock_received",
   "last_confirmed_at": "2026-11-26T00:00:00Z",
   "last_confirmed_snapshot": {
+    "title": "초보자를 위한 랩 기초 개인레슨",
+    "category_path": [
+      "취미 레슨",
+      "보컬·랩 레슨",
+      "랩 레슨"
+    ],
+    "description": "랩을 처음 시작하는 수강생을 대상으로 진행하는 개인 레슨입니다. 기본 발성, 박자에 맞춘 리듬 연습, 가사 전달과 발음 점검, 짧은 벌스 작성 및 실습을 순서대로 진행합니다. 매회 연습 내용을 함께 점검하고 다음 수업에서 반복할 과제를 정리합니다. 수업은 온라인으로 진행하며 수강생의 연습 속도에 맞추어 과제를 조정합니다.",
+    "recruitment_types": [
+      "개인레슨"
+    ],
+    "main_image_asset_ids": [
+      "00000000-0000-4000-8000-000000000031"
+    ],
+    "service_procedure": "수강생의 학습 목표와 현재 연습 경험을 먼저 확인합니다. 기본 발성과 리듬을 점검한 뒤 가사 작성과 랩 실습을 진행하고 마지막에 연습 과제를 안내합니다.",
+    "client_preparation": "온라인 수업에 접속할 수 있는 기기와 이어폰을 준비해 주세요. 연습할 가사나 관심 있는 곡이 있다면 수업 전에 정리하고 조용한 공간에서 참여해 주세요.",
+    "regions": [
+      {
+        "type": "온라인",
+        "meeting_place": "온라인 화상 수업"
+      }
+    ],
+    "package_mode": "STANDARD",
+    "package_title": "랩 기초 4회",
+    "package_description": "90분 개인 온라인 레슨 총 4회",
     "amount_vat_included_krw": 250000,
+    "work_period_days": 30,
+    "revision_count": 0,
     "minutes_per_session": 90,
     "sessions": 4,
-    "native_status": "mock_received"
+    "native_status": "mock_received",
+    "asset_digests": [
+      "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    ]
   },
   "latest_attempt_outcome": "unavailable",
   "latest_attempt_at": "2026-11-26T01:00:00Z",
@@ -609,6 +1117,20 @@ HTTP 200은 저장 결과를 읽었다는 뜻이지 업무 성공이 아니다. 
 
 DB 복합 FK는 연결의 무결성을, 서비스는 세션에서 얻은 owner의 조회/변경 권한을 보장한다. 요청에서 owner를 받아 신뢰하지 않는다. 두 합성 사용자 목록·상세·연결·증거 주입·WS 및 start의 외부 효과 0을 실제 연결 시험한다.
 
+### 4.1 두 합성 계정 실제 HTTP 인수 시험 (12/3, R03 실행 후보·R01 검토)
+
+| 시험 ID | 입력 | 기대 결과 | 현재 |
+| --- | --- | --- | --- |
+| HTTP-01 | 세션 없음/만료 A 세션 | 401 | 미실행 |
+| HTTP-02 | B 세션으로 A 원본·요청·job ID | 404, 정보 미노출 | 미실행 |
+| HTTP-03 | B 목록 GET lessons/requests/jobs/objects 및 cursor | B 데이터만 | 미실행 |
+| HTTP-04 | B 세션으로 A 원본 연결·A 요청 start | 404, job/모의 접수 증가 0 | 미실행 |
+| HTTP-05 | A 동시 동일 start | 202/200 동일 job_id·접수 1회 | 미실행 |
+| HTTP-06 | PREP 제한/모델 오류/저장 불가 | 201 blocked 또는 503; 늦은 결과 저장 금지 | 미실행 |
+| HTTP-07 | 접수 응답 유실·독립 조회 성공/실패·재접속 | confirmed 또는 stopped/unknown; 재접수 0 | 미실행 |
+
+기존 /v1 SQLite 합성 HTTP 14건의 [11/25 실행 기록](../artifacts/runs/TASK-050-s8-http-20261125.json)은 이전 계약 근거이며 /v2 실제 HTTP 통과가 아니다. 새 시험은 실행일/commit/tree/명령/비밀 제거 요청응답/외부 효과 count를 남긴다.
+
 ## 5. Tool 정의 및 실행 계약
 
 | 내부 경계 | 입력 → 출력 | 실행 제한 |
@@ -636,10 +1158,10 @@ DB 복합 FK는 연결의 무결성을, 서비스는 세션에서 얻은 owner�
 }
 ```
 
-외부 실행은 1회 dispatch, 응답 유실 시 독립 조회만 허용. 사용자 요청 ID 및 request_key/body digest로 수락 멱등성 보장. 상태 전이는 active → done 또는 active → stopping → stopped; terminal 재개 금지. 복구용 새 status 작업은 별도 읽기 전용 기록으로 남긴다.
+외부 실행은 1회 dispatch, 응답 유실 시 독립 조회만 허용. 독립 확인은 전체 15초 제한(제출 설계 선택), 자동 읽기 재시도 0회. 신뢰 증거가 없으면 stopped/unknown, EFFECT_UNKNOWN 안내 및 관측 저장, 재접수 금지. 늦은 증거는 별도 read-only status 업무로 연결한다. 12/3–4 검증으로 수치를 재평가하고 [DLV-05 상태전이 설계](../step3/단일에이전트_상태전이그래프_설계서.md)에 30초 PREP·201/503·late CAS 계약을 연결했다. 사용자 요청 ID 및 request_key/body digest로 수락 멱등성 보장. 상태 전이는 active → done 또는 active → stopping → stopped; terminal 재개 금지. 복구용 새 status 작업은 별도 읽기 전용 기록으로 남긴다.
 
 ### 6.2 계약 고정·변경 이력
 
-현재 검토 기준 S1.0의 기계 판독 계약 [openapi.json](submission-v1/openapi.json), 합성 사례 [examples.json](submission-v1/examples.json), DB [001_init.sql](submission-v1/001_init.sql) 및 [002_observation.sql](submission-v1/002_observation.sql). 31개 예시의 필수 필드/타입·경로·응답 코드 및 읽기 전용/결과 불변조건 제한적 검사를 [api-structural-check.json](submission-v1/api-structural-check.json)에 기록. 실제 HTTP/DB/제품 시험 및 전체 OpenAPI validator 실행은 미실행이다. 변경은 원본에 반영 후 재프로젝션하고 Git commit으로 판을 고정한다.
+현재 검토 기준 S1.0의 기계 판독 계약 [openapi.json](submission-v1/openapi.json), 합성 사례 [examples.json](submission-v1/examples.json), DB [001_init.sql](submission-v1/001_init.sql) 및 [002_observation.sql](submission-v1/002_observation.sql). 44개 예시의 필수 필드/타입·경로·응답 코드 및 일부 불변조건 제한적 검사와 10개 모의 규칙·호출 연결 검사를 [api-structural-check.json](submission-v1/api-structural-check.json)에 기록. [독립 PostgreSQL 16.16 SQL 실행 결과](https://github.com/ik-e/chaja-you/actions/runs/45749134693)는 PG-01/02/07 통과(DB 설계 6.2). 실제 앱의 PostgreSQL 연결·HTTP·제품 시험 및 전체 OpenAPI validator 실행은 미실행이다. [합성 검사기](submission-v1/check_examples.mjs)를 문서 CI에서 실행한다. 변경은 원본에 반영 후 재프로젝션하고 Git commit으로 판을 고정한다.
 
 이전 구현 기준은 [6bd597e 이전 제출용 /v1 문서](https://github.com/ik-e/chaja-you/blob/6bd597ed858cfa9f29391079e43ba9eba5fb6afa/docs/step2/API_설계_문서.md), [공통 V1](../artifacts/design/lesson-registration-20261124/common-integration-v1.json), [V4.1](../artifacts/design/lesson-registration-20261124/data-schema-v4.1.json), [기존 replay](../../product/lesson-registration/fixtures/shared/replay.json)로 보존. /v2는 원본 버전, 외부 객체, 독립 업무/job, 상태 관측·증거와 별도 미확인 해소로 확장. S1.0 보완판은 수정·갱신·조회 계약과 사례, 정보·범위 승인 및 게시 객체 결과 연결을 추가했다. 기존 /v1 독립 시험과 새 설계 검증을 혼동하지 않는다. 개발 전용 문서는 localhost/인증된 개발 환경으로 제한하며 제품 공개 금지.

@@ -1056,7 +1056,7 @@
     "/v2/requests": {
       "post": {
         "operationId": "createRequest",
-        "description": "create/update/renew/status의 독립 초안 생성; 기존 unknown 확인은 related_job_id로 읽기 전용 상태 요청. 신규 외부 변경 없음",
+        "description": "create/update/renew/status의 독립 초안 생성; 기존 unknown 확인은 related_job_id로 읽기 전용 상태 요청. 신규 외부 변경 없음; PL01 최초 등록 모의 프로필 필수값·근거·첨부·규격을 모두 검증 후 ready=true (kmong-demo-profile.json).",
         "security": [
           {
             "appSession": []

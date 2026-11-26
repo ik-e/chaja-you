@@ -319,7 +319,7 @@ BEGIN
           )))
  ) THEN RAISE EXCEPTION 'result object mismatch' USING ERRCODE='23514'; END IF;
  RETURN NEW;
-END $;
+END $$;
 CREATE TRIGGER job_transition BEFORE INSERT OR UPDATE ON jobs FOR EACH ROW EXECUTE FUNCTION guard_job_transition();
 CREATE FUNCTION guard_admission() RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE s text; ep bigint;

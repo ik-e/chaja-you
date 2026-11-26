@@ -1,0 +1,113 @@
+{
+  "id": "KMONG-DEMO-MOCK-V1",
+  "profile_id": "00000000-0000-4000-8000-000000000041",
+  "platform_id": "PL01",
+  "operation": "create",
+  "version": "mock-v1",
+  "environment": "mock",
+  "policy_status": "unknown",
+  "basis": {
+    "source": "https://github.com/ik-e/chaja-you/blob/ef6ca8d1cbf3feb7a162e14be7d72dea685ebf97/docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json",
+    "date": "2026-11-26",
+    "scope": "관측된 레슨 카테고리·단일 STANDARD·온라인 합성 사례에 한정. 실제 플랫폼 전체 규칙·가격 상한·작업 기간/수정 횟수 공식 의미 및 자동화 허용 미확인."
+  },
+  "fields": {
+    "title": {
+      "type": "string",
+      "min": 10,
+      "max": 30
+    },
+    "category_path": {
+      "type": "exact",
+      "value": [
+        "취미 레슨",
+        "보컬·랩 레슨",
+        "랩 레슨"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "min": 100,
+      "max": 20000
+    },
+    "recruitment_types": {
+      "type": "choices",
+      "min": 1,
+      "max": 3,
+      "allowed": [
+        "개인레슨",
+        "그룹교육",
+        "기업강의"
+      ]
+    },
+    "main_image_asset_ids": {
+      "type": "asset_refs",
+      "min": 1,
+      "max": 4,
+      "mime": [
+        "image/png",
+        "image/jpeg"
+      ]
+    },
+    "service_procedure": {
+      "type": "string",
+      "min": 50,
+      "max": 20000
+    },
+    "client_preparation": {
+      "type": "string",
+      "min": 50,
+      "max": 20000
+    },
+    "regions": {
+      "type": "online_regions",
+      "min": 1,
+      "max": 5
+    },
+    "package_mode": {
+      "type": "exact",
+      "value": "STANDARD"
+    },
+    "package_title": {
+      "type": "string",
+      "min": 1,
+      "max": 20
+    },
+    "package_description": {
+      "type": "string",
+      "min": 1,
+      "max": 60
+    },
+    "amount_vat_included_krw": {
+      "type": "integer",
+      "min": 5000,
+      "step": 1000,
+      "base": 0
+    },
+    "work_period_days": {
+      "type": "integer",
+      "min": 1,
+      "max": 90,
+      "note": "합성 명시값, 공식 의미 미확인"
+    },
+    "revision_count": {
+      "type": "integer",
+      "min": 0,
+      "max": 15,
+      "note": "합성 명시값, 공식 의미 미확인"
+    },
+    "minutes_per_session": {
+      "type": "integer",
+      "min": 30,
+      "max": 540,
+      "step": 15,
+      "base": 30
+    },
+    "sessions": {
+      "type": "integer",
+      "min": 1,
+      "max": 50
+    }
+  },
+  "optional_scope": "상세 이미지·동영상·FAQ·가능일·옵션·오프라인 주소 등은 이번 합성 사례에서 선택하지 않음."
+}
