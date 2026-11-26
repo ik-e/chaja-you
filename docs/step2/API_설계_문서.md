@@ -35,11 +35,11 @@
 | POST /v2/requests/{request_id}/authentication | AuthInput | 200 AuthResponse | 외부 직접 인증, generation 검증, 메모리 grant |
 | GET /v2/requests/{request_id}/targets | — | 200 TargetChoiceList | 서버가 이미 관측한 대상만 반환 |
 | POST /v2/requests/{request_id}/target | SelectTarget | 200 WorkRequest | 검증된 대상 선택 및 revision 변경 |
-| POST /v2/requests/{request_id}/start | Start | 200 Job / 202 Job | 현재 revision, review_digest, 승인 scope, 권한 및 대상 일치 확인 후 job 영속 수락. 동일 key/body 200, 신규 202. status는 읽기 전용; 변경 업무의 불확실한 이전 효과는 차단. |
-| GET /v2/jobs/{job_id} | — | 200 Job | 저장된 진행·판정·증거 조회 |
+| POST /v2/requests/{request_id}/start | Start | 200 Job / 202 Job | 현재 revision, review_digest, 정보·범위 각각 명시 승인, 계정·대상·규칙 일치 후 job 영속 수락; 같은 key/body 200, 신규 202. status는 외부 변경 0; 이전 미확인 변경은 별도 독립 조회 전 재실행 금지. |
+| GET /v2/jobs/{job_id} | — | 200 Job | 저장된 작업 ID의 원래 결과·근거·별도 재확인 결과 조회; 조회 자체는 외부 실행하지 않음 |
 | GET /v2/jobs | — | 200 JobList | owner 작업 이력 |
 | GET /v2/objects | — | 200 ExternalObjectList | 마지막 확인 상태 목록 |
-| GET /v2/objects/{object_id} | — | 200 ExternalObject | 마지막 확인과 최근 시도 결과 분리 |
+| GET /v2/objects/{object_id} | — | 200 ExternalObject | 최근 확인 snapshot·고유 상태·시각과 최근 조회 시도/실패 분리 |
 | POST /v2/objects/{object_id}/unlink | — | 200 Ack | 내부 연결 해제; 진행 작업 충돌 409 |
 
 신규/추가 등록은 operation=create로 새 요청, 수정은 update, 공고 갱신은 renew, 사용자 요청 기반 조회는 status. 기존 객체가 확인되면 object_id를 사용하며, 대상 미확정이면 인증 후 관측된 후보를 선택한다. 신규 등록의 unknown 후 조회는 related_job_id를 지정하는 새 읽기 전용 status 업무로 수행할 수 있다. 결과 미확인에서 기존 외부 변경을 재실행하거나 terminal job을 되살리지 않는다. 반려 대응은 결과 안내 후 새 정보/승인/권한으로 필요한 업무를 별도 요청한다. 원본 삭제·관리 연결 해제는 내부 업무만이며 외부 게시물 삭제가 아니다. 조건부 E01–E05는 필수 MVP에서 제외하고 본 API의 실행 권한으로 제공하지 않는다.
@@ -156,6 +156,8 @@
 | review_digest | string | 필수 |
 | approved | true | 필수 |
 | request_key | string | 필수 |
+| information_approved | true | 필수 |
+| scope_approved | true | 필수 |
 
 **Job**
 
@@ -166,6 +168,8 @@
 | state | active / stopping / done / stopped | 필수 |
 | progress | Progress | 필수 |
 | result | Result 또는 null | 필수 |
+| operation | create / update / renew / status | 필수 |
+| reconciliation | Reconciliation 또는 null | 필수 |
 
 **Progress**
 
@@ -186,6 +190,7 @@
 | evidence | 배열(Evidence) | 필수 |
 | next_action | string | 필수 |
 | error | Error 또는 null | 필수 |
+| object_id | string (uuid) 또는 null | 필수 |
 
 **Effect**
 
@@ -207,6 +212,9 @@
 | outcome | observed / unavailable | 필수 |
 | observed_at | string (date-time) | 필수 |
 | summary | string | 필수 |
+| object_id | string (uuid) 또는 null | 필수 |
+| native_status | string 또는 null | 필수 |
+| snapshot | object 또는 null | 필수 |
 
 **ExternalObject**
 
@@ -223,6 +231,18 @@
 | latest_attempt_outcome | observed / unavailable 또는 null | 필수 |
 | latest_attempt_at | string (date-time) 또는 null | 필수 |
 | unlinked_at | string (date-time) 또는 null | 필수 |
+| last_confirmed_snapshot | object 또는 null | 필수 |
+
+**Reconciliation**
+
+| 필드 | 타입 | 필수 |
+| --- | --- | --- |
+| prior_job_id | string (uuid) | 필수 |
+| status_job_id | string (uuid) | 필수 |
+| verdict | confirmed / not_reached | 필수 |
+| object_id | string (uuid) 또는 null | 필수 |
+| evidence_id | string (uuid) | 필수 |
+| observed_at | string (date-time) | 필수 |
 
 **Error**
 
@@ -235,7 +255,7 @@
 
 ### 3.2 대표 JSON 예시
 
-아래 값은 가상 설계 예시이며 실제 시험 결과가 아니다. 전체 사례 12개와 요청 body는 [examples.json](submission-v1/examples.json) 참조.
+아래 값은 가상 설계 예시이며 실제 시험 결과가 아니다. 전체 사례 31개와 요청 body는 [examples.json](submission-v1/examples.json) 참조.
 
 **가격 충돌 — POST /v2/requests, 201 차단 초안.** 원문 사실 두 값이 다르면 ready=false로 저장하고 확인 질문을 반환한다. 사용자가 PATCH에서 expected_revision과 확인값을 보내며, 충돌을 해소한 뒤 새 revision을 저장한다. 원본 자체의 사실을 수정해야 하는 경우 새 원본 버전을 사용한다.
 
@@ -297,7 +317,7 @@
 }
 ```
 
-**작업 수락 — POST /v2/requests/{request_id}/start, 202.** expected_revision, review_digest, approved=true, request_key를 검증하여 승인 snapshot과 job을 원자적으로 저장한다. job_id를 받아 GET /v2/jobs/{job_id}에서 진행·종료를 조회한다. 동일 key/body 재요청은 기존 작업 200, 다른 body/이미 수락한 요청에 새 key는 409. 승인 전 거절은 PATCH reject=true로 종료, 외부 효과 0.
+**작업 수락 — POST /v2/requests/{request_id}/start, 202.** expected_revision, review_digest, approved=true, information_approved=true, scope_approved=true, request_key를 검증하여 승인 snapshot과 job을 원자적으로 저장한다. job_id를 받아 GET /v2/jobs/{job_id}에서 진행·종료를 조회한다. 동일 key/body 재요청은 기존 작업 200, 다른 body/이미 수락한 요청에 새 key는 409. 승인 전 거절은 PATCH reject=true로 종료, 외부 효과 0.
 
 ```json
 {
@@ -356,12 +376,25 @@
         "method": "independent_readback",
         "outcome": "observed",
         "observed_at": "2026-11-26T00:00:00Z",
-        "summary": "합성 receipt 대상/값/첨부 일치"
+        "summary": "합성 receipt 대상/값/첨부 일치",
+        "object_id": "00000000-0000-4000-8000-000000000121",
+        "native_status": "mock_received",
+        "snapshot": {
+          "amount_vat_included_krw": 250000,
+          "minutes_per_session": 90,
+          "sessions": 4,
+          "asset_digests": [
+            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ]
+        }
       }
     ],
     "next_action": "모의 접수 확인; 심사 승인/공개 아님",
-    "error": null
-  }
+    "error": null,
+    "object_id": "00000000-0000-4000-8000-000000000121"
+  },
+  "operation": "create",
+  "reconciliation": null
 }
 ```
 
@@ -405,19 +438,149 @@
         "method": "independent_readback",
         "outcome": "unavailable",
         "observed_at": "2026-11-26T00:00:00Z",
-        "summary": "응답 유실 후 독립 조회 불가"
+        "summary": "응답 유실 후 독립 조회 불가",
+        "object_id": null,
+        "native_status": null,
+        "snapshot": null
       }
     ],
     "next_action": "확인 필요; 자동 재등록 없음",
     "error": {
       "code": "EFFECT_UNKNOWN",
       "message": "접수 여부 확인 불가"
-    }
-  }
+    },
+    "object_id": null
+  },
+  "operation": "create",
+  "reconciliation": null
 }
 ```
 
 HTTP 200은 저장 결과를 읽었다는 뜻이지 업무 성공이 아니다. done+confirmed는 독립 증거가 승인 대상·값·첨부 및 완료 조건과 일치할 때만. stopped+unknown이면 외부 효과를 모르는 상태이고 자동 재등록하지 않는다. stopped+not_reached는 신뢰할 증거로 목표 미도달을 확인한 경우. 외부 접수/심사 승인/게시 공개는 object 관측의 고유 상태이고 job state와 별개. 마지막 확인 시각과 최근 조회 실패를 나눠 표시한다.
+
+### 3.3 V1.2 관리 업무의 정상·오류 계약
+
+| 기능/업무 | 정상 흐름·완료 근거 | 오류·미확인 처리 | 전체 합성 사례 ID |
+| --- | --- | --- | --- |
+| F14–F20 기존 게시물 수정(update) | 기존 object_id·독립 조회 before와 변경 values를 비교 → 정보·범위 각각 승인 → start 202 → 동일 native_id 및 승인 변경값·나머지 불변 독립 확인; job done/confirmed | 대상/기존값/승인 변경 409 APPROVAL_INVALID, 다시 확인·새 revision; 확인 실패는 stopped/unknown, 수정 재실행 0 | update_review, update_accepted, update_confirmed, update_target_changed |
+| F21 공고 갱신(renew) | 허용된 갱신 동작만, 기존 게시물 동일 ID·갱신 시점 등 규칙상 변화 확인; 제목/본문 등 승인 외 변경 0 | 업무 미지원 422 UNSUPPORTED_TARGET; 유실·조회 실패 unknown, 중복 갱신 금지 | renew_review, renew_accepted, renew_confirmed, renew_unknown, renew_unsupported |
+| F25–F29 요청 기반 상태 조회(status) | 기존 객체 또는 관련 작업·조회 범위 선택 → 필요한 직접 인증·승인 → 독립 읽기 → 새 관측 저장; 변경 효과 0 | 조회 실패 stopped/unknown; object의 last_confirmed_snapshot/at 유지, latest_attempt만 unavailable; 재인증/반려 대응 안내 | status_review, status_accepted, status_confirmed, status_unavailable, object_after_status_failure |
+| F22–F29 이전 미확인 효과 확인(status+related_job_id) | 별도 조회 업무의 독립 증거로 이전 승인과 대상/값/첨부/시점이 일치하는지 판정; 이전 terminal 결과는 그대로, Reconciliation 파생 조회 | 확증 없으면 reconciliation=null, 기존 슬롯 unknown 유지; 신뢰할 미도달 확인은 새 승인 전까지만 재실행 가능성 검토 | reconcile_request, reconcile_accepted, reconcile_confirmed, prior_job_reconciled, reconcile_absence_proven |
+
+아래는 핵심 필드 발췌이며, 전체 계약 및 모든 요청/응답은 [examples.json](submission-v1/examples.json)에 있다. 실제 플랫폼 조사에서 세부 허용 여부는 미확인이다. 크몽형 수정과 뮬 형태의 갱신은 **합성 fixture 시험 목표**일 뿐 실서비스 지원 확정이 아니다.
+
+**수정 승인 화면 (GET /v2/requests/{request_id}, 200, review 발췌):**
+```json
+{
+  "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "values": {
+    "amount_vat_included_krw": 300000,
+    "minutes_per_session": 90,
+    "sessions": 4
+  },
+  "asset_digests": [],
+  "platform_id": "PL01",
+  "object_kind": "service_listing",
+  "operation": "update",
+  "account_id": "00000000-0000-4000-8000-000000000051",
+  "object_id": "00000000-0000-4000-8000-000000000121",
+  "target_slot": "00000000-0000-4000-8000-000000000121",
+  "before": {
+    "amount_vat_included_krw": 250000,
+    "minutes_per_session": 90,
+    "sessions": 4,
+    "native_status": "mock_received"
+  },
+  "notice": "합성 모의 업무만 허용"
+}
+```
+
+**수정 대상 변경 (POST /v2/requests/{request_id}/start, 409):**
+```json
+{
+  "code": "APPROVAL_INVALID",
+  "message": "승인 당시의 대상 또는 기존 정보가 달라졌습니다. 변경 범위를 다시 확인해 주세요."
+}
+```
+
+**갱신 확인 (GET /v2/jobs/{job_id}, 200, 결과 발췌):**
+```json
+{
+  "operation": "renew",
+  "state": "done",
+  "result": {
+    "goal_verdict": "confirmed",
+    "environment": "mock",
+    "effects": [
+      {
+        "effect_id": "00000000-0000-4000-8000-000000000384",
+        "operation_id": "R-renew",
+        "state": "confirmed",
+        "evidence_ids": [
+          "00000000-0000-4000-8000-000000000184"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "00000000-0000-4000-8000-000000000184",
+        "observation_id": "00000000-0000-4000-8000-000000000284",
+        "kind": "goal",
+        "method": "independent_readback",
+        "outcome": "observed",
+        "observed_at": "2026-11-26T01:00:00Z",
+        "summary": "승인 대상의 독립 모의 조회 완료",
+        "object_id": "00000000-0000-4000-8000-000000000122",
+        "native_status": "mock_active",
+        "snapshot": {
+          "title": "합성 기타 레슨",
+          "renewed_at": "2026-11-26T01:00:00Z"
+        }
+      }
+    ],
+    "next_action": "승인한 변경·갱신 확인",
+    "error": null,
+    "object_id": "00000000-0000-4000-8000-000000000122"
+  }
+}
+```
+
+**상태 조회 실패 뒤의 객체 조회 (GET /v2/objects/{object_id}, 200):**
+```json
+{
+  "object_id": "00000000-0000-4000-8000-000000000121",
+  "lesson_id": "00000000-0000-4000-8000-000000000011",
+  "platform_id": "PL01",
+  "object_kind": "service_listing",
+  "native_id": "mock-listing-001",
+  "public_url": null,
+  "native_status": "mock_received",
+  "last_confirmed_at": "2026-11-26T00:00:00Z",
+  "last_confirmed_snapshot": {
+    "amount_vat_included_krw": 250000,
+    "minutes_per_session": 90,
+    "sessions": 4,
+    "native_status": "mock_received"
+  },
+  "latest_attempt_outcome": "unavailable",
+  "latest_attempt_at": "2026-11-26T01:00:00Z",
+  "unlinked_at": null
+}
+```
+
+**미확인 작업에 대한 별도 확인 (GET /v2/jobs/{job_id}, 200, reconciliation 발췌):**
+```json
+{
+  "prior_job_id": "00000000-0000-4000-8000-000000000081",
+  "status_job_id": "00000000-0000-4000-8000-000000000086",
+  "verdict": "confirmed",
+  "object_id": "00000000-0000-4000-8000-000000000121",
+  "evidence_id": "00000000-0000-4000-8000-000000000186",
+  "observed_at": "2026-11-26T01:00:00Z"
+}
+```
+
+원래 job의 result는 과거 실행 시점의 판정으로 유지한다. 이후 확인 작업은 status 자체의 goal_verdict와 이전 작업에 대한 reconciliation.verdict를 별도로 반환한다. status 읽기 성공이 과거 변경 성공이라는 뜻은 아니다. 기존 계정·대상과 증거가 일치해야 conclusive resolution으로 채택한다. 새 조회가 실패하면 기존 성공 확인을 덮지 않는다. 정보와 실행 범위 각각 승인하고, 현재 규칙·계정·대상·revision·before의 검증 결과가 달라지면 수락하지 않는다. GET은 외부 조회를 실행하지 않는다.
 
 ## 4. 입력·권한 검증 및 공통 오류
 
@@ -477,6 +640,6 @@ DB 복합 FK는 연결의 무결성을, 서비스는 세션에서 얻은 owner�
 
 ### 6.2 계약 고정·변경 이력
 
-현재 검토 기준 S1.0의 기계 판독 계약 [openapi.json](submission-v1/openapi.json), 합성 사례 [examples.json](submission-v1/examples.json), DB [001_init.sql](submission-v1/001_init.sql) 및 [002_observation.sql](submission-v1/002_observation.sql). 12개 예시의 필수 필드/타입·경로·응답 코드 제한적 구조 검사를 [api-structural-check.json](submission-v1/api-structural-check.json)에 기록. 실제 HTTP/DB/제품 시험 및 전체 OpenAPI validator 실행은 미실행이다. 변경은 원본에 반영 후 재프로젝션하고 Git commit으로 판을 고정한다.
+현재 검토 기준 S1.0의 기계 판독 계약 [openapi.json](submission-v1/openapi.json), 합성 사례 [examples.json](submission-v1/examples.json), DB [001_init.sql](submission-v1/001_init.sql) 및 [002_observation.sql](submission-v1/002_observation.sql). 31개 예시의 필수 필드/타입·경로·응답 코드 및 읽기 전용/결과 불변조건 제한적 검사를 [api-structural-check.json](submission-v1/api-structural-check.json)에 기록. 실제 HTTP/DB/제품 시험 및 전체 OpenAPI validator 실행은 미실행이다. 변경은 원본에 반영 후 재프로젝션하고 Git commit으로 판을 고정한다.
 
-이전 구현 기준은 [6bd597e 이전 제출용 /v1 문서](https://github.com/ik-e/chaja-you/blob/6bd597ed858cfa9f29391079e43ba9eba5fb6afa/docs/step2/API_설계_문서.md), [공통 V1](../artifacts/design/lesson-registration-20261124/common-integration-v1.json), [V4.1](../artifacts/design/lesson-registration-20261124/data-schema-v4.1.json), [기존 replay](../../product/lesson-registration/fixtures/shared/replay.json)로 보존. /v2는 원본 버전, 외부 객체, 독립 업무/job, 상태 관측과 증거로 확장. 기존 /v1 독립 시험과 새 설계 검증을 혼동하지 않는다. 개발 전용 문서는 localhost/인증된 개발 환경으로 제한하며 제품 공개 금지.
+이전 구현 기준은 [6bd597e 이전 제출용 /v1 문서](https://github.com/ik-e/chaja-you/blob/6bd597ed858cfa9f29391079e43ba9eba5fb6afa/docs/step2/API_설계_문서.md), [공통 V1](../artifacts/design/lesson-registration-20261124/common-integration-v1.json), [V4.1](../artifacts/design/lesson-registration-20261124/data-schema-v4.1.json), [기존 replay](../../product/lesson-registration/fixtures/shared/replay.json)로 보존. /v2는 원본 버전, 외부 객체, 독립 업무/job, 상태 관측·증거와 별도 미확인 해소로 확장. S1.0 보완판은 수정·갱신·조회 계약과 사례, 정보·범위 승인 및 게시 객체 결과 연결을 추가했다. 기존 /v1 독립 시험과 새 설계 검증을 혼동하지 않는다. 개발 전용 문서는 localhost/인증된 개발 환경으로 제한하며 제품 공개 금지.

@@ -200,7 +200,8 @@
         "FOREIGN KEY (owner_id,object_id,lesson_id,account_id,platform_id,object_kind) REFERENCES external_objects(owner_id,object_id,lesson_id,account_id,platform_id,object_kind)",
         "CHECK (object_id IS NULL OR account_id IS NOT NULL)",
         "CHECK (operation<>'create' OR object_id IS NULL)",
-        "FOREIGN KEY (owner_id,related_job_id) REFERENCES jobs(owner_id,job_id) -- added after jobs"
+        "FOREIGN KEY (owner_id,related_job_id) REFERENCES jobs(owner_id,job_id) -- added after jobs",
+        "CHECK (related_job_id IS NULL OR operation='status')"
       ]
     },
     {
@@ -263,6 +264,7 @@
         "state text NOT NULL CHECK (state IN ('active','stopping','done','stopped'))",
         "goal_verdict text CHECK (goal_verdict IN ('confirmed','not_reached','unknown'))",
         "final_evidence_id uuid",
+        "result_object_id uuid",
         "next_action text",
         "progress_json jsonb NOT NULL DEFAULT '{\"step_index\":0,\"step_count\":1,\"confirmed_steps\":[],\"current_step\":null}'::jsonb",
         "error_json jsonb",
@@ -275,7 +277,8 @@
         "UNIQUE (owner_id,request_key)",
         "FOREIGN KEY (owner_id,request_id,approval_id,revision) REFERENCES approvals(owner_id,request_id,approval_id,revision)",
         "CHECK ((state IN ('active','stopping') AND goal_verdict IS NULL AND final_evidence_id IS NULL AND next_action IS NULL) OR (state='done' AND goal_verdict IS NOT DISTINCT FROM 'confirmed' AND final_evidence_id IS NOT NULL AND next_action IS NOT NULL) OR (state='stopped' AND goal_verdict IS NOT NULL AND goal_verdict IN ('not_reached','unknown') AND next_action IS NOT NULL))",
-        "FOREIGN KEY (owner_id,job_id,final_evidence_id) REFERENCES evidence(owner_id,job_id,evidence_id) -- added after evidence"
+        "FOREIGN KEY (owner_id,job_id,final_evidence_id) REFERENCES evidence(owner_id,job_id,evidence_id) -- added after evidence",
+        "FOREIGN KEY (owner_id,result_object_id) REFERENCES external_objects(owner_id,object_id)"
       ]
     },
     {
@@ -286,12 +289,17 @@
         "account_id uuid NOT NULL",
         "slot_key text NOT NULL",
         "job_id uuid NOT NULL",
+        "object_id uuid",
+        "reconciled_by_job_id uuid",
         "state text NOT NULL CHECK (state IN ('reserved','confirmed','unknown','absent'))"
       ],
       "keys": [
         "PRIMARY KEY (owner_id,account_id,slot_key)",
         "FOREIGN KEY (owner_id,account_id) REFERENCES external_accounts(owner_id,account_id)",
-        "FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)"
+        "FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)",
+        "FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id)",
+        "FOREIGN KEY (owner_id,reconciled_by_job_id) REFERENCES jobs(owner_id,job_id)",
+        "CHECK ((state='confirmed') = (object_id IS NOT NULL))"
       ]
     },
     {
@@ -326,6 +334,7 @@
         "object_id uuid",
         "method text NOT NULL CHECK (method IN ('independent_readback','submission_response','form_read','runtime_observation'))",
         "outcome text NOT NULL CHECK (outcome IN ('observed','unavailable'))",
+        "reconciliation_verdict text CHECK (reconciliation_verdict IN ('confirmed','not_reached'))",
         "native_status text",
         "snapshot jsonb NOT NULL DEFAULT '{}'",
         "observed_at timestamptz NOT NULL DEFAULT now()"
@@ -335,7 +344,8 @@
         "FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)",
         "FOREIGN KEY (owner_id,job_id,effect_id) REFERENCES effects(owner_id,job_id,effect_id)",
         "FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id)",
-        "CHECK (outcome<>'unavailable' OR native_status IS NULL)"
+        "CHECK (outcome<>'unavailable' OR native_status IS NULL)",
+        "CHECK (reconciliation_verdict IS NULL OR (method='independent_readback' AND outcome='observed' AND (reconciliation_verdict<>'confirmed' OR object_id IS NOT NULL)))"
       ]
     },
     {
@@ -359,7 +369,8 @@
   ],
   "views": [
     "request_status",
-    "object_status"
+    "object_status",
+    "job_reconciliation"
   ],
   "migration2": "observations.failure_code + observations_job_idx",
   "notes": [
@@ -371,6 +382,9 @@
     "progress_json and error_json persist Job.progress and Result.error",
     "related_job_id permits a new approved read-only status work request for an older unknown job; previous terminal record stays immutable",
     "before_snapshot binds pre-change readback; app verifies current revision/approval, target slot, same-owner linked account and profile before acceptance",
-    "SQL reference design only, no database or HTTP execution"
+    "SQL reference design only, no database or HTTP execution",
+    "jobs.result_object_id and evidence observation.object_id must agree on confirmed completion; a create uses the independently verified stable native ID, not the submission response alone.",
+    "status operation admits zero mutating effects; related_job_id records the earlier terminal unknown; job_reconciliation derives only evidence-backed outcomes from a separate completed status job; old job remains immutable.",
+    "object_status separates last successful independent snapshot from latest failed attempt. effect_slots.object_id and reconciled_by_job_id record atomic resolution of the original create reservation; app enforces exact target/scope and no speculative release."
   ]
 }

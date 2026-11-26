@@ -153,7 +153,8 @@ CREATE TABLE work_requests (
   FOREIGN KEY (owner_id,account_id,platform_id) REFERENCES external_accounts(owner_id,account_id,platform_id),
   FOREIGN KEY (owner_id,object_id,lesson_id,account_id,platform_id,object_kind) REFERENCES external_objects(owner_id,object_id,lesson_id,account_id,platform_id,object_kind),
   CHECK (object_id IS NULL OR account_id IS NOT NULL),
-  CHECK (operation<>'create' OR object_id IS NULL)
+  CHECK (operation<>'create' OR object_id IS NULL),
+  CHECK (related_job_id IS NULL OR operation='status')
 );
 
 -- revision별 준비 결과·질문·확인 근거
@@ -206,6 +207,7 @@ CREATE TABLE jobs (
   state text NOT NULL CHECK (state IN ('active','stopping','done','stopped')),
   goal_verdict text CHECK (goal_verdict IN ('confirmed','not_reached','unknown')),
   final_evidence_id uuid,
+  result_object_id uuid,
   next_action text,
   progress_json jsonb NOT NULL DEFAULT '{"step_index":0,"step_count":1,"confirmed_steps":[],"current_step":null}'::jsonb,
   error_json jsonb,
@@ -215,7 +217,8 @@ CREATE TABLE jobs (
   UNIQUE (owner_id,job_id),
   UNIQUE (owner_id,request_key),
   FOREIGN KEY (owner_id,request_id,approval_id,revision) REFERENCES approvals(owner_id,request_id,approval_id,revision),
-  CHECK ((state IN ('active','stopping') AND goal_verdict IS NULL AND final_evidence_id IS NULL AND next_action IS NULL) OR (state='done' AND goal_verdict IS NOT DISTINCT FROM 'confirmed' AND final_evidence_id IS NOT NULL AND next_action IS NOT NULL) OR (state='stopped' AND goal_verdict IS NOT NULL AND goal_verdict IN ('not_reached','unknown') AND next_action IS NOT NULL))
+  CHECK ((state IN ('active','stopping') AND goal_verdict IS NULL AND final_evidence_id IS NULL AND next_action IS NULL) OR (state='done' AND goal_verdict IS NOT DISTINCT FROM 'confirmed' AND final_evidence_id IS NOT NULL AND next_action IS NOT NULL) OR (state='stopped' AND goal_verdict IS NOT NULL AND goal_verdict IN ('not_reached','unknown') AND next_action IS NOT NULL)),
+  FOREIGN KEY (owner_id,result_object_id) REFERENCES external_objects(owner_id,object_id)
 );
 
 -- 계정별 안정 논리 슬롯 및 중복/미확인 효과 차단
@@ -224,10 +227,15 @@ CREATE TABLE effect_slots (
   account_id uuid NOT NULL,
   slot_key text NOT NULL,
   job_id uuid NOT NULL,
+  object_id uuid,
+  reconciled_by_job_id uuid,
   state text NOT NULL CHECK (state IN ('reserved','confirmed','unknown','absent')),
   PRIMARY KEY (owner_id,account_id,slot_key),
   FOREIGN KEY (owner_id,account_id) REFERENCES external_accounts(owner_id,account_id),
-  FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)
+  FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id),
+  FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id),
+  FOREIGN KEY (owner_id,reconciled_by_job_id) REFERENCES jobs(owner_id,job_id),
+  CHECK ((state='confirmed') = (object_id IS NOT NULL))
 );
 
 -- 등록된 operation별 durable admission/효과 상태
@@ -256,6 +264,7 @@ CREATE TABLE observations (
   object_id uuid,
   method text NOT NULL CHECK (method IN ('independent_readback','submission_response','form_read','runtime_observation')),
   outcome text NOT NULL CHECK (outcome IN ('observed','unavailable')),
+  reconciliation_verdict text CHECK (reconciliation_verdict IN ('confirmed','not_reached')),
   native_status text,
   snapshot jsonb NOT NULL DEFAULT '{}',
   observed_at timestamptz NOT NULL DEFAULT now(),
@@ -263,7 +272,8 @@ CREATE TABLE observations (
   FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id),
   FOREIGN KEY (owner_id,job_id,effect_id) REFERENCES effects(owner_id,job_id,effect_id),
   FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id),
-  CHECK (outcome<>'unavailable' OR native_status IS NULL)
+  CHECK (outcome<>'unavailable' OR native_status IS NULL),
+  CHECK (reconciliation_verdict IS NULL OR (method='independent_readback' AND outcome='observed' AND (reconciliation_verdict<>'confirmed' OR object_id IS NOT NULL)))
 );
 
 -- 작업·관측에 연결된 redacted 증거
@@ -297,15 +307,27 @@ BEGIN
    SELECT 1 FROM evidence e JOIN observations o ON (e.owner_id,e.job_id,e.observation_id)=(o.owner_id,o.job_id,o.observation_id)
    WHERE (e.owner_id,e.job_id,e.evidence_id)=(NEW.owner_id,NEW.job_id,NEW.final_evidence_id)
      AND e.kind='goal' AND o.method='independent_readback' AND o.outcome='observed'
+     AND o.object_id IS NOT DISTINCT FROM NEW.result_object_id
  ) THEN RAISE EXCEPTION 'independent goal evidence required' USING ERRCODE='23514'; END IF;
+ IF NEW.state='done' AND EXISTS (
+   SELECT 1 FROM work_requests r WHERE r.owner_id=NEW.owner_id AND r.request_id=NEW.request_id
+     AND ((r.operation<>'status' AND NEW.result_object_id IS NULL) OR
+          (r.object_id IS NOT NULL AND r.object_id IS DISTINCT FROM NEW.result_object_id) OR
+          (NEW.result_object_id IS NOT NULL AND NOT EXISTS (
+            SELECT 1 FROM external_objects x WHERE x.owner_id=r.owner_id AND x.object_id=NEW.result_object_id
+              AND (x.lesson_id,x.account_id,x.platform_id,x.object_kind)=(r.lesson_id,r.account_id,r.platform_id,r.object_kind)
+          )))
+ ) THEN RAISE EXCEPTION 'result object mismatch' USING ERRCODE='23514'; END IF;
  RETURN NEW;
-END $$;
+END $;
 CREATE TRIGGER job_transition BEFORE INSERT OR UPDATE ON jobs FOR EACH ROW EXECUTE FUNCTION guard_job_transition();
 CREATE FUNCTION guard_admission() RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE s text; ep bigint;
 BEGIN
  SELECT state,lease_epoch INTO s,ep FROM jobs WHERE owner_id=NEW.owner_id AND job_id=NEW.job_id FOR UPDATE;
  IF NOT FOUND OR s<>'active' OR ep<>NEW.lease_epoch OR NEW.state<>'admitted' OR NEW.dispatched_at IS NOT NULL
+   OR EXISTS (SELECT 1 FROM jobs j JOIN work_requests r ON (r.owner_id,r.request_id)=(j.owner_id,j.request_id)
+              WHERE j.owner_id=NEW.owner_id AND j.job_id=NEW.job_id AND r.operation='status')
  THEN RAISE EXCEPTION 'admission forbidden' USING ERRCODE='23514'; END IF;
  RETURN NEW;
 END $$;
@@ -313,11 +335,28 @@ CREATE TRIGGER effect_admission BEFORE INSERT ON effects FOR EACH ROW EXECUTE FU
 
 CREATE VIEW request_status AS SELECT r.owner_id,r.request_id,r.revision,r.draft_status,j.job_id,j.state AS job_state,j.goal_verdict
  FROM work_requests r LEFT JOIN jobs j ON j.owner_id=r.owner_id AND j.request_id=r.request_id;
-CREATE VIEW object_status AS SELECT x.owner_id,x.object_id,x.lesson_id,x.platform_id,x.native_id,x.unlinked_at,
- ok.native_status,ok.observed_at AS last_confirmed_at,attempt.outcome AS latest_attempt_outcome,attempt.observed_at AS latest_attempt_at
+CREATE VIEW object_status AS SELECT x.owner_id,x.object_id,x.lesson_id,x.platform_id,x.object_kind,x.native_id,x.public_url,x.unlinked_at,
+ ok.native_status,ok.observed_at AS last_confirmed_at,ok.snapshot AS last_confirmed_snapshot,attempt.outcome AS latest_attempt_outcome,attempt.observed_at AS latest_attempt_at
  FROM external_objects x
- LEFT JOIN LATERAL (SELECT o.native_status,o.observed_at FROM observations o WHERE o.owner_id=x.owner_id AND o.object_id=x.object_id AND o.outcome='observed' AND o.method='independent_readback' ORDER BY o.observed_at DESC,o.observation_id DESC LIMIT 1) ok ON true
+ LEFT JOIN LATERAL (SELECT o.native_status,o.observed_at,o.snapshot FROM observations o WHERE o.owner_id=x.owner_id AND o.object_id=x.object_id AND o.outcome='observed' AND o.method='independent_readback' ORDER BY o.observed_at DESC,o.observation_id DESC LIMIT 1) ok ON true
  LEFT JOIN LATERAL (SELECT o.outcome,o.observed_at FROM observations o WHERE o.owner_id=x.owner_id AND o.object_id=x.object_id ORDER BY o.observed_at DESC,o.observation_id DESC LIMIT 1) attempt ON true;
+-- Reconciliation is a new read-only status job, never an UPDATE of the previous terminal job.
+CREATE VIEW job_reconciliation AS
+ SELECT DISTINCT ON (r.owner_id,r.related_job_id)
+ r.owner_id,r.related_job_id AS prior_job_id,j.job_id AS status_job_id,
+ o.reconciliation_verdict AS verdict,o.object_id,e.evidence_id,o.observed_at
+ FROM work_requests r JOIN jobs j ON (r.owner_id,r.request_id)=(j.owner_id,j.request_id)
+ JOIN jobs prior ON (prior.owner_id,prior.job_id)=(r.owner_id,r.related_job_id)
+ JOIN work_requests pr ON (pr.owner_id,pr.request_id)=(prior.owner_id,prior.request_id)
+ JOIN evidence e ON (e.owner_id,e.job_id,e.evidence_id)=(j.owner_id,j.job_id,j.final_evidence_id)
+ JOIN observations o ON (o.owner_id,o.job_id,o.observation_id)=(e.owner_id,e.job_id,e.observation_id)
+ WHERE r.operation='status' AND j.state='done' AND prior.state='stopped' AND prior.goal_verdict='unknown'
+ AND pr.operation IN ('create','update','renew')
+ AND (r.lesson_id,r.account_id,r.platform_id,r.object_kind,r.target_slot)=(pr.lesson_id,pr.account_id,pr.platform_id,pr.object_kind,pr.target_slot)
+ AND (pr.object_id IS NULL OR o.object_id=pr.object_id)
+ AND o.reconciliation_verdict IS NOT NULL AND o.method='independent_readback' AND o.outcome='observed'
+ ORDER BY r.owner_id,r.related_job_id,o.observed_at DESC,o.observation_id DESC;
+
 CREATE INDEX lessons_owner_idx ON lessons(owner_id,created_at DESC,lesson_id);
 CREATE INDEX requests_owner_idx ON work_requests(owner_id,created_at DESC,request_id);
 CREATE INDEX jobs_owner_idx ON jobs(owner_id,accepted_at DESC,job_id);

@@ -1,5 +1,5 @@
 {
-  "status": "limited_in_memory_structural_check",
+  "status": "limited_in_memory_structural_and_semantic_check",
   "checks": [
     {
       "id": "price_conflict",
@@ -48,7 +48,83 @@
     {
       "id": "stale_revision",
       "pass": true
+    },
+    {
+      "id": "update_review",
+      "pass": true
+    },
+    {
+      "id": "update_accepted",
+      "pass": true
+    },
+    {
+      "id": "update_confirmed",
+      "pass": true
+    },
+    {
+      "id": "update_target_changed",
+      "pass": true
+    },
+    {
+      "id": "renew_review",
+      "pass": true
+    },
+    {
+      "id": "renew_accepted",
+      "pass": true
+    },
+    {
+      "id": "renew_confirmed",
+      "pass": true
+    },
+    {
+      "id": "renew_unknown",
+      "pass": true
+    },
+    {
+      "id": "renew_unsupported",
+      "pass": true
+    },
+    {
+      "id": "status_review",
+      "pass": true
+    },
+    {
+      "id": "status_accepted",
+      "pass": true
+    },
+    {
+      "id": "status_confirmed",
+      "pass": true
+    },
+    {
+      "id": "status_unavailable",
+      "pass": true
+    },
+    {
+      "id": "object_after_status_failure",
+      "pass": true
+    },
+    {
+      "id": "reconcile_request",
+      "pass": true
+    },
+    {
+      "id": "reconcile_accepted",
+      "pass": true
+    },
+    {
+      "id": "reconcile_confirmed",
+      "pass": true
+    },
+    {
+      "id": "prior_job_reconciled",
+      "pass": true
+    },
+    {
+      "id": "reconcile_absence_proven",
+      "pass": true
     }
   ],
-  "limitations": "실제 PostgreSQL, HTTP, 전체 OpenAPI validator 및 제품 gate 미실행"
+  "limitations": "스키마 필수값·자료형·경로·HTTP·응답 schema 및 status 업무의 변경 효과 0 등 일부 불변조건 검사. 실제 HTTP/모델/제품 및 전체 OpenAPI validator 미실행."
 }

@@ -3,7 +3,7 @@
   "info": {
     "title": "레슨 다중 플랫폼 등록·관리 제출용 계약",
     "version": "submission-v1.0",
-    "description": "V1.2 기반 2026-11-26 제출용 프로젝션, 잠정 /v2 계약. 활성 제품 계약 /v1 변경 없음. 모의 환경만."
+    "description": "V1.2 기반 2026-11-26 제출용 프로젝션, 잠정 /v2 계약. 활성 제품 계약 /v1 변경 없음. 모의 환경만. S1.0 보완: 관리 업무 사례 및 게시 객체/별도 재확인 관계."
   },
   "servers": [
     {
@@ -1866,7 +1866,7 @@
     "/v2/requests/{request_id}/start": {
       "post": {
         "operationId": "start",
-        "description": "현재 revision, review_digest, 승인 scope, 권한 및 대상 일치 확인 후 job 영속 수락. 동일 key/body 200, 신규 202. status는 읽기 전용; 변경 업무의 불확실한 이전 효과는 차단.",
+        "description": "현재 revision, review_digest, 정보·범위 각각 명시 승인, 계정·대상·규칙 일치 후 job 영속 수락; 같은 key/body 200, 신규 202. status는 외부 변경 0; 이전 미확인 변경은 별도 독립 조회 전 재실행 금지.",
         "security": [
           {
             "appSession": []
@@ -1998,7 +1998,7 @@
     "/v2/jobs/{job_id}": {
       "get": {
         "operationId": "getJob",
-        "description": "저장된 진행·판정·증거 조회",
+        "description": "저장된 작업 ID의 원래 결과·근거·별도 재확인 결과 조회; 조회 자체는 외부 실행하지 않음",
         "security": [
           {
             "appSession": []
@@ -2324,7 +2324,7 @@
     "/v2/objects/{object_id}": {
       "get": {
         "operationId": "getObject",
-        "description": "마지막 확인과 최근 시도 결과 분리",
+        "description": "최근 확인 snapshot·고유 상태·시각과 최근 조회 시도/실패 분리",
         "security": [
           {
             "appSession": []
@@ -3305,13 +3305,21 @@
           },
           "request_key": {
             "type": "string"
+          },
+          "information_approved": {
+            "const": true
+          },
+          "scope_approved": {
+            "const": true
           }
         },
         "required": [
           "expected_revision",
           "review_digest",
           "approved",
-          "request_key"
+          "request_key",
+          "information_approved",
+          "scope_approved"
         ],
         "additionalProperties": false
       },
@@ -3514,6 +3522,37 @@
           },
           "summary": {
             "type": "string"
+          },
+          "object_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "native_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "snapshot": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -3523,7 +3562,10 @@
           "method",
           "outcome",
           "observed_at",
-          "summary"
+          "summary",
+          "object_id",
+          "native_status",
+          "snapshot"
         ],
         "additionalProperties": false
       },
@@ -3565,6 +3607,17 @@
                 "type": "null"
               }
             ]
+          },
+          "object_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -3573,7 +3626,8 @@
           "effects",
           "evidence",
           "next_action",
-          "error"
+          "error",
+          "object_id"
         ],
         "additionalProperties": false
       },
@@ -3645,6 +3699,25 @@
                 "type": "null"
               }
             ]
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "create",
+              "update",
+              "renew",
+              "status"
+            ]
+          },
+          "reconciliation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Reconciliation"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -3652,7 +3725,9 @@
           "request_id",
           "state",
           "progress",
-          "result"
+          "result",
+          "operation",
+          "reconciliation"
         ],
         "additionalProperties": false
       },
@@ -3751,6 +3826,16 @@
                 "type": "null"
               }
             ]
+          },
+          "last_confirmed_snapshot": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -3764,7 +3849,8 @@
           "last_confirmed_at",
           "latest_attempt_outcome",
           "latest_attempt_at",
-          "unlinked_at"
+          "unlinked_at",
+          "last_confirmed_snapshot"
         ],
         "additionalProperties": false
       },
@@ -3933,6 +4019,54 @@
         "required": [
           "items",
           "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "Reconciliation": {
+        "type": "object",
+        "properties": {
+          "prior_job_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status_job_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "not_reached"
+            ]
+          },
+          "object_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidence_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "prior_job_id",
+          "status_job_id",
+          "verdict",
+          "object_id",
+          "evidence_id",
+          "observed_at"
         ],
         "additionalProperties": false
       }
