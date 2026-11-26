@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-058",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R01",
   "suggested_owner": null,
   "due": "2026-11-26",
@@ -88,7 +88,124 @@
       "path": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "R01 전용 브랜치에서 R02·R04·R05 최신 원본 행동 118건 및 시스템 이벤트 37건을 고정해 통합 행동 후보 107개(기존 63 ID 유지), 34개 피처와 447개 상황별 분기 후보를 연결했다. 7개 플랫폼 업무 42건, 원본·상세 필드 260건(중복 포함), 의미 후보 24개 그룹과 차이/충돌 11개, 행동별 범위 추천 107건 및 결정 요청 14건을 정리했다. 구조 참조 검사 통과; 의미·완전성·제품 범위 미확정. R03 인계 및 후속 조사 반영 후 범위 검토. 신규 DB 설계 및 실제 실행 미착수.",
+    "claims": [
+      {
+        "id": "C058-01",
+        "text": "118/118 원본 스토리 및 37/37 시스템 이벤트의 후보 연결, 기존 63개 ID 유지, 107개 후보와 34개 F/E 정역방향 참조, 447개 분기 후보. R03 빈 양식은 조사 결과로 계산하지 않음.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-01"
+        ]
+      },
+      {
+        "id": "C058-02",
+        "text": "7개 플랫폼×6개 업무, 공통 136+상세 124개 출처 필드 레코드(중복 포함), 47개 원본 교차 연결과 상세 연결 23개 포함. R01 비교 결과의 대행 허용은 42개 모두 unknown.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-02"
+        ]
+      },
+      {
+        "id": "C058-03",
+        "text": "107개 행동별 범위 추천(기본 82·조건부 10·미결정 15)과 14개 결정 후보, 강사 피드백 A1~A4/D1~D4의 후속 설계 입력 연결. 제품 범위 승인 0건.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      },
+      {
+        "id": "C058-04",
+        "text": "인증/대상, 내용/범위 승인, 변경·미확인 효과·재요청 관련 고위험 분기 후보를 우선 정리했으며 전체 분기 및 의미 검토는 미완료.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-01",
+          "E058-03"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E058-01",
+        "label": "통합 사용자 스토리·원본 추적·분기 검토",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
+        "commit": "62aa774ed08ed710e924530972f8442d37a69a84",
+        "blob": "65494b884f7e41824b86d88fdd8d758bb507f2dc"
+      },
+      {
+        "id": "E058-02",
+        "label": "7개 플랫폼 업무·필드·관계 및 제약 비교",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json",
+        "commit": "42b17c707e581cd3ec7ac5de7217129c0d95dcd3",
+        "blob": "d884e7cd67e52515e21dd7a6b99d4075c1eb0e74"
+      },
+      {
+        "id": "E058-03",
+        "label": "행동별 범위 추천·결정 요청·강사 피드백 연결",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
+        "commit": "c3d423862a928bb2e2314df1bb4430b0f55cfe1e",
+        "blob": "b41d941c1a72aee56ce0a96eb94fb9e09da56447"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "구조 참조 검사 · 118 원본/37 이벤트/34 피처/107 행동/447 분기/260 필드/42 업무/107 범위 추천 연결",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-01",
+          "E058-02",
+          "E058-03"
+        ]
+      },
+      {
+        "criterion": "I1 및 USV-01~05 · 사용자 행동의 완전성·의미/원자성/분기·사용자/시스템 역할 검토",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-01"
+        ]
+      },
+      {
+        "criterion": "I2 및 USV-06~07 · 사용자 가치·범위·MVP 판단과 R01 승인",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      },
+      {
+        "criterion": "I3 · 7개 플랫폼 교차 비교, 사실·제약·실제 권한/완료의 근거",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-02"
+        ]
+      },
+      {
+        "criterion": "I4~I6 · 승인 범위 기반 DB/ERD/스키마, 데이터 표현/기존 설계 영향 및 API 입력",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      },
+      {
+        "criterion": "I7 · 강사 피드백 8개 실제 설계/시험 추적",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "R03 신규 결과는 이번 고정 입력에 없음. R02 후속 조사 및 R04/R05 미확인 사항 보완에 따라 차이·누락 검토 필요.",
+      "분기 레코드는 후보 관계로 작성했으며 모든 조건별 유효 전이, 사용자 행동의 의미 완전성·원자성·중복 해소는 후속 검토 필요.",
+      "플랫폼 직접 경로/필수 표시와 실제 검증·공개·대행 허용은 구분. 실제 외부 작업 및 제3자 대행 허용 독립 실증 없음.",
+      "DB 진입 게이트 유지. 신규 DB/ERD/스키마·API·이관/실행 시험은 미수행; 제출용 잠정안과 기존 구현 보존.",
+      "R01 전용 브랜치 작업이며 main 및 다른 owner 원본에 반영하지 않음. 이 세션의 구조 검사는 수행했으나 전체 Python/CI 검증은 미실행."
+    ],
+    "decision_requests": [
+      "scope-decisions.json SD-01~14: 의미·범위 검토 후 필요한 R01 판단을 순차 처리. 제품/MVP·실제 실행 권한·설계 채택을 구분.",
+      "R03 결과를 기존 107 후보와 대조하여 추가·중복·제외 근거를 검토하고 승인할 행동 집합을 고정한 뒤 신규 DB 설계 진입."
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
@@ -123,7 +240,7 @@
   "intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
   "registration_authority_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
   "assignment_mode": "self_directed",
-  "assignment_status": "R01 자기 주도형 등록 · 통합 입력 대기",
+  "assignment_status": "R01 통합 초안 작성 · 의미 검토/범위 결정 및 R03 추가 결과 대기",
   "workspace_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/",
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"
