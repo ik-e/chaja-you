@@ -3293,6 +3293,423 @@
           "evidence_refs": [
             "R02-EV-ADD-PL02"
           ]
+        },
+        {
+          "field_id": "R02-PL02-CONF-01",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "운영 방식",
+          "observed_constraints": {
+            "observed_values": [
+              "멤버십",
+              "오프라인",
+              "VOD",
+              "전자책"
+            ],
+            "source": "사용자 화면 클래스 만들기 메뉴"
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/운영 방식"
+        },
+        {
+          "field_id": "R02-PL02-CONF-02",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "카테고리",
+          "observed_constraints": {
+            "required": true,
+            "observed_path": [
+              "취미·문화",
+              "보컬·작곡작사·악기"
+            ],
+            "depth": 2
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/카테고리"
+        },
+        {
+          "field_id": "R02-PL02-CONF-03",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스명",
+          "observed_constraints": {
+            "required": true,
+            "chars": [
+              10,
+              30
+            ],
+            "allowed": "한글·알파벳·숫자·쉼표·마침표·대시"
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/클래스명"
+        },
+        {
+          "field_id": "R02-PL02-CONF-04",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 썸네일",
+          "observed_constraints": {
+            "required": true,
+            "count": [
+              1,
+              10
+            ],
+            "representative_required": true,
+            "max_mb": 10,
+            "formats": [
+              "JPG",
+              "JPEG",
+              "PNG"
+            ],
+            "guidance_px": [
+              1280,
+              720
+            ]
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/클래스 썸네일"
+        },
+        {
+          "field_id": "R02-PL02-CONF-05",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 대상",
+          "observed_constraints": {
+            "required": true,
+            "chars": [
+              50,
+              500
+            ]
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/클래스 대상"
+        },
+        {
+          "field_id": "R02-PL02-CONF-06",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 요약",
+          "observed_constraints": {
+            "required": false,
+            "max_chars": 200
+          },
+          "required": false,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/클래스 요약"
+        },
+        {
+          "field_id": "R02-PL02-CONF-07",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 상세 소개",
+          "observed_constraints": {
+            "required": true,
+            "format": "글·이미지 편집기",
+            "char_limit": "unknown"
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/클래스 상세 소개"
+        },
+        {
+          "field_id": "R02-PL02-CONF-08",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "회차",
+          "observed_constraints": {
+            "required": true,
+            "after_review_editable": false,
+            "limit": "unknown",
+            "observation": "사용자가 10000 입력 후 입력칸 생성 화면 제공. 100000 입력 시 멈춤 진술. 저장 성공·지원 상한으로 해석하지 않음"
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/회차"
+        },
+        {
+          "field_id": "R02-PL02-CONF-09",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "회차별 커리큘럼 소개",
+          "observed_constraints": {
+            "required": true,
+            "chars": [
+              50,
+              500
+            ],
+            "attachment_max_mb": 10
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/회차별 커리큘럼 소개"
+        },
+        {
+          "field_id": "R02-PL02-CONF-10",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "참여인원",
+          "observed_constraints": {
+            "required": true,
+            "values": [
+              "1:1 클래스",
+              "그룹 클래스"
+            ],
+            "group_observed_counts": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              17,
+              18,
+              19,
+              20,
+              30,
+              40,
+              50
+            ],
+            "group_structure": "인원 범위 양끝 선택",
+            "after_review_editable": false
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/참여인원"
+        },
+        {
+          "field_id": "R02-PL02-CONF-11",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "수강료",
+          "observed_constraints": {
+            "required": true,
+            "formula": "시간당 가격 × 1회당 클래스 시간 × 총 클래스 횟수",
+            "minimum_total_krw": 5000,
+            "tax_notice": "세금과 공과 등 10% 포함",
+            "hour_input": "정수만 가능 (사용자 진술)",
+            "after_review": "기존 심사 완료 클래스에서 시간당 가격은 편집 가능, 1회당 시간은 비활성 (직접 관찰)"
+          },
+          "required": true,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/수강료"
+        },
+        {
+          "field_id": "R02-PL02-CONF-12",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "승인 메시지",
+          "observed_constraints": {
+            "required": false,
+            "max_chars": 500,
+            "purpose": "결제 시 반복 안내"
+          },
+          "required": false,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/승인 메시지"
+        },
+        {
+          "field_id": "R02-PL02-CONF-13",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "태그",
+          "observed_constraints": {
+            "required": false,
+            "max_count": 10
+          },
+          "required": false,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/태그"
+        },
+        {
+          "field_id": "R02-PL02-CONF-14",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "영상",
+          "observed_constraints": {
+            "required": false,
+            "type": "유튜브 URL",
+            "max_count": 5
+          },
+          "required": false,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/영상"
+        },
+        {
+          "field_id": "R02-PL02-CONF-15",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 공지사항",
+          "observed_constraints": {
+            "required": false,
+            "max_chars": 1000
+          },
+          "required": false,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/클래스 공지사항"
+        },
+        {
+          "field_id": "R02-PL02-CONF-16",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "정산 설정",
+          "observed_constraints": {
+            "observed_precondition": "이 계정의 심사 제출 전 입력 요구",
+            "labels": [
+              "은행",
+              "정산 계좌",
+              "예금주",
+              "주민번호"
+            ],
+            "storage": "값 수집·보존 없음"
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/정산 설정"
+        },
+        {
+          "field_id": "R02-PL02-CONF-17",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "튜터명",
+          "observed_constraints": {
+            "max_chars": 12
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/튜터명"
+        },
+        {
+          "field_id": "R02-PL02-CONF-18",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "튜터 소개",
+          "observed_constraints": {
+            "max_chars": 500
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/튜터 소개"
+        },
+        {
+          "field_id": "R02-PL02-CONF-19",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "프로필 이미지",
+          "observed_constraints": {
+            "guidance": "본인 사진 권장. 동물·캐릭터·단순 배경은 승인 어려울 수 있음",
+            "channel_formats": [
+              "PNG",
+              "JPG",
+              "JPEG"
+            ]
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/프로필 이미지"
+        },
+        {
+          "field_id": "R02-PL02-CONF-20",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "이력",
+          "observed_constraints": {
+            "required": false,
+            "labels": [
+              "이력 내용",
+              "증빙파일"
+            ],
+            "attachment_max_mb": 10,
+            "review_days": "첫 심사 영업일 5~7일, 추가 인증 1~2일",
+            "observed_state": "승인 거절",
+            "controls": [
+              "파일 보기",
+              "삭제하기"
+            ]
+          },
+          "required": false,
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/이력"
+        },
+        {
+          "field_id": "R02-PL02-CONF-21",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "장소",
+          "observed_constraints": {
+            "flow": [
+              "우편번호 검색",
+              "주소 선택",
+              "상세주소 입력"
+            ],
+            "detail_required": "미확인. 비어 있어도 저장 버튼 활성화 관찰",
+            "save_result": "미실행"
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/장소"
+        },
+        {
+          "field_id": "R02-PL02-CONF-22",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "튜터 채널",
+          "observed_constraints": {
+            "required_for_class_submission": false,
+            "source": "사용자 확인",
+            "required_groups": [
+              "채널 기본 정보",
+              "프로필 이미지",
+              "배경 이미지 3장",
+              "튜터 소개",
+              "채널 주소"
+            ],
+            "title_max_chars": 50,
+            "search_max_count": 8,
+            "address_chars": [
+              3,
+              30
+            ],
+            "address_allowed": "영문·숫자·마침표·밑줄·붙임표",
+            "background": "10MB 이하 JPG/JPEG/PNG/WebP/GIF/MP4, 영상 1개·사진 최대5개",
+            "optional": [
+              "검색어",
+              "수업 장소",
+              "소셜 미디어",
+              "이력"
+            ],
+            "location_visibility": "정확한 주소·위치는 결제 전 비공개"
+          },
+          "required": "unknown",
+          "evidence_refs": [
+            "R02-EV-TALING-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json#/output/fields/튜터 채널"
         }
       ],
       "relations": [],
@@ -3318,10 +3735,11 @@
         "R02-US-020"
       ],
       "unknowns": [
-        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
-        "수정·갱신·반려 대응별 절차와 완료 근거",
-        "외부 유료 대행과 자동화 허용 범위",
-        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+        "90분 수업을 정수 시간 입력으로 표현하는 방법",
+        "승인 후 일정·장소 실제 입력 필드와 결과",
+        "가격·회차의 서버 저장 제약",
+        "상태별 삭제·중지·재개 실제 결과",
+        "대행 허용 범위"
       ],
       "decision_requests": [
         "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
@@ -3333,7 +3751,8 @@
             "R02-EV-ADD-PL02"
           ]
         }
-      ]
+      ],
+      "user_confirmation_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json"
     },
     {
       "platform_id": "PL03",
@@ -4735,6 +5154,13 @@
       "type": "user_statement_and_provided_screenshots",
       "observed_at": "2026-11-26",
       "limitation": "해당 카테고리와 확인 시점 한정"
+    },
+    {
+      "evidence_id": "R02-EV-TALING-USER-20261126",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R02/taling-user-confirmation.json",
+      "type": "user_screenshots_statements_and_readonly_browser",
+      "observed_at": "2026-11-26",
+      "limitation": "오프라인 클래스 기준. 로그인 계정별 화면 관찰 한정"
     }
   ],
   "cross_links": [
