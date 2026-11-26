@@ -1,5 +1,5 @@
 {
-  "status": "limited_in_memory_structural_check",
+  "status": "limited_in_memory_structural_and_demo_rule_check",
   "checks": [
     {
       "id": "price_conflict",
@@ -164,7 +164,61 @@
     {
       "id": "demo_owner_list",
       "pass": true
+    },
+    {
+      "id": "demo_asset_saved",
+      "pass": true
+    },
+    {
+      "id": "demo_missing_description",
+      "pass": true
+    },
+    {
+      "id": "demo_invalid_amount",
+      "pass": true
     }
   ],
-  "limitations": "합성 사례 타입·필수값·경로·응답 schema 검사; 실제 HTTP/모델/제품 시험 아님."
+  "demo_checks": [
+    {
+      "id": "required-and-provenance:ready_review",
+      "pass": true
+    },
+    {
+      "id": "required-and-provenance:demo_price_resolved",
+      "pass": true
+    },
+    {
+      "id": "required-and-provenance:demo_auth_open",
+      "pass": true
+    },
+    {
+      "id": "required-and-provenance:demo_auth_finish",
+      "pass": true
+    },
+    {
+      "id": "price-conflict-blocked",
+      "pass": true
+    },
+    {
+      "id": "negative:demo_missing_description",
+      "pass": true
+    },
+    {
+      "id": "negative:demo_invalid_amount",
+      "pass": true
+    },
+    {
+      "id": "demo-ids-and-revisions",
+      "pass": true
+    },
+    {
+      "id": "independent-evidence-matches-approved-values",
+      "pass": true
+    },
+    {
+      "id": "model-failure-blocked-or-503",
+      "pass": true
+    }
+  ],
+  "limitations": "합성 타입/필수값/경로/응답 schema·일부 불변조건·모의 필수값/근거/호출 연결 검사. 실제 HTTP/모델/PG 연결·bytes/권리·전체 OpenAPI validator 또는 제품 시험 아님."
 }

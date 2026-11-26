@@ -42,7 +42,7 @@ gantt
  최종 발표/소스/영상 :milestone, m8, 2027-01-04, 0d
 ```
 
-11/26 막대는 당일 설계 목표 및 원본에서 확인한 상태, 미래 마일스톤은 기존 교육 제출일/내부 목표이다. 새로운 전체 공수·실행 일정이 아니다. 별도 [이전 V0.7 계획](../artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json)의 구현 기간은 새 설계 확정 후 재산정한다.
+11/26 활성 작업 구간의 done/active는 작성 완료 보고/진행 중 상태이며 R01 인수 완료가 아니다. 이후 구간은 제출용 잠정 계획(실제 실행일 아님), 미래 마일스톤은 기존 교육 제출일/내부 목표이다. 11/25 모듈별 독립 시험 및 11/26 PostgreSQL SQL 실적은 아래 시험 근거 표와 4.3에서 별도로 표시한다. 미확인 잔여 공수는 11/27 각 기존 담당과 R01 확인. 새로운 전체 공수·실행 일정이 아니다. 별도 [이전 V0.7 계획](../artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json)의 구현 기간은 새 설계 확정 후 재산정한다.
 
 | 담당/작업 | 현재 원본에서 확인된 실적 | 계획 대비 잔여 |
 | --- | --- | --- |
@@ -63,7 +63,7 @@ gantt
 | 시연 ID | 기능 | 행동 | 합격 조건 |
 | --- | --- | --- | --- |
 | D01 | F01, F05 | 원본·사진 저장 | 원본·첨부·version_id 저장 및 owner 조회 |
-| D02 | F03, F06–F11 | 크몽형 준비·가격 확인 | 가격 충돌 질문, ready=false에서 실행 0; 확인값·출처 및 revision 보존 |
+| D02 | F03, F06–F11 | 크몽형 준비·가격 확인 | 가격 충돌 질문·필수값/근거/첨부/규격 검증, ready=false에서 실행 0; 확인값·출처 및 revision 보존 |
 | D03 | F12, F13 | 직접 인증 | 강사 직접 인증, 동일 계정·권한 확인, 외부 비밀 미저장 |
 | D04 | F16–F18 | 정보·범위 승인 | 명시 승인 두 항목, revision/digest/key 검증, job_id 반환 |
 | D05 | F19, F22 | 모의 접수·독립 확인 | 접수 1회, 별도 조회로 대상·값·첨부·receipt 확인; 유실 시 재접수 0, 근거 없으면 unknown |
@@ -73,7 +73,7 @@ gantt
 | --- | --- | --- |
 | 11/27 | R01, 기존 담당 확인 | DLV-05 상태전이 제출, TASK-058 중 크몽형 D01–D06 및 DB/API 우선 검토. 각 실제 담당자 잔여 공수·가능일·선행 확인, R01의 재개 결정 기록 후 실제 TASK/WBS 갱신; 제출안에서 재개 승인하지 않음. |
 | 12/3 | R03 조립 / R01, R04·R05 | PG 빈/기존 DB·FK·owner/경합, /v2 HTTP 실제 응답, UI/STORE/runtime/adapter 입력 출력·scope·receipt. 합성 PREP로 D01–D06 선행 인수; 실패하면 예비 축소 범위 기록. |
-| 12/4 | R02→R03 / R01 | PREP 실제 모듈 교체, 가격 충돌/출처·30초·201/503·late CAS, 전체 D01–D06 재시험. 미충족 시 검증된 연속 단계만 시연; 합성 여부 표시. |
+| 12/4 | R02→R03 / R01 | PREP 실제 모듈 교체, [모의 필수값·근거 검증](../step2/submission-v1/kmong-demo-profile.json)·가격 충돌·30초·201/503·late CAS, 전체 D01–D06 재시험. 미충족 시 검증된 연속 단계만 시연; 합성 여부 표시. |
 | 12/7 | R01 | 후보 commit/tree·schema/profile/fixture 및 연결 모듈 고정, 동일 후보 재시험·최종 부분/완료 판정. |
 
 현재 새 /v2 동일 후보 D01–D06 제품 시험 0/6(미실행). 이전 제품 22개 gate와 별도 집계. 
@@ -96,8 +96,8 @@ gantt
 | 시험 | 실행일·기준 | 결과·제한 |
 | --- | --- | --- |
 | R03 HTTP | 11/25 fa40128 + 미커밋 worktree, [실행 기록](../artifacts/runs/TASK-050-s8-http-20261125.json) | 191 테스트(14 HTTP), 합성 PREP/SQLite; /v2·전체 제품 아님. |
-| R04 UI/숨고 | 11/25 366cea92, [CI](https://github.com/ik-e/chaja-you/actions/runs/45565527174/job/139039245388) | 독립 9/6, 전체 연결 미확인. |
-| R05 Runtime/크몽 | 11/25 main 366cea92 + c3fa0b19 + a3718a90, tree 10096b0f, [CI](https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594) | 30/37 독립 조합, 합성 PREP, 전체 UI/HTTP 미연결. |
+| R04 UI/숨고 | 11/25 366cea92, [CI](https://github.com/ik-e/chaja-you/actions/runs/45565527174/job/139039245388) | UI 9건·숨고 6건 독립 통과, 전체 연결 미확인. |
+| R05 Runtime/크몽 | 11/25 main 366cea92 + c3fa0b19 + a3718a90, tree 10096b0f, [CI](https://github.com/ik-e/chaja-you/actions/runs/45568163241/job/139047965594) | Runtime 30건·크몽 37건 독립 조합 통과, 합성 PREP, 전체 UI/HTTP 미연결. |
 | R02 PREP | 11/25 [체크포인트](../../product/lesson-registration/evidence/team-integration-checkpoint-20261125.json) PR49/50 main, PR51/52 보고 | 44 합성 및 모델 3/5·4/5 보고, 가격 충돌 오류; 정확한 모델 실행 판/비용 미확인. |
 | 새 통합 | 12/3, 12/4, 12/7 | 동일 commit/tree, PG 버전, OpenAPI hash, fixture, 실제 연결 모듈, 실행일/명령/로그. D01–D06과 제품 gate 별도. |
 
