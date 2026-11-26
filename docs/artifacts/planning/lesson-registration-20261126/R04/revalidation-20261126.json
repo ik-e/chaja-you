@@ -1,0 +1,4581 @@
+{
+  "schema_version": 1,
+  "id": "REVALIDATION-TASK-056-20261126",
+  "kind": "document",
+  "task_ref": "TASK-056",
+  "status": "보완 수행 · 일부 기준 미확인",
+  "baseline_commit": "63d9d7ba70faf0c76f5560d0d9e3b59b31e1ebd0",
+  "input": {
+    "contract": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
+    "result": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json",
+    "review_source": "현재 사용자 대화의 R04 검토 의견 및 추가 지시",
+    "boundary": "기존 자료 재검증 및 공개 페이지 읽기만 수행. 로그인·외부 등록·구현 없음"
+  },
+  "claim_reviews": [
+    {
+      "id": "R04-PL01-OBJ1",
+      "platform_id": "PL01",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL01-OBJ1",
+        "name": "서비스 상품 (Service Product)",
+        "business_meaning": "전문가가 판매하는 1:1 음악 레슨 패키지 상품",
+        "owner": "전문가 회원 계정",
+        "identifier": "상품 ID (숫자) 및 상품 상세 URL (https://kmong.com/gig/{id})",
+        "lifecycle": "임시저장 -> 심사대기 -> 심사중 -> [승인: 판매중 / 반려: 수정요청] -> 판매중지/마감",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-OBJ1"
+    },
+    {
+      "id": "R04-PL01-CREATE",
+      "platform_id": "PL01",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL01-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL01-OBJ1"
+        ],
+        "actual_user_steps": [
+          "전문가 센터 > 나의 서비스 > 서비스 등록 클릭",
+          "기본정보 입력 (카테고리: 레슨·실무교육 > 음악 레슨, 서비스 제목, 서비스 방식 선택)",
+          "가격 및 옵션 설정 (STANDARD / DELUXE / PREMIUM 패키지별 금액, 수업시간, 횟수, 작업기간)",
+          "서비스 설명 작성 (전문가 소개, 커리큘럼, 대상, 준비사항 - 최소 글자수 충족)",
+          "이미지 등록 (메인 썸네일 필수 규격 652x488, 상세 이미지 등록)",
+          "요청사항 설정 (수강생 사전 질문 작성)",
+          "최종 확인 후 '심사 제출' 클릭"
+        ],
+        "preconditions": [
+          "크몽 전문가 회원 인증 완료",
+          "휴대폰 본인인증 완료"
+        ],
+        "input_field_refs": [
+          "R04-PL01-F01",
+          "R04-PL01-F02",
+          "R04-PL01-F03",
+          "R04-PL01-F04",
+          "R04-PL01-F05",
+          "R04-PL01-F06"
+        ],
+        "return_field_refs": [
+          "R04-PL01-F07",
+          "R04-PL01-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL01-F01",
+          "R04-PL01-F03",
+          "R04-PL01-F04",
+          "R04-PL01-F05"
+        ],
+        "state_before": "DRAFT",
+        "state_after": "PENDING_REVIEW",
+        "completion_evidence": [
+          "심사 접수 완료 모달 노출",
+          "접수 번호 및 접수 일시 표시",
+          "나의 서비스 목록 상태가 '심사대기'로 변경"
+        ],
+        "error_and_unknown_conditions": [
+          "필수 필드 누락 시 해당 탭 이동 및 인라인 에러",
+          "이미지 규격 미달 시 업로드 거부",
+          "네트워크 단절 시 임시저장 데이터 잔존 여부 확인 필요"
+        ],
+        "retry_or_duplicate_risk": "심사 중복 제출 시 약관 제9조(동일 서비스 중복 등록 제한) 위반 위험 발생",
+        "external_effect": "크몽 관리자 심사 큐에 신규 상품 등록",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03",
+          "R04-EV-PLATFORM-RIGHTS"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-CREATE"
+    },
+    {
+      "id": "R04-PL01-READ",
+      "platform_id": "PL01",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL01-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL01-OBJ1"
+        ],
+        "actual_user_steps": [
+          "전문가 센터 > 나의 서비스 관리 메뉴 접속",
+          "등록된 서비스 상품 목록 및 현재 심사/판매 상태 확인",
+          "특정 상품 클릭하여 등록된 상세 내용 열람"
+        ],
+        "preconditions": [
+          "로그인 세션 유효"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL01-F01",
+          "R04-PL01-F03",
+          "R04-PL01-F07",
+          "R04-PL01-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL01-F01",
+          "R04-PL01-F03",
+          "R04-PL01-F07",
+          "R04-PL01-F08"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "서비스 목록 및 상태 데이터 정상 렌더링"
+        ],
+        "error_and_unknown_conditions": [
+          "세션 만료 시 로그인 페이지 리다이렉트"
+        ],
+        "retry_or_duplicate_risk": "조회 작업으로 부작용 없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-READ"
+    },
+    {
+      "id": "R04-PL01-UPDATE",
+      "platform_id": "PL01",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL01-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL01-OBJ1"
+        ],
+        "actual_user_steps": [
+          "나의 서비스 관리 > 특정 서비스 '편집' 버튼 클릭",
+          "가격, 설명, 이미지 등 변경 사항 수정",
+          "단순 수정(오탈자 등)은 즉시 반영 또는 중요 항목(가격/서비스내용)은 재심사 제출"
+        ],
+        "preconditions": [
+          "기존 등록 서비스 존재",
+          "심사 진행 중(PENDING_REVIEW)이 아닐 것"
+        ],
+        "input_field_refs": [
+          "R04-PL01-F01",
+          "R04-PL01-F03",
+          "R04-PL01-F04",
+          "R04-PL01-F05"
+        ],
+        "return_field_refs": [
+          "R04-PL01-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL01-F01",
+          "R04-PL01-F03"
+        ],
+        "state_before": "SELLING",
+        "state_after": "PENDING_REVIEW_OR_UPDATED",
+        "completion_evidence": [
+          "수정 완료 토스트 노출 또는 재심사 접수 완료 표시"
+        ],
+        "error_and_unknown_conditions": [
+          "심사 중 상태에서는 편집 버튼 비활성화"
+        ],
+        "retry_or_duplicate_risk": "중복 수정 요청 시 덮어쓰기 위험",
+        "external_effect": "기존 상품 정보 변경 또는 재심사 큐 인입",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-UPDATE"
+    },
+    {
+      "id": "R04-PL01-RENEW",
+      "platform_id": "PL01",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL01-RENEW",
+        "operation_type": "RENEW",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL01-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "unknown_reason": "크몽은 게시물 갱신/끌어올리기 개념이 없으며 상시 판매 노출 및 유료 광고 부스팅 구조임"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-RENEW"
+    },
+    {
+      "id": "R04-PL01-STATUS",
+      "platform_id": "PL01",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL01-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL01-OBJ1"
+        ],
+        "actual_user_steps": [
+          "나의 서비스 관리에서 배지 확인 (심사대기, 판매중, 수정요청, 비승인)",
+          "알림 센터에서 심사 통과 또는 수정 요청 알림 확인"
+        ],
+        "preconditions": [
+          "로그인 세션 유효"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL01-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL01-F08"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "상태 배지 명칭 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "외부 비로그인 공개 상품 페이지에서는 '판매중' 여부만 관측 가능(심사중/반려는 비공개)"
+        ],
+        "retry_or_duplicate_risk": "부작용 없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-STATUS"
+    },
+    {
+      "id": "R04-PL01-RESPOND",
+      "platform_id": "PL01",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL01-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL01-OBJ1"
+        ],
+        "actual_user_steps": [
+          "수정요청(반려) 상태 확인 및 반려 상세 사유 확인",
+          "지적된 필드 수정 후 재심사 제출 버튼 클릭"
+        ],
+        "preconditions": [
+          "서비스 상태가 '수정요청'일 것"
+        ],
+        "input_field_refs": [
+          "R04-PL01-F03",
+          "R04-PL01-F04",
+          "R04-PL01-F05"
+        ],
+        "return_field_refs": [
+          "R04-PL01-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL01-F08"
+        ],
+        "state_before": "REVISION_REQUESTED",
+        "state_after": "PENDING_REVIEW",
+        "completion_evidence": [
+          "재심사 접수 완료 표시"
+        ],
+        "error_and_unknown_conditions": [
+          "반려 사유 미충족 시 재반려"
+        ],
+        "retry_or_duplicate_risk": "동일 반려 상태에서 중복 요청 방지 필요",
+        "external_effect": "재심사 큐 인입",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-RESPOND"
+    },
+    {
+      "id": "R04-PL01-F01",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F01",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "서비스 제목",
+        "meaning": "레슨 상품의 메인 타이틀",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (최대 50자 내외)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "특수문자 제한, 연락처/URL 포함 금지",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "금칙어 및 외부 연락처 기재 차단 필터링",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F01"
+    },
+    {
+      "id": "R04-PL01-F02",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F02",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "카테고리",
+        "meaning": "레슨 분류 카테고리 식별자",
+        "direction": [
+          "input"
+        ],
+        "observed_type_or_format": "select (레슨·실무교육 > 음악 레슨)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "고정 카테고리 코드",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "음악 레슨 하위 보컬/작곡/악기 분류 일치",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F02"
+    },
+    {
+      "id": "R04-PL01-F03",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F03",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "패키지별 가격 및 옵션 (STANDARD/DELUXE/PREMIUM)",
+        "meaning": "수업료, 수업시간(분), 횟수, 작업기간 매트릭스",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "array of objects (3단계)",
+        "required": "yes",
+        "required_when": "최소 STANDARD 1개 필수",
+        "allowed_values_or_limits": "최소 5,000원 이상, 1,000원 단위",
+        "multiplicity": "1..3",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "금액 및 시간 양수 정수",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F03"
+    },
+    {
+      "id": "R04-PL01-F04",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F04",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "서비스 설명",
+        "meaning": "전문가 이력, 커리큘럼, 수업 대상, 장소 등 본문",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (최소 200자 이상)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "텍스트 포맷팅 지원, 외부 연락처 기재 금지",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "개인 연락처, 카카오톡 ID 기재 시 심사 반려",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F04"
+    },
+    {
+      "id": "R04-PL01-F05",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F05",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "메인 이미지",
+        "meaning": "상품 목록 및 대표 썸네일",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "image file (JPG/PNG, 권장 652x488)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "최대 10MB, 비율 4:3 준수",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "저작권 위반 이미지, 텍스트 과다 삽입 시 반려",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F05"
+    },
+    {
+      "id": "R04-PL01-F06",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F06",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "의뢰인 준비사항",
+        "meaning": "레슨 신청자 사전 확인 질의",
+        "direction": [
+          "input"
+        ],
+        "observed_type_or_format": "string",
+        "required": "no",
+        "required_when": "선택",
+        "allowed_values_or_limits": "최대 1000자",
+        "multiplicity": "0..1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "authenticated",
+        "persistence_need_candidate": "save",
+        "validation_rules": "자유 텍스트",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F06"
+    },
+    {
+      "id": "R04-PL01-F07",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F07",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "상품 고유 ID 및 상세 링크",
+        "meaning": "외부 게시 객체 식별자",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "string/URL (https://kmong.com/gig/{id})",
+        "required": "yes",
+        "required_when": "등록/접수 완료 시 발급",
+        "allowed_values_or_limits": "고유 식별 번호",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 형식",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F07"
+    },
+    {
+      "id": "R04-PL01-F08",
+      "platform_id": "PL01",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL01-F08",
+        "object_ref": "R04-PL01-OBJ1",
+        "actual_label_or_observed_key": "심사 및 판매 상태",
+        "meaning": "상품의 현재 수명주기 상태값",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "enum (작성중, 심사대기, 심사중, 판매중, 수정요청, 비승인, 판매중지)",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "플랫폼 정의 상태",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "authenticated",
+        "persistence_need_candidate": "save",
+        "validation_rules": "상태 전이 룰 준수",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-F08"
+    },
+    {
+      "id": "R04-PL01-REL1",
+      "platform_id": "PL01",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL01-REL1",
+        "from_object_ref": "R04-PL01-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 크몽 판매 상품 간 1:1 또는 1:N 매핑 (동일 레슨을 기초/심화 2개 상품으로 나눌 수 있음)",
+        "cardinality": "1:N",
+        "ownership_constraints": "전문가 계정 소유",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-REL1"
+    },
+    {
+      "id": "R04-PL01-ST1",
+      "platform_id": "PL01",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL01-ST1",
+        "object_or_operation_ref": "R04-PL01-OBJ1",
+        "native_label": "심사대기 / 심사중",
+        "meaning": "상품 등록/수정 후 크몽 운영팀 검수 대기",
+        "transition_trigger": "CREATE 또는 RESPOND 제출",
+        "next_states": [
+          "판매중",
+          "수정요청",
+          "비승인"
+        ],
+        "observability": "전문가 센터 나의 서비스 목록에서 관측 가능 (약 1~3영업일 소요)",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-ST1"
+    },
+    {
+      "id": "R04-PL01-ST2",
+      "platform_id": "PL01",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL01-ST2",
+        "object_or_operation_ref": "R04-PL01-OBJ1",
+        "native_label": "판매중",
+        "meaning": "심사 승인 완료되어 일반 사용자에게 노출 및 결제 가능 상태",
+        "transition_trigger": "크몽 관리자 승인",
+        "next_states": [
+          "판매중지",
+          "수정요청"
+        ],
+        "observability": "공개 웹페이지에서 누구나 관측 가능",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-ST2"
+    },
+    {
+      "id": "R04-PL01-ST3",
+      "platform_id": "PL01",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL01-ST3",
+        "object_or_operation_ref": "R04-PL01-OBJ1",
+        "native_label": "수정요청",
+        "meaning": "약관/규격 위반으로 반려되어 보완 요구 상태",
+        "transition_trigger": "크몽 관리자 반려 사유 입력",
+        "next_states": [
+          "심사대기"
+        ],
+        "observability": "전문가 센터 알림 및 반려 사유 텍스트 관측",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-ST3"
+    },
+    {
+      "id": "R04-PL01-C01",
+      "platform_id": "PL01",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL01-C01",
+        "category": "pricing_model",
+        "description": "3단계(STANDARD/DELUXE/PREMIUM) 패키지 단위 가격 책정 구조 강제",
+        "impact": "단일 회당 가격 원본을 크몽 3단계 패키지 구조로 변환 매핑해야 함",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-C01"
+    },
+    {
+      "id": "R04-PL01-C02",
+      "platform_id": "PL01",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL01-C02",
+        "category": "compliance",
+        "description": "본문 및 썸네일에 외부 직거래 유도 연락처(전화번호, 카톡ID) 포함 시 즉시 반려",
+        "impact": "변환 시 사전 정규식 필터링 및 경고 필수",
+        "evidence_refs": [
+          "R04-EV-KMONG-R03"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-C02"
+    },
+    {
+      "id": "R04-PL01-AUTH1",
+      "platform_id": "PL01",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL01-AUTH1",
+        "method": "Web Cookie/Session (이메일/소셜 로그인 + 본인인증)",
+        "required_credential_type": "전문가 계정 세션",
+        "delegation_feasibility": "강사 직접 로그인 필수, 무인 로그인 위임 불가",
+        "session_characteristics": "로그인 후 장기 세션 유지 가능하나 브라우저 지문 변동 시 재인증 요구 가능",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL01-AUTH1"
+    },
+    {
+      "id": "R04-PL02-OBJ1",
+      "platform_id": "PL02",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL02-OBJ1",
+        "name": "튜터 클래스 (Tutor Class)",
+        "business_meaning": "탈잉 튜터가 개설하는 음악 레슨 수업",
+        "owner": "탈잉 튜터 계정",
+        "identifier": "클래스 ID (숫자) 및 URL (https://taling.me/Talent/Detail/{id})",
+        "lifecycle": "작성중 -> 검수대기 -> [승인 / 반려] -> 클래스오픈 -> 일정등록/진행",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-OBJ1"
+    },
+    {
+      "id": "R04-PL02-CREATE",
+      "platform_id": "PL02",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL02-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL02-OBJ1"
+        ],
+        "actual_user_steps": [
+          "탈잉 PC 웹 > 튜터 스튜디오 접속",
+          "튜터 프로필 선행 확인 (소개, 사진, 학력/경력 증빙)",
+          "신규 클래스 등록 클릭",
+          "기본 정보 (카테고리: 음악/예술 > 악기/보컬/작곡, 수업 형태: 1:1/그룹)",
+          "가격 및 시간 설정 (시간당 금액, 회당 수업 시간, 총 회차)",
+          "수업 소개 및 상세 커리큘럼 단계별 입력",
+          "수업 가능 지역/장소 (온라인/오프라인 연습실)",
+          "검수 신청 클릭"
+        ],
+        "preconditions": [
+          "튜터 등록 승인 완료",
+          "프로필 이미지 및 연락처 인증 완료"
+        ],
+        "input_field_refs": [
+          "R04-PL02-F01",
+          "R04-PL02-F02",
+          "R04-PL02-F03",
+          "R04-PL02-F04",
+          "R04-PL02-F05"
+        ],
+        "return_field_refs": [
+          "R04-PL02-F06",
+          "R04-PL02-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL02-F01",
+          "R04-PL02-F03",
+          "R04-PL02-F04"
+        ],
+        "state_before": "DRAFT",
+        "state_after": "REVIEWING",
+        "completion_evidence": [
+          "검수 신청 완료 화면",
+          "스튜디오 내 상태 '검수중' 표시"
+        ],
+        "error_and_unknown_conditions": [
+          "회당 수업시간 단위(60분, 120분 등) 고정 제약 위반 시 저장 불가",
+          "커리큘럼 단계 미입력 시 신청 차단"
+        ],
+        "retry_or_duplicate_risk": "동일 클래스 중복 등록 시 탈잉 검수팀 반려",
+        "external_effect": "탈잉 클래스 검수 큐 인입",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02",
+          "R04-EV-PROPOSAL"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-CREATE"
+    },
+    {
+      "id": "R04-PL02-READ",
+      "platform_id": "PL02",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL02-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL02-OBJ1"
+        ],
+        "actual_user_steps": [
+          "튜터 스튜디오 > 내 수업 관리 접속",
+          "클래스 목록 및 현재 검수/오픈 상태 조회"
+        ],
+        "preconditions": [
+          "튜터 계정 로그인"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL02-F01",
+          "R04-PL02-F06",
+          "R04-PL02-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL02-F01",
+          "R04-PL02-F07"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "내 수업 리스트 정상 로드"
+        ],
+        "error_and_unknown_conditions": [
+          "세션 만료"
+        ],
+        "retry_or_duplicate_risk": "부작용 없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-READ"
+    },
+    {
+      "id": "R04-PL02-UPDATE",
+      "platform_id": "PL02",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL02-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL02-OBJ1"
+        ],
+        "actual_user_steps": [
+          "수업 관리 > 클래스 선택 > 수정하기",
+          "수업료 또는 커리큘럼 변경 후 저장"
+        ],
+        "preconditions": [
+          "기존 클래스 존재"
+        ],
+        "input_field_refs": [
+          "R04-PL02-F01",
+          "R04-PL02-F03",
+          "R04-PL02-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL02-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL02-F01"
+        ],
+        "state_before": "OPEN",
+        "state_after": "REVIEWING_OR_UPDATED",
+        "completion_evidence": [
+          "수정 사항 저장 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "중요 항목 수정 시 재검수 트리거"
+        ],
+        "retry_or_duplicate_risk": "덮어쓰기 위험",
+        "external_effect": "클래스 정보 변경",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-UPDATE"
+    },
+    {
+      "id": "R04-PL02-RENEW",
+      "platform_id": "PL02",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL02-RENEW",
+        "operation_type": "RENEW",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL02-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "unknown_reason": "탈잉은 클래스 갱신 개념이 아니며 수업 일정(스케줄) 추가/오픈 방식으로 운영됨"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-RENEW"
+    },
+    {
+      "id": "R04-PL02-STATUS",
+      "platform_id": "PL02",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL02-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL02-OBJ1"
+        ],
+        "actual_user_steps": [
+          "튜터 스튜디오에서 클래스 상태 배지(검수중, 오픈, 반려) 확인"
+        ],
+        "preconditions": [
+          "로그인 세션 유효"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL02-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL02-F07"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "상태 배지 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "검수 완료 후 일정 미등록 시 노출 미개시 상태 주의"
+        ],
+        "retry_or_duplicate_risk": "부작용 없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-STATUS"
+    },
+    {
+      "id": "R04-PL02-RESPOND",
+      "platform_id": "PL02",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL02-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL02-OBJ1"
+        ],
+        "actual_user_steps": [
+          "반려 사유(커리큘럼 보완 등) 열람",
+          "지적된 내용 수정 후 재신청"
+        ],
+        "preconditions": [
+          "상태가 '반려'일 것"
+        ],
+        "input_field_refs": [
+          "R04-PL02-F03",
+          "R04-PL02-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL02-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL02-F07"
+        ],
+        "state_before": "REJECTED",
+        "state_after": "REVIEWING",
+        "completion_evidence": [
+          "재검수 신청 완료"
+        ],
+        "error_and_unknown_conditions": [
+          "수정 미비 시 재반려"
+        ],
+        "retry_or_duplicate_risk": "중복 신청 방지",
+        "external_effect": "재검수 큐 인입",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "reported",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-RESPOND"
+    },
+    {
+      "id": "R04-PL02-F01",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F01",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "수업 제목",
+        "meaning": "탈잉 클래스 대표 명칭",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (최대 40자)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "어그로성 문구 제한",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "글자수 준수",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F01"
+    },
+    {
+      "id": "R04-PL02-F02",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F02",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "수업 형태 및 인원",
+        "meaning": "1:1 개인레슨 또는 소그룹 레슨",
+        "direction": [
+          "input"
+        ],
+        "observed_type_or_format": "select (1:1, 그룹)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "1:1, 그룹(최대인원 지정)",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "유효 옵션",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F02"
+    },
+    {
+      "id": "R04-PL02-F03",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F03",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "시간당 수업료 및 회차",
+        "meaning": "시간당 금액(원), 회당 시간(분), 총 회차수",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "number / select",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "시간당 최소 10,000원 이상, 회당 시간 60분/120분 단위",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "탈잉 고정 시간 슬롯 매핑 필요 (F11 충돌 가능성)",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02",
+          "R04-EV-PROPOSAL"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F03"
+    },
+    {
+      "id": "R04-PL02-F04",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F04",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "단계별 커리큘럼",
+        "meaning": "1회차, 2회차 등 회차별 학습 내용",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "array of step objects (회차, 제목, 상세내용)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "회차 수와 일치해야 함",
+        "multiplicity": "1..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "각 단계별 최소 내용 존재",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F04"
+    },
+    {
+      "id": "R04-PL02-F05",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F05",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "커버 및 수업 사진",
+        "meaning": "클래스 대표 썸네일 및 실습/수업 사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "image files",
+        "required": "yes",
+        "required_when": "대표 이미지 1장 필수",
+        "allowed_values_or_limits": "비율 1:1 권장, 고해상도",
+        "multiplicity": "1..5",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "워터마크 없는 선명한 사진",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F05"
+    },
+    {
+      "id": "R04-PL02-F06",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F06",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "클래스 식별 번호 및 URL",
+        "meaning": "탈잉 클래스 고유 ID",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "string/URL (https://taling.me/Talent/Detail/{id})",
+        "required": "yes",
+        "required_when": "등록 생성 시",
+        "allowed_values_or_limits": "고유 식별자",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 형식",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F06"
+    },
+    {
+      "id": "R04-PL02-F07",
+      "platform_id": "PL02",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL02-F07",
+        "object_ref": "R04-PL02-OBJ1",
+        "actual_label_or_observed_key": "클래스 검수 상태",
+        "meaning": "클래스의 현재 라이프사이클 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "enum (임시저장, 검수중, 승인(오픈대기), 오픈(판매중), 반려, 판매종료)",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "플랫폼 정의 상태",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "authenticated",
+        "persistence_need_candidate": "save",
+        "validation_rules": "상태 전이 룰 준수",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-F07"
+    },
+    {
+      "id": "R04-PL02-REL1",
+      "platform_id": "PL02",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL02-REL1",
+        "from_object_ref": "R04-PL02-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 탈잉 클래스 간 1:1 매핑",
+        "cardinality": "1:1",
+        "ownership_constraints": "튜터 계정 소유",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-REL1"
+    },
+    {
+      "id": "R04-PL02-ST1",
+      "platform_id": "PL02",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL02-ST1",
+        "object_or_operation_ref": "R04-PL02-OBJ1",
+        "native_label": "검수중",
+        "meaning": "탈잉 운영팀 클래스 검수 대기",
+        "transition_trigger": "검수 신청",
+        "next_states": [
+          "오픈(오픈대기)",
+          "반려"
+        ],
+        "observability": "튜터 스튜디오에서 확인 가능",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-ST1"
+    },
+    {
+      "id": "R04-PL02-ST2",
+      "platform_id": "PL02",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL02-ST2",
+        "object_or_operation_ref": "R04-PL02-OBJ1",
+        "native_label": "오픈 (판매중)",
+        "meaning": "검수 승인 후 클래스 공개 상태 (수강생 결제 가능)",
+        "transition_trigger": "검수 승인 및 일정 등록",
+        "next_states": [
+          "판매종료"
+        ],
+        "observability": "탈잉 공개 페이지에서 조회 가능",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-ST2"
+    },
+    {
+      "id": "R04-PL02-C01",
+      "platform_id": "PL02",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL02-C01",
+        "category": "schedule_requirement",
+        "description": "검수 승인 이후 튜터가 직접 일정(스케줄)을 1개 이상 열어야 실제 수강생 신청 가능",
+        "impact": "클래스 등록 성공과 최종 모집 가능 상태 간 분리 인식 필요",
+        "evidence_refs": [
+          "R04-EV-PROPOSAL"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-C01"
+    },
+    {
+      "id": "R04-PL02-AUTH1",
+      "platform_id": "PL02",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL02-AUTH1",
+        "method": "Web Session (이메일/소셜 로그인)",
+        "required_credential_type": "튜터 자격 인증 계정",
+        "delegation_feasibility": "강사 직접 로그인 필수",
+        "session_characteristics": "PC 스튜디오 웹 브라우저 기반 세션",
+        "evidence_refs": [
+          "R04-EV-LOGIN-R02"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL02-AUTH1"
+    },
+    {
+      "id": "R04-PL03-OBJ1",
+      "platform_id": "PL03",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL03-OBJ1",
+        "name": "고수 프로필 및 제공 서비스 (Gosu Profile & Service)",
+        "business_meaning": "숨고 고수의 레슨 서비스 설정 및 공개 대표 프로필",
+        "owner": "숨고 고수 회원 계정",
+        "identifier": "고수 프로필 번호 및 고수 페이지 URL (https://soomgo.com/profile/users/{user_id})",
+        "lifecycle": "고수전환 -> 제공서비스등록(질문지/옵션) -> 프로필작성 -> 프로필공개/검토 -> 요청서매칭",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-OBJ1"
+    },
+    {
+      "id": "R04-PL03-CREATE",
+      "platform_id": "PL03",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL03-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL03-OBJ1"
+        ],
+        "actual_user_steps": [
+          "숨고 웹 > 우측 상단 '고수 전환' 클릭 (미전환 시)",
+          "제공할 서비스 검색 및 선택 (예: '보컬 레슨', '작곡/미디 레슨')",
+          "서비스 질문지 설정 (레슨 목적, 연령대, 선호 요일/시간, 레슨 장소 선택지 응답 설정)",
+          "활동 지역 설정 (시/도 및 구 단위 활동 반경 설정)",
+          "고수 프로필 작성 (한줄 소개, 대표 사진, 상세 자기소개, 경력, 자격증 첨부)",
+          "설정 완료 및 '프로필 저장/공개' 클릭"
+        ],
+        "preconditions": [
+          "숨고 회원가입 및 휴대폰 본인인증 완료",
+          "고수 전환 완료"
+        ],
+        "input_field_refs": [
+          "R04-PL03-F01",
+          "R04-PL03-F02",
+          "R04-PL03-F03",
+          "R04-PL03-F04",
+          "R04-PL03-F05",
+          "R04-PL03-F06"
+        ],
+        "return_field_refs": [
+          "R04-PL03-F07",
+          "R04-PL03-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL03-F01",
+          "R04-PL03-F04",
+          "R04-PL03-F05"
+        ],
+        "state_before": "USER_OR_UNCONFIGURED",
+        "state_after": "GOSU_PROFILE_ACTIVE",
+        "completion_evidence": [
+          "프로필 저장 완료 토스트 알림",
+          "내 프로필 보기 페이지에서 서비스 명칭 및 소개 노출 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "서비스 카테고리별 필수 질문지 미응답 시 저장 불가",
+          "본인인증 미완료 계정은 고수 전환 차단"
+        ],
+        "retry_or_duplicate_risk": "동일 서비스 중복 추가는 차단되며, 기존 서비스 설정 덮어쓰기 형태로 동작",
+        "external_effect": "숨고 검색 마켓 및 요청서 매칭 풀에 고수 프로필 등록",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04",
+          "R04-EV-SOOMGO-SHOTS"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-CREATE"
+    },
+    {
+      "id": "R04-PL03-READ",
+      "platform_id": "PL03",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL03-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL03-OBJ1"
+        ],
+        "actual_user_steps": [
+          "마이페이지 > 프로필 관리 또는 마켓 접속",
+          "현재 등록된 제공 서비스 목록, 프로필 정보, 숨고페이/리뷰 현황 확인"
+        ],
+        "preconditions": [
+          "고수 계정 로그인"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL03-F01",
+          "R04-PL03-F02",
+          "R04-PL03-F07",
+          "R04-PL03-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL03-F01",
+          "R04-PL03-F02",
+          "R04-PL03-F08"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "프로필 관리 화면에 설정된 텍스트 및 사진 렌더링"
+        ],
+        "error_and_unknown_conditions": [
+          "세션 만료"
+        ],
+        "retry_or_duplicate_risk": "부작용 없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-READ"
+    },
+    {
+      "id": "R04-PL03-UPDATE",
+      "platform_id": "PL03",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL03-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL03-OBJ1"
+        ],
+        "actual_user_steps": [
+          "프로필 관리 > 수정할 항목(소개글, 사진, 제공 서비스 세부조건) 선택",
+          "내용 변경 후 '수정완료/저장' 클릭"
+        ],
+        "preconditions": [
+          "고수 프로필 존재"
+        ],
+        "input_field_refs": [
+          "R04-PL03-F01",
+          "R04-PL03-F04",
+          "R04-PL03-F05"
+        ],
+        "return_field_refs": [
+          "R04-PL03-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL03-F01",
+          "R04-PL03-F04"
+        ],
+        "state_before": "GOSU_PROFILE_ACTIVE",
+        "state_after": "GOSU_PROFILE_ACTIVE",
+        "completion_evidence": [
+          "저장 완료 메시지 및 프로필 뷰에 즉시 반영 관측"
+        ],
+        "error_and_unknown_conditions": [
+          "이미지 업로드 실패"
+        ],
+        "retry_or_duplicate_risk": "필드별 덮어쓰기",
+        "external_effect": "외부 노출 프로필 정보 변경",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-UPDATE"
+    },
+    {
+      "id": "R04-PL03-RENEW",
+      "platform_id": "PL03",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL03-RENEW",
+        "operation_type": "RENEW",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL03-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ],
+        "unknown_reason": "숨고는 고수 프로필 상시 노출 기반이며 공고 갱신/끌어올리기 기능이 없음 (견적 발송은 본 작업 범위 제외)"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-RENEW"
+    },
+    {
+      "id": "R04-PL03-STATUS",
+      "platform_id": "PL03",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL03-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL03-OBJ1"
+        ],
+        "actual_user_steps": [
+          "프로필 관리에서 '프로필 공개' 스위치 On/Off 상태 확인",
+          "내 고수 프로필 공개 URL로 비로그인 접속하여 정상 노출 검증"
+        ],
+        "preconditions": [
+          "로그인 세션 또는 공개 프로필 URL 확보"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL03-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL03-F08"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "프로필 공개 상태 On/Off 플래그 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "본인인증 미비 등으로 비공개 전환된 경우 사유 확인"
+        ],
+        "retry_or_duplicate_risk": "부작용 없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-STATUS"
+    },
+    {
+      "id": "R04-PL03-RESPOND",
+      "platform_id": "PL03",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL03-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL03-OBJ1"
+        ],
+        "actual_user_steps": [
+          "숨고는 크몽과 달리 사전 심사제가 아니나, 프로필에 금지 정보(연락처 등) 기재 시 운영팀에 의해 비공개 처리될 수 있음",
+          "운영팀 제재 알림 확인 후 프로필 수정 및 고객센터 소명"
+        ],
+        "preconditions": [
+          "프로필 비공개 제재 상태"
+        ],
+        "input_field_refs": [
+          "R04-PL03-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL03-F08"
+        ],
+        "visible_field_refs": [
+          "R04-PL03-F08"
+        ],
+        "state_before": "SUSPENDED_OR_PRIVATE",
+        "state_after": "GOSU_PROFILE_ACTIVE",
+        "completion_evidence": [
+          "프로필 재공개 승인"
+        ],
+        "error_and_unknown_conditions": [
+          "사후 제재 대응이므로 발생 빈도 낮음"
+        ],
+        "retry_or_duplicate_risk": "반복 위반 시 계정 정지 위험",
+        "external_effect": "고객센터 대응",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-RESPOND"
+    },
+    {
+      "id": "R04-PL03-F01",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F01",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "한 줄 소개",
+        "meaning": "고수 프로필의 대표 헤드라인",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (최대 50자)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "자유 텍스트",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "글자수 준수",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F01"
+    },
+    {
+      "id": "R04-PL03-F02",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F02",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "제공 서비스 카테고리",
+        "meaning": "제공하는 레슨 종목 식별",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "array of category IDs",
+        "required": "yes",
+        "required_when": "최소 1개 이상",
+        "allowed_values_or_limits": "숨고 서비스 목록 (보컬 레슨, 미디/작곡 레슨 등)",
+        "multiplicity": "1..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "유효 카테고리 코드",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F02"
+    },
+    {
+      "id": "R04-PL03-F03",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F03",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "서비스별 질문지 응답 설정",
+        "meaning": "수강생 매칭을 위한 선호 조건 (레슨 목적, 연령대, 장소 등)",
+        "direction": [
+          "input"
+        ],
+        "observed_type_or_format": "key-value map",
+        "required": "yes",
+        "required_when": "서비스 등록 시 필수",
+        "allowed_values_or_limits": "객관식/다중선택",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "internal_matching",
+        "persistence_need_candidate": "save",
+        "validation_rules": "필수 질문 응답 누락 방지",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F03"
+    },
+    {
+      "id": "R04-PL03-F04",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F04",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "고수 상세 설명 및 경력",
+        "meaning": "강사 자기소개, 커리큘럼 특징, 학력/활동 이력",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (긴 글)",
+        "required": "yes",
+        "required_when": "항상 필수",
+        "allowed_values_or_limits": "텍스트 포맷",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "외부 연락처 기재 시 노출 제한 주의",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F04"
+    },
+    {
+      "id": "R04-PL03-F05",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F05",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "프로필 사진 및 갤러리 이미지",
+        "meaning": "대표 얼굴 사진 및 작업실/레슨 사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "image files",
+        "required": "yes",
+        "required_when": "프로필 사진 1장 필수",
+        "allowed_values_or_limits": "최대 10장",
+        "multiplicity": "1..10",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "이미지 포맷",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F05"
+    },
+    {
+      "id": "R04-PL03-F06",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F06",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "활동 지역",
+        "meaning": "레슨 제공 가능 지역 및 이동 반경",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "array of region codes",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "시/군/구 단위",
+        "multiplicity": "1..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "지역 코드 일치",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F06"
+    },
+    {
+      "id": "R04-PL03-F07",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F07",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "고수 프로필 URL",
+        "meaning": "고수 공개 프로필 웹 페이지 링크",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "URL (https://soomgo.com/profile/users/{user_id})",
+        "required": "yes",
+        "required_when": "프로필 생성 시",
+        "allowed_values_or_limits": "고유 URL",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 형식",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F07"
+    },
+    {
+      "id": "R04-PL03-F08",
+      "platform_id": "PL03",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL03-F08",
+        "object_ref": "R04-PL03-OBJ1",
+        "actual_label_or_observed_key": "프로필 공개 및 본인인증 상태",
+        "meaning": "프로필 노출 활성화 여부",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "boolean / status enum",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "공개(Active), 비공개(Private)",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "상태값",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-F08"
+    },
+    {
+      "id": "R04-PL03-REL1",
+      "platform_id": "PL03",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL03-REL1",
+        "from_object_ref": "R04-PL03-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 숨고 고수 프로필 서비스 간 N:1 관계 (강사 1명의 프로필 안에 여러 레슨 서비스 카테고리가 묶임)",
+        "cardinality": "N:1",
+        "ownership_constraints": "고수 본인 소유",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-REL1"
+    },
+    {
+      "id": "R04-PL03-ST1",
+      "platform_id": "PL03",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL03-ST1",
+        "object_or_operation_ref": "R04-PL03-OBJ1",
+        "native_label": "프로필 공개 (활성)",
+        "meaning": "요청서 매칭 풀에 참여하며 고수 찾기에서 검색 가능한 상태",
+        "transition_trigger": "정보 입력 후 저장",
+        "next_states": [
+          "프로필 비공개"
+        ],
+        "observability": "공개 프로필 URL에서 관측 가능",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-ST1"
+    },
+    {
+      "id": "R04-PL03-C01",
+      "platform_id": "PL03",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL03-C01",
+        "category": "object_model",
+        "description": "숨고는 개별 '상품' 게시물이 아니라 1개의 '고수 프로필' 내에 복수 서비스가 귀속되는 구조임",
+        "impact": "DB 설계 시 개별 게시물(Post)과 프로필(Profile) 엔터티의 차이를 반영해야 함",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-C01"
+    },
+    {
+      "id": "R04-PL03-AUTH1",
+      "platform_id": "PL03",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL03-AUTH1",
+        "method": "Web Session (이메일/소셜 로그인 + 휴대폰 인증)",
+        "required_credential_type": "고수 전환 계정",
+        "delegation_feasibility": "강사 직접 로그인 필수",
+        "session_characteristics": "웹 쿠키 세션 기반",
+        "evidence_refs": [
+          "R04-EV-SOOMGO-R04"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL03-AUTH1"
+    },
+    {
+      "id": "R04-PL04-OBJ1",
+      "platform_id": "PL04",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL04-OBJ1",
+        "name": "전문가 프로필 및 레슨 분야 (Prompie Partner Profile)",
+        "business_meaning": "프람피 전문가가 등록하는 음악 레슨 분야 및 소개 프로필",
+        "owner": "프람피 전문가 회원 계정",
+        "identifier": "전문가 ID 및 프로필 URL (https://prompie.com/partners/{id})",
+        "lifecycle": "전문가가입 -> 활동분야선택 -> 프로필작성 -> 승인대기 -> 활동중",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-OBJ1"
+    },
+    {
+      "id": "R04-PL04-CREATE",
+      "platform_id": "PL04",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL04-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL04-OBJ1"
+        ],
+        "actual_user_steps": [
+          "프람피 파트너스 웹 접속 및 전문가 회원가입",
+          "전문 분야 선택 (음악/예술 > 보컬 레슨, 작곡 레슨 등)",
+          "프로필 기본 정보 (전문가명, 대표 사진, 연락처) 입력",
+          "상세 소개 및 경력/학력 정보 기재",
+          "수업 진행 방식 (방문레슨, 화상레슨, 연습실 레슨) 및 활동 지역 설정",
+          "프로필 저장 및 승인 신청"
+        ],
+        "preconditions": [
+          "프람피 전문가 회원 가입"
+        ],
+        "input_field_refs": [
+          "R04-PL04-F01",
+          "R04-PL04-F02",
+          "R04-PL04-F03",
+          "R04-PL04-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL04-F05",
+          "R04-PL04-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL04-F01",
+          "R04-PL04-F03"
+        ],
+        "state_before": "UNREGISTERED",
+        "state_after": "ACTIVE_OR_PENDING",
+        "completion_evidence": [
+          "전문가 프로필 저장 완료 안내",
+          "파트너 센터 프로필 노출"
+        ],
+        "error_and_unknown_conditions": [
+          "필수 학력/경력 미입력 시 승인 보류 가능"
+        ],
+        "retry_or_duplicate_risk": "계정당 단일 프로필 유지",
+        "external_effect": "프람피 레슨 매칭 풀 등록",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-CREATE"
+    },
+    {
+      "id": "R04-PL04-READ",
+      "platform_id": "PL04",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL04-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL04-OBJ1"
+        ],
+        "actual_user_steps": [
+          "프람피 파트너스 센터 접속 > 내 프로필 보기"
+        ],
+        "preconditions": [
+          "로그인 세션 유효"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL04-F01",
+          "R04-PL04-F05",
+          "R04-PL04-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL04-F01",
+          "R04-PL04-F06"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "프로필 정보 렌더링"
+        ],
+        "error_and_unknown_conditions": [
+          "세션 만료"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-READ"
+    },
+    {
+      "id": "R04-PL04-UPDATE",
+      "platform_id": "PL04",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL04-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL04-OBJ1"
+        ],
+        "actual_user_steps": [
+          "파트너 센터 > 프로필 수정 클릭 > 내용 변경 후 저장"
+        ],
+        "preconditions": [
+          "전문가 프로필 존재"
+        ],
+        "input_field_refs": [
+          "R04-PL04-F01",
+          "R04-PL04-F03",
+          "R04-PL04-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL04-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL04-F01"
+        ],
+        "state_before": "ACTIVE",
+        "state_after": "ACTIVE",
+        "completion_evidence": [
+          "수정 완료 알림"
+        ],
+        "error_and_unknown_conditions": [
+          "저장 실패"
+        ],
+        "retry_or_duplicate_risk": "덮어쓰기",
+        "external_effect": "공개 프로필 정보 변경",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-UPDATE"
+    },
+    {
+      "id": "R04-PL04-RENEW",
+      "platform_id": "PL04",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL04-RENEW",
+        "operation_type": "RENEW",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL04-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "unknown_reason": "숨고와 유사하게 프로필 상시 노출 체계로 공고 갱신 개념 없음"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-RENEW"
+    },
+    {
+      "id": "R04-PL04-STATUS",
+      "platform_id": "PL04",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL04-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL04-OBJ1"
+        ],
+        "actual_user_steps": [
+          "파트너 센터에서 프로필 노출 상태(활동중/승인대기) 확인"
+        ],
+        "preconditions": [
+          "로그인 세션 유효"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL04-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL04-F06"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "활동 상태 배지 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "계정 정지 여부"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-STATUS"
+    },
+    {
+      "id": "R04-PL04-RESPOND",
+      "platform_id": "PL04",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL04-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "unknown",
+        "target_object_refs": [
+          "R04-PL04-OBJ1"
+        ],
+        "actual_user_steps": [
+          "심사 반려 또는 수정 권고 발생 시 공식 수정 경로"
+        ],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [
+          "프람피의 프로필 반려 구체 사유 양식 미확인"
+        ],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "unknown",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ],
+        "unknown_reason": "공개 가이드에서 반려 사유의 웹 노출 형식 및 대응 절차가 명확히 문서화되지 않음"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-RESPOND"
+    },
+    {
+      "id": "R04-PL04-F01",
+      "platform_id": "PL04",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL04-F01",
+        "object_ref": "R04-PL04-OBJ1",
+        "actual_label_or_observed_key": "전문가명 및 한줄소개",
+        "meaning": "전문가 닉네임과 대표 슬로건",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "텍스트",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "글자수 준수",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-F01"
+    },
+    {
+      "id": "R04-PL04-F02",
+      "platform_id": "PL04",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL04-F02",
+        "object_ref": "R04-PL04-OBJ1",
+        "actual_label_or_observed_key": "전문 분야 (레슨)",
+        "meaning": "보컬, 악기, 작곡 등 선택 분야",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "array of categories",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "프람피 분류 카테고리",
+        "multiplicity": "1..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "카테고리 코드",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-F02"
+    },
+    {
+      "id": "R04-PL04-F03",
+      "platform_id": "PL04",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL04-F03",
+        "object_ref": "R04-PL04-OBJ1",
+        "actual_label_or_observed_key": "소개글 및 경력사항",
+        "meaning": "상세 프로필 본문 및 이력",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (텍스트)",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "자유 양식",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "텍스트 검증",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-F03"
+    },
+    {
+      "id": "R04-PL04-F04",
+      "platform_id": "PL04",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL04-F04",
+        "object_ref": "R04-PL04-OBJ1",
+        "actual_label_or_observed_key": "활동 지역 및 방식",
+        "meaning": "수업 제공 지역 및 대면/비대면 여부",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "region codes / lesson method enum",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "지역 및 방식",
+        "multiplicity": "1..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "선택값",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-F04"
+    },
+    {
+      "id": "R04-PL04-F05",
+      "platform_id": "PL04",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL04-F05",
+        "object_ref": "R04-PL04-OBJ1",
+        "actual_label_or_observed_key": "전문가 프로필 URL",
+        "meaning": "프람피 공개 프로필 웹 링크",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "URL",
+        "required": "yes",
+        "required_when": "프로필 생성 시",
+        "allowed_values_or_limits": "고유 URL",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 포맷",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-F05"
+    },
+    {
+      "id": "R04-PL04-F06",
+      "platform_id": "PL04",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL04-F06",
+        "object_ref": "R04-PL04-OBJ1",
+        "actual_label_or_observed_key": "전문가 활동 상태",
+        "meaning": "프로필 노출 및 활동 가능 여부",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "enum (활동중, 승인대기, 휴식)",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "상태값",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "유효 상태",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-F06"
+    },
+    {
+      "id": "R04-PL04-REL1",
+      "platform_id": "PL04",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL04-REL1",
+        "from_object_ref": "R04-PL04-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 프람피 전문가 프로필 간 N:1 관계 (숨고와 유사)",
+        "cardinality": "N:1",
+        "ownership_constraints": "전문가 계정 소유",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-REL1"
+    },
+    {
+      "id": "R04-PL04-ST1",
+      "platform_id": "PL04",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL04-ST1",
+        "object_or_operation_ref": "R04-PL04-OBJ1",
+        "native_label": "활동중",
+        "meaning": "프람피 플랫폼 내 프로필 정상 공개 상태",
+        "transition_trigger": "프로필 등록/승인",
+        "next_states": [
+          "휴식",
+          "비활성"
+        ],
+        "observability": "공개 프로필 웹페이지에서 관측 가능",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-ST1"
+    },
+    {
+      "id": "R04-PL04-C01",
+      "platform_id": "PL04",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL04-C01",
+        "category": "service_boundary",
+        "description": "프람피의 유료 제안서 발송 및 의뢰인 견적 채팅은 기획 제외 범위임",
+        "impact": "프로필 및 레슨 분야 등록·유지 기능만 제공",
+        "evidence_refs": [
+          "R04-EV-PROPOSAL"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-C01"
+    },
+    {
+      "id": "R04-PL04-AUTH1",
+      "platform_id": "PL04",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL04-AUTH1",
+        "method": "Web Cookie/Session",
+        "required_credential_type": "프람피 파트너스 계정",
+        "delegation_feasibility": "강사 직접 로그인 필요",
+        "session_characteristics": "웹 세션",
+        "evidence_refs": [
+          "R04-EV-PROMPIE-GUIDE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL04-AUTH1"
+    },
+    {
+      "id": "R04-PL05-OBJ1",
+      "platform_id": "PL05",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL05-OBJ1",
+        "name": "음악 레슨 구인/모집 공고 (Music Lesson Forum Post)",
+        "business_meaning": "국내 최대 실용음악 커뮤니티(뮬) 구인/레슨 게시판 게시글",
+        "owner": "뮬 회원 계정",
+        "identifier": "게시글 번호 및 URL (https://www.mule.co.kr/bbs/info/lesson?idx={id})",
+        "lifecycle": "게시글작성 -> 등록완료(게시중) -> [주기적 끌어올리기/갱신] -> 마감/삭제",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-OBJ1"
+    },
+    {
+      "id": "R04-PL05-CREATE",
+      "platform_id": "PL05",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL05-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL05-OBJ1"
+        ],
+        "actual_user_steps": [
+          "뮬 웹사이트 접속 및 로그인",
+          "구인구직 > '레슨' 게시판 이동",
+          "'글쓰기' 버튼 클릭",
+          "분류 선택 (기타, 베이스, 드럼, 보컬, 미디/작곡, 건반/재즈피아노 등)",
+          "지역 선택 (서울, 경기, 부산 등)",
+          "제목 작성 (핵심 키워드, 지역, 과목 명시)",
+          "본문 작성 (에디터에 레슨 커리큘럼, 프로필, 가격, 연락처/오픈카톡 기재)",
+          "사진 첨부 (작업실 전경, 프로필 사진)",
+          "'등록' 버튼 클릭"
+        ],
+        "preconditions": [
+          "뮬 회원 로그인 (일반 회원 글쓰기 권한)"
+        ],
+        "input_field_refs": [
+          "R04-PL05-F01",
+          "R04-PL05-F02",
+          "R04-PL05-F03",
+          "R04-PL05-F04",
+          "R04-PL05-F05"
+        ],
+        "return_field_refs": [
+          "R04-PL05-F06",
+          "R04-PL05-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL05-F01",
+          "R04-PL05-F02",
+          "R04-PL05-F03",
+          "R04-PL05-F04"
+        ],
+        "state_before": "DRAFT",
+        "state_after": "POSTED",
+        "completion_evidence": [
+          "게시글 상세 페이지로 즉시 이동",
+          "게시글 고유 번호(idx) 발급 및 목록 상단 노출"
+        ],
+        "error_and_unknown_conditions": [
+          "제목/본문 미입력 시 브라우저 경고 팝업",
+          "도배 방지 시간 제한(연속 글쓰기 제한)"
+        ],
+        "retry_or_duplicate_risk": "단시간 내 중복 등록 시 게시판 도배 제재(글 삭제 및 글쓰기 차단) 위험 매우 높음",
+        "external_effect": "뮬 레슨 게시판에 새 글 공개 게시",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-CREATE"
+    },
+    {
+      "id": "R04-PL05-READ",
+      "platform_id": "PL05",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL05-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL05-OBJ1"
+        ],
+        "actual_user_steps": [
+          "뮬 레슨 게시판 접속 또는 내가 쓴 글 목록에서 게시글 조회"
+        ],
+        "preconditions": [
+          "없음 (비로그인 공개 조회 가능)"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL05-F01",
+          "R04-PL05-F03",
+          "R04-PL05-F06",
+          "R04-PL05-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL05-F01",
+          "R04-PL05-F03",
+          "R04-PL05-F07"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "게시글 HTML 본문 정상 응답"
+        ],
+        "error_and_unknown_conditions": [
+          "삭제된 글인 경우 404/존재하지 않는 게시글"
+        ],
+        "retry_or_duplicate_risk": "부작용 없음",
+        "external_effect": "조회수 1 증가",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-READ"
+    },
+    {
+      "id": "R04-PL05-UPDATE",
+      "platform_id": "PL05",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL05-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL05-OBJ1"
+        ],
+        "actual_user_steps": [
+          "게시글 상세 페이지 하단 '수정' 버튼 클릭",
+          "제목, 본문, 사진 변경 후 '수정완료' 클릭"
+        ],
+        "preconditions": [
+          "작성자 본인 계정 로그인"
+        ],
+        "input_field_refs": [
+          "R04-PL05-F01",
+          "R04-PL05-F03",
+          "R04-PL05-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL05-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL05-F01",
+          "R04-PL05-F03"
+        ],
+        "state_before": "POSTED",
+        "state_after": "POSTED",
+        "completion_evidence": [
+          "수정 완료 후 글 상세 보기 리다이렉트"
+        ],
+        "error_and_unknown_conditions": [
+          "수정 권한 없음"
+        ],
+        "retry_or_duplicate_risk": "내용 덮어쓰기",
+        "external_effect": "게시글 본문 내용 수정",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-UPDATE"
+    },
+    {
+      "id": "R04-PL05-RENEW",
+      "platform_id": "PL05",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL05-RENEW",
+        "operation_type": "RENEW",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL05-OBJ1"
+        ],
+        "actual_user_steps": [
+          "뮬 규정상 일정 기간(예: 3일 또는 7일) 경과 후 '끌어올리기' 버튼 클릭 또는 동일 내용 재작성 후 이전 글 삭제/마감",
+          "끌어올리기 실행 시 등록일시가 현재 시각으로 갱신되어 게시판 1페이지 상단으로 이동"
+        ],
+        "preconditions": [
+          "끌어올리기 가능 쿨다운 시간 경과"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL05-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL05-F07"
+        ],
+        "state_before": "POSTED_OLD",
+        "state_after": "POSTED_TOP",
+        "completion_evidence": [
+          "게시글 등록일시가 현재 시각으로 갱신됨",
+          "게시판 1페이지 최상단 노출 관측"
+        ],
+        "error_and_unknown_conditions": [
+          "쿨다운 시간 미도래 시 '갱신 가능 시간이 아닙니다' 얼럿 표시"
+        ],
+        "retry_or_duplicate_risk": "중복 갱신 시도시 에러 반환",
+        "external_effect": "게시글 노출 순서 상단 이동 (강사의 반복 갱신 페인 P02 직접 해결)",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY",
+          "R04-EV-PROPOSAL"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-RENEW"
+    },
+    {
+      "id": "R04-PL05-STATUS",
+      "platform_id": "PL05",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL05-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL05-OBJ1"
+        ],
+        "actual_user_steps": [
+          "게시글 URL 접속하여 게시글 존재 여부, 조회수, 갱신 일시 확인"
+        ],
+        "preconditions": [
+          "공개 URL 존재"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL05-F07"
+        ],
+        "visible_field_refs": [
+          "R04-PL05-F07"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "게시글 정상 표시 (HTTP 200)"
+        ],
+        "error_and_unknown_conditions": [
+          "게시글 삭제 또는 블라인드 처리"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-STATUS"
+    },
+    {
+      "id": "R04-PL05-RESPOND",
+      "platform_id": "PL05",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL05-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL05-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ],
+        "unknown_reason": "뮬은 커뮤니티 자유 게시판으로 사전 심사 및 공식 반려/수정요청 절차가 없음 (위반 시 사후 삭제)"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-RESPOND"
+    },
+    {
+      "id": "R04-PL05-F01",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F01",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "제목",
+        "meaning": "게시글 제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string (최대 100자)",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "말머리 포함 (예: [보컬/홍대])",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "필수 텍스트",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F01"
+    },
+    {
+      "id": "R04-PL05-F02",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F02",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "과목 분류 및 지역",
+        "meaning": "악기/장르 카테고리 및 활동 시/도",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "select (과목, 지역)",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "뮬 드롭다운 옵션",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "선택값",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F02"
+    },
+    {
+      "id": "R04-PL05-F03",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F03",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "본문 내용",
+        "meaning": "레슨 상세 소개, 커리큘럼, 강사 약력, 수업료, 연락처",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "HTML / string (자유 형식)",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "자유 텍스트, 이미지 태그, 연락처 포함 허용",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "크몽/탈잉과 달리 오픈카톡 및 전화번호 직접 기재가 관행이자 핵심",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F03"
+    },
+    {
+      "id": "R04-PL05-F04",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F04",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "첨부 이미지",
+        "meaning": "작업실, 장비, 프로필 사진",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "image files",
+        "required": "no",
+        "required_when": "선택",
+        "allowed_values_or_limits": "파일당 용량 제한 (약 5MB)",
+        "multiplicity": "0..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "이미지 포맷",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F04"
+    },
+    {
+      "id": "R04-PL05-F05",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F05",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "연락처 정보",
+        "meaning": "전화번호 또는 오픈채팅 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string",
+        "required": "yes",
+        "required_when": "수강생 문의를 위해 필수 권장",
+        "allowed_values_or_limits": "전화번호, 카톡ID, 오픈카톡 URL",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "유효 연락처",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F05"
+    },
+    {
+      "id": "R04-PL05-F06",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F06",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "게시글 번호(idx) 및 URL",
+        "meaning": "뮬 게시글 식별자",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "number / URL (https://www.mule.co.kr/bbs/info/lesson?idx={id})",
+        "required": "yes",
+        "required_when": "글 등록 시",
+        "allowed_values_or_limits": "고유 번호",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 포맷",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F06"
+    },
+    {
+      "id": "R04-PL05-F07",
+      "platform_id": "PL05",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL05-F07",
+        "object_ref": "R04-PL05-OBJ1",
+        "actual_label_or_observed_key": "게시/갱신 일시 및 노출 상태",
+        "meaning": "게시글의 최신 갱신 일시 및 활성 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "datetime / status",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "일시",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "일시 포맷",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-F07"
+    },
+    {
+      "id": "R04-PL05-REL1",
+      "platform_id": "PL05",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL05-REL1",
+        "from_object_ref": "R04-PL05-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 뮬 커뮤니티 게시글 간 1:N 매핑 (시간 경과에 따라 재작성/갱신 게시글이 누적될 수 있음)",
+        "cardinality": "1:N",
+        "ownership_constraints": "작성자 계정 소유",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-REL1"
+    },
+    {
+      "id": "R04-PL05-ST1",
+      "platform_id": "PL05",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL05-ST1",
+        "object_or_operation_ref": "R04-PL05-OBJ1",
+        "native_label": "게시중 (정상 노출)",
+        "meaning": "게시판에 공개 게시되어 수강생 조회 가능한 상태",
+        "transition_trigger": "CREATE 또는 RENEW",
+        "next_states": [
+          "만료/밀려남",
+          "삭제"
+        ],
+        "observability": "공개 웹에서 누구나 조회 가능",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-ST1"
+    },
+    {
+      "id": "R04-PL05-C01",
+      "platform_id": "PL05",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL05-C01",
+        "category": "spam_prevention",
+        "description": "커뮤니티 도배 방지 규칙: 동일/유사 내용 게시글을 연속 등록 시 계정 정지 및 IP 차단",
+        "impact": "반드시 신규 등록 대신 갱신(끌어올리기) 기능을 우선 활용하고 쿨다운 준수 필수",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-C01"
+    },
+    {
+      "id": "R04-PL05-AUTH1",
+      "platform_id": "PL05",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL05-AUTH1",
+        "method": "Web Cookie/Session (아이디/비밀번호)",
+        "required_credential_type": "뮬 정회원 계정",
+        "delegation_feasibility": "강사 직접 로그인 필요",
+        "session_characteristics": "웹 로그인 세션",
+        "evidence_refs": [
+          "R04-EV-MULE-COMMUNITY"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL05-AUTH1"
+    },
+    {
+      "id": "R04-PL06-OBJ1",
+      "platform_id": "PL06",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL06-OBJ1",
+        "name": "레슨 홍보 게시물 (Advertise Board Post)",
+        "business_meaning": "힙합플레이야 구인/홍보 게시판의 힙합/R&B/비트메이킹 레슨 모집 글",
+        "owner": "힙플 회원 계정",
+        "identifier": "게시물 번호(wr_id) 및 URL (https://hiphopplaya.com/g2/bbs/board.php?bo_table=advertise&wr_id={id})",
+        "lifecycle": "게시글작성 -> 공개게시 -> [주기적 재등록/수정] -> 마감",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-OBJ1"
+    },
+    {
+      "id": "R04-PL06-CREATE",
+      "platform_id": "PL06",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL06-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL06-OBJ1"
+        ],
+        "actual_user_steps": [
+          "힙합플레이야 웹사이트 로그인",
+          "게시판 > '구인/홍보(advertise)' 게시판 이동",
+          "'글쓰기' 클릭",
+          "분류 선택 (레슨/강의 등)",
+          "제목 작성 (장르, 프로듀서/래퍼 명, 지역)",
+          "본문 작성 (사운드클라우드/유튜브 작업물 링크 임베드, 커리큘럼, 가격, 카카오톡 오픈채팅 링크)",
+          "홍보 포스터 이미지 첨부",
+          "'작성완료' 클릭"
+        ],
+        "preconditions": [
+          "힙합플레이야 회원 로그인"
+        ],
+        "input_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02",
+          "R04-PL06-F03",
+          "R04-PL06-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL06-F05",
+          "R04-PL06-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02",
+          "R04-PL06-F03"
+        ],
+        "state_before": "DRAFT",
+        "state_after": "POSTED",
+        "completion_evidence": [
+          "게시글 상세 페이지 이동",
+          "wr_id 파라미터 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "연속 글쓰기 제한"
+        ],
+        "retry_or_duplicate_risk": "도배 시 운영자 삭제",
+        "external_effect": "홍보 게시판에 공개 글 게시",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-CREATE"
+    },
+    {
+      "id": "R04-PL06-READ",
+      "platform_id": "PL06",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL06-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL06-OBJ1"
+        ],
+        "actual_user_steps": [
+          "홍보 게시판에서 게시글 열람"
+        ],
+        "preconditions": [
+          "비로그인 가능"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02",
+          "R04-PL06-F05",
+          "R04-PL06-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02",
+          "R04-PL06-F06"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "게시물 본문 로드"
+        ],
+        "error_and_unknown_conditions": [
+          "삭제된 글"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "조회수 증가",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-READ"
+    },
+    {
+      "id": "R04-PL06-UPDATE",
+      "platform_id": "PL06",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL06-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL06-OBJ1"
+        ],
+        "actual_user_steps": [
+          "글 상세 > 수정 클릭 > 본문 내용 수정 후 저장"
+        ],
+        "preconditions": [
+          "작성자 로그인"
+        ],
+        "input_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02",
+          "R04-PL06-F03"
+        ],
+        "return_field_refs": [
+          "R04-PL06-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02"
+        ],
+        "state_before": "POSTED",
+        "state_after": "POSTED",
+        "completion_evidence": [
+          "수정 완료 리다이렉트"
+        ],
+        "error_and_unknown_conditions": [
+          "수정 권한 오류"
+        ],
+        "retry_or_duplicate_risk": "덮어쓰기",
+        "external_effect": "게시글 내용 변경",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-UPDATE"
+    },
+    {
+      "id": "R04-PL06-RENEW",
+      "platform_id": "PL06",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL06-RENEW",
+        "operation_type": "RENEW",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL06-OBJ1"
+        ],
+        "actual_user_steps": [
+          "힙합플레이야는 별도 끌올 버튼이 없는 그누보드 형태일 경우 일정 주기(예: 1주일) 후 이전 글 삭제 후 새 글 재등록 방식으로 갱신 수행"
+        ],
+        "preconditions": [
+          "재등록 허용 주기 준수"
+        ],
+        "input_field_refs": [
+          "R04-PL06-F01",
+          "R04-PL06-F02"
+        ],
+        "return_field_refs": [
+          "R04-PL06-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL06-F01"
+        ],
+        "state_before": "POSTED_OLD",
+        "state_after": "POSTED_NEW",
+        "completion_evidence": [
+          "신규 글 등록 및 이전 글 삭제"
+        ],
+        "error_and_unknown_conditions": [
+          "도배 정책 위반 주의"
+        ],
+        "retry_or_duplicate_risk": "이전 글 미삭제 시 중복 노출",
+        "external_effect": "최신 글 등록",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-RENEW"
+    },
+    {
+      "id": "R04-PL06-STATUS",
+      "platform_id": "PL06",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL06-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL06-OBJ1"
+        ],
+        "actual_user_steps": [
+          "게시글 URL 접속하여 게시글 노출 상태 확인"
+        ],
+        "preconditions": [
+          "공개 URL 존재"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL06-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL06-F06"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "게시물 확인 (HTTP 200)"
+        ],
+        "error_and_unknown_conditions": [
+          "삭제됨"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-STATUS"
+    },
+    {
+      "id": "R04-PL06-RESPOND",
+      "platform_id": "PL06",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL06-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL06-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ],
+        "unknown_reason": "사전 심사 없는 자유 커뮤니티 게시판"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-RESPOND"
+    },
+    {
+      "id": "R04-PL06-F01",
+      "platform_id": "PL06",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL06-F01",
+        "object_ref": "R04-PL06-OBJ1",
+        "actual_label_or_observed_key": "제목",
+        "meaning": "레슨 홍보 게시글 제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "자유 텍스트",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "제목 필수",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-F01"
+    },
+    {
+      "id": "R04-PL06-F02",
+      "platform_id": "PL06",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL06-F02",
+        "object_ref": "R04-PL06-OBJ1",
+        "actual_label_or_observed_key": "본문 내용 및 사클/유튜브 링크",
+        "meaning": "레슨 소개, 포트폴리오 음원/영상 링크, 수강료, 오픈채팅 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "HTML / 텍스트",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "임베드 링크 및 연락처 기재 허용",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "사운드클라우드/유튜브 미디어 링크 변환",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-F02"
+    },
+    {
+      "id": "R04-PL06-F03",
+      "platform_id": "PL06",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL06-F03",
+        "object_ref": "R04-PL06-OBJ1",
+        "actual_label_or_observed_key": "포스터 이미지 첨부",
+        "meaning": "홍보 포스터 이미지 파일",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "image file",
+        "required": "no",
+        "required_when": "선택",
+        "allowed_values_or_limits": "JPG/PNG",
+        "multiplicity": "0..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "이미지 포맷",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-F03"
+    },
+    {
+      "id": "R04-PL06-F04",
+      "platform_id": "PL06",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL06-F04",
+        "object_ref": "R04-PL06-OBJ1",
+        "actual_label_or_observed_key": "오픈카톡/연락처",
+        "meaning": "수강생 1:1 상담 연락 수단",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "URL/string",
+        "required": "yes",
+        "required_when": "필수 권장",
+        "allowed_values_or_limits": "카카오톡 오픈채팅 URL",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "연락처 형식",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-F04"
+    },
+    {
+      "id": "R04-PL06-F05",
+      "platform_id": "PL06",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL06-F05",
+        "object_ref": "R04-PL06-OBJ1",
+        "actual_label_or_observed_key": "게시물 ID(wr_id) 및 URL",
+        "meaning": "게시물 식별자",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "number / URL",
+        "required": "yes",
+        "required_when": "등록 시",
+        "allowed_values_or_limits": "식별자",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 포맷",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-F05"
+    },
+    {
+      "id": "R04-PL06-F06",
+      "platform_id": "PL06",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL06-F06",
+        "object_ref": "R04-PL06-OBJ1",
+        "actual_label_or_observed_key": "작성 일시 및 상태",
+        "meaning": "게시물 최신 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "datetime / status",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "일시",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "일시",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-F06"
+    },
+    {
+      "id": "R04-PL06-REL1",
+      "platform_id": "PL06",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL06-REL1",
+        "from_object_ref": "R04-PL06-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 힙플 홍보글 간 1:N 매핑",
+        "cardinality": "1:N",
+        "ownership_constraints": "작성자 계정 소유",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-REL1"
+    },
+    {
+      "id": "R04-PL06-ST1",
+      "platform_id": "PL06",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL06-ST1",
+        "object_or_operation_ref": "R04-PL06-OBJ1",
+        "native_label": "공개게시",
+        "meaning": "게시판 목록에 정상 노출",
+        "transition_trigger": "글 작성 완료",
+        "next_states": [
+          "삭제"
+        ],
+        "observability": "공개 웹페이지 조회",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-ST1"
+    },
+    {
+      "id": "R04-PL06-C01",
+      "platform_id": "PL06",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL06-C01",
+        "category": "community_policy",
+        "description": "게시판별 주제 위반 및 지나친 반복 등록 시 운영자 제재",
+        "impact": "구인/홍보 게시판으로 정확히 분류 작성 필수",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-C01"
+    },
+    {
+      "id": "R04-PL06-AUTH1",
+      "platform_id": "PL06",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL06-AUTH1",
+        "method": "Web Cookie/Session",
+        "required_credential_type": "힙합플레이야 회원 계정",
+        "delegation_feasibility": "강사 직접 로그인 필요",
+        "session_characteristics": "웹 로그인 세션",
+        "evidence_refs": [
+          "R04-EV-HIPHOPPLAYA-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL06-AUTH1"
+    },
+    {
+      "id": "R04-PL07-OBJ1",
+      "platform_id": "PL07",
+      "group": "objects",
+      "previous": {
+        "object_id": "R04-PL07-OBJ1",
+        "name": "레슨 게시물 (Market / Work Post)",
+        "business_meaning": "힙합LE 장터/워크/레슨 카테고리의 음악 레슨 모집 글",
+        "owner": "힙합LE 회원 계정",
+        "identifier": "게시물 번호 및 URL (https://hiphople.com/market/{id})",
+        "lifecycle": "게시글작성 -> 공개노출 -> [끌어올리기/갱신] -> 마감/삭제",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-OBJ1"
+    },
+    {
+      "id": "R04-PL07-CREATE",
+      "platform_id": "PL07",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL07-CREATE",
+        "operation_type": "CREATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL07-OBJ1"
+        ],
+        "actual_user_steps": [
+          "힙합LE 웹사이트 로그인",
+          "Market 또는 관련 작업/레슨 게시판 이동",
+          "'글쓰기' 클릭",
+          "말머리/카테고리 선택 ('레슨')",
+          "제목 작성 (레슨 종목, 강사명, 지역)",
+          "본문 작성 (커리큘럼, 작업물 음원 링크, 수업 방식, 오픈카톡 링크)",
+          "사진 첨부 (포스터/작업실)",
+          "'등록' 클릭"
+        ],
+        "preconditions": [
+          "힙합LE 회원 가입 및 일정 등급/포인트 충족 (가입 안내 기준 확인)"
+        ],
+        "input_field_refs": [
+          "R04-PL07-F01",
+          "R04-PL07-F02",
+          "R04-PL07-F03",
+          "R04-PL07-F04"
+        ],
+        "return_field_refs": [
+          "R04-PL07-F05",
+          "R04-PL07-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL07-F01",
+          "R04-PL07-F02",
+          "R04-PL07-F03"
+        ],
+        "state_before": "DRAFT",
+        "state_after": "POSTED",
+        "completion_evidence": [
+          "게시글 상세 페이지 이동",
+          "게시글 ID 확인"
+        ],
+        "error_and_unknown_conditions": [
+          "가입 직후 글쓰기 권한 제한(쿨다운) 존재 가능"
+        ],
+        "retry_or_duplicate_risk": "도배 제재",
+        "external_effect": "장터/레슨 게시판에 글 공개",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE",
+          "R04-EV-HIPHOPLE-JOIN"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-CREATE"
+    },
+    {
+      "id": "R04-PL07-READ",
+      "platform_id": "PL07",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL07-READ",
+        "operation_type": "READ",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL07-OBJ1"
+        ],
+        "actual_user_steps": [
+          "게시판에서 게시글 열람"
+        ],
+        "preconditions": [
+          "비로그인 가능"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL07-F01",
+          "R04-PL07-F02",
+          "R04-PL07-F05",
+          "R04-PL07-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL07-F01",
+          "R04-PL07-F02",
+          "R04-PL07-F06"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "글 내용 표시"
+        ],
+        "error_and_unknown_conditions": [
+          "삭제된 글"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "조회수 증가",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "observed",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-READ"
+    },
+    {
+      "id": "R04-PL07-UPDATE",
+      "platform_id": "PL07",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL07-UPDATE",
+        "operation_type": "UPDATE",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL07-OBJ1"
+        ],
+        "actual_user_steps": [
+          "글 상세 > '수정' 클릭 > 본문 내용 수정 후 '확인'"
+        ],
+        "preconditions": [
+          "작성자 로그인"
+        ],
+        "input_field_refs": [
+          "R04-PL07-F01",
+          "R04-PL07-F02",
+          "R04-PL07-F03"
+        ],
+        "return_field_refs": [
+          "R04-PL07-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL07-F01",
+          "R04-PL07-F02"
+        ],
+        "state_before": "POSTED",
+        "state_after": "POSTED",
+        "completion_evidence": [
+          "수정 완료 반영"
+        ],
+        "error_and_unknown_conditions": [
+          "권한 없음"
+        ],
+        "retry_or_duplicate_risk": "내용 덮어쓰기",
+        "external_effect": "게시글 수정",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-UPDATE"
+    },
+    {
+      "id": "R04-PL07-RENEW",
+      "platform_id": "PL07",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL07-RENEW",
+        "operation_type": "RENEW",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL07-OBJ1"
+        ],
+        "actual_user_steps": [
+          "장터 게시판의 경우 '끌어올리기' 버튼 또는 일정 기간 경과 후 재등록 허용"
+        ],
+        "preconditions": [
+          "갱신 쿨다운 시간 경과"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL07-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL07-F06"
+        ],
+        "state_before": "POSTED_OLD",
+        "state_after": "POSTED_TOP",
+        "completion_evidence": [
+          "게시글 목록 상단 이동 관측"
+        ],
+        "error_and_unknown_conditions": [
+          "쿨다운 미도래 시 에러"
+        ],
+        "retry_or_duplicate_risk": "중복 갱신 방지",
+        "external_effect": "게시글 상단 노출",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE",
+          "R04-EV-PROPOSAL"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-RENEW"
+    },
+    {
+      "id": "R04-PL07-STATUS",
+      "platform_id": "PL07",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL07-STATUS",
+        "operation_type": "STATUS",
+        "availability": "supported",
+        "target_object_refs": [
+          "R04-PL07-OBJ1"
+        ],
+        "actual_user_steps": [
+          "게시글 URL 접속하여 게시글 노출 상태 확인"
+        ],
+        "preconditions": [
+          "공개 URL 존재"
+        ],
+        "input_field_refs": [],
+        "return_field_refs": [
+          "R04-PL07-F06"
+        ],
+        "visible_field_refs": [
+          "R04-PL07-F06"
+        ],
+        "state_before": "ANY",
+        "state_after": "UNCHANGED",
+        "completion_evidence": [
+          "게시글 확인 (HTTP 200)"
+        ],
+        "error_and_unknown_conditions": [
+          "삭제됨"
+        ],
+        "retry_or_duplicate_risk": "없음",
+        "external_effect": "없음",
+        "policy_status": "allowed",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "unknown_reason": null
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-STATUS"
+    },
+    {
+      "id": "R04-PL07-RESPOND",
+      "platform_id": "PL07",
+      "group": "operations",
+      "previous": {
+        "operation_id": "R04-PL07-RESPOND",
+        "operation_type": "RESPOND",
+        "availability": "not_applicable",
+        "target_object_refs": [
+          "R04-PL07-OBJ1"
+        ],
+        "actual_user_steps": [],
+        "preconditions": [],
+        "input_field_refs": [],
+        "return_field_refs": [],
+        "visible_field_refs": [],
+        "state_before": null,
+        "state_after": null,
+        "completion_evidence": [],
+        "error_and_unknown_conditions": [],
+        "retry_or_duplicate_risk": null,
+        "external_effect": null,
+        "policy_status": "not_applicable",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ],
+        "unknown_reason": "사전 심사 없는 커뮤니티 게시판"
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-RESPOND"
+    },
+    {
+      "id": "R04-PL07-F01",
+      "platform_id": "PL07",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL07-F01",
+        "object_ref": "R04-PL07-OBJ1",
+        "actual_label_or_observed_key": "제목 및 말머리",
+        "meaning": "[레슨] 말머리 및 게시글 제목",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "자유 텍스트",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "제목 필수",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-F01"
+    },
+    {
+      "id": "R04-PL07-F02",
+      "platform_id": "PL07",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL07-F02",
+        "object_ref": "R04-PL07-OBJ1",
+        "actual_label_or_observed_key": "본문 및 레슨 정보",
+        "meaning": "커리큘럼, 비용, 강사 소개, 작업물 링크, 연락처",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "HTML / 텍스트",
+        "required": "yes",
+        "required_when": "필수",
+        "allowed_values_or_limits": "에디터 포맷팅 지원",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "본문 유효성",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-F02"
+    },
+    {
+      "id": "R04-PL07-F03",
+      "platform_id": "PL07",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL07-F03",
+        "object_ref": "R04-PL07-OBJ1",
+        "actual_label_or_observed_key": "첨부 이미지 및 미디어 링크",
+        "meaning": "포스터 사진 및 유튜브 링크",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "image / URL",
+        "required": "no",
+        "required_when": "선택",
+        "allowed_values_or_limits": "파일 업로드",
+        "multiplicity": "0..N",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "파일 규격",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-F03"
+    },
+    {
+      "id": "R04-PL07-F04",
+      "platform_id": "PL07",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL07-F04",
+        "object_ref": "R04-PL07-OBJ1",
+        "actual_label_or_observed_key": "연락처 / 오픈채팅",
+        "meaning": "문의용 연락처",
+        "direction": [
+          "input",
+          "visible"
+        ],
+        "observed_type_or_format": "string/URL",
+        "required": "yes",
+        "required_when": "필수 권장",
+        "allowed_values_or_limits": "오픈카톡",
+        "multiplicity": "1",
+        "source_actor": "user",
+        "editable": "editable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "유효 연락처",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-F04"
+    },
+    {
+      "id": "R04-PL07-F05",
+      "platform_id": "PL07",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL07-F05",
+        "object_ref": "R04-PL07-OBJ1",
+        "actual_label_or_observed_key": "게시물 ID 및 URL",
+        "meaning": "힙합LE 게시글 식별자",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "number / URL (https://hiphople.com/market/{id})",
+        "required": "yes",
+        "required_when": "등록 시",
+        "allowed_values_or_limits": "식별자",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "URL 형식",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-F05"
+    },
+    {
+      "id": "R04-PL07-F06",
+      "platform_id": "PL07",
+      "group": "data_fields",
+      "previous": {
+        "field_id": "R04-PL07-F06",
+        "object_ref": "R04-PL07-OBJ1",
+        "actual_label_or_observed_key": "등록/갱신 일시 및 노출 상태",
+        "meaning": "게시물 상태",
+        "direction": [
+          "return",
+          "visible"
+        ],
+        "observed_type_or_format": "datetime / status",
+        "required": "yes",
+        "required_when": "항상 존재",
+        "allowed_values_or_limits": "일시",
+        "multiplicity": "1",
+        "source_actor": "platform",
+        "editable": "immutable",
+        "visibility": "public",
+        "persistence_need_candidate": "save",
+        "validation_rules": "일시",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-F06"
+    },
+    {
+      "id": "R04-PL07-REL1",
+      "platform_id": "PL07",
+      "group": "relations",
+      "previous": {
+        "relation_id": "R04-PL07-REL1",
+        "from_object_ref": "R04-PL07-OBJ1",
+        "to_object_ref": "USER_LESSON_CORE",
+        "meaning": "서비스 원본 레슨과 힙합LE 게시글 간 1:N 매핑",
+        "cardinality": "1:N",
+        "ownership_constraints": "작성자 계정 소유",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "inferred",
+      "reason": "우리 서비스 원본과의 매핑 제안. 외부 플랫폼 내부 DB 관계 사실 아님.",
+      "final_claim_status": "inferred",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-REL1"
+    },
+    {
+      "id": "R04-PL07-ST1",
+      "platform_id": "PL07",
+      "group": "states",
+      "previous": {
+        "state_id": "R04-PL07-ST1",
+        "object_or_operation_ref": "R04-PL07-OBJ1",
+        "native_label": "공개게시",
+        "meaning": "게시판에 정상 노출",
+        "transition_trigger": "글 작성 완료",
+        "next_states": [
+          "삭제"
+        ],
+        "observability": "공개 웹 조회",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-SAMPLE"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 상태명·전이·검색 노출 의미는 직접 관측 미확인. 정규화 상태 후보로만 참조.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-ST1"
+    },
+    {
+      "id": "R04-PL07-C01",
+      "platform_id": "PL07",
+      "group": "constraints",
+      "previous": {
+        "constraint_id": "R04-PL07-C01",
+        "category": "membership_level",
+        "description": "회원가입 후 일정 등급/활동 포인트가 있어야 장터/구인 글쓰기 권한이 부여되는 제약 존재 가능",
+        "impact": "신규 계정 사전 인증 시 글쓰기 권한 확인(EVT-006) 필수",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-JOIN"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-C01"
+    },
+    {
+      "id": "R04-PL07-AUTH1",
+      "platform_id": "PL07",
+      "group": "auth_permission",
+      "previous": {
+        "auth_id": "R04-PL07-AUTH1",
+        "method": "Web Cookie/Session",
+        "required_credential_type": "힙합LE 회원 계정",
+        "delegation_feasibility": "강사 직접 로그인 필요",
+        "session_characteristics": "웹 로그인 세션",
+        "evidence_refs": [
+          "R04-EV-HIPHOPLE-JOIN"
+        ]
+      },
+      "initial_disposition": "unknown",
+      "reason": "기존 근거의 해당 주장 직접 입증 미확인. 이전 값은 가설/조사 후보이며 사실로 사용하지 않음.",
+      "final_claim_status": "unknown",
+      "current_result_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#R04-PL07-AUTH1"
+    }
+  ],
+  "story_revisions": [
+    {
+      "source_story_id": "R04-US-001",
+      "retained_action": "강사가 원본 레슨 텍스트를 입력한다.",
+      "split_story_id": "R04-US-027",
+      "split_action": "강사가 원본 레슨 이미지 파일을 업로드한다."
+    },
+    {
+      "source_story_id": "R04-US-002",
+      "retained_action": "강사가 저장된 원본 레슨 목록을 조회한다.",
+      "split_story_id": "R04-US-028",
+      "split_action": "강사가 작업할 원본 레슨을 선택한다."
+    },
+    {
+      "source_story_id": "R04-US-005",
+      "retained_action": "강사가 작업 대상 플랫폼을 선택한다.",
+      "split_story_id": "R04-US-029",
+      "split_action": "강사가 수행할 업무 종류를 선택한다."
+    },
+    {
+      "source_story_id": "R04-US-009",
+      "retained_action": "강사가 외부 플랫폼의 기존 객체 목록을 조회한다.",
+      "split_story_id": "R04-US-030",
+      "split_action": "강사가 관리 대상 외부 객체를 지정한다."
+    },
+    {
+      "source_story_id": "R04-US-011",
+      "retained_action": "강사가 플랫폼별 최종 입력안을 검토한다.",
+      "split_story_id": "R04-US-031",
+      "split_action": "강사가 최종 입력안을 승인한다."
+    },
+    {
+      "source_story_id": "R04-US-012",
+      "retained_action": "강사가 실행 범위를 검토한다.",
+      "split_story_id": "R04-US-032",
+      "split_action": "강사가 실행 범위를 승인한다."
+    },
+    {
+      "source_story_id": "R04-US-017",
+      "retained_action": "강사가 외부 플랫폼의 반려 사유를 확인한다.",
+      "split_story_id": "R04-US-033",
+      "split_action": "강사가 반려 대응 수정 제안을 검토한다."
+    },
+    {
+      "source_story_id": "R04-US-019",
+      "retained_action": "강사가 세션 유지 위험 고지를 확인한다.",
+      "split_story_id": "R04-US-034",
+      "split_action": "강사가 세션 유지를 승인한다."
+    },
+    {
+      "source_story_id": "R04-US-021",
+      "retained_action": "강사가 자동 모니터링 중단을 요청한다.",
+      "split_story_id": "R04-US-035",
+      "split_action": "강사가 보관된 작업 세션 파기를 요청한다."
+    },
+    {
+      "source_story_id": "R04-US-022",
+      "retained_action": "강사가 추가 등록할 원본 레슨을 선택한다.",
+      "split_story_id": "R04-US-036",
+      "split_action": "강사가 신규 플랫폼 추가 등록을 요청한다."
+    },
+    {
+      "source_story_id": "R04-US-023",
+      "retained_action": "강사가 작업 승인을 거절한다.",
+      "split_story_id": "R04-US-037",
+      "split_action": "강사가 기존 작업 승인을 철회한다."
+    },
+    {
+      "source_story_id": "R04-US-024",
+      "retained_action": "강사가 실패한 인증을 재시도한다.",
+      "split_story_id": "R04-US-038",
+      "split_action": "강사가 인증에 실패한 플랫폼 작업을 건너뛴다."
+    },
+    {
+      "source_story_id": "R04-US-025",
+      "retained_action": "강사가 저장된 원본 레슨 삭제를 요청한다.",
+      "split_story_id": "R04-US-039",
+      "split_action": "강사가 외부 게시물 연동 해제를 요청한다."
+    }
+  ],
+  "checks": [
+    {
+      "criterion": "고유 정의 user_stories",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "고유 정의 supporting_system_events",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "고유 정의 evidence",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "근거/스토리/이벤트 참조 해소",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "34개 피처 양방향 참조",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "7×6 업무 및 필드/객체 참조",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "로컬 근거 파일 존재",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "TASK와 자체 판정 일치",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "수량 일치",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "대행 허용 확정 없음",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "criterion": "문서 프로젝션 생성 및 최신 여부",
+      "command": "uv run --no-project python tools/project_docs.py; uv run --no-project python tools/project_docs.py --check",
+      "verdict": "pass",
+      "observed": "41 projections verified; 1 updated. 41 projections current."
+    },
+    {
+      "criterion": "공백 오류",
+      "command": "git diff --check",
+      "verdict": "pass",
+      "observed": "종료 코드 0, 출력 없음"
+    }
+  ],
+  "counts": {
+    "previous_fields": 48,
+    "current_fields": 57,
+    "user_stories": 39,
+    "system_events": 16,
+    "platforms": 7,
+    "operations": 42,
+    "original_claim_records_reviewed": 129
+  },
+  "acceptance": [
+    {
+      "criterion": "A1",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R04-EV-PROPOSAL"
+      ],
+      "verification_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/revalidation-20261126.json",
+      "note": "복수 행동 13건 분리 및 34개 피처 양방향 참조 정리. 각 상황별 분기·종료 조건의 의미적 충분성과 지원 행동 누락은 미확인."
+    },
+    {
+      "criterion": "A2",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R04-EV-PROPOSAL"
+      ],
+      "verification_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/revalidation-20261126.json",
+      "note": "7×6 업무와 전체 필드/객체/관계/상태/권한 검토 기록. 근거 부족 수치·필수·대행/완료 판정 보류. 정적 화면/공개 자료 한계로 실제 업무 조건 일부 미확인."
+    },
+    {
+      "criterion": "A3",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R04-EV-PROPOSAL"
+      ],
+      "verification_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/revalidation-20261126.json",
+      "note": "기존 11개 교차 링크는 매핑 후보. 새 분리 행동/숨고 추가 필드의 전수 양방향 의미 연결은 아직 불충분."
+    },
+    {
+      "criterion": "A4",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R04-EV-PROPOSAL"
+      ],
+      "verification_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/revalidation-20261126.json",
+      "note": "기존 observed/allowed 일괄 판정 철회, 항목별 근거 강도와 재확인 방법 기록. 화면 외 수치/상태 사실 검증은 미완료."
+    },
+    {
+      "criterion": "A5",
+      "verdict": "pass",
+      "evidence_refs": [
+        "R04-EV-PROPOSAL"
+      ],
+      "verification_ref": "docs/artifacts/planning/lesson-registration-20261126/R04/revalidation-20261126.json",
+      "note": "지정 원본 및 TASK/보고서 수량·판정 동기화. ID/참조·필수 구조의 정적 검사 결과는 revalidation 원장 checks 참조. R01 최종 검토 대기."
+    }
+  ],
+  "remaining": [
+    "7개 플랫폼의 필수 필드·수치 제한·상태 전이·완료 조건은 항목별 미확인 존재. 이전 값은 재검증 원장에서 가설로 보존.",
+    "플랫폼 직접 기능 존재가 AI 대행 허용을 뜻하지 않음. 모든 업무 대행 허용 미확인 및 현행 실행 금지.",
+    "단일 행동 분리 후 상황별·피처별 의미 완전성 및 전수 데이터 교차 연결 잔여사항 있음.",
+    "승인 맥락 참고와 R01 최종 범위/DB/알고리즘 채택을 구분."
+  ],
+  "title": "TASK-056 조사 원본 재검증 원장",
+  "owner": "R04",
+  "verification_limit": "정적 참조/수량/구조 검사이며 의미 완전성·플랫폼 실제 동작 검증 아님.",
+  "trace_review": {
+    "field_records": 57,
+    "story_records": 39,
+    "source": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#field_story_review / story_data_review",
+    "interpretation": "전수 연결 유무를 기록; 의미 완전성 판정 미완료"
+  },
+  "checks_method": "고유 ID 집합 비교, 참조 대상 존재, 피처별 스토리/이벤트 역방향 집합 동등성, 7개 플랫폼 업무 집합 및 필드/객체 참조, 로컬 근거 파일 존재, TASK 판정과 정본 판정 동등성, 수량 57/39/16 확인. 의미 완전성과 실제 운영 검증은 별도."
+}
