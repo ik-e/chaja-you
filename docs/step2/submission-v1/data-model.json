@@ -1,0 +1,390 @@
+{
+  "id": "SUB-DESIGN-20261126-V1",
+  "basis": "6bd597ed858cfa9f29391079e43ba9eba5fb6afa",
+  "status": "submission_only_provisional",
+  "postgresql": "16",
+  "tables": [
+    {
+      "name": "app_users",
+      "meaning": "OIDC 식별 사용자",
+      "columns": [
+        "user_id uuid PRIMARY KEY",
+        "issuer text NOT NULL",
+        "subject text NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "deletion_requested_at timestamptz"
+      ],
+      "keys": [
+        "UNIQUE (issuer,subject)"
+      ]
+    },
+    {
+      "name": "app_sessions",
+      "meaning": "서버 검증 서비스 세션(토큰 해시만)",
+      "columns": [
+        "session_hash text PRIMARY KEY",
+        "owner_id uuid NOT NULL REFERENCES app_users(user_id)",
+        "csrf_hash text NOT NULL",
+        "expires_at timestamptz NOT NULL",
+        "revoked_at timestamptz"
+      ],
+      "keys": [
+        "CHECK (length(session_hash)=64 AND length(csrf_hash)=64)"
+      ]
+    },
+    {
+      "name": "platforms",
+      "meaning": "7개 조사 플랫폼 레지스트리",
+      "columns": [
+        "platform_id text PRIMARY KEY",
+        "name text NOT NULL"
+      ],
+      "keys": []
+    },
+    {
+      "name": "platform_profiles",
+      "meaning": "플랫폼별 객체·업무·규칙 버전 및 허용 근거",
+      "columns": [
+        "profile_id uuid PRIMARY KEY",
+        "platform_id text NOT NULL REFERENCES platforms(platform_id)",
+        "object_kind text NOT NULL",
+        "operation text NOT NULL CHECK (operation IN ('create','update','renew','status'))",
+        "version text NOT NULL",
+        "rules_digest text NOT NULL",
+        "rules jsonb NOT NULL",
+        "policy_status text NOT NULL CHECK (policy_status IN ('allowed','prohibited','unknown'))",
+        "policy_evidence jsonb NOT NULL DEFAULT '[]'",
+        "mock_supported boolean NOT NULL DEFAULT false"
+      ],
+      "keys": [
+        "UNIQUE (platform_id,object_kind,operation,version)",
+        "UNIQUE (profile_id,platform_id,object_kind,operation)"
+      ]
+    },
+    {
+      "name": "lessons",
+      "meaning": "소유자별 재사용 원본 레슨",
+      "columns": [
+        "lesson_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL REFERENCES app_users(user_id)",
+        "title text NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "deletion_requested_at timestamptz"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,lesson_id)"
+      ]
+    },
+    {
+      "name": "lesson_versions",
+      "meaning": "원본 버전(불변) 및 공통 사실·출처",
+      "columns": [
+        "version_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "lesson_id uuid NOT NULL",
+        "version_no bigint NOT NULL CHECK (version_no>=1)",
+        "raw_text text NOT NULL",
+        "facts jsonb NOT NULL DEFAULT '[]'",
+        "content_digest text NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,version_id)",
+        "UNIQUE (owner_id,lesson_id,version_id)",
+        "UNIQUE (lesson_id,version_no)",
+        "FOREIGN KEY (owner_id,lesson_id) REFERENCES lessons(owner_id,lesson_id)"
+      ]
+    },
+    {
+      "name": "assets",
+      "meaning": "첨부 bytes·사용 권리·digest",
+      "columns": [
+        "asset_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL REFERENCES app_users(user_id)",
+        "digest text NOT NULL",
+        "mime text NOT NULL",
+        "content bytea NOT NULL",
+        "byte_count bigint NOT NULL CHECK (byte_count>=0)",
+        "rights_confirmed boolean NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,asset_id)",
+        "CHECK (byte_count=octet_length(content))"
+      ]
+    },
+    {
+      "name": "version_assets",
+      "meaning": "원본 버전별 순서가 있는 첨부 연결",
+      "columns": [
+        "owner_id uuid NOT NULL",
+        "version_id uuid NOT NULL",
+        "asset_id uuid NOT NULL",
+        "position integer NOT NULL CHECK (position>=0)"
+      ],
+      "keys": [
+        "PRIMARY KEY (version_id,asset_id)",
+        "UNIQUE (version_id,position)",
+        "FOREIGN KEY (owner_id,version_id) REFERENCES lesson_versions(owner_id,version_id)",
+        "FOREIGN KEY (owner_id,asset_id) REFERENCES assets(owner_id,asset_id)"
+      ]
+    },
+    {
+      "name": "external_accounts",
+      "meaning": "직접 인증한 외부 계정 식별만 저장(비밀 미저장)",
+      "columns": [
+        "account_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL REFERENCES app_users(user_id)",
+        "platform_id text NOT NULL REFERENCES platforms(platform_id)",
+        "external_ref text NOT NULL",
+        "label text NOT NULL",
+        "verified_at timestamptz NOT NULL DEFAULT now()",
+        "unlinked_at timestamptz"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,account_id)",
+        "UNIQUE (owner_id,account_id,platform_id)",
+        "UNIQUE (owner_id,platform_id,external_ref)"
+      ]
+    },
+    {
+      "name": "external_objects",
+      "meaning": "확인된 외부 게시 객체; 상태는 관측에서 파생",
+      "columns": [
+        "object_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "lesson_id uuid NOT NULL",
+        "account_id uuid NOT NULL",
+        "platform_id text NOT NULL",
+        "object_kind text NOT NULL",
+        "native_id text NOT NULL",
+        "public_url text",
+        "linked_at timestamptz NOT NULL DEFAULT now()",
+        "unlinked_at timestamptz"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,object_id)",
+        "UNIQUE (owner_id,object_id,lesson_id,account_id,platform_id,object_kind)",
+        "UNIQUE (owner_id,account_id,object_kind,native_id)",
+        "FOREIGN KEY (owner_id,lesson_id) REFERENCES lessons(owner_id,lesson_id)",
+        "FOREIGN KEY (owner_id,account_id,platform_id) REFERENCES external_accounts(owner_id,account_id,platform_id)"
+      ]
+    },
+    {
+      "name": "work_requests",
+      "meaning": "업무 초안. 한 외부 객체에 독립적인 복수 업무 요청 가능",
+      "columns": [
+        "request_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "lesson_id uuid NOT NULL",
+        "version_id uuid NOT NULL",
+        "profile_id uuid NOT NULL",
+        "platform_id text NOT NULL",
+        "object_kind text NOT NULL",
+        "operation text NOT NULL CHECK (operation IN ('create','update','renew','status'))",
+        "account_id uuid",
+        "object_id uuid",
+        "related_job_id uuid",
+        "before_snapshot jsonb",
+        "target_slot text NOT NULL",
+        "revision bigint NOT NULL CHECK (revision>=1)",
+        "draft_status text NOT NULL CHECK (draft_status IN ('blocked','ready','rejected'))",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "updated_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,request_id)",
+        "FOREIGN KEY (owner_id,lesson_id,version_id) REFERENCES lesson_versions(owner_id,lesson_id,version_id)",
+        "FOREIGN KEY (profile_id,platform_id,object_kind,operation) REFERENCES platform_profiles(profile_id,platform_id,object_kind,operation)",
+        "FOREIGN KEY (owner_id,account_id,platform_id) REFERENCES external_accounts(owner_id,account_id,platform_id)",
+        "FOREIGN KEY (owner_id,object_id,lesson_id,account_id,platform_id,object_kind) REFERENCES external_objects(owner_id,object_id,lesson_id,account_id,platform_id,object_kind)",
+        "CHECK (object_id IS NULL OR account_id IS NOT NULL)",
+        "CHECK (operation<>'create' OR object_id IS NULL)",
+        "FOREIGN KEY (owner_id,related_job_id) REFERENCES jobs(owner_id,job_id) -- added after jobs",
+        "CHECK (related_job_id IS NULL OR operation='status')"
+      ]
+    },
+    {
+      "name": "preparation_versions",
+      "meaning": "revision별 준비 결과·질문·확인 근거",
+      "columns": [
+        "owner_id uuid NOT NULL",
+        "request_id uuid NOT NULL",
+        "revision bigint NOT NULL CHECK (revision>=1)",
+        "ready boolean NOT NULL",
+        "values_json jsonb NOT NULL DEFAULT '{}'",
+        "facts jsonb NOT NULL DEFAULT '[]'",
+        "issues jsonb NOT NULL DEFAULT '[]'",
+        "provenance jsonb NOT NULL DEFAULT '[]'",
+        "answers jsonb NOT NULL DEFAULT '[]'",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "PRIMARY KEY (request_id,revision)",
+        "UNIQUE (owner_id,request_id,revision)",
+        "FOREIGN KEY (owner_id,request_id) REFERENCES work_requests(owner_id,request_id)",
+        "CHECK (jsonb_typeof(values_json)='object' AND jsonb_typeof(issues)='array')",
+        "CHECK (NOT ready OR NOT jsonb_path_exists(issues, '$[*] ? (@.blocking == true)'))"
+      ]
+    },
+    {
+      "name": "approvals",
+      "meaning": "정보 및 실행 범위 승인 snapshot",
+      "columns": [
+        "approval_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "request_id uuid NOT NULL",
+        "revision bigint NOT NULL",
+        "account_id uuid NOT NULL",
+        "object_id uuid",
+        "target_slot text NOT NULL",
+        "review_digest text NOT NULL",
+        "scope jsonb NOT NULL",
+        "approved_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,request_id,approval_id,revision)",
+        "UNIQUE (request_id,revision)",
+        "FOREIGN KEY (owner_id,request_id,revision) REFERENCES preparation_versions(owner_id,request_id,revision)",
+        "FOREIGN KEY (owner_id,account_id) REFERENCES external_accounts(owner_id,account_id)",
+        "FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id)"
+      ]
+    },
+    {
+      "name": "jobs",
+      "meaning": "작업 상태의 유일한 저장 정본",
+      "columns": [
+        "job_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "request_id uuid NOT NULL UNIQUE",
+        "revision bigint NOT NULL",
+        "approval_id uuid NOT NULL",
+        "request_key text NOT NULL",
+        "request_digest text NOT NULL",
+        "state text NOT NULL CHECK (state IN ('active','stopping','done','stopped'))",
+        "goal_verdict text CHECK (goal_verdict IN ('confirmed','not_reached','unknown'))",
+        "final_evidence_id uuid",
+        "result_object_id uuid",
+        "next_action text",
+        "progress_json jsonb NOT NULL DEFAULT '{\"step_index\":0,\"step_count\":1,\"confirmed_steps\":[],\"current_step\":null}'::jsonb",
+        "error_json jsonb",
+        "lease_epoch bigint NOT NULL DEFAULT 0 CHECK (lease_epoch>=0)",
+        "accepted_at timestamptz NOT NULL DEFAULT now()",
+        "updated_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,job_id)",
+        "UNIQUE (owner_id,request_key)",
+        "FOREIGN KEY (owner_id,request_id,approval_id,revision) REFERENCES approvals(owner_id,request_id,approval_id,revision)",
+        "CHECK ((state IN ('active','stopping') AND goal_verdict IS NULL AND final_evidence_id IS NULL AND next_action IS NULL) OR (state='done' AND goal_verdict IS NOT DISTINCT FROM 'confirmed' AND final_evidence_id IS NOT NULL AND next_action IS NOT NULL) OR (state='stopped' AND goal_verdict IS NOT NULL AND goal_verdict IN ('not_reached','unknown') AND next_action IS NOT NULL))",
+        "FOREIGN KEY (owner_id,job_id,final_evidence_id) REFERENCES evidence(owner_id,job_id,evidence_id) -- added after evidence",
+        "FOREIGN KEY (owner_id,result_object_id) REFERENCES external_objects(owner_id,object_id)"
+      ]
+    },
+    {
+      "name": "effect_slots",
+      "meaning": "계정별 안정 논리 슬롯 및 중복/미확인 효과 차단",
+      "columns": [
+        "owner_id uuid NOT NULL",
+        "account_id uuid NOT NULL",
+        "slot_key text NOT NULL",
+        "job_id uuid NOT NULL",
+        "object_id uuid",
+        "reconciled_by_job_id uuid",
+        "state text NOT NULL CHECK (state IN ('reserved','confirmed','unknown','absent'))"
+      ],
+      "keys": [
+        "PRIMARY KEY (owner_id,account_id,slot_key)",
+        "FOREIGN KEY (owner_id,account_id) REFERENCES external_accounts(owner_id,account_id)",
+        "FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)",
+        "FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id)",
+        "FOREIGN KEY (owner_id,reconciled_by_job_id) REFERENCES jobs(owner_id,job_id)",
+        "CHECK ((state='confirmed') = (object_id IS NOT NULL))"
+      ]
+    },
+    {
+      "name": "effects",
+      "meaning": "등록된 operation별 durable admission/효과 상태",
+      "columns": [
+        "effect_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "job_id uuid NOT NULL",
+        "operation_id text NOT NULL",
+        "effect_key text NOT NULL",
+        "lease_epoch bigint NOT NULL CHECK (lease_epoch>=0)",
+        "state text NOT NULL CHECK (state IN ('admitted','confirmed','absent','unknown'))",
+        "admitted_at timestamptz NOT NULL DEFAULT now()",
+        "dispatched_at timestamptz",
+        "resolved_at timestamptz"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,job_id,effect_id)",
+        "UNIQUE (job_id,effect_key)",
+        "FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)"
+      ]
+    },
+    {
+      "name": "observations",
+      "meaning": "관측 성공과 실패를 별도 저장; 외부 상태/시간",
+      "columns": [
+        "observation_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "job_id uuid NOT NULL",
+        "effect_id uuid",
+        "object_id uuid",
+        "method text NOT NULL CHECK (method IN ('independent_readback','submission_response','form_read','runtime_observation'))",
+        "outcome text NOT NULL CHECK (outcome IN ('observed','unavailable'))",
+        "reconciliation_verdict text CHECK (reconciliation_verdict IN ('confirmed','not_reached'))",
+        "native_status text",
+        "snapshot jsonb NOT NULL DEFAULT '{}'",
+        "observed_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,job_id,observation_id)",
+        "FOREIGN KEY (owner_id,job_id) REFERENCES jobs(owner_id,job_id)",
+        "FOREIGN KEY (owner_id,job_id,effect_id) REFERENCES effects(owner_id,job_id,effect_id)",
+        "FOREIGN KEY (owner_id,object_id) REFERENCES external_objects(owner_id,object_id)",
+        "CHECK (outcome<>'unavailable' OR native_status IS NULL)",
+        "CHECK (reconciliation_verdict IS NULL OR (method='independent_readback' AND outcome='observed' AND (reconciliation_verdict<>'confirmed' OR object_id IS NOT NULL)))"
+      ]
+    },
+    {
+      "name": "evidence",
+      "meaning": "작업·관측에 연결된 redacted 증거",
+      "columns": [
+        "evidence_id uuid PRIMARY KEY",
+        "owner_id uuid NOT NULL",
+        "job_id uuid NOT NULL",
+        "observation_id uuid NOT NULL",
+        "kind text NOT NULL CHECK (kind IN ('goal','operation','error'))",
+        "payload_digest text NOT NULL",
+        "record jsonb NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "keys": [
+        "UNIQUE (owner_id,job_id,evidence_id)",
+        "FOREIGN KEY (owner_id,job_id,observation_id) REFERENCES observations(owner_id,job_id,observation_id)"
+      ]
+    }
+  ],
+  "views": [
+    "request_status",
+    "object_status",
+    "job_reconciliation"
+  ],
+  "migration2": "observations.failure_code + observations_job_idx",
+  "notes": [
+    "FK + service owner filter; DB FK does not establish user identity",
+    "state canonical jobs.state; external object state from independent observations",
+    "app_sessions only service token hashes, no platform credentials",
+    "fixture uses placeholder digests for SQL constraint tests; real digest semantic verification separate",
+    "not executed",
+    "progress_json and error_json persist Job.progress and Result.error",
+    "related_job_id permits a new approved read-only status work request for an older unknown job; previous terminal record stays immutable",
+    "before_snapshot binds pre-change readback; app verifies current revision/approval, target slot, same-owner linked account and profile before acceptance",
+    "SQL reference design only, no database or HTTP execution",
+    "jobs.result_object_id and evidence observation.object_id must agree on confirmed completion; a create uses the independently verified stable native ID, not the submission response alone.",
+    "status operation admits zero mutating effects; related_job_id records the earlier terminal unknown; job_reconciliation derives only evidence-backed outcomes from a separate completed status job; old job remains immutable.",
+    "object_status separates last successful independent snapshot from latest failed attempt. effect_slots.object_id and reconciled_by_job_id record atomic resolution of the original create reservation; app enforces exact target/scope and no speculative release."
+  ]
+}

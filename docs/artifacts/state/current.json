@@ -3,8 +3,8 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-25",
-  "scope": "채택된 레슨 등록 논리 설계를 기반으로 mock 제품 개발 TASK 배정 및 공통 환경·통합 검증.",
+  "as_of": "2026-11-26",
+  "scope": "기획 V1.2를 후속 설계 기준으로 채택. 전체 사용자 스토리와 7개 플랫폼 독립 조사, 서비스 기능 범위 확정 및 DB 설계 우선. 실제 플랫폼 실행 금지 및 기존 mock 구현 보존.",
   "confirmed": [
     "기획서는 서비스 개요부터 사용자·Pain·원인·핵심 기능·가치·비즈니스 모델·요구사항·기술 제약·MVP·검증까지 12항목을 갖추며, 실제 가치와 설계 입력의 연결을 설명해야 한다.",
     "R02~R05 개인 산출물과 TASK 결과는 각 담당자가 관리하고, R01이 공통 기획 원본에 통합한다.",
@@ -15,17 +15,13 @@
     "R01은 공통 계약·개발환경·통합만 담당하고 크몽 실행기를 맡지 않는다.",
     "R01 지시에 따라 준비된 일곱 작업 패키지를 TASK-048~054로 배정한다. 실제 제품 시험·실서비스 허용 및 담당자 수신/공수는 별도 확인한다.",
     "R01이 IB-01~05 공통 구현 방향을 수용했다. 초기 공통 구현 경계는 공동 개발에 사용하되 담당자 확인이 필요한 세부 서명·실행 기술·공수 및 실제 제품 검증은 별도로 결정한다.",
-    "R01이 PD-01~08 공통 물리 방향 수용 및 검증된 초기 공통 환경·기준선 공유와 WBS 재구성을 지시했다. 담당자별 세부 계약 및 실제 제품 검증·일정 확정은 별도."
+    "R01이 PD-01~08 공통 물리 방향 수용 및 검증된 초기 공통 환경·기준선 공유와 WBS 재구성을 지시했다. 담당자별 세부 계약 및 실제 제품 검증·일정 확정은 별도.",
+    "R01 11/26: V1.2를 후속 설계 기준으로 사용하되 가설·조건부 확장·MVP·실제 지원/실행은 별도 판단. R02·R04·R05 각각 전체 사용자 스토리와 7개 플랫폼 독립 조사; R01 통합·서비스 범위 결정·DB 설계. INTENT-DESIGN-003 우선."
   ],
   "priorities": [
-    "TASK-048: R03 조립 후보 인수·독립 CI, 공통 D01~D06 및 22개 gate 검증, 산출물·WBS 조정.",
-    "TASK-049(R02): PR51/52 draft 실제 모델 초기 보고·44 CI; R02 실험 설계/비용 반환과 D05 H5/timeout 협의, 12/4 인계/잔여 공수 확인.",
-    "TASK-050(R03): 191 CI·실제 app/WS/STORE/slot/asset 조립 계획; 중첩/timeout·permit/fence/read; 기존 3 MD 추정 갱신.",
-    "TASK-051(R04): 366cea92 grant URL 제거·백오프/dispose 개선, 9 CI; 실제 module/H1~H9·서버 오류 fail-closed.",
-    "TASK-052(R04): 숨고 6 CI; 실제 모의 상태·독립 readback·unknown·BoundGateway/canonical 보완.",
-    "TASK-053(R05): 최신 Runtime 30/30 독립 조합 CI; 실제 owner/WS/permit/fence/slot/asset 조립.",
-    "TASK-054(R05): 최신 크몽 조합 37/37 독립 CI; D01~03 및 실제 승인 asset/계보 slot/readback 연결.",
-    "12/4 인계/vertical·12/8 mock MVP·1/4 최종 목표 유지; 전원 잔여/가용성 및 공식 제출 상태 확인."
+    "TASK-055 R02 / TASK-056 R04 / TASK-057 R05: 각각 전체 F01~F29, E01~E05 조건부 및 PL01~PL07 전부 독립 조사. 공통 계약·독립 원본·근거/미확인 준수.",
+    "TASK-058 R01: 세 결과 비교·통합, 사용자 스토리 및 서비스 범위 결정 후 논리 DB·ERD·스키마 설계; 7개 수용 가능성, 기존 DB/API/코드 영향 및 API·프로토콜 입력 확인.",
+    "기존 TASK-048~054 신규 구현 일시 보류, 상태·증거·미충족 의무 보존; 새 설계에 따라 영향/재개 판단. 12/8 mock MVP·1/4 최종 목표는 재평가 전 유지. 실제 플랫폼 로그인/등록/자동화 및 인증정보 수집 금지."
   ],
   "decisions_needed": [
     {
@@ -47,46 +43,46 @@
       "evidence_needed": "운영사 허용, 실제 보안·가치·비용 및 수용 시험"
     }
   ],
-  "review_summary": "11/25 최신 검토: R02 PR51/52 draft 실제 모델 초기 비교(양 모델 가격 충돌 오류), 합성 44 CI. R03 191 CI·실제 조립 계획. R04 main 366cea92 Viewer/폴링 개선, 실제 API fallback/계약·숨고 readback 보완. R05 고정 조합 tree 10096b0f Runtime 30/30·크몽 37/37 독립 CI 성공, skip 0. R03 실제 조립/R01 독립 검증 역할 분리. 22 gate 전체 0/22; WBS 갱신 공수·공식 제출/접수 미확인.",
+  "review_summary": "11/26 R01이 V1.2 기반 독립 사용자 스토리·7개 플랫폼 조사를 요청. TASK-055~058 배정 준비; 실제 조사 결과·수신·착수·서비스 범위 및 DB 확정은 미확인. 이전 11/25 구현·시험 결과는 해당 TASK/근거 원본 보존.",
   "deliverables": [
     {
       "id": "SUB-01",
       "due": "2026-11-13",
       "title": "기획서·요구사항",
-      "status": "11/25 V1.1·채택 mock 요구사항 반영 개정 문서 · 검토/최종 형식 미확인",
+      "status": "11/26 V1.2 및 S1.0 잠정 설계 프로젝션; 2차 검토 준비",
       "submission_status": "미확인",
-      "source": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.1.json",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json",
       "projection": "docs/step1/기획서_제출본.md",
       "completion_tasks": [],
       "revision_ref": "docs/step1/기획서_제출본.md",
-      "revision_date": "2026-11-25",
-      "note": "11/23 후보는 Git 이력. 실제 가치·제품 검증·공식 제출/접수는 별도."
+      "revision_date": "2026-11-26",
+      "note": "원본→제출용 프로젝션; 실제 TASK/제품 설계 변경 아님. 공식 제출·접수 미확인."
     },
     {
       "id": "SUB-02",
       "due": "2026-11-13",
       "title": "WBS",
-      "status": "11/25 V0.6 후보 · R03 실제 조립 계획, R04 9/6 CI, R05 최신 30/37 독립 조합 CI; 갱신 잔여/일정·캡처 미확인",
+      "status": "11/26 S1.0 잠정 일정·실적·인수·교육 마일스톤; 캡처/2차 검토 전",
       "submission_status": "미확인",
-      "source": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json",
       "projection": "docs/step1/WBS_제출본.md",
       "completion_tasks": [],
       "target": "docs/step1/WBS_제출본.md",
       "revision_ref": "docs/step1/WBS_제출본.md",
-      "revision_date": "2026-11-25",
-      "note": "기존 최초/잔여 추정 보존. 담당자 갱신·가용성/공식 제출·캡처 미확인."
+      "revision_date": "2026-11-26",
+      "note": "원본→제출용 프로젝션; 실제 TASK/제품 설계 변경 아님. 공식 제출·접수 미확인."
     },
     {
       "id": "SUB-API-20261120",
       "due": "2026-11-20",
       "title": "API 설계 문서·DB 스키마 설계서",
-      "status": "11/25 S8/launcher 독립 시험 통과 · R03 실제 WS/STORE/slot/asset 조립 계획, 전체 연동 미확인",
+      "status": "11/26 S1.0 PostgreSQL·API 구체 잠정 설계; 실제 시험/2차 검토 전",
       "submission_status": "미확인",
-      "source": "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json",
       "projection": "docs/step2/README.md",
       "completion_tasks": [],
-      "note": "PR #44 병합 완료; 세부 계약의 실제 조립/검증 및 공식 제출·접수 미확인.",
-      "revision_date": "2026-11-25"
+      "note": "원본→제출용 프로젝션; 실제 TASK/제품 설계 변경 아님. 공식 제출·접수 미확인.",
+      "revision_date": "2026-11-26"
     },
     {
       "id": "SUB-DLV05-20261127",
@@ -359,6 +355,33 @@
     },
     {
       "path": "product/lesson-registration/evidence/r03-progress-20261125.json"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/README.md"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-055.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-056.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-057.json"
+    },
+    {
+      "path": "docs/artifacts/tasks/TASK-058.json"
     }
   ],
   "submission_plan": {
@@ -453,6 +476,12 @@
       "authority": "human",
       "source_ref": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
       "source_id": "HRESP-20261125-03"
+    },
+    {
+      "text": "R01 11/26: V1.2를 후속 설계 기준으로 사용하되 가설·조건부 확장·MVP·실제 지원/실행은 별도 판단. R02·R04·R05 각각 전체 사용자 스토리와 7개 플랫폼 독립 조사; R01 통합·서비스 범위 결정·DB 설계. INTENT-DESIGN-003 우선.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
+      "source_id": "HRESP-20261126-01"
     }
   ],
   "human_input": {
@@ -461,17 +490,14 @@
   },
   "operating_transition_ref": "docs/artifacts/state/transition-20261118.json",
   "active_task_ids": [
-    "TASK-048",
-    "TASK-049",
-    "TASK-050",
-    "TASK-051",
-    "TASK-052",
-    "TASK-053",
-    "TASK-054"
+    "TASK-055",
+    "TASK-056",
+    "TASK-057",
+    "TASK-058"
   ],
   "inactive_historical_task_range": "TASK-001~032 (이전 단계 기록 보존, 신규 배정 제외; 001~021 기존 정산, 022~032 신규 정산 참조); TASK-043~047 이전 단계 보존",
-  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
-  "active_phase_intent_id": "PHASE-20261125-01",
+  "active_phase_intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
+  "active_phase_intent_id": "PHASE-20261126-01",
   "current_product_status": "공통 환경·R03 합성 API main, R02 실제 모델 초기 비교 보고/PR51·52 검토, R04 UI 개선 9·숨고 6 CI, R05 실제 Runtime/크몽 조합 독립 CI 30/37. R03 실제 App 조립 주도, D01~D06·실제 UI/I2/숨고 연결 미완료. 22 gate preflight 통과, full 0/22. mock-only.",
   "legacy_execution_status": "기존 찾아you 기획서·APP-A/C·WBS 및 과거 구현 일정은 실제 개발 실행 보류",
   "legacy_submission_use": "이전 찾아you와 11/23 후보는 이력·당시 제출 대응 자료로만 보존. 11/25 현행 레슨 등록 설계와 Step1~4 후보는 docs/design/lesson-registration/CURRENT-DOCUMENTS.md 기준; 실제 구현/시험/제출은 별도 확인",
@@ -495,9 +521,16 @@
     "TASK-044",
     "TASK-045",
     "TASK-046",
-    "TASK-047"
+    "TASK-047",
+    "TASK-048",
+    "TASK-049",
+    "TASK-050",
+    "TASK-051",
+    "TASK-052",
+    "TASK-053",
+    "TASK-054"
   ],
-  "previous_phase_task_status_policy": "TASK-028~032의 당시 상태·결과를 보존하고 신규 실행 의무로 자동 해석하지 않는다. TASK-033~042는 미채택/미병합 제안으로 별도 정산한다. TASK-043~047 원본 상태·결과 보존, 신규 실행 제외; 개별 미충족 의무는 후속 TASK 및 R01 검토와 연결, 완료 소급 없음.",
+  "previous_phase_task_status_policy": "TASK-028~032의 당시 상태·결과를 보존하고 신규 실행 의무로 자동 해석하지 않는다. TASK-033~042는 미채택/미병합 제안으로 별도 정산한다. TASK-043~047 원본 상태·결과 보존, 신규 실행 제외; 개별 미충족 의무는 후속 TASK 및 R01 검토와 연결, 완료 소급 없음. TASK-048~054는 원본 상태·구현·검증·남은 의무를 보존하고 11/26 설계 우선 단계에서 신규 실행 보류. R01이 새 서비스 범위 및 설계 영향 검토 후 재개 판단; 완료·취소 아님.",
   "task_closeout_ref": "docs/artifacts/state/task_closeout_20261124.json",
   "task_closeout_view_ref": "docs/artifacts/state/TASK-CLOSEOUT-20261124.md",
   "task_reconciliation_ref": "docs/human/responses/HRESP-20261124-03_task-reconciliation.md"

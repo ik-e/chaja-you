@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "id": "WORK-20261126-LESSON-STORY-PLATFORM-DB",
+  "kind": "document",
+  "status": "R01 승인 방향에 따른 공통 작업 계약 · 조사/검토 미실행",
+  "title": "사용자 스토리·7개 플랫폼 독립 조사 작업 계약",
+  "owner": "R01",
+  "date": "2026-11-26",
+  "authority_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
+  "proposal_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+  "proposal_blob_sha": "d3cac078a8e0d1898e0e249e670327497c657b07",
+  "participants": [
+    "R02",
+    "R04",
+    "R05"
+  ],
+  "integrator": "R01",
+  "goal": "정상·오류·반복 상황에서의 모든 사용자 행동 후보와 7개 플랫폼의 관찰 가능한 업무/데이터 구조를 독립 확보하여 서비스 범위 및 논리 DB/ERD 설계의 근거로 사용한다.",
+  "core_feature_ids": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F12",
+    "F13",
+    "F14",
+    "F15",
+    "F16",
+    "F17",
+    "F18",
+    "F19",
+    "F20",
+    "F21",
+    "F22",
+    "F23",
+    "F24",
+    "F25",
+    "F26",
+    "F27",
+    "F28",
+    "F29"
+  ],
+  "conditional_feature_ids": [
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05"
+  ],
+  "platforms": [
+    {
+      "id": "PL01",
+      "name": "크몽",
+      "object_hint": "레슨 서비스 상품"
+    },
+    {
+      "id": "PL02",
+      "name": "탈잉",
+      "object_hint": "레슨 클래스"
+    },
+    {
+      "id": "PL03",
+      "name": "숨고",
+      "object_hint": "고수 프로필 및 레슨 서비스"
+    },
+    {
+      "id": "PL04",
+      "name": "프람피",
+      "object_hint": "전문가 프로필 및 레슨 분야"
+    },
+    {
+      "id": "PL05",
+      "name": "뮬",
+      "object_hint": "음악 레슨 모집 공고"
+    },
+    {
+      "id": "PL06",
+      "name": "힙합플레이야",
+      "object_hint": "레슨 홍보 게시물"
+    },
+    {
+      "id": "PL07",
+      "name": "힙합LE",
+      "object_hint": "레슨 게시물"
+    }
+  ],
+  "scope": {
+    "each_member": "전체 F01~F29 및 E01~E05(조건부 별도) 검토 + PL01~PL07 전부 조사, 팀원별 독립 원본 작성; 기존 조사 재사용 가능, 원본 확인 시점·출처 기록",
+    "platforms": [
+      "PL01",
+      "PL02",
+      "PL03",
+      "PL04",
+      "PL05",
+      "PL06",
+      "PL07"
+    ],
+    "operations": [
+      "CREATE 신규·추가 등록",
+      "READ 기존 객체/내용 조회",
+      "UPDATE 기존 게시 정보 수정",
+      "RENEW 공고 갱신",
+      "STATUS 상태 확인",
+      "RESPOND 오류·반려 대응"
+    ],
+    "exclude": [
+      "상담·유료 견적·수업 운영/결제 등 기획 제외 범위",
+      "UI/물리 DB/API/프로토콜/기술 스택 확정 및 신규 구현",
+      "실제 계정 로그인·등록·수정·갱신·인증정보 취급·외부 자동화 실행",
+      "외부 서비스 내부 DB/API 추정이나 우회 접근",
+      "임의의 새 기능/플랫폼 지원/자동화 허용 확정"
+    ]
+  },
+  "evidence_rules": {
+    "claim_status": [
+      "observed",
+      "documented",
+      "reported",
+      "inferred",
+      "unknown"
+    ],
+    "rule": "각 사실/필드/절차/상태에 evidence_refs 연결. observed는 직접 관찰한 범위만, documented는 공식 문서에 명시된 범위만, reported는 기존 팀/사용자 조사, inferred는 추론 및 근거, unknown은 미확인 이유·확인 방법. 동일 출처 복제는 독립 근거가 아님. 공개 URL·repo 경로·확인 시점·정확한 화면/절/필드 위치. 비공개 정보 및 비밀/개인 데이터 미포함."
+  },
+  "user_story": {
+    "purpose": "사용자 기능 범위 결정. UI나 구현 방법이 아닌 실제 사용자가 할 수 있어야 하는 행동을 주어·동사·목적어로 정의. 사용자 행동과 시스템/외부 이벤트 분리.",
+    "coverage": "F01~F29 각각 행동 연결 또는 내부 기능/적용 없음 사유, E01~E05 조건부 별도, 서비스 자체 진입·계정·소유권·정보 삭제/연결 해제 등 전제 지원 행동은 후보로 기록. 정상/오류/예외/반복/조건부, 거절·보류·실패·부분 성공·미확인·재시도와 종료 조건 포함. 발생할 수 없는 행동을 만들어 채우지 않음.",
+    "record_fields": [
+      "story_id: 담당별 고유 ID (예 R02-US-001)",
+      "actor: 강사 등 실제 사용자",
+      "action: 주어·동사·목적어의 단일 행동",
+      "goal: 행동 목적과 관련 Pain/핵심 피처",
+      "trigger: 발생 조건/선행 상태",
+      "preconditions: 이용 조건, 인증·권한·선행 행동",
+      "inputs: 필요한 데이터/선택/대상과 출처",
+      "observable_result: 사용자가 받거나 확인하는 결과/정보/상태",
+      "failure_or_branch: 오류·예외 조건, 사용자에게 가능한 다음 행동 ID, 종료/미확인 구분",
+      "related_story_ids: 선행·후속·대안 관계",
+      "feature_refs: F/E ID 또는 지원 행동의 필요 근거",
+      "scope_candidate: base/conditional/excluded/undecided",
+      "scenario_type: normal/error/exception/repeat/conditional",
+      "evidence_refs: 근거 ID 또는 기획 절/피처·플랫폼 조사 ID",
+      "decision_request: 기획 누락/충돌/불확실성 및 제안"
+    ],
+    "boundary": "기획안에서 정의하지 않은 사용자 행동은 필요 근거와 함께 undecided로 제안. 시스템의 저장·검증·세션 폐기·상태 전이 등은 user story로 꾸미지 않고 supporting_system_events에 기록해 DB/API 입력으로 사용.",
+    "system_event_fields": [
+      "event_id",
+      "actor (service/platform)",
+      "trigger/story_refs",
+      "input_data_refs",
+      "precondition/approval/permission",
+      "output_data_refs",
+      "state_before",
+      "state_after",
+      "error/unknown/partial result",
+      "external_effect",
+      "retry/dedup/confirmation constraints",
+      "evidence_refs"
+    ]
+  },
+  "platform_research": {
+    "purpose": "외부에서 관찰 가능한 객체·정보·업무·관계·상태를 공통 비교 형식으로 조사; 웹 등록 가능/업무 허용 여부를 분리.",
+    "platform_record_fields": [
+      "platform_id",
+      "name",
+      "web_path_status: confirmed/unconfirmed/not_supported + evidence",
+      "source/evidence_refs",
+      "objects",
+      "operations",
+      "data_fields",
+      "relations",
+      "states",
+      "constraints",
+      "auth_permission",
+      "story_candidates",
+      "unknowns",
+      "decision_requests"
+    ],
+    "object_fields": [
+      "object_id",
+      "name",
+      "business_meaning",
+      "owner/related_account",
+      "identifier (관찰 가능한 ID/URL·유일성 미확인 표시)",
+      "lifecycle",
+      "evidence_refs"
+    ],
+    "operation_fields": [
+      "operation_id",
+      "operation_type (CREATE/READ/UPDATE/RENEW/STATUS/RESPOND)",
+      "availability: supported/not_supported/unknown/not_applicable",
+      "target_object_refs",
+      "actual_user_steps (행동 순서·분기, 입력/선택/인증/승인/결과)",
+      "preconditions/roles/permissions",
+      "input_field_refs",
+      "return_field_refs",
+      "visible_field_refs",
+      "state_before/state_after",
+      "completion_evidence (접수/심사/공개 분리)",
+      "error_and_unknown_conditions",
+      "retry_or_duplicate_risk",
+      "external_effect",
+      "policy_status: allowed/prohibited/unknown + 근거",
+      "evidence_refs"
+    ],
+    "data_field_fields": [
+      "field_id",
+      "object_ref",
+      "actual_label_or_observed_key (내부 키 추정 금지)",
+      "meaning",
+      "direction: input/return/visible (복수 가능)",
+      "observed_type_or_format; unknown 가능",
+      "required: yes/no/conditional/unknown",
+      "required_when",
+      "allowed_values/default/unit/limits",
+      "multiplicity/nullability",
+      "source_or_generation_actor",
+      "editable/immutable/derived/unknown",
+      "visibility: public/authenticated/internal_unknown",
+      "persistence_need_candidate: save/reference/ephemeral/not_needed/unknown + 이유; 비밀값 금지",
+      "validation_or_dependency",
+      "evidence_refs"
+    ],
+    "relation_fields": [
+      "relation_id",
+      "from_object_ref",
+      "to_object_ref",
+      "meaning",
+      "cardinality: 1:1/1:N/N:M/unknown (관찰과 가설 분리)",
+      "ownership/identity/lifecycle constraints",
+      "evidence_refs"
+    ],
+    "state_fields": [
+      "state_id",
+      "object_or_operation_ref",
+      "native_label",
+      "meaning",
+      "transition_trigger",
+      "next_states",
+      "observability",
+      "evidence_refs"
+    ],
+    "note": "입력·반환·노출 데이터는 UI/공식 자료에서 실제 관측 가능한 논리 정보이며 네트워크 내부 API 스키마가 아님. 플랫폼별 가격/시간/옵션/필수 조건·첨부·상태 차이, 식별/소유권/복수 객체 관계를 특히 확인. 업무 시도·접수·심사·공개 및 마지막 관측/조회 실패 구분. 웹 경로 부재나 정보 제한은 미확인/미지원 근거로 남겨 대체 후보를 R01에게 제안; 임의 교체 금지."
+  },
+  "integration": {
+    "owner": "R01",
+    "rule": "팀원 원본 보존, 의미 동일 행동 병합/차이와 누락 추적, 출처 독립성 및 조건 비교, 기획안 모순·범위 결정 요청 처리. 조사 결과와 사용자 행동 간 양방향 교차 검토. R01 승인 범위의 사용자 스토리 ID를 확정한 뒤 데이터 의미·관계·제약·상태·수명주기 도출. 기존 DB/코드와의 차이·영향·이관 후보 확인. 7개 플랫폼의 필수/고유 정보·업무 표현 가능성과 새 플랫폼 추가 영향 검증. API·프로토콜에 필요한 actor/event/data/state/error/authorization trace를 남기되 엔드포인트와 기술은 후속. [instructor-api-db-design-inputs.json]을 TASK-058 I7의 추가 설계 검토 입력으로 사용. PostgreSQL은 목표이며 실제 migration과 이전 구현 재개는 별도. 독립 조사 A1~A5/양식/owner 불변.",
+    "outputs": [
+      "integrated/user-stories.json",
+      "integrated/platform-comparison.json",
+      "integrated/scope-decisions.json",
+      "integrated/db-design.json",
+      "integrated/DB-DESIGN.md"
+    ],
+    "db_design_fields": [
+      "logical_entities/attributes/meaning",
+      "PK/FK 또는 논리 식별 관계",
+      "cardinality/ownership/constraints",
+      "lifecycle and native vs normalized state",
+      "common vs platform-specific data",
+      "retention/security/approval/version/observation/audit",
+      "ERD",
+      "story→data coverage",
+      "platform→field/object coverage and unresolved gaps",
+      "existing design impact and API/protocol handoff",
+      "instructor feedback A1~A4/D1~D4 trace; PostgreSQL target, SQLite migration/ownership/state/evidence verification design, future API inputs"
+    ],
+    "user_story_scope_gate": {
+      "contract_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json#validation_contract",
+      "criteria_ids": [
+        "USV-01",
+        "USV-02",
+        "USV-03",
+        "USV-04",
+        "USV-05",
+        "USV-06",
+        "USV-07"
+      ],
+      "purpose": "R01 통합 검토에서 개별 SVO 사용자 행동의 완전성과 서비스 기능 범위를 확정한다.",
+      "method": "개별 SVO 행동 전수 도출 → 원자성/중복 정리 → 피처/생애주기/플랫폼/분기 검증 → 범위 검토와 R01 결정 → 사용자 흐름 → DB/API. 수량/ID coverage는 완전성 증명이 아니다.",
+      "trace": "개별 행동↔F01~F29/E01~E05 및 시스템 이벤트의 양방향 추적; 직접 피처가 없는 지원 행동은 기획 절/근거와 관련 피처를 명시하고 별도 범위 판정. 직접 연결과 관련 후보 구분.",
+      "entry_gate": "모든 적용 검토 완료 및 범위에 영향을 미치는 미결정 해소, R01 승인된 행동 집합 고정 전 신규 DB 설계 진입 보류. 7개 플랫폼 사실/데이터 조사는 병행. 기존 잠정 제출본과 mock 구현 변경 없음.",
+      "validation_result": "현재 63개 초기 후보에 대한 정적 연결 검사만 수행; USV-01~07 의미·범위 검토 미완료. R04 및 후속 조사 반영 필요.",
+      "independent_contract": "기존 A1~A5와 팀원별 독립 조사 양식, 범위, 소유권 및 실행 권한 변경 없음."
+    }
+  },
+  "acceptance": [
+    "A1: 전체 F01~F29 검토 및 E01~E05 별도 조건부 검토. 정상/오류/예외/반복에서 가능한 단일 사용자 행동을 명세하고 관계·조건·입출력·관찰 결과·범위 후보/근거 표시. 미검토·내부 행동만 있는 항목도 사유 표시.",
+    "A2: PL01~PL07 모두 독립 조사; 각 플랫폼의 6개 업무별 supported/not_supported/unknown/not_applicable 및 근거/미확인 사유, 객체·필드·관계·상태·제약·권한·완료 증거를 공통 형식으로 기록.",
+    "A3: 플랫폼에서 발견된 행동/데이터/오류를 스토리와 연결. 사용자 스토리에서 발견된 요구 정보가 조사에서 확인 가능한지 표시.",
+    "A4: 각 사실/추론/미확인 구분, 확인일/출처/위치 및 재확인 방법. 실제 외부 실행 없음. 미확인 항목의 존재는 조사 제출을 막지 않으나 확인된 것처럼 표시하거나 DB 설계를 확정하지 않음.",
+    "A5: 지정 JSON 원본의 필수 구조, 담당별 독립 ID/참조 일치, 각 TASK result에 산출물 경로/commit과 자체 점검 결과·미확인·결정 요청 기록. 최종 검토는 R01."
+  ],
+  "completion_policy": "오늘 목표는 조사·스토리 후보 제출과 R01의 통합/설계 가능한 범위 확정이다. 결과 없는 템플릿은 완료 아님. DB 상세 설계에 필요한 정보가 부족하면 확인된 설계와 열린 제약·결정 요청을 분리하며 확정 판정 금지."
+}

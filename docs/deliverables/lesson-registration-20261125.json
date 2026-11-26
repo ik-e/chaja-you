@@ -14,13 +14,20 @@
         "docs/artifacts/design/lesson-registration-20261124/adoption-20261125.json",
         "docs/artifacts/design/lesson-registration-20261124/common-integration-v1.json",
         "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
-        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md"
+        "docs/human/responses/HRESP-20261125-06_pain-first-rolling-plan.md",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 3,
-      "status": "현행 mock 범위 반영 후보",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "title": "기획서(요구사항 명세 포함)",
       "due": "2026-11-13",
-      "submission_status": "미확인"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-02",
@@ -34,13 +41,22 @@
         "product/lesson-registration/tests/modules/web/PLAN.md",
         "product/lesson-registration/tests/modules/soomgo/PLAN.md",
         "docs/members/R04/daily/2026-11-25.md",
-        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.7-candidate.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.8-candidate.json",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 4,
-      "status": "11/25 V0.6 후보 · R03 실제 조립 계획, R04 9/6 CI, R05 최신 30/37 독립 조합 CI; 갱신 잔여/일정·캡처 미확인",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "title": "WBS",
       "due": "2026-11-13",
-      "submission_status": "미확인"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-03",
@@ -52,13 +68,21 @@
         "product/lesson-registration/fixtures/shared/replay.json",
         "docs/artifacts/runs/TASK-050-s8-http-20261125.json",
         "product/lesson-registration/src/lesson_registration/app/http/api.py",
-        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/step2/api-feedback-examples-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 6,
-      "status": "11/25 S8/launcher 독립 시험 통과 · R03 실제 WS/STORE/slot/asset 조립 계획, 전체 연동 미확인",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "title": "API 설계 문서",
       "due": "2026-11-20",
-      "submission_status": "미확인"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-04",
@@ -67,14 +91,21 @@
         "docs/artifacts/design/lesson-registration-20261124/data-contract-v4.json",
         "docs/artifacts/design/lesson-registration-20261124/data-schema-v4.1.json",
         "product/lesson-registration/contracts/PHYSICAL-BINDING.json",
-        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json"
+        "product/lesson-registration/evidence/team-integration-checkpoint-20261125.json",
+        "docs/artifacts/planning/lesson-registration-20261123/instructor-feedback-20261126.json",
+        "docs/artifacts/planning/lesson-registration-20261126/instructor-api-db-design-inputs.json",
+        "docs/human/responses/HRESP-20261126-02_submission-and-postgresql-direction.md",
+        "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
+        "docs/artifacts/planning/lesson-registration-20261126/R02/proposal-v1.2-review.json",
+        "docs/artifacts/planning/lesson-registration-20261126/submission-review-source.json"
       ],
       "top_level_sections": 6,
-      "status": "R03 SQLite DDL main; 실제 stable slot/asset/permit/lease 조립 대기",
+      "status": "11/26 S1.0 원본 기반 잠정 제출 프로젝션 작성; 1차 피드백 반영, 실제 시험/2차 검토/PDF 전",
       "external_snapshot": "https://github.com/ik-e/chaja-you/blob/4992959c08a12ad81a983ea4a89fed0837c0f1f8/product/lesson-registration/src/lesson_registration/app/store/schema.sql",
       "title": "데이터베이스 스키마 설계서",
       "due": "2026-11-20",
-      "submission_status": "미확인"
+      "submission_status": "2차 검토 준비; 공식 제출·접수 전"
     },
     {
       "id": "DLV-05",

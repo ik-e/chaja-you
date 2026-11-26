@@ -4,9 +4,22 @@
 
 [AI용 현행 인덱스](CURRENT-DESIGN.json) · [운영 상태](../../../CURRENT.md) · [채택 전 고정 검토 스냅샷](README.md) · [전체 이력](12-HISTORY.md)
 
-## 1. 현행 적용 우선순위
+## 현재 단계 및 활성 작업
 
-- [PHASE-20261125-01](../../human/phase-intents/PHASE-20261125-01.md) · [논리 설계 채택](../../artifacts/design/lesson-registration-20261124/adoption-20261125.json) · [IB-01~05 승인](../../human/responses/HRESP-20261125-02_common-implementation-binding.md)
+[PHASE-20261126-01](../../human/phase-intents/PHASE-20261126-01.md) · [실제 작업 상태](../../../CURRENT.md)
+
+| TASK | 담당 | 작업 |
+| --- | --- | --- |
+| [TASK-055](../../artifacts/tasks/TASK-055.json) | R02 | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R02) |
+| [TASK-056](../../artifacts/tasks/TASK-056.json) | R04 | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R04) |
+| [TASK-057](../../artifacts/tasks/TASK-057.json) | R05 | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R05) |
+| [TASK-058](../../artifacts/tasks/TASK-058.json) | R01 | 통합 사용자 스토리·서비스 범위 확정 및 DB 설계 |
+
+이전 구현 기준선은 참고·이력 및 영향 검토용으로 보존하며 현재 실행 배정으로 사용하지 않는다. 아래 요구사항/결정/시험/패키지의 연결은 기존 기준선에 대한 추적이다.
+
+## 1. 이전 구현 기준선의 적용 기록
+
+- [PHASE-20261125-01](../../human/phase-intents/PHASE-20261125-01.md) · [논리 설계 채택](../../artifacts/design/lesson-registration-20261124/adoption-20261125.json) · [IB-01–05 승인](../../human/responses/HRESP-20261125-02_common-implementation-binding.md)
 - 고정 논리 기준선 `197987047ea9a305072bba3fdff816c5c37b0157`: 원본 98개, 기존 결정 88개 보존. IB 결정 5개는 그 후속 구현 방향이다.
 - 실행 후 사용자 중단/변경/재개/rollback 없음; 오류 시에만 중단 후 결과 반환. 이전 재개/취소/rollback 조항보다 우선.
 - 현재 mock-only. 실제 서비스 허용, 제품 성공, 팀원 수신·착수, 물리 스택/일정 확정을 추정하지 않는다.
@@ -17,11 +30,11 @@
 | --- | --- | --- | --- |
 | 상위 의도·목표 | 현재 적용 | [INTENT.md](../../human/INTENT.md) · [PHASE-20261125-01.md](../../human/phase-intents/PHASE-20261125-01.md) · [direction-v0.4.json](../../artifacts/design/lesson-registration-20261124/direction-v0.4.json) · [top-design-v1.json](../../artifacts/design/lesson-registration-20261124/top-design-v1.json) · [top-design-amendment-v1.json](../../artifacts/design/lesson-registration-20261124/top-design-amendment-v1.json) | [01-GOALS.md](01-GOALS.md) — 현재 Phase 우선, A2 오류 전용 중단·mock-only |
 | 제품 요구사항 | 명시 보존 | [implementation-v0.4.json](../../artifacts/design/lesson-registration-20261124/implementation-v0.4.json) `/requirements` · [trace-index-v0.9.json](../../artifacts/design/lesson-registration-20261124/trace-index-v0.9.json) `/requirements` | [01-GOALS.md](01-GOALS.md) — REQ-08 재개 문구는 A2 및 CS-05/06으로 대체. 구 컴포넌트/물리 설계는 이력 |
-| 논리·상태·업무 경계 | 채택 | [detail-decisions-v2.json](../../artifacts/design/lesson-registration-20261124/detail-decisions-v2.json) · [logical-behavior-v5.json](../../artifacts/design/lesson-registration-20261124/logical-behavior-v5.json) · [common-integration-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [adoption-20261125.json](../../artifacts/design/lesson-registration-20261124/adoption-20261125.json) | [02-LOGIC.md](02-LOGIC.md) · [06-API-PORTS.md](06-API-PORTS.md) · [07-EXECUTION.md](07-EXECUTION.md) — CS-01~09 원본 당시 상태 유지, 현행 채택은 승인 기록 |
+| 논리·상태·업무 경계 | 채택 | [detail-decisions-v2.json](../../artifacts/design/lesson-registration-20261124/detail-decisions-v2.json) · [logical-behavior-v5.json](../../artifacts/design/lesson-registration-20261124/logical-behavior-v5.json) · [common-integration-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) · [adoption-20261125.json](../../artifacts/design/lesson-registration-20261124/adoption-20261125.json) | [02-LOGIC.md](02-LOGIC.md) · [06-API-PORTS.md](06-API-PORTS.md) · [07-EXECUTION.md](07-EXECUTION.md) — CS-01–09 원본 당시 상태 유지, 현행 채택은 승인 기록 |
 | 데이터·프로필 | 동결/채택·mock | [logical-data-contract-decision-v1.json](../../artifacts/design/lesson-registration-20261124/logical-data-contract-decision-v1.json) · [data-contract-v4.json](../../artifacts/design/lesson-registration-20261124/data-contract-v4.json) · [data-schema-v4.1.json](../../artifacts/design/lesson-registration-20261124/data-schema-v4.1.json) · [platform-profiles-v2.json](../../artifacts/design/lesson-registration-20261124/platform-profiles-v2.json) | [03-DATA.md](03-DATA.md) · [04-SCHEMA.md](04-SCHEMA.md) · [05-PLATFORMS.md](05-PLATFORMS.md) — V4.1 명시 델타·공통 V1 우선. 실제 운영사 규칙 미검증 |
-| 공통 구현 계약 | 방향 승인·초기 공유 | [IMPLEMENTATION-BINDING.json](../../../product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json) · [HRESP-20261125-02_common-implementation-binding.md](../../human/responses/HRESP-20261125-02_common-implementation-binding.md) · [interfaces.py](../../../product/lesson-registration/contracts/interfaces.py) · [validation.py](../../../product/lesson-registration/contracts/validation.py) · [viewer.d.ts](../../../product/lesson-registration/contracts/viewer.d.ts) · [wiring.py](../../../product/lesson-registration/src/lesson_registration/composition/wiring.py) | [README.md](../../../product/lesson-registration/contracts/README.md) — IB-01~05, 세부 provider/제품 스택 미확정 |
-| 공통 물리 설계·실행환경 | PD-01~08 방향 채택·세부 검증 | [PHYSICAL-BINDING.json](../../../product/lesson-registration/contracts/PHYSICAL-BINDING.json) · [HRESP-20261125-03_common-physical-direction.md](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [pyproject.toml](../../../product/lesson-registration/pyproject.toml) · [uv.lock](../../../product/lesson-registration/uv.lock) · [bootstrap-ci-20261125.json](../../../product/lesson-registration/evidence/bootstrap-ci-20261125.json) · [pyproject.toml](../../../product/lesson-registration/evidence/physical-env/pyproject.toml) · [lesson-physical-probe.yml](../../../.github/workflows/lesson-physical-probe.yml) | [README.md](../../../product/lesson-registration/README.md) · [PLAN.md](../../../product/lesson-registration/evidence/PLAN.md) — 정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도 |
-| 담당별 상세 설계·작업 | TASK 배정 | [current.json](../../artifacts/state/current.json) · [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [TASK-048.json](../../artifacts/tasks/TASK-048.json) · [TASK-049.json](../../artifacts/tasks/TASK-049.json) · [TASK-050.json](../../artifacts/tasks/TASK-050.json) · [TASK-051.json](../../artifacts/tasks/TASK-051.json) · [TASK-052.json](../../artifacts/tasks/TASK-052.json) · [TASK-053.json](../../artifacts/tasks/TASK-053.json) · [TASK-054.json](../../artifacts/tasks/TASK-054.json) | [CURRENT.md](../../../CURRENT.md) · [WORK-PACKAGES.md](../../../product/lesson-registration/WORK-PACKAGES.md) — 담당자 PLAN/수신/착수 및 일정 별도 확인 |
+| 공통 구현 계약 | 방향 승인·초기 공유 | [IMPLEMENTATION-BINDING.json](../../../product/lesson-registration/contracts/IMPLEMENTATION-BINDING.json) · [HRESP-20261125-02_common-implementation-binding.md](../../human/responses/HRESP-20261125-02_common-implementation-binding.md) · [interfaces.py](../../../product/lesson-registration/contracts/interfaces.py) · [validation.py](../../../product/lesson-registration/contracts/validation.py) · [viewer.d.ts](../../../product/lesson-registration/contracts/viewer.d.ts) · [wiring.py](../../../product/lesson-registration/src/lesson_registration/composition/wiring.py) | [README.md](../../../product/lesson-registration/contracts/README.md) — IB-01–05, 세부 provider/제품 스택 미확정 |
+| 공통 물리 설계·실행환경 | PD-01–08 방향 채택·세부 검증 | [PHYSICAL-BINDING.json](../../../product/lesson-registration/contracts/PHYSICAL-BINDING.json) · [HRESP-20261125-03_common-physical-direction.md](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [pyproject.toml](../../../product/lesson-registration/pyproject.toml) · [uv.lock](../../../product/lesson-registration/uv.lock) · [bootstrap-ci-20261125.json](../../../product/lesson-registration/evidence/bootstrap-ci-20261125.json) · [pyproject.toml](../../../product/lesson-registration/evidence/physical-env/pyproject.toml) · [lesson-physical-probe.yml](../../../.github/workflows/lesson-physical-probe.yml) | [README.md](../../../product/lesson-registration/README.md) · [PLAN.md](../../../product/lesson-registration/evidence/PLAN.md) — 정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도 |
+| 이전 구현 패키지 | 보류·근거 보존 | [current.json](../../artifacts/state/current.json) · [WORKSPACE.json](../../../product/lesson-registration/WORKSPACE.json) · [TASK-048.json](../../artifacts/tasks/TASK-048.json) · [TASK-049.json](../../artifacts/tasks/TASK-049.json) · [TASK-050.json](../../artifacts/tasks/TASK-050.json) · [TASK-051.json](../../artifacts/tasks/TASK-051.json) · [TASK-052.json](../../artifacts/tasks/TASK-052.json) · [TASK-053.json](../../artifacts/tasks/TASK-053.json) · [TASK-054.json](../../artifacts/tasks/TASK-054.json) | [CURRENT.md](../../../CURRENT.md) · [WORK-PACKAGES.md](../../../product/lesson-registration/WORK-PACKAGES.md) — 현재 활성 배정이 아님. 재개는 R01 판단. |
 | 검증·수용 시험 | 설계/합성 검증 | [common-integration-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-v1.json) `/gate` · [common-integration-validation-v1.json](../../artifacts/design/lesson-registration-20261124/common-integration-validation-v1.json) · [common-contract-ci-20261125.json](../../../product/lesson-registration/evidence/common-contract-ci-20261125.json) · [TASK-048.json](../../artifacts/tasks/TASK-048.json) | [09-TESTS.md](09-TESTS.md) · [README.md](../../review/README.md) — 제품 22개 시험 실제 결과는 TASK/고정 실행 근거로 판정 |
 | 현행 WBS 후보 | 미확정 | [wbs-v0.6-candidate.json](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json) | [PLAN.md](../../../product/lesson-registration/evidence/PLAN.md) — R05 7근무일 추정·R02 12/4 인계; 전체 owner PLAN 후 확정 |
 | 과거 설계·WBS | 이력/선별 참조 | [MANIFEST.json](MANIFEST.json) · [trace-index-v0.9.json](../../artifacts/design/lesson-registration-20261124/trace-index-v0.9.json) · [wbs-v0.5.json](../../artifacts/design/lesson-registration-20261124/wbs-v0.5.json) | [10-DECISIONS.md](10-DECISIONS.md) · [11-WBS.md](11-WBS.md) · [12-HISTORY.md](12-HISTORY.md) · [TARGET-DESIGN.md](../TARGET-DESIGN.md) — 고정 98개 원본·88개 추적 보존, 이전 찾아you 및 WBS는 현행 배정 아님 |
@@ -135,7 +148,7 @@
 - 남은 검토: Owner factory signatures, shared launch configuration and module-level testing strategy before actual assembly.
 - 재검토 조건: First real provider ready.
 
-### PD-01~08 · 공통 물리 방향
+### PD-01–08 · 공통 물리 방향
 
 [PHYSICAL-BINDING.json](../../../product/lesson-registration/contracts/PHYSICAL-BINDING.json) · [HRESP-20261125-03_common-physical-direction.md](../../../docs/human/responses/HRESP-20261125-03_common-physical-direction.md) · [wbs-v0.6-candidate.json](../../../docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json)
 
@@ -150,7 +163,7 @@
 | PD-07 Composition | 명시 provider 주입·설정·수명 관리, fake는 개발·검증에 명시 선택; 자동 replay fallback 없음 | 각 owner factory signature, config/launch, port, shutdown |
 | PD-08 통합 검증 | 독립 기술 검사 → 공유 계약 → 실제 provider → 크몽/숨고 통합 → 22개 동일 후보 gate | R01: shared product-lock regression, owner PLAN and actual provider/product gate; R02 handoff 12/4 |
 
-## 5. 현재 담당별 작업
+## 5. 이전 구현 패키지 (보류)
 
 | TASK | 담당 | 패키지 | 관련 IB | PLAN 작성 위치 |
 | --- | --- | --- | --- | --- |

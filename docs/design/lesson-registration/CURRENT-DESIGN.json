@@ -2,7 +2,7 @@
   "id": "LR-CURRENT-DESIGN",
   "kind": "generated_navigation_not_authority",
   "phase": {
-    "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+    "path": "docs/human/phase-intents/PHASE-20261126-01.md"
   },
   "operational_state": {
     "path": "docs/artifacts/state/current.json"
@@ -39,15 +39,43 @@
     "V4.1 schema delta and common-integration-v1 wire/ports/constraints current; V4 remaining data and profile V2 current; old contracts historical except explicitly retained requirements",
     "V0.6 trace historical; original status preserved; current status is projection, not actual product verification",
     "Adoption sets current application without rewriting snapshot statuses.",
-    "IB approved direction is subordinate to logical contract. Current phase/workspace/TASK outrank older WBS. No new assignment, acceptance criterion or approval."
+    "IB approved direction is subordinate to logical contract. Current phase/workspace/TASK outrank older WBS. No new assignment, acceptance criterion or approval.",
+    "Active design phase takes precedence. The previous implementation workspace is preserved and deferred; no new execution authority."
   ],
   "trace_semantics": {
-    "related_tasks": "Navigation via common logical decisions or affected interface, not direct requirement assignment or new acceptance criterion.",
+    "related_tasks": "Historical navigation via prior implementation decisions, not current assignment, acceptance or satisfaction.",
     "inherited_requirements": "Context from prior CS decisions, not claim of satisfaction.",
     "planned_tests": "Related future product test IDs, not executed proof.",
     "actual_evidence": "Bounded synthetic checks only; IB-04 has no runtime check."
   },
   "layers": [
+    {
+      "title": "현재 설계 단계",
+      "status": "적용 중",
+      "sources": [
+        {
+          "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-055.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-056.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-057.json"
+        },
+        {
+          "path": "docs/artifacts/tasks/TASK-058.json"
+        }
+      ],
+      "views": [
+        {
+          "path": "CURRENT.md"
+        }
+      ],
+      "note": "실제 실행 범위와 활성 TASK는 CURRENT 및 해당 Phase를 따른다."
+    },
     {
       "title": "상위 의도·목표",
       "status": "현재 적용",
@@ -225,8 +253,8 @@
       "note": "정확한 lock 및 기술 시험은 PD 정본의 environment 상태로 판정; 제품 보안/동작은 별도"
     },
     {
-      "title": "담당별 상세 설계·작업",
-      "status": "TASK 배정",
+      "title": "이전 구현 패키지",
+      "status": "보류·근거 보존",
       "sources": [
         {
           "path": "docs/artifacts/state/current.json"
@@ -264,7 +292,7 @@
           "path": "product/lesson-registration/WORK-PACKAGES.md"
         }
       ],
-      "note": "담당자 PLAN/수신/착수 및 일정 별도 확인"
+      "note": "현재 활성 배정이 아님. 재개는 R01 판단."
     },
     {
       "title": "검증·수용 시험",
@@ -1449,243 +1477,7 @@
       }
     }
   ],
-  "active_packages": [
-    {
-      "id": "TASK-048",
-      "owner": "R01",
-      "package": "common",
-      "branch": "r01/product-integration",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-048.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-048.md"
-      },
-      "plan_path": "product/lesson-registration/evidence/PLAN.md",
-      "logical_decisions": [
-        "CS-01",
-        "CS-07",
-        "CS-08",
-        "CS-09"
-      ],
-      "planned_product_tests": [
-        "AT-01",
-        "T5-08",
-        "T5-11",
-        "T6-01",
-        "T6-02",
-        "AT-02",
-        "AT-03",
-        "T5-01",
-        "T5-02",
-        "T5-12",
-        "T5-03",
-        "T5-07",
-        "AT-04",
-        "AT-05",
-        "T5-06",
-        "T5-13",
-        "T5-05",
-        "DV-01",
-        "DV-02",
-        "DV-03",
-        "DV-04",
-        "DV-05"
-      ],
-      "related_implementation_decisions": [
-        "IB-01",
-        "IB-02",
-        "IB-03",
-        "IB-04",
-        "IB-05"
-      ]
-    },
-    {
-      "id": "TASK-049",
-      "owner": "R02",
-      "package": "r02-preparation",
-      "branch": "r02/product-preparation",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-049.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-049.md"
-      },
-      "plan_path": "product/lesson-registration/tests/modules/preparation/PLAN.md",
-      "logical_decisions": [
-        "CS-01",
-        "CS-02"
-      ],
-      "planned_product_tests": [
-        "AT-01",
-        "T5-08",
-        "T6-02"
-      ],
-      "related_implementation_decisions": [
-        "IB-01",
-        "IB-02",
-        "IB-05"
-      ]
-    },
-    {
-      "id": "TASK-050",
-      "owner": "R03",
-      "package": "r03-app",
-      "branch": "r03/product-app",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-050.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-050.md"
-      },
-      "plan_path": "product/lesson-registration/tests/modules/app/PLAN.md",
-      "logical_decisions": [
-        "CS-01",
-        "CS-02",
-        "CS-03",
-        "CS-05",
-        "CS-06"
-      ],
-      "planned_product_tests": [
-        "T5-01",
-        "T5-05",
-        "T5-06",
-        "T5-11",
-        "T5-12",
-        "T6-01",
-        "DV-01"
-      ],
-      "related_implementation_decisions": [
-        "IB-01",
-        "IB-02",
-        "IB-03",
-        "IB-05"
-      ]
-    },
-    {
-      "id": "TASK-051",
-      "owner": "R04",
-      "package": "r04-web",
-      "branch": "r04/product-web",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-051.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-051.md"
-      },
-      "plan_path": "product/lesson-registration/tests/modules/web/PLAN.md",
-      "logical_decisions": [
-        "CS-02",
-        "CS-03",
-        "CS-04",
-        "CS-06"
-      ],
-      "planned_product_tests": [
-        "AT-02",
-        "T5-05",
-        "T6-02",
-        "DV-05"
-      ],
-      "related_implementation_decisions": [
-        "IB-02",
-        "IB-04",
-        "IB-05"
-      ]
-    },
-    {
-      "id": "TASK-052",
-      "owner": "R04",
-      "package": "r04-soomgo",
-      "branch": "r04/product-soomgo",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-052.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-052.md"
-      },
-      "plan_path": "product/lesson-registration/tests/modules/soomgo/PLAN.md",
-      "logical_decisions": [
-        "CS-01",
-        "CS-05",
-        "CS-06"
-      ],
-      "planned_product_tests": [
-        "AT-05",
-        "T5-13",
-        "DV-03",
-        "DV-04"
-      ],
-      "related_implementation_decisions": [
-        "IB-01",
-        "IB-02",
-        "IB-03",
-        "IB-05"
-      ]
-    },
-    {
-      "id": "TASK-053",
-      "owner": "R05",
-      "package": "r05-remote",
-      "branch": "r05/product-remote",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-053.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-053.md"
-      },
-      "plan_path": "product/lesson-registration/tests/modules/remote/PLAN.md",
-      "logical_decisions": [
-        "CS-04",
-        "CS-05",
-        "CS-07"
-      ],
-      "planned_product_tests": [
-        "AT-02",
-        "AT-03",
-        "T5-02",
-        "T5-12",
-        "DV-02",
-        "DV-05"
-      ],
-      "related_implementation_decisions": [
-        "IB-01",
-        "IB-02",
-        "IB-03",
-        "IB-04",
-        "IB-05"
-      ]
-    },
-    {
-      "id": "TASK-054",
-      "owner": "R05",
-      "package": "r05-kmong",
-      "branch": "r05/product-kmong",
-      "task_ref": {
-        "path": "docs/artifacts/tasks/TASK-054.json"
-      },
-      "intent_ref": {
-        "path": "docs/human/task-intents/TASK-054.md"
-      },
-      "plan_path": "product/lesson-registration/tests/modules/kmong/PLAN.md",
-      "logical_decisions": [
-        "CS-01",
-        "CS-05",
-        "CS-06"
-      ],
-      "planned_product_tests": [
-        "AT-04",
-        "T5-13",
-        "DV-03",
-        "DV-04"
-      ],
-      "related_implementation_decisions": [
-        "IB-01",
-        "IB-02",
-        "IB-03",
-        "IB-05"
-      ]
-    }
-  ],
+  "active_packages": [],
   "verification": {
     "source": {
       "path": "product/lesson-registration/evidence/common-contract-ci-20261125.json"
@@ -1990,5 +1782,291 @@
     "schedule": {
       "path": "docs/artifacts/planning/lesson-registration-20261123/wbs-v0.6-candidate.json"
     }
-  }
+  },
+  "baseline_phase": {
+    "path": "docs/human/phase-intents/PHASE-20261125-01.md"
+  },
+  "previous_packages": [
+    {
+      "id": "TASK-048",
+      "owner": "R01",
+      "package": "common",
+      "branch": "r01/product-integration",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-048.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-048.md"
+      },
+      "plan_path": "product/lesson-registration/evidence/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-07",
+        "CS-08",
+        "CS-09"
+      ],
+      "planned_product_tests": [
+        "AT-01",
+        "T5-08",
+        "T5-11",
+        "T6-01",
+        "T6-02",
+        "AT-02",
+        "AT-03",
+        "T5-01",
+        "T5-02",
+        "T5-12",
+        "T5-03",
+        "T5-07",
+        "AT-04",
+        "AT-05",
+        "T5-06",
+        "T5-13",
+        "T5-05",
+        "DV-01",
+        "DV-02",
+        "DV-03",
+        "DV-04",
+        "DV-05"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-049",
+      "owner": "R02",
+      "package": "r02-preparation",
+      "branch": "r02/product-preparation",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-049.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-049.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/preparation/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-02"
+      ],
+      "planned_product_tests": [
+        "AT-01",
+        "T5-08",
+        "T6-02"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-050",
+      "owner": "R03",
+      "package": "r03-app",
+      "branch": "r03/product-app",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-050.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-050.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/app/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-02",
+        "CS-03",
+        "CS-05",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "T5-01",
+        "T5-05",
+        "T5-06",
+        "T5-11",
+        "T5-12",
+        "T6-01",
+        "DV-01"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-051",
+      "owner": "R04",
+      "package": "r04-web",
+      "branch": "r04/product-web",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-051.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-051.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/web/PLAN.md",
+      "logical_decisions": [
+        "CS-02",
+        "CS-03",
+        "CS-04",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "AT-02",
+        "T5-05",
+        "T6-02",
+        "DV-05"
+      ],
+      "related_implementation_decisions": [
+        "IB-02",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-052",
+      "owner": "R04",
+      "package": "r04-soomgo",
+      "branch": "r04/product-soomgo",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-052.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-052.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/soomgo/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-05",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "AT-05",
+        "T5-13",
+        "DV-03",
+        "DV-04"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-053",
+      "owner": "R05",
+      "package": "r05-remote",
+      "branch": "r05/product-remote",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-053.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-053.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/remote/PLAN.md",
+      "logical_decisions": [
+        "CS-04",
+        "CS-05",
+        "CS-07"
+      ],
+      "planned_product_tests": [
+        "AT-02",
+        "AT-03",
+        "T5-02",
+        "T5-12",
+        "DV-02",
+        "DV-05"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-04",
+        "IB-05"
+      ]
+    },
+    {
+      "id": "TASK-054",
+      "owner": "R05",
+      "package": "r05-kmong",
+      "branch": "r05/product-kmong",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-054.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/task-intents/TASK-054.md"
+      },
+      "plan_path": "product/lesson-registration/tests/modules/kmong/PLAN.md",
+      "logical_decisions": [
+        "CS-01",
+        "CS-05",
+        "CS-06"
+      ],
+      "planned_product_tests": [
+        "AT-04",
+        "T5-13",
+        "DV-03",
+        "DV-04"
+      ],
+      "related_implementation_decisions": [
+        "IB-01",
+        "IB-02",
+        "IB-03",
+        "IB-05"
+      ]
+    }
+  ],
+  "active_design_tasks": [
+    {
+      "id": "TASK-055",
+      "owner": "R02",
+      "title": "전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R02)",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-055.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+      }
+    },
+    {
+      "id": "TASK-056",
+      "owner": "R04",
+      "title": "전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R04)",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-056.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+      }
+    },
+    {
+      "id": "TASK-057",
+      "owner": "R05",
+      "title": "전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R05)",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-057.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+      }
+    },
+    {
+      "id": "TASK-058",
+      "owner": "R01",
+      "title": "통합 사용자 스토리·서비스 범위 확정 및 DB 설계",
+      "task_ref": {
+        "path": "docs/artifacts/tasks/TASK-058.json"
+      },
+      "intent_ref": {
+        "path": "docs/human/phase-intents/PHASE-20261126-01.md"
+      }
+    }
+  ]
 }

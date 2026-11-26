@@ -1,0 +1,5058 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-STORY-PLATFORM",
+  "kind": "document",
+  "status": "진행 중 · 크몽 상세 데이터·업무·스토리 연결 보완, 나머지 플랫폼 조사 계속",
+  "owner": "R02",
+  "title": "R02 독립 사용자 스토리·7개 플랫폼 조사",
+  "task_ref": "TASK-055",
+  "work_contract_ref": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
+  "proposal_ref": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+  "proposal_blob_sha": "d3cac078a8e0d1898e0e249e670327497c657b07",
+  "feature_coverage": [
+    {
+      "feature_id": "F01",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-001"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F02",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-002",
+        "R02-US-028"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F03",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-001"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F04",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-003"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F05",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-027"
+      ],
+      "system_event_refs": [
+        "R02-EVT-002"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F06",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-004"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F07",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-005"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F08",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-003"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F09",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-031"
+      ],
+      "system_event_refs": [
+        "R02-EVT-004"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F10",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-006",
+        "R02-US-007"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F11",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-008",
+        "R02-US-009",
+        "R02-US-032"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F12",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-010"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F13",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-011"
+      ],
+      "system_event_refs": [
+        "R02-EVT-005"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F14",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-012"
+      ],
+      "system_event_refs": [
+        "R02-EVT-006"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F15",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-013"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F16",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-014",
+        "R02-US-015"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F17",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-014",
+        "R02-US-015"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F18",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-007"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F19",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-008"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F20",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-030"
+      ],
+      "system_event_refs": [
+        "R02-EVT-009"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F21",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-010"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F22",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-016"
+      ],
+      "system_event_refs": [
+        "R02-EVT-011"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F23",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-012"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F24",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-016"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F25",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-017"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F26",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-018"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F27",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-013"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "F28",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-019"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "F29",
+      "scope": "base",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-020"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "E01",
+      "scope": "conditional",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-021"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "E02",
+      "scope": "conditional",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-022"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "E03",
+      "scope": "conditional",
+      "status": "draft",
+      "story_refs": [],
+      "system_event_refs": [
+        "R02-EVT-014"
+      ],
+      "reason": "시스템 행동으로 기록. 사용자 행동과 플랫폼 근거 추가 연결 필요"
+    },
+    {
+      "feature_id": "E04",
+      "scope": "conditional",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-023"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    },
+    {
+      "feature_id": "E05",
+      "scope": "conditional",
+      "status": "draft",
+      "story_refs": [
+        "R02-US-024"
+      ],
+      "system_event_refs": [],
+      "reason": null
+    }
+  ],
+  "user_stories": [
+    {
+      "story_id": "R02-US-001",
+      "actor": "강사",
+      "action": "강사가 레슨 원본과 사진을 제공한다",
+      "goal": "등록 정보 준비",
+      "trigger": "처음 이용하거나 새 자료가 있을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "원본 자료"
+      ],
+      "observable_result": "제공한 자료의 수신 상태",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-004",
+          "R02-US-006"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-004",
+        "R02-US-006"
+      ],
+      "feature_refs": [
+        "F01"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-002",
+      "actor": "강사",
+      "action": "강사가 저장된 레슨 원본을 선택한다",
+      "goal": "기존 정보 재사용",
+      "trigger": "재이용 또는 추가 등록 시",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "저장된 원본"
+      ],
+      "observable_result": "선택한 원본",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-003",
+          "R02-US-004"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-003",
+        "R02-US-004"
+      ],
+      "feature_refs": [
+        "F02"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-003",
+      "actor": "강사",
+      "action": "강사가 원본 레슨 정보를 수정한다",
+      "goal": "현재 수업 조건 반영",
+      "trigger": "원본 정보가 변경됐을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "수정할 원본과 변경 내용"
+      ],
+      "observable_result": "수정된 원본",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-004"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-004"
+      ],
+      "feature_refs": [
+        "F04"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-004",
+      "actor": "강사",
+      "action": "강사가 지원 플랫폼과 업무를 확인한다",
+      "goal": "가능한 업무 선택",
+      "trigger": "업무를 시작할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "플랫폼과 업무"
+      ],
+      "observable_result": "지원 여부와 선행 조건",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-005"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-005"
+      ],
+      "feature_refs": [
+        "F06"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-005",
+      "actor": "강사",
+      "action": "강사가 대상 플랫폼과 업무를 선택한다",
+      "goal": "수행 범위 지정",
+      "trigger": "지원 범위를 확인한 뒤",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "플랫폼과 업무 종류"
+      ],
+      "observable_result": "선택한 작업 범위",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-006",
+          "R02-US-007",
+          "R02-US-008",
+          "R02-US-010"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-006",
+        "R02-US-007",
+        "R02-US-008",
+        "R02-US-010"
+      ],
+      "feature_refs": [
+        "F07"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-006",
+      "actor": "강사",
+      "action": "강사가 누락된 레슨 정보를 입력한다",
+      "goal": "등록에 필요한 사실 보완",
+      "trigger": "필수 정보가 부족할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "요청된 사실"
+      ],
+      "observable_result": "보완한 정보와 재검사 결과",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-007",
+          "R02-US-008",
+          "R02-US-014"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-007",
+        "R02-US-008",
+        "R02-US-014"
+      ],
+      "feature_refs": [
+        "F10"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-007",
+      "actor": "강사",
+      "action": "강사가 불확실한 레슨 정보를 확인한다",
+      "goal": "사실 여부 확인",
+      "trigger": "원본 근거가 불충분할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "확인 요청과 사용자 답변"
+      ],
+      "observable_result": "확인된 사실 또는 미확인",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-006",
+          "R02-US-008",
+          "R02-US-014"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-006",
+        "R02-US-008",
+        "R02-US-014"
+      ],
+      "feature_refs": [
+        "F10"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-008",
+      "actor": "강사",
+      "action": "강사가 플랫폼 제약의 대안을 선택한다",
+      "goal": "실제 제공 가능한 조건 결정",
+      "trigger": "원본 조건이 플랫폼 제약과 충돌할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "제약과 제시된 대안"
+      ],
+      "observable_result": "선택한 조건과 재검사 결과",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-009",
+          "R02-US-014"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-009",
+        "R02-US-014"
+      ],
+      "feature_refs": [
+        "F11"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-009",
+      "actor": "강사",
+      "action": "강사가 대안이 없는 업무를 중단한다",
+      "goal": "수행 불가 처리",
+      "trigger": "유효한 대안이 없을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "수행 불가 사유"
+      ],
+      "observable_result": "해당 업무의 중단 상태",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-004"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-004"
+      ],
+      "feature_refs": [
+        "F11"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-010",
+      "actor": "강사",
+      "action": "강사가 대상 플랫폼에 로그인한다",
+      "goal": "사용자 인증",
+      "trigger": "선택한 업무에 인증이 필요할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "사용자가 직접 수행하는 인증"
+      ],
+      "observable_result": "인증 결과 또는 실패",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-011"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "인증 실패·만료는 재인증 또는 업무 종료. 인증 전 실행 불가"
+      },
+      "related_story_ids": [
+        "R02-US-011"
+      ],
+      "feature_refs": [
+        "F12"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-011",
+      "actor": "강사",
+      "action": "강사가 인증된 계정을 확인한다",
+      "goal": "작업 계정 확인",
+      "trigger": "인증 후",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "표시된 계정"
+      ],
+      "observable_result": "확인한 계정 또는 불일치",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-012",
+          "R02-US-014"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "다른 계정이면 인증으로 복귀. 대상 확인 전 실행 불가"
+      },
+      "related_story_ids": [
+        "R02-US-012",
+        "R02-US-014"
+      ],
+      "feature_refs": [
+        "F13"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-012",
+      "actor": "강사",
+      "action": "강사가 관리할 기존 게시물을 선택한다",
+      "goal": "변경 대상 식별",
+      "trigger": "기존 게시물 수정·갱신 요청 시",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "조회된 게시물"
+      ],
+      "observable_result": "선택한 게시 대상",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-013"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-013"
+      ],
+      "feature_refs": [
+        "F14"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-013",
+      "actor": "강사",
+      "action": "강사가 변경 전후 정보를 확인한다",
+      "goal": "변경 범위 검토",
+      "trigger": "기존 게시물과 변경안이 준비됐을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "게시 정보와 변경안"
+      ],
+      "observable_result": "확인한 차이",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-014",
+          "R02-US-015"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-014",
+        "R02-US-015"
+      ],
+      "feature_refs": [
+        "F15"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-014",
+      "actor": "강사",
+      "action": "강사가 최종 정보와 실행 범위를 승인한다",
+      "goal": "사용자가 허용한 업무 실행",
+      "trigger": "정보·대상·계정이 준비됐을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "최종 정보와 업무 범위"
+      ],
+      "observable_result": "승인 기록",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-016"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "승인 후 대상·조건 변경 시 변경안 확인과 새 승인 필요"
+      },
+      "related_story_ids": [
+        "R02-US-016"
+      ],
+      "feature_refs": [
+        "F16",
+        "F17"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-015",
+      "actor": "강사",
+      "action": "강사가 최종 정보와 실행 범위를 거절한다",
+      "goal": "원하지 않는 실행 중단",
+      "trigger": "승인 요청을 검토할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "승인 요청"
+      ],
+      "observable_result": "미승인 및 중단",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-003",
+          "R02-US-005",
+          "R02-US-009"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-003",
+        "R02-US-005",
+        "R02-US-009"
+      ],
+      "feature_refs": [
+        "F16",
+        "F17"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-016",
+      "actor": "강사",
+      "action": "강사가 플랫폼별 업무 결과를 확인한다",
+      "goal": "실제 완료 여부 파악",
+      "trigger": "작업 실행 후",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "플랫폼별 결과와 확인 근거"
+      ],
+      "observable_result": "접수·심사·게시·실패·미확인 구분",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-017",
+          "R02-US-020"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "미확인은 외부 효과 확인 후 재시도 판단. 부분 성공은 실패 대상만 새 승인"
+      },
+      "related_story_ids": [
+        "R02-US-017",
+        "R02-US-020"
+      ],
+      "feature_refs": [
+        "F22",
+        "F24"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-017",
+      "actor": "강사",
+      "action": "강사가 플랫폼별 마지막 확인 상태를 조회한다",
+      "goal": "기존 결과 확인",
+      "trigger": "이전에 수행한 업무를 확인할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "대상 플랫폼"
+      ],
+      "observable_result": "마지막 상태와 확인 시점",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-018"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-018"
+      ],
+      "feature_refs": [
+        "F25"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-018",
+      "actor": "강사",
+      "action": "강사가 플랫폼 상태 갱신을 요청한다",
+      "goal": "현재 상태 확인",
+      "trigger": "최신 상태가 필요할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "조회 대상"
+      ],
+      "observable_result": "갱신 요청 결과",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-010",
+          "R02-US-019"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "조회 권한 부족이면 직접 인증. 조회 실패는 마지막 상태와 실패를 함께 표시"
+      },
+      "related_story_ids": [
+        "R02-US-010",
+        "R02-US-019"
+      ],
+      "feature_refs": [
+        "F26"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-019",
+      "actor": "강사",
+      "action": "강사가 상태 변화와 갱신 결과를 확인한다",
+      "goal": "후속 대응 판단",
+      "trigger": "상태 갱신 후",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "관측 결과와 확인 시점"
+      ],
+      "observable_result": "새 상태 또는 조회 불가",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-020",
+          "R02-US-018"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-020",
+        "R02-US-018"
+      ],
+      "feature_refs": [
+        "F28"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-020",
+      "actor": "강사",
+      "action": "강사가 실패 또는 반려 대응 안내를 확인한다",
+      "goal": "필요한 후속 조치 판단",
+      "trigger": "실패·반려·불일치가 확인됐을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "확인된 사유"
+      ],
+      "observable_result": "가능한 후속 조치",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-006",
+          "R02-US-013",
+          "R02-US-014"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "반려는 정보 보완·변경안 확인·새 승인 후 진행"
+      },
+      "related_story_ids": [
+        "R02-US-006",
+        "R02-US-013",
+        "R02-US-014"
+      ],
+      "feature_refs": [
+        "F29"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-021",
+      "actor": "강사",
+      "action": "강사가 자동 모니터링 대상과 조건을 설정한다",
+      "goal": "조건부 상태 추적",
+      "trigger": "조건부 제공 가능 시",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "대상·범위·기간·알림 조건"
+      ],
+      "observable_result": "설정 내용",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-022"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-022"
+      ],
+      "feature_refs": [
+        "E01"
+      ],
+      "scope_candidate": "conditional",
+      "scenario_type": "conditional",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-022",
+      "actor": "강사",
+      "action": "강사가 인증 유지를 승인한다",
+      "goal": "조건부 인증 유지",
+      "trigger": "인증 기반 모니터링을 선택할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "위험·기간·접근 범위"
+      ],
+      "observable_result": "승인 또는 거절",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-023",
+          "R02-US-024"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-023",
+        "R02-US-024"
+      ],
+      "feature_refs": [
+        "E02"
+      ],
+      "scope_candidate": "conditional",
+      "scenario_type": "conditional",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-023",
+      "actor": "강사",
+      "action": "강사가 상태 변화 알림을 확인한다",
+      "goal": "대응 필요 여부 판단",
+      "trigger": "조건부 모니터링에서 변화가 관측됐을 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "상태 변화"
+      ],
+      "observable_result": "알림 내용",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-024"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-024"
+      ],
+      "feature_refs": [
+        "E04"
+      ],
+      "scope_candidate": "conditional",
+      "scenario_type": "conditional",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-024",
+      "actor": "강사",
+      "action": "강사가 자동 모니터링을 종료한다",
+      "goal": "지속 조회 중단",
+      "trigger": "모니터링을 끝내려 할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "종료 대상"
+      ],
+      "observable_result": "종료 상태",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-017"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "누락·충돌은 보완 또는 대안 선택. 거절·수행 불가는 중단 상태로 종료"
+      },
+      "related_story_ids": [
+        "R02-US-017"
+      ],
+      "feature_refs": [
+        "E05"
+      ],
+      "scope_candidate": "conditional",
+      "scenario_type": "conditional",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-025",
+      "actor": "강사",
+      "action": "강사가 작업을 취소한다",
+      "goal": "원하지 않는 작업 중단",
+      "trigger": "작업 중 취소를 원할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "작업 대상"
+      ],
+      "observable_result": "중단 가능 여부와 이미 발생한 결과",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-016"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "이미 발생한 외부 효과는 취소로 되돌아간다고 가정하지 않음"
+      },
+      "related_story_ids": [
+        "R02-US-016"
+      ],
+      "feature_refs": [],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": "필요성과 범위 R01 확인"
+    },
+    {
+      "story_id": "R02-US-026",
+      "actor": "강사",
+      "action": "강사가 중단한 작업을 다시 시작한다",
+      "goal": "기존 입력을 활용해 계속 진행",
+      "trigger": "이전에 중단한 작업을 이어갈 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "기존 작업"
+      ],
+      "observable_result": "현재 조건 재확인 결과",
+      "failure_or_branch": {
+        "next_story_ids": [
+          "R02-US-005",
+          "R02-US-010",
+          "R02-US-013"
+        ],
+        "rule": "후속 행동은 해당 조건이 성립할 때 선택",
+        "exceptions": "원본·대상·계정·권한·승인 유효성을 재확인"
+      },
+      "related_story_ids": [
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-013"
+      ],
+      "feature_refs": [],
+      "scope_candidate": "undecided",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "decision_request": "필요성과 범위 R01 확인"
+    },
+    {
+      "story_id": "R02-US-027",
+      "actor": "강사",
+      "action": "강사가 작성 중인 판매글을 임시 저장한다",
+      "goal": "임시 저장된 초안",
+      "trigger": "작성 중 중단하려 할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "입력값과 첨부"
+      ],
+      "observable_result": "임시 저장된 초안",
+      "failure_or_branch": {
+        "condition": "저장 결과 미확인은 다시 열어 확인",
+        "next_story_ids": []
+      },
+      "related_story_ids": [],
+      "feature_refs": [
+        "F05"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-028",
+      "actor": "강사",
+      "action": "강사가 임시 저장한 판매글을 다시 연다",
+      "goal": "유지된 입력과 첨부",
+      "trigger": "작성을 재개할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "저장한 판매글"
+      ],
+      "observable_result": "유지된 입력과 첨부",
+      "failure_or_branch": {
+        "condition": "불러오기 실패 시 저장 여부 확인",
+        "next_story_ids": []
+      },
+      "related_story_ids": [],
+      "feature_refs": [
+        "F02"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-029",
+      "actor": "강사",
+      "action": "강사가 심사 중인 판매글의 제출을 취소한다",
+      "goal": "편집 가능 여부",
+      "trigger": "심사 중 수정이 필요할 때",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "심사 중 판매글"
+      ],
+      "observable_result": "편집 가능 여부",
+      "failure_or_branch": {
+        "condition": "취소의 실제 상태 변화는 사용자 추가 확인 필요",
+        "next_story_ids": []
+      },
+      "related_story_ids": [],
+      "feature_refs": [],
+      "scope_candidate": "undecided",
+      "scenario_type": "exception",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "decision_request": "심사 취소 지원 범위 R01 검토"
+    },
+    {
+      "story_id": "R02-US-030",
+      "actor": "강사",
+      "action": "강사가 수정한 판매글의 재심사를 요청한다",
+      "goal": "재심사 접수 여부",
+      "trigger": "판매중 글 수정 또는 반려 보완 후",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "수정안"
+      ],
+      "observable_result": "재심사 접수 여부",
+      "failure_or_branch": {
+        "condition": "심사 중 편집 제한 및 접수 결과 확인",
+        "next_story_ids": []
+      },
+      "related_story_ids": [],
+      "feature_refs": [
+        "F20"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "repeat",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-031",
+      "actor": "강사",
+      "action": "강사가 가격 검증 오류를 확인한다",
+      "goal": "수정이 필요한 조건",
+      "trigger": "최대 금액 또는 패키지 간 조건 위반 시",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "가격 오류"
+      ],
+      "observable_result": "수정이 필요한 조건",
+      "failure_or_branch": {
+        "condition": "정확한 상한 미확인. 실제 금액 임의 변경 없이 사용자 결정",
+        "next_story_ids": []
+      },
+      "related_story_ids": [],
+      "feature_refs": [
+        "F09"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "error",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "decision_request": null
+    },
+    {
+      "story_id": "R02-US-032",
+      "actor": "강사",
+      "action": "강사가 오프라인 장소의 상호 협의 가능 여부를 선택한다",
+      "goal": "상세주소 필수 여부",
+      "trigger": "장소 설정 시",
+      "preconditions": [
+        "서비스 접근 및 해당 업무의 권한·지원 여부 확인 필요"
+      ],
+      "inputs": [
+        "실제 협의 가능 조건"
+      ],
+      "observable_result": "상세주소 필수 여부",
+      "failure_or_branch": {
+        "condition": "실제 조건 확인 없이 주소 생략을 유도하지 않음",
+        "next_story_ids": []
+      },
+      "related_story_ids": [],
+      "feature_refs": [
+        "F11"
+      ],
+      "scope_candidate": "base",
+      "scenario_type": "normal",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "decision_request": null
+    }
+  ],
+  "supporting_system_events": [
+    {
+      "event_id": "R02-EVT-001",
+      "actor": "service",
+      "action": "원본을 사실과 근거로 구조화",
+      "trigger": "원본 제공 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "원본"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "사실 후보와 근거"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "사실 후보와 근거",
+      "error_unknown_partial": "근거 부족 시 미확인",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F03"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-002",
+      "actor": "service",
+      "action": "원본을 저장",
+      "trigger": "원본 제공 또는 수정 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "원본"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "재사용 가능한 원본"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "재사용 가능한 원본",
+      "error_unknown_partial": "저장 실패",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F05"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-003",
+      "actor": "service",
+      "action": "플랫폼별 입력안을 생성",
+      "trigger": "대상과 원본 선택 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "원본·플랫폼 조건"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "입력안"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "입력안",
+      "error_unknown_partial": "변환 불가 또는 미확인",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F08"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-004",
+      "actor": "service",
+      "action": "입력안을 검증",
+      "trigger": "입력안 준비 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "입력안·플랫폼 조건"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "누락·충돌·규격 검사"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "누락·충돌·규격 검사",
+      "error_unknown_partial": "조건 미확인",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F09"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-005",
+      "actor": "service",
+      "action": "계정과 권한을 확인",
+      "trigger": "사용자 인증 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "인증 결과"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "확인된 계정·권한"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "확인된 계정·권한",
+      "error_unknown_partial": "권한 미확인 또는 불일치",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F13"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-006",
+      "actor": "service",
+      "action": "기존 게시물을 조회",
+      "trigger": "인증 및 조회 허용 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "계정·대상"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "관측 가능한 게시물"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "관측 가능한 게시물",
+      "error_unknown_partial": "조회 실패 또는 대상 불명",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F14"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-007",
+      "actor": "service",
+      "action": "실행 조건과 승인을 대조",
+      "trigger": "실행 직전",
+      "story_refs": [],
+      "input_data_refs": [
+        "승인·계정·대상·조건"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "실행 가능 여부"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "실행 가능 여부",
+      "error_unknown_partial": "변경 또는 불일치 시 보류",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F18"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-008",
+      "actor": "service",
+      "action": "신규 등록을 실행",
+      "trigger": "유효 승인 및 권한 확인 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "승인된 입력안"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "등록 시도"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "등록 시도",
+      "error_unknown_partial": "실패·결과 미확인",
+      "external_effect": "플랫폼별 확인 필요",
+      "retry_dedup_confirmation_constraints": "결과 미확인 시 외부 효과 확인 전 무조건 재실행 금지",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F19"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-009",
+      "actor": "service",
+      "action": "기존 게시물을 수정",
+      "trigger": "대상 식별 및 승인 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "승인된 변경안"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "수정 시도"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "수정 시도",
+      "error_unknown_partial": "실패·결과 미확인",
+      "external_effect": "플랫폼별 확인 필요",
+      "retry_dedup_confirmation_constraints": "결과 미확인 시 외부 효과 확인 전 무조건 재실행 금지",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F20"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-010",
+      "actor": "service",
+      "action": "공고를 갱신",
+      "trigger": "대상과 갱신 허용 확인 및 승인 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "승인된 갱신 범위"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "갱신 시도"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "갱신 시도",
+      "error_unknown_partial": "실패·결과 미확인",
+      "external_effect": "플랫폼별 확인 필요",
+      "retry_dedup_confirmation_constraints": "결과 미확인 시 외부 효과 확인 전 무조건 재실행 금지",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F21"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-011",
+      "actor": "service",
+      "action": "실제 업무 결과를 확인",
+      "trigger": "실행 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "관측 가능한 결과"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "접수·심사·게시·실패·미확인"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "접수·심사·게시·실패·미확인",
+      "error_unknown_partial": "관측 실패",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "결과 미확인 시 외부 효과 확인 전 무조건 재실행 금지",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F22"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-012",
+      "actor": "service",
+      "action": "업무 이력을 저장",
+      "trigger": "승인·실행·관측 시",
+      "story_refs": [],
+      "input_data_refs": [
+        "업무 대상·승인·결과"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "추적 기록"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "추적 기록",
+      "error_unknown_partial": "저장 실패",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F23"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-013",
+      "actor": "service",
+      "action": "요청된 상태를 확인하고 저장",
+      "trigger": "사용자 상태 갱신 요청 후",
+      "story_refs": [],
+      "input_data_refs": [
+        "대상·허용된 접근"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "관측 상태·시점"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "관측 상태·시점",
+      "error_unknown_partial": "조회 불가 시 마지막 관측 보존",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "F27"
+      ]
+    },
+    {
+      "event_id": "R02-EVT-014",
+      "actor": "service",
+      "action": "조건부로 상태를 확인",
+      "trigger": "모니터링 조건 충족 시",
+      "story_refs": [],
+      "input_data_refs": [
+        "허용 범위·대상"
+      ],
+      "precondition": "관련 권한·승인 및 기획 조건 충족",
+      "output_data_refs": [
+        "관측 상태"
+      ],
+      "state_before": "업무별 확인 필요",
+      "state_after": "관측 상태",
+      "error_unknown_partial": "권한 만료·조회 실패",
+      "external_effect": "없음 또는 미확인",
+      "retry_dedup_confirmation_constraints": "상황별 추가 검토",
+      "evidence_refs": [
+        "R02-EV-PROPOSAL"
+      ],
+      "feature_refs": [
+        "E03"
+      ]
+    }
+  ],
+  "platforms": [
+    {
+      "platform_id": "PL01",
+      "name": "크몽",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL01"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL01-OBJ1",
+          "name": "서비스 판매글",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "전문가 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL01"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL01-CREATE",
+          "operation_type": "CREATE",
+          "availability": "supported",
+          "target_object_refs": [
+            "R02-PL01-OBJ1"
+          ],
+          "actual_user_steps": [
+            "전문가 회원가입",
+            "주문 관리",
+            "판매관리",
+            "서비스 등록·편집",
+            "서비스 등록하기",
+            "내용 작성",
+            "심사 요청"
+          ],
+          "preconditions": [],
+          "input_field_refs": [
+            "R02-PL01-CONF-01",
+            "R02-PL01-CONF-02",
+            "R02-PL01-CONF-03",
+            "R02-PL01-CONF-04",
+            "R02-PL01-CONF-05",
+            "R02-PL01-CONF-06",
+            "R02-PL01-CONF-07",
+            "R02-PL01-CONF-08",
+            "R02-PL01-CONF-09",
+            "R02-PL01-CONF-10",
+            "R02-PL01-CONF-11",
+            "R02-PL01-CONF-12",
+            "R02-PL01-CONF-13",
+            "R02-PL01-CONF-14",
+            "R02-PL01-CONF-15",
+            "R02-PL01-CONF-16",
+            "R02-PL01-CONF-17",
+            "R02-PL01-CONF-18",
+            "R02-PL01-CONF-19",
+            "R02-PL01-CONF-20",
+            "R02-PL01-CONF-21",
+            "R02-PL01-CONF-22",
+            "R02-PL01-CONF-23",
+            "R02-PL01-CONF-24",
+            "R02-PL01-CONF-25",
+            "R02-PL01-CONF-26",
+            "R02-PL01-CONF-27",
+            "R02-PL01-CONF-28",
+            "R02-PL01-CONF-29",
+            "R02-PL01-CONF-30",
+            "R02-PL01-CONF-31"
+          ],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [
+            "사용자 제공 화면 또는 경험 요약. 각 작업의 실제 저장·반영 결과는 관측 범위에 한정"
+          ],
+          "error_and_unknown_conditions": [
+            "심사 중 편집 불가",
+            "입력 검증 오류",
+            "대행 허용 미확인",
+            "재심사 중 기존 판매글 노출 미확인"
+          ],
+          "retry_or_duplicate_risk": "제출 결과 미확인 시 기존 서비스와 상태 확인 필요. 동일 내용 중복 정책은 별도 근거 확인",
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "unknown_reason": null
+        },
+        {
+          "operation_id": "R02-PL01-READ",
+          "operation_type": "READ",
+          "availability": "supported",
+          "target_object_refs": [
+            "R02-PL01-OBJ1"
+          ],
+          "actual_user_steps": [
+            "서비스 등록·편집",
+            "대상 판매글과 상태 확인"
+          ],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [
+            "사용자 제공 화면 또는 경험 요약. 각 작업의 실제 저장·반영 결과는 관측 범위에 한정"
+          ],
+          "error_and_unknown_conditions": [
+            "심사 중 편집 불가",
+            "입력 검증 오류",
+            "대행 허용 미확인",
+            "재심사 중 기존 판매글 노출 미확인"
+          ],
+          "retry_or_duplicate_risk": "제출 결과 미확인 시 기존 서비스와 상태 확인 필요. 동일 내용 중복 정책은 별도 근거 확인",
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "unknown_reason": null
+        },
+        {
+          "operation_id": "R02-PL01-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "supported",
+          "target_object_refs": [
+            "R02-PL01-OBJ1"
+          ],
+          "actual_user_steps": [
+            "서비스 등록·편집",
+            "편집하기",
+            "내용 수정",
+            "재심사 요청"
+          ],
+          "preconditions": [],
+          "input_field_refs": [
+            "R02-PL01-CONF-01",
+            "R02-PL01-CONF-02",
+            "R02-PL01-CONF-03",
+            "R02-PL01-CONF-04",
+            "R02-PL01-CONF-05",
+            "R02-PL01-CONF-06",
+            "R02-PL01-CONF-07",
+            "R02-PL01-CONF-08",
+            "R02-PL01-CONF-09",
+            "R02-PL01-CONF-10",
+            "R02-PL01-CONF-11",
+            "R02-PL01-CONF-12",
+            "R02-PL01-CONF-13",
+            "R02-PL01-CONF-14",
+            "R02-PL01-CONF-15",
+            "R02-PL01-CONF-16",
+            "R02-PL01-CONF-17",
+            "R02-PL01-CONF-18",
+            "R02-PL01-CONF-19",
+            "R02-PL01-CONF-20",
+            "R02-PL01-CONF-21",
+            "R02-PL01-CONF-22",
+            "R02-PL01-CONF-23",
+            "R02-PL01-CONF-24",
+            "R02-PL01-CONF-25",
+            "R02-PL01-CONF-26",
+            "R02-PL01-CONF-27",
+            "R02-PL01-CONF-28",
+            "R02-PL01-CONF-29",
+            "R02-PL01-CONF-30",
+            "R02-PL01-CONF-31"
+          ],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [
+            "사용자 제공 화면 또는 경험 요약. 각 작업의 실제 저장·반영 결과는 관측 범위에 한정"
+          ],
+          "error_and_unknown_conditions": [
+            "심사 중 편집 불가",
+            "입력 검증 오류",
+            "대행 허용 미확인",
+            "재심사 중 기존 판매글 노출 미확인"
+          ],
+          "retry_or_duplicate_risk": "제출 결과 미확인 시 기존 서비스와 상태 확인 필요. 동일 내용 중복 정책은 별도 근거 확인",
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "unknown_reason": null
+        },
+        {
+          "operation_id": "R02-PL01-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL01-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [
+            "사용자 제공 화면 또는 경험 요약. 각 작업의 실제 저장·반영 결과는 관측 범위에 한정"
+          ],
+          "error_and_unknown_conditions": [
+            "심사 중 편집 불가",
+            "입력 검증 오류",
+            "대행 허용 미확인",
+            "재심사 중 기존 판매글 노출 미확인"
+          ],
+          "retry_or_duplicate_risk": "제출 결과 미확인 시 기존 서비스와 상태 확인 필요. 동일 내용 중복 정책은 별도 근거 확인",
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL01-STATUS",
+          "operation_type": "STATUS",
+          "availability": "supported",
+          "target_object_refs": [
+            "R02-PL01-OBJ1"
+          ],
+          "actual_user_steps": [
+            "서비스 등록·편집",
+            "승인 전·판매중·비승인·판매 중지 상태 확인"
+          ],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [
+            "사용자 제공 화면 또는 경험 요약. 각 작업의 실제 저장·반영 결과는 관측 범위에 한정"
+          ],
+          "error_and_unknown_conditions": [
+            "심사 중 편집 불가",
+            "입력 검증 오류",
+            "대행 허용 미확인",
+            "재심사 중 기존 판매글 노출 미확인"
+          ],
+          "retry_or_duplicate_risk": "제출 결과 미확인 시 기존 서비스와 상태 확인 필요. 동일 내용 중복 정책은 별도 근거 확인",
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "unknown_reason": null
+        },
+        {
+          "operation_id": "R02-PL01-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "supported",
+          "target_object_refs": [
+            "R02-PL01-OBJ1"
+          ],
+          "actual_user_steps": [
+            "반려 알림에서 사유 확인",
+            "관련 개인정보 삭제",
+            "심사 재요청"
+          ],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [
+            "사용자 제공 화면 또는 경험 요약. 각 작업의 실제 저장·반영 결과는 관측 범위에 한정"
+          ],
+          "error_and_unknown_conditions": [
+            "심사 중 편집 불가",
+            "입력 검증 오류",
+            "대행 허용 미확인",
+            "재심사 중 기존 판매글 노출 미확인"
+          ],
+          "retry_or_duplicate_risk": "제출 결과 미확인 시 기존 서비스와 상태 확인 필요. 동일 내용 중복 정책은 별도 근거 확인",
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "unknown_reason": null
+        }
+      ],
+      "data_fields": [
+        {
+          "field_id": "R02-PL01-FIELD01",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "전문가 소개",
+          "meaning": "전문가 소개",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL01"
+          ]
+        },
+        {
+          "field_id": "R02-PL01-FIELD02",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "보유 기술",
+          "meaning": "보유 기술",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL01"
+          ]
+        },
+        {
+          "field_id": "R02-PL01-FIELD03",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "경력·학력·자격",
+          "meaning": "경력·학력·자격",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL01"
+          ]
+        },
+        {
+          "field_id": "R02-PL01-FIELD04",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "포트폴리오",
+          "meaning": "포트폴리오",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL01"
+          ]
+        },
+        {
+          "field_id": "R02-PL01-CONF-01",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "제목",
+          "meaning": "제목",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "min_chars": 10,
+            "max_chars": 30
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/제목",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-02",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "카테고리",
+          "meaning": "카테고리",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "observed": [
+              "취미 레슨",
+              "보컬·랩 레슨",
+              "랩 레슨"
+            ],
+            "note": "해당 선택 사례이며 전체 분류 목록은 미확인"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/카테고리",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-03",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "서비스 설명",
+          "meaning": "서비스 설명",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "min_chars": 100,
+            "max_chars": 20000
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/서비스 설명",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-04",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "모집 형태",
+          "meaning": "모집 형태",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "values": [
+              "개인레슨",
+              "그룹교육",
+              "기업강의"
+            ],
+            "multiple": true
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/모집 형태",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-05",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "메인 이미지",
+          "meaning": "메인 이미지",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "min_count": 1,
+            "max_count": 4,
+            "displayed_size": "652×488px",
+            "formats": [
+              "PNG",
+              "JPG"
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/메인 이미지",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-06",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "상세 이미지",
+          "meaning": "상세 이미지",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 9,
+            "width_px": [
+              652,
+              2000
+            ],
+            "max_height_px": 3000,
+            "formats": [
+              "PNG",
+              "JPG",
+              "GIF"
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/상세 이미지",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-07",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "동영상",
+          "meaning": "동영상",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 6,
+            "total_size_display": "500mb 이하",
+            "formats": [
+              "MP4"
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/동영상",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-08",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "서비스 제공 절차",
+          "meaning": "서비스 제공 절차",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "min_chars": 50,
+            "max_chars": 20000
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/서비스 제공 절차",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-09",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "의뢰인 준비사항",
+          "meaning": "의뢰인 준비사항",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "min_chars": 50,
+            "max_chars": 20000
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/의뢰인 준비사항",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-10",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "지역",
+          "meaning": "지역",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": true,
+          "observed_constraints": {
+            "required": true,
+            "max_total_entries": 5,
+            "types": [
+              "온라인",
+              "오프라인"
+            ],
+            "online": "미팅 장소 자유 텍스트",
+            "offline": [
+              "지역",
+              "상세 지역",
+              "상세주소"
+            ],
+            "conditional": "상호 협의 가능 활성화 시 상세주소 생략 가능",
+            "multiple": true
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/지역",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-11",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "가격",
+          "meaning": "가격",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "single_standard": true,
+            "packages": [
+              "STANDARD",
+              "DELUXE",
+              "PREMIUM"
+            ],
+            "title_max_chars": 20,
+            "description_max_chars": 60,
+            "amount": "VAT 포함 선택한 레슨 횟수 전체 금액",
+            "minimum_krw": 5000,
+            "step_krw": 1000,
+            "upper_bound": "99,897,000 / 99,898,000 / 99,899,000 조합에서 금액 오류 없음. 99,900,000은 이전 패키지 화면에서 오류. 정확한 단일 패키지 상한 미확인",
+            "package_order": "다음 패키지에 더 높은 최소 금액을 요구하는 오류 관찰"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/가격",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-12",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "작업 기간",
+          "meaning": "작업 기간",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "range_days": [
+              1,
+              90
+            ],
+            "user_interpretation": "4회 수업을 마치는 기간으로 생각해 30일 선택. 플랫폼의 공식 의미는 미확인"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/작업 기간",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-13",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "수정 횟수",
+          "meaning": "수정 횟수",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "range": [
+              0,
+              15
+            ],
+            "user_interpretation": "외주용 항목으로 판단해 레슨에는 0회 선택"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/수정 횟수",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-14",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "1회당 레슨시간",
+          "meaning": "1회당 레슨시간",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "range_minutes": [
+              30,
+              540
+            ],
+            "step_minutes": 15
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/1회당 레슨시간",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-15",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "레슨 횟수",
+          "meaning": "레슨 횟수",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "range": [
+              1,
+              50
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/레슨 횟수",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-16",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "기본 포함 항목",
+          "meaning": "기본 포함 항목",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "list",
+          "required": "unknown",
+          "observed_constraints": [
+            "준비물 제공 포함",
+            "강의실 제공 포함"
+          ],
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/기본 포함 항목",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-17",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "검색 키워드",
+          "meaning": "검색 키워드",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 5,
+            "max_chars_per_item": 20
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/검색 키워드",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-18",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "자주 묻는 질문",
+          "meaning": "자주 묻는 질문",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 50,
+            "question_max_chars": 255,
+            "answer_max_chars": 255,
+            "question_answer_required_when_added": true
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/자주 묻는 질문",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-19",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "작업 전 요청사항",
+          "meaning": "작업 전 요청사항",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "question_max_chars": 255,
+            "answer_types": [
+              "서술형",
+              "파일첨부",
+              "단일선택지",
+              "다중선택지"
+            ],
+            "choice_max_chars": 255,
+            "required_answer_toggle": true,
+            "max_count": "unknown"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/작업 전 요청사항",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-20",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "대상자",
+          "meaning": "대상자",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 4,
+            "item_max_chars": 50
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/대상자",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-21",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "서비스 내용",
+          "meaning": "서비스 내용",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 4,
+            "item_max_chars": 50
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/서비스 내용",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-22",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "준비물",
+          "meaning": "준비물",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_count": 4,
+            "item_max_chars": 50
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/준비물",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-23",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "커리큘럼",
+          "meaning": "커리큘럼",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "max_sessions": 20,
+            "detail_chars": [
+              20,
+              500
+            ],
+            "image_attachment": true
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/커리큘럼",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-24",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "가능일",
+          "meaning": "가능일",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": "unknown",
+          "observed_constraints": {
+            "weekdays": [
+              "월",
+              "화",
+              "수",
+              "목",
+              "금",
+              "토",
+              "일"
+            ],
+            "time_range": [
+              "00:00",
+              "23:30"
+            ],
+            "step_minutes": 30,
+            "multiple_ranges_same_day": true,
+            "max_count": "unknown"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/fields/가능일",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-25",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "빠른 작업",
+          "meaning": "빠른 작업",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "금액",
+            "빠른 작업 일수"
+          ],
+          "observed_constraints": {
+            "per_package": true,
+            "required": [
+              "금액",
+              "빠른 작업 일수"
+            ],
+            "days": [
+              1,
+              90
+            ],
+            "semantics": "일수의 정확한 의미·기본 작업 기간과 관계 미확인"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/빠른 작업",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-26",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "추가 수정",
+          "meaning": "추가 수정",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "금액",
+            "추가 수정 횟수"
+          ],
+          "observed_constraints": {
+            "required": [
+              "금액",
+              "추가 수정 횟수"
+            ],
+            "count": [
+              0,
+              15
+            ],
+            "amount_observation": "99,900,000원 입력 화면에 오류 없음. 저장 검증·상한 미확인"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/추가 수정",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-27",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "레슨 시간 추가",
+          "meaning": "레슨 시간 추가",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "금액",
+            "추가 시간"
+          ],
+          "observed_constraints": {
+            "per_package": true,
+            "required": [
+              "금액",
+              "추가 시간"
+            ],
+            "minutes": [
+              30,
+              540
+            ],
+            "step_minutes": 15
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/레슨 시간 추가",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-28",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "레슨 횟수 추가",
+          "meaning": "레슨 횟수 추가",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "금액",
+            "추가 횟수"
+          ],
+          "observed_constraints": {
+            "per_package": true,
+            "required": [
+              "금액",
+              "추가 횟수"
+            ],
+            "count": [
+              1,
+              50
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/레슨 횟수 추가",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-29",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "준비물 제공 비용 추가",
+          "meaning": "준비물 제공 비용 추가",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "금액",
+            "세트 수"
+          ],
+          "observed_constraints": {
+            "required": [
+              "금액",
+              "세트 수"
+            ],
+            "sets": [
+              1,
+              30
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/준비물 제공 비용 추가",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-30",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "강의실 제공 추가",
+          "meaning": "강의실 제공 추가",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "금액",
+            "시간"
+          ],
+          "observed_constraints": {
+            "required": [
+              "금액",
+              "시간"
+            ],
+            "hours": [
+              1,
+              30
+            ]
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/강의실 제공 추가",
+          "persistence_need_candidate": "설계 검토 필요"
+        },
+        {
+          "field_id": "R02-PL01-CONF-31",
+          "object_ref": "R02-PL01-OBJ1",
+          "actual_label_or_observed_key": "맞춤 옵션",
+          "meaning": "맞춤 옵션",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "structured",
+          "required": [
+            "제목",
+            "설명",
+            "금액",
+            "추가 작업일"
+          ],
+          "observed_constraints": {
+            "multiple": true,
+            "required": [
+              "제목",
+              "설명",
+              "금액",
+              "추가 작업일"
+            ],
+            "days": [
+              0,
+              30
+            ],
+            "max_count": "unknown",
+            "title_description_limits": "unknown"
+          },
+          "evidence_type": "provided_screen_or_user_statement",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ],
+          "detail_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json#/output/additional_options/맞춤 옵션",
+          "persistence_need_candidate": "설계 검토 필요"
+        }
+      ],
+      "relations": [],
+      "states": [
+        {
+          "state_id": "R02-PL01-STATE-1",
+          "native_label": "승인 전",
+          "meaning": "관리 화면 표시 상태",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ]
+        },
+        {
+          "state_id": "R02-PL01-STATE-2",
+          "native_label": "판매중",
+          "meaning": "관리 화면 표시 상태",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ]
+        },
+        {
+          "state_id": "R02-PL01-STATE-3",
+          "native_label": "비승인",
+          "meaning": "관리 화면 표시 상태",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ]
+        },
+        {
+          "state_id": "R02-PL01-STATE-4",
+          "native_label": "판매 중지",
+          "meaning": "관리 화면 표시 상태",
+          "evidence_refs": [
+            "R02-EV-KMONG-USER-20261126"
+          ]
+        }
+      ],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "약관 검토로 외부 유료 등록 대행의 명시적 허용은 확인하지 못함",
+          "evidence_refs": [
+            "R02-EV-ADD-PL01"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "프로필 등록 및 전문가 인증 뒤 판매글 작성·심사. 접수와 게시를 구별. 현재 레슨 카테고리 편집 필드와 수정 후 재심사 조건은 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL01"
+          ]
+        }
+      ],
+      "user_confirmation_ref": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json"
+    },
+    {
+      "platform_id": "PL02",
+      "name": "탈잉",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL02"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL02-OBJ1",
+          "name": "튜터 프로필 및 클래스",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "튜터 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL02-CREATE",
+          "operation_type": "CREATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL02-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL02-READ",
+          "operation_type": "READ",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL02-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL02-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL02-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL02-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL02-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL02-STATUS",
+          "operation_type": "STATUS",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL02-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL02-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL02-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL02"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        }
+      ],
+      "data_fields": [
+        {
+          "field_id": "R02-PL02-FIELD01",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "카테고리",
+          "meaning": "카테고리",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL02"
+          ]
+        },
+        {
+          "field_id": "R02-PL02-FIELD02",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스명",
+          "meaning": "클래스명",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "클래스명 30자 이하",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL02"
+          ]
+        },
+        {
+          "field_id": "R02-PL02-FIELD03",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 썸네일",
+          "meaning": "클래스 썸네일",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL02"
+          ]
+        },
+        {
+          "field_id": "R02-PL02-FIELD04",
+          "object_ref": "R02-PL02-OBJ1",
+          "actual_label_or_observed_key": "클래스 대상",
+          "meaning": "클래스 대상",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL02"
+          ]
+        }
+      ],
+      "relations": [],
+      "states": [],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "튜터 본인의 작성 안내이며 제3자 대행 허용은 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL02"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "PC 로그인 → 탈잉 스튜디오 → 클래스 만들기 → 기본 정보 작성. 클래스명 30자 이하. 승인 후 카테고리 변경 어려움",
+          "evidence_refs": [
+            "R02-EV-ADD-PL02"
+          ]
+        }
+      ]
+    },
+    {
+      "platform_id": "PL03",
+      "name": "숨고",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL03"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL03-OBJ1",
+          "name": "고수 프로필",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "고수 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL03-CREATE",
+          "operation_type": "CREATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL03-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL03-READ",
+          "operation_type": "READ",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL03-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL03-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL03-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL03-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL03-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL03-STATUS",
+          "operation_type": "STATUS",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL03-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL03-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL03-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL03"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        }
+      ],
+      "data_fields": [
+        {
+          "field_id": "R02-PL03-FIELD01",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "활동명",
+          "meaning": "활동명",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD02",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "한줄소개",
+          "meaning": "한줄소개",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD03",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "이벤트",
+          "meaning": "이벤트",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD04",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "프로필 사진",
+          "meaning": "프로필 사진",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD05",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "경력",
+          "meaning": "경력",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD06",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "학력",
+          "meaning": "학력",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD07",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "고수 서비스 상세설명",
+          "meaning": "고수 서비스 상세설명",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD08",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "사진 및 동영상",
+          "meaning": "사진 및 동영상",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD09",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "질문답변",
+          "meaning": "질문답변",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        },
+        {
+          "field_id": "R02-PL03-FIELD10",
+          "object_ref": "R02-PL03-OBJ1",
+          "actual_label_or_observed_key": "포트폴리오",
+          "meaning": "포트폴리오",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        }
+      ],
+      "relations": [],
+      "states": [],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "제3자 유료 편집 및 원격 세션 자동화의 명시적 허용 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "고수 프로필 정보를 사실대로 유지. 위반 시 수정·삭제 요청 또는 비공개 가능. 사진은 PC 프로필 → 상단 사진 → 사진 선택 절차가 공식 도움말에 있음",
+          "evidence_refs": [
+            "R02-EV-ADD-PL03"
+          ]
+        }
+      ]
+    },
+    {
+      "platform_id": "PL04",
+      "name": "프람피",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL04"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL04-OBJ1",
+          "name": "전문가 분야 등록",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "전문가 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL04-CREATE",
+          "operation_type": "CREATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL04-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL04-READ",
+          "operation_type": "READ",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL04-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL04-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL04-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL04-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL04-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL04-STATUS",
+          "operation_type": "STATUS",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL04-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL04-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL04-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL04"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        }
+      ],
+      "data_fields": [
+        {
+          "field_id": "R02-PL04-FIELD01",
+          "object_ref": "R02-PL04-OBJ1",
+          "actual_label_or_observed_key": "카테고리 선택",
+          "meaning": "카테고리 선택",
+          "direction": [
+            "input"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL04"
+          ]
+        }
+      ],
+      "relations": [],
+      "states": [],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "안전이용정책은 전문가의 직접 동의를 설명. 등록 대행 허용은 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL04"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "외국어·스포츠/댄스·음악 등 분야 선택 → 시작하기. 이후 실제 필드와 저장·공개 결과는 로그인 없이 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL04"
+          ]
+        }
+      ]
+    },
+    {
+      "platform_id": "PL05",
+      "name": "뮬",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL05"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL05-OBJ1",
+          "name": "레슨 공고",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "작성자 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL05-CREATE",
+          "operation_type": "CREATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL05-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL05-READ",
+          "operation_type": "READ",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL05-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL05-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL05-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL05-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL05-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL05-STATUS",
+          "operation_type": "STATUS",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL05-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL05-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL05-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL05"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        }
+      ],
+      "data_fields": [],
+      "relations": [],
+      "states": [],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "동의 없는 크롤링·스크래핑 등 자동수집 금지 명시. 등록·수정 대행 허용 여부는 별도 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL05"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "레슨 공고 갱신은 기존 R02 회상 근거. 현재 작성·수정 필드 및 갱신 버튼·주기 미확인. 공개 레슨 경로 조회 도구 실패",
+          "evidence_refs": [
+            "R02-EV-ADD-PL05"
+          ]
+        }
+      ]
+    },
+    {
+      "platform_id": "PL06",
+      "name": "힙합플레이야",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL06"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL06-OBJ1",
+          "name": "레슨 홍보 게시물",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "작성자 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL06-CREATE",
+          "operation_type": "CREATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL06-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL06-READ",
+          "operation_type": "READ",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL06-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL06-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL06-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL06-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL06-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL06-STATUS",
+          "operation_type": "STATUS",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL06-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL06-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL06-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL06"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        }
+      ],
+      "data_fields": [
+        {
+          "field_id": "R02-PL06-FIELD01",
+          "object_ref": "R02-PL06-OBJ1",
+          "actual_label_or_observed_key": "게시물 제목",
+          "meaning": "게시물 제목",
+          "direction": [
+            "visible"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL06"
+          ]
+        },
+        {
+          "field_id": "R02-PL06-FIELD02",
+          "object_ref": "R02-PL06-OBJ1",
+          "actual_label_or_observed_key": "게시물 본문",
+          "meaning": "게시물 본문",
+          "direction": [
+            "visible"
+          ],
+          "observed_type_or_format": "unknown",
+          "required": "unknown",
+          "limits": "unknown",
+          "source_or_generation_actor": "사용자",
+          "visibility": "unknown",
+          "editable": "unknown",
+          "evidence_refs": [
+            "R02-EV-ADD-PL06"
+          ]
+        }
+      ],
+      "relations": [],
+      "states": [],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "이용약관에서 게시물 관리 의무는 확인하나 제3자 유료 등록·자동화 허용 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL06"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "레슨 홍보 게시물이 공개됨. 작성 화면의 필수 필드·저장·수정·갱신 절차는 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL06"
+          ]
+        }
+      ]
+    },
+    {
+      "platform_id": "PL07",
+      "name": "힙합LE",
+      "web_path_status": "unconfirmed",
+      "evidence_refs": [
+        "R02-EV-PL07"
+      ],
+      "objects": [
+        {
+          "object_id": "R02-PL07-OBJ1",
+          "name": "레슨 게시물",
+          "business_meaning": "모집 정보 관리 대상 후보",
+          "owner": "작성자 계정",
+          "identifier": "실제 식별 및 유일성 미확인",
+          "lifecycle": "등록·관리 절차 후속 확인",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ]
+        }
+      ],
+      "operations": [
+        {
+          "operation_id": "R02-PL07-CREATE",
+          "operation_type": "CREATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL07-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL07-READ",
+          "operation_type": "READ",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL07-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL07-UPDATE",
+          "operation_type": "UPDATE",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL07-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL07-RENEW",
+          "operation_type": "RENEW",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL07-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL07-STATUS",
+          "operation_type": "STATUS",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL07-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        },
+        {
+          "operation_id": "R02-PL07-RESPOND",
+          "operation_type": "RESPOND",
+          "availability": "unknown",
+          "target_object_refs": [
+            "R02-PL07-OBJ1"
+          ],
+          "actual_user_steps": [],
+          "preconditions": [],
+          "input_field_refs": [],
+          "return_field_refs": [],
+          "visible_field_refs": [],
+          "state_before": null,
+          "state_after": null,
+          "completion_evidence": [],
+          "error_and_unknown_conditions": [],
+          "retry_or_duplicate_risk": null,
+          "external_effect": null,
+          "policy_status": "unknown",
+          "evidence_refs": [
+            "R02-EV-PL07"
+          ],
+          "unknown_reason": "기존 근거에서 현재 업무별 실제 화면·입출력·완료 조건 및 대행 권한을 확인할 수 없음. 공식 업무 도움말 및 별도 승인된 관찰로 재확인 필요"
+        }
+      ],
+      "data_fields": [],
+      "relations": [],
+      "states": [],
+      "constraints": [],
+      "auth_permission": [
+        {
+          "status": "unknown",
+          "finding": "가입 안내만으로 대행·자동화 허용 판단 불가",
+          "evidence_refs": [
+            "R02-EV-ADD-PL07"
+          ],
+          "follow_up": "운영사의 업무별 서면 허용 범위 확인 필요"
+        }
+      ],
+      "story_candidates": [
+        "R02-US-004",
+        "R02-US-005",
+        "R02-US-010",
+        "R02-US-012",
+        "R02-US-016",
+        "R02-US-018",
+        "R02-US-020"
+      ],
+      "unknowns": [
+        "실제 필드 표시명·필수 조건·길이·반복·첨부 제약",
+        "수정·갱신·반려 대응별 절차와 완료 근거",
+        "외부 유료 대행과 자동화 허용 범위",
+        "사용자 확인 요청: 실제 필수 입력·첨부 제한·저장/제출 단계·수정/갱신/반려 대응·대행 허용 회신"
+      ],
+      "decision_requests": [
+        "권한 근거가 없거나 로그인 이후 정보가 필요한 항목의 확인 방법"
+      ],
+      "procedure_findings": [
+        {
+          "finding": "안내상 가입 후 5일 로그인·글쓰기 제한, 6일째 이용 가능. 현행 계정 적용은 재확인 필요. 거래·장터 레슨 게시물 사례 존재. 작성·수정 필드 미확인",
+          "evidence_refs": [
+            "R02-EV-ADD-PL07"
+          ]
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "R02-EV-PROPOSAL",
+      "source": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.md",
+      "location": "5절 및 8절",
+      "observed_at": "2026-11-26",
+      "type": "proposal",
+      "note": "기획안의 제안이며 실제 플랫폼 검증 결과가 아니다."
+    },
+    {
+      "evidence_id": "R02-EV-PL01",
+      "source": "docs/members/R02/workspace/2026-11-23_platform-login.md",
+      "observed_at": "2026-11-26",
+      "type": "existing_research",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-PL02",
+      "source": "docs/members/R02/workspace/2026-11-23_platform-login.md",
+      "observed_at": "2026-11-26",
+      "type": "existing_research",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-PL03",
+      "source": "docs/members/R02/workspace/2026-11-23_platform-login.md",
+      "observed_at": "2026-11-26",
+      "type": "existing_research",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-PL04",
+      "source": "https://prompie.com/partners/register/레슨/",
+      "observed_at": "2026-11-26",
+      "type": "official_search_result",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-PL05",
+      "source": "docs/members/R02/workspace/2026-11-23_lesson-pain-priority.md",
+      "observed_at": "2026-11-26",
+      "type": "existing_research",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-PL06",
+      "source": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.md",
+      "observed_at": "2026-11-26",
+      "type": "existing_research",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-PL07",
+      "source": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.md",
+      "observed_at": "2026-11-26",
+      "type": "existing_research",
+      "note": "기존 자료 재검토. 현재 로그인 이후 화면과 필드 제약은 미검증"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL01",
+      "source": "https://kmong.com/support/customer-center/posts/189",
+      "location": "판매 이용약관 2026-02-05",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "프로필 등록 및 전문가 인증 뒤 판매글 작성·심사. 접수와 게시를 구별. 현재 레슨 카테고리 편집 필드와 수정 후 재심사 조건은 미확인",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL02",
+      "source": "https://talingtutorguide.oopy.io/onofflinecover",
+      "location": "기본 정보 · 온/오프라인 클래스",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "PC 로그인 → 탈잉 스튜디오 → 클래스 만들기 → 기본 정보 작성. 클래스명 30자 이하. 승인 후 카테고리 변경 어려움",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL03",
+      "source": "https://frontend-next.soomgo.com/terms/usage/2026-11-19",
+      "location": "제2조 및 제34조 고수 프로필",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "고수 프로필 정보를 사실대로 유지. 위반 시 수정·삭제 요청 또는 비공개 가능. 사진은 PC 프로필 → 상단 사진 → 사진 선택 절차가 공식 도움말에 있음",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL04",
+      "source": "https://prompie.com/partners/register/레슨/",
+      "location": "전문가 등록 공개 진입 화면",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "외국어·스포츠/댄스·음악 등 분야 선택 → 시작하기. 이후 실제 필드와 저장·공개 결과는 로그인 없이 미확인",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL05",
+      "source": "https://mule.co.kr/page/introduce",
+      "location": "사이트소개",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "레슨 공고 갱신은 기존 R02 회상 근거. 현재 작성·수정 필드 및 갱신 버튼·주기 미확인. 공개 레슨 경로 조회 도구 실패",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL06",
+      "source": "https://hiphopplaya.com/g2/bbs/board.php?bo_table=advertise&wr_id=174753",
+      "location": "홍보 게시물 공개 사례",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "레슨 홍보 게시물이 공개됨. 작성 화면의 필수 필드·저장·수정·갱신 절차는 미확인",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-ADD-PL07",
+      "source": "https://hiphople.com/join",
+      "location": "회원가입 안내",
+      "observed_at": "2026-11-26",
+      "type": "official_public_document",
+      "finding": "안내상 가입 후 5일 로그인·글쓰기 제한, 6일째 이용 가능. 현행 계정 적용은 재확인 필요. 거래·장터 레슨 게시물 사례 존재. 작성·수정 필드 미확인",
+      "limitation": "문서·공개 화면 확인. 로그인 이후 실제 실행 검증 없음"
+    },
+    {
+      "evidence_id": "R02-EV-KMONG-USER-20261126",
+      "source": "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json",
+      "type": "user_statement_and_provided_screenshots",
+      "observed_at": "2026-11-26",
+      "limitation": "해당 카테고리와 확인 시점 한정"
+    }
+  ],
+  "cross_links": [
+    {
+      "story_ref": "R02-US-027",
+      "platform_ref": "PL01",
+      "operation_refs": [
+        "R02-PL01-CREATE"
+      ],
+      "field_refs": [
+        "R02-PL01-CONF-01",
+        "R02-PL01-CONF-02",
+        "R02-PL01-CONF-03",
+        "R02-PL01-CONF-04",
+        "R02-PL01-CONF-05",
+        "R02-PL01-CONF-06",
+        "R02-PL01-CONF-07",
+        "R02-PL01-CONF-08",
+        "R02-PL01-CONF-09",
+        "R02-PL01-CONF-10",
+        "R02-PL01-CONF-11",
+        "R02-PL01-CONF-12",
+        "R02-PL01-CONF-13",
+        "R02-PL01-CONF-14",
+        "R02-PL01-CONF-15",
+        "R02-PL01-CONF-16",
+        "R02-PL01-CONF-17",
+        "R02-PL01-CONF-18",
+        "R02-PL01-CONF-19",
+        "R02-PL01-CONF-20",
+        "R02-PL01-CONF-21",
+        "R02-PL01-CONF-22",
+        "R02-PL01-CONF-23",
+        "R02-PL01-CONF-24",
+        "R02-PL01-CONF-25",
+        "R02-PL01-CONF-26",
+        "R02-PL01-CONF-27",
+        "R02-PL01-CONF-28",
+        "R02-PL01-CONF-29",
+        "R02-PL01-CONF-30",
+        "R02-PL01-CONF-31"
+      ],
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    },
+    {
+      "story_ref": "R02-US-028",
+      "platform_ref": "PL01",
+      "operation_refs": [
+        "R02-PL01-CREATE"
+      ],
+      "field_refs": [
+        "R02-PL01-CONF-01",
+        "R02-PL01-CONF-02",
+        "R02-PL01-CONF-03",
+        "R02-PL01-CONF-04",
+        "R02-PL01-CONF-05",
+        "R02-PL01-CONF-06",
+        "R02-PL01-CONF-07",
+        "R02-PL01-CONF-08",
+        "R02-PL01-CONF-09",
+        "R02-PL01-CONF-10",
+        "R02-PL01-CONF-11",
+        "R02-PL01-CONF-12",
+        "R02-PL01-CONF-13",
+        "R02-PL01-CONF-14",
+        "R02-PL01-CONF-15",
+        "R02-PL01-CONF-16",
+        "R02-PL01-CONF-17",
+        "R02-PL01-CONF-18",
+        "R02-PL01-CONF-19",
+        "R02-PL01-CONF-20",
+        "R02-PL01-CONF-21",
+        "R02-PL01-CONF-22",
+        "R02-PL01-CONF-23",
+        "R02-PL01-CONF-24",
+        "R02-PL01-CONF-25",
+        "R02-PL01-CONF-26",
+        "R02-PL01-CONF-27",
+        "R02-PL01-CONF-28",
+        "R02-PL01-CONF-29",
+        "R02-PL01-CONF-30",
+        "R02-PL01-CONF-31"
+      ],
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    },
+    {
+      "story_ref": "R02-US-029",
+      "platform_ref": "PL01",
+      "operation_refs": [
+        "R02-PL01-CREATE"
+      ],
+      "field_refs": [
+        "R02-PL01-CONF-01",
+        "R02-PL01-CONF-02",
+        "R02-PL01-CONF-03",
+        "R02-PL01-CONF-04",
+        "R02-PL01-CONF-05",
+        "R02-PL01-CONF-06",
+        "R02-PL01-CONF-07",
+        "R02-PL01-CONF-08",
+        "R02-PL01-CONF-09",
+        "R02-PL01-CONF-10",
+        "R02-PL01-CONF-11",
+        "R02-PL01-CONF-12",
+        "R02-PL01-CONF-13",
+        "R02-PL01-CONF-14",
+        "R02-PL01-CONF-15",
+        "R02-PL01-CONF-16",
+        "R02-PL01-CONF-17",
+        "R02-PL01-CONF-18",
+        "R02-PL01-CONF-19",
+        "R02-PL01-CONF-20",
+        "R02-PL01-CONF-21",
+        "R02-PL01-CONF-22",
+        "R02-PL01-CONF-23",
+        "R02-PL01-CONF-24",
+        "R02-PL01-CONF-25",
+        "R02-PL01-CONF-26",
+        "R02-PL01-CONF-27",
+        "R02-PL01-CONF-28",
+        "R02-PL01-CONF-29",
+        "R02-PL01-CONF-30",
+        "R02-PL01-CONF-31"
+      ],
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    },
+    {
+      "story_ref": "R02-US-030",
+      "platform_ref": "PL01",
+      "operation_refs": [
+        "R02-PL01-UPDATE"
+      ],
+      "field_refs": [
+        "R02-PL01-CONF-01",
+        "R02-PL01-CONF-02",
+        "R02-PL01-CONF-03",
+        "R02-PL01-CONF-04",
+        "R02-PL01-CONF-05",
+        "R02-PL01-CONF-06",
+        "R02-PL01-CONF-07",
+        "R02-PL01-CONF-08",
+        "R02-PL01-CONF-09",
+        "R02-PL01-CONF-10",
+        "R02-PL01-CONF-11",
+        "R02-PL01-CONF-12",
+        "R02-PL01-CONF-13",
+        "R02-PL01-CONF-14",
+        "R02-PL01-CONF-15",
+        "R02-PL01-CONF-16",
+        "R02-PL01-CONF-17",
+        "R02-PL01-CONF-18",
+        "R02-PL01-CONF-19",
+        "R02-PL01-CONF-20",
+        "R02-PL01-CONF-21",
+        "R02-PL01-CONF-22",
+        "R02-PL01-CONF-23",
+        "R02-PL01-CONF-24",
+        "R02-PL01-CONF-25",
+        "R02-PL01-CONF-26",
+        "R02-PL01-CONF-27",
+        "R02-PL01-CONF-28",
+        "R02-PL01-CONF-29",
+        "R02-PL01-CONF-30",
+        "R02-PL01-CONF-31"
+      ],
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    },
+    {
+      "story_ref": "R02-US-031",
+      "platform_ref": "PL01",
+      "operation_refs": [
+        "R02-PL01-CREATE"
+      ],
+      "field_refs": [
+        "R02-PL01-CONF-01",
+        "R02-PL01-CONF-02",
+        "R02-PL01-CONF-03",
+        "R02-PL01-CONF-04",
+        "R02-PL01-CONF-05",
+        "R02-PL01-CONF-06",
+        "R02-PL01-CONF-07",
+        "R02-PL01-CONF-08",
+        "R02-PL01-CONF-09",
+        "R02-PL01-CONF-10",
+        "R02-PL01-CONF-11",
+        "R02-PL01-CONF-12",
+        "R02-PL01-CONF-13",
+        "R02-PL01-CONF-14",
+        "R02-PL01-CONF-15",
+        "R02-PL01-CONF-16",
+        "R02-PL01-CONF-17",
+        "R02-PL01-CONF-18",
+        "R02-PL01-CONF-19",
+        "R02-PL01-CONF-20",
+        "R02-PL01-CONF-21",
+        "R02-PL01-CONF-22",
+        "R02-PL01-CONF-23",
+        "R02-PL01-CONF-24",
+        "R02-PL01-CONF-25",
+        "R02-PL01-CONF-26",
+        "R02-PL01-CONF-27",
+        "R02-PL01-CONF-28",
+        "R02-PL01-CONF-29",
+        "R02-PL01-CONF-30",
+        "R02-PL01-CONF-31"
+      ],
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    },
+    {
+      "story_ref": "R02-US-032",
+      "platform_ref": "PL01",
+      "operation_refs": [
+        "R02-PL01-CREATE"
+      ],
+      "field_refs": [
+        "R02-PL01-CONF-01",
+        "R02-PL01-CONF-02",
+        "R02-PL01-CONF-03",
+        "R02-PL01-CONF-04",
+        "R02-PL01-CONF-05",
+        "R02-PL01-CONF-06",
+        "R02-PL01-CONF-07",
+        "R02-PL01-CONF-08",
+        "R02-PL01-CONF-09",
+        "R02-PL01-CONF-10",
+        "R02-PL01-CONF-11",
+        "R02-PL01-CONF-12",
+        "R02-PL01-CONF-13",
+        "R02-PL01-CONF-14",
+        "R02-PL01-CONF-15",
+        "R02-PL01-CONF-16",
+        "R02-PL01-CONF-17",
+        "R02-PL01-CONF-18",
+        "R02-PL01-CONF-19",
+        "R02-PL01-CONF-20",
+        "R02-PL01-CONF-21",
+        "R02-PL01-CONF-22",
+        "R02-PL01-CONF-23",
+        "R02-PL01-CONF-24",
+        "R02-PL01-CONF-25",
+        "R02-PL01-CONF-26",
+        "R02-PL01-CONF-27",
+        "R02-PL01-CONF-28",
+        "R02-PL01-CONF-29",
+        "R02-PL01-CONF-30",
+        "R02-PL01-CONF-31"
+      ],
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "note": "입력 구조와 업무 연결 후보. 대행 허용 확정 아님"
+    }
+  ],
+  "uncertainties": [
+    "사용자 행동의 선후 관계·오류별 후속 경로와 시스템 이벤트는 추가 작성 필요",
+    "7개 플랫폼 조사와 양방향 연결 미수행",
+    "취소·재개는 범위 미결정 후보",
+    "시스템 이벤트의 상세 상태·입출력·스토리 연결은 플랫폼 조사 후 보완",
+    "공식 문서의 필드 목록과 실제 계정 편집 화면의 필수 입력·최신 제약은 다를 수 있음"
+  ],
+  "decision_requests": [
+    "취소·중단 후 재개의 필요성과 범위"
+  ],
+  "self_check": [
+    {
+      "criterion": "A1",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "reason": "전체 피처 연결은 있으나 전 스토리 세부 분기·완전성 검토 잔여"
+    },
+    {
+      "criterion": "A2",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "reason": "7개 플랫폼 중 크몽 상세 연결 보완. 나머지 플랫폼 필드·업무 미확인 잔여"
+    },
+    {
+      "criterion": "A3",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "reason": "크몽 새 스토리 6개 연결. 나머지 플랫폼 양방향 연결 잔여"
+    },
+    {
+      "criterion": "A4",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "reason": "크몽 사용자 해석과 화면 조건을 상세서에서 구분. 일부 복합 근거의 항목별 세분화 잔여"
+    },
+    {
+      "criterion": "A5",
+      "verdict": "inconclusive",
+      "evidence_refs": [
+        "R02-EV-KMONG-USER-20261126"
+      ],
+      "reason": "JSON·ID 참조 검사 수행. 전체 계약 수용 및 R01 검토 대기"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "status": "limited_in_memory_structural_and_demo_rule_check",
+  "checks": [
+    {
+      "id": "price_conflict",
+      "pass": true
+    },
+    {
+      "id": "model_blocked",
+      "pass": true
+    },
+    {
+      "id": "ready_review",
+      "pass": true
+    },
+    {
+      "id": "start_accepted",
+      "pass": true
+    },
+    {
+      "id": "same_start_replay",
+      "pass": true
+    },
+    {
+      "id": "confirmed",
+      "pass": true
+    },
+    {
+      "id": "unknown",
+      "pass": true
+    },
+    {
+      "id": "unauthenticated",
+      "pass": true
+    },
+    {
+      "id": "foreign_owner",
+      "pass": true
+    },
+    {
+      "id": "model_storage_failed",
+      "pass": true
+    },
+    {
+      "id": "fact_conflict",
+      "pass": true
+    },
+    {
+      "id": "stale_revision",
+      "pass": true
+    },
+    {
+      "id": "update_review",
+      "pass": true
+    },
+    {
+      "id": "update_accepted",
+      "pass": true
+    },
+    {
+      "id": "update_confirmed",
+      "pass": true
+    },
+    {
+      "id": "update_target_changed",
+      "pass": true
+    },
+    {
+      "id": "renew_review",
+      "pass": true
+    },
+    {
+      "id": "renew_accepted",
+      "pass": true
+    },
+    {
+      "id": "renew_confirmed",
+      "pass": true
+    },
+    {
+      "id": "renew_unknown",
+      "pass": true
+    },
+    {
+      "id": "renew_unsupported",
+      "pass": true
+    },
+    {
+      "id": "status_review",
+      "pass": true
+    },
+    {
+      "id": "status_accepted",
+      "pass": true
+    },
+    {
+      "id": "status_confirmed",
+      "pass": true
+    },
+    {
+      "id": "status_unavailable",
+      "pass": true
+    },
+    {
+      "id": "object_after_status_failure",
+      "pass": true
+    },
+    {
+      "id": "reconcile_request",
+      "pass": true
+    },
+    {
+      "id": "reconcile_accepted",
+      "pass": true
+    },
+    {
+      "id": "reconcile_confirmed",
+      "pass": true
+    },
+    {
+      "id": "prior_job_reconciled",
+      "pass": true
+    },
+    {
+      "id": "reconcile_absence_proven",
+      "pass": true
+    },
+    {
+      "id": "demo_session",
+      "pass": true
+    },
+    {
+      "id": "demo_lesson_saved",
+      "pass": true
+    },
+    {
+      "id": "demo_profile_list",
+      "pass": true
+    },
+    {
+      "id": "demo_price_resolved",
+      "pass": true
+    },
+    {
+      "id": "demo_auth_open",
+      "pass": true
+    },
+    {
+      "id": "demo_auth_finish",
+      "pass": true
+    },
+    {
+      "id": "demo_foreign_lesson",
+      "pass": true
+    },
+    {
+      "id": "demo_foreign_start",
+      "pass": true
+    },
+    {
+      "id": "demo_expired_session",
+      "pass": true
+    },
+    {
+      "id": "demo_owner_list",
+      "pass": true
+    },
+    {
+      "id": "demo_asset_saved",
+      "pass": true
+    },
+    {
+      "id": "demo_missing_description",
+      "pass": true
+    },
+    {
+      "id": "demo_invalid_amount",
+      "pass": true
+    }
+  ],
+  "demo_checks": [
+    {
+      "id": "required-and-provenance:ready_review",
+      "pass": true
+    },
+    {
+      "id": "required-and-provenance:demo_price_resolved",
+      "pass": true
+    },
+    {
+      "id": "required-and-provenance:demo_auth_open",
+      "pass": true
+    },
+    {
+      "id": "required-and-provenance:demo_auth_finish",
+      "pass": true
+    },
+    {
+      "id": "price-conflict-blocked",
+      "pass": true
+    },
+    {
+      "id": "negative:demo_missing_description",
+      "pass": true
+    },
+    {
+      "id": "negative:demo_invalid_amount",
+      "pass": true
+    },
+    {
+      "id": "demo-ids-and-revisions",
+      "pass": true
+    },
+    {
+      "id": "independent-evidence-matches-approved-values",
+      "pass": true
+    },
+    {
+      "id": "model-failure-blocked-or-503",
+      "pass": true
+    }
+  ],
+  "limitations": "합성 타입/필수값/경로/응답 schema·일부 불변조건·모의 필수값/근거/호출 연결 검사. 실제 HTTP/모델/PG 연결·bytes/권리·전체 OpenAPI validator 또는 제품 시험 아님."
+}

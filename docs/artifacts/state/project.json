@@ -4,7 +4,7 @@
   "kind": "project",
   "status": "이전 찾아you 기준안 — 구현 보류 / 제출용 잠정 보존",
   "owner": "프로젝트 리더",
-  "updated_at": "2026-11-25",
+  "updated_at": "2026-11-26",
   "goal": "사용자의 요청과 리서치 도메인에 맞게 조사 워크플로와 에이전트 역할·작업을 구성하고, 도메인에 적합한 출처와 검증 기준을 사용해 공개 자료를 조사하여 근거와 출처가 연결된 결과를 제공한다.",
   "success": [
     "사용자 조건과 리서치 도메인에 맞춰 필요한 조사 작업과 역할을 구성하고 실제 결과까지 실행한다.",
@@ -38,6 +38,9 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261118-02_phase-sync.md"
+    },
+    {
+      "path": "docs/human/phase-intents/PHASE-20261126-01.md"
     }
   ],
   "authority": {
@@ -45,6 +48,6 @@
     "ref": "docs/human/INTENT.md",
     "id": "INTENT-PRODUCT-001"
   },
-  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261125-01.md",
+  "phase_intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
   "product_scope_lifecycle": "2026-11-24 실제 PoC·조사 및 설계 검토 단계. 본 PROJECT의 찾아you 목표는 과거 기준 및 잠정 제출용이다. 레슨 등록 본 구현 및 실서비스 실행은 별도 결정 전 보류."
 }

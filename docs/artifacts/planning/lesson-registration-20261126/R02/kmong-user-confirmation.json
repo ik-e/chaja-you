@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-KMONG-USER-CONFIRMATION",
+  "kind": "document",
+  "status": "사용자 화면·경험 확인 · 운영사 대행 허용 미확인",
+  "owner": "R02",
+  "inputs": [
+    "2026-11-26 사용자 문답과 첨부 화면"
+  ],
+  "evidence_policy": "첨부 원본은 로컬 대화에 보존. 공개 저장소에는 계정·주소·연락처·스크린샷 원본 없이 업무 요약만 기록. 화면 확인과 사용자 해석을 구분.",
+  "output": {
+    "create_flow": [
+      "전문가 회원가입",
+      "주문 관리",
+      "판매관리",
+      "서비스 등록·편집",
+      "서비스 등록하기",
+      "내용 작성",
+      "심사 요청"
+    ],
+    "fields": {
+      "제목": {
+        "required": true,
+        "min_chars": 10,
+        "max_chars": 30
+      },
+      "카테고리": {
+        "required": true,
+        "observed": [
+          "취미 레슨",
+          "보컬·랩 레슨",
+          "랩 레슨"
+        ],
+        "note": "해당 선택 사례이며 전체 분류 목록은 미확인"
+      },
+      "서비스 설명": {
+        "required": true,
+        "min_chars": 100,
+        "max_chars": 20000
+      },
+      "모집 형태": {
+        "required": true,
+        "values": [
+          "개인레슨",
+          "그룹교육",
+          "기업강의"
+        ],
+        "multiple": true
+      },
+      "메인 이미지": {
+        "required": true,
+        "min_count": 1,
+        "max_count": 4,
+        "displayed_size": "652×488px",
+        "formats": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "상세 이미지": {
+        "max_count": 9,
+        "width_px": [
+          652,
+          2000
+        ],
+        "max_height_px": 3000,
+        "formats": [
+          "PNG",
+          "JPG",
+          "GIF"
+        ]
+      },
+      "동영상": {
+        "max_count": 6,
+        "total_size_display": "500mb 이하",
+        "formats": [
+          "MP4"
+        ]
+      },
+      "서비스 제공 절차": {
+        "required": true,
+        "min_chars": 50,
+        "max_chars": 20000
+      },
+      "의뢰인 준비사항": {
+        "required": true,
+        "min_chars": 50,
+        "max_chars": 20000
+      },
+      "지역": {
+        "required": true,
+        "max_total_entries": 5,
+        "types": [
+          "온라인",
+          "오프라인"
+        ],
+        "online": "미팅 장소 자유 텍스트",
+        "offline": [
+          "지역",
+          "상세 지역",
+          "상세주소"
+        ],
+        "conditional": "상호 협의 가능 활성화 시 상세주소 생략 가능",
+        "multiple": true
+      },
+      "가격": {
+        "single_standard": true,
+        "packages": [
+          "STANDARD",
+          "DELUXE",
+          "PREMIUM"
+        ],
+        "title_max_chars": 20,
+        "description_max_chars": 60,
+        "amount": "VAT 포함 선택한 레슨 횟수 전체 금액",
+        "minimum_krw": 5000,
+        "step_krw": 1000,
+        "upper_bound": "99,897,000 / 99,898,000 / 99,899,000 조합에서 금액 오류 없음. 99,900,000은 이전 패키지 화면에서 오류. 정확한 단일 패키지 상한 미확인",
+        "package_order": "다음 패키지에 더 높은 최소 금액을 요구하는 오류 관찰"
+      },
+      "작업 기간": {
+        "range_days": [
+          1,
+          90
+        ],
+        "user_interpretation": "4회 수업을 마치는 기간으로 생각해 30일 선택. 플랫폼의 공식 의미는 미확인"
+      },
+      "수정 횟수": {
+        "range": [
+          0,
+          15
+        ],
+        "user_interpretation": "외주용 항목으로 판단해 레슨에는 0회 선택"
+      },
+      "1회당 레슨시간": {
+        "range_minutes": [
+          30,
+          540
+        ],
+        "step_minutes": 15
+      },
+      "레슨 횟수": {
+        "range": [
+          1,
+          50
+        ]
+      },
+      "기본 포함 항목": [
+        "준비물 제공 포함",
+        "강의실 제공 포함"
+      ],
+      "검색 키워드": {
+        "max_count": 5,
+        "max_chars_per_item": 20
+      },
+      "자주 묻는 질문": {
+        "max_count": 50,
+        "question_max_chars": 255,
+        "answer_max_chars": 255,
+        "question_answer_required_when_added": true
+      },
+      "작업 전 요청사항": {
+        "question_max_chars": 255,
+        "answer_types": [
+          "서술형",
+          "파일첨부",
+          "단일선택지",
+          "다중선택지"
+        ],
+        "choice_max_chars": 255,
+        "required_answer_toggle": true,
+        "max_count": "unknown"
+      },
+      "대상자": {
+        "max_count": 4,
+        "item_max_chars": 50
+      },
+      "서비스 내용": {
+        "max_count": 4,
+        "item_max_chars": 50
+      },
+      "준비물": {
+        "max_count": 4,
+        "item_max_chars": 50
+      },
+      "커리큘럼": {
+        "max_sessions": 20,
+        "detail_chars": [
+          20,
+          500
+        ],
+        "image_attachment": true
+      },
+      "가능일": {
+        "weekdays": [
+          "월",
+          "화",
+          "수",
+          "목",
+          "금",
+          "토",
+          "일"
+        ],
+        "time_range": [
+          "00:00",
+          "23:30"
+        ],
+        "step_minutes": 30,
+        "multiple_ranges_same_day": true,
+        "max_count": "unknown"
+      }
+    },
+    "additional_options": {
+      "빠른 작업": {
+        "per_package": true,
+        "required": [
+          "금액",
+          "빠른 작업 일수"
+        ],
+        "days": [
+          1,
+          90
+        ],
+        "semantics": "일수의 정확한 의미·기본 작업 기간과 관계 미확인"
+      },
+      "추가 수정": {
+        "required": [
+          "금액",
+          "추가 수정 횟수"
+        ],
+        "count": [
+          0,
+          15
+        ],
+        "amount_observation": "99,900,000원 입력 화면에 오류 없음. 저장 검증·상한 미확인"
+      },
+      "레슨 시간 추가": {
+        "per_package": true,
+        "required": [
+          "금액",
+          "추가 시간"
+        ],
+        "minutes": [
+          30,
+          540
+        ],
+        "step_minutes": 15
+      },
+      "레슨 횟수 추가": {
+        "per_package": true,
+        "required": [
+          "금액",
+          "추가 횟수"
+        ],
+        "count": [
+          1,
+          50
+        ]
+      },
+      "준비물 제공 비용 추가": {
+        "required": [
+          "금액",
+          "세트 수"
+        ],
+        "sets": [
+          1,
+          30
+        ]
+      },
+      "강의실 제공 추가": {
+        "required": [
+          "금액",
+          "시간"
+        ],
+        "hours": [
+          1,
+          30
+        ]
+      },
+      "맞춤 옵션": {
+        "multiple": true,
+        "required": [
+          "제목",
+          "설명",
+          "금액",
+          "추가 작업일"
+        ],
+        "days": [
+          0,
+          30
+        ],
+        "max_count": "unknown",
+        "title_description_limits": "unknown"
+      }
+    },
+    "lifecycle": {
+      "draft": "임시 저장 후 입력 내용과 이미지 유지 (사용자 경험)",
+      "submit": "최종 확인 체크 후 제출. 제출 완료 화면에서 승인 대기·영업일 기준 7일 안내",
+      "states_observed": [
+        "승인 전",
+        "판매중",
+        "비승인",
+        "판매 중지"
+      ],
+      "review_edit": "심사 중 편집 불가. 제출 취소 후 수정·재제출 안내",
+      "rejection": "알림에서 사유 확인 → 개인정보 포함 부분 삭제 → 재심사 요청 (사용자 경험)",
+      "update": "서비스 등록·편집 → 편집하기 → 수정 → 다시 심사 요청 (사용자 경험)",
+      "notifications": [
+        "크몽 내 알림",
+        "앱 푸시",
+        "문자"
+      ],
+      "more_menu": [
+        "판매 중지",
+        "삭제"
+      ],
+      "multiple_posts": "동일 계정 여러 판매글 등록 가능. 유사 내용 중복 제한은 사용자 미확인",
+      "renew": "끌어올리기·등록일 갱신 사용 경험 없음. 광고 신청·관리의 유료 광고 메뉴 관찰"
+    },
+    "permission": {
+      "delegation": "unknown",
+      "automation": "unknown",
+      "user_statement": "운영사 허용 여부를 확인한 적 없음"
+    },
+    "uncertainties": [
+      "촬영 화면의 조건은 해당 레슨 카테고리·당시 UI 범위",
+      "작업 기간·수정 횟수의 공식 업무 의미",
+      "단일·패키지 가격 상한과 추가 금액 제한",
+      "맞춤 옵션·가능일·요청사항 최대 개수",
+      "삭제·판매 중지·재개 및 수정 심사 중 기존 글 노출의 실제 결과",
+      "대행·자동화 운영사 허용 범위"
+    ]
+  },
+  "verification": {
+    "method": "대화의 답변과 첨부 화면 표시를 대조",
+    "result": "문답 요약 완료. 실제 실행·운영사 정책 검증은 미수행"
+  }
+}
