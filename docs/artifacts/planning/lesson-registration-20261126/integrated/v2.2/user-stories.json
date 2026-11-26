@@ -11938,12 +11938,17 @@
     ],
     "excluded_story_refs": [
       "IS-036",
-      "IS-063"
+      "IS-042",
+      "IS-063",
+      "IS-075",
+      "IS-076"
     ],
     "scope_decision_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
     "policy_risk_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
     "scenario_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json",
-    "note": "참조의 정적 일치; 의미 완전성·정책/법률·실제 실행·사용성 미검증. 이전 분기와 책임은 원본에서 유지. 신규/변경 후보 및 관련 참조를 승인된 요구로 승격하지 않는다."
+    "note": "참조의 정적 일치; 의미 완전성·정책/법률·실제 실행·사용성 미검증. 이전 분기와 책임은 원본에서 유지. 신규/변경 후보 및 관련 참조를 승인된 요구로 승격하지 않는다.",
+    "exclusion_basis": "V1.3 scope_candidate=excluded (후보이며 개인정보 권리 행사 자체 제외 아님)",
+    "unmapped_prior_story_refs": []
   },
   "verification": {
     "normal_content_roundtrip": "pass_except_private_url",
@@ -11964,7 +11969,10 @@
     "known_limits": [
       "전이 목적지 구조화는 목적지 표현과 호출 컨텍스트의 후보 인덱스이며 실행 가능한 상태 머신·정식 조건 판정이 아니다.",
       "일부 기존 행동은 사용자/시스템 복합 기술이다. 이전 SVO·시스템 원본 보존, 원자화/의미 대조는 별도 검토.",
-      "최신 main 독립 조사 병합/개별 범위 승인 및 오류 상세화는 수행하지 않음."
-    ]
+      "최신 main 독립 조사 병합/개별 범위 승인 및 오류 상세화는 수행하지 않음.",
+      "화면 전이 후보 중 호출 화면 복귀 등은 문맥 의존이며 상태 머신 검증 미완료. 기존 SVO와 관련 참조의 일대일 동등성 보장 없음."
+    ],
+    "excluded_count": 5,
+    "deferred_error_count": 14
   }
 }
