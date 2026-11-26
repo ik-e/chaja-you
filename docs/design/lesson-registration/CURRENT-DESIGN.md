@@ -14,7 +14,7 @@
 | [TASK-056](../../artifacts/tasks/TASK-056.json) | R04 | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R04) |
 | [TASK-057](../../artifacts/tasks/TASK-057.json) | R05 | 전체 사용자 스토리 및 7개 플랫폼 독립 조사 (R05) |
 | [TASK-058](../../artifacts/tasks/TASK-058.json) | R01 | 통합 사용자 스토리·서비스 범위 확정 및 DB 설계 |
-| [TASK-059](../../../docs/artifacts/tasks/TASK-059.json) | R03 | 사용자 스토리 독립 도출 및 누락 검토 (R03) |
+| [TASK-059](../../artifacts/tasks/TASK-059.json) | R03 | 사용자 스토리 독립 도출 및 누락 검토 (R03) |
 
 이전 구현 기준선은 참고·이력 및 영향 검토용으로 보존하며 현재 실행 배정으로 사용하지 않는다. 아래 요구사항/결정/시험/패키지의 연결은 기존 기준선에 대한 추적이다.
 
