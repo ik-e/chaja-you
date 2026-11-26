@@ -262,9 +262,9 @@
       "id": "D2R1",
       "deliverable": "DLV-04",
       "summary": "PG 적용·FK",
-      "section": "6.1",
-      "revision": "초기 SQL 오류 수정, 독립 PG 합성 검사, role/명령/결과 표.",
-      "remaining": "실제 SQL CI 및 실제 앱 연결",
+      "section": "6.1–6.2",
+      "revision": "초기 SQL 오류 수정, 독립 PG 합성 검사, role/명령/결과 표. 11/26 6a7c527 독립 PG 16.16 CI PG-01/02/07 SQL 통과; 두 DB 및 합성 role 23503 로그 연결.",
+      "remaining": "실제 앱 DB 연결/FK/owner·SQLite 이관 및 복원 시험",
       "status": "document_projection_prepared"
     },
     {
@@ -272,8 +272,8 @@
       "deliverable": "DLV-04",
       "summary": "동시 및 재확인",
       "section": "3.3, 6.1",
-      "revision": "SQL UNIQUE/lease 및 005 검증, 실제 효과 count 요구.",
-      "remaining": "실제 HTTP 동시/모의 접수 1회",
+      "revision": "SQL UNIQUE/lease 및 005 검증, 실제 효과 count 요구. 005 독립 SQL 통과 확인.",
+      "remaining": "실제 HTTP 동시 start 및 모의 접수 1회",
       "status": "document_projection_prepared"
     },
     {
