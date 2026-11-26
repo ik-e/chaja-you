@@ -163,7 +163,7 @@
     "E": {
       "id": "E",
       "name": "원본 작성·편집",
-      "purpose": "원문/자료 → AI 추출 → 사실 확인·저장",
+      "purpose": "원문/자료 또는 직접 입력 → 필요 시 AI 추출 → 사실 확인·저장",
       "entry": "H의 새 레슨/원본 편집",
       "exit": "H 또는 W(저장 및 작업 시작)",
       "classification": "basic"
@@ -196,7 +196,7 @@
       "id": "X",
       "name": "외부 인증 (하위 영역)",
       "purpose": "사용자 직접 인증·계정 확인",
-      "entry": "W/R/A에서 필요한 계정만",
+      "entry": "W/R/A에서 해당 대상 인증 필요 시, 별도 채택된 M에서만 추가",
       "exit": "호출한 화면의 같은 작업/선택 상태, 취소 시 해당 대상 보류",
       "classification": "subview"
     },
@@ -204,8 +204,8 @@
       "id": "D",
       "name": "직접 작성 안내 (W 하위 영역)",
       "purpose": "내부 입력안 제공",
-      "entry": "W/R의 지원 제한/직접 작성",
-      "exit": "호출 화면",
+      "entry": "W-24 내부 작성안 준비 완료 후만; R에서도 W 준비를 경유",
+      "exit": "W 또는 원래 호출 R (새 외부 실행 없음)",
       "classification": "subview"
     },
     "G": {
@@ -300,7 +300,7 @@
       {
         "from": "H",
         "to": "W",
-        "label": "등록/수정/갱신 준비",
+        "label": "등록/수정/갱신 준비·기존 글 연결",
         "conditional": false,
         "source_line": 33
       },
@@ -363,16 +363,9 @@
       {
         "from": "W",
         "to": "D",
-        "label": "지원 제한/직접 작성",
+        "label": "W-24 내부 작성안 준비 완료",
         "conditional": false,
         "source_line": 42
-      },
-      {
-        "from": "R",
-        "to": "D",
-        "label": "지원 제한/직접 작성",
-        "conditional": false,
-        "source_line": 43
       },
       {
         "from": "D",
@@ -384,21 +377,21 @@
       {
         "from": "D",
         "to": "R",
-        "label": "결과 화면 복귀",
+        "label": "원래 호출 R로 복귀",
         "conditional": false,
         "source_line": 45
       },
       {
         "from": "W",
         "to": "R",
-        "label": "내용 확인 + 실행 범위 승인 및 요청",
+        "label": "명시 승인·요청 수락",
         "conditional": false,
         "source_line": 46
       },
       {
         "from": "R",
         "to": "W",
-        "label": "새 업무/보완",
+        "label": "새 업무/보완/내부 작성안 준비",
         "conditional": false,
         "source_line": 47
       },
@@ -789,7 +782,7 @@
       "number": 2,
       "screen_id": "W",
       "name": "작업 준비·검토 (선택 영역)",
-      "entry": "H-10, E-06/E-09 저장 및 작업 시작, R 후속 업무.",
+      "entry": "H-10 등록/수정/갱신 준비, H-13 미연결 등록물 찾기, E-06/E-09 저장 및 작업 시작, R 후속 업무.",
       "default_display": "원본 이름·버전, 7개 플랫폼의 실제 지원 후보/보류/조건부, 수행 방식, 계정 연결 및 마지막 확인 상태, 기존 등록 연결, 선택된 업무 목록, 준비 요청 버튼. 동일 레슨·기존 등록물에서 시작한 경우 이미 선택한 값 표시.",
       "action_ids": [
         "W-01",
@@ -808,7 +801,7 @@
       "number": 3,
       "screen_id": "W",
       "name": "작업 준비·검토 (준비/추가 확인 영역)",
-      "entry": "H-10 기존 등록물 준비 요청 또는 W-06 준비 요청; W 수정/재검증; X 복귀.",
+      "entry": "H-10/H-13의 정확 읽기 범위 또는 W-06 요청; W 내부 보완/재검증 및 동일 X 호출 복귀.",
       "default_display": "대상별 준비 중/준비 완료/정보 보완/인증 필요/대상 확인/지원 제한, 원본·이전 설정·변환안과 확인 근거. 사용자가 해결해야 할 항목만 별도 표시. 내부 변환과 허용된 대상 확인은 필요한 순서로 실행하며 준비 자체는 외부 쓰기를 하지 않는다.",
       "action_ids": [
         "W-07",
@@ -832,7 +825,7 @@
       "screen_id": "W",
       "name": "작업 준비·검토 (최종 검토·승인 영역)",
       "entry": "W-16에서 준비 완료된 대상. W의 같은 화면에 자동 표시.",
-      "default_display": "선택 원본/버전, 대상별 플랫폼·실제 계정·객체·업무·현재 입력안 및 완료 기준, 원본과 차이/변경 전후/공유 영향, 제목·설명·가격·시간·회차·공개 자료·고유 필드 전체 미리보기. 중요한 차이·조건 변경·권리 확인·불확실을 앞에 표시한다. 대상별 실행 가능/보류 상태, 실행 범위·비용·제약·되돌리기 불가 안내. 내용 확인란과 실행 범위 승인 및 요청 버튼. 현재 준비 revision과 내용/범위, 단일 승인·요청 추천(별도 동의 필요시 분리).",
+      "default_display": "선택 원본/버전, 대상별 플랫폼·실제 계정·객체·업무·현재 입력안 및 완료 기준, 원본과 차이/변경 전후/공유 영향, 제목·설명·가격·시간·회차·공개 자료·고유 필드 전체 미리보기. 중요한 차이·조건 변경·권리 확인·불확실을 앞에 표시한다. 대상별 실행 가능/보류 상태, 실행 범위·비용·제약·되돌리기 불가 안내. 내용/범위의 명시 승인 및 요청 동작(별도 확인란은 독립 동의 필요시만). 현재 준비 revision과 내용/범위, 단일 승인·요청 추천(별도 동의 필요시 분리).",
       "action_ids": [
         "W-17",
         "W-18",
@@ -1125,7 +1118,7 @@
       "source_line": 83,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "V0-02": {
       "id": "V0-02",
@@ -1169,7 +1162,7 @@
       "source_line": 84,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "V0-03": {
       "id": "V0-03",
@@ -1210,7 +1203,7 @@
       "source_line": 86,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "V0-04": {
       "id": "V0-04",
@@ -1250,7 +1243,7 @@
       "source_line": 88,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "V0-05": {
       "id": "V0-05",
@@ -1300,7 +1293,7 @@
       "source_line": 90,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-01": {
       "id": "H-01",
@@ -1341,7 +1334,7 @@
       "source_line": 95,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-02": {
       "id": "H-02",
@@ -1385,7 +1378,7 @@
       "source_line": 96,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-03": {
       "id": "H-03",
@@ -1420,7 +1413,7 @@
       "source_line": 97,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-04": {
       "id": "H-04",
@@ -1460,7 +1453,7 @@
       "source_line": 98,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "G-01": {
       "id": "G-01",
@@ -1498,7 +1491,7 @@
       "source_line": 103,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "G-02": {
       "id": "G-02",
@@ -1541,7 +1534,7 @@
       "source_line": 104,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "G-03": {
       "id": "G-03",
@@ -1587,7 +1580,7 @@
       "source_line": 105,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-05": {
       "id": "H-05",
@@ -1628,7 +1621,7 @@
       "source_line": 115,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-06": {
       "id": "H-06",
@@ -1673,7 +1666,7 @@
       "source_line": 116,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-07": {
       "id": "H-07",
@@ -1705,7 +1698,7 @@
       "source_line": 117,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-08": {
       "id": "H-08",
@@ -1751,7 +1744,7 @@
       "source_line": 118,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-09": {
       "id": "H-09",
@@ -1796,7 +1789,7 @@
       "source_line": 119,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-01": {
       "id": "E-01",
@@ -1837,7 +1830,7 @@
       "source_line": 125,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-02": {
       "id": "E-02",
@@ -1883,7 +1876,7 @@
       "source_line": 126,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-03": {
       "id": "E-03",
@@ -1924,7 +1917,7 @@
       "source_line": 127,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-04": {
       "id": "E-04",
@@ -1971,7 +1964,7 @@
       "source_line": 128,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-05": {
       "id": "E-05",
@@ -2027,7 +2020,7 @@
       "source_line": 129,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-06": {
       "id": "E-06",
@@ -2071,7 +2064,7 @@
       "source_line": 130,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-07": {
       "id": "E-07",
@@ -2111,7 +2104,7 @@
       "source_line": 132,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-08": {
       "id": "E-08",
@@ -2159,7 +2152,7 @@
       "source_line": 133,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "E-09": {
       "id": "E-09",
@@ -2210,7 +2203,7 @@
       "source_line": 134,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "A-01": {
       "id": "A-01",
@@ -2243,7 +2236,7 @@
       "source_line": 144,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "A-02": {
       "id": "A-02",
@@ -2286,7 +2279,7 @@
       "source_line": 145,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "A-03": {
       "id": "A-03",
@@ -2318,7 +2311,7 @@
       "source_line": 146,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-01": {
       "id": "X-01",
@@ -2367,7 +2360,7 @@
       "source_line": 151,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-02": {
       "id": "X-02",
@@ -2409,7 +2402,7 @@
       "source_line": 152,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-03": {
       "id": "X-03",
@@ -2449,7 +2442,7 @@
       "source_line": 153,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-04": {
       "id": "X-04",
@@ -2485,7 +2478,7 @@
       "source_line": 155,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-05": {
       "id": "X-05",
@@ -2521,7 +2514,7 @@
       "source_line": 157,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-06": {
       "id": "X-06",
@@ -2556,7 +2549,7 @@
       "source_line": 159,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-07": {
       "id": "X-07",
@@ -2600,7 +2593,7 @@
       "source_line": 161,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "X-08": {
       "id": "X-08",
@@ -2643,7 +2636,7 @@
       "source_line": 163,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-10": {
       "id": "H-10",
@@ -2683,7 +2676,7 @@
       "source_line": 175,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-01": {
       "id": "W-01",
@@ -2731,7 +2724,7 @@
       "source_line": 180,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-02": {
       "id": "W-02",
@@ -2779,7 +2772,7 @@
       "source_line": 182,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-03": {
       "id": "W-03",
@@ -2811,7 +2804,7 @@
       "source_line": 184,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-04": {
       "id": "W-04",
@@ -2843,7 +2836,7 @@
       "source_line": 185,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-05": {
       "id": "W-05",
@@ -2896,7 +2889,7 @@
       "source_line": 187,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-06": {
       "id": "W-06",
@@ -2936,7 +2929,7 @@
       "source_line": 188,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-07": {
       "id": "W-07",
@@ -2979,7 +2972,7 @@
       "source_line": 193,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-08": {
       "id": "W-08",
@@ -3026,7 +3019,7 @@
       "source_line": 194,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-09": {
       "id": "W-09",
@@ -3059,7 +3052,7 @@
       "source_line": 196,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-10": {
       "id": "W-10",
@@ -3105,7 +3098,7 @@
       "source_line": 198,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-11": {
       "id": "W-11",
@@ -3151,7 +3144,7 @@
       "source_line": 199,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-12": {
       "id": "W-12",
@@ -3212,7 +3205,7 @@
       "source_line": 201,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-13": {
       "id": "W-13",
@@ -3260,7 +3253,7 @@
       "source_line": 203,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-14": {
       "id": "W-14",
@@ -3306,7 +3299,7 @@
       "source_line": 205,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-15": {
       "id": "W-15",
@@ -3348,7 +3341,7 @@
       "source_line": 207,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-16": {
       "id": "W-16",
@@ -3396,7 +3389,7 @@
       "source_line": 208,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-17": {
       "id": "W-17",
@@ -3471,7 +3464,7 @@
       "source_line": 213,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-18": {
       "id": "W-18",
@@ -3516,7 +3509,7 @@
       "source_line": 214,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-19": {
       "id": "W-19",
@@ -3559,7 +3552,7 @@
       "source_line": 215,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-20": {
       "id": "W-20",
@@ -3599,7 +3592,7 @@
       "source_line": 216,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-21": {
       "id": "W-21",
@@ -3660,7 +3653,7 @@
       "source_line": 217,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "W-22": {
       "id": "W-22",
@@ -3712,7 +3705,7 @@
       "source_line": 218,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-01": {
       "id": "R-01",
@@ -3752,7 +3745,7 @@
       "source_line": 228,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-02": {
       "id": "R-02",
@@ -3784,7 +3777,7 @@
       "source_line": 229,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-03": {
       "id": "R-03",
@@ -3832,7 +3825,7 @@
       "source_line": 231,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-04": {
       "id": "R-04",
@@ -3880,7 +3873,7 @@
       "source_line": 232,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-05": {
       "id": "R-05",
@@ -3923,7 +3916,7 @@
       "source_line": 233,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-06": {
       "id": "R-06",
@@ -3975,7 +3968,7 @@
       "source_line": 234,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-07": {
       "id": "R-07",
@@ -4023,7 +4016,7 @@
       "source_line": 235,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-08": {
       "id": "R-08",
@@ -4057,7 +4050,7 @@
       "source_line": 236,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-11": {
       "id": "H-11",
@@ -4102,7 +4095,7 @@
       "source_line": 244,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "H-12": {
       "id": "H-12",
@@ -4134,7 +4127,7 @@
       "source_line": 245,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-09": {
       "id": "R-09",
@@ -4179,7 +4172,7 @@
       "source_line": 250,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-10": {
       "id": "R-10",
@@ -4212,7 +4205,7 @@
       "source_line": 251,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-11": {
       "id": "R-11",
@@ -4257,7 +4250,7 @@
       "source_line": 253,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-12": {
       "id": "R-12",
@@ -4289,7 +4282,7 @@
       "source_line": 254,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-13": {
       "id": "R-13",
@@ -4335,7 +4328,7 @@
       "source_line": 256,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-14": {
       "id": "R-14",
@@ -4384,7 +4377,7 @@
       "source_line": 257,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-15": {
       "id": "R-15",
@@ -4431,7 +4424,7 @@
       "source_line": 259,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-16": {
       "id": "R-16",
@@ -4479,7 +4472,7 @@
       "source_line": 260,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "R-17": {
       "id": "R-17",
@@ -4525,7 +4518,7 @@
       "source_line": 261,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "D-01": {
       "id": "D-01",
@@ -4569,7 +4562,7 @@
       "source_line": 269,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "D-02": {
       "id": "D-02",
@@ -4611,7 +4604,7 @@
       "source_line": 270,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "D-03": {
       "id": "D-03",
@@ -4655,7 +4648,7 @@
       "source_line": 272,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "D-04": {
       "id": "D-04",
@@ -4697,7 +4690,7 @@
       "source_line": 273,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "D-05": {
       "id": "D-05",
@@ -4730,7 +4723,7 @@
       "source_line": 274,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-01": {
       "id": "M-01",
@@ -4785,7 +4778,7 @@
       "source_line": 284,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-02": {
       "id": "M-02",
@@ -4829,7 +4822,7 @@
       "source_line": 285,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-03": {
       "id": "M-03",
@@ -4876,7 +4869,7 @@
       "source_line": 286,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-04": {
       "id": "M-04",
@@ -4917,7 +4910,7 @@
       "source_line": 287,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-05": {
       "id": "M-05",
@@ -4963,7 +4956,7 @@
       "source_line": 288,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-06": {
       "id": "M-06",
@@ -5004,7 +4997,7 @@
       "source_line": 289,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-07": {
       "id": "M-07",
@@ -5046,7 +5039,7 @@
       "source_line": 290,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-08": {
       "id": "M-08",
@@ -5089,7 +5082,7 @@
       "source_line": 291,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "M-09": {
       "id": "M-09",
@@ -5134,7 +5127,7 @@
       "source_line": 292,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred"
+      "error_definition_status": "candidate_linked_by_review"
     },
     "P01-FIELDS": {
       "id": "P01-FIELDS",
@@ -5193,7 +5186,7 @@
       "source_line": 308,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01"
     },
     "P01-CREATE-FLOW": {
@@ -5265,7 +5258,7 @@
       "source_line": 310,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01",
       "operation_ref": "PS-PL01-CREATE",
       "operation_scope": "core",
@@ -5334,7 +5327,7 @@
       "source_line": 312,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01",
       "operation_ref": "PS-PL01-READ",
       "operation_scope": "core",
@@ -5414,7 +5407,7 @@
       "source_line": 314,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01",
       "operation_ref": "PS-PL01-UPDATE",
       "operation_scope": "core",
@@ -5432,17 +5425,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능·조건 미확인 외부 효과를 실행하지 않는다. 수정·삭제·재등록을 갱신으로 대체 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능·조건 미확인 외부 효과를 실행하지 않는다. 수정·삭제·재등록을 갱신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P01-RENEW.01",
@@ -5471,7 +5464,7 @@
       "source_line": 316,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01",
       "operation_ref": "PS-PL01-RENEW",
       "operation_scope": "hold",
@@ -5540,7 +5533,7 @@
       "source_line": 318,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01",
       "operation_ref": "PS-PL01-STATUS",
       "operation_scope": "core",
@@ -5613,7 +5606,7 @@
       "source_line": 320,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL01",
       "operation_ref": "PS-PL01-RESPOND",
       "operation_scope": "core",
@@ -5673,7 +5666,7 @@
       "source_line": 330,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02"
     },
     "P02-CREATE-FLOW": {
@@ -5748,7 +5741,7 @@
       "source_line": 332,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-CREATE",
       "operation_scope": "core",
@@ -5817,7 +5810,7 @@
       "source_line": 334,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-READ",
       "operation_scope": "core",
@@ -5898,7 +5891,7 @@
       "source_line": 336,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-UPDATE",
       "operation_scope": "core",
@@ -5916,17 +5909,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 기능·정책·효과 미확인 외부 효과를 실행하지 않는다. 유료 끌어올리기·일정 등록을 갱신으로 대체 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 기능·정책·효과 미확인 외부 효과를 실행하지 않는다. 유료 끌어올리기·일정 등록을 갱신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P02-RENEW.01",
@@ -5955,7 +5948,7 @@
       "source_line": 338,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-RENEW",
       "operation_scope": "hold",
@@ -6029,7 +6022,7 @@
       "source_line": 340,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-FIRST-OPEN-SCHEDULE",
       "operation_scope": "conditional",
@@ -6099,7 +6092,7 @@
       "source_line": 342,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-STATUS",
       "operation_scope": "core",
@@ -6172,7 +6165,7 @@
       "source_line": 344,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL02",
       "operation_ref": "PS-PL02-RESPOND",
       "operation_scope": "core",
@@ -6232,7 +6225,7 @@
       "source_line": 354,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03"
     },
     "P03-CREATE-FLOW": {
@@ -6307,7 +6300,7 @@
       "source_line": 356,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-CREATE",
       "operation_scope": "core",
@@ -6379,7 +6372,7 @@
       "source_line": 358,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-READ",
       "operation_scope": "core",
@@ -6458,7 +6451,7 @@
       "source_line": 360,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-UPDATE",
       "operation_scope": "core",
@@ -6476,17 +6469,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 프로필 수정·서비스 삭제 재추가를 갱신으로 대체 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 프로필 수정·서비스 삭제 재추가를 갱신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P03-RENEW.01",
@@ -6515,7 +6508,7 @@
       "source_line": 362,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-RENEW",
       "operation_scope": "hold",
@@ -6592,7 +6585,7 @@
       "source_line": 364,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-REPRESENTATIVE-SERVICE",
       "operation_scope": "conditional",
@@ -6664,7 +6657,7 @@
       "source_line": 366,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-STATUS",
       "operation_scope": "core",
@@ -6735,7 +6728,7 @@
       "source_line": 368,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL03",
       "operation_ref": "PS-PL03-RESPOND",
       "operation_scope": "core",
@@ -6801,7 +6794,7 @@
       "source_line": 378,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04"
     },
     "P04-CREATE-FLOW": {
@@ -6874,7 +6867,7 @@
       "source_line": 380,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04",
       "operation_ref": "PS-PL04-CREATE",
       "operation_scope": "extension",
@@ -6943,7 +6936,7 @@
       "source_line": 382,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04",
       "operation_ref": "PS-PL04-READ",
       "operation_scope": "extension",
@@ -7024,7 +7017,7 @@
       "source_line": 384,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04",
       "operation_ref": "PS-PL04-UPDATE",
       "operation_scope": "extension",
@@ -7042,17 +7035,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 유료 제안·요청 수신으로 대체 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 유료 제안·요청 수신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P04-RENEW.01",
@@ -7081,7 +7074,7 @@
       "source_line": 386,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04",
       "operation_ref": "PS-PL04-RENEW",
       "operation_scope": "hold",
@@ -7151,7 +7144,7 @@
       "source_line": 388,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04",
       "operation_ref": "PS-PL04-STATUS",
       "operation_scope": "extension",
@@ -7169,17 +7162,18 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 반려 조회/재접수 자동 대행 없음",
-      "destination_text": "R 또는 D",
+      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 반려 조회/재접수 자동 대행 없음 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "R 제한 또는 W→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "R",
+          "W",
           "D"
         ],
-        "condition_text": "R 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "R 제한 또는 W→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P04-RESPOND.01",
@@ -7216,7 +7210,7 @@
       "source_line": 390,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL04",
       "operation_ref": "PS-PL04-RESPOND",
       "operation_scope": "local",
@@ -7269,7 +7263,7 @@
       "source_line": 400,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05"
     },
     "P05-CREATE-FLOW": {
@@ -7343,7 +7337,7 @@
       "source_line": 402,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05",
       "operation_ref": "PS-PL05-CREATE",
       "operation_scope": "extension",
@@ -7412,7 +7406,7 @@
       "source_line": 404,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05",
       "operation_ref": "PS-PL05-READ",
       "operation_scope": "extension",
@@ -7490,7 +7484,7 @@
       "source_line": 406,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05",
       "operation_ref": "PS-PL05-UPDATE",
       "operation_scope": "extension",
@@ -7564,7 +7558,7 @@
       "source_line": 408,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05",
       "operation_ref": "PS-PL05-RENEW",
       "operation_scope": "extension",
@@ -7633,7 +7627,7 @@
       "source_line": 410,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05",
       "operation_ref": "PS-PL05-STATUS",
       "operation_scope": "extension",
@@ -7651,17 +7645,18 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제재 해제·삭제·자동 재게시 금지",
-      "destination_text": "R 또는 D",
+      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제재 해제·삭제·자동 재게시 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "R 제한 또는 W→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "R",
+          "W",
           "D"
         ],
-        "condition_text": "R 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "R 제한 또는 W→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P05-RESPOND.01",
@@ -7700,7 +7695,7 @@
       "source_line": 412,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL05",
       "operation_ref": "PS-PL05-RESPOND",
       "operation_scope": "local",
@@ -7745,7 +7740,7 @@
       "source_line": 422,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06"
     },
     "P06-CREATE-FLOW": {
@@ -7817,7 +7812,7 @@
       "source_line": 424,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06",
       "operation_ref": "PS-PL06-CREATE",
       "operation_scope": "extension",
@@ -7886,7 +7881,7 @@
       "source_line": 426,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06",
       "operation_ref": "PS-PL06-READ",
       "operation_scope": "extension",
@@ -7904,17 +7899,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 권한·반영 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 권한·반영 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P06-UPDATE.01",
@@ -7943,7 +7938,7 @@
       "source_line": 428,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06",
       "operation_ref": "PS-PL06-UPDATE",
       "operation_scope": "hold",
@@ -7961,17 +7956,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 현행 게시 제한 및 갱신 결과 미확인 외부 효과를 실행하지 않는다. 과거 안내를 현행 규칙으로 단정·재게시 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 현행 게시 제한 및 갱신 결과 미확인 외부 효과를 실행하지 않는다. 과거 안내를 현행 규칙으로 단정·재게시 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P06-RENEW.01",
@@ -8000,7 +7995,7 @@
       "source_line": 430,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06",
       "operation_ref": "PS-PL06-RENEW",
       "operation_scope": "hold",
@@ -8069,7 +8064,7 @@
       "source_line": 432,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06",
       "operation_ref": "PS-PL06-STATUS",
       "operation_scope": "extension",
@@ -8087,17 +8082,18 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 거부 처리·계정 제한 해제 대행 없음",
-      "destination_text": "R 또는 D",
+      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 거부 처리·계정 제한 해제 대행 없음 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "R 제한 또는 W→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "R",
+          "W",
           "D"
         ],
-        "condition_text": "R 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "R 제한 또는 W→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P06-RESPOND.01",
@@ -8133,7 +8129,7 @@
       "source_line": 434,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL06",
       "operation_ref": "PS-PL06-RESPOND",
       "operation_scope": "local",
@@ -8178,7 +8174,7 @@
       "source_line": 444,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07"
     },
     "P07-CREATE-FLOW": {
@@ -8252,7 +8248,7 @@
       "source_line": 446,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07",
       "operation_ref": "PS-PL07-CREATE",
       "operation_scope": "extension",
@@ -8321,7 +8317,7 @@
       "source_line": 448,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07",
       "operation_ref": "PS-PL07-READ",
       "operation_scope": "extension",
@@ -8339,17 +8335,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 가능 범위·저장 결과 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 가능 범위·저장 결과 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P07-UPDATE.01",
@@ -8378,7 +8374,7 @@
       "source_line": 450,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07",
       "operation_ref": "PS-PL07-UPDATE",
       "operation_scope": "hold",
@@ -8396,17 +8392,17 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 갱신 기능·간격 실제 집행 미확인 외부 효과를 실행하지 않는다. 2일 규칙을 자동 재게시 일정으로 사용 금지",
-      "destination_text": "W 제한 안내 또는 D",
+      "description": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 갱신 기능·간격 실제 집행 미확인 외부 효과를 실행하지 않는다. 2일 규칙을 자동 재게시 일정으로 사용 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "W 제한 또는 W-24→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W 제한 안내 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 제한 또는 W-24→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P07-RENEW.01",
@@ -8435,7 +8431,7 @@
       "source_line": 452,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07",
       "operation_ref": "PS-PL07-RENEW",
       "operation_scope": "hold",
@@ -8504,7 +8500,7 @@
       "source_line": 454,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07",
       "operation_ref": "PS-PL07-STATUS",
       "operation_scope": "extension",
@@ -8522,17 +8518,18 @@
       "classification": "system_or_composite_spec",
       "display_class": "자동 처리",
       "actor": "composite_platform_workflow",
-      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제한 회피·재등록·계정 차단 해제 대행 없음",
-      "destination_text": "R 또는 D",
+      "description": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제한 회피·재등록·계정 차단 해제 대행 없음 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다.",
+      "destination_text": "R 제한 또는 W→D(내부 준비 완료)",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "R",
+          "W",
           "D"
         ],
-        "condition_text": "R 또는 D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "R 제한 또는 W→D(내부 준비 완료)",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "P07-RESPOND.01",
@@ -8568,7 +8565,7 @@
       "source_line": 456,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "platform_id": "PL07",
       "operation_ref": "PS-PL07-RESPOND",
       "operation_scope": "local",
@@ -8611,7 +8608,7 @@
       "source_line": 466,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "source_story_refs": [
         "R02-US-036"
       ]
@@ -8625,17 +8622,17 @@
       "classification": "user_optional_or_conditional",
       "display_class": "선택/조건부",
       "actor": "user",
-      "description": "강사는 미제공 상태에서 해당 업무를 제외하거나 내부 작성안을 이용한다.",
-      "destination_text": "W/D",
+      "description": "강사는 미제공 상태에서 업무를 제외하거나 외부 접근 없는 내부 작성안을 선택한다. W-24에서 준비 완료된 경우에만 D를 제공한다.",
+      "destination_text": "W 또는 준비 완료 D",
       "transition": {
         "kind": "conditional_or_sequence",
         "screen_ids": [
           "W",
           "D"
         ],
-        "condition_text": "W/D",
-        "guard_status": "candidate",
-        "return_context_required": false
+        "condition_text": "W 또는 준비 완료 D",
+        "guard_status": "candidate_explicit",
+        "return_context_required": true
       },
       "legacy_step_refs": [
         "REPOST.04"
@@ -8649,7 +8646,7 @@
       "source_line": 467,
       "indent": 3,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "source_story_refs": [
         "R02-US-036"
       ]
@@ -8689,7 +8686,7 @@
       "source_line": 469,
       "indent": 5,
       "scope_status": "unapproved_candidate",
-      "error_definition_status": "deferred",
+      "error_definition_status": "candidate_linked_by_review",
       "source_story_refs": [
         "R02-US-036"
       ]
@@ -10140,7 +10137,7 @@
     },
     {
       "type": "text",
-      "text": "> **검토 후보, 미승인.** 아래는 기능 영역/논리 화면이고 실제 페이지 수·URL·디자인·기술 선택을 확정하지 않는다. 7개 플랫폼 설계 범위, 기존 44개 업무(우선/후순위/보류/내부 안내/조건부), 기존 5개 제외 유지 및 14개 오류 이월 대응 후보 연결. 외부 플랫폼 접근·인증 연결·입력·첨부·제출·읽기·지속 접근 모두 현재 mock-only. 운영사 정책·법률·권한·단계별 허용·실제 효과 검증 전 실사용하지 않는다. 외부 가입·본인인증·전문가 자격·약관 동의·결제/정산은 사용자가 직접 한다. 비밀번호·인증코드 수집/저장 및 외부 효과 원복은 제공하지 않는다. 자체 계정 방식, 장기 인증 연결, 통합 승인 UX, 준비값 보존·이탈 정책, 일반 실행 중단은 기본 범위가 아니며 승인 철회·접근 차단과 구분한다. 사용자의 직접 제출만으로 앞선 자동화가 허용되는 것은 아니다."
+      "text": "> **검토 후보, 미승인.** 아래는 기능 영역/논리 화면이고 실제 페이지 수·URL·디자인·기술 선택을 확정하지 않는다. 7개 플랫폼 설계 범위, 기존 44개 업무(우선/후순위/보류/내부 안내/조건부), 기존 5개 제외 유지 및 14개 오류 이월 대응 후보 연결. 외부 플랫폼 접근·인증 연결·입력·첨부·제출·읽기·지속 접근 모두 현재 mock-only. 운영사 정책·법률·권한·단계별 허용·실제 효과 검증 전 실사용하지 않는다. 외부 가입·본인인증·전문가 자격·약관 동의·결제/정산은 사용자가 직접 한다. 비밀번호·인증코드 수집/저장 및 외부 효과 원복은 제공하지 않는다. 자체 계정 방식, 장기 인증 연결, 통합 승인 UX, 준비값 보존·이탈 정책은 별도 결정 후보이다. 일반 실행 중단은 기본 범위가 아니며 승인 철회·접근 차단과 구분한다. 사용자의 직접 제출만으로 앞선 자동화가 허용되는 것은 아니다."
     },
     {
       "type": "text",
@@ -10951,7 +10948,7 @@
     },
     {
       "type": "text",
-      "text": "   - **case1. 진행 중인 작업의 승인/접근 철회·중단**"
+      "text": "   - **case1. 진행 중인 작업의 승인 철회·접근 차단**"
     },
     {
       "type": "action",
@@ -11975,7 +11972,7 @@
     },
     {
       "type": "text",
-      "text": "- 인증 유지 정책, 내용 확인과 실행 범위 승인/요청 UX의 통합, 사용자 임의 중단, 화면 이탈/초안 보존, 계정 복구는 승인 전 후보이다. 기존 법률/정책/기술 제한을 변경하지 않는다."
+      "text": "- 인증 유지 정책, 내용 확인과 실행 범위 승인/요청 UX의 통합, 일반 실행 중단의 별도 채택 여부, 화면 이탈/초안 보존, 계정 복구는 승인 전 후보이다. 기존 법률/정책/기술 제한을 변경하지 않는다."
     },
     {
       "type": "text",
@@ -12588,7 +12585,35 @@
     ],
     "excluded_count": 5,
     "deferred_error_count": 14,
-    "error_flow": "linked_review_candidate"
+    "error_flow": "linked_review_candidate",
+    "error_review": {
+      "actions": 155,
+      "old_actions_retained": 147,
+      "legacy_steps": 536,
+      "screens": 10,
+      "journeys": 8,
+      "errors": 32,
+      "branches": 693,
+      "generic_original_conditions": 195,
+      "generic_specific_candidates": 191,
+      "generic_excluded": 4,
+      "deferred": 14,
+      "prior_error_repeat": 37,
+      "system_responsibilities": 42,
+      "scenarios": 30,
+      "team_rows": 248,
+      "platform_ops": 44,
+      "normal_revisions": 8,
+      "normal_path_revisions": 6,
+      "scope_approved": 0,
+      "external_permission_verified": 0,
+      "external_completion_verified": 0,
+      "structural_verdict": "pass_connector_js",
+      "semantic_verdict": "inconclusive",
+      "actions_with_error_refs": 155,
+      "error_journeys": 4,
+      "domain_priority_review": "candidate_corrected_internal_save_and_external_effect"
+    }
   },
   "version": "2.3",
   "error_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json",
@@ -12756,6 +12781,58 @@
     "REPOST-03": {
       "before": "강사는 기존 글 유지와 별도 신규 글 생성 대상을 확인하고 W-20/21에서 현재 내용과 범위를 별도 승인한다. 허용된 경우에만 신규 글을 실행하고 이전 글 유지·새 객체 식별·승인값·게시 상태를 독립 확인한다. 자동 반복 없음.",
       "after": "별도 범위 채택·실제 허용·게시 제한 및 기존 글 유지 확인 후에만 강사는 기존 글 유지와 신규 글 효과를 확인하고 W-21에서 새 내용·범위를 승인한다. 정확 새 객체·이전 글 유지·승인값·게시 상태 독립 확인 후보. 현재 미채택. R02-US-036 페인 근거는 운영사 허용 근거가 아니다."
+    },
+    "P01-RENEW-FLOW": {
+      "before": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능·조건 미확인 외부 효과를 실행하지 않는다. 수정·삭제·재등록을 갱신으로 대체 금지",
+      "after": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능·조건 미확인 외부 효과를 실행하지 않는다. 수정·삭제·재등록을 갱신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P02-RENEW-FLOW": {
+      "before": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 기능·정책·효과 미확인 외부 효과를 실행하지 않는다. 유료 끌어올리기·일정 등록을 갱신으로 대체 금지",
+      "after": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 기능·정책·효과 미확인 외부 효과를 실행하지 않는다. 유료 끌어올리기·일정 등록을 갱신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P03-RENEW-FLOW": {
+      "before": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 프로필 수정·서비스 삭제 재추가를 갱신으로 대체 금지",
+      "after": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 프로필 수정·서비스 삭제 재추가를 갱신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P04-RENEW-FLOW": {
+      "before": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 유료 제안·요청 수신으로 대체 금지",
+      "after": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 독립 갱신 기능 미확인 외부 효과를 실행하지 않는다. 유료 제안·요청 수신으로 대체 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P04-RESPOND-FLOW": {
+      "before": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 반려 조회/재접수 자동 대행 없음",
+      "after": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 반려 조회/재접수 자동 대행 없음 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P05-RESPOND-FLOW": {
+      "before": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제재 해제·삭제·자동 재게시 금지",
+      "after": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제재 해제·삭제·자동 재게시 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P06-UPDATE-FLOW": {
+      "before": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 권한·반영 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지",
+      "after": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 권한·반영 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P06-RENEW-FLOW": {
+      "before": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 현행 게시 제한 및 갱신 결과 미확인 외부 효과를 실행하지 않는다. 과거 안내를 현행 규칙으로 단정·재게시 금지",
+      "after": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 현행 게시 제한 및 갱신 결과 미확인 외부 효과를 실행하지 않는다. 과거 안내를 현행 규칙으로 단정·재게시 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P06-RESPOND-FLOW": {
+      "before": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 거부 처리·계정 제한 해제 대행 없음",
+      "after": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 외부 거부 처리·계정 제한 해제 대행 없음 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P07-UPDATE-FLOW": {
+      "before": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 가능 범위·저장 결과 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지",
+      "after": "서비스는 기존 정보 수정의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 수정 가능 범위·저장 결과 미확인 외부 효과를 실행하지 않는다. 삭제 재등록 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P07-RENEW-FLOW": {
+      "before": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 갱신 기능·간격 실제 집행 미확인 외부 효과를 실행하지 않는다. 2일 규칙을 자동 재게시 일정으로 사용 금지",
+      "after": "서비스는 동일 공고 갱신의 현재 지원 보류 이유와 가능한 내부 대안을 표시한다. 갱신 기능·간격 실제 집행 미확인 외부 효과를 실행하지 않는다. 2일 규칙을 자동 재게시 일정으로 사용 금지 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "P07-RESPOND-FLOW": {
+      "before": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제한 회피·재등록·계정 차단 해제 대행 없음",
+      "after": "서비스는 확인된 제한/내부 준비 결과와 가능한 보완·직접 작성·보류를 표시한다. 확인되지 않은 외부 사유는 불명으로 표시한다. 제한 회피·재등록·계정 차단 해제 대행 없음 직접 작성 지원을 선택하면 W-24 내부 준비 완료 후에만 D를 제공한다."
+    },
+    "REPOST-02": {
+      "before": "강사는 미제공 상태에서 해당 업무를 제외하거나 내부 작성안을 이용한다.",
+      "after": "강사는 미제공 상태에서 업무를 제외하거나 외부 접근 없는 내부 작성안을 선택한다. W-24에서 준비 완료된 경우에만 D를 제공한다."
     }
   }
 }
