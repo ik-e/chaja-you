@@ -42,7 +42,7 @@
 | GET /v2/objects/{object_id} | — | 200 ExternalObject | 마지막 확인과 최근 시도 결과 분리 |
 | POST /v2/objects/{object_id}/unlink | — | 200 Ack | 내부 연결 해제; 진행 작업 충돌 409 |
 
-신규/추가 등록은 operation=create로 새 요청, 수정은 update, 공고 갱신은 renew, 사용자 요청 기반 조회는 status. 기존 객체가 확인되면 object_id를 사용하며, 대상 미확정이면 인증 후 관측된 후보를 선택한다. 신규 등록의 unknown 후 조회는 related_job_id를 지정하는 새 읽기 전용 status 업무로 수행할 수 있다. 결과 미확인에서 기존 외부 변경을 재실행하거나 terminal job을 되살리지 않는다. 반려 대응은 결과 안내 후 새 정보/승인/권한으로 필요한 업무를 별도 요청한다. 원본 삭제·관리 연결 해제는 내부 업무만이며 외부 게시물 삭제가 아니다. 조건부 E01~E05는 필수 MVP에서 제외하고 본 API의 실행 권한으로 제공하지 않는다.
+신규/추가 등록은 operation=create로 새 요청, 수정은 update, 공고 갱신은 renew, 사용자 요청 기반 조회는 status. 기존 객체가 확인되면 object_id를 사용하며, 대상 미확정이면 인증 후 관측된 후보를 선택한다. 신규 등록의 unknown 후 조회는 related_job_id를 지정하는 새 읽기 전용 status 업무로 수행할 수 있다. 결과 미확인에서 기존 외부 변경을 재실행하거나 terminal job을 되살리지 않는다. 반려 대응은 결과 안내 후 새 정보/승인/권한으로 필요한 업무를 별도 요청한다. 원본 삭제·관리 연결 해제는 내부 업무만이며 외부 게시물 삭제가 아니다. 조건부 E01–E05는 필수 MVP에서 제외하고 본 API의 실행 권한으로 제공하지 않는다.
 
 ## 3. 엔드포인트별 상세 계약
 
@@ -464,7 +464,7 @@ DB 복합 FK는 연결의 무결성을, 서비스는 세션에서 얻은 owner�
 
 - 정상적으로 차단 초안을 저장할 수 있으면 H4 대응 POST 201, preparation.ready=false, issues.code=model_unavailable.
 - 안전한 초안 저장 자체가 실패하면 503, 생성/수정 성공 표시 금지. PATCH 실패 시 이전 preparation/답변/revision 유지.
-- 11/27 상태전이 설계에 가격 충돌·모델 불가 연결, 11/30~12/4 PREP 인계·자기성찰에서 timeout/429/5xx/late revision/비용 측정 및 수치 재검토. R02/R03 실제 연동 재개 후 R01 검토. 외부 모델 추가 비용 승인은 별도.
+- 11/27 상태전이 설계에 가격 충돌·모델 불가 연결, 11/30–12/4 PREP 인계·자기성찰에서 timeout/429/5xx/late revision/비용 측정 및 수치 재검토. R02/R03 실제 연동 재개 후 R01 검토. 외부 모델 추가 비용 승인은 별도.
 
 ```json
 {

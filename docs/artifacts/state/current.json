@@ -476,6 +476,12 @@
       "authority": "human",
       "source_ref": "docs/human/responses/HRESP-20261125-03_common-physical-direction.md",
       "source_id": "HRESP-20261125-03"
+    },
+    {
+      "text": "R01 11/26: V1.2를 후속 설계 기준으로 사용하되 가설·조건부 확장·MVP·실제 지원/실행은 별도 판단. R02·R04·R05 각각 전체 사용자 스토리와 7개 플랫폼 독립 조사; R01 통합·서비스 범위 결정·DB 설계. INTENT-DESIGN-003 우선.",
+      "authority": "human",
+      "source_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
+      "source_id": "HRESP-20261126-01"
     }
   ],
   "human_input": {

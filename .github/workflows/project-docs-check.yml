@@ -20,5 +20,9 @@ jobs:
         run: python -m py_compile tools/project_docs.py
       - name: Validate canonical artifacts and projections
         run: python tools/project_docs.py --check
+      - name: Check Markdown range syntax in submission and current design
+        run: |
+          node tools/check_markdown_ranges.mjs --self-test
+          node tools/check_markdown_ranges.mjs docs/step1/기획서_제출본.md docs/step1/WBS_제출본.md docs/step2/API_설계_문서.md docs/step2/데이터베이스_스키마_설계서.md docs/design/lesson-registration/CURRENT-DESIGN.md docs/design/lesson-registration/BASELINE-POLICY.md
       - name: Validate deliverable framework mapping (design only)
         run: python tools/check_deliverables.py
