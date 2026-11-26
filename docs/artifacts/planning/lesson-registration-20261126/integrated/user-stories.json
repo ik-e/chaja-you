@@ -86,7 +86,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F01",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 사용자로부터 원본 레슨 정보를 입력받는다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-002",
@@ -122,7 +137,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F02",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 저장된 원본 레슨 정보를 불러온다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-003",
@@ -155,7 +185,28 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F03",
+          "relation_type": "result_review",
+          "reason": "구조화는 서비스가 수행하며 강사는 추출 결과를 원본과 대조한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F09",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 입력안의 정확성과 유효성을 검증한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-004",
@@ -191,7 +242,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F04",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 사용자가 기존 원본 정보를 수정할 수 있도록 한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-005",
@@ -222,7 +288,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F05",
+          "relation_type": "trigger",
+          "reason": "저장 요청과 실제 저장·버전 관리는 별도 행동이다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-006",
@@ -258,7 +339,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F06",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 플랫폼별 지원 가능한 업무와 제약을 사용자에게 제공한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-007",
@@ -294,7 +390,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F07",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 사용자로부터 작업 대상과 업무 종류를 선택받는다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-008",
@@ -326,7 +437,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F08",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 원본 정보를 대상 플랫폼에 맞게 변환한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-009",
@@ -362,7 +488,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F10",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 부족하거나 불확실한 정보를 사용자에게 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-010",
@@ -398,7 +539,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F11",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 플랫폼 제약과 충돌하는 정보에 대한 해결 방안 및 선택지를 제공하고 사용자 결정을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-011",
@@ -434,7 +590,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F12",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 대상 플랫폼에 대한 사용자 인증을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-012",
@@ -466,7 +637,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F12",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 대상 플랫폼에 대한 사용자 인증을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-013",
@@ -503,7 +689,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F13",
+          "relation_type": "result_review",
+          "reason": "인증된 계정과 권한의 시스템 확인 결과를 사용자가 확인하는 후보; 계정과 권한은 별도 대상이다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-014",
@@ -539,7 +740,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F14",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 기존 게시물을 조회하고 관리할 대상을 식별한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-015",
@@ -575,7 +791,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F15",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 기존 게시 정보와 변경 예정 정보를 비교하여 사용자에게 제공한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-016",
@@ -611,7 +842,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F16",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 사용자에게 최종 등록·변경 정보의 승인을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-017",
@@ -649,7 +895,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F17",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 사용자에게 업무 실행 범위의 승인을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-018",
@@ -685,7 +946,28 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F16",
+          "relation_type": "exception_response",
+          "reason": "정보 승인 거절과 실행 범위 승인 거절이 섞여 있어 별도 행동으로 분해 검토.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F17",
+          "relation_type": "exception_response",
+          "reason": "정보 승인 거절과 실행 범위 승인 거절이 섞여 있어 별도 행동으로 분해 검토.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-019",
@@ -718,7 +1000,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F18",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 현재 실행 조건과 사용자 승인 내용의 일치 여부를 확인한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-020",
@@ -750,7 +1047,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F19",
+          "relation_type": "trigger",
+          "reason": "사용자의 등록 요청 또는 실행 승인에 의해 서비스가 신규 등록을 수행한다. 별도 실행 요청이 필요한지는 승인 흐름 검토.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-021",
@@ -782,7 +1094,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F20",
+          "relation_type": "trigger",
+          "reason": "사용자의 수정 요청 또는 실행 승인에 의해 서비스가 수정한다. 별도 실행 요청 여부는 검토.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-022",
@@ -814,7 +1141,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F21",
+          "relation_type": "trigger",
+          "reason": "사용자의 갱신 요청 또는 실행 승인에 의해 서비스가 허용된 갱신을 수행한다. 별도 실행 요청 여부는 검토.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-023",
@@ -851,7 +1193,28 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F22",
+          "relation_type": "result_review",
+          "reason": "접수 근거 확인은 결과 확인의 사용자 측 행동이며, 서비스가 외부 결과를 독립 검증한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F24",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 수행한 업무의 결과를 사용자에게 전달한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-024",
@@ -887,7 +1250,28 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F23",
+          "relation_type": "result_review",
+          "reason": "이력 열람은 저장된 이력을 사용하는 행동이다. 이력 저장 자체는 시스템 동작.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F25",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 플랫폼별 마지막 확인 정보와 상태를 통합하여 제공한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-025",
@@ -923,7 +1307,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F26",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 사용자로부터 상태 갱신 요청을 받는다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-026",
@@ -956,7 +1355,28 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F22",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 수행한 업무의 실제 결과를 확인한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F27",
+          "relation_type": "trigger",
+          "reason": "미확인 업무에 대한 읽기 전용 결과 확인 요청 후보. 신규 변경을 재전송하는 행동이 아니다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-027",
@@ -988,7 +1408,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F28",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 확인된 상태 변화 및 갱신 결과를 사용자에게 전달한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-028",
@@ -1020,7 +1455,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F29",
+          "relation_type": "exception_response",
+          "reason": "대응 안내의 후속 행동 후보. 내부 보완안 입력과 외부 재제출은 구분하고 외부 변경은 새 승인·권한 필요.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-029",
@@ -1054,7 +1504,28 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F24",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 수행한 업무의 결과를 사용자에게 전달한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F25",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 플랫폼별 마지막 확인 정보와 상태를 통합하여 제공한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-030",
@@ -1090,7 +1561,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "E01",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 자동 모니터링의 대상과 조건을 설정받는다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-031",
@@ -1126,7 +1612,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "E02",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 인증 유지가 필요한 경우 위험성을 안내하고 별도의 승인을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-032",
@@ -1163,7 +1664,28 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "E03",
+          "relation_type": "result_review",
+          "reason": "자동 관측은 시스템 동작이며 사용자는 관측 근거를 확인한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "E04",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 대응이 필요한 상태 변화를 사용자에게 알린다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-033",
@@ -1198,7 +1720,22 @@
       ],
       "decision_request": null,
       "classification": "merged_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "E05",
+          "relation_type": "trigger",
+          "reason": "철회는 사용자의 요청; 권한 해제와 세션 폐기는 시스템 책임.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-034",
@@ -1228,7 +1765,22 @@
       "decision_request": "진행 중 작업과 삭제 요청 충돌 시 원본·감사 정보별 처리 순서",
       "classification": "team_candidate",
       "scope_status": "R01 review pending",
-      "authority_note": "V1.2 §9.5 명시; 처리 정책 미확정"
+      "authority_note": "V1.2 §9.5 명시; 처리 정책 미확정",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "explicit_policy",
+        "basis": "V1.2 §9.5 원본 정보 삭제 요청",
+        "related_features": [
+          "F05"
+        ],
+        "reason": "원본 저장과 수명주기 관리의 필수 보완 행동; 삭제 자체는 F05의 명시 기능이 아님."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-035",
@@ -1258,7 +1810,23 @@
       "decision_request": "진행 중인 작업이 있을 때 연결 해제 시점",
       "classification": "team_candidate",
       "scope_status": "R01 review pending",
-      "authority_note": "V1.2 §9.5 명시; 처리 정책 미확정"
+      "authority_note": "V1.2 §9.5 명시; 처리 정책 미확정",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "explicit_policy",
+        "basis": "V1.2 §9.5 외부 게시물 관리 연결 해제",
+        "related_features": [
+          "F14",
+          "F25"
+        ],
+        "reason": "관리 대상 연결의 수명주기; 외부 게시물 삭제와 구별."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-036",
@@ -1287,7 +1855,22 @@
       ],
       "decision_request": "외부 심사취소의 대행은 미결정. 직접 안내만 제안.",
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "scope_candidate",
+        "basis": "R05-DEC-1, V1.2 §9.3 외부 변경 취소·복구 미보장",
+        "related_features": [
+          "F29"
+        ],
+        "reason": "심사 취소의 외부 대행은 미결정; 대응 안내와 실제 취소를 구분."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-037",
@@ -1318,7 +1901,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F07",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 사용자로부터 작업 대상과 업무 종류를 선택받는다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-038",
@@ -1351,7 +1949,28 @@
       ],
       "decision_request": "대표 서비스 변경이 모집 정보 관리 범위인지 결정",
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F11",
+          "relation_type": "candidate_only",
+          "reason": "숨고 대표 서비스 지정은 별도의 변경 업무 범위 후보; 제약 선택과 반드시 같은 기능은 아니다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F15",
+          "relation_type": "candidate_only",
+          "reason": "대표 서비스 변경 전후 비교와 관련될 수 있으나 변경 실행 권한은 미확정.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-039",
@@ -1382,7 +2001,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F06",
+          "relation_type": "result_review",
+          "reason": "지원 업무와 제외된 유료 제안서 발송의 차이를 확인하는 행동; 발송 기능은 범위 밖.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-040",
@@ -1415,7 +2049,28 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F08",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 원본 정보를 대상 플랫폼에 맞게 변환한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F09",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 입력안의 정확성과 유효성을 검증한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-041",
@@ -1447,7 +2102,22 @@
       "decision_request": null,
       "classification": "team_candidate",
       "scope_status": "R01 review pending",
-      "authority_note": "후속 조치 확인과 일정 변경 대행 구분"
+      "authority_note": "후속 조치 확인과 일정 변경 대행 구분",
+      "feature_links": [
+        {
+          "feature_id": "F29",
+          "relation_type": "result_review",
+          "reason": "심사 승인 후 모집에 필요한 남은 조치 안내; 일정 등록 대행과 구분.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-042",
@@ -1476,7 +2146,24 @@
       ],
       "decision_request": "서비스 자체 사용자 식별 및 소유 확인 범위를 별도 확정",
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "service_prerequisite_candidate",
+        "basis": "V1.2 §9.5–9.6 사용자별 접근/소유권; 강사 피드백 A2/D1",
+        "related_features": [
+          "F02",
+          "F05",
+          "F25"
+        ],
+        "reason": "서비스 자체 사용자 식별·본인 데이터 접근의 전제; 외부 플랫폼 인증 F12와 동일하지 않음."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-043",
@@ -1509,7 +2196,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F10",
+          "relation_type": "interaction",
+          "reason": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증: 부족하거나 불확실한 정보를 사용자에게 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-044",
@@ -1541,7 +2243,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F11",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 플랫폼 제약과 충돌하는 정보에 대한 해결 방안 및 선택지를 제공하고 사용자 결정을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-045",
@@ -1576,7 +2293,34 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F22",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 수행한 업무의 실제 결과를 확인한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F24",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 수행한 업무의 결과를 사용자에게 전달한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F29",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 실패·반려·정보 불일치에 필요한 대응을 안내한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-046",
@@ -1611,7 +2355,34 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F22",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 수행한 업무의 실제 결과를 확인한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F24",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 수행한 업무의 결과를 사용자에게 전달한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F25",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 플랫폼별 마지막 확인 정보와 상태를 통합하여 제공한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-047",
@@ -1643,7 +2414,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F28",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 확인된 상태 변화 및 갱신 결과를 사용자에게 전달한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-048",
@@ -1676,7 +2462,22 @@
       ],
       "decision_request": null,
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F29",
+          "relation_type": "result_review",
+          "reason": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인: 실패·반려·정보 불일치에 필요한 대응을 안내한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-049",
@@ -1707,7 +2508,23 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "scope_candidate",
+        "basis": "R02-US-025, V1.2 §9.2–9.3",
+        "related_features": [
+          "F18",
+          "F22"
+        ],
+        "reason": "실행 전 철회, 실행 중 취소, 이미 발생한 외부 효과를 구분해 범위 결정."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-050",
@@ -1739,7 +2556,24 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "team_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "scope_candidate",
+        "basis": "R02-US-026, V1.2 §9.2–9.3",
+        "related_features": [
+          "F18",
+          "F22",
+          "F29"
+        ],
+        "reason": "중단 원인과 기존 효과에 따라 새 요청/재승인/재개 가능성 검토. 자동 재실행 금지."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-051",
@@ -1770,7 +2604,24 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "service_prerequisite_candidate",
+        "basis": "V1.2 §9.5–9.6 및 강사 피드백 A2/D1",
+        "related_features": [
+          "F02",
+          "F05",
+          "F25"
+        ],
+        "reason": "본인 원본·업무·이력에 접근하기 위한 서비스 자체 인증 후보."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-052",
@@ -1800,7 +2651,23 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "service_prerequisite_candidate",
+        "basis": "강사 피드백 A2/D1 서비스 인증과 소유권 검토",
+        "related_features": [
+          "F02",
+          "F25"
+        ],
+        "reason": "인증 실패 시 접근 차단·안내 후보; 구체 인증 방식 미정."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-053",
@@ -1830,7 +2697,23 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "service_prerequisite_candidate",
+        "basis": "강사 피드백 A2/D1 서비스 세션 종료 검토",
+        "related_features": [
+          "F02",
+          "F25"
+        ],
+        "reason": "서비스 세션 종료와 작업용 외부 인증 세션 폐기를 구분."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-054",
@@ -1866,7 +2749,34 @@
       ],
       "decision_request": null,
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F08",
+          "relation_type": "interaction",
+          "reason": "플랫폼별 조건의 정정에 의해 입력안을 다시 준비하는 관계 후보.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F10",
+          "relation_type": "exception_response",
+          "reason": "누락/불확실성 보완과 관련되는 경우만 연결; 일반 플랫폼 조건 수정과 구분 검토.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F15",
+          "relation_type": "result_review",
+          "reason": "기존 게시 정보 변경에 해당할 때만 비교 기능과 연결.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-055",
@@ -1900,7 +2810,28 @@
       ],
       "decision_request": null,
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F01",
+          "relation_type": "prerequisite_support",
+          "reason": "원본 첨부 자료 확보의 선행 조건이며 권리 확인 근거는 V1.2 §9.5.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F09",
+          "relation_type": "prerequisite_support",
+          "reason": "사용 권한 확인은 입력안 검증의 전제; 권리 판단 자동화 승인 아님.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-056",
@@ -1936,7 +2867,28 @@
       ],
       "decision_request": null,
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F15",
+          "relation_type": "exception_response",
+          "reason": "실제 게시 정보와 변경 예정 정보 재비교 후보.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F18",
+          "relation_type": "exception_response",
+          "reason": "승인 조건 불일치 발견 시 재검토·재승인 필요. 비교와 승인 재검토 분리 검토.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-057",
@@ -1972,7 +2924,34 @@
       ],
       "decision_request": null,
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F08",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 원본 정보를 대상 플랫폼에 맞게 변환한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F09",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 입력안의 정확성과 유효성을 검증한다.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F10",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 부족하거나 불확실한 정보를 사용자에게 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-058",
@@ -2004,7 +2983,22 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F29",
+          "relation_type": "candidate_only",
+          "reason": "일정 설정의 필요성 안내는 F29에 연결되지만 실제 일정 설정 대행은 신규 범위 후보.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-059",
@@ -2038,7 +3032,28 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F06",
+          "relation_type": "candidate_only",
+          "reason": "지원 불가 이유 안내는 F06에 해당하나 직접 작성용 자료 제공은 별도 가치·범위 검토.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F08",
+          "relation_type": "candidate_only",
+          "reason": "변환된 입력안 활용 가능성 후보. 직접 작성용 산출물 제공을 기존 피처로 확정하지 않음.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-060",
@@ -2072,7 +3087,28 @@
       ],
       "decision_request": null,
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "F12",
+          "relation_type": "exception_response",
+          "reason": "인증 실패 후 외부 변경 없이 종료하는 분기 후보.",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "feature_id": "F13",
+          "relation_type": "exception_response",
+          "reason": "계정·권한 문제로 실행 불가 시 종료하는 분기 후보.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-061",
@@ -2105,7 +3141,22 @@
       ],
       "decision_request": null,
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [
+        {
+          "feature_id": "E02",
+          "relation_type": "exception_response",
+          "reason": "해당 피처의 오류·거절·재검토·종료 등 대응: 인증 유지가 필요한 경우 위험성을 안내하고 별도의 승인을 요청한다.",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "non_feature_basis": null,
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-062",
@@ -2136,7 +3187,24 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "service_prerequisite_candidate",
+        "basis": "강사 피드백 A2/D1 사용자 식별 검토",
+        "related_features": [
+          "F02",
+          "F05",
+          "F25"
+        ],
+        "reason": "서비스 계정 등록 방식은 미결정; 사용자 식별이 필요한 점과 분리."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     },
     {
       "id": "IS-063",
@@ -2168,7 +3236,23 @@
       ],
       "decision_request": "R01 범위 결정 필요",
       "classification": "integration_candidate",
-      "scope_status": "R01 review pending"
+      "scope_status": "R01 review pending",
+      "feature_links": [],
+      "non_feature_basis": {
+        "kind": "scope_candidate",
+        "basis": "V1.2 §9.5 개인정보 보호와 원본 삭제; 계정 삭제 자체는 명시되지 않음",
+        "related_features": [
+          "F05",
+          "F23"
+        ],
+        "reason": "서비스 계정 삭제/보존 범위 및 권리 대응을 검토할 후보, 실제 외부 삭제 기능 아님."
+      },
+      "action_validation": {
+        "svo_status": "review_pending",
+        "atomicity": "review_pending",
+        "scope_status": "review_pending",
+        "branch_closure": "review_pending"
+      }
     }
   ],
   "feature_coverage": [
@@ -2180,7 +3264,22 @@
         "IS-055"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "소개글·사진·수업 조건 등의 원본 확보",
+      "story_links": [
+        {
+          "story_id": "IS-001",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-055",
+          "relation_type": "prerequisite_support",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": []
     },
     {
       "feature_id": "F02",
@@ -2189,7 +3288,23 @@
         "IS-002"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "재사용할 원본 확보",
+      "story_links": [
+        {
+          "story_id": "IS-002",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-042",
+        "IS-051",
+        "IS-052",
+        "IS-053",
+        "IS-062"
+      ],
+      "system_event_group_refs": []
     },
     {
       "feature_id": "F03",
@@ -2207,7 +3322,19 @@
           "id": "R05-SE-1"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "근거와 연결된 레슨 사실 및 항목별 정보",
+      "story_links": [
+        {
+          "story_id": "IS-003",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-01"
+      ]
     },
     {
       "feature_id": "F04",
@@ -2216,7 +3343,17 @@
         "IS-004"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "변경된 원본 정보",
+      "story_links": [
+        {
+          "story_id": "IS-004",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": []
     },
     {
       "feature_id": "F05",
@@ -2234,7 +3371,25 @@
           "id": "R05-SE-1"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "재사용 및 버전 관리가 가능한 원본",
+      "story_links": [
+        {
+          "story_id": "IS-005",
+          "relation_type": "trigger",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-034",
+        "IS-042",
+        "IS-051",
+        "IS-062",
+        "IS-063"
+      ],
+      "system_event_group_refs": [
+        "EV-01"
+      ]
     },
     {
       "feature_id": "F06",
@@ -2245,7 +3400,27 @@
         "IS-059"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "등록·수정·갱신·조회 가능 여부 및 선행 조건",
+      "story_links": [
+        {
+          "story_id": "IS-006",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-039",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-059",
+          "relation_type": "candidate_only",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": []
     },
     {
       "feature_id": "F07",
@@ -2255,7 +3430,22 @@
         "IS-037"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "대상 플랫폼 및 수행하려는 업무 범위",
+      "story_links": [
+        {
+          "story_id": "IS-007",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-037",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": []
     },
     {
       "feature_id": "F08",
@@ -2277,7 +3467,39 @@
           "id": "R05-SE-1"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "플랫폼별 입력안",
+      "story_links": [
+        {
+          "story_id": "IS-008",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-040",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-054",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-057",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-059",
+          "relation_type": "candidate_only",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-02"
+      ]
     },
     {
       "feature_id": "F09",
@@ -2298,7 +3520,34 @@
           "id": "R05-SE-1"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "누락·불확실·충돌·규격 위반 확인",
+      "story_links": [
+        {
+          "story_id": "IS-003",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-040",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-055",
+          "relation_type": "prerequisite_support",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-057",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-02"
+      ]
     },
     {
       "feature_id": "F10",
@@ -2310,7 +3559,34 @@
         "IS-057"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "추가 정보 및 확인된 사실",
+      "story_links": [
+        {
+          "story_id": "IS-009",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-043",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-054",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-057",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-02"
+      ]
     },
     {
       "feature_id": "F11",
@@ -2321,7 +3597,29 @@
         "IS-044"
       ],
       "system_event_sources": [],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "승인된 대체 조건 또는 업무 수행 불가 판단",
+      "story_links": [
+        {
+          "story_id": "IS-010",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-038",
+          "relation_type": "candidate_only",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-044",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-02"
+      ]
     },
     {
       "feature_id": "F12",
@@ -2337,7 +3635,30 @@
           "id": "R05-SE-2"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "사용자가 직접 수행한 인증 결과",
+      "story_links": [
+        {
+          "story_id": "IS-011",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-012",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-060",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-03",
+        "EV-07"
+      ]
     },
     {
       "feature_id": "F13",
@@ -2356,7 +3677,24 @@
           "id": "R05-SE-2"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "확인된 계정 및 접근 가능 범위",
+      "story_links": [
+        {
+          "story_id": "IS-013",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-060",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-03"
+      ]
     },
     {
       "feature_id": "F14",
@@ -2374,7 +3712,21 @@
           "id": "R05-SE-2"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "확인된 기존 게시 객체 및 원본과의 연결",
+      "story_links": [
+        {
+          "story_id": "IS-014",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-035"
+      ],
+      "system_event_group_refs": [
+        "EV-03"
+      ]
     },
     {
       "feature_id": "F15",
@@ -2391,7 +3743,34 @@
           "id": "R05-SE-3"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "변경 대상·변경 전후 정보 및 변경 범위",
+      "story_links": [
+        {
+          "story_id": "IS-015",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-038",
+          "relation_type": "candidate_only",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-054",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-056",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-04"
+      ]
     },
     {
       "feature_id": "F16",
@@ -2406,7 +3785,24 @@
           "id": "R05-SE-3"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "사용자가 승인한 최종 정보",
+      "story_links": [
+        {
+          "story_id": "IS-016",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-018",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-04"
+      ]
     },
     {
       "feature_id": "F17",
@@ -2421,7 +3817,24 @@
           "id": "R05-SE-3"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "승인된 플랫폼·계정·게시 객체·업무·실행 범위",
+      "story_links": [
+        {
+          "story_id": "IS-017",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-018",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-04"
+      ]
     },
     {
       "feature_id": "F18",
@@ -2440,7 +3853,27 @@
           "id": "R05-SE-3"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "실행 가능 또는 실행 제한 판단",
+      "story_links": [
+        {
+          "story_id": "IS-019",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-056",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-049",
+        "IS-050"
+      ],
+      "system_event_group_refs": [
+        "EV-04"
+      ]
     },
     {
       "feature_id": "F19",
@@ -2458,7 +3891,19 @@
           "id": "R05-SE-4"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "신규 등록 실행 결과",
+      "story_links": [
+        {
+          "story_id": "IS-020",
+          "relation_type": "trigger",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-05"
+      ]
     },
     {
       "feature_id": "F20",
@@ -2476,7 +3921,19 @@
           "id": "R05-SE-4"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "정보 수정 실행 결과",
+      "story_links": [
+        {
+          "story_id": "IS-021",
+          "relation_type": "trigger",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-05"
+      ]
     },
     {
       "feature_id": "F21",
@@ -2494,7 +3951,19 @@
           "id": "R05-SE-4"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "공고 갱신 실행 결과",
+      "story_links": [
+        {
+          "story_id": "IS-022",
+          "relation_type": "trigger",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-05"
+      ]
     },
     {
       "feature_id": "F22",
@@ -2515,7 +3984,37 @@
           "id": "R05-SE-4"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "확인된 성공·실패·미확인 상태 및 근거",
+      "story_links": [
+        {
+          "story_id": "IS-023",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-026",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-045",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-046",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-049",
+        "IS-050"
+      ],
+      "system_event_group_refs": [
+        "EV-06"
+      ]
     },
     {
       "feature_id": "F23",
@@ -2533,7 +4032,21 @@
           "id": "R05-SE-4"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "작업 대상·승인·실행·관측 결과의 추적 기록",
+      "story_links": [
+        {
+          "story_id": "IS-024",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-063"
+      ],
+      "system_event_group_refs": [
+        "EV-05"
+      ]
     },
     {
       "feature_id": "F24",
@@ -2550,7 +4063,34 @@
           "id": "R05-SE-4"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "플랫폼별 작업 결과와 필요한 후속 조치",
+      "story_links": [
+        {
+          "story_id": "IS-023",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-029",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-045",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-046",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-06"
+      ]
     },
     {
       "feature_id": "F25",
@@ -2566,7 +4106,36 @@
           "id": "R05-SE-5"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "확인된 등록 정보·상태·확인 시점·게시 링크 등의 관리 정보",
+      "story_links": [
+        {
+          "story_id": "IS-024",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-029",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-046",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-035",
+        "IS-042",
+        "IS-051",
+        "IS-052",
+        "IS-053",
+        "IS-062"
+      ],
+      "system_event_group_refs": [
+        "EV-06"
+      ]
     },
     {
       "feature_id": "F26",
@@ -2580,7 +4149,17 @@
           "id": "R05-SE-5"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "조회 대상 및 요청 범위",
+      "story_links": [
+        {
+          "story_id": "IS-025",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": []
     },
     {
       "feature_id": "F27",
@@ -2602,7 +4181,20 @@
           "id": "R05-SE-7"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "새로운 관측 정보 또는 조회 불가 상태",
+      "story_links": [
+        {
+          "story_id": "IS-026",
+          "relation_type": "trigger",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-06",
+        "EV-07"
+      ]
     },
     {
       "feature_id": "F28",
@@ -2617,7 +4209,24 @@
           "id": "R05-SE-5"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "최신 확인 결과와 대응 필요 여부",
+      "story_links": [
+        {
+          "story_id": "IS-027",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-047",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-06"
+      ]
     },
     {
       "feature_id": "F29",
@@ -2635,7 +4244,42 @@
           "id": "R05-SE-5"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "확인된 문제 사유 및 가능한 후속 조치",
+      "story_links": [
+        {
+          "story_id": "IS-028",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-041",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-045",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-048",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-058",
+          "relation_type": "candidate_only",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [
+        "IS-036",
+        "IS-050"
+      ],
+      "system_event_group_refs": [
+        "EV-06"
+      ]
     },
     {
       "feature_id": "E01",
@@ -2649,7 +4293,19 @@
           "id": "R05-SE-6"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "모니터링 대상·조회 범위·기간·알림 조건",
+      "story_links": [
+        {
+          "story_id": "IS-030",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-08"
+      ]
     },
     {
       "feature_id": "E02",
@@ -2664,7 +4320,24 @@
           "id": "R05-SE-6"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "위험성 인지 및 명시적인 인증 유지 승인",
+      "story_links": [
+        {
+          "story_id": "IS-031",
+          "relation_type": "interaction",
+          "review_status": "pending_semantic_review"
+        },
+        {
+          "story_id": "IS-061",
+          "relation_type": "exception_response",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-08"
+      ]
     },
     {
       "feature_id": "E03",
@@ -2682,7 +4355,19 @@
           "id": "R05-SE-6"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "새로운 관측 상태와 변화 정보",
+      "story_links": [
+        {
+          "story_id": "IS-032",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-08"
+      ]
     },
     {
       "feature_id": "E04",
@@ -2696,7 +4381,19 @@
           "id": "R05-SE-6"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "상태 변화 및 문제 발생 알림",
+      "story_links": [
+        {
+          "story_id": "IS-032",
+          "relation_type": "result_review",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-08"
+      ]
     },
     {
       "feature_id": "E05",
@@ -2710,7 +4407,20 @@
           "id": "R05-SE-7"
         }
       ],
-      "status": "candidate trace only; not completeness proof"
+      "status": "trace_exists_review_pending",
+      "feature_output": "모니터링 종료 및 인증 세션 폐기",
+      "story_links": [
+        {
+          "story_id": "IS-033",
+          "relation_type": "trigger",
+          "review_status": "pending_semantic_review"
+        }
+      ],
+      "support_story_refs": [],
+      "system_event_group_refs": [
+        "EV-07",
+        "EV-08"
+      ]
     }
   ],
   "system_event_groups": [
@@ -3541,5 +5251,205 @@
     "broken_related_candidate_ids": 0,
     "verdict": "inconclusive",
     "limits": "정적 참조 검사만; 의미적 완전성·범위 확정 아님."
+  },
+  "validation_contract": {
+    "id": "USV-20261126-01",
+    "status": "검토 방법 적용 · 범위 미확정",
+    "basis": [
+      {
+        "path": "docs/artifacts/meetings/MEET-20261125-01.json",
+        "section": "사용자 스토리와 범위 (4~5쪽)"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+        "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
+        "section": "user_story / integration"
+      }
+    ],
+    "principle": "개별 SVO 행동 전수 도출 → 원자성/중복 정리 → 피처/생애주기/플랫폼/분기 검증 → 범위 검토와 R01 결정 → 사용자 흐름 → DB/API. 수량/ID coverage는 완전성 증명이 아니다.",
+    "relationship_types": {
+      "interaction": "피처가 요구하는 사용자 입력·선택·승인 또는 직접 인증",
+      "trigger": "사용자의 요청·선택이 시스템 피처 수행을 유발",
+      "result_review": "서비스/외부 시스템이 생성·검증한 결과를 사용자 측에서 확인",
+      "prerequisite_support": "피처 수행을 위한 선행 조건 또는 지원 행동",
+      "exception_response": "해당 피처의 오류·거절·재검토·종료 등 대응",
+      "candidate_only": "기존 피처와 관련 가능하지만 행동 자체의 범위 또는 연결이 미확정"
+    },
+    "checks": [
+      {
+        "id": "USV-01",
+        "name": "행동 전수 도출",
+        "rule": "피처 F01~F29/E01~E05, 진입~종료 사용자 생애주기, 7개 플랫폼 실제 업무의 세 관점에서 독립 도출; 기획에 명시되지 않은 필요/제외 행동도 후보로 기록.",
+        "done": "각 관점별 도출 목록 및 차이·누락·출처 참조, 적용 불가 근거. 확정 범위를 바꿀 미확인 조건 해소."
+      },
+      {
+        "id": "USV-02",
+        "name": "SVO 및 원자성",
+        "rule": "모든 항목에 실제 사용자 주체·단일 의미 동사·목적어를 명시; 여러 행동/대상·독립 결과를 분리하고 의미 동일 행동은 원본 ID 보존하여 병합. 화면 이동/버튼 등 구현 세분화 제외.",
+        "done": "각 행동 S/V/O 및 원자성 개별 판정; 복합/중복 처리 내역, 미결정 항목 없음."
+      },
+      {
+        "id": "USV-03",
+        "name": "피처 양방향 추적",
+        "rule": "각 스토리에서 직접 관련 F/E 또는 V1.2 절·필수 전제·범위 후보 근거를 명시; F/E에서 스토리와 시스템 이벤트를 역추적. 1:N/N:M 허용; 관련성만 있는 행동과 신규 기능을 기존 피처로 승격 금지.",
+        "done": "정적 참조 일치와 의미 검토 별도; 34개 피처의 사용자/시스템 역할 및 누락 확인. 피처 없는 행동은 사유와 출처."
+      },
+      {
+        "id": "USV-04",
+        "name": "정상·오류·예외·반복·조건부",
+        "rule": "각 행동과 발생 가능한 조건/상태/오류에 대해 사용자 후속 행동 ID 또는 명시적 종료/시스템 처리/적용 불가 근거 기록; 거절·보류·재인증·재승인·부분 성공·미확인·중복/외부 변화 포함.",
+        "done": "상황별 검증표: 행동, 조건, 정상/오류/예외/반복/조건부, 후속 ID·종료 사유, 근거 및 판정; 모든 발견 조건 처리, 불명확 분기 보완."
+      },
+      {
+        "id": "USV-05",
+        "name": "사용자·시스템 행동 구분",
+        "rule": "사용자 행동과 서비스/플랫폼 내부 이벤트를 구분하고 트리거/결과를 연결; 저장·변환·검증·실행·관측·세션 폐기를 강사 행동으로 가장하지 않는다.",
+        "done": "행동↔이벤트↔피처 의미 검토; 서비스와 플랫폼의 책임 경계 및 결과 관측 명확."
+      },
+      {
+        "id": "USV-06",
+        "name": "범위와 가치 검증",
+        "rule": "각 행동의 타깃 사용자·Pain/문제·핵심 피처/필수 지원·가치/필수성·기획 일관성 및 플랫폼 제약을 검토; 제품 범위와 MVP·실제 실행 권한을 분리.",
+        "done": "모든 행동 포함/제외/조건부 결정·근거·권한/가치 한계·R01 판단; 제외 항목과 적용 조건 명시. 제품 범위에 영향 주는 미결정 해소."
+      },
+      {
+        "id": "USV-07",
+        "name": "확정 및 DB 진입 게이트",
+        "rule": "USV-01~06의 발견 누락 보완 및 R01의 행동 단위 범위 승인 후 확정 스토리 ID와 버전을 고정. 이후 흐름·서비스 프로세스·논리 DB·ERD·API 설계.",
+        "done": "R01 확인/승인 기록 및 확정 범위, 검증 결과. 조사·근거 확보는 병행; 미확정 상태에서 DB 설계 시작/확정하지 않음. 기존 제출용 잠정안과 구현 보존."
+      }
+    ],
+    "branch_review_record_fields": [
+      "story_id",
+      "condition",
+      "scenario_type (normal/error/exception/repeat/conditional)",
+      "next_story_ids",
+      "terminal_or_system_only_reason",
+      "evidence_refs",
+      "verdict (pass/fail/inconclusive/not_applicable)"
+    ],
+    "scope_review_record_fields": [
+      "story_id",
+      "problem_pain_refs",
+      "feature_or_support_basis",
+      "value_or_necessity",
+      "constraints",
+      "product_scope (included/excluded/conditional/undecided)",
+      "mvp_scope (separate)",
+      "decision_reason",
+      "R01_authority_ref"
+    ],
+    "db_entry_gate": "모든 적용 검토 완료 및 범위에 영향을 미치는 미결정 해소, R01 승인된 행동 집합 고정 전 신규 DB 설계 진입 보류. 7개 플랫폼 사실/데이터 조사는 병행. 기존 잠정 제출본과 mock 구현 변경 없음."
+  },
+  "first_validation_pass": {
+    "date": "2026-11-26",
+    "source_story_blob": "6f8dd6012dace9a7f9e40bbe5e294ed569cbea7a",
+    "proposal_blob": "d3cac078a8e0d1898e0e249e670327497c657b07",
+    "structural_trace": {
+      "verdict": "pass",
+      "counts": {
+        "stories": 63,
+        "with_feature_links": 52,
+        "with_non_feature_basis": 11,
+        "feature_links": 73,
+        "candidate_only_links": 5,
+        "reverse_features": 34,
+        "features_with_story_or_event": 34,
+        "missing_link_or_basis": 0,
+        "bad_ref": 0
+      },
+      "limits": "정적 ID·역참조·근거 존재 검사. 근거 주장·의미적 연결·SVO 원자성·분기·범위·사용자 행동 완전성은 통과 판정 아님."
+    },
+    "checks": [
+      {
+        "check": "USV-01",
+        "status": "inconclusive",
+        "finding": "R02 26/R05 42 원본 추적 및 63개 후보. R04 미제출, 후속 조사 대기. 생애주기·업무별 전수 도출 미완료.",
+        "review_examples": [
+          "IS-001",
+          "IS-002",
+          "IS-005",
+          "IS-051"
+        ],
+        "next": "진입~종료의 원본 목록/상세 조회·첨부 추가/제거·저장 결과/실패/재요청 등 추가 행동 검토."
+      },
+      {
+        "check": "USV-02",
+        "status": "inconclusive",
+        "finding": "후보 행동 문장은 존재하나 분리된 S/V/O 필드와 모든 후보의 의미적 원자성 검토 미완료.",
+        "review_examples": [
+          "IS-007",
+          "IS-018",
+          "IS-030",
+          "IS-047",
+          "IS-056"
+        ],
+        "next": "플랫폼/업무 선택, 정보/실행 승인 거절, 관측 결과 등 독립 행동 구분 여부 판정 후 분해."
+      },
+      {
+        "check": "USV-03",
+        "status": "inconclusive",
+        "finding": "이번 갱신에서 63개 모두 피처 연결 또는 근거 연결, F/E 34개 역방향 구조와 연결 역할 추가. 의미 및 충분성은 미검증.",
+        "review_examples": [
+          "IS-034",
+          "IS-051",
+          "IS-058",
+          "IS-059"
+        ],
+        "next": "후속 행동별 목적/피처·Pain 관계·역할 검토. 후보 연결 및 비피처 근거 승인 전 확정 금지."
+      },
+      {
+        "check": "USV-04",
+        "status": "inconclusive",
+        "finding": "branch_note/related_candidate_ids는 현재 참고 관계. 조건별 후속 ID/종료 검증표 미작성; 단순 관계 참조 통과는 분기 완결 아님.",
+        "review_examples": [
+          "IS-011",
+          "IS-012",
+          "IS-026",
+          "IS-046",
+          "IS-060"
+        ],
+        "next": "오류 및 예외 조건을 하나씩 열거하고 가능한 개별 후속 행동 또는 종료 ID/근거 기록."
+      },
+      {
+        "check": "USV-05",
+        "status": "inconclusive",
+        "finding": "8개 시스템 이벤트 그룹이 연결되어 있지만 트리거·입출력·행동 책임의 개별 검토 전.",
+        "review_examples": [
+          "IS-005",
+          "IS-020",
+          "IS-028",
+          "IS-032"
+        ],
+        "next": "저장 요청 vs 저장, 실행 승인 vs 실제 실행, 내부 보완 vs 외부 재제출 등 책임 구분."
+      },
+      {
+        "check": "USV-06",
+        "status": "inconclusive",
+        "finding": "46 base/5 conditional/12 undecided 후보, 모두 범위 검토 전. 제외 행동 목록 및 행동별 가치/필수성/근거 판단 필요.",
+        "review_examples": [
+          "IS-036",
+          "IS-038",
+          "IS-049",
+          "IS-050",
+          "IS-058",
+          "IS-059",
+          "IS-063"
+        ],
+        "next": "제품 범위와 MVP, 실제 자동화 권한 분리. 사용자 행동별 결정 기록 생성."
+      },
+      {
+        "check": "USV-07",
+        "status": "inconclusive",
+        "finding": "범위 미확정; R04 및 추가 조사, 의미·분기 검토, R01 승인 전.",
+        "review_examples": [],
+        "next": "DB 신규 설계 진입 보류. 제출용 잠정 설계 및 기존 구현 보존."
+      }
+    ],
+    "overall": "inconclusive",
+    "db_entry": "blocked_pending_story_scope_approval"
   }
 }
