@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R05-PL02-DB-DETAIL",
+  "kind": "document",
+  "status": "R05 후속 조사 · 클래스 관리 목록 관찰",
+  "owner": "R05",
+  "task_ref": "TASK-057",
+  "platform_id": "PL02",
+  "platform": "탈잉",
+  "checked_at": "2026-11-26",
+  "scope": "PC 탈잉 스튜디오 클래스 관리 목록의 관찰 정보와 기존 공식 가이드를 기록한다. 이번 화면은 기존 임시저장 클래스의 목록 근거다.",
+  "evidence": [
+    {
+      "id": "T01",
+      "claim_status": "observed",
+      "source": "R05 제공 탈잉 PC 화면 캡처(원본 비공개)",
+      "location": "탈잉 스튜디오 → 클래스 관리, 운영 중인 클래스·모든 클래스",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "T02",
+      "claim_status": "documented",
+      "source": "https://talingtutorguide.oopy.io/24141f37-bd7f-808a-a6a9-ed4160a5a7b1",
+      "location": "클래스 제출하기, 심사반려 사유 확인하기",
+      "checked_at": "2026-11-26"
+    },
+    {
+      "id": "T03",
+      "claim_status": "documented",
+      "source": "https://talingtutorguide.oopy.io/schedule",
+      "location": "온/오프라인 클래스 일정 관리",
+      "checked_at": "2026-11-26"
+    }
+  ],
+  "fields": [
+    {
+      "field_id": "PL02-F01",
+      "label": "썸네일",
+      "object": "클래스",
+      "format": "이미지 미리보기",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "목록에서 관찰된 항목. 작성 필수 여부는 미확인.",
+      "notes": "미리보기가 표시된다. 파일 규격과 첨부 식별 정보는 목록에서 미확인.",
+      "evidence_refs": [
+        "T01"
+      ]
+    },
+    {
+      "field_id": "PL02-F02",
+      "label": "클래스명",
+      "object": "클래스",
+      "format": "문자열",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "목록에서 관찰된 항목. 작성 필수 여부는 미확인.",
+      "notes": "목록 텍스트. 제목의 고유성과 작성 시 필수 여부는 목록에서 미확인.",
+      "evidence_refs": [
+        "T01"
+      ]
+    },
+    {
+      "field_id": "PL02-F03",
+      "label": "운영 방식",
+      "object": "클래스",
+      "format": "분류값",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "목록에서 관찰된 항목. 작성 필수 여부는 미확인.",
+      "notes": "오프라인 사례를 관찰했다. 전체 선택지와 일정 단위 운영 방식과의 관계는 목록에서 미확인.",
+      "evidence_refs": [
+        "T01"
+      ]
+    },
+    {
+      "field_id": "PL02-F04",
+      "label": "운영 상태",
+      "object": "클래스",
+      "format": "상태 표시",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "목록에서 관찰된 항목. 작성 필수 여부는 미확인.",
+      "notes": "임시 저장 표시를 관찰했다. 심사와 실제 신청 가능 여부는 각각 확인이 필요하다.",
+      "evidence_refs": [
+        "T01"
+      ]
+    },
+    {
+      "field_id": "PL02-F05",
+      "label": "등록일",
+      "object": "클래스",
+      "format": "날짜(YYYY-MM-DD)",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "목록에서 관찰된 항목. 작성 필수 여부는 미확인.",
+      "notes": "날짜만 표시된다. 최초 작성일·최종 저장일과의 관계는 미확인.",
+      "evidence_refs": [
+        "T01"
+      ]
+    },
+    {
+      "field_id": "PL02-F06",
+      "label": "목록 건수·페이지 표시",
+      "object": "클래스 관리 목록",
+      "format": "건수, 페이지 수, 페이지 크기 선택",
+      "direction": [
+        "노출"
+      ],
+      "visibility": "authenticated",
+      "required_or_condition": "목록에서 관찰된 항목. 작성 필수 여부는 미확인.",
+      "notes": "운영 중인 클래스는 0건, 모든 클래스는 1건으로 표시됐다. UI의 표시 단위이며 API 반환 구조는 미확인.",
+      "evidence_refs": [
+        "T01"
+      ]
+    }
+  ],
+  "authenticated_observations": [
+    {
+      "screen": "클래스 관리 목록",
+      "observed": [
+        "운영 중인 클래스와 모든 클래스가 별도 영역에 있다.",
+        "운영 중인 클래스는 0건이다.",
+        "모든 클래스에는 오프라인·임시 저장으로 표시되는 클래스 1건이 있다.",
+        "좌측에 프로필·채널 관리와 클래스 관리가 각각 표시된다."
+      ],
+      "limits": "목록에 클래스 번호가 표시되지 않는다. 실제 상세 URL의 식별값, 심사 결과, 신청 가능 여부 및 상세 편집 필드는 이 캡처에서 확인되지 않았다.",
+      "evidence_refs": [
+        "T01"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "튜터 스튜디오",
+      "to": "클래스",
+      "cardinality_candidate": "튜터 관리 범위 안에서 클래스 목록을 제공한다. 권한 위임·공동 소유는 미확인.",
+      "identity": "이 화면의 클래스명이나 등록일을 고유 식별값으로 확정할 수 없다.",
+      "evidence_refs": [
+        "T01"
+      ]
+    },
+    {
+      "from": "클래스",
+      "to": "일정",
+      "cardinality_candidate": "공식 가이드에서 한 클래스에 여러 일정을 설정할 수 있다.",
+      "identity": "실제 일정 ID 및 클래스 ID의 표시 여부는 미관측.",
+      "evidence_refs": [
+        "T03"
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "operation": "작성·심사",
+      "state_before_after": "목록에서 임시 저장을 관찰했다. 공식 가이드는 별도 제출 후 심사를 설명한다.",
+      "completion_evidence": "임시 저장 표시는 저장 상태의 화면 근거다. 심사 접수는 기존 접수 상태나 알림에서 확인해야 한다.",
+      "evidence_refs": [
+        "T01",
+        "T02"
+      ]
+    },
+    {
+      "operation": "승인 이후 운영",
+      "state_before_after": "온·오프라인 클래스는 공식 가이드상 수강 신청을 받으려면 일정 등록이 필요하다.",
+      "completion_evidence": "승인 결과와 신청 가능 상태의 증거를 별도로 기록한다. 이번 표본에 운영 중인 클래스는 없다.",
+      "evidence_refs": [
+        "T01",
+        "T03"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "item": "작성 양식의 필수·조건부 필드, 가격, 회차·일정의 입력 구조, 클래스 식별 정보",
+      "reason": "클래스 관리 목록만 제공됐다.",
+      "recheck": "기존 임시 저장 클래스에서 상태 변경 없이 열 수 있는 상세를 확인한다."
+    },
+    {
+      "item": "심사 접수·반려·승인과 일정 등록 결과, 승인 이후 수정 가능 범위",
+      "reason": "운영·심사 이력이 있는 클래스가 제공되지 않았다.",
+      "recheck": "기존 이력이 있는 비식별 관리 화면이나 공식 자료를 확인한다."
+    }
+  ],
+  "design_inputs": [
+    "운영 방식, 운영 상태, 심사 결과, 일정 상태를 출처와 함께 별도 개념으로 기록한다.",
+    "목록에서 보이는 등록일의 의미는 추가 확인하고 자동으로 마지막 임시저장 시각으로 해석하지 않는다."
+  ]
+}
