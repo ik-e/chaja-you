@@ -16,32 +16,27 @@ assert.equal(v5.work_information.length,sw.works.length);
 assert.ok(sw.works.every(w=>v5.work_information.some(x=>x.id===w.id)));
 assert.ok(v5.work_information.every(w=>w.reads.concat(w.writes).every(f=>fields.has(f))));
 assert.ok(v5.payload_information.every(g=>fields.has(g.container)));
-function runAbstractTests(){
-const cases=[];function test(id,description,f){try{const value=!!f();cases.push({id,description,pass:value,verdict:value?"pass":"fail"})}catch(e){cases.push({id,description,pass:false,verdict:"fail",error:String(e)})}}
-const sources=[{id:"s1",owner:"a",rev:2,content:"new"},{id:"s2",owner:"a",rev:1,content:"other"},{id:"s3",owner:"b",rev:1,content:"private"}];
-test("M01","owner 격리와 복수 원본",()=>sources.filter(s=>s.owner==="a").map(s=>s.id).join(",")==="s1,s2");
-test("M02","최신 원본/승인 값 분리",()=>{const frozen={source:"s1",approved:"old",rev:1};return sources[0].rev===2&&frozen.approved==="old"&&frozen.rev!==sources[0].rev});
-const cmds=[{key:"k1",digest:"d1",state:"committed",receipt:"s1@2"},{key:"k2",digest:"d2",state:"reserved",source:"s1",request:"r1",affected:["price"]}];
-const find=(k,d)=>{const x=cmds.find(c=>c.key===k);return x?x.digest===d?x.receipt??x.state:"reject_digest":"unrecorded"};
-test("M03","같은 키 결과 및 다른 digest 거절",()=>find("k1","d1")==="s1@2"&&find("k1","bad")==="reject_digest"&&find("absent","d")==="unrecorded");
-const canAccept=(source,deps)=>!cmds.some(c=>c.source===source&&c.state==="reserved"&&(!c.affected||!deps||c.affected.some(a=>deps.includes(a))));
-test("M04","같은 원본 영향 저장 예약 중 승인 금지, 독립 원본/검증된 무관 경로 유지",()=>!canAccept("s1",["price"])&&!canAccept("s1",null)&&canAccept("s2",["price"])&&canAccept("s1",["title"]));
-const targets=[{id:"a",prep:"consumed",life:"ended"},{id:"b",prep:"consumed",life:"fencing"},{id:"c",prep:"consumed",life:"running"},{id:"d",prep:"held",life:"not_accepted"},{id:"e",prep:"excluded",life:"not_accepted"}];
-const accepted=t=>t.prep==="consumed"&&t.life!=="not_accepted",closed=xs=>xs.some(accepted)&&xs.filter(accepted).every(t=>t.life==="ended");
-test("M05","최초 선택 5/수락 3/held·excluded 각 1, 독립 진행·종료",()=>targets.length===5&&targets.filter(accepted).length===3&&targets.filter(t=>t.prep==="held").length===1&&targets.filter(t=>t.prep==="excluded").length===1&&!closed(targets)&&closed(targets.map(t=>accepted(t)?{...t,life:"ended"}:t))&&!closed(targets.filter(t=>!accepted(t))));
-test("M06","링크 활성 상태 유도 및 내부 해제",()=>{const objects=["o1"];const links=[{object:"o1",ended:null},{object:"o1",ended:"t1"}];return links.filter(x=>x.ended===null).length===1&&objects.includes("o1")});
-const accounts=[{owner:"a",key:"kmong/K",state:"unlinked"},{owner:"b",key:"kmong/K",state:"linked"}];
-test("M07","일시 식별≠관리 연결, 교차 owner 정규 account key 공유",()=>accounts.filter(x=>x.owner==="a"&&x.state==="linked").length===0&&accounts[0].key===accounts[1].key);
-test("M08","총량/일일 동시 claim 직렬 축약 검사",()=>{let left={total:1,daily:1};const reserve=()=>{if(left.total<1||left.daily<1)return false;left.total--;left.daily--;return true};return reserve()&&!reserve()&&left.total===0&&left.daily===0});
-test("M09","개별 효과 불명/확인/미시도 판정",()=>{const eff=[{state:"confirmed",attempt:"a"},{state:"unknown",attempt:"a"},{state:"not_attempted",attempt:null}];return eff.filter(e=>e.attempt==="a").length===2&&eff.some(e=>e.state==="unknown")&&eff.filter(e=>e.state==="not_attempted").length===1});
-test("M10","조회 실패와 뒤늦은 관측 분리",()=>{const hist=[{seq:2,eligible:true,value:"approved"},{seq:3,eligible:false,value:null},{seq:1,eligible:true,value:"pending"}];return hist.filter(x=>x.eligible).sort((a,b)=>b.seq-a.seq)[0].value==="approved"});
-test("M11","인증 문맥 세대와 정리 독립",()=>{const a={context:"r1",generation:1,state:"blocked",cleanup:"unknown"},b={context:"r1",generation:2,state:"verified",cleanup:"not_required"};return a.generation<b.generation&&a.state==="blocked"&&a.cleanup==="unknown"&&b.state==="verified"});
-test("M12","미선택 탈잉 가격 관계 불명·충돌에 영향 변경 보류",()=>{const allowed=(affects,relation,independent)=>affects?relation==="confirmed_compatible":independent;return !allowed(true,"unknown",true)&&!allowed(true,"conflict",true)&&allowed(false,"unknown",true)&&!allowed(false,"unknown",false)});
-test("M13","보류된 신규 대상만 새 의도, 기존 처분/효과 불변",()=>{const old=targets.find(t=>t.id==="d");const next={id:"d2",prior:"d",prep:"unprepared",life:"not_accepted"};return old.prep==="held"&&next.id!==old.id&&targets.filter(accepted).length===3});
-test("M14","읽기/쓰기 및 준비 종료와 결과 분리",()=>{const read={kind:"read",state:"unavailable"},target={life:"ended",result:"effect_unknown"};return read.kind==="read"&&read.state!=="confirmed"&&target.life==="ended"&&target.result!=="complete"});
-test("M15","권리 제한 및 필요한 승인 자료 참조",()=>{const asset={rights:"revoked",refs:1};return asset.rights!=="allowed"&&asset.refs>0});
-test("M16","직접 작성안·운영 계측 불명",()=>{const result={kind:"guidance_delivered",effects:0,directTime:null};return result.effects===0&&result.directTime===null&&result.kind!=="complete"});
-return cases}
-const cases = runAbstractTests();
-console.log(JSON.stringify({scope:'static reference and synthetic sequential model; NOT PostgreSQL or platform execution',cases},null,2));
+
+assert.equal(v5.tables.length,12);
+assert.equal(fields.size,134);
+assert.ok(!v5.tables.some(t=>t.name==='source_object_links'));
+assert.ok(fields.has('platform_objects.source_id'));
+assert.ok(v5.field_audit.filter(a=>a.table==='source_object_links').every(a=>a.candidate_field===null&&a.replacement_fields.every(f=>fields.has(f))));
+function runBindingModels(){
+ const cases=[];function test(id,description,fn){try{const pass=!!fn();cases.push({id,description,pass,verdict:pass?"pass":"fail"})}catch(e){cases.push({id,description,pass:false,verdict:"fail",error:String(e)})}}
+ function state(){return {objects:{o1:{owner:"a",source:null,head:"initial",shared:false},o2:{owner:"a",source:null,head:"initial",shared:false},profile:{owner:"a",source:null,head:"initial",shared:true}},sources:{s1:{owner:"a",active:true},s2:{owner:"a",active:true},s3:{owner:"b",active:true}},receipts:{},events:[],effects:[]}}
+ function apply(s,c){const known=s.receipts[c.key];if(known)return known.digest===c.digest?known.result:"digest_mismatch";const o=s.objects[c.object],src=s.sources[c.source];if(!o||!src||o.owner!==c.owner||src.owner!==c.owner||o.shared||!src.active||o.head!==c.expected)return "rejected";if(c.action==="link"&&o.source!==null)return "conflict";if(c.action==="unlink"&&o.source!==c.source)return "rejected";const id="binding-"+(s.events.length+1);const before=o.head;o.source=c.action==="link"?c.source:null;o.head=id;s.events.push({id,previous:before,object:c.object,source:c.source,action:c.action});s.receipts[c.key]={digest:c.digest,result:id};return id}
+ const cmd=(key,object="o1",source="s1",action="link",expected="initial",owner="a")=>({key,object,source,action,expected,owner,digest:[object,source,action,expected,owner].join(":")});
+ test("B01","강사 원본 1개에 복수 등록물",()=>{const s=state();apply(s,cmd("k1"));apply(s,cmd("k2","o2"));return s.objects.o1.source==="s1"&&s.objects.o2.source==="s1"&&s.events.length===2});
+ test("B02","같은 객체에 다른 원본 암묵 덮어쓰기 금지",()=>{const s=state(),head=apply(s,cmd("k1"));return apply(s,cmd("k2","o1","s2","link",head))==="conflict"&&s.objects.o1.source==="s1"});
+ test("B03","공유 프로필 및 다른 owner 연결 금지",()=>{const s=state();return apply(s,cmd("k1","profile"))==="rejected"&&apply(s,cmd("k2","o1","s3"))==="rejected"&&s.events.length===0});
+ test("B04","내부 해제 후 객체 및 외부 효과 유지",()=>{const s=state(),head=apply(s,cmd("k1"));s.effects.push({object:"o1",state:"confirmed"});apply(s,cmd("k2","o1","s1","unlink",head));return s.objects.o1.source===null&&s.effects[0].state==="confirmed"&&s.events.length===2});
+ test("B05","동일 키 응답 유실 복구, 다른 digest 거절",()=>{const s=state(),c=cmd("k1"),r=apply(s,c);return apply(s,c)===r&&apply(s,{...c,digest:"other"})==="digest_mismatch"&&s.events.length===1});
+ test("B06","해제 후 같은 원본 재연결 시 낡은 unlink 거절",()=>{const s=state(),a=apply(s,cmd("k1")),b=apply(s,cmd("k2","o1","s1","unlink",a));apply(s,cmd("k3","o1","s1","link",b));return apply(s,cmd("k4","o1","s1","unlink",a))==="rejected"&&s.objects.o1.source==="s1"&&s.events.length===3});
+ test("B07","늦은 등록 결과가 명시 해제 덮어쓰지 않음",()=>{const s=state(),a=apply(s,cmd("k1"));apply(s,cmd("k2","o1","s1","unlink",a));s.effects.push({object:"o1",state:"confirmed"});return apply(s,cmd("late","o1","s1","link","initial"))==="rejected"&&s.objects.o1.source===null&&s.effects[0].state==="confirmed"});
+ test("B08","원본 retire 이후 새 연결 차단",()=>{const s=state();s.sources.s1.active=false;return apply(s,cmd("k1"))==="rejected"&&s.objects.o1.source===null});
+ return cases;
+}
+const cases=runBindingModels();
+console.log(JSON.stringify({scope:'V5.1 static references and sequential mock binding cases; NOT PostgreSQL/platform execution',cases},null,2));
 assert.ok(cases.every(c=>c.pass));
