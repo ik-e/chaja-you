@@ -1,5 +1,7 @@
 # [기술 검토 보고서] Viewer 연결 및 메시지 규격 · 숨고 Operation 및 Readback 설계
 
+> **문서 지위 (2026-11-26 정정):** 이 문서는 **이전 설계 기준의 기록이며 참고 자료로 보존**한다. 현재 적용할 설계로 제안하는 문서가 아니다. 현재는 [기획안 V1.2](../../../artifacts/planning/lesson-registration-20261123/proposal-v1.2.md)를 기준으로 사용자 스토리·서비스 범위를 확정한 뒤 DB → API·프로토콜 → 상세 설계 순으로 진행한다([PHASE-20261126-01](../../../human/phase-intents/PHASE-20261126-01.md)). 새 설계 기준이 확정되기 전에는 이 문서의 API·UI·화면 흐름을 후속 설계의 기준으로 사용하지 않는다.
+
 - **작성일:** 2026-11-25
 - **작성자:** R04 (원민, 웹 UI / 숨고 Adapter 담당)
 - **대상 과업:** [TASK-051](../../../artifacts/tasks/TASK-051.json) (등록 지원 웹 UI), [TASK-052](../../../artifacts/tasks/TASK-052.json) (숨고 Adapter 및 독립 mock)

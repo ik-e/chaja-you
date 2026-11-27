@@ -3,7 +3,7 @@
   "id": "REVALIDATION-TASK-056-20261126",
   "kind": "document",
   "task_ref": "TASK-056",
-  "status": "보완 수행 · 일부 기준 미확인",
+  "status": "2차 재검증 완료 · R01 검토 대기",
   "baseline_commit": "63d9d7ba70faf0c76f5560d0d9e3b59b31e1ebd0",
   "input": {
     "contract": "docs/artifacts/planning/lesson-registration-20261126/work-contract.json",
@@ -4440,6 +4440,36 @@
       "retained_action": "강사가 저장된 원본 레슨 삭제를 요청한다.",
       "split_story_id": "R04-US-039",
       "split_action": "강사가 외부 게시물 연동 해제를 요청한다."
+    },
+    {
+      "source_story_id": "R04-US-004",
+      "retained_action": "강사가 플랫폼별 지원 업무 범위를 열람한다.",
+      "split_story_id": "R04-US-040",
+      "split_action": "강사가 플랫폼별 필수 제약 조건을 열람한다."
+    },
+    {
+      "source_story_id": "R04-US-013",
+      "retained_action": "강사가 플랫폼별 업무 실행 결과(접수/성공/실패/미확인)를 확인한다.",
+      "split_story_id": "R04-US-041",
+      "split_action": "강사가 플랫폼별 결과 증빙 링크를 연다."
+    },
+    {
+      "source_story_id": "R04-US-016",
+      "retained_action": "강사가 수동 갱신으로 확인된 최신 상태 변화(승인/반려/만료)를 확인한다.",
+      "split_story_id": "R04-US-042",
+      "split_action": "강사가 상태 변화 알림을 확인한다."
+    },
+    {
+      "source_story_id": "R04-US-018",
+      "retained_action": "강사가 자동 모니터링 대상 플랫폼을 선택한다.",
+      "split_story_id": "R04-US-043",
+      "split_action": "강사가 자동 모니터링 점검 주기를 설정한다."
+    },
+    {
+      "source_story_id": "R04-US-018",
+      "retained_action": "강사가 자동 모니터링 대상 플랫폼을 선택한다.",
+      "split_story_id": "R04-US-044",
+      "split_action": "강사가 자동 모니터링 알림 조건을 설정한다."
     }
   ],
   "checks": [
@@ -4508,12 +4538,13 @@
   ],
   "counts": {
     "previous_fields": 48,
-    "current_fields": 57,
-    "user_stories": 39,
+    "current_fields": 93,
+    "user_stories": 44,
     "system_events": 16,
     "platforms": 7,
     "operations": 42,
-    "original_claim_records_reviewed": 129
+    "original_claim_records_reviewed": 129,
+    "objects": 11
   },
   "acceptance": [
     {
@@ -4577,5 +4608,339 @@
     "source": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json#field_story_review / story_data_review",
     "interpretation": "전수 연결 유무를 기록; 의미 완전성 판정 미완료"
   },
-  "checks_method": "고유 ID 집합 비교, 참조 대상 존재, 피처별 스토리/이벤트 역방향 집합 동등성, 7개 플랫폼 업무 집합 및 필드/객체 참조, 로컬 근거 파일 존재, TASK 판정과 정본 판정 동등성, 수량 57/39/16 확인. 의미 완전성과 실제 운영 검증은 별도."
+  "checks_method": "고유 ID 집합 비교, 참조 대상 존재, 피처별 스토리/이벤트 역방향 집합 동등성, 7개 플랫폼 업무 집합 및 필드/객체 참조, 로컬 근거 파일 존재, TASK 판정과 정본 판정 동등성, 수량 57/39/16 확인. 의미 완전성과 실제 운영 검증은 별도.",
+  "round2": {
+    "date": "2026-11-26",
+    "trigger": "R01 TASK-056 검토 의견 (조사 근거·사실/추론 구분·SVO·정합성 재검증 요청)",
+    "review_items": [
+      {
+        "r01_finding": "숨고 한 줄 소개 화면 80자, JSON 50자",
+        "status": "fixed",
+        "where": "R04-PL03-F01",
+        "note": "제한 칸은 1차에서 80자로 고쳤으나 형식 칸에 '최대 50자'가 남아 있었음. 삭제하고 화면 카운터 근거로 통일"
+      },
+      {
+        "r01_finding": "활동명·대표 서비스·연락 가능 시간·외부 링크 누락",
+        "status": "fixed",
+        "where": "R04-PL03-F09·F13·F10·F12 (1차) + F17~F28 (2차 화면 06 전수 대조)"
+      },
+      {
+        "r01_finding": "고수 프로필과 제공 서비스를 하나의 객체로 정의",
+        "status": "fixed",
+        "where": "R04-PL03-OBJ1/OBJ2, REL2(1:N observed), REL3(대표 서비스 관계 unknown); 같은 유형으로 PL04 객체 분리, PL01·PL02 하위 관리 대상 분리"
+      },
+      {
+        "r01_finding": "사용자 직접 수행 업무와 우리 서비스 대행 구분",
+        "status": "fixed",
+        "where": "42개 operations의 user_direct_support / service_delegation"
+      },
+      {
+        "r01_finding": "필수 입력·업무 지원·대행 허용·완료 조건 근거 확인",
+        "status": "fixed_as_unknown",
+        "where": "required_inputs_basis, completion_condition_basis, 필드 required; 근거 없으면 unknown"
+      },
+      {
+        "r01_finding": "스토리에 복수 행동 포함",
+        "status": "fixed",
+        "where": "US-004·013·016·018 분리 → US-040~044"
+      },
+      {
+        "r01_finding": "피처별 연결 목록과 스토리 참조 불일치",
+        "status": "verified",
+        "where": "feature_coverage를 스토리 feature_refs에서 재구성; 검사 결과 checks 참조"
+      },
+      {
+        "r01_finding": "필드 수 JSON 48 vs TASK/보고서 46",
+        "status": "fixed",
+        "where": "현재 JSON 93개를 TASK·보고서·원장에 동일 기록"
+      },
+      {
+        "r01_finding": "문제가 남았는데 A1~A5 전부 Pass",
+        "status": "fixed",
+        "where": "A1~A4 inconclusive, A5는 정적 정합성 한정 pass"
+      },
+      {
+        "r01_finding": "확정으로 기록한 정책의 승인 근거",
+        "status": "fixed",
+        "where": "approval_context: 확정 정책 없음. 안 A는 reported 맥락이며 R01 결정 요청 유지"
+      }
+    ],
+    "changes": [
+      {
+        "item": "근거 추가",
+        "detail": "숨고 화면 11·12 재검토를 근거로 추가; 11/25 이전 설계 문서 근거는 현행 설계 기준 아님으로 표시"
+      },
+      {
+        "item": "숨고 필드",
+        "detail": "F01 형식의 50자 표기 삭제(화면 80자); 결합 필드 F04·F05·F08 분리; 누락 항목 F17~F28(경력·학력·사진 및 동영상·포트폴리오·질문답변·본인인증·사업자등록증·자격증 서류·결제 3종·리뷰) 추가; F15·F16 source_actor 정정; F02·F03 의미·근거를 화면 11·12로 보정"
+      },
+      {
+        "item": "결합 필드 분리",
+        "detail": "6개 플랫폼 결합 필드 23건을 단일 의미 필드로 분리; 원래 ID는 첫 의미에 유지하고 새 ID에 split_from_field_id 기록",
+        "map": {
+          "R04-PL01-F03": [
+            "R04-PL01-F03",
+            "R04-PL01-F09"
+          ],
+          "R04-PL01-F07": [
+            "R04-PL01-F07",
+            "R04-PL01-F10"
+          ],
+          "R04-PL01-F08": [
+            "R04-PL01-F08",
+            "R04-PL01-F11"
+          ],
+          "R04-PL02-F02": [
+            "R04-PL02-F02",
+            "R04-PL02-F08"
+          ],
+          "R04-PL02-F03": [
+            "R04-PL02-F03",
+            "R04-PL02-F09"
+          ],
+          "R04-PL02-F05": [
+            "R04-PL02-F05",
+            "R04-PL02-F10"
+          ],
+          "R04-PL02-F06": [
+            "R04-PL02-F06",
+            "R04-PL02-F11"
+          ],
+          "R04-PL04-F01": [
+            "R04-PL04-F01",
+            "R04-PL04-F07"
+          ],
+          "R04-PL04-F03": [
+            "R04-PL04-F03",
+            "R04-PL04-F08"
+          ],
+          "R04-PL04-F04": [
+            "R04-PL04-F04",
+            "R04-PL04-F09"
+          ],
+          "R04-PL05-F02": [
+            "R04-PL05-F02",
+            "R04-PL05-F08"
+          ],
+          "R04-PL05-F06": [
+            "R04-PL05-F06",
+            "R04-PL05-F09"
+          ],
+          "R04-PL05-F07": [
+            "R04-PL05-F07",
+            "R04-PL05-F10",
+            "R04-PL05-F11"
+          ],
+          "R04-PL06-F02": [
+            "R04-PL06-F02",
+            "R04-PL06-F07"
+          ],
+          "R04-PL06-F04": [
+            "R04-PL06-F04",
+            "R04-PL06-F08"
+          ],
+          "R04-PL06-F05": [
+            "R04-PL06-F05",
+            "R04-PL06-F09"
+          ],
+          "R04-PL06-F06": [
+            "R04-PL06-F06",
+            "R04-PL06-F10"
+          ],
+          "R04-PL07-F01": [
+            "R04-PL07-F01",
+            "R04-PL07-F08"
+          ],
+          "R04-PL07-F02": [
+            "R04-PL07-F02"
+          ],
+          "R04-PL07-F03": [
+            "R04-PL07-F03",
+            "R04-PL07-F09"
+          ],
+          "R04-PL07-F04": [
+            "R04-PL07-F04",
+            "R04-PL07-F10"
+          ],
+          "R04-PL07-F05": [
+            "R04-PL07-F05",
+            "R04-PL07-F11"
+          ],
+          "R04-PL07-F06": [
+            "R04-PL07-F06",
+            "R04-PL07-F12",
+            "R04-PL07-F13"
+          ]
+        }
+      },
+      {
+        "item": "근거 없는 수치·열거 격리",
+        "detail": "claim_status가 unknown/reported인 필드의 형식 칸에 적힌 길이·열거·형식을 unverified_prior_value로 이동",
+        "field_ids": [
+          "R04-PL01-F01",
+          "R04-PL01-F02",
+          "R04-PL01-F03",
+          "R04-PL01-F09",
+          "R04-PL01-F04",
+          "R04-PL01-F05",
+          "R04-PL01-F07",
+          "R04-PL01-F10",
+          "R04-PL01-F08",
+          "R04-PL01-F11",
+          "R04-PL02-F01",
+          "R04-PL02-F02",
+          "R04-PL02-F08",
+          "R04-PL02-F03",
+          "R04-PL02-F09",
+          "R04-PL02-F04",
+          "R04-PL02-F06",
+          "R04-PL02-F11",
+          "R04-PL02-F07",
+          "R04-PL04-F02",
+          "R04-PL04-F03",
+          "R04-PL04-F08",
+          "R04-PL04-F04",
+          "R04-PL04-F09",
+          "R04-PL04-F06",
+          "R04-PL05-F01",
+          "R04-PL05-F02",
+          "R04-PL05-F08",
+          "R04-PL05-F03",
+          "R04-PL05-F06",
+          "R04-PL05-F09",
+          "R04-PL07-F05",
+          "R04-PL07-F11"
+        ]
+      },
+      {
+        "item": "객체 분리",
+        "detail": "프람피 결합 객체를 프로필/전문 분야로 분리; 크몽 가격 패키지·탈잉 커리큘럼 회차를 하위 관리 대상 후보로 분리 (모두 unknown)"
+      },
+      {
+        "item": "사용자 직접 수행 vs 대행 구분",
+        "detail": "42개 업무에 user_direct_support/service_delegation/required_inputs_basis/completion_condition_basis 추가; 근거 없는 오류·중복 조건에 미확인 후보 표시; web_path_status를 근거 강도로 정정(confirmed 일괄 표기 철회)"
+      },
+      {
+        "item": "SVO 단일 행동",
+        "detail": "복수 목적어 스토리 4건(US-004·013·016·018) 분리, 새 스토리 US-040~044; US-014는 단일 목적어로 문장 정정"
+      },
+      {
+        "item": "상황별 행동 정의",
+        "detail": "44개 스토리 전부 정상·오류·예외·반복을 스토리 ID 단위로 구체화(이전 공통 문구 대체). 미도출 7건은 R01 결정 요청",
+        "gap_story_ids": [
+          "R04-US-001",
+          "R04-US-003",
+          "R04-US-016",
+          "R04-US-017",
+          "R04-US-027",
+          "R04-US-037",
+          "R04-US-039"
+        ]
+      },
+      {
+        "item": "SVO 문장 정정",
+        "detail": "US-007·US-010 목적어 단일화, US-012·US-032 선행조건을 최종 입력안 승인(US-031)으로 정정"
+      }
+    ],
+    "counts": {
+      "fields_before_round2": 57,
+      "fields_after_round2": 93,
+      "objects": 11,
+      "user_stories": 44,
+      "system_events": 16,
+      "platforms": 7,
+      "operations": 42,
+      "evidence": 20
+    },
+    "checks": [
+      {
+        "criterion": "고유 정의 user_stories",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "고유 정의 supporting_system_events",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "고유 정의 evidence",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "고유 정의 필드/객체",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "근거/스토리/이벤트 참조 해소",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "34개 피처 양방향 참조",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "7×6 업무 및 필드/객체/관계 참조, 직접수행/대행 구분",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "모든 필드의 스토리 연결 또는 미연결 사유",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "모든 스토리 상황별 정의",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "단일 SVO 표현(접속 목적어 없음)",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "로컬 근거 파일 존재",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "필드 내 형식/제한 수치 상충 없음",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "근거 없는 필드 형식 칸에 수치 없음",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "대행 허용 확정 없음",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "확정 정책 표기 없음(승인 근거 미연결 상태)",
+        "verdict": "pass",
+        "findings": []
+      },
+      {
+        "criterion": "문서 프로젝션 생성 및 최신 여부",
+        "command": "uv run --no-project python tools/project_docs.py; uv run --no-project python tools/project_docs.py --check",
+        "verdict": "pass",
+        "observed": "45 projections verified; 1 updated. 45 projections current."
+      },
+      {
+        "criterion": "공백 오류",
+        "command": "git diff --check",
+        "verdict": "pass",
+        "observed": "종료 코드 0, 출력 없음"
+      }
+    ],
+    "checks_method": "scratchpad 검사 스크립트로 independent-result.json 정적 검사 (ID 고유·참조 해소·피처 양방향·7×6 업무·직접/대행 구분·필드↔스토리 연결·상황별 정의·SVO 접속 목적어·형식/제한 수치 상충·근거 없는 수치·대행 확정·확정 정책 표기). 사실성 검증이 아님."
+  }
 }

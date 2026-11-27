@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "id": "RESEARCH-20261126-R02-TALING-CONFIRMATION",
+  "kind": "document",
+  "status": "부분 확인 · 사용자 결정 대기",
+  "owner": "R02",
+  "inputs": [
+    "2026-11-26 사용자 문답·첨부 화면",
+    "2026-11-26 연결된 본인 브라우저의 기존 클래스 읽기 전용 확인"
+  ],
+  "evidence_policy": "계정·연락처·정산·주민번호·주소 값과 스크린샷 원본은 공개 저장소에 기록하지 않음. 필드 이름과 제약만 보존.",
+  "output": {
+    "scope": "오프라인 클래스 양식. 멤버십/VOD/전자책에 일반화하지 않음",
+    "fields": {
+      "운영 방식": {
+        "observed_values": [
+          "멤버십",
+          "오프라인",
+          "VOD",
+          "전자책"
+        ],
+        "source": "사용자 화면 클래스 만들기 메뉴"
+      },
+      "카테고리": {
+        "required": true,
+        "observed_path": [
+          "취미·문화",
+          "보컬·작곡작사·악기"
+        ],
+        "depth": 2
+      },
+      "클래스명": {
+        "required": true,
+        "chars": [
+          10,
+          30
+        ],
+        "allowed": "한글·알파벳·숫자·쉼표·마침표·대시"
+      },
+      "클래스 썸네일": {
+        "required": true,
+        "count": [
+          1,
+          10
+        ],
+        "representative_required": true,
+        "max_mb": 10,
+        "formats": [
+          "JPG",
+          "JPEG",
+          "PNG"
+        ],
+        "guidance_px": [
+          1280,
+          720
+        ]
+      },
+      "클래스 대상": {
+        "required": true,
+        "chars": [
+          50,
+          500
+        ]
+      },
+      "클래스 요약": {
+        "required": false,
+        "max_chars": 200
+      },
+      "클래스 상세 소개": {
+        "required": true,
+        "format": "글·이미지 편집기",
+        "char_limit": "unknown"
+      },
+      "회차": {
+        "required": true,
+        "after_review_editable": false,
+        "limit": "unknown",
+        "observation": "사용자가 10000 입력 후 입력칸 생성 화면 제공. 100000 입력 시 멈춤 진술. 저장 성공·지원 상한으로 해석하지 않음"
+      },
+      "회차별 커리큘럼 소개": {
+        "required": true,
+        "chars": [
+          50,
+          500
+        ],
+        "attachment_max_mb": 10
+      },
+      "참여인원": {
+        "required": true,
+        "values": [
+          "1:1 클래스",
+          "그룹 클래스"
+        ],
+        "group_observed_counts": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          17,
+          18,
+          19,
+          20,
+          30,
+          40,
+          50
+        ],
+        "group_structure": "인원 범위 양끝 선택",
+        "after_review_editable": false
+      },
+      "수강료": {
+        "required": true,
+        "formula": "시간당 가격 × 1회당 클래스 시간 × 총 클래스 횟수",
+        "minimum_total_krw": 5000,
+        "tax_notice": "세금과 공과 등 10% 포함",
+        "hour_input": "정수만 가능 (사용자 진술)",
+        "after_review": "기존 심사 완료 클래스에서 시간당 가격은 편집 가능, 1회당 시간은 비활성 (직접 관찰)"
+      },
+      "승인 메시지": {
+        "required": false,
+        "max_chars": 500,
+        "purpose": "결제 시 반복 안내"
+      },
+      "태그": {
+        "required": false,
+        "max_count": 10
+      },
+      "영상": {
+        "required": false,
+        "type": "유튜브 URL",
+        "max_count": 5
+      },
+      "클래스 공지사항": {
+        "required": false,
+        "max_chars": 1000
+      },
+      "정산 설정": {
+        "observed_precondition": "이 계정의 심사 제출 전 입력 요구",
+        "labels": [
+          "은행",
+          "정산 계좌",
+          "예금주",
+          "주민번호"
+        ],
+        "storage": "값 수집·보존 없음"
+      },
+      "튜터명": {
+        "max_chars": 12
+      },
+      "튜터 소개": {
+        "max_chars": 500
+      },
+      "프로필 이미지": {
+        "guidance": "본인 사진 권장. 동물·캐릭터·단순 배경은 승인 어려울 수 있음",
+        "channel_formats": [
+          "PNG",
+          "JPG",
+          "JPEG"
+        ]
+      },
+      "이력": {
+        "required": false,
+        "labels": [
+          "이력 내용",
+          "증빙파일"
+        ],
+        "attachment_max_mb": 10,
+        "review_days": "첫 심사 영업일 5~7일, 추가 인증 1~2일",
+        "observed_state": "승인 거절",
+        "controls": [
+          "파일 보기",
+          "삭제하기"
+        ]
+      },
+      "장소": {
+        "flow": [
+          "우편번호 검색",
+          "주소 선택",
+          "상세주소 입력"
+        ],
+        "detail_required": "미확인. 비어 있어도 저장 버튼 활성화 관찰",
+        "save_result": "미실행"
+      },
+      "튜터 채널": {
+        "required_for_class_submission": false,
+        "source": "사용자 확인",
+        "required_groups": [
+          "채널 기본 정보",
+          "프로필 이미지",
+          "배경 이미지 3장",
+          "튜터 소개",
+          "채널 주소"
+        ],
+        "title_max_chars": 50,
+        "search_max_count": 8,
+        "address_chars": [
+          3,
+          30
+        ],
+        "address_allowed": "영문·숫자·마침표·밑줄·붙임표",
+        "background": "10MB 이하 JPG/JPEG/PNG/WebP/GIF/MP4, 영상 1개·사진 최대5개",
+        "optional": [
+          "검색어",
+          "수업 장소",
+          "소셜 미디어",
+          "이력"
+        ],
+        "location_visibility": "정확한 주소·위치는 결제 전 비공개"
+      }
+    },
+    "objects_and_relations": [
+      {
+        "from": "튜터 프로필",
+        "to": "클래스",
+        "relation": "소개와 이력을 여러 클래스에서 공유",
+        "basis": "사용자 확인"
+      },
+      {
+        "from": "클래스",
+        "to": "회차별 커리큘럼",
+        "relation": "복수 회차",
+        "basis": "화면 관찰"
+      },
+      {
+        "from": "클래스",
+        "to": "일정·장소",
+        "relation": "오픈 상태에서 접근 가능",
+        "basis": "사용자 화면 및 직접 관찰"
+      },
+      {
+        "from": "튜터 프로필",
+        "to": "이력 증빙",
+        "relation": "여러 이력별 개별 승인 상태",
+        "basis": "화면 관찰"
+      }
+    ],
+    "lifecycle": {
+      "states_observed": [
+        "임시 저장",
+        "운영 중지",
+        "심사 진행 중"
+      ],
+      "draft": "변경사항 저장 후 내용과 이미지 유지 (사용자 확인)",
+      "rejection": "개인정보 포함 시 반려 경험. 알림·문자에서 사유 확인",
+      "update": "수정 후 재심사 필요. 심사 끝날 때까지 기존 클래스 숨김 (사용자 경험)",
+      "cancel": "심사 제출 취소 버튼 존재. 실제 취소 결과 미실행",
+      "delete": "기본 정보 하단 클래스 삭제 링크 존재. 상태별 허용·결과 미실행",
+      "schedule": "현재 운영중지·심사중으로 접근 불가",
+      "renew": "유료 끌어올리기 사용자 기억만 있으며 기능명·조건 미확인",
+      "duplicate_user_experience": "중복 등록 제한이나 경고를 본 경험 없음. 정책상 제한 부재를 뜻하지 않음"
+    },
+    "official_findings": [
+      {
+        "url": "https://talingtutorguide.oopy.io/27341f37-bd7f-812f-ad1f-dd609de1e9a1",
+        "finding": "운영 상태 변경에서 중지 가능. 중지 후 재운영은 재심사 필요"
+      },
+      {
+        "url": "https://talingtutorguide.oopy.io/schedule",
+        "finding": "일정 등록 후 신청 가능. 신청자 없는 일정만 삭제 가능"
+      },
+      {
+        "url": "https://talingrules.oopy.io/rule",
+        "finding": "회사 미승인 시스템을 통한 무단 자동 등록 제한 조항 확인. 개별 외부 대행 방식 허용은 미확인"
+      },
+      {
+        "url": "https://talingtutorguide.oopy.io/24141f37-bd7f-808a-a6a9-ed4160a5a7b1",
+        "checked_at": "2026-11-26",
+        "finding": "공식 튜터 가이드상 클래스 심사는 보통 영업일 3~5일, 반려 후 재심사는 영업일 2~3일. 카카오톡·알림톡 안내. 보장 기한으로 해석하지 않음. 정산 계좌와 클래스 정책 동의 후 접수. 반려 사유는 스튜디오 클래스 상세에서도 확인 가능."
+      }
+    ],
+    "permission": {
+      "user_confirmed_permission": "대행·자동화 허용 문의 경험 없음",
+      "delegation": "unknown",
+      "automation": "회사 승인 필요 여부 검토. 현행 개별 허용 미확인"
+    },
+    "uncertainties": [
+      "90분 수업을 정수 시간 입력으로 표현하는 방법",
+      "승인 후 일정·장소 실제 입력 필드와 결과",
+      "가격·회차의 서버 저장 제약",
+      "상태별 삭제·중지·재개 실제 결과",
+      "대행 허용 범위"
+    ],
+    "decision_request": "위 사용자 의견을 R01 서비스 범위 통합 시 검토",
+    "duration_price_user_recollection": {
+      "basis": "2026-11-26 사용자 회상 · 확정값 미검증",
+      "entered_hours": 1,
+      "hourly_price_method": "90분 수업료를 1.5로 나눠 입력했던 것으로 기억",
+      "actual_lesson_duration_minutes": 90,
+      "platform_transaction_experience": "탈잉 결제를 통한 레슨 수행 경험 없음",
+      "contact_experience": "탈잉 채팅 후 직접 만나 1시간30분으로 다시 안내",
+      "implication": "화면 계산식상 1시간 × 환산 시간당 가격 × 회차는 90분 × 원래 수업료 조건과 다른 총액을 만들 수 있음. 게시·결제·실제 수업 조건의 동일성 미확인",
+      "decision": "자동 환산 또는 1시간 대체를 매핑 규칙으로 확정하지 않음",
+      "contact_price_confirmation": "표시 금액과 별도로 대면 상담에서 90분 기준 수업료 재안내 (사용자 확인)"
+    },
+    "duration_constraint_handling": {
+      "status": "사용자 의견 · R01 범위 통합 검토 입력",
+      "source": "2026-11-26 현재 대화의 사용자 명시 응답",
+      "flow": [
+        "90분 입력 제약을 강사에게 알림",
+        "강사가 실제 제공 가능한 60분 또는 120분 조건과 가격을 선택",
+        "유효한 조건이 없거나 원하지 않으면 등록 보류"
+      ],
+      "validation": "선택한 실제 시간·횟수·가격으로 입력안과 계산 총액을 재검증하고 최종 승인",
+      "remaining_unknown": "플랫폼 공식 90분 표현 지원 여부",
+      "feature_refs": [
+        "F09",
+        "F11",
+        "F16",
+        "F17"
+      ]
+    }
+  },
+  "verification": {
+    "result": "제공 화면·문답과 직접 읽기 전용 관찰 구분. 외부 저장·제출·삭제 미수행",
+    "status": "부분 확인"
+  }
+}

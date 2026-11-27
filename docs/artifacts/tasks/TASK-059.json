@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-059",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R03",
   "suggested_owner": null,
   "due": "2026-11-26",
@@ -67,7 +67,96 @@
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "기획 V1.2의 F01~F29 및 조건부 E01~E05 34개 피처에서 사용자 행동 121개와 지원 시스템 이벤트 56개를 도출했다. R02·R04·R05 및 R01의 스토리 181개를 기준 커밋에 고정해 비교하고 발견 18건을 보완했다. 지정 R03 원본에 반영했으며 R01의 범위·의미 검토와 인계는 남아 있다.",
+    "artifact_path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json",
+    "claims": [
+      {
+        "id": "R03-059-C1",
+        "text": "F01~F29와 E01~E05 전체 34개 피처를 검토 대상으로 연결하고, 단일 사용자 행동 121개와 별도 시스템 이벤트 56개를 기록했다.",
+        "status": "확인",
+        "evidence_ids": ["R03-059-E1", "R03-059-E2"]
+      },
+      {
+        "id": "R03-059-C2",
+        "text": "기준 커밋의 R02 32개·R04 39개·R05 47개·R01 63개 스토리를 비교하고 차이·누락 후보 18건과 보완 내역을 남겼다. 같은 근거를 독립 실증으로 중복 계산하지 않았다.",
+        "status": "확인",
+        "evidence_ids": ["R03-059-E1", "R03-059-E3", "R03-059-E4"]
+      },
+      {
+        "id": "R03-059-C3",
+        "text": "30개 대표 경로를 논리 검토했고 JSON 파싱, 피처 참조, 행동·이벤트 ID 중복 및 문서 프로젝션 최신성 검사를 통과했다. 의미 완전성·실제 플랫폼 동작·외부 실행은 검증하지 않았다.",
+        "status": "확인",
+        "evidence_ids": ["R03-059-E1", "R03-059-E5"]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "R03-059-E1",
+        "label": "R03 지정 사용자 스토리 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json"
+      },
+      {
+        "id": "R03-059-E2",
+        "label": "독립 F/E 도출 과정의 원본 초안",
+        "path": "docs/members/R03/workspace/R03_TASK-059_F01-E05_user-stories_draft.json"
+      },
+      {
+        "id": "R03-059-E3",
+        "label": "팀원 및 R01 스토리 비교 원장",
+        "path": "docs/members/R03/workspace/R03_TASK-059_story_comparison_ledger.json"
+      },
+      {
+        "id": "R03-059-E4",
+        "label": "비교 후 수정·참조·시나리오 검토 기록",
+        "path": "docs/members/R03/workspace/R03_TASK-059_revision_audit.json"
+      },
+      {
+        "id": "R03-059-E5",
+        "label": "보완본 자체 검토 보고서 및 이번 로컬 검사",
+        "path": "docs/members/R03/workspace/R03_TASK-059_revision_review.md"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "S1",
+        "verdict": "inconclusive",
+        "note": "34개 피처 정·역방향 연결과 조건부 E 피처 분리 확인. 최종 범위 판단은 R01 검토 전.",
+        "evidence_ids": ["R03-059-E1", "R03-059-E4"]
+      },
+      {
+        "criterion": "S2",
+        "verdict": "inconclusive",
+        "note": "121개 행동·56개 이벤트와 30개 대표 분기 검토를 기록. 전체 의미·분기 완전성은 미확인.",
+        "evidence_ids": ["R03-059-E1", "R03-059-E4", "R03-059-E5"]
+      },
+      {
+        "criterion": "S3",
+        "verdict": "inconclusive",
+        "note": "181개 비교 원본과 발견 18건을 연결. 후속 팀원 갱신 및 R01 통합 판단은 미확인.",
+        "evidence_ids": ["R03-059-E1", "R03-059-E3", "R03-059-E4"]
+      },
+      {
+        "criterion": "S4",
+        "verdict": "inconclusive",
+        "note": "지정 JSON과 TASK result에 현재 결과 기록. 커밋 고정, CI 및 R01 인계는 미수행.",
+        "evidence_ids": ["R03-059-E1", "R03-059-E5"]
+      }
+    ],
+    "uncertainties": [
+      "플랫폼별 업무·객체·권한·완료 근거 및 자동 대행 허용은 R03 범위에서 전수 조사하지 않았다.",
+      "사용자 행동의 의미 완전성과 모든 정상·오류·예외·반복 분기는 30개 대표 경로만 검토했다.",
+      "기준 커밋 이후 팀원 원본 갱신은 재대조가 필요하며 R01의 최종 서비스 범위 결정 전이다.",
+      "조건부 E01~E05의 모니터링 정책·기술·보안·비용 및 실제 권한은 미확인이다."
+    ],
+    "decision_requests": [
+      "R01: 원본 보관·외부 초안·재개·심사 취소/재심사·승인 후 별도 실행 요청 등 비교 발견 C01~C18의 서비스 범위와 중복 행동을 결정해 주세요.",
+      "R01: 서비스 자체 계정·작업 공간, 삭제/연결 해제, 부분 성공·미확인 결과의 후속 행동 범위를 결정해 주세요.",
+      "R01: E01~E05 자동 모니터링 채택 여부와 인증 유지·알림·종료 범위를 결정해 주세요."
+    ],
+    "baseline_commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+    "review_status": "R03 자체 검토 완료 범위 기록 · R01 검토 전 · 인계 전"
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/INTENT.md",

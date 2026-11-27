@@ -60,10 +60,14 @@
     }
   ],
   "result": {
-    "summary": "진행 중 · 크몽 상세 데이터·업무·스토리 연결 보완, 나머지 플랫폼 조사 계속",
+    "summary": "진행 중 · 7개 플랫폼 1차 근거 확보, 힙합플레이야·힙합LE 문답/관찰 보완. 상세 미확인 및 전체 계약 검토 잔여",
     "artifact_refs": [
       "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json",
-      "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json"
+      "docs/artifacts/planning/lesson-registration-20261126/R02/kmong-user-confirmation.json",
+      "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json",
+      "docs/artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json",
+      "docs/artifacts/planning/lesson-registration-20261126/R02/hiphopplaya-user-confirmation.json",
+      "docs/artifacts/planning/lesson-registration-20261126/R02/hiphople-user-confirmation.json"
     ],
     "uncertainties": [
       "촬영 화면의 조건은 해당 레슨 카테고리·당시 UI 범위",
@@ -71,26 +75,83 @@
       "단일·패키지 가격 상한과 추가 금액 제한",
       "맞춤 옵션·가능일·요청사항 최대 개수",
       "삭제·판매 중지·재개 및 수정 심사 중 기존 글 노출의 실제 결과",
-      "대행·자동화 운영사 허용 범위"
+      "대행·자동화 운영사 허용 범위",
+      "프람피 신규 가입 전체 필수 조건·실제 저장·삭제·갱신 결과",
+      "프람피 설명 분량 안내와 HTML 속성 불일치",
+      "프람피 운영사 대행·자동화 업무별 허용",
+      "뮬 최신글 올리기 간격·비용·실제 성공 조건",
+      "뮬 이모지 규정 집행 및 장터 규정 레슨 적용 범위",
+      "뮬 갱신 약5분 회상과 기존2~3분 근거의 조건 차이",
+      "힙합LE 현재 작성 양식·첨부 제약 및2일/3일 안내 충돌",
+      "힙합플레이야 매일 동일글 재등록의 공식 허용·간격·횟수",
+      "두 플랫폼 대행·자동화 허용 및 실제 외부 실행 결과"
     ],
     "decision_requests": [
       "심사 취소·재개 지원 범위",
       "대행 허용 확인 방법"
     ],
-    "basis_commit": "6ae42ca",
+    "basis_commit": "f3022c2",
     "evidence": [
       {
         "id": "E-R02-055",
         "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+      },
+      {
+        "id": "E-R02-055-PROMPIE",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R02/prompie-user-confirmation.json"
+      },
+      {
+        "id": "E-R02-055-MULE",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R02/mule-user-confirmation.json"
+      },
+      {
+        "id": "E-R02-055-HIPHOPPLAYA",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R02/hiphopplaya-user-confirmation.json"
+      },
+      {
+        "id": "E-R02-055-HIPHOPLE",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/R02/hiphople-user-confirmation.json"
       }
     ],
     "claims": [
       {
         "id": "C-R02-055",
-        "text": "진행 중 · 크몽 상세 데이터·업무·스토리 연결 보완, 나머지 플랫폼 조사 계속",
+        "text": "진행 중 · 7개 플랫폼 1차 근거 확보, 힙합플레이야·힙합LE 문답/관찰 보완. 상세 미확인 및 전체 계약 검토 잔여",
         "status": "진행 중",
         "evidence_ids": [
           "E-R02-055"
+        ]
+      },
+      {
+        "id": "C-R02-055-PROMPIE",
+        "text": "프람피 28개 필드 묶음·16개 사용자 경험·8개 정책 확인, 공통 데이터·업무와 2개 스토리 후보 연결. 대행 허용·실제 저장 결과는 미확인",
+        "status": "관찰 범위 확인",
+        "evidence_ids": [
+          "E-R02-055-PROMPIE"
+        ]
+      },
+      {
+        "id": "C-R02-055-MULE",
+        "text": "뮬 17개 필드 묶음·16개 사용자 경험·7개 정책 확인과 갱신 스토리 연결. 갱신 조건·자동화 허용·효과 미확인",
+        "status": "관찰 범위 확인",
+        "evidence_ids": [
+          "E-R02-055-MULE"
+        ]
+      },
+      {
+        "id": "C-R02-055-HIPHOPPLAYA",
+        "text": "HIPHOPPLAYA 개별 화면·공식 문서와 사용자 문답 정리. 등록 경험과 실제 실행·운영사 허용 미확인을 구분",
+        "status": "관찰 범위 확인",
+        "evidence_ids": [
+          "E-R02-055-HIPHOPPLAYA"
+        ]
+      },
+      {
+        "id": "C-R02-055-HIPHOPLE",
+        "text": "HIPHOPLE 개별 화면·공식 문서와 사용자 문답 정리. 등록 경험과 실제 실행·운영사 허용 미확인을 구분",
+        "status": "관찰 범위 확인",
+        "evidence_ids": [
+          "E-R02-055-HIPHOPLE"
         ]
       }
     ],
@@ -100,31 +161,47 @@
         "verdict": "inconclusive",
         "reason": "전체 피처 연결은 있으나 전 스토리 세부 분기·완전성 검토 잔여",
         "evidence_ids": [
-          "E-R02-055"
+          "E-R02-055",
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE",
+          "E-R02-055-HIPHOPPLAYA",
+          "E-R02-055-HIPHOPLE"
         ]
       },
       {
         "criterion": "A2",
         "verdict": "inconclusive",
-        "reason": "7개 플랫폼 중 크몽 상세 연결 보완. 나머지 플랫폼 필드·업무 미확인 잔여",
+        "reason": "7개 플랫폼 모두 1차 조사 근거 확보. 숨고 상세 공통 연결과 힙합LE 작성 양식, 각 플랫폼 미관찰 동작·조건 잔여",
         "evidence_ids": [
-          "E-R02-055"
+          "E-R02-055",
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE",
+          "E-R02-055-HIPHOPPLAYA",
+          "E-R02-055-HIPHOPLE"
         ]
       },
       {
         "criterion": "A3",
         "verdict": "inconclusive",
-        "reason": "크몽 새 스토리 6개 연결. 나머지 플랫폼 양방향 연결 잔여",
+        "reason": "힙합플레이야 재등록 행동과 두 플랫폼 필드·업무 연결 추가. 전체 양방향·세부 분기 완전성 검토 잔여",
         "evidence_ids": [
-          "E-R02-055"
+          "E-R02-055",
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE",
+          "E-R02-055-HIPHOPPLAYA",
+          "E-R02-055-HIPHOPLE"
         ]
       },
       {
         "criterion": "A4",
         "verdict": "inconclusive",
-        "reason": "크몽 사용자 해석과 화면 조건을 상세서에서 구분. 일부 복합 근거의 항목별 세분화 잔여",
+        "reason": "두 플랫폼의 직접 화면·공식 문서·회상 및2일/3일 안내 충돌·과거 도움말 구분. 전체 기록 일관성 검토 잔여",
         "evidence_ids": [
-          "E-R02-055"
+          "E-R02-055",
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE",
+          "E-R02-055-HIPHOPPLAYA",
+          "E-R02-055-HIPHOPLE"
         ]
       },
       {
@@ -132,7 +209,11 @@
         "verdict": "inconclusive",
         "reason": "JSON·ID 참조 검사 수행. 전체 계약 수용 및 R01 검토 대기",
         "evidence_ids": [
-          "E-R02-055"
+          "E-R02-055",
+          "E-R02-055-PROMPIE",
+          "E-R02-055-MULE",
+          "E-R02-055-HIPHOPPLAYA",
+          "E-R02-055-HIPHOPLE"
         ]
       }
     ]

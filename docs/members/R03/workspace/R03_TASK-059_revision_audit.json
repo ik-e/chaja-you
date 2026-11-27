@@ -1,0 +1,2888 @@
+{
+  "status": "비교 보완 및 자체 논리 검토 · R01 검토 전",
+  "main_commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+  "source_baseline": {
+    "independent_file": "R03_TASK-059_F01-E05_user-stories_draft.json",
+    "sha256": "602bbbaddb6dca379afcbadeaf88d93914f33527bb565b6873c6be05dd17c32c",
+    "comparison_file": "R03_TASK-059_user-stories_comparison_draft.json",
+    "comparison_sha256": "ce4615be1f7317d1ecae8df8cb8a524fa9a5841afb18330e1ccf13989e206555",
+    "ledger_file": "R03_TASK-059_story_comparison_ledger.json",
+    "ledger_sha256": "c0b4fce3d233ec489309c8529eb6dbfd42c08fd3804b93160ce6c0383ffef9b5",
+    "source_story_count": 181,
+    "note": "원본과 비교본의 98개 행동/48개 이벤트 동일성 검사 후 복제본 수정"
+  },
+  "output": {
+    "file": "R03_TASK-059_user-stories_revised_draft.json",
+    "sha256": "d778d066e813eee9e070904b0c819980873b797deb6dde068345f33d37a54d8d"
+  },
+  "counts": {
+    "features": 34,
+    "original_stories": 98,
+    "added_stories": 23,
+    "total_stories": 121,
+    "changed_existing_stories": 70,
+    "original_events": 48,
+    "added_events": 8,
+    "total_events": 56,
+    "changed_existing_events": 23,
+    "scope": {
+      "base": 63,
+      "undecided": 42,
+      "excluded": 4,
+      "conditional": 12
+    },
+    "scenario": {
+      "normal": 30,
+      "exception": 38,
+      "error": 13,
+      "repeat": 26,
+      "conditional": 14
+    },
+    "findings": 18,
+    "scenario_paths": 30,
+    "semantic_groups": 16
+  },
+  "changes_by_finding": [
+    {
+      "finding_id": "R03-C01",
+      "title": "원본 보관·목록 조회",
+      "added": [
+        "R03-US-099",
+        "R03-US-100"
+      ],
+      "revised": [
+        "R03-US-009",
+        "R03-US-014"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-002",
+        "R03-SE-005"
+      ],
+      "decision": "추가 2 · 기존 연결 보완",
+      "rationale": "목록과 선택, 저장 요청과 결과를 논리 구분; 별도 저장 방식은 미확정.",
+      "source_story_refs": [
+        {
+          "source": "R05",
+          "story_id": "R05-US-005",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-005",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-002",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C02",
+      "title": "외부 판매글 임시 저장·재열기",
+      "added": [
+        "R03-US-101",
+        "R03-US-102"
+      ],
+      "revised": [],
+      "events_added": [
+        "R03-SE-049",
+        "R03-SE-050"
+      ],
+      "events_revised": [],
+      "decision": "추가 2 · 지원 이벤트 2",
+      "rationale": "내부 저장/원본 재사용과 별도 외부 초안 객체; 실제 기능과 대행 권한 미검증.",
+      "source_story_refs": [
+        {
+          "source": "R02",
+          "story_id": "R02-US-027",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R02",
+          "story_id": "R02-US-028",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C03",
+      "title": "중단된 기본 작업의 재개",
+      "added": [
+        "R03-US-103"
+      ],
+      "revised": [
+        "R03-US-070",
+        "R03-US-071"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-033"
+      ],
+      "decision": "추가 1 · 분기 보완",
+      "rationale": "실패 재처리와 사용자 중단/보류 이후 재개를 분리.",
+      "source_story_refs": [
+        {
+          "source": "R02",
+          "story_id": "R02-US-026",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-050",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C04",
+      "title": "심사 접수 취소와 재심사",
+      "added": [
+        "R03-US-104",
+        "R03-US-105"
+      ],
+      "revised": [
+        "R03-US-066",
+        "R03-US-068"
+      ],
+      "events_added": [
+        "R03-SE-051"
+      ],
+      "events_revised": [
+        "R03-SE-020",
+        "R03-SE-029"
+      ],
+      "decision": "추가 2 · 지원 이벤트 1",
+      "rationale": "외부 취소와 일반 중단은 다른 효과; 재심사 제공 범위는 미결정.",
+      "source_story_refs": [
+        {
+          "source": "R02",
+          "story_id": "R02-US-029",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R02",
+          "story_id": "R02-US-030",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-036",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-036",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C05",
+      "title": "업무 선택·승인·실행 요청의 관계",
+      "added": [
+        "R03-US-106",
+        "R03-US-107",
+        "R03-US-108"
+      ],
+      "revised": [
+        "R03-US-051"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-019",
+        "R03-SE-020",
+        "R03-SE-021",
+        "R03-SE-018"
+      ],
+      "decision": "추가 3 (모두 선택적 미결정)",
+      "rationale": "실행 요청을 후보로 분리하되 승인과 결합 가능; 추가 클릭 강제 없음.",
+      "source_story_refs": [
+        {
+          "source": "R05",
+          "story_id": "R05-US-020",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-021",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-022",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-020",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-021",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-022",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-036",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C06",
+      "title": "부분 성공 시 미완료 대상 선택",
+      "added": [
+        "R03-US-109"
+      ],
+      "revised": [
+        "R03-US-022",
+        "R03-US-055",
+        "R03-US-068"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-007",
+        "R03-SE-024",
+        "R03-SE-029"
+      ],
+      "decision": "추가 1 · 기존 제외 행동 재사용",
+      "rationale": "인증 실패의 건너뛰기는 US-022 분기로 통합; 미완료 대상 선택만 추가.",
+      "source_story_refs": [
+        {
+          "source": "R05",
+          "story_id": "R05-US-029",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-029",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-046",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-038",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C07",
+      "title": "준비 작업 실패 후 재준비",
+      "added": [
+        "R03-US-110"
+      ],
+      "revised": [
+        "R03-US-023",
+        "R03-US-024"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-008"
+      ],
+      "decision": "추가 1 · 시스템 분기 보완",
+      "rationale": "외부 효과가 없는 준비 재수행은 외부 작업 재처리와 분리.",
+      "source_story_refs": [
+        {
+          "source": "R01",
+          "story_id": "IS-057",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C08",
+      "title": "서비스 자체 계정·작업 공간",
+      "added": [
+        "R03-US-111",
+        "R03-US-112",
+        "R03-US-113",
+        "R03-US-114"
+      ],
+      "revised": [
+        "R03-US-001",
+        "R03-US-002",
+        "R03-US-075"
+      ],
+      "events_added": [
+        "R03-SE-054",
+        "R03-SE-055",
+        "R03-SE-056"
+      ],
+      "events_revised": [],
+      "decision": "추가 4 · 지원 이벤트 3",
+      "rationale": "계정 관리·작업 공간은 상세 정책 미정; 자체 계정과 외부 계정 구별.",
+      "source_story_refs": [
+        {
+          "source": "R05",
+          "story_id": "R05-US-042",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-042",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-051",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-052",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-053",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-062",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-063",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C09",
+      "title": "대행 불가 시 직접 작성용 자료",
+      "added": [
+        "R03-US-115"
+      ],
+      "revised": [
+        "R03-US-017",
+        "R03-US-022"
+      ],
+      "events_added": [
+        "R03-SE-052"
+      ],
+      "events_revised": [],
+      "decision": "추가 1 · 시스템 후보 1",
+      "rationale": "자동화 불가 상황의 대안은 가치 검증 및 R01 결정 전 미결정.",
+      "source_story_refs": [
+        {
+          "source": "R01",
+          "story_id": "IS-059",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-039",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C10",
+      "title": "심사 승인과 실제 모집 가능 구분",
+      "added": [
+        "R03-US-116",
+        "R03-US-117"
+      ],
+      "revised": [
+        "R03-US-055",
+        "R03-US-057"
+      ],
+      "events_added": [
+        "R03-SE-053"
+      ],
+      "events_revised": [
+        "R03-SE-022",
+        "R03-SE-024"
+      ],
+      "decision": "추가 2 · 시스템 후보 1",
+      "rationale": "모집 준비 확인은 기본 후보, 최초 일정 설정은 미결정.",
+      "source_story_refs": [
+        {
+          "source": "R05",
+          "story_id": "R05-US-041",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-041",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-058",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C11",
+      "title": "삭제·연결 해제 범위 수정 권고",
+      "added": [],
+      "revised": [
+        "R03-US-072",
+        "R03-US-073"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-031",
+        "R03-SE-032"
+      ],
+      "decision": "기존 2개 기본 후보로 재분류",
+      "rationale": "V1.2 §9.5 명시; 세부 보존/삭제·권한은 미확정.",
+      "source_story_refs": [
+        {
+          "source": "R04",
+          "story_id": "R04-US-025",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-039",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-034",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-035",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-034",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-035",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C12",
+      "title": "미확인 결과의 확인 요청과 안전한 재처리",
+      "added": [],
+      "revised": [
+        "R03-US-069"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-018",
+        "R03-SE-022"
+      ],
+      "decision": "기존 행동·이벤트 보완",
+      "rationale": "별도 사용자 요청은 미결정, 시스템의 확인 및 중복 방지는 필수.",
+      "source_story_refs": [
+        {
+          "source": "R04",
+          "story_id": "R04-US-026",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-026",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-026",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C13",
+      "title": "플랫폼 특화 정보·객체·정책",
+      "added": [
+        "R03-US-118"
+      ],
+      "revised": [
+        "R03-US-024",
+        "R03-US-027",
+        "R03-US-028",
+        "R03-US-016",
+        "R03-US-040",
+        "R03-US-047"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-009",
+        "R03-SE-020"
+      ],
+      "decision": "추가 1 · 플랫폼 특화 분기 보완",
+      "rationale": "플랫폼 세부 항목은 공통 입력/검증에 연결, 대표 서비스만 별도 미결정 후보.",
+      "source_story_refs": [
+        {
+          "source": "R02",
+          "story_id": "R02-US-031",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R02",
+          "story_id": "R02-US-032",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-038",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-039",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-040",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-043",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-044",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-045",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-046",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-047",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-038",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-039",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-040",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C14",
+      "title": "검토와 승인·거절의 분리",
+      "added": [
+        "R03-US-119"
+      ],
+      "revised": [
+        "R03-US-023",
+        "R03-US-048",
+        "R03-US-051"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-016",
+        "R03-SE-017"
+      ],
+      "decision": "추가 1 · 동일 행동 통합",
+      "rationale": "최종 입력 검토는 US-023으로 통합; 실행 범위 검토만 새 ID, 승인과 구분.",
+      "source_story_refs": [
+        {
+          "source": "R02",
+          "story_id": "R02-US-014",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R02",
+          "story_id": "R02-US-015",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-011",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-012",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-023",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-031",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-032",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-037",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-018",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-018",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C15",
+      "title": "모니터링 설정 항목의 차이",
+      "added": [
+        "R03-US-120",
+        "R03-US-121"
+      ],
+      "revised": [
+        "R03-US-082",
+        "R03-US-084"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-035",
+        "R03-SE-042"
+      ],
+      "decision": "추가 2 (조건부 미결정)",
+      "rationale": "기간과 조회 주기, 알림 조건과 수신 채널은 다른 설정; 구체 주기·채널 미확정.",
+      "source_story_refs": [
+        {
+          "source": "R04",
+          "story_id": "R04-US-018",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R02",
+          "story_id": "R02-US-021",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "e14d4f802b6012887f7cae4ef7f192dedfabbd9d",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R02/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-030",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-030",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C16",
+      "title": "자동 조회·알림·종료 경계",
+      "added": [],
+      "revised": [
+        "R03-US-094",
+        "R03-US-095",
+        "R03-US-098"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-044",
+        "R03-SE-046"
+      ],
+      "decision": "기존 행동 유지 및 분기 보완",
+      "rationale": "세션 파기와 종료 요청을 중복 추가하지 않음. 종료와 해제 확인은 구분.",
+      "source_story_refs": [
+        {
+          "source": "R04",
+          "story_id": "R04-US-019",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-034",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-035",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-032",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-033",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-031",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-032",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-033",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-061",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C17",
+      "title": "R03 자체 의미 중복·분기 정리",
+      "added": [],
+      "revised": [
+        "R03-US-010",
+        "R03-US-056",
+        "R03-US-059",
+        "R03-US-065"
+      ],
+      "events_added": [],
+      "events_revised": [],
+      "decision": "동일 의미는 기존 ID 재사용 · 삭제 없음",
+      "rationale": "US-022 인증 실패 제외, US-023 최종 입력 검토, US-094/095 세션 파기 요청을 기존 ID로 흡수. 나머지는 대상·의도·시점 차이로 유지; UI 통합 가능.",
+      "source_story_refs": [
+        {
+          "source": "R04",
+          "story_id": "R04-US-022",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-028",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-007",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-007",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-024",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-027",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    },
+    {
+      "finding_id": "R03-C18",
+      "title": "권한·검증 근거의 강도 및 제안 충돌",
+      "added": [],
+      "revised": [
+        "R03-US-045",
+        "R03-US-033",
+        "R03-US-052",
+        "R03-US-053",
+        "R03-US-087"
+      ],
+      "events_added": [],
+      "events_revised": [
+        "R03-SE-014",
+        "R03-SE-030"
+      ],
+      "decision": "기존 정책/분기 정합화",
+      "rationale": "세션 무기한 대기·고정 인증 횟수·플랫폼 단위 차단·자동 보정·임의 환산/연락처 공개를 확정하지 않음.",
+      "source_story_refs": [
+        {
+          "source": "R04",
+          "story_id": "R04-US-012",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-018",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-036",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R04",
+          "story_id": "R04-US-038",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "b7f4cb3e0ca38c76d07cc23785b4d8a6bdb0e383",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R04/independent-result.json"
+        },
+        {
+          "source": "R05",
+          "story_id": "R05-US-038",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "98271e64f02a035b9c1175d33b9a5691cc632481",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/R05/independent-result.json"
+        },
+        {
+          "source": "R01",
+          "story_id": "IS-038",
+          "commit": "3f4924c5fc1153a641987eaf1b5e2bdc937b569f",
+          "blob_sha": "62e92b26a95d0df7d4b41cac7354bb24a6165ff4",
+          "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+        }
+      ]
+    }
+  ],
+  "existing_story_diff": [
+    {
+      "story_id": "R03-US-001",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 서비스에 진입한다.",
+      "new_action": "강사는 서비스에 진입한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-002",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 서비스 계정으로 인증한다.",
+      "new_action": "강사는 서비스 계정으로 인증한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-003",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 기존 레슨 소개글을 제공한다.",
+      "new_action": "강사는 기존 레슨 소개글을 제공한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-006",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 기본 레슨 조건을 입력한다.",
+      "new_action": "강사는 기본 레슨 조건을 입력한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-009",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 저장된 원본 레슨 정보를 선택한다.",
+      "new_action": "강사는 저장된 원본 레슨 정보를 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-010",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 불러온 원본 레슨 정보를 확인한다.",
+      "new_action": "강사는 불러온 원본 레슨 정보를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-013",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 기존 원본 레슨 정보를 수정한다.",
+      "new_action": "강사는 기존 원본 레슨 정보를 수정한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-014",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 원본 저장 결과를 확인한다.",
+      "new_action": "강사는 원본 저장 결과를 확인한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-015",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 원본 저장을 재요청한다.",
+      "new_action": "강사는 원본 저장을 재요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-016",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 플랫폼별 지원 업무를 확인한다.",
+      "new_action": "강사는 플랫폼별 지원 업무를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-017",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 플랫폼별 업무 제약을 확인한다.",
+      "new_action": "강사는 플랫폼별 업무 제약을 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-018",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 작업 대상 플랫폼을 선택한다.",
+      "new_action": "강사는 작업 대상 플랫폼을 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-019",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 신규 등록 업무를 선택한다.",
+      "new_action": "강사는 신규 등록 업무를 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-020",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 기존 게시 정보 수정 업무를 선택한다.",
+      "new_action": "강사는 기존 게시 정보 수정 업무를 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-021",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 공고 갱신 업무를 선택한다.",
+      "new_action": "강사는 공고 갱신 업무를 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-022",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 작업 대상에서 수행 불가 플랫폼을 제외한다.",
+      "new_action": "강사는 작업 대상에서 수행 불가 플랫폼을 제외한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-023",
+      "changed_fields": [
+        "action",
+        "observable_result",
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 플랫폼별 변환 정보를 확인한다.",
+      "new_action": "강사는 플랫폼별 등록·변경 예정 정보를 검토한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-024",
+      "changed_fields": [
+        "inputs",
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 입력 정보의 검증 문제를 확인한다.",
+      "new_action": "강사는 입력 정보의 검증 문제를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-025",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 누락된 레슨 정보를 제공한다.",
+      "new_action": "강사는 누락된 레슨 정보를 제공한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-026",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 불확실한 레슨 사실을 확인한다.",
+      "new_action": "강사는 불확실한 레슨 사실을 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-027",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 유효하지 않은 입력 정보를 정정한다.",
+      "new_action": "강사는 유효하지 않은 입력 정보를 정정한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-028",
+      "changed_fields": [
+        "inputs",
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 플랫폼별 적용 조건을 지정한다.",
+      "new_action": "강사는 플랫폼별 적용 조건을 지정한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-031",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 대상 외부 플랫폼에 직접 로그인한다.",
+      "new_action": "강사는 대상 외부 플랫폼에 직접 로그인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-033",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 대상 외부 플랫폼에 재인증한다.",
+      "new_action": "강사는 대상 외부 플랫폼에 재인증한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-035",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 접근 권한 제한 사유를 확인한다.",
+      "new_action": "강사는 접근 권한 제한 사유를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-036",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 외부 플랫폼 계정을 생성한다.",
+      "new_action": "강사는 외부 플랫폼 계정을 생성한다.",
+      "original_scope": "excluded",
+      "new_scope": "excluded"
+    },
+    {
+      "story_id": "R03-US-040",
+      "changed_fields": [
+        "inputs",
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 기존 게시물 후보를 확인한다.",
+      "new_action": "강사는 기존 게시물 후보를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-041",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 관리할 기존 게시물을 선택한다.",
+      "new_action": "강사는 관리할 기존 게시물을 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-042",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 선택된 게시물의 작업 대상을 확인한다.",
+      "new_action": "강사는 선택된 게시물의 작업 대상을 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-043",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 직접 등록했던 기존 게시물의 관리 연결을 요청한다.",
+      "new_action": "강사는 직접 등록했던 기존 게시물의 관리 연결을 요청한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-044",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 잘못 식별된 작업 대상을 거절한다.",
+      "new_action": "강사는 잘못 식별된 작업 대상을 거절한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-045",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 기존 등록 여부의 확인 결과를 검토한다.",
+      "new_action": "강사는 기존 등록 여부의 확인 결과를 검토한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-046",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 변경 전후 레슨 정보를 비교한다.",
+      "new_action": "강사는 변경 전후 레슨 정보를 비교한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-047",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 기존 게시물의 변경 범위를 선택한다.",
+      "new_action": "강사는 기존 게시물의 변경 범위를 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-048",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 최종 등록·변경 정보를 승인한다.",
+      "new_action": "강사는 최종 등록·변경 정보를 승인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-050",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 최종 정보의 수정을 요청한다.",
+      "new_action": "강사는 최종 정보의 수정을 요청한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-051",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 업무 실행 범위를 승인한다.",
+      "new_action": "강사는 업무 실행 범위를 승인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-052",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 업무 실행 범위의 승인을 거절한다.",
+      "new_action": "강사는 업무 실행 범위의 승인을 거절한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-053",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 실행 전에 업무 승인을 철회한다.",
+      "new_action": "강사는 실행 전에 업무 승인을 철회한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-054",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 변경된 실행 조건을 확인한다.",
+      "new_action": "강사는 변경된 실행 조건을 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-055",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 플랫폼별 업무 결과를 확인한다.",
+      "new_action": "강사는 플랫폼별 업무 결과를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-056",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 업무 결과의 확인 근거를 검토한다.",
+      "new_action": "강사는 업무 결과의 확인 근거를 검토한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-057",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 결과에 따른 후속 조치를 확인한다.",
+      "new_action": "강사는 결과에 따른 후속 조치를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-059",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 플랫폼별 마지막 확인 정보와 상태를 조회한다.",
+      "new_action": "강사는 플랫폼별 마지막 확인 정보와 상태를 조회한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-063",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 현재 상태의 갱신을 요청한다.",
+      "new_action": "강사는 현재 상태의 갱신을 요청한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-065",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 상태 조회 실패 사유를 확인한다.",
+      "new_action": "강사는 상태 조회 실패 사유를 확인한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-066",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 업무 실패·반려·정보 불일치의 확인된 사유를 검토한다.",
+      "new_action": "강사는 업무 실패·반려·정보 불일치의 확인된 사유를 검토한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-067",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 필요한 후속 대응 방안을 선택한다.",
+      "new_action": "강사는 필요한 후속 대응 방안을 선택한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-068",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 실패한 업무의 재처리를 요청한다.",
+      "new_action": "강사는 실패한 업무의 재처리를 요청한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-069",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs",
+        "decision_request"
+      ],
+      "original_action": "강사는 미확인 업무의 기존 외부 효과 확인을 요청한다.",
+      "new_action": "강사는 미확인 업무의 기존 외부 효과 확인을 요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-070",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 해당 업무의 중단을 요청한다.",
+      "new_action": "강사는 해당 업무의 중단을 요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-071",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 해당 업무의 진행을 보류한다.",
+      "new_action": "강사는 해당 업무의 진행을 보류한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-072",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "scope_candidate",
+        "evidence_refs",
+        "decision_request"
+      ],
+      "original_action": "강사는 보관된 원본 정보의 삭제를 요청한다.",
+      "new_action": "강사는 보관된 원본 정보의 삭제를 요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-073",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "scope_candidate",
+        "evidence_refs",
+        "decision_request"
+      ],
+      "original_action": "강사는 외부 게시물의 관리 연결 해제를 요청한다.",
+      "new_action": "강사는 외부 게시물의 관리 연결 해제를 요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-074",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 업무용 외부 접근 권한을 철회한다.",
+      "new_action": "강사는 업무용 외부 접근 권한을 철회한다.",
+      "original_scope": "base",
+      "new_scope": "base"
+    },
+    {
+      "story_id": "R03-US-075",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 서비스 계정에서 로그아웃한다.",
+      "new_action": "강사는 서비스 계정에서 로그아웃한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-080",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 상태 변화의 알림 조건을 설정한다.",
+      "new_action": "강사는 상태 변화의 알림 조건을 설정한다.",
+      "original_scope": "conditional",
+      "new_scope": "conditional"
+    },
+    {
+      "story_id": "R03-US-081",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 모니터링의 조회 방식을 선택한다.",
+      "new_action": "강사는 자동 모니터링의 조회 방식을 선택한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-082",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 자동 모니터링 설정 내용을 확인한다.",
+      "new_action": "강사는 자동 모니터링 설정 내용을 확인한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-083",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 모니터링의 시작을 요청한다.",
+      "new_action": "강사는 자동 모니터링의 시작을 요청한다.",
+      "original_scope": "conditional",
+      "new_scope": "conditional"
+    },
+    {
+      "story_id": "R03-US-084",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 자동 모니터링의 설정 변경을 요청한다.",
+      "new_action": "강사는 자동 모니터링의 설정 변경을 요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-085",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 모니터링 대상에서 지원 불가 대상을 제외한다.",
+      "new_action": "강사는 자동 모니터링 대상에서 지원 불가 대상을 제외한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-087",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 인증 유지 조건을 승인한다.",
+      "new_action": "강사는 인증 유지 조건을 승인한다.",
+      "original_scope": "conditional",
+      "new_scope": "conditional"
+    },
+    {
+      "story_id": "R03-US-089",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 모니터링의 운영 상태를 조회한다.",
+      "new_action": "강사는 자동 모니터링의 운영 상태를 조회한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-090",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 조회 실패 사유를 확인한다.",
+      "new_action": "강사는 자동 조회 실패 사유를 확인한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-091",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 모니터링의 재개를 요청한다.",
+      "new_action": "강사는 자동 모니터링의 재개를 요청한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    },
+    {
+      "story_id": "R03-US-092",
+      "changed_fields": [
+        "failure_or_branch",
+        "related_story_ids"
+      ],
+      "original_action": "강사는 자동 모니터링의 상태 변화 알림을 확인한다.",
+      "new_action": "강사는 자동 모니터링의 상태 변화 알림을 확인한다.",
+      "original_scope": "conditional",
+      "new_scope": "conditional"
+    },
+    {
+      "story_id": "R03-US-094",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 자동 모니터링의 종료를 요청한다.",
+      "new_action": "강사는 자동 모니터링의 종료를 요청한다.",
+      "original_scope": "conditional",
+      "new_scope": "conditional"
+    },
+    {
+      "story_id": "R03-US-095",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 인증 유지 승인을 철회한다.",
+      "new_action": "강사는 인증 유지 승인을 철회한다.",
+      "original_scope": "conditional",
+      "new_scope": "conditional"
+    },
+    {
+      "story_id": "R03-US-098",
+      "changed_fields": [
+        "failure_or_branch",
+        "evidence_refs"
+      ],
+      "original_action": "강사는 자동 모니터링 종료 처리의 제한 사유를 확인한다.",
+      "new_action": "강사는 자동 모니터링 종료 처리의 제한 사유를 확인한다.",
+      "original_scope": "undecided",
+      "new_scope": "undecided"
+    }
+  ],
+  "existing_event_diff": [
+    {
+      "event_id": "R03-SE-002",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-005",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-007",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-008",
+      "changed_fields": [
+        "story_refs",
+        "error/unknown/partial result",
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-009",
+      "changed_fields": [
+        "error/unknown/partial result",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-014",
+      "changed_fields": [
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-016",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-017",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-018",
+      "changed_fields": [
+        "story_refs",
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-019",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-020",
+      "changed_fields": [
+        "story_refs",
+        "precondition/approval/permission",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-021",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-022",
+      "changed_fields": [
+        "story_refs",
+        "error/unknown/partial result",
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-024",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-029",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-030",
+      "changed_fields": [
+        "story_refs",
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-031",
+      "changed_fields": [
+        "action",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-032",
+      "changed_fields": [
+        "action",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-033",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-035",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-042",
+      "changed_fields": [
+        "story_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-044",
+      "changed_fields": [
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    },
+    {
+      "event_id": "R03-SE-046",
+      "changed_fields": [
+        "retry/dedup/confirmation constraints",
+        "evidence_refs"
+      ]
+    }
+  ],
+  "semantic_review": [
+    {
+      "refs": "US-009/010/099",
+      "distinction": "목록 조회, 원본 선택, 내용 확인",
+      "recommendation": "서로 다른 대상/결과; 한 흐름으로 결합 가능"
+    },
+    {
+      "refs": "US-011/012/013/027",
+      "distinction": "추출 정정, 원본 변경, 유효하지 않은 입력안 정정",
+      "recommendation": "수정 대상·원본 보존 차이; 구분 유지"
+    },
+    {
+      "refs": "US-014/015/100",
+      "distinction": "저장 확인, 재요청, 최초 보관 요청",
+      "recommendation": "시점/목적 다름; 자동 저장 시 100 생략"
+    },
+    {
+      "refs": "US-022/085",
+      "distinction": "기본 작업 제외 vs 모니터링 대상 제외",
+      "recommendation": "권한/업무 수명주기 다름; 공통 패턴 재사용"
+    },
+    {
+      "refs": "US-023/048/119/051",
+      "distinction": "입력안 검토, 정보 승인, 범위 검토, 실행 승인",
+      "recommendation": "확인·의사결정 구분; 동일 과정 허용"
+    },
+    {
+      "refs": "US-019~021/106~108",
+      "distinction": "업무 선택 vs 승인 후 실행 요청",
+      "recommendation": "후자는 선택적 미결정; 별도 요청 강제하지 않음"
+    },
+    {
+      "refs": "US-040/041/042/043",
+      "distinction": "후보 확인, 대상 선택, 식별 확인, 관리 연결",
+      "recommendation": "관찰/선택/확인/연결 의도 다름; 하나의 과정 가능"
+    },
+    {
+      "refs": "US-055/056/057/109",
+      "distinction": "결과 확인, 근거 확인, 후속 조치 확인, 미완료 대상 선택",
+      "recommendation": "관찰 범위 차이; 동일 결과 과정 가능"
+    },
+    {
+      "refs": "US-058/059/060/061",
+      "distinction": "이력, 마지막 상태, 확인 시점, 링크",
+      "recommendation": "조회 목적 구분; 별도 화면 강제 안 함"
+    },
+    {
+      "refs": "US-062/063/069",
+      "distinction": "조회 대상 선택, 일반 조회 요청, 미확인 효과 확인",
+      "recommendation": "069는 중복 방지 목적, 자동 확인 필수; 사용자 요청은 미결정"
+    },
+    {
+      "refs": "US-065/090",
+      "distinction": "수동 조회 실패 vs 자동 조회 실패",
+      "recommendation": "발생 원인·종료 영향 다름"
+    },
+    {
+      "refs": "US-066/067/068/105",
+      "distinction": "사유 확인, 방안 선택, 실패 재처리, 재심사",
+      "recommendation": "105는 특수 분기·별도 범위 미결정"
+    },
+    {
+      "refs": "US-053/070/071/103/104",
+      "distinction": "승인 철회, 작업 중단, 보류, 재개, 외부 심사 취소",
+      "recommendation": "외부 효과·상태 차이; 취소와 원복 구분"
+    },
+    {
+      "refs": "US-072/073/074/113",
+      "distinction": "원본 삭제, 연결 해제, 접근 철회, 계정 삭제",
+      "recommendation": "삭제/권한/소유의 효과 다름"
+    },
+    {
+      "refs": "US-077~084/120/121",
+      "distinction": "모니터링 조건 및 변경/주기/채널",
+      "recommendation": "설정 항목 구분; 사용자 지정 주기/채널 미결정"
+    },
+    {
+      "refs": "US-094/095/096/097/098",
+      "distinction": "종료 요청/철회/결과 확인/세션 해제 확인/미확인 사유",
+      "recommendation": "서로 다른 상태 및 의사; 별도 세션 파기 요청 추가 안 함"
+    }
+  ],
+  "scenario_review": [
+    {
+      "id": "T01",
+      "title": "최초 신규 등록",
+      "scenario_type": "정상",
+      "candidate_story_refs": [
+        "R03-US-001",
+        "R03-US-003",
+        "R03-US-004",
+        "R03-US-006",
+        "R03-US-016",
+        "R03-US-018",
+        "R03-US-019",
+        "R03-US-023",
+        "R03-US-031",
+        "R03-US-034",
+        "R03-US-045",
+        "R03-US-048",
+        "R03-US-119",
+        "R03-US-051",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-001",
+        "R03-SE-003",
+        "R03-SE-008",
+        "R03-SE-009",
+        "R03-SE-013",
+        "R03-SE-014",
+        "R03-SE-018",
+        "R03-SE-019",
+        "R03-SE-022",
+        "R03-SE-023",
+        "R03-SE-024",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "유효 입력·허용된 업무·계정 및 중복 확인·두 승인·실행 전 검증 충족 시에만 등록; 실제 근거 확인 후 결과 제공, 세션 폐기.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T02",
+      "title": "원본 재사용·추가 등록",
+      "scenario_type": "반복",
+      "candidate_story_refs": [
+        "R03-US-099",
+        "R03-US-009",
+        "R03-US-010",
+        "R03-US-018",
+        "R03-US-019",
+        "R03-US-045",
+        "R03-US-023",
+        "R03-US-048",
+        "R03-US-051",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-002",
+        "R03-SE-007",
+        "R03-SE-014",
+        "R03-SE-018",
+        "R03-SE-019",
+        "R03-SE-022",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "원본 목록은 선택적; 이전 등록 플랫폼만으로 차단하지 않음. 같은 레슨/계정/객체 및 미확인 효과 확인.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T03",
+      "title": "정보 누락·불확실·첨부 오류",
+      "scenario_type": "오류",
+      "candidate_story_refs": [
+        "R03-US-024",
+        "R03-US-025",
+        "R03-US-026",
+        "R03-US-007",
+        "R03-US-027",
+        "R03-US-023",
+        "R03-US-048"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-008",
+        "R03-SE-009",
+        "R03-SE-010",
+        "R03-SE-016"
+      ],
+      "guard_and_end": "실제 사실 미확보 또는 권리 문제 미해결 시 보류/종료; 임의 생성 금지.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T04",
+      "title": "제약 충돌 및 대안 거절",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-024",
+        "R03-US-029",
+        "R03-US-030",
+        "R03-US-022",
+        "R03-US-070"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-009",
+        "R03-SE-011",
+        "R03-SE-018",
+        "R03-SE-033",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "유효 대안이 있으면 재변환·검증·승인; 없거나 거절 시 해당 업무 미실행.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T05",
+      "title": "저장 실패·원본 보관",
+      "scenario_type": "오류",
+      "candidate_story_refs": [
+        "R03-US-100",
+        "R03-US-014",
+        "R03-US-015",
+        "R03-US-009"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-005",
+        "R03-SE-002"
+      ],
+      "guard_and_end": "명시 보관 여부 미정; 실패/미확인 표시, 원본 손실 여부 단정 금지.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T06",
+      "title": "준비 변환 실패",
+      "scenario_type": "오류",
+      "candidate_story_refs": [
+        "R03-US-024",
+        "R03-US-110",
+        "R03-US-023",
+        "R03-US-024",
+        "R03-US-048"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-008",
+        "R03-SE-009",
+        "R03-SE-010",
+        "R03-SE-016"
+      ],
+      "guard_and_end": "외부 변경 없음; 최신 원본/입력안 버전 확인, 늦은 응답 덮어쓰기 금지; 반복 실패 보류.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T07",
+      "title": "인증 실패·대상 제외",
+      "scenario_type": "오류",
+      "candidate_story_refs": [
+        "R03-US-031",
+        "R03-US-032",
+        "R03-US-033",
+        "R03-US-035",
+        "R03-US-022",
+        "R03-US-070"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-012",
+        "R03-SE-013",
+        "R03-SE-018",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "우회·고정 재시도 횟수 없음; 실패 대상 실행 금지, 나머지 대상 별도 조건 확인; 종료 시 세션 폐기.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T08",
+      "title": "계정/게시물 불일치",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-034",
+        "R03-US-044",
+        "R03-US-076",
+        "R03-US-033",
+        "R03-US-040",
+        "R03-US-041",
+        "R03-US-042",
+        "R03-US-054",
+        "R03-US-051"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-013",
+        "R03-SE-014",
+        "R03-SE-017",
+        "R03-SE-018"
+      ],
+      "guard_and_end": "소유·대상·권한 미확인 시 접근/실행 금지, 중요한 변경은 새 승인.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T09",
+      "title": "원본 수정과 외부 수정",
+      "scenario_type": "반복",
+      "candidate_story_refs": [
+        "R03-US-013",
+        "R03-US-020",
+        "R03-US-041",
+        "R03-US-042",
+        "R03-US-046",
+        "R03-US-047",
+        "R03-US-023",
+        "R03-US-048",
+        "R03-US-119",
+        "R03-US-051",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-004",
+        "R03-SE-005",
+        "R03-SE-014",
+        "R03-SE-015",
+        "R03-SE-018",
+        "R03-SE-020",
+        "R03-SE-022",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "내부 원본 변경은 외부 변경 아님; 현재 게시 정보와 승인 범위 검증 후 외부 수정.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T10",
+      "title": "승인 거절 및 철회",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-023",
+        "R03-US-049",
+        "R03-US-050",
+        "R03-US-048",
+        "R03-US-119",
+        "R03-US-052",
+        "R03-US-053",
+        "R03-US-070"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-016",
+        "R03-SE-017",
+        "R03-SE-018",
+        "R03-SE-030",
+        "R03-SE-033"
+      ],
+      "guard_and_end": "각 승인 거절 시 해당 업무 미실행; 철회 시 추가 실행 차단. 이미 발생한 외부 효과는 069 확인, 원복 보장 없음.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T11",
+      "title": "승인 이후 중요 조건 변경",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-051",
+        "R03-US-054",
+        "R03-US-033",
+        "R03-US-042",
+        "R03-US-046",
+        "R03-US-023",
+        "R03-US-048",
+        "R03-US-119",
+        "R03-US-051",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-013",
+        "R03-SE-015",
+        "R03-SE-016",
+        "R03-SE-017",
+        "R03-SE-018",
+        "R03-SE-022"
+      ],
+      "guard_and_end": "이전 승인 그대로 실행 금지; 재검증 및 필요한 새 승인 후만 진행.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T12",
+      "title": "공고 갱신",
+      "scenario_type": "반복",
+      "candidate_story_refs": [
+        "R03-US-021",
+        "R03-US-017",
+        "R03-US-041",
+        "R03-US-042",
+        "R03-US-119",
+        "R03-US-051",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-006",
+        "R03-SE-014",
+        "R03-SE-017",
+        "R03-SE-018",
+        "R03-SE-021",
+        "R03-SE-022",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "허용된 갱신 방식과 별도 승인 확인, 삭제·재등록 대체 금지; 빈도 제한 시 종료/보류.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T13",
+      "title": "부분 성공",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-055",
+        "R03-US-109",
+        "R03-US-066",
+        "R03-US-067",
+        "R03-US-068",
+        "R03-US-048",
+        "R03-US-051",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-022",
+        "R03-SE-024",
+        "R03-SE-029",
+        "R03-SE-018",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "성공 대상 제외; 실패와 미확인 분리, 미확인 대상 069 확인 후에만 재처리 검토.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T14",
+      "title": "제출 응답 유실",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-055",
+        "R03-US-069",
+        "R03-US-056",
+        "R03-US-071"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-022",
+        "R03-SE-027",
+        "R03-SE-018",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "반영 확인→결과 제공/종료; 미반영 확인→새 승인 필요 여부 및 조건 검토; 계속 미확인→재실행 차단.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T15",
+      "title": "반려 보완 및 재심사",
+      "scenario_type": "반복",
+      "candidate_story_refs": [
+        "R03-US-066",
+        "R03-US-067",
+        "R03-US-025",
+        "R03-US-050",
+        "R03-US-024",
+        "R03-US-048",
+        "R03-US-051",
+        "R03-US-105",
+        "R03-US-055"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-029",
+        "R03-SE-009",
+        "R03-SE-016",
+        "R03-SE-017",
+        "R03-SE-018",
+        "R03-SE-020",
+        "R03-SE-022"
+      ],
+      "guard_and_end": "재심사 지원 자체 미결정; 기존 외부 효과·현재 심사 상태 및 새 승인 확인; 임의 재제출 금지.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T16",
+      "title": "수동 상태 조회 실패",
+      "scenario_type": "오류",
+      "candidate_story_refs": [
+        "R03-US-059",
+        "R03-US-060",
+        "R03-US-062",
+        "R03-US-063",
+        "R03-US-033",
+        "R03-US-065",
+        "R03-US-064"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-025",
+        "R03-SE-026",
+        "R03-SE-012",
+        "R03-SE-027",
+        "R03-SE-028",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "새 관측 없음은 이전 확인 시점과 현재 조회 불가 구분; 업무 종료 후 세션 폐기.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T17",
+      "title": "업무 중단·보류 후 재개",
+      "scenario_type": "반복",
+      "candidate_story_refs": [
+        "R03-US-070",
+        "R03-US-071",
+        "R03-US-103",
+        "R03-US-069",
+        "R03-US-009",
+        "R03-US-054",
+        "R03-US-048",
+        "R03-US-051"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-033",
+        "R03-SE-022",
+        "R03-SE-018",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "외부 효과 미확인 선확인, 재개 정책 미정; 유효한 조건/승인 없으면 계속 보류.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T18",
+      "title": "원본 삭제·연결 해제",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-072",
+        "R03-US-073",
+        "R03-US-074",
+        "R03-US-070",
+        "R03-US-069"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-031",
+        "R03-SE-032",
+        "R03-SE-030",
+        "R03-SE-033",
+        "R03-SE-022"
+      ],
+      "guard_and_end": "요청 자체 기본 후보. 진행 업무/보존 정책 미정; 외부 게시물 삭제 아님, 접근 권한은 별도 처리.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T19",
+      "title": "대행 불가·직접 작성 대안",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-016",
+        "R03-US-017",
+        "R03-US-022",
+        "R03-US-115"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-006",
+        "R03-SE-052"
+      ],
+      "guard_and_end": "외부 실행 금지; 직접 작성용 자료는 미결정이고 대행 성공으로 표시하지 않음.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T20",
+      "title": "심사 승인 후 모집 준비",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-055",
+        "R03-US-116",
+        "R03-US-117",
+        "R03-US-048",
+        "R03-US-051",
+        "R03-US-069"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-022",
+        "R03-SE-024",
+        "R03-SE-053",
+        "R03-SE-018"
+      ],
+      "guard_and_end": "심사 승인과 모집 가능 구분; 최초 모집 일정 설정 지원 미결정, 수업 운영 제외.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T21",
+      "title": "공개 기반 자동 모니터링",
+      "scenario_type": "조건부",
+      "candidate_story_refs": [
+        "R03-US-077",
+        "R03-US-078",
+        "R03-US-079",
+        "R03-US-080",
+        "R03-US-082",
+        "R03-US-083",
+        "R03-US-089",
+        "R03-US-092",
+        "R03-US-094",
+        "R03-US-096"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-034",
+        "R03-SE-035",
+        "R03-SE-036",
+        "R03-SE-039",
+        "R03-SE-041",
+        "R03-SE-042",
+        "R03-SE-044",
+        "R03-SE-045",
+        "R03-SE-047"
+      ],
+      "guard_and_end": "공개 접근 허용·기간·조회 범위 검증, 인증 유지 없이 읽기 전용; 종료 후 신규 조회 차단.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T22",
+      "title": "인증 기반 모니터링 정상",
+      "scenario_type": "조건부",
+      "candidate_story_refs": [
+        "R03-US-077",
+        "R03-US-078",
+        "R03-US-079",
+        "R03-US-080",
+        "R03-US-081",
+        "R03-US-086",
+        "R03-US-087",
+        "R03-US-031",
+        "R03-US-034",
+        "R03-US-083",
+        "R03-US-092",
+        "R03-US-094",
+        "R03-US-095",
+        "R03-US-097",
+        "R03-US-096"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-034",
+        "R03-SE-037",
+        "R03-SE-038",
+        "R03-SE-036",
+        "R03-SE-040",
+        "R03-SE-041",
+        "R03-SE-042",
+        "R03-SE-044",
+        "R03-SE-045",
+        "R03-SE-046",
+        "R03-SE-047"
+      ],
+      "guard_and_end": "별도 명시 승인·계정·정책·보안 충족 시에만 지속 조회; 조회 권한으로 쓰기 금지; 종료/철회 후 세션 해제.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T23",
+      "title": "인증 유지 거절",
+      "scenario_type": "조건부",
+      "candidate_story_refs": [
+        "R03-US-086",
+        "R03-US-088",
+        "R03-US-081",
+        "R03-US-063"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-037",
+        "R03-SE-038",
+        "R03-SE-036",
+        "R03-SE-027",
+        "R03-SE-030"
+      ],
+      "guard_and_end": "인증 기반 자동 접근 금지; 공개 방식은 별도 허용 확인, 수동 조회는 별도 권한.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T24",
+      "title": "자동 조회 실패 및 재개",
+      "scenario_type": "조건부",
+      "candidate_story_refs": [
+        "R03-US-089",
+        "R03-US-090",
+        "R03-US-091",
+        "R03-US-086",
+        "R03-US-087",
+        "R03-US-033",
+        "R03-US-083"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-043",
+        "R03-SE-044",
+        "R03-SE-048",
+        "R03-SE-038",
+        "R03-SE-036",
+        "R03-SE-040"
+      ],
+      "guard_and_end": "만료·철회·불허 시 중단, 이전 관측 최신으로 표시 금지; 재개는 유효한 새 조건/승인 확인 전 금지.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T25",
+      "title": "종료·세션 해제 미확인",
+      "scenario_type": "조건부",
+      "candidate_story_refs": [
+        "R03-US-094",
+        "R03-US-095",
+        "R03-US-096",
+        "R03-US-097",
+        "R03-US-098"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-044",
+        "R03-SE-045",
+        "R03-SE-046",
+        "R03-SE-047"
+      ],
+      "guard_and_end": "신규 접근 차단 유지, 해제 미확인을 완료로 표시하지 않음; 재개 금지.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T26",
+      "title": "모니터링 설정 변경·알림 실패",
+      "scenario_type": "조건부",
+      "candidate_story_refs": [
+        "R03-US-084",
+        "R03-US-120",
+        "R03-US-121",
+        "R03-US-082",
+        "R03-US-086",
+        "R03-US-087",
+        "R03-US-092",
+        "R03-US-093"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-035",
+        "R03-SE-048",
+        "R03-SE-038",
+        "R03-SE-042",
+        "R03-SE-043"
+      ],
+      "guard_and_end": "조회 주기·채널 미결정; 확대 범위 재승인; 중복/전송 실패는 확인 완료 아님.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T27",
+      "title": "외부 임시 저장·이어쓰기",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-101",
+        "R03-US-069",
+        "R03-US-102",
+        "R03-US-023",
+        "R03-US-048",
+        "R03-US-051"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-049",
+        "R03-SE-050",
+        "R03-SE-022",
+        "R03-SE-018"
+      ],
+      "guard_and_end": "허용/승인 및 대상 미확인 시 실행 금지; 외부 초안 보관과 내부 원본 별개; 미확인 효과 확인 우선.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T28",
+      "title": "외부 심사 접수 취소",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-104",
+        "R03-US-069",
+        "R03-US-055",
+        "R03-US-105"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-051",
+        "R03-SE-022",
+        "R03-SE-029",
+        "R03-SE-018"
+      ],
+      "guard_and_end": "별도 미결정 업무, 취소 확인 없이 재심사 금지; 원복 보장 없음.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T29",
+      "title": "자체 계정 접근·삭제",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-111",
+        "R03-US-002",
+        "R03-US-112",
+        "R03-US-114",
+        "R03-US-099",
+        "R03-US-075",
+        "R03-US-113",
+        "R03-US-072",
+        "R03-US-073"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-054",
+        "R03-SE-055",
+        "R03-SE-056",
+        "R03-SE-031",
+        "R03-SE-032"
+      ],
+      "guard_and_end": "정책 미결정, 타인 데이터 접근 차단; 원본 삭제·외부 연결 해제·계정 삭제 분리.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    },
+    {
+      "id": "T30",
+      "title": "대표 서비스 변경 검토",
+      "scenario_type": "예외",
+      "candidate_story_refs": [
+        "R03-US-118",
+        "R03-US-041",
+        "R03-US-042",
+        "R03-US-046",
+        "R03-US-047",
+        "R03-US-048",
+        "R03-US-051"
+      ],
+      "supporting_event_refs": [
+        "R03-SE-014",
+        "R03-SE-015",
+        "R03-SE-018",
+        "R03-SE-020"
+      ],
+      "guard_and_end": "별도 범위 결정·실제 권한 및 새 승인 전 실행 금지.",
+      "verdict": "기획 논리 검토 · 실제 실행 미검증",
+      "note": "대표 관련 행동 순서 예시; 모든 ID가 필수 단계/직접 인접 간선은 아님. 조건에 따른 대안 분기 포함."
+    }
+  ],
+  "verification": {
+    "static_errors": [],
+    "checks": [
+      "34개 피처 정·역방향 행동/이벤트 참조",
+      "고유 ID 및 동일 행동 문장 중복",
+      "필수 필드·사용자/시스템 분리·범위/상황 enum",
+      "행동·분기·이벤트·근거·결정·비교·경로 참조 존재",
+      "기존 ID 유지, E 피처 기본 범위 승격 금지"
+    ],
+    "limitations": [
+      "문장 형태 검사는 의미 원자성의 자동 증명이 아님",
+      "대표 시나리오는 논리 검토이며 실제 실행/전체 상태 공간 검증 아님",
+      "공식 저장소 스키마/CI 미실행, GitHub 반영 및 TASK result 미수정",
+      "모든 실제 권한·정책·플랫폼 동작 미검증; R01 최종 범위 결정 필요"
+    ]
+  }
+}

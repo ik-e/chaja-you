@@ -3,7 +3,7 @@
   "id": "STATE-001",
   "kind": "state",
   "status": "운영 중",
-  "as_of": "2026-11-26",
+  "as_of": "2026-11-27",
   "scope": "기획 V1.2를 후속 설계 기준으로 채택. 전체 사용자 스토리와 7개 플랫폼 독립 조사, 서비스 기능 범위 확정 및 DB 설계 우선. 실제 플랫폼 실행 금지 및 기존 mock 구현 보존.",
   "confirmed": [
     "기획서는 서비스 개요부터 사용자·Pain·원인·핵심 기능·가치·비즈니스 모델·요구사항·기술 제약·MVP·검증까지 12항목을 갖추며, 실제 가치와 설계 입력의 연결을 설명해야 한다.",
@@ -22,7 +22,7 @@
   "priorities": [
     "TASK-055 R02 / TASK-056 R04 / TASK-057 R05: 각각 전체 F01~F29, E01~E05 조건부 및 PL01~PL07 전부 독립 조사. 공통 계약·독립 원본·근거/미확인 준수.",
     "TASK-059 R03: 오후 사용자 스토리 독립 도출 및 정상·오류·예외·반복 분기·누락 검토. 별도 플랫폼 전수 조사 제외; 오늘 1차 인계, 미검토 근거 표시.",
-    "TASK-058 R01: 기존 세 결과와 R03 스토리 검토 비교·통합, 사용자 스토리 및 서비스 범위 결정 후 논리 DB·ERD·스키마 설계; 7개 수용 가능성, 기존 DB/API/코드 영향 및 API·프로토콜 입력 확인.",
+    "TASK-058 R01: V3.1-R4 현행 사용자 스토리 기준·상세 명세·최소 DB V3 후보 연결을 검토하고 공식 검증/CI 및 R01 승인 후 DB/API 후속 설계. 실제 플랫폼 실행 금지 유지.",
     "기존 TASK-048~054 신규 구현 일시 보류, 상태·증거·미충족 의무 보존; 새 설계에 따라 영향/재개 판단. 12/8 mock MVP·1/4 최종 목표는 재평가 전 유지. 실제 플랫폼 로그인/등록/자동화 및 인증정보 수집 금지."
   ],
   "decisions_needed": [
@@ -45,7 +45,7 @@
       "evidence_needed": "운영사 허용, 실제 보안·가치·비용 및 수용 시험"
     }
   ],
-  "review_summary": "11/26 V1.2 기반 TASK-055~058 진행, R04 결과 main 반영·R02 크몽 보완·R05 개인 브랜치 상세 조사, R01 통합 초안은 범위 승인 전. 오후 R03 TASK-059 사용자 스토리 추가 배정; 수신·착수 미확인. 이전 11/25 구현·시험 보존, 실제 제품 설계 확정 전.",
+  "review_summary": "11/27 TASK-058 V3.1-R4를 현행 논리 검토 기준으로 고정: 사용자 스토리 12 여정·7 플랫폼/44 업무, R02/R03/R05 검토 반영 및 R04 기존 조사·IA 반영(별도 V3.1 검토 미확인). 상세 명세 6종과 최소 DB V3 13개 테이블 참조 대조. [현행 사용자 스토리 검토](lesson-registration/USER-STORY-CURRENT.md). 최종 승인·실제 DB/외부 실행·공식 CI/프로젝션 검증은 별도. TASK-055~059 및 기존 보류·mock-only 경계 유지. 11/26 AI 병합 판단 오류 기록 및 최소 영향 처리: [OPS-20261126-MERGE-01](../artifacts/state/merge-review-20261126.json). 담당자 원본·TASK·브랜치 유지.",
   "deliverables": [
     {
       "id": "SUB-01",
@@ -384,6 +384,15 @@
     },
     {
       "path": "docs/artifacts/tasks/TASK-058.json"
+    },
+    {
+      "path": "docs/artifacts/state/merge-review-20261126.json"
+    },
+    {
+      "path": "docs/human/responses/HRESP-20261126-04_merge-judgment-correction.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
     }
   ],
   "submission_plan": {
