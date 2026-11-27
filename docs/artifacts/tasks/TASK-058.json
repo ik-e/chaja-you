@@ -87,7 +87,21 @@
     "docs/review/lesson-registration/USER-STORY-V3.0.md",
     "docs/review/lesson-registration/USER-STORY-FLOWS-V3.0.md",
     "docs/review/lesson-registration/USER-STORY-TRACE-V3.0.md",
-    "tools/validate_user_story_v3.mjs"
+    "tools/validate_user_story_v3.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-trace.json",
+    "docs/review/lesson-registration/LOGICAL-DB-ERD-V1.0.md",
+    "docs/review/lesson-registration/LOGICAL-DB-TRACE-V1.0.md",
+    "tools/project_logical_db_v1.mjs",
+    "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
+    "docs/review/lesson-registration/USER-STORY-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-INTEGRATION-REVIEW-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-MENTOR-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-SEMANTIC-REVIEW-V3.1.md",
+    "tools/project_user_story_v31.mjs"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -186,7 +200,7 @@
     }
   ],
   "result": {
-    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음. | 멘토 참고 형식 팀 검토본 USER-STORY.md: 21개 이용 상황, 기존 536개 ID 1회씩 대조, 정상 우선·오류 후속. | V2.2 정상 전수 검토(147 행동/24 경로) 보존. V2.3 정상 수정 필요 8 행동/6 경로 보완 후보, 155 화면 행동 모두 32개 오류 대응 연결, 536 단계/44 업무/693 분기 원문·후속 ID 보존. 일반 조건 195개 중 191개 구체화 후보 및 제외 4개 유지, 14개 이월 오류 연결. 8 정상·4 오류 흐름도, 기존 V2.2 2개 프로젝션 JS 재구성 일치. 개별 승인/실제 권한·효과/의미 완전성/공식 Python 미확정. main 병합 및 DB/API 확정 없음. | V2.4 의미 보완 overlay: 8 수정 후보·8 정상/오류 흐름·155 행동 도메인 분류·693 분기 조건/후속 보존 및 유형별 대응 후보·32 오류·7개 플랫폼 44업무 150개 업무 체크포인트. 단일 플랫폼 부분 효과·조회/종료·계정/인증·재처리 분리. 의미·실행·공식 Python 미검증, 범위 미승인. | 현재 승인 기준선: 서비스 범위 V1.0 R01 확정(공고 갱신 기본 기능 포함). 이전 후보의 제품 범위 미승인 표현은 이력이며 신규 기준선 우선. 7개 플랫폼·44 업무 분류, 실제 실행 mock-only. 개별 사용자 스토리·논리 설계 미확정. | 추상 화면 V1.0 검토 후보: 핵심 H/E/W/R 4개, 보조 영역 포함 9개 논리 영역·22개 세부 영역·30개 전이·12개 여정; 7 기본 기능/44 업무/155 행동/37 R04 화면/32 오류 위치 연결. 원본 재사용·필요 판단만·같은 문맥 복귀·조건부 인증·부분 효과 보존. 화면 의미/사용성 및 공식 Python 미검증. | 시스템 업무 V1.0 검토 후보: 7 업무군/36 공통 업무(시작·입력·처리·출력·완료·사용자/FE/공통·플랫폼 BE/저장소 책임 및 오류), 11 논리 정보 개념·12 불변조건. 7 기능/29 피처·155 행동·42 시스템 책임·44 업무/150 체크포인트·12 여정/30 전이·32 오류·8 피드백 관련 참조 검증. 실제 실행/의미·사용성/공식 Python 미검증. 범위 변경 없음. | 플랫폼별 업무 V1.0 검토 후보: R02/R04/R05 126 업무 행과 R05 124 상세 필드, R02 130·R04 93·R05 독립 27 필드 행을 보존(중복/결합 포함); 7 플랫폼/44 업무, 150 이전 체크포인트 연결·144 새 업무 체크포인트·38 의미 필드 그룹, R04 정정/R03 비교/R05 추가 사례와 10 근거 대조. 공통 SW/오류 참조 정적 검사 통과; 범위 변경·실제 실행 없음. 개별 의미·필수/제약·대행 권한·완료 증거/공식 Python 미검증. | 논리 상태·전이 V1.0 검토 후보: 이전 V5 24 규칙과 공통 계약·V2.4 6축, 신규 36 업무/44 플랫폼 업무·144 체크포인트/30 화면 전이/32 오류/8 피드백 연결; 16 상태 축·69 전이·7 논리 일관성 경계. 한 대상·2개 순서 효과 축약 모형 314 상태/1026 간선, 검사 불변조건 위반 0(JS). 전체 의미·실제 경합/권한/DB/API 및 공식 Python/CI 미검증. | 오류 대응 V1.0 검토 후보: 32 오류의 영향·보존·상태 판정·복귀·재처리, 36 공통/44 플랫폼 업무·144 체크포인트·155 행동·693 분기 관련 참조, LT-70 보완 후보, 16 수용 시험 후보. JS 참조 검사 통과; 개별 의미·공식 Python/CI·runtime 미검증. | R1 설계 보완: 제품 44 업무 불변, 45 논리 효과/잔여 계획(독립 경로 미검증), 검증 읽기 계획·공유 객체 claim/분쟁 AX17·LT-70~73, 44 화면 전이, 22 오류 수용 후보. JS 교차 정적/참조 사례 34개 검사, 위반 0; 실제 실행/공식 Python/CI/전체 의미 미검증. | V3.0 통합 검토 후보: 12 여정·40 노드·96 연결·28 참조 시나리오, 36 공통 업무/44 플랫폼 업무·144 체크포인트·45 논리 효과·32 오류, R03 121 행동/56 이벤트/18 발견 및 기존 144 스토리/155 행동/693 분기(505 활성 의미 미검증·172 미채택·16 범위 분리) 대응. LT-44 조회 목적 보완. 30 정적/축약 검사(13 모형 사례) 및 10 추적 검사 실패 0. 실제 실행/공식 Python/CI·전체 개별 의미 검증 미완료; 범위 및 main 불변.",
+    "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음. | 멘토 참고 형식 팀 검토본 USER-STORY.md: 21개 이용 상황, 기존 536개 ID 1회씩 대조, 정상 우선·오류 후속. | V2.2 정상 전수 검토(147 행동/24 경로) 보존. V2.3 정상 수정 필요 8 행동/6 경로 보완 후보, 155 화면 행동 모두 32개 오류 대응 연결, 536 단계/44 업무/693 분기 원문·후속 ID 보존. 일반 조건 195개 중 191개 구체화 후보 및 제외 4개 유지, 14개 이월 오류 연결. 8 정상·4 오류 흐름도, 기존 V2.2 2개 프로젝션 JS 재구성 일치. 개별 승인/실제 권한·효과/의미 완전성/공식 Python 미확정. main 병합 및 DB/API 확정 없음. | V2.4 의미 보완 overlay: 8 수정 후보·8 정상/오류 흐름·155 행동 도메인 분류·693 분기 조건/후속 보존 및 유형별 대응 후보·32 오류·7개 플랫폼 44업무 150개 업무 체크포인트. 단일 플랫폼 부분 효과·조회/종료·계정/인증·재처리 분리. 의미·실행·공식 Python 미검증, 범위 미승인. | 현재 승인 기준선: 서비스 범위 V1.0 R01 확정(공고 갱신 기본 기능 포함). 이전 후보의 제품 범위 미승인 표현은 이력이며 신규 기준선 우선. 7개 플랫폼·44 업무 분류, 실제 실행 mock-only. 개별 사용자 스토리·논리 설계 미확정. | 추상 화면 V1.0 검토 후보: 핵심 H/E/W/R 4개, 보조 영역 포함 9개 논리 영역·22개 세부 영역·30개 전이·12개 여정; 7 기본 기능/44 업무/155 행동/37 R04 화면/32 오류 위치 연결. 원본 재사용·필요 판단만·같은 문맥 복귀·조건부 인증·부분 효과 보존. 화면 의미/사용성 및 공식 Python 미검증. | 시스템 업무 V1.0 검토 후보: 7 업무군/36 공통 업무(시작·입력·처리·출력·완료·사용자/FE/공통·플랫폼 BE/저장소 책임 및 오류), 11 논리 정보 개념·12 불변조건. 7 기능/29 피처·155 행동·42 시스템 책임·44 업무/150 체크포인트·12 여정/30 전이·32 오류·8 피드백 관련 참조 검증. 실제 실행/의미·사용성/공식 Python 미검증. 범위 변경 없음. | 플랫폼별 업무 V1.0 검토 후보: R02/R04/R05 126 업무 행과 R05 124 상세 필드, R02 130·R04 93·R05 독립 27 필드 행을 보존(중복/결합 포함); 7 플랫폼/44 업무, 150 이전 체크포인트 연결·144 새 업무 체크포인트·38 의미 필드 그룹, R04 정정/R03 비교/R05 추가 사례와 10 근거 대조. 공통 SW/오류 참조 정적 검사 통과; 범위 변경·실제 실행 없음. 개별 의미·필수/제약·대행 권한·완료 증거/공식 Python 미검증. | 논리 상태·전이 V1.0 검토 후보: 이전 V5 24 규칙과 공통 계약·V2.4 6축, 신규 36 업무/44 플랫폼 업무·144 체크포인트/30 화면 전이/32 오류/8 피드백 연결; 16 상태 축·69 전이·7 논리 일관성 경계. 한 대상·2개 순서 효과 축약 모형 314 상태/1026 간선, 검사 불변조건 위반 0(JS). 전체 의미·실제 경합/권한/DB/API 및 공식 Python/CI 미검증. | 오류 대응 V1.0 검토 후보: 32 오류의 영향·보존·상태 판정·복귀·재처리, 36 공통/44 플랫폼 업무·144 체크포인트·155 행동·693 분기 관련 참조, LT-70 보완 후보, 16 수용 시험 후보. JS 참조 검사 통과; 개별 의미·공식 Python/CI·runtime 미검증. | R1 설계 보완: 제품 44 업무 불변, 45 논리 효과/잔여 계획(독립 경로 미검증), 검증 읽기 계획·공유 객체 claim/분쟁 AX17·LT-70~73, 44 화면 전이, 22 오류 수용 후보. JS 교차 정적/참조 사례 34개 검사, 위반 0; 실제 실행/공식 Python/CI/전체 의미 미검증. | V3.0 통합 검토 후보: 12 여정·40 노드·96 연결·28 참조 시나리오, 36 공통 업무/44 플랫폼 업무·144 체크포인트·45 논리 효과·32 오류, R03 121 행동/56 이벤트/18 발견 및 기존 144 스토리/155 행동/693 분기(505 활성 의미 미검증·172 미채택·16 범위 분리) 대응. LT-44 조회 목적 보완. 30 정적/축약 검사(13 모형 사례) 및 10 추적 검사 실패 0. 실제 실행/공식 Python/CI·전체 개별 의미 검증 미완료; 범위 및 main 불변. | 2026-11-27 R01 잠정 V3.1-R1 기준 논리 DB V1.0 작성: 42 논리 기록/78 관계/13 불변조건, 12 여정/40 노드/36 업무·17축/73전이/8 원자경계·44업무/144단계/45효과/38 필드그룹, 기존 SQLite 10 테이블 영향·강사 A1~D4 연결. 21 구조/참조 검사 및 40 축약 가드 예시 통과. 논리 후보, 물리/실행/실제 권한/공식 CI 미검증, main 미병합.",
     "claims": [
       {
         "id": "C058-01",
@@ -428,6 +442,18 @@
           "E058-50",
           "E058-51",
           "E058-52"
+        ]
+      },
+      {
+        "id": "C058-26",
+        "text": "R01 잠정 V3.1-R1 기준으로 논리 DB/ERD·양방향 대조 후보 작성. 기존 범위, 상위 세 논리 구조, mock-only 유지. 물리/실제 검증 및 최종 승인 별도.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-53",
+          "E058-54",
+          "E058-55",
+          "E058-56",
+          "E058-57"
         ]
       }
     ],
@@ -713,6 +739,31 @@
         "id": "E058-52",
         "label": "V3 정적 및 참조 모형 검증기",
         "path": "tools/validate_user_story_v3.mjs"
+      },
+      {
+        "id": "E058-53",
+        "label": "R01 잠정 V3.1 논리 DB 착수 의도",
+        "path": "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md"
+      },
+      {
+        "id": "E058-54",
+        "label": "논리 DB V1.0 후보",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json"
+      },
+      {
+        "id": "E058-55",
+        "label": "DB 데이터·사용자 스토리 양방향 추적",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-trace.json"
+      },
+      {
+        "id": "E058-56",
+        "label": "논리 ERD 및 데이터 사전",
+        "path": "docs/review/lesson-registration/LOGICAL-DB-ERD-V1.0.md"
+      },
+      {
+        "id": "E058-57",
+        "label": "논리 DB 생성/축약 가드 평가기",
+        "path": "tools/project_logical_db_v1.mjs"
       }
     ],
     "verification": [
@@ -1000,14 +1051,16 @@
       "시스템 업무 V1.0은 36개 공통 업무 및 책임 검토 후보. 150 체크포인트/155 행동 등의 관련 연결은 의미 동등성/전수 분기·실제 단계 허용·상태 머신 검증 아님. 공식 Python/CI 및 실제 사용성/외부 실행 미검증.",
       "플랫폼별 업무 V1.0은 팀원 조사 기반 검토 후보. 38 필드 그룹 및 원본 필드 행은 고유 필수 필드 수 아님. R03 비교 발견 일부 활용, 전체 121 행동/56 이벤트 및 기존 693 분기 의미 검토 잔여. 실제 권한·완료/규칙 최신성·공식 Python/CI 미확인; 현행 mock-only.",
       "논리 상태 V1.0은 이전 검증 결과를 현재 검증으로 승격하지 않으며 축약 모델은 명세 전체 guard의 자동 해석기가 아님. 다중 대상 경합/실제 효과·권한·전이별 정확 오류 조건·전체 의미·DB/API·공식 Python/CI 미검증. 종료 후 늦은 증거가 미전송을 입증하는 경우 결과 보완 전이의 명시 정합성도 오류 명세에서 확인 필요.",
-      "V3는 R03 121/56과 693 분기를 범위/노드에 대조했으나 505 활성 분기와 16 범위 분리의 개별 edge 의미 완전성은 미확정. W 공통 사실 인라인 저장 계약·실제 플랫폼 권한/효과/복구·경합 및 사용자 시간/행동 실측, 공식 Python/CI 잔여."
+      "V3는 R03 121/56과 693 분기를 범위/노드에 대조했으나 505 활성 분기와 16 범위 분리의 개별 edge 의미 완전성은 미확정. W 공통 사실 인라인 저장 계약·실제 플랫폼 권한/효과/복구·경합 및 사용자 시간/행동 실측, 공식 Python/CI 잔여.",
+      "논리 DB V1.0: 플랫폼 실제 필수/규격·정규 객체/slot·권한·관측, 상태/동시성의 상세 의미, 보존/삭제/권리 및 PostgreSQL 물리 schema/마이그레이션·API·실제 CI 미확정. 축약 가드 예시는 DB 검증 아님."
     ],
     "decision_requests": [
       "추상 화면/시스템 업무/플랫폼별 업무/논리 상태·전이 V1.0 후보 검토. 다음 오류 대응 명세에서 업무별 오류·보존·복귀·재처리 및 전이 정합성 보완 → 전체 사용자 스토리 의미 확정(R03 비교 포함).",
       "정책 근거/법률 적용 및 업무 단계별 허용·효과 실증은 별도. 사용자 스토리 확정 후 DB/ERD/API 상세 설계.",
       "장기 인증·자동 모니터링·단일 승인 조작 UI·직접 결과 기록·최초 일정·대표 서비스는 별도 결정. 미확인 갱신 경로 및 구현 순서·일정·가치 실측 별도. main 미병합.",
       "오류 대응 V1.0 및 LT-70 보완 후보를 반영하여 통합 사용자 스토리 재구성 및 시각화 검증 진행.",
-      "V3 통합 후보 검토: 인라인 원본 사실 변경/동일 키 저장 계약 확정 및 개별 의미·권한/효과/경합 검증 후 승인. 승인 후 상세 DB/ERD/API 진입."
+      "V3 통합 후보 검토: 인라인 원본 사실 변경/동일 키 저장 계약 확정 및 개별 의미·권한/효과/경합 검증 후 승인. 승인 후 상세 DB/ERD/API 진입.",
+      "DB-D01~06 논리 설계 후보 검토, 팀 V3.1 최종 합의/DB 승인 후 물리 PostgreSQL 및 API 단계 결정. 기존 작업 재개 별도."
     ]
   },
   "traceability": {
@@ -1146,10 +1199,16 @@
     "status": "candidate_not_approved"
   },
   "active_user_story_candidate_ref": {
-    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/user-stories.json",
-    "id": "USER-STORY-20261127-R01-V3",
-    "version": "3.0",
-    "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json"
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+    "id": "USER-STORY-20261127-R01-V31",
+    "version": "3.1",
+    "semantic_revision": "V3.1-R1",
+    "commit": "70ae8e7169c284ba71c4dcbcc0cde4415929d079",
+    "blob": "d11f63353fd48bee4126d7fd916a6d870f55410f",
+    "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
+    "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
+    "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
+    "status": "provisional_for_logical_db_not_final_approved"
   },
   "design_review_v3": {
     "base_commit": "c0340296e75bcab160bdc63d86ca048121a11b44",
@@ -1197,5 +1256,14 @@
       "공식 Python/CI 및 최신 팀 자료 재검증",
       "승인 후 DB/ERD/API"
     ]
+  },
+  "provisional_logical_db_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json",
+    "id": "TASK-058-LOGICAL-DB-V1",
+    "version": "1.0",
+    "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-trace.json",
+    "authority_ref": "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md",
+    "source_commit": "70ae8e7169c284ba71c4dcbcc0cde4415929d079",
+    "status": "provisional_candidate_not_approved_for_physical_design"
   }
 }
