@@ -308,7 +308,9 @@ class PreparationTests(unittest.TestCase):
             updated = co.edit_registration("test-owner", view["registration_id"], {
                 "expected_revision": revised["revision"],
                 "corrections": [{"field": "/packages/0/amount_vat_included_krw", "value": 190000}]})
-            self.assertTrue(updated["preparation"]["ready"])
+            self.assertFalse(updated["preparation"]["ready"])
+            self.assertEqual(updated["preparation"]["issues"], revised["preparation"]["issues"])
+            self.assertEqual({issue["field"] for issue in updated["preparation"]["issues"]}, {"/region"})
             packages = updated["preparation"]["values"]["packages"]
             self.assertEqual(packages[0]["amount_vat_included_krw"], 190000)
             original_first = copy.deepcopy(values["packages"][0])
