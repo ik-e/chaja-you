@@ -1898,5 +1898,30 @@
       "official_projection_ci": "not_run"
     },
     "decision": "V5.1 12/134 후보 유지 권장. 12 조건부, R05 활성 1인 제약 미승인, 물리 입력/이관·시험 계획 준비. DDL/실제 실행/CI not_run; main 병합 없음."
+  },
+  "db_physical_candidate_ref": {
+    "id": "TASK-058-DB-PHYSICAL-V5.2",
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-physical-v5.2.json",
+    "blob": "783b4d936eb4b5231635038172bdc7194d83953f",
+    "ddl_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-physical-v5.2.sql",
+    "ddl_blob": "d1b18570a9ca0e2bd2a9e98066c36810de85ead4",
+    "source_commit": "6d787d624b28f761aebd90236616c330142c20f1",
+    "status": "approved_policy_physical_candidate_static_only_pg_blocked",
+    "counts": {
+      "tables": 12,
+      "fields": 132,
+      "removed": 2,
+      "retained_conditional": 10,
+      "work_coverage": 36,
+      "prior_payload_groups": 38
+    },
+    "verification": {
+      "static": "15/15",
+      "ddl_column_roundtrip": "132/132",
+      "postgres": "0/22 not_run",
+      "external": "0 not_run",
+      "projection_ci": "not_run"
+    },
+    "open_gate": "PG runtime unavailable; guarded store, exact JSON leaf validators, integration and policy/evidence gates remain; no product implementation approval"
   }
 }
