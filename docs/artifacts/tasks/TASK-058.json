@@ -117,7 +117,10 @@
     "docs/review/lesson-registration/DB-MINIMAL-V5.md",
     "tools/validate_db_v5_candidate.mjs",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-inputs-20261127.json",
-    "docs/review/lesson-registration/DB-DESIGN-INPUTS-20261127.md"
+    "docs/review/lesson-registration/DB-DESIGN-INPUTS-20261127.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-evidence-normalization-20261127.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-review-20261127.json",
+    "docs/review/lesson-registration/DB-DESIGN-REVIEW-20261127.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -255,6 +258,15 @@
     },
     {
       "path": "docs/review/lesson-registration/DB-DESIGN-INPUTS-20261127.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-evidence-normalization-20261127.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-review-20261127.json"
+    },
+    {
+      "path": "docs/review/lesson-registration/DB-DESIGN-REVIEW-20261127.md"
     }
   ],
   "result": {
@@ -1284,7 +1296,8 @@
       "실제 플랫폼 허용·운영 상세·개인정보 정책 및 구현 순서·기존 작업 재개는 후속 결정.",
       "DB V4 13개 권장 후보와 12개 연결 단순형 조건 검토; 사용자 스토리 최종 의견 반영 및 논리 설계 승인 전 물리 스키마/API/마이그레이션 착수 없음.",
       "V5 13개/138개 검토 후보의 필요성 및 조건부 필드 판단 후 승인, 물리 PostgreSQL/실제 테스트·API 상세 및 main 병합 별도.",
-      "V5.1 1:N 방향은 승인 반영; 전체 DB 및 물리 구현 승인 별도. R05-DB-01 초기 동일 외부 계정 활성 연결 단일 owner 제한을 별도 승인받을지 검토."
+      "V5.1 1:N 방향은 승인 반영; 전체 DB 및 물리 구현 승인 별도. R05-DB-01 초기 동일 외부 계정 활성 연결 단일 owner 제한을 별도 승인받을지 검토.",
+      "정규화 374/374 그룹 후보 연결 및 V5.1 12/134 필드 재검토, PostgreSQL 물리 설계 입력까지 준비. R01 논리 후보 및 R05-DB-01·조건부 필드/보존·인증 결정 후 DDL/합성 시험 단계."
     ]
   },
   "traceability": {
@@ -1803,5 +1816,87 @@
       "official_projection_ci": false
     },
     "decision": "기존 V5.1 후보 보존; 근거 연결 후 세부 의미/상위 정합화 및 물리 설계 검토. main 병합·DB/API 구현 없음."
+  },
+  "db_evidence_normalization_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-evidence-normalization-20261127.json",
+    "commit": "8ced4742147215622246df62479da2a01cb1ee53",
+    "blob": "6163d06451ef702d64e9e58196f586345747f190",
+    "status": "group_normalized_design_input_candidate_mock_only",
+    "verification": {
+      "observations": 374,
+      "previously_unlinked": 116,
+      "reviewed_inherited": 258,
+      "refined_inherited": 15,
+      "groups": 25,
+      "unknown_direction": 22,
+      "by_role": {
+        "input_candidate": 122,
+        "direction_unverified_candidate": 21,
+        "direct_or_sensitive_minimum_proof": 8,
+        "input_and_visible_distinct": 116,
+        "observed_only": 95,
+        "operation_not_field": 4,
+        "excluded_finance_or_mixed": 4,
+        "lookup_not_registration_input": 4
+      },
+      "unmapped": 0,
+      "unique_ids": 374,
+      "platforms": 7,
+      "actual_server_validation": false
+    }
+  },
+  "db_design_review_ref": {
+    "id": "TASK-058-DB-DESIGN-REVIEW-20261127",
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-review-20261127.json",
+    "review_path": "docs/review/lesson-registration/DB-DESIGN-REVIEW-20261127.md",
+    "source_commit": "8de7172d7dfb3b61c019558543687306826a97a2",
+    "source_blob": "b8831167240be6e1cfce6ca9da7aec68c252b80a",
+    "projection_commit": "46a75e97989529ffa262c1ea11e0b8c7967efb78",
+    "status": "logical_candidate_review_ready_physical_draft_not_approved",
+    "prior_candidate_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v5.json",
+      "commit": "774465d765d2c776d6d415bc5222d2f02eff9d00",
+      "blob": "de787a7187c2beeb23da97bd9757b0cb128fe5f4"
+    },
+    "latest_story_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "8d29f734a1e977662af2250d447d2437661eedbc"
+    },
+    "verification": {
+      "normalized_observations": 374,
+      "semantic_families": 25,
+      "group_unmapped": 0,
+      "unknown_direction_original": 22,
+      "unknown_direction_detail_present": 22,
+      "work_coverage": 36,
+      "requirements": 10,
+      "work_ids_equal_latest": true,
+      "platform_ops_equal_latest": true,
+      "errors_equal_latest": true,
+      "axes_equal_latest": true,
+      "journeys_equal_latest": true,
+      "platform_ops": 44,
+      "errors": 32,
+      "axes": 17,
+      "journeys": 12,
+      "table_count": 12,
+      "fields": 134,
+      "fields_with_work_refs": 134,
+      "conditional_fields": 12,
+      "fields_missing_reason_or_work": [],
+      "invalid_table_refs": [],
+      "fk_destinations_missing": 0,
+      "payload_groups_prior": 38,
+      "feedback_items": 8,
+      "legacy_sqlite_tables": 10,
+      "pg_type_rows": 134,
+      "transaction_designs": 7,
+      "planned_db_cases": 22,
+      "actual_postgres_tests": 0,
+      "actual_external_tests": 0,
+      "official_projection_ci": "not_run"
+    },
+    "decision": "V5.1 12/134 후보 유지 권장. 12 조건부, R05 활성 1인 제약 미승인, 물리 입력/이관·시험 계획 준비. DDL/실제 실행/CI not_run; main 병합 없음."
   }
 }
