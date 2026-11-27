@@ -1222,9 +1222,9 @@
     "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
     "id": "USER-STORY-20261127-R01-V31",
     "version": "3.1",
-    "semantic_revision": "V3.1-R2",
-    "commit": "c7ab3a1eec9683360106511b5b9efd088151957d",
-    "blob": "cf7e4ec9df2b73a5f399f8b42e44c118c177b874",
+    "semantic_revision": "V3.1-R2-DR02",
+    "commit": "83d767192bb49c80bf9f863e9c3ef88dc933dada",
+    "blob": "b38c37c4cdd334303455155a828c731af6dcab80",
     "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
     "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
     "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
@@ -1311,5 +1311,20 @@
     "structural_checks": 11,
     "db_candidate_impact": "17-table candidate mapped; no new table requirement identified; actual DB validation pending",
     "actual_tests": 0
+  },
+  "operational_quality_decision": {
+    "id": "DR-02",
+    "status": "accepted_operational_direction",
+    "story_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "83d767192bb49c80bf9f863e9c3ef88dc933dada",
+      "blob": "b38c37c4cdd334303455155a828c731af6dcab80",
+      "section": "operational_quality_baseline"
+    },
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-INTEGRATION-REVIEW-V3.1.md#dr-02-운영-품질-기준선",
+    "metric_count": 7,
+    "scope": "운영 기준선 관측·판정·미달 정보 전달 채택; 관리자 전용 제품 기능 미채택; 기존 강사 흐름·DB V3 후보 유지",
+    "verification": "6/6 생성 프로젝션 원격 내용 일치; 계측·수치·알림 구현/시험 미수행",
+    "remaining": "OB-01~05 수치·표본/기간, 계측·전달·권한 상세 및 검증"
   }
 }
