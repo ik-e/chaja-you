@@ -103,7 +103,8 @@
     "docs/review/lesson-registration/USER-STORY-SEMANTIC-REVIEW-V3.1.md",
     "tools/project_user_story_v31.mjs",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md",
+    "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -205,6 +206,9 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md"
     }
   ],
   "result": {
@@ -1210,13 +1214,14 @@
     "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
     "id": "USER-STORY-20261127-R01-V31",
     "version": "3.1",
-    "semantic_revision": "V3.1-R1",
-    "commit": "70ae8e7169c284ba71c4dcbcc0cde4415929d079",
-    "blob": "d11f63353fd48bee4126d7fd916a6d870f55410f",
+    "semantic_revision": "V3.1-R2",
+    "commit": "c7ab3a1eec9683360106511b5b9efd088151957d",
+    "blob": "cf7e4ec9df2b73a5f399f8b42e44c118c177b874",
     "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
     "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
     "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
-    "status": "provisional_for_logical_db_not_final_approved"
+    "status": "provisional_for_logical_db_not_final_approved",
+    "r03_review_projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md"
   },
   "design_review_v3": {
     "base_commit": "c0340296e75bcab160bdc63d86ca048121a11b44",
@@ -1282,5 +1287,20 @@
     "source_commit": "800f6a13d7444e8a6c8b2586fca9ac8b1f46bcc9",
     "table_count": 17,
     "prior_candidate_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json"
+  },
+  "r03_v31_review": {
+    "source": {
+      "commit": "42ab10fc73fb0395798ff1dc1f81df5312bbd162",
+      "path": "docs/members/R03/workspace/2026-11-27_R03_USER-STORY-V3.1_REVIEW.md",
+      "blob": "3928399e0760bcd9f794a7fa6e7254a129ef45d0"
+    },
+    "decision": "all_four_accepted_design_clarification",
+    "story_commit": "c7ab3a1eec9683360106511b5b9efd088151957d",
+    "story_blob": "cf7e4ec9df2b73a5f399f8b42e44c118c177b874",
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+    "acceptance_cases": 13,
+    "structural_checks": 11,
+    "db_candidate_impact": "17-table candidate mapped; no new table requirement identified; actual DB validation pending",
+    "actual_tests": 0
   }
 }
