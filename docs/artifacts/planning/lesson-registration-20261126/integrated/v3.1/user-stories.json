@@ -4,7 +4,7 @@
   "kind": "document",
   "title": "찾아you 통합 사용자 스토리 V3.1 — 팀원 비교 보완 후보",
   "version": "3.1",
-  "status": "R01 검토 후보 · 서비스 범위 V1.0 유지 · 실제 외부 접근/쓰기 mock-only",
+  "status": "R01 검토 후보 · 의미 검토 R1 반영 · 서비스 범위 V1.0 유지 · 실제 외부 접근/쓰기 mock-only",
   "owner": "R01",
   "task_ref": "TASK-058",
   "date": "2026-11-27",
@@ -130,6 +130,9 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json"
     }
   ],
   "projection_path": "docs/review/lesson-registration/USER-STORY-V3.1.md",
@@ -309,7 +312,8 @@
         "context": "기존 명령 ID 확인 가능; 성공 이동 아님; 명시 폐기 없이 정본 삭제 금지",
         "rule": "표시/접근 문맥 변경만. 저장/수락/실행 상태와 독립; 원 owner 검증 전 비노출; 기존 요청/효과 그대로; 외부 인증 X 자동 재개 없음."
       }
-    ]
+    ],
+    "review_navigation_note": "VE-097: T06 기존 기록 재열기이며 동일 키만 확인. VE-098: SW-03/07/35의 같은 H 화면 내부 동일 저장 ID 확인. 새 화면/외부 읽기 없음. T10 기존 R 표시, T13 잔여와 별도 새 의도 구분. 상세 화면/보존 정책은 최종 승인 전."
   },
   "nodes": [
     {
@@ -344,7 +348,7 @@
         "SW-35"
       ],
       "transition_refs": [],
-      "review_display_refinement": "내부 목록 실제 0건 확인 → 새 레슨 안내; 조회 실패 → 조회 불가/필요시 재조회. 외부 조회 자동 없음.",
+      "review_display_refinement": "내부 목록 실제 0건 확인 → 새 레슨 안내; 조회 실패 → 조회 불가/필요시 재조회. 외부 조회 자동 없음. 저장 불명은 동일 저장 명령 확인, 수락 불명은 동일 요청 확인으로 표시. 실제 미수락 준비·기존 수락 기록과 구분.",
       "change_refs": [
         "CH-02"
       ]
@@ -452,7 +456,7 @@
       "actor": "system_display",
       "action": "시스템은 저장 불명과 동일 요청 확인 상태를 표시한다.",
       "observable": "기존 입력·명령 ID 보존, 안전 이탈 가능",
-      "guard": "새 원본/새 저장 ID 생성 금지; 커밋/미커밋 확인만",
+      "guard": "새 원본/새 저장 ID 생성 금지; 커밋/미커밋 확인만 권위 있는 미커밋·지연 봉쇄 또는 거절 확인 후 현재 revision 새 명시 저장 가능; 안전 이탈 후 H 동일 ID 확인.",
       "work_refs": [
         "SW-07",
         "SW-35"
@@ -752,7 +756,7 @@
       "actor": "system",
       "action": "시스템은 내부 연결 명령의 동일 키 결과를 확인한다.",
       "observable": "연결 확인·거절·불명",
-      "guard": "정확 동일 관계만; 외부 객체 변화 없음; 불명은 동일 키만",
+      "guard": "정확 동일 관계만; 외부 객체 변화 없음; 불명은 동일 키만 새 요청은 권위 있는 미커밋·지연 봉쇄 또는 거절 후 별도 명시 의도. 외부 실행 수락과 구분.",
       "work_refs": [
         "SW-18",
         "SW-35"
@@ -796,7 +800,7 @@
       "actor": "system",
       "action": "시스템은 인증 신호와 실제 계정·권한·선행조건을 독립 확인한다.",
       "observable": "정확 계정·목적·유효성 또는 실패/불명",
-      "guard": "최초 계정은 명시 사용 선택 필요; 기존 기대 계정 자동 교체 금지; 실패는 차단/정리",
+      "guard": "최초 계정은 명시 사용 선택 필요; 기존 기대 계정 자동 교체 금지; 실패는 차단/정리 실패/취소/불명은 LIMIT/READEND/ACCOUNTS 제한 표시 및 폐기 의무. 최초 계정 사용 미확정 상태에서 후속 업무 읽기 금지.",
       "work_refs": [
         "SW-15",
         "SW-16",
@@ -832,7 +836,7 @@
       "actor": "system",
       "action": "시스템은 수락된 각 대상의 업무를 조정한다.",
       "observable": "수락/진행 상태와 대상별 예정 효과",
-      "guard": "현행 실제 외부 접근/변이 금지, 모의만; 서버 수락 정본 기준, 화면 확인 불필요",
+      "guard": "현행 실제 외부 접근/변이 금지, 모의만; 서버 수락 정본 기준, 화면 확인 불필요 최초 조정은 원자 수락 및 서버 정본에만 의존. 이미 실행 중/종료된 기존 요청 열기로 START하지 않음.",
       "work_refs": [
         "SW-23",
         "SW-24"
@@ -936,8 +940,8 @@
       "id": "RESULT",
       "screen": "R",
       "actor": "system_display",
-      "action": "시스템은 대상별 종료/결과·효과·관측·모집 목표·폐기 상태를 독립 표시한다.",
-      "observable": "complete/not_executed/no_effect/partial_confirmed/effect_unknown 등; 모의 표시",
+      "action": "시스템은 기존 정확 업무의 대기·진행·종료/결과·효과·관측·모집 목표·폐기 상태를 독립 표시한다.",
+      "observable": "기존 정확 업무의 현재 상태와 효과·근거/불명·관측 시각·모집 목표·접근/폐기 상태; 기존 기록 열기는 새 실행 아님",
       "guard": "정확 업무 완료 근거, 결과 판정 이력·외부 관계 보존; 사용자의 확인 클릭 불필요",
       "work_refs": [
         "SW-03",
@@ -1069,9 +1073,9 @@
       "id": "NEXT",
       "screen": "R",
       "actor": "conditional_user",
-      "action": "강사는 필요한 경우 정확한 기존 효과 조회 또는 지원되는 잔여 업무 준비를 선택한다.",
+      "action": "강사는 필요한 정확 기존 효과 조회, 검증된 잔여 업무 또는 별도 새 수정·허용 갱신 의도의 준비를 선택한다.",
       "observable": "기존 대상/미확인/잔여 효과 및 가능한 조치",
-      "guard": "미발생 확정/안전 미시도·지연 봉쇄·독립 경로 검증·새 승인 필요; 불명/분쟁은 읽기/보류",
+      "guard": "기존 불명/분쟁은 허용 읽기·보류. 동일 효과 잔여는 미발생 또는 안전 미시도·지연 봉쇄·독립 경로·현재 조건·새 승인. 별도 새 수정/갱신은 정확 객체·실제 새 의도·현재 권한·동일/경합 효과 미해결 없음 및 새 승인. 확인된 동일 효과 반복 금지.",
       "work_refs": [
         "SW-09",
         "SW-28",
@@ -1083,7 +1087,7 @@
         "LT-44",
         "LT-69"
       ],
-      "review_display_refinement": "정확 미발생/안전 미시도·지연 봉쇄·독립 경로·새 승인 충족 잔여 업무만. 불명 보류.",
+      "review_display_refinement": "검증된 잔여 효과 vs 성공한 기존 객체의 별도 새 수정·허용 갱신 구분. 둘 다 새 승인, 동일 효과 반복 금지.",
       "change_refs": [
         "CH-07"
       ]
@@ -1224,7 +1228,7 @@
       "id": "VE-006",
       "from": "HOME",
       "to": "PREP",
-      "condition": "검증된 미수락 기존 준비 열기; 현재 revision 확인",
+      "condition": "정확 기존 준비 기록을 열며 실제 미수락임이 확인된 문맥만; 현재 revision 검증. 수락 불명은 VE-097, 이미 수락된 기록은 VE-007.",
       "screen_ref": "T06",
       "actor": "user"
     },
@@ -1312,7 +1316,7 @@
       "id": "VE-017",
       "from": "SAVEACK",
       "to": "EDITFIX",
-      "condition": "거절/충돌 확정, 편집 유지; 필요 수정",
+      "condition": "동일 명령 확정 거절 또는 권위 있는 미커밋·지연 커밋 봉쇄 확인 후 편집 유지; 필요한 수정 및 새 명시 저장만.",
       "screen_ref": "T29",
       "actor": "user"
     },
@@ -1472,7 +1476,7 @@
       "id": "VE-037",
       "from": "LINKACK",
       "to": "PREP",
-      "condition": "거절 또는 변경 확인; 재준비는 사용자 의도가 있을 때만",
+      "condition": "동일 내부 연결 명령 확정 거절 또는 권위 있는 미커밋·지연 커밋 봉쇄, 또는 확인된 관계 변경; 정확 새 의도/현재 조건이 있을 때만 재준비.",
       "screen_ref": "T08",
       "actor": "user"
     },
@@ -1544,7 +1548,7 @@
       "id": "VE-046",
       "from": "ACCEPT",
       "to": "START",
-      "condition": "서버 커밋 및 수락 확인; UI R 이동은 정본 확인 후",
+      "condition": "서버 원자 수락 커밋에 따른 기존 정확 수락 업무의 최초 처리 조정 후보; UI ack/R 진입은 서버 수락·최초 처리의 전제 아님.",
       "screen_ref": "T09",
       "actor": "system"
     },
@@ -1567,8 +1571,8 @@
     {
       "id": "VE-049",
       "from": "ACCEPTUNKNOWN",
-      "to": "START",
-      "condition": "동일 요청의 기존 수락 확인; 기존 업무 열기, 새 실행 없음",
+      "to": "RESULT",
+      "condition": "동일 요청의 이미 수락된 기존 기록 확인; T10으로 R의 기존 대기/진행/종료 표시만. 새 START·수락·효과 자격 생성 또는 재개 없음.",
       "screen_ref": "T10",
       "actor": "system"
     },
@@ -1584,7 +1588,7 @@
       "id": "VE-051",
       "from": "ACCEPTUNKNOWN",
       "to": "PREP",
-      "condition": "거절/미커밋 확정 후만 사용자 새 의도",
+      "condition": "동일 키 확정 거절 또는 권위 있는 미커밋 및 이전 지연 커밋/수락 가능성 봉쇄 확인 이후에만 새 명시 의도·현재 조건으로 재준비; 조회 실패/404/시간초과 불충분.",
       "screen_ref": "T08",
       "actor": "user"
     },
@@ -1680,7 +1684,7 @@
       "id": "VE-063",
       "from": "XCHECK",
       "to": "IDENT",
-      "condition": "W 호출의 현재 권한/선행 확인 또는 실패·취소; 문제 대상만",
+      "condition": "W 원 호출의 동일 generation·정확 계정/권한·선행 조건 및 필요한 최초 명시 사용 의도 확인 성공. 필요한 허용 읽기만 IDENT; 실패/취소/불명은 VE-100.",
       "screen_ref": "T23",
       "actor": "system"
     },
@@ -1688,7 +1692,7 @@
       "id": "VE-064",
       "from": "XCHECK",
       "to": "READ",
-      "condition": "R의 명시 읽기 인증 확인; 실패/취소는 READEND로",
+      "condition": "R 원 호출의 정확 명시 읽기 목적·계정·권한·generation과 필요한 최초 명시 사용 의도 확인 성공; 현재 허용된 읽기만.",
       "screen_ref": "T24",
       "actor": "system"
     },
@@ -1696,7 +1700,7 @@
       "id": "VE-065",
       "from": "XCHECK",
       "to": "READEND",
-      "condition": "R 호출 실패/취소; 최신 조회 불가 및 정리",
+      "condition": "R 원 호출 인증 실패/취소/불명·권한 불충족; READEND 조회 불가로 복귀, 접근 차단 및 폐기 의무.",
       "screen_ref": "T24",
       "actor": "system"
     },
@@ -1704,7 +1708,7 @@
       "id": "VE-066",
       "from": "XCHECK",
       "to": "ACCOUNTS",
-      "condition": "A 호출 결과, 명시 관리 의도만 연결",
+      "condition": "A 원 호출 결과 표시. 정확 계정·관리 목적·명시 연결 의도·허용 권한 검증 성공일 때만 연결. 실패/취소/불명은 새 관계 없음, 접근 차단 및 폐기 의무.",
       "screen_ref": "T25",
       "actor": "system"
     },
@@ -1848,7 +1852,7 @@
       "id": "VE-084",
       "from": "NEXT",
       "to": "PREP",
-      "condition": "검증된 독립 잔여 경로/별도 지원 업무·미발생/안전 미시도·지연 봉쇄·새 준비 의도",
+      "condition": "동일 이전 효과의 잔여만: 독립 미발생 또는 안전 미시도/미전송 확정, 지연 실행 봉쇄, 정확 독립 지원 잔여 경로 및 현재 조건 확인, 새 준비 의도와 후속 새 승인.",
       "screen_ref": "T13",
       "actor": "user"
     },
@@ -1947,6 +1951,46 @@
       "condition": "명시 로그아웃/자체 인증 종료",
       "screen_ref": "T19",
       "actor": "user"
+    },
+    {
+      "id": "VE-097",
+      "from": "HOME",
+      "to": "ACCEPTUNKNOWN",
+      "condition": "본인 H의 정확 기존 수락 불명 기록 확인 선택; 기존 준비/수락 ID 문맥 및 동일 키 조회만. PREP 또는 새 승인 없음.",
+      "screen_ref": "T06",
+      "actor": "user"
+    },
+    {
+      "id": "VE-098",
+      "from": "HOME",
+      "to": "HOME",
+      "condition": "동일 owner의 보존된 저장 불명 기록에 대한 내부 동일 키 확인. 커밋/거절/권위 미커밋·지연 봉쇄/지속 불명 표시. 불명 중 새 원본/저장 없음. 재편집은 별도 의도 및 보존 문맥 검증.",
+      "screen_ref": null,
+      "actor": "system"
+    },
+    {
+      "id": "VE-099",
+      "from": "NEXT",
+      "to": "PREP",
+      "condition": "확인된 기존 객체의 별도 새 수정/허용 갱신 의도(동일 효과 재시도 아님): 정확 객체·실제 새 변경값/갱신 조건·현재 권한 및 동일/경합 효과의 pending/unknown/dispute 없음 확인; 새 준비 및 승인.",
+      "screen_ref": "T13",
+      "actor": "user"
+    },
+    {
+      "id": "VE-100",
+      "from": "XCHECK",
+      "to": "LIMIT",
+      "condition": "W 원 호출 인증 실패/취소/불명·계정 불일치·권한/선행 조건 미충족 또는 최초 사용 거절; 해당 접근 차단 및 폐기 의무, 원래 준비의 제한 표시·정상 자료 보존.",
+      "screen_ref": "T23",
+      "actor": "system"
+    },
+    {
+      "id": "VE-101",
+      "from": "PREP",
+      "to": "PREP",
+      "condition": "내부 준비만 실패하거나 낡은 응답, 고칠 사용자 사실 없음: 정확 현재 미수락 준비/revision·현재 조건·관련 이전 요청/효과 불명 없음 검증, 필요한 명시 재준비. 자동 외부 재시도/새 쓰기 없음.",
+      "screen_ref": "T08",
+      "actor": "user"
     }
   ],
   "journeys": [
@@ -2012,8 +2056,8 @@
             "HOME"
           ],
           "user_actions": "새 레슨 선택",
-          "system_display": "원본별 목록·최근 결과",
-          "cases": "0건 확인과 조회 실패 구분",
+          "system_display": "본인 원본·기존 기록·저장/수락 불명 구분, 0건 확인과 조회 실패 구분.",
+          "cases": "보존된 불명 기록 동일 ID 확인, 새로운 동일 원본/업무 금지.",
           "error_refs": [
             "ER-05"
           ]
@@ -2051,7 +2095,7 @@
           ],
           "user_actions": "선택·준비, 필요 보완·인증, 최종 승인·실행",
           "system_display": "채널별 필수 후보·정확 대상·효과·비용·검증 범위",
-          "cases": "필요 UJ-07/09; 수락 불명 동일 요청 확인",
+          "cases": "필요 UJ-07/09; 모든 선택 대상의 준비/보류/제외 명시. 실행 후보 없으면 승인 강제 없음. 수락 불명 동일 ID.",
           "error_refs": [
             "ER-07",
             "ER-08",
@@ -2136,7 +2180,7 @@
           ],
           "user_actions": "저장 원본 행 추가 등록",
           "system_display": "원본 버전·기존 결과",
-          "cases": "재입력 없음",
+          "cases": "저장 원본 재입력 없음. 기존 수락 불명 기록은 새 추가 등록 아님.",
           "error_refs": [
             "ER-02",
             "ER-05"
@@ -2150,11 +2194,12 @@
             "IDENT",
             "PREVIEW",
             "APPROVE",
-            "ACCEPT"
+            "ACCEPT",
+            "ACCEPTUNKNOWN"
           ],
           "user_actions": "신규 대상만 선택·보완·승인",
           "system_display": "원본 재사용·정확 대상/권한/중복 검증",
-          "cases": "기존 등록/불명 신규 차단, 필요 UJ-07/09",
+          "cases": "기존 등록/불명 신규 차단, 필요 UJ-07/09; 수락 불명 동일 요청 확인.",
           "error_refs": [
             "ER-07",
             "ER-08",
@@ -2232,11 +2277,11 @@
             "HOME"
           ],
           "user_actions": "정확 등록물 수정 선택",
-          "system_display": "연결 관계·마지막 관측",
-          "cases": "대상 불명 쓰기 금지",
+          "system_display": "저장 연결 관계·마지막 관측; 현재 외부 대상 확인은 W 허용 읽기/권한 검증.",
+          "cases": "H의 저장 관계는 현재 외부 객체 근거 아님. 정확 대상 불명 쓰기 차단.",
           "error_refs": [
-            "ER-14",
-            "ER-15"
+            "ER-02",
+            "ER-05"
           ]
         },
         {
@@ -2252,7 +2297,7 @@
           ],
           "user_actions": "변경 항목 입력·전후 비교·승인",
           "system_display": "동일 계정/객체, 변경값·공유 영향",
-          "cases": "플랫폼 표현만 또는 원본 변경 H→E 명시 저장; 외부값 변경 재검토",
+          "cases": "전용 표현만 또는 공통 사실 H→E 명시 저장; 외부값/공유 영향 불명 보류. 수락 불명 동일 키 확인.",
           "error_refs": [
             "ER-09",
             "ER-10",
@@ -2325,10 +2370,11 @@
             "HOME"
           ],
           "user_actions": "정확 기존 공고 갱신 선택",
-          "system_display": "업무 지원/제한",
+          "system_display": "정확 기존 공고와 저장 지원/제한 표시; 현재 조건 W에서 검증.",
           "cases": "동일 공고 갱신만",
           "error_refs": [
-            "ER-07"
+            "ER-02",
+            "ER-05"
           ]
         },
         {
@@ -2343,7 +2389,7 @@
           ],
           "user_actions": "모의 조건 충족 시 방식·간격·횟수·무료·효과 검토 승인",
           "system_display": "뮬 후보, 타 6개 보류, 확인된 다음 가능 시점",
-          "cases": "불명/유료/재게시 대체 금지",
+          "cases": "뮬 실제 경로도 미검증, 모의 조건 충족 시만. 불명/유료/재게시 금지. 수락 불명 동일 키.",
           "error_refs": [
             "ER-07",
             "ER-29",
@@ -2402,10 +2448,10 @@
           ],
           "user_actions": "최신 필요시 정확 행 조회 요청",
           "system_display": "마지막 관측·시각 자동 표시",
-          "cases": "저장값 충분하면 조작 없음",
+          "cases": "저장값 충분하면 외부 조회 없음; 정확 내부 관측 조회 실패 시 이전 확인값이 있는 경우만 표시.",
           "error_refs": [
-            "ER-05",
-            "ER-31"
+            "ER-02",
+            "ER-05"
           ]
         },
         {
@@ -2479,12 +2525,11 @@
           ],
           "user_actions": "필요 직접 인증·후보 선택, 내부 연결 요청",
           "system_display": "정확 권한/객체·같은 관계 중복 확인",
-          "cases": "후보 선택만 소유권 아님, 불명 동일 키 확인",
+          "cases": "후보 선택만 소유권 근거 아님. 내부 연결 불명 동일 내부 키 확인; 외부 승인·쓰기 없음.",
           "error_refs": [
             "ER-12",
             "ER-14",
-            "ER-15",
-            "ER-17"
+            "ER-15"
           ]
         },
         {
@@ -2494,9 +2539,10 @@
           ],
           "user_actions": "필요 결과 확인",
           "system_display": "확인 관계 표시",
-          "cases": "외부 쓰기 없음",
+          "cases": "커밋 확인된 관계만 표시. 불명에서 관계 확정·새 외부 등록 없음.",
           "error_refs": [
-            "ER-31"
+            "ER-02",
+            "ER-05"
           ]
         }
       ],
@@ -2543,10 +2589,8 @@
           ],
           "user_actions": "필요 항목·제약 대안·정확 후보 선택",
           "system_display": "채널 필수/선택 후보, 사진 용도·권리·가격/시간/회차, 원본 변경 영향",
-          "cases": "플랫폼 표현 같은 준비; 공통 사실 H→E 저장; 불명 보류",
+          "cases": "플랫폼 표현 같은 준비; 공통 사실 H→E 저장. 내부 준비만 실패하고 수정할 사실 없으면 정확 미수락 문맥에서 명시 재준비; 불명/미지원 보류.",
           "error_refs": [
-            "ER-03",
-            "ER-04",
             "ER-08",
             "ER-09",
             "ER-10",
@@ -2564,7 +2608,7 @@
           ],
           "user_actions": "필요 공식 인증·직접 선행/정산·최초 계정 선택",
           "system_display": "정확 계정/권한 검증, 정산/인증 비밀 미수집",
-          "cases": "취소·불일치·만료 대상 차단",
+          "cases": "검증된 기대 계정은 불필요 선택 없음. 최초 계정 명시 사용 선택 후 재검증. 취소·불일치·만료·불명은 대상 차단/폐기 의무 및 원 호출 제한 복귀.",
           "error_refs": [
             "ER-11",
             "ER-12",
@@ -2647,9 +2691,9 @@
             "READEND",
             "DISPUTE"
           ],
-          "user_actions": "필요 정확 기존 효과 확인 요청",
+          "user_actions": "필요 기존 효과 조회 또는 안전한 후속 업무 준비 선택",
           "system_display": "허용 읽기·새/이전 관측·분쟁",
-          "cases": "불명 쓰기 차단; 기존 업무 재개 없음",
+          "cases": "불명/분쟁은 허용 읽기·보류. 미발생/안전 미시도 입증된 잔여 또는 성공 기존 객체의 별도 새 수정·허용 갱신 의도만 W.",
           "error_refs": [
             "ER-15",
             "ER-19",
@@ -2660,14 +2704,15 @@
         {
           "screen": "W",
           "node_refs": [
-            "NEXT",
             "PREP",
             "PREVIEW",
-            "APPROVE"
+            "APPROVE",
+            "ACCEPT",
+            "ACCEPTUNKNOWN"
           ],
-          "user_actions": "검증 잔여만 새 준비·승인",
-          "system_display": "미발생/미시도·지연 봉쇄·독립 경로/현재 조건",
-          "cases": "반려 사유·경로 불명 보류; 전체 반복 금지",
+          "user_actions": "정확 잔여 업무 또는 별도 새 수정·허용 갱신 준비 및 새 승인",
+          "system_display": "잔여: 미발생/미시도·지연 봉쇄·독립 경로. 새 의도: 정확 기존 객체·실제 새 조건·경합 없음. 각각 현재 권한 확인.",
+          "cases": "동일 확인 효과 반복 금지; 불명/경로 미검증 보류; 새 승인 및 수락 불명 동일 키.",
           "error_refs": [
             "ER-20",
             "ER-21",
@@ -2704,12 +2749,13 @@
         {
           "screen": "W",
           "node_refs": [
+            "PREP",
             "LIMIT",
             "HOLDCHOICE"
           ],
           "user_actions": "제한 보류·제외 또는 허용 작성안 선택",
           "system_display": "근거 및 정확 대상 표시",
-          "cases": "몰래 제외/외부 접근 없음",
+          "cases": "보류/제외/작성안 선택은 강사 의도. 모든 대상 제한이면 승인·실행 없음.",
           "error_refs": [
             "ER-07",
             "ER-24",
@@ -2725,7 +2771,7 @@
           ],
           "user_actions": "필요 내부 작성안 참고",
           "system_display": "충분한 내부 자료·외부 미수행",
-          "cases": "부족 W 보완 또는 보류; 자동 복붙/직접 결과 보고 미제공",
+          "cases": "충분한 내부 자료만 참고; W 또는 원 호출 R 복귀. 부족 시 W 보완/보류; 자동 복붙·직접 보고 없음.",
           "error_refs": [
             "ER-24"
           ]
@@ -2743,15 +2789,14 @@
         "FACT",
         "SAVE",
         "SAVEACK",
-        "HOME",
-        "MANAGE",
         "HOME"
       ],
       "alternatives": [
         "SAVEUNKNOWN",
-        "EDITFIX"
+        "EDITFIX",
+        "MANAGE"
       ],
-      "user_actions": "외부 삭제/원복 아님; 보존 정책/불명 효과와 권리 분리",
+      "user_actions": "원본 편집·명시 저장 또는 별개의 내부 삭제/연결 해제 요청. 편집 후 삭제는 필수 순서 아님.",
       "feature_refs": [
         "SF-01",
         "SF-06",
@@ -2767,7 +2812,7 @@
           ],
           "user_actions": "원본 편집·내부 삭제/연결 해제 선택",
           "system_display": "정확 대상·진행/불명·보존 영향",
-          "cases": "외부 삭제/원복 아님; 정책 불명 보류",
+          "cases": "독립 선택: 편집은 E, 삭제/해제는 H 내부 관리. 진행/불명·보존 정책 미해결 보류; 외부 삭제 없음.",
           "error_refs": [
             "ER-02",
             "ER-25"
@@ -2808,6 +2853,17 @@
       ],
       "change_refs": [
         "CH-01"
+      ],
+      "alternative_paths": [
+        {
+          "title": "원본 삭제 또는 내부 연결 해제(편집 없이 별개 요청)",
+          "path": [
+            "HOME",
+            "MANAGE",
+            "HOME"
+          ],
+          "condition": "정확 owner/대상과 내부 의도, 보존·진행/불명·경합 확인. 실제 삭제 정책 미정이면 보류, 외부 쓰기 없음."
+        }
       ]
     },
     {
@@ -2817,9 +2873,6 @@
       "path": [
         "HOME",
         "SETTINGS",
-        "ACCOUNTS",
-        "XAUTH",
-        "XCHECK",
         "ACCOUNTS",
         "SETTINGS",
         "HOME"
@@ -2836,6 +2889,18 @@
       ],
       "condition": "명시된 guard/의도 및 모의 환경 조건이 참인 참조 경로; 실제 플랫폼 지원·허용의 증명 아님. 공통 조건부 단계는 생략 가능.",
       "review_stages": [
+        {
+          "screen": "H",
+          "node_refs": [
+            "HOME"
+          ],
+          "user_actions": "필요한 경우만 설정 선택",
+          "system_display": "본인 원본/업무",
+          "cases": "권리·계정 관리 또는 로그아웃 의도에서만 G",
+          "error_refs": [
+            "ER-02"
+          ]
+        },
         {
           "screen": "G",
           "node_refs": [
@@ -2878,10 +2943,53 @@
             "ER-12",
             "ER-13"
           ]
+        },
+        {
+          "screen": "A/G/H",
+          "node_refs": [
+            "ACCOUNTS",
+            "SETTINGS",
+            "HOME"
+          ],
+          "user_actions": "필요 관리 후 복귀",
+          "system_display": "관계 변경/폐기 확인 또는 불명",
+          "cases": "X는 필요할 때만. 계정 해제는 외부 글 삭제 아님.",
+          "error_refs": [
+            "ER-23",
+            "ER-25",
+            "ER-26"
+          ]
         }
       ],
       "change_refs": [
         "CH-05"
+      ],
+      "alternative_paths": [
+        {
+          "title": "필요한 외부 계정 연결·재인증",
+          "path": [
+            "HOME",
+            "SETTINGS",
+            "ACCOUNTS",
+            "XAUTH",
+            "XCHECK",
+            "XCHOOSE",
+            "XCHECK",
+            "ACCOUNTS",
+            "SETTINGS",
+            "HOME"
+          ],
+          "condition": "공식 허용 단계, 최초 계정 명시 관리/업무 사용 선택. 기존 계정 확인이면 XCHOOSE 생략; 실패 시 새 관계 없음."
+        },
+        {
+          "title": "자체 로그아웃",
+          "path": [
+            "HOME",
+            "SETTINGS",
+            "AUTH"
+          ],
+          "condition": "새 접근 차단·기발생/불명 효과 보존. 권리 요청은 G 별도 처리, 삭제 정책 미정."
+        }
       ]
     },
     {
@@ -2897,7 +3005,7 @@
         "ACCEPT",
         "ACCEPTUNKNOWN",
         "HOME",
-        "PREP"
+        "ACCEPTUNKNOWN"
       ],
       "alternatives": [
         "SAVEUNKNOWN",
@@ -2905,7 +3013,7 @@
         "AUTH",
         "HOME"
       ],
-      "user_actions": "경로 예시는 별도 아래 시나리오; 자동 재실행·취소·재개 금지",
+      "user_actions": "필요 안전 이탈·동일 owner 재인증 및 정확 기존 기록 열기. 저장/수락 불명 동일 ID 확인, 새 실행/취소/자동 재개 금지.",
       "feature_refs": [
         "SF-01",
         "SF-02",
@@ -2923,7 +3031,7 @@
           ],
           "user_actions": "필요 이탈/기존 기록 다시 열기",
           "system_display": "저장·수락·효과 보존 및 미저장 영향",
-          "cases": "단순 이탈 취소/재실행 아님; 불명 동일 ID",
+          "cases": "이탈만으로 취소/재실행 없음. 보존된 명령 ID, 원본/준비/수락 상태 구분.",
           "error_refs": [
             "ER-06",
             "ER-17",
@@ -2949,17 +3057,53 @@
           "screen": "H 또는 안전한 기존 화면",
           "node_refs": [
             "HOME",
+            "SAVEUNKNOWN",
+            "ACCEPTUNKNOWN",
             "RESULT"
           ],
-          "user_actions": "기존 요청/결과 확인",
-          "system_display": "같은 기록·현재 관측",
-          "cases": "새 실행/취소/자동 재개 없음",
+          "user_actions": "정확 기존 저장/수락/결과 기록 열기",
+          "system_display": "같은 저장·수락 ID 확인 및 현재 상태·관측, 기존 수락 기록 R 표시",
+          "cases": "불명 중 새 동일 요청 금지. 거절/미커밋·지연 봉쇄 후 새 의도. 기존 수락 업무 열어도 START 없음.",
           "error_refs": [
             "ER-26"
           ]
         }
       ],
-      "change_refs": []
+      "change_refs": [],
+      "alternative_paths": [
+        {
+          "title": "저장 불명 안전 이탈 및 같은 저장 키 확인",
+          "path": [
+            "HOME",
+            "EDIT",
+            "FACT",
+            "SAVE",
+            "SAVEACK",
+            "SAVEUNKNOWN",
+            "HOME",
+            "HOME"
+          ],
+          "condition": "동일 owner와 동일 저장 명령 ID, 지속 불명 중 새 원본/저장 금지."
+        },
+        {
+          "title": "수락 불명에서 기존 수락 확인",
+          "path": [
+            "HOME",
+            "ACCEPTUNKNOWN",
+            "RESULT"
+          ],
+          "condition": "기존 동일 키 수락 확인, 기존 대기/진행/종료 표시, 새 START 없음."
+        },
+        {
+          "title": "확정 거절/미커밋 및 지연 수락 봉쇄",
+          "path": [
+            "HOME",
+            "ACCEPTUNKNOWN",
+            "PREP"
+          ],
+          "condition": "권위 거절 또는 미커밋·봉쇄 후 사용자 새 의도와 현재 조건."
+        }
+      ]
     }
   ],
   "platform_routes": [
@@ -5009,7 +5153,8 @@
     "R04 기능/IA 및 기존 노드의 대응은 상세 데이터 의미·전체 분기 검증과 다름.",
     "V3.0의 505개 개별 분기 의미 검증 및 16개 범위 분리 검토 유지; 28개 모의 시나리오와 기존 모델 테스트 재실행하지 않음.",
     "실제 외부 접근/실행 0건, 공식 Python/CI·실제 사용자 시간 측정 미수행.",
-    "DR-01~05 미결정; V1.0 범위 유지."
+    "DR-01~05 미결정; V1.0 범위 유지.",
+    "693개 분기의 원래 조건·다음 ID와 업무별 의미 가드/판정을 기록했다. 반복 조건은 같은 의미 영역 판정을 재사용했으며, 370개 조건의 모든 조합 및 레거시 각 다음 ID의 전이 완전성/동시성 형식 증명은 아니다. guarded_reinterpretation/scope_split/decision_pending은 상세 확인·결정 필요."
   ],
   "verification": {
     "structural": "pass_connector_js_source_coverage_and_baseline_equality",
@@ -5153,9 +5298,119 @@
     "actual_execution": "blocked_mock_only",
     "actual_tests": 0,
     "model_reference_tests_rerun": 0,
-    "full_semantics": "inconclusive",
+    "full_semantics": "conditional_review_not_proof; detailed decision/branch/runtime validation remains",
     "official_python_ci": "not_run",
-    "projection_generation": "standalone Node renderer; same function evaluated in connector JS, filesystem/official Python CI not run"
+    "projection_generation": "standalone Node renderer; same function evaluated in connector JS, filesystem/official Python CI not run",
+    "semantic_revision": "V3.1-R1",
+    "prior_structure_checks": "V3.1 초기 기록, R1은 별도 검사",
+    "nodes": 40,
+    "edges": 101,
+    "journeys": 12,
+    "legacy_semantics": "intent_guard_and_scope_review_not_formal_proof",
+    "legacy_branch_counts": {
+      "consistent_intent": 179,
+      "guarded_reinterpretation": 284,
+      "decision_pending": 21,
+      "scope_excluded": 172,
+      "scope_split": 37
+    },
+    "semantic_findings": {
+      "corrected": 10,
+      "decision_pending": 2
+    },
+    "semantic_reference_cases": 10,
+    "semantic_review_checks": [
+      {
+        "name": "all 144 legacy story domains",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "all 693 original branch IDs",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "all explicit targeted branch IDs",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "current and alternate paths",
+        "pass": true,
+        "detail": "[]"
+      },
+      {
+        "name": "44 platform scope rows",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "approved scope/44 platform routes/32 error contracts unchanged",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "4 core and 5 auxiliary preserved",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "same-key reopen never START",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "29 F individual references, 5 E held",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "branch guards reference valid nodes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "583 team source identities preserved",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "12 journeys, 32 error, 44 platform reviews",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "all edge node IDs",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "pinned existing renderer",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "renderer function boundaries",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "five regenerated projections",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "rendered corrections visible",
+        "pass": true,
+        "detail": "{\"mentor\":true}"
+      },
+      {
+        "name": "generator entry point updated",
+        "pass": true,
+        "detail": ""
+      }
+    ]
   },
   "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
   "scenarios": [
@@ -5373,7 +5628,7 @@
         "PREP",
         "LIMIT"
       ],
-      "condition": "최초 identity-only 확인 후 사용 선택, 권한 불명 또는 불일치",
+      "condition": "최초 identity-only 확인 후 사용 선택, 권한 불명 또는 불일치 최초 계정 명시 사용 선택과 동일 generation 검증 전 후속 업무 읽기 금지; 실패/불명 제한.",
       "expected": "실제 권한 미확정 시 hold; 자동 계정 교체 없음",
       "error_acceptance_refs": [
         "ET-07",
@@ -5394,10 +5649,11 @@
         "SAVE",
         "SAVEACK",
         "SAVEUNKNOWN",
+        "HOME",
         "HOME"
       ],
       "condition": "저장 불명 및 안전 이탈; 동일 명령 ID는 보존하여 재접속 후 확인(새 저장은 미커밋/거절 확정 및 사용자 의도 이후 별도)",
-      "expected": "같은 저장 키 조회·안전 이탈; 권위 있는 확인 전 새 원본/새 저장 0",
+      "expected": "같은 저장 키 조회·안전 이탈; 권위 있는 확인 전 새 원본/새 저장 0 H에서 보존된 정확 동일 명령 확인. 커밋이면 기존 원본 표시, 지속 불명 새 저장 없음.",
       "error_acceptance_refs": [
         "ET-01",
         "ET-22"
@@ -5421,14 +5677,10 @@
         "ACCEPT",
         "ACCEPTUNKNOWN",
         "ACCEPTUNKNOWN",
-        "START",
-        "RESERVE",
-        "DISPATCH",
-        "VERIFY",
         "RESULT"
       ],
       "condition": "서버가 동일 요청을 수락했으나 UI ack 유실; 같은 키 확인",
-      "expected": "기존 수락 업무 1개, 새 효과 자격 중복 생성 0",
+      "expected": "기존 수락 업무 1개, 새 효과 자격 중복 생성 0 기존 대기/진행/종료만 표시. 최초 서버 조정은 수락 정본 기준, UI 재접속 START 없음.",
       "error_acceptance_refs": [
         "ET-02",
         "ET-22"
@@ -5886,7 +6138,8 @@
     "docs/review/lesson-registration/USER-STORY-V3.1.md",
     "docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md",
     "docs/review/lesson-registration/USER-STORY-INTEGRATION-REVIEW-V3.1.md",
-    "docs/review/lesson-registration/USER-STORY-MENTOR-V3.1.md"
+    "docs/review/lesson-registration/USER-STORY-MENTOR-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-SEMANTIC-REVIEW-V3.1.md"
   ],
   "baseline": {
     "id": "V30",
@@ -6195,5 +6448,183 @@
     }
   ],
   "mentor_projection_path": "docs/review/lesson-registration/USER-STORY-MENTOR-V3.1.md",
-  "trace_scope": "기존 V3.0 trace 참조만; 이번 대조는 integration_review_ref."
+  "trace_scope": "기존 V3.0 trace 참조만; 이번 대조는 integration_review_ref.",
+  "semantic_scenarios": [
+    {
+      "id": "SC-S01",
+      "title": "수락 불명 안전 이탈 및 재방문",
+      "path": [
+        "ACCEPTUNKNOWN",
+        "HOME",
+        "ACCEPTUNKNOWN",
+        "ACCEPTUNKNOWN"
+      ],
+      "condition": "정확 동일 owner/요청 ID, 조회 지속 불명",
+      "expected": "새 PREP/APPROVE/ACCEPT/START 없음; 동일 키 확인",
+      "basis": [
+        "LT-14",
+        "LT-17",
+        "T06"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S02",
+      "title": "기존 수락을 늦게 확인",
+      "path": [
+        "HOME",
+        "ACCEPTUNKNOWN",
+        "RESULT"
+      ],
+      "condition": "동일 기존 수락 기록 확인, UI ack 유실",
+      "expected": "기존 대기/진행/종료 표시만, 새 START/효과 없음",
+      "basis": [
+        "LT-16",
+        "T10"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S03",
+      "title": "권위 있는 미커밋과 지연 봉쇄",
+      "path": [
+        "HOME",
+        "ACCEPTUNKNOWN",
+        "PREP"
+      ],
+      "condition": "거절 확정 또는 미커밋+지연 봉쇄, 새 사용자 의도",
+      "expected": "현재 조건 새 준비만, 외부 효과 0. 404/timeout 불충분",
+      "basis": [
+        "LT-13",
+        "LT-14",
+        "LT-18"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S04",
+      "title": "성공 게시물의 별도 새 수정",
+      "path": [
+        "RESULT",
+        "NEXT",
+        "PREP"
+      ],
+      "condition": "정확 확인 기존 객체, 새 변경값·현재 권한·경합 미해결 없음",
+      "expected": "지원 새 준비 허용; 성공 CREATE 반복 없음, 새 승인",
+      "basis": [
+        "LR-03",
+        "LR-04",
+        "T13"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S05",
+      "title": "W 인증 실패 후 제한 복귀",
+      "path": [
+        "PREP",
+        "IDENT",
+        "XAUTH",
+        "XCHECK",
+        "LIMIT"
+      ],
+      "condition": "인증 실패/취소/불명 또는 계정/권한/선행조건 미충족",
+      "expected": "해당 접근 차단·폐기 의무; 자료 보존, 후속 IDENT 읽기 없음",
+      "basis": [
+        "LT-55",
+        "LT-56",
+        "T23"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S06",
+      "title": "내부 변환 실패, 수정할 사용자 사실 없음",
+      "path": [
+        "PREP",
+        "PREP"
+      ],
+      "condition": "정확 미수락 준비/revision·현재 조건, 관련 불명 없음, 명시 재준비",
+      "expected": "내부 재준비·정상 입력 보존, 외부 쓰기 0",
+      "basis": [
+        "LT-18",
+        "ER-08",
+        "T08"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S07",
+      "title": "내부 연결 응답 불명",
+      "path": [
+        "LINK",
+        "LINKACK",
+        "LINKACK"
+      ],
+      "condition": "정확 내부 동일 명령 키 불명",
+      "expected": "동일 관계/키 조회, 외부 쓰기 0, 중복 연결 없음",
+      "basis": [
+        "LT-12",
+        "LT-14",
+        "SW-18",
+        "ER-14"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S08",
+      "title": "원본 편집 없는 관리 연결 해제",
+      "path": [
+        "HOME",
+        "MANAGE",
+        "HOME"
+      ],
+      "condition": "정확 관계·owner·보존·진행/불명 영향 확인",
+      "expected": "내부 관계 처리 또는 보류만. 편집/원본 삭제/외부 글 삭제 필요 없음",
+      "basis": [
+        "SW-08",
+        "ER-25"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S09",
+      "title": "계정 관리에서 연결 해제만",
+      "path": [
+        "HOME",
+        "SETTINGS",
+        "ACCOUNTS",
+        "SETTINGS",
+        "HOME"
+      ],
+      "condition": "정확 관리 관계 및 허용 해제/접근 제한 조건",
+      "expected": "필요 해제/차단 및 폐기 상태 표시, 외부 인증 강제 없음",
+      "basis": [
+        "SW-34",
+        "LR-10",
+        "T16",
+        "T17"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    },
+    {
+      "id": "SC-S10",
+      "title": "홈에서 과거 불명 저장 명령 확인",
+      "path": [
+        "HOME",
+        "HOME"
+      ],
+      "condition": "동일 owner의 정확 보존 저장 키, 지속 불명",
+      "expected": "동일 키 확인만, 새 원본/저장/외부 요청 0",
+      "basis": [
+        "SW-07",
+        "LT-14",
+        "T44"
+      ],
+      "verdict": "semantic_reference_not_executed"
+    }
+  ],
+  "semantic_revision": "V3.1-R1",
+  "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
+  "semantic_projection_path": "docs/review/lesson-registration/USER-STORY-SEMANTIC-REVIEW-V3.1.md"
 }

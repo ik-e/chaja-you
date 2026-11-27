@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-058-TEAM-INTEGRATION-REVIEW-V31",
   "kind": "document",
-  "status": "R01 통합 후보 · 수동 행동/화면 참조 대조 · 개별 분기 의미 검증 미완료",
+  "status": "R01 통합 후보 · 의미 검토 R1 교정",
   "owner": "R01",
   "task_ref": "TASK-058",
   "date": "2026-11-27",
@@ -2640,18 +2640,25 @@
       "source_item": "R03-US-097",
       "kind": "user_action",
       "title": "강사는 관련 작업용 인증 세션의 해제 결과를 확인한다.",
-      "disposition": "covered",
+      "disposition": "scope_split",
       "node_refs": [
-        "CLEANUP"
+        "LIMIT",
+        "CLEANUP",
+        "RESULT"
       ],
-      "reason": "일반 업무 폐기 상태 표시, 장기 모니터링 세션 미채택.",
+      "reason": "조건부 모니터링 세션 해제 문맥 미채택; 일반 업무 폐기 상태 표시만 별도 안전 의무.",
       "source_scope": "undecided",
       "evidence_refs": [
         "R03-EV-P5-9",
         "R03-EV-P9-4",
         "R03-EV-P9-5",
         "R03-EV-INFERRED"
-      ]
+      ],
+      "active_node_refs": [
+        "CLEANUP",
+        "RESULT"
+      ],
+      "held_scope": "자동 모니터링/장기 인증 유지"
     },
     {
       "source_id": "R03",
@@ -2804,7 +2811,7 @@
         "NEXT",
         "PREP"
       ],
-      "reason": "지원되는 동일 객체 수정/재심사 후보만 새 준비.",
+      "reason": "지원되는 동일 객체 수정/재심사 새 준비. 이전 효과 재처리와 별도 새 수정 구분.",
       "source_scope": "undecided",
       "evidence_refs": [
         "R03-EV-P5-8",
@@ -2910,10 +2917,10 @@
       "title": "강사는 실패한 입력안 준비 작업의 재수행을 요청한다.",
       "disposition": "clarified",
       "node_refs": [
-        "FIX",
-        "PREP"
+        "PREP",
+        "FIX"
       ],
-      "reason": "기존 범위에서 화면 표시·조건·정보 경계 보완. 실제 허용 미변경.",
+      "reason": "내부 준비 실패·수정할 사실 없음 VE-101 명시 재준비, 입력 오류만 FIX. 기존 불명/수락 실행 아님.",
       "source_scope": "base",
       "evidence_refs": [
         "R03-EV-P5-3",
@@ -4748,15 +4755,22 @@
       "source_item": "R04-US-035",
       "kind": "user_action",
       "title": "강사가 보관된 작업 세션 파기를 요청한다.",
-      "disposition": "covered",
+      "disposition": "scope_split",
       "node_refs": [
-        "CLEANUP"
+        "LIMIT",
+        "CLEANUP",
+        "RESULT"
       ],
-      "reason": "업무용 폐기와 장기 모니터링 파기 구분.",
+      "reason": "조건부 보관 세션 파기 조작 미채택; 일반 업무 접근 차단/폐기 SW-34 별도.",
       "source_scope": "conditional",
       "evidence_refs": [
         "R04-EV-PROPOSAL"
-      ]
+      ],
+      "active_node_refs": [
+        "CLEANUP",
+        "RESULT"
+      ],
+      "held_scope": "자동 모니터링/장기 인증 유지"
     },
     {
       "source_id": "R04",
@@ -5976,15 +5990,22 @@
       "source_item": "R05-SE-7",
       "kind": "system_event",
       "title": "게시 여부 또는 심사 결과를 다시 알고 싶다",
-      "disposition": "held",
+      "disposition": "scope_split",
       "node_refs": [
-        "LIMIT"
+        "LIMIT",
+        "CLEANUP",
+        "RESULT"
       ],
-      "reason": "자동 모니터링 미채택; 일반 업무 폐기는 CLEANUP.",
+      "reason": "E05 모니터링 종료 미채택; F27 수동 조회 후 접근 차단/폐기 별도.",
       "source_scope": null,
       "evidence_refs": [
         "R05-EV-01"
-      ]
+      ],
+      "active_node_refs": [
+        "CLEANUP",
+        "RESULT"
+      ],
+      "held_scope": "자동 모니터링/장기 인증 유지"
     },
     {
       "source_id": "R03",
@@ -7998,10 +8019,11 @@
       "title": "강사는 작성을 마치기 전에 목록으로 돌아가거나 다른 레슨을 연다.",
       "disposition": "decision_required",
       "node_refs": [
+        "EDIT",
         "SAVEUNKNOWN",
         "HOME"
       ],
-      "reason": "관련 보수적 경계 유지, R01 세부 판단 요청.",
+      "reason": "미저장 보존·폐기와 불명 동일 저장 ID 구분. H 동일 키 확인 후 새 저장 강제 없음.",
       "error": "저장하지 않은 변경 내용이 남아 있다.",
       "recovery": "계속 편집, 저장 후 이동, 변경 내용 버리기 중에서 선택하게 한다. 저장 요청의 결과를 확인 중이었다면 입력을 보존하고, 돌아왔을 때 같은 요청을 이어서 확인한다."
     },
@@ -8777,261 +8799,581 @@
       "source_item": "F01",
       "kind": "function_candidate",
       "title": "원본 레슨 정보 입력",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-10"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "EDIT"
+      ],
+      "scope_feature_refs": [
+        "SF-01"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F02",
       "kind": "function_candidate",
       "title": "원본 레슨 불러오기",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-02",
+        "UJ-03",
+        "UJ-10"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "HOME"
+      ],
+      "scope_feature_refs": [
+        "SF-01"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F03",
       "kind": "function_candidate",
       "title": "원본 구조화",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-10"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "FACT"
+      ],
+      "scope_feature_refs": [
+        "SF-01"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F04",
       "kind": "function_candidate",
       "title": "원본 수정",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-10",
+        "UJ-03",
+        "UJ-07"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "EDIT"
+      ],
+      "scope_feature_refs": [
+        "SF-01"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F05",
       "kind": "function_candidate",
       "title": "원본 저장·버전 관리",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-10",
+        "UJ-12"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "SAVE",
+        "SAVEACK",
+        "SAVEUNKNOWN"
+      ],
+      "scope_feature_refs": [
+        "SF-01"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F06",
       "kind": "function_candidate",
       "title": "플랫폼 지원 범위 제공",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-09"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREP",
+        "LIMIT"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F07",
       "kind": "function_candidate",
       "title": "작업 대상·업무 선택",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-06"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "SELECT",
+        "PREP"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F08",
       "kind": "function_candidate",
       "title": "플랫폼별 변환",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-07"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREP"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F09",
       "kind": "function_candidate",
       "title": "입력안 검증",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-07"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREP",
+        "FIX"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F10",
       "kind": "function_candidate",
       "title": "보완 정보 요청",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-07"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "FIX",
+        "EDITFIX"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F11",
       "kind": "function_candidate",
       "title": "제약 충돌 해결 선택",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-07",
+        "UJ-09"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "FIX",
+        "LIMIT",
+        "HOLDCHOICE"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F12",
       "kind": "function_candidate",
       "title": "플랫폼 인증 요청",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-07",
+        "UJ-11"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "XAUTH"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F13",
       "kind": "function_candidate",
       "title": "계정·권한 확인",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-06",
+        "UJ-07",
+        "UJ-11"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "XCHECK",
+        "XCHOOSE",
+        "IDENT"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F14",
       "kind": "function_candidate",
       "title": "기존 게시물 식별",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-03",
+        "UJ-06",
+        "UJ-07"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "IDENT",
+        "CHOOSE"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F15",
       "kind": "function_candidate",
       "title": "변경 전후 비교",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-03"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREVIEW"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F16",
       "kind": "function_candidate",
       "title": "최종 정보 승인",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREVIEW",
+        "APPROVE"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F17",
       "kind": "function_candidate",
       "title": "실행 범위 승인",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREVIEW",
+        "APPROVE",
+        "ACCEPT"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F18",
       "kind": "function_candidate",
       "title": "실행 조건 대조",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "ACCEPT",
+        "RESERVE"
+      ],
+      "scope_feature_refs": [
+        "SF-02"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F19",
       "kind": "function_candidate",
       "title": "신규 등록 실행",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "DISPATCH",
+        "VERIFY"
+      ],
+      "scope_feature_refs": [
+        "SF-03"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F20",
       "kind": "function_candidate",
       "title": "기존 정보 수정 실행",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-03"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "DISPATCH",
+        "VERIFY"
+      ],
+      "scope_feature_refs": [
+        "SF-04"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F21",
       "kind": "function_candidate",
       "title": "공고 갱신 실행",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-04"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "PREP",
+        "DISPATCH",
+        "VERIFY",
+        "LIMIT"
+      ],
+      "scope_feature_refs": [
+        "SF-05"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F22",
       "kind": "function_candidate",
       "title": "실제 결과 확인",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "VERIFY",
+        "RESULT"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F23",
       "kind": "function_candidate",
       "title": "이력 저장",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-05",
+        "UJ-08",
+        "UJ-12"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "RESULT",
+        "READEND"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F24",
       "kind": "function_candidate",
       "title": "결과 전달",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-01",
+        "UJ-02",
+        "UJ-03",
+        "UJ-04",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "RESULT"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F25",
       "kind": "function_candidate",
       "title": "통합 상태 제공",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-05",
+        "UJ-12"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "HOME",
+        "RESULT"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F26",
       "kind": "function_candidate",
       "title": "상태 갱신 요청",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-05",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "READ",
+        "NEXT"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F27",
       "kind": "function_candidate",
       "title": "상태 확인·갱신",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-05",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "READ",
+        "READEND"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F28",
       "kind": "function_candidate",
       "title": "상태 변화 전달",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-05",
+        "UJ-08"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "READEND",
+        "RESULT"
+      ],
+      "scope_feature_refs": [
+        "SF-06"
+      ]
     },
     {
       "source_id": "R04FUNC",
       "source_item": "F29",
       "kind": "function_candidate",
       "title": "대응 안내",
-      "journey_refs": [],
-      "disposition": "related_candidate",
-      "reason": "기존 여정의 feature 참조 대응, 세부 입출력 의미 검증 별도."
+      "journey_refs": [
+        "UJ-07",
+        "UJ-08",
+        "UJ-09"
+      ],
+      "disposition": "semantic_correspondence",
+      "reason": "개별 기능 의도·노드·여정 수동 명시 대응. 모든 여정에서 필수 실행 아님; 실제 지원/효과 미검증.",
+      "node_refs": [
+        "LIMIT",
+        "RESULT",
+        "NEXT"
+      ],
+      "scope_feature_refs": [
+        "SF-07"
+      ]
     },
     {
       "source_id": "R04FUNC",
@@ -9039,8 +9381,11 @@
       "kind": "function_candidate",
       "title": "모니터링 대상·조건 설정",
       "journey_refs": [],
-      "disposition": "scope_review",
-      "reason": "조건부/추가 후보, 신규 채택 없음."
+      "disposition": "held",
+      "reason": "E01~E05 별도 채택 전 미제공, 일반 업무 세션 정리와 별개.",
+      "node_refs": [
+        "LIMIT"
+      ]
     },
     {
       "source_id": "R04FUNC",
@@ -9048,8 +9393,11 @@
       "kind": "function_candidate",
       "title": "인증 유지 위험 안내·승인",
       "journey_refs": [],
-      "disposition": "scope_review",
-      "reason": "조건부/추가 후보, 신규 채택 없음."
+      "disposition": "held",
+      "reason": "E01~E05 별도 채택 전 미제공, 일반 업무 세션 정리와 별개.",
+      "node_refs": [
+        "LIMIT"
+      ]
     },
     {
       "source_id": "R04FUNC",
@@ -9057,8 +9405,11 @@
       "kind": "function_candidate",
       "title": "자동 상태 확인",
       "journey_refs": [],
-      "disposition": "scope_review",
-      "reason": "조건부/추가 후보, 신규 채택 없음."
+      "disposition": "held",
+      "reason": "E01~E05 별도 채택 전 미제공, 일반 업무 세션 정리와 별개.",
+      "node_refs": [
+        "LIMIT"
+      ]
     },
     {
       "source_id": "R04FUNC",
@@ -9066,8 +9417,11 @@
       "kind": "function_candidate",
       "title": "상태 변화 알림",
       "journey_refs": [],
-      "disposition": "scope_review",
-      "reason": "조건부/추가 후보, 신규 채택 없음."
+      "disposition": "held",
+      "reason": "E01~E05 별도 채택 전 미제공, 일반 업무 세션 정리와 별개.",
+      "node_refs": [
+        "LIMIT"
+      ]
     },
     {
       "source_id": "R04FUNC",
@@ -9075,8 +9429,11 @@
       "kind": "function_candidate",
       "title": "모니터링 종료·세션 해제",
       "journey_refs": [],
-      "disposition": "scope_review",
-      "reason": "조건부/추가 후보, 신규 채택 없음."
+      "disposition": "held",
+      "reason": "E01~E05 별도 채택 전 미제공, 일반 업무 세션 정리와 별개.",
+      "node_refs": [
+        "LIMIT"
+      ]
     },
     {
       "source_id": "R05EX",
@@ -9523,7 +9880,10 @@
       "R02 입력 후보 및 R05 예시의 실제 필수·허용·효과는 미검증.",
       "R04 기능/IA 및 기존 노드의 대응은 상세 데이터 의미·전체 분기 검증과 다름.",
       "V3.0의 505개 개별 분기 의미 검증 및 16개 범위 분리 검토 유지; 28개 모의 시나리오와 기존 모델 테스트 재실행하지 않음.",
-      "실제 외부 접근/실행 0건, 공식 Python/CI·실제 사용자 시간 측정 미수행."
-    ]
-  }
+      "실제 외부 접근/실행 0건, 공식 Python/CI·실제 사용자 시간 측정 미수행.",
+      "693개 분기의 원래 조건·다음 ID와 업무별 의미 가드/판정을 기록했다. 반복 조건은 같은 의미 영역 판정을 재사용했으며, 370개 조건의 모든 조합 및 레거시 각 다음 ID의 전이 완전성/동시성 형식 증명은 아니다. guarded_reinterpretation/scope_split/decision_pending은 상세 확인·결정 필요."
+    ],
+    "semantic_revision": "V3.1-R1"
+  },
+  "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json"
 }
