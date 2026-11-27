@@ -9310,7 +9310,7 @@
       ],
       "checkpoints": [
         {
-          "description": "전문가 직접 인증/프로필 선행 및 정확 계정·기존 상품/효과 확인; 카테고리·모집 형태·방식·가격 옵션·위치·자료 검증",
+          "description": "전문가 직접 인증/프로필 선행 및 정확 계정·기존 상품/효과 확인; 카테고리·모집 형태·방식·가격 옵션·위치·자료 검증 정확 계정의 판매중+승인대기 합계/당일 신규 승인 요청 한도와 현재 근거를 확인; 불명/초과 해당 업무 보류.",
           "mode": "prepare_and_permitted_read",
           "work_refs": [
             "SW-02",
@@ -9389,7 +9389,7 @@
           "id": "PS-PL01-CREATE-W03"
         },
         {
-          "description": "정확 동일 상품의 심사 요청 효과 후보; 필수 직접 확인 유지",
+          "description": "정확 동일 상품의 심사 요청 효과 후보; 필수 직접 확인 유지 전송 직전 실제 계정·한도 종류/일자·미반영 예약/불명 시도와 원자 자격 재검증.",
           "mode": "effect_candidate",
           "work_refs": [
             "SW-23",
@@ -9458,7 +9458,11 @@
       "recovery": "상품/옵션 저장 후 접수 불명은 정확 기존 상품 조회. 전체 CREATE 반복 금지; 지원 잔여 업무만 새 승인.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-01",
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL01-READ",
@@ -9844,7 +9848,7 @@
       ],
       "checkpoints": [
         {
-          "description": "동일 상품·옵션의 현재 상태와 변경 가능 항목/심사 제한 확인; 판매중 수정 및 동영상 공개 차이 검토",
+          "description": "동일 상품·옵션의 현재 상태와 변경 가능 항목/심사 제한 확인; 판매중 수정 및 동영상 공개 차이 검토 판매 중 일반 변경 선공개 가능·동영상 승인 후 공개를 변경 영향으로 고지. 신규 승인 요청 해당 여부/비승인 후 재승인 조건만 한도 적용.",
           "mode": "prepare_and_permitted_read",
           "work_refs": [
             "SW-02",
@@ -9945,7 +9949,7 @@
           "id": "PS-PL01-UPDATE-W04"
         },
         {
-          "description": "동일 상품 변경값·필요 접수 확인; 판매·공개 별도.",
+          "description": "동일 상품 변경값·필요 접수 확인; 판매·공개 별도. 변경값 저장/필요 접수와 항목별 현재 공개 및 검토 결과 독립 관측.",
           "mode": "read_candidate",
           "work_refs": [
             "SW-10",
@@ -9984,13 +9988,18 @@
       ],
       "completion": "동일 상품의 승인 변경값 저장 확인 및 필요한 경우 재심사 접수 확인",
       "source_completion": "동일 상품의 승인 변경값 저장 확인 및 필요한 경우 재심사 접수 확인",
-      "goal": "심사 승인 후 실제 판매 상세 변경 별도",
+      "goal": "동일 상품 저장·필요 재심사 접수와 별도로 항목별 공개 및 검토 결과 관측. 판매 중 일반 변경은 선공개 가능, 동영상은 승인 후 반영. 실제 관측 없이 공개/검토 완료 추정 금지.",
       "not_provided": "심사 중 편집 우회·삭제 재등록·미허용 필드 변경 금지",
       "unknown": "판매 중 변경 가능 범위·재심사 반영/공개 미확인",
       "recovery": "상품/옵션 저장 후 접수 불명은 정확 기존 상품 조회. 전체 CREATE 반복 금지; 지원 잔여 업무만 새 승인.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-01",
+        "POL-R05-02",
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL01-RENEW",
@@ -10652,7 +10661,7 @@
       ],
       "checkpoints": [
         {
-          "description": "튜터 직접 선행 상태/정산·정책 동의와 정확 계정·기존 클래스 확인; 오프라인 클래스/회차별 실제 내용·인원·가격 계산/썸네일 검증",
+          "description": "튜터 직접 선행 상태/정산·정책 동의와 정확 계정·기존 클래스 확인; 오프라인 클래스/회차별 실제 내용·인원·가격 계산/썸네일 검증 원본 총액·시간/회차·단위·환산 총액 및 동일 클래스 타 플랫폼 수강료/별도 계약 확인. 불명 해당 영향 업무 보류.",
           "mode": "prepare_and_permitted_read",
           "work_refs": [
             "SW-02",
@@ -10800,7 +10809,10 @@
       "recovery": "기존 클래스 저장 후 접수 불명은 기존 객체 조회. 신규 반복 금지. 일정 없음은 등록 실패 아님.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL02-READ",
@@ -11119,7 +11131,7 @@
       ],
       "checkpoints": [
         {
-          "description": "정확 클래스/회차·현재 값/상태·변경 불가 항목과 공유 프로필/재심사 영향 확인",
+          "description": "정확 클래스/회차·현재 값/상태·변경 불가 항목과 공유 프로필/재심사 영향 확인 동일 클래스 가격/구성·계약 영향 확인; 타 플랫폼 가격 변경에도 해당 동일성/효과에 따라 규칙 적용.",
           "mode": "prepare_and_permitted_read",
           "work_refs": [
             "SW-02",
@@ -11265,7 +11277,10 @@
       "recovery": "기존 클래스 저장 후 접수 불명은 기존 객체 조회. 신규 반복 금지. 일정 없음은 등록 실패 아님.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL02-RENEW",
@@ -11880,7 +11895,7 @@
       ],
       "checkpoints": [
         {
-          "description": "고수 직접 전환/인증 등 선행 상태·정확 프로필·기존 제공 서비스 및 서비스별 질문/공통 프로필 영향 확인",
+          "description": "고수 직접 전환/인증 등 선행 상태·정확 프로필·기존 제공 서비스 및 서비스별 질문/공통 프로필 영향 확인 활동명 변경 효과가 포함되면 공백 포함 2~20자 및 회원 변경 후 30일 제한(공식 예외 조건) 확인. 이름 변경 없는 서비스 추가에 강제하지 않음.",
           "mode": "prepare_and_permitted_read",
           "work_refs": [
             "SW-02",
@@ -11959,7 +11974,7 @@
           "id": "PS-PL03-CREATE-W03"
         },
         {
-          "description": "서비스별 매칭 설정 및 별도 승인된 공통 프로필 저장을 서로 다른 효과로 기록",
+          "description": "서비스별 매칭 설정 및 별도 승인된 공통 프로필 저장을 서로 다른 효과로 기록 활동명 변경 포함 시 실제 정책·공유 영향·독립 저장 여부·정확 승인 검증, 결합 불명 보류.",
           "mode": "effect_candidate",
           "work_refs": [
             "SW-23",
@@ -12028,7 +12043,11 @@
       "recovery": "서비스 관계 추가 후 설정 실패면 기존 관계의 지원되는 설정만 새 승인. 관계 재추가 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03",
+        "POL-R05-04"
+      ]
     },
     {
       "id": "PS-PL03-READ",
@@ -12369,7 +12388,7 @@
       ],
       "checkpoints": [
         {
-          "description": "정확 프로필/서비스 관계, 현재 설정·공통 필드 및 타 서비스 영향 확인",
+          "description": "정확 프로필/서비스 관계, 현재 설정·공통 필드 및 타 서비스 영향 확인 활동명 정책(2~20자, 변경 후 30일 및 공식 예외) 확인. 30자 UI 관찰은 근거 이력일 뿐 정책 아님.",
           "mode": "prepare_and_permitted_read",
           "work_refs": [
             "SW-02",
@@ -12446,7 +12465,7 @@
           "id": "PS-PL03-UPDATE-W03"
         },
         {
-          "description": "별도 승인된 공통 프로필 정보 변경 후보(타 서비스 영향 명시)",
+          "description": "별도 승인된 공통 프로필 정보 변경 후보(타 서비스 영향 명시) 활동명 정책 불충족/불명 해당 변경 차단, 다른 변경은 물리 독립성과 승인 확인 후만.",
           "mode": "effect_candidate",
           "work_refs": [
             "SW-23",
@@ -12515,7 +12534,11 @@
       "recovery": "서비스 관계 추가 후 설정 실패면 기존 관계의 지원되는 설정만 새 승인. 관계 재추가 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03",
+        "POL-R05-04"
+      ]
     },
     {
       "id": "PS-PL03-RENEW",
@@ -13315,7 +13338,10 @@
       "recovery": "기존 프로필/분야/하위 항목 저장 후 실패면 정확 기존 객체의 지원 잔여 업무만. 재생성 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL04-READ",
@@ -13833,7 +13859,10 @@
       "recovery": "기존 프로필/분야/하위 항목 저장 후 실패면 정확 기존 객체의 지원 잔여 업무만. 재생성 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL04-RENEW",
@@ -14636,7 +14665,10 @@
       "recovery": "등록/갱신 응답 유실은 기존 효과 허용 조회 또는 보류. 새 글/재갱신 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL05-READ",
@@ -15135,7 +15167,10 @@
       "recovery": "등록/갱신 응답 유실은 기존 효과 허용 조회 또는 보류. 새 글/재갱신 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL05-RENEW",
@@ -16064,7 +16099,10 @@
       "recovery": "등록/자동저장 불명 시 기존 효과 확인 전 새 글 금지. 수정·갱신 보류를 재등록으로 우회 금지.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL06-READ",
@@ -17182,7 +17220,10 @@
       "recovery": "등록 응답 불명/제한 상충 시 기존 글 확인 전 새 글 금지. 재등록·정기 갱신 제외.",
       "permission": "unknown",
       "actual_execution": "blocked_mock_only",
-      "completion_verified": false
+      "completion_verified": false,
+      "review_policy_refs": [
+        "POL-R05-03"
+      ]
     },
     {
       "id": "PS-PL07-READ",
@@ -18390,7 +18431,7 @@
       "target": "확정 동일 상품",
       "mutation": "심사 요청",
       "application": "현재 승인안에서 해당 효과가 요구되고 지원/허용·실제 단계 근거가 확인된 경우; 선택적 미적용은 명시",
-      "precondition": "정확 기존 객체 또는 검증된 신규 slot binding 및 현재 승인 필수 내용/첨부의 확인된 선행 효과; 실제 물리 결합 여부 확인",
+      "precondition": "정확 기존 객체 또는 검증된 신규 slot binding 및 현재 승인 필수 내용/첨부의 확인된 선행 효과; 실제 물리 결합 여부 확인 해당 신규 승인 요청 한도 및 정규 계정 전체 자격/미반영 예약·불명·일자 경합 재검증.",
       "readback": "같은 상품의 접수/심사 근거",
       "read_scope": {
         "purpose": "verification_of_this_effect",
@@ -18420,7 +18461,7 @@
       "mutation": "승인 변경 기본값",
       "application": "현재 승인안에서 해당 효과가 요구되고 지원/허용·실제 단계 근거가 확인된 경우; 선택적 미적용은 명시",
       "precondition": "정확 계정/대상/slot·하위 객체·현재 승인값·규칙 및 실제 필요한 선행 효과 확인. 물리 결합/순서 미확인은 실행 차단",
-      "readback": "정확 변경값",
+      "readback": "정확 변경값 저장 관측과 항목별 현재 공개/검토 관측 독립; 관측 불명 추정 금지.",
       "read_scope": {
         "purpose": "verification_of_this_effect",
         "target_binding": "동일 상품",
@@ -18478,7 +18519,7 @@
       "mutation": "승인 첨부 변경",
       "application": "현재 승인안에서 해당 효과가 요구되고 지원/허용·실제 단계 근거가 확인된 경우; 선택적 미적용은 명시",
       "precondition": "정확 계정/대상/slot·하위 객체·현재 승인값·규칙 및 실제 필요한 선행 효과 확인. 물리 결합/순서 미확인은 실행 차단",
-      "readback": "정확 첨부 확인",
+      "readback": "정확 첨부 확인 저장 관측과 항목별 현재 공개/검토 관측 독립; 관측 불명 추정 금지.",
       "read_scope": {
         "purpose": "verification_of_this_effect",
         "target_binding": "동일 상품/첨부",
@@ -18854,7 +18895,7 @@
       "target": "정확 고수 프로필",
       "mutation": "별도 승인 공통 필드",
       "application": "현재 승인안에서 해당 효과가 요구되고 지원/허용·실제 단계 근거가 확인된 경우; 선택적 미적용은 명시",
-      "precondition": "정확 계정/대상/slot·하위 객체·현재 승인값·규칙 및 실제 필요한 선행 효과 확인. 물리 결합/순서 미확인은 실행 차단",
+      "precondition": "정확 계정/대상/slot·하위 객체·현재 승인값·규칙 및 실제 필요한 선행 효과 확인. 물리 결합/순서 미확인은 실행 차단 활동명 변이가 포함되는 경우 공식 규격/변경 주기·현재 근거·공유 범위·물리 독립성 및 정확 승인 확인.",
       "readback": "프로필 변경값·타 서비스 영향",
       "read_scope": {
         "purpose": "verification_of_this_effect",
@@ -18912,7 +18953,7 @@
       "target": "정확 고수 프로필",
       "mutation": "별도 승인 공통 필드",
       "application": "현재 승인안에서 해당 효과가 요구되고 지원/허용·실제 단계 근거가 확인된 경우; 선택적 미적용은 명시",
-      "precondition": "정확 계정/대상/slot·하위 객체·현재 승인값·규칙 및 실제 필요한 선행 효과 확인. 물리 결합/순서 미확인은 실행 차단",
+      "precondition": "정확 계정/대상/slot·하위 객체·현재 승인값·규칙 및 실제 필요한 선행 효과 확인. 물리 결합/순서 미확인은 실행 차단 활동명 변이가 포함되는 경우 공식 규격/변경 주기·현재 근거·공유 범위·물리 독립성 및 정확 승인 확인.",
       "readback": "정확 변경값·영향",
       "read_scope": {
         "purpose": "verification_of_this_effect",
@@ -19645,7 +19686,220 @@
           "SW-28",
           "LT-44"
         ]
+      },
+      {
+        "id": "POL-R05-01-R4",
+        "title": "POL-R05-01 효과/연관 기준 적용",
+        "rule": "공식 근거: https://kmong.com/support/expert-center/posts/817 · 계정당 판매 중+승인 대기 합계 최대 100개, 하루 신규 승인 요청 5개. 기존 판매 중 수정 자체 가능; 비승인 후 재승인 요청은 해당 공지 조건 확인. 준비: 정확 계정 전체 등록수·당일 신규 승인 요청수 및 현재 근거/시각 확인. 초과/미확인 시 해당 신규/해당 승인 요청만 보류, 공식 관리 화면 안내; 정상 대상 유지. 동일 실제 계정의 모든 관련 수락 업무/외부 관측에 적용; 조건별 정확 한도 및 당일 기준 검증. 전송 전: 해당 승인 요청 직전 한도·경합·현재 권한 재검증. 불가/불충족 차단; 삭제/판매중지/우회 금지. 수정 자체에 신규 한도 무조건 적용 금지. 정규 실제 계정/한도 종류/일자 기준 원자 자격 확보. 권위 있는 현재 카운트에 아직 반영되지 않은 내부 예약·불명 시도만 보수적으로 포함; 중복 계상 여부 불명/외부 경합 미해결은 보류. 계정 범위 보호는 실제 원자성 시험 전 후보. 관측: 한도 통과는 접수 증거 아님; 정확 저장/접수 독립 관측. 실제 서버/권한/효과 미검증, mock-only.",
+        "refs": [
+          "PS-PL01-CREATE",
+          "PS-PL01-UPDATE",
+          "PS-PL01-CREATE-W01",
+          "PS-PL01-CREATE-W02",
+          "PS-PL01-CREATE-EF04",
+          "PS-PL01-UPDATE-W01",
+          "PS-PL01-UPDATE-EF04",
+          "ER-07",
+          "ER-09",
+          "ER-10",
+          "ER-15",
+          "ER-29"
+        ]
+      },
+      {
+        "id": "POL-R05-02-R4",
+        "title": "POL-R05-02 효과/연관 기준 적용",
+        "rule": "공식 근거: https://kmong.com/support/expert-center/posts/680 · 판매 중 상품 일반 수정 내용 선공개 후 추가 검토 가능, 동영상은 승인 후 반영. 준비: W에서 선공개 가능성·동영상 심사 제한, 정확 변경 범위·조회 계획 표시 및 승인. 전송 전: 정확 상품·승인 변이·현재 권한·물리 결합 확인. 동영상 승인 우회 금지. 관측: 변경값 저장·필요 재심사 접수와 항목별 현재 공개/검토 결과 독립 관측. 기존 목표 문구 '심사 승인 후 실제 판매 상세 변경 별도' 대체. 실제 서버/권한/효과 미검증, mock-only.",
+        "refs": [
+          "PS-PL01-UPDATE",
+          "PS-PL01-UPDATE-W01",
+          "PS-PL01-UPDATE-W05",
+          "PS-PL01-UPDATE-EF01",
+          "PS-PL01-UPDATE-EF03",
+          "PS-PL01-UPDATE-EF04",
+          "ER-19",
+          "ER-20",
+          "ER-21",
+          "ER-31"
+        ]
+      },
+      {
+        "id": "POL-R05-03-R4",
+        "title": "POL-R05-03 효과/연관 기준 적용",
+        "rule": "공식 근거: https://talingtutorguide.oopy.io/27041f37-bd7f-8071-9a6e-d412f50e46a9 · 동일 클래스 타 플랫폼 판매 시 동일 수강료 및 별도 계약 조건 확인. 120분×6회 총150000원→시간당12500원은 관찰·계산 사례, 모든 유형 규칙 아님. 준비: 원본 총액·회차/시간·입력 단위·환산 총액 및 세금/구성·동일 클래스/계약 조건 확인. 불명/충돌 탈잉만 보류. 탈잉 미선택이라도 타 플랫폼 가격/구성 변경이 연결된 동일 클래스에 영향을 주는 경우 정확 동일성·현 계약/수강료 조건 확인. 동일 원본이라고 동일 클래스 단정 금지. 허용된 최소 근거/강사 확인만 사용, 자동 타 플랫폼 읽기 금지. 전송 전: 현재 실제 제공 조건·승인값·계약 일치 확인. 임의 가격 변경/타 플랫폼 가격 수정 금지. 가격 동일 조건을 충족하지 못하는 영향을 가진 변경 자체를 보류; 타 플랫폼 가격을 자동 조정하거나 순차 실행으로 조건 우회 금지. 독립 변경 가능성 검증 시 무관한 변경만 진행. 관측: 정확 가격·최종 총액 관측. 등록과 모집 목표 분리. 실제 서버/권한/효과 미검증, mock-only.",
+        "refs": [
+          "PS-PL01-CREATE",
+          "PS-PL01-UPDATE",
+          "PS-PL02-CREATE",
+          "PS-PL02-UPDATE",
+          "PS-PL03-CREATE",
+          "PS-PL03-UPDATE",
+          "PS-PL04-CREATE",
+          "PS-PL04-UPDATE",
+          "PS-PL05-CREATE",
+          "PS-PL05-UPDATE",
+          "PS-PL06-CREATE",
+          "PS-PL07-CREATE",
+          "PS-PL02-CREATE-W01",
+          "PS-PL02-CREATE-EF03",
+          "PS-PL02-UPDATE-W01",
+          "ER-08",
+          "ER-09",
+          "ER-10",
+          "ER-29"
+        ]
+      },
+      {
+        "id": "POL-R05-04-R4",
+        "title": "POL-R05-04 효과/연관 기준 적용",
+        "rule": "공식 근거: https://soomgo.com/terms/usage/2026-11-19 · 활동명 공백 포함 2~20자, 회원 변경 후 30일 재변경 제한; 최초 가입 설정 및 운영사 변경 예외. 30자 화면 관찰값은 출처 이력, 허용 기준 아님. 준비: 정책·화면 관찰 충돌 보존, 길이·현재 변경 가능성/시각 확인. 불명 해당 변경 보류, 자동 잘라내기 금지. CREATE에서도 공통 프로필 활동명 변경 효과가 포함될 때만 적용. 이름 변경이 없는 서비스 추가에 이름 수정 강제 없음. 전송 전: 다른 항목은 독립 저장·효과와 공유 범위 확인 및 정확 범위 승인 때만 진행; 결합 불명 결합 범위 보류. 관측: 정확 승인 변경값과 공개 영향 관측, 제한 활동명 미실행 사유 구분. 실제 서버/권한/효과 미검증, mock-only.",
+        "refs": [
+          "PS-PL03-CREATE",
+          "PS-PL03-UPDATE",
+          "PS-PL03-UPDATE-W01",
+          "PS-PL03-UPDATE-W04",
+          "PS-PL03-UPDATE-EF02",
+          "PS-PL03-CREATE-W01",
+          "PS-PL03-CREATE-W04",
+          "ER-09",
+          "ER-10",
+          "ER-21",
+          "ER-29"
+        ]
       }
     ]
+  },
+  "review_policies": [
+    {
+      "id": "POL-R05-01",
+      "review": "R05-V31-01",
+      "operations": [
+        "PS-PL01-CREATE",
+        "PS-PL01-UPDATE"
+      ],
+      "official_url": "https://kmong.com/support/expert-center/posts/817",
+      "effective": "2026-11-27",
+      "rule": "계정당 판매 중+승인 대기 합계 최대 100개, 하루 신규 승인 요청 5개. 기존 판매 중 수정 자체 가능; 비승인 후 재승인 요청은 해당 공지 조건 확인.",
+      "prepare": "정확 계정 전체 등록수·당일 신규 승인 요청수 및 현재 근거/시각 확인. 초과/미확인 시 해당 신규/해당 승인 요청만 보류, 공식 관리 화면 안내; 정상 대상 유지. 동일 실제 계정의 모든 관련 수락 업무/외부 관측에 적용; 조건별 정확 한도 및 당일 기준 검증.",
+      "dispatch": "해당 승인 요청 직전 한도·경합·현재 권한 재검증. 불가/불충족 차단; 삭제/판매중지/우회 금지. 수정 자체에 신규 한도 무조건 적용 금지. 정규 실제 계정/한도 종류/일자 기준 원자 자격 확보. 권위 있는 현재 카운트에 아직 반영되지 않은 내부 예약·불명 시도만 보수적으로 포함; 중복 계상 여부 불명/외부 경합 미해결은 보류. 계정 범위 보호는 실제 원자성 시험 전 후보.",
+      "effect": "한도 통과는 접수 증거 아님; 정확 저장/접수 독립 관측.",
+      "refs": [
+        "PS-PL01-CREATE-W01",
+        "PS-PL01-CREATE-W02",
+        "PS-PL01-CREATE-EF04",
+        "PS-PL01-UPDATE-W01",
+        "PS-PL01-UPDATE-EF04"
+      ],
+      "errors": [
+        "ER-07",
+        "ER-09",
+        "ER-10",
+        "ER-15",
+        "ER-29"
+      ],
+      "evidence_status": "R05 공개 공식 자료 대조 및 R01 이전 검토; 실제 서버/권한/효과 미검증"
+    },
+    {
+      "id": "POL-R05-02",
+      "review": "R05-V31-02",
+      "operations": [
+        "PS-PL01-UPDATE"
+      ],
+      "official_url": "https://kmong.com/support/expert-center/posts/680",
+      "rule": "판매 중 상품 일반 수정 내용 선공개 후 추가 검토 가능, 동영상은 승인 후 반영.",
+      "prepare": "W에서 선공개 가능성·동영상 심사 제한, 정확 변경 범위·조회 계획 표시 및 승인.",
+      "dispatch": "정확 상품·승인 변이·현재 권한·물리 결합 확인. 동영상 승인 우회 금지.",
+      "effect": "변경값 저장·필요 재심사 접수와 항목별 현재 공개/검토 결과 독립 관측. 기존 목표 문구 '심사 승인 후 실제 판매 상세 변경 별도' 대체.",
+      "refs": [
+        "PS-PL01-UPDATE-W01",
+        "PS-PL01-UPDATE-W05",
+        "PS-PL01-UPDATE-EF01",
+        "PS-PL01-UPDATE-EF03",
+        "PS-PL01-UPDATE-EF04"
+      ],
+      "errors": [
+        "ER-19",
+        "ER-20",
+        "ER-21",
+        "ER-31"
+      ],
+      "evidence_status": "R05 공개 공식 자료 대조 및 R01 이전 검토; 실제 서버/권한/효과 미검증"
+    },
+    {
+      "id": "POL-R05-03",
+      "review": "R05-V31-03",
+      "operations": [
+        "PS-PL01-CREATE",
+        "PS-PL01-UPDATE",
+        "PS-PL02-CREATE",
+        "PS-PL02-UPDATE",
+        "PS-PL03-CREATE",
+        "PS-PL03-UPDATE",
+        "PS-PL04-CREATE",
+        "PS-PL04-UPDATE",
+        "PS-PL05-CREATE",
+        "PS-PL05-UPDATE",
+        "PS-PL06-CREATE",
+        "PS-PL07-CREATE"
+      ],
+      "official_url": "https://talingtutorguide.oopy.io/27041f37-bd7f-8071-9a6e-d412f50e46a9",
+      "rule": "동일 클래스 타 플랫폼 판매 시 동일 수강료 및 별도 계약 조건 확인. 120분×6회 총150000원→시간당12500원은 관찰·계산 사례, 모든 유형 규칙 아님.",
+      "prepare": "원본 총액·회차/시간·입력 단위·환산 총액 및 세금/구성·동일 클래스/계약 조건 확인. 불명/충돌 탈잉만 보류. 탈잉 미선택이라도 타 플랫폼 가격/구성 변경이 연결된 동일 클래스에 영향을 주는 경우 정확 동일성·현 계약/수강료 조건 확인. 동일 원본이라고 동일 클래스 단정 금지. 허용된 최소 근거/강사 확인만 사용, 자동 타 플랫폼 읽기 금지.",
+      "dispatch": "현재 실제 제공 조건·승인값·계약 일치 확인. 임의 가격 변경/타 플랫폼 가격 수정 금지. 가격 동일 조건을 충족하지 못하는 영향을 가진 변경 자체를 보류; 타 플랫폼 가격을 자동 조정하거나 순차 실행으로 조건 우회 금지. 독립 변경 가능성 검증 시 무관한 변경만 진행.",
+      "effect": "정확 가격·최종 총액 관측. 등록과 모집 목표 분리.",
+      "refs": [
+        "PS-PL02-CREATE-W01",
+        "PS-PL02-CREATE-EF03",
+        "PS-PL02-UPDATE-W01"
+      ],
+      "errors": [
+        "ER-08",
+        "ER-09",
+        "ER-10",
+        "ER-29"
+      ],
+      "evidence_status": "R05 공개 공식 자료 대조 및 R01 이전 검토; 실제 서버/권한/효과 미검증"
+    },
+    {
+      "id": "POL-R05-04",
+      "review": "R05-V31-04",
+      "operations": [
+        "PS-PL03-CREATE",
+        "PS-PL03-UPDATE"
+      ],
+      "official_url": "https://soomgo.com/terms/usage/2026-11-19",
+      "rule": "활동명 공백 포함 2~20자, 회원 변경 후 30일 재변경 제한; 최초 가입 설정 및 운영사 변경 예외. 30자 화면 관찰값은 출처 이력, 허용 기준 아님.",
+      "prepare": "정책·화면 관찰 충돌 보존, 길이·현재 변경 가능성/시각 확인. 불명 해당 변경 보류, 자동 잘라내기 금지. CREATE에서도 공통 프로필 활동명 변경 효과가 포함될 때만 적용. 이름 변경이 없는 서비스 추가에 이름 수정 강제 없음.",
+      "dispatch": "다른 항목은 독립 저장·효과와 공유 범위 확인 및 정확 범위 승인 때만 진행; 결합 불명 결합 범위 보류.",
+      "effect": "정확 승인 변경값과 공개 영향 관측, 제한 활동명 미실행 사유 구분.",
+      "refs": [
+        "PS-PL03-UPDATE-W01",
+        "PS-PL03-UPDATE-W04",
+        "PS-PL03-UPDATE-EF02",
+        "PS-PL03-CREATE-W01",
+        "PS-PL03-CREATE-W04"
+      ],
+      "errors": [
+        "ER-09",
+        "ER-10",
+        "ER-21",
+        "ER-29"
+      ],
+      "evidence_status": "R05 공개 공식 자료 대조 및 R01 이전 검토; 실제 서버/권한/효과 미검증"
+    }
+  ],
+  "r4_sync": {
+    "id": "R4-20261127",
+    "source": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+    },
+    "clauses": [
+      "POL-R05-01-R4",
+      "POL-R05-02-R4",
+      "POL-R05-03-R4",
+      "POL-R05-04-R4"
+    ],
+    "verification": "R4 동기화 정적 텍스트/참조; 공식 Python/CI 및 실제 실행 미검증"
   }
 }
