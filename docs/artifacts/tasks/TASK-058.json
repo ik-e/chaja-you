@@ -1900,28 +1900,40 @@
     "decision": "V5.1 12/134 후보 유지 권장. 12 조건부, R05 활성 1인 제약 미승인, 물리 입력/이관·시험 계획 준비. DDL/실제 실행/CI not_run; main 병합 없음."
   },
   "db_physical_candidate_ref": {
-    "id": "TASK-058-DB-PHYSICAL-V5.2",
-    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-physical-v5.2.json",
-    "blob": "783b4d936eb4b5231635038172bdc7194d83953f",
-    "ddl_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-physical-v5.2.sql",
-    "ddl_blob": "d1b18570a9ca0e2bd2a9e98066c36810de85ead4",
-    "source_commit": "6d787d624b28f761aebd90236616c330142c20f1",
-    "status": "approved_policy_physical_candidate_static_only_pg_blocked",
+    "id": "TASK-058-DB-PHYSICAL-V5.3",
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-physical-v5.3.json",
+    "blob": "74be76b535badd66714663056c6193e461999c4f",
+    "ddl_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-physical-v5.3.sql",
+    "ddl_blob": "9a779044dc3bb49cd1591f75f8a1786828c7d84d",
+    "guard_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-guards-v5.3.sql",
+    "guard_blob": "a21812ac3d5a0d007307c61d656941b856c530a8",
+    "payload_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-payload-v5.3.schema.json",
+    "payload_blob": "2325d4f63b68d941798ced819333028304326b9f",
+    "smoke_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-smoke-v5.3.sql",
+    "smoke_blob": "0222d888a964d4d2de684985f53259f277e7844e",
+    "status": "design_refined_mock_runtime_and_store_gates_open",
     "counts": {
       "tables": 12,
       "fields": 132,
-      "removed": 2,
-      "retained_conditional": 10,
-      "work_coverage": 36,
-      "prior_payload_groups": 38
+      "works": 36,
+      "prior_trace_mismatch": 59,
+      "after_trace_mismatch": 0,
+      "orphan_fields": [],
+      "payload_containers": 13,
+      "groups": 38,
+      "state_axes": 17,
+      "planned_db_cases": 30,
+      "sql_triggers": 18
     },
     "verification": {
-      "static": "15/15",
-      "ddl_column_roundtrip": "132/132",
-      "postgres": "0/22 not_run",
-      "external": "0 not_run",
-      "projection_ci": "not_run"
+      "ddl_columns": "132/132",
+      "trace_mismatch": 0,
+      "payload_examples": "36/36 subset checker",
+      "postgres": "0/30 not_run",
+      "sql_smoke": "not_run",
+      "projection_ci": "not_run",
+      "external": "not_run"
     },
-    "open_gate": "PG runtime unavailable; guarded store, exact JSON leaf validators, integration and policy/evidence gates remain; no product implementation approval"
+    "open_gate": "PG unavailable; full trusted store/typed semantic checks, broker fencing, retention maintenance/read authorization, native evidence, policy and integration gates open."
   }
 }
