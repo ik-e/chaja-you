@@ -54,12 +54,28 @@ for(const p of Object.keys(out)){if(p!==v.semantic_projection_path)out[p]=out[p]
 out[v.flow_projection_path]=out[v.flow_projection_path].replace("원본·연결 등록물·결과·마지막 관측","원본·연결 등록물·불명 내부 명령·결과·마지막 관측").replace("진행·효과·접수/심사/공개/모집·관측·폐기","최초 선택 전체·처분/미실행 사유·수락 결과·접수/심사/공개/모집·관측·폐기").replace("저장/수락 응답 불명","저장/내부 연결/수락 응답 불명");
 out[v.r03_review_projection_path]=renderR03(v);return out;}
 
+
+function renderOperationalDecision(v,l,a){
+ const out=renderR2(v,l,a),b=v.operational_quality_baseline;
+ if(!b)return out;
+ const esc=x=>String(x??"").replace(/\\|/g,"\\\\|").replace(/\\n/g," ");
+ const note="\n\n**DR-02 결정:** 관리자 전용 제품 기능 미채택. 운영 기준선 관측·미달 정보 전달 채택. [기준선 및 검증 후보](USER-STORY-INTEGRATION-REVIEW-V3.1.md#dr-02-운영-품질-기준선).\n";
+ for(const p of [v.projection_path,v.flow_projection_path,v.mentor_projection_path])out[p]+=note;
+ out[v.projection_path]=out[v.projection_path].replace("## 판단 요청","## 결정 및 판단 요청");
+ out[v.flow_projection_path]=out[v.flow_projection_path].replace("관리자 전용 확인은 DR-02 미결정.","DR-02 관리자 전용 확인 미채택; 운영 기준선 미달 정보 전달은 별도 운영 책임.");
+ out[v.mentor_projection_path]=out[v.mentor_projection_path].replace("[미결정 항목]","[결정 및 미결정 항목]");
+ out[v.trace_projection_path]=out[v.trace_projection_path].replace("## R01 판단 요청","## R01 결정 및 판단 요청").replace("- 판단 요청: "+v.decision_requests.find(d=>d.id==="DR-02").proposal,"- 결정 후속: "+v.decision_requests.find(d=>d.id==="DR-02").proposal);
+ const lines=["","## DR-02 운영 품질 기준선","",b.status,"",b.scope,"","R01 사용자 방향: "+b.user_direction,"","[R02 검토 원문](https://github.com/ik-e/chaja-you/blob/"+b.r02_source.commit+"/"+b.r02_source.path+") · 기획: "+b.planning_ref,"","| 기준 | Pain / 피처 | 관측 정의 | 정보 출처 | 기준 및 전달 |","|---|---|---|---|---|",...b.metrics.map(m=>"| "+m.id+" "+esc(m.metric)+" | "+m.pain+" / "+m.feature_refs.join(", ")+" | "+esc(m.definition)+" | "+esc(m.source)+" | "+esc(m.baseline)+" / "+m.cadence+" |"),"","### 운영 경계","",...b.rules.map(x=>"- "+x),"","### 후속 결정","",...b.pending.map(x=>"- "+x),"","### 수용 사례 (미실행)","","| 조건 | 기대 결과 |","|---|---|",...b.acceptance_cases.map(x=>"| "+esc(x.condition)+" | "+esc(x.expected)+" |"),"",b.verification,""];
+ out[v.trace_projection_path]+=lines.join("\n");
+ return out;
+}
+
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const v=JSON.parse(fs.readFileSync(path.join(root,"docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json"),"utf8"));
 const l=JSON.parse(fs.readFileSync(path.join(root,"docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json"),"utf8"));
 const audit=JSON.parse(fs.readFileSync(path.join(root,"docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json"),"utf8"));
 const checking=process.argv.includes("--check");
 let bad=[];
-for(const [p,s] of Object.entries(renderR2(v,l,audit))){const target=path.join(root,p);if(checking){if(!fs.existsSync(target)||fs.readFileSync(target,"utf8")!==s)bad.push(p);}else{fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,s,"utf8");}}
+for(const [p,s] of Object.entries(renderOperationalDecision(v,l,audit))){const target=path.join(root,p);if(checking){if(!fs.existsSync(target)||fs.readFileSync(target,"utf8")!==s)bad.push(p);}else{fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,s,"utf8");}}
 if(bad.length){console.error("Stale V3.1 projections:",bad.join(", "));process.exit(1);}
 console.log(checking?"V3.1 projections match":"V3.1 projections generated");
