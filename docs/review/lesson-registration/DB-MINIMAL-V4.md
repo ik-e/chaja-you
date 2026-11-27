@@ -77,7 +77,7 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | source_object_links | 정확 원본↔정확 외부 객체의 현재 연결/해제. | 검증된 내부 연결 → 해제/재연결 → 필요 참조 해소 후 폐기 | 원본과 외부 객체의 생명주기는 독립; 동일 공유 객체가 복수 원본과 연관될 수 있으나 실제 필요/허용은 미확인. 1:N 제품 제약을 채택할 경우만 통합 검토. |
 | work_requests | 최초 선택한 플랫폼 묶음, 원본 revision, 정확한 대상별 승인안 digest, 논리 내용/범위 승인 및 수락 시각. | 준비 → 제시 → 수락/동결 → 모든 수락 대상 종료 후 close | 사용자가 한 번에 선택·승인하는 묶음과 실제 대상별 실행 상태는 별개. 원자 수락 및 보류/제외 표시. |
 | work_targets | 업무 유형·대상·입력안·오류·준비 상태·수락 이후 동결된 필요한 계획·개별 종료. | 선택 → 준비/보류/제외 → 수락/실행 → 종료; 새 의도는 새 target | 플랫폼별 필수·가격·효과·실패 독립. 하나의 요청 JSON으로 합치면 동시 실행·잠금 및 대상별 FK/판정이 어려워진다. |
-| commands | 저장·연결·해제·수락·권리 요청 등 동일 명령 key/digest/결과. | pending → committed/rejected/no_commit_proven; 확인된 동일 요청 재조회; 보존 기한 이후 폐기 | 등록 업무가 없는 원본 저장과 연결도 응답 유실 복구 필요. history append-only와 현재 key의 원자적 일회 처리 책임이 다름. |
+| commands | 저장·연결·해제·수락·권리 요청 등 동일 명령 key/digest/결과. SAVE_SOURCE의 pending 최소 문맥과 확인된 결과를 구분; 서버 미도달은 호출자 동일 키 문맥으로 확인. SAVE_SOURCE의 pending 최소 문맥과 확인된 결과를 구분; 서버 미도달은 호출자 동일 키 문맥으로 확인. | pending → committed/rejected/no_commit_proven; 확인된 동일 요청 재조회; 보존 기한 이후 폐기 | 등록 업무가 없는 원본 저장과 연결도 응답 유실 복구 필요. history append-only와 현재 key의 원자적 일회 처리 책임이 다름. |
 | access_contexts | 정확 owner·플랫폼·기대/확인 계정·호출 문맥 generation·목적·권한·만료·폐기 의무. 비밀 없음. | 발급 → 직접 인증/검증 → 차단 → 폐기 확인/불명; 새 인증 새 ID | 한 업무에서 여러 인증 가능, 한 인증 문맥에서 여러 허용 호출 가능. 화면 이탈과 폐기 확인 독립. |
 | attempts | 하나의 읽기 또는 쓰기 호출의 목적·정확 대상·순서·상태/시각. | 예약/요청 → 시작 → 응답/종료/불가; 늦은 관측은 history | 전송 성공과 외부 효과 성공은 다르다. 조회는 효과 생성 없이 존재하고 한 쓰기 호출이 여러 효과를 가질 수 있다. |
 | effects | 개별 변경의 승인 의도·정확 scope·복수 경합 claim·미시도/예약/진행/확인/불명/분쟁. | 예정 → 예약/시작 → 독립 확인 또는 미발생/불명; 차단 상태 유지/증거 기반 해소 | 한 호출에서 상품 저장·이미지·심사 접수 등 결과가 다를 수 있다. 확인된 효과 재실행 및 unknown 재시도 차단. |
@@ -110,7 +110,7 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | created_at | timestamptz | 생성 시점 |
 | updated_at | timestamptz | 마지막 명시 저장 시점(미저장 시 생성 시점) |
 
-무결성: 저장 시 owner·base revision·draft generation 검사/CAS 후 최신 content 교체 및 revision 증가, draft 정리와 command 영수증 원자 기록; 오래된 추출 응답은 무시; 신규 미저장 shell은 저장 원본 목록에 미표시; 한 원본당 서버 draft 하나(충돌 시 타 편집 덮어쓰기 금지)
+무결성: 저장 시 owner·base revision·draft generation 검사/CAS 후 최신 content 교체 및 revision 증가, draft 정리와 command 영수증 원자 기록; 오래된 추출 응답은 무시; 신규 미저장 shell은 저장 원본 목록에 미표시; 한 원본당 서버 draft 하나(충돌 시 타 편집 덮어쓰기 금지) 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다. 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다.
 
 ### assets
 
@@ -187,7 +187,7 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | created_at | timestamptz | 요청 생성 |
 | accepted_at | timestamptz? | 쓰기 업무 수락 시점 |
 
-무결성: 전체 선택 대상의 처분과 plan은 work_targets가 정본; approval에 동일 입력값 반복 저장 안 함; 양 승인+정확한 target 집합/plan digest+command receipt를 원자 수락; 0 ready면 쓰기 수락 없음; 동결 후 선택/승인 변경 금지; 미수락 원본 변경은 revision 갱신 후 준비 재검증; 읽기/내부 업무는 쓰기 승인 요구하지 않음
+무결성: 전체 선택 대상의 처분과 plan은 work_targets가 정본; approval에 동일 입력값 반복 저장 안 함; 양 승인+정확한 target 집합/plan digest+command receipt를 원자 수락; 0 ready면 쓰기 수락 없음; 동결 후 선택/승인 변경 금지; 미수락 원본 변경은 revision 갱신 후 준비 재검증; 읽기/내부 업무는 쓰기 승인 요구하지 않음 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다. 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다.
 
 ### work_targets
 
@@ -210,7 +210,7 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | lifecycle | text | not_accepted/accepted/running/fencing/ended |
 | ended_at | timestamptz? | 실행 종료(결과 성공과 별개) |
 
-무결성: UNIQUE(request_id,selection_key); source revision/계정/객체/owner/env 정합; 미확인 후보는 plan 안에만, 정확 binding 전 쓰기 금지; 승인 전 stale 조건 검사, 승인 후 필요한 입력/자료만 freeze; 새 변경/재심사/갱신은 새 대상/새 승인; 결과 객체는 effects.object_id와 history에서 유도
+무결성: UNIQUE(request_id,selection_key); source revision/계정/객체/owner/env 정합; 미확인 후보는 plan 안에만, 정확 binding 전 쓰기 금지; 승인 전 stale 조건 검사, 승인 후 필요한 입력/자료만 freeze; 새 변경/재심사/갱신은 새 대상/새 승인; 결과 객체는 effects.object_id와 history에서 유도 미수락 보류·제외 대상은 실패/잔여 효과가 아니다. R에서 이유와 조건부 후속 안내 제공; 사용자가 새 업무를 명시 선택하면 H에서 저장 원본으로 해당 신규 대상만 UJ-02, 정확 기존 객체 수정 UJ-03 또는 허용 갱신 UJ-04를 준비하고 현재 지원·권한·중복/경합·revision 검증 및 새 승인. 이전 묶음·처분·수락/성공/불명 기록 불변; 실제 지원/허용 불명은 계속 보류, 자동 재등록/실행 없음. 미수락 보류·제외 대상은 실패/잔여 효과가 아니다. R에서 이유와 조건부 후속 안내 제공; 사용자가 새 업무를 명시 선택하면 H에서 저장 원본으로 해당 신규 대상만 UJ-02, 정확 기존 객체 수정 UJ-03 또는 허용 갱신 UJ-04를 준비하고 현재 지원·권한·중복/경합·revision 검증 및 새 승인. 이전 묶음·처분·수락/성공/불명 기록 불변; 실제 지원/허용 불명은 계속 보류, 자동 재등록/실행 없음.
 
 ### commands
 
@@ -223,11 +223,11 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | request_key | text | 호출자가 재사용할 멱등 키 |
 | request_digest | text | 정규화된 요청 내용의 digest |
 | state | text | pending/committed/rejected/no_commit_proven |
-| receipt | jsonb? | 정확 결과 ID/revision/거절 사유; 과거 원본 내용 보존하지 않음 |
+| receipt | jsonb? | 종류별 typed 최소 문맥/결과: SAVE_SOURCE pending의 정확 source_id·준비 ID(해당 시)·base revision·영향 판정용 최소 변경 범위/불명, 확정 결과 ID/revision/거절 사유. 과거 원본 내용 보존하지 않음 |
 | created_at | timestamptz | 접수 시점 |
 | resolved_at | timestamptz? | 정본 결과 기록 시점 |
 
-무결성: UNIQUE(principal_key,kind,request_key); 동일 digest만 기존 결과 확인, 다르면 거절; DB 행 잠금과 최종 상태 CAS로 업무와 영수증 동일 트랜잭션; no_commit_proven은 이전 지연 커밋을 봉쇄한 경우만; 서버 미기록이면 호출자의 owner-scoped 기존 키 보존 필요; pending 상태에서 무조건 재실행 금지
+무결성: UNIQUE(principal_key,kind,request_key); 동일 digest만 기존 결과 확인, 다르면 거절; DB 행 잠금과 최종 상태 CAS로 업무와 영수증 동일 트랜잭션; no_commit_proven은 이전 지연 커밋을 봉쇄한 경우만; 서버 미기록이면 호출자의 owner-scoped 기존 키 보존 필요; pending 상태에서 무조건 재실행 금지 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다. SAVE_SOURCE pending은 기존 commands.receipt의 typed 문맥에 정확 owner/source/준비 ID·base revision 및 영향 판정 최소 범위를 기록하고 FK/owner 및 JSON 역참조 검증; 영향 정보 불명은 같은 원본의 관련 범위 보수적 보류. 새 필드/테이블 없음. 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다. SAVE_SOURCE pending은 기존 commands.receipt의 typed 문맥에 정확 owner/source/준비 ID·base revision 및 영향 판정 최소 범위를 기록하고 FK/owner 및 JSON 역참조 검증; 영향 정보 불명은 같은 원본의 관련 범위 보수적 보류. 새 필드/테이블 없음.
 
 ### access_contexts
 
@@ -383,7 +383,7 @@ platform_accounts 식별/관리 관계만, access_contexts 일시적 업무 권�
 
 | 쟁점 | 발견 | 권장 조치 |
 | --- | --- | --- |
-| 기존 V1.0 AT-01 | '새 불변 revision'이 AX03/R4의 최신본 원칙과 함께 읽힐 때 과거 전문 보존으로 오해 가능. | 원자 CAS로 최신 content 교체 및 revision 번호 증가, 명령 영수증 기록으로 명시. 스토리 브랜치는 이번 DB 검토에서 수정하지 않음. |
+| 기존 V1.0 AT-01 | '새 불변 revision'이 AX03/R4의 최신본 원칙과 함께 읽힐 때 과거 전문 보존으로 오해 가능. | AT-01의 문구를 최신 content 원자 CAS 교체·revision 증가·명령 영수증으로 수정. 실제 DB 구현/시험은 후속. |
 | source_object_links | 한 정확 외부 객체와 복수 원본의 제품상 관계 허용/필요성 아직 미확인. | 현재 안전한 독립 링크 유지; 팀 검토에서 단일 원본 연결로 충분하다는 근거 확보 시 12개 후보 재검토. |
 | history typed relationship / proofs | 탈잉 동일 클래스 증거, 복수 객체 관계, JSON 배열 FK/역참조/삭제의 실효성 미검증. | typed ref 및 exact relation scope, 현재 근거 조회 인덱스와 제약 검증. 독립 관계 저장/대규모 조회 요구가 입증되면 별도 relation table 검토. |
 | access_contexts | 장기 인증 저장이 필요한지 및 공식 API/위임 가능 여부 미확인. | 기본 비밀 미보존. 필요성·권한·동의·보안/폐기 승인 시 vault/opaque credential_ref 조건부 설계, 기본 테이블 변경 없음. |
@@ -427,14 +427,14 @@ platform_accounts 식별/관리 관계만, access_contexts 일시적 업무 권�
 | ID | 상황 | 기대 결과 |
 | --- | --- | --- |
 | T01 | 사용자 A 두 레슨과 사용자 B 한 레슨 | 두 A source에 독립 최신 content/revision; B 조회 금지 |
-| T02 | 원본 1개로 크몽·탈잉 2개 요청, 이후 원본 수정 | 두 대상의 고정 승인 입력 유지. 미수락 영향만 stale; 과거 전문 없음 |
-| T03 | 원본 저장 응답 유실, 동일 key 재접속 | committed receipt 조회, 다른 digest 거절; 새 source 생성 없음 |
+| T02 | 동일 원본의 미수락 준비 A/B: A 저장 pending·응답 유실 중 B 수락 시도, 다른 원본 준비 C; 저장/수락 두 커밋 순서 | 동일 owner/source 원자 경계에서 영향받는 B 수락 차단/재검증, 독립 C 유지; 수락 선행 snapshot 불변, 저장 선행 미수락 영향 stale; 과거 전문 없음 |
+| T03 | 원본 저장 응답 유실 → H 동일 준비 일반 열기, 같은 key 확인; 서버 미도달/지연 응답·커밋/거절/미커밋 | 기존 동일 키 우선 자동 확인; 같은 준비 복귀, 다른 digest 거절, 새 저장/승인 0 중 불명. 권위 거절/미커밋+지연 봉쇄 후 새 의도; 새 source 생성 없음 |
 | T04 | 기존 글 직접 등록 후 내부 연결·해제 | 정확 기존 object 유지; link retire; 외부 effect 0 |
 | T05 | 같은 공유 프로필이 두 레슨과 연관 | 정확 동일 object의 복수 관리 연결 또는 부모 관계; 독립 연결 해제; 실제 관계 미확인시 hold |
-| T06 | 선택 5건 중 수락 3, 보류 1, 제외 1 | 5개 처분 보존, 수락 3만 실행; A 종료/B 불명/C 계속; 모든 수락 종료 후 close |
+| T06 | 선택 5건 중 수락 3, 보류 1, 제외 1 | 5개 처분 보존, 수락 3만 실행; A 종료/B 불명/C 계속; 모든 수락 종료 후 close 이후 조건 해소된 미수락 신규 대상만 새 H→W 준비·새 승인, 이전 성공/불명 및 5개 처분 불변. 조건 미충족 보류. 이후 조건 해소된 미수락 신규 대상만 새 H→W 준비·새 승인, 이전 성공/불명 및 5개 처분 불변. 조건 미충족 보류. |
 | T07 | 상품 저장 확인·첨부 불명·심사 미시도 | 한 attempt에 여러 effects; 확인/불명 반복 금지, 독립 남은 효과만 새 승인 후보 |
 | T08 | 크몽 동일 실제 계정·서로 다른 차자유 owner의 동시 요청 2개: (a) 등록 99/100, (b) 일일 한도 1개 남음(각각 독립 시험) | owner별 내부 ID와 무관한 동일 정규 계정 claim 원자 경쟁: 각각 최대 1개 자격, 나머지 hold/fence; 반영 증거 전 보수적 예약, 외부 경합/중복 계상 불명은 둘 다 hold |
-| T09 | 탈잉 미선택, 다른 플랫폼 동일 클래스 가격 변경 | 정확 관계+현재 계약/가격 증거 확인; 준비·실행 모두 불명/충돌 영향 변경 hold, 독립 저장·효과 및 정확 승인 확인된 소개 문구/다른 대상 유지; 결합 불명 범위 hold. 원본 같음만으로 관계 단정 안 함 |
+| T09 | 탈잉 미선택, 다른 플랫폼 동일 클래스 가격 변경 | 정확 관계+현재 계약/가격 증거 확인; 준비·실행 모두 불명/충돌 영향 변경 hold, 독립 저장·효과 및 정확 승인 확인된 소개 문구/다른 대상 유지; 결합 불명 범위 hold. 원본 같음만으로 관계 단정 안 함 W 영향 변경 ready/승인 가능 표시 0; 제한 사유, 실행 직전 재검증. W 영향 변경 ready/승인 가능 표시 0; 제한 사유, 실행 직전 재검증. |
 | T10 | 숨고 서비스 CREATE 중 공통 활동명 제한 | 같은 계정 프로필 root 변경 effect 분리; 결합 불명 차단, 독립 서비스 추가만 허용 후보 |
 | T11 | 최신 상태 조회 실패 또는 늦은 readback | attempt unavailable, 마지막 적격 history 보존; native status/목표/업무 판정 별개, ended 재개 안 함 |
 | T12 | 접근 만료·재인증·이전 폐기 불명 | 새 generation, 과거 access 차단; cleanup unknown 유지, 운영 통지; 기존 효과 변경 없음 |
@@ -444,7 +444,7 @@ platform_accounts 식별/관리 관계만, access_contexts 일시적 업무 권�
 | T16 | 운영 기준 미달·폐기 불명 | 기존 최소 관측/상태로 판정/전달; 관리자 제품·테이블 없음. 계측 미확정은 판정 불가 |
 
 - PostgreSQL 타입/PK/FK·owner/env 일치와 활성 링크/명령 키/접근 문맥 세대 unique, typed payload schema와 역참조 검사 및 삭제 규칙.
-- 실제 정규 계정 잠금·scope/claims의 경쟁 제어, 승인/영수증/예약의 원자 트랜잭션, late readback 및 crash 복구 테스트.
+- 실제 정규 계정 잠금·scope/claims의 경쟁 제어, 승인/영수증/예약의 원자 트랜잭션, late readback 및 crash 복구 테스트. 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다. SAVE_SOURCE pending은 기존 commands.receipt의 typed 문맥에 정확 owner/source/준비 ID·base revision 및 영향 판정 최소 범위를 기록하고 FK/owner 및 JSON 역참조 검증; 영향 정보 불명은 같은 원본의 관련 범위 보수적 보류. 새 필드/테이블 없음. 저장 및 수락은 동일 owner/source의 경쟁 제어 경계에서 현재 revision·관련 저장 명령 상태·양 승인/plan digest·영향 관계를 원자 검증한다. 서버가 관측한 미해결 관련 저장 명령은 영향받는 수락을 보류한다. 서버 미도달은 조회 없음만으로 미커밋 확정하지 않고 기존 키의 지연 커밋 봉쇄 후에만 새 저장 허용; 서버에 알려지지 않은 요청을 탐지한다고 가정하지 않는다. 수락이 먼저 확정되면 그 snapshot/효과 보존; 저장이 먼저 확정되면 영향 미수락 준비 stale 및 재검증. 영향 독립성 불명은 같은 원본의 해당 범위 보류, 다른 원본은 차단하지 않는다. SAVE_SOURCE pending은 기존 commands.receipt의 typed 문맥에 정확 owner/source/준비 ID·base revision 및 영향 판정 최소 범위를 기록하고 FK/owner 및 JSON 역참조 검증; 영향 정보 불명은 같은 원본의 관련 범위 보수적 보류. 새 필드/테이블 없음.
 - R4의 16 수용 사례를 DB seed/transaction/concurrency/권한 시험으로 구현. 그 전에 플랫폼 실제 API/권한/효과를 단정하지 않음.
 - 사용자 스토리 최종 검토 및 DB 후보 승인 후 physical DDL/API·이관 계획 확정. 기존 SQLite mock과 11/26 이전 실행 보류 유지.
 
