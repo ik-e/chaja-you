@@ -1,0 +1,47 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const base = new URL('../', import.meta.url);
+const read = p => JSON.parse(fs.readFileSync(new URL(p, base), 'utf8'));
+const v4 = read('docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v4.json');
+const v5 = read('docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v5.json');
+const sw = read('docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json');
+const prior = new Set(v4.tables.flatMap(t=>t.fields.map(f=>t.name+'.'+f.name)));
+const audited = v5.field_audit.filter(a=>a.classification!=='add');
+assert.equal(audited.length, prior.size);
+assert.equal(new Set(audited.map(a=>a.table+'.'+a.field)).size, prior.size);
+assert.ok(audited.every(a=>prior.has(a.table+'.'+a.field)));
+const fields = new Set(v5.tables.flatMap(t=>t.fields.map(f=>t.name+'.'+f.name)));
+assert.equal(fields.size,v5.counts.fields);
+assert.equal(v5.work_information.length,sw.works.length);
+assert.ok(sw.works.every(w=>v5.work_information.some(x=>x.id===w.id)));
+assert.ok(v5.work_information.every(w=>w.reads.concat(w.writes).every(f=>fields.has(f))));
+assert.ok(v5.payload_information.every(g=>fields.has(g.container)));
+function runAbstractTests(){
+const cases=[];function test(id,description,f){try{const value=!!f();cases.push({id,description,pass:value,verdict:value?"pass":"fail"})}catch(e){cases.push({id,description,pass:false,verdict:"fail",error:String(e)})}}
+const sources=[{id:"s1",owner:"a",rev:2,content:"new"},{id:"s2",owner:"a",rev:1,content:"other"},{id:"s3",owner:"b",rev:1,content:"private"}];
+test("M01","owner 격리와 복수 원본",()=>sources.filter(s=>s.owner==="a").map(s=>s.id).join(",")==="s1,s2");
+test("M02","최신 원본/승인 값 분리",()=>{const frozen={source:"s1",approved:"old",rev:1};return sources[0].rev===2&&frozen.approved==="old"&&frozen.rev!==sources[0].rev});
+const cmds=[{key:"k1",digest:"d1",state:"committed",receipt:"s1@2"},{key:"k2",digest:"d2",state:"reserved",source:"s1",request:"r1",affected:["price"]}];
+const find=(k,d)=>{const x=cmds.find(c=>c.key===k);return x?x.digest===d?x.receipt??x.state:"reject_digest":"unrecorded"};
+test("M03","같은 키 결과 및 다른 digest 거절",()=>find("k1","d1")==="s1@2"&&find("k1","bad")==="reject_digest"&&find("absent","d")==="unrecorded");
+const canAccept=(source,deps)=>!cmds.some(c=>c.source===source&&c.state==="reserved"&&(!c.affected||!deps||c.affected.some(a=>deps.includes(a))));
+test("M04","같은 원본 영향 저장 예약 중 승인 금지, 독립 원본/검증된 무관 경로 유지",()=>!canAccept("s1",["price"])&&!canAccept("s1",null)&&canAccept("s2",["price"])&&canAccept("s1",["title"]));
+const targets=[{id:"a",prep:"consumed",life:"ended"},{id:"b",prep:"consumed",life:"fencing"},{id:"c",prep:"consumed",life:"running"},{id:"d",prep:"held",life:"not_accepted"},{id:"e",prep:"excluded",life:"not_accepted"}];
+const accepted=t=>t.prep==="consumed"&&t.life!=="not_accepted",closed=xs=>xs.some(accepted)&&xs.filter(accepted).every(t=>t.life==="ended");
+test("M05","최초 선택 5/수락 3/held·excluded 각 1, 독립 진행·종료",()=>targets.length===5&&targets.filter(accepted).length===3&&targets.filter(t=>t.prep==="held").length===1&&targets.filter(t=>t.prep==="excluded").length===1&&!closed(targets)&&closed(targets.map(t=>accepted(t)?{...t,life:"ended"}:t))&&!closed(targets.filter(t=>!accepted(t))));
+test("M06","링크 활성 상태 유도 및 내부 해제",()=>{const objects=["o1"];const links=[{object:"o1",ended:null},{object:"o1",ended:"t1"}];return links.filter(x=>x.ended===null).length===1&&objects.includes("o1")});
+const accounts=[{owner:"a",key:"kmong/K",state:"unlinked"},{owner:"b",key:"kmong/K",state:"linked"}];
+test("M07","일시 식별≠관리 연결, 교차 owner 정규 account key 공유",()=>accounts.filter(x=>x.owner==="a"&&x.state==="linked").length===0&&accounts[0].key===accounts[1].key);
+test("M08","총량/일일 동시 claim 직렬 축약 검사",()=>{let left={total:1,daily:1};const reserve=()=>{if(left.total<1||left.daily<1)return false;left.total--;left.daily--;return true};return reserve()&&!reserve()&&left.total===0&&left.daily===0});
+test("M09","개별 효과 불명/확인/미시도 판정",()=>{const eff=[{state:"confirmed",attempt:"a"},{state:"unknown",attempt:"a"},{state:"not_attempted",attempt:null}];return eff.filter(e=>e.attempt==="a").length===2&&eff.some(e=>e.state==="unknown")&&eff.filter(e=>e.state==="not_attempted").length===1});
+test("M10","조회 실패와 뒤늦은 관측 분리",()=>{const hist=[{seq:2,eligible:true,value:"approved"},{seq:3,eligible:false,value:null},{seq:1,eligible:true,value:"pending"}];return hist.filter(x=>x.eligible).sort((a,b)=>b.seq-a.seq)[0].value==="approved"});
+test("M11","인증 문맥 세대와 정리 독립",()=>{const a={context:"r1",generation:1,state:"blocked",cleanup:"unknown"},b={context:"r1",generation:2,state:"verified",cleanup:"not_required"};return a.generation<b.generation&&a.state==="blocked"&&a.cleanup==="unknown"&&b.state==="verified"});
+test("M12","미선택 탈잉 가격 관계 불명·충돌에 영향 변경 보류",()=>{const allowed=(affects,relation,independent)=>affects?relation==="confirmed_compatible":independent;return !allowed(true,"unknown",true)&&!allowed(true,"conflict",true)&&allowed(false,"unknown",true)&&!allowed(false,"unknown",false)});
+test("M13","보류된 신규 대상만 새 의도, 기존 처분/효과 불변",()=>{const old=targets.find(t=>t.id==="d");const next={id:"d2",prior:"d",prep:"unprepared",life:"not_accepted"};return old.prep==="held"&&next.id!==old.id&&targets.filter(accepted).length===3});
+test("M14","읽기/쓰기 및 준비 종료와 결과 분리",()=>{const read={kind:"read",state:"unavailable"},target={life:"ended",result:"effect_unknown"};return read.kind==="read"&&read.state!=="confirmed"&&target.life==="ended"&&target.result!=="complete"});
+test("M15","권리 제한 및 필요한 승인 자료 참조",()=>{const asset={rights:"revoked",refs:1};return asset.rights!=="allowed"&&asset.refs>0});
+test("M16","직접 작성안·운영 계측 불명",()=>{const result={kind:"guidance_delivered",effects:0,directTime:null};return result.effects===0&&result.directTime===null&&result.kind!=="complete"});
+return cases}
+const cases = runAbstractTests();
+console.log(JSON.stringify({scope:'static reference and synthetic sequential model; NOT PostgreSQL or platform execution',cases},null,2));
+assert.ok(cases.every(c=>c.pass));

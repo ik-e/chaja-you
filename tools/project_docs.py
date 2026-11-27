@@ -1719,6 +1719,9 @@ def build():
         if record["id"] == "R02-USER-STORY-20261127-SYNC":
             output = "docs/review/lesson-registration/R02-USER-STORIES-20261127.md"
             outputs[output] = render_document(record, source, output)
+        if record["id"] == "TASK-058-MINIMAL-DB-V5":
+            output = "docs/review/lesson-registration/DB-MINIMAL-V5.md"
+            outputs[output] = render_document(record, source, output)
         if record["id"] == "TASK-058-MINIMAL-DB-V4":
             output = "docs/review/lesson-registration/DB-MINIMAL-V4.md"
             outputs[output] = render_document(record, source, output)

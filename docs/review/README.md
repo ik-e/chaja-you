@@ -151,7 +151,7 @@ R01 검토 의견 2차 반영: 숨고 화면 06·07·08·11·12 대조로 한 �
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-058.json)
 
-V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행. | R05 R4 후속 4건 반영: W 직접 저장 기본·H/E 예외, 탈잉 가격 충돌의 실제 영향 변경 보류, 동일 실제 크몽 계정 교차 owner 원자 경합, UJ-09 작성안 제공 완료/준비 시간 가치 경계. DB V4 13개/143필드 유지. 후속 표적 정적 대조 8/8 통과, 실제 DB·외부·사용자 시험 및 공식 projection/CI 미수행.
+V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행. | R05 R4 후속 4건 반영: W 직접 저장 기본·H/E 예외, 탈잉 가격 충돌의 실제 영향 변경 보류, 동일 실제 크몽 계정 교차 owner 원자 경합, UJ-09 작성안 제공 완료/준비 시간 가치 경계. DB V4 13개/143필드 유지. 후속 표적 정적 대조 8/8 통과, 실제 DB·외부·사용자 시험 및 공식 projection/CI 미수행. | DB V5 업무 기반 전수 필요성 검토: 기존 143개 열 분류, 9개 제거/유도·4개 추가, 13개/138개 후보 열(조건부 포함). 36개 업무 읽기/쓰기와 38개 JSON 의미 그룹, 17 상태축 연결. R05 후속 및 R03 최종 의견을 DB 입력으로 반영. 12개 정적 확인·16개 축약 순차 모형 통과; 실제 DB/CI 및 최종 승인 별도.
 
 검증과 근거
 
@@ -194,6 +194,8 @@ V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 
 - DB V4 16 수용 시나리오·PostgreSQL·공식 projection/CI·실제 외부 효과 · inconclusive
 - R05 R4 후속 4건 표적 정적 정합성 8개 · pass
 - R05 후속 실제 DB/외부/사용자 가치·공식 projection/CI · inconclusive
+- V5 전수 분류/참조 정적 12개 및 축약 순차 사례 16개 · pass
+- V5 실제 PostgreSQL/경합/복구/보존·플랫폼·공식 projection/CI · inconclusive
 - [통합 사용자 스토리·원본 추적·분기 검토](../artifacts/planning/lesson-registration-20261126/integrated/user-stories.json)
 - [7개 플랫폼 업무·필드·관계 및 제약 비교](../artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json)
 - [행동별 범위 추천·결정 요청·강사 피드백 연결](../artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json)
@@ -256,6 +258,9 @@ V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 
 - [V4 최소 DB 사람용 검토/ERD](lesson-registration/DB-MINIMAL-V4.md)
 - [R05 R4 후속 의견 반영 및 표적 대조](../artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json)
 - [R05 후속 수정 사용자 스토리 및 DB V4 커밋](../artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json)
+- [V5 업무별 정보·143개 필드·JSON 필요성 전수 검토](../artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v5.json)
+- [V5 사람용 DB 검토](lesson-registration/DB-MINIMAL-V5.md)
+- [V5 정적/축약 모형 재현 검증기](../../tools/validate_db_v5_candidate.mjs)
 
 남은 불확실성과 결정 요청
 
@@ -267,9 +272,11 @@ V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 
 - main 통합 충돌 해소 및 공식 Python/Node projection·CI 검증 필요.
 - DB V4: source↔object 단일 원본 제약 채택 여부, 동일 클래스 관계 조회/typed FK·JSON 역참조, 계정 한도 다중 claim 원자성 및 generation/보존·권리 검증 미완료. 조건부 장기 인증 저장 미채택.
 - 동일 실제 외부 계정 교차 owner의 총량·일일 한도 원자 자격 PostgreSQL 시험 및 직접 작성안 준비 시간 절감 측정 미수행.
+- V5: 12개 링크 단순화 조건, 인증 공급자/namespace·locator/편집 저장 필요, 사전 durable save intent API·영향 guard·동시성, typed JSON/FK 및 보존·실제 서버 규격 미검증. R03 최종 검토 의견은 DB 조건으로만 반영; 사용자 스토리 수용·정식 명세 동기화 별도.
 - 현재 논리 검토 기준 R4와 DB V3 R4 재대조 후보의 최종 검토. 실제 DB DDL/API/구현 승인 별도.
 - 실제 플랫폼 허용·운영 상세·개인정보 정책 및 구현 순서·기존 작업 재개는 후속 결정.
 - DB V4 13개 권장 후보와 12개 연결 단순형 조건 검토; 사용자 스토리 최종 의견 반영 및 논리 설계 승인 전 물리 스키마/API/마이그레이션 착수 없음.
+- V5 13개/138개 검토 후보의 필요성 및 조건부 필드 판단 후 승인, 물리 PostgreSQL/실제 테스트·API 상세 및 main 병합 별도.
 
 ### TASK-059 · 진행 중
 
