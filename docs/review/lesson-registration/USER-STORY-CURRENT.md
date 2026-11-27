@@ -6,9 +6,9 @@
 R01 정리 지시에 따른 현재 논리 검토 후보. 12개 여정 · 42 노드 · 113 연결 · 7 플랫폼 · 44 업무 · 32 오류. 실제 외부 접근/쓰기 mock-only. 최종 물리 DB/API/구현 승인 아님.
 
 ## 현재 읽는 순서
-- [사용자 스토리 V3.1-R4](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-V3.1.md)
-- [화면 중심 흐름](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md)
-- [R4 보완 및 수용 사례](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md)
+- [사용자 스토리 V3.1-R4](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-V3.1.md)
+- [화면 중심 흐름](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md)
+- [R4 보완 및 수용 사례](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md)
 - [R3 팀 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md) · [R2 R03 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md)
 
 R1~R3와 V1.3/V2.x/V3.0은 판단·검증 이력. R4가 현행 논리 검토 기준이다. 7개 플랫폼 구현 목표와 44개 실제 지원/hold 경계, mock-only 유지.
@@ -55,3 +55,17 @@ R1~R3와 V1.3/V2.x/V3.0은 판단·검증 이력. R4가 현행 논리 검토 기
 - PASS — r4_db_field_refs
 
 정본 JSON을 읽어 14개 구조/참조 검사와 DB 실제 필드명 확인 1개를 수행. 기존 R4 18개 정적 검사는 이력으로 유지하며 재실행한 것으로 합산하지 않는다. 공식 Python/Node projection·CI, 실제 DB/플랫폼 및 사용자 가치 시험은 미수행. R04 별도 V3.1 검토 미확인. 최종 구현·실서비스 승인/일정 및 운영 상세는 후속.
+
+## R05 후속 의견 반영
+R05 후속 4건은 R01의 반영 지시에 따라 수정했다. V3.1-R4의 여정/노드/연결/서비스 범위와 DB V4의 기본 테이블·필드 수는 유지한다.
+
+| 항목 | 처리 |
+| --- | --- |
+| CH-04 · UJ-03/07 | W 인라인 명시 저장 기본, H/E 전체 편집 명시 선택만. 동일 준비·선택 및 영향 재검증. |
+| POL-R05-03 · SC-R4-06 | 준비/실행 실제 영향 변경 보류, 독립 저장/효과·정확 승인 확인된 무관 변경만 계속. 결합 불명 보류. |
+| POL-R05-01 · SC-R4-07 · T08 | 동일 정규 외부 계정의 서로 다른 owner가 잠금/claim 공유. 총량 99/100 및 일일 한도 각각 최대 1건 자격; 외부 경합 불명 보류. |
+| UJ-09 · D · SC-26 | 허용 작성안 제공까지 완료, 준비 시간 절감만 가치 검증 대상. 직접 결과 기록 미채택; UJ-06 별도 조건부. |
+
+[수정 사용자 스토리](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-V3.1.md) · [DB V4 검토 후보](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/DB-MINIMAL-V4.md).
+
+후속 표적 정적 대조 8/8 통과(기존 검사와 별도); 실제 PostgreSQL 동시성·플랫폼 효과·사용자 가치·공식 projection/CI 미검증. 최종 구현 승인 또는 main 병합 아님.

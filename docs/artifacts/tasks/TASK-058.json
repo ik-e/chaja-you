@@ -238,7 +238,7 @@
     }
   ],
   "result": {
-    "summary": "V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행.",
+    "summary": "V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행. | R05 R4 후속 4건 반영: W 직접 저장 기본·H/E 예외, 탈잉 가격 충돌의 실제 영향 변경 보류, 동일 실제 크몽 계정 교차 owner 원자 경합, UJ-09 작성안 제공 완료/준비 시간 가치 경계. DB V4 13개/143필드 유지. 후속 표적 정적 대조 8/8 통과, 실제 DB·외부·사용자 시험 및 공식 projection/CI 미수행.",
     "claims": [
       {
         "id": "C058-01",
@@ -509,6 +509,15 @@
         "evidence_ids": [
           "E058-59",
           "E058-60"
+        ]
+      },
+      {
+        "id": "C058-29",
+        "text": "R05 R4 후속 4건 반영: W 직접 저장 기본·H/E 예외, 탈잉 가격 충돌의 실제 영향 변경 보류, 동일 실제 크몽 계정 교차 owner 원자 경합, UJ-09 작성안 제공 완료/준비 시간 가치 경계. DB V4 13개/143필드 유지. 후속 표적 정적 대조 8/8 통과, 실제 DB·외부·사용자 시험 및 공식 projection/CI 미수행.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-61",
+          "E058-62"
         ]
       }
     ],
@@ -834,6 +843,17 @@
         "id": "E058-60",
         "label": "V4 최소 DB 사람용 검토/ERD",
         "path": "docs/review/lesson-registration/DB-MINIMAL-V4.md"
+      },
+      {
+        "id": "E058-61",
+        "label": "R05 R4 후속 의견 반영 및 표적 대조",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+      },
+      {
+        "id": "E058-62",
+        "label": "R05 후속 수정 사용자 스토리 및 DB V4 커밋",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+        "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8"
       }
     ],
     "verification": [
@@ -1134,6 +1154,21 @@
         "evidence_ids": [
           "E058-59"
         ]
+      },
+      {
+        "criterion": "R05 R4 후속 4건 표적 정적 정합성 8개",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-61",
+          "E058-62"
+        ]
+      },
+      {
+        "criterion": "R05 후속 실제 DB/외부/사용자 가치·공식 projection/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-61"
+        ]
       }
     ],
     "uncertainties": [
@@ -1143,7 +1178,8 @@
       "최소 DB typed schema·제약·원자성·참조·권리/보존·generation·실제 PostgreSQL 미검증.",
       "운영 기준치/계측/전달·인증 공급자·권리/보존·구현 순서 미확정.",
       "main 통합 충돌 해소 및 공식 Python/Node projection·CI 검증 필요.",
-      "DB V4: source↔object 단일 원본 제약 채택 여부, 동일 클래스 관계 조회/typed FK·JSON 역참조, 계정 한도 다중 claim 원자성 및 generation/보존·권리 검증 미완료. 조건부 장기 인증 저장 미채택."
+      "DB V4: source↔object 단일 원본 제약 채택 여부, 동일 클래스 관계 조회/typed FK·JSON 역참조, 계정 한도 다중 claim 원자성 및 generation/보존·권리 검증 미완료. 조건부 장기 인증 저장 미채택.",
+      "동일 실제 외부 계정 교차 owner의 총량·일일 한도 원자 자격 PostgreSQL 시험 및 직접 작성안 준비 시간 절감 측정 미수행."
     ],
     "decision_requests": [
       "현재 논리 검토 기준 R4와 DB V3 R4 재대조 후보의 최종 검토. 실제 DB DDL/API/구현 승인 별도.",
@@ -1315,8 +1351,8 @@
     "id": "USER-STORY-20261127-R01-V31",
     "version": "3.1",
     "semantic_revision": "V3.1-R4",
-    "commit": "c606f9b703b037f397a37904567895e959805903",
-    "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
+    "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
+    "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
     "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
     "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
     "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
@@ -1324,7 +1360,8 @@
     "r03_review_projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
     "team_review_projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md",
     "design_refinement_projection_ref": "docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md",
-    "consolidation_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+    "consolidation_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json",
+    "followup_ref": "R05-V31-R4-FOLLOWUP-20261127"
   },
   "design_review_v3": {
     "base_commit": "c0340296e75bcab160bdc63d86ca048121a11b44",
@@ -1454,8 +1491,8 @@
     "projection_ref": "docs/review/lesson-registration/USER-STORY-CURRENT.md",
     "source_ref": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
-      "commit": "c606f9b703b037f397a37904567895e959805903",
-      "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
+      "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
+      "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
       "revision": "V3.1-R4"
     },
     "prior_status_history": {
@@ -1565,7 +1602,21 @@
       "pass": 15
     },
     "actual_runtime": 0,
-    "merge_policy": "R01 통합 준비 branch. main 직접 변경 금지; team 파일 보존·정식 검사 후 별도 병합."
+    "merge_policy": "R01 통합 준비 branch. main 직접 변경 금지; team 파일 보존·정식 검사 후 별도 병합.",
+    "r05_followup": {
+      "id": "R05-V31-R4-FOLLOWUP-20261127",
+      "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
+      "checks": {
+        "total": 8,
+        "pass": 8
+      },
+      "prior_source_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
+        "revision": "V3.1-R4"
+      }
+    }
   },
   "db_redesign_candidate_ref": {
     "id": "TASK-058-MINIMAL-DB-V4",
@@ -1577,6 +1628,9 @@
     "field_count": 143,
     "prior_candidate_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v3.json",
     "source_commit": "d63d53357d6924887727a584632e8800f4f9eab8",
-    "decision": "recommendation_only_pending_R01_and_story_review"
+    "decision": "recommendation_only_pending_R01_and_story_review",
+    "followup_commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
+    "followup_blob": "e058a804b6c8298fedc53071fa5224c9697a069f",
+    "followup_ref": "R05-V31-R4-FOLLOWUP-20261127"
   }
 }
