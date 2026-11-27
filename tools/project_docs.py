@@ -1713,6 +1713,9 @@ def build():
     )
 
     for source, record in sources.items():
+        if record["id"] == "TASK-058-V31-R4-CONSOLIDATION-20261127":
+            output = "docs/review/lesson-registration/USER-STORY-CURRENT.md"
+            outputs[output] = render_document(record, source, output)
         if source.startswith("docs/artifacts/meetings/") and record["kind"] == "document":
             output = f"docs/meetings/reviews/{Path(source).stem}.md"
             outputs[output] = render_document(record, source, output)

@@ -1481,5 +1481,156 @@
     "effects 기반 경합과 attempts 통합은 PostgreSQL transaction/동시성/지연 readback/장애 검증 전 후보. 전역 guard를 없애는 것이 안전성을 포기하는 것은 아님.",
     "PostgreSQL 후보 타입·제약; DDL·migration·공식 CI/프로젝션 검사·실제 외부 실행 미수행. 기존 SQLite·기존 상위 명세 및 V1/V2 이력 보존. 사용자 최신본 방향과 상충하는 AX03/기존 버전 문구는 채택 시 필요한 수정 사항으로 명시."
   ],
-  "projection_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md"
+  "projection_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md",
+  "r4_recheck": {
+    "id": "DB-V3-R4-RECHECK-20261127",
+    "source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "c606f9b703b037f397a37904567895e959805903",
+      "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
+      "revision": "V3.1-R4"
+    },
+    "status": "mapped_candidate_not_approved_for_physical_design",
+    "prior_basis": {
+      "commit": "387df295582a78ea3ca9d6b9024235eba144b026",
+      "user_story_revision": "V3.1-R2",
+      "user_story_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "prior_db": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json",
+      "source_scope": "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+      "system_work": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+      "platform_work": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+      "logical_state": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+      "error_response": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+      "r03_review": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+      "user_direction": "이전 버전 원본들을 저장해야 할 필요성이 분명한가? 내가 보기에는 최신본만 가지고 있으면 될 것 같은데 / 그럼 다시 DB 설계를 해서 나를 설득하도록 정보를 보고해봐"
+    },
+    "table_count": 13,
+    "table_changes": 0,
+    "rows": [
+      {
+        "id": "R4-01",
+        "fields": [
+          "sources.content",
+          "sources.revision",
+          "sources.draft",
+          "work_requests.source_revision",
+          "work_targets.prepared_source_revision",
+          "work_targets.prep_state",
+          "work_targets.plan",
+          "commands.request_key",
+          "commands.receipt",
+          "history.payload"
+        ],
+        "meaning": "명시 원본 저장/CAS·동일 키 receipt·동일 미수락 준비 복귀, 영향 대상만 stale. 수락 동결값 불변.",
+        "test": "동일 키 재접속/충돌/커밋 전후 장애/영향 대상 재검증.",
+        "verdict": "mapped_candidate_runtime_not_tested"
+      },
+      {
+        "id": "R4-02",
+        "fields": [
+          "platform_accounts.native_account_key",
+          "platform_accounts.verified_at",
+          "platform_objects.native_object_key",
+          "source_object_links.object_id",
+          "work_targets.plan",
+          "attempts.scope",
+          "effects.root_key",
+          "effects.scope_path",
+          "effects.state",
+          "history.payload"
+        ],
+        "meaning": "정규 계정별 한도/미반영 예약·불명 효과, 가격/계약 동일 클래스 및 프로필 공유 영향의 명시 근거. 동일 원본이 동일 클래스임을 단정 금지. typed plan/history 후보.",
+        "test": "한도 원자 경합·정규 계정 별칭·외부 경합·별도 동일 클래스 관계 참조 및 쿼리. 제약 불충분하면 구조 재검토.",
+        "verdict": "mapped_candidate_runtime_not_tested"
+      },
+      {
+        "id": "R4-03",
+        "fields": [
+          "work_requests.selection_revision",
+          "work_requests.review_state",
+          "work_targets.selection_key",
+          "work_targets.disposition",
+          "work_targets.lifecycle",
+          "work_targets.ended_at",
+          "attempts.state",
+          "effects.state",
+          "effects.disputed",
+          "history.payload"
+        ],
+        "meaning": "최초 선택과 수락 대상 lifecycle/효과 분리. 수락 0이면 실행 없음. 모든 수락 대상 ended 때 요청 종료.",
+        "test": "A 종료/B 불명/C 독립 진행·공유 권리 상실·선택 5/수락 3·동시 종료 집계.",
+        "verdict": "mapped_candidate_runtime_not_tested"
+      },
+      {
+        "id": "R4-04",
+        "fields": [
+          "users.state",
+          "sources.owner_id",
+          "sources.content",
+          "sources.revision",
+          "sources.draft",
+          "sources.state",
+          "assets.digest",
+          "assets.rights_state",
+          "assets.rights_detail",
+          "source_object_links.state",
+          "work_requests.approval",
+          "work_targets.plan",
+          "commands.receipt",
+          "effects.state",
+          "history.payload",
+          "history.proof_ids"
+        ],
+        "meaning": "강사별 복수 원본, source별 최신 저장본 한 개. 필요한 승인값/자료만 동결, 과거 전체 원본 금지. retire/권리 요청과 물리 폐기 분리.",
+        "test": "원본 2개 독립·수정, 과거 승인 유지, 자료 참조 중 삭제·철회, 참조 해소 후 폐기/익명화.",
+        "verdict": "mapped_candidate_runtime_not_tested"
+      },
+      {
+        "id": "R4-05",
+        "fields": [
+          "users.issuer",
+          "users.subject",
+          "sources.draft",
+          "commands.state",
+          "access_contexts.id",
+          "access_contexts.expected_account_id",
+          "access_contexts.verified_account_id",
+          "access_contexts.scope",
+          "access_contexts.state",
+          "access_contexts.blocked_at",
+          "access_contexts.cleanup",
+          "history.payload"
+        ],
+        "meaning": "정확 owner·명시 draft 폐기·저장 불명 해소. 접근 차단과 폐기 확인 분리. 신규 access ID/generation의 현재성 보장 필요. 장기 비밀 저장 미채택.",
+        "test": "폐기 중 장애·재접속·계정 불일치·이전 generation 재사용 차단; generation 타입/unique/CAS 검증.",
+        "verdict": "mapped_candidate_runtime_not_tested"
+      },
+      {
+        "id": "R4-06",
+        "fields": [
+          "sources.content",
+          "assets.rights_state",
+          "work_targets.plan",
+          "work_requests.approval",
+          "effects.scope_path",
+          "history.payload"
+        ],
+        "meaning": "공개 위치·문의 채널의 허용·권리·필요 범위 및 before/after를 정확 승인안에 표현. 불명 효과 보류.",
+        "test": "공개 허용 불명/권리 철회/승인 후 값 변경 방지/민감값 비보존.",
+        "verdict": "mapped_candidate_runtime_not_tested"
+      }
+    ],
+    "operations": "DR-02 기존 attempts/effects/history와 실제 UI 계측 후보를 이용. 관리자 전용 제품 기능/테이블 없음. 운영 지표 상세 별도.",
+    "verification": {
+      "checked_fields": 64,
+      "missing_fields": [],
+      "actual_db_tests": 0,
+      "actual_external_tests": 0,
+      "official_ci": "not_run"
+    },
+    "remaining": [
+      "typed JSON schema/참조·제약·정규 계정/동일 클래스 관계 및 쿼리, 한도 경합/원자성, 정확 generation, 권리·보존/폐기 실증",
+      "인증 공급자·조건부 장기 인증 저장의 제품 필요/보안·권한 별도 결정, 이번 변경에서 비밀 저장 기능 미채택"
+    ]
+  }
 }
