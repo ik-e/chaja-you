@@ -1065,7 +1065,7 @@ def render_system_work_v1(record, source, output):
     lines.extend(table(["ID", "결정 후보", "내용"], [(x["id"], x["title"], x["proposal"]) for x in record["decision_candidates"]]))
     lines.extend(table(["ID", "검증 과제", "판정 기준"], [(x["id"], x["name"], x["criterion"]) for x in record["validation_cases"]]))
     v = record["verification"]
-    lines.extend(["## 추적 및 제한", "", f"- {v['work_groups']} 업무군 · {v['work_units']} 공통 업무 · {v['logical_concepts']} 논리 정보 개념 · {v['invariants']} 불변조건.", f"- 7 기능/29 피처, 42 이전 책임, 155 행동, 44 플랫폼 업무/150 체크포인트, 12 여정/30 전이, 32 오류, 8 피드백. 구조: {v['structural']}.", "", *["- " + x for x in record["limits"]], ""])
+    lines.extend(["## 추적 및 제한", "", f"- {v['work_groups']} 업무군 · {v['work_units']} 공통 업무 · {v['logical_concepts']} 논리 정보 개념 · {v['invariants']} 불변조건.", f"- 7 기능/29 피처, 42 이전 책임, 155 행동, 44 플랫폼 업무/150 체크포인트, 12 여정/{v['screen_transitions']} 전이, 32 오류, 8 피드백. 구조: {v['structural']}.", "", *["- " + x for x in record["limits"]], ""])
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -1128,7 +1128,7 @@ def render_logical_state_v1(record, source, output):
     v = record["verification"]
     m = v["model"]["abstract_write_model"]
     lines.extend(["## 검증 및 제한", "",
-        "- 16 상태 축 · 69 전이 · 7 논리 일관성 경계 · 36 공통 업무 · 44 플랫폼 업무/144 체크포인트 · 30 화면 전이 · 24 이전 규칙 · 32 오류 · 8 피드백 관련 참조.",
+        f"- {v['axes']} 상태 축 · {v['transitions']} 전이 · {len(record['atomic_boundaries'])} 논리 일관성 경계 · 36 공통 업무 · 44 플랫폼 업무/144 체크포인트 · {v['screen_transitions']} 화면 전이 · 24 이전 규칙 · 32 오류 · 8 피드백 관련 참조.",
         f"- 축약 모형: {m['states']} 상태 / {m['edges']} 전이 간선, 불변조건 위반 {len(m['violations'])}. 한 대상·2개 효과에 한정.",
         f"- 검증기: [validate_logical_state_v1.mjs](../../../tools/validate_logical_state_v1.mjs). 구조: {v['structural']}.",
         "", *["- " + x for x in record["limits"]], ""])
@@ -1163,7 +1163,7 @@ def render_error_response_v1(record, source, output):
             "- 금지: " + e["prohibited"],
             "- 관련 참조: " + " · ".join(e["work_refs"]) + " / " + " · ".join(e["transition_refs"]), "",
         ])
-    lines.extend(["## 상태 전이 보완 후보", ""])
+    lines.extend(["## 논리 상태 정본에 반영된 보완 전이", ""])
     for t in record["supplemental_transitions"]:
         lines.extend(["- " + t["id"] + " " + t["axis"] + ": " + " / ".join(t["from"]) + " → " + t["to"], "  - 전제: " + t["guard"], "  - 결과: " + t["result"]])
     lines.extend(["", "## 수용 시험 후보 (미실행)", ""])
@@ -1171,6 +1171,20 @@ def render_error_response_v1(record, source, output):
         lines.append("- " + t["id"] + " " + t["scenario"] + " — " + t["expected"] + " (" + t["transition_route"] + ")")
     v = record["verification"]
     lines.extend(["", "## 검증 및 제한", "", f"- 참조 검사: {v['structural']}; 오류 {v['error_types']}, 공통 업무 {v['common_works']}, 플랫폼 업무 {v['operations']}, 체크포인트 {v['checkpoints']}, 행동 {v['actions']}, 분기 {v['branches']}.", *["- " + x for x in record["limits"]], ""])
+    return "\n".join(lines).rstrip() + "\n"
+
+
+
+def render_revision_contract(record):
+    x = record["revision_contract"]
+    lines = ["## R1 설계 보완 계약", "", x["status"] + " · 기준 " + x["reviewed_parent"][:7], ""]
+    for c in x["clauses"]:
+        lines.extend(["### " + c["id"] + " · " + c["title"], "", c["rule"], "", "관련: " + " · ".join(c["refs"]), ""])
+    if record.get("effect_contracts"):
+        lines.extend(["### 플랫폼별 논리 효과 및 잔여 업무 후보", "", "모든 독립 경로·권한·물리 전송 경계는 미검증이며 실제 실행 금지. 실제 UI 조작 순서를 뜻하지 않는다.", ""])
+        for fx in record["effect_contracts"]:
+            rr = fx["recovery"]
+            lines.extend(["#### " + fx["id"] + " · " + fx["title"], "", "- 체크포인트: " + fx["checkpoint_ref"], "- 정확 대상: " + fx["target"], "- 효과: " + fx["mutation"], "- 적용: " + fx["application"], "- 선행: " + fx["precondition"], "- 독립 읽기: " + fx["readback"], "- 충돌 범위: " + fx["conflict_scope"], "- 전송 경계: " + fx["dispatch_boundary"], "- 잔여 업무: " + rr["id"] + " · " + rr["disposition"], "- 복구 조건: " + rr["target_rule"] + "; " + rr["allowed_if"], "- 금지: " + rr["prohibited"], ""])
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -1748,6 +1762,11 @@ def build():
         if record["projection_path"] != output:
             raise ValueError(f"{error_response_v1}: unexpected projection path")
         outputs[output] = render_error_response_v1(record, error_response_v1, output)
+
+    for record in sources.values():
+        if record.get("revision_contract") and record.get("projection_path") in outputs:
+            output = record["projection_path"]
+            outputs[output] = outputs[output].rstrip() + "\n\n" + render_revision_contract(record)
 
     return outputs
 
