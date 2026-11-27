@@ -142,7 +142,7 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | verified_at | timestamptz | 계정 식별 확인 시점 |
 | updated_at | timestamptz | 연결 상태 변경 시점 |
 
-무결성: UNIQUE(owner_id,environment,platform_key,identity_namespace,native_account_key); 연결 해제 시 기존 접근 문맥 차단 및 폐기 의무 기록; 재연결로 옛 접근 문맥을 활성화하지 않음; 관리 연결≠실제 접근 권한; 쿠키/비밀번호/토큰 없음
+무결성: UNIQUE(owner_id,environment,platform_key,identity_namespace,native_account_key); 연결 해제 시 기존 접근 문맥 차단 및 폐기 의무 기록; 재연결로 옛 접근 문맥을 활성화하지 않음; 관리 연결≠실제 접근 권한; 쿠키/비밀번호/토큰 없음; owner별 관리 연결 고유성과 경합 범위는 별개. 전역 정규 계정 key=(environment,platform_key,identity_namespace,native_account_key); 동일 key의 여러 owner 연결은 같은 잠금/한도 claim을 공유하며 다른 owner 데이터 공개·권한 부여 아님. 정규 식별 불명은 실행 보류.
 
 ### platform_objects
 
@@ -291,7 +291,7 @@ ERD는 주요 FK 관계를 표시한다. 상세 FK, 복수 object/계정·prior 
 | updated_at | timestamptz | 현재 판정 변경 시점 |
 | claims | jsonb | 정규 scope 외에 동시에 획득해야 할 계정 한도/일자·공유 정책 claim 목록. typed key, rule version, observation ref, 반영/미반영 판정; 비어 있으면 추가 claim 없음. |
 
-무결성: 대상 내 동일 효과 후보 중복 금지; attempt는 같은 target의 write, 여러 effects가 같은 attempt에 연결 가능; 정규 외부 계정 키를 통한 전역 잠금 하 모든 활성/불명/분쟁 효과 및 slot→확인 객체 관계와 scope 겹침 검사·원자 reserve; unknown/disputed 지속 저장; 권한 차단 뒤 시작 금지; 종료 후 늦은 증거는 history로 판정 보완만; 확인/불명 동일 효과 반복 금지, 새 시도는 새 승인+안전한 미발생/미시도 또는 새 의도 및 미해결 경합 없음 / claims는 종류별 schema(정규 account/정확 quota/기간 및 관측·예약 식별) 검증; 한 효과의 모든 scope/claim을 정규 계정 잠금 경계에서 동시에 획득. 최신 적격 관측에 이미 반영됐다는 증거 전 내부 미반영/불명 예약 보수적 포함. 외부 경합/이중 계상 판단 불가 시 hold; 내부 잠금만으로 외부 서버 한도 보장하지 않음.
+무결성: 대상 내 동일 효과 후보 중복 금지; attempt는 같은 target의 write, 여러 effects가 같은 attempt에 연결 가능; 정규 외부 계정 키를 통한 전역 잠금 하 모든 활성/불명/분쟁 효과 및 slot→확인 객체 관계와 scope 겹침 검사·원자 reserve; unknown/disputed 지속 저장; 권한 차단 뒤 시작 금지; 종료 후 늦은 증거는 history로 판정 보완만; 확인/불명 동일 효과 반복 금지, 새 시도는 새 승인+안전한 미발생/미시도 또는 새 의도 및 미해결 경합 없음 / claims는 종류별 schema(정규 account/정확 quota/기간 및 관측·예약 식별) 검증; 한 효과의 모든 scope/claim을 정규 계정 잠금 경계에서 동시에 획득. 최신 적격 관측에 이미 반영됐다는 증거 전 내부 미반영/불명 예약 보수적 포함. 외부 경합/이중 계상 판단 불가 시 hold; 내부 잠금만으로 외부 서버 한도 보장하지 않음. 동일 정규 계정의 모든 owner별 연결·관련 effects를 대상으로 조회/잠금/예약하며 owner_id 또는 내부 account_id를 quota key에 넣지 않는다. 총량 한도와 일일 한도는 종류별 기간을 구분하고 해당 요청의 모든 claim을 원자 획득한다.
 
 ### history
 
@@ -433,8 +433,8 @@ platform_accounts 식별/관리 관계만, access_contexts 일시적 업무 권�
 | T05 | 같은 공유 프로필이 두 레슨과 연관 | 정확 동일 object의 복수 관리 연결 또는 부모 관계; 독립 연결 해제; 실제 관계 미확인시 hold |
 | T06 | 선택 5건 중 수락 3, 보류 1, 제외 1 | 5개 처분 보존, 수락 3만 실행; A 종료/B 불명/C 계속; 모든 수락 종료 후 close |
 | T07 | 상품 저장 확인·첨부 불명·심사 미시도 | 한 attempt에 여러 effects; 확인/불명 반복 금지, 독립 남은 효과만 새 승인 후보 |
-| T08 | 크몽 정규 계정 일일 한도 1개 남음, 두 동시 요청 | 정규 계정 claim 원자 경쟁; 반영 증거 전 보수적 예약, 외부 경합 불명 hold |
-| T09 | 탈잉 미선택, 다른 플랫폼 동일 클래스 가격 변경 | 정확 관계+현재 계약/가격 증거 확인; 불명/충돌 영향 변경 hold, 다른 대상 유지. 원본 같음만으로 관계 단정 안 함 |
+| T08 | 크몽 동일 실제 계정·서로 다른 차자유 owner의 동시 요청 2개: (a) 등록 99/100, (b) 일일 한도 1개 남음(각각 독립 시험) | owner별 내부 ID와 무관한 동일 정규 계정 claim 원자 경쟁: 각각 최대 1개 자격, 나머지 hold/fence; 반영 증거 전 보수적 예약, 외부 경합/중복 계상 불명은 둘 다 hold |
+| T09 | 탈잉 미선택, 다른 플랫폼 동일 클래스 가격 변경 | 정확 관계+현재 계약/가격 증거 확인; 준비·실행 모두 불명/충돌 영향 변경 hold, 독립 저장·효과 및 정확 승인 확인된 소개 문구/다른 대상 유지; 결합 불명 범위 hold. 원본 같음만으로 관계 단정 안 함 |
 | T10 | 숨고 서비스 CREATE 중 공통 활동명 제한 | 같은 계정 프로필 root 변경 effect 분리; 결합 불명 차단, 독립 서비스 추가만 허용 후보 |
 | T11 | 최신 상태 조회 실패 또는 늦은 readback | attempt unavailable, 마지막 적격 history 보존; native status/목표/업무 판정 별개, ended 재개 안 함 |
 | T12 | 접근 만료·재인증·이전 폐기 불명 | 새 generation, 과거 access 차단; cleanup unknown 유지, 운영 통지; 기존 효과 변경 없음 |
