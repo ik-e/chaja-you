@@ -101,7 +101,9 @@
     "docs/review/lesson-registration/USER-STORY-INTEGRATION-REVIEW-V3.1.md",
     "docs/review/lesson-registration/USER-STORY-MENTOR-V3.1.md",
     "docs/review/lesson-registration/USER-STORY-SEMANTIC-REVIEW-V3.1.md",
-    "tools/project_user_story_v31.mjs"
+    "tools/project_user_story_v31.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -197,6 +199,12 @@
     },
     {
       "path": "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md"
     }
   ],
   "result": {
@@ -1097,7 +1105,7 @@
   "intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
   "registration_authority_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
   "assignment_mode": "self_directed",
-  "assignment_status": "서비스 범위 V1.0 승인 · 추상 화면/시스템 업무/플랫폼별 업무/논리 상태·전이 V1.0 검토 후보 · 오류 대응 및 통합 사용자 스토리 확정 대기 · DB/API 미착수",
+  "assignment_status": "서비스 범위 V1.0 승인 · 사용자 스토리 V3.1-R1 잠정 기준 · 최소 DB V2.0 17개 테이블 검토 후보 · 실제 구현/물리 DDL/API 미승인",
   "workspace_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/",
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"
@@ -1265,5 +1273,14 @@
     "authority_ref": "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md",
     "source_commit": "70ae8e7169c284ba71c4dcbcc0cde4415929d079",
     "status": "provisional_candidate_not_approved_for_physical_design"
+  },
+  "minimal_db_candidate_ref": {
+    "id": "TASK-058-MINIMAL-DB-V2",
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json",
+    "review_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md",
+    "status": "recommended_candidate_not_approved_for_implementation",
+    "source_commit": "800f6a13d7444e8a6c8b2586fca9ac8b1f46bcc9",
+    "table_count": 17,
+    "prior_candidate_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json"
   }
 }

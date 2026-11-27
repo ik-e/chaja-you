@@ -1,0 +1,907 @@
+{
+  "schema_version": 1,
+  "kind": "document",
+  "id": "TASK-058-MINIMAL-DB-V2",
+  "title": "찾아you 최소 DB 구조 V2.0 — V3.1-R1 잠정 기준",
+  "version": "2.0",
+  "status": "recommended_candidate_not_approved_for_implementation",
+  "owner": "R01",
+  "task_ref": "TASK-058",
+  "date": "2026-11-27",
+  "basis": {
+    "commit": "800f6a13d7444e8a6c8b2586fca9ac8b1f46bcc9",
+    "planning": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+    "source_refs": [
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json"
+    ],
+    "prior_logical_records": 42,
+    "prior_relations": 78
+  },
+  "purpose": "기획과 기존 시스템 동작을 변경하지 않고 현재 기능·무결성·복구 요구를 지원하는 최소 실용 관계형 테이블 구조 도출. 테이블 수의 수학적 최솟값을 주장하지 않음.",
+  "tables": [
+    {
+      "name": "users",
+      "meaning": "서비스 사용자와 검증된 본인 식별",
+      "columns": [
+        "id uuid PK",
+        "issuer text",
+        "subject text",
+        "state text",
+        "created_at timestamptz",
+        "retired_at timestamptz?"
+      ],
+      "constraints": "UNIQUE(issuer,subject); 서비스 인증 서버가 검증한 subject만 사용; 상태에 따른 접근 제한",
+      "why_separate": "사용자 소유권의 독립 정본. 현재 한 사용자에 한 활성 인증 주체 후보; 다중 로그인 연결 기능 미채택."
+    },
+    {
+      "name": "sources",
+      "meaning": "재사용할 레슨 원본의 안정된 식별 및 현재 버전",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "state text",
+        "current_version_id uuid? FK source_versions",
+        "created_at timestamptz",
+        "retired_at timestamptz?"
+      ],
+      "constraints": "현재 버전은 동일 원본의 saved 버전만; 최초 draft shell은 저장 전 원본 목록에 표시하지 않음; head 변경 CAS; retire는 내부 효과만",
+      "why_separate": "원본 하나가 여러 버전·작업·외부 등록물과 연결된다. stable ID와 불변 revision을 합치면 기존 공고 연결이 버전 변경마다 이동한다."
+    },
+    {
+      "name": "source_versions",
+      "meaning": "원본 편집 문맥 및 저장된 불변 버전",
+      "columns": [
+        "id uuid PK",
+        "source_id uuid FK sources",
+        "base_version_id uuid? FK source_versions",
+        "revision_no integer?",
+        "edit_generation bigint",
+        "state text",
+        "content jsonb",
+        "extraction_request_id uuid?",
+        "content_digest text?",
+        "created_at timestamptz",
+        "saved_at timestamptz?"
+      ],
+      "constraints": "UNIQUE(source_id,revision_no) for saved; saved 이후 내용 및 첨부 관계 불변; content에는 원문·직접 입력·공통 의미 사실·출처/불확실·편집 문제의 타입 검증; 이전 추출 결과는 generation과 요청 ID 비교",
+      "why_separate": "수정과 재사용 시점의 값을 보존한다. 편집 단계는 동일 구조의 draft 행으로 통합; 새 저장 전 버전 번호/성공 확정 없음."
+    },
+    {
+      "name": "assets",
+      "meaning": "권리 확인 자료 및 바이너리 보관 위치",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "storage_key text",
+        "digest text",
+        "media_type text",
+        "size_bytes bigint",
+        "rights_state text",
+        "rights_detail jsonb",
+        "created_at timestamptz",
+        "retired_at timestamptz?"
+      ],
+      "constraints": "같은 owner의 자료만 연결; 바이너리 외부 저장소, 비공개 접근; 현재 권리 상태가 과거 스냅샷보다 우선하여 새 이용 제한",
+      "why_separate": "같은 사진을 여러 원본 버전에서 재사용하고 권리 철회가 모든 새 이용에 영향을 미친다."
+    },
+    {
+      "name": "source_version_assets",
+      "meaning": "원본 버전의 자료 사용 관계",
+      "columns": [
+        "version_id uuid FK source_versions",
+        "asset_id uuid FK assets",
+        "role text",
+        "position integer",
+        "usage_rights jsonb"
+      ],
+      "constraints": "PK(version_id,role,position); 동일 owner; 저장된 버전의 관계 불변; FK 삭제 RESTRICT",
+      "why_separate": "자료와 원본 버전의 다대다 관계를 FK로 유지한다. 사진 ID 배열만 두면 고아·타인 자료·권리 철회 검사에 불필요한 복잡성이 생긴다."
+    },
+    {
+      "name": "platform_accounts",
+      "meaning": "사용자별 외부 계정 관리 연결 및 정확 계정 키",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "platform_key text",
+        "environment text",
+        "identity_namespace text",
+        "native_account_key text",
+        "management_state text",
+        "link_generation bigint",
+        "verified_at timestamptz",
+        "retired_at timestamptz?"
+      ],
+      "constraints": "UNIQUE(owner_id,environment,platform_key,identity_namespace,native_account_key); 검증된 정규 키만 생성; 연결/해제 이력은 history; 관리 연결은 실제 접근 권한 아님",
+      "why_separate": "사용자별 연결/해제와 여러 외부 등록물의 공통 계정. 다른 owner의 동일 외부 계정은 별도 내부 행일 수 있으나 전역 경합은 정규 외부 키로 동일하게 판단."
+    },
+    {
+      "name": "platform_objects",
+      "meaning": "상품·클래스·프로필·서비스·공고 등 정확 외부 객체",
+      "columns": [
+        "id uuid PK",
+        "account_id uuid FK platform_accounts",
+        "parent_id uuid? FK platform_objects",
+        "object_kind text",
+        "identity_namespace text",
+        "native_object_key text",
+        "verified_at timestamptz",
+        "locator jsonb?",
+        "identity_state text"
+      ],
+      "constraints": "UNIQUE(account_id,object_kind,identity_namespace,native_object_key); parent 동일 계정; 실제 검증된 객체만 저장; 표시명/URL/목록 순서만으로 고유 식별 확정 금지",
+      "why_separate": "외부 객체는 원본이나 작업 없이도 존재할 수 있고, 한 객체에 여러 수정·갱신·관측이 연결된다. 현재 관찰된 계층 관계만 parent로 모델링."
+    },
+    {
+      "name": "source_object_links",
+      "meaning": "원본과 외부 객체의 내부 관리 연결",
+      "columns": [
+        "id uuid PK",
+        "source_id uuid FK sources",
+        "object_id uuid FK platform_objects",
+        "role text",
+        "state text",
+        "linked_at timestamptz",
+        "retired_at timestamptz?"
+      ],
+      "constraints": "같은 owner 및 정확 권한 확인; UNIQUE(source_id,object_id,role) WHERE active; 해제 후 새 연결 이력 보존; 외부 삭제 없음",
+      "why_separate": "공유 프로필과 서로 다른 레슨 원본, 한 원본의 여러 플랫폼, 사용자 직접 등록물의 사후 연결을 독립적으로 관리."
+    },
+    {
+      "name": "work_requests",
+      "meaning": "한 번 선택한 작업 묶음 및 양 승인",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "source_id uuid? FK sources",
+        "environment text",
+        "selection_revision bigint",
+        "review_state text",
+        "approval_snapshot jsonb?",
+        "snapshot_digest text?",
+        "frozen_at timestamptz?",
+        "created_at timestamptz"
+      ],
+      "constraints": "선택 전체 및 대상별 실행/보류/제외와 내용승인·범위승인 구분; 수락 시 대상 행 및 명령과 같은 트랜잭션으로 동결; 동결 후 수정 금지",
+      "why_separate": "여러 플랫폼을 한 번 선택/검토/승인하는 사용자 행동의 단위. 결과 상태는 개별 대상에서 집계."
+    },
+    {
+      "name": "work_targets",
+      "meaning": "선택된 플랫폼별 업무, 준비안, 대상 식별 및 독립 작업 상태",
+      "columns": [
+        "id uuid PK",
+        "request_id uuid FK work_requests",
+        "platform_key text",
+        "operation_key text",
+        "selection_key text",
+        "disposition text",
+        "source_version_id uuid? FK source_versions",
+        "account_id uuid? FK platform_accounts",
+        "target_object_id uuid? FK platform_objects",
+        "resolved_object_id uuid? FK platform_objects",
+        "slot_key text?",
+        "prior_target_id uuid? FK work_targets",
+        "prep_revision bigint",
+        "prep_state text",
+        "profile_digest text?",
+        "preparation jsonb",
+        "binding_snapshot jsonb?",
+        "frozen_item_digest text?",
+        "lifecycle text",
+        "accepted_at timestamptz?",
+        "ended_at timestamptz?"
+      ],
+      "constraints": "UNIQUE(request_id,selection_key); operation 및 schema 버전 pin; 같은 owner/source/account/object 일치; 정확 계정/대상 또는 slot 미확정이면 쓰기 금지; 준비 값·출처·문제·비교·계획·처분 동결 후 변경 금지; 신규 객체는 resolved_object_id로 별도 연결; 새 승인 필요 시 새 target/request",
+      "why_separate": "묶음 내 플랫폼별 다른 입력·오류·처분·실행·결과를 분리. 준비/입력값/승인 항목은 종속 값이므로 따로 테이블화하지 않는다."
+    },
+    {
+      "name": "commands",
+      "meaning": "저장·수락·연결·해제·권리 요청의 멱등 처리 영수증",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid? FK users",
+        "principal_key text",
+        "kind text",
+        "request_key text",
+        "request_digest text",
+        "state text",
+        "receipt jsonb?",
+        "fence_generation bigint",
+        "created_at timestamptz",
+        "committed_at timestamptz?"
+      ],
+      "constraints": "UNIQUE(principal_key,kind,request_key); 같은 key+digest는 기존 결과, 다른 digest 거절; no_commit_proven은 지연 커밋 방지까지 확인 후; 업무 처리와 영수증 원자 기록; 첫 가입 전 principal은 검증 issuer/subject 기준",
+      "why_separate": "명령 수락 응답 유실과 실제 업무 상태가 다르다. 권리 요청 영수증과 이후 처리 상태는 history로 연결."
+    },
+    {
+      "name": "access_contexts",
+      "meaning": "업무 목적 한정 인증·권한·차단·폐기 상태",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "target_id uuid? FK work_targets",
+        "platform_key text",
+        "expected_account_id uuid? FK platform_accounts",
+        "verified_account_id uuid? FK platform_accounts",
+        "purpose text",
+        "generation bigint",
+        "state text",
+        "scope jsonb",
+        "permission_proof jsonb",
+        "expires_at timestamptz",
+        "blocked_at timestamptz?",
+        "cleanup jsonb"
+      ],
+      "constraints": "새 인증은 새 context; 목적·정확 계정·read/write scope·generation·만료 검증; 접근 차단과 자원별 cleanup 의무 원자 기록, 폐기 확인은 별도 상태; 토큰·쿠키·비밀번호·OTP·grant 저장 금지",
+      "why_separate": "작업과 접근 자원의 수명이 다르다. 한 문맥의 제한된 자원별 폐기 목록은 문맥 내 값으로 통합; 재인증이 과거 폐기 불명을 해결하지 않음."
+    },
+    {
+      "name": "dispatches",
+      "meaning": "하나의 실제/모의 전송 경계와 일회 실행 자격",
+      "columns": [
+        "id uuid PK",
+        "target_id uuid FK work_targets",
+        "access_id uuid FK access_contexts",
+        "dispatch_key text",
+        "binding_digest text",
+        "permit_generation bigint",
+        "state text",
+        "reserved_at timestamptz",
+        "started_at timestamptz?",
+        "sealed_at timestamptz?"
+      ],
+      "constraints": "UNIQUE(dispatch_key); 같은 대상·접근 및 승인 효과 전체 검증; 전송 전 reserve 및 fence, CAS 일회 시작; crash/timeout에서 재전송 금지; 전송 자격 비밀 원문 없음",
+      "why_separate": "한 번의 외부 저장/제출이 여러 독립 효과를 만들 수 있다. 전송 상태를 효과 상태와 구분해야 한다."
+    },
+    {
+      "name": "effects",
+      "meaning": "정확한 승인 효과별 시도 및 현재 판정",
+      "columns": [
+        "id uuid PK",
+        "target_id uuid FK work_targets",
+        "dispatch_id uuid? FK dispatches",
+        "prior_effect_id uuid? FK effects",
+        "rule_key text",
+        "logical_effect_key text",
+        "conflict_scope jsonb",
+        "intent_digest text",
+        "required boolean",
+        "state text",
+        "created_at timestamptz",
+        "assessed_at timestamptz?"
+      ],
+      "constraints": "같은 target의 동일 승인 효과 후보 중복 금지; dispatch는 동일 target, 한 효과 행에 한 전송만; 상태/이력 동일 트랜잭션; confirmed/unknown 재실행 금지; 새 시도는 독립 미발생/안전 미시도 및 새 승인과 fence 증거 필요",
+      "why_separate": "복수 플랫폼뿐 아니라 한 플랫폼의 단계별 부분 성공·미발생·불명을 보존. 전송 그룹의 결과로 덮어쓸 수 없다."
+    },
+    {
+      "name": "conflict_guards",
+      "meaning": "전역 외부 대상의 경합 예약·미확인·분쟁 차단",
+      "columns": [
+        "id uuid PK",
+        "environment text",
+        "platform_key text",
+        "account_namespace text",
+        "canonical_account_key text",
+        "root_key text",
+        "scope_key text",
+        "active_dispatch_id uuid? FK dispatches",
+        "fence_generation bigint",
+        "unknown_block boolean",
+        "disputed boolean",
+        "alias_to_id uuid? FK conflict_guards",
+        "updated_at timestamptz"
+      ],
+      "constraints": "UNIQUE(environment,platform_key,account_namespace,canonical_account_key,root_key,scope_key); 같은 정규 계정 잠금 하 root/경로 겹침 확인 및 claim 원자 확보; active release와 unknown/dispute 해제 분리; slot→actual alias 원자 연결; 신원/범위 불명은 보수적으로 차단; 사용자 직접 조회 금지",
+      "why_separate": "외부 중복/경합은 owner별 내부 ID가 아니라 실제 같은 계정/객체 기준. 새 slot과 확인 후 객체, 공유 프로필/하위 범위까지 연결하고 서버 재시작에도 차단 유지."
+    },
+    {
+      "name": "read_requests",
+      "meaning": "사용자/준비/독립 검증 목적의 읽기 요청과 조회 성공 여부",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "target_id uuid? FK work_targets",
+        "object_id uuid? FK platform_objects",
+        "effect_id uuid? FK effects",
+        "access_id uuid? FK access_contexts",
+        "read_key text",
+        "purpose text",
+        "scope_snapshot jsonb",
+        "sequence_no bigint",
+        "state text",
+        "requested_at timestamptz",
+        "resolved_at timestamptz?",
+        "failure_reason text?"
+      ],
+      "constraints": "UNIQUE(owner_id,read_key); 정확 목적/계정/객체 또는 target slot 및 허용 범위; 접근 없이 외부 읽기 금지; observed/unavailable 별도; 이전 요청 늦은 결과가 최신 요청 상태를 바꾸지 않음",
+      "why_separate": "쓰기 없이 최신 상태/대상 확인 가능; 실패한 최신 조회와 마지막 정상 관측을 구분하고 늦은 관측을 처리."
+    },
+    {
+      "name": "history",
+      "meaning": "관측·근거·효과 판정·결과·권리/감사 이력의 불변 기록",
+      "columns": [
+        "id uuid PK",
+        "owner_id uuid FK users",
+        "kind text",
+        "sequence_no bigint",
+        "target_id uuid? FK work_targets",
+        "object_id uuid? FK platform_objects",
+        "effect_id uuid? FK effects",
+        "dispatch_id uuid? FK dispatches",
+        "read_id uuid? FK read_requests",
+        "access_id uuid? FK access_contexts",
+        "command_id uuid? FK commands",
+        "observed_at timestamptz?",
+        "recorded_at timestamptz",
+        "payload jsonb",
+        "proof_ids uuid[]"
+      ],
+      "constraints": "append-only; kind별 필수 FK 및 payload schema, 모든 참조 owner/대상/목적 일치 검사; effect/result version 단조 증가; response와 independent_readback 구별; proof_ids는 이미 존재하는 적격 불변 근거만, 삭제 RESTRICT 상당의 서비스 검증; 권한 없는 cross-owner 증거 노출 금지",
+      "why_separate": "F23의 과거 결과·독립 관측·근거·늦은 판정·권리 처리 기록을 공통 append 저장. 현재 work lifecycle/효과/읽기 상태는 해당 행 정본, 외부 native/goal/result는 별도 kind의 최신 적격 이력에서 투영."
+    }
+  ],
+  "logical_record_mapping": {
+    "OWNER": "users",
+    "IDENTITY": "users",
+    "SERVICE_ACCESS": "인증 서비스/휘발 문맥 (세션 비밀 DB 미저장)",
+    "SOURCE": "sources",
+    "EDIT_CONTEXT": "source_versions",
+    "SOURCE_REVISION": "source_versions",
+    "SOURCE_FACT": "source_versions.content",
+    "ASSET": "assets",
+    "REVISION_ASSET": "source_version_assets",
+    "PLATFORM": "버전된 플랫폼 설정",
+    "PROFILE_VERSION": "버전된 플랫폼 설정 + work_targets.profile_digest",
+    "FIELD_RULE": "버전된 플랫폼 설정",
+    "OPERATION_RULE": "버전된 플랫폼 설정 + work_targets.operation_key",
+    "EFFECT_RULE": "버전된 플랫폼 설정 + effects.rule_key",
+    "EXTERNAL_ACCOUNT": "platform_accounts",
+    "ACCOUNT_LINK": "platform_accounts + history",
+    "EXTERNAL_OBJECT": "platform_objects",
+    "OBJECT_RELATION": "platform_objects.parent_id (검증된 계층만)",
+    "SOURCE_LINK": "source_object_links",
+    "REGISTRATION": "work_requests",
+    "TARGET_WORK": "work_targets",
+    "TARGET_BINDING": "work_targets.binding_snapshot",
+    "PREPARATION": "work_targets.preparation",
+    "PREPARED_VALUE": "work_targets.preparation",
+    "APPROVAL_SNAPSHOT": "work_requests.approval_snapshot",
+    "APPROVAL_ITEM": "work_targets + work_requests.approval_snapshot",
+    "INTERNAL_COMMAND": "commands",
+    "ACCESS_CONTEXT": "access_contexts",
+    "CLEANUP_OBLIGATION": "access_contexts.cleanup + history",
+    "EFFECT_RECORD": "effects",
+    "DISPATCH_ATTEMPT": "dispatches",
+    "DISPATCH_EFFECT": "effects.dispatch_id",
+    "EFFECT_JUDGMENT": "effects.state + history",
+    "CONFLICT_RECORD": "conflict_guards",
+    "OBSERVATION_REQUEST": "read_requests",
+    "OBSERVATION": "history",
+    "EVIDENCE": "history",
+    "EVIDENCE_LINK": "history.proof_ids",
+    "RESULT_VERSION": "history",
+    "GOAL_OBSERVATION": "history",
+    "RIGHTS_REQUEST": "commands + history",
+    "AUDIT_EVENT": "history"
+  },
+  "feature_coverage": [
+    {
+      "feature": "사용자·권한·복귀",
+      "works": [
+        "SW-01",
+        "SW-02",
+        "SW-03",
+        "SW-35",
+        "SW-36"
+      ],
+      "errors": [
+        "ER-01",
+        "ER-02",
+        "ER-26"
+      ],
+      "stores": [
+        "users",
+        "commands",
+        "work_requests",
+        "work_targets",
+        "history"
+      ],
+      "reason": "검증된 본인, 내부 읽기, 동일 명령 조회, 저장 문맥 복귀. FE 응답 인지는 영속 상태가 아님."
+    },
+    {
+      "feature": "F01~F05 원본과 자료",
+      "works": [
+        "SW-04",
+        "SW-05",
+        "SW-06",
+        "SW-07",
+        "SW-08"
+      ],
+      "errors": [
+        "ER-03",
+        "ER-04",
+        "ER-05",
+        "ER-06",
+        "ER-25"
+      ],
+      "stores": [
+        "sources",
+        "source_versions",
+        "assets",
+        "source_version_assets",
+        "source_object_links",
+        "commands",
+        "history"
+      ],
+      "reason": "편집 보존, 불변 저장, 재사용, CAS, 내부 삭제/연결 해제."
+    },
+    {
+      "feature": "F06~F11 대상 및 입력안",
+      "works": [
+        "SW-09",
+        "SW-10",
+        "SW-11",
+        "SW-12",
+        "SW-13"
+      ],
+      "errors": [
+        "ER-07",
+        "ER-08",
+        "ER-09",
+        "ER-10"
+      ],
+      "stores": [
+        "work_requests",
+        "work_targets",
+        "source_versions",
+        "commands"
+      ],
+      "reason": "7개 플랫폼 규칙은 버전된 설정; 정확 준비값·오류·출처·대상별 보류."
+    },
+    {
+      "feature": "F12~F15 계정/객체/변경 비교",
+      "works": [
+        "SW-14",
+        "SW-15",
+        "SW-16",
+        "SW-17",
+        "SW-18",
+        "SW-19",
+        "SW-20"
+      ],
+      "errors": [
+        "ER-11",
+        "ER-12",
+        "ER-13",
+        "ER-14",
+        "ER-15"
+      ],
+      "stores": [
+        "platform_accounts",
+        "platform_objects",
+        "source_object_links",
+        "work_targets",
+        "access_contexts",
+        "read_requests",
+        "commands",
+        "history",
+        "conflict_guards"
+      ],
+      "reason": "정확 권한·계정·공유 프로필/하위 대상·이전 관측·갱신 조건."
+    },
+    {
+      "feature": "F16~F18 승인 및 실행 자격",
+      "works": [
+        "SW-21",
+        "SW-22",
+        "SW-23",
+        "SW-24"
+      ],
+      "errors": [
+        "ER-16",
+        "ER-17"
+      ],
+      "stores": [
+        "work_requests",
+        "work_targets",
+        "commands",
+        "access_contexts",
+        "dispatches",
+        "effects",
+        "conflict_guards"
+      ],
+      "reason": "전체 선택 처분, 논리 양 승인·pin, 수락 원자성, 전역 fence."
+    },
+    {
+      "feature": "F19~F21 등록·수정·갱신",
+      "works": [
+        "SW-25",
+        "SW-26",
+        "SW-27"
+      ],
+      "errors": [
+        "ER-18",
+        "ER-19",
+        "ER-21",
+        "ER-29",
+        "ER-30"
+      ],
+      "stores": [
+        "work_targets",
+        "platform_objects",
+        "source_object_links",
+        "dispatches",
+        "effects",
+        "conflict_guards",
+        "history"
+      ],
+      "reason": "한 전송에 여러 효과; 부분 성공·불명, 기존 객체 갱신·새 의도 구분."
+    },
+    {
+      "feature": "F22~F29 결과·관측·안내",
+      "works": [
+        "SW-28",
+        "SW-29",
+        "SW-30",
+        "SW-31",
+        "SW-32"
+      ],
+      "errors": [
+        "ER-20",
+        "ER-22",
+        "ER-24",
+        "ER-31",
+        "ER-32"
+      ],
+      "stores": [
+        "work_targets",
+        "effects",
+        "read_requests",
+        "history",
+        "platform_objects",
+        "source_object_links"
+      ],
+      "reason": "독립 근거, 시점별 native/goal/result 구분, 조회 실패 시 마지막 관측 유지, 내부 안내만."
+    },
+    {
+      "feature": "접근 종료·권리·제외 범위",
+      "works": [
+        "SW-33",
+        "SW-34"
+      ],
+      "errors": [
+        "ER-23",
+        "ER-27",
+        "ER-28"
+      ],
+      "stores": [
+        "access_contexts",
+        "platform_accounts",
+        "commands",
+        "conflict_guards",
+        "history"
+      ],
+      "reason": "새 접근 차단/폐기 불명 독립; 장기 위임·자동 모니터링 없음."
+    }
+  ],
+  "journey_coverage": [
+    {
+      "id": "UJ-01",
+      "title": "최초 등록",
+      "stores": [
+        "sources",
+        "source_versions",
+        "work_requests",
+        "work_targets",
+        "effects",
+        "history"
+      ],
+      "case": "원본 저장 후 선택 대상별 승인/실행/독립 결과; 결과가 확인되면 정확 객체 및 링크 생성."
+    },
+    {
+      "id": "UJ-02",
+      "title": "저장 원본 추가 등록",
+      "stores": [
+        "sources",
+        "source_versions",
+        "work_requests",
+        "work_targets",
+        "platform_objects",
+        "source_object_links"
+      ],
+      "case": "같은 저장 버전으로 새 요청, 기존 공고와 효과 이력 유지."
+    },
+    {
+      "id": "UJ-03",
+      "title": "기존 등록물 수정",
+      "stores": [
+        "platform_objects",
+        "work_targets",
+        "effects",
+        "read_requests",
+        "history"
+      ],
+      "case": "기존 객체 ID 유지; before/after 승인값 및 관측, 수정으로 신규 생성하지 않음."
+    },
+    {
+      "id": "UJ-04",
+      "title": "공고 갱신",
+      "stores": [
+        "platform_objects",
+        "work_targets",
+        "effects",
+        "conflict_guards",
+        "history"
+      ],
+      "case": "뮬 동일 게시물 갱신 업무; 지원/조건/새 의도 확인, 다른 6개는 보류."
+    },
+    {
+      "id": "UJ-05",
+      "title": "저장 상태 확인 및 최신 조회",
+      "stores": [
+        "platform_objects",
+        "read_requests",
+        "history"
+      ],
+      "case": "저장된 최신 적격 관측을 보여주며 최신 조회 실패는 별도로 표시."
+    },
+    {
+      "id": "UJ-06",
+      "title": "기존 글 관리 연결",
+      "stores": [
+        "platform_accounts",
+        "platform_objects",
+        "source_object_links",
+        "commands",
+        "history"
+      ],
+      "case": "권한과 정확 식별 확인 후 기존 직접 등록물을 내부 연결; 외부 변이 없음."
+    },
+    {
+      "id": "UJ-07",
+      "title": "정보·규격 오류 및 인증",
+      "stores": [
+        "source_versions",
+        "work_targets",
+        "access_contexts",
+        "history"
+      ],
+      "case": "다른 정상 대상의 준비를 보존하고 해당 오류만 수정; 인증 만료 후 새 문맥."
+    },
+    {
+      "id": "UJ-08",
+      "title": "부분 성공·실패·효과 불명",
+      "stores": [
+        "work_targets",
+        "dispatches",
+        "effects",
+        "conflict_guards",
+        "read_requests",
+        "history"
+      ],
+      "case": "확인+불명은 effect_unknown, 확인+미발생 확정은 partial_confirmed; 기존 성공/불명 재실행 없음."
+    },
+    {
+      "id": "UJ-09",
+      "title": "대행 제한·내부 작성안",
+      "stores": [
+        "work_targets",
+        "history"
+      ],
+      "case": "정확 작성안/제한 근거만 기록; 외부 effect 또는 성공 없음."
+    },
+    {
+      "id": "UJ-10",
+      "title": "원본 수정·삭제·연결 해제",
+      "stores": [
+        "sources",
+        "source_versions",
+        "source_object_links",
+        "commands",
+        "history"
+      ],
+      "case": "새 버전/내부 retire/연결 해제; 고정 승인·외부 효과·기존 관측 보존."
+    },
+    {
+      "id": "UJ-11",
+      "title": "외부 계정·권리",
+      "stores": [
+        "users",
+        "platform_accounts",
+        "access_contexts",
+        "commands",
+        "history"
+      ],
+      "case": "정확 계정 연결/해제 및 권리 접수; 접근 차단과 폐기 확인 독립."
+    },
+    {
+      "id": "UJ-12",
+      "title": "이탈·재접속·복귀",
+      "stores": [
+        "users",
+        "source_versions",
+        "work_requests",
+        "work_targets",
+        "commands",
+        "access_contexts",
+        "history"
+      ],
+      "case": "저장 또는 수락 응답 유실에서 같은 key 확인; 화면 이탈로 외부 효과 재개 없음."
+    }
+  ],
+  "state_placement": {
+    "AX01": "인증 서비스의 접근 문맥; users 본인 식별",
+    "AX02": "source_versions.state/edit_generation",
+    "AX03": "sources.state / source_object_links.state",
+    "AX04": "commands.state",
+    "AX05": "FE 응답 인지, DB 미저장",
+    "AX06": "work_targets.prep_state",
+    "AX07": "work_targets.binding_snapshot + 정확 FK",
+    "AX08": "work_requests.review_state/approval_snapshot",
+    "AX09": "work_targets.lifecycle",
+    "AX10": "effects.state + history(effect_judgment)",
+    "AX11": "read_requests.state",
+    "AX12": "history(native_observation)",
+    "AX13": "history(goal_assessment)",
+    "AX14": "access_contexts.state/scope/generation",
+    "AX15": "access_contexts.cleanup",
+    "AX16": "history(target_result)",
+    "AX17": "conflict_guards.disputed/unknown_block"
+  },
+  "platform_fit": [
+    {
+      "id": "PL01",
+      "name": "크몽",
+      "fit": "전문가 프로필→상품; 가격 패키지/첨부는 검증된 중첩 값; 상품 ID, 심사 접수와 판매 목표 분리."
+    },
+    {
+      "id": "PL02",
+      "name": "탈잉",
+      "fit": "튜터 프로필→클래스; 회차/가격 구성은 중첩 값; 최초 일정은 조건부 미채택; 클래스 승인과 신청 가능 분리."
+    },
+    {
+      "id": "PL03",
+      "name": "숨고",
+      "fit": "고수 프로필→제공 서비스; 공유 프로필 범위와 서비스 하위 범위를 guard에서 겹침 판정; 대표 서비스 미채택."
+    },
+    {
+      "id": "PL04",
+      "name": "프람피",
+      "fit": "전문가 프로필→레슨 분야; 확인된 하위 객체만 parent; 이력/커리큘럼 반복 값; 고유 키 미확인 시 쓰기 차단."
+    },
+    {
+      "id": "PL05",
+      "name": "뮬",
+      "fit": "기존 정확 게시물 유지, 신규/수정/동일 글 갱신 별도 operation; 이전 갱신 효과와 조건 비교."
+    },
+    {
+      "id": "PL06",
+      "name": "힙합플레이야",
+      "fit": "정확 홍보 게시물/게시 상태; 미검증 수정·갱신 보류; 공개 목표 별도."
+    },
+    {
+      "id": "PL07",
+      "name": "힙합LE",
+      "fit": "정확 장터 게시물/게시 상태; 미검증 수정·갱신 보류; 공개 목표 별도."
+    }
+  ],
+  "rules": [
+    {
+      "title": "R1 소유권",
+      "rule": "모든 사용자의 FK 연결에서 owner를 검증(직접/상위 행의 owner 및 계정 포함). 복합 FK 또는 동일 트랜잭션 검증과 제한된 DB role/RLS 적용. 없는 ID와 타 owner ID 응답 구분 노출 금지. conflict_guards만 전역 내부 전용."
+    },
+    {
+      "title": "R2 원본·준비·승인",
+      "rule": "원본 head CAS, draft generation 확인, saved 버전 불변, 준비안은 승인 전 교체 가능하며 stale 응답 거절. 전체 선택 snapshot·내용/범위 양 승인·준비/대상/규칙/효과/비용/읽기 계획을 묶어 동결. 승인 이후 수정은 새 요청·새 대상."
+    },
+    {
+      "title": "R3 명령 멱등",
+      "rule": "같은 principal/kind/key+digest는 같은 결과, 다른 digest 거절. 작업 기록과 command 영수증 동일 트랜잭션. 응답 유실/404로 새 키 발행 금지; no_commit_proven은 지연 커밋 방지까지."
+    },
+    {
+      "title": "R4 전송·경합",
+      "rule": "전역 정규 외부 계정 단위 트랜잭션 잠금 후 root/경로/alias 겹침 및 불명/분쟁 확인, 모든 효과 예약, 동일 dispatch 1회 시작 CAS. 전송 시작과 외부 효과는 원자적이지 않으므로 crash 시 unknown 보존. scope 불명 시 보수적 상위 범위 차단."
+    },
+    {
+      "title": "R5 정확 효과",
+      "rule": "dispatch 한 건→복수 effects. 응답과 독립 관측 별개. 효과 현재값과 append history를 같은 트랜잭션으로 변경; 종료된 업무 재개 금지, 늦은 증거는 해당 효과/결과 판정 새 기록만. 새 잔여 시도는 새 승인 및 미발생 증명/전송 fence."
+    },
+    {
+      "title": "R6 조회·상태",
+      "rule": "요청 순번과 관측/수신 시각 분리. read_requests는 조회 상태, history의 native/goal/target_result는 별도 정본. 늦은 결과·충돌 근거 처리 시 기존 적격 관측을 잘못 덮어쓰지 않음; 근거 충돌은 전역 dispute 차단."
+    },
+    {
+      "title": "R7 인증·폐기",
+      "rule": "매 실행 시 access purpose·account·scope·generation·만료 및 정책을 검사. 차단과 폐기 의무는 같은 트랜잭션, 완료/불명은 별도 기록. 새 인증은 기존 폐기 의무와 효과를 지우지 않음. mock-only; 비밀/민감 증빙 원문 저장 금지."
+    },
+    {
+      "title": "R8 보존",
+      "rule": "원본 retire, 관계 해제, 권리 요청은 내부 효과; 실제 외부 삭제·원복 없음. 기존 승인/결과/근거의 물리 삭제, 백업/보존 기간은 정책 승인 전 보류; 사용자의 권리 요청은 command 접수 및 history 처리 단계로 표현."
+    },
+    {
+      "title": "R9 JSON 경계",
+      "rule": "JSONB는 버전 종속 사실/입력안/규칙 pin/승인 snapshot/폐기 자원 목록/typed history payload에만 사용. 사용자·원본·객체·요청·대상·효과·읽기·명령 등 독립 identity는 관계형 FK. history proof IDs는 적격·owner·scope의 참조 무결성 검사 및 append-only, 임의 ID 허용 금지. 규칙 레지스트리의 사용 버전은 릴리스 후에도 재현 가능하게 보존."
+    }
+  ],
+  "minimization": [
+    {
+      "pair": "원본+버전",
+      "decision": "분리",
+      "why": "원본 안정 ID와 불변 revision, 동시 수정 CAS 및 기존 공고 연결 때문에."
+    },
+    {
+      "pair": "자료+사용 관계",
+      "decision": "분리",
+      "why": "공유 자료에 대한 권리 제한 및 여러 버전의 사용 무결성 때문에."
+    },
+    {
+      "pair": "외부 계정+외부 객체+원본 연결",
+      "decision": "분리",
+      "why": "계정 하나의 여러 상품/공고, 공유 프로필 및 기존 게시물 연결·해제 때문에."
+    },
+    {
+      "pair": "요청+대상",
+      "decision": "분리",
+      "why": "전체 선택·양 승인과 플랫폼별 부분 성공을 모두 표현해야 함."
+    },
+    {
+      "pair": "전송+효과",
+      "decision": "분리",
+      "why": "한 물리 전송이 여러 개별 효과를 만들고 각각 다른 판정을 가질 수 있음."
+    },
+    {
+      "pair": "효과+경합 가드",
+      "decision": "분리",
+      "why": "다른 요청/owner 및 신규 slot을 넘는 전역 충돌·불명·분쟁 유지."
+    },
+    {
+      "pair": "조회+이력",
+      "decision": "분리",
+      "why": "요청 lifecycle과 관측/증거/늦은 판정의 append-only 수명이 다름."
+    },
+    {
+      "pair": "사실/준비값/승인 항목/프로필",
+      "decision": "통합 또는 설정",
+      "why": "독립 조회·수명주기 요구 없음; versioned payload/설정으로 표현."
+    },
+    {
+      "pair": "인증/폐기·권리/감사",
+      "decision": "통합",
+      "why": "접근 문맥 내부의 자원 폐기 목록, 명령+불변 history에 권리/감사. 세션/토큰 저장 없음."
+    }
+  ],
+  "assumptions": [
+    "인증 기술 미정. 현재 사용자당 하나의 검증된 서비스 로그인 주체를 users에 통합; 다중 인증 제공자 연결/공동 소유 기능이 채택되면 identity/link 분리 필요. 서비스 인증/세션 폐기는 인증 서비스가 책임지며 필요 비밀을 DB에 저장하지 않는다.",
+    "정규 외부 계정/객체 식별 키, slot 및 경합 scope는 플랫폼 실증 전 후보. 다른 owner가 같은 외부 계정을 관리하는 경우에도 전역 guard 키는 동일해야 하며 다른 owner의 정보는 노출되지 않는다.",
+    "현재 팀 조사에서 확인된 객체 관계는 주로 계층 1:N. 다중 부모의 독립 변경/관계 lifecycle이 증명되면 관계 테이블 추가 검토; 하위 항목 고유 ID 미확인은 JSON 값으로 보존하되 정확한 하위 수정 성공을 가정하지 않는다.",
+    "임시 인증 자원은 한 문맥의 제한된 자원 목록으로 관리. 자원별 독립 실행/대규모 수명주기 요구가 추가되면 분리 검토.",
+    "검토 중 준비는 대상 행에서 최신 버전과 generation을 관리하고 승인된 버전은 불변 대상/요청으로 보존한다. 승인 전 모든 키 입력/자동 추출 시도에 대한 무기한 이력은 요구하지 않는다.",
+    "PostgreSQL 자료형·PK/FK/unique/check 및 트랜잭션 설계 후보. 실제 DDL/DB 실행, 기존 SQLite 이관, 공식 projection check, 플랫폼 외부 테스트 미실행; 사용자 스토리 V3.1-R1 잠정 기준 유지. 물리 삭제/보존 기간, 권한·실제 필드/효과·MVP 우선순위 미확정."
+  ],
+  "verification": {
+    "method": "기존 JSON 원본의 ID 전수 대조 + 관계/시나리오 수동 설계 검토; ID coverage는 실제 동작 보장이 아님",
+    "checks": {
+      "old_logical_record_mapping": true,
+      "table_name_unique": true,
+      "all_36_system_works": true,
+      "all_32_error_types": true,
+      "all_17_state_axes": true,
+      "all_12_journeys": true,
+      "all_7_platforms": true,
+      "all_feature_table_refs": true,
+      "all_declared_fk_table_refs": true,
+      "platform_scope_rows": true,
+      "effect_contract_rows": true
+    },
+    "actual_db_tests": 0,
+    "actual_external_tests": 0,
+    "official_projection_check": "not_run"
+  },
+  "projection_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md"
+}
