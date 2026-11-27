@@ -106,7 +106,8 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md",
     "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v3.json",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md",
+    "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -217,6 +218,9 @@
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md"
     }
   ],
   "result": {
@@ -1222,14 +1226,15 @@
     "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
     "id": "USER-STORY-20261127-R01-V31",
     "version": "3.1",
-    "semantic_revision": "V3.1-R2-DR02",
-    "commit": "83d767192bb49c80bf9f863e9c3ef88dc933dada",
-    "blob": "b38c37c4cdd334303455155a828c731af6dcab80",
+    "semantic_revision": "V3.1-R3",
+    "commit": "e6a6922f003062c6ad757ad79a24eb364fd47e85",
+    "blob": "9a866e346b8521c3788f723eaf308ff50d19f2c4",
     "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
     "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
     "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
     "status": "provisional_for_logical_db_not_final_approved",
-    "r03_review_projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md"
+    "r03_review_projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+    "team_review_projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md"
   },
   "design_review_v3": {
     "base_commit": "c0340296e75bcab160bdc63d86ca048121a11b44",
@@ -1326,5 +1331,29 @@
     "scope": "운영 기준선 관측·판정·미달 정보 전달 채택; 관리자 전용 제품 기능 미채택; 기존 강사 흐름·DB V3 후보 유지",
     "verification": "6/6 생성 프로젝션 원격 내용 일치; 계측·수치·알림 구현/시험 미수행",
     "remaining": "OB-01~05 수치·표본/기간, 계측·전달·권한 상세 및 검증"
+  },
+  "team_review_integration": {
+    "id": "V31-R3-TEAM-REVIEWS",
+    "status": "integrated_review_candidate",
+    "story_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "e6a6922f003062c6ad757ad79a24eb364fd47e85",
+      "blob": "9a866e346b8521c3788f723eaf308ff50d19f2c4",
+      "section": "team_review_integration"
+    },
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md",
+    "review_counts": {
+      "R02": 6,
+      "R03": 4,
+      "R05": 4,
+      "R04": "no_new_review_found"
+    },
+    "verification": "15/15 static checks; 7/7 projection remote match; no runtime/CI",
+    "remaining": [
+      "DR-03 계정·첨부 수명주기 및 DR-04 W 인라인 저장/공개 정보 미결정.",
+      "DR-05 실제 서버 규격·대행 허용·독립 효과/물리 결합 미검증. DR-01 일정/구현 순서 미확정.",
+      "DR-02 운영 기준치/계측/알림 미구현. R04 별도 검토 미확인.",
+      "상위 V1.0 원본 및 상세 구현 계약 정식 동기화, 정식 CI 및 실제 앱/외부 실행 미수행."
+    ]
   }
 }
