@@ -1105,6 +1105,9 @@ def build():
     )
 
     for source, record in sources.items():
+        if record["id"] == "R02-V31-REVIEW-20261127":
+            output = "docs/review/lesson-registration/R02-V31-REVIEW-20261127.md"
+            outputs[output] = render_document(record, source, output)
         if record["id"] == "R02-USER-STORY-20261127-SYNC":
             output = "docs/review/lesson-registration/R02-USER-STORIES-20261127.md"
             outputs[output] = render_document(record, source, output)
