@@ -1,0 +1,6278 @@
+{
+  "schema_version": 1,
+  "id": "INTG-20261126-R01-SEMANTIC-REVIEW-01",
+  "kind": "document",
+  "status": "R01 의미 검토 제안 · R03 작업 초안 참고 · 범위 승인 전",
+  "owner": "R01",
+  "date": "2026-11-26",
+  "task_ref": "TASK-058",
+  "title": "107개 통합 후보 의미 검토 및 R03 121개 초안 대조",
+  "source_refs": {
+    "stories": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
+      "commit": "6395ccae8bfa1b86ca46f6c1d7733b6d0e011c99",
+      "blob": "65494b884f7e41824b86d88fdd8d758bb507f2dc"
+    },
+    "scope": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
+      "commit": "6395ccae8bfa1b86ca46f6c1d7733b6d0e011c99",
+      "blob": "b41d941c1a72aee56ce0a96eb94fb9e09da56447"
+    },
+    "platforms": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json",
+      "commit": "6395ccae8bfa1b86ca46f6c1d7733b6d0e011c99",
+      "blob": "d884e7cd67e52515e21dd7a6b99d4075c1eb0e74"
+    },
+    "r03": {
+      "path": "docs/members/R03/workspace/R03_TASK-059_user-stories_revised_draft.json",
+      "commit": "163a489561a77b31fca99e709ee2366d2779af89",
+      "blob": "d95fe57a0a066362393fa56c6267e0064191e32f"
+    },
+    "proposal": {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+      "commit": "163a489561a77b31fca99e709ee2366d2779af89",
+      "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+    },
+    "r03_template": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/R03/user-stories.json",
+      "commit": "163a489561a77b31fca99e709ee2366d2779af89",
+      "blob": "f7223d9e2777fc4aae51193a96b322f70fa39a4d"
+    }
+  },
+  "method": "기존 107개 행동을 문장·의도·대상·피처/지원 근거·Pain/가치·범위·실행 조건으로 검토. R03 작업 공간의 비교 후 보완 초안 121개는 기존 R01 63개 버전과 비교해 작성된 참고자료이며 정식 TASK-059 인계/독립 실증이 아님. 현재 107개에 다시 대조하고 동일·부분·누락 후보·제외를 구분. 같은 기획/출처 재사용을 독립 증거로 집계하지 않음. 기존 ID·팀원 원본·main 불변. 승인된 행동 집합을 만들지 않는다.",
+  "relation_legend": {
+    "M": "동일 의미 후보(세부 전제 미확정)",
+    "P": "부분 대응/조건·분해·관련 차이",
+    "G": "별도 명시 필요 또는 지원/조건부 누락 후보; 연결 ID는 맥락이며 동일 대응 아님",
+    "X": "기획상 대행 제외; 연결 ID는 직접 사용자 수행/안내의 맥락"
+  },
+  "disposition_legend": {
+    "retain": "의미 유지 추천",
+    "clarify": "정의/역할/조건 보완",
+    "revise": "의미 누락 또는 좁은 표현 수정",
+    "scenario": "기존 행동의 조건별 분기로 묶는 후보, ID 유지",
+    "optional_interaction": "시스템 의무/논리 의도와 별도 사용자 조작을 구분",
+    "defer": "범위 또는 선택 방식 미결정",
+    "conditional": "조건부 확장으로만 검토"
+  },
+  "summary": {
+    "reviewed_integrated_candidates": 107,
+    "source_R03_draft_actions": 121,
+    "source_R03_formal_template_actions": 0,
+    "source_R03_draft_system_events": 56,
+    "r03_relations": {
+      "G": 20,
+      "M": 64,
+      "P": 33,
+      "X": 4
+    },
+    "review_dispositions": {
+      "retain": 33,
+      "clarify": 12,
+      "optional_interaction": 5,
+      "revise": 1,
+      "scenario": 33,
+      "conditional": 10,
+      "defer": 13
+    },
+    "feature_rows": 34,
+    "scope_decision_rows": 14,
+    "platform_difference_rows": 11,
+    "review_groups": 8,
+    "gap_groups": 10,
+    "approved_scope_count": 0,
+    "conclusion": "범위 승인 전 검토를 앞당겼다. 특히 F12 직접 로그인, F14 직접 등록물 관리 연결, §9.4 기본 접근 철회는 명시적 보완 우선. 최초 등록에서도 중복 확인 필요. V1.2 제품 MVP의 대표 기존 정보 수정 방향을 보존한다. 별도 화면/버튼 수로 행동 후보를 환산하지 않는다."
+  },
+  "story_reviews": [
+    {
+      "story_id": "IS-001",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "기존 소개글·기본 조건을 받는 공통 원본 입력. 구조화 입력과 텍스트 입력은 대안이며 동시에 강제하지 않는다.",
+      "action": "강사가 원본 레슨 텍스트를 입력한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F01"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-003",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-006",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-002",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "저장된 원본 선택은 재사용의 실질 트리거. 목록 조회·상세 열람과 의도가 다르나 한 과정으로 가능하다.",
+      "action": "강사가 저장된 원본 레슨을 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F02"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-04"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-009",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-003",
+      "disposition": "clarify",
+      "role": "support",
+      "reason": "F03 구조화 자체는 시스템; 추출 사실 중 잘못되거나 불확실한 것만 확인·정정하면 된다. 별도 전수 재검수 강제 금지.",
+      "action": "강사가 구조화된 레슨 사실을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F03",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-05"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-011",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-012",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-004",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "원본 사실 변경과 플랫폼별 입력안 수정의 저장 대상·외부 영향 구분. 외부 변경 자동 전파 금지.",
+      "action": "강사가 원본 레슨 정보를 수정한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F04"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-012",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-013",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-027",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-050",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-005",
+      "disposition": "optional_interaction",
+      "role": "support",
+      "reason": "F05의 저장·버전 보존은 기본. 명시 저장 요청은 자동 저장 대안과 비교; 성공 확인·실패/미확인 후 안전한 재요청 표현 필요.",
+      "action": "강사가 원본 레슨 정보의 저장을 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F05"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-04",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-014",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-015",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-100",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-006",
+      "disposition": "clarify",
+      "role": "support",
+      "reason": "업무 지원과 제약은 하나의 안내에서 함께 확인 가능하지만 업무별 허용·선행 조건·근거는 각각 유지.",
+      "action": "강사가 플랫폼별 지원 업무와 제약 안내를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F06"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-08"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-016",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-017",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-007",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "대상 플랫폼 선택은 업무 종류 선택과 독립 의사이며 한 선택 과정으로 가능. 대상별 지원 확인.",
+      "action": "강사가 작업 대상 플랫폼을 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F07"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-018",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-008",
+      "disposition": "clarify",
+      "role": "direct",
+      "reason": "변환안의 실제 조건·검증 결과를 검토. IS-082와 동일 revision이면 중복 검수 강제 금지.",
+      "action": "강사가 플랫폼별 변환 입력안을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F08",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-05",
+        "SD-08",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-023",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-024",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-027",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-009",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "부족 정보 입력은 구조화 정정과 구분되는 사실 확보. 진실·권리 미확인 값 자동 생성 금지.",
+      "action": "강사가 누락된 레슨 정보를 입력한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F10"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-05",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-006",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-025",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-027",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-050",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-010",
+      "disposition": "clarify",
+      "role": "direct",
+      "reason": "실제 제공 가능한 대체 조건 선택. 대안 거절도 표현할 필요; 단순 플랫폼 제외와 다른 판단이나 별도 UI 강제 금지.",
+      "action": "강사가 플랫폼 제약 충돌의 대안을 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F11"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-05",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-028",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-029",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-030",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-011",
+      "disposition": "revise",
+      "role": "support",
+      "reason": "F12는 직접 로그인 및 필요한 추가 인증을 포함한다. 현재 본인 인증 표현만으로 일반 로그인 누락; 로그인과 조건부 본인인증을 구별.",
+      "action": "강사가 대상 플랫폼의 본인 인증을 수행한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F12"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-031",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-032",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-036",
+          "relation": "X"
+        },
+        {
+          "id": "R03-US-037",
+          "relation": "X"
+        },
+        {
+          "id": "R03-US-038",
+          "relation": "X"
+        },
+        {
+          "id": "R03-US-039",
+          "relation": "X"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-012",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "만료 후 재인증은 IS-079 실패 후 재인증과 공통 행동이지만 만료와 실패 조건·이전 권한 폐기 구별.",
+      "action": "강사가 만료된 외부 인증 세션을 재인증한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F12"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [],
+      "r03_refs": [
+        {
+          "id": "R03-US-033",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-013",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "인증 계정 확인을 의도한 계정·업무권한과 대조; 계정 불일치 거절/재인증 및 잘못된 계정의 실행 금지.",
+      "action": "강사가 업무에 사용할 외부 계정을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F13"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-034",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-042",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-076",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-014",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "기존 객체 선택은 기존 관리 업무. 선택된 객체·소유권 확인과 직접 등록물 연결은 별도 의도.",
+      "action": "강사가 관리할 기존 외부 객체를 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F14"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06",
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-041",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-042",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-043",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-044",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-076",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-015",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "현재 관측된 기존 정보와 예정 정보 비교; 대상/변경 범위 및 최신 관측 전제. 신규 등록에 일률 강제하지 않음.",
+      "action": "강사가 게시 정보의 변경 전후 차이를 비교한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F15"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06",
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-046",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-047",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-016",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "최종 내용의 승인. 승인 버전 고정 및 이전 승인 재사용 금지; 실행 범위 승인과 한 과정 가능.",
+      "action": "강사가 플랫폼별 최종 입력 내용을 승인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F16"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-048",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-017",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "대상 계정·객체·업무·범위에 대한 승인; 내용 승인과 논리적으로 구분, 버튼 두 개를 강제하지 않음.",
+      "action": "강사가 외부 업무의 실행 범위를 승인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F17"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-047",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-051",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-018",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "내용 승인 거절은 쓰기 금지 및 수정/종료의 분기. 승인 철회와 시간적 차이.",
+      "action": "강사가 최종 입력 내용의 승인을 거절한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F16"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-049",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-050",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-019",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "승인에 영향 주는 변경만 재검토·새 승인. 기존 효과 불명 시 확인 우선.",
+      "action": "강사가 변경된 실행 조건을 재검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F18"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-044",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-054",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-068",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-020",
+      "disposition": "optional_interaction",
+      "role": "direct",
+      "reason": "F19 신규/추가 등록 의도 자체는 기본. 별도 실행 요청 클릭은 승인 의사가 요청까지 포함할 경우 불필요; 정책·효과 확인 선행.",
+      "action": "강사가 승인된 레슨의 신규 등록을 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F19"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-068",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-106",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-021",
+      "disposition": "optional_interaction",
+      "role": "direct",
+      "reason": "F20 기존 정보 수정은 기본 제품 후보이며 V1.2의 제품 MVP 대표 수정 포함 방향 보존. 별도 실행 버튼 미결정.",
+      "action": "강사가 기존 외부 객체의 정보 수정을 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F20"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-12",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-068",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-107",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-022",
+      "disposition": "optional_interaction",
+      "role": "direct",
+      "reason": "F21 허용 갱신은 수정·신규와 다른 효과. 빈도/권한 검증 전 MVP 필수 아님, 승인과 요청 통합 가능.",
+      "action": "강사가 기존 모집 공고의 갱신을 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F21"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-12",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-068",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-108",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-023",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "결과 확인의 상위 행동; 성공·실패·부분·미확인 및 접수/공개를 별도 판정으로 제공. 증빙 열람은 선택 가능.",
+      "action": "강사가 플랫폼별 업무 실행 결과를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F22",
+        "F24"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-055",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-024",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "저장된 마지막 관측 상태 조회와 실제 외부 재조회 구분. 확인 시각·게시 링크는 결과 속성.",
+      "action": "강사가 플랫폼별 마지막 관측 상태를 조회한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F25"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-10",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-059",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-060",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-061",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-089",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-025",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "사용자 요청 상태 갱신은 F26/F27; 대상 선택과 요청은 결합 가능. 현재 조회 실패가 이전 관측을 덮지 않는다.",
+      "action": "강사가 선택한 플랫폼의 상태 갱신을 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F26"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-062",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-063",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-026",
+      "disposition": "optional_interaction",
+      "role": "safety",
+      "reason": "미확인 효과 확인은 서비스의 필수 안전 의무; 사용자 요청 UI는 선택 후보. 일반 상태 조회와 중복 실행 방지 목적 구분.",
+      "action": "강사가 미확인 외부 효과의 확인을 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F22",
+        "F27"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-12",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-068",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-069",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-027",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "수동 조회 실패의 마지막 확인 시각 및 실패 사유는 IS-024/047 결과 분기; 최신 상태로 표시 금지.",
+      "action": "강사가 조회 실패 이후 마지막 확인 시점을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F28"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-060",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-065",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-090",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-028",
+      "disposition": "clarify",
+      "role": "direct",
+      "reason": "반려 사유에 맞춰 원본 또는 적용안을 보완. 원본 수정과 플랫폼별 설정 변경을 혼동하지 않음; 재접수는 새 결정.",
+      "action": "강사가 반려된 레슨 입력안을 보완한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F29",
+        "F10",
+        "F08"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-067",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-029",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "부분 성공 시 실패/미실행 대상만 재처리 후보 선택; 미확인 효과 확인 우선, 성공 대상 재실행 금지.",
+      "action": "강사가 부분 성공에서 미완료 대상을 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F24",
+        "F25"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-067",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-068",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-109",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-030",
+      "disposition": "conditional",
+      "role": "direct",
+      "reason": "모니터링 대상과 조회 범위는 구별. E01~E05 전체 기본 및 필수 MVP 제외.",
+      "action": "강사가 자동 모니터링 대상을 설정한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E01"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-077",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-078",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-081",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-082",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-083",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-084",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-085",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-089",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-031",
+      "disposition": "conditional",
+      "role": "safety",
+      "reason": "지속 조회 범위·기간 명시 승인; 기본 실행 권한 및 세션 유지와 분리.",
+      "action": "강사가 조회용 인증 유지를 승인한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E02"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-078",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-081",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-082",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-083",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-087",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-091",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-032",
+      "disposition": "conditional",
+      "role": "direct",
+      "reason": "실제 관측 변화 알림 확인; 근거와 중복/전달 실패 구분, 성과 미검증.",
+      "action": "강사가 자동 모니터링의 상태 변화 알림을 확인한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E04"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-090",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-092",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-093",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-121",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-033",
+      "disposition": "conditional",
+      "role": "safety",
+      "reason": "모니터링 종료 의도와 실제 종료/권한 해제 관측 구분; 추가 접근 우선 차단.",
+      "action": "강사가 자동 모니터링 중단을 요청한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E05"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-089",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-091",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-094",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-096",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-097",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-098",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-034",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "V1.2 §9.5 명시. 삭제 대상·진행 업무·보존 조건 확인. 외부 삭제와 연결 해제의 자동 수반 금지.",
+      "action": "강사가 보관된 원본 레슨의 삭제를 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "minimum_ownership_privacy_safety_requirement_candidate",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "V1.2 §9.5 원본 삭제",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-072",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-035",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "§9.5 관리 연결 해제 명시; 외부 게시물 및 필요 감사 이력 보존, 관련 접근 권한과 별도 검토.",
+      "action": "강사가 외부 게시물의 관리 연결 해제를 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "minimum_ownership_privacy_safety_requirement_candidate",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "V1.2 §9.5 관리 연결 해제",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-043",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-073",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-036",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "외부 심사 접수 취소는 새로운 외부 효과. 권한·가능 상태·취소 결과 확인 전 미결정; 내부 중단과 구별.",
+      "action": "강사가 외부 심사 접수의 취소를 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": {
+        "basis": "R02-US-029/R05-US-036; §5.6 별도 업무·승인 필요",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-07"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-104",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-037",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "지원 불가 플랫폼 제외는 F07 선택 변경. 인증 실패 등 제외 원인 분리, 다른 대상 조건 독립 검증.",
+      "action": "강사가 처리할 수 없는 플랫폼을 제외한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F07"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-08"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-022",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-030",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-085",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-038",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "숨고 대표 서비스 지정은 공통 기능과 다른 플랫폼별 변경 후보. 기존 서비스와 대표 관계/저장 권한 미확인.",
+      "action": "강사가 숨고 프로필의 대표 서비스를 지정한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [
+        "F11",
+        "F15"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-118",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-039",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "F06 지원 범위 안내의 구체 사례; 유료 견적·상담 업무 자체는 제외. 별도 서비스 기능 수로 계산하지 않음.",
+      "action": "강사가 프로필 등록과 유료 제안서의 업무 경계를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F06"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-040",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "본문 가격 표현은 IS-008/082의 플랫폼별 검토 분기; 별도 가격 필드와 본문 의미/단위 일치 확인.",
+      "action": "강사가 게시글 본문에 표현된 레슨 요금을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F08",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-041",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "심사 승인 후 모집 준비 안내는 결과/대응의 상황; 최초 일정 설정 별도 미결정. 승인과 오픈 구분.",
+      "action": "강사가 심사 승인 후 남은 모집 준비를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F29"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-116",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-042",
+      "disposition": "defer",
+      "role": "support",
+      "reason": "다중 workspace 선택이 필요한 근거 없음. 사용자 소유권 강제는 기본이며 workspace UI는 미결정.",
+      "action": "강사가 서비스의 작업 공간을 선택한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "강사 API/DB A2, D1 owner 경계; 별도 workspace UI 미정",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-114",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-043",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "원본 사실 확인과 부족 값 입력의 의미 구분. 확인할 수 없으면 외부 작업 금지.",
+      "action": "강사가 불확실한 레슨 사실을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F10"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-012",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-026",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-044",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "대안 없음으로 실행 전 업무 보류·종료. 진행 중 취소/이미 발생한 효과와 구분.",
+      "action": "강사가 유효한 대안이 없는 대상 업무를 중단한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F11"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-08"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-030",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-071",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-045",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "IS-023 실패 결과 분기; 확인된 실패와 미확인 효과를 혼동하지 않음.",
+      "action": "강사가 실패한 업무의 결과를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F22",
+        "F24",
+        "F29"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-066",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-046",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "IS-023 대상별 부분 성공 분기; 성공 집계와 후속 업무 선택 분리.",
+      "action": "강사가 복수 플랫폼 업무의 부분 성공 결과를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F22",
+        "F24",
+        "F25"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-13"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-047",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "사용자 요청 재조회 결과 확인; 기존 상태/현재 관측 변화와 조회 실패를 함께 표현.",
+      "action": "강사가 상태 갱신 결과를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F28"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-064",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-048",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "F29 대응 안내 확인. 원인 관측과 대응 선택은 달라야 하며 자동 재실행 지시 아님.",
+      "action": "강사가 업무 실패·반려·불일치의 대응 안내를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F29"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-057",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-066",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-067",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-049",
+      "disposition": "defer",
+      "role": "safety",
+      "reason": "실행 전 철회·일시 보류와 실행 중 중단의 가능 경계 구분. 외부 효과 후 원복 보장 없음.",
+      "action": "강사가 진행 중인 업무의 중단을 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": {
+        "basis": "V1.2 §9.3/R02-US-025, 기존 작업 중단 정책 미확정",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-070",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-071",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-050",
+      "disposition": "defer",
+      "role": "support",
+      "reason": "중단/보류 재개는 권한·대상·revision·효과·승인 재확인 조건. 기존 실행을 자동 이어가지 않음.",
+      "action": "강사가 중단된 업무의 재개를 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": {
+        "basis": "V1.2 §9.2–9.3/R02-US-026; 안전한 재개 후보",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-071",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-103",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-051",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "서비스 사용자 식별/owner 경계는 강사 피드백 A2/D1 및 §9.6 기본 안전 요구 후보. 계정/인증 기술은 미결정.",
+      "action": "강사가 서비스 이용 인증을 수행한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "강사 피드백 A2 서비스 인증·owner",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-001",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-002",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-052",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "IS-051의 인증 실패 결과; 타 사용자 정보 노출 금지. 복구 방법·계정 정책 미결정.",
+      "action": "강사가 서비스 계정 인증 실패를 확인한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "강사 피드백 A2 인증 오류",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-112",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-053",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "서비스 접근 종료와 외부 업무용 세션 폐기 구분. 진행 작업 처리·인증 방식 미결정이 종료 안전 의무를 약화하지 않음.",
+      "action": "강사가 서비스 이용 세션의 종료를 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "강사 피드백 A2 서비스 세션 종료",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02",
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-075",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-054",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "사용자 선택한 플랫폼별 적용 조건 변경과 원본 사실 수정은 다른 데이터 의미. 바뀐 승인 무효화.",
+      "action": "강사가 플랫폼별 적용 조건을 수정한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F08",
+        "F10",
+        "F15"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-027",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-028",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-050",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-055",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "사진·영상 등의 사용 권리 확인은 최소 권리 요구. 실제 권리 보유·공개 범위 확인, 필요 이상 자료 수집 금지.",
+      "action": "강사가 첨부 자료의 사용 권한을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F01",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-005",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-056",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "IS-015/019의 외부 변경 발견 분기; 최신 외부 관측과 변경 범위 재검증 후 새 승인.",
+      "action": "강사가 새로 관측된 외부 변경을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F15",
+        "F18"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-12",
+        "SD-13"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-057",
+      "disposition": "retain",
+      "role": "support",
+      "reason": "준비 실패 후 재준비는 외부 효과 없음. 기존 초안 보존·늦은 결과 무시·최신 revision 확인.",
+      "action": "강사가 준비 실패 후 새로운 준비를 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-110",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-058",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "탈잉 최초 모집 오픈의 선행 일정 설정만 후보. 실제 수업 일정 운영은 제외.",
+      "action": "강사가 탈잉의 모집 오픈에 필요한 일정 등록을 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [
+        "F29"
+      ],
+      "pain_refs": [
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-117",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-059",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "직접 작성용 자료 제공은 대행 제한 상황의 대안. 권리·정책 및 시간 절감 검증 후 채택.",
+      "action": "강사가 자동 대행 불가 업무의 직접 작성용 자료를 확인한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [
+        "F06",
+        "F08"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-08"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-115",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-060",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "권한 부족은 시스템이 실행을 차단할 의무; 사용자가 종료/제외를 선택할 수 있으나 차단이 사용자 선택에 의존하지 않음.",
+      "action": "강사가 권한 부족으로 제한된 업무를 종료한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F12",
+        "F13"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-035",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-074",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-061",
+      "disposition": "conditional",
+      "role": "safety",
+      "reason": "별도 인증 유지 승인 거절 시 인증 기반 자동 조회 금지. 허용 공개 방식은 별도 검토.",
+      "action": "강사가 인증 유지 승인을 거절한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E02"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-088",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-062",
+      "disposition": "defer",
+      "role": "support",
+      "reason": "서비스 자체 가입 여부는 인증 전략에 종속. 사용자 식별 의무와 별도 등록 기능을 구분.",
+      "action": "강사가 서비스 계정 등록을 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "강사 피드백 A2; 서비스 계정 방식 미확정",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-111",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-063",
+      "disposition": "defer",
+      "role": "safety",
+      "reason": "서비스 계정 삭제 정책과 원본 삭제/연결 해제는 별개. 적용 법·보존·진행 업무 검토 전 방식 미확정.",
+      "action": "강사가 서비스 계정 삭제를 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "V1.2 §9.5 개인정보 보호; 계정 자체 삭제 정책 미결정",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02",
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-113",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-064",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "원본 첨부 업로드는 텍스트와 다른 자료. 파일 권리/제약 확인·실패 대응, 별도 화면 강제 없음.",
+      "action": "강사가 원본 레슨 첨부 파일을 업로드한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F01"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-004",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-007",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-065",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "첨부 제거는 자료 변경. 교체는 제거+업로드 구성 가능, 영구 삭제와 플랫폼 게시 변경을 의미하지 않음.",
+      "action": "강사가 원본의 불필요한 첨부를 제거한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F01",
+        "F04"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-09",
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-007",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-008",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-066",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "저장 원본 목록 조회는 재사용 진입. 목록→선택→열람은 하나의 흐름 가능.",
+      "action": "강사가 저장된 원본 레슨 목록을 조회한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F02"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-099",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-067",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "선택 원본 내용 열람은 사용자가 재사용 대상을 확인. 목록과 결과 구분.",
+      "action": "강사가 선택한 원본 레슨의 내용을 열람한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F02"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-010",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-068",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "업무 종류 선택과 실행 승인/요청 구분. 신규·수정·갱신·조회 조건을 각각 표현.",
+      "action": "강사가 수행할 업무 종류를 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F07"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-019",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-020",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-021",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-069",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "실행 범위 승인 거절 시 쓰기 금지. 이미 준 내용 승인만으로 실행 불가.",
+      "action": "강사가 업무 실행 범위의 승인을 거절한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F17"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-052",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-070",
+      "disposition": "conditional",
+      "role": "support",
+      "reason": "모니터링 유지 기간 설정과 조회 주기 구분. 안전한 기본값/상한 정책 미결정.",
+      "action": "강사가 자동 모니터링의 유지 기간을 설정한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E01"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-079",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-084",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-120",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-071",
+      "disposition": "conditional",
+      "role": "support",
+      "reason": "알림 조건과 채널 구분. 사용자 설정 강제보다 필요성·비용 확인.",
+      "action": "강사가 자동 모니터링의 알림 조건을 설정한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E01"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-080",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-084",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-121",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-072",
+      "disposition": "conditional",
+      "role": "safety",
+      "reason": "지속 조회 권한 철회. 기본 업무용 외부 접근 권한 철회도 별도로 누락 후보.",
+      "action": "강사가 지속 조회 권한을 철회한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E05"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-074",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-091",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-095",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-073",
+      "disposition": "conditional",
+      "role": "optional_ui",
+      "reason": "세션 폐기는 시스템 의무. 별도 파기 요청은 종료·권한 철회에 흡수 가능; 실제 해제 결과 확인 필요.",
+      "action": "강사가 보관된 모니터링 세션의 파기를 요청한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E05"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-097",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-098",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-074",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "재심사 요청은 반려 대응의 특수 외부 업무. 기존 대상·반영 효과·새 승인·허용 확인 필요.",
+      "action": "강사가 보완한 레슨의 재심사 접수를 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [
+        "F20",
+        "F29"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-105",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-075",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "외부 임시저장은 내부 초안 보존과 다른 외부 효과/대상. 권한·실제 저장 조건 미확인.",
+      "action": "강사가 외부 플랫폼에 판매글 임시저장을 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "R02-US-027 외부 판매글 임시저장; V1.2 §9.1 내부 저장과 분리",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-101",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-076",
+      "disposition": "defer",
+      "role": "direct",
+      "reason": "외부 임시 초안 조회는 내부 원본 조회와 구분. 저장/식별/접근 권한 확인 전 미결정.",
+      "action": "강사가 외부 플랫폼 임시저장 초안의 조회를 요청한다.",
+      "original_scope_candidate": "undecided",
+      "previous_scope_recommendation": "undecided",
+      "previous_mvp_recommendation": "undecided_not_required",
+      "feature_refs": [],
+      "pain_refs": [
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "R02-US-028 외부 초안 조회; V1.2 §5.4 대상 식별과 구분",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-102",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-077",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "가격 검증 오류는 F09 검증 문제의 한 사례. 일반 오류 확인·정정 흐름 재사용.",
+      "action": "강사가 가격 검증 오류를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05",
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-024",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-078",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "인증 실패 대상 제외는 IS-037의 조건별 분기. 실패 대상을 성공으로 집계하지 않음.",
+      "action": "강사가 인증에 실패한 플랫폼 작업을 건너뛴다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F12",
+        "F07"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-079",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "인증 실패 재시도는 만료 재인증 IS-012와 공통 행동. 원인·정책에 맞춘 수동 재인증; 우회 금지.",
+      "action": "강사가 실패한 외부 플랫폼 인증을 재시도한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F12"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [],
+      "r03_refs": [
+        {
+          "id": "R03-US-033",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-080",
+      "disposition": "retain",
+      "role": "direct",
+      "reason": "업무 이력은 상태의 현재값과 다른 승인/실행/관측 기록. 보존·권한·노출 최소화.",
+      "action": "강사가 업무 실행 이력을 열람한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F23",
+        "F25"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-11",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-058",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-081",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "업무 결과 증거 열람과 결과 판정 구별. 비밀/타인 정보 노출 없이 확인 가능한 근거 제공.",
+      "action": "강사가 업무 실행 결과의 증거를 열람한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F22",
+        "F24"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-11",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-056",
+          "relation": "M"
+        },
+        {
+          "id": "R03-US-061",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-093",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-082",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "최종 승인 직전 입력안 검토는 IS-008과 같은 revision이면 재사용 가능. 바뀐 내용만 새 검토.",
+      "action": "강사가 플랫폼별 최종 입력안을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F16"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-09"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-023",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-083",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "실행 범위 검토는 승인과 구분되는 의미. IS-017과 같은 과정 허용.",
+      "action": "강사가 업무 실행 범위를 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F17"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-042",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-047",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-119",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-084",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "반려 사유 확인은 F29 문제 원인 확인. IS-048의 안내와 결과 구분, 실제 확인된 사유만.",
+      "action": "강사가 외부 플랫폼의 반려 사유를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F29"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07",
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-066",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-085",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "반려 수정 제안 검토는 F29/F10 분기. 실제 수정과 대응 방안 선택은 별개.",
+      "action": "강사가 반려 대응의 수정 제안을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "priority_by_operation_value_and_permission",
+      "feature_refs": [
+        "F29",
+        "F10"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-07"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-086",
+      "disposition": "conditional",
+      "role": "safety",
+      "reason": "인증 유지 위험 고지는 승인 전 조건; 위험 안내를 확인했어도 자동 승인 아님.",
+      "action": "강사가 인증 세션 유지의 위험 고지를 확인한다.",
+      "original_scope_candidate": "conditional",
+      "previous_scope_recommendation": "conditional",
+      "previous_mvp_recommendation": "excluded_from_required_MVP_by_V1_2",
+      "feature_refs": [
+        "E02"
+      ],
+      "pain_refs": [
+        "P03"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-082",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-086",
+          "relation": "M"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-087",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "내용 승인 철회는 추가 쓰기 차단. 이미 발생한 효과를 취소했다고 표시하지 않음.",
+      "action": "강사가 기존 입력 내용 승인을 철회한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F16",
+        "F18"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-053",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-088",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "실행 범위 승인 철회는 범위 재검증/차단. 내용 철회와 논리적으로 구별, UX 통합 가능.",
+      "action": "강사가 기존 업무 실행 범위 승인을 철회한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F17",
+        "F18"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-11"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-053",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-089",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "기존 객체 목록/중복 확인은 신규 등록에서도 필요한 안전 조건. UI 목록은 필요할 때 표시하며 최초 등록 MVP 검증에서 누락 금지.",
+      "action": "강사가 외부 플랫폼의 기존 객체 목록을 조회한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F14"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06",
+        "SD-01",
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-040",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-045",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-076",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-090",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "레슨 장소 협의 가능 여부는 플랫폼별 설정/제약 사례. 원본의 실제 조건과 일치.",
+      "action": "강사가 레슨 장소의 협의 가능 여부를 선택한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F11",
+        "F08"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-091",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "오프라인 장소 입력안 검토는 IS-008/082의 조건 사례. 주소 공개·권한 최소화.",
+      "action": "강사가 플랫폼별 오프라인 장소 입력안을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F08",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-092",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "패키지 가격 검토는 변환안 검토의 조건 사례. 단일·다중 패키지와 금액 단위 보존.",
+      "action": "강사가 패키지별 가격 입력안을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F08",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-093",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "계산된 클래스 요금 검토는 사실·금액 검증. 실제 시간·회차·단가 임의 환산 금지.",
+      "action": "강사가 계산된 클래스 수강료를 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F09",
+        "F16"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-094",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "클래스 회차 구성 검토는 플랫폼별 입력안 검증. 수업 운영 일정 관리로 확대 금지.",
+      "action": "강사가 클래스 회차 구성을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F08",
+        "F09"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-05"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-095",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "숨고 등 제공 서비스 매칭 조건은 플랫폼별 설정·검토. 별도 수정 실행은 승인/권한 필요.",
+      "action": "강사가 제공 서비스의 매칭 조건을 검토한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F08",
+        "F09",
+        "F20"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-096",
+      "disposition": "scenario",
+      "role": "direct",
+      "reason": "프로필 등록 단계는 외부 native 상태의 구체 사례. 미리보기나 단계 표시로 완료 단정 금지.",
+      "action": "강사가 전문가 프로필의 현재 등록 단계를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F06",
+        "F25"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-097",
+      "disposition": "defer",
+      "role": "support",
+      "reason": "기존 게시물 검색 조건은 객체 식별 수단 후보. 검색 기능 확대·필수 필터 확정 근거 없음.",
+      "action": "강사가 기존 레슨 게시물의 검색 조건을 설정한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "only_when_selected_platform_and_scenario_requires_it",
+      "feature_refs": [
+        "F14"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-06"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-098",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "진행 중 인증 취소는 해당 접근 차단·세션 종료 조건. 업무 중단/승인 철회와 효과 차이.",
+      "action": "강사가 외부 플랫폼 인증의 취소를 요청한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F12"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-074",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-099",
+      "disposition": "retain",
+      "role": "safety",
+      "reason": "타 owner 접근 차단은 시스템 필수 조건. 사용자에게는 최소한의 거절 안내만; 타인 존재 여부 누설 금지.",
+      "action": "강사가 본인 권한 밖의 접근 거절을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "minimum_ownership_privacy_safety_requirement_candidate",
+      "feature_refs": [],
+      "pain_refs": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "non_feature_basis": {
+        "basis": "강사 피드백 A2/D1 소유권 및 접근 거절",
+        "review_status": "pending_R01_decision"
+      },
+      "scope_decision_refs": [
+        "SD-02",
+        "SD-11"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-100",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "준비 실패 확인은 F08~10의 오류 분기. 이전 초안·원본 보존 및 재요청 IS-057.",
+      "action": "강사가 정보 준비 작업의 실패를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-024",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-101",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "낡은 준비 결과 차단은 시스템 안전 의무. 사용자 안내 및 최신 준비 결과 사용; 늦은 응답 자동 덮어쓰기 금지.",
+      "action": "강사가 오래된 준비 결과의 적용 제한을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F08",
+        "F18"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-13"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-102",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "원본 불러오기 실패는 F02 오류 분기. 없는 원본과 접근 불가 구분하되 민감 정보 노출 금지.",
+      "action": "강사가 원본 불러오기 실패를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F02"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "r03_refs": [],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-103",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "저장 결과 불확실성 확인은 F05 오류 분기. 성공 결과 확인과 안전한 재저장 후보를 명시; 중복/버전 손실 방지.",
+      "action": "강사가 원본 저장 결과의 불확실성을 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F05"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-014",
+          "relation": "G"
+        },
+        {
+          "id": "R03-US-015",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-104",
+      "disposition": "scenario",
+      "role": "safety",
+      "reason": "외부 상태 불명 확인은 F22/27/28 오류 결과. 알 수 없음을 실제 실패/미등록으로 단정 금지.",
+      "action": "강사가 확인할 수 없는 외부 업무 상태를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F22",
+        "F27",
+        "F28"
+      ],
+      "pain_refs": [
+        "P03",
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-10",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-065",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-090",
+          "relation": "G"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-105",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "부족 정보 안내 확인은 F10의 결과, IS-009 입력과 의도 다름. UI 분리 강제 없음.",
+      "action": "강사가 플랫폼별 부족 정보 안내를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F10"
+      ],
+      "pain_refs": [
+        "P01"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [],
+      "r03_refs": [
+        {
+          "id": "R03-US-024",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-106",
+      "disposition": "clarify",
+      "role": "safety",
+      "reason": "신규 등록의 중복 확인은 기본 안전 요구. 기존 등록 있음/없음/불명 결과를 명시; 실제 객체 확인 없이 신규 실행 금지.",
+      "action": "강사가 기존 등록의 중복 후보를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F14",
+        "F18"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-06",
+        "SD-12",
+        "SD-13"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-040",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-044",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-045",
+          "relation": "P"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    },
+    {
+      "story_id": "IS-108",
+      "disposition": "scenario",
+      "role": "support",
+      "reason": "대행 제한 이유 안내는 F06/F29의 분기. 제3자 허용 unknown과 불허를 구분하되 양쪽 모두 실제 실행 차단.",
+      "action": "강사가 업무 대행 제한 사유를 확인한다.",
+      "original_scope_candidate": "base",
+      "previous_scope_recommendation": "included",
+      "previous_mvp_recommendation": "first_registration_scenario_candidate_if_necessary",
+      "feature_refs": [
+        "F06",
+        "F29"
+      ],
+      "pain_refs": [
+        "P02"
+      ],
+      "non_feature_basis": null,
+      "scope_decision_refs": [
+        "SD-08",
+        "SD-12"
+      ],
+      "r03_refs": [
+        {
+          "id": "R03-US-017",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-035",
+          "relation": "P"
+        },
+        {
+          "id": "R03-US-036",
+          "relation": "X"
+        },
+        {
+          "id": "R03-US-037",
+          "relation": "X"
+        },
+        {
+          "id": "R03-US-038",
+          "relation": "X"
+        },
+        {
+          "id": "R03-US-039",
+          "relation": "X"
+        }
+      ],
+      "status": "AI/R01 검토 추천·승인 전"
+    }
+  ],
+  "semantic_groups": [
+    {
+      "id": "SG-01",
+      "title": "원본 확보·재사용",
+      "story_refs": [
+        "IS-001",
+        "IS-002",
+        "IS-003",
+        "IS-004",
+        "IS-005",
+        "IS-055",
+        "IS-064",
+        "IS-065",
+        "IS-066",
+        "IS-067",
+        "IS-102",
+        "IS-103"
+      ],
+      "pain": "P01",
+      "value": "기존 원고 재작성·검수 감소; 자동 저장과 명시 저장 선택, 추출 오류 정정 분리."
+    },
+    {
+      "id": "SG-02",
+      "title": "대상·업무 선택 및 준비",
+      "story_refs": [
+        "IS-006",
+        "IS-007",
+        "IS-008",
+        "IS-009",
+        "IS-010",
+        "IS-037",
+        "IS-039",
+        "IS-040",
+        "IS-043",
+        "IS-044",
+        "IS-054",
+        "IS-057",
+        "IS-068",
+        "IS-077",
+        "IS-090",
+        "IS-091",
+        "IS-092",
+        "IS-093",
+        "IS-094",
+        "IS-095",
+        "IS-100",
+        "IS-101",
+        "IS-105",
+        "IS-108"
+      ],
+      "pain": "P01/P02",
+      "value": "변환·검증으로 반복 준비 감소; 특화 입력은 동일 검토 패턴의 사례, 별도 기능 증식 방지."
+    },
+    {
+      "id": "SG-03",
+      "title": "인증·대상·승인 안전",
+      "story_refs": [
+        "IS-011",
+        "IS-012",
+        "IS-013",
+        "IS-014",
+        "IS-015",
+        "IS-016",
+        "IS-017",
+        "IS-018",
+        "IS-019",
+        "IS-056",
+        "IS-060",
+        "IS-069",
+        "IS-078",
+        "IS-079",
+        "IS-082",
+        "IS-083",
+        "IS-087",
+        "IS-088",
+        "IS-089",
+        "IS-097",
+        "IS-098",
+        "IS-106"
+      ],
+      "pain": "P02 지원",
+      "value": "실행 의사·권한·중복 방지 전제. 사용자 추가 클릭을 최소화하고 안전 요구는 유지."
+    },
+    {
+      "id": "SG-04",
+      "title": "업무 실행 및 결과",
+      "story_refs": [
+        "IS-020",
+        "IS-021",
+        "IS-022",
+        "IS-023",
+        "IS-026",
+        "IS-029",
+        "IS-045",
+        "IS-046",
+        "IS-080",
+        "IS-081",
+        "IS-104"
+      ],
+      "pain": "P02/P03",
+      "value": "허용된 등록·수정·갱신의 반복 직접 조작 절감; 업무별 효과·증빙 분리."
+    },
+    {
+      "id": "SG-05",
+      "title": "상태 및 대응",
+      "story_refs": [
+        "IS-024",
+        "IS-025",
+        "IS-027",
+        "IS-028",
+        "IS-041",
+        "IS-047",
+        "IS-048",
+        "IS-084",
+        "IS-085",
+        "IS-096"
+      ],
+      "pain": "P03",
+      "value": "확인·대응 부담 감소 가설; 기존 플랫폼 알림·수정 빈도 대비 가치 추가 검증."
+    },
+    {
+      "id": "SG-06",
+      "title": "서비스 이용·데이터 보호",
+      "story_refs": [
+        "IS-034",
+        "IS-035",
+        "IS-042",
+        "IS-051",
+        "IS-052",
+        "IS-053",
+        "IS-062",
+        "IS-063",
+        "IS-099"
+      ],
+      "pain": "지원 전제",
+      "value": "직접 Pain 절감과 구분되는 보안·권리/접근 안전 요구."
+    },
+    {
+      "id": "SG-07",
+      "title": "미결정 외부 업무",
+      "story_refs": [
+        "IS-036",
+        "IS-038",
+        "IS-049",
+        "IS-050",
+        "IS-058",
+        "IS-059",
+        "IS-074",
+        "IS-075",
+        "IS-076"
+      ],
+      "pain": "P02/P03 후보",
+      "value": "실제 업무 권한·효과·사용자 수요 확인 전 확장하지 않음."
+    },
+    {
+      "id": "SG-08",
+      "title": "조건부 모니터링",
+      "story_refs": [
+        "IS-030",
+        "IS-031",
+        "IS-032",
+        "IS-033",
+        "IS-061",
+        "IS-070",
+        "IS-071",
+        "IS-072",
+        "IS-073",
+        "IS-086"
+      ],
+      "pain": "P03 조건부",
+      "value": "자동 조회의 추가 가치·권한·비용 미확인; 기본/필수 MVP 제외."
+    }
+  ],
+  "r03_comparison": [
+    {
+      "r03_story_id": "R03-US-001",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-051"
+      ],
+      "review_reason": "일반 서비스 진입은 인증과 구분; 독립 기능이 아닌 시작 조건 후보.",
+      "action": "강사는 서비스에 진입한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-002",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-051"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 서비스 계정으로 인증한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-003",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-001"
+      ],
+      "review_reason": "기존 소개글은 원본 텍스트의 사례.",
+      "action": "강사는 기존 레슨 소개글을 제공한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-004",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-064"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 레슨 사진을 첨부한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-005",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-055"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 첨부 자료의 사용 권한을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-006",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-001",
+        "IS-009"
+      ],
+      "review_reason": "기본 레슨 조건 입력은 원본 텍스트와 구조화 입력 대안.",
+      "action": "강사는 기본 레슨 조건을 입력한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-007",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-065",
+        "IS-064"
+      ],
+      "review_reason": "교체는 제거+업로드로 구성 가능; 권리/규격 오류 분기.",
+      "action": "강사는 사용할 수 없는 첨부 자료를 교체한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-008",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-065"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 원본의 불필요한 첨부 자료를 제거한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-009",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-002"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 저장된 원본 레슨 정보를 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-010",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-067"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 불러온 원본 레슨 정보를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-011",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-003"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 구조화된 레슨 사실을 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-012",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-003",
+        "IS-004",
+        "IS-043"
+      ],
+      "review_reason": "추출 결과 정정과 원본 자체 변경 구분 필요.",
+      "action": "강사는 잘못 추출된 레슨 사실을 정정한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-013",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-004"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 기존 원본 레슨 정보를 수정한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-014",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-005",
+        "IS-103"
+      ],
+      "review_reason": "저장 성공·실패·미확인 결과 확인의 상위 행동 후보.",
+      "action": "강사는 원본 저장 결과를 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-015",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-005",
+        "IS-103"
+      ],
+      "review_reason": "안전한 저장 재요청 조건 필요; 별도 클릭 미정.",
+      "action": "강사는 원본 저장을 재요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-016",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-006"
+      ],
+      "review_reason": "지원 업무 안내의 한 측면.",
+      "action": "강사는 플랫폼별 지원 업무를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-017",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-006",
+        "IS-108"
+      ],
+      "review_reason": "업무별 제약 안내의 한 측면.",
+      "action": "강사는 플랫폼별 업무 제약을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-018",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-007"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 작업 대상 플랫폼을 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-019",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-068"
+      ],
+      "review_reason": "신규 등록 업무 선택 분기; 승인 후 요청 IS-020과 구분.",
+      "action": "강사는 신규 등록 업무를 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-020",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-068"
+      ],
+      "review_reason": "기존 수정 업무 선택 분기.",
+      "action": "강사는 기존 게시 정보 수정 업무를 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-021",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-068"
+      ],
+      "review_reason": "갱신 업무 선택 분기.",
+      "action": "강사는 공고 갱신 업무를 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-022",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-037"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 작업 대상에서 수행 불가 플랫폼을 제외한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-023",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-008",
+        "IS-082"
+      ],
+      "review_reason": "동일 입력안 revision이면 검토 재사용.",
+      "action": "강사는 플랫폼별 등록·변경 예정 정보를 검토한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-024",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-077",
+        "IS-105",
+        "IS-100",
+        "IS-008"
+      ],
+      "review_reason": "가격·누락에 국한되지 않는 일반 검증 결과 확인 보완 후보.",
+      "action": "강사는 입력 정보의 검증 문제를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-025",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-009"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 누락된 레슨 정보를 제공한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-026",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-043"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 불확실한 레슨 사실을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-027",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-004",
+        "IS-009",
+        "IS-054",
+        "IS-008"
+      ],
+      "review_reason": "유효하지 않은 변환안 정정과 원본 수정 분리.",
+      "action": "강사는 유효하지 않은 입력 정보를 정정한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-028",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-054",
+        "IS-010"
+      ],
+      "review_reason": "적용 조건 신규 지정/변경과 충돌 해결 구분.",
+      "action": "강사는 플랫폼별 적용 조건을 지정한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-029",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-010"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 실제로 제공할 수 있는 대체 조건을 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-030",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-010",
+        "IS-044",
+        "IS-037"
+      ],
+      "review_reason": "대안 거절의 의사 명시 필요. 미실행 종료와 구분.",
+      "action": "강사는 제시된 대체 조건을 거절한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-031",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-011"
+      ],
+      "review_reason": "직접 로그인 표현이 본인 인증으로 좁아짐; 로그인+필요 추가 인증 보완.",
+      "action": "강사는 대상 외부 플랫폼에 직접 로그인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-032",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-011"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 외부 플랫폼의 본인인증을 수행한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-033",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-012",
+        "IS-079"
+      ],
+      "review_reason": "만료/실패 재인증 분기 포함.",
+      "action": "강사는 대상 외부 플랫폼에 재인증한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-034",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-013"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 인증된 외부 계정을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-035",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-060",
+        "IS-108"
+      ],
+      "review_reason": "권한 제한 사유 확인과 종료 구분.",
+      "action": "강사는 접근 권한 제한 사유를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-036",
+      "relation": "X",
+      "related_integrated_ids": [
+        "IS-011",
+        "IS-108"
+      ],
+      "review_reason": "외부 가입은 사용자 직접 수행; 서비스 대행 제외.",
+      "action": "강사는 외부 플랫폼 계정을 생성한다.",
+      "r03_scope_candidate": "excluded"
+    },
+    {
+      "r03_story_id": "R03-US-037",
+      "relation": "X",
+      "related_integrated_ids": [
+        "IS-011",
+        "IS-108"
+      ],
+      "review_reason": "외부 전문가 자격 인증은 직접 수행; 우회·대행 제외.",
+      "action": "강사는 외부 플랫폼의 전문가 인증을 수행한다.",
+      "r03_scope_candidate": "excluded"
+    },
+    {
+      "r03_story_id": "R03-US-038",
+      "relation": "X",
+      "related_integrated_ids": [
+        "IS-011",
+        "IS-108"
+      ],
+      "review_reason": "외부 약관 동의는 사용자 직접 판단; 대행 제외.",
+      "action": "강사는 외부 플랫폼의 약관에 동의한다.",
+      "r03_scope_candidate": "excluded"
+    },
+    {
+      "r03_story_id": "R03-US-039",
+      "relation": "X",
+      "related_integrated_ids": [
+        "IS-011",
+        "IS-108"
+      ],
+      "review_reason": "정산 계좌 설정은 대행·제품 업무 제외.",
+      "action": "강사는 외부 플랫폼의 정산 계좌를 설정한다.",
+      "r03_scope_candidate": "excluded"
+    },
+    {
+      "r03_story_id": "R03-US-040",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-089",
+        "IS-106"
+      ],
+      "review_reason": "기존 후보 확인과 조회·중복 판정 관련.",
+      "action": "강사는 기존 게시물 후보를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-041",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-014"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 관리할 기존 게시물을 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-042",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-014",
+        "IS-013",
+        "IS-083"
+      ],
+      "review_reason": "선택한 외부 객체 확인은 선택 자체와 구분; 승인 경계 보완.",
+      "action": "강사는 선택된 게시물의 작업 대상을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-043",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-014",
+        "IS-035"
+      ],
+      "review_reason": "직접 등록 기존 게시물 관리 연결은 명시 기획 요구, 선택과 연결 해제만으로 대체 불가.",
+      "action": "강사는 직접 등록했던 기존 게시물의 관리 연결을 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-044",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-014",
+        "IS-019",
+        "IS-106"
+      ],
+      "review_reason": "잘못 식별된 대상 거절/재선택 분기 명시 필요.",
+      "action": "강사는 잘못 식별된 작업 대상을 거절한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-045",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-106",
+        "IS-089"
+      ],
+      "review_reason": "기존 등록 존재/없음/불명 확인 결과를 포함하도록 넓힘.",
+      "action": "강사는 기존 등록 여부의 확인 결과를 검토한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-046",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-015"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 변경 전후 레슨 정보를 비교한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-047",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-015",
+        "IS-083",
+        "IS-017"
+      ],
+      "review_reason": "변경 범위 선택은 비교·검토·승인 중 어느 것도 단독 대체하지 않음.",
+      "action": "강사는 기존 게시물의 변경 범위를 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-048",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-016"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 최종 등록·변경 정보를 승인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-049",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-018"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 최종 등록·변경 정보의 승인을 거절한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-050",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-004",
+        "IS-009",
+        "IS-054",
+        "IS-018"
+      ],
+      "review_reason": "최종 정보 수정 의사와 실제 원본/적용안 변경 구분.",
+      "action": "강사는 최종 정보의 수정을 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-051",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-017"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 업무 실행 범위를 승인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-052",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-069"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 업무 실행 범위의 승인을 거절한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-053",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-087",
+        "IS-088"
+      ],
+      "review_reason": "두 승인 철회 관계; 실행 전 차단.",
+      "action": "강사는 실행 전에 업무 승인을 철회한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-054",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-019"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 변경된 실행 조건을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-055",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-023"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 플랫폼별 업무 결과를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-056",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-081"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 업무 결과의 확인 근거를 검토한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-057",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-048"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 결과에 따른 후속 조치를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-058",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-080"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 과거 업무 실행 이력을 조회한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-059",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-024"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 플랫폼별 마지막 확인 정보와 상태를 조회한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-060",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-024",
+        "IS-027"
+      ],
+      "review_reason": "확인 시각은 조회 결과 속성; 별도 기능 강제 아님.",
+      "action": "강사는 상태의 마지막 확인 시점을 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-061",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-024",
+        "IS-081"
+      ],
+      "review_reason": "게시 링크 열기와 증빙 열람 구분; 링크는 §5.7 결과 속성.",
+      "action": "강사는 외부 게시물 링크를 연다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-062",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-025"
+      ],
+      "review_reason": "조회 대상 선택과 요청의 구성 관계.",
+      "action": "강사는 상태 갱신 대상을 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-063",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-025"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 현재 상태의 갱신을 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-064",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-047"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 상태 갱신 결과를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-065",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-027",
+        "IS-104"
+      ],
+      "review_reason": "조회 실패 사유와 마지막 관측을 함께 구분.",
+      "action": "강사는 상태 조회 실패 사유를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-066",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-048",
+        "IS-084",
+        "IS-045"
+      ],
+      "review_reason": "원인 확인의 일반 행동, 반려/실패 분기 포함.",
+      "action": "강사는 업무 실패·반려·정보 불일치의 확인된 사유를 검토한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-067",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-048",
+        "IS-029",
+        "IS-028"
+      ],
+      "review_reason": "후속 대응 방안 선택은 안내 확인과 다름; 일반 선택 표현 필요.",
+      "action": "강사는 필요한 후속 대응 방안을 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-068",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-029",
+        "IS-020",
+        "IS-021",
+        "IS-022",
+        "IS-026",
+        "IS-019"
+      ],
+      "review_reason": "실패 재처리는 새 업무 조건 확인. 성공·불명은 제외.",
+      "action": "강사는 실패한 업무의 재처리를 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-069",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-026"
+      ],
+      "review_reason": "별도 사용자 요청 UI 미정; 시스템 효과 확인 의무는 기본.",
+      "action": "강사는 미확인 업무의 기존 외부 효과 확인을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-070",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-049"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 해당 업무의 중단을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-071",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-044",
+        "IS-049",
+        "IS-050"
+      ],
+      "review_reason": "보류는 중단/종료와 달리 재개 가능한 의미 후보.",
+      "action": "강사는 해당 업무의 진행을 보류한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-072",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-034"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 보관된 원본 정보의 삭제를 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-073",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-035"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 외부 게시물의 관리 연결 해제를 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-074",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-098",
+        "IS-072",
+        "IS-060"
+      ],
+      "review_reason": "기본 업무용 접근 철회는 인증 중 취소·조건부 지속 조회 철회와 구별.",
+      "action": "강사는 업무용 외부 접근 권한을 철회한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-075",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-053"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 서비스 계정에서 로그아웃한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-076",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-013",
+        "IS-014",
+        "IS-089"
+      ],
+      "review_reason": "추가 소유권 자료는 최소 필요성·권리 확인 후만; 별도 의무 미정.",
+      "action": "강사는 작업 대상의 소유권 확인 자료를 제공한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-077",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-030"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 자동 모니터링 대상을 선택한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-078",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-030",
+        "IS-031"
+      ],
+      "review_reason": "대상과 조회 범위는 별도 승인·설정 의미; 조건부.",
+      "action": "강사는 자동 모니터링의 조회 범위를 지정한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-079",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-070"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 자동 모니터링 기간을 설정한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-080",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-071"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 상태 변화의 알림 조건을 설정한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-081",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-030",
+        "IS-031"
+      ],
+      "review_reason": "공개/인증 조회 방식 선택 UI는 미결정. 허용 경로 검증은 필수.",
+      "action": "강사는 자동 모니터링의 조회 방식을 선택한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-082",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-030",
+        "IS-031",
+        "IS-086"
+      ],
+      "review_reason": "설정 결과 확인 후보, 별도 조작 강제 금지.",
+      "action": "강사는 자동 모니터링 설정 내용을 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-083",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-030",
+        "IS-031"
+      ],
+      "review_reason": "개시 의사 후보; 별도 요청은 설정/승인과 통합 가능.",
+      "action": "강사는 자동 모니터링의 시작을 요청한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-084",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-030",
+        "IS-070",
+        "IS-071"
+      ],
+      "review_reason": "설정 변경의 중요 조건과 재승인 분기 후보.",
+      "action": "강사는 자동 모니터링의 설정 변경을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-085",
+      "relation": "P",
+      "related_integrated_ids": [
+        "IS-030",
+        "IS-037"
+      ],
+      "review_reason": "모니터링 대상 제외와 기본 작업 제외는 다른 수명주기.",
+      "action": "강사는 자동 모니터링 대상에서 지원 불가 대상을 제외한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-086",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-086"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 인증 유지 위험 안내를 확인한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-087",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-031"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 인증 유지 조건을 승인한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-088",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-061"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 인증 유지 조건의 승인을 거절한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-089",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-024",
+        "IS-030",
+        "IS-033"
+      ],
+      "review_reason": "모니터링 운영 상태와 외부 상태 관측 구분.",
+      "action": "강사는 자동 모니터링의 운영 상태를 조회한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-090",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-027",
+        "IS-104",
+        "IS-032"
+      ],
+      "review_reason": "자동 조회 실패 사유와 수동 실패 구분; 조건부.",
+      "action": "강사는 자동 조회 실패 사유를 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-091",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-033",
+        "IS-072",
+        "IS-031"
+      ],
+      "review_reason": "재개는 새 허용·기간·승인 확인, 자동 재개 금지.",
+      "action": "강사는 자동 모니터링의 재개를 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-092",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-032"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 자동 모니터링의 상태 변화 알림을 확인한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-093",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-032",
+        "IS-081"
+      ],
+      "review_reason": "알림 근거와 업무 실행 증빙은 대상이 다름; 조건부.",
+      "action": "강사는 상태 변화 알림의 관측 근거를 검토한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-094",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-033"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 자동 모니터링의 종료를 요청한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-095",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-072"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 인증 유지 승인을 철회한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-096",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-033"
+      ],
+      "review_reason": "종료 요청과 실제 접근 중단/종료 확인 구분.",
+      "action": "강사는 자동 모니터링 종료 결과를 확인한다.",
+      "r03_scope_candidate": "conditional"
+    },
+    {
+      "r03_story_id": "R03-US-097",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-073",
+        "IS-033"
+      ],
+      "review_reason": "세션 폐기 요청과 실제 해제 결과 구분; 시스템 의무.",
+      "action": "강사는 관련 작업용 인증 세션의 해제 결과를 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-098",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-033",
+        "IS-073"
+      ],
+      "review_reason": "종료·해제 실패 이유 및 추가 접근 차단; 조건부.",
+      "action": "강사는 자동 모니터링 종료 처리의 제한 사유를 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-099",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-066"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 저장된 레슨 원본 목록을 조회한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-100",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-005"
+      ],
+      "review_reason": "명시 저장 요청은 선택 후보.",
+      "action": "강사는 레슨 원본의 보관을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-101",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-075"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 외부 판매글의 임시 저장을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-102",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-076"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 외부 임시 판매글의 열람을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-103",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-050"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 중단된 업무의 재개를 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-104",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-036"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 외부 심사 접수 취소를 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-105",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-074"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 보완한 판매글의 재심사를 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-106",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-020"
+      ],
+      "review_reason": "실행 요청 별도 클릭 미정.",
+      "action": "강사는 승인된 신규 등록을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-107",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-021"
+      ],
+      "review_reason": "실행 요청 별도 클릭 미정.",
+      "action": "강사는 승인된 게시물 수정을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-108",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-022"
+      ],
+      "review_reason": "실행 요청 별도 클릭 미정.",
+      "action": "강사는 승인된 공고 갱신을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-109",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-029"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 미완료 업무 대상을 선택한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-110",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-057"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 실패한 입력안 준비 작업의 재수행을 요청한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-111",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-062"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 서비스 계정 등록을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-112",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-052"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 서비스 계정 인증 실패 사유를 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-113",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-063"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 서비스 계정 삭제를 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-114",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-042"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 본인의 작업 공간을 선택한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-115",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-059"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 직접 작성용 레슨 자료를 확인한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-116",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-041"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 심사 승인 후 남은 모집 준비를 확인한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-117",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-058"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 최초 모집 일정 설정을 요청한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-118",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-038"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 대표 서비스 후보를 지정한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-119",
+      "relation": "M",
+      "related_integrated_ids": [
+        "IS-083"
+      ],
+      "review_reason": "동일한 사용자 의도/대상 후보; 전제·완료·권한은 별도 검토.",
+      "action": "강사는 업무 실행 범위를 검토한다.",
+      "r03_scope_candidate": "base"
+    },
+    {
+      "r03_story_id": "R03-US-120",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-070"
+      ],
+      "review_reason": "유지 기간과 조회 주기 차이; 주기 사용자 설정 필요성 미정.",
+      "action": "강사는 자동 조회 주기를 설정한다.",
+      "r03_scope_candidate": "undecided"
+    },
+    {
+      "r03_story_id": "R03-US-121",
+      "relation": "G",
+      "related_integrated_ids": [
+        "IS-071",
+        "IS-032"
+      ],
+      "review_reason": "알림 조건과 수신 채널 차이; 조건부·비용 미정.",
+      "action": "강사는 알림 수신 채널을 선택한다.",
+      "r03_scope_candidate": "undecided"
+    }
+  ],
+  "r03_finding_review": [
+    {
+      "r03_finding_id": "R03-C01",
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "assessment": "기존 IS-005/066에 반영되어 있으며 저장 결과는 보완 필요"
+    },
+    {
+      "r03_finding_id": "R03-C02",
+      "scope_decision_refs": [
+        "SD-04"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C03",
+      "scope_decision_refs": [
+        "SD-03"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C04",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-07"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C05",
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-03",
+        "SD-14"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C06",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-12",
+        "SD-13"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C07",
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-13"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C08",
+      "scope_decision_refs": [
+        "SD-02",
+        "SD-11"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C09",
+      "scope_decision_refs": [
+        "SD-08"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C10",
+      "scope_decision_refs": [
+        "SD-07"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C11",
+      "scope_decision_refs": [
+        "SD-11"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C12",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-13"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C13",
+      "scope_decision_refs": [
+        "SD-05",
+        "SD-06",
+        "SD-09",
+        "SD-12"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C14",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-14"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C15",
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "assessment": "조건부 백로그에 보존; 범위 미채택"
+    },
+    {
+      "r03_finding_id": "R03-C16",
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "assessment": "조건부 백로그에 보존; 범위 미채택"
+    },
+    {
+      "r03_finding_id": "R03-C17",
+      "scope_decision_refs": [
+        "SD-14"
+      ],
+      "assessment": "기존 통합 후보와 중복/부분 대응; 별도 신규 기능 확정 아님"
+    },
+    {
+      "r03_finding_id": "R03-C18",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-05",
+        "SD-08",
+        "SD-09",
+        "SD-10"
+      ],
+      "assessment": "현행 실행 제한·근거 분리 재확인"
+    }
+  ],
+  "r03_decision_review": [
+    {
+      "r03_decision_id": "R03-D01",
+      "scope_decision_refs": [
+        "SD-02",
+        "SD-11"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D02",
+      "scope_decision_refs": [
+        "SD-09",
+        "SD-11"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D03",
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-05",
+        "SD-13"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D04",
+      "scope_decision_refs": [
+        "SD-04",
+        "SD-13"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D05",
+      "scope_decision_refs": [
+        "SD-06",
+        "SD-12"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D06",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-11"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D07",
+      "scope_decision_refs": [
+        "SD-07",
+        "SD-11",
+        "SD-13"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D08",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-12",
+        "SD-13"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D09",
+      "scope_decision_refs": [
+        "SD-11"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D10",
+      "scope_decision_refs": [
+        "SD-05",
+        "SD-06",
+        "SD-07",
+        "SD-08",
+        "SD-09",
+        "SD-12"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D11",
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-02",
+        "SD-03",
+        "SD-04",
+        "SD-14"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D12",
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D13",
+      "scope_decision_refs": [
+        "SD-10"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D14",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-10"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D15",
+      "scope_decision_refs": [
+        "SD-10",
+        "SD-13"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D16",
+      "scope_decision_refs": [
+        "SD-03",
+        "SD-10",
+        "SD-11"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    },
+    {
+      "r03_decision_id": "R03-D17",
+      "scope_decision_refs": [
+        "SD-01",
+        "SD-10",
+        "SD-12"
+      ],
+      "status": "검토안 연결; R01 승인 전"
+    }
+  ],
+  "gap_and_correction_candidates": [
+    {
+      "id": "G-01",
+      "priority": "기본 안전/명시 기획",
+      "topic": "기본 외부 플랫폼 직접 로그인과 필요한 본인 인증 구분",
+      "integrated_refs": [
+        "IS-011"
+      ],
+      "r03_refs": [
+        "R03-US-031",
+        "R03-US-032"
+      ],
+      "basis": "F12·V1.2 §5.4",
+      "recommendation": "IS-011은 본인 인증만 표현. 직접 로그인과 필요한 추가 인증을 논리 분리하되 가입/전문가 인증/약관/정산 대행 제외.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-02",
+      "priority": "기본 안전/명시 기획",
+      "topic": "직접 등록했던 기존 외부 게시물의 관리 연결 요청",
+      "integrated_refs": [
+        "IS-014",
+        "IS-035",
+        "IS-089"
+      ],
+      "r03_refs": [
+        "R03-US-043"
+      ],
+      "basis": "F14·F25·V1.2 §5.4/§9.5",
+      "recommendation": "기존 객체 선택은 연결의 의사·결과를 충분히 표현하지 않음. 소유권/정확한 ID/권한 확인, 연결 실패 및 중복 연결 방지.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-03",
+      "priority": "기본 안전/명시 기획",
+      "topic": "기본 업무용 외부 접근 권한 철회",
+      "integrated_refs": [
+        "IS-098",
+        "IS-072",
+        "IS-060",
+        "IS-088"
+      ],
+      "r03_refs": [
+        "R03-US-074"
+      ],
+      "basis": "V1.2 §9.4, F12/F13/F18/F27",
+      "recommendation": "인증 취소, 승인 철회, 조건부 지속 접근 철회와 달리 기본 세션 접근 자체를 차단. 외부 효과 보존, 세션 폐기.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-04",
+      "priority": "기본 가치/지원",
+      "topic": "후속 대응 방안 선택",
+      "integrated_refs": [
+        "IS-048",
+        "IS-029",
+        "IS-028",
+        "IS-085"
+      ],
+      "r03_refs": [
+        "R03-US-067"
+      ],
+      "basis": "F29·V1.2 §5.8",
+      "recommendation": "안내 열람과 사용자의 대응 결정 구분. 선택이 실제 새 업무면 권한·효과·승인 재확인; UI 추가 강제 없음.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-05",
+      "priority": "기본 안전/지원",
+      "topic": "원본 저장 결과 확인 및 안전한 재요청",
+      "integrated_refs": [
+        "IS-005",
+        "IS-103"
+      ],
+      "r03_refs": [
+        "R03-US-014",
+        "R03-US-015"
+      ],
+      "basis": "F05·A3/D4",
+      "recommendation": "정상 성공과 실패/미확인을 구분; 자동 저장이 가능하면 별도 클릭 없음. 저장 재요청은 동일 원본/revision 및 결과 확인.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-06",
+      "priority": "기본 안전/지원",
+      "topic": "신규 등록의 기존 등록 있음·없음·불명 및 작업 대상 거절/확인",
+      "integrated_refs": [
+        "IS-013",
+        "IS-014",
+        "IS-089",
+        "IS-106"
+      ],
+      "r03_refs": [
+        "R03-US-040",
+        "R03-US-042",
+        "R03-US-044",
+        "R03-US-045"
+      ],
+      "basis": "F13/F14/F18·§9.2",
+      "recommendation": "중복 후보가 발견된 경우뿐 아니라 없음/미확인 구분. 잘못 식별된 대상은 실행하지 않고 재선택.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-07",
+      "priority": "기본 지원/UX",
+      "topic": "일반 입력안 검증 문제 확인 및 정정",
+      "integrated_refs": [
+        "IS-003",
+        "IS-008",
+        "IS-077",
+        "IS-105",
+        "IS-054"
+      ],
+      "r03_refs": [
+        "R03-US-012",
+        "R03-US-024",
+        "R03-US-027"
+      ],
+      "basis": "F03/F09/F10",
+      "recommendation": "가격 오류/누락 이외 규격 위반·추출 오류도 기존 흐름으로 표현. 원본 정정 vs 적용안 정정, 추가 UI 미정.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-08",
+      "priority": "기본 지원/UX",
+      "topic": "서비스 진입·변경 범위 선택·대안 거절",
+      "integrated_refs": [
+        "IS-051",
+        "IS-015",
+        "IS-083",
+        "IS-010",
+        "IS-044"
+      ],
+      "r03_refs": [
+        "R03-US-001",
+        "R03-US-047",
+        "R03-US-030"
+      ],
+      "basis": "§8.1/F11/F15/F17",
+      "recommendation": "진입은 별도 기능이 아닌 조건일 수 있음. 비교/승인 전에 변경 범위 선택 의사 명시. 대안 거절은 안전 종료 분기.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-09",
+      "priority": "조건부 백로그",
+      "topic": "자동 모니터링 조건·생명주기 세분화",
+      "integrated_refs": [
+        "IS-030",
+        "IS-031",
+        "IS-033",
+        "IS-070",
+        "IS-071",
+        "IS-072",
+        "IS-073"
+      ],
+      "r03_refs": [
+        "R03-US-078",
+        "R03-US-081",
+        "R03-US-082",
+        "R03-US-083",
+        "R03-US-084",
+        "R03-US-085",
+        "R03-US-089",
+        "R03-US-090",
+        "R03-US-091",
+        "R03-US-093",
+        "R03-US-096",
+        "R03-US-097",
+        "R03-US-098",
+        "R03-US-120",
+        "R03-US-121"
+      ],
+      "basis": "E01~E05·V1.2 §5.9/§11.2",
+      "recommendation": "범위/방식/조건/주기/채널·변경/개시/종료/실패/세션 해제 확인을 별도 의미로 보존. E 채택 전 기본 범위·필수 MVP에 승격하지 않음. 종료·권한 해제는 시스템 의무.",
+      "status": "candidate_pending_scope_review"
+    },
+    {
+      "id": "G-10",
+      "priority": "제외 범위",
+      "topic": "외부 가입·전문가 인증·약관 동의·정산 계좌 설정",
+      "integrated_refs": [
+        "IS-011",
+        "IS-108"
+      ],
+      "r03_refs": [
+        "R03-US-036",
+        "R03-US-037",
+        "R03-US-038",
+        "R03-US-039"
+      ],
+      "basis": "V1.2 §5.4/§11.3",
+      "recommendation": "사용자 직접 수행 또는 별도 외부 전제. 서비스 대행과 기능 범위 제외 근거를 명시; 직접 로그인/인증 지원과 혼동 금지.",
+      "status": "candidate_pending_scope_review"
+    }
+  ],
+  "feature_role_review": [
+    {
+      "feature_id": "F01",
+      "story_refs": [
+        "IS-001",
+        "IS-055",
+        "IS-064",
+        "IS-065"
+      ],
+      "event_refs": [
+        "SE-F01"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F02",
+      "story_refs": [
+        "IS-002",
+        "IS-066",
+        "IS-067",
+        "IS-102"
+      ],
+      "event_refs": [
+        "SE-F02"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F03",
+      "story_refs": [
+        "IS-003"
+      ],
+      "event_refs": [
+        "SE-F03"
+      ],
+      "role": "구조화 자체는 시스템; 사용자 확인/정정은 조건부 상호작용",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F04",
+      "story_refs": [
+        "IS-004",
+        "IS-065"
+      ],
+      "event_refs": [
+        "SE-F04"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F05",
+      "story_refs": [
+        "IS-005",
+        "IS-103"
+      ],
+      "event_refs": [
+        "SE-F05"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F06",
+      "story_refs": [
+        "IS-006",
+        "IS-039",
+        "IS-059",
+        "IS-096",
+        "IS-108"
+      ],
+      "event_refs": [
+        "SE-F06"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F07",
+      "story_refs": [
+        "IS-007",
+        "IS-037",
+        "IS-068",
+        "IS-078"
+      ],
+      "event_refs": [
+        "SE-F07"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F08",
+      "story_refs": [
+        "IS-008",
+        "IS-028",
+        "IS-040",
+        "IS-054",
+        "IS-057",
+        "IS-059",
+        "IS-090",
+        "IS-091",
+        "IS-092",
+        "IS-094",
+        "IS-095",
+        "IS-100",
+        "IS-101"
+      ],
+      "event_refs": [
+        "SE-F08"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F09",
+      "story_refs": [
+        "IS-003",
+        "IS-008",
+        "IS-040",
+        "IS-055",
+        "IS-057",
+        "IS-077",
+        "IS-091",
+        "IS-092",
+        "IS-093",
+        "IS-094",
+        "IS-095",
+        "IS-100"
+      ],
+      "event_refs": [
+        "SE-F09"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F10",
+      "story_refs": [
+        "IS-009",
+        "IS-028",
+        "IS-043",
+        "IS-054",
+        "IS-057",
+        "IS-085",
+        "IS-100",
+        "IS-105"
+      ],
+      "event_refs": [
+        "SE-F10"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F11",
+      "story_refs": [
+        "IS-010",
+        "IS-038",
+        "IS-044",
+        "IS-090"
+      ],
+      "event_refs": [
+        "SE-F11"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F12",
+      "story_refs": [
+        "IS-011",
+        "IS-012",
+        "IS-060",
+        "IS-078",
+        "IS-079",
+        "IS-098"
+      ],
+      "event_refs": [
+        "SE-F12"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F13",
+      "story_refs": [
+        "IS-013",
+        "IS-060"
+      ],
+      "event_refs": [
+        "SE-F13"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F14",
+      "story_refs": [
+        "IS-014",
+        "IS-089",
+        "IS-097",
+        "IS-106"
+      ],
+      "event_refs": [
+        "SE-F14"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F15",
+      "story_refs": [
+        "IS-015",
+        "IS-038",
+        "IS-054",
+        "IS-056"
+      ],
+      "event_refs": [
+        "SE-F15"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F16",
+      "story_refs": [
+        "IS-016",
+        "IS-018",
+        "IS-082",
+        "IS-087",
+        "IS-093"
+      ],
+      "event_refs": [
+        "SE-F16"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F17",
+      "story_refs": [
+        "IS-017",
+        "IS-069",
+        "IS-083",
+        "IS-088"
+      ],
+      "event_refs": [
+        "SE-F17"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F18",
+      "story_refs": [
+        "IS-019",
+        "IS-056",
+        "IS-087",
+        "IS-088",
+        "IS-101",
+        "IS-106"
+      ],
+      "event_refs": [
+        "SE-F18"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F19",
+      "story_refs": [
+        "IS-020"
+      ],
+      "event_refs": [
+        "SE-F19"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F20",
+      "story_refs": [
+        "IS-021",
+        "IS-074",
+        "IS-095"
+      ],
+      "event_refs": [
+        "SE-F20"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F21",
+      "story_refs": [
+        "IS-022"
+      ],
+      "event_refs": [
+        "SE-F21"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F22",
+      "story_refs": [
+        "IS-023",
+        "IS-026",
+        "IS-045",
+        "IS-046",
+        "IS-081",
+        "IS-104"
+      ],
+      "event_refs": [
+        "SE-F22"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F23",
+      "story_refs": [
+        "IS-080"
+      ],
+      "event_refs": [
+        "SE-F23"
+      ],
+      "role": "저장 자체는 시스템 의무, 이력 열람만 사용자 행동",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F24",
+      "story_refs": [
+        "IS-023",
+        "IS-029",
+        "IS-045",
+        "IS-046",
+        "IS-081"
+      ],
+      "event_refs": [
+        "SE-F24"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F25",
+      "story_refs": [
+        "IS-024",
+        "IS-029",
+        "IS-046",
+        "IS-080",
+        "IS-096"
+      ],
+      "event_refs": [
+        "SE-F25"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F26",
+      "story_refs": [
+        "IS-025"
+      ],
+      "event_refs": [
+        "SE-F26"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F27",
+      "story_refs": [
+        "IS-026",
+        "IS-104"
+      ],
+      "event_refs": [
+        "SE-F27"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F28",
+      "story_refs": [
+        "IS-027",
+        "IS-047",
+        "IS-104"
+      ],
+      "event_refs": [
+        "SE-F28"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "F29",
+      "story_refs": [
+        "IS-028",
+        "IS-041",
+        "IS-045",
+        "IS-048",
+        "IS-058",
+        "IS-074",
+        "IS-084",
+        "IS-085",
+        "IS-108"
+      ],
+      "event_refs": [
+        "SE-F29"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "E01",
+      "story_refs": [
+        "IS-030",
+        "IS-070",
+        "IS-071"
+      ],
+      "event_refs": [
+        "SE-E01"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "E02",
+      "story_refs": [
+        "IS-031",
+        "IS-061",
+        "IS-086"
+      ],
+      "event_refs": [
+        "SE-E02"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "E03",
+      "story_refs": [],
+      "event_refs": [
+        "SE-E03"
+      ],
+      "role": "시스템 내부 자동 조회; 별도 사용자 행동 없어도 정당함",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "E04",
+      "story_refs": [
+        "IS-032"
+      ],
+      "event_refs": [
+        "SE-E04"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    },
+    {
+      "feature_id": "E05",
+      "story_refs": [
+        "IS-033",
+        "IS-072",
+        "IS-073"
+      ],
+      "event_refs": [
+        "SE-E05"
+      ],
+      "role": "상호작용·트리거·결과 검토와 시스템 수행을 분리",
+      "review_status": "정적 연결 확인·의미 최종 검증 미완"
+    }
+  ],
+  "platform_difference_review": [
+    {
+      "id": "PC-01",
+      "platform": "PL01",
+      "topic": "제목/설명 길이",
+      "story_refs": [
+        "IS-008",
+        "IS-077",
+        "IS-105"
+      ],
+      "finding": "R02 화면/사용자 문답 제목 10~30자·설명 100~20,000자; R04 타입에 이전 최대 50자/최소 200자 가설이 남음(unknown).",
+      "review_recommendation": "현행 화면 범위 우선 비교",
+      "reason": "R02 카테고리·시점 화면 표시와 R04 과거 미확인 수치를 분리. 실제 서버 검증/다른 카테고리 제한 미정.",
+      "remaining_evidence": "정확한 카테고리·표시·실제 검증을 별도 근거로 확보; 고정 공통 제한값 금지.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-02",
+      "platform": "PL01",
+      "topic": "단일/3패키지·총액",
+      "story_refs": [
+        "IS-040",
+        "IS-077",
+        "IS-092"
+      ],
+      "finding": "R02 단일 STANDARD와 3패키지 가능 및 VAT 포함 총액 보고. R05는 오프라인 패키지 켜짐 표본. R04 3단계 표기는 전체 강제 근거 아님.",
+      "review_recommendation": "가격의 의미 구분",
+      "reason": "단일/다중 패키지 선택, 각 패키지 총액 및 단위·VAT 조건 보존; 시간당 환산 강제 금지.",
+      "remaining_evidence": "단일 상한, 패키지 순서, 서버 검증·실제 제공 조건 확인.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-03",
+      "platform": "PL01",
+      "topic": "필수 입력의 조건 표현",
+      "story_refs": [
+        "IS-008",
+        "IS-009",
+        "IS-077",
+        "IS-105"
+      ],
+      "finding": "R02 공통 원본 required 값 일부가 boolean 또는 하위 필드 배열로 공통 yes/no/conditional/unknown 표현과 다름.",
+      "review_recommendation": "형식 충돌 보존",
+      "reason": "boolean/배열 형식과 yes/no/conditional/unknown의 차이는 정규화 문제이지 플랫폼 사실의 충돌로 단정하지 않음.",
+      "remaining_evidence": "원본 담당 수정 없이 통합 후보에서 조건/필드별 의미 명시; 후속 재확인 시 형식 보완.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-04",
+      "platform": "PL02",
+      "topic": "수강료 계산/시간 충돌",
+      "story_refs": [
+        "IS-010",
+        "IS-054",
+        "IS-093",
+        "IS-094"
+      ],
+      "finding": "시간당 단가×회당 시간×회차의 화면 계산 사례. 90분 원본을 60분으로 환산하면 실제 제공 조건이 달라질 수 있음.",
+      "review_recommendation": "사실 변경 금지",
+      "reason": "90분 레슨을 60/120분으로 자동 변경하거나 가격을 임의 환산하지 않는다.",
+      "remaining_evidence": "허용 단위·실제 제공 가능한 조건·사용자 선택·계산 결과 및 승인 근거.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-05",
+      "platform": "PL03",
+      "topic": "한 줄 소개 제한",
+      "story_refs": [
+        "IS-008",
+        "IS-105"
+      ],
+      "finding": "R04 observed_type_or_format에는 최대 50자, allowed_values_or_limits에는 최대 80자. 기존 스크린샷의 80자 화면 카운터 근거. 서버 실제 한계 미확인.",
+      "review_recommendation": "80자 화면 관찰만 유지",
+      "reason": "동일 R04 레코드의 50/80자 불일치에서 80자 카운터는 화면 관찰, 서버 제한 확정 아님.",
+      "remaining_evidence": "카테고리/시점·실제 서버 검증 근거; 원본 수정 요구 또는 팀원 재제출 없음.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-06",
+      "platform": "PL03",
+      "topic": "제공 서비스·질문·공개",
+      "story_refs": [
+        "IS-038",
+        "IS-039",
+        "IS-095",
+        "IS-104"
+      ],
+      "finding": "프로필/서비스 별도 관리, 대표는 등록된 제공 서비스 중 선택. MIDI·보컬 질문 차이. 항목 미설정 상태에서도 서비스명 미리보기 표시.",
+      "review_recommendation": "객체·관계·상태 분리",
+      "reason": "프로필과 제공 서비스, 대표 서비스 선택, 질문지, 미리보기·공개 상태를 동일 객체/상태로 간주하지 않음.",
+      "remaining_evidence": "대상 식별·대표 변경 저장 결과·질문 조건·실제 노출과 허용.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-07",
+      "platform": "PL04",
+      "topic": "프로필 등록 단계와 공개",
+      "story_refs": [
+        "IS-096",
+        "IS-105"
+      ],
+      "finding": "3단계 표시와 고등학교 학력 그룹 필수 표시만 확보. 필드별 실제 검사, 최종 공개 및 분야/지역 관계 불명.",
+      "review_recommendation": "등록 단계와 공개 분리",
+      "reason": "3단계 표시는 단계 관찰; 학력 그룹 필수 표시가 모든 하위 필드 필수/최종 공개 성공을 증명하지 않음.",
+      "remaining_evidence": "프로필/분야/지역 연결, 실제 저장/공개 근거, 필요한 개인정보 최소성.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-08",
+      "platform": "PL05",
+      "topic": "별도 수강료 및 갱신",
+      "story_refs": [
+        "IS-022",
+        "IS-040",
+        "IS-106"
+      ],
+      "finding": "가격 입력란과 기존 본문 할인 사례, 공식 공지의 최신글 올리기 안내. 동일/유사 글 중복 제한. 실제 갱신 간격·효과 불명.",
+      "review_recommendation": "갱신과 신규 구분",
+      "reason": "별도 수강료 및 본문 할인 표현, 최신글 올리기와 중복 게시 제한을 분리.",
+      "remaining_evidence": "허용 갱신 조건/간격/기산점/실제 효과, 기존 객체 식별.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-09",
+      "platform": "PL06",
+      "topic": "게시 조건/옵션",
+      "story_refs": [
+        "IS-006",
+        "IS-108"
+      ],
+      "finding": "과거 가입 대기 7일·15일의 적용 기준 차이; 현재 홍보 게시판 규칙 불명. 옵션 5개 미선택 표본.",
+      "review_recommendation": "과거 안내와 현재 규칙 분리",
+      "reason": "가입 대기 7/15일 과거 사례 및 옵션은 적용 범위·현행 조건 미확인.",
+      "remaining_evidence": "현행 공식 조건, 게시 옵션 실제 공개/알림 결과; 접근/대행 허용 확인.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-10",
+      "platform": "PL07",
+      "topic": "가격 및 동일 내용 게시 제한",
+      "story_refs": [
+        "IS-040",
+        "IS-077",
+        "IS-106",
+        "IS-108"
+      ],
+      "finding": "별도 가격 입력 확인, 가격 미표시 사례. R05는 2025-05-10 공지의 2일 제한을 레슨 포함으로 해석, 기존 글 3일 문구 잔존.",
+      "review_recommendation": "게시 제한을 일정으로 자동 채택 금지",
+      "reason": "2일 정책 해석과 3일 게시물 문구 차이, 실제 집행·기산점 미확인. 가격 별도 필드 존재와 필수 여부 구분.",
+      "remaining_evidence": "공지 적용 범위/기산점/집행·가격 조건·업무별 허용 확인.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    },
+    {
+      "id": "PC-11",
+      "platform": "ALL",
+      "topic": "업무 지원·대행·완료 차이",
+      "story_refs": [
+        "IS-006",
+        "IS-011",
+        "IS-013",
+        "IS-017",
+        "IS-023",
+        "IS-026",
+        "IS-108"
+      ],
+      "finding": "세 팀원의 supported/unknown은 확인 수준 차이; 읽기 가능한 UI 또는 공식 절차는 제3자 대행 허용과 실제 저장/반영 결과를 입증하지 않음. 각 소스에서 대행 허용 unknown.",
+      "review_recommendation": "실행 권한과 결과 별도",
+      "reason": "42개 업무 모두 대행 허용 unknown; 직접 경로·저장 성공·심사·공개·실제 자동화는 별도 근거.",
+      "remaining_evidence": "정책 허용, 기술 가능, 사용자 승인, 실제 완료 증거를 각각 검증. 현재 외부 실행 금지.",
+      "status": "근거 우선순위 검토·실제 플랫폼 검증 미완"
+    }
+  ],
+  "scope_decision_review": [
+    {
+      "id": "SD-01",
+      "topic": "초기 사용자 가치와 MVP 시나리오",
+      "recommendation": "먼저 기술 검증은 단일 플랫폼; 제품 MVP는 V1.2 §11.4의 복수 플랫폼 신규/추가 등록·대표 수정·통합 결과 방향을 보존. 최초 등록만으로 제품 MVP를 축소하지 않음.",
+      "user_decision": "제품 MVP/대표 수정의 실제 포함 여부·플랫폼 선정 및 12/8·1/4 재평가 승인",
+      "needed": "직접/범용 도구/전용 서비스 동일 업무의 총 시간·오류·재작업·인증/승인 부담, 운영사 권한·공수.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-02",
+      "topic": "자체 서비스 계정·소유권 및 진입",
+      "recommendation": "사용자 식별·owner·접근 차단·안전한 종료를 기본 안전 요구로 추천; 자체 가입·workspace·인증 방식은 별도.",
+      "user_decision": "계정 정책/복구/종료 시 진행 업무 처리, 인증 방식",
+      "needed": "A2/D1, §9.6 및 최소 권한; 서비스 계정과 외부 계정 분리.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-03",
+      "topic": "중단·재개·승인 거절/철회와 외부 효과",
+      "recommendation": "효과 전 승인 거절/철회·대상 불일치는 차단. 중단·보류·재개·외부 취소는 효과가 다른 후보. 기본 외부 접근 철회 및 세션 폐기 의무 명시.",
+      "user_decision": "진행 중 중단·재개/취소 제공 범위, 철회 UX",
+      "needed": "단계별 권한·관측 가능한 효과, readback/새 승인 및 중복 차단.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-04",
+      "topic": "내부 저장 및 외부 플랫폼 임시저장/재조회",
+      "recommendation": "내부 저장·버전/준비 결과 보존 기본. 명시 저장·저장 재요청은 자동 저장 대안과 비교. 외부 임시저장·조회 별도 미결정.",
+      "user_decision": "외부 초안 업무 필요성, 저장 결과/재요청 방식",
+      "needed": "저장 성공·미확인·중복/버전 보존, 외부 실제 저장·식별·권한.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-05",
+      "topic": "가격·시간·옵션 표현과 사실 보존",
+      "recommendation": "실제 제공 조건 및 가격 의미를 보존하고 플랫폼별 표현은 승인. 임의 단가/시간 환산 금지; 특화 필드는 공통 검토의 조건 사례.",
+      "user_decision": "공통/플랫폼별 적용 정보의 선택·정정 정책",
+      "needed": "PC-01/02/04/05/10 실제 조건·근거·권한.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-06",
+      "topic": "외부 관리 객체·대표 서비스·서비스별 질문",
+      "recommendation": "직접 등록 기존 게시물의 관리 연결은 §5.4에 명시되어 기본 후보로 보완. 객체 선택·소유 확인·연결·해제 분리. 대표 서비스/검색 UI 등은 별도.",
+      "user_decision": "대표 설정·프람피 분야 연결·추가 소유 자료/검색 범위",
+      "needed": "객체 식별·소유권·연결 결과, 공개와 저장의 구분.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-07",
+      "topic": "심사 반려·재접수와 탈잉 모집 오픈",
+      "recommendation": "접수·반려·승인·오픈·공개 분리. 반려 보완과 대응 선택 기본 후보; 재심사·취소·최초 일정 설정의 외부 효과는 별도.",
+      "user_decision": "재접수·취소·모집 오픈 지원 여부",
+      "needed": "업무별 실제 완료 조건·권한·수요; 지속 수업 운영 제외.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-08",
+      "topic": "대행 허용 미확인 시 직접 작성 지원",
+      "recommendation": "대행 허용 미확인은 실행 차단 및 안내. 직접 작성용 지원은 가치 검증 후 선택.",
+      "user_decision": "허용 미확인 플랫폼의 직접 작성 자료 범위",
+      "needed": "정책/자료 권리·실제 절감 시간·재작업 부담.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-09",
+      "topic": "연락 수단·공개 자료 및 첨부 권리",
+      "recommendation": "공개 문의 정보와 내부 개인정보, 실제 레슨 사실과 플랫폼 표현, 첨부 사용 권리 구분. 임의 공개/변환 금지.",
+      "user_decision": "연락 채널·권리 확인·공개/보존 범위",
+      "needed": "플랫폼 정책·실제 화면·사용자 동의 및 최소 수집.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-10",
+      "topic": "사용자 요청 상태 조회와 자동 모니터링",
+      "recommendation": "사용자 요청 상태 갱신과 자동 모니터링 분리. E01~E05 기본/MVP 제외; 추가 조회 범위·개시·변경·운영/실패·해제 확인은 조건부 검토 원장에 보존.",
+      "user_decision": "자동 모니터링 채택 및 주기·채널·설정 범위는 별도",
+      "needed": "정책·수요·기존 알림 대비 가치·비용·종료/철회 안전.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-11",
+      "topic": "원본 삭제·연결 해제·이력 및 보존",
+      "recommendation": "원본 삭제와 관리 연결 해제는 §9.5 기본 후보. 내부 삭제와 외부 게시물 삭제 구분. 보존기간/계정 삭제는 별도.",
+      "user_decision": "삭제 단위·진행 작업·증거 보존·재연결·복구 정책",
+      "needed": "법/정책·권리·권한·백업과 삭제 상태 확인.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-12",
+      "topic": "공고 갱신·기존 정보 수정의 우선순위와 중복 제한",
+      "recommendation": "신규·수정·갱신 구분. 최초 등록의 중복 확인은 필수. 제품 MVP 대표 수정 방향 유지; 갱신/추가 수정은 빈도·권한 후 우선순위.",
+      "user_decision": "구체 제품 MVP 수정 시나리오 및 갱신 순위",
+      "needed": "수정 빈도·공고 갱신 절감·실제 정책 및 기존 객체 식별.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-13",
+      "topic": "상태·결과·근거의 구분과 준비 실패",
+      "recommendation": "업무 진행 상태·외부 native 상태·목표 완료·증거 및 확인 시각을 구분하는 요구 유지. 미확인 효과 확인은 시스템 의무, 별도 사용자 요청은 미정.",
+      "user_decision": "결과/이력 노출·수동 재요청/재준비 UX",
+      "needed": "A3/D3/D4, 최신 revision·증거·중복·오류 조건; 세부 상태/스키마 후속.",
+      "status": "R01 승인 전 추천"
+    },
+    {
+      "id": "SD-14",
+      "topic": "통합 행동의 의미 완전성·최종 범위 및 DB 진입",
+      "recommendation": "107개 기존 후보와 R03 초안 121개를 비교한 검토 원장을 통합 근거로 사용. 승인 범위/의미·분기 완전성·R03 정식 인계 전 DB 진입 금지.",
+      "user_decision": "R03 정식 결과 및 필요한 추가 근거 대조 후 행동 단위 승인",
+      "needed": "USV-01~07 및 I1~I7. 새 범위/설계/구현 승인 없음.",
+      "status": "R01 승인 전 추천"
+    }
+  ],
+  "representative_guard_checks": [
+    {
+      "id": "RG-01",
+      "story_refs": [
+        "IS-011",
+        "IS-013",
+        "IS-089",
+        "IS-106",
+        "IS-082",
+        "IS-083",
+        "IS-016",
+        "IS-017",
+        "IS-020",
+        "IS-023"
+      ],
+      "guard": "신규 등록: 업무별 정책 및 계정/대상/기존 효과 확인; 중복 없음과 미확인 구분, 양 승인 및 최신 조건 확인; mock-only.",
+      "finding": "IS-089의 기존 MVP 우선순위를 신규에서도 필요한 안전 조건으로 보완."
+    },
+    {
+      "id": "RG-02",
+      "story_refs": [
+        "IS-087",
+        "IS-088",
+        "IS-049",
+        "IS-026",
+        "IS-023"
+      ],
+      "guard": "철회 이후 추가 실행 차단. 이미 외부 효과 발생/불명이면 관측 결과 제공; 원복 보장 없음.",
+      "finding": "기본 접근 철회 G-03과 구별."
+    },
+    {
+      "id": "RG-03",
+      "story_refs": [
+        "IS-023",
+        "IS-045",
+        "IS-046",
+        "IS-104",
+        "IS-026",
+        "IS-029",
+        "IS-019"
+      ],
+      "guard": "실패/미확인/부분 성공 분리; 불명 확인 전 재시도 금지; 성공 대상 제외.",
+      "finding": "미확인 효과 확인은 사용자 요청 여부와 무관한 시스템 의무."
+    },
+    {
+      "id": "RG-04",
+      "story_refs": [
+        "IS-004",
+        "IS-054",
+        "IS-008",
+        "IS-082",
+        "IS-016",
+        "IS-017",
+        "IS-021",
+        "IS-056"
+      ],
+      "guard": "원본 수정과 외부 수정 분리; 동일 revision 중복 검토 금지; 실제 변경에는 새 승인.",
+      "finding": "대표 기존 수정은 V1.2 제품 MVP 제안에 포함."
+    },
+    {
+      "id": "RG-05",
+      "story_refs": [
+        "IS-034",
+        "IS-035",
+        "IS-050",
+        "IS-080"
+      ],
+      "guard": "원본 삭제/관리 연결 해제/외부 삭제 구분. 진행 업무 및 필요한 증거와 충돌 시 보류/제한 안내.",
+      "finding": "삭제 완료 및 세션 정리 실제 증거 필요."
+    },
+    {
+      "id": "RG-06",
+      "story_refs": [
+        "IS-030",
+        "IS-031",
+        "IS-033",
+        "IS-061",
+        "IS-072",
+        "IS-073"
+      ],
+      "guard": "조건부 자동 조회는 승인·정책·보안 검증 후만. 철회·만료·종료 즉시 새 접근 차단; 관련 세션 자동 폐기.",
+      "finding": "조건부 추가 후보를 기본 범위로 승격하지 않음."
+    }
+  ],
+  "verification": {
+    "structural_check": {
+      "verdict": "pass",
+      "checks": [
+        "107개 원본 ID에 각각 한 검토 행",
+        "121개 R03 초안 행동 ID에 각각 한 대조 행 및 유효 통합 참조",
+        "그룹별 107개 ID 중복/누락 없음",
+        "14개 SD/11개 PC/18개 R03 발견/17개 R03 결정 연결 수 및 ID 검증",
+        "승인된 범위 0 유지"
+      ],
+      "errors": []
+    },
+    "semantic_check": {
+      "verdict": "inconclusive",
+      "limits": "행동별 의미·범위 추천 및 대표 조건 논리 검토. 실제 완전성·모든 447개 분기별 직접 전이 유효성·R03 56개 시스템 이벤트 전수 의미 대조·정식 인계·외부 정책/실행/완료 실증·전체 Python/CI는 미수행."
+    },
+    "USV": {
+      "USV-01": "inconclusive · R03 초안 비교 및 누락 후보 도출, 정식 원본/추가 조사 대기",
+      "USV-02": "inconclusive · 107개 개별 의미/그룹 검토, 실제 정규화/승인 미수행",
+      "USV-03": "inconclusive · 34개 피처 역할 확인, 상세 이벤트 의미 추적 잔여",
+      "USV-04": "inconclusive · 대표 안전 조건 검토, 447개 전체 분기 의미 폐쇄 미검증",
+      "USV-05": "inconclusive · 시스템 의무와 사용자 조작 구분, R03 56개 이벤트 전수 대조 잔여",
+      "USV-06": "inconclusive · 14개 결정 추천, 실제 가치/권한과 R01 승인 필요",
+      "USV-07": "blocked · 승인 범위 없음, DB 미착수"
+    }
+  },
+  "next": [
+    "R03 지정 원본/TASK result 정식 인계 시 현재 고정 초안과 변경 대조; 담당자 대신 제출·상태 변경하지 않음.",
+    "G-01~08 우선 반영 후보를 기존 ID 보존하며 통합 원본에 적용할지 R01 검토; 조건부/제외 G-09/10 유지.",
+    "팀원 후속 조사 및 447개 분기/56개 R03 시스템 이벤트 의미 비교 완료 후 필요한 범위 결정, 승인된 행동 집합 고정.",
+    "USV-07 통과 전 DB/ERD/API 상세 및 신규 구현 금지. main/타 owner 변경·병합 없음."
+  ]
+}

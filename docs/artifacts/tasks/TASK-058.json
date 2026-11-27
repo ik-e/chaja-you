@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-058",
   "kind": "task",
-  "status": "할 일",
+  "status": "진행 중",
   "owner": "R01",
   "suggested_owner": null,
   "due": "2026-11-26",
@@ -13,7 +13,7 @@
   ],
   "submission_ids": [],
   "required_for_submission": false,
-  "updated_at": "2026-11-26",
+  "updated_at": "2026-11-27",
   "title": "통합 사용자 스토리·서비스 범위 확정 및 DB 설계",
   "question": "독립 조사와 사용자 행동을 통합하여 어떤 서비스 범위·논리 데이터 모델·ERD·스키마를 근거 있게 확정할 수 있는가?",
   "goal": "상위 기획 의도에 맞는 서비스 범위 확정과 7개 플랫폼 확장 가능한 DB 설계, 이후 API·프로토콜 설계 입력 제공",
@@ -44,7 +44,73 @@
     "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json",
-    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-DESIGN.md"
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-DESIGN.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/branch-refinement-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/README.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/COMMON-NORMAL-FLOWS.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/PLATFORM-NORMAL-FLOWS.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/USER-STORY.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json",
+    "docs/review/lesson-registration/USER-STORY-V2.3.md",
+    "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md",
+    "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.4/semantic-flow.json",
+    "docs/review/lesson-registration/USER-STORY-SEMANTIC-FLOWS-V2.4.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+    "docs/review/lesson-registration/SERVICE-SCOPE-V1.0.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
+    "docs/review/lesson-registration/ABSTRACT-SCREENS-V1.0.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+    "docs/review/lesson-registration/SYSTEM-WORK-V1.0.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+    "docs/review/lesson-registration/PLATFORM-WORK-V1.0.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+    "docs/review/lesson-registration/LOGICAL-STATE-V1.0.md",
+    "tools/validate_logical_state_v1.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+    "docs/review/lesson-registration/ERROR-RESPONSE-V1.0.md",
+    "tools/validate_lesson_design_r1.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
+    "docs/review/lesson-registration/USER-STORY-V3.0.md",
+    "docs/review/lesson-registration/USER-STORY-FLOWS-V3.0.md",
+    "docs/review/lesson-registration/USER-STORY-TRACE-V3.0.md",
+    "tools/validate_user_story_v3.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-trace.json",
+    "docs/review/lesson-registration/LOGICAL-DB-ERD-V1.0.md",
+    "docs/review/lesson-registration/LOGICAL-DB-TRACE-V1.0.md",
+    "tools/project_logical_db_v1.mjs",
+    "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
+    "docs/review/lesson-registration/USER-STORY-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-INTEGRATION-REVIEW-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-MENTOR-V3.1.md",
+    "docs/review/lesson-registration/USER-STORY-SEMANTIC-REVIEW-V3.1.md",
+    "tools/project_user_story_v31.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md",
+    "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v3.json",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md",
+    "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md",
+    "docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json",
+    "docs/review/lesson-registration/USER-STORY-CURRENT.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -86,9 +152,962 @@
     },
     {
       "path": "docs/human/responses/HRESP-20261126-03_r03-afternoon-user-story-assignment.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-V2.3.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V2.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v3.json"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md"
+    },
+    {
+      "path": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
     }
   ],
-  "result": null,
+  "result": {
+    "summary": "V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도.",
+    "claims": [
+      {
+        "id": "C058-01",
+        "text": "118/118 원본 스토리 및 37/37 시스템 이벤트의 후보 연결, 기존 63개 ID 유지, 107개 후보와 34개 F/E 정역방향 참조, 447개 분기 후보. R03 빈 양식은 조사 결과로 계산하지 않음.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-01"
+        ]
+      },
+      {
+        "id": "C058-02",
+        "text": "7개 플랫폼×6개 업무, 공통 136+상세 124개 출처 필드 레코드(중복 포함), 47개 원본 교차 연결과 상세 연결 23개 포함. R01 비교 결과의 대행 허용은 42개 모두 unknown.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-02"
+        ]
+      },
+      {
+        "id": "C058-03",
+        "text": "107개 행동별 범위 추천(기본 82·조건부 10·미결정 15)과 14개 결정 후보, 강사 피드백 A1~A4/D1~D4의 후속 설계 입력 연결. 제품 범위 승인 0건.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      },
+      {
+        "id": "C058-04",
+        "text": "인증/대상, 내용/범위 승인, 변경·미확인 효과·재요청 관련 고위험 분기 후보를 우선 정리했으며 전체 분기 및 의미 검토는 미완료.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-01",
+          "E058-03"
+        ]
+      },
+      {
+        "id": "C058-05",
+        "text": "기존 107개 행동을 개별 검토하고 R03 작업 공간 보완 초안의 121개 행동을 동일 후보 64, 부분 대응 33, 명시 필요/누락 후보 20, 대행 제외 4로 대조했다. 34개 피처 및 R03 발견 18개·결정 요청 17개·플랫폼 차이 11개·범위 결정 14개를 참조로 연결했다. 정식 TASK-059 지정 원본은 고정 시점 0건이며 초안은 독립 실증이나 정식 수용이 아니다.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-04"
+        ]
+      },
+      {
+        "id": "C058-06",
+        "text": "직접 로그인과 필요 본인 인증 구분, 직접 등록물 관리 연결, 기본 업무 접근 철회 및 신규 등록의 기존 객체/효과 확인 등 10개 보완 주제를 추천했다. V1.2 제품 MVP의 대표 기존 정보 수정 방향 유지; 실행 요청/검토의 UI 중복 방지 및 E01~E05 기본 범위 제외. 원본 후보·범위·DB·외부 실행은 변경 또는 승인하지 않았다.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-04"
+        ]
+      },
+      {
+        "id": "C058-07",
+        "text": "최신 R02/R03/R04/R05 원본 244개 행동 대응, 141개 통합 후보와 681개 분기, 시스템 책임 40개 및 R03 대표 시나리오 30개 정상·오류 기대 동작 검토를 기록했다.",
+        "status": "observed",
+        "evidence_ids": [
+          "E058-05",
+          "E058-06",
+          "E058-07"
+        ]
+      },
+      {
+        "id": "C058-08",
+        "text": "141개 범위 추천 및 14개 결정, 사람용 문서를 동기화했다. 기본108/조건부27/제외6 추천, 승인 0건.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-08",
+          "E058-09"
+        ]
+      },
+      {
+        "id": "C058-09",
+        "text": "141개 기존 행동 ID를 보존하고 최초 owner 식별, 15개 이용 시나리오, 플랫폼 44개 업무, R04 22개 오류·9개 반복·12개 추가 후보 및 보완 오류 6개를 연결했다. 승인 전 후보.",
+        "status": "확인",
+        "evidence_ids": [
+          "E058-10",
+          "E058-11",
+          "E058-09"
+        ]
+      },
+      {
+        "id": "C058-10",
+        "text": "7개 플랫폼을 모두 설계에 포함한다는 사용자 지시를 기록. 15개 시나리오를 원자 SVO 대표 행동/정상 사용자 행동 및 기획 동기로 분리. 최신 R05 사례, R04 37 화면 후보 및 최신 필드 인덱스 318개 반영. 개별 업무/행동 승인 및 외부 실행 미수행.",
+        "status": "확인",
+        "evidence_ids": [
+          "E058-09",
+          "E058-10",
+          "E058-11",
+          "E058-02"
+        ]
+      },
+      {
+        "id": "C058-11",
+        "text": "단계별 수행 주체·외부 효과·정책 권한, 사용자 직접 결과와 독립 관측의 구분, 신규 SVO 3개 및 시스템 책임 2개 후보, R02 최신 프람피/뮬 조사 반영. 7개 설계 포함 및 mock-only 유지.",
+        "status": "확인",
+        "evidence_ids": [
+          "E058-12",
+          "E058-13",
+          "E058-10",
+          "E058-11"
+        ]
+      },
+      {
+        "id": "C058-12",
+        "text": "V1.3 기준 커밋의 144개 행동을 12개 카테고리와 하위 묶음으로 재배치한 수동 검토 프로젝션 추가. 정본 SVO·범위 보존, 정적 목록 대조 누락/중복/잘못된 ID 0. 별도 생성기 및 분류 정본 미도입.",
+        "status": "확인",
+        "evidence_ids": [
+          "E058-14",
+          "E058-09"
+        ]
+      },
+      {
+        "id": "C058-13",
+        "text": "멘토 참고 자료 및 사용자 요청에 따라 V1.3 보존, V2.0 정상 흐름 우선 후보 작성. 24개 공통 시나리오/204단계, 플랫폼 332단계, 총 536개 고유 단계 ID, 44개 업무 대응, 125개 기존 행동 참조·14개 오류 상세 이월·5개 제외 유지. R02-US-036 별도 미결정 후보. 정적 참조 확인이며 실제 동작·의미 완전성·범위 승인 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-15",
+          "E058-16",
+          "E058-17"
+        ]
+      },
+      {
+        "id": "C058-14",
+        "text": "멘토 Notion 참고 자료의 페이지·case·사용자 행동 형식을 적용한 팀 검토 문서. 기존 V2.0 536단계 ID를 21개 이용 상황으로 배치하고 각 1회 확인. 기존 상세 및 V1.3 보존. 오류 흐름 미작성, 범위 승인·공식 검증 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-18",
+          "E058-15",
+          "E058-16",
+          "E058-17"
+        ]
+      },
+      {
+        "id": "C058-15",
+        "text": "V2.3 155개 화면 행동 및 8개 정상 흐름, 기존 147 행동/536 단계/44 플랫폼 업무 보존. V2.2 수정 필요 8 행동/6 경로 보완 후보 및 4개 외부 직접 선행 행동·기존 글 연결·갱신·직접 작성 준비 분리.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-19",
+          "E058-20",
+          "E058-21",
+          "E058-23",
+          "E058-24"
+        ]
+      },
+      {
+        "id": "C058-16",
+        "text": "693개 기존 분기 조건·후속 ID 전수 보존, 일반 조건 195개 중 191개 구체화 후보/제외 4개 유지, 155개 화면 행동↔32개 오류 대응, 14개 이월/42개 시스템 책임/30개 대표 시나리오/248개 팀원 원본/44개 업무 관련 후보 연결. 의미 동등성과 실제 상태 머신·외부 효과는 미검증.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-21",
+          "E058-22",
+          "E058-25"
+        ]
+      },
+      {
+        "id": "C058-17",
+        "text": "155 행동 업무 도메인 분류·693 분기 원문/후속 보존 및 도메인별 대응 후보·44 업무별 체크포인트/실패·복구·완료 기준. 의미 동등성/실제 실행/범위 승인 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-26",
+          "E058-27"
+        ]
+      },
+      {
+        "id": "C058-18",
+        "text": "R01 대화 승인으로 제품 범위 V1.0 확정, 공고 갱신 기본 기능 명시. 7 플랫폼·44 업무 지원 분류와 완료 기준 승인 경계. 실제 외부 실행 및 사용자 스토리 전체 의미 승인 아님.",
+        "status": "confirmed",
+        "evidence_ids": [
+          "E058-28",
+          "E058-29"
+        ]
+      },
+      {
+        "id": "C058-19",
+        "text": "V1.0 승인 제품 범위를 바탕으로 원본 중심 핵심 4개 논리 화면, 조건부 보조 영역, 최소 사용자 행동/시스템 자동 처리·전이·오류 대응 후보 및 기존 업무/행동/화면 추적 작성. 화면/사용성 승인 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-30",
+          "E058-31"
+        ]
+      },
+      {
+        "id": "C058-20",
+        "text": "서비스 범위 V1.0 및 추상 화면 후보를 근거로 36 공통 시스템 업무/책임·입출력·완료·공통/플랫폼 경계와 44 업무/150 체크포인트·기존 행동/오류/피드백 관련 추적 작성. 상세 상태/오류/DB/API·실제 실행/승인 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-32",
+          "E058-33"
+        ]
+      },
+      {
+        "id": "C058-21",
+        "text": "7 플랫폼/44 업무의 팀 조사 기반 객체·38 필드 그룹·144 업무 체크포인트·공통 책임/오류·완료 및 복구 후보 명세. 126 조사 업무 행, R02/R04/R05 필드 주장, R05 상세 조사/예시·R04 정정·R03 비교 발견 연결. 실제 권한/효과·세부 필드/의미 완전성 검증 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-34",
+          "E058-35"
+        ]
+      },
+      {
+        "id": "C058-22",
+        "text": "기존 V5 및 공통 계약의 안전 원칙을 다중 대상·다회 업무의 상태/효과/관측/권한 분리 후보로 확장. 16 상태 축·69 전이·7 일관성 경계 및 관련 참조. 신뢰 이벤트 전제 단일 대상/2효과 유한 검사 한정, 전체 실제 검증 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-36",
+          "E058-37",
+          "E058-38"
+        ]
+      },
+      {
+        "id": "C058-23",
+        "text": "32 오류 대응 계약·LT-70 보완 후보 및 155 행동/693 분기·144 체크포인트 참조, 16 시험 기대값을 기록. 전체 의미 및 실행 검증 아님.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-39",
+          "E058-40"
+        ]
+      },
+      {
+        "id": "C058-24",
+        "text": "P0-01~05 및 P1 화면 복귀·행동 측정 기준에 대한 논리 보완 후보 반영. 44 업무 분류 불변. 실제 독립 효과/복구·허용 미검증.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-41",
+          "E058-42",
+          "E058-43",
+          "E058-44",
+          "E058-45",
+          "E058-46"
+        ]
+      },
+      {
+        "id": "C058-25",
+        "text": "V3 통합 사용자 스토리 및 R03 121/56, 기존 693 분기 대조 후보 작성. 승인된 제품 범위 불변; actual mock-only. 전체 의미·실제 효과 검증 미완료.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-47",
+          "E058-48",
+          "E058-49",
+          "E058-50",
+          "E058-51",
+          "E058-52"
+        ]
+      },
+      {
+        "id": "C058-26",
+        "text": "R01 잠정 V3.1-R1 기준으로 논리 DB/ERD·양방향 대조 후보 작성. 기존 범위, 상위 세 논리 구조, mock-only 유지. 물리/실제 검증 및 최종 승인 별도.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-53",
+          "E058-54",
+          "E058-55",
+          "E058-56",
+          "E058-57"
+        ]
+      },
+      {
+        "id": "C058-27",
+        "text": "R4와 6개 상세 명세의 동기화 기록, 13개 기존 DB 후보 필드 대조. 실제 실행과 구현 승인 별도.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-58"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E058-01",
+        "label": "통합 사용자 스토리·원본 추적·분기 검토",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
+        "commit": "62aa774ed08ed710e924530972f8442d37a69a84",
+        "blob": "65494b884f7e41824b86d88fdd8d758bb507f2dc"
+      },
+      {
+        "id": "E058-02",
+        "label": "7개 플랫폼 업무·필드·관계 및 제약 비교",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json",
+        "commit": "42b17c707e581cd3ec7ac5de7217129c0d95dcd3",
+        "blob": "d884e7cd67e52515e21dd7a6b99d4075c1eb0e74"
+      },
+      {
+        "id": "E058-03",
+        "label": "행동별 범위 추천·결정 요청·강사 피드백 연결",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
+        "commit": "c3d423862a928bb2e2314df1bb4430b0f55cfe1e",
+        "blob": "b41d941c1a72aee56ce0a96eb94fb9e09da56447"
+      },
+      {
+        "id": "E058-04",
+        "label": "107개 의미 검토·R03 121개 미제출 초안 대조·범위 결정 추천 원장",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-review-20261126.json",
+        "commit": "864d068bc6d4f4b54ac63199bdfbf9e776b08dfb",
+        "blob": "76bae7062d2d4245edac9747e949e30c42a59d59"
+      },
+      {
+        "id": "E058-05",
+        "label": "최신 244개 원본·141개 행동·681개 분기",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-stories.json",
+        "commit": "6cce5d6716888e12cd9ec089c727af95f8046889",
+        "blob": "3eda5129e96b048b4daad085e0d6c69df53a19c3"
+      },
+      {
+        "id": "E058-06",
+        "label": "R03 56개 시스템 이벤트 대조",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-event-review-20261126.json",
+        "commit": "8f6503498a352e0fa561091968b7ae4424555b80",
+        "blob": "ef72131ef4771296b16299104e707ddc189d4210"
+      },
+      {
+        "id": "E058-07",
+        "label": "R03 30개 시나리오 교차 검토",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scenario-review-20261126.json",
+        "commit": "5b07a0ac379a9b3167c1de6b50c2e4496a588432",
+        "blob": "0a9050fe245c1fe5ef8568136ecae731be8d0359"
+      },
+      {
+        "id": "E058-08",
+        "label": "141개 범위 추천 원장",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json",
+        "commit": "e70514e6cfb0e2d45e94b77cc3424a5aebb29ff6",
+        "blob": "5ef392c53d838417c5c6a7e1e6ba2288e65ac970"
+      },
+      {
+        "id": "E058-09",
+        "label": "사용자 스토리 최종 확인용 문서",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-REVIEW.md",
+        "commit": "5b1ebe1995b0ea60cb5f163274e995b8f3e06715",
+        "blob": "1c19c4e5c00215c59dcca887bd6ff29f21a977b2"
+      },
+      {
+        "id": "E058-10",
+        "label": "통합 사용자 스토리 최종 검토",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/user-story-final-review-20261126.json"
+      },
+      {
+        "id": "E058-11",
+        "label": "플랫폼별 업무 및 완료 기준",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-service-scope.json"
+      },
+      {
+        "id": "E058-12",
+        "label": "정책 위험 원장 및 후속 설계 요구",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/policy-risk-register.json"
+      },
+      {
+        "id": "E058-13",
+        "label": "사람 검토용 정책 위험 기록",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/POLICY-RISK-REVIEW.md"
+      },
+      {
+        "id": "E058-14",
+        "label": "144개 SVO 카테고리별 공동 검토 프로젝션",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/USER-STORIES-CATEGORY-REVIEW.md"
+      },
+      {
+        "id": "E058-15",
+        "label": "V2.0 정상 흐름 검토 및 144개 기존 행동 추적",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/README.md"
+      },
+      {
+        "id": "E058-16",
+        "label": "V2.0 공통 정상 이용 흐름",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/COMMON-NORMAL-FLOWS.md"
+      },
+      {
+        "id": "E058-17",
+        "label": "V2.0 7개 플랫폼별 정상 이용 흐름",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/PLATFORM-NORMAL-FLOWS.md"
+      },
+      {
+        "id": "E058-18",
+        "label": "멘토 참고 자료 형식 사용자 스토리 V2.0 팀 검토안",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.0/USER-STORY.md"
+      },
+      {
+        "id": "E058-19",
+        "label": "V2.2 작업용 정상 사용자 스토리",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/user-stories.json"
+      },
+      {
+        "id": "E058-20",
+        "label": "V2.2 정상 흐름 전수 검토 원장",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.2/normal-review-20261127.json"
+      },
+      {
+        "id": "E058-21",
+        "label": "V2.3 작업용 정상·오류 연계 후보",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/user-stories.json",
+        "blob": "bc6dad39b639c3eb908702ee104baedce3415aa9"
+      },
+      {
+        "id": "E058-22",
+        "label": "V2.3 전수 분기·오류 및 원본 추적",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.3/review.json",
+        "blob": "029a983aa0bda441068924ddf951ec7db46586d5"
+      },
+      {
+        "id": "E058-23",
+        "label": "V2.3 화면별 사용자 스토리",
+        "path": "docs/review/lesson-registration/USER-STORY-V2.3.md"
+      },
+      {
+        "id": "E058-24",
+        "label": "V2.3 정상 흐름도",
+        "path": "docs/review/lesson-registration/USER-STORY-FLOWS-V2.3.md"
+      },
+      {
+        "id": "E058-25",
+        "label": "V2.3 오류 흐름·플랫폼 완료 경계·결정 검토",
+        "path": "docs/review/lesson-registration/USER-STORY-ERROR-REVIEW-V2.3.md"
+      },
+      {
+        "id": "E058-26",
+        "label": "V2.4 의미·업무·오류 보완 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v2.4/semantic-flow.json"
+      },
+      {
+        "id": "E058-27",
+        "label": "V2.4 정상·오류 및 플랫폼별 BE 검토 프로젝션",
+        "path": "docs/review/lesson-registration/USER-STORY-SEMANTIC-FLOWS-V2.4.md"
+      },
+      {
+        "id": "E058-28",
+        "label": "현재 R01 승인 서비스 범위 V1.0 정본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json"
+      },
+      {
+        "id": "E058-29",
+        "label": "서비스 범위 V1.0 사람 검토용",
+        "path": "docs/review/lesson-registration/SERVICE-SCOPE-V1.0.md"
+      },
+      {
+        "id": "E058-30",
+        "label": "추상 화면 V1.0 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json"
+      },
+      {
+        "id": "E058-31",
+        "label": "추상 화면 V1.0 사람 검토용",
+        "path": "docs/review/lesson-registration/ABSTRACT-SCREENS-V1.0.md"
+      },
+      {
+        "id": "E058-32",
+        "label": "시스템 업무 V1.0 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json"
+      },
+      {
+        "id": "E058-33",
+        "label": "시스템 업무 V1.0 사람 검토용",
+        "path": "docs/review/lesson-registration/SYSTEM-WORK-V1.0.md"
+      },
+      {
+        "id": "E058-34",
+        "label": "플랫폼별 업무 V1.0 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json"
+      },
+      {
+        "id": "E058-35",
+        "label": "플랫폼별 업무 V1.0 사람 검토용",
+        "path": "docs/review/lesson-registration/PLATFORM-WORK-V1.0.md"
+      },
+      {
+        "id": "E058-36",
+        "label": "논리 상태·전이 V1.0 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json"
+      },
+      {
+        "id": "E058-37",
+        "label": "논리 상태·전이 V1.0 사람 검토용",
+        "path": "docs/review/lesson-registration/LOGICAL-STATE-V1.0.md"
+      },
+      {
+        "id": "E058-38",
+        "label": "논리 상태 축약 검증기",
+        "path": "tools/validate_logical_state_v1.mjs"
+      },
+      {
+        "id": "E058-39",
+        "label": "오류 대응 명세 V1.0 정본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+        "blob": "49e77b3d7b7367a78642b1ebf3df23a96e887419"
+      },
+      {
+        "id": "E058-40",
+        "label": "오류 대응 명세 검토용 프로젝션",
+        "path": "docs/review/lesson-registration/ERROR-RESPONSE-V1.0.md",
+        "blob": "f2bccf165a6bcec1d607456d5e68f3982f47d045"
+      },
+      {
+        "id": "E058-41",
+        "label": "R1 화면·복귀 계약",
+        "path": "docs/review/lesson-registration/ABSTRACT-SCREENS-V1.0.md"
+      },
+      {
+        "id": "E058-42",
+        "label": "R1 공통 책임·검증 읽기·충돌",
+        "path": "docs/review/lesson-registration/SYSTEM-WORK-V1.0.md"
+      },
+      {
+        "id": "E058-43",
+        "label": "R1 플랫폼 효과·잔여 업무",
+        "path": "docs/review/lesson-registration/PLATFORM-WORK-V1.0.md"
+      },
+      {
+        "id": "E058-44",
+        "label": "R1 논리 상태",
+        "path": "docs/review/lesson-registration/LOGICAL-STATE-V1.0.md"
+      },
+      {
+        "id": "E058-45",
+        "label": "R1 오류 계약",
+        "path": "docs/review/lesson-registration/ERROR-RESPONSE-V1.0.md"
+      },
+      {
+        "id": "E058-46",
+        "label": "R1 참조 검증기",
+        "path": "tools/validate_lesson_design_r1.mjs"
+      },
+      {
+        "id": "E058-47",
+        "label": "V3 통합 사용자 스토리 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/user-stories.json"
+      },
+      {
+        "id": "E058-48",
+        "label": "V3 사람 검토용 사용자 스토리",
+        "path": "docs/review/lesson-registration/USER-STORY-V3.0.md"
+      },
+      {
+        "id": "E058-49",
+        "label": "V3 화면/업무/오류 흐름 및 수용 후보",
+        "path": "docs/review/lesson-registration/USER-STORY-FLOWS-V3.0.md"
+      },
+      {
+        "id": "E058-50",
+        "label": "V3 팀원/기존 분기 추적 작업 원본",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json"
+      },
+      {
+        "id": "E058-51",
+        "label": "V3 R03 비교 검토 프로젝션",
+        "path": "docs/review/lesson-registration/USER-STORY-TRACE-V3.0.md"
+      },
+      {
+        "id": "E058-52",
+        "label": "V3 정적 및 참조 모형 검증기",
+        "path": "tools/validate_user_story_v3.mjs"
+      },
+      {
+        "id": "E058-53",
+        "label": "R01 잠정 V3.1 논리 DB 착수 의도",
+        "path": "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md"
+      },
+      {
+        "id": "E058-54",
+        "label": "논리 DB V1.0 후보",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json"
+      },
+      {
+        "id": "E058-55",
+        "label": "DB 데이터·사용자 스토리 양방향 추적",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-trace.json"
+      },
+      {
+        "id": "E058-56",
+        "label": "논리 ERD 및 데이터 사전",
+        "path": "docs/review/lesson-registration/LOGICAL-DB-ERD-V1.0.md"
+      },
+      {
+        "id": "E058-57",
+        "label": "논리 DB 생성/축약 가드 평가기",
+        "path": "tools/project_logical_db_v1.mjs"
+      },
+      {
+        "id": "E058-58",
+        "label": "R4 현행 기준 및 DB V3 필드 재대조",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+      }
+    ],
+    "verification": [
+      {
+        "criterion": "구조 참조 검사 · 118 원본/37 이벤트/34 피처/107 행동/447 분기/260 필드/42 업무/107 범위 추천 연결",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-01",
+          "E058-02",
+          "E058-03"
+        ]
+      },
+      {
+        "criterion": "검토 원장 참조 검사 · 107 행동/121 R03 초안/34 피처/18 발견/17 결정/11 차이/14 범위 요청",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-04"
+        ]
+      },
+      {
+        "criterion": "최신 원본 244개·141 행동·681 분기 및 30 시나리오/141 범위 추천 참조 검사",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-05",
+          "E058-07",
+          "E058-08"
+        ]
+      },
+      {
+        "criterion": "I1/USV-01~05 · 의미 완전성 및 실제 상태 전이",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-05",
+          "E058-06",
+          "E058-07"
+        ]
+      },
+      {
+        "criterion": "I2/USV-06~07 · 제품 범위 및 사용자 승인",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-08",
+          "E058-09"
+        ]
+      },
+      {
+        "criterion": "I3 · 7개 플랫폼 교차 비교, 사실·제약·실제 권한/완료의 근거",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-02",
+          "E058-04"
+        ]
+      },
+      {
+        "criterion": "I4~I6 · 승인 범위 기반 DB/ERD/스키마, 데이터 표현/기존 설계 영향 및 API 입력",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      },
+      {
+        "criterion": "I7 · 강사 피드백 8개 실제 설계/시험 추적",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-03"
+        ]
+      },
+      {
+        "criterion": "최신 이용 시나리오·오류/반복·플랫폼 업무·행동 범위 정적 참조 검사",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-10",
+          "E058-11",
+          "E058-09"
+        ]
+      },
+      {
+        "criterion": "7개 플랫폼 및 44 업무 설계 포함, 141개 SVO/15 시나리오/37 화면 참조",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-09",
+          "E058-10",
+          "E058-11"
+        ]
+      },
+      {
+        "criterion": "정책 위험 44업무 연결 및 144개 SVO/693개 분기·신규 원본 행동·15개 시나리오 참조 검사",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-12",
+          "E058-10",
+          "E058-11"
+        ]
+      },
+      {
+        "criterion": "카테고리 검토 문서의 정본 144개 행동 일대일 대응 및 기본110/조건부29/제외5 수량 확인",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-14",
+          "E058-09"
+        ]
+      },
+      {
+        "criterion": "V2.3 구조: 기존 행동/단계/693 분기 원문·후속 ID·191 일반 조건 구체화 후보·제외 4·155 행동↔32 오류·팀원 및 플랫폼 참조 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-19",
+          "E058-21",
+          "E058-22"
+        ]
+      },
+      {
+        "criterion": "V2.2 두 기존 프로젝션 JS 재구성 일치 및 V2.3 세 프로젝션 템플릿 생성",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-19",
+          "E058-21",
+          "E058-23",
+          "E058-24",
+          "E058-25"
+        ]
+      },
+      {
+        "criterion": "V2.3 의미 완전성·원자적 상태 전이·공식 전체 Python/CI·실제 UI·외부 정책/효과 및 가치",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-22",
+          "E058-25"
+        ]
+      },
+      {
+        "criterion": "V2.4 행동·분기 보존·플랫폼 업무/단계 참조 및 hold/local 외부 단계 차단 정적 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-26"
+        ]
+      },
+      {
+        "criterion": "V2.4 개별 의미·실제 효과/허용·공식 Python/CI·사용성",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-26",
+          "E058-27"
+        ]
+      },
+      {
+        "criterion": "V1.0 제품 범위 결정 추적(14 SD), 7 플랫폼/44 업무, 7 기본 기능/29 기획 피처, 7 갱신 업무 및 mock-only 정적 참조(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-28"
+        ]
+      },
+      {
+        "criterion": "V1.0 후속 논리 설계·개별 사용자 스토리 의미 및 외부 허용/효과·공식 Python/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-28",
+          "E058-29"
+        ]
+      },
+      {
+        "criterion": "추상 화면 V1.0 4 핵심/9 영역·전이/영역/155 행동/44 업무/37 R04 화면/32 오류·7 기능 참조 및 갱신/mock-only 범위 정적 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-30"
+        ]
+      },
+      {
+        "criterion": "추상 화면 V1.0 개별 의미/전이·사용성 및 외부 권한/효과·공식 Python/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-30",
+          "E058-31"
+        ]
+      },
+      {
+        "criterion": "시스템 업무 V1.0 36 업무·7/29 피처·155 행동·42 책임·44/150 업무/단계·12/30 화면 여정/전이·32 오류·8 피드백, hold/local/조건부 실행 차단 분류 정적 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-32"
+        ]
+      },
+      {
+        "criterion": "시스템 업무 V1.0 개별 의미·실제 업무/권한/효과·공식 Python/CI·사용성",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-32",
+          "E058-33"
+        ]
+      },
+      {
+        "criterion": "플랫폼별 업무 V1.0 7/44 업무·150 기존/144 신규 체크포인트·38 필드 그룹·126 팀 업무·SW/오류/근거 참조 및 hold/local/조건부/갱신 실행 차단 정적 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-34"
+        ]
+      },
+      {
+        "criterion": "플랫폼별 업무 V1.0 개별 의미·정확 필수/제약·실제 권한/효과 및 공식 Python/CI·사용성",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-34",
+          "E058-35"
+        ]
+      },
+      {
+        "criterion": "논리 상태 V1.0 16 축/69 전이의 상태 도달성·정적 참조 및 제한 업무 차단, 단일 대상/2효과 축약 모형 314 상태/1026 간선 검사(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-36",
+          "E058-38"
+        ]
+      },
+      {
+        "criterion": "논리 상태 V1.0 개별 전이 의미/전체 분기·다중 대상 경합·실제 권한 및 효과·DB/API·공식 Python/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-36",
+          "E058-37",
+          "E058-38"
+        ]
+      },
+      {
+        "criterion": "오류 대응 V1.0 32/155/693/144 참조 및 LT-70 상태값 확인(JS)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-39"
+        ]
+      },
+      {
+        "criterion": "오류 대응 V1.0 개별 의미/실제 수용시험/공식 생성기 및 CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-39",
+          "E058-40"
+        ]
+      },
+      {
+        "criterion": "R1 교차 정적 및 reference fixture 검사 34개; 실제 실행/동시성 검증 아님",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-46"
+        ]
+      },
+      {
+        "criterion": "R1 개별 693분기 의미·R03 121/56 전수·실제 플랫폼 효과/복구·공식 Python/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-41",
+          "E058-42",
+          "E058-43",
+          "E058-44",
+          "E058-45"
+        ]
+      },
+      {
+        "criterion": "V3 30 정적/참조 모형 검사 및 10 추적 검사(커넥터 JS); 실패 0",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-47",
+          "E058-50",
+          "E058-52"
+        ]
+      },
+      {
+        "criterion": "V3 505 활성 분기/16 범위 분리의 개별 실행 의미, 플랫폼·동시성·사용성, 공식 Python/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-47",
+          "E058-49",
+          "E058-50"
+        ]
+      },
+      {
+        "criterion": "R4 정적 검사 15개(구조/참조/DB field 존재)",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-58"
+        ]
+      },
+      {
+        "criterion": "R4 실제 DB/외부 실행·공식 CI 및 projection",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-58"
+        ]
+      }
+    ],
+    "uncertainties": [
+      "R04 별도 V3.1 검토 미확인. 기존 조사/IA 보존.",
+      "R4 상위 명세 동기화 기록 및 정적 참조 대조는 전체 전이 의미·경합·사용성 완전성 검증이 아님.",
+      "실제 플랫폼 지원·허용·필수 규격·효과 및 시간 절감 미검증; mock-only.",
+      "최소 DB typed schema·제약·원자성·참조·권리/보존·generation·실제 PostgreSQL 미검증.",
+      "운영 기준치/계측/전달·인증 공급자·권리/보존·구현 순서 미확정.",
+      "main 통합 충돌 해소 및 공식 Python/Node projection·CI 검증 필요."
+    ],
+    "decision_requests": [
+      "현재 논리 검토 기준 R4와 DB V3 R4 재대조 후보의 최종 검토. 실제 DB DDL/API/구현 승인 별도.",
+      "실제 플랫폼 허용·운영 상세·개인정보 정책 및 구현 순서·기존 작업 재개는 후속 결정."
+    ]
+  },
   "traceability": {
     "intent_refs": [
       "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
@@ -123,7 +1142,7 @@
   "intent_ref": "docs/human/phase-intents/PHASE-20261126-01.md",
   "registration_authority_ref": "docs/human/responses/HRESP-20261126-01_parallel-story-platform-design.md",
   "assignment_mode": "self_directed",
-  "assignment_status": "R01 자기 주도형 등록 · 통합 입력 대기",
+  "assignment_status": "서비스 범위 V1.0 승인 · 사용자 스토리 V3.1-R2 잠정 · 최신 원본 중심 최소 DB V3.0(13개) 검토 후보 · 물리 DDL/구현/API 미승인",
   "workspace_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/",
   "owned_paths": [
     "docs/artifacts/planning/lesson-registration-20261126/integrated/"
@@ -131,5 +1150,378 @@
   "priority_note": "초안 준비는 병행; 선행 결과 검토 후 범위/DB 확정; 강사 API/DB 피드백 설계 입력 및 PostgreSQL 목표 반영, 구현 재개 별도",
   "supporting_task_refs": [
     "TASK-059"
-  ]
+  ],
+  "active_service_scope_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+    "id": "SERVICE-SCOPE-20261127-R01-V1",
+    "version": "1.0",
+    "effective_semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "ef3ddf34338289d4455ed870c998881fa91a2fa3",
+    "r4_sync_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "active_abstract_screen_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
+    "id": "ABSTRACT-SCREENS-20261127-R01-V1",
+    "version": "1.0",
+    "effective_semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "a88a8bf3c7cf12e8dcc9b29e084ee7bfeb63dc85",
+    "r4_sync_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "active_system_work_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+    "id": "SYSTEM-WORK-20261127-R01-V1",
+    "version": "1.0",
+    "effective_semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "ca8af9fad5b9401f4d9190ec04b6340e810a09b5",
+    "r4_sync_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "active_platform_work_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+    "id": "PLATFORM-WORK-20261127-R01-V1",
+    "version": "1.0",
+    "effective_semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "d449d6232a43f1000f55666f16bd0c5436f6fea7",
+    "r4_sync_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "active_logical_state_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+    "id": "LOGICAL-STATE-20261127-R01-V1",
+    "version": "1.0",
+    "effective_semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "7b5ab8fe8067b236b563913062d1e2d74e9ca7b9",
+    "r4_sync_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "active_error_response_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+    "id": "ERROR-RESPONSE-20261127-R01-V1",
+    "version": "1.0",
+    "effective_semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "8abf8b6cf583f05359dd71f1ec3b57c978f3fadc",
+    "r4_sync_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "design_review_r1": {
+    "base_commit": "f99cef645d0a42ad741315c53d2b8758ae25e083",
+    "scope_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+    "effective_design_refs": [
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+      "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json"
+    ],
+    "validator": "tools/validate_lesson_design_r1.mjs",
+    "result": {
+      "checks": 34,
+      "failures": [],
+      "checks_detail": [
+        "44 approved scope rows",
+        "44 screen route traces",
+        "global authentication expiry routes",
+        "73 transitions and state domains",
+        "axis reachability AX01",
+        "axis reachability AX02",
+        "axis reachability AX03",
+        "axis reachability AX04",
+        "axis reachability AX05",
+        "axis reachability AX06",
+        "axis reachability AX07",
+        "axis reachability AX08",
+        "axis reachability AX09",
+        "axis reachability AX10",
+        "axis reachability AX11",
+        "axis reachability AX12",
+        "axis reachability AX13",
+        "axis reachability AX14",
+        "axis reachability AX15",
+        "axis reachability AX16",
+        "axis reachability AX17",
+        "bidirectional state/error references",
+        "state/work references",
+        "transition refs",
+        "45 effect contracts and recovery gates",
+        "23 mutation checkpoints covered",
+        "held/local/conditional no effect",
+        "error/legacy references preserved",
+        "22 acceptance references",
+        "reference collision prefix/independent resource",
+        "reference approval/read/claim/unknown/dispute gates",
+        "reference result discrimination",
+        "reference late non-dispatch path",
+        "reference residual gate"
+      ],
+      "effect_candidates": 45,
+      "mutation_checkpoints": 23,
+      "screen_transitions": 44,
+      "state_axes": 17,
+      "state_transitions": 73,
+      "scope_rows": 44,
+      "actual_platform_tests": 0,
+      "semantic_complete": false,
+      "official_python_ci": "not_run"
+    },
+    "status": "candidate_not_approved"
+  },
+  "active_user_story_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+    "id": "USER-STORY-20261127-R01-V31",
+    "version": "3.1",
+    "semantic_revision": "V3.1-R4",
+    "commit": "c606f9b703b037f397a37904567895e959805903",
+    "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
+    "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
+    "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
+    "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
+    "status": "current_logical_review_baseline_not_final_approved",
+    "r03_review_projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+    "team_review_projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md",
+    "design_refinement_projection_ref": "docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md",
+    "consolidation_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "design_review_v3": {
+    "base_commit": "c0340296e75bcab160bdc63d86ca048121a11b44",
+    "latest_team_main_commit": "868719ff379a5977c78475ee58748d463ed9ba51",
+    "status": "candidate_not_approved",
+    "source_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/user-stories.json",
+    "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
+    "verification_ref": "tools/validate_user_story_v3.mjs",
+    "result": {
+      "checks": 30,
+      "failures": [],
+      "counts": {
+        "nodes": 40,
+        "edges": 96,
+        "journeys": 12,
+        "scenarios": 28,
+        "platform_operations": 44,
+        "error_acceptance": 22,
+        "r03_actions": 121,
+        "r03_events": 56,
+        "legacy_branches": 693
+      },
+      "model_cases": 13,
+      "trace_counts": {
+        "r03_actions": 121,
+        "r03_events": 56,
+        "r03_findings": 18,
+        "legacy_stories": 144,
+        "legacy_actions": 155,
+        "legacy_branches": 693
+      },
+      "branch_dispositions": {
+        "mapped_candidate_individual_semantics_pending": 505,
+        "excluded_by_current_scope": 172,
+        "scope_split": 16
+      },
+      "full_semantics": "inconclusive",
+      "actual_tests": 0,
+      "official_python_ci": "not_run"
+    },
+    "remaining": [
+      "W 공통 사실 인라인 저장 UX/업무 계약",
+      "개별 505 활성 분기 및 16 범위 분리 의미 대조",
+      "실제 플랫폼 경로/허용/readback/복구·권한·동시성 및 사용자 행동 실측",
+      "공식 Python/CI 및 최신 팀 자료 재검증",
+      "승인 후 DB/ERD/API"
+    ]
+  },
+  "provisional_logical_db_candidate_ref": {
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design.json",
+    "id": "TASK-058-LOGICAL-DB-V1",
+    "version": "1.0",
+    "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-trace.json",
+    "authority_ref": "docs/human/responses/HRESP-20261127-02_provisional-v31-logical-db.md",
+    "source_commit": "70ae8e7169c284ba71c4dcbcc0cde4415929d079",
+    "status": "provisional_candidate_not_approved_for_physical_design"
+  },
+  "minimal_db_candidate_ref": {
+    "id": "TASK-058-MINIMAL-DB-V3",
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v3.json",
+    "review_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md",
+    "status": "r4_mapping_rechecked_review_candidate_not_approved_for_implementation",
+    "source_commit": "387df295582a78ea3ca9d6b9024235eba144b026",
+    "user_story_revision": "V3.1-R2",
+    "table_count": 13,
+    "prior_candidate_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json",
+    "latest_recheck_revision": "V3.1-R4",
+    "recheck_id": "DB-V3-R4-RECHECK-20261127",
+    "recheck_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+  },
+  "r03_v31_review": {
+    "source": {
+      "commit": "42ab10fc73fb0395798ff1dc1f81df5312bbd162",
+      "path": "docs/members/R03/workspace/2026-11-27_R03_USER-STORY-V3.1_REVIEW.md",
+      "blob": "3928399e0760bcd9f794a7fa6e7254a129ef45d0"
+    },
+    "decision": "all_four_accepted_design_clarification",
+    "story_commit": "c7ab3a1eec9683360106511b5b9efd088151957d",
+    "story_blob": "cf7e4ec9df2b73a5f399f8b42e44c118c177b874",
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+    "acceptance_cases": 13,
+    "structural_checks": 11,
+    "db_candidate_impact": "17-table candidate mapped; no new table requirement identified; actual DB validation pending",
+    "actual_tests": 0
+  },
+  "operational_quality_decision": {
+    "id": "DR-02",
+    "status": "accepted_operational_direction",
+    "story_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "83d767192bb49c80bf9f863e9c3ef88dc933dada",
+      "blob": "b38c37c4cdd334303455155a828c731af6dcab80",
+      "section": "operational_quality_baseline"
+    },
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-INTEGRATION-REVIEW-V3.1.md#dr-02-운영-품질-기준선",
+    "metric_count": 7,
+    "scope": "운영 기준선 관측·판정·미달 정보 전달 채택; 관리자 전용 제품 기능 미채택; 기존 강사 흐름·DB V3 후보 유지",
+    "verification": "6/6 생성 프로젝션 원격 내용 일치; 계측·수치·알림 구현/시험 미수행",
+    "remaining": "OB-01~05 수치·표본/기간, 계측·전달·권한 상세 및 검증"
+  },
+  "team_review_integration": {
+    "id": "V31-R3-TEAM-REVIEWS",
+    "status": "integrated_review_candidate",
+    "story_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "e6a6922f003062c6ad757ad79a24eb364fd47e85",
+      "blob": "9a866e346b8521c3788f723eaf308ff50d19f2c4",
+      "section": "team_review_integration"
+    },
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md",
+    "review_counts": {
+      "R02": 6,
+      "R03": 4,
+      "R05": 4,
+      "R04": "no_new_review_found"
+    },
+    "verification": "15/15 static checks; 7/7 projection remote match; no runtime/CI",
+    "remaining": [
+      "DR-03 계정·첨부 수명주기 및 DR-04 W 인라인 저장/공개 정보 미결정.",
+      "DR-05 실제 서버 규격·대행 허용·독립 효과/물리 결합 미검증. DR-01 일정/구현 순서 미확정.",
+      "DR-02 운영 기준치/계측/알림 미구현. R04 별도 검토 미확인.",
+      "상위 V1.0 원본 및 상세 구현 계약 정식 동기화, 정식 CI 및 실제 앱/외부 실행 미수행."
+    ]
+  },
+  "consolidation": {
+    "ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json",
+    "projection_ref": "docs/review/lesson-registration/USER-STORY-CURRENT.md",
+    "source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "c606f9b703b037f397a37904567895e959805903",
+      "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
+      "revision": "V3.1-R4"
+    },
+    "prior_status_history": {
+      "active_user_story_candidate_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+        "id": "USER-STORY-20261127-R01-V31",
+        "version": "3.1",
+        "semantic_revision": "V3.1-R3",
+        "commit": "e6a6922f003062c6ad757ad79a24eb364fd47e85",
+        "blob": "9a866e346b8521c3788f723eaf308ff50d19f2c4",
+        "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
+        "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
+        "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
+        "status": "provisional_for_logical_db_not_final_approved",
+        "r03_review_projection_ref": "docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md",
+        "team_review_projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md"
+      },
+      "minimal_db_candidate_ref": {
+        "id": "TASK-058-MINIMAL-DB-V3",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v3.json",
+        "review_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/DB-MINIMAL-V3.md",
+        "status": "review_candidate_not_approved_for_implementation",
+        "source_commit": "387df295582a78ea3ca9d6b9024235eba144b026",
+        "user_story_revision": "V3.1-R2",
+        "table_count": 13,
+        "prior_candidate_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v2.json"
+      },
+      "summary": "정책 위험 설계 연계 v1.3: 8개 위험·12단계·6수행 방식·7설계 요구·16검증 기대 사례를 7개 플랫폼 44개 업무 및 144개 SVO에 연결. R02 프람피/뮬 최신 조사·추가 3개 원본 행동 대응. 프람피 조회/수정/상태 및 뮬 수정 후순위 후보로 변경. 기본110/조건부29/제외5, 693분기·42책임, 15시나리오, 최신 필드 363 레코드. 개별 승인 0, 실제 실행/DB 미착수, main 미병합. | V2.0 별도 정상 흐름 검토안: 24개 시나리오·536단계(공통 204/플랫폼 332), 기존 44개 업무 대응, 기존 행동 125개 참조·14개 오류 이월·5개 제외 유지. 정상 흐름 검토 및 오류 상세화 전 범위/DB 확정 없음. | 멘토 참고 형식 팀 검토본 USER-STORY.md: 21개 이용 상황, 기존 536개 ID 1회씩 대조, 정상 우선·오류 후속. | V2.2 정상 전수 검토(147 행동/24 경로) 보존. V2.3 정상 수정 필요 8 행동/6 경로 보완 후보, 155 화면 행동 모두 32개 오류 대응 연결, 536 단계/44 업무/693 분기 원문·후속 ID 보존. 일반 조건 195개 중 191개 구체화 후보 및 제외 4개 유지, 14개 이월 오류 연결. 8 정상·4 오류 흐름도, 기존 V2.2 2개 프로젝션 JS 재구성 일치. 개별 승인/실제 권한·효과/의미 완전성/공식 Python 미확정. main 병합 및 DB/API 확정 없음. | V2.4 의미 보완 overlay: 8 수정 후보·8 정상/오류 흐름·155 행동 도메인 분류·693 분기 조건/후속 보존 및 유형별 대응 후보·32 오류·7개 플랫폼 44업무 150개 업무 체크포인트. 단일 플랫폼 부분 효과·조회/종료·계정/인증·재처리 분리. 의미·실행·공식 Python 미검증, 범위 미승인. | 현재 승인 기준선: 서비스 범위 V1.0 R01 확정(공고 갱신 기본 기능 포함). 이전 후보의 제품 범위 미승인 표현은 이력이며 신규 기준선 우선. 7개 플랫폼·44 업무 분류, 실제 실행 mock-only. 개별 사용자 스토리·논리 설계 미확정. | 추상 화면 V1.0 검토 후보: 핵심 H/E/W/R 4개, 보조 영역 포함 9개 논리 영역·22개 세부 영역·30개 전이·12개 여정; 7 기본 기능/44 업무/155 행동/37 R04 화면/32 오류 위치 연결. 원본 재사용·필요 판단만·같은 문맥 복귀·조건부 인증·부분 효과 보존. 화면 의미/사용성 및 공식 Python 미검증. | 시스템 업무 V1.0 검토 후보: 7 업무군/36 공통 업무(시작·입력·처리·출력·완료·사용자/FE/공통·플랫폼 BE/저장소 책임 및 오류), 11 논리 정보 개념·12 불변조건. 7 기능/29 피처·155 행동·42 시스템 책임·44 업무/150 체크포인트·12 여정/30 전이·32 오류·8 피드백 관련 참조 검증. 실제 실행/의미·사용성/공식 Python 미검증. 범위 변경 없음. | 플랫폼별 업무 V1.0 검토 후보: R02/R04/R05 126 업무 행과 R05 124 상세 필드, R02 130·R04 93·R05 독립 27 필드 행을 보존(중복/결합 포함); 7 플랫폼/44 업무, 150 이전 체크포인트 연결·144 새 업무 체크포인트·38 의미 필드 그룹, R04 정정/R03 비교/R05 추가 사례와 10 근거 대조. 공통 SW/오류 참조 정적 검사 통과; 범위 변경·실제 실행 없음. 개별 의미·필수/제약·대행 권한·완료 증거/공식 Python 미검증. | 논리 상태·전이 V1.0 검토 후보: 이전 V5 24 규칙과 공통 계약·V2.4 6축, 신규 36 업무/44 플랫폼 업무·144 체크포인트/30 화면 전이/32 오류/8 피드백 연결; 16 상태 축·69 전이·7 논리 일관성 경계. 한 대상·2개 순서 효과 축약 모형 314 상태/1026 간선, 검사 불변조건 위반 0(JS). 전체 의미·실제 경합/권한/DB/API 및 공식 Python/CI 미검증. | 오류 대응 V1.0 검토 후보: 32 오류의 영향·보존·상태 판정·복귀·재처리, 36 공통/44 플랫폼 업무·144 체크포인트·155 행동·693 분기 관련 참조, LT-70 보완 후보, 16 수용 시험 후보. JS 참조 검사 통과; 개별 의미·공식 Python/CI·runtime 미검증. | R1 설계 보완: 제품 44 업무 불변, 45 논리 효과/잔여 계획(독립 경로 미검증), 검증 읽기 계획·공유 객체 claim/분쟁 AX17·LT-70~73, 44 화면 전이, 22 오류 수용 후보. JS 교차 정적/참조 사례 34개 검사, 위반 0; 실제 실행/공식 Python/CI/전체 의미 미검증. | V3.0 통합 검토 후보: 12 여정·40 노드·96 연결·28 참조 시나리오, 36 공통 업무/44 플랫폼 업무·144 체크포인트·45 논리 효과·32 오류, R03 121 행동/56 이벤트/18 발견 및 기존 144 스토리/155 행동/693 분기(505 활성 의미 미검증·172 미채택·16 범위 분리) 대응. LT-44 조회 목적 보완. 30 정적/축약 검사(13 모형 사례) 및 10 추적 검사 실패 0. 실제 실행/공식 Python/CI·전체 개별 의미 검증 미완료; 범위 및 main 불변. | 2026-11-27 R01 잠정 V3.1-R1 기준 논리 DB V1.0 작성: 42 논리 기록/78 관계/13 불변조건, 12 여정/40 노드/36 업무·17축/73전이/8 원자경계·44업무/144단계/45효과/38 필드그룹, 기존 SQLite 10 테이블 영향·강사 A1~D4 연결. 21 구조/참조 검사 및 40 축약 가드 예시 통과. 논리 후보, 물리/실행/실제 권한/공식 CI 미검증, main 미병합.",
+      "uncertainties": [
+        "7개 플랫폼 설계 및 V1.0 업무 분류 제품 범위 승인. 144개 기존 SVO 및 V2.3 155개 행동의 개별 의미·전이 미확정; 실제 대행 허용 및 완료 실증 0. mock-only.",
+        "R02 최신 프람피·뮬 사용자 화면/회상·공식 정책 근거 반영, R02 추가 3개 원본 행동 대응. 실제 저장/갱신/공개·법률 판단 미확인.",
+        "기존 141개 후보 보존. IS-143 기본 추천 및 IS-144/145 별도 조건부. 사용자 직접 수행 결과 기록의 가치/범위/보호 조건 미승인.",
+        "최신 필드 인덱스 363개 출처 레코드(중복 포함), 의미·제약/관계 전수 정규화 미실시.",
+        "7개 약관 원문 전체 독립 검토 및 운영사 회신/법률 전문가 의견 미확보. 공식 Python/CI 및 project_docs.py 미실행, 실제 전이/의미 완전성 검증 미완료.",
+        "최신 main b08650b의 R02 힙합플레이야·힙합LE 추가 조사 및 저녁 점검은 현재 V1.3 통합 정본에 미반영. 이번 작업은 기존 정본의 공동 검토용 프로젝션 작성에 한정.",
+        "V2.3 구체화 후보는 의미 승인 아님. 기준 main 868719ff의 조사 결과 참조 및 원본 보존; 미병합 팀원 변경 및 최신 실제 허용·효과 확인 별도. 컨테이너 DNS 제한으로 공식 전체 생성기 --check/CI 미실행, JS 구조 및 프로젝션 대조만 수행.",
+        "V2.4는 V2.3 스냅샷 기준 의미 보완 overlay. 693개 개별 의미 동등성·최신 팀원 조사·실제 플랫폼 규격/변이·공식 Python/CI 미확정. DB/API 및 main 변경 없음. 제품 범위에 대해서만 V1.0 기준선이 우선.",
+        "추상 화면 V1.0은 논리 화면 검토 후보. 155 행동·44 업무·37 화면·32 오류 위치 추적은 의미 동등성/693 분기 전수 의미/실제 사용성 검증 아님. 실제 클릭 수·시간 절감 및 공식 Python/CI 미측정.",
+        "시스템 업무 V1.0은 36개 공통 업무 및 책임 검토 후보. 150 체크포인트/155 행동 등의 관련 연결은 의미 동등성/전수 분기·실제 단계 허용·상태 머신 검증 아님. 공식 Python/CI 및 실제 사용성/외부 실행 미검증.",
+        "플랫폼별 업무 V1.0은 팀원 조사 기반 검토 후보. 38 필드 그룹 및 원본 필드 행은 고유 필수 필드 수 아님. R03 비교 발견 일부 활용, 전체 121 행동/56 이벤트 및 기존 693 분기 의미 검토 잔여. 실제 권한·완료/규칙 최신성·공식 Python/CI 미확인; 현행 mock-only.",
+        "논리 상태 V1.0은 이전 검증 결과를 현재 검증으로 승격하지 않으며 축약 모델은 명세 전체 guard의 자동 해석기가 아님. 다중 대상 경합/실제 효과·권한·전이별 정확 오류 조건·전체 의미·DB/API·공식 Python/CI 미검증. 종료 후 늦은 증거가 미전송을 입증하는 경우 결과 보완 전이의 명시 정합성도 오류 명세에서 확인 필요.",
+        "V3는 R03 121/56과 693 분기를 범위/노드에 대조했으나 505 활성 분기와 16 범위 분리의 개별 edge 의미 완전성은 미확정. W 공통 사실 인라인 저장 계약·실제 플랫폼 권한/효과/복구·경합 및 사용자 시간/행동 실측, 공식 Python/CI 잔여.",
+        "논리 DB V1.0: 플랫폼 실제 필수/규격·정규 객체/slot·권한·관측, 상태/동시성의 상세 의미, 보존/삭제/권리 및 PostgreSQL 물리 schema/마이그레이션·API·실제 CI 미확정. 축약 가드 예시는 DB 검증 아님."
+      ],
+      "decision_requests": [
+        "추상 화면/시스템 업무/플랫폼별 업무/논리 상태·전이 V1.0 후보 검토. 다음 오류 대응 명세에서 업무별 오류·보존·복귀·재처리 및 전이 정합성 보완 → 전체 사용자 스토리 의미 확정(R03 비교 포함).",
+        "정책 근거/법률 적용 및 업무 단계별 허용·효과 실증은 별도. 사용자 스토리 확정 후 DB/ERD/API 상세 설계.",
+        "장기 인증·자동 모니터링·단일 승인 조작 UI·직접 결과 기록·최초 일정·대표 서비스는 별도 결정. 미확인 갱신 경로 및 구현 순서·일정·가치 실측 별도. main 미병합.",
+        "오류 대응 V1.0 및 LT-70 보완 후보를 반영하여 통합 사용자 스토리 재구성 및 시각화 검증 진행.",
+        "V3 통합 후보 검토: 인라인 원본 사실 변경/동일 키 저장 계약 확정 및 개별 의미·권한/효과/경합 검증 후 승인. 승인 후 상세 DB/ERD/API 진입.",
+        "DB-D01~06 논리 설계 후보 검토, 팀 V3.1 최종 합의/DB 승인 후 물리 PostgreSQL 및 API 단계 결정. 기존 작업 재개 별도."
+      ]
+    },
+    "upper_spec_refs": [
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+        "id": "SERVICE-SCOPE-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "ef3ddf34338289d4455ed870c998881fa91a2fa3",
+        "clauses": "DR-01~05",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
+        "id": "ABSTRACT-SCREENS-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "a88a8bf3c7cf12e8dcc9b29e084ee7bfeb63dc85",
+        "clauses": "UX-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+        "id": "SYSTEM-WORK-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "ca8af9fad5b9401f4d9190ec04b6340e810a09b5",
+        "clauses": "SW-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+        "id": "PLATFORM-WORK-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "d449d6232a43f1000f55666f16bd0c5436f6fea7",
+        "clauses": "POL-R05-01~04-R4",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+        "id": "LOGICAL-STATE-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "7b5ab8fe8067b236b563913062d1e2d74e9ca7b9",
+        "clauses": "LS-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+        "id": "ERROR-RESPONSE-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "8abf8b6cf583f05359dd71f1ec3b57c978f3fadc",
+        "clauses": "ER-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      }
+    ],
+    "db_recheck_id": "DB-V3-R4-RECHECK-20261127",
+    "checks": {
+      "total": 15,
+      "pass": 15
+    },
+    "actual_runtime": 0,
+    "merge_policy": "R01 통합 준비 branch. main 직접 변경 금지; team 파일 보존·정식 검사 후 별도 병합."
+  }
 }
