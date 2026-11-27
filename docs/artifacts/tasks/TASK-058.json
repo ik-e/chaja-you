@@ -115,7 +115,9 @@
     "docs/review/lesson-registration/DB-MINIMAL-V4.md",
     "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v5.json",
     "docs/review/lesson-registration/DB-MINIMAL-V5.md",
-    "tools/validate_db_v5_candidate.mjs"
+    "tools/validate_db_v5_candidate.mjs",
+    "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-inputs-20261127.json",
+    "docs/review/lesson-registration/DB-DESIGN-INPUTS-20261127.md"
   ],
   "acceptance": [
     "I1: R02·R04·R05 독립 조사 결과와 R03 사용자 스토리 검토의 원본·근거·차이·누락을 비교하여 통합 스토리와 모든 F/E 추적; R03 미검토 범위는 별도 표시",
@@ -247,6 +249,12 @@
     },
     {
       "path": "tools/validate_db_v5_candidate.mjs"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-inputs-20261127.json"
+    },
+    {
+      "path": "docs/review/lesson-registration/DB-DESIGN-INPUTS-20261127.md"
     }
   ],
   "result": {
@@ -1760,5 +1768,40 @@
       }
     },
     "source_object_decision": "DB-DEC-SOURCE-OBJECT-20261127"
+  },
+  "db_design_inputs_ref": {
+    "id": "TASK-058-DB-DESIGN-INPUTS-20261127",
+    "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-design-inputs-20261127.json",
+    "review_path": "docs/review/lesson-registration/DB-DESIGN-INPUTS-20261127.md",
+    "source_commit": "ad40922e3b4121f6bbbdeeda92231235e086107c",
+    "status": "evidence_linked_semantic_and_physical_design_pending",
+    "main_commit": "14b3e5f380fbe4379a6eeb67dc8c991a4e38c912",
+    "latest_story_commit": "1608d9b6b41e6812ce116bacd9c123aa2f28a1f3",
+    "db_candidate_commit": "774465d765d2c776d6d415bc5222d2f02eff9d00",
+    "verification": {
+      "platforms": 7,
+      "observations": 374,
+      "unique_observations": 374,
+      "common_observations": 250,
+      "detail_observations": 124,
+      "previous_index_common_count": 239,
+      "added_common_keys_since_index": 13,
+      "observations_with_historical_semantic_candidates": 258,
+      "observations_pending_semantic_normalization": 116,
+      "required_groups": 52,
+      "optional_groups": 34,
+      "total_groups": 86,
+      "reported_review_total": 96,
+      "prior_v51_group_count": 86,
+      "direct_prerequisites": 2,
+      "research_metadata": 1,
+      "platform_operations": 44,
+      "field_groups": 38,
+      "invalid_db_store_refs": [],
+      "actual_server_validation": false,
+      "actual_db_tests": false,
+      "official_projection_ci": false
+    },
+    "decision": "기존 V5.1 후보 보존; 근거 연결 후 세부 의미/상위 정합화 및 물리 설계 검토. main 병합·DB/API 구현 없음."
   }
 }
