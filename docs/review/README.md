@@ -151,7 +151,7 @@ R01 검토 의견 2차 반영: 숨고 화면 06·07·08·11·12 대조로 한 �
 
 [작업과 상세 산출물](../artifacts/tasks/TASK-058.json)
 
-V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도.
+V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행.
 
 검증과 근거
 
@@ -190,6 +190,8 @@ V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 
 - V3 505 활성 분기/16 범위 분리의 개별 실행 의미, 플랫폼·동시성·사용성, 공식 Python/CI · inconclusive
 - R4 정적 검사 15개(구조/참조/DB field 존재) · pass
 - R4 실제 DB/외부 실행·공식 CI 및 projection · inconclusive
+- DB V4 정적 구조·FK·36 SW/12 여정/32 오류/17 상태축/44 업무/45 효과/38 그룹/86 입력 후보 연결 18개 · pass
+- DB V4 16 수용 시나리오·PostgreSQL·공식 projection/CI·실제 외부 효과 · inconclusive
 - [통합 사용자 스토리·원본 추적·분기 검토](../artifacts/planning/lesson-registration-20261126/integrated/user-stories.json)
 - [7개 플랫폼 업무·필드·관계 및 제약 비교](../artifacts/planning/lesson-registration-20261126/integrated/platform-comparison.json)
 - [행동별 범위 추천·결정 요청·강사 피드백 연결](../artifacts/planning/lesson-registration-20261126/integrated/scope-decisions.json)
@@ -248,6 +250,8 @@ V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 
 - [논리 ERD 및 데이터 사전](lesson-registration/LOGICAL-DB-ERD-V1.0.md)
 - [논리 DB 생성/축약 가드 평가기](../../tools/project_logical_db_v1.mjs)
 - [R4 현행 기준 및 DB V3 필드 재대조](../artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json)
+- [V4 최소 DB 비교·수명·필드·추적 원본](../artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v4.json)
+- [V4 최소 DB 사람용 검토/ERD](lesson-registration/DB-MINIMAL-V4.md)
 
 남은 불확실성과 결정 요청
 
@@ -257,8 +261,10 @@ V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 
 - 최소 DB typed schema·제약·원자성·참조·권리/보존·generation·실제 PostgreSQL 미검증.
 - 운영 기준치/계측/전달·인증 공급자·권리/보존·구현 순서 미확정.
 - main 통합 충돌 해소 및 공식 Python/Node projection·CI 검증 필요.
+- DB V4: source↔object 단일 원본 제약 채택 여부, 동일 클래스 관계 조회/typed FK·JSON 역참조, 계정 한도 다중 claim 원자성 및 generation/보존·권리 검증 미완료. 조건부 장기 인증 저장 미채택.
 - 현재 논리 검토 기준 R4와 DB V3 R4 재대조 후보의 최종 검토. 실제 DB DDL/API/구현 승인 별도.
 - 실제 플랫폼 허용·운영 상세·개인정보 정책 및 구현 순서·기존 작업 재개는 후속 결정.
+- DB V4 13개 권장 후보와 12개 연결 단순형 조건 검토; 사용자 스토리 최종 의견 반영 및 논리 설계 승인 전 물리 스키마/API/마이그레이션 착수 없음.
 
 ### TASK-059 · 진행 중
 
