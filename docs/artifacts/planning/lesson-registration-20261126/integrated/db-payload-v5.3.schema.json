@@ -819,10 +819,10 @@
       "properties": {
         "verdict": {
           "enum": [
-            "unverified",
-            "verified",
-            "conflict",
-            "unknown"
+            "unresolved",
+            "exact_new",
+            "exact_existing",
+            "ambiguous"
           ]
         },
         "slot_key": {
@@ -1134,11 +1134,16 @@
         },
         "target_verdict": {
           "enum": [
-            "confirmed",
-            "partial",
-            "none_confirmed",
-            "unknown",
-            "disputed"
+            "pending",
+            "complete",
+            "not_executed",
+            "no_effect",
+            "partial_confirmed",
+            "effect_unknown",
+            "read_observed",
+            "read_unavailable",
+            "guidance_delivered",
+            "restricted"
           ]
         },
         "required_effect_refs": {
@@ -1173,10 +1178,9 @@
         },
         "goal_verdict": {
           "enum": [
-            "confirmed",
-            "not_confirmed",
             "unknown",
-            "disputed"
+            "not_reached",
+            "confirmed"
           ]
         },
         "criterion_ref": {
@@ -1904,8 +1908,73 @@
         },
         {
           "$ref": "#/$defs/history_metric"
+        },
+        {
+          "$ref": "#/$defs/history_evidence"
+        },
+        {
+          "$ref": "#/$defs/history_audit"
         }
       ]
+    },
+    "history_evidence": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "evidence_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "verdict": {
+          "enum": [
+            "eligible",
+            "ineligible",
+            "unknown"
+          ]
+        },
+        "opaque_nonsecret_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "evidence_type",
+        "method",
+        "scope",
+        "verdict"
+      ],
+      "additionalProperties": false
+    },
+    "history_audit": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "event_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_scope": {
+          "$ref": "#/$defs/scope"
+        }
+      },
+      "required": [
+        "schema_version",
+        "event_code",
+        "affected_scope"
+      ],
+      "additionalProperties": false
     }
   },
   "x_containers": {
@@ -1937,7 +2006,9 @@
     "goal": "history_goal",
     "error": "history_error",
     "cleanup": "history_cleanup",
-    "metric": "history_metric"
+    "metric": "history_metric",
+    "evidence": "history_evidence",
+    "audit": "history_audit"
   },
   "x_semantic_checks": [
     {
@@ -1963,7 +2034,7 @@
       "containers": [
         "work_targets.plan"
       ],
-      "rule": "channel_values 각 family의 field_key는 해당 platform/operation/profile_ref/transform_version의 승인된 leaf registry로 검증; 중복 key, 타입·단위·선택지·규격·필수값 및 effect/dependency/readback 대응 확인. source paths는 등록된 정확 leaf로 제한. 공개 범위/권리/선행 조건/가격 정책 미확인은 hold. registry 미실증 leaf는 임의 ready 불가. 승인 대상은 정확 binding, rule ref, 효과 키/필수 여부, 현재성, 독립 readback이 있어야 한다."
+      "rule": "channel_values 각 family의 field_key는 해당 platform/operation/profile_ref/transform_version의 승인된 leaf registry로 검증; 중복 key, 타입·단위·선택지·규격·필수값 및 effect/dependency/readback 대응 확인. source paths는 등록된 정확 leaf로 제한. 공개 범위/권리/선행 조건/가격 정책 미확인은 hold. registry 미실증 leaf는 임의 ready 불가. 승인 대상은 정확 binding, rule ref, 효과 키/필수 여부, 현재성, 독립 readback이 있어야 한다. AX07 exact_new는 명시 slot과 부재/이전 효과 확인, exact_existing은 정확 기존 object FK와 권한 확인. unresolved/ambiguous는 쓰기 ready 금지."
     },
     {
       "id": "J04",
@@ -1971,7 +2042,7 @@
         "work_requests.approval",
         "work_targets.plan"
       ],
-      "rule": "actor_ref=owner, selection_revision 일치, 두 승인 시각 및 동의 근거 적격, accepted_target_ids와 digest map key 집합 정확 일치; 실제 request의 ready 대상 집합 중 명시 수락 대상만. canonical digest는 DB JSONB 텍스트 순서에 의존하지 않는 UTF-8 canonical bytes + 버전, decimal 정규화. frozen 이후 변경 불가."
+      "rule": "actor_ref=owner, selection_revision 일치, 두 승인 시각 및 동의 근거 적격, accepted_target_ids와 digest map key 집합 정확 일치; 실제 request의 ready 대상 집합 중 명시 수락 대상만. canonical digest는 DB JSONB 텍스트 순서에 의존하지 않는 UTF-8 canonical bytes + 버전, decimal 정규화. frozen 이후 변경 불가. 읽기/내부 업무는 AX09 수락 가능하나 쓰기 승인/효과 없음(AT-03)."
     },
     {
       "id": "J05",
@@ -2003,7 +2074,7 @@
         "history.payload",
         "platform_objects.locator"
       ],
-      "rule": "history.kind로 정확 payload variant 선택(임의 anyOf 통과로 대체 금지); 각 종류의 FK/owner/env/정확 대상/순번·시각 및 적격 proof를 검증. independent observation은 write 응답과 분리, 정확 read attempt와 effect spec/관측값 일치. proof_ids 및 내부 refs의 적격성/역참조/삭제 경합 검사. locator는 검증된 공개/관리 위치만, credential-bearing URL 금지."
+      "rule": "history.kind로 정확 payload variant 선택(임의 anyOf 통과로 대체 금지); 각 종류의 FK/owner/env/정확 대상/순번·시각 및 적격 proof를 검증. independent observation은 write 응답과 분리, 정확 read attempt와 effect spec/관측값 일치. proof_ids 및 내부 refs의 적격성/역참조/삭제 경합 검사. locator는 검증된 공개/관리 위치만, credential-bearing URL 금지. AX13/16은 상위 논리 상태값을 그대로 사용. effect disputed는 AX17 독립 상태. target_result complete은 모든 필수 효과와 근거 적격, guidance_delivered/read_observed는 별도."
     },
     {
       "id": "J09",
@@ -10428,8 +10499,8 @@
       "families": 25,
       "input_groups": 86,
       "unmapped_group_containers": 0,
-      "example_pass": 30,
-      "example_total": 30
+      "example_pass": 36,
+      "example_total": 36
     },
     "method": "executed JS subset checker for declared keywords against positive/negative examples, not a standards-complete validator or PostgreSQL run; semantic rules J01-J09 and live platform checks not executed",
     "examples": [
@@ -10709,7 +10780,7 @@
         "value": {
           "schema_version": 1,
           "binding": {
-            "verdict": "unverified"
+            "verdict": "unresolved"
           },
           "channel_values": {
             "price": [
@@ -10735,7 +10806,7 @@
         "value": {
           "schema_version": 1,
           "binding": {
-            "verdict": "verified"
+            "verdict": "exact_existing"
           },
           "channel_values": {
             "unregistered_family": []
@@ -10950,6 +11021,141 @@
         "expected": false,
         "actual": false,
         "pass": true
+      },
+      {
+        "id": "JS-31",
+        "container": "history.payload",
+        "value": {
+          "schema_version": 1,
+          "target_verdict": "complete",
+          "required_effect_refs": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        },
+        "expected": true,
+        "actual": true,
+        "pass": true
+      },
+      {
+        "id": "JS-32",
+        "container": "history.payload",
+        "value": {
+          "schema_version": 1,
+          "target_verdict": "confirmed",
+          "required_effect_refs": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        },
+        "expected": false,
+        "actual": false,
+        "pass": true
+      },
+      {
+        "id": "JS-33",
+        "container": "history.payload",
+        "value": {
+          "schema_version": 1,
+          "goal_kind": "sales",
+          "goal_verdict": "not_reached",
+          "criterion_ref": "c"
+        },
+        "expected": true,
+        "actual": true,
+        "pass": true
+      },
+      {
+        "id": "JS-34",
+        "container": "history.payload",
+        "value": {
+          "schema_version": 1,
+          "goal_kind": "sales",
+          "goal_verdict": "not_confirmed",
+          "criterion_ref": "c"
+        },
+        "expected": false,
+        "actual": false,
+        "pass": true
+      },
+      {
+        "id": "JS-35",
+        "container": "history.payload",
+        "value": {
+          "schema_version": 1,
+          "evidence_type": "synthetic",
+          "method": "read",
+          "scope": {
+            "root_key": "r",
+            "scope_paths": [
+              "title"
+            ]
+          },
+          "verdict": "eligible"
+        },
+        "expected": true,
+        "actual": true,
+        "pass": true
+      },
+      {
+        "id": "JS-36",
+        "container": "history.payload",
+        "value": {
+          "schema_version": 1,
+          "evidence_type": "synthetic",
+          "method": "read",
+          "scope": {
+            "root_key": "r",
+            "scope_paths": [
+              "title"
+            ]
+          },
+          "verdict": "eligible",
+          "raw_response": "secret"
+        },
+        "expected": false,
+        "actual": false,
+        "pass": true
+      }
+    ]
+  },
+  "x_state_axes": {
+    "source_path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+    "source_commit": "a574844bb122b73adc33ecb4a39665e1868ab32f",
+    "source_blob": "7b5ab8fe8067b236b563913062d1e2d74e9ca7b9",
+    "enum_mappings": [
+      {
+        "axis": "AX07",
+        "schema": "#/$defs/binding/properties/verdict",
+        "values": [
+          "unresolved",
+          "exact_new",
+          "exact_existing",
+          "ambiguous"
+        ]
+      },
+      {
+        "axis": "AX13",
+        "schema": "#/$defs/history_goal/properties/goal_verdict",
+        "values": [
+          "unknown",
+          "not_reached",
+          "confirmed"
+        ]
+      },
+      {
+        "axis": "AX16",
+        "schema": "#/$defs/history_result/properties/target_verdict",
+        "values": [
+          "pending",
+          "complete",
+          "not_executed",
+          "no_effect",
+          "partial_confirmed",
+          "effect_unknown",
+          "read_observed",
+          "read_unavailable",
+          "guidance_delivered",
+          "restricted"
+        ]
       }
     ]
   }
