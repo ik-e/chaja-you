@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "id": "MENTOR-FEEDBACK-20261127-01",
+  "kind": "document",
+  "status": "확인된 의견 보존 · R01 최종 설계 승인 아님",
+  "owner": "R01",
+  "date": "2026-11-27",
+  "title": "Notion 멘토 사용자 스토리 참고 권고 및 피드백 확인 기록",
+  "purpose": "기존 Notion의 멘토 의견을 공개 가능한 범위에서 GitHub에 보존하고 작업 반영 근거와 구분",
+  "source": {
+    "channel": "Notion",
+    "location": "멘토님 자유 작성 공간 > User Story",
+    "page_title": "User Story",
+    "observed_date": "2026-11-27",
+    "last_edited_at_utc": "2026-11-27T01:22:42.058Z",
+    "author_role": "멘토 (R01의 자료 출처 설명에 따름; 개인 계정 독립 확인은 미수행)",
+    "private_source_locator": "팀 비공개 Notion 내 제목·위치로 확인; URL 및 식별자 미게시"
+  },
+  "feedback": [
+    {
+      "id": "MF-20261127-01",
+      "type": "recommendation",
+      "quote": "우리 서비스의 User Story 작성에 참고가 될 타 서비스 개발시의 User Story를 참고해서 우리팀 별도의 페이지에 작성하는 것을 추천합니다",
+      "quote_scope": "직접 권고 문장만 보존; 개인 멘션 생략",
+      "summary": "타 서비스 개발 사례의 User Story 형식을 참고하여 팀의 사용자 스토리를 별도로 작성할 것을 권고.",
+      "sample_format": {
+        "normal": "정상적인 상황 Golden Path",
+        "abnormal": "비정상적인 상황: 오류 → 예외처리",
+        "organization": [
+          "이용 상황",
+          "번호가 붙은 화면",
+          "구체적인 사용자 행동",
+          "관련 FE/BE/D/ML 분류",
+          "Case와 Error",
+          "예외처리"
+        ],
+        "boundary": "샘플의 타 서비스 동작과 상세 문구는 우리 서비스의 요구사항이 아니다. 제3자 예시 원문은 재배포 권한 미확인으로 복제하지 않음."
+      },
+      "disposition": "형식 참고 반영; 최신 V3.0 검토 후보의 설계 채택은 별도",
+      "related": [
+        {
+          "path": "docs/review/lesson-registration/USER-STORY-MENTOR-V3.0.md",
+          "commit": "7a3fa4323e953ccacd877d9cfdbfd0de92c5456a",
+          "state": "R01 통합 브랜치의 검토용 수동 프로젝션; main 미병합"
+        }
+      ]
+    }
+  ],
+  "existing_preservation": [
+    {
+      "path": "docs/meetings/reviews/MEET-20261125-01.md",
+      "commit": "868719ff379a5977c78475ee58748d463ed9ba51",
+      "scope": "11/25 멘토링의 서비스 범위·사용자 스토리·데이터 설계 등 요약; 중복 복제하지 않음"
+    }
+  ],
+  "read_scope": [
+    {
+      "title": "멘토님 자유 작성 공간",
+      "result": "기존 피드백 진입점 및 참고 페이지 확인; 별도 자유 작성 의견 본문 없음"
+    },
+    {
+      "title": "기획안 V1.1 및 멘토 피드백 (11/23)",
+      "result": "자유 의견 작성란 공란"
+    },
+    {
+      "title": "기획안 V1.2 및 멘토 피드백 (11/26)",
+      "result": "자유 의견란 공란"
+    },
+    {
+      "title": "User Story",
+      "result": "직접 권고 문장 및 정상/오류 사례 확인"
+    }
+  ],
+  "verification": {
+    "page_body_read": true,
+    "comments_query": "4개 페이지(해결된 댓글 포함) 조회 결과 댓글/토론 내용 반환 없음; suggested_edits_status=upgrade_required. 제안 편집/비공개·삭제 기록 등은 확인 불가.",
+    "coverage": "확인한 지정 페이지에 한정; 멘토의 모든 과거/비공개 의견 전수 보존을 의미하지 않음",
+    "privacy": "비공개 링크·페이지 ID·개인 멘션/연락처·타 서비스 예시 전체 제외",
+    "notion_write": false
+  },
+  "references": [
+    {
+      "path": "docs/human/responses/HRESP-20261127-01_notion-minimal-mentor-feedback.md"
+    },
+    {
+      "path": "docs/artifacts/meetings/MEET-20261125-01.json"
+    }
+  ]
+}
