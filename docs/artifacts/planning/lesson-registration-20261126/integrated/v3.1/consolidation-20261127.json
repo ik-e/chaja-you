@@ -9,8 +9,8 @@
   "date": "2026-11-27",
   "source_ref": {
     "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
-    "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
-    "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
+    "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+    "blob": "8d29f734a1e977662af2250d447d2437661eedbc",
     "revision": "V3.1-R4"
   },
   "main_snapshot": "40de7d3fc977e787a13e727e8c3edd09ca532480",
@@ -26,42 +26,47 @@
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
       "id": "ABSTRACT-SCREENS-20261127-R01-V1",
-      "commit": "c606f9b703b037f397a37904567895e959805903",
-      "blob": "a88a8bf3c7cf12e8dcc9b29e084ee7bfeb63dc85",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "53acf6fc408510544d72163c5dbc1a1b9af63629",
       "clauses": "UX-R4-01/02",
-      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+      "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
       "id": "SYSTEM-WORK-20261127-R01-V1",
-      "commit": "c606f9b703b037f397a37904567895e959805903",
-      "blob": "ca8af9fad5b9401f4d9190ec04b6340e810a09b5",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "ed2f165ba8c123074290cbbff26dd3b614cd20fc",
       "clauses": "SW-R4-01/02",
-      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+      "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
       "id": "PLATFORM-WORK-20261127-R01-V1",
-      "commit": "c606f9b703b037f397a37904567895e959805903",
-      "blob": "d449d6232a43f1000f55666f16bd0c5436f6fea7",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "849dfee85b8244f3178c1e9d9ebddbc148dbda9a",
       "clauses": "POL-R05-01~04-R4",
-      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+      "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
       "id": "LOGICAL-STATE-20261127-R01-V1",
-      "commit": "c606f9b703b037f397a37904567895e959805903",
-      "blob": "7b5ab8fe8067b236b563913062d1e2d74e9ca7b9",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "c36a60503c6a170c35d788b7b04518e4fbf20e7f",
       "clauses": "LS-R4-01/02",
-      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+      "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
     },
     {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
       "id": "ERROR-RESPONSE-20261127-R01-V1",
-      "commit": "c606f9b703b037f397a37904567895e959805903",
-      "blob": "8abf8b6cf583f05359dd71f1ec3b57c978f3fadc",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "3adbebd3ce1318f3a41d0537d3f871306d1b1943",
       "clauses": "ER-R4-01/02",
-      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+      "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
     }
   ],
   "review_status": {
@@ -180,12 +185,12 @@
     {
       "level": 2,
       "heading": "현재 읽는 순서",
-      "content_markdown": "- [사용자 스토리 V3.1-R4](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-V3.1.md)\n- [화면 중심 흐름](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md)\n- [R4 보완 및 수용 사례](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md)\n- [R3 팀 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md) · [R2 R03 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md)\n\nR1~R3와 V1.3/V2.x/V3.0은 판단·검증 이력. R4가 현행 논리 검토 기준이다. 7개 플랫폼 구현 목표와 44개 실제 지원/hold 경계, mock-only 유지.\n"
+      "content_markdown": "- [사용자 스토리 V3.1-R4](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-V3.1.md)\n- [화면 중심 흐름](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md)\n- [R4 보완 및 수용 사례](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md)\n- [R3 팀 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md) · [R2 R03 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md)\n\nR1~R3와 V1.3/V2.x/V3.0은 판단·검증 이력. R4가 현행 논리 검토 기준이다. 7개 플랫폼 구현 목표와 44개 실제 지원/hold 경계, mock-only 유지.\n"
     },
     {
       "level": 2,
       "heading": "상세 명세",
-      "content_markdown": "| 명세 | 동기화 규칙 |\n| --- | --- |\n| [service-scope](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json) | DR-01~05 |\n| [abstract-screen](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json) | UX-R4-01/02 |\n| [system-work](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json) | SW-R4-01/02 |\n| [platform-work](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json) | POL-R05-01~04-R4 |\n| [logical-state](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json) | LS-R4-01/02 |\n| [error-response](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json) | ER-R4-01/02 |\n\n기존 최신 R01 브랜치에서 6개 R4 동기화 기록을 재확인했다. 원본과 검증 이력은 보존한다.\n"
+      "content_markdown": "| 명세 | 동기화 규칙 |\n| --- | --- |\n| [service-scope](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json) | DR-01~05 |\n| [abstract-screen](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json) | UX-R4-01/02 |\n| [system-work](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json) | SW-R4-01/02 |\n| [platform-work](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json) | POL-R05-01~04-R4 |\n| [logical-state](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json) | LS-R4-01/02 |\n| [error-response](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json) | ER-R4-01/02 |\n\n기존 최신 R01 브랜치에서 6개 R4 동기화 기록을 재확인했다. 원본과 검증 이력은 보존한다.\n"
     },
     {
       "level": 2,
@@ -201,6 +206,11 @@
       "level": 2,
       "heading": "R05 후속 의견 반영",
       "content_markdown": "R05 후속 4건은 R01의 반영 지시에 따라 수정했다. V3.1-R4의 여정/노드/연결/서비스 범위와 DB V4의 기본 테이블·필드 수는 유지한다.\n\n| 항목 | 처리 |\n| --- | --- |\n| CH-04 · UJ-03/07 | W 인라인 명시 저장 기본, H/E 전체 편집 명시 선택만. 동일 준비·선택 및 영향 재검증. |\n| POL-R05-03 · SC-R4-06 | 준비/실행 실제 영향 변경 보류, 독립 저장/효과·정확 승인 확인된 무관 변경만 계속. 결합 불명 보류. |\n| POL-R05-01 · SC-R4-07 · T08 | 동일 정규 외부 계정의 서로 다른 owner가 잠금/claim 공유. 총량 99/100 및 일일 한도 각각 최대 1건 자격; 외부 경합 불명 보류. |\n| UJ-09 · D · SC-26 | 허용 작성안 제공까지 완료, 준비 시간 절감만 가치 검증 대상. 직접 결과 기록 미채택; UJ-06 별도 조건부. |\n\n[수정 사용자 스토리](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-V3.1.md) · [DB V4 검토 후보](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/DB-MINIMAL-V4.md).\n\n후속 표적 정적 대조 8/8 통과(기존 검사와 별도); 실제 PostgreSQL 동시성·플랫폼 효과·사용자 가치·공식 projection/CI 미검증. 최종 구현 승인 또는 main 병합 아님.\n"
+    },
+    {
+      "level": 2,
+      "heading": "R03 최종 검토 의견 반영",
+      "content_markdown": "R03 최종 검토 4건에 대한 R01 반영 지시 적용. 기존 R03 4건의 반영 확인 및 서비스 방향 동의는 R03 원문에 보존. R05 후속도 유지.\n\n| 의견 | 반영 |\n| --- | --- |\n| R03-R4-01 | 플랫폼 업무 명세까지 가격 영향 보류 통일. W에서 영향 변경 ready/승인 가능 표시 금지, 제한 사유 및 실행 직전 재검증. |\n| R03-R4-02 | VE-111 동일 키 확인 우선, 저장·수락 동일 owner/source 경쟁 제어 및 현재 revision/양 승인 원자 검증, 영향 범위만 차단. 서버 미도달 요청을 탐지한다고 가정하지 않음. |\n| R03-R4-03 | R05-FU-01에서 이미 반영된 W 기본/H·E 예외 유지. |\n| R03-R4-04 | R에서 미수락 보류·제외 사유 및 조건부 새 업무 안내; 기존 H→W와 UJ-02/03/04 재사용, 새 승인 및 기존 기록 보존. |\n\n[수정 상세 수용 사례](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md) · [DB V4](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/DB-MINIMAL-V4.md).\n\n정본 표적 정적 검사 14/14 통과; 관련 사람용 문서 9개 직접 동기화 및 핵심 문구 대조. 공식 생성기/CI·실제 PostgreSQL·플랫폼·사용자 가치 시험 미수행. 12 여정/42 노드/113 연결/47 의미 사례, DB 13개/143필드/16 수용 사례 유지. 최종 물리 설계·실행·main 병합 승인 아님.\n"
     }
   ],
   "r05_followup": {
@@ -264,5 +274,146 @@
     "actual_external_tests": 0,
     "user_value_tests": 0,
     "official_projection_ci": "not_run"
+  },
+  "r03_final_followup": {
+    "id": "R03-V31-R4-FINAL-FOLLOWUP-20261127",
+    "source": {
+      "path": "docs/members/R03/workspace/2026-11-27_R03_USER-STORY-V3.1-R4_FINAL-REVIEW.md",
+      "commit": "14b3e5f380fbe4379a6eeb67dc8c991a4e38c912",
+      "blob": "66e6259f1cba62f964ef0b318488a2fe6bd64bd1",
+      "review_basis": "c606f9b703b037f397a37904567895e959805903"
+    },
+    "prior_source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
+      "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
+      "revision": "V3.1-R4"
+    },
+    "prior_upper_spec_refs": [
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json",
+        "id": "SERVICE-SCOPE-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "ef3ddf34338289d4455ed870c998881fa91a2fa3",
+        "clauses": "DR-01~05",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
+        "id": "ABSTRACT-SCREENS-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "a88a8bf3c7cf12e8dcc9b29e084ee7bfeb63dc85",
+        "clauses": "UX-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
+        "id": "SYSTEM-WORK-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "ca8af9fad5b9401f4d9190ec04b6340e810a09b5",
+        "clauses": "SW-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
+        "id": "PLATFORM-WORK-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "d449d6232a43f1000f55666f16bd0c5436f6fea7",
+        "clauses": "POL-R05-01~04-R4",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
+        "id": "LOGICAL-STATE-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "7b5ab8fe8067b236b563913062d1e2d74e9ca7b9",
+        "clauses": "LS-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      },
+      {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
+        "id": "ERROR-RESPONSE-20261127-R01-V1",
+        "commit": "c606f9b703b037f397a37904567895e959805903",
+        "blob": "8abf8b6cf583f05359dd71f1ec3b57c978f3fadc",
+        "clauses": "ER-R4-01/02",
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+      }
+    ],
+    "source_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "8d29f734a1e977662af2250d447d2437661eedbc",
+      "revision": "V3.1-R4"
+    },
+    "db_candidate_ref": {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/db-minimal-v4.json",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "c5557c7788a720fc993b45559f983dfd35048e40",
+      "table_count": 13,
+      "field_count": 143,
+      "status": "review_candidate_not_approved_for_implementation"
+    },
+    "checks": [
+      {
+        "name": "정책 명세 동일",
+        "pass": true
+      },
+      {
+        "name": "W 승인 가능 표시 제한",
+        "pass": true
+      },
+      {
+        "name": "VE-006/111 우선",
+        "pass": true
+      },
+      {
+        "name": "T06 화면 동기화",
+        "pass": true
+      },
+      {
+        "name": "SW-07/22 원자 경계",
+        "pass": true
+      },
+      {
+        "name": "LT/AT 최신 원본 및 수락",
+        "pass": true
+      },
+      {
+        "name": "ER-06 복구",
+        "pass": true
+      },
+      {
+        "name": "CH-04 R05 유지",
+        "pass": true
+      },
+      {
+        "name": "후속 기존 경로",
+        "pass": true
+      },
+      {
+        "name": "DB pending 문맥",
+        "pass": true
+      },
+      {
+        "name": "DB 수용 사례",
+        "pass": true
+      },
+      {
+        "name": "구조 유지",
+        "pass": true
+      },
+      {
+        "name": "R05 보존",
+        "pass": true
+      },
+      {
+        "name": "상세 명세 후속 참조",
+        "pass": true
+      }
+    ],
+    "official_projection_ci": "not_run",
+    "actual_db_tests": 0,
+    "actual_external_tests": 0,
+    "user_value_tests": 0
   }
 }

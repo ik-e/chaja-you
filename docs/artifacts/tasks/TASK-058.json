@@ -238,7 +238,7 @@
     }
   ],
   "result": {
-    "summary": "V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행. | R05 R4 후속 4건 반영: W 직접 저장 기본·H/E 예외, 탈잉 가격 충돌의 실제 영향 변경 보류, 동일 실제 크몽 계정 교차 owner 원자 경합, UJ-09 작성안 제공 완료/준비 시간 가치 경계. DB V4 13개/143필드 유지. 후속 표적 정적 대조 8/8 통과, 실제 DB·외부·사용자 시험 및 공식 projection/CI 미수행.",
+    "summary": "V3.1-R4 현재 논리 검토 기준 고정. 12 여정·42 노드·113 연결·7 플랫폼/44 업무·32 오류. R02 6/R03 4/R05 4 의견 반영; R04 기존 조사·IA 반영, 별도 V3.1 검토 미확인. 6개 상세 명세 R4 동기화 기록 및 참조 대조, 최소 DB V3 13개 테이블 R4 필드 연결 재검토. 관리자 전용 제품 기능 미채택·DR-02 운영 기준선 전달·source별 최신 원본·mock-only 유지. 실제 DB/외부 실행·공식 CI 및 최종 구현 승인 별도. | DB V4 재도출 비교: 8/12/13/17개 및 조건부 확장 대안 비교, 기본 13개 유지·7개 필드 보완 권장. 12/36/32/17/44/45/38/86 저장 경계 참조 및 18개 정적 검사 통과. 16개 수용 시험 계획, 실제 DB/CI 미수행. | R05 R4 후속 4건 반영: W 직접 저장 기본·H/E 예외, 탈잉 가격 충돌의 실제 영향 변경 보류, 동일 실제 크몽 계정 교차 owner 원자 경합, UJ-09 작성안 제공 완료/준비 시간 가치 경계. DB V4 13개/143필드 유지. 후속 표적 정적 대조 8/8 통과, 실제 DB·외부·사용자 시험 및 공식 projection/CI 미수행. | R03 최종 의견 4건 통합: 가격 정책 플랫폼 명세 동기화·W ready 제한, 저장 불명 동일 키 우선 및 동일 source 저장/수락 원자 검증, R05 W 기본 편집 유지, 미수락 대상 후속 기존 여정 안내. 정본 표적 검사 14/14 통과; 기존 구조 및 DB V4 13개/143필드 유지. 실제 DB/외부/사용자 가치 및 공식 projection/CI 미수행.",
     "claims": [
       {
         "id": "C058-01",
@@ -518,6 +518,15 @@
         "evidence_ids": [
           "E058-61",
           "E058-62"
+        ]
+      },
+      {
+        "id": "C058-30",
+        "text": "R03 최종 의견 4건 통합: 가격 정책 플랫폼 명세 동기화·W ready 제한, 저장 불명 동일 키 우선 및 동일 source 저장/수락 원자 검증, R05 W 기본 편집 유지, 미수락 대상 후속 기존 여정 안내. 정본 표적 검사 14/14 통과; 기존 구조 및 DB V4 13개/143필드 유지. 실제 DB/외부/사용자 가치 및 공식 projection/CI 미수행.",
+        "status": "candidate",
+        "evidence_ids": [
+          "E058-63",
+          "E058-64"
         ]
       }
     ],
@@ -854,6 +863,17 @@
         "label": "R05 후속 수정 사용자 스토리 및 DB V4 커밋",
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
         "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8"
+      },
+      {
+        "id": "E058-63",
+        "label": "R03 최종 검토 후속 통합 및 정적 검사",
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json"
+      },
+      {
+        "id": "E058-64",
+        "label": "R03 최종 검토 원문",
+        "path": "docs/members/R03/workspace/2026-11-27_R03_USER-STORY-V3.1-R4_FINAL-REVIEW.md",
+        "commit": "14b3e5f380fbe4379a6eeb67dc8c991a4e38c912"
       }
     ],
     "verification": [
@@ -1169,6 +1189,20 @@
         "evidence_ids": [
           "E058-61"
         ]
+      },
+      {
+        "criterion": "R03 최종 검토 정본 표적 정합성 14개",
+        "verdict": "pass",
+        "evidence_ids": [
+          "E058-63"
+        ]
+      },
+      {
+        "criterion": "R03 후속 실제 PostgreSQL/플랫폼/사용자 가치·공식 projection/CI",
+        "verdict": "inconclusive",
+        "evidence_ids": [
+          "E058-63"
+        ]
       }
     ],
     "uncertainties": [
@@ -1179,7 +1213,8 @@
       "운영 기준치/계측/전달·인증 공급자·권리/보존·구현 순서 미확정.",
       "main 통합 충돌 해소 및 공식 Python/Node projection·CI 검증 필요.",
       "DB V4: source↔object 단일 원본 제약 채택 여부, 동일 클래스 관계 조회/typed FK·JSON 역참조, 계정 한도 다중 claim 원자성 및 generation/보존·권리 검증 미완료. 조건부 장기 인증 저장 미채택.",
-      "동일 실제 외부 계정 교차 owner의 총량·일일 한도 원자 자격 PostgreSQL 시험 및 직접 작성안 준비 시간 절감 측정 미수행."
+      "동일 실제 외부 계정 교차 owner의 총량·일일 한도 원자 자격 PostgreSQL 시험 및 직접 작성안 준비 시간 절감 측정 미수행.",
+      "서버 미도달/지연 커밋·같은 source 저장/수락 경합과 영향 독립성, 보류 후속 새 업무의 실제 API/DB/UI 시험 미수행."
     ],
     "decision_requests": [
       "현재 논리 검토 기준 R4와 DB V3 R4 재대조 후보의 최종 검토. 실제 DB DDL/API/구현 승인 별도.",
@@ -1351,8 +1386,8 @@
     "id": "USER-STORY-20261127-R01-V31",
     "version": "3.1",
     "semantic_revision": "V3.1-R4",
-    "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
-    "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
+    "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+    "blob": "8d29f734a1e977662af2250d447d2437661eedbc",
     "trace_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.0/trace.json",
     "integration_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/integration-review.json",
     "semantic_review_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/semantic-review.json",
@@ -1361,7 +1396,8 @@
     "team_review_projection_ref": "docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md",
     "design_refinement_projection_ref": "docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md",
     "consolidation_ref": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/consolidation-20261127.json",
-    "followup_ref": "R05-V31-R4-FOLLOWUP-20261127"
+    "followup_ref": "R05-V31-R4-FOLLOWUP-20261127",
+    "r03_final_followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
   },
   "design_review_v3": {
     "base_commit": "c0340296e75bcab160bdc63d86ca048121a11b44",
@@ -1491,8 +1527,8 @@
     "projection_ref": "docs/review/lesson-registration/USER-STORY-CURRENT.md",
     "source_ref": {
       "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
-      "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
-      "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "blob": "8d29f734a1e977662af2250d447d2437661eedbc",
       "revision": "V3.1-R4"
     },
     "prior_status_history": {
@@ -1558,42 +1594,47 @@
       {
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json",
         "id": "ABSTRACT-SCREENS-20261127-R01-V1",
-        "commit": "c606f9b703b037f397a37904567895e959805903",
-        "blob": "a88a8bf3c7cf12e8dcc9b29e084ee7bfeb63dc85",
+        "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+        "blob": "53acf6fc408510544d72163c5dbc1a1b9af63629",
         "clauses": "UX-R4-01/02",
-        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+        "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
       },
       {
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json",
         "id": "SYSTEM-WORK-20261127-R01-V1",
-        "commit": "c606f9b703b037f397a37904567895e959805903",
-        "blob": "ca8af9fad5b9401f4d9190ec04b6340e810a09b5",
+        "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+        "blob": "ed2f165ba8c123074290cbbff26dd3b614cd20fc",
         "clauses": "SW-R4-01/02",
-        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+        "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
       },
       {
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json",
         "id": "PLATFORM-WORK-20261127-R01-V1",
-        "commit": "c606f9b703b037f397a37904567895e959805903",
-        "blob": "d449d6232a43f1000f55666f16bd0c5436f6fea7",
+        "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+        "blob": "849dfee85b8244f3178c1e9d9ebddbc148dbda9a",
         "clauses": "POL-R05-01~04-R4",
-        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+        "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
       },
       {
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json",
         "id": "LOGICAL-STATE-20261127-R01-V1",
-        "commit": "c606f9b703b037f397a37904567895e959805903",
-        "blob": "7b5ab8fe8067b236b563913062d1e2d74e9ca7b9",
+        "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+        "blob": "c36a60503c6a170c35d788b7b04518e4fbf20e7f",
         "clauses": "LS-R4-01/02",
-        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+        "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
       },
       {
         "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json",
         "id": "ERROR-RESPONSE-20261127-R01-V1",
-        "commit": "c606f9b703b037f397a37904567895e959805903",
-        "blob": "8abf8b6cf583f05359dd71f1ec3b57c978f3fadc",
+        "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+        "blob": "3adbebd3ce1318f3a41d0537d3f871306d1b1943",
         "clauses": "ER-R4-01/02",
-        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33"
+        "source_commit": "ffd5fc5d1c285472d47bec250842e4bca10e8a33",
+        "followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127"
       }
     ],
     "db_recheck_id": "DB-V3-R4-RECHECK-20261127",
@@ -1616,6 +1657,20 @@
         "blob": "d52b43dae7a4d74432c8b760d5d2b49a54645ca2",
         "revision": "V3.1-R4"
       }
+    },
+    "r03_final_followup": {
+      "id": "R03-V31-R4-FINAL-FOLLOWUP-20261127",
+      "commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+      "checks": {
+        "total": 14,
+        "pass": 14
+      },
+      "prior_source_ref": {
+        "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/v3.1/user-stories.json",
+        "commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
+        "blob": "b55da4b9d8e75dab0beeb76381cac1ee3cc947de",
+        "revision": "V3.1-R4"
+      }
     }
   },
   "db_redesign_candidate_ref": {
@@ -1631,6 +1686,9 @@
     "decision": "recommendation_only_pending_R01_and_story_review",
     "followup_commit": "500ada1eae93ea5d56e43ff88f645a36f9b406c8",
     "followup_blob": "e058a804b6c8298fedc53071fa5224c9697a069f",
-    "followup_ref": "R05-V31-R4-FOLLOWUP-20261127"
+    "followup_ref": "R05-V31-R4-FOLLOWUP-20261127",
+    "r03_final_followup_ref": "R03-V31-R4-FINAL-FOLLOWUP-20261127",
+    "r03_final_followup_commit": "9f09a8d064b7a19c4b279a78f8d2b68291e898cf",
+    "r03_final_followup_blob": "c5557c7788a720fc993b45559f983dfd35048e40"
   }
 }

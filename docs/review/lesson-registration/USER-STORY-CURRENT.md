@@ -6,9 +6,9 @@
 R01 정리 지시에 따른 현재 논리 검토 후보. 12개 여정 · 42 노드 · 113 연결 · 7 플랫폼 · 44 업무 · 32 오류. 실제 외부 접근/쓰기 mock-only. 최종 물리 DB/API/구현 승인 아님.
 
 ## 현재 읽는 순서
-- [사용자 스토리 V3.1-R4](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-V3.1.md)
-- [화면 중심 흐름](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md)
-- [R4 보완 및 수용 사례](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md)
+- [사용자 스토리 V3.1-R4](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-V3.1.md)
+- [화면 중심 흐름](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-SCREEN-FLOWS-V3.1.md)
+- [R4 보완 및 수용 사례](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md)
 - [R3 팀 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-TEAM-REVIEW-V3.1-R3.md) · [R2 R03 검토](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/review/lesson-registration/USER-STORY-R03-REVIEW-V3.1-R2.md)
 
 R1~R3와 V1.3/V2.x/V3.0은 판단·검증 이력. R4가 현행 논리 검토 기준이다. 7개 플랫폼 구현 목표와 44개 실제 지원/hold 경계, mock-only 유지.
@@ -17,11 +17,11 @@ R1~R3와 V1.3/V2.x/V3.0은 판단·검증 이력. R4가 현행 논리 검토 기
 | 명세 | 동기화 규칙 |
 | --- | --- |
 | [service-scope](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/service-scope-v1.0.json) | DR-01~05 |
-| [abstract-screen](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json) | UX-R4-01/02 |
-| [system-work](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json) | SW-R4-01/02 |
-| [platform-work](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json) | POL-R05-01~04-R4 |
-| [logical-state](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json) | LS-R4-01/02 |
-| [error-response](https://github.com/ik-e/chaja-you/blob/c606f9b703b037f397a37904567895e959805903/docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json) | ER-R4-01/02 |
+| [abstract-screen](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/abstract-screen-v1.0.json) | UX-R4-01/02 |
+| [system-work](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/system-work-v1.0.json) | SW-R4-01/02 |
+| [platform-work](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/platform-work-v1.0.json) | POL-R05-01~04-R4 |
+| [logical-state](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/logical-state-v1.0.json) | LS-R4-01/02 |
+| [error-response](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/artifacts/planning/lesson-registration-20261126/integrated/error-response-v1.0.json) | ER-R4-01/02 |
 
 기존 최신 R01 브랜치에서 6개 R4 동기화 기록을 재확인했다. 원본과 검증 이력은 보존한다.
 
@@ -69,3 +69,17 @@ R05 후속 4건은 R01의 반영 지시에 따라 수정했다. V3.1-R4의 여�
 [수정 사용자 스토리](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/USER-STORY-V3.1.md) · [DB V4 검토 후보](https://github.com/ik-e/chaja-you/blob/500ada1eae93ea5d56e43ff88f645a36f9b406c8/docs/review/lesson-registration/DB-MINIMAL-V4.md).
 
 후속 표적 정적 대조 8/8 통과(기존 검사와 별도); 실제 PostgreSQL 동시성·플랫폼 효과·사용자 가치·공식 projection/CI 미검증. 최종 구현 승인 또는 main 병합 아님.
+
+## R03 최종 검토 의견 반영
+R03 최종 검토 4건에 대한 R01 반영 지시 적용. 기존 R03 4건의 반영 확인 및 서비스 방향 동의는 R03 원문에 보존. R05 후속도 유지.
+
+| 의견 | 반영 |
+| --- | --- |
+| R03-R4-01 | 플랫폼 업무 명세까지 가격 영향 보류 통일. W에서 영향 변경 ready/승인 가능 표시 금지, 제한 사유 및 실행 직전 재검증. |
+| R03-R4-02 | VE-111 동일 키 확인 우선, 저장·수락 동일 owner/source 경쟁 제어 및 현재 revision/양 승인 원자 검증, 영향 범위만 차단. 서버 미도달 요청을 탐지한다고 가정하지 않음. |
+| R03-R4-03 | R05-FU-01에서 이미 반영된 W 기본/H·E 예외 유지. |
+| R03-R4-04 | R에서 미수락 보류·제외 사유 및 조건부 새 업무 안내; 기존 H→W와 UJ-02/03/04 재사용, 새 승인 및 기존 기록 보존. |
+
+[수정 상세 수용 사례](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/USER-STORY-DESIGN-REVIEW-V3.1-R4.md) · [DB V4](https://github.com/ik-e/chaja-you/blob/9f09a8d064b7a19c4b279a78f8d2b68291e898cf/docs/review/lesson-registration/DB-MINIMAL-V4.md).
+
+정본 표적 정적 검사 14/14 통과; 관련 사람용 문서 9개 직접 동기화 및 핵심 문구 대조. 공식 생성기/CI·실제 PostgreSQL·플랫폼·사용자 가치 시험 미수행. 12 여정/42 노드/113 연결/47 의미 사례, DB 13개/143필드/16 수용 사례 유지. 최종 물리 설계·실행·main 병합 승인 아님.
