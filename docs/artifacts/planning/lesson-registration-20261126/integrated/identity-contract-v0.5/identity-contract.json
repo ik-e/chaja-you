@@ -1,0 +1,2316 @@
+{
+  "id": "IDENTITY-CONTRACT-V0.5",
+  "schema_version": 1,
+  "status": "review_proposal_not_adopted",
+  "date": "2026-11-28",
+  "owner": "R01",
+  "task_ref": "TASK-058",
+  "authority": "기획안 V1.2 기준; V0.4를 검토 이력으로 보존. 정의 방식 수정안이며 기존 제품 범위 및 DB/화면/실행 제한 유지.",
+  "source_refs": [
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/semantic-model-v0.4/model.json",
+      "ref": "b3ff5bcc0f6f1b84f57101665e1f0f4c4d6a6eee",
+      "blob": "5394ac4873ed75c378b5839ff3434ff7eba4fb18"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261123/proposal-v1.2.json",
+      "ref": "b3ff5bcc0f6f1b84f57101665e1f0f4c4d6a6eee",
+      "blob": "d3cac078a8e0d1898e0e249e670327497c657b07"
+    },
+    {
+      "path": "docs/artifacts/planning/lesson-registration-20261126/integrated/terminology-v0.3/semantic-audit.json",
+      "ref": "b3ff5bcc0f6f1b84f57101665e1f0f4c4d6a6eee",
+      "blob": "29df22be485c6d058820cefe299e10de38809a11"
+    }
+  ],
+  "roles": [
+    {
+      "id": "ACT.USER",
+      "label": "강사",
+      "definition": "본인에게 귀속되는 서비스 요청을 작성하거나 공식 외부 화면에서 직접 행동하는 사람. 실제 서비스 권한은 인증된 ACT.USER와 ACCOUNT 참조로 판정한다.",
+      "excludes": "사람과 계정은 동일 개념이 아니며, 서비스가 동일인 여부를 추측하지 않는다."
+    },
+    {
+      "id": "ACT.SERVICE",
+      "label": "찾아you",
+      "definition": "내부 읽기·쓰기, 사용자에게 정보 제공, 허가된 외부 동작 시도, 근거에 의한 판정을 수행하는 제품 책임 주체.",
+      "excludes": "외부 플랫폼의 실제 변경이나 사람의 결정을 대신했다고 정의하지 않는다."
+    },
+    {
+      "id": "ACT.PLATFORM",
+      "label": "외부 플랫폼",
+      "definition": "PLATFORM으로 식별된 외부 시스템에서 자체 객체와 심사·공개 등의 상태를 실제로 처리하는 주체.",
+      "excludes": "서비스의 관측·효과 판정 주체가 아니다."
+    },
+    {
+      "id": "ACT.OPERATOR",
+      "label": "운영자",
+      "definition": "서비스 운영 사건의 조사 및 허용된 대응을 담당하는 역할.",
+      "excludes": "강사의 승인 대행 주체 아님. 제품상 관리자 개입 절차 미채택."
+    },
+    {
+      "id": "ACT.AUTH_PROVIDER",
+      "label": "공식 인증 제공자",
+      "definition": "실제로 별도 공식 인증 사업자가 있을 때 해당 인증 요청에 대한 결과를 제공하는 주체.",
+      "excludes": "인증 사업자 도입 자체는 미결정."
+    },
+    {
+      "id": "ACT.RIGHTSHOLDER",
+      "label": "자료 권리자",
+      "definition": "정확 자료에 대해 사용 허용 여부를 결정할 법적 권리를 가진 사람 또는 조직.",
+      "excludes": "정보주체와 동일하다고 가정하지 않음."
+    },
+    {
+      "id": "ACT.DATA_SUBJECT",
+      "label": "정보주체",
+      "definition": "특정 개인정보로 식별되거나 식별될 수 있는 사람.",
+      "excludes": "자료 권리자와 동일하다고 가정하지 않음."
+    },
+    {
+      "id": "ACT.LEARNER",
+      "label": "수강생",
+      "definition": "외부 모집 정보의 대상이 되는 사람.",
+      "excludes": "기획상 제품의 수강생 상담·결제·수업 관리 주체가 아님."
+    }
+  ],
+  "types": [
+    {
+      "id": "ACCOUNT",
+      "label": "서비스 계정",
+      "kind": "record",
+      "creation": "서비스의 가입 절차에서 계정이 생성된 때",
+      "identity": "같은 서비스 계정 ID",
+      "composition": "계정 ID, 계정 접근 상태, 서비스 인증에 필요한 참조",
+      "mutation": "이메일/표시명 변경은 계정 ID를 바꾸지 않는다",
+      "termination": "계정 삭제/사용 불가 시 기존 ID 재할당 금지",
+      "excludes": "동일 이름·이메일만으로 동일인/동일 계정 판정 금지",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "SESSION",
+      "label": "서비스 로그인 세션",
+      "kind": "record",
+      "creation": "서비스 인증 후 세션 발급 시",
+      "identity": "같은 발급 세션 ID",
+      "composition": "계정 ID, 발급/만료 시각, 접근 범위",
+      "mutation": "세션 종료/만료는 기존 세션 상태 변경",
+      "termination": "종료/만료 후 재사용 금지, 새 발급은 새 세션",
+      "excludes": "외부 플랫폼 세션 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "AUTH_ATTEMPT",
+      "label": "인증 시도",
+      "kind": "event",
+      "creation": "인증 절차를 한 번 시작할 때",
+      "identity": "같은 시도 ID",
+      "composition": "인증 대상 종류 SERVICE 또는 EXTERNAL, 요청 주체, 목적, 시작 시각, 결과 참조",
+      "mutation": "추가 인증 단계는 같은 시도에 포함할 수 있음; 새 시작은 새 시도",
+      "termination": "종료·실패·취소·만료 기록",
+      "excludes": "인증 성공/계정 권한/세션 자체 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "LESSON",
+      "label": "저장 레슨 정보",
+      "kind": "record",
+      "creation": "강사가 새로 저장할 정보로 지정하고 서비스가 최초 저장에 성공한 때",
+      "identity": "같은 레슨 정보 ID. 값·제목·수업 내용 일치 여부는 동일성 기준 아님",
+      "composition": "레슨 정보 ID, 소유 계정 ID, 현재 항목값 집합, 자료 사용 관계 집합",
+      "mutation": "기존 ID를 지정하여 저장하면 값이 바뀌어도 같은 레슨 정보. 새 정보로 저장하면 내용이 동일해도 새 ID",
+      "termination": "삭제 확인 후 해당 ID는 활성 원본으로 조회/사용 불가; 필요한 기록 참조만 별도 보존",
+      "excludes": "실제 강의 상품/수업 회차/외부 게시글/파일 한 개/버전 자체가 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EDIT",
+      "label": "미저장 편집 내용",
+      "kind": "record",
+      "creation": "새 저장 또는 기존 정보 변경을 위해 편집을 시작할 때",
+      "identity": "같은 편집 문맥 ID와 대상(기존 LESSON ID 또는 NEW)",
+      "composition": "편집 대상, 기준 버전, 아직 저장되지 않은 항목값과 자료 관계",
+      "mutation": "편집값 변경은 저장 레슨 정보 변경 아님",
+      "termination": "저장 완료 또는 폐기 확인 후 해당 편집값 적용 종료; 보존 방식 미정",
+      "excludes": "이미 저장된 LESSON 값과 구분",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "FIELD_DEF",
+      "label": "정보 항목 정의",
+      "kind": "schema",
+      "creation": "항목의 대상 유형·의미·값 형식·단위·적용 범위를 정할 때",
+      "identity": "같은 항목 정의 ID와 규격 버전",
+      "composition": "대상 유형, 의미, 값 형식, 단위, 복수값 여부, 적용 범위",
+      "mutation": "의미/단위가 달라지면 다른 정의 또는 명시 버전",
+      "termination": "폐기된 정의는 새 입력 검증에 사용하지 않음",
+      "excludes": "값 자체/화면 라벨 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "FIELD_VALUE",
+      "label": "정보 항목값",
+      "kind": "value",
+      "creation": "정확한 항목 정의에 값을 제공하거나 추출/변환/관측할 때",
+      "identity": "같은 소속 대상/항목 정의/적용 위치·범위의 값 슬롯. 값 변경은 슬롯 변경 아님",
+      "composition": "소속 대상 참조, FIELD_DEF 참조, 값 또는 값 없음, 단위, 출처, 적용 범위",
+      "mutation": "값과 출처·검토 결과는 별개로 변경 가능",
+      "termination": "해당 값 슬롯 제거/대체 시 이전 값의 현재 적용 종료",
+      "excludes": "진실을 보장하지 않음; 모르는 값을 거짓/0으로 대체 금지",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "MATERIAL",
+      "label": "제공 자료",
+      "kind": "record",
+      "creation": "강사가 특정 파일·텍스트·링크를 제공하고 자료 참조가 생성된 때",
+      "identity": "같은 자료 ID. 파일명/URL만으로 동일성 확정 금지",
+      "composition": "자료 ID, 소유/제공 주체, 종류, 실제 내용 또는 참조, 출처",
+      "mutation": "내용 교체는 별도 자료 또는 명시 개정 참조로 처리; 자료 ID의 의미를 임의 변경하지 않음",
+      "termination": "삭제/접근 제한 확인 시 더 이상 사용 불가",
+      "excludes": "자료 사용 관계/외부 첨부 파일 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "MATERIAL_USE",
+      "label": "자료 사용 관계",
+      "kind": "relation",
+      "creation": "자료를 특정 정보 또는 입력안에 특정 용도로 사용하도록 지정할 때",
+      "identity": "같은 소속 대상 ID·자료 ID·용도 키",
+      "composition": "소속 대상(LESSON, EDIT, INPUT_SET 중 정확 하나), 자료 ID, 용도",
+      "mutation": "용도가 달라지면 다른 관계; 같은 관계의 세부 속성 변경은 동일 관계",
+      "termination": "관계 제거 확인 시 해당 용도에서 미사용",
+      "excludes": "자료 자체 삭제 및 외부 첨부 삭제 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "RIGHTS",
+      "label": "자료 사용 허용 범위",
+      "kind": "decision",
+      "creation": "권리자/강사의 사용 권한 정보와 공개 허용 범위를 기록할 때",
+      "identity": "같은 자료 ID·용도·권리/공개 항목·판정 시점",
+      "composition": "자료, 용도, 권리 정보, 공개 대상/범위, 출처, 확인 여부",
+      "mutation": "권리 정보 변경은 새 판단 근거; 기존 사용 영향 별도 확인",
+      "termination": "철회·만료 후 해당 범위 사용 금지",
+      "excludes": "사용자 주장만으로 권리 실재 확정 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "PLATFORM",
+      "label": "플랫폼",
+      "kind": "reference",
+      "creation": "조사 대상 외부 서비스가 등록될 때",
+      "identity": "같은 플랫폼 ID",
+      "composition": "플랫폼 ID, 서비스 명칭, 공식 출처",
+      "mutation": "표시명 변경은 같은 플랫폼으로 확인될 때 ID 유지",
+      "termination": "범위에서 제외되어도 이력 ID 유지",
+      "excludes": "외부 계정 또는 접속 방식 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EXT_ACCOUNT",
+      "label": "외부 플랫폼 계정",
+      "kind": "reference",
+      "creation": "외부 공식 인증 등으로 계정 식별 근거가 확보될 때",
+      "identity": "같은 플랫폼 및 플랫폼이 보장하는 계정 식별 근거. 근거 부족 시 동일성 미확인",
+      "composition": "플랫폼 ID, 외부 계정 식별 근거, 확인 시각",
+      "mutation": "표시명 변경은 동일 계정 근거 유지 시 ID 유지",
+      "termination": "접근 해제는 계정 삭제가 아님; 계정 존재/폐쇄는 외부 근거 필요",
+      "excludes": "서비스 계정/외부 인증 세션 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EXT_TYPE",
+      "label": "외부 대상 유형",
+      "kind": "schema",
+      "creation": "팀 조사로 외부 시스템의 대상 종류를 구분하고 식별 규칙을 정할 때",
+      "identity": "같은 플랫폼·외부 대상 유형 ID·규격 버전",
+      "composition": "외부 식별 규칙, 상하위 관계, 필드 정의, 지원하는 효과와 근거",
+      "mutation": "동일 객체인지 속성인지 미확인인 경우 유형 후보로만 기록",
+      "termination": "실재/식별 미검증 유형으로 실행 불가",
+      "excludes": "상품·프로필·게시판을 하나의 동일 유형으로 간주 금지",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EXT_OBJECT",
+      "label": "외부 객체",
+      "kind": "reference",
+      "creation": "정확한 외부 대상 유형의 특정 객체를 외부 근거로 식별할 때",
+      "identity": "같은 플랫폼·유형 및 해당 유형의 외부 식별 규칙이 동일이라고 증명하는 대상",
+      "composition": "플랫폼, 유형, 외부 식별 근거, 접근 계정 참조",
+      "mutation": "제목/본문/가격/URL 변경만으로 동일성 변경/유지 확정 금지",
+      "termination": "외부 삭제는 외부 근거 필요; 내부 참조 제거와 별개",
+      "excludes": "외부 실제 객체와 이를 가리키는 내부 참조를 혼동하지 않음",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EXT_REL",
+      "label": "외부 객체 관계",
+      "kind": "relation",
+      "creation": "외부 시스템이 정확한 상위·하위 또는 분류 연결을 표현할 때",
+      "identity": "같은 플랫폼·관계 유형·양쪽 외부 대상 식별 근거",
+      "composition": "관계 유형, 상위/하위 또는 분류 참조, 외부 관계 식별 근거",
+      "mutation": "관계 속성 변경과 관계 제거/추가 구별",
+      "termination": "외부 관계 제거는 독립 효과 근거 필요",
+      "excludes": "내부 관리 관계 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "LESSON_LINK",
+      "label": "레슨-외부 대상 연결",
+      "kind": "relation",
+      "creation": "서비스가 정확 LESSON과 외부 대상(EXT_OBJECT 또는 확인된 EXT_REL)의 연결을 기록할 때",
+      "identity": "같은 LESSON ID와 정확 외부 대상 참조",
+      "composition": "레슨 정보 ID, 외부 대상 참조, 식별 근거",
+      "mutation": "다른 레슨/외부 대상으로 바꾸려면 별도 관계 제거/추가",
+      "termination": "제거 시 내부 연결만 종료",
+      "excludes": "외부 삭제·외부 인증·외부 객체 생성 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "ACCOUNT_LINK",
+      "label": "서비스-외부 계정 연결",
+      "kind": "relation",
+      "creation": "별도 제품 채택 시 서비스 계정과 확인된 외부 계정의 관리 관계 기록",
+      "identity": "같은 ACCOUNT ID와 EXT_ACCOUNT 참조",
+      "composition": "서비스 계정 ID, 외부 계정 참조",
+      "mutation": "관계 변경과 인증 상태 변경 구별",
+      "termination": "제거 시 계정 후보 관계 종료",
+      "excludes": "외부 접근 허가/지속 인증/외부 계정 삭제 아님",
+      "authority": "조건부/별도 검토; 의미 정의만"
+    },
+    {
+      "id": "OVERRIDE",
+      "label": "플랫폼 적용값",
+      "kind": "value",
+      "creation": "사용자가 특정 플랫폼에서 적용할 항목값을 별도로 지정할 때",
+      "identity": "같은 LESSON ID·플랫폼·항목 정의·적용 범위(이번 TASK 또는 향후 재사용 규칙)·필요시 계정/외부 대상",
+      "composition": "항목값, 정확 적용 범위, 사용자 결정 근거",
+      "mutation": "값 변경은 지정 범위에만 적용; 범위 변경은 새 범위 지정",
+      "termination": "제거/유효 범위 종료 후 적용하지 않음",
+      "excludes": "실제 공통 레슨 정보의 자동 변경 및 외부 반영 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "INPUT_SET",
+      "label": "외부 입력안",
+      "kind": "record",
+      "creation": "특정 TASK에 대해 서비스가 외부에 입력할 예정 항목값을 구성할 때",
+      "identity": "같은 TASK ID·입력안 버전 식별",
+      "composition": "대상 유형, 적용할 항목값·자료 사용 관계, 출처/변환 규칙 참조",
+      "mutation": "값 변경은 입력안 개정; 승인 당시 버전과 구분",
+      "termination": "폐기·대체 시 현재 실행용으로 사용하지 않음",
+      "excludes": "실제 외부 저장값·사용자 승인 그 자체 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "CHECK",
+      "label": "검사 결과",
+      "kind": "record",
+      "creation": "정확 검사 대상에 규칙을 적용할 때",
+      "identity": "같은 검사 실행 ID·대상·규칙 버전",
+      "composition": "대상 참조, 규칙 참조, 결과 값, 사유·근거, 검사 시점",
+      "mutation": "새 검사 결과는 이전 검사 결과 덮어쓰지 않고 구별 가능",
+      "termination": "입력/규칙 변화 시 이전 결과를 현재 충족으로 재사용 금지",
+      "excludes": "외부 실제 효과 또는 사용자 결정 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "QUESTION",
+      "label": "보완 질문",
+      "kind": "record",
+      "creation": "서비스가 정확 항목의 누락/불확실을 해결하려 질문할 때",
+      "identity": "같은 질문 ID·대상 항목",
+      "composition": "대상 참조, 필요한 정보 항목, 질문 사유, 응답 참조",
+      "mutation": "질문 응답과 질문 제시는 별개",
+      "termination": "응답/불필요/철회 시 해당 질문 종료",
+      "excludes": "강사의 실제 사실을 임의 확정하는 값 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "OPTION",
+      "label": "제안 선택지",
+      "kind": "value",
+      "creation": "서비스가 제약 충돌에 대해 특정 대체값/범위를 제시할 때",
+      "identity": "같은 질문 또는 충돌 참조·선택지 ID",
+      "composition": "변경 대상, 제안값, 적용 범위, 제약 근거",
+      "mutation": "선택 시 DECISION 기록; 선택지 자체는 변경되지 않음",
+      "termination": "거절·조건 변경 시 적용하지 않음",
+      "excludes": "승인된 사실/실행 승인 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "DECISION",
+      "label": "사용자 결정",
+      "kind": "record",
+      "creation": "정확한 질문·승인·범위에 대한 강사의 선택이 전달될 때",
+      "identity": "같은 결정 ID 및 정확 결정 대상 버전",
+      "composition": "결정 종류(정보 승인, 실행 승인, 유지 승인, 일반 선택, 약관 등 구별), 대상/값, 선택 결과, 주체, 시각",
+      "mutation": "새 선택은 새 결정 또는 철회 사건; 기존 의미를 덮어쓰지 않음",
+      "termination": "철회/대상 버전 변경 시 해당 적용 여부 재판정",
+      "excludes": "외부 플랫폼 심사 결정 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "REQUEST",
+      "label": "사용자 요청",
+      "kind": "record",
+      "creation": "강사가 서비스에 정확 의도를 전달하여 요청 ID가 식별될 때",
+      "identity": "같은 요청 ID; 응답 유실 시 동일 요청으로 조회",
+      "composition": "소유 계정, 요청 종류, 대상 참조/범위, 제공값/결정 참조",
+      "mutation": "동일 요청의 처리 상태 변화는 같은 요청. 새 의도/재요청은 새 ID",
+      "termination": "처리 종료/거절 후 새 실행은 별도 요청",
+      "excludes": "클릭/수락/실행/효과 자체 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "TASK",
+      "label": "플랫폼별 업무",
+      "kind": "record",
+      "creation": "서비스가 외부 목적의 REQUEST를 독립 처리 대상으로 구성할 때",
+      "identity": "같은 업무 ID; 정확 플랫폼·계정 참조(확인 전에는 미지정)·외부 대상/생성 대상 유형·업무 코드에 결부",
+      "composition": "REQUEST ID, 플랫폼, 계정, 대상, 업무 코드, INPUT_SET/목표 효과 참조",
+      "mutation": "준비 개정은 같은 업무; 수락 후 실행 범위 변경은 기존 승인 사용 금지, 필요한 새 요청",
+      "termination": "종료 또는 제외 시 해당 업무의 새로운 실행 제한",
+      "excludes": "요청 전체와 외부 효과 한 개를 동일시하지 않음",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "GOAL",
+      "label": "외부 목표 효과",
+      "kind": "record",
+      "creation": "TASK에 대해 어떤 외부 변화/읽기 결과를 달성할지 구체화할 때",
+      "identity": "같은 TASK ID·효과 ID 및 정의된 효과 코드·대상·목표값",
+      "composition": "효과 코드, 정확 대상/신규 대상 유형, 목표값 또는 상태, 판정 규칙 참조",
+      "mutation": "효과·대상·값 변경은 기존 승인 적용 여부 재판정; 다른 독립 효과는 별도 GOAL",
+      "termination": "미실행/종료 후에도 판정 근거 보존",
+      "excludes": "외부에서 발생한 실제 변화 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EXT_SESSION",
+      "label": "업무용 외부 인증 세션",
+      "kind": "record",
+      "creation": "허용된 외부 인증 후 정확 계정·목적 범위의 세션을 서비스가 사용 가능하게 확보할 때",
+      "identity": "같은 세션 식별·외부 계정·업무 목적 범위",
+      "composition": "외부 계정, 사용 서비스 계정, 목적, 접근 범위, 유효기간, 세션 참조",
+      "mutation": "범위/목적 변경을 자동 허용하지 않음",
+      "termination": "완료·실패·철회·만료 시 차단 및 폐기 대상",
+      "excludes": "비밀번호/인증코드 저장이나 서비스 로그인 세션 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "PERMISSION",
+      "label": "접근 권한 근거",
+      "kind": "record",
+      "creation": "내부 또는 외부의 정확 주체·대상·행위 권한을 확인할 근거 확보 시",
+      "identity": "같은 권한 종류·주체·대상·행위·근거/유효 시점",
+      "composition": "내부/외부 구분, 계정, 대상, 행위, 허용/제한/미확인, 출처·유효성",
+      "mutation": "권한 변경 시 새 판정 필요",
+      "termination": "철회/만료/근거 불명 시 실행 허용에 사용 금지",
+      "excludes": "정책 허용·사용자 승인과 별개",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "RULE",
+      "label": "규칙",
+      "kind": "schema",
+      "creation": "정확 플랫폼/제품/보안/운영 요구의 규칙이 식별될 때",
+      "identity": "같은 규칙 ID와 버전. 규칙 종류별 구분",
+      "composition": "규칙 종류, 적용 대상, 입력 조건, 판정 결과, 출처 및 버전",
+      "mutation": "조건/효과 변경은 새 버전",
+      "termination": "폐기/미확인 규칙은 해당 실행 근거로 사용 불가",
+      "excludes": "조사 보고, 실제 기능 실재, 개별 판정과 별개",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EVIDENCE",
+      "label": "근거",
+      "kind": "record",
+      "creation": "특정 주장/값/관측/권한/검증의 출처가 확보될 때",
+      "identity": "같은 근거 ID 및 출처·대상·시점 식별",
+      "composition": "출처, 정확 대상, 주장/값, 확보 시각, 확인 방법",
+      "mutation": "새 출처/시점은 별개 근거",
+      "termination": "무효/제한/만료 시 현재 판단에 사용 금지",
+      "excludes": "근거 존재만으로 주장 참 확정 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "ATTEMPT",
+      "label": "외부 동작 시도",
+      "kind": "event",
+      "creation": "서비스가 허용된 외부 동작을 실제 시도할 때",
+      "identity": "같은 시도 ID·GOAL ID",
+      "composition": "목표 효과, 요청/전송 정보의 안전한 참조, 시점, 응답 관측 참조",
+      "mutation": "응답 도착은 같은 시도에 대한 기록; 재전송은 별도 시도",
+      "termination": "종료/차단 이후 재사용 불가",
+      "excludes": "실제 효과 발생/미발생 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "OBSERVATION",
+      "label": "외부 조회 시도 및 결과",
+      "kind": "record",
+      "creation": "정확 외부 대상·항목에 대해 읽기를 한 번 시도할 때",
+      "identity": "같은 조회 시도 ID; 여러 항목은 항목별 결과 구분",
+      "composition": "대상, 조회 항목, 시점, 결과(확보/불가/상충), 확보값 및 근거 참조",
+      "mutation": "새 조회는 새 ID; 실패 시 이전 유효 결과 변경 금지",
+      "termination": "해당 시도 종료 후 과거 관측으로만 사용",
+      "excludes": "외부 실제 현재값을 항상 안다는 의미 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EFFECT_RESULT",
+      "label": "외부 효과 판정",
+      "kind": "record",
+      "creation": "정확 GOAL에 관해 증거를 평가할 때",
+      "identity": "같은 GOAL ID·판정 사건 ID",
+      "composition": "목표, 판정(미시도/발생 확인/미발생 확인/발생 여부 미확인), 증거·시점",
+      "mutation": "새 근거 확보 시 새 판정; 최신 판정 참조 변경 가능",
+      "termination": "목표 종료 후에도 판정 이력 구별",
+      "excludes": "외부 실제 사실 자체 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "REVIEW",
+      "label": "외부 심사",
+      "kind": "reference",
+      "creation": "외부 플랫폼의 특정 심사 제출 또는 판단 단위를 식별할 근거 확보 시",
+      "identity": "같은 플랫폼·객체·심사 유형·외부 심사 식별 근거",
+      "composition": "외부 대상, 제출 정보 참조, 최초/재심사 종류, 관측된 심사 상태",
+      "mutation": "심사 상태 변화는 같은 심사 사건의 관측 변화; 재심사 별도 사건 여부 검증",
+      "termination": "심사 종료와 공개/모집 가능은 별개",
+      "excludes": "사용자 승인/서비스 요청 수락 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "EVENT",
+      "label": "사건 기록",
+      "kind": "record",
+      "creation": "요청 수락·변경·시도·관측·전달·종료 등 특정 사건이 발생할 때",
+      "identity": "같은 사건 ID와 사건 유형·정확 대상",
+      "composition": "사건 유형, 대상, 주체, 시점, 이전/이후 값 또는 결과 참조, 근거",
+      "mutation": "기록 정정은 근거 보존; 사건 유형 혼용 금지",
+      "termination": "보존 제한에 따라 처리; 무기한 보존 전제 없음",
+      "excludes": "대상 객체의 현재값/서비스 운영 사건 전체와 구분",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "VERSION",
+      "label": "적용 버전 참조",
+      "kind": "reference",
+      "creation": "특정 값 집합 또는 규칙 개정을 식별할 때",
+      "identity": "같은 대상 ID 및 버전 식별 근거",
+      "composition": "대상 참조, 버전 식별, 적용 시점/기준",
+      "mutation": "내용 변경 후 새 버전 식별; 동일 ID와 버전 구별",
+      "termination": "과거 버전 참조는 승인/업무 기록에 필요한 범위 보존",
+      "excludes": "과거 모든 원본 스냅샷 저장을 전제하지 않음",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "NOTICE",
+      "label": "전달할 정보",
+      "kind": "record",
+      "creation": "정확 수신자와 전달 내용이 구성될 때",
+      "identity": "같은 통지 ID·수신 범위·내용 버전",
+      "composition": "수신자, 내용, 업무/사건 참조, 전달 목적",
+      "mutation": "내용 변경은 새 버전; 전달 시도는 EVENT",
+      "termination": "통지 종료·만료 후 별도 신규 통지",
+      "excludes": "전달 성공과 실제 열람은 별개",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "ISSUE",
+      "label": "문제 항목",
+      "kind": "record",
+      "creation": "특정 대상에 대해 미충족 조건 또는 오류/반려/불명이 판정될 때",
+      "identity": "같은 문제 ID·대상·문제 종류·관련 사건",
+      "composition": "문제 종류, 대상, 발생 단계, 사유/근거, 영향 범위",
+      "mutation": "추가 근거에 따른 판정 변경 구별",
+      "termination": "해결 판정/보류/종료는 근거 필요",
+      "excludes": "모든 기술 오류와 심사 반려를 같은 상태로 합치지 않음",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "RIGHT_REQUEST",
+      "label": "정보 권리 요청",
+      "kind": "record",
+      "creation": "정보주체가 개인정보 열람·정정·삭제 등의 정확 권리 요청을 전달할 때",
+      "identity": "같은 권리 요청 ID·권리 주체·권리 종류·데이터 범위",
+      "composition": "요청자, 권리 유형, 범위, 증거/처리 결과 참조",
+      "mutation": "새 권리/범위는 별도 요청; 처리 진행 상태 변경은 동일 요청",
+      "termination": "처리 종료/제한 결과 기록",
+      "excludes": "일반 LESSON 수정·삭제 및 외부 객체 삭제 아님",
+      "authority": "조건부/별도 검토; 의미 정의만"
+    },
+    {
+      "id": "OPS_CASE",
+      "label": "운영 사건",
+      "kind": "record",
+      "creation": "정확 장애 또는 품질 기준 미달이 식별될 때",
+      "identity": "같은 운영 사건 ID·영향 범위",
+      "composition": "발생 시점, 영향 범위, 기준/측정 근거, 원인, 대응 사건 참조",
+      "mutation": "원인·대응 변화는 같은 사건의 추가 기록",
+      "termination": "종료/해결 여부 별도 판정",
+      "excludes": "강사의 업무 요청/승인 대기 단위 아님",
+      "authority": "기획 관련 논리 정의 제안"
+    },
+    {
+      "id": "MONITOR",
+      "label": "자동 조회 설정",
+      "kind": "record",
+      "creation": "조건부 확장 채택 후 사용자의 대상·기간·주기·읽기 범위 설정이 저장될 때",
+      "identity": "같은 설정 ID·소유자",
+      "composition": "대상, 범위, 기간, 주기, 알림 조건, 필요 승인/세션 참조",
+      "mutation": "설정 변경은 개정 및 승인 재판정",
+      "termination": "종료·철회·만료 시 자동 조회 중지 및 접근 정리",
+      "excludes": "기본 제품 기능/외부 쓰기 권한 아님",
+      "authority": "조건부/별도 검토; 의미 정의만"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "VALUE_ORIGIN",
+      "label": "값 출처",
+      "values": [
+        "USER_PROVIDED",
+        "EXTRACTED",
+        "CONVERTED",
+        "EXTERNAL_OBSERVED"
+      ],
+      "definition": "값의 생성 경로. 값의 진위를 단정하지 않는다."
+    },
+    {
+      "id": "VALUE_REVIEW",
+      "label": "값 검토 결과",
+      "values": [
+        "NOT_REVIEWED",
+        "ACCEPTED_FOR_USE",
+        "REJECTED_FOR_USE",
+        "NEEDS_CLARIFICATION"
+      ],
+      "definition": "해당 업무에서 사용 가능하다는 결정. 객관적 진실 보장 아님."
+    },
+    {
+      "id": "VALUE_PRESENCE",
+      "label": "값 유무",
+      "values": [
+        "PRESENT",
+        "MISSING",
+        "NOT_APPLICABLE",
+        "UNKNOWN"
+      ],
+      "definition": "실제 값과 정보 없음 구별. 값이 0, false, 빈 문자열인 경우와 혼용 금지."
+    },
+    {
+      "id": "SCOPE_KIND",
+      "label": "값 적용 범위 종류",
+      "values": [
+        "LESSON",
+        "TASK",
+        "REUSABLE_PLATFORM"
+      ],
+      "definition": "레슨 기본값, 이번 업무 적용값, 이후 재사용 규칙으로 구분. 재사용 별도 채택."
+    },
+    {
+      "id": "TARGET_ROLE",
+      "label": "외부 대상 역할",
+      "values": [
+        "RECRUITMENT",
+        "DEPENDENT",
+        "SHARED",
+        "LOCATION",
+        "CATEGORY"
+      ],
+      "definition": "실제 유형의 역할 표기. 한 객체가 복수 역할일 수 있음. CATEGORY는 값일 수도 있음."
+    },
+    {
+      "id": "EFFECT_KIND",
+      "label": "외부 목표 효과 종류",
+      "values": [
+        "CREATE_OBJECT",
+        "ADD_RELATION",
+        "CHANGE_FIELD",
+        "BUMP_EXISTING",
+        "EXTEND_EXISTING",
+        "SUBMIT_FIRST_REVIEW",
+        "SUBMIT_REVISION_REVIEW",
+        "SAVE_DRAFT",
+        "SET_FIRST_SCHEDULE",
+        "SET_REPRESENTATIVE",
+        "READ_CONTENT",
+        "READ_STATUS",
+        "REMOVE_OBJECT",
+        "REMOVE_RELATION"
+      ],
+      "definition": "정확 외부 효과 코드. 플랫폼 실재·제품 범위·허용 근거 별도. 제거·재등록은 기본 제공에 포함하지 않음."
+    },
+    {
+      "id": "CHECK_RESULT",
+      "label": "조건 검사 결과",
+      "values": [
+        "PASS",
+        "FAIL",
+        "UNKNOWN",
+        "NOT_APPLICABLE"
+      ],
+      "definition": "정확 규칙·대상별 판정. UNKNOWN은 PASS 아님."
+    },
+    {
+      "id": "EFFECT_RESULT_CODE",
+      "label": "외부 효과 판정값",
+      "values": [
+        "NOT_ATTEMPTED",
+        "CONFIRMED_OCCURRED",
+        "CONFIRMED_NOT_OCCURRED",
+        "UNKNOWN"
+      ],
+      "definition": "미응답은 UNKNOWN. 외부 실제 발생 여부와 서비스 인식 구별."
+    },
+    {
+      "id": "READ_RESULT",
+      "label": "조회 결과",
+      "values": [
+        "VALUE_OBTAINED",
+        "UNAVAILABLE",
+        "CONFLICTING"
+      ],
+      "definition": "조회 시도별 결과. 값이 없는 사실을 확보한 경우와 읽지 못한 경우 구별."
+    },
+    {
+      "id": "INTERNAL_RESULT",
+      "label": "내부 변경 판정값",
+      "values": [
+        "PENDING",
+        "APPLIED",
+        "NOT_APPLIED",
+        "UNKNOWN",
+        "REJECTED"
+      ],
+      "definition": "정확 요청·대상별 내부 반영 여부. 외부 효과 판정과 별개."
+    },
+    {
+      "id": "REQUEST_KIND",
+      "label": "요청 종류",
+      "values": [
+        "CREATE_LESSON",
+        "SAVE_LESSON",
+        "DELETE_LESSON",
+        "PREPARE_TASK",
+        "EXECUTE_TASK",
+        "READ_EXTERNAL",
+        "ADD_LINK",
+        "REMOVE_LINK",
+        "OTHER_TYPED"
+      ],
+      "definition": "OTHER_TYPED 단독 사용 금지, 구체 action 및 대상 지정 필수. 범위 밖 요청은 별도 표시."
+    },
+    {
+      "id": "APPROVAL_KIND",
+      "label": "승인 종류",
+      "values": [
+        "INPUT_CONTENT",
+        "EXECUTION_SCOPE",
+        "SESSION_RETENTION"
+      ],
+      "definition": "각 대상이 다른 결정. 하나의 UI로 결합 가능. 외부 약관/심사 승인과 별개."
+    },
+    {
+      "id": "TASK_PHASE",
+      "label": "서비스 업무 단계",
+      "values": [
+        "PREPARATION",
+        "ACCEPTED",
+        "EXECUTING",
+        "PROCESSING_ENDED"
+      ],
+      "definition": "단계는 목표 효과 성공과 별개. 보류/제외 및 불명은 별도 판정."
+    },
+    {
+      "id": "DECISION_RESULT",
+      "label": "사용자 선택 결과",
+      "values": [
+        "ACCEPT",
+        "REJECT",
+        "WITHDRAW",
+        "CHOOSE_OPTION"
+      ],
+      "definition": "대상/선택값·철회 참조를 명시. 미응답은 결정 이벤트 없음."
+    }
+  ],
+  "operations": [
+    {
+      "id": "U.CREATE_LESSON",
+      "actor": "ACT.USER",
+      "label": "새 레슨 정보 생성 요청",
+      "targets": [
+        "REQUEST"
+      ],
+      "input": "소유자, 새 정보 저장 의도 및 편집 참조",
+      "pre": "NEW로 저장 요청",
+      "post": "요청 전달; 아직 LESSON 없음",
+      "excludes": "새 ID 발급/저장 성공 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.CHOOSE_LESSON",
+      "actor": "ACT.USER",
+      "label": "기존 레슨 정보 선택",
+      "targets": [
+        "LESSON"
+      ],
+      "input": "정확 레슨 정보 ID",
+      "pre": "본인 접근 가능한 후보",
+      "post": "선택한 레슨 ID 전달",
+      "excludes": "내용 수정 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.PROVIDE_VALUE",
+      "actor": "ACT.USER",
+      "label": "항목값 제공",
+      "targets": [
+        "FIELD_VALUE"
+      ],
+      "input": "정확 FIELD_DEF, 소속 EDIT 또는 INPUT_SET 또는 적용 범위, 값 및 단위",
+      "pre": "해당 값이 필요한 경우",
+      "post": "사용자 제공값과 출처 전달",
+      "excludes": "값 저장/검증/외부 반영 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.PROVIDE_MATERIAL",
+      "actor": "ACT.USER",
+      "label": "자료 제공",
+      "targets": [
+        "MATERIAL"
+      ],
+      "input": "파일/텍스트/링크와 용도 의도",
+      "pre": "자료 제공 필요",
+      "post": "자료 전달",
+      "excludes": "외부 업로드 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.CHOOSE_OPTION",
+      "actor": "ACT.USER",
+      "label": "제시된 선택지 결정",
+      "targets": [
+        "OPTION"
+      ],
+      "input": "정확 선택지 ID와 결정",
+      "pre": "선택지 제시·조건 유효",
+      "post": "결정 전달",
+      "excludes": "실행 승인 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.REQUEST",
+      "actor": "ACT.USER",
+      "label": "지정 업무 요청",
+      "targets": [
+        "REQUEST"
+      ],
+      "input": "정확 요청 종류·대상 참조·인자",
+      "pre": "요청 종류별 유효 대상과 권한",
+      "post": "동일 요청 식별로 의도 전달",
+      "excludes": "요청 수락/외부 실행/효과 아님; 종류 생략 금지",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.APPROVE",
+      "actor": "ACT.USER",
+      "label": "정확 승인 결정",
+      "targets": [
+        "DECISION"
+      ],
+      "input": "승인 종류·대상 버전·범위·선택 결과",
+      "pre": "승인 내용 제시됨",
+      "post": "강사 결정 전달",
+      "excludes": "서비스 기록·외부 심사 승인 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.READ",
+      "actor": "ACT.USER",
+      "label": "제공된 정보 열람",
+      "targets": [
+        "NOTICE"
+      ],
+      "input": "정확 제공 정보 참조",
+      "pre": "정보 제공·본인 접근 권한",
+      "post": "해당 정보 읽음",
+      "excludes": "확인 클릭/승인/서비스 효과 검증 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.DIRECT_AUTH",
+      "actor": "ACT.USER",
+      "label": "공식 외부 인증 수행",
+      "targets": [
+        "AUTH_ATTEMPT"
+      ],
+      "input": "정확 공식 인증 절차",
+      "pre": "필요·허용된 공식 경로",
+      "post": "본인 직접 인증 행위",
+      "excludes": "인증 성공·업무 승인 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "U.WITHDRAW",
+      "actor": "ACT.USER",
+      "label": "결정 철회 요청",
+      "targets": [
+        "DECISION"
+      ],
+      "input": "정확 결정 ID·철회 범위",
+      "pre": "철회 가능 단계 확인 필요",
+      "post": "철회 의사 전달",
+      "excludes": "기발생 효과 원복 아님",
+      "result_rule": "의사/제공값 전달과 처리 결과를 분리; 미응답은 전달 결과 미확인"
+    },
+    {
+      "id": "S.RECEIVE",
+      "actor": "ACT.SERVICE",
+      "label": "요청 수신",
+      "targets": [
+        "REQUEST"
+      ],
+      "input": "정확 사용자 요청과 식별",
+      "pre": "접근 조건 확인",
+      "post": "요청 수신 기록",
+      "excludes": "수락/실행 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.ACCEPT",
+      "actor": "ACT.SERVICE",
+      "label": "요청 수락 기록",
+      "targets": [
+        "REQUEST"
+      ],
+      "input": "요청 ID·수락 범위",
+      "pre": "유효 요청 및 수락 조건",
+      "post": "해당 ID 수락 사건 기록",
+      "excludes": "외부 접수/효과 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.CREATE_LESSON",
+      "actor": "ACT.SERVICE",
+      "label": "새 레슨 정보 저장",
+      "targets": [
+        "LESSON"
+      ],
+      "input": "NEW 요청 ID·소유자·편집값·자료 관계",
+      "pre": "권한·내부 저장 조건 충족",
+      "post": "새 LESSON ID가 발급되고 저장된 값이 조회 가능",
+      "excludes": "기존 레슨 수정/외부 등록 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.SAVE_LESSON",
+      "actor": "ACT.SERVICE",
+      "label": "기존 레슨 정보 변경 저장",
+      "targets": [
+        "LESSON"
+      ],
+      "input": "기존 LESSON ID·기준 버전·변경값",
+      "pre": "소유 권한·충돌 검토",
+      "post": "동일 LESSON ID의 현재 값 및 버전 변경",
+      "excludes": "다른 레슨·외부 변경 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.DELETE_LESSON",
+      "actor": "ACT.SERVICE",
+      "label": "저장 레슨 정보 삭제",
+      "targets": [
+        "LESSON"
+      ],
+      "input": "정확 LESSON ID·삭제 요청·보존 규칙",
+      "pre": "권한 및 삭제 조건 충족",
+      "post": "해당 정보가 활성 조회·재사용 집합에서 제외, 삭제/보존 범위 명시",
+      "excludes": "외부 삭제·모든 기록 삭제 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.READ_INTERNAL",
+      "actor": "ACT.SERVICE",
+      "label": "정확 내부 정보 조회",
+      "targets": [
+        "LESSON",
+        "INPUT_SET",
+        "REQUEST",
+        "TASK",
+        "DECISION",
+        "EVENT",
+        "OBSERVATION",
+        "EFFECT_RESULT",
+        "OVERRIDE",
+        "ACCOUNT_LINK",
+        "LESSON_LINK",
+        "EDIT"
+      ],
+      "input": "정확 유형·ID 또는 소유자 범위 검색 조건",
+      "pre": "내부 읽기 권한",
+      "post": "해당 값/기록 반환 또는 조회 불가",
+      "excludes": "외부 조회/쓰기 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.LINK_MATERIAL",
+      "actor": "ACT.SERVICE",
+      "label": "자료 사용 관계 추가",
+      "targets": [
+        "MATERIAL_USE"
+      ],
+      "input": "정확 소속 대상·자료 ID·용도",
+      "pre": "권한·권리 범위 확인",
+      "post": "정확 관계 생성",
+      "excludes": "외부 첨부·자료 복제 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.UNLINK_MATERIAL",
+      "actor": "ACT.SERVICE",
+      "label": "자료 사용 관계 제거",
+      "targets": [
+        "MATERIAL_USE"
+      ],
+      "input": "정확 관계 참조",
+      "pre": "제거 조건 확인",
+      "post": "정확 관계 제거",
+      "excludes": "자료 삭제 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.EXTRACT",
+      "actor": "ACT.SERVICE",
+      "label": "자료에서 항목값 추출",
+      "targets": [
+        "FIELD_VALUE"
+      ],
+      "input": "정확 자료와 FIELD_DEF",
+      "pre": "자료 사용 허용·항목 정의",
+      "post": "EXTRACTED 출처의 후보값 및 근거 생성; 불확실 별도",
+      "excludes": "사용자 제공값/실제 사실 확정 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.WRITE_OVERRIDE",
+      "actor": "ACT.SERVICE",
+      "label": "지정 플랫폼 적용값 반영",
+      "targets": [
+        "OVERRIDE"
+      ],
+      "input": "정확 플랫폼·항목·값·적용 범위",
+      "pre": "사용자 결정 및 규칙 충족",
+      "post": "해당 범위 적용값 생성/변경",
+      "excludes": "LESSON 공통값·외부값 변경 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.REMOVE_OVERRIDE",
+      "actor": "ACT.SERVICE",
+      "label": "지정 적용값 제거",
+      "targets": [
+        "OVERRIDE"
+      ],
+      "input": "정확 적용값 슬롯",
+      "pre": "권한 및 적용 범위 확인",
+      "post": "정확 범위에서 적용값 제거",
+      "excludes": "다른 플랫폼 적용값/외부값 변경 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.TRANSFORM",
+      "actor": "ACT.SERVICE",
+      "label": "외부 입력안 생성",
+      "targets": [
+        "INPUT_SET"
+      ],
+      "input": "LESSON 버전, 적용값, 플랫폼·유형·규칙, TASK",
+      "pre": "대상별 규칙 식별",
+      "post": "정확 TASK의 예정 항목값·자료 및 출처 구성",
+      "excludes": "외부 입력/저장 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.CHECK",
+      "actor": "ACT.SERVICE",
+      "label": "규칙에 따른 검사",
+      "targets": [
+        "CHECK"
+      ],
+      "input": "정확 검사 대상 참조·규칙 ID·버전·근거",
+      "pre": "검사 범위 및 규칙 의미 명확",
+      "post": "규칙별 PASS/FAIL/UNKNOWN/NOT_APPLICABLE 기록",
+      "excludes": "실제 효과 판정이나 사용자 결정 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.ASK",
+      "actor": "ACT.SERVICE",
+      "label": "보완 질문 생성 및 제공",
+      "targets": [
+        "QUESTION"
+      ],
+      "input": "정확 대상 항목·문제·필요 응답",
+      "pre": "정보 누락/불확실 또는 사용자 판단 필요",
+      "post": "질문 정의 및 사용자에게 제공된 사실 구별 기록",
+      "excludes": "응답/정정 완료 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.PROPOSE",
+      "actor": "ACT.SERVICE",
+      "label": "제약 충돌 선택지 산출",
+      "targets": [
+        "OPTION"
+      ],
+      "input": "정확 충돌 항목·규칙·실제 제공 가능 후보값",
+      "pre": "검증 가능한 후보 필요",
+      "post": "검증된 후보 또는 후보 없음 표시",
+      "excludes": "사용자가 대안 수락한 것 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.COMPOSE_TASK",
+      "actor": "ACT.SERVICE",
+      "label": "플랫폼별 업무 구성",
+      "targets": [
+        "TASK"
+      ],
+      "input": "REQUEST ID·플랫폼·대상 유형/기존 대상·업무 코드",
+      "pre": "외부 목적 요청 범위 존재",
+      "post": "독립 TASK ID 구성",
+      "excludes": "대행 허용/실행 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.SET_GOAL",
+      "actor": "ACT.SERVICE",
+      "label": "외부 목표 효과 지정",
+      "targets": [
+        "GOAL"
+      ],
+      "input": "TASK ID·효과 코드·정확 대상/유형·목표값·판정 규칙",
+      "pre": "효과 정의 근거 존재",
+      "post": "GOAL ID 및 판정 조건 확정",
+      "excludes": "외부 실제 효과 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.REQUEST_AUTH",
+      "actor": "ACT.SERVICE",
+      "label": "외부 직접 인증 요구 제공",
+      "targets": [
+        "AUTH_ATTEMPT"
+      ],
+      "input": "정확 플랫폼·업무·공식 경로",
+      "pre": "접근 방식 허용 및 인증 필요",
+      "post": "정확 인증 요구 전달",
+      "excludes": "인증 성공 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.IDENTIFY_EXTERNAL",
+      "actor": "ACT.SERVICE",
+      "label": "외부 대상 동일성 판정",
+      "targets": [
+        "EXT_OBJECT",
+        "EXT_REL",
+        "EXT_ACCOUNT"
+      ],
+      "input": "플랫폼·대상 유형·외부 식별 근거·비교 대상",
+      "pre": "식별 규칙 확보",
+      "post": "동일/상이/미확인 근거를 기록",
+      "excludes": "제목·URL 유사성으로 동일성 확정 금지",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.ADD_LINK",
+      "actor": "ACT.SERVICE",
+      "label": "레슨-외부 대상 연결 추가",
+      "targets": [
+        "LESSON_LINK"
+      ],
+      "input": "정확 LESSON ID·검증된 외부 대상",
+      "pre": "소유·대상 근거·권한 확인",
+      "post": "내부 관계 추가",
+      "excludes": "외부 객체 생성/수정 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.REMOVE_LINK",
+      "actor": "ACT.SERVICE",
+      "label": "레슨-외부 대상 연결 제거",
+      "targets": [
+        "LESSON_LINK"
+      ],
+      "input": "정확 내부 관계 참조",
+      "pre": "권한 확인",
+      "post": "내부 관계 제거",
+      "excludes": "외부 객체 삭제 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.COMPARE",
+      "actor": "ACT.SERVICE",
+      "label": "정확 항목값 비교",
+      "targets": [
+        "FIELD_VALUE"
+      ],
+      "input": "동일 의미와 단위의 두 값, 각 대상/시점",
+      "pre": "비교 가능성 검증",
+      "post": "동일/차이/비교 불가와 근거",
+      "excludes": "값 변경/승인 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.REQUEST_APPROVAL",
+      "actor": "ACT.SERVICE",
+      "label": "정확 승인 요구 제공",
+      "targets": [
+        "DECISION"
+      ],
+      "input": "승인 종류·대상 버전·정보/효과 범위",
+      "pre": "승인에 필요한 정보 확보",
+      "post": "승인 요구 내용 전달",
+      "excludes": "사용자 승인 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.RECORD_DECISION",
+      "actor": "ACT.SERVICE",
+      "label": "사용자 결정 기록",
+      "targets": [
+        "DECISION"
+      ],
+      "input": "정확 결정 전달값·대상·시각·주체",
+      "pre": "결정 대상 검증",
+      "post": "DECISION 기록 생성",
+      "excludes": "외부 승인/효과 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.CHECK_EXECUTION",
+      "actor": "ACT.SERVICE",
+      "label": "개별 실행 조건 판정",
+      "targets": [
+        "CHECK"
+      ],
+      "input": "GOAL, 규칙, 권한, 인증, 대상, 입력안, 승인, 중복 및 프로젝트 허가 근거",
+      "pre": "정확 GOAL 및 필수 조건 전부 식별",
+      "post": "충족/미충족/미확인 판정",
+      "excludes": "승인만으로 실행 가능 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.ATTEMPT",
+      "actor": "ACT.SERVICE",
+      "label": "외부 목표 효과 동작 시도",
+      "targets": [
+        "ATTEMPT"
+      ],
+      "input": "정확 GOAL ID·승인값·허용 외부 접근",
+      "pre": "현재 실행 조건 충족; 효과 코드가 허용된 실행 계약에 존재",
+      "post": "새 ATTEMPT 사건 및 시도 근거 기록",
+      "excludes": "외부 실제 효과 발생 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "P.APPLY",
+      "actor": "ACT.PLATFORM",
+      "label": "외부 상태 전이",
+      "targets": [
+        "EXT_OBJECT",
+        "EXT_REL",
+        "REVIEW"
+      ],
+      "input": "정확 효과 코드·외부 대상/유형·입력값",
+      "pre": "외부 플랫폼의 자체 조건",
+      "post": "효과 코드별 실제 외부 변화(아래 효과 계약)",
+      "excludes": "서비스가 전이를 강제하거나 발생을 확정할 수 없음",
+      "result_rule": "외부 자체 효과; 관측 근거 없이는 서비스에서 미확인"
+    },
+    {
+      "id": "S.OBSERVE",
+      "actor": "ACT.SERVICE",
+      "label": "외부 지정값 조회",
+      "targets": [
+        "OBSERVATION"
+      ],
+      "input": "정확 외부 대상·조회 항목/효과·허용 읽기 범위",
+      "pre": "읽기 허용 및 필요한 권한",
+      "post": "조회 시도별 결과·값·근거 확보",
+      "excludes": "외부 쓰기/실제 현재 상태 보장 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.JUDGE_EFFECT",
+      "actor": "ACT.SERVICE",
+      "label": "목표 효과 발생 여부 판정",
+      "targets": [
+        "EFFECT_RESULT"
+      ],
+      "input": "GOAL ID·시도·판정 규칙 및 독립 근거",
+      "pre": "효과 및 근거 식별",
+      "post": "효과 코드별 판정값 기록",
+      "excludes": "증거 부족은 UNKNOWN, 미응답을 미발생으로 간주 금지",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.PRESENT",
+      "actor": "ACT.SERVICE",
+      "label": "정확 정보 제공",
+      "targets": [
+        "NOTICE"
+      ],
+      "input": "수신자·내용·출처·목적",
+      "pre": "수신 권한 및 전달 조건",
+      "post": "전달 시도/결과 기록",
+      "excludes": "실제 열람/승인 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.RECORD_EVENT",
+      "actor": "ACT.SERVICE",
+      "label": "정확 사건 기록",
+      "targets": [
+        "EVENT"
+      ],
+      "input": "사건 유형·대상·주체·시각·근거",
+      "pre": "해당 사건 발생 또는 미확인 상태 근거",
+      "post": "EVENT 추가 및 추적 가능",
+      "excludes": "현재 객체 값과 사건을 같은 것으로 간주 금지",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.BLOCK_WRITE",
+      "actor": "ACT.SERVICE",
+      "label": "위험 외부 쓰기 차단",
+      "targets": [
+        "TASK"
+      ],
+      "input": "정확 TASK/GOAL·중복/효과 불명 사유",
+      "pre": "필수 조건 미충족 또는 미확인",
+      "post": "해당 효과 새 실행 차단",
+      "excludes": "기발생 효과 원복 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.BLOCK_ACCESS",
+      "actor": "ACT.SERVICE",
+      "label": "업무용 외부 접근 차단",
+      "targets": [
+        "EXT_SESSION"
+      ],
+      "input": "정확 세션·접근 범위·철회/종료 사유",
+      "pre": "종료/실패/만료/철회",
+      "post": "이후 서비스 접근 차단 또는 미확인 기록",
+      "excludes": "외부 전체 로그아웃 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    },
+    {
+      "id": "S.DISCARD_SESSION",
+      "actor": "ACT.SERVICE",
+      "label": "업무용 외부 세션 폐기",
+      "targets": [
+        "EXT_SESSION"
+      ],
+      "input": "정확 서비스 관리 세션 참조",
+      "pre": "폐기 조건 충족",
+      "post": "재사용 불가 정리 및 판정 근거",
+      "excludes": "접근 차단과 별도 판정; 외부 모든 세션 삭제 아님",
+      "result_rule": "권한/규칙/근거 미충족 시 실행 차단 또는 불명 판정; 효과 발생과 시도를 분리"
+    }
+  ],
+  "effect_contracts": [
+    {
+      "id": "CREATE_OBJECT",
+      "label": "신규 외부 객체 생성",
+      "input": "외부 유형, 새 객체에 적용할 값",
+      "pre": "기존 객체 ID를 수정 대상으로 지정하지 않음",
+      "post": "외부 시스템에 새 객체 식별 근거가 생김",
+      "evidence": "생성된 정확 객체 식별 및 값/단계 증거",
+      "excludes": "동일한 내용의 기존 객체가 수정된 것 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "ADD_RELATION",
+      "label": "외부 모집 관계 추가",
+      "input": "기존 상위 외부 객체, 하위 대상 또는 서비스/분야 식별값",
+      "pre": "정확 상위 대상·관계 유형 식별",
+      "post": "정확 신규 모집 관계 존재",
+      "evidence": "상위와 신규 관계의 외부 독립 근거",
+      "excludes": "새 공유 프로필 생성과 다름",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "CHANGE_FIELD",
+      "label": "외부 항목값 변경",
+      "input": "기존 외부 대상 ID, 정확 FIELD_DEF, 변경값",
+      "pre": "동일 대상 및 해당 항목 식별",
+      "post": "같은 외부 대상에서 지정 저장 항목값이 바뀜",
+      "evidence": "승인한 정확 값의 실제 반영 근거",
+      "excludes": "수정안 접수·공개값 반영·노출 갱신 별도",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "BUMP_EXISTING",
+      "label": "동일 공고 노출 최신화",
+      "input": "기존 공고 식별, 플랫폼의 노출 최신화 기능",
+      "pre": "동일성/효과 정의 및 허용 확인",
+      "post": "같은 공고에 플랫폼이 정의한 노출 최신화 효과 발생",
+      "evidence": "동일 공고 연속성 및 효과 근거",
+      "excludes": "새 공고 생성이나 유효기간 연장 아님; 뮬 실제 효과 미검증",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "EXTEND_EXISTING",
+      "label": "동일 공고 유효기간 연장",
+      "input": "기존 공고, 기존/목표 유효기간",
+      "pre": "기능 실재·기간 의미 확인",
+      "post": "같은 공고의 유효기간 값 변경",
+      "evidence": "동일 공고 및 변경 기간 근거",
+      "excludes": "노출 최신화 아님; 해당 기능 실재 미확인",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "SUBMIT_FIRST_REVIEW",
+      "label": "외부 최초 심사 제출 접수",
+      "input": "정확 객체·제출 정보 버전",
+      "pre": "해당 외부 절차 존재",
+      "post": "정확 최초 심사 요청 접수",
+      "evidence": "접수 증거와 객체·내용 식별",
+      "excludes": "심사 승인/공개 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "SUBMIT_REVISION_REVIEW",
+      "label": "외부 변경안 심사 제출 접수",
+      "input": "정확 기존 객체·변경 정보 버전",
+      "pre": "해당 외부 절차 존재",
+      "post": "정확 변경안 심사 요청 접수",
+      "evidence": "접수 증거와 객체·변경 내용 식별",
+      "excludes": "실제 수정값 반영/승인 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "SAVE_DRAFT",
+      "label": "외부 임시저장",
+      "input": "외부 미제출 대상 유형 또는 기존 객체 참조·값",
+      "pre": "별도 채택 및 외부 임시저장 의미 확인",
+      "post": "외부 미제출 정보 저장",
+      "evidence": "외부 저장 단계 및 정확 대상 근거",
+      "excludes": "내부 저장·심사 접수 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "SET_FIRST_SCHEDULE",
+      "label": "최초 모집 일정 반영",
+      "input": "정확 클래스·일정 항목값",
+      "pre": "별도 업무 채택 및 일정 의미 확인",
+      "post": "외부 최초 모집 일정값/관계 반영",
+      "evidence": "일정 반영 근거",
+      "excludes": "수업 운영/모집 가능 보장 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "SET_REPRESENTATIVE",
+      "label": "대표 서비스 관계 변경",
+      "input": "정확 공유 프로필·대표 서비스",
+      "pre": "별도 채택·공유 영향 확인",
+      "post": "대표로 표시할 관계 반영",
+      "evidence": "외부 대표 관계 근거",
+      "excludes": "신규 서비스 생성 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "READ_CONTENT",
+      "label": "외부 내용 조회",
+      "input": "정확 대상·항목",
+      "pre": "허용 읽기",
+      "post": "외부 내용 관측값 확보 또는 읽기 결과",
+      "evidence": "조회값·시각·근거",
+      "excludes": "외부 변경 없음",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "READ_STATUS",
+      "label": "외부 상태 조회",
+      "input": "정확 대상·상태 축",
+      "pre": "허용 읽기",
+      "post": "외부 상태 관측값 확보 또는 읽기 결과",
+      "evidence": "조회값·시각·근거",
+      "excludes": "공고 갱신/외부 변경 없음",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "REMOVE_OBJECT",
+      "label": "외부 객체 삭제",
+      "input": "정확 기존 대상",
+      "pre": "기본 범위 밖; 별도 채택과 허용 필요",
+      "post": "외부 객체 제거",
+      "evidence": "삭제 독립 근거",
+      "excludes": "내부 관리 관계 제거 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    },
+    {
+      "id": "REMOVE_RELATION",
+      "label": "외부 관계 제거",
+      "input": "정확 외부 관계",
+      "pre": "기본 범위 밖; 별도 채택과 허용 필요",
+      "post": "외부 관계 제거",
+      "evidence": "제거 독립 근거",
+      "excludes": "내부 연결 제거 아님",
+      "execution": "정의만; 플랫폼별 실재 및 제품 채택·정책 허용 미확인, 실제 실행 금지"
+    }
+  ],
+  "legacy_concept_disposition": [
+    {
+      "old_id": "C01",
+      "new_refs": [
+        "ACCOUNT",
+        "ACT.USER"
+      ],
+      "note": "사람/계정 분리",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C02",
+      "new_refs": [
+        "SESSION"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C03",
+      "new_refs": [
+        "AUTH_ATTEMPT"
+      ],
+      "note": "SERVICE 대상 지정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C04",
+      "new_refs": [
+        "LESSON"
+      ],
+      "note": "생성/동일성 기준 도입",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C05",
+      "new_refs": [
+        "FIELD_VALUE",
+        "VALUE_ORIGIN",
+        "VALUE_REVIEW"
+      ],
+      "note": "사실값 폐기",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C06",
+      "new_refs": [
+        "MATERIAL"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C07",
+      "new_refs": [
+        "MATERIAL_USE"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C08",
+      "new_refs": [
+        "RIGHTS"
+      ],
+      "note": "자료 권리와 공개 범위 항목을 구별",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C09",
+      "new_refs": [
+        "FIELD_DEF"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C10",
+      "new_refs": [
+        "OVERRIDE"
+      ],
+      "note": "정확 항목과 적용 범위",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C11",
+      "new_refs": [
+        "FIELD_VALUE",
+        "OVERRIDE"
+      ],
+      "note": "표현값은 항목 정의로 구별",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C12",
+      "new_refs": [
+        "SCOPE_KIND",
+        "OVERRIDE"
+      ],
+      "note": "범위 값이지 독립 관계로 단정하지 않음",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C13",
+      "new_refs": [
+        "OVERRIDE",
+        "SCOPE_KIND"
+      ],
+      "note": "향후 재사용 별도 채택",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C14",
+      "new_refs": [
+        "INPUT_SET"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C15",
+      "new_refs": [
+        "CHECK"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C16",
+      "new_refs": [
+        "QUESTION"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C17",
+      "new_refs": [
+        "OPTION"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C18",
+      "new_refs": [
+        "PLATFORM"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C19",
+      "new_refs": [
+        "EXT_ACCOUNT"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C20",
+      "new_refs": [
+        "EXT_OBJECT",
+        "EXT_REL",
+        "EXT_TYPE",
+        "TARGET_ROLE"
+      ],
+      "note": "실제 대상 유형 및 관계를 확인",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C21",
+      "new_refs": [
+        "EXT_OBJECT",
+        "EXT_TYPE",
+        "TARGET_ROLE"
+      ],
+      "note": "종속 역할이지 실제 독립 객체 보장 아님",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C22",
+      "new_refs": [
+        "EXT_OBJECT",
+        "EXT_TYPE",
+        "TARGET_ROLE"
+      ],
+      "note": "공유 역할",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C23",
+      "new_refs": [
+        "EXT_REL"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C24",
+      "new_refs": [
+        "EXT_TYPE",
+        "EXT_OBJECT",
+        "TARGET_ROLE"
+      ],
+      "note": "외부 게시 위치의 실제 유형 확인",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C25",
+      "new_refs": [
+        "FIELD_DEF",
+        "FIELD_VALUE"
+      ],
+      "note": "분류가 값인지 관계인지 플랫폼별 확인",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C26",
+      "new_refs": [
+        "LESSON_LINK"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C27",
+      "new_refs": [
+        "ACCOUNT_LINK"
+      ],
+      "note": "조건부",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C28",
+      "new_refs": [
+        "REQUEST"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C29",
+      "new_refs": [
+        "TASK"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C30",
+      "new_refs": [
+        "TASK",
+        "INPUT_SET",
+        "CHECK"
+      ],
+      "note": "집합을 별도 객체로 강제하지 않음",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C31",
+      "new_refs": [
+        "GOAL",
+        "EFFECT_KIND"
+      ],
+      "note": "목표와 코드 구별",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C32",
+      "new_refs": [
+        "DECISION",
+        "APPROVAL_KIND"
+      ],
+      "note": "정보 승인 타입",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C33",
+      "new_refs": [
+        "DECISION",
+        "APPROVAL_KIND"
+      ],
+      "note": "실행 범위 승인 타입",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C34",
+      "new_refs": [
+        "DECISION",
+        "APPROVAL_KIND"
+      ],
+      "note": "인증 유지 승인 타입",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C35",
+      "new_refs": [
+        "DECISION",
+        "EVENT"
+      ],
+      "note": "결정 및 기록 사건",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C36",
+      "new_refs": [
+        "AUTH_ATTEMPT"
+      ],
+      "note": "EXTERNAL 대상 지정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C37",
+      "new_refs": [
+        "EXT_SESSION"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C38",
+      "new_refs": [
+        "PERMISSION"
+      ],
+      "note": "외부 권한 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C39",
+      "new_refs": [
+        "EVIDENCE"
+      ],
+      "note": "기능 조사 근거 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C40",
+      "new_refs": [
+        "EVIDENCE",
+        "RULE"
+      ],
+      "note": "정책 규칙과 증거",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C41",
+      "new_refs": [
+        "RULE",
+        "FIELD_DEF"
+      ],
+      "note": "정확 규칙/항목",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C42",
+      "new_refs": [
+        "RULE"
+      ],
+      "note": "효과 판정 규칙 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C43",
+      "new_refs": [
+        "DECISION",
+        "RULE"
+      ],
+      "note": "제품 결정은 강사 DECISION이 아님. 제품 범위 규칙 및 결정 근거 별도 모델링 필요",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C44",
+      "new_refs": [
+        "RULE",
+        "EVIDENCE"
+      ],
+      "note": "프로젝트 허가 근거; 제품 범위와 별개",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C45",
+      "new_refs": [
+        "EVIDENCE"
+      ],
+      "note": "구현 검증 근거",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C46",
+      "new_refs": [
+        "CHECK"
+      ],
+      "note": "실행 조건 검사 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C47",
+      "new_refs": [
+        "ATTEMPT"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C48",
+      "new_refs": [
+        "GOAL",
+        "EFFECT_RESULT"
+      ],
+      "note": "외부 실제 효과는 외부 사실; 내부 객체로 가정하지 않음",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C49",
+      "new_refs": [
+        "FIELD_VALUE",
+        "OBSERVATION"
+      ],
+      "note": "외부 값과 확보 관측값 구별",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C50",
+      "new_refs": [
+        "FIELD_DEF",
+        "FIELD_VALUE",
+        "OBSERVATION"
+      ],
+      "note": "정확 상태 축",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C51",
+      "new_refs": [
+        "OBSERVATION"
+      ],
+      "note": "조회 시도 ID",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C52",
+      "new_refs": [
+        "OBSERVATION",
+        "FIELD_VALUE"
+      ],
+      "note": "항목별 관측값",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C53",
+      "new_refs": [
+        "EVIDENCE"
+      ],
+      "note": "관측 근거",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C54",
+      "new_refs": [
+        "OBSERVATION"
+      ],
+      "note": "마지막 유효 관측 선택 규칙; 별도 저장 객체 미정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C55",
+      "new_refs": [
+        "EFFECT_RESULT"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C56",
+      "new_refs": [
+        "REVIEW"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C57",
+      "new_refs": [
+        "EXT_TYPE",
+        "EXT_OBJECT",
+        "FIELD_VALUE"
+      ],
+      "note": "독립 임시저장 객체인지 상태인지 미확인",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C58",
+      "new_refs": [
+        "REQUEST",
+        "REQUEST_KIND"
+      ],
+      "note": "내부 변경 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C59",
+      "new_refs": [
+        "INTERNAL_RESULT",
+        "EVENT"
+      ],
+      "note": "정확 요청의 판정값과 기록",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C60",
+      "new_refs": [
+        "EDIT"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C61",
+      "new_refs": [
+        "VERSION"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C62",
+      "new_refs": [
+        "EVENT",
+        "VERSION"
+      ],
+      "note": "변경 사건 유형",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C63",
+      "new_refs": [
+        "EVENT"
+      ],
+      "note": "업무 이력 조회 범위",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C64",
+      "new_refs": [
+        "OBSERVATION",
+        "EVENT"
+      ],
+      "note": "조회 이력",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C65",
+      "new_refs": [
+        "NOTICE"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C66",
+      "new_refs": [
+        "EVENT"
+      ],
+      "note": "전달 사건 유형",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C67",
+      "new_refs": [
+        "RIGHT_REQUEST"
+      ],
+      "note": "별도 권리 요청",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C68",
+      "new_refs": [
+        "CHECK",
+        "EVENT"
+      ],
+      "note": "정확 권리 처리 판정/기록",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C69",
+      "new_refs": [
+        "RULE"
+      ],
+      "note": "운영 품질 규칙 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C70",
+      "new_refs": [
+        "OPS_CASE"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C71",
+      "new_refs": [
+        "EVENT",
+        "OPS_CASE"
+      ],
+      "note": "운영 대응 사건 유형",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C72",
+      "new_refs": [
+        "MONITOR"
+      ],
+      "note": "조건부",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C73",
+      "new_refs": [
+        "MONITOR",
+        "EVENT"
+      ],
+      "note": "정확 실행 상태/사건",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C74",
+      "new_refs": [
+        "OBSERVATION",
+        "CHECK"
+      ],
+      "note": "동일 상태 항목의 비교",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C75",
+      "new_refs": [
+        "ISSUE"
+      ],
+      "note": "대체",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C76",
+      "new_refs": [
+        "OPTION"
+      ],
+      "note": "후속 선택지 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C77",
+      "new_refs": [
+        "CHECK",
+        "EXT_SESSION"
+      ],
+      "note": "접근 차단 판정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C78",
+      "new_refs": [
+        "CHECK",
+        "EXT_SESSION"
+      ],
+      "note": "폐기 판정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C79",
+      "new_refs": [
+        "RULE",
+        "CHECK"
+      ],
+      "note": "선행 요건과 충족 판정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C80",
+      "new_refs": [
+        "DECISION",
+        "REQUEST"
+      ],
+      "note": "정확 업무 범위 결정",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C81",
+      "new_refs": [
+        "EVENT",
+        "REQUEST"
+      ],
+      "note": "수락 사건",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C82",
+      "new_refs": [
+        "EVENT",
+        "TASK",
+        "REQUEST"
+      ],
+      "note": "종료 사건 및 효과 집계",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C83",
+      "new_refs": [
+        "NOTICE",
+        "RULE"
+      ],
+      "note": "제품 범위 안내",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C84",
+      "new_refs": [
+        "ATTEMPT",
+        "EVENT"
+      ],
+      "note": "시도와 기록",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C85",
+      "new_refs": [
+        "EVENT",
+        "EVIDENCE"
+      ],
+      "note": "사용자 보고 종류; 독립 검증 아님",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C86",
+      "new_refs": [
+        "PERMISSION"
+      ],
+      "note": "내부 접근 권한",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C87",
+      "new_refs": [
+        "CHECK",
+        "NOTICE"
+      ],
+      "note": "비교 결과와 전달 정보",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C88",
+      "new_refs": [
+        "EVIDENCE",
+        "EXT_TYPE"
+      ],
+      "note": "식별 근거와 식별 규칙",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C89",
+      "new_refs": [
+        "EVENT",
+        "ISSUE",
+        "TASK"
+      ],
+      "note": "제약 기록/업무 범위",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C90",
+      "new_refs": [
+        "CHECK",
+        "AUTH_ATTEMPT"
+      ],
+      "note": "외부 인증·선행 요건 검사",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C91",
+      "new_refs": [
+        "RULE"
+      ],
+      "note": "개인정보 처리 규칙 종류",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    },
+    {
+      "old_id": "C92",
+      "new_refs": [
+        "FIELD_VALUE",
+        "EVIDENCE",
+        "OPS_CASE"
+      ],
+      "note": "운영 측정값과 측정 근거",
+      "disposition": "이전 명칭 자동 채택 금지; 새 정의 기준 재검토"
+    }
+  ],
+  "field_examples": [
+    {
+      "field_id": "example.duration_per_session_minutes",
+      "owner_type": "LESSON",
+      "meaning": "수강생에게 제공하는 한 회 수업의 시간",
+      "value_type": "positive_integer",
+      "unit": "minute",
+      "not": "전체 과정 시간 또는 플랫폼 작업 기간"
+    },
+    {
+      "field_id": "example.session_count",
+      "owner_type": "LESSON",
+      "meaning": "해당 수강 상품의 총 수업 횟수",
+      "value_type": "positive_integer",
+      "unit": "session",
+      "not": "수정 가능 횟수 또는 인원"
+    },
+    {
+      "field_id": "example.course_total_price_krw",
+      "owner_type": "LESSON",
+      "meaning": "해당 전체 수업 과정에 대해 수강생에게 요구하는 금액",
+      "value_type": "nonnegative_integer",
+      "unit": "KRW/course",
+      "not": "회당 가격·시간당 가격·플랫폼 수수료"
+    }
+  ],
+  "assumptions": [
+    "LESSON의 동일성은 현실 세계의 같은 레슨을 자동 판정하는 것이 아니라 강사가 신규 저장과 기존 정보 변경을 구분한 의도 및 서비스 ID로 결정한다. 최초 저장 성공 때 ID를 발급하는 것은 논리 제안이며 사전 UUID 발급 구현을 금지하는 뜻은 아니다.",
+    "원본이라는 이름을 저장 레슨 정보로 대체한다. 새 정보 최초 저장과 기존 정보 변경 저장은 별개 효과. 제목/값/내용 동일성은 레슨 ID의 동일성 조건이 아님.",
+    "값은 FIELD_DEF에 결부된 값이다. 출처, 검토 결과, 값 유무는 별도 판정 축이다. 사람 제공/AI 추출 중 어느 쪽도 객관적 사실이라는 보장 없음.",
+    "객체 유형 식별자와 객체 인스턴스 식별자는 별개. 예시 ID는 계약의 이름이며 DB 키 형식이나 UUID 사용을 강제하지 않는다.",
+    "외부 객체 ID를 임의 생성하여 외부 실체를 확정하지 않는다. 외부 동일성은 플랫폼별 검증된 식별 규칙과 증거에 의존. 미확인 상태에서는 외부 쓰기 차단.",
+    "자료 권리자와 정보주체를 독립 주체로 분리했다. 운영자/인증 제공자/수강생의 제품 기능 채택은 미정/범위 밖.",
+    "복합 동작을 일반 동작 이름으로 숨기지 않는다. U.REQUEST/S.ATTEMPT 등은 구체 종류·대상·인자가 채워지지 않으면 호출 가능한 명세가 아니다. S.ASK의 질문 구성/전달 등은 후속 원자 계약에서 더 분리할 부분으로 남긴다.",
+    "기획안 F01~F29/E01~E05, V0.4 243개 동작 및 330개 후보의 전체 의미 계약 재작성은 후속 단계. 본 작업은 객체 정의 방식과 핵심 동작 계약을 바로잡기 위한 기준안이며 최종 완결성 주장 아님.",
+    "FIELD_DEF 예시는 설명용이다. 실제 팀원 조사 필드 86/96 및 추가 주장 374개는 의미·단위·적용 대상을 검증 후 추가한다. 기존 외부 모의 실행 제한 유지."
+  ],
+  "verification": {
+    "roles": 8,
+    "types": 41,
+    "vocabulary_axes": 14,
+    "operations": 44,
+    "effect_contracts": 14,
+    "legacy_concept_rows": 92,
+    "invalid_reference_count": 0,
+    "legacy_actions_rewritten": 0,
+    "semantic_completion": "not established"
+  }
+}
