@@ -2,13 +2,13 @@
 
 > **기획안이 기준 · 팀원 조사와 사용자 경험은 근거 · 기존 설계 및 DB는 참고.** 2026-11-28 / TASK-058 / R01 검토용. 채택·스토리 그룹화·화면·DB·API 확정 아님.
 
-[작업 정본](../../artifacts/planning/lesson-registration-20261126/integrated/action-candidates-v0.1/action-candidates.json) · [팀원 조사 대응 및 플랫폼 입력 후보 원장](USER-ACTION-TEAM-TRACE-V0.1.md) · [전체 근거 보존본](../../artifacts/planning/lesson-registration-20261126/integrated/action-candidates-v0.1/evidence.json)
+[작업 정본](../../artifacts/planning/lesson-registration-20261126/integrated/action-candidates-v0.1/action-candidates.json) · [팀원 조사 대응 및 플랫폼 입력 후보 원장](USER-ACTION-TEAM-TRACE-V0.1.md) · [기존 설계 참고 대조](USER-ACTION-REFERENCE-CROSSCHECK-V0.1.md) · [전체 근거 보존본](../../artifacts/planning/lesson-registration-20261126/integrated/action-candidates-v0.1/evidence.json)
 
 ## 검토 요약
 
 - 행동 후보 330개. 팀원 스토리 원문 248개 모두 1차 대응. 기획 피처 34개 모두 후보 참조 연결.
 - R02 사용자 확인 표 86개: 85개 후보 대응, 1개 메타데이터 후보. R02 요약의 96개와 불일치.
-- 직접 팀원 상세 필드 250개 중 249개 초기 대응, 1개 미대응. 대응은 의미 검증 완료가 아님.
+- 직접 팀원 상세 필드 250개 모두 초기 대응, 0개 미대응. 대응은 의미 검증 완료가 아님.
 - 읽는 법: 모든 주체는 강사. 직접 조작은 후보이며 별도 버튼·필수 클릭을 뜻하지 않음. 열람·인지는 자동 표시를 확인하는 행동. 외부 직접은 공식 플랫폼에서 본인이 수행. 순번은 ID이며 동작 순서가 아님.
 
 | 잠정 범위 | 후보 수 |
@@ -50,7 +50,7 @@
 | UA-016 | 강사는 레슨 제목을 입력한다. | 직접 조작 | 기획 관련 | 새 사실 또는 필요한 정정 | F01·F04·F10 | R03-US-006, R02NEW:PL1-R1, R02NEW:PL2-R2, R02NEW:PL4-R1, R02NEW:PL5-R2, R02NEW:PL6-R1, R02NEW:PL7-R1, R02-PL01-CONF-01, R02-PL02-FIELD02, R02-PL02-CONF-03, R02-PL04-CONF-01, R02-PL05-CONF-10, R02-PL06-CONF-01, R04-PL01-F01, R04-PL02-F01, R04-PL05-F01, R05-PL01-F1, R05-PL02-F1 |
 | UA-017 | 강사는 강사 활동명을 입력한다. | 직접 조작 | 기획 관련 | 튜터명·전문가명 의미 대조 | F01·F04·F10 | R02NEW:PL2-R9, R02NEW:PL3-R1, R02NEW:PL4-R2, R02-PL02-CONF-17, R02-PL03-FIELD01, R02-PL04-CONF-02, R04-PL03-F09, R04-PL04-F01, R05-PL03-F2 |
 | UA-018 | 강사는 레슨 분야를 선택한다. | 직접 조작 | 기획 관련 | 실제 분류 | F01·F04·F10 | R03-US-006, R02NEW:PL1-R2, R02NEW:PL2-R1, R02NEW:PL5-R1, R02NEW:PL6-R3, R02NEW:PL7-O1, R02-PL01-CONF-02, R02-PL02-FIELD01, R02-PL02-CONF-02, R02-PL04-FIELD01, R02-PL05-CONF-01, R02-PL06-CONF-03, R04-PL01-F02, R04-PL05-F02, R04-PL07-F08, R05-PL01-F2 |
-| UA-019 | 강사는 레슨 상세 소개를 입력한다. | 직접 조작 | 기획 관련 | 채널 표현과 공통 사실 구분 | F01·F04·F10 | R03-US-006, R04-US-001, R02NEW:PL1-R3, R02NEW:PL1-O5, R02NEW:PL2-R5, R02NEW:PL3-R3, R02NEW:PL5-R5, R02NEW:PL6-R2, R02NEW:PL7-R3, R02-PL01-CONF-03, R02-PL01-CONF-21, R02-PL02-CONF-07, R02-PL05-CONF-11, R02-PL06-CONF-02, R04-PL01-F04, R04-PL03-F04, R04-PL04-F03, R04-PL05-F03, R05-PL01-F3, R05-PL05-F1 |
+| UA-019 | 강사는 레슨 상세 소개를 입력한다. | 직접 조작 | 기획 관련 | 채널 표현과 공통 사실 구분 | F01·F04·F10 | R03-US-006, R04-US-001, R02NEW:PL1-R3, R02NEW:PL1-O5, R02NEW:PL2-R5, R02NEW:PL3-R3, R02NEW:PL5-R5, R02NEW:PL6-R2, R02NEW:PL7-R3, R02-PL01-CONF-03, R02-PL01-CONF-21, R02-PL02-CONF-07, R02-PL05-CONF-11, R02-PL06-CONF-02, R04-PL01-F04, R04-PL03-F04, R04-PL04-F03, R04-PL05-F03, R05-PL01-F3, R05-PL05-F1, R02-PL03-FIELD07 |
 | UA-020 | 강사는 한 줄 소개를 입력한다. | 직접 조작 | 기획 관련 | 필요 채널; 자동 작성 가능 | F01·F04·F10 | R02NEW:PL3-R2, R02-PL03-FIELD02, R04-PL03-F01, R04-PL04-F07, R05-PL03-F1 |
 | UA-021 | 강사는 강사 소개를 입력한다. | 직접 조작 | 기획 관련 | 프로필 소개가 필요한 경우 | F01·F04·F10 | R02NEW:PL2-R10, R02NEW:PL4-R6, R02-PL01-FIELD01, R02-PL02-CONF-18, R02-PL04-CONF-12 |
 | UA-022 | 강사는 레슨 진행 방식을 선택한다. | 직접 조작 | 기획 관련 | 온라인·대면 등 실제 조건 | F01·F04·F10 | R03-US-006, R02NEW:PL3-O3, R02NEW:PL4-R5, R02-PL02-CONF-01, R02-PL04-CONF-07, R04-PL04-F09 |
