@@ -91,8 +91,8 @@
     "r02_groups_action_linked": 85,
     "r02_reported_review_total": 96,
     "direct_team_fields": 250,
-    "direct_team_fields_with_candidate_links": 249,
-    "direct_team_fields_unmapped": 1,
+    "direct_team_fields_with_candidate_links": 250,
+    "direct_team_fields_unmapped": 0,
     "candidates_with_team_refs": 233
   },
   "candidates": [
@@ -490,7 +490,8 @@
         "R04-PL04-F03",
         "R04-PL05-F03",
         "R05-PL01-F3",
-        "R05-PL05-F1"
+        "R05-PL05-F1",
+        "R02-PL03-FIELD07"
       ],
       "review": "미검토"
     },
@@ -7299,5 +7300,16 @@
     "R02/R04/R05 상세 원본 필드 250개를 별도 대조. 규칙 기반 초기 대응은 의미 검토 전이며 다의/복합 항목이 남음. 통합 참고 주장 374개 및 팀 플랫폼 업무 126개, 기존 행동 155개·상태·오류·추가 팀원 텍스트는 evidence.json에 보존; 개별 행동 매핑 전수 확인은 후속 작업.",
     "기획과 팀 제안이 충돌하거나 필요성이 불명확한 항목(장기 모니터링·관리자 확인·최초 모집 일정·대표 서비스·외부 임시저장·추가 옵션 등)은 확정하지 않음.",
     "개별 행동 오류·전이·선후 및 실제 필수 조작 수는 다음 단계. 사용자 행동 후보 누락이 없다고 최종 선언하지 않음."
-  ]
+  ],
+  "reference_crosscheck": {
+    "legacy_user": 67,
+    "legacy_user_linked": 67,
+    "user_nodes": 17,
+    "user_nodes_linked": 17,
+    "user_edges": 57,
+    "user_edges_linked": 57,
+    "user_intent_transitions": 6,
+    "user_intent_transitions_linked": 6,
+    "unmapped": []
+  }
 }
